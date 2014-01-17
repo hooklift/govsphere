@@ -26306,7 +26306,7 @@ func NewVimPortType(url string, tls bool) *VimPortType {
  */
 func (service *VimPortType) AddAuthorizationRole(request *AddAuthorizationRoleRequestType) (*AddAuthorizationRoleResponse, error) {
 	response := &AddAuthorizationRoleResponse{}
-	err := service.client.Call("AddAuthorizationRole", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26323,7 +26323,7 @@ func (service *VimPortType) AddAuthorizationRole(request *AddAuthorizationRoleRe
  */
 func (service *VimPortType) RemoveAuthorizationRole(request *RemoveAuthorizationRoleRequestType) (*RemoveAuthorizationRoleResponse, error) {
 	response := &RemoveAuthorizationRoleResponse{}
-	err := service.client.Call("RemoveAuthorizationRole", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26341,7 +26341,7 @@ func (service *VimPortType) RemoveAuthorizationRole(request *RemoveAuthorization
  */
 func (service *VimPortType) UpdateAuthorizationRole(request *UpdateAuthorizationRoleRequestType) (*UpdateAuthorizationRoleResponse, error) {
 	response := &UpdateAuthorizationRoleResponse{}
-	err := service.client.Call("UpdateAuthorizationRole", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26358,7 +26358,7 @@ func (service *VimPortType) UpdateAuthorizationRole(request *UpdateAuthorization
  */
 func (service *VimPortType) MergePermissions(request *MergePermissionsRequestType) (*MergePermissionsResponse, error) {
 	response := &MergePermissionsResponse{}
-	err := service.client.Call("MergePermissions", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26374,7 +26374,7 @@ func (service *VimPortType) MergePermissions(request *MergePermissionsRequestTyp
  */
 func (service *VimPortType) RetrieveRolePermissions(request *RetrieveRolePermissionsRequestType) (*RetrieveRolePermissionsResponse, error) {
 	response := &RetrieveRolePermissionsResponse{}
-	err := service.client.Call("RetrieveRolePermissions", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26389,7 +26389,7 @@ func (service *VimPortType) RetrieveRolePermissions(request *RetrieveRolePermiss
  */
 func (service *VimPortType) RetrieveEntityPermissions(request *RetrieveEntityPermissionsRequestType) (*RetrieveEntityPermissionsResponse, error) {
 	response := &RetrieveEntityPermissionsResponse{}
-	err := service.client.Call("RetrieveEntityPermissions", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26404,7 +26404,7 @@ func (service *VimPortType) RetrieveEntityPermissions(request *RetrieveEntityPer
  */
 func (service *VimPortType) RetrieveAllPermissions(request *RetrieveAllPermissionsRequestType) (*RetrieveAllPermissionsResponse, error) {
 	response := &RetrieveAllPermissionsResponse{}
-	err := service.client.Call("RetrieveAllPermissions", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26422,7 +26422,7 @@ func (service *VimPortType) RetrieveAllPermissions(request *RetrieveAllPermissio
  */
 func (service *VimPortType) SetEntityPermissions(request *SetEntityPermissionsRequestType) (*SetEntityPermissionsResponse, error) {
 	response := &SetEntityPermissionsResponse{}
-	err := service.client.Call("SetEntityPermissions", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26440,7 +26440,7 @@ func (service *VimPortType) SetEntityPermissions(request *SetEntityPermissionsRe
  */
 func (service *VimPortType) ResetEntityPermissions(request *ResetEntityPermissionsRequestType) (*ResetEntityPermissionsResponse, error) {
 	response := &ResetEntityPermissionsResponse{}
-	err := service.client.Call("ResetEntityPermissions", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26457,7 +26457,7 @@ func (service *VimPortType) ResetEntityPermissions(request *ResetEntityPermissio
  */
 func (service *VimPortType) RemoveEntityPermission(request *RemoveEntityPermissionRequestType) (*RemoveEntityPermissionResponse, error) {
 	response := &RemoveEntityPermissionResponse{}
-	err := service.client.Call("RemoveEntityPermission", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26472,7 +26472,7 @@ func (service *VimPortType) RemoveEntityPermission(request *RemoveEntityPermissi
  */
 func (service *VimPortType) HasPrivilegeOnEntity(request *HasPrivilegeOnEntityRequestType) (*HasPrivilegeOnEntityResponse, error) {
 	response := &HasPrivilegeOnEntityResponse{}
-	err := service.client.Call("HasPrivilegeOnEntity", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26487,7 +26487,7 @@ func (service *VimPortType) HasPrivilegeOnEntity(request *HasPrivilegeOnEntityRe
  */
 func (service *VimPortType) HasPrivilegeOnEntities(request *HasPrivilegeOnEntitiesRequestType) (*HasPrivilegeOnEntitiesResponse, error) {
 	response := &HasPrivilegeOnEntitiesResponse{}
-	err := service.client.Call("HasPrivilegeOnEntities", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26502,7 +26502,7 @@ func (service *VimPortType) HasPrivilegeOnEntities(request *HasPrivilegeOnEntiti
  */
 func (service *VimPortType) ReconfigureCluster_Task(request *ReconfigureClusterRequestType) (*ReconfigureCluster_TaskResponse, error) {
 	response := &ReconfigureCluster_TaskResponse{}
-	err := service.client.Call("ReconfigureCluster_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26517,7 +26517,7 @@ func (service *VimPortType) ReconfigureCluster_Task(request *ReconfigureClusterR
  */
 func (service *VimPortType) ApplyRecommendation(request *ApplyRecommendationRequestType) (*ApplyRecommendationResponse, error) {
 	response := &ApplyRecommendationResponse{}
-	err := service.client.Call("ApplyRecommendation", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26532,7 +26532,7 @@ func (service *VimPortType) ApplyRecommendation(request *ApplyRecommendationRequ
  */
 func (service *VimPortType) CancelRecommendation(request *CancelRecommendationRequestType) (*CancelRecommendationResponse, error) {
 	response := &CancelRecommendationResponse{}
-	err := service.client.Call("CancelRecommendation", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26547,7 +26547,7 @@ func (service *VimPortType) CancelRecommendation(request *CancelRecommendationRe
  */
 func (service *VimPortType) RecommendHostsForVm(request *RecommendHostsForVmRequestType) (*RecommendHostsForVmResponse, error) {
 	response := &RecommendHostsForVmResponse{}
-	err := service.client.Call("RecommendHostsForVm", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26565,7 +26565,7 @@ func (service *VimPortType) RecommendHostsForVm(request *RecommendHostsForVmRequ
  */
 func (service *VimPortType) AddHost_Task(request *AddHostRequestType) (*AddHost_TaskResponse, error) {
 	response := &AddHost_TaskResponse{}
-	err := service.client.Call("AddHost_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26583,7 +26583,7 @@ func (service *VimPortType) AddHost_Task(request *AddHostRequestType) (*AddHost_
  */
 func (service *VimPortType) MoveInto_Task(request *MoveIntoRequestType) (*MoveInto_TaskResponse, error) {
 	response := &MoveInto_TaskResponse{}
-	err := service.client.Call("MoveInto_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26600,7 +26600,7 @@ func (service *VimPortType) MoveInto_Task(request *MoveIntoRequestType) (*MoveIn
  */
 func (service *VimPortType) MoveHostInto_Task(request *MoveHostIntoRequestType) (*MoveHostInto_TaskResponse, error) {
 	response := &MoveHostInto_TaskResponse{}
-	err := service.client.Call("MoveHostInto_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26615,7 +26615,7 @@ func (service *VimPortType) MoveHostInto_Task(request *MoveHostIntoRequestType) 
  */
 func (service *VimPortType) RefreshRecommendation(request *RefreshRecommendationRequestType) (*RefreshRecommendationResponse, error) {
 	response := &RefreshRecommendationResponse{}
-	err := service.client.Call("RefreshRecommendation", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26630,7 +26630,7 @@ func (service *VimPortType) RefreshRecommendation(request *RefreshRecommendation
  */
 func (service *VimPortType) RetrieveDasAdvancedRuntimeInfo(request *RetrieveDasAdvancedRuntimeInfoRequestType) (*RetrieveDasAdvancedRuntimeInfoResponse, error) {
 	response := &RetrieveDasAdvancedRuntimeInfoResponse{}
-	err := service.client.Call("RetrieveDasAdvancedRuntimeInfo", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26645,7 +26645,7 @@ func (service *VimPortType) RetrieveDasAdvancedRuntimeInfo(request *RetrieveDasA
  */
 func (service *VimPortType) ClusterEnterMaintenanceMode(request *ClusterEnterMaintenanceModeRequestType) (*ClusterEnterMaintenanceModeResponse, error) {
 	response := &ClusterEnterMaintenanceModeResponse{}
-	err := service.client.Call("ClusterEnterMaintenanceMode", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26660,7 +26660,7 @@ func (service *VimPortType) ClusterEnterMaintenanceMode(request *ClusterEnterMai
  */
 func (service *VimPortType) ReconfigureComputeResource_Task(request *ReconfigureComputeResourceRequestType) (*ReconfigureComputeResource_TaskResponse, error) {
 	response := &ReconfigureComputeResource_TaskResponse{}
-	err := service.client.Call("ReconfigureComputeResource_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26677,7 +26677,7 @@ func (service *VimPortType) ReconfigureComputeResource_Task(request *Reconfigure
  */
 func (service *VimPortType) AddCustomFieldDef(request *AddCustomFieldDefRequestType) (*AddCustomFieldDefResponse, error) {
 	response := &AddCustomFieldDefResponse{}
-	err := service.client.Call("AddCustomFieldDef", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26692,7 +26692,7 @@ func (service *VimPortType) AddCustomFieldDef(request *AddCustomFieldDefRequestT
  */
 func (service *VimPortType) RemoveCustomFieldDef(request *RemoveCustomFieldDefRequestType) (*RemoveCustomFieldDefResponse, error) {
 	response := &RemoveCustomFieldDefResponse{}
-	err := service.client.Call("RemoveCustomFieldDef", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26708,7 +26708,7 @@ func (service *VimPortType) RemoveCustomFieldDef(request *RemoveCustomFieldDefRe
  */
 func (service *VimPortType) RenameCustomFieldDef(request *RenameCustomFieldDefRequestType) (*RenameCustomFieldDefResponse, error) {
 	response := &RenameCustomFieldDefResponse{}
-	err := service.client.Call("RenameCustomFieldDef", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26723,7 +26723,7 @@ func (service *VimPortType) RenameCustomFieldDef(request *RenameCustomFieldDefRe
  */
 func (service *VimPortType) SetField(request *SetFieldRequestType) (*SetFieldResponse, error) {
 	response := &SetFieldResponse{}
-	err := service.client.Call("SetField", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26738,7 +26738,7 @@ func (service *VimPortType) SetField(request *SetFieldRequestType) (*SetFieldRes
  */
 func (service *VimPortType) DoesCustomizationSpecExist(request *DoesCustomizationSpecExistRequestType) (*DoesCustomizationSpecExistResponse, error) {
 	response := &DoesCustomizationSpecExistResponse{}
-	err := service.client.Call("DoesCustomizationSpecExist", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26754,7 +26754,7 @@ func (service *VimPortType) DoesCustomizationSpecExist(request *DoesCustomizatio
  */
 func (service *VimPortType) GetCustomizationSpec(request *GetCustomizationSpecRequestType) (*GetCustomizationSpecResponse, error) {
 	response := &GetCustomizationSpecResponse{}
-	err := service.client.Call("GetCustomizationSpec", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26771,7 +26771,7 @@ func (service *VimPortType) GetCustomizationSpec(request *GetCustomizationSpecRe
  */
 func (service *VimPortType) CreateCustomizationSpec(request *CreateCustomizationSpecRequestType) (*CreateCustomizationSpecResponse, error) {
 	response := &CreateCustomizationSpecResponse{}
-	err := service.client.Call("CreateCustomizationSpec", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26789,7 +26789,7 @@ func (service *VimPortType) CreateCustomizationSpec(request *CreateCustomization
  */
 func (service *VimPortType) OverwriteCustomizationSpec(request *OverwriteCustomizationSpecRequestType) (*OverwriteCustomizationSpecResponse, error) {
 	response := &OverwriteCustomizationSpecResponse{}
-	err := service.client.Call("OverwriteCustomizationSpec", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26805,7 +26805,7 @@ func (service *VimPortType) OverwriteCustomizationSpec(request *OverwriteCustomi
  */
 func (service *VimPortType) DeleteCustomizationSpec(request *DeleteCustomizationSpecRequestType) (*DeleteCustomizationSpecResponse, error) {
 	response := &DeleteCustomizationSpecResponse{}
-	err := service.client.Call("DeleteCustomizationSpec", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26822,7 +26822,7 @@ func (service *VimPortType) DeleteCustomizationSpec(request *DeleteCustomization
  */
 func (service *VimPortType) DuplicateCustomizationSpec(request *DuplicateCustomizationSpecRequestType) (*DuplicateCustomizationSpecResponse, error) {
 	response := &DuplicateCustomizationSpecResponse{}
-	err := service.client.Call("DuplicateCustomizationSpec", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26839,7 +26839,7 @@ func (service *VimPortType) DuplicateCustomizationSpec(request *DuplicateCustomi
  */
 func (service *VimPortType) RenameCustomizationSpec(request *RenameCustomizationSpecRequestType) (*RenameCustomizationSpecResponse, error) {
 	response := &RenameCustomizationSpecResponse{}
-	err := service.client.Call("RenameCustomizationSpec", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26854,7 +26854,7 @@ func (service *VimPortType) RenameCustomizationSpec(request *RenameCustomization
  */
 func (service *VimPortType) CustomizationSpecItemToXml(request *CustomizationSpecItemToXmlRequestType) (*CustomizationSpecItemToXmlResponse, error) {
 	response := &CustomizationSpecItemToXmlResponse{}
-	err := service.client.Call("CustomizationSpecItemToXml", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26870,7 +26870,7 @@ func (service *VimPortType) CustomizationSpecItemToXml(request *CustomizationSpe
  */
 func (service *VimPortType) XmlToCustomizationSpecItem(request *XmlToCustomizationSpecItemRequestType) (*XmlToCustomizationSpecItemResponse, error) {
 	response := &XmlToCustomizationSpecItemResponse{}
-	err := service.client.Call("XmlToCustomizationSpecItem", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26886,7 +26886,7 @@ func (service *VimPortType) XmlToCustomizationSpecItem(request *XmlToCustomizati
  */
 func (service *VimPortType) CheckCustomizationResources(request *CheckCustomizationResourcesRequestType) (*CheckCustomizationResourcesResponse, error) {
 	response := &CheckCustomizationResourcesResponse{}
-	err := service.client.Call("CheckCustomizationResources", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26903,7 +26903,7 @@ func (service *VimPortType) CheckCustomizationResources(request *CheckCustomizat
  */
 func (service *VimPortType) QueryConnectionInfo(request *QueryConnectionInfoRequestType) (*QueryConnectionInfoResponse, error) {
 	response := &QueryConnectionInfoResponse{}
-	err := service.client.Call("QueryConnectionInfo", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26918,7 +26918,7 @@ func (service *VimPortType) QueryConnectionInfo(request *QueryConnectionInfoRequ
  */
 func (service *VimPortType) PowerOnMultiVM_Task(request *PowerOnMultiVMRequestType) (*PowerOnMultiVM_TaskResponse, error) {
 	response := &PowerOnMultiVM_TaskResponse{}
-	err := service.client.Call("PowerOnMultiVM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26933,7 +26933,7 @@ func (service *VimPortType) PowerOnMultiVM_Task(request *PowerOnMultiVMRequestTy
  */
 func (service *VimPortType) QueryDatacenterConfigOptionDescriptor(request *queryDatacenterConfigOptionDescriptorRequestType) (*queryDatacenterConfigOptionDescriptorResponse, error) {
 	response := &queryDatacenterConfigOptionDescriptorResponse{}
-	err := service.client.Call("queryDatacenterConfigOptionDescriptor", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26948,7 +26948,7 @@ func (service *VimPortType) QueryDatacenterConfigOptionDescriptor(request *query
  */
 func (service *VimPortType) ReconfigureDatacenter_Task(request *ReconfigureDatacenterRequestType) (*ReconfigureDatacenter_TaskResponse, error) {
 	response := &ReconfigureDatacenter_TaskResponse{}
-	err := service.client.Call("ReconfigureDatacenter_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26965,7 +26965,7 @@ func (service *VimPortType) ReconfigureDatacenter_Task(request *ReconfigureDatac
  */
 func (service *VimPortType) RefreshDatastore(request *RefreshDatastoreRequestType) (*RefreshDatastoreResponse, error) {
 	response := &RefreshDatastoreResponse{}
-	err := service.client.Call("RefreshDatastore", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26980,7 +26980,7 @@ func (service *VimPortType) RefreshDatastore(request *RefreshDatastoreRequestTyp
  */
 func (service *VimPortType) RefreshDatastoreStorageInfo(request *RefreshDatastoreStorageInfoRequestType) (*RefreshDatastoreStorageInfoResponse, error) {
 	response := &RefreshDatastoreStorageInfoResponse{}
-	err := service.client.Call("RefreshDatastoreStorageInfo", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26999,7 +26999,7 @@ func (service *VimPortType) RefreshDatastoreStorageInfo(request *RefreshDatastor
  */
 func (service *VimPortType) UpdateVirtualMachineFiles_Task(request *UpdateVirtualMachineFilesRequestType) (*UpdateVirtualMachineFiles_TaskResponse, error) {
 	response := &UpdateVirtualMachineFiles_TaskResponse{}
-	err := service.client.Call("UpdateVirtualMachineFiles_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27016,7 +27016,7 @@ func (service *VimPortType) UpdateVirtualMachineFiles_Task(request *UpdateVirtua
  */
 func (service *VimPortType) RenameDatastore(request *RenameDatastoreRequestType) (*RenameDatastoreResponse, error) {
 	response := &RenameDatastoreResponse{}
-	err := service.client.Call("RenameDatastore", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27032,7 +27032,7 @@ func (service *VimPortType) RenameDatastore(request *RenameDatastoreRequestType)
  */
 func (service *VimPortType) DestroyDatastore(request *DestroyDatastoreRequestType) (*DestroyDatastoreResponse, error) {
 	response := &DestroyDatastoreResponse{}
-	err := service.client.Call("DestroyDatastore", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27048,7 +27048,7 @@ func (service *VimPortType) DestroyDatastore(request *DestroyDatastoreRequestTyp
  */
 func (service *VimPortType) DatastoreEnterMaintenanceMode(request *DatastoreEnterMaintenanceModeRequestType) (*DatastoreEnterMaintenanceModeResponse, error) {
 	response := &DatastoreEnterMaintenanceModeResponse{}
-	err := service.client.Call("DatastoreEnterMaintenanceMode", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27064,7 +27064,7 @@ func (service *VimPortType) DatastoreEnterMaintenanceMode(request *DatastoreEnte
  */
 func (service *VimPortType) DatastoreExitMaintenanceMode_Task(request *DatastoreExitMaintenanceModeRequestType) (*DatastoreExitMaintenanceMode_TaskResponse, error) {
 	response := &DatastoreExitMaintenanceMode_TaskResponse{}
-	err := service.client.Call("DatastoreExitMaintenanceMode_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27082,7 +27082,7 @@ func (service *VimPortType) DatastoreExitMaintenanceMode_Task(request *Datastore
  */
 func (service *VimPortType) CreateDirectory(request *CreateDirectoryRequestType) (*CreateDirectoryResponse, error) {
 	response := &CreateDirectoryResponse{}
-	err := service.client.Call("CreateDirectory", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27101,7 +27101,7 @@ func (service *VimPortType) CreateDirectory(request *CreateDirectoryRequestType)
  */
 func (service *VimPortType) DeleteDirectory(request *DeleteDirectoryRequestType) (*DeleteDirectoryResponse, error) {
 	response := &DeleteDirectoryResponse{}
-	err := service.client.Call("DeleteDirectory", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27116,7 +27116,7 @@ func (service *VimPortType) DeleteDirectory(request *DeleteDirectoryRequestType)
  */
 func (service *VimPortType) QueryDescriptions(request *QueryDescriptionsRequestType) (*QueryDescriptionsResponse, error) {
 	response := &QueryDescriptionsResponse{}
-	err := service.client.Call("QueryDescriptions", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27132,7 +27132,7 @@ func (service *VimPortType) QueryDescriptions(request *QueryDescriptionsRequestT
  */
 func (service *VimPortType) BrowseDiagnosticLog(request *BrowseDiagnosticLogRequestType) (*BrowseDiagnosticLogResponse, error) {
 	response := &BrowseDiagnosticLogResponse{}
-	err := service.client.Call("BrowseDiagnosticLog", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27149,7 +27149,7 @@ func (service *VimPortType) BrowseDiagnosticLog(request *BrowseDiagnosticLogRequ
  */
 func (service *VimPortType) GenerateLogBundles_Task(request *GenerateLogBundlesRequestType) (*GenerateLogBundles_TaskResponse, error) {
 	response := &GenerateLogBundles_TaskResponse{}
-	err := service.client.Call("GenerateLogBundles_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27164,7 +27164,7 @@ func (service *VimPortType) GenerateLogBundles_Task(request *GenerateLogBundlesR
  */
 func (service *VimPortType) FetchDVPortKeys(request *FetchDVPortKeysRequestType) (*FetchDVPortKeysResponse, error) {
 	response := &FetchDVPortKeysResponse{}
-	err := service.client.Call("FetchDVPortKeys", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27179,7 +27179,7 @@ func (service *VimPortType) FetchDVPortKeys(request *FetchDVPortKeysRequestType)
  */
 func (service *VimPortType) FetchDVPorts(request *FetchDVPortsRequestType) (*FetchDVPortsResponse, error) {
 	response := &FetchDVPortsResponse{}
-	err := service.client.Call("FetchDVPorts", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27194,7 +27194,7 @@ func (service *VimPortType) FetchDVPorts(request *FetchDVPortsRequestType) (*Fet
  */
 func (service *VimPortType) QueryUsedVlanIdInDvs(request *QueryUsedVlanIdInDvsRequestType) (*QueryUsedVlanIdInDvsResponse, error) {
 	response := &QueryUsedVlanIdInDvsResponse{}
-	err := service.client.Call("QueryUsedVlanIdInDvs", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27220,7 +27220,7 @@ func (service *VimPortType) QueryUsedVlanIdInDvs(request *QueryUsedVlanIdInDvsRe
  */
 func (service *VimPortType) ReconfigureDvs_Task(request *ReconfigureDvsRequestType) (*ReconfigureDvs_TaskResponse, error) {
 	response := &ReconfigureDvs_TaskResponse{}
-	err := service.client.Call("ReconfigureDvs_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27238,7 +27238,7 @@ func (service *VimPortType) ReconfigureDvs_Task(request *ReconfigureDvsRequestTy
  */
 func (service *VimPortType) PerformDvsProductSpecOperation_Task(request *PerformDvsProductSpecOperationRequestType) (*PerformDvsProductSpecOperation_TaskResponse, error) {
 	response := &PerformDvsProductSpecOperation_TaskResponse{}
-	err := service.client.Call("PerformDvsProductSpecOperation_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27257,7 +27257,7 @@ func (service *VimPortType) PerformDvsProductSpecOperation_Task(request *Perform
  */
 func (service *VimPortType) MergeDvs_Task(request *MergeDvsRequestType) (*MergeDvs_TaskResponse, error) {
 	response := &MergeDvs_TaskResponse{}
-	err := service.client.Call("MergeDvs_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27275,7 +27275,7 @@ func (service *VimPortType) MergeDvs_Task(request *MergeDvsRequestType) (*MergeD
  */
 func (service *VimPortType) AddDVPortgroup_Task(request *AddDVPortgroupRequestType) (*AddDVPortgroup_TaskResponse, error) {
 	response := &AddDVPortgroup_TaskResponse{}
-	err := service.client.Call("AddDVPortgroup_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27293,7 +27293,7 @@ func (service *VimPortType) AddDVPortgroup_Task(request *AddDVPortgroupRequestTy
  */
 func (service *VimPortType) MoveDVPort_Task(request *MoveDVPortRequestType) (*MoveDVPort_TaskResponse, error) {
 	response := &MoveDVPort_TaskResponse{}
-	err := service.client.Call("MoveDVPort_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27309,7 +27309,7 @@ func (service *VimPortType) MoveDVPort_Task(request *MoveDVPortRequestType) (*Mo
  */
 func (service *VimPortType) UpdateDvsCapability(request *UpdateDvsCapabilityRequestType) (*UpdateDvsCapabilityResponse, error) {
 	response := &UpdateDvsCapabilityResponse{}
-	err := service.client.Call("UpdateDvsCapability", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27328,7 +27328,7 @@ func (service *VimPortType) UpdateDvsCapability(request *UpdateDvsCapabilityRequ
  */
 func (service *VimPortType) ReconfigureDVPort_Task(request *ReconfigureDVPortRequestType) (*ReconfigureDVPort_TaskResponse, error) {
 	response := &ReconfigureDVPort_TaskResponse{}
-	err := service.client.Call("ReconfigureDVPort_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27345,7 +27345,7 @@ func (service *VimPortType) ReconfigureDVPort_Task(request *ReconfigureDVPortReq
  */
 func (service *VimPortType) RefreshDVPortState(request *RefreshDVPortStateRequestType) (*RefreshDVPortStateResponse, error) {
 	response := &RefreshDVPortStateResponse{}
-	err := service.client.Call("RefreshDVPortState", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27362,7 +27362,7 @@ func (service *VimPortType) RefreshDVPortState(request *RefreshDVPortStateReques
  */
 func (service *VimPortType) RectifyDvsHost_Task(request *RectifyDvsHostRequestType) (*RectifyDvsHost_TaskResponse, error) {
 	response := &RectifyDvsHost_TaskResponse{}
-	err := service.client.Call("RectifyDvsHost_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27381,7 +27381,7 @@ func (service *VimPortType) RectifyDvsHost_Task(request *RectifyDvsHostRequestTy
  */
 func (service *VimPortType) UpdateNetworkResourcePool(request *UpdateNetworkResourcePoolRequestType) (*UpdateNetworkResourcePoolResponse, error) {
 	response := &UpdateNetworkResourcePoolResponse{}
-	err := service.client.Call("UpdateNetworkResourcePool", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27398,7 +27398,7 @@ func (service *VimPortType) UpdateNetworkResourcePool(request *UpdateNetworkReso
  */
 func (service *VimPortType) AddNetworkResourcePool(request *AddNetworkResourcePoolRequestType) (*AddNetworkResourcePoolResponse, error) {
 	response := &AddNetworkResourcePoolResponse{}
-	err := service.client.Call("AddNetworkResourcePool", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27417,7 +27417,7 @@ func (service *VimPortType) AddNetworkResourcePool(request *AddNetworkResourcePo
  */
 func (service *VimPortType) RemoveNetworkResourcePool(request *RemoveNetworkResourcePoolRequestType) (*RemoveNetworkResourcePoolResponse, error) {
 	response := &RemoveNetworkResourcePoolResponse{}
-	err := service.client.Call("RemoveNetworkResourcePool", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27433,7 +27433,7 @@ func (service *VimPortType) RemoveNetworkResourcePool(request *RemoveNetworkReso
  */
 func (service *VimPortType) EnableNetworkResourceManagement(request *EnableNetworkResourceManagementRequestType) (*EnableNetworkResourceManagementResponse, error) {
 	response := &EnableNetworkResourceManagementResponse{}
-	err := service.client.Call("EnableNetworkResourceManagement", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27450,7 +27450,7 @@ func (service *VimPortType) EnableNetworkResourceManagement(request *EnableNetwo
  */
 func (service *VimPortType) DVSRollback_Task(request *DVSRollbackRequestType) (*DVSRollback_TaskResponse, error) {
 	response := &DVSRollback_TaskResponse{}
-	err := service.client.Call("DVSRollback_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27468,7 +27468,7 @@ func (service *VimPortType) DVSRollback_Task(request *DVSRollbackRequestType) (*
  */
 func (service *VimPortType) CreateDVPortgroup_Task(request *CreateDVPortgroupRequestType) (*CreateDVPortgroup_TaskResponse, error) {
 	response := &CreateDVPortgroup_TaskResponse{}
-	err := service.client.Call("CreateDVPortgroup_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27484,7 +27484,7 @@ func (service *VimPortType) CreateDVPortgroup_Task(request *CreateDVPortgroupReq
  */
 func (service *VimPortType) UpdateDVSHealthCheckConfig_Task(request *UpdateDVSHealthCheckConfigRequestType) (*UpdateDVSHealthCheckConfig_TaskResponse, error) {
 	response := &UpdateDVSHealthCheckConfig_TaskResponse{}
-	err := service.client.Call("UpdateDVSHealthCheckConfig_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27500,7 +27500,7 @@ func (service *VimPortType) UpdateDVSHealthCheckConfig_Task(request *UpdateDVSHe
  */
 func (service *VimPortType) LookupDvPortGroup(request *LookupDvPortGroupRequestType) (*LookupDvPortGroupResponse, error) {
 	response := &LookupDvPortGroupResponse{}
-	err := service.client.Call("LookupDvPortGroup", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27515,7 +27515,7 @@ func (service *VimPortType) LookupDvPortGroup(request *LookupDvPortGroupRequestT
  */
 func (service *VimPortType) QueryConfigOptionDescriptor(request *QueryConfigOptionDescriptorRequestType) (*QueryConfigOptionDescriptorResponse, error) {
 	response := &QueryConfigOptionDescriptorResponse{}
-	err := service.client.Call("QueryConfigOptionDescriptor", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27530,7 +27530,7 @@ func (service *VimPortType) QueryConfigOptionDescriptor(request *QueryConfigOpti
  */
 func (service *VimPortType) QueryConfigOption(request *QueryConfigOptionRequestType) (*QueryConfigOptionResponse, error) {
 	response := &QueryConfigOptionResponse{}
-	err := service.client.Call("QueryConfigOption", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27545,7 +27545,7 @@ func (service *VimPortType) QueryConfigOption(request *QueryConfigOptionRequestT
  */
 func (service *VimPortType) QueryConfigTarget(request *QueryConfigTargetRequestType) (*QueryConfigTargetResponse, error) {
 	response := &QueryConfigTargetResponse{}
-	err := service.client.Call("QueryConfigTarget", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27560,7 +27560,7 @@ func (service *VimPortType) QueryConfigTarget(request *QueryConfigTargetRequestT
  */
 func (service *VimPortType) QueryTargetCapabilities(request *QueryTargetCapabilitiesRequestType) (*QueryTargetCapabilitiesResponse, error) {
 	response := &QueryTargetCapabilitiesResponse{}
-	err := service.client.Call("QueryTargetCapabilities", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27575,7 +27575,7 @@ func (service *VimPortType) QueryTargetCapabilities(request *QueryTargetCapabili
  */
 func (service *VimPortType) SetCustomValue(request *setCustomValueRequestType) (*setCustomValueResponse, error) {
 	response := &setCustomValueResponse{}
-	err := service.client.Call("setCustomValue", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27591,7 +27591,7 @@ func (service *VimPortType) SetCustomValue(request *setCustomValueRequestType) (
  */
 func (service *VimPortType) UnregisterExtension(request *UnregisterExtensionRequestType) (*UnregisterExtensionResponse, error) {
 	response := &UnregisterExtensionResponse{}
-	err := service.client.Call("UnregisterExtension", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27606,7 +27606,7 @@ func (service *VimPortType) UnregisterExtension(request *UnregisterExtensionRequ
  */
 func (service *VimPortType) FindExtension(request *FindExtensionRequestType) (*FindExtensionResponse, error) {
 	response := &FindExtensionResponse{}
-	err := service.client.Call("FindExtension", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27621,7 +27621,7 @@ func (service *VimPortType) FindExtension(request *FindExtensionRequestType) (*F
  */
 func (service *VimPortType) RegisterExtension(request *RegisterExtensionRequestType) (*RegisterExtensionResponse, error) {
 	response := &RegisterExtensionResponse{}
-	err := service.client.Call("RegisterExtension", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27637,7 +27637,7 @@ func (service *VimPortType) RegisterExtension(request *RegisterExtensionRequestT
  */
 func (service *VimPortType) UpdateExtension(request *UpdateExtensionRequestType) (*UpdateExtensionResponse, error) {
 	response := &UpdateExtensionResponse{}
-	err := service.client.Call("UpdateExtension", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27652,7 +27652,7 @@ func (service *VimPortType) UpdateExtension(request *UpdateExtensionRequestType)
  */
 func (service *VimPortType) GetPublicKey(request *GetPublicKeyRequestType) (*GetPublicKeyResponse, error) {
 	response := &GetPublicKeyResponse{}
-	err := service.client.Call("GetPublicKey", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27667,7 +27667,7 @@ func (service *VimPortType) GetPublicKey(request *GetPublicKeyRequestType) (*Get
  */
 func (service *VimPortType) SetPublicKey(request *SetPublicKeyRequestType) (*SetPublicKeyResponse, error) {
 	response := &SetPublicKeyResponse{}
-	err := service.client.Call("SetPublicKey", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27684,7 +27684,7 @@ func (service *VimPortType) SetPublicKey(request *SetPublicKeyRequestType) (*Set
  */
 func (service *VimPortType) SetExtensionCertificate(request *SetExtensionCertificateRequestType) (*SetExtensionCertificateResponse, error) {
 	response := &SetExtensionCertificateResponse{}
-	err := service.client.Call("SetExtensionCertificate", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27699,7 +27699,7 @@ func (service *VimPortType) SetExtensionCertificate(request *SetExtensionCertifi
  */
 func (service *VimPortType) QueryManagedBy(request *QueryManagedByRequestType) (*QueryManagedByResponse, error) {
 	response := &QueryManagedByResponse{}
-	err := service.client.Call("QueryManagedBy", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27714,7 +27714,7 @@ func (service *VimPortType) QueryManagedBy(request *QueryManagedByRequestType) (
  */
 func (service *VimPortType) QueryExtensionIpAllocationUsage(request *QueryExtensionIpAllocationUsageRequestType) (*QueryExtensionIpAllocationUsageResponse, error) {
 	response := &QueryExtensionIpAllocationUsageResponse{}
-	err := service.client.Call("QueryExtensionIpAllocationUsage", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27731,7 +27731,7 @@ func (service *VimPortType) QueryExtensionIpAllocationUsage(request *QueryExtens
  */
 func (service *VimPortType) MoveDatastoreFile_Task(request *MoveDatastoreFileRequestType) (*MoveDatastoreFile_TaskResponse, error) {
 	response := &MoveDatastoreFile_TaskResponse{}
-	err := service.client.Call("MoveDatastoreFile_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27748,7 +27748,7 @@ func (service *VimPortType) MoveDatastoreFile_Task(request *MoveDatastoreFileReq
  */
 func (service *VimPortType) CopyDatastoreFile_Task(request *CopyDatastoreFileRequestType) (*CopyDatastoreFile_TaskResponse, error) {
 	response := &CopyDatastoreFile_TaskResponse{}
-	err := service.client.Call("CopyDatastoreFile_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27765,7 +27765,7 @@ func (service *VimPortType) CopyDatastoreFile_Task(request *CopyDatastoreFileReq
  */
 func (service *VimPortType) DeleteDatastoreFile_Task(request *DeleteDatastoreFileRequestType) (*DeleteDatastoreFile_TaskResponse, error) {
 	response := &DeleteDatastoreFile_TaskResponse{}
-	err := service.client.Call("DeleteDatastoreFile_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27782,7 +27782,7 @@ func (service *VimPortType) DeleteDatastoreFile_Task(request *DeleteDatastoreFil
  */
 func (service *VimPortType) MakeDirectory(request *MakeDirectoryRequestType) (*MakeDirectoryResponse, error) {
 	response := &MakeDirectoryResponse{}
-	err := service.client.Call("MakeDirectory", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27800,7 +27800,7 @@ func (service *VimPortType) MakeDirectory(request *MakeDirectoryRequestType) (*M
  */
 func (service *VimPortType) ChangeOwner(request *ChangeOwnerRequestType) (*ChangeOwnerResponse, error) {
 	response := &ChangeOwnerResponse{}
-	err := service.client.Call("ChangeOwner", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27817,7 +27817,7 @@ func (service *VimPortType) ChangeOwner(request *ChangeOwnerRequestType) (*Chang
  */
 func (service *VimPortType) CreateFolder(request *CreateFolderRequestType) (*CreateFolderResponse, error) {
 	response := &CreateFolderResponse{}
-	err := service.client.Call("CreateFolder", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27835,7 +27835,7 @@ func (service *VimPortType) CreateFolder(request *CreateFolderRequestType) (*Cre
  */
 func (service *VimPortType) MoveIntoFolder_Task(request *MoveIntoFolderRequestType) (*MoveIntoFolder_TaskResponse, error) {
 	response := &MoveIntoFolder_TaskResponse{}
-	err := service.client.Call("MoveIntoFolder_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27859,7 +27859,7 @@ func (service *VimPortType) MoveIntoFolder_Task(request *MoveIntoFolderRequestTy
  */
 func (service *VimPortType) CreateVM_Task(request *CreateVMRequestType) (*CreateVM_TaskResponse, error) {
 	response := &CreateVM_TaskResponse{}
-	err := service.client.Call("CreateVM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27884,7 +27884,7 @@ func (service *VimPortType) CreateVM_Task(request *CreateVMRequestType) (*Create
  */
 func (service *VimPortType) RegisterVM_Task(request *RegisterVMRequestType) (*RegisterVM_TaskResponse, error) {
 	response := &RegisterVM_TaskResponse{}
-	err := service.client.Call("RegisterVM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27901,7 +27901,7 @@ func (service *VimPortType) RegisterVM_Task(request *RegisterVMRequestType) (*Re
  */
 func (service *VimPortType) CreateCluster(request *CreateClusterRequestType) (*CreateClusterResponse, error) {
 	response := &CreateClusterResponse{}
-	err := service.client.Call("CreateCluster", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27918,7 +27918,7 @@ func (service *VimPortType) CreateCluster(request *CreateClusterRequestType) (*C
  */
 func (service *VimPortType) CreateClusterEx(request *CreateClusterExRequestType) (*CreateClusterExResponse, error) {
 	response := &CreateClusterExResponse{}
-	err := service.client.Call("CreateClusterEx", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27936,7 +27936,7 @@ func (service *VimPortType) CreateClusterEx(request *CreateClusterExRequestType)
  */
 func (service *VimPortType) AddStandaloneHost_Task(request *AddStandaloneHostRequestType) (*AddStandaloneHost_TaskResponse, error) {
 	response := &AddStandaloneHost_TaskResponse{}
-	err := service.client.Call("AddStandaloneHost_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27953,7 +27953,7 @@ func (service *VimPortType) AddStandaloneHost_Task(request *AddStandaloneHostReq
  */
 func (service *VimPortType) CreateDatacenter(request *CreateDatacenterRequestType) (*CreateDatacenterResponse, error) {
 	response := &CreateDatacenterResponse{}
-	err := service.client.Call("CreateDatacenter", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27970,7 +27970,7 @@ func (service *VimPortType) CreateDatacenter(request *CreateDatacenterRequestTyp
  */
 func (service *VimPortType) UnregisterAndDestroy_Task(request *UnregisterAndDestroyRequestType) (*UnregisterAndDestroy_TaskResponse, error) {
 	response := &UnregisterAndDestroy_TaskResponse{}
-	err := service.client.Call("UnregisterAndDestroy_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -27990,7 +27990,7 @@ func (service *VimPortType) UnregisterAndDestroy_Task(request *UnregisterAndDest
  */
 func (service *VimPortType) CreateDVS_Task(request *CreateDVSRequestType) (*CreateDVS_TaskResponse, error) {
 	response := &CreateDVS_TaskResponse{}
-	err := service.client.Call("CreateDVS_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28007,7 +28007,7 @@ func (service *VimPortType) CreateDVS_Task(request *CreateDVSRequestType) (*Crea
  */
 func (service *VimPortType) CreateStoragePod(request *CreateStoragePodRequestType) (*CreateStoragePodResponse, error) {
 	response := &CreateStoragePodResponse{}
-	err := service.client.Call("CreateStoragePod", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28022,7 +28022,7 @@ func (service *VimPortType) CreateStoragePod(request *CreateStoragePodRequestTyp
  */
 func (service *VimPortType) SetCollectorPageSize(request *SetCollectorPageSizeRequestType) (*SetCollectorPageSizeResponse, error) {
 	response := &SetCollectorPageSizeResponse{}
-	err := service.client.Call("SetCollectorPageSize", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28037,7 +28037,7 @@ func (service *VimPortType) SetCollectorPageSize(request *SetCollectorPageSizeRe
  */
 func (service *VimPortType) RewindCollector(request *RewindCollectorRequestType) (*RewindCollectorResponse, error) {
 	response := &RewindCollectorResponse{}
-	err := service.client.Call("RewindCollector", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28052,7 +28052,7 @@ func (service *VimPortType) RewindCollector(request *RewindCollectorRequestType)
  */
 func (service *VimPortType) ResetCollector(request *ResetCollectorRequestType) (*ResetCollectorResponse, error) {
 	response := &ResetCollectorResponse{}
-	err := service.client.Call("ResetCollector", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28067,7 +28067,7 @@ func (service *VimPortType) ResetCollector(request *ResetCollectorRequestType) (
  */
 func (service *VimPortType) DestroyCollector(request *DestroyCollectorRequestType) (*DestroyCollectorResponse, error) {
 	response := &DestroyCollectorResponse{}
-	err := service.client.Call("DestroyCollector", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28082,7 +28082,7 @@ func (service *VimPortType) DestroyCollector(request *DestroyCollectorRequestTyp
  */
 func (service *VimPortType) QueryTpmAttestationReport(request *QueryTpmAttestationReportRequestType) (*QueryTpmAttestationReportResponse, error) {
 	response := &QueryTpmAttestationReportResponse{}
-	err := service.client.Call("QueryTpmAttestationReport", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28097,7 +28097,7 @@ func (service *VimPortType) QueryTpmAttestationReport(request *QueryTpmAttestati
  */
 func (service *VimPortType) QueryHostConnectionInfo(request *QueryHostConnectionInfoRequestType) (*QueryHostConnectionInfoResponse, error) {
 	response := &QueryHostConnectionInfoResponse{}
-	err := service.client.Call("QueryHostConnectionInfo", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28112,7 +28112,7 @@ func (service *VimPortType) QueryHostConnectionInfo(request *QueryHostConnection
  */
 func (service *VimPortType) UpdateSystemResources(request *UpdateSystemResourcesRequestType) (*UpdateSystemResourcesResponse, error) {
 	response := &UpdateSystemResourcesResponse{}
-	err := service.client.Call("UpdateSystemResources", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28127,7 +28127,7 @@ func (service *VimPortType) UpdateSystemResources(request *UpdateSystemResources
  */
 func (service *VimPortType) UpdateSystemSwapConfiguration(request *UpdateSystemSwapConfigurationRequestType) (*UpdateSystemSwapConfigurationResponse, error) {
 	response := &UpdateSystemSwapConfigurationResponse{}
-	err := service.client.Call("UpdateSystemSwapConfiguration", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28146,7 +28146,7 @@ func (service *VimPortType) UpdateSystemSwapConfiguration(request *UpdateSystemS
  */
 func (service *VimPortType) ReconnectHost_Task(request *ReconnectHostRequestType) (*ReconnectHost_TaskResponse, error) {
 	response := &ReconnectHost_TaskResponse{}
-	err := service.client.Call("ReconnectHost_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28161,7 +28161,7 @@ func (service *VimPortType) ReconnectHost_Task(request *ReconnectHostRequestType
  */
 func (service *VimPortType) DisconnectHost_Task(request *DisconnectHostRequestType) (*DisconnectHost_TaskResponse, error) {
 	response := &DisconnectHost_TaskResponse{}
-	err := service.client.Call("DisconnectHost_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28178,7 +28178,7 @@ func (service *VimPortType) DisconnectHost_Task(request *DisconnectHostRequestTy
  */
 func (service *VimPortType) EnterMaintenanceMode_Task(request *EnterMaintenanceModeRequestType) (*EnterMaintenanceMode_TaskResponse, error) {
 	response := &EnterMaintenanceMode_TaskResponse{}
-	err := service.client.Call("EnterMaintenanceMode_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28195,7 +28195,7 @@ func (service *VimPortType) EnterMaintenanceMode_Task(request *EnterMaintenanceM
  */
 func (service *VimPortType) ExitMaintenanceMode_Task(request *ExitMaintenanceModeRequestType) (*ExitMaintenanceMode_TaskResponse, error) {
 	response := &ExitMaintenanceMode_TaskResponse{}
-	err := service.client.Call("ExitMaintenanceMode_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28211,7 +28211,7 @@ func (service *VimPortType) ExitMaintenanceMode_Task(request *ExitMaintenanceMod
  */
 func (service *VimPortType) RebootHost_Task(request *RebootHostRequestType) (*RebootHost_TaskResponse, error) {
 	response := &RebootHost_TaskResponse{}
-	err := service.client.Call("RebootHost_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28227,7 +28227,7 @@ func (service *VimPortType) RebootHost_Task(request *RebootHostRequestType) (*Re
  */
 func (service *VimPortType) ShutdownHost_Task(request *ShutdownHostRequestType) (*ShutdownHost_TaskResponse, error) {
 	response := &ShutdownHost_TaskResponse{}
-	err := service.client.Call("ShutdownHost_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28247,7 +28247,7 @@ func (service *VimPortType) ShutdownHost_Task(request *ShutdownHostRequestType) 
  */
 func (service *VimPortType) PowerDownHostToStandBy_Task(request *PowerDownHostToStandByRequestType) (*PowerDownHostToStandBy_TaskResponse, error) {
 	response := &PowerDownHostToStandBy_TaskResponse{}
-	err := service.client.Call("PowerDownHostToStandBy_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28266,7 +28266,7 @@ func (service *VimPortType) PowerDownHostToStandBy_Task(request *PowerDownHostTo
  */
 func (service *VimPortType) PowerUpHostFromStandBy_Task(request *PowerUpHostFromStandByRequestType) (*PowerUpHostFromStandBy_TaskResponse, error) {
 	response := &PowerUpHostFromStandBy_TaskResponse{}
-	err := service.client.Call("PowerUpHostFromStandBy_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28281,7 +28281,7 @@ func (service *VimPortType) PowerUpHostFromStandBy_Task(request *PowerUpHostFrom
  */
 func (service *VimPortType) QueryMemoryOverhead(request *QueryMemoryOverheadRequestType) (*QueryMemoryOverheadResponse, error) {
 	response := &QueryMemoryOverheadResponse{}
-	err := service.client.Call("QueryMemoryOverhead", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28296,7 +28296,7 @@ func (service *VimPortType) QueryMemoryOverhead(request *QueryMemoryOverheadRequ
  */
 func (service *VimPortType) QueryMemoryOverheadEx(request *QueryMemoryOverheadExRequestType) (*QueryMemoryOverheadExResponse, error) {
 	response := &QueryMemoryOverheadExResponse{}
-	err := service.client.Call("QueryMemoryOverheadEx", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28312,7 +28312,7 @@ func (service *VimPortType) QueryMemoryOverheadEx(request *QueryMemoryOverheadEx
  */
 func (service *VimPortType) ReconfigureHostForDAS_Task(request *ReconfigureHostForDASRequestType) (*ReconfigureHostForDAS_TaskResponse, error) {
 	response := &ReconfigureHostForDAS_TaskResponse{}
-	err := service.client.Call("ReconfigureHostForDAS_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28327,7 +28327,7 @@ func (service *VimPortType) ReconfigureHostForDAS_Task(request *ReconfigureHostF
  */
 func (service *VimPortType) UpdateFlags(request *UpdateFlagsRequestType) (*UpdateFlagsResponse, error) {
 	response := &UpdateFlagsResponse{}
-	err := service.client.Call("UpdateFlags", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28343,7 +28343,7 @@ func (service *VimPortType) UpdateFlags(request *UpdateFlagsRequestType) (*Updat
  */
 func (service *VimPortType) EnterLockdownMode(request *EnterLockdownModeRequestType) (*EnterLockdownModeResponse, error) {
 	response := &EnterLockdownModeResponse{}
-	err := service.client.Call("EnterLockdownMode", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28359,7 +28359,7 @@ func (service *VimPortType) EnterLockdownMode(request *EnterLockdownModeRequestT
  */
 func (service *VimPortType) ExitLockdownMode(request *ExitLockdownModeRequestType) (*ExitLockdownModeResponse, error) {
 	response := &ExitLockdownModeResponse{}
-	err := service.client.Call("ExitLockdownMode", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28374,7 +28374,7 @@ func (service *VimPortType) ExitLockdownMode(request *ExitLockdownModeRequestTyp
  */
 func (service *VimPortType) AcquireCimServicesTicket(request *AcquireCimServicesTicketRequestType) (*AcquireCimServicesTicketResponse, error) {
 	response := &AcquireCimServicesTicketResponse{}
-	err := service.client.Call("AcquireCimServicesTicket", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28391,7 +28391,7 @@ func (service *VimPortType) AcquireCimServicesTicket(request *AcquireCimServices
  */
 func (service *VimPortType) UpdateIpmi(request *UpdateIpmiRequestType) (*UpdateIpmiResponse, error) {
 	response := &UpdateIpmiResponse{}
-	err := service.client.Call("UpdateIpmi", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28406,7 +28406,7 @@ func (service *VimPortType) UpdateIpmi(request *UpdateIpmiRequestType) (*UpdateI
  */
 func (service *VimPortType) RetrieveHardwareUptime(request *RetrieveHardwareUptimeRequestType) (*RetrieveHardwareUptimeResponse, error) {
 	response := &RetrieveHardwareUptimeResponse{}
-	err := service.client.Call("RetrieveHardwareUptime", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28423,7 +28423,7 @@ func (service *VimPortType) RetrieveHardwareUptime(request *RetrieveHardwareUpti
  */
 func (service *VimPortType) HttpNfcLeaseGetManifest(request *HttpNfcLeaseGetManifestRequestType) (*HttpNfcLeaseGetManifestResponse, error) {
 	response := &HttpNfcLeaseGetManifestResponse{}
-	err := service.client.Call("HttpNfcLeaseGetManifest", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28440,7 +28440,7 @@ func (service *VimPortType) HttpNfcLeaseGetManifest(request *HttpNfcLeaseGetMani
  */
 func (service *VimPortType) HttpNfcLeaseComplete(request *HttpNfcLeaseCompleteRequestType) (*HttpNfcLeaseCompleteResponse, error) {
 	response := &HttpNfcLeaseCompleteResponse{}
-	err := service.client.Call("HttpNfcLeaseComplete", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28457,7 +28457,7 @@ func (service *VimPortType) HttpNfcLeaseComplete(request *HttpNfcLeaseCompleteRe
  */
 func (service *VimPortType) HttpNfcLeaseAbort(request *HttpNfcLeaseAbortRequestType) (*HttpNfcLeaseAbortResponse, error) {
 	response := &HttpNfcLeaseAbortResponse{}
-	err := service.client.Call("HttpNfcLeaseAbort", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28473,7 +28473,7 @@ func (service *VimPortType) HttpNfcLeaseAbort(request *HttpNfcLeaseAbortRequestT
  */
 func (service *VimPortType) HttpNfcLeaseProgress(request *HttpNfcLeaseProgressRequestType) (*HttpNfcLeaseProgressResponse, error) {
 	response := &HttpNfcLeaseProgressResponse{}
-	err := service.client.Call("HttpNfcLeaseProgress", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28488,7 +28488,7 @@ func (service *VimPortType) HttpNfcLeaseProgress(request *HttpNfcLeaseProgressRe
  */
 func (service *VimPortType) QueryIpPools(request *QueryIpPoolsRequestType) (*QueryIpPoolsResponse, error) {
 	response := &QueryIpPoolsResponse{}
-	err := service.client.Call("QueryIpPools", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28503,7 +28503,7 @@ func (service *VimPortType) QueryIpPools(request *QueryIpPoolsRequestType) (*Que
  */
 func (service *VimPortType) CreateIpPool(request *CreateIpPoolRequestType) (*CreateIpPoolResponse, error) {
 	response := &CreateIpPoolResponse{}
-	err := service.client.Call("CreateIpPool", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28518,7 +28518,7 @@ func (service *VimPortType) CreateIpPool(request *CreateIpPoolRequestType) (*Cre
  */
 func (service *VimPortType) UpdateIpPool(request *UpdateIpPoolRequestType) (*UpdateIpPoolResponse, error) {
 	response := &UpdateIpPoolResponse{}
-	err := service.client.Call("UpdateIpPool", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28534,7 +28534,7 @@ func (service *VimPortType) UpdateIpPool(request *UpdateIpPoolRequestType) (*Upd
  */
 func (service *VimPortType) DestroyIpPool(request *DestroyIpPoolRequestType) (*DestroyIpPoolResponse, error) {
 	response := &DestroyIpPoolResponse{}
-	err := service.client.Call("DestroyIpPool", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28549,7 +28549,7 @@ func (service *VimPortType) DestroyIpPool(request *DestroyIpPoolRequestType) (*D
  */
 func (service *VimPortType) AllocateIpv4Address(request *AllocateIpv4AddressRequestType) (*AllocateIpv4AddressResponse, error) {
 	response := &AllocateIpv4AddressResponse{}
-	err := service.client.Call("AllocateIpv4Address", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28564,7 +28564,7 @@ func (service *VimPortType) AllocateIpv4Address(request *AllocateIpv4AddressRequ
  */
 func (service *VimPortType) AllocateIpv6Address(request *AllocateIpv6AddressRequestType) (*AllocateIpv6AddressResponse, error) {
 	response := &AllocateIpv6AddressResponse{}
-	err := service.client.Call("AllocateIpv6Address", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28579,7 +28579,7 @@ func (service *VimPortType) AllocateIpv6Address(request *AllocateIpv6AddressRequ
  */
 func (service *VimPortType) ReleaseIpAllocation(request *ReleaseIpAllocationRequestType) (*ReleaseIpAllocationResponse, error) {
 	response := &ReleaseIpAllocationResponse{}
-	err := service.client.Call("ReleaseIpAllocation", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28594,7 +28594,7 @@ func (service *VimPortType) ReleaseIpAllocation(request *ReleaseIpAllocationRequ
  */
 func (service *VimPortType) QueryIPAllocations(request *QueryIPAllocationsRequestType) (*QueryIPAllocationsResponse, error) {
 	response := &QueryIPAllocationsResponse{}
-	err := service.client.Call("QueryIPAllocations", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28610,7 +28610,7 @@ func (service *VimPortType) QueryIPAllocations(request *QueryIPAllocationsReques
  */
 func (service *VimPortType) UpdateAssignedLicense(request *UpdateAssignedLicenseRequestType) (*UpdateAssignedLicenseResponse, error) {
 	response := &UpdateAssignedLicenseResponse{}
-	err := service.client.Call("UpdateAssignedLicense", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28626,7 +28626,7 @@ func (service *VimPortType) UpdateAssignedLicense(request *UpdateAssignedLicense
  */
 func (service *VimPortType) RemoveAssignedLicense(request *RemoveAssignedLicenseRequestType) (*RemoveAssignedLicenseResponse, error) {
 	response := &RemoveAssignedLicenseResponse{}
-	err := service.client.Call("RemoveAssignedLicense", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28641,7 +28641,7 @@ func (service *VimPortType) RemoveAssignedLicense(request *RemoveAssignedLicense
  */
 func (service *VimPortType) QueryAssignedLicenses(request *QueryAssignedLicensesRequestType) (*QueryAssignedLicensesResponse, error) {
 	response := &QueryAssignedLicensesResponse{}
-	err := service.client.Call("QueryAssignedLicenses", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28656,7 +28656,7 @@ func (service *VimPortType) QueryAssignedLicenses(request *QueryAssignedLicenses
  */
 func (service *VimPortType) QuerySupportedFeatures(request *QuerySupportedFeaturesRequestType) (*QuerySupportedFeaturesResponse, error) {
 	response := &QuerySupportedFeaturesResponse{}
-	err := service.client.Call("QuerySupportedFeatures", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28671,7 +28671,7 @@ func (service *VimPortType) QuerySupportedFeatures(request *QuerySupportedFeatur
  */
 func (service *VimPortType) QueryLicenseSourceAvailability(request *QueryLicenseSourceAvailabilityRequestType) (*QueryLicenseSourceAvailabilityResponse, error) {
 	response := &QueryLicenseSourceAvailabilityResponse{}
-	err := service.client.Call("QueryLicenseSourceAvailability", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28686,7 +28686,7 @@ func (service *VimPortType) QueryLicenseSourceAvailability(request *QueryLicense
  */
 func (service *VimPortType) QueryLicenseUsage(request *QueryLicenseUsageRequestType) (*QueryLicenseUsageResponse, error) {
 	response := &QueryLicenseUsageResponse{}
-	err := service.client.Call("QueryLicenseUsage", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28703,7 +28703,7 @@ func (service *VimPortType) QueryLicenseUsage(request *QueryLicenseUsageRequestT
  */
 func (service *VimPortType) SetLicenseEdition(request *SetLicenseEditionRequestType) (*SetLicenseEditionResponse, error) {
 	response := &SetLicenseEditionResponse{}
-	err := service.client.Call("SetLicenseEdition", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28719,7 +28719,7 @@ func (service *VimPortType) SetLicenseEdition(request *SetLicenseEditionRequestT
  */
 func (service *VimPortType) CheckLicenseFeature(request *CheckLicenseFeatureRequestType) (*CheckLicenseFeatureResponse, error) {
 	response := &CheckLicenseFeatureResponse{}
-	err := service.client.Call("CheckLicenseFeature", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28736,7 +28736,7 @@ func (service *VimPortType) CheckLicenseFeature(request *CheckLicenseFeatureRequ
  */
 func (service *VimPortType) EnableFeature(request *EnableFeatureRequestType) (*EnableFeatureResponse, error) {
 	response := &EnableFeatureResponse{}
-	err := service.client.Call("EnableFeature", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28753,7 +28753,7 @@ func (service *VimPortType) EnableFeature(request *EnableFeatureRequestType) (*E
  */
 func (service *VimPortType) DisableFeature(request *DisableFeatureRequestType) (*DisableFeatureResponse, error) {
 	response := &DisableFeatureResponse{}
-	err := service.client.Call("DisableFeature", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28771,7 +28771,7 @@ func (service *VimPortType) DisableFeature(request *DisableFeatureRequestType) (
  */
 func (service *VimPortType) ConfigureLicenseSource(request *ConfigureLicenseSourceRequestType) (*ConfigureLicenseSourceResponse, error) {
 	response := &ConfigureLicenseSourceResponse{}
-	err := service.client.Call("ConfigureLicenseSource", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28786,7 +28786,7 @@ func (service *VimPortType) ConfigureLicenseSource(request *ConfigureLicenseSour
  */
 func (service *VimPortType) UpdateLicense(request *UpdateLicenseRequestType) (*UpdateLicenseResponse, error) {
 	response := &UpdateLicenseResponse{}
-	err := service.client.Call("UpdateLicense", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28801,7 +28801,7 @@ func (service *VimPortType) UpdateLicense(request *UpdateLicenseRequestType) (*U
  */
 func (service *VimPortType) AddLicense(request *AddLicenseRequestType) (*AddLicenseResponse, error) {
 	response := &AddLicenseResponse{}
-	err := service.client.Call("AddLicense", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28816,7 +28816,7 @@ func (service *VimPortType) AddLicense(request *AddLicenseRequestType) (*AddLice
  */
 func (service *VimPortType) RemoveLicense(request *RemoveLicenseRequestType) (*RemoveLicenseResponse, error) {
 	response := &RemoveLicenseResponse{}
-	err := service.client.Call("RemoveLicense", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28831,7 +28831,7 @@ func (service *VimPortType) RemoveLicense(request *RemoveLicenseRequestType) (*R
  */
 func (service *VimPortType) DecodeLicense(request *DecodeLicenseRequestType) (*DecodeLicenseResponse, error) {
 	response := &DecodeLicenseResponse{}
-	err := service.client.Call("DecodeLicense", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28846,7 +28846,7 @@ func (service *VimPortType) DecodeLicense(request *DecodeLicenseRequestType) (*D
  */
 func (service *VimPortType) UpdateLicenseLabel(request *UpdateLicenseLabelRequestType) (*UpdateLicenseLabelResponse, error) {
 	response := &UpdateLicenseLabelResponse{}
-	err := service.client.Call("UpdateLicenseLabel", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28861,7 +28861,7 @@ func (service *VimPortType) UpdateLicenseLabel(request *UpdateLicenseLabelReques
  */
 func (service *VimPortType) RemoveLicenseLabel(request *RemoveLicenseLabelRequestType) (*RemoveLicenseLabelResponse, error) {
 	response := &RemoveLicenseLabelResponse{}
-	err := service.client.Call("RemoveLicenseLabel", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28876,7 +28876,7 @@ func (service *VimPortType) RemoveLicenseLabel(request *RemoveLicenseLabelReques
  */
 func (service *VimPortType) Reload(request *ReloadRequestType) (*ReloadResponse, error) {
 	response := &ReloadResponse{}
-	err := service.client.Call("Reload", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28893,7 +28893,7 @@ func (service *VimPortType) Reload(request *ReloadRequestType) (*ReloadResponse,
  */
 func (service *VimPortType) Rename_Task(request *RenameRequestType) (*Rename_TaskResponse, error) {
 	response := &Rename_TaskResponse{}
-	err := service.client.Call("Rename_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28909,7 +28909,7 @@ func (service *VimPortType) Rename_Task(request *RenameRequestType) (*Rename_Tas
  */
 func (service *VimPortType) Destroy_Task(request *DestroyRequestType) (*Destroy_TaskResponse, error) {
 	response := &Destroy_TaskResponse{}
-	err := service.client.Call("Destroy_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28925,7 +28925,7 @@ func (service *VimPortType) Destroy_Task(request *DestroyRequestType) (*Destroy_
  */
 func (service *VimPortType) DestroyNetwork(request *DestroyNetworkRequestType) (*DestroyNetworkResponse, error) {
 	response := &DestroyNetworkResponse{}
-	err := service.client.Call("DestroyNetwork", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28944,7 +28944,7 @@ func (service *VimPortType) DestroyNetwork(request *DestroyNetworkRequestType) (
  */
 func (service *VimPortType) ValidateHost(request *ValidateHostRequestType) (*ValidateHostResponse, error) {
 	response := &ValidateHostResponse{}
-	err := service.client.Call("ValidateHost", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28964,7 +28964,7 @@ func (service *VimPortType) ValidateHost(request *ValidateHostRequestType) (*Val
  */
 func (service *VimPortType) ParseDescriptor(request *ParseDescriptorRequestType) (*ParseDescriptorResponse, error) {
 	response := &ParseDescriptorResponse{}
-	err := service.client.Call("ParseDescriptor", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -28985,7 +28985,7 @@ func (service *VimPortType) ParseDescriptor(request *ParseDescriptorRequestType)
  */
 func (service *VimPortType) CreateImportSpec(request *CreateImportSpecRequestType) (*CreateImportSpecResponse, error) {
 	response := &CreateImportSpecResponse{}
-	err := service.client.Call("CreateImportSpec", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29005,7 +29005,7 @@ func (service *VimPortType) CreateImportSpec(request *CreateImportSpecRequestTyp
  */
 func (service *VimPortType) CreateDescriptor(request *CreateDescriptorRequestType) (*CreateDescriptorResponse, error) {
 	response := &CreateDescriptorResponse{}
-	err := service.client.Call("CreateDescriptor", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29020,7 +29020,7 @@ func (service *VimPortType) CreateDescriptor(request *CreateDescriptorRequestTyp
  */
 func (service *VimPortType) QueryPerfProviderSummary(request *QueryPerfProviderSummaryRequestType) (*QueryPerfProviderSummaryResponse, error) {
 	response := &QueryPerfProviderSummaryResponse{}
-	err := service.client.Call("QueryPerfProviderSummary", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29035,7 +29035,7 @@ func (service *VimPortType) QueryPerfProviderSummary(request *QueryPerfProviderS
  */
 func (service *VimPortType) QueryAvailablePerfMetric(request *QueryAvailablePerfMetricRequestType) (*QueryAvailablePerfMetricResponse, error) {
 	response := &QueryAvailablePerfMetricResponse{}
-	err := service.client.Call("QueryAvailablePerfMetric", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29050,7 +29050,7 @@ func (service *VimPortType) QueryAvailablePerfMetric(request *QueryAvailablePerf
  */
 func (service *VimPortType) QueryPerfCounter(request *QueryPerfCounterRequestType) (*QueryPerfCounterResponse, error) {
 	response := &QueryPerfCounterResponse{}
-	err := service.client.Call("QueryPerfCounter", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29065,7 +29065,7 @@ func (service *VimPortType) QueryPerfCounter(request *QueryPerfCounterRequestTyp
  */
 func (service *VimPortType) QueryPerfCounterByLevel(request *QueryPerfCounterByLevelRequestType) (*QueryPerfCounterByLevelResponse, error) {
 	response := &QueryPerfCounterByLevelResponse{}
-	err := service.client.Call("QueryPerfCounterByLevel", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29080,7 +29080,7 @@ func (service *VimPortType) QueryPerfCounterByLevel(request *QueryPerfCounterByL
  */
 func (service *VimPortType) QueryPerf(request *QueryPerfRequestType) (*QueryPerfResponse, error) {
 	response := &QueryPerfResponse{}
-	err := service.client.Call("QueryPerf", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29095,7 +29095,7 @@ func (service *VimPortType) QueryPerf(request *QueryPerfRequestType) (*QueryPerf
  */
 func (service *VimPortType) QueryPerfComposite(request *QueryPerfCompositeRequestType) (*QueryPerfCompositeResponse, error) {
 	response := &QueryPerfCompositeResponse{}
-	err := service.client.Call("QueryPerfComposite", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29110,7 +29110,7 @@ func (service *VimPortType) QueryPerfComposite(request *QueryPerfCompositeReques
  */
 func (service *VimPortType) CreatePerfInterval(request *CreatePerfIntervalRequestType) (*CreatePerfIntervalResponse, error) {
 	response := &CreatePerfIntervalResponse{}
-	err := service.client.Call("CreatePerfInterval", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29125,7 +29125,7 @@ func (service *VimPortType) CreatePerfInterval(request *CreatePerfIntervalReques
  */
 func (service *VimPortType) RemovePerfInterval(request *RemovePerfIntervalRequestType) (*RemovePerfIntervalResponse, error) {
 	response := &RemovePerfIntervalResponse{}
-	err := service.client.Call("RemovePerfInterval", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29140,7 +29140,7 @@ func (service *VimPortType) RemovePerfInterval(request *RemovePerfIntervalReques
  */
 func (service *VimPortType) UpdatePerfInterval(request *UpdatePerfIntervalRequestType) (*UpdatePerfIntervalResponse, error) {
 	response := &UpdatePerfIntervalResponse{}
-	err := service.client.Call("UpdatePerfInterval", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29155,7 +29155,7 @@ func (service *VimPortType) UpdatePerfInterval(request *UpdatePerfIntervalReques
  */
 func (service *VimPortType) UpdateCounterLevelMapping(request *UpdateCounterLevelMappingRequestType) (*UpdateCounterLevelMappingResponse, error) {
 	response := &UpdateCounterLevelMappingResponse{}
-	err := service.client.Call("UpdateCounterLevelMapping", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29170,7 +29170,7 @@ func (service *VimPortType) UpdateCounterLevelMapping(request *UpdateCounterLeve
  */
 func (service *VimPortType) ResetCounterLevelMapping(request *ResetCounterLevelMappingRequestType) (*ResetCounterLevelMappingResponse, error) {
 	response := &ResetCounterLevelMappingResponse{}
-	err := service.client.Call("ResetCounterLevelMapping", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29185,7 +29185,7 @@ func (service *VimPortType) ResetCounterLevelMapping(request *ResetCounterLevelM
  */
 func (service *VimPortType) EstimateDatabaseSize(request *EstimateDatabaseSizeRequestType) (*EstimateDatabaseSizeResponse, error) {
 	response := &EstimateDatabaseSizeResponse{}
-	err := service.client.Call("EstimateDatabaseSize", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29204,7 +29204,7 @@ func (service *VimPortType) EstimateDatabaseSize(request *EstimateDatabaseSizeRe
  */
 func (service *VimPortType) UpdateConfig(request *UpdateConfigRequestType) (*UpdateConfigResponse, error) {
 	response := &UpdateConfigResponse{}
-	err := service.client.Call("UpdateConfig", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29221,7 +29221,7 @@ func (service *VimPortType) UpdateConfig(request *UpdateConfigRequestType) (*Upd
  */
 func (service *VimPortType) MoveIntoResourcePool(request *MoveIntoResourcePoolRequestType) (*MoveIntoResourcePoolResponse, error) {
 	response := &MoveIntoResourcePoolResponse{}
-	err := service.client.Call("MoveIntoResourcePool", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29238,7 +29238,7 @@ func (service *VimPortType) MoveIntoResourcePool(request *MoveIntoResourcePoolRe
  */
 func (service *VimPortType) UpdateChildResourceConfiguration(request *UpdateChildResourceConfigurationRequestType) (*UpdateChildResourceConfigurationResponse, error) {
 	response := &UpdateChildResourceConfigurationResponse{}
-	err := service.client.Call("UpdateChildResourceConfiguration", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29256,7 +29256,7 @@ func (service *VimPortType) UpdateChildResourceConfiguration(request *UpdateChil
  */
 func (service *VimPortType) CreateResourcePool(request *CreateResourcePoolRequestType) (*CreateResourcePoolResponse, error) {
 	response := &CreateResourcePoolResponse{}
-	err := service.client.Call("CreateResourcePool", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29271,7 +29271,7 @@ func (service *VimPortType) CreateResourcePool(request *CreateResourcePoolReques
  */
 func (service *VimPortType) DestroyChildren(request *DestroyChildrenRequestType) (*DestroyChildrenResponse, error) {
 	response := &DestroyChildrenResponse{}
-	err := service.client.Call("DestroyChildren", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29291,7 +29291,7 @@ func (service *VimPortType) DestroyChildren(request *DestroyChildrenRequestType)
  */
 func (service *VimPortType) CreateVApp(request *CreateVAppRequestType) (*CreateVAppResponse, error) {
 	response := &CreateVAppResponse{}
-	err := service.client.Call("CreateVApp", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29312,7 +29312,7 @@ func (service *VimPortType) CreateVApp(request *CreateVAppRequestType) (*CreateV
  */
 func (service *VimPortType) CreateChildVM_Task(request *CreateChildVMRequestType) (*CreateChildVM_TaskResponse, error) {
 	response := &CreateChildVM_TaskResponse{}
-	err := service.client.Call("CreateChildVM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29335,7 +29335,7 @@ func (service *VimPortType) CreateChildVM_Task(request *CreateChildVMRequestType
  */
 func (service *VimPortType) RegisterChildVM_Task(request *RegisterChildVMRequestType) (*RegisterChildVM_TaskResponse, error) {
 	response := &RegisterChildVM_TaskResponse{}
-	err := service.client.Call("RegisterChildVM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29357,7 +29357,7 @@ func (service *VimPortType) RegisterChildVM_Task(request *RegisterChildVMRequest
  */
 func (service *VimPortType) ImportVApp(request *ImportVAppRequestType) (*ImportVAppResponse, error) {
 	response := &ImportVAppResponse{}
-	err := service.client.Call("ImportVApp", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29372,7 +29372,7 @@ func (service *VimPortType) ImportVApp(request *ImportVAppRequestType) (*ImportV
  */
 func (service *VimPortType) QueryResourceConfigOption(request *QueryResourceConfigOptionRequestType) (*QueryResourceConfigOptionResponse, error) {
 	response := &QueryResourceConfigOptionResponse{}
-	err := service.client.Call("QueryResourceConfigOption", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29387,7 +29387,7 @@ func (service *VimPortType) QueryResourceConfigOption(request *QueryResourceConf
  */
 func (service *VimPortType) RefreshRuntime(request *RefreshRuntimeRequestType) (*RefreshRuntimeResponse, error) {
 	response := &RefreshRuntimeResponse{}
-	err := service.client.Call("RefreshRuntime", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29402,7 +29402,7 @@ func (service *VimPortType) RefreshRuntime(request *RefreshRuntimeRequestType) (
  */
 func (service *VimPortType) FindByUuid(request *FindByUuidRequestType) (*FindByUuidResponse, error) {
 	response := &FindByUuidResponse{}
-	err := service.client.Call("FindByUuid", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29418,7 +29418,7 @@ func (service *VimPortType) FindByUuid(request *FindByUuidRequestType) (*FindByU
  */
 func (service *VimPortType) FindByDatastorePath(request *FindByDatastorePathRequestType) (*FindByDatastorePathResponse, error) {
 	response := &FindByDatastorePathResponse{}
-	err := service.client.Call("FindByDatastorePath", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29433,7 +29433,7 @@ func (service *VimPortType) FindByDatastorePath(request *FindByDatastorePathRequ
  */
 func (service *VimPortType) FindByDnsName(request *FindByDnsNameRequestType) (*FindByDnsNameResponse, error) {
 	response := &FindByDnsNameResponse{}
-	err := service.client.Call("FindByDnsName", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29448,7 +29448,7 @@ func (service *VimPortType) FindByDnsName(request *FindByDnsNameRequestType) (*F
  */
 func (service *VimPortType) FindByIp(request *FindByIpRequestType) (*FindByIpResponse, error) {
 	response := &FindByIpResponse{}
-	err := service.client.Call("FindByIp", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29463,7 +29463,7 @@ func (service *VimPortType) FindByIp(request *FindByIpRequestType) (*FindByIpRes
  */
 func (service *VimPortType) FindByInventoryPath(request *FindByInventoryPathRequestType) (*FindByInventoryPathResponse, error) {
 	response := &FindByInventoryPathResponse{}
-	err := service.client.Call("FindByInventoryPath", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29478,7 +29478,7 @@ func (service *VimPortType) FindByInventoryPath(request *FindByInventoryPathRequ
  */
 func (service *VimPortType) FindChild(request *FindChildRequestType) (*FindChildResponse, error) {
 	response := &FindChildResponse{}
-	err := service.client.Call("FindChild", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29493,7 +29493,7 @@ func (service *VimPortType) FindChild(request *FindChildRequestType) (*FindChild
  */
 func (service *VimPortType) FindAllByUuid(request *FindAllByUuidRequestType) (*FindAllByUuidResponse, error) {
 	response := &FindAllByUuidResponse{}
-	err := service.client.Call("FindAllByUuid", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29508,7 +29508,7 @@ func (service *VimPortType) FindAllByUuid(request *FindAllByUuidRequestType) (*F
  */
 func (service *VimPortType) FindAllByDnsName(request *FindAllByDnsNameRequestType) (*FindAllByDnsNameResponse, error) {
 	response := &FindAllByDnsNameResponse{}
-	err := service.client.Call("FindAllByDnsName", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29523,7 +29523,7 @@ func (service *VimPortType) FindAllByDnsName(request *FindAllByDnsNameRequestTyp
  */
 func (service *VimPortType) FindAllByIp(request *FindAllByIpRequestType) (*FindAllByIpResponse, error) {
 	response := &FindAllByIpResponse{}
-	err := service.client.Call("FindAllByIp", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29538,7 +29538,7 @@ func (service *VimPortType) FindAllByIp(request *FindAllByIpRequestType) (*FindA
  */
 func (service *VimPortType) CurrentTime(request *CurrentTimeRequestType) (*CurrentTimeResponse, error) {
 	response := &CurrentTimeResponse{}
-	err := service.client.Call("CurrentTime", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29553,7 +29553,7 @@ func (service *VimPortType) CurrentTime(request *CurrentTimeRequestType) (*Curre
  */
 func (service *VimPortType) RetrieveServiceContent(request *RetrieveServiceContentRequestType) (*RetrieveServiceContentResponse, error) {
 	response := &RetrieveServiceContentResponse{}
-	err := service.client.Call("RetrieveServiceContent", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29569,7 +29569,7 @@ func (service *VimPortType) RetrieveServiceContent(request *RetrieveServiceConte
  */
 func (service *VimPortType) ValidateMigration(request *ValidateMigrationRequestType) (*ValidateMigrationResponse, error) {
 	response := &ValidateMigrationResponse{}
-	err := service.client.Call("ValidateMigration", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29584,7 +29584,7 @@ func (service *VimPortType) ValidateMigration(request *ValidateMigrationRequestT
  */
 func (service *VimPortType) QueryVMotionCompatibility(request *QueryVMotionCompatibilityRequestType) (*QueryVMotionCompatibilityResponse, error) {
 	response := &QueryVMotionCompatibilityResponse{}
-	err := service.client.Call("QueryVMotionCompatibility", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29599,7 +29599,7 @@ func (service *VimPortType) QueryVMotionCompatibility(request *QueryVMotionCompa
  */
 func (service *VimPortType) RetrieveProductComponents(request *RetrieveProductComponentsRequestType) (*RetrieveProductComponentsResponse, error) {
 	response := &RetrieveProductComponentsResponse{}
-	err := service.client.Call("RetrieveProductComponents", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29614,7 +29614,7 @@ func (service *VimPortType) RetrieveProductComponents(request *RetrieveProductCo
  */
 func (service *VimPortType) QueryServiceList(request *QueryServiceListRequestType) (*QueryServiceListResponse, error) {
 	response := &QueryServiceListResponse{}
-	err := service.client.Call("QueryServiceList", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29629,7 +29629,7 @@ func (service *VimPortType) QueryServiceList(request *QueryServiceListRequestTyp
  */
 func (service *VimPortType) UpdateServiceMessage(request *UpdateServiceMessageRequestType) (*UpdateServiceMessageResponse, error) {
 	response := &UpdateServiceMessageResponse{}
-	err := service.client.Call("UpdateServiceMessage", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29646,7 +29646,7 @@ func (service *VimPortType) UpdateServiceMessage(request *UpdateServiceMessageRe
  */
 func (service *VimPortType) LoginByToken(request *LoginByTokenRequestType) (*LoginByTokenResponse, error) {
 	response := &LoginByTokenResponse{}
-	err := service.client.Call("LoginByToken", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29663,7 +29663,7 @@ func (service *VimPortType) LoginByToken(request *LoginByTokenRequestType) (*Log
  */
 func (service *VimPortType) Login(request *LoginRequestType) (*LoginResponse, error) {
 	response := &LoginResponse{}
-	err := service.client.Call("Login", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29681,7 +29681,7 @@ func (service *VimPortType) Login(request *LoginRequestType) (*LoginResponse, er
  */
 func (service *VimPortType) LoginBySSPI(request *LoginBySSPIRequestType) (*LoginBySSPIResponse, error) {
 	response := &LoginBySSPIResponse{}
-	err := service.client.Call("LoginBySSPI", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29696,7 +29696,7 @@ func (service *VimPortType) LoginBySSPI(request *LoginBySSPIRequestType) (*Login
  */
 func (service *VimPortType) Logout(request *LogoutRequestType) (*LogoutResponse, error) {
 	response := &LogoutResponse{}
-	err := service.client.Call("Logout", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29712,7 +29712,7 @@ func (service *VimPortType) Logout(request *LogoutRequestType) (*LogoutResponse,
  */
 func (service *VimPortType) AcquireLocalTicket(request *AcquireLocalTicketRequestType) (*AcquireLocalTicketResponse, error) {
 	response := &AcquireLocalTicketResponse{}
-	err := service.client.Call("AcquireLocalTicket", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29727,7 +29727,7 @@ func (service *VimPortType) AcquireLocalTicket(request *AcquireLocalTicketReques
  */
 func (service *VimPortType) AcquireGenericServiceTicket(request *AcquireGenericServiceTicketRequestType) (*AcquireGenericServiceTicketResponse, error) {
 	response := &AcquireGenericServiceTicketResponse{}
-	err := service.client.Call("AcquireGenericServiceTicket", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29743,7 +29743,7 @@ func (service *VimPortType) AcquireGenericServiceTicket(request *AcquireGenericS
  */
 func (service *VimPortType) TerminateSession(request *TerminateSessionRequestType) (*TerminateSessionResponse, error) {
 	response := &TerminateSessionResponse{}
-	err := service.client.Call("TerminateSession", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29759,7 +29759,7 @@ func (service *VimPortType) TerminateSession(request *TerminateSessionRequestTyp
  */
 func (service *VimPortType) SetLocale(request *SetLocaleRequestType) (*SetLocaleResponse, error) {
 	response := &SetLocaleResponse{}
-	err := service.client.Call("SetLocale", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29779,7 +29779,7 @@ func (service *VimPortType) SetLocale(request *SetLocaleRequestType) (*SetLocale
  */
 func (service *VimPortType) LoginExtensionBySubjectName(request *LoginExtensionBySubjectNameRequestType) (*LoginExtensionBySubjectNameResponse, error) {
 	response := &LoginExtensionBySubjectNameResponse{}
-	err := service.client.Call("LoginExtensionBySubjectName", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29797,7 +29797,7 @@ func (service *VimPortType) LoginExtensionBySubjectName(request *LoginExtensionB
  */
 func (service *VimPortType) LoginExtensionByCertificate(request *LoginExtensionByCertificateRequestType) (*LoginExtensionByCertificateResponse, error) {
 	response := &LoginExtensionByCertificateResponse{}
-	err := service.client.Call("LoginExtensionByCertificate", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29814,7 +29814,7 @@ func (service *VimPortType) LoginExtensionByCertificate(request *LoginExtensionB
  */
 func (service *VimPortType) ImpersonateUser(request *ImpersonateUserRequestType) (*ImpersonateUserResponse, error) {
 	response := &ImpersonateUserResponse{}
-	err := service.client.Call("ImpersonateUser", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29829,7 +29829,7 @@ func (service *VimPortType) ImpersonateUser(request *ImpersonateUserRequestType)
  */
 func (service *VimPortType) SessionIsActive(request *SessionIsActiveRequestType) (*SessionIsActiveResponse, error) {
 	response := &SessionIsActiveResponse{}
-	err := service.client.Call("SessionIsActive", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29844,7 +29844,7 @@ func (service *VimPortType) SessionIsActive(request *SessionIsActiveRequestType)
  */
 func (service *VimPortType) AcquireCloneTicket(request *AcquireCloneTicketRequestType) (*AcquireCloneTicketResponse, error) {
 	response := &AcquireCloneTicketResponse{}
-	err := service.client.Call("AcquireCloneTicket", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29860,7 +29860,7 @@ func (service *VimPortType) AcquireCloneTicket(request *AcquireCloneTicketReques
  */
 func (service *VimPortType) CloneSession(request *CloneSessionRequestType) (*CloneSessionResponse, error) {
 	response := &CloneSessionResponse{}
-	err := service.client.Call("CloneSession", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29875,7 +29875,7 @@ func (service *VimPortType) CloneSession(request *CloneSessionRequestType) (*Clo
  */
 func (service *VimPortType) ExecuteSimpleCommand(request *ExecuteSimpleCommandRequestType) (*ExecuteSimpleCommandResponse, error) {
 	response := &ExecuteSimpleCommandResponse{}
-	err := service.client.Call("ExecuteSimpleCommand", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29892,7 +29892,7 @@ func (service *VimPortType) ExecuteSimpleCommand(request *ExecuteSimpleCommandRe
  */
 func (service *VimPortType) ConfigureDatastoreIORM_Task(request *ConfigureDatastoreIORMRequestType) (*ConfigureDatastoreIORM_TaskResponse, error) {
 	response := &ConfigureDatastoreIORM_TaskResponse{}
-	err := service.client.Call("ConfigureDatastoreIORM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29907,7 +29907,7 @@ func (service *VimPortType) ConfigureDatastoreIORM_Task(request *ConfigureDatast
  */
 func (service *VimPortType) QueryIORMConfigOption(request *QueryIORMConfigOptionRequestType) (*QueryIORMConfigOptionResponse, error) {
 	response := &QueryIORMConfigOptionResponse{}
-	err := service.client.Call("QueryIORMConfigOption", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29923,7 +29923,7 @@ func (service *VimPortType) QueryIORMConfigOption(request *QueryIORMConfigOption
  */
 func (service *VimPortType) QueryDatastorePerformanceSummary(request *QueryDatastorePerformanceSummaryRequestType) (*QueryDatastorePerformanceSummaryResponse, error) {
 	response := &QueryDatastorePerformanceSummaryResponse{}
-	err := service.client.Call("QueryDatastorePerformanceSummary", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29938,7 +29938,7 @@ func (service *VimPortType) QueryDatastorePerformanceSummary(request *QueryDatas
  */
 func (service *VimPortType) ApplyStorageDrsRecommendationToPod_Task(request *ApplyStorageDrsRecommendationToPodRequestType) (*ApplyStorageDrsRecommendationToPod_TaskResponse, error) {
 	response := &ApplyStorageDrsRecommendationToPod_TaskResponse{}
-	err := service.client.Call("ApplyStorageDrsRecommendationToPod_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29953,7 +29953,7 @@ func (service *VimPortType) ApplyStorageDrsRecommendationToPod_Task(request *App
  */
 func (service *VimPortType) ApplyStorageDrsRecommendation_Task(request *ApplyStorageDrsRecommendationRequestType) (*ApplyStorageDrsRecommendation_TaskResponse, error) {
 	response := &ApplyStorageDrsRecommendation_TaskResponse{}
-	err := service.client.Call("ApplyStorageDrsRecommendation_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29968,7 +29968,7 @@ func (service *VimPortType) ApplyStorageDrsRecommendation_Task(request *ApplySto
  */
 func (service *VimPortType) CancelStorageDrsRecommendation(request *CancelStorageDrsRecommendationRequestType) (*CancelStorageDrsRecommendationResponse, error) {
 	response := &CancelStorageDrsRecommendationResponse{}
-	err := service.client.Call("CancelStorageDrsRecommendation", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29983,7 +29983,7 @@ func (service *VimPortType) CancelStorageDrsRecommendation(request *CancelStorag
  */
 func (service *VimPortType) RefreshStorageDrsRecommendation(request *RefreshStorageDrsRecommendationRequestType) (*RefreshStorageDrsRecommendationResponse, error) {
 	response := &RefreshStorageDrsRecommendationResponse{}
-	err := service.client.Call("RefreshStorageDrsRecommendation", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -29998,7 +29998,7 @@ func (service *VimPortType) RefreshStorageDrsRecommendation(request *RefreshStor
  */
 func (service *VimPortType) ConfigureStorageDrsForPod_Task(request *ConfigureStorageDrsForPodRequestType) (*ConfigureStorageDrsForPod_TaskResponse, error) {
 	response := &ConfigureStorageDrsForPod_TaskResponse{}
-	err := service.client.Call("ConfigureStorageDrsForPod_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30013,7 +30013,7 @@ func (service *VimPortType) ConfigureStorageDrsForPod_Task(request *ConfigureSto
  */
 func (service *VimPortType) RecommendDatastores(request *RecommendDatastoresRequestType) (*RecommendDatastoresResponse, error) {
 	response := &RecommendDatastoresResponse{}
-	err := service.client.Call("RecommendDatastores", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30029,7 +30029,7 @@ func (service *VimPortType) RecommendDatastores(request *RecommendDatastoresRequ
  */
 func (service *VimPortType) CancelTask(request *CancelTaskRequestType) (*CancelTaskResponse, error) {
 	response := &CancelTaskResponse{}
-	err := service.client.Call("CancelTask", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30046,7 +30046,7 @@ func (service *VimPortType) CancelTask(request *CancelTaskRequestType) (*CancelT
  */
 func (service *VimPortType) UpdateProgress(request *UpdateProgressRequestType) (*UpdateProgressResponse, error) {
 	response := &UpdateProgressResponse{}
-	err := service.client.Call("UpdateProgress", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30062,7 +30062,7 @@ func (service *VimPortType) UpdateProgress(request *UpdateProgressRequestType) (
  */
 func (service *VimPortType) SetTaskState(request *SetTaskStateRequestType) (*SetTaskStateResponse, error) {
 	response := &SetTaskStateResponse{}
-	err := service.client.Call("SetTaskState", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30077,7 +30077,7 @@ func (service *VimPortType) SetTaskState(request *SetTaskStateRequestType) (*Set
  */
 func (service *VimPortType) SetTaskDescription(request *SetTaskDescriptionRequestType) (*SetTaskDescriptionResponse, error) {
 	response := &SetTaskDescriptionResponse{}
-	err := service.client.Call("SetTaskDescription", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30092,7 +30092,7 @@ func (service *VimPortType) SetTaskDescription(request *SetTaskDescriptionReques
  */
 func (service *VimPortType) ReadNextTasks(request *ReadNextTasksRequestType) (*ReadNextTasksResponse, error) {
 	response := &ReadNextTasksResponse{}
-	err := service.client.Call("ReadNextTasks", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30107,7 +30107,7 @@ func (service *VimPortType) ReadNextTasks(request *ReadNextTasksRequestType) (*R
  */
 func (service *VimPortType) ReadPreviousTasks(request *ReadPreviousTasksRequestType) (*ReadPreviousTasksResponse, error) {
 	response := &ReadPreviousTasksResponse{}
-	err := service.client.Call("ReadPreviousTasks", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30123,7 +30123,7 @@ func (service *VimPortType) ReadPreviousTasks(request *ReadPreviousTasksRequestT
  */
 func (service *VimPortType) CreateCollectorForTasks(request *CreateCollectorForTasksRequestType) (*CreateCollectorForTasksResponse, error) {
 	response := &CreateCollectorForTasksResponse{}
-	err := service.client.Call("CreateCollectorForTasks", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30138,7 +30138,7 @@ func (service *VimPortType) CreateCollectorForTasks(request *CreateCollectorForT
  */
 func (service *VimPortType) CreateTask(request *CreateTaskRequestType) (*CreateTaskResponse, error) {
 	response := &CreateTaskResponse{}
-	err := service.client.Call("CreateTask", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30154,7 +30154,7 @@ func (service *VimPortType) CreateTask(request *CreateTaskRequestType) (*CreateT
  */
 func (service *VimPortType) RetrieveUserGroups(request *RetrieveUserGroupsRequestType) (*RetrieveUserGroupsResponse, error) {
 	response := &RetrieveUserGroupsResponse{}
-	err := service.client.Call("RetrieveUserGroups", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30178,7 +30178,7 @@ func (service *VimPortType) RetrieveUserGroups(request *RetrieveUserGroupsReques
  */
 func (service *VimPortType) UpdateVAppConfig(request *UpdateVAppConfigRequestType) (*UpdateVAppConfigResponse, error) {
 	response := &UpdateVAppConfigResponse{}
-	err := service.client.Call("UpdateVAppConfig", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30194,7 +30194,7 @@ func (service *VimPortType) UpdateVAppConfig(request *UpdateVAppConfigRequestTyp
  */
 func (service *VimPortType) UpdateLinkedChildren(request *UpdateLinkedChildrenRequestType) (*UpdateLinkedChildrenResponse, error) {
 	response := &UpdateLinkedChildrenResponse{}
-	err := service.client.Call("UpdateLinkedChildren", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30216,7 +30216,7 @@ func (service *VimPortType) UpdateLinkedChildren(request *UpdateLinkedChildrenRe
  */
 func (service *VimPortType) CloneVApp_Task(request *CloneVAppRequestType) (*CloneVApp_TaskResponse, error) {
 	response := &CloneVApp_TaskResponse{}
-	err := service.client.Call("CloneVApp_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30235,7 +30235,7 @@ func (service *VimPortType) CloneVApp_Task(request *CloneVAppRequestType) (*Clon
  */
 func (service *VimPortType) ExportVApp(request *ExportVAppRequestType) (*ExportVAppResponse, error) {
 	response := &ExportVAppResponse{}
-	err := service.client.Call("ExportVApp", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30256,7 +30256,7 @@ func (service *VimPortType) ExportVApp(request *ExportVAppRequestType) (*ExportV
  */
 func (service *VimPortType) PowerOnVApp_Task(request *PowerOnVAppRequestType) (*PowerOnVApp_TaskResponse, error) {
 	response := &PowerOnVApp_TaskResponse{}
-	err := service.client.Call("PowerOnVApp_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30274,7 +30274,7 @@ func (service *VimPortType) PowerOnVApp_Task(request *PowerOnVAppRequestType) (*
  */
 func (service *VimPortType) PowerOffVApp_Task(request *PowerOffVAppRequestType) (*PowerOffVApp_TaskResponse, error) {
 	response := &PowerOffVApp_TaskResponse{}
-	err := service.client.Call("PowerOffVApp_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30292,7 +30292,7 @@ func (service *VimPortType) PowerOffVApp_Task(request *PowerOffVAppRequestType) 
  */
 func (service *VimPortType) SuspendVApp_Task(request *SuspendVAppRequestType) (*SuspendVApp_TaskResponse, error) {
 	response := &SuspendVApp_TaskResponse{}
-	err := service.client.Call("SuspendVApp_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30309,7 +30309,7 @@ func (service *VimPortType) SuspendVApp_Task(request *SuspendVAppRequestType) (*
  */
 func (service *VimPortType) UnregisterVApp_Task(request *unregisterVAppRequestType) (*unregisterVApp_TaskResponse, error) {
 	response := &unregisterVApp_TaskResponse{}
-	err := service.client.Call("unregisterVApp_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30326,7 +30326,7 @@ func (service *VimPortType) UnregisterVApp_Task(request *unregisterVAppRequestTy
  */
 func (service *VimPortType) CreateVirtualDisk_Task(request *CreateVirtualDiskRequestType) (*CreateVirtualDisk_TaskResponse, error) {
 	response := &CreateVirtualDisk_TaskResponse{}
-	err := service.client.Call("CreateVirtualDisk_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30343,7 +30343,7 @@ func (service *VimPortType) CreateVirtualDisk_Task(request *CreateVirtualDiskReq
  */
 func (service *VimPortType) DeleteVirtualDisk_Task(request *DeleteVirtualDiskRequestType) (*DeleteVirtualDisk_TaskResponse, error) {
 	response := &DeleteVirtualDisk_TaskResponse{}
-	err := service.client.Call("DeleteVirtualDisk_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30360,7 +30360,7 @@ func (service *VimPortType) DeleteVirtualDisk_Task(request *DeleteVirtualDiskReq
  */
 func (service *VimPortType) MoveVirtualDisk_Task(request *MoveVirtualDiskRequestType) (*MoveVirtualDisk_TaskResponse, error) {
 	response := &MoveVirtualDisk_TaskResponse{}
-	err := service.client.Call("MoveVirtualDisk_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30378,7 +30378,7 @@ func (service *VimPortType) MoveVirtualDisk_Task(request *MoveVirtualDiskRequest
  */
 func (service *VimPortType) CopyVirtualDisk_Task(request *CopyVirtualDiskRequestType) (*CopyVirtualDisk_TaskResponse, error) {
 	response := &CopyVirtualDisk_TaskResponse{}
-	err := service.client.Call("CopyVirtualDisk_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30395,7 +30395,7 @@ func (service *VimPortType) CopyVirtualDisk_Task(request *CopyVirtualDiskRequest
  */
 func (service *VimPortType) ExtendVirtualDisk_Task(request *ExtendVirtualDiskRequestType) (*ExtendVirtualDisk_TaskResponse, error) {
 	response := &ExtendVirtualDisk_TaskResponse{}
-	err := service.client.Call("ExtendVirtualDisk_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30412,7 +30412,7 @@ func (service *VimPortType) ExtendVirtualDisk_Task(request *ExtendVirtualDiskReq
  */
 func (service *VimPortType) QueryVirtualDiskFragmentation(request *QueryVirtualDiskFragmentationRequestType) (*QueryVirtualDiskFragmentationResponse, error) {
 	response := &QueryVirtualDiskFragmentationResponse{}
-	err := service.client.Call("QueryVirtualDiskFragmentation", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30429,7 +30429,7 @@ func (service *VimPortType) QueryVirtualDiskFragmentation(request *QueryVirtualD
  */
 func (service *VimPortType) DefragmentVirtualDisk_Task(request *DefragmentVirtualDiskRequestType) (*DefragmentVirtualDisk_TaskResponse, error) {
 	response := &DefragmentVirtualDisk_TaskResponse{}
-	err := service.client.Call("DefragmentVirtualDisk_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30446,7 +30446,7 @@ func (service *VimPortType) DefragmentVirtualDisk_Task(request *DefragmentVirtua
  */
 func (service *VimPortType) ShrinkVirtualDisk_Task(request *ShrinkVirtualDiskRequestType) (*ShrinkVirtualDisk_TaskResponse, error) {
 	response := &ShrinkVirtualDisk_TaskResponse{}
-	err := service.client.Call("ShrinkVirtualDisk_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30463,7 +30463,7 @@ func (service *VimPortType) ShrinkVirtualDisk_Task(request *ShrinkVirtualDiskReq
  */
 func (service *VimPortType) InflateVirtualDisk_Task(request *InflateVirtualDiskRequestType) (*InflateVirtualDisk_TaskResponse, error) {
 	response := &InflateVirtualDisk_TaskResponse{}
-	err := service.client.Call("InflateVirtualDisk_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30480,7 +30480,7 @@ func (service *VimPortType) InflateVirtualDisk_Task(request *InflateVirtualDiskR
  */
 func (service *VimPortType) EagerZeroVirtualDisk_Task(request *EagerZeroVirtualDiskRequestType) (*EagerZeroVirtualDisk_TaskResponse, error) {
 	response := &EagerZeroVirtualDisk_TaskResponse{}
-	err := service.client.Call("EagerZeroVirtualDisk_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30497,7 +30497,7 @@ func (service *VimPortType) EagerZeroVirtualDisk_Task(request *EagerZeroVirtualD
  */
 func (service *VimPortType) ZeroFillVirtualDisk_Task(request *ZeroFillVirtualDiskRequestType) (*ZeroFillVirtualDisk_TaskResponse, error) {
 	response := &ZeroFillVirtualDisk_TaskResponse{}
-	err := service.client.Call("ZeroFillVirtualDisk_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30514,7 +30514,7 @@ func (service *VimPortType) ZeroFillVirtualDisk_Task(request *ZeroFillVirtualDis
  */
 func (service *VimPortType) SetVirtualDiskUuid(request *SetVirtualDiskUuidRequestType) (*SetVirtualDiskUuidResponse, error) {
 	response := &SetVirtualDiskUuidResponse{}
-	err := service.client.Call("SetVirtualDiskUuid", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30531,7 +30531,7 @@ func (service *VimPortType) SetVirtualDiskUuid(request *SetVirtualDiskUuidReques
  */
 func (service *VimPortType) QueryVirtualDiskUuid(request *QueryVirtualDiskUuidRequestType) (*QueryVirtualDiskUuidResponse, error) {
 	response := &QueryVirtualDiskUuidResponse{}
-	err := service.client.Call("QueryVirtualDiskUuid", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30548,7 +30548,7 @@ func (service *VimPortType) QueryVirtualDiskUuid(request *QueryVirtualDiskUuidRe
  */
 func (service *VimPortType) QueryVirtualDiskGeometry(request *QueryVirtualDiskGeometryRequestType) (*QueryVirtualDiskGeometryResponse, error) {
 	response := &QueryVirtualDiskGeometryResponse{}
-	err := service.client.Call("QueryVirtualDiskGeometry", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30563,7 +30563,7 @@ func (service *VimPortType) QueryVirtualDiskGeometry(request *QueryVirtualDiskGe
  */
 func (service *VimPortType) RefreshStorageInfo(request *RefreshStorageInfoRequestType) (*RefreshStorageInfoResponse, error) {
 	response := &RefreshStorageInfoResponse{}
-	err := service.client.Call("RefreshStorageInfo", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30584,7 +30584,7 @@ func (service *VimPortType) RefreshStorageInfo(request *RefreshStorageInfoReques
  */
 func (service *VimPortType) CreateSnapshot_Task(request *CreateSnapshotRequestType) (*CreateSnapshot_TaskResponse, error) {
 	response := &CreateSnapshot_TaskResponse{}
-	err := service.client.Call("CreateSnapshot_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30605,7 +30605,7 @@ func (service *VimPortType) CreateSnapshot_Task(request *CreateSnapshotRequestTy
  */
 func (service *VimPortType) RevertToCurrentSnapshot_Task(request *RevertToCurrentSnapshotRequestType) (*RevertToCurrentSnapshot_TaskResponse, error) {
 	response := &RevertToCurrentSnapshot_TaskResponse{}
-	err := service.client.Call("RevertToCurrentSnapshot_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30623,7 +30623,7 @@ func (service *VimPortType) RevertToCurrentSnapshot_Task(request *RevertToCurren
  */
 func (service *VimPortType) RemoveAllSnapshots_Task(request *RemoveAllSnapshotsRequestType) (*RemoveAllSnapshots_TaskResponse, error) {
 	response := &RemoveAllSnapshots_TaskResponse{}
-	err := service.client.Call("RemoveAllSnapshots_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30642,7 +30642,7 @@ func (service *VimPortType) RemoveAllSnapshots_Task(request *RemoveAllSnapshotsR
  */
 func (service *VimPortType) ConsolidateVMDisks_Task(request *ConsolidateVMDisksRequestType) (*ConsolidateVMDisks_TaskResponse, error) {
 	response := &ConsolidateVMDisks_TaskResponse{}
-	err := service.client.Call("ConsolidateVMDisks_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30661,7 +30661,7 @@ func (service *VimPortType) ConsolidateVMDisks_Task(request *ConsolidateVMDisksR
  */
 func (service *VimPortType) EstimateStorageForConsolidateSnapshots_Task(request *EstimateStorageForConsolidateSnapshotsRequestType) (*EstimateStorageForConsolidateSnapshots_TaskResponse, error) {
 	response := &EstimateStorageForConsolidateSnapshots_TaskResponse{}
-	err := service.client.Call("EstimateStorageForConsolidateSnapshots_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30685,7 +30685,7 @@ func (service *VimPortType) EstimateStorageForConsolidateSnapshots_Task(request 
  */
 func (service *VimPortType) ReconfigVM_Task(request *ReconfigVMRequestType) (*ReconfigVM_TaskResponse, error) {
 	response := &ReconfigVM_TaskResponse{}
-	err := service.client.Call("ReconfigVM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30704,7 +30704,7 @@ func (service *VimPortType) ReconfigVM_Task(request *ReconfigVMRequestType) (*Re
  */
 func (service *VimPortType) UpgradeVM_Task(request *UpgradeVMRequestType) (*UpgradeVM_TaskResponse, error) {
 	response := &UpgradeVM_TaskResponse{}
-	err := service.client.Call("UpgradeVM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30720,7 +30720,7 @@ func (service *VimPortType) UpgradeVM_Task(request *UpgradeVMRequestType) (*Upgr
  */
 func (service *VimPortType) ExtractOvfEnvironment(request *ExtractOvfEnvironmentRequestType) (*ExtractOvfEnvironmentResponse, error) {
 	response := &ExtractOvfEnvironmentResponse{}
-	err := service.client.Call("ExtractOvfEnvironment", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30740,7 +30740,7 @@ func (service *VimPortType) ExtractOvfEnvironment(request *ExtractOvfEnvironment
  */
 func (service *VimPortType) PowerOnVM_Task(request *PowerOnVMRequestType) (*PowerOnVM_TaskResponse, error) {
 	response := &PowerOnVM_TaskResponse{}
-	err := service.client.Call("PowerOnVM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30757,7 +30757,7 @@ func (service *VimPortType) PowerOnVM_Task(request *PowerOnVMRequestType) (*Powe
  */
 func (service *VimPortType) PowerOffVM_Task(request *PowerOffVMRequestType) (*PowerOffVM_TaskResponse, error) {
 	response := &PowerOffVM_TaskResponse{}
-	err := service.client.Call("PowerOffVM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30774,7 +30774,7 @@ func (service *VimPortType) PowerOffVM_Task(request *PowerOffVMRequestType) (*Po
  */
 func (service *VimPortType) SuspendVM_Task(request *SuspendVMRequestType) (*SuspendVM_TaskResponse, error) {
 	response := &SuspendVM_TaskResponse{}
-	err := service.client.Call("SuspendVM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30791,7 +30791,7 @@ func (service *VimPortType) SuspendVM_Task(request *SuspendVMRequestType) (*Susp
  */
 func (service *VimPortType) ResetVM_Task(request *ResetVMRequestType) (*ResetVM_TaskResponse, error) {
 	response := &ResetVM_TaskResponse{}
-	err := service.client.Call("ResetVM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30809,7 +30809,7 @@ func (service *VimPortType) ResetVM_Task(request *ResetVMRequestType) (*ResetVM_
  */
 func (service *VimPortType) ShutdownGuest(request *ShutdownGuestRequestType) (*ShutdownGuestResponse, error) {
 	response := &ShutdownGuestResponse{}
-	err := service.client.Call("ShutdownGuest", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30827,7 +30827,7 @@ func (service *VimPortType) ShutdownGuest(request *ShutdownGuestRequestType) (*S
  */
 func (service *VimPortType) RebootGuest(request *RebootGuestRequestType) (*RebootGuestResponse, error) {
 	response := &RebootGuestResponse{}
-	err := service.client.Call("RebootGuest", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30845,7 +30845,7 @@ func (service *VimPortType) RebootGuest(request *RebootGuestRequestType) (*Reboo
  */
 func (service *VimPortType) StandbyGuest(request *StandbyGuestRequestType) (*StandbyGuestResponse, error) {
 	response := &StandbyGuestResponse{}
-	err := service.client.Call("StandbyGuest", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30861,7 +30861,7 @@ func (service *VimPortType) StandbyGuest(request *StandbyGuestRequestType) (*Sta
  */
 func (service *VimPortType) AnswerVM(request *AnswerVMRequestType) (*AnswerVMResponse, error) {
 	response := &AnswerVMResponse{}
-	err := service.client.Call("AnswerVM", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30877,7 +30877,7 @@ func (service *VimPortType) AnswerVM(request *AnswerVMRequestType) (*AnswerVMRes
  */
 func (service *VimPortType) CustomizeVM_Task(request *CustomizeVMRequestType) (*CustomizeVM_TaskResponse, error) {
 	response := &CustomizeVM_TaskResponse{}
-	err := service.client.Call("CustomizeVM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30893,7 +30893,7 @@ func (service *VimPortType) CustomizeVM_Task(request *CustomizeVMRequestType) (*
  */
 func (service *VimPortType) CheckCustomizationSpec(request *CheckCustomizationSpecRequestType) (*CheckCustomizationSpecResponse, error) {
 	response := &CheckCustomizationSpecResponse{}
-	err := service.client.Call("CheckCustomizationSpec", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30914,7 +30914,7 @@ func (service *VimPortType) CheckCustomizationSpec(request *CheckCustomizationSp
  */
 func (service *VimPortType) MigrateVM_Task(request *MigrateVMRequestType) (*MigrateVM_TaskResponse, error) {
 	response := &MigrateVM_TaskResponse{}
-	err := service.client.Call("MigrateVM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30936,7 +30936,7 @@ func (service *VimPortType) MigrateVM_Task(request *MigrateVMRequestType) (*Migr
  */
 func (service *VimPortType) RelocateVM_Task(request *RelocateVMRequestType) (*RelocateVM_TaskResponse, error) {
 	response := &RelocateVM_TaskResponse{}
-	err := service.client.Call("RelocateVM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30959,7 +30959,7 @@ func (service *VimPortType) RelocateVM_Task(request *RelocateVMRequestType) (*Re
  */
 func (service *VimPortType) CloneVM_Task(request *CloneVMRequestType) (*CloneVM_TaskResponse, error) {
 	response := &CloneVM_TaskResponse{}
-	err := service.client.Call("CloneVM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30978,7 +30978,7 @@ func (service *VimPortType) CloneVM_Task(request *CloneVMRequestType) (*CloneVM_
  */
 func (service *VimPortType) ExportVm(request *ExportVmRequestType) (*ExportVmResponse, error) {
 	response := &ExportVmResponse{}
-	err := service.client.Call("ExportVm", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -30996,7 +30996,7 @@ func (service *VimPortType) ExportVm(request *ExportVmRequestType) (*ExportVmRes
  */
 func (service *VimPortType) MarkAsTemplate(request *MarkAsTemplateRequestType) (*MarkAsTemplateResponse, error) {
 	response := &MarkAsTemplateResponse{}
-	err := service.client.Call("MarkAsTemplate", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31015,7 +31015,7 @@ func (service *VimPortType) MarkAsTemplate(request *MarkAsTemplateRequestType) (
  */
 func (service *VimPortType) MarkAsVirtualMachine(request *MarkAsVirtualMachineRequestType) (*MarkAsVirtualMachineResponse, error) {
 	response := &MarkAsVirtualMachineResponse{}
-	err := service.client.Call("MarkAsVirtualMachine", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31032,7 +31032,7 @@ func (service *VimPortType) MarkAsVirtualMachine(request *MarkAsVirtualMachineRe
  */
 func (service *VimPortType) UnregisterVM(request *UnregisterVMRequestType) (*UnregisterVMResponse, error) {
 	response := &UnregisterVMResponse{}
-	err := service.client.Call("UnregisterVM", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31048,7 +31048,7 @@ func (service *VimPortType) UnregisterVM(request *UnregisterVMRequestType) (*Unr
  */
 func (service *VimPortType) ResetGuestInformation(request *ResetGuestInformationRequestType) (*ResetGuestInformationResponse, error) {
 	response := &ResetGuestInformationResponse{}
-	err := service.client.Call("ResetGuestInformation", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31066,7 +31066,7 @@ func (service *VimPortType) ResetGuestInformation(request *ResetGuestInformation
  */
 func (service *VimPortType) MountToolsInstaller(request *MountToolsInstallerRequestType) (*MountToolsInstallerResponse, error) {
 	response := &MountToolsInstallerResponse{}
-	err := service.client.Call("MountToolsInstaller", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31083,7 +31083,7 @@ func (service *VimPortType) MountToolsInstaller(request *MountToolsInstallerRequ
  */
 func (service *VimPortType) UnmountToolsInstaller(request *UnmountToolsInstallerRequestType) (*UnmountToolsInstallerResponse, error) {
 	response := &UnmountToolsInstallerResponse{}
-	err := service.client.Call("UnmountToolsInstaller", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31103,7 +31103,7 @@ func (service *VimPortType) UnmountToolsInstaller(request *UnmountToolsInstaller
  */
 func (service *VimPortType) UpgradeTools_Task(request *UpgradeToolsRequestType) (*UpgradeTools_TaskResponse, error) {
 	response := &UpgradeTools_TaskResponse{}
-	err := service.client.Call("UpgradeTools_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31118,7 +31118,7 @@ func (service *VimPortType) UpgradeTools_Task(request *UpgradeToolsRequestType) 
  */
 func (service *VimPortType) AcquireMksTicket(request *AcquireMksTicketRequestType) (*AcquireMksTicketResponse, error) {
 	response := &AcquireMksTicketResponse{}
-	err := service.client.Call("AcquireMksTicket", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31134,7 +31134,7 @@ func (service *VimPortType) AcquireMksTicket(request *AcquireMksTicketRequestTyp
  */
 func (service *VimPortType) AcquireTicket(request *AcquireTicketRequestType) (*AcquireTicketResponse, error) {
 	response := &AcquireTicketResponse{}
-	err := service.client.Call("AcquireTicket", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31151,7 +31151,7 @@ func (service *VimPortType) AcquireTicket(request *AcquireTicketRequestType) (*A
  */
 func (service *VimPortType) SetScreenResolution(request *SetScreenResolutionRequestType) (*SetScreenResolutionResponse, error) {
 	response := &SetScreenResolutionResponse{}
-	err := service.client.Call("SetScreenResolution", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31170,7 +31170,7 @@ func (service *VimPortType) SetScreenResolution(request *SetScreenResolutionRequ
  */
 func (service *VimPortType) DefragmentAllDisks(request *DefragmentAllDisksRequestType) (*DefragmentAllDisksResponse, error) {
 	response := &DefragmentAllDisksResponse{}
-	err := service.client.Call("DefragmentAllDisks", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31191,7 +31191,7 @@ func (service *VimPortType) DefragmentAllDisks(request *DefragmentAllDisksReques
  */
 func (service *VimPortType) CreateSecondaryVM_Task(request *CreateSecondaryVMRequestType) (*CreateSecondaryVM_TaskResponse, error) {
 	response := &CreateSecondaryVM_TaskResponse{}
-	err := service.client.Call("CreateSecondaryVM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31209,7 +31209,7 @@ func (service *VimPortType) CreateSecondaryVM_Task(request *CreateSecondaryVMReq
  */
 func (service *VimPortType) TurnOffFaultToleranceForVM_Task(request *TurnOffFaultToleranceForVMRequestType) (*TurnOffFaultToleranceForVM_TaskResponse, error) {
 	response := &TurnOffFaultToleranceForVM_TaskResponse{}
-	err := service.client.Call("TurnOffFaultToleranceForVM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31227,7 +31227,7 @@ func (service *VimPortType) TurnOffFaultToleranceForVM_Task(request *TurnOffFaul
  */
 func (service *VimPortType) MakePrimaryVM_Task(request *MakePrimaryVMRequestType) (*MakePrimaryVM_TaskResponse, error) {
 	response := &MakePrimaryVM_TaskResponse{}
-	err := service.client.Call("MakePrimaryVM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31245,7 +31245,7 @@ func (service *VimPortType) MakePrimaryVM_Task(request *MakePrimaryVMRequestType
  */
 func (service *VimPortType) TerminateFaultTolerantVM_Task(request *TerminateFaultTolerantVMRequestType) (*TerminateFaultTolerantVM_TaskResponse, error) {
 	response := &TerminateFaultTolerantVM_TaskResponse{}
-	err := service.client.Call("TerminateFaultTolerantVM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31263,7 +31263,7 @@ func (service *VimPortType) TerminateFaultTolerantVM_Task(request *TerminateFaul
  */
 func (service *VimPortType) DisableSecondaryVM_Task(request *DisableSecondaryVMRequestType) (*DisableSecondaryVM_TaskResponse, error) {
 	response := &DisableSecondaryVM_TaskResponse{}
-	err := service.client.Call("DisableSecondaryVM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31282,7 +31282,7 @@ func (service *VimPortType) DisableSecondaryVM_Task(request *DisableSecondaryVMR
  */
 func (service *VimPortType) EnableSecondaryVM_Task(request *EnableSecondaryVMRequestType) (*EnableSecondaryVM_TaskResponse, error) {
 	response := &EnableSecondaryVM_TaskResponse{}
-	err := service.client.Call("EnableSecondaryVM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31299,7 +31299,7 @@ func (service *VimPortType) EnableSecondaryVM_Task(request *EnableSecondaryVMReq
  */
 func (service *VimPortType) SetDisplayTopology(request *SetDisplayTopologyRequestType) (*SetDisplayTopologyResponse, error) {
 	response := &SetDisplayTopologyResponse{}
-	err := service.client.Call("SetDisplayTopology", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31323,7 +31323,7 @@ func (service *VimPortType) SetDisplayTopology(request *SetDisplayTopologyReques
  */
 func (service *VimPortType) StartRecording_Task(request *StartRecordingRequestType) (*StartRecording_TaskResponse, error) {
 	response := &StartRecording_TaskResponse{}
-	err := service.client.Call("StartRecording_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31343,7 +31343,7 @@ func (service *VimPortType) StartRecording_Task(request *StartRecordingRequestTy
  */
 func (service *VimPortType) StopRecording_Task(request *StopRecordingRequestType) (*StopRecording_TaskResponse, error) {
 	response := &StopRecording_TaskResponse{}
-	err := service.client.Call("StopRecording_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31367,7 +31367,7 @@ func (service *VimPortType) StopRecording_Task(request *StopRecordingRequestType
  */
 func (service *VimPortType) StartReplaying_Task(request *StartReplayingRequestType) (*StartReplaying_TaskResponse, error) {
 	response := &StartReplaying_TaskResponse{}
-	err := service.client.Call("StartReplaying_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31387,7 +31387,7 @@ func (service *VimPortType) StartReplaying_Task(request *StartReplayingRequestTy
  */
 func (service *VimPortType) StopReplaying_Task(request *StopReplayingRequestType) (*StopReplaying_TaskResponse, error) {
 	response := &StopReplaying_TaskResponse{}
-	err := service.client.Call("StopReplaying_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31405,7 +31405,7 @@ func (service *VimPortType) StopReplaying_Task(request *StopReplayingRequestType
  */
 func (service *VimPortType) PromoteDisks_Task(request *PromoteDisksRequestType) (*PromoteDisks_TaskResponse, error) {
 	response := &PromoteDisks_TaskResponse{}
-	err := service.client.Call("PromoteDisks_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31423,7 +31423,7 @@ func (service *VimPortType) PromoteDisks_Task(request *PromoteDisksRequestType) 
  */
 func (service *VimPortType) CreateScreenshot_Task(request *CreateScreenshotRequestType) (*CreateScreenshot_TaskResponse, error) {
 	response := &CreateScreenshot_TaskResponse{}
-	err := service.client.Call("CreateScreenshot_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31440,7 +31440,7 @@ func (service *VimPortType) CreateScreenshot_Task(request *CreateScreenshotReque
  */
 func (service *VimPortType) QueryChangedDiskAreas(request *QueryChangedDiskAreasRequestType) (*QueryChangedDiskAreasResponse, error) {
 	response := &QueryChangedDiskAreasResponse{}
-	err := service.client.Call("QueryChangedDiskAreas", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31455,7 +31455,7 @@ func (service *VimPortType) QueryChangedDiskAreas(request *QueryChangedDiskAreas
  */
 func (service *VimPortType) QueryUnownedFiles(request *QueryUnownedFilesRequestType) (*QueryUnownedFilesResponse, error) {
 	response := &QueryUnownedFilesResponse{}
-	err := service.client.Call("QueryUnownedFiles", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31476,7 +31476,7 @@ func (service *VimPortType) QueryUnownedFiles(request *QueryUnownedFilesRequestT
  */
 func (service *VimPortType) ReloadVirtualMachineFromPath_Task(request *reloadVirtualMachineFromPathRequestType) (*reloadVirtualMachineFromPath_TaskResponse, error) {
 	response := &reloadVirtualMachineFromPath_TaskResponse{}
-	err := service.client.Call("reloadVirtualMachineFromPath_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31493,7 +31493,7 @@ func (service *VimPortType) ReloadVirtualMachineFromPath_Task(request *reloadVir
  */
 func (service *VimPortType) QueryFaultToleranceCompatibility(request *QueryFaultToleranceCompatibilityRequestType) (*QueryFaultToleranceCompatibilityResponse, error) {
 	response := &QueryFaultToleranceCompatibilityResponse{}
-	err := service.client.Call("QueryFaultToleranceCompatibility", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31510,7 +31510,7 @@ func (service *VimPortType) QueryFaultToleranceCompatibility(request *QueryFault
  */
 func (service *VimPortType) TerminateVM(request *TerminateVMRequestType) (*TerminateVMResponse, error) {
 	response := &TerminateVMResponse{}
-	err := service.client.Call("TerminateVM", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31525,7 +31525,7 @@ func (service *VimPortType) TerminateVM(request *TerminateVMRequestType) (*Termi
  */
 func (service *VimPortType) RemoveAlarm(request *RemoveAlarmRequestType) (*RemoveAlarmResponse, error) {
 	response := &RemoveAlarmResponse{}
-	err := service.client.Call("RemoveAlarm", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31542,7 +31542,7 @@ func (service *VimPortType) RemoveAlarm(request *RemoveAlarmRequestType) (*Remov
  */
 func (service *VimPortType) ReconfigureAlarm(request *ReconfigureAlarmRequestType) (*ReconfigureAlarmResponse, error) {
 	response := &ReconfigureAlarmResponse{}
-	err := service.client.Call("ReconfigureAlarm", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31559,7 +31559,7 @@ func (service *VimPortType) ReconfigureAlarm(request *ReconfigureAlarmRequestTyp
  */
 func (service *VimPortType) CreateAlarm(request *CreateAlarmRequestType) (*CreateAlarmResponse, error) {
 	response := &CreateAlarmResponse{}
-	err := service.client.Call("CreateAlarm", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31574,7 +31574,7 @@ func (service *VimPortType) CreateAlarm(request *CreateAlarmRequestType) (*Creat
  */
 func (service *VimPortType) GetAlarm(request *GetAlarmRequestType) (*GetAlarmResponse, error) {
 	response := &GetAlarmResponse{}
-	err := service.client.Call("GetAlarm", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31589,7 +31589,7 @@ func (service *VimPortType) GetAlarm(request *GetAlarmRequestType) (*GetAlarmRes
  */
 func (service *VimPortType) AreAlarmActionsEnabled(request *AreAlarmActionsEnabledRequestType) (*AreAlarmActionsEnabledResponse, error) {
 	response := &AreAlarmActionsEnabledResponse{}
-	err := service.client.Call("AreAlarmActionsEnabled", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31604,7 +31604,7 @@ func (service *VimPortType) AreAlarmActionsEnabled(request *AreAlarmActionsEnabl
  */
 func (service *VimPortType) EnableAlarmActions(request *EnableAlarmActionsRequestType) (*EnableAlarmActionsResponse, error) {
 	response := &EnableAlarmActionsResponse{}
-	err := service.client.Call("EnableAlarmActions", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31619,7 +31619,7 @@ func (service *VimPortType) EnableAlarmActions(request *EnableAlarmActionsReques
  */
 func (service *VimPortType) GetAlarmState(request *GetAlarmStateRequestType) (*GetAlarmStateResponse, error) {
 	response := &GetAlarmStateResponse{}
-	err := service.client.Call("GetAlarmState", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31634,7 +31634,7 @@ func (service *VimPortType) GetAlarmState(request *GetAlarmStateRequestType) (*G
  */
 func (service *VimPortType) AcknowledgeAlarm(request *AcknowledgeAlarmRequestType) (*AcknowledgeAlarmResponse, error) {
 	response := &AcknowledgeAlarmResponse{}
-	err := service.client.Call("AcknowledgeAlarm", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31653,7 +31653,7 @@ func (service *VimPortType) AcknowledgeAlarm(request *AcknowledgeAlarmRequestTyp
  */
 func (service *VimPortType) ReconfigureDVPortgroup_Task(request *ReconfigureDVPortgroupRequestType) (*ReconfigureDVPortgroup_TaskResponse, error) {
 	response := &ReconfigureDVPortgroup_TaskResponse{}
-	err := service.client.Call("ReconfigureDVPortgroup_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31670,7 +31670,7 @@ func (service *VimPortType) ReconfigureDVPortgroup_Task(request *ReconfigureDVPo
  */
 func (service *VimPortType) DVPortgroupRollback_Task(request *DVPortgroupRollbackRequestType) (*DVPortgroupRollback_TaskResponse, error) {
 	response := &DVPortgroupRollback_TaskResponse{}
-	err := service.client.Call("DVPortgroupRollback_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31685,7 +31685,7 @@ func (service *VimPortType) DVPortgroupRollback_Task(request *DVPortgroupRollbac
  */
 func (service *VimPortType) QueryAvailableDvsSpec(request *QueryAvailableDvsSpecRequestType) (*QueryAvailableDvsSpecResponse, error) {
 	response := &QueryAvailableDvsSpecResponse{}
-	err := service.client.Call("QueryAvailableDvsSpec", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31700,7 +31700,7 @@ func (service *VimPortType) QueryAvailableDvsSpec(request *QueryAvailableDvsSpec
  */
 func (service *VimPortType) QueryCompatibleHostForNewDvs(request *QueryCompatibleHostForNewDvsRequestType) (*QueryCompatibleHostForNewDvsResponse, error) {
 	response := &QueryCompatibleHostForNewDvsResponse{}
-	err := service.client.Call("QueryCompatibleHostForNewDvs", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31715,7 +31715,7 @@ func (service *VimPortType) QueryCompatibleHostForNewDvs(request *QueryCompatibl
  */
 func (service *VimPortType) QueryCompatibleHostForExistingDvs(request *QueryCompatibleHostForExistingDvsRequestType) (*QueryCompatibleHostForExistingDvsResponse, error) {
 	response := &QueryCompatibleHostForExistingDvsResponse{}
-	err := service.client.Call("QueryCompatibleHostForExistingDvs", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31730,7 +31730,7 @@ func (service *VimPortType) QueryCompatibleHostForExistingDvs(request *QueryComp
  */
 func (service *VimPortType) QueryDvsCompatibleHostSpec(request *QueryDvsCompatibleHostSpecRequestType) (*QueryDvsCompatibleHostSpecResponse, error) {
 	response := &QueryDvsCompatibleHostSpecResponse{}
-	err := service.client.Call("QueryDvsCompatibleHostSpec", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31745,7 +31745,7 @@ func (service *VimPortType) QueryDvsCompatibleHostSpec(request *QueryDvsCompatib
  */
 func (service *VimPortType) QueryDvsFeatureCapability(request *QueryDvsFeatureCapabilityRequestType) (*QueryDvsFeatureCapabilityResponse, error) {
 	response := &QueryDvsFeatureCapabilityResponse{}
-	err := service.client.Call("QueryDvsFeatureCapability", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31761,7 +31761,7 @@ func (service *VimPortType) QueryDvsFeatureCapability(request *QueryDvsFeatureCa
  */
 func (service *VimPortType) QueryDvsByUuid(request *QueryDvsByUuidRequestType) (*QueryDvsByUuidResponse, error) {
 	response := &QueryDvsByUuidResponse{}
-	err := service.client.Call("QueryDvsByUuid", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31776,7 +31776,7 @@ func (service *VimPortType) QueryDvsByUuid(request *QueryDvsByUuidRequestType) (
  */
 func (service *VimPortType) QueryDvsConfigTarget(request *QueryDvsConfigTargetRequestType) (*QueryDvsConfigTargetResponse, error) {
 	response := &QueryDvsConfigTargetResponse{}
-	err := service.client.Call("QueryDvsConfigTarget", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31791,7 +31791,7 @@ func (service *VimPortType) QueryDvsConfigTarget(request *QueryDvsConfigTargetRe
  */
 func (service *VimPortType) QueryDvsCheckCompatibility(request *QueryDvsCheckCompatibilityRequestType) (*QueryDvsCheckCompatibilityResponse, error) {
 	response := &QueryDvsCheckCompatibilityResponse{}
-	err := service.client.Call("QueryDvsCheckCompatibility", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31807,7 +31807,7 @@ func (service *VimPortType) QueryDvsCheckCompatibility(request *QueryDvsCheckCom
  */
 func (service *VimPortType) RectifyDvsOnHost_Task(request *RectifyDvsOnHostRequestType) (*RectifyDvsOnHost_TaskResponse, error) {
 	response := &RectifyDvsOnHost_TaskResponse{}
-	err := service.client.Call("RectifyDvsOnHost_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31824,7 +31824,7 @@ func (service *VimPortType) RectifyDvsOnHost_Task(request *RectifyDvsOnHostReque
  */
 func (service *VimPortType) DVSManagerExportEntity_Task(request *DVSManagerExportEntityRequestType) (*DVSManagerExportEntity_TaskResponse, error) {
 	response := &DVSManagerExportEntity_TaskResponse{}
-	err := service.client.Call("DVSManagerExportEntity_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31841,7 +31841,7 @@ func (service *VimPortType) DVSManagerExportEntity_Task(request *DVSManagerExpor
  */
 func (service *VimPortType) DVSManagerImportEntity_Task(request *DVSManagerImportEntityRequestType) (*DVSManagerImportEntity_TaskResponse, error) {
 	response := &DVSManagerImportEntity_TaskResponse{}
-	err := service.client.Call("DVSManagerImportEntity_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31857,7 +31857,7 @@ func (service *VimPortType) DVSManagerImportEntity_Task(request *DVSManagerImpor
  */
 func (service *VimPortType) DVSManagerLookupDvPortGroup(request *DVSManagerLookupDvPortGroupRequestType) (*DVSManagerLookupDvPortGroupResponse, error) {
 	response := &DVSManagerLookupDvPortGroupResponse{}
-	err := service.client.Call("DVSManagerLookupDvPortGroup", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31873,7 +31873,7 @@ func (service *VimPortType) DVSManagerLookupDvPortGroup(request *DVSManagerLooku
  */
 func (service *VimPortType) UpdateDVSLacpGroupConfig_Task(request *UpdateDVSLacpGroupConfigRequestType) (*UpdateDVSLacpGroupConfig_TaskResponse, error) {
 	response := &UpdateDVSLacpGroupConfig_TaskResponse{}
-	err := service.client.Call("UpdateDVSLacpGroupConfig_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31888,7 +31888,7 @@ func (service *VimPortType) UpdateDVSLacpGroupConfig_Task(request *UpdateDVSLacp
  */
 func (service *VimPortType) ReadNextEvents(request *ReadNextEventsRequestType) (*ReadNextEventsResponse, error) {
 	response := &ReadNextEventsResponse{}
-	err := service.client.Call("ReadNextEvents", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31903,7 +31903,7 @@ func (service *VimPortType) ReadNextEvents(request *ReadNextEventsRequestType) (
  */
 func (service *VimPortType) ReadPreviousEvents(request *ReadPreviousEventsRequestType) (*ReadPreviousEventsResponse, error) {
 	response := &ReadPreviousEventsResponse{}
-	err := service.client.Call("ReadPreviousEvents", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31918,7 +31918,7 @@ func (service *VimPortType) ReadPreviousEvents(request *ReadPreviousEventsReques
  */
 func (service *VimPortType) RetrieveArgumentDescription(request *RetrieveArgumentDescriptionRequestType) (*RetrieveArgumentDescriptionResponse, error) {
 	response := &RetrieveArgumentDescriptionResponse{}
-	err := service.client.Call("RetrieveArgumentDescription", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31934,7 +31934,7 @@ func (service *VimPortType) RetrieveArgumentDescription(request *RetrieveArgumen
  */
 func (service *VimPortType) CreateCollectorForEvents(request *CreateCollectorForEventsRequestType) (*CreateCollectorForEventsResponse, error) {
 	response := &CreateCollectorForEventsResponse{}
-	err := service.client.Call("CreateCollectorForEvents", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31949,7 +31949,7 @@ func (service *VimPortType) CreateCollectorForEvents(request *CreateCollectorFor
  */
 func (service *VimPortType) LogUserEvent(request *LogUserEventRequestType) (*LogUserEventResponse, error) {
 	response := &LogUserEventResponse{}
-	err := service.client.Call("LogUserEvent", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31964,7 +31964,7 @@ func (service *VimPortType) LogUserEvent(request *LogUserEventRequestType) (*Log
  */
 func (service *VimPortType) QueryEvents(request *QueryEventsRequestType) (*QueryEventsResponse, error) {
 	response := &QueryEventsResponse{}
-	err := service.client.Call("QueryEvents", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -31980,7 +31980,7 @@ func (service *VimPortType) QueryEvents(request *QueryEventsRequestType) (*Query
  */
 func (service *VimPortType) PostEvent(request *PostEventRequestType) (*PostEventResponse, error) {
 	response := &PostEventResponse{}
-	err := service.client.Call("PostEvent", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32000,7 +32000,7 @@ func (service *VimPortType) PostEvent(request *PostEventRequestType) (*PostEvent
  */
 func (service *VimPortType) JoinDomain_Task(request *JoinDomainRequestType) (*JoinDomain_TaskResponse, error) {
 	response := &JoinDomain_TaskResponse{}
-	err := service.client.Call("JoinDomain_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32019,7 +32019,7 @@ func (service *VimPortType) JoinDomain_Task(request *JoinDomainRequestType) (*Jo
  */
 func (service *VimPortType) JoinDomainWithCAM_Task(request *JoinDomainWithCAMRequestType) (*JoinDomainWithCAM_TaskResponse, error) {
 	response := &JoinDomainWithCAM_TaskResponse{}
-	err := service.client.Call("JoinDomainWithCAM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32036,7 +32036,7 @@ func (service *VimPortType) JoinDomainWithCAM_Task(request *JoinDomainWithCAMReq
  */
 func (service *VimPortType) ImportCertificateForCAM_Task(request *ImportCertificateForCAMRequestType) (*ImportCertificateForCAM_TaskResponse, error) {
 	response := &ImportCertificateForCAM_TaskResponse{}
-	err := service.client.Call("ImportCertificateForCAM_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32055,7 +32055,7 @@ func (service *VimPortType) ImportCertificateForCAM_Task(request *ImportCertific
  */
 func (service *VimPortType) LeaveCurrentDomain_Task(request *LeaveCurrentDomainRequestType) (*LeaveCurrentDomain_TaskResponse, error) {
 	response := &LeaveCurrentDomain_TaskResponse{}
-	err := service.client.Call("LeaveCurrentDomain_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32070,7 +32070,7 @@ func (service *VimPortType) LeaveCurrentDomain_Task(request *LeaveCurrentDomainR
  */
 func (service *VimPortType) ReconfigureAutostart(request *ReconfigureAutostartRequestType) (*ReconfigureAutostartResponse, error) {
 	response := &ReconfigureAutostartResponse{}
-	err := service.client.Call("ReconfigureAutostart", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32085,7 +32085,7 @@ func (service *VimPortType) ReconfigureAutostart(request *ReconfigureAutostartRe
  */
 func (service *VimPortType) AutoStartPowerOn(request *AutoStartPowerOnRequestType) (*AutoStartPowerOnResponse, error) {
 	response := &AutoStartPowerOnResponse{}
-	err := service.client.Call("AutoStartPowerOn", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32100,7 +32100,7 @@ func (service *VimPortType) AutoStartPowerOn(request *AutoStartPowerOnRequestTyp
  */
 func (service *VimPortType) AutoStartPowerOff(request *AutoStartPowerOffRequestType) (*AutoStartPowerOffResponse, error) {
 	response := &AutoStartPowerOffResponse{}
-	err := service.client.Call("AutoStartPowerOff", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32115,7 +32115,7 @@ func (service *VimPortType) AutoStartPowerOff(request *AutoStartPowerOffRequestT
  */
 func (service *VimPortType) QueryBootDevices(request *QueryBootDevicesRequestType) (*QueryBootDevicesResponse, error) {
 	response := &QueryBootDevicesResponse{}
-	err := service.client.Call("QueryBootDevices", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32130,7 +32130,7 @@ func (service *VimPortType) QueryBootDevices(request *QueryBootDevicesRequestTyp
  */
 func (service *VimPortType) UpdateBootDevice(request *UpdateBootDeviceRequestType) (*UpdateBootDeviceResponse, error) {
 	response := &UpdateBootDeviceResponse{}
-	err := service.client.Call("UpdateBootDevice", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32145,7 +32145,7 @@ func (service *VimPortType) UpdateBootDevice(request *UpdateBootDeviceRequestTyp
  */
 func (service *VimPortType) ConfigureHostCache_Task(request *ConfigureHostCacheRequestType) (*ConfigureHostCache_TaskResponse, error) {
 	response := &ConfigureHostCache_TaskResponse{}
-	err := service.client.Call("ConfigureHostCache_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32160,7 +32160,7 @@ func (service *VimPortType) ConfigureHostCache_Task(request *ConfigureHostCacheR
  */
 func (service *VimPortType) EnableHyperThreading(request *EnableHyperThreadingRequestType) (*EnableHyperThreadingResponse, error) {
 	response := &EnableHyperThreadingResponse{}
-	err := service.client.Call("EnableHyperThreading", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32175,7 +32175,7 @@ func (service *VimPortType) EnableHyperThreading(request *EnableHyperThreadingRe
  */
 func (service *VimPortType) DisableHyperThreading(request *DisableHyperThreadingRequestType) (*DisableHyperThreadingResponse, error) {
 	response := &DisableHyperThreadingResponse{}
-	err := service.client.Call("DisableHyperThreading", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32192,7 +32192,7 @@ func (service *VimPortType) DisableHyperThreading(request *DisableHyperThreading
  */
 func (service *VimPortType) SearchDatastore_Task(request *SearchDatastoreRequestType) (*SearchDatastore_TaskResponse, error) {
 	response := &SearchDatastore_TaskResponse{}
-	err := service.client.Call("SearchDatastore_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32209,7 +32209,7 @@ func (service *VimPortType) SearchDatastore_Task(request *SearchDatastoreRequest
  */
 func (service *VimPortType) SearchDatastoreSubFolders_Task(request *SearchDatastoreSubFoldersRequestType) (*SearchDatastoreSubFolders_TaskResponse, error) {
 	response := &SearchDatastoreSubFolders_TaskResponse{}
-	err := service.client.Call("SearchDatastoreSubFolders_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32226,7 +32226,7 @@ func (service *VimPortType) SearchDatastoreSubFolders_Task(request *SearchDatast
  */
 func (service *VimPortType) DeleteFile(request *DeleteFileRequestType) (*DeleteFileResponse, error) {
 	response := &DeleteFileResponse{}
-	err := service.client.Call("DeleteFile", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32243,7 +32243,7 @@ func (service *VimPortType) DeleteFile(request *DeleteFileRequestType) (*DeleteF
  */
 func (service *VimPortType) UpdateLocalSwapDatastore(request *UpdateLocalSwapDatastoreRequestType) (*UpdateLocalSwapDatastoreResponse, error) {
 	response := &UpdateLocalSwapDatastoreResponse{}
-	err := service.client.Call("UpdateLocalSwapDatastore", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32260,7 +32260,7 @@ func (service *VimPortType) UpdateLocalSwapDatastore(request *UpdateLocalSwapDat
  */
 func (service *VimPortType) QueryAvailableDisksForVmfs(request *QueryAvailableDisksForVmfsRequestType) (*QueryAvailableDisksForVmfsResponse, error) {
 	response := &QueryAvailableDisksForVmfsResponse{}
-	err := service.client.Call("QueryAvailableDisksForVmfs", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32277,7 +32277,7 @@ func (service *VimPortType) QueryAvailableDisksForVmfs(request *QueryAvailableDi
  */
 func (service *VimPortType) QueryVmfsDatastoreCreateOptions(request *QueryVmfsDatastoreCreateOptionsRequestType) (*QueryVmfsDatastoreCreateOptionsResponse, error) {
 	response := &QueryVmfsDatastoreCreateOptionsResponse{}
-	err := service.client.Call("QueryVmfsDatastoreCreateOptions", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32294,7 +32294,7 @@ func (service *VimPortType) QueryVmfsDatastoreCreateOptions(request *QueryVmfsDa
  */
 func (service *VimPortType) CreateVmfsDatastore(request *CreateVmfsDatastoreRequestType) (*CreateVmfsDatastoreResponse, error) {
 	response := &CreateVmfsDatastoreResponse{}
-	err := service.client.Call("CreateVmfsDatastore", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32311,7 +32311,7 @@ func (service *VimPortType) CreateVmfsDatastore(request *CreateVmfsDatastoreRequ
  */
 func (service *VimPortType) QueryVmfsDatastoreExtendOptions(request *QueryVmfsDatastoreExtendOptionsRequestType) (*QueryVmfsDatastoreExtendOptionsResponse, error) {
 	response := &QueryVmfsDatastoreExtendOptionsResponse{}
-	err := service.client.Call("QueryVmfsDatastoreExtendOptions", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32328,7 +32328,7 @@ func (service *VimPortType) QueryVmfsDatastoreExtendOptions(request *QueryVmfsDa
  */
 func (service *VimPortType) QueryVmfsDatastoreExpandOptions(request *QueryVmfsDatastoreExpandOptionsRequestType) (*QueryVmfsDatastoreExpandOptionsResponse, error) {
 	response := &QueryVmfsDatastoreExpandOptionsResponse{}
-	err := service.client.Call("QueryVmfsDatastoreExpandOptions", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32345,7 +32345,7 @@ func (service *VimPortType) QueryVmfsDatastoreExpandOptions(request *QueryVmfsDa
  */
 func (service *VimPortType) ExtendVmfsDatastore(request *ExtendVmfsDatastoreRequestType) (*ExtendVmfsDatastoreResponse, error) {
 	response := &ExtendVmfsDatastoreResponse{}
-	err := service.client.Call("ExtendVmfsDatastore", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32362,7 +32362,7 @@ func (service *VimPortType) ExtendVmfsDatastore(request *ExtendVmfsDatastoreRequ
  */
 func (service *VimPortType) ExpandVmfsDatastore(request *ExpandVmfsDatastoreRequestType) (*ExpandVmfsDatastoreResponse, error) {
 	response := &ExpandVmfsDatastoreResponse{}
-	err := service.client.Call("ExpandVmfsDatastore", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32380,7 +32380,7 @@ func (service *VimPortType) ExpandVmfsDatastore(request *ExpandVmfsDatastoreRequ
  */
 func (service *VimPortType) CreateNasDatastore(request *CreateNasDatastoreRequestType) (*CreateNasDatastoreResponse, error) {
 	response := &CreateNasDatastoreResponse{}
-	err := service.client.Call("CreateNasDatastore", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32399,7 +32399,7 @@ func (service *VimPortType) CreateNasDatastore(request *CreateNasDatastoreReques
  */
 func (service *VimPortType) CreateLocalDatastore(request *CreateLocalDatastoreRequestType) (*CreateLocalDatastoreResponse, error) {
 	response := &CreateLocalDatastoreResponse{}
-	err := service.client.Call("CreateLocalDatastore", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32417,7 +32417,7 @@ func (service *VimPortType) CreateLocalDatastore(request *CreateLocalDatastoreRe
  */
 func (service *VimPortType) RemoveDatastore(request *RemoveDatastoreRequestType) (*RemoveDatastoreResponse, error) {
 	response := &RemoveDatastoreResponse{}
-	err := service.client.Call("RemoveDatastore", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32434,7 +32434,7 @@ func (service *VimPortType) RemoveDatastore(request *RemoveDatastoreRequestType)
  */
 func (service *VimPortType) ConfigureDatastorePrincipal(request *ConfigureDatastorePrincipalRequestType) (*ConfigureDatastorePrincipalResponse, error) {
 	response := &ConfigureDatastorePrincipalResponse{}
-	err := service.client.Call("ConfigureDatastorePrincipal", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32449,7 +32449,7 @@ func (service *VimPortType) ConfigureDatastorePrincipal(request *ConfigureDatast
  */
 func (service *VimPortType) QueryUnresolvedVmfsVolumes(request *QueryUnresolvedVmfsVolumesRequestType) (*QueryUnresolvedVmfsVolumesResponse, error) {
 	response := &QueryUnresolvedVmfsVolumesResponse{}
-	err := service.client.Call("QueryUnresolvedVmfsVolumes", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32466,7 +32466,7 @@ func (service *VimPortType) QueryUnresolvedVmfsVolumes(request *QueryUnresolvedV
  */
 func (service *VimPortType) ResignatureUnresolvedVmfsVolume_Task(request *ResignatureUnresolvedVmfsVolumeRequestType) (*ResignatureUnresolvedVmfsVolume_TaskResponse, error) {
 	response := &ResignatureUnresolvedVmfsVolume_TaskResponse{}
-	err := service.client.Call("ResignatureUnresolvedVmfsVolume_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32482,7 +32482,7 @@ func (service *VimPortType) ResignatureUnresolvedVmfsVolume_Task(request *Resign
  */
 func (service *VimPortType) UpdateDateTimeConfig(request *UpdateDateTimeConfigRequestType) (*UpdateDateTimeConfigResponse, error) {
 	response := &UpdateDateTimeConfigResponse{}
-	err := service.client.Call("UpdateDateTimeConfig", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32497,7 +32497,7 @@ func (service *VimPortType) UpdateDateTimeConfig(request *UpdateDateTimeConfigRe
  */
 func (service *VimPortType) QueryAvailableTimeZones(request *QueryAvailableTimeZonesRequestType) (*QueryAvailableTimeZonesResponse, error) {
 	response := &QueryAvailableTimeZonesResponse{}
-	err := service.client.Call("QueryAvailableTimeZones", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32512,7 +32512,7 @@ func (service *VimPortType) QueryAvailableTimeZones(request *QueryAvailableTimeZ
  */
 func (service *VimPortType) QueryDateTime(request *QueryDateTimeRequestType) (*QueryDateTimeResponse, error) {
 	response := &QueryDateTimeResponse{}
-	err := service.client.Call("QueryDateTime", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32528,7 +32528,7 @@ func (service *VimPortType) QueryDateTime(request *QueryDateTimeRequestType) (*Q
  */
 func (service *VimPortType) UpdateDateTime(request *UpdateDateTimeRequestType) (*UpdateDateTimeResponse, error) {
 	response := &UpdateDateTimeResponse{}
-	err := service.client.Call("UpdateDateTime", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32543,7 +32543,7 @@ func (service *VimPortType) UpdateDateTime(request *UpdateDateTimeRequestType) (
  */
 func (service *VimPortType) RefreshDateTimeSystem(request *RefreshDateTimeSystemRequestType) (*RefreshDateTimeSystemResponse, error) {
 	response := &RefreshDateTimeSystemResponse{}
-	err := service.client.Call("RefreshDateTimeSystem", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32559,7 +32559,7 @@ func (service *VimPortType) RefreshDateTimeSystem(request *RefreshDateTimeSystem
  */
 func (service *VimPortType) QueryAvailablePartition(request *QueryAvailablePartitionRequestType) (*QueryAvailablePartitionResponse, error) {
 	response := &QueryAvailablePartitionResponse{}
-	err := service.client.Call("QueryAvailablePartition", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32576,7 +32576,7 @@ func (service *VimPortType) QueryAvailablePartition(request *QueryAvailableParti
  */
 func (service *VimPortType) SelectActivePartition(request *SelectActivePartitionRequestType) (*SelectActivePartitionResponse, error) {
 	response := &SelectActivePartitionResponse{}
-	err := service.client.Call("SelectActivePartition", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32592,7 +32592,7 @@ func (service *VimPortType) SelectActivePartition(request *SelectActivePartition
  */
 func (service *VimPortType) QueryPartitionCreateOptions(request *QueryPartitionCreateOptionsRequestType) (*QueryPartitionCreateOptionsResponse, error) {
 	response := &QueryPartitionCreateOptionsResponse{}
-	err := service.client.Call("QueryPartitionCreateOptions", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32609,7 +32609,7 @@ func (service *VimPortType) QueryPartitionCreateOptions(request *QueryPartitionC
  */
 func (service *VimPortType) QueryPartitionCreateDesc(request *QueryPartitionCreateDescRequestType) (*QueryPartitionCreateDescResponse, error) {
 	response := &QueryPartitionCreateDescResponse{}
-	err := service.client.Call("QueryPartitionCreateDesc", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32626,7 +32626,7 @@ func (service *VimPortType) QueryPartitionCreateDesc(request *QueryPartitionCrea
  */
 func (service *VimPortType) CreateDiagnosticPartition(request *CreateDiagnosticPartitionRequestType) (*CreateDiagnosticPartitionResponse, error) {
 	response := &CreateDiagnosticPartitionResponse{}
-	err := service.client.Call("CreateDiagnosticPartition", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32642,7 +32642,7 @@ func (service *VimPortType) CreateDiagnosticPartition(request *CreateDiagnosticP
  */
 func (service *VimPortType) EsxAgentHostManagerUpdateConfig(request *EsxAgentHostManagerUpdateConfigRequestType) (*EsxAgentHostManagerUpdateConfigResponse, error) {
 	response := &EsxAgentHostManagerUpdateConfigResponse{}
-	err := service.client.Call("EsxAgentHostManagerUpdateConfig", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32657,7 +32657,7 @@ func (service *VimPortType) EsxAgentHostManagerUpdateConfig(request *EsxAgentHos
  */
 func (service *VimPortType) UpdateDefaultPolicy(request *UpdateDefaultPolicyRequestType) (*UpdateDefaultPolicyResponse, error) {
 	response := &UpdateDefaultPolicyResponse{}
-	err := service.client.Call("UpdateDefaultPolicy", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32674,7 +32674,7 @@ func (service *VimPortType) UpdateDefaultPolicy(request *UpdateDefaultPolicyRequ
  */
 func (service *VimPortType) EnableRuleset(request *EnableRulesetRequestType) (*EnableRulesetResponse, error) {
 	response := &EnableRulesetResponse{}
-	err := service.client.Call("EnableRuleset", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32691,7 +32691,7 @@ func (service *VimPortType) EnableRuleset(request *EnableRulesetRequestType) (*E
  */
 func (service *VimPortType) DisableRuleset(request *DisableRulesetRequestType) (*DisableRulesetResponse, error) {
 	response := &DisableRulesetResponse{}
-	err := service.client.Call("DisableRuleset", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32708,7 +32708,7 @@ func (service *VimPortType) DisableRuleset(request *DisableRulesetRequestType) (
  */
 func (service *VimPortType) UpdateRuleset(request *UpdateRulesetRequestType) (*UpdateRulesetResponse, error) {
 	response := &UpdateRulesetResponse{}
-	err := service.client.Call("UpdateRuleset", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32723,7 +32723,7 @@ func (service *VimPortType) UpdateRuleset(request *UpdateRulesetRequestType) (*U
  */
 func (service *VimPortType) RefreshFirewall(request *RefreshFirewallRequestType) (*RefreshFirewallResponse, error) {
 	response := &RefreshFirewallResponse{}
-	err := service.client.Call("RefreshFirewall", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32739,7 +32739,7 @@ func (service *VimPortType) RefreshFirewall(request *RefreshFirewallRequestType)
  */
 func (service *VimPortType) ResetFirmwareToFactoryDefaults(request *ResetFirmwareToFactoryDefaultsRequestType) (*ResetFirmwareToFactoryDefaultsResponse, error) {
 	response := &ResetFirmwareToFactoryDefaultsResponse{}
-	err := service.client.Call("ResetFirmwareToFactoryDefaults", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32754,7 +32754,7 @@ func (service *VimPortType) ResetFirmwareToFactoryDefaults(request *ResetFirmwar
  */
 func (service *VimPortType) BackupFirmwareConfiguration(request *BackupFirmwareConfigurationRequestType) (*BackupFirmwareConfigurationResponse, error) {
 	response := &BackupFirmwareConfigurationResponse{}
-	err := service.client.Call("BackupFirmwareConfiguration", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32769,7 +32769,7 @@ func (service *VimPortType) BackupFirmwareConfiguration(request *BackupFirmwareC
  */
 func (service *VimPortType) QueryFirmwareConfigUploadURL(request *QueryFirmwareConfigUploadURLRequestType) (*QueryFirmwareConfigUploadURLResponse, error) {
 	response := &QueryFirmwareConfigUploadURLResponse{}
-	err := service.client.Call("QueryFirmwareConfigUploadURL", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32788,7 +32788,7 @@ func (service *VimPortType) QueryFirmwareConfigUploadURL(request *QueryFirmwareC
  */
 func (service *VimPortType) RestoreFirmwareConfiguration(request *RestoreFirmwareConfigurationRequestType) (*RestoreFirmwareConfigurationResponse, error) {
 	response := &RestoreFirmwareConfigurationResponse{}
-	err := service.client.Call("RestoreFirmwareConfiguration", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32803,7 +32803,7 @@ func (service *VimPortType) RestoreFirmwareConfiguration(request *RestoreFirmwar
  */
 func (service *VimPortType) RefreshGraphicsManager(request *RefreshGraphicsManagerRequestType) (*RefreshGraphicsManagerResponse, error) {
 	response := &RefreshGraphicsManagerResponse{}
-	err := service.client.Call("RefreshGraphicsManager", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32818,7 +32818,7 @@ func (service *VimPortType) RefreshGraphicsManager(request *RefreshGraphicsManag
  */
 func (service *VimPortType) IsSharedGraphicsActive(request *IsSharedGraphicsActiveRequestType) (*IsSharedGraphicsActiveResponse, error) {
 	response := &IsSharedGraphicsActiveResponse{}
-	err := service.client.Call("IsSharedGraphicsActive", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32833,7 +32833,7 @@ func (service *VimPortType) IsSharedGraphicsActive(request *IsSharedGraphicsActi
  */
 func (service *VimPortType) RefreshHealthStatusSystem(request *RefreshHealthStatusSystemRequestType) (*RefreshHealthStatusSystemResponse, error) {
 	response := &RefreshHealthStatusSystemResponse{}
-	err := service.client.Call("RefreshHealthStatusSystem", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32848,7 +32848,7 @@ func (service *VimPortType) RefreshHealthStatusSystem(request *RefreshHealthStat
  */
 func (service *VimPortType) ResetSystemHealthInfo(request *ResetSystemHealthInfoRequestType) (*ResetSystemHealthInfoResponse, error) {
 	response := &ResetSystemHealthInfoResponse{}
-	err := service.client.Call("ResetSystemHealthInfo", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32864,7 +32864,7 @@ func (service *VimPortType) ResetSystemHealthInfo(request *ResetSystemHealthInfo
  */
 func (service *VimPortType) HostImageConfigGetAcceptance(request *HostImageConfigGetAcceptanceRequestType) (*HostImageConfigGetAcceptanceResponse, error) {
 	response := &HostImageConfigGetAcceptanceResponse{}
-	err := service.client.Call("HostImageConfigGetAcceptance", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32879,7 +32879,7 @@ func (service *VimPortType) HostImageConfigGetAcceptance(request *HostImageConfi
  */
 func (service *VimPortType) HostImageConfigGetProfile(request *HostImageConfigGetProfileRequestType) (*HostImageConfigGetProfileResponse, error) {
 	response := &HostImageConfigGetProfileResponse{}
-	err := service.client.Call("HostImageConfigGetProfile", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32895,7 +32895,7 @@ func (service *VimPortType) HostImageConfigGetProfile(request *HostImageConfigGe
  */
 func (service *VimPortType) UpdateHostImageAcceptanceLevel(request *UpdateHostImageAcceptanceLevelRequestType) (*UpdateHostImageAcceptanceLevelResponse, error) {
 	response := &UpdateHostImageAcceptanceLevelResponse{}
-	err := service.client.Call("UpdateHostImageAcceptanceLevel", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32911,7 +32911,7 @@ func (service *VimPortType) UpdateHostImageAcceptanceLevel(request *UpdateHostIm
  */
 func (service *VimPortType) QueryVnicStatus(request *QueryVnicStatusRequestType) (*QueryVnicStatusResponse, error) {
 	response := &QueryVnicStatusResponse{}
-	err := service.client.Call("QueryVnicStatus", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32927,7 +32927,7 @@ func (service *VimPortType) QueryVnicStatus(request *QueryVnicStatusRequestType)
  */
 func (service *VimPortType) QueryPnicStatus(request *QueryPnicStatusRequestType) (*QueryPnicStatusResponse, error) {
 	response := &QueryPnicStatusResponse{}
-	err := service.client.Call("QueryPnicStatus", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32944,7 +32944,7 @@ func (service *VimPortType) QueryPnicStatus(request *QueryPnicStatusRequestType)
  */
 func (service *VimPortType) QueryBoundVnics(request *QueryBoundVnicsRequestType) (*QueryBoundVnicsResponse, error) {
 	response := &QueryBoundVnicsResponse{}
-	err := service.client.Call("QueryBoundVnics", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32961,7 +32961,7 @@ func (service *VimPortType) QueryBoundVnics(request *QueryBoundVnicsRequestType)
  */
 func (service *VimPortType) QueryCandidateNics(request *QueryCandidateNicsRequestType) (*QueryCandidateNicsResponse, error) {
 	response := &QueryCandidateNicsResponse{}
-	err := service.client.Call("QueryCandidateNics", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -32985,7 +32985,7 @@ func (service *VimPortType) QueryCandidateNics(request *QueryCandidateNicsReques
  */
 func (service *VimPortType) BindVnic(request *BindVnicRequestType) (*BindVnicResponse, error) {
 	response := &BindVnicResponse{}
-	err := service.client.Call("BindVnic", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33006,7 +33006,7 @@ func (service *VimPortType) BindVnic(request *BindVnicRequestType) (*BindVnicRes
  */
 func (service *VimPortType) UnbindVnic(request *UnbindVnicRequestType) (*UnbindVnicResponse, error) {
 	response := &UnbindVnicResponse{}
-	err := service.client.Call("UnbindVnic", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33021,7 +33021,7 @@ func (service *VimPortType) UnbindVnic(request *UnbindVnicRequestType) (*UnbindV
  */
 func (service *VimPortType) QueryMigrationDependencies(request *QueryMigrationDependenciesRequestType) (*QueryMigrationDependenciesResponse, error) {
 	response := &QueryMigrationDependenciesResponse{}
-	err := service.client.Call("QueryMigrationDependencies", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33036,7 +33036,7 @@ func (service *VimPortType) QueryMigrationDependencies(request *QueryMigrationDe
  */
 func (service *VimPortType) QueryModules(request *QueryModulesRequestType) (*QueryModulesResponse, error) {
 	response := &QueryModulesResponse{}
-	err := service.client.Call("QueryModules", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33052,7 +33052,7 @@ func (service *VimPortType) QueryModules(request *QueryModulesRequestType) (*Que
  */
 func (service *VimPortType) UpdateModuleOptionString(request *UpdateModuleOptionStringRequestType) (*UpdateModuleOptionStringResponse, error) {
 	response := &UpdateModuleOptionStringResponse{}
-	err := service.client.Call("UpdateModuleOptionString", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33068,7 +33068,7 @@ func (service *VimPortType) UpdateModuleOptionString(request *UpdateModuleOption
  */
 func (service *VimPortType) QueryConfiguredModuleOptionString(request *QueryConfiguredModuleOptionStringRequestType) (*QueryConfiguredModuleOptionStringResponse, error) {
 	response := &QueryConfiguredModuleOptionStringResponse{}
-	err := service.client.Call("QueryConfiguredModuleOptionString", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33084,7 +33084,7 @@ func (service *VimPortType) QueryConfiguredModuleOptionString(request *QueryConf
  */
 func (service *VimPortType) CreateUser(request *CreateUserRequestType) (*CreateUserResponse, error) {
 	response := &CreateUserResponse{}
-	err := service.client.Call("CreateUser", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33101,7 +33101,7 @@ func (service *VimPortType) CreateUser(request *CreateUserRequestType) (*CreateU
  */
 func (service *VimPortType) UpdateUser(request *UpdateUserRequestType) (*UpdateUserResponse, error) {
 	response := &UpdateUserResponse{}
-	err := service.client.Call("UpdateUser", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33117,7 +33117,7 @@ func (service *VimPortType) UpdateUser(request *UpdateUserRequestType) (*UpdateU
  */
 func (service *VimPortType) CreateGroup(request *CreateGroupRequestType) (*CreateGroupResponse, error) {
 	response := &CreateGroupResponse{}
-	err := service.client.Call("CreateGroup", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33133,7 +33133,7 @@ func (service *VimPortType) CreateGroup(request *CreateGroupRequestType) (*Creat
  */
 func (service *VimPortType) RemoveUser(request *RemoveUserRequestType) (*RemoveUserResponse, error) {
 	response := &RemoveUserResponse{}
-	err := service.client.Call("RemoveUser", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33149,7 +33149,7 @@ func (service *VimPortType) RemoveUser(request *RemoveUserRequestType) (*RemoveU
  */
 func (service *VimPortType) RemoveGroup(request *RemoveGroupRequestType) (*RemoveGroupResponse, error) {
 	response := &RemoveGroupResponse{}
-	err := service.client.Call("RemoveGroup", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33166,7 +33166,7 @@ func (service *VimPortType) RemoveGroup(request *RemoveGroupRequestType) (*Remov
  */
 func (service *VimPortType) AssignUserToGroup(request *AssignUserToGroupRequestType) (*AssignUserToGroupResponse, error) {
 	response := &AssignUserToGroupResponse{}
-	err := service.client.Call("AssignUserToGroup", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33182,7 +33182,7 @@ func (service *VimPortType) AssignUserToGroup(request *AssignUserToGroupRequestT
  */
 func (service *VimPortType) UnassignUserFromGroup(request *UnassignUserFromGroupRequestType) (*UnassignUserFromGroupResponse, error) {
 	response := &UnassignUserFromGroupResponse{}
-	err := service.client.Call("UnassignUserFromGroup", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33197,7 +33197,7 @@ func (service *VimPortType) UnassignUserFromGroup(request *UnassignUserFromGroup
  */
 func (service *VimPortType) ReconfigureServiceConsoleReservation(request *ReconfigureServiceConsoleReservationRequestType) (*ReconfigureServiceConsoleReservationResponse, error) {
 	response := &ReconfigureServiceConsoleReservationResponse{}
-	err := service.client.Call("ReconfigureServiceConsoleReservation", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33212,7 +33212,7 @@ func (service *VimPortType) ReconfigureServiceConsoleReservation(request *Reconf
  */
 func (service *VimPortType) ReconfigureVirtualMachineReservation(request *ReconfigureVirtualMachineReservationRequestType) (*ReconfigureVirtualMachineReservationResponse, error) {
 	response := &ReconfigureVirtualMachineReservationResponse{}
-	err := service.client.Call("ReconfigureVirtualMachineReservation", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33231,7 +33231,7 @@ func (service *VimPortType) ReconfigureVirtualMachineReservation(request *Reconf
  */
 func (service *VimPortType) UpdateNetworkConfig(request *UpdateNetworkConfigRequestType) (*UpdateNetworkConfigResponse, error) {
 	response := &UpdateNetworkConfigResponse{}
-	err := service.client.Call("UpdateNetworkConfig", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33248,7 +33248,7 @@ func (service *VimPortType) UpdateNetworkConfig(request *UpdateNetworkConfigRequ
  */
 func (service *VimPortType) UpdateDnsConfig(request *UpdateDnsConfigRequestType) (*UpdateDnsConfigResponse, error) {
 	response := &UpdateDnsConfigResponse{}
-	err := service.client.Call("UpdateDnsConfig", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33265,7 +33265,7 @@ func (service *VimPortType) UpdateDnsConfig(request *UpdateDnsConfigRequestType)
  */
 func (service *VimPortType) UpdateIpRouteConfig(request *UpdateIpRouteConfigRequestType) (*UpdateIpRouteConfigResponse, error) {
 	response := &UpdateIpRouteConfigResponse{}
-	err := service.client.Call("UpdateIpRouteConfig", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33281,7 +33281,7 @@ func (service *VimPortType) UpdateIpRouteConfig(request *UpdateIpRouteConfigRequ
  */
 func (service *VimPortType) UpdateConsoleIpRouteConfig(request *UpdateConsoleIpRouteConfigRequestType) (*UpdateConsoleIpRouteConfigResponse, error) {
 	response := &UpdateConsoleIpRouteConfigResponse{}
-	err := service.client.Call("UpdateConsoleIpRouteConfig", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33297,7 +33297,7 @@ func (service *VimPortType) UpdateConsoleIpRouteConfig(request *UpdateConsoleIpR
  */
 func (service *VimPortType) UpdateIpRouteTableConfig(request *UpdateIpRouteTableConfigRequestType) (*UpdateIpRouteTableConfigResponse, error) {
 	response := &UpdateIpRouteTableConfigResponse{}
-	err := service.client.Call("UpdateIpRouteTableConfig", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33315,7 +33315,7 @@ func (service *VimPortType) UpdateIpRouteTableConfig(request *UpdateIpRouteTable
  */
 func (service *VimPortType) AddVirtualSwitch(request *AddVirtualSwitchRequestType) (*AddVirtualSwitchResponse, error) {
 	response := &AddVirtualSwitchResponse{}
-	err := service.client.Call("AddVirtualSwitch", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33333,7 +33333,7 @@ func (service *VimPortType) AddVirtualSwitch(request *AddVirtualSwitchRequestTyp
  */
 func (service *VimPortType) RemoveVirtualSwitch(request *RemoveVirtualSwitchRequestType) (*RemoveVirtualSwitchResponse, error) {
 	response := &RemoveVirtualSwitchResponse{}
-	err := service.client.Call("RemoveVirtualSwitch", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33351,7 +33351,7 @@ func (service *VimPortType) RemoveVirtualSwitch(request *RemoveVirtualSwitchRequ
  */
 func (service *VimPortType) UpdateVirtualSwitch(request *UpdateVirtualSwitchRequestType) (*UpdateVirtualSwitchResponse, error) {
 	response := &UpdateVirtualSwitchResponse{}
-	err := service.client.Call("UpdateVirtualSwitch", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33369,7 +33369,7 @@ func (service *VimPortType) UpdateVirtualSwitch(request *UpdateVirtualSwitchRequ
  */
 func (service *VimPortType) AddPortGroup(request *AddPortGroupRequestType) (*AddPortGroupResponse, error) {
 	response := &AddPortGroupResponse{}
-	err := service.client.Call("AddPortGroup", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33387,7 +33387,7 @@ func (service *VimPortType) AddPortGroup(request *AddPortGroupRequestType) (*Add
  */
 func (service *VimPortType) RemovePortGroup(request *RemovePortGroupRequestType) (*RemovePortGroupResponse, error) {
 	response := &RemovePortGroupResponse{}
-	err := service.client.Call("RemovePortGroup", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33405,7 +33405,7 @@ func (service *VimPortType) RemovePortGroup(request *RemovePortGroupRequestType)
  */
 func (service *VimPortType) UpdatePortGroup(request *UpdatePortGroupRequestType) (*UpdatePortGroupResponse, error) {
 	response := &UpdatePortGroupResponse{}
-	err := service.client.Call("UpdatePortGroup", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33422,7 +33422,7 @@ func (service *VimPortType) UpdatePortGroup(request *UpdatePortGroupRequestType)
  */
 func (service *VimPortType) UpdatePhysicalNicLinkSpeed(request *UpdatePhysicalNicLinkSpeedRequestType) (*UpdatePhysicalNicLinkSpeedResponse, error) {
 	response := &UpdatePhysicalNicLinkSpeedResponse{}
-	err := service.client.Call("UpdatePhysicalNicLinkSpeed", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33439,7 +33439,7 @@ func (service *VimPortType) UpdatePhysicalNicLinkSpeed(request *UpdatePhysicalNi
  */
 func (service *VimPortType) QueryNetworkHint(request *QueryNetworkHintRequestType) (*QueryNetworkHintResponse, error) {
 	response := &QueryNetworkHintResponse{}
-	err := service.client.Call("QueryNetworkHint", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33457,7 +33457,7 @@ func (service *VimPortType) QueryNetworkHint(request *QueryNetworkHintRequestTyp
  */
 func (service *VimPortType) AddVirtualNic(request *AddVirtualNicRequestType) (*AddVirtualNicResponse, error) {
 	response := &AddVirtualNicResponse{}
-	err := service.client.Call("AddVirtualNic", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33474,7 +33474,7 @@ func (service *VimPortType) AddVirtualNic(request *AddVirtualNicRequestType) (*A
  */
 func (service *VimPortType) RemoveVirtualNic(request *RemoveVirtualNicRequestType) (*RemoveVirtualNicResponse, error) {
 	response := &RemoveVirtualNicResponse{}
-	err := service.client.Call("RemoveVirtualNic", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33492,7 +33492,7 @@ func (service *VimPortType) RemoveVirtualNic(request *RemoveVirtualNicRequestTyp
  */
 func (service *VimPortType) UpdateVirtualNic(request *UpdateVirtualNicRequestType) (*UpdateVirtualNicResponse, error) {
 	response := &UpdateVirtualNicResponse{}
-	err := service.client.Call("UpdateVirtualNic", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33508,7 +33508,7 @@ func (service *VimPortType) UpdateVirtualNic(request *UpdateVirtualNicRequestTyp
  */
 func (service *VimPortType) AddServiceConsoleVirtualNic(request *AddServiceConsoleVirtualNicRequestType) (*AddServiceConsoleVirtualNicResponse, error) {
 	response := &AddServiceConsoleVirtualNicResponse{}
-	err := service.client.Call("AddServiceConsoleVirtualNic", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33526,7 +33526,7 @@ func (service *VimPortType) AddServiceConsoleVirtualNic(request *AddServiceConso
  */
 func (service *VimPortType) RemoveServiceConsoleVirtualNic(request *RemoveServiceConsoleVirtualNicRequestType) (*RemoveServiceConsoleVirtualNicResponse, error) {
 	response := &RemoveServiceConsoleVirtualNicResponse{}
-	err := service.client.Call("RemoveServiceConsoleVirtualNic", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33544,7 +33544,7 @@ func (service *VimPortType) RemoveServiceConsoleVirtualNic(request *RemoveServic
  */
 func (service *VimPortType) UpdateServiceConsoleVirtualNic(request *UpdateServiceConsoleVirtualNicRequestType) (*UpdateServiceConsoleVirtualNicResponse, error) {
 	response := &UpdateServiceConsoleVirtualNicResponse{}
-	err := service.client.Call("UpdateServiceConsoleVirtualNic", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33561,7 +33561,7 @@ func (service *VimPortType) UpdateServiceConsoleVirtualNic(request *UpdateServic
  */
 func (service *VimPortType) RestartServiceConsoleVirtualNic(request *RestartServiceConsoleVirtualNicRequestType) (*RestartServiceConsoleVirtualNicResponse, error) {
 	response := &RestartServiceConsoleVirtualNicResponse{}
-	err := service.client.Call("RestartServiceConsoleVirtualNic", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33576,7 +33576,7 @@ func (service *VimPortType) RestartServiceConsoleVirtualNic(request *RestartServ
  */
 func (service *VimPortType) RefreshNetworkSystem(request *RefreshNetworkSystemRequestType) (*RefreshNetworkSystemResponse, error) {
 	response := &RefreshNetworkSystemResponse{}
-	err := service.client.Call("RefreshNetworkSystem", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33595,7 +33595,7 @@ func (service *VimPortType) RefreshNetworkSystem(request *RefreshNetworkSystemRe
  */
 func (service *VimPortType) CheckHostPatch_Task(request *CheckHostPatchRequestType) (*CheckHostPatch_TaskResponse, error) {
 	response := &CheckHostPatch_TaskResponse{}
-	err := service.client.Call("CheckHostPatch_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33613,7 +33613,7 @@ func (service *VimPortType) CheckHostPatch_Task(request *CheckHostPatchRequestTy
  */
 func (service *VimPortType) ScanHostPatch_Task(request *ScanHostPatchRequestType) (*ScanHostPatch_TaskResponse, error) {
 	response := &ScanHostPatch_TaskResponse{}
-	err := service.client.Call("ScanHostPatch_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33632,7 +33632,7 @@ func (service *VimPortType) ScanHostPatch_Task(request *ScanHostPatchRequestType
  */
 func (service *VimPortType) ScanHostPatchV2_Task(request *ScanHostPatchV2RequestType) (*ScanHostPatchV2_TaskResponse, error) {
 	response := &ScanHostPatchV2_TaskResponse{}
-	err := service.client.Call("ScanHostPatchV2_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33651,7 +33651,7 @@ func (service *VimPortType) ScanHostPatchV2_Task(request *ScanHostPatchV2Request
  */
 func (service *VimPortType) StageHostPatch_Task(request *StageHostPatchRequestType) (*StageHostPatch_TaskResponse, error) {
 	response := &StageHostPatch_TaskResponse{}
-	err := service.client.Call("StageHostPatch_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33674,7 +33674,7 @@ func (service *VimPortType) StageHostPatch_Task(request *StageHostPatchRequestTy
  */
 func (service *VimPortType) InstallHostPatch_Task(request *InstallHostPatchRequestType) (*InstallHostPatch_TaskResponse, error) {
 	response := &InstallHostPatch_TaskResponse{}
-	err := service.client.Call("InstallHostPatch_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33693,7 +33693,7 @@ func (service *VimPortType) InstallHostPatch_Task(request *InstallHostPatchReque
  */
 func (service *VimPortType) InstallHostPatchV2_Task(request *InstallHostPatchV2RequestType) (*InstallHostPatchV2_TaskResponse, error) {
 	response := &InstallHostPatchV2_TaskResponse{}
-	err := service.client.Call("InstallHostPatchV2_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33711,7 +33711,7 @@ func (service *VimPortType) InstallHostPatchV2_Task(request *InstallHostPatchV2R
  */
 func (service *VimPortType) UninstallHostPatch_Task(request *UninstallHostPatchRequestType) (*UninstallHostPatch_TaskResponse, error) {
 	response := &UninstallHostPatch_TaskResponse{}
-	err := service.client.Call("UninstallHostPatch_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33730,7 +33730,7 @@ func (service *VimPortType) UninstallHostPatch_Task(request *UninstallHostPatchR
  */
 func (service *VimPortType) QueryHostPatch_Task(request *QueryHostPatchRequestType) (*QueryHostPatch_TaskResponse, error) {
 	response := &QueryHostPatch_TaskResponse{}
-	err := service.client.Call("QueryHostPatch_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33745,7 +33745,7 @@ func (service *VimPortType) QueryHostPatch_Task(request *QueryHostPatchRequestTy
  */
 func (service *VimPortType) Refresh(request *RefreshRequestType) (*RefreshResponse, error) {
 	response := &RefreshResponse{}
-	err := service.client.Call("Refresh", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33761,7 +33761,7 @@ func (service *VimPortType) Refresh(request *RefreshRequestType) (*RefreshRespon
  */
 func (service *VimPortType) UpdatePassthruConfig(request *UpdatePassthruConfigRequestType) (*UpdatePassthruConfigResponse, error) {
 	response := &UpdatePassthruConfigResponse{}
-	err := service.client.Call("UpdatePassthruConfig", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33777,7 +33777,7 @@ func (service *VimPortType) UpdatePassthruConfig(request *UpdatePassthruConfigRe
  */
 func (service *VimPortType) ConfigurePowerPolicy(request *ConfigurePowerPolicyRequestType) (*ConfigurePowerPolicyResponse, error) {
 	response := &ConfigurePowerPolicyResponse{}
-	err := service.client.Call("ConfigurePowerPolicy", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33794,7 +33794,7 @@ func (service *VimPortType) ConfigurePowerPolicy(request *ConfigurePowerPolicyRe
  */
 func (service *VimPortType) UpdateServicePolicy(request *UpdateServicePolicyRequestType) (*UpdateServicePolicyResponse, error) {
 	response := &UpdateServicePolicyResponse{}
-	err := service.client.Call("UpdateServicePolicy", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33812,7 +33812,7 @@ func (service *VimPortType) UpdateServicePolicy(request *UpdateServicePolicyRequ
  */
 func (service *VimPortType) StartService(request *StartServiceRequestType) (*StartServiceResponse, error) {
 	response := &StartServiceResponse{}
-	err := service.client.Call("StartService", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33830,7 +33830,7 @@ func (service *VimPortType) StartService(request *StartServiceRequestType) (*Sta
  */
 func (service *VimPortType) StopService(request *StopServiceRequestType) (*StopServiceResponse, error) {
 	response := &StopServiceResponse{}
-	err := service.client.Call("StopService", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33848,7 +33848,7 @@ func (service *VimPortType) StopService(request *StopServiceRequestType) (*StopS
  */
 func (service *VimPortType) RestartService(request *RestartServiceRequestType) (*RestartServiceResponse, error) {
 	response := &RestartServiceResponse{}
-	err := service.client.Call("RestartService", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33865,7 +33865,7 @@ func (service *VimPortType) RestartService(request *RestartServiceRequestType) (
  */
 func (service *VimPortType) UninstallService(request *UninstallServiceRequestType) (*UninstallServiceResponse, error) {
 	response := &UninstallServiceResponse{}
-	err := service.client.Call("UninstallService", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33880,7 +33880,7 @@ func (service *VimPortType) UninstallService(request *UninstallServiceRequestTyp
  */
 func (service *VimPortType) RefreshServices(request *RefreshServicesRequestType) (*RefreshServicesResponse, error) {
 	response := &RefreshServicesResponse{}
-	err := service.client.Call("RefreshServices", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33897,7 +33897,7 @@ func (service *VimPortType) RefreshServices(request *RefreshServicesRequestType)
  */
 func (service *VimPortType) ReconfigureSnmpAgent(request *ReconfigureSnmpAgentRequestType) (*ReconfigureSnmpAgentResponse, error) {
 	response := &ReconfigureSnmpAgentResponse{}
-	err := service.client.Call("ReconfigureSnmpAgent", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33914,7 +33914,7 @@ func (service *VimPortType) ReconfigureSnmpAgent(request *ReconfigureSnmpAgentRe
  */
 func (service *VimPortType) SendTestNotification(request *SendTestNotificationRequestType) (*SendTestNotificationResponse, error) {
 	response := &SendTestNotificationResponse{}
-	err := service.client.Call("SendTestNotification", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33929,7 +33929,7 @@ func (service *VimPortType) SendTestNotification(request *SendTestNotificationRe
  */
 func (service *VimPortType) RetrieveDiskPartitionInfo(request *RetrieveDiskPartitionInfoRequestType) (*RetrieveDiskPartitionInfoResponse, error) {
 	response := &RetrieveDiskPartitionInfoResponse{}
-	err := service.client.Call("RetrieveDiskPartitionInfo", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33946,7 +33946,7 @@ func (service *VimPortType) RetrieveDiskPartitionInfo(request *RetrieveDiskParti
  */
 func (service *VimPortType) ComputeDiskPartitionInfo(request *ComputeDiskPartitionInfoRequestType) (*ComputeDiskPartitionInfoResponse, error) {
 	response := &ComputeDiskPartitionInfoResponse{}
-	err := service.client.Call("ComputeDiskPartitionInfo", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33963,7 +33963,7 @@ func (service *VimPortType) ComputeDiskPartitionInfo(request *ComputeDiskPartiti
  */
 func (service *VimPortType) ComputeDiskPartitionInfoForResize(request *ComputeDiskPartitionInfoForResizeRequestType) (*ComputeDiskPartitionInfoForResizeResponse, error) {
 	response := &ComputeDiskPartitionInfoForResizeResponse{}
-	err := service.client.Call("ComputeDiskPartitionInfoForResize", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33980,7 +33980,7 @@ func (service *VimPortType) ComputeDiskPartitionInfoForResize(request *ComputeDi
  */
 func (service *VimPortType) UpdateDiskPartitions(request *UpdateDiskPartitionsRequestType) (*UpdateDiskPartitionsResponse, error) {
 	response := &UpdateDiskPartitionsResponse{}
-	err := service.client.Call("UpdateDiskPartitions", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -33997,7 +33997,7 @@ func (service *VimPortType) UpdateDiskPartitions(request *UpdateDiskPartitionsRe
  */
 func (service *VimPortType) FormatVmfs(request *FormatVmfsRequestType) (*FormatVmfsResponse, error) {
 	response := &FormatVmfsResponse{}
-	err := service.client.Call("FormatVmfs", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34016,7 +34016,7 @@ func (service *VimPortType) FormatVmfs(request *FormatVmfsRequestType) (*FormatV
  */
 func (service *VimPortType) MountVmfsVolume(request *MountVmfsVolumeRequestType) (*MountVmfsVolumeResponse, error) {
 	response := &MountVmfsVolumeResponse{}
-	err := service.client.Call("MountVmfsVolume", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34035,7 +34035,7 @@ func (service *VimPortType) MountVmfsVolume(request *MountVmfsVolumeRequestType)
  */
 func (service *VimPortType) UnmountVmfsVolume(request *UnmountVmfsVolumeRequestType) (*UnmountVmfsVolumeResponse, error) {
 	response := &UnmountVmfsVolumeResponse{}
-	err := service.client.Call("UnmountVmfsVolume", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34051,7 +34051,7 @@ func (service *VimPortType) UnmountVmfsVolume(request *UnmountVmfsVolumeRequestT
  */
 func (service *VimPortType) DeleteVmfsVolumeState(request *DeleteVmfsVolumeStateRequestType) (*DeleteVmfsVolumeStateResponse, error) {
 	response := &DeleteVmfsVolumeStateResponse{}
-	err := service.client.Call("DeleteVmfsVolumeState", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34067,7 +34067,7 @@ func (service *VimPortType) DeleteVmfsVolumeState(request *DeleteVmfsVolumeState
  */
 func (service *VimPortType) RescanVmfs(request *RescanVmfsRequestType) (*RescanVmfsResponse, error) {
 	response := &RescanVmfsResponse{}
-	err := service.client.Call("RescanVmfs", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34084,7 +34084,7 @@ func (service *VimPortType) RescanVmfs(request *RescanVmfsRequestType) (*RescanV
  */
 func (service *VimPortType) AttachVmfsExtent(request *AttachVmfsExtentRequestType) (*AttachVmfsExtentResponse, error) {
 	response := &AttachVmfsExtentResponse{}
-	err := service.client.Call("AttachVmfsExtent", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34101,7 +34101,7 @@ func (service *VimPortType) AttachVmfsExtent(request *AttachVmfsExtentRequestTyp
  */
 func (service *VimPortType) ExpandVmfsExtent(request *ExpandVmfsExtentRequestType) (*ExpandVmfsExtentResponse, error) {
 	response := &ExpandVmfsExtentResponse{}
-	err := service.client.Call("ExpandVmfsExtent", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34118,7 +34118,7 @@ func (service *VimPortType) ExpandVmfsExtent(request *ExpandVmfsExtentRequestTyp
  */
 func (service *VimPortType) UpgradeVmfs(request *UpgradeVmfsRequestType) (*UpgradeVmfsResponse, error) {
 	response := &UpgradeVmfsResponse{}
-	err := service.client.Call("UpgradeVmfs", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34133,7 +34133,7 @@ func (service *VimPortType) UpgradeVmfs(request *UpgradeVmfsRequestType) (*Upgra
  */
 func (service *VimPortType) UpgradeVmLayout(request *UpgradeVmLayoutRequestType) (*UpgradeVmLayoutResponse, error) {
 	response := &UpgradeVmLayoutResponse{}
-	err := service.client.Call("UpgradeVmLayout", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34148,7 +34148,7 @@ func (service *VimPortType) UpgradeVmLayout(request *UpgradeVmLayoutRequestType)
  */
 func (service *VimPortType) QueryUnresolvedVmfsVolume(request *QueryUnresolvedVmfsVolumeRequestType) (*QueryUnresolvedVmfsVolumeResponse, error) {
 	response := &QueryUnresolvedVmfsVolumeResponse{}
-	err := service.client.Call("QueryUnresolvedVmfsVolume", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34164,7 +34164,7 @@ func (service *VimPortType) QueryUnresolvedVmfsVolume(request *QueryUnresolvedVm
  */
 func (service *VimPortType) ResolveMultipleUnresolvedVmfsVolumes(request *ResolveMultipleUnresolvedVmfsVolumesRequestType) (*ResolveMultipleUnresolvedVmfsVolumesResponse, error) {
 	response := &ResolveMultipleUnresolvedVmfsVolumesResponse{}
-	err := service.client.Call("ResolveMultipleUnresolvedVmfsVolumes", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34180,7 +34180,7 @@ func (service *VimPortType) ResolveMultipleUnresolvedVmfsVolumes(request *Resolv
  */
 func (service *VimPortType) ResolveMultipleUnresolvedVmfsVolumesEx_Task(request *ResolveMultipleUnresolvedVmfsVolumesExRequestType) (*ResolveMultipleUnresolvedVmfsVolumesEx_TaskResponse, error) {
 	response := &ResolveMultipleUnresolvedVmfsVolumesEx_TaskResponse{}
-	err := service.client.Call("ResolveMultipleUnresolvedVmfsVolumesEx_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34197,7 +34197,7 @@ func (service *VimPortType) ResolveMultipleUnresolvedVmfsVolumesEx_Task(request 
  */
 func (service *VimPortType) UnmountForceMountedVmfsVolume(request *UnmountForceMountedVmfsVolumeRequestType) (*UnmountForceMountedVmfsVolumeResponse, error) {
 	response := &UnmountForceMountedVmfsVolumeResponse{}
-	err := service.client.Call("UnmountForceMountedVmfsVolume", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34214,7 +34214,7 @@ func (service *VimPortType) UnmountForceMountedVmfsVolume(request *UnmountForceM
  */
 func (service *VimPortType) RescanHba(request *RescanHbaRequestType) (*RescanHbaResponse, error) {
 	response := &RescanHbaResponse{}
-	err := service.client.Call("RescanHba", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34230,7 +34230,7 @@ func (service *VimPortType) RescanHba(request *RescanHbaRequestType) (*RescanHba
  */
 func (service *VimPortType) RescanAllHba(request *RescanAllHbaRequestType) (*RescanAllHbaResponse, error) {
 	response := &RescanAllHbaResponse{}
-	err := service.client.Call("RescanAllHba", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34246,7 +34246,7 @@ func (service *VimPortType) RescanAllHba(request *RescanAllHbaRequestType) (*Res
  */
 func (service *VimPortType) UpdateSoftwareInternetScsiEnabled(request *UpdateSoftwareInternetScsiEnabledRequestType) (*UpdateSoftwareInternetScsiEnabledResponse, error) {
 	response := &UpdateSoftwareInternetScsiEnabledResponse{}
-	err := service.client.Call("UpdateSoftwareInternetScsiEnabled", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34263,7 +34263,7 @@ func (service *VimPortType) UpdateSoftwareInternetScsiEnabled(request *UpdateSof
  */
 func (service *VimPortType) UpdateInternetScsiDiscoveryProperties(request *UpdateInternetScsiDiscoveryPropertiesRequestType) (*UpdateInternetScsiDiscoveryPropertiesResponse, error) {
 	response := &UpdateInternetScsiDiscoveryPropertiesResponse{}
-	err := service.client.Call("UpdateInternetScsiDiscoveryProperties", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34280,7 +34280,7 @@ func (service *VimPortType) UpdateInternetScsiDiscoveryProperties(request *Updat
  */
 func (service *VimPortType) UpdateInternetScsiAuthenticationProperties(request *UpdateInternetScsiAuthenticationPropertiesRequestType) (*UpdateInternetScsiAuthenticationPropertiesResponse, error) {
 	response := &UpdateInternetScsiAuthenticationPropertiesResponse{}
-	err := service.client.Call("UpdateInternetScsiAuthenticationProperties", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34297,7 +34297,7 @@ func (service *VimPortType) UpdateInternetScsiAuthenticationProperties(request *
  */
 func (service *VimPortType) UpdateInternetScsiDigestProperties(request *UpdateInternetScsiDigestPropertiesRequestType) (*UpdateInternetScsiDigestPropertiesResponse, error) {
 	response := &UpdateInternetScsiDigestPropertiesResponse{}
-	err := service.client.Call("UpdateInternetScsiDigestProperties", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34314,7 +34314,7 @@ func (service *VimPortType) UpdateInternetScsiDigestProperties(request *UpdateIn
  */
 func (service *VimPortType) UpdateInternetScsiAdvancedOptions(request *UpdateInternetScsiAdvancedOptionsRequestType) (*UpdateInternetScsiAdvancedOptionsResponse, error) {
 	response := &UpdateInternetScsiAdvancedOptionsResponse{}
-	err := service.client.Call("UpdateInternetScsiAdvancedOptions", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34331,7 +34331,7 @@ func (service *VimPortType) UpdateInternetScsiAdvancedOptions(request *UpdateInt
  */
 func (service *VimPortType) UpdateInternetScsiIPProperties(request *UpdateInternetScsiIPPropertiesRequestType) (*UpdateInternetScsiIPPropertiesResponse, error) {
 	response := &UpdateInternetScsiIPPropertiesResponse{}
-	err := service.client.Call("UpdateInternetScsiIPProperties", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34348,7 +34348,7 @@ func (service *VimPortType) UpdateInternetScsiIPProperties(request *UpdateIntern
  */
 func (service *VimPortType) UpdateInternetScsiName(request *UpdateInternetScsiNameRequestType) (*UpdateInternetScsiNameResponse, error) {
 	response := &UpdateInternetScsiNameResponse{}
-	err := service.client.Call("UpdateInternetScsiName", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34365,7 +34365,7 @@ func (service *VimPortType) UpdateInternetScsiName(request *UpdateInternetScsiNa
  */
 func (service *VimPortType) UpdateInternetScsiAlias(request *UpdateInternetScsiAliasRequestType) (*UpdateInternetScsiAliasResponse, error) {
 	response := &UpdateInternetScsiAliasResponse{}
-	err := service.client.Call("UpdateInternetScsiAlias", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34382,7 +34382,7 @@ func (service *VimPortType) UpdateInternetScsiAlias(request *UpdateInternetScsiA
  */
 func (service *VimPortType) AddInternetScsiSendTargets(request *AddInternetScsiSendTargetsRequestType) (*AddInternetScsiSendTargetsResponse, error) {
 	response := &AddInternetScsiSendTargetsResponse{}
-	err := service.client.Call("AddInternetScsiSendTargets", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34399,7 +34399,7 @@ func (service *VimPortType) AddInternetScsiSendTargets(request *AddInternetScsiS
  */
 func (service *VimPortType) RemoveInternetScsiSendTargets(request *RemoveInternetScsiSendTargetsRequestType) (*RemoveInternetScsiSendTargetsResponse, error) {
 	response := &RemoveInternetScsiSendTargetsResponse{}
-	err := service.client.Call("RemoveInternetScsiSendTargets", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34416,7 +34416,7 @@ func (service *VimPortType) RemoveInternetScsiSendTargets(request *RemoveInterne
  */
 func (service *VimPortType) AddInternetScsiStaticTargets(request *AddInternetScsiStaticTargetsRequestType) (*AddInternetScsiStaticTargetsResponse, error) {
 	response := &AddInternetScsiStaticTargetsResponse{}
-	err := service.client.Call("AddInternetScsiStaticTargets", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34433,7 +34433,7 @@ func (service *VimPortType) AddInternetScsiStaticTargets(request *AddInternetScs
  */
 func (service *VimPortType) RemoveInternetScsiStaticTargets(request *RemoveInternetScsiStaticTargetsRequestType) (*RemoveInternetScsiStaticTargetsResponse, error) {
 	response := &RemoveInternetScsiStaticTargetsResponse{}
-	err := service.client.Call("RemoveInternetScsiStaticTargets", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34450,7 +34450,7 @@ func (service *VimPortType) RemoveInternetScsiStaticTargets(request *RemoveInter
  */
 func (service *VimPortType) EnableMultipathPath(request *EnableMultipathPathRequestType) (*EnableMultipathPathResponse, error) {
 	response := &EnableMultipathPathResponse{}
-	err := service.client.Call("EnableMultipathPath", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34467,7 +34467,7 @@ func (service *VimPortType) EnableMultipathPath(request *EnableMultipathPathRequ
  */
 func (service *VimPortType) DisableMultipathPath(request *DisableMultipathPathRequestType) (*DisableMultipathPathResponse, error) {
 	response := &DisableMultipathPathResponse{}
-	err := service.client.Call("DisableMultipathPath", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34484,7 +34484,7 @@ func (service *VimPortType) DisableMultipathPath(request *DisableMultipathPathRe
  */
 func (service *VimPortType) SetMultipathLunPolicy(request *SetMultipathLunPolicyRequestType) (*SetMultipathLunPolicyResponse, error) {
 	response := &SetMultipathLunPolicyResponse{}
-	err := service.client.Call("SetMultipathLunPolicy", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34500,7 +34500,7 @@ func (service *VimPortType) SetMultipathLunPolicy(request *SetMultipathLunPolicy
  */
 func (service *VimPortType) QueryPathSelectionPolicyOptions(request *QueryPathSelectionPolicyOptionsRequestType) (*QueryPathSelectionPolicyOptionsResponse, error) {
 	response := &QueryPathSelectionPolicyOptionsResponse{}
-	err := service.client.Call("QueryPathSelectionPolicyOptions", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34516,7 +34516,7 @@ func (service *VimPortType) QueryPathSelectionPolicyOptions(request *QueryPathSe
  */
 func (service *VimPortType) QueryStorageArrayTypePolicyOptions(request *QueryStorageArrayTypePolicyOptionsRequestType) (*QueryStorageArrayTypePolicyOptionsResponse, error) {
 	response := &QueryStorageArrayTypePolicyOptionsResponse{}
-	err := service.client.Call("QueryStorageArrayTypePolicyOptions", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34535,7 +34535,7 @@ func (service *VimPortType) QueryStorageArrayTypePolicyOptions(request *QuerySto
  */
 func (service *VimPortType) UpdateScsiLunDisplayName(request *UpdateScsiLunDisplayNameRequestType) (*UpdateScsiLunDisplayNameResponse, error) {
 	response := &UpdateScsiLunDisplayNameResponse{}
-	err := service.client.Call("UpdateScsiLunDisplayName", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34554,7 +34554,7 @@ func (service *VimPortType) UpdateScsiLunDisplayName(request *UpdateScsiLunDispl
  */
 func (service *VimPortType) DetachScsiLun(request *DetachScsiLunRequestType) (*DetachScsiLunResponse, error) {
 	response := &DetachScsiLunResponse{}
-	err := service.client.Call("DetachScsiLun", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34570,7 +34570,7 @@ func (service *VimPortType) DetachScsiLun(request *DetachScsiLunRequestType) (*D
  */
 func (service *VimPortType) DeleteScsiLunState(request *DeleteScsiLunStateRequestType) (*DeleteScsiLunStateResponse, error) {
 	response := &DeleteScsiLunStateResponse{}
-	err := service.client.Call("DeleteScsiLunState", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34588,7 +34588,7 @@ func (service *VimPortType) DeleteScsiLunState(request *DeleteScsiLunStateReques
  */
 func (service *VimPortType) AttachScsiLun(request *AttachScsiLunRequestType) (*AttachScsiLunResponse, error) {
 	response := &AttachScsiLunResponse{}
-	err := service.client.Call("AttachScsiLun", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34603,7 +34603,7 @@ func (service *VimPortType) AttachScsiLun(request *AttachScsiLunRequestType) (*A
  */
 func (service *VimPortType) RefreshStorageSystem(request *RefreshStorageSystemRequestType) (*RefreshStorageSystemResponse, error) {
 	response := &RefreshStorageSystemResponse{}
-	err := service.client.Call("RefreshStorageSystem", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34621,7 +34621,7 @@ func (service *VimPortType) RefreshStorageSystem(request *RefreshStorageSystemRe
  */
 func (service *VimPortType) DiscoverFcoeHbas(request *DiscoverFcoeHbasRequestType) (*DiscoverFcoeHbasResponse, error) {
 	response := &DiscoverFcoeHbasResponse{}
-	err := service.client.Call("DiscoverFcoeHbas", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34638,7 +34638,7 @@ func (service *VimPortType) DiscoverFcoeHbas(request *DiscoverFcoeHbasRequestTyp
  */
 func (service *VimPortType) MarkForRemoval(request *MarkForRemovalRequestType) (*MarkForRemovalResponse, error) {
 	response := &MarkForRemovalResponse{}
-	err := service.client.Call("MarkForRemoval", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34656,7 +34656,7 @@ func (service *VimPortType) MarkForRemoval(request *MarkForRemovalRequestType) (
  */
 func (service *VimPortType) FormatVffs(request *FormatVffsRequestType) (*FormatVffsResponse, error) {
 	response := &FormatVffsResponse{}
-	err := service.client.Call("FormatVffs", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34674,7 +34674,7 @@ func (service *VimPortType) FormatVffs(request *FormatVffsRequestType) (*FormatV
  */
 func (service *VimPortType) ExtendVffs(request *ExtendVffsRequestType) (*ExtendVffsResponse, error) {
 	response := &ExtendVffsResponse{}
-	err := service.client.Call("ExtendVffs", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34692,7 +34692,7 @@ func (service *VimPortType) ExtendVffs(request *ExtendVffsRequestType) (*ExtendV
  */
 func (service *VimPortType) DestroyVffs(request *DestroyVffsRequestType) (*DestroyVffsResponse, error) {
 	response := &DestroyVffsResponse{}
-	err := service.client.Call("DestroyVffs", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34711,7 +34711,7 @@ func (service *VimPortType) DestroyVffs(request *DestroyVffsRequestType) (*Destr
  */
 func (service *VimPortType) MountVffsVolume(request *MountVffsVolumeRequestType) (*MountVffsVolumeResponse, error) {
 	response := &MountVffsVolumeResponse{}
-	err := service.client.Call("MountVffsVolume", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34730,7 +34730,7 @@ func (service *VimPortType) MountVffsVolume(request *MountVffsVolumeRequestType)
  */
 func (service *VimPortType) UnmountVffsVolume(request *UnmountVffsVolumeRequestType) (*UnmountVffsVolumeResponse, error) {
 	response := &UnmountVffsVolumeResponse{}
-	err := service.client.Call("UnmountVffsVolume", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34746,7 +34746,7 @@ func (service *VimPortType) UnmountVffsVolume(request *UnmountVffsVolumeRequestT
  */
 func (service *VimPortType) DeleteVffsVolumeState(request *DeleteVffsVolumeStateRequestType) (*DeleteVffsVolumeStateResponse, error) {
 	response := &DeleteVffsVolumeStateResponse{}
-	err := service.client.Call("DeleteVffsVolumeState", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34762,7 +34762,7 @@ func (service *VimPortType) DeleteVffsVolumeState(request *DeleteVffsVolumeState
  */
 func (service *VimPortType) RescanVffs(request *RescanVffsRequestType) (*RescanVffsResponse, error) {
 	response := &RescanVffsResponse{}
-	err := service.client.Call("RescanVffs", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34779,7 +34779,7 @@ func (service *VimPortType) RescanVffs(request *RescanVffsRequestType) (*RescanV
  */
 func (service *VimPortType) QueryAvailableSsds(request *QueryAvailableSsdsRequestType) (*QueryAvailableSsdsResponse, error) {
 	response := &QueryAvailableSsdsResponse{}
-	err := service.client.Call("QueryAvailableSsds", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34795,7 +34795,7 @@ func (service *VimPortType) QueryAvailableSsds(request *QueryAvailableSsdsReques
  */
 func (service *VimPortType) ConfigureVFlashResourceEx_Task(request *ConfigureVFlashResourceExRequestType) (*ConfigureVFlashResourceEx_TaskResponse, error) {
 	response := &ConfigureVFlashResourceEx_TaskResponse{}
-	err := service.client.Call("ConfigureVFlashResourceEx_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34812,7 +34812,7 @@ func (service *VimPortType) ConfigureVFlashResourceEx_Task(request *ConfigureVFl
  */
 func (service *VimPortType) HostConfigureVFlashResource(request *HostConfigureVFlashResourceRequestType) (*HostConfigureVFlashResourceResponse, error) {
 	response := &HostConfigureVFlashResourceResponse{}
-	err := service.client.Call("HostConfigureVFlashResource", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34830,7 +34830,7 @@ func (service *VimPortType) HostConfigureVFlashResource(request *HostConfigureVF
  */
 func (service *VimPortType) HostRemoveVFlashResource(request *HostRemoveVFlashResourceRequestType) (*HostRemoveVFlashResourceResponse, error) {
 	response := &HostRemoveVFlashResourceResponse{}
-	err := service.client.Call("HostRemoveVFlashResource", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34848,7 +34848,7 @@ func (service *VimPortType) HostRemoveVFlashResource(request *HostRemoveVFlashRe
  */
 func (service *VimPortType) HostConfigVFlashCache(request *HostConfigVFlashCacheRequestType) (*HostConfigVFlashCacheResponse, error) {
 	response := &HostConfigVFlashCacheResponse{}
-	err := service.client.Call("HostConfigVFlashCache", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34865,7 +34865,7 @@ func (service *VimPortType) HostConfigVFlashCache(request *HostConfigVFlashCache
  */
 func (service *VimPortType) HostGetVFlashModuleDefaultConfig(request *HostGetVFlashModuleDefaultConfigRequestType) (*HostGetVFlashModuleDefaultConfigResponse, error) {
 	response := &HostGetVFlashModuleDefaultConfigResponse{}
-	err := service.client.Call("HostGetVFlashModuleDefaultConfig", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34882,7 +34882,7 @@ func (service *VimPortType) HostGetVFlashModuleDefaultConfig(request *HostGetVFl
  */
 func (service *VimPortType) UpdateIpConfig(request *UpdateIpConfigRequestType) (*UpdateIpConfigResponse, error) {
 	response := &UpdateIpConfigResponse{}
-	err := service.client.Call("UpdateIpConfig", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34898,7 +34898,7 @@ func (service *VimPortType) UpdateIpConfig(request *UpdateIpConfigRequestType) (
  */
 func (service *VimPortType) SelectVnic(request *SelectVnicRequestType) (*SelectVnicResponse, error) {
 	response := &SelectVnicResponse{}
-	err := service.client.Call("SelectVnic", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34914,7 +34914,7 @@ func (service *VimPortType) SelectVnic(request *SelectVnicRequestType) (*SelectV
  */
 func (service *VimPortType) DeselectVnic(request *DeselectVnicRequestType) (*DeselectVnicResponse, error) {
 	response := &DeselectVnicResponse{}
-	err := service.client.Call("DeselectVnic", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34931,7 +34931,7 @@ func (service *VimPortType) DeselectVnic(request *DeselectVnicRequestType) (*Des
  */
 func (service *VimPortType) QueryNetConfig(request *QueryNetConfigRequestType) (*QueryNetConfigResponse, error) {
 	response := &QueryNetConfigResponse{}
-	err := service.client.Call("QueryNetConfig", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34948,7 +34948,7 @@ func (service *VimPortType) QueryNetConfig(request *QueryNetConfigRequestType) (
  */
 func (service *VimPortType) SelectVnicForNicType(request *SelectVnicForNicTypeRequestType) (*SelectVnicForNicTypeResponse, error) {
 	response := &SelectVnicForNicTypeResponse{}
-	err := service.client.Call("SelectVnicForNicType", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34965,7 +34965,7 @@ func (service *VimPortType) SelectVnicForNicType(request *SelectVnicForNicTypeRe
  */
 func (service *VimPortType) DeselectVnicForNicType(request *DeselectVnicForNicTypeRequestType) (*DeselectVnicForNicTypeResponse, error) {
 	response := &DeselectVnicForNicTypeResponse{}
-	err := service.client.Call("DeselectVnicForNicType", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34980,7 +34980,7 @@ func (service *VimPortType) DeselectVnicForNicType(request *DeselectVnicForNicTy
  */
 func (service *VimPortType) QueryCmmds(request *QueryCmmdsRequestType) (*QueryCmmdsResponse, error) {
 	response := &QueryCmmdsResponse{}
-	err := service.client.Call("QueryCmmds", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -34995,7 +34995,7 @@ func (service *VimPortType) QueryCmmds(request *QueryCmmdsRequestType) (*QueryCm
  */
 func (service *VimPortType) QueryPhysicalVsanDisks(request *QueryPhysicalVsanDisksRequestType) (*QueryPhysicalVsanDisksResponse, error) {
 	response := &QueryPhysicalVsanDisksResponse{}
-	err := service.client.Call("QueryPhysicalVsanDisks", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35010,7 +35010,7 @@ func (service *VimPortType) QueryPhysicalVsanDisks(request *QueryPhysicalVsanDis
  */
 func (service *VimPortType) QueryVsanObjects(request *QueryVsanObjectsRequestType) (*QueryVsanObjectsResponse, error) {
 	response := &QueryVsanObjectsResponse{}
-	err := service.client.Call("QueryVsanObjects", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35025,7 +35025,7 @@ func (service *VimPortType) QueryVsanObjects(request *QueryVsanObjectsRequestTyp
  */
 func (service *VimPortType) QueryObjectsOnPhysicalVsanDisk(request *QueryObjectsOnPhysicalVsanDiskRequestType) (*QueryObjectsOnPhysicalVsanDiskResponse, error) {
 	response := &QueryObjectsOnPhysicalVsanDiskResponse{}
-	err := service.client.Call("QueryObjectsOnPhysicalVsanDisk", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35040,7 +35040,7 @@ func (service *VimPortType) QueryObjectsOnPhysicalVsanDisk(request *QueryObjects
  */
 func (service *VimPortType) QueryDisksForVsan(request *QueryDisksForVsanRequestType) (*QueryDisksForVsanResponse, error) {
 	response := &QueryDisksForVsanResponse{}
-	err := service.client.Call("QueryDisksForVsan", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35055,7 +35055,7 @@ func (service *VimPortType) QueryDisksForVsan(request *QueryDisksForVsanRequestT
  */
 func (service *VimPortType) AddDisks_Task(request *AddDisksRequestType) (*AddDisks_TaskResponse, error) {
 	response := &AddDisks_TaskResponse{}
-	err := service.client.Call("AddDisks_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35070,7 +35070,7 @@ func (service *VimPortType) AddDisks_Task(request *AddDisksRequestType) (*AddDis
  */
 func (service *VimPortType) InitializeDisks_Task(request *InitializeDisksRequestType) (*InitializeDisks_TaskResponse, error) {
 	response := &InitializeDisks_TaskResponse{}
-	err := service.client.Call("InitializeDisks_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35085,7 +35085,7 @@ func (service *VimPortType) InitializeDisks_Task(request *InitializeDisksRequest
  */
 func (service *VimPortType) RemoveDisk_Task(request *RemoveDiskRequestType) (*RemoveDisk_TaskResponse, error) {
 	response := &RemoveDisk_TaskResponse{}
-	err := service.client.Call("RemoveDisk_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35100,7 +35100,7 @@ func (service *VimPortType) RemoveDisk_Task(request *RemoveDiskRequestType) (*Re
  */
 func (service *VimPortType) RemoveDiskMapping_Task(request *RemoveDiskMappingRequestType) (*RemoveDiskMapping_TaskResponse, error) {
 	response := &RemoveDiskMapping_TaskResponse{}
-	err := service.client.Call("RemoveDiskMapping_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35115,7 +35115,7 @@ func (service *VimPortType) RemoveDiskMapping_Task(request *RemoveDiskMappingReq
  */
 func (service *VimPortType) UpdateVsan_Task(request *UpdateVsanRequestType) (*UpdateVsan_TaskResponse, error) {
 	response := &UpdateVsan_TaskResponse{}
-	err := service.client.Call("UpdateVsan_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35130,7 +35130,7 @@ func (service *VimPortType) UpdateVsan_Task(request *UpdateVsanRequestType) (*Up
  */
 func (service *VimPortType) QueryHostStatus(request *QueryHostStatusRequestType) (*QueryHostStatusResponse, error) {
 	response := &QueryHostStatusResponse{}
-	err := service.client.Call("QueryHostStatus", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35146,7 +35146,7 @@ func (service *VimPortType) QueryHostStatus(request *QueryHostStatusRequestType)
  */
 func (service *VimPortType) QueryOptions(request *QueryOptionsRequestType) (*QueryOptionsResponse, error) {
 	response := &QueryOptionsResponse{}
-	err := service.client.Call("QueryOptions", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35162,7 +35162,7 @@ func (service *VimPortType) QueryOptions(request *QueryOptionsRequestType) (*Que
  */
 func (service *VimPortType) UpdateOptions(request *UpdateOptionsRequestType) (*UpdateOptionsResponse, error) {
 	response := &UpdateOptionsResponse{}
-	err := service.client.Call("UpdateOptions", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35177,7 +35177,7 @@ func (service *VimPortType) UpdateOptions(request *UpdateOptionsRequestType) (*U
  */
 func (service *VimPortType) CheckCompliance_Task(request *CheckComplianceRequestType) (*CheckCompliance_TaskResponse, error) {
 	response := &CheckCompliance_TaskResponse{}
-	err := service.client.Call("CheckCompliance_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35192,7 +35192,7 @@ func (service *VimPortType) CheckCompliance_Task(request *CheckComplianceRequest
  */
 func (service *VimPortType) QueryComplianceStatus(request *QueryComplianceStatusRequestType) (*QueryComplianceStatusResponse, error) {
 	response := &QueryComplianceStatusResponse{}
-	err := service.client.Call("QueryComplianceStatus", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35207,7 +35207,7 @@ func (service *VimPortType) QueryComplianceStatus(request *QueryComplianceStatus
  */
 func (service *VimPortType) ClearComplianceStatus(request *ClearComplianceStatusRequestType) (*ClearComplianceStatusResponse, error) {
 	response := &ClearComplianceStatusResponse{}
-	err := service.client.Call("ClearComplianceStatus", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35222,7 +35222,7 @@ func (service *VimPortType) ClearComplianceStatus(request *ClearComplianceStatus
  */
 func (service *VimPortType) QueryExpressionMetadata(request *QueryExpressionMetadataRequestType) (*QueryExpressionMetadataResponse, error) {
 	response := &QueryExpressionMetadataResponse{}
-	err := service.client.Call("QueryExpressionMetadata", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35237,7 +35237,7 @@ func (service *VimPortType) QueryExpressionMetadata(request *QueryExpressionMeta
  */
 func (service *VimPortType) RetrieveDescription(request *RetrieveDescriptionRequestType) (*RetrieveDescriptionResponse, error) {
 	response := &RetrieveDescriptionResponse{}
-	err := service.client.Call("RetrieveDescription", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35252,7 +35252,7 @@ func (service *VimPortType) RetrieveDescription(request *RetrieveDescriptionRequ
  */
 func (service *VimPortType) DestroyProfile(request *DestroyProfileRequestType) (*DestroyProfileResponse, error) {
 	response := &DestroyProfileResponse{}
-	err := service.client.Call("DestroyProfile", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35267,7 +35267,7 @@ func (service *VimPortType) DestroyProfile(request *DestroyProfileRequestType) (
  */
 func (service *VimPortType) AssociateProfile(request *AssociateProfileRequestType) (*AssociateProfileResponse, error) {
 	response := &AssociateProfileResponse{}
-	err := service.client.Call("AssociateProfile", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35282,7 +35282,7 @@ func (service *VimPortType) AssociateProfile(request *AssociateProfileRequestTyp
  */
 func (service *VimPortType) DissociateProfile(request *DissociateProfileRequestType) (*DissociateProfileResponse, error) {
 	response := &DissociateProfileResponse{}
-	err := service.client.Call("DissociateProfile", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35297,7 +35297,7 @@ func (service *VimPortType) DissociateProfile(request *DissociateProfileRequestT
  */
 func (service *VimPortType) CheckProfileCompliance_Task(request *CheckProfileComplianceRequestType) (*CheckProfileCompliance_TaskResponse, error) {
 	response := &CheckProfileCompliance_TaskResponse{}
-	err := service.client.Call("CheckProfileCompliance_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35312,7 +35312,7 @@ func (service *VimPortType) CheckProfileCompliance_Task(request *CheckProfileCom
  */
 func (service *VimPortType) ExportProfile(request *ExportProfileRequestType) (*ExportProfileResponse, error) {
 	response := &ExportProfileResponse{}
-	err := service.client.Call("ExportProfile", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35328,7 +35328,7 @@ func (service *VimPortType) ExportProfile(request *ExportProfileRequestType) (*E
  */
 func (service *VimPortType) CreateProfile(request *CreateProfileRequestType) (*CreateProfileResponse, error) {
 	response := &CreateProfileResponse{}
-	err := service.client.Call("CreateProfile", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35343,7 +35343,7 @@ func (service *VimPortType) CreateProfile(request *CreateProfileRequestType) (*C
  */
 func (service *VimPortType) QueryPolicyMetadata(request *QueryPolicyMetadataRequestType) (*QueryPolicyMetadataResponse, error) {
 	response := &QueryPolicyMetadataResponse{}
-	err := service.client.Call("QueryPolicyMetadata", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35358,7 +35358,7 @@ func (service *VimPortType) QueryPolicyMetadata(request *QueryPolicyMetadataRequ
  */
 func (service *VimPortType) FindAssociatedProfile(request *FindAssociatedProfileRequestType) (*FindAssociatedProfileResponse, error) {
 	response := &FindAssociatedProfileResponse{}
-	err := service.client.Call("FindAssociatedProfile", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35374,7 +35374,7 @@ func (service *VimPortType) FindAssociatedProfile(request *FindAssociatedProfile
  */
 func (service *VimPortType) UpdateClusterProfile(request *UpdateClusterProfileRequestType) (*UpdateClusterProfileResponse, error) {
 	response := &UpdateClusterProfileResponse{}
-	err := service.client.Call("UpdateClusterProfile", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35389,7 +35389,7 @@ func (service *VimPortType) UpdateClusterProfile(request *UpdateClusterProfileRe
  */
 func (service *VimPortType) UpdateReferenceHost(request *UpdateReferenceHostRequestType) (*UpdateReferenceHostResponse, error) {
 	response := &UpdateReferenceHostResponse{}
-	err := service.client.Call("UpdateReferenceHost", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35406,7 +35406,7 @@ func (service *VimPortType) UpdateReferenceHost(request *UpdateReferenceHostRequ
  */
 func (service *VimPortType) UpdateHostProfile(request *UpdateHostProfileRequestType) (*UpdateHostProfileResponse, error) {
 	response := &UpdateHostProfileResponse{}
-	err := service.client.Call("UpdateHostProfile", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35421,7 +35421,7 @@ func (service *VimPortType) UpdateHostProfile(request *UpdateHostProfileRequestT
  */
 func (service *VimPortType) ExecuteHostProfile(request *ExecuteHostProfileRequestType) (*ExecuteHostProfileResponse, error) {
 	response := &ExecuteHostProfileResponse{}
-	err := service.client.Call("ExecuteHostProfile", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35438,7 +35438,7 @@ func (service *VimPortType) ExecuteHostProfile(request *ExecuteHostProfileReques
  */
 func (service *VimPortType) ApplyHostConfig_Task(request *ApplyHostConfigRequestType) (*ApplyHostConfig_TaskResponse, error) {
 	response := &ApplyHostConfig_TaskResponse{}
-	err := service.client.Call("ApplyHostConfig_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35453,7 +35453,7 @@ func (service *VimPortType) ApplyHostConfig_Task(request *ApplyHostConfigRequest
  */
 func (service *VimPortType) GenerateConfigTaskList(request *GenerateConfigTaskListRequestType) (*GenerateConfigTaskListResponse, error) {
 	response := &GenerateConfigTaskListResponse{}
-	err := service.client.Call("GenerateConfigTaskList", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35468,7 +35468,7 @@ func (service *VimPortType) GenerateConfigTaskList(request *GenerateConfigTaskLi
  */
 func (service *VimPortType) GenerateHostProfileTaskList_Task(request *GenerateHostProfileTaskListRequestType) (*GenerateHostProfileTaskList_TaskResponse, error) {
 	response := &GenerateHostProfileTaskList_TaskResponse{}
-	err := service.client.Call("GenerateHostProfileTaskList_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35483,7 +35483,7 @@ func (service *VimPortType) GenerateHostProfileTaskList_Task(request *GenerateHo
  */
 func (service *VimPortType) QueryHostProfileMetadata(request *QueryHostProfileMetadataRequestType) (*QueryHostProfileMetadataResponse, error) {
 	response := &QueryHostProfileMetadataResponse{}
-	err := service.client.Call("QueryHostProfileMetadata", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35498,7 +35498,7 @@ func (service *VimPortType) QueryHostProfileMetadata(request *QueryHostProfileMe
  */
 func (service *VimPortType) QueryProfileStructure(request *QueryProfileStructureRequestType) (*QueryProfileStructureResponse, error) {
 	response := &QueryProfileStructureResponse{}
-	err := service.client.Call("QueryProfileStructure", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35513,7 +35513,7 @@ func (service *VimPortType) QueryProfileStructure(request *QueryProfileStructure
  */
 func (service *VimPortType) CreateDefaultProfile(request *CreateDefaultProfileRequestType) (*CreateDefaultProfileResponse, error) {
 	response := &CreateDefaultProfileResponse{}
-	err := service.client.Call("CreateDefaultProfile", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35529,7 +35529,7 @@ func (service *VimPortType) CreateDefaultProfile(request *CreateDefaultProfileRe
  */
 func (service *VimPortType) UpdateAnswerFile_Task(request *UpdateAnswerFileRequestType) (*UpdateAnswerFile_TaskResponse, error) {
 	response := &UpdateAnswerFile_TaskResponse{}
-	err := service.client.Call("UpdateAnswerFile_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35544,7 +35544,7 @@ func (service *VimPortType) UpdateAnswerFile_Task(request *UpdateAnswerFileReque
  */
 func (service *VimPortType) RetrieveAnswerFile(request *RetrieveAnswerFileRequestType) (*RetrieveAnswerFileResponse, error) {
 	response := &RetrieveAnswerFileResponse{}
-	err := service.client.Call("RetrieveAnswerFile", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35559,7 +35559,7 @@ func (service *VimPortType) RetrieveAnswerFile(request *RetrieveAnswerFileReques
  */
 func (service *VimPortType) RetrieveAnswerFileForProfile(request *RetrieveAnswerFileForProfileRequestType) (*RetrieveAnswerFileForProfileResponse, error) {
 	response := &RetrieveAnswerFileForProfileResponse{}
-	err := service.client.Call("RetrieveAnswerFileForProfile", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35574,7 +35574,7 @@ func (service *VimPortType) RetrieveAnswerFileForProfile(request *RetrieveAnswer
  */
 func (service *VimPortType) ExportAnswerFile_Task(request *ExportAnswerFileRequestType) (*ExportAnswerFile_TaskResponse, error) {
 	response := &ExportAnswerFile_TaskResponse{}
-	err := service.client.Call("ExportAnswerFile_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35589,7 +35589,7 @@ func (service *VimPortType) ExportAnswerFile_Task(request *ExportAnswerFileReque
  */
 func (service *VimPortType) CheckAnswerFileStatus_Task(request *CheckAnswerFileStatusRequestType) (*CheckAnswerFileStatus_TaskResponse, error) {
 	response := &CheckAnswerFileStatus_TaskResponse{}
-	err := service.client.Call("CheckAnswerFileStatus_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35604,7 +35604,7 @@ func (service *VimPortType) CheckAnswerFileStatus_Task(request *CheckAnswerFileS
  */
 func (service *VimPortType) QueryAnswerFileStatus(request *QueryAnswerFileStatusRequestType) (*QueryAnswerFileStatusResponse, error) {
 	response := &QueryAnswerFileStatusResponse{}
-	err := service.client.Call("QueryAnswerFileStatus", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35620,7 +35620,7 @@ func (service *VimPortType) QueryAnswerFileStatus(request *QueryAnswerFileStatus
  */
 func (service *VimPortType) RemoveScheduledTask(request *RemoveScheduledTaskRequestType) (*RemoveScheduledTaskResponse, error) {
 	response := &RemoveScheduledTaskResponse{}
-	err := service.client.Call("RemoveScheduledTask", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35638,7 +35638,7 @@ func (service *VimPortType) RemoveScheduledTask(request *RemoveScheduledTaskRequ
  */
 func (service *VimPortType) ReconfigureScheduledTask(request *ReconfigureScheduledTaskRequestType) (*ReconfigureScheduledTaskResponse, error) {
 	response := &ReconfigureScheduledTaskResponse{}
-	err := service.client.Call("ReconfigureScheduledTask", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35654,7 +35654,7 @@ func (service *VimPortType) ReconfigureScheduledTask(request *ReconfigureSchedul
  */
 func (service *VimPortType) RunScheduledTask(request *RunScheduledTaskRequestType) (*RunScheduledTaskResponse, error) {
 	response := &RunScheduledTaskResponse{}
-	err := service.client.Call("RunScheduledTask", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35671,7 +35671,7 @@ func (service *VimPortType) RunScheduledTask(request *RunScheduledTaskRequestTyp
  */
 func (service *VimPortType) CreateScheduledTask(request *CreateScheduledTaskRequestType) (*CreateScheduledTaskResponse, error) {
 	response := &CreateScheduledTaskResponse{}
-	err := service.client.Call("CreateScheduledTask", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35686,7 +35686,7 @@ func (service *VimPortType) CreateScheduledTask(request *CreateScheduledTaskRequ
  */
 func (service *VimPortType) RetrieveEntityScheduledTask(request *RetrieveEntityScheduledTaskRequestType) (*RetrieveEntityScheduledTaskResponse, error) {
 	response := &RetrieveEntityScheduledTaskResponse{}
-	err := service.client.Call("RetrieveEntityScheduledTask", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35703,7 +35703,7 @@ func (service *VimPortType) RetrieveEntityScheduledTask(request *RetrieveEntityS
  */
 func (service *VimPortType) CreateObjectScheduledTask(request *CreateObjectScheduledTaskRequestType) (*CreateObjectScheduledTaskResponse, error) {
 	response := &CreateObjectScheduledTaskResponse{}
-	err := service.client.Call("CreateObjectScheduledTask", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35718,7 +35718,7 @@ func (service *VimPortType) CreateObjectScheduledTask(request *CreateObjectSched
  */
 func (service *VimPortType) RetrieveObjectScheduledTask(request *RetrieveObjectScheduledTaskRequestType) (*RetrieveObjectScheduledTaskResponse, error) {
 	response := &RetrieveObjectScheduledTaskResponse{}
-	err := service.client.Call("RetrieveObjectScheduledTask", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35733,7 +35733,7 @@ func (service *VimPortType) RetrieveObjectScheduledTask(request *RetrieveObjectS
  */
 func (service *VimPortType) OpenInventoryViewFolder(request *OpenInventoryViewFolderRequestType) (*OpenInventoryViewFolderResponse, error) {
 	response := &OpenInventoryViewFolderResponse{}
-	err := service.client.Call("OpenInventoryViewFolder", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35748,7 +35748,7 @@ func (service *VimPortType) OpenInventoryViewFolder(request *OpenInventoryViewFo
  */
 func (service *VimPortType) CloseInventoryViewFolder(request *CloseInventoryViewFolderRequestType) (*CloseInventoryViewFolderResponse, error) {
 	response := &CloseInventoryViewFolderResponse{}
-	err := service.client.Call("CloseInventoryViewFolder", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35763,7 +35763,7 @@ func (service *VimPortType) CloseInventoryViewFolder(request *CloseInventoryView
  */
 func (service *VimPortType) ModifyListView(request *ModifyListViewRequestType) (*ModifyListViewResponse, error) {
 	response := &ModifyListViewResponse{}
-	err := service.client.Call("ModifyListView", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35778,7 +35778,7 @@ func (service *VimPortType) ModifyListView(request *ModifyListViewRequestType) (
  */
 func (service *VimPortType) ResetListView(request *ResetListViewRequestType) (*ResetListViewResponse, error) {
 	response := &ResetListViewResponse{}
-	err := service.client.Call("ResetListView", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35793,7 +35793,7 @@ func (service *VimPortType) ResetListView(request *ResetListViewRequestType) (*R
  */
 func (service *VimPortType) ResetListViewFromView(request *ResetListViewFromViewRequestType) (*ResetListViewFromViewResponse, error) {
 	response := &ResetListViewFromViewResponse{}
-	err := service.client.Call("ResetListViewFromView", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35808,7 +35808,7 @@ func (service *VimPortType) ResetListViewFromView(request *ResetListViewFromView
  */
 func (service *VimPortType) DestroyView(request *DestroyViewRequestType) (*DestroyViewResponse, error) {
 	response := &DestroyViewResponse{}
-	err := service.client.Call("DestroyView", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35823,7 +35823,7 @@ func (service *VimPortType) DestroyView(request *DestroyViewRequestType) (*Destr
  */
 func (service *VimPortType) CreateInventoryView(request *CreateInventoryViewRequestType) (*CreateInventoryViewResponse, error) {
 	response := &CreateInventoryViewResponse{}
-	err := service.client.Call("CreateInventoryView", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35838,7 +35838,7 @@ func (service *VimPortType) CreateInventoryView(request *CreateInventoryViewRequ
  */
 func (service *VimPortType) CreateContainerView(request *CreateContainerViewRequestType) (*CreateContainerViewResponse, error) {
 	response := &CreateContainerViewResponse{}
-	err := service.client.Call("CreateContainerView", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35853,7 +35853,7 @@ func (service *VimPortType) CreateContainerView(request *CreateContainerViewRequ
  */
 func (service *VimPortType) CreateListView(request *CreateListViewRequestType) (*CreateListViewResponse, error) {
 	response := &CreateListViewResponse{}
-	err := service.client.Call("CreateListView", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35868,7 +35868,7 @@ func (service *VimPortType) CreateListView(request *CreateListViewRequestType) (
  */
 func (service *VimPortType) CreateListViewFromView(request *CreateListViewFromViewRequestType) (*CreateListViewFromViewResponse, error) {
 	response := &CreateListViewFromViewResponse{}
-	err := service.client.Call("CreateListViewFromView", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35888,7 +35888,7 @@ func (service *VimPortType) CreateListViewFromView(request *CreateListViewFromVi
  */
 func (service *VimPortType) RevertToSnapshot_Task(request *RevertToSnapshotRequestType) (*RevertToSnapshot_TaskResponse, error) {
 	response := &RevertToSnapshot_TaskResponse{}
-	err := service.client.Call("RevertToSnapshot_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35904,7 +35904,7 @@ func (service *VimPortType) RevertToSnapshot_Task(request *RevertToSnapshotReque
  */
 func (service *VimPortType) RemoveSnapshot_Task(request *RemoveSnapshotRequestType) (*RemoveSnapshot_TaskResponse, error) {
 	response := &RemoveSnapshot_TaskResponse{}
-	err := service.client.Call("RemoveSnapshot_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35922,7 +35922,7 @@ func (service *VimPortType) RemoveSnapshot_Task(request *RemoveSnapshotRequestTy
  */
 func (service *VimPortType) RenameSnapshot(request *RenameSnapshotRequestType) (*RenameSnapshotResponse, error) {
 	response := &RenameSnapshotResponse{}
-	err := service.client.Call("RenameSnapshot", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35940,7 +35940,7 @@ func (service *VimPortType) RenameSnapshot(request *RenameSnapshotRequestType) (
  */
 func (service *VimPortType) ExportSnapshot(request *ExportSnapshotRequestType) (*ExportSnapshotResponse, error) {
 	response := &ExportSnapshotResponse{}
-	err := service.client.Call("ExportSnapshot", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35957,7 +35957,7 @@ func (service *VimPortType) ExportSnapshot(request *ExportSnapshotRequestType) (
  */
 func (service *VimPortType) CheckCompatibility_Task(request *CheckCompatibilityRequestType) (*CheckCompatibility_TaskResponse, error) {
 	response := &CheckCompatibility_TaskResponse{}
-	err := service.client.Call("CheckCompatibility_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35972,7 +35972,7 @@ func (service *VimPortType) CheckCompatibility_Task(request *CheckCompatibilityR
  */
 func (service *VimPortType) QueryVMotionCompatibilityEx_Task(request *QueryVMotionCompatibilityExRequestType) (*QueryVMotionCompatibilityEx_TaskResponse, error) {
 	response := &QueryVMotionCompatibilityEx_TaskResponse{}
-	err := service.client.Call("QueryVMotionCompatibilityEx_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -35988,7 +35988,7 @@ func (service *VimPortType) QueryVMotionCompatibilityEx_Task(request *QueryVMoti
  */
 func (service *VimPortType) CheckMigrate_Task(request *CheckMigrateRequestType) (*CheckMigrate_TaskResponse, error) {
 	response := &CheckMigrate_TaskResponse{}
-	err := service.client.Call("CheckMigrate_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36004,7 +36004,7 @@ func (service *VimPortType) CheckMigrate_Task(request *CheckMigrateRequestType) 
  */
 func (service *VimPortType) CheckRelocate_Task(request *CheckRelocateRequestType) (*CheckRelocate_TaskResponse, error) {
 	response := &CheckRelocate_TaskResponse{}
-	err := service.client.Call("CheckRelocate_Task", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36022,7 +36022,7 @@ func (service *VimPortType) CheckRelocate_Task(request *CheckRelocateRequestType
  */
 func (service *VimPortType) ValidateCredentialsInGuest(request *ValidateCredentialsInGuestRequestType) (*ValidateCredentialsInGuestResponse, error) {
 	response := &ValidateCredentialsInGuestResponse{}
-	err := service.client.Call("ValidateCredentialsInGuest", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36040,7 +36040,7 @@ func (service *VimPortType) ValidateCredentialsInGuest(request *ValidateCredenti
  */
 func (service *VimPortType) AcquireCredentialsInGuest(request *AcquireCredentialsInGuestRequestType) (*AcquireCredentialsInGuestResponse, error) {
 	response := &AcquireCredentialsInGuestResponse{}
-	err := service.client.Call("AcquireCredentialsInGuest", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36058,7 +36058,7 @@ func (service *VimPortType) AcquireCredentialsInGuest(request *AcquireCredential
  */
 func (service *VimPortType) ReleaseCredentialsInGuest(request *ReleaseCredentialsInGuestRequestType) (*ReleaseCredentialsInGuestResponse, error) {
 	response := &ReleaseCredentialsInGuestResponse{}
-	err := service.client.Call("ReleaseCredentialsInGuest", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36077,7 +36077,7 @@ func (service *VimPortType) ReleaseCredentialsInGuest(request *ReleaseCredential
  */
 func (service *VimPortType) MakeDirectoryInGuest(request *MakeDirectoryInGuestRequestType) (*MakeDirectoryInGuestResponse, error) {
 	response := &MakeDirectoryInGuestResponse{}
-	err := service.client.Call("MakeDirectoryInGuest", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36096,7 +36096,7 @@ func (service *VimPortType) MakeDirectoryInGuest(request *MakeDirectoryInGuestRe
  */
 func (service *VimPortType) DeleteFileInGuest(request *DeleteFileInGuestRequestType) (*DeleteFileInGuestResponse, error) {
 	response := &DeleteFileInGuestResponse{}
-	err := service.client.Call("DeleteFileInGuest", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36115,7 +36115,7 @@ func (service *VimPortType) DeleteFileInGuest(request *DeleteFileInGuestRequestT
  */
 func (service *VimPortType) DeleteDirectoryInGuest(request *DeleteDirectoryInGuestRequestType) (*DeleteDirectoryInGuestResponse, error) {
 	response := &DeleteDirectoryInGuestResponse{}
-	err := service.client.Call("DeleteDirectoryInGuest", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36134,7 +36134,7 @@ func (service *VimPortType) DeleteDirectoryInGuest(request *DeleteDirectoryInGue
  */
 func (service *VimPortType) MoveDirectoryInGuest(request *MoveDirectoryInGuestRequestType) (*MoveDirectoryInGuestResponse, error) {
 	response := &MoveDirectoryInGuestResponse{}
-	err := service.client.Call("MoveDirectoryInGuest", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36153,7 +36153,7 @@ func (service *VimPortType) MoveDirectoryInGuest(request *MoveDirectoryInGuestRe
  */
 func (service *VimPortType) MoveFileInGuest(request *MoveFileInGuestRequestType) (*MoveFileInGuestResponse, error) {
 	response := &MoveFileInGuestResponse{}
-	err := service.client.Call("MoveFileInGuest", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36172,7 +36172,7 @@ func (service *VimPortType) MoveFileInGuest(request *MoveFileInGuestRequestType)
  */
 func (service *VimPortType) CreateTemporaryFileInGuest(request *CreateTemporaryFileInGuestRequestType) (*CreateTemporaryFileInGuestResponse, error) {
 	response := &CreateTemporaryFileInGuestResponse{}
-	err := service.client.Call("CreateTemporaryFileInGuest", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36191,7 +36191,7 @@ func (service *VimPortType) CreateTemporaryFileInGuest(request *CreateTemporaryF
  */
 func (service *VimPortType) CreateTemporaryDirectoryInGuest(request *CreateTemporaryDirectoryInGuestRequestType) (*CreateTemporaryDirectoryInGuestResponse, error) {
 	response := &CreateTemporaryDirectoryInGuestResponse{}
-	err := service.client.Call("CreateTemporaryDirectoryInGuest", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36210,7 +36210,7 @@ func (service *VimPortType) CreateTemporaryDirectoryInGuest(request *CreateTempo
  */
 func (service *VimPortType) ListFilesInGuest(request *ListFilesInGuestRequestType) (*ListFilesInGuestResponse, error) {
 	response := &ListFilesInGuestResponse{}
-	err := service.client.Call("ListFilesInGuest", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36229,7 +36229,7 @@ func (service *VimPortType) ListFilesInGuest(request *ListFilesInGuestRequestTyp
  */
 func (service *VimPortType) ChangeFileAttributesInGuest(request *ChangeFileAttributesInGuestRequestType) (*ChangeFileAttributesInGuestResponse, error) {
 	response := &ChangeFileAttributesInGuestResponse{}
-	err := service.client.Call("ChangeFileAttributesInGuest", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36248,7 +36248,7 @@ func (service *VimPortType) ChangeFileAttributesInGuest(request *ChangeFileAttri
  */
 func (service *VimPortType) InitiateFileTransferFromGuest(request *InitiateFileTransferFromGuestRequestType) (*InitiateFileTransferFromGuestResponse, error) {
 	response := &InitiateFileTransferFromGuestResponse{}
-	err := service.client.Call("InitiateFileTransferFromGuest", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36267,7 +36267,7 @@ func (service *VimPortType) InitiateFileTransferFromGuest(request *InitiateFileT
  */
 func (service *VimPortType) InitiateFileTransferToGuest(request *InitiateFileTransferToGuestRequestType) (*InitiateFileTransferToGuestResponse, error) {
 	response := &InitiateFileTransferToGuestResponse{}
-	err := service.client.Call("InitiateFileTransferToGuest", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36286,7 +36286,7 @@ func (service *VimPortType) InitiateFileTransferToGuest(request *InitiateFileTra
  */
 func (service *VimPortType) StartProgramInGuest(request *StartProgramInGuestRequestType) (*StartProgramInGuestResponse, error) {
 	response := &StartProgramInGuestResponse{}
-	err := service.client.Call("StartProgramInGuest", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36304,7 +36304,7 @@ func (service *VimPortType) StartProgramInGuest(request *StartProgramInGuestRequ
  */
 func (service *VimPortType) ListProcessesInGuest(request *ListProcessesInGuestRequestType) (*ListProcessesInGuestResponse, error) {
 	response := &ListProcessesInGuestResponse{}
-	err := service.client.Call("ListProcessesInGuest", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36322,7 +36322,7 @@ func (service *VimPortType) ListProcessesInGuest(request *ListProcessesInGuestRe
  */
 func (service *VimPortType) TerminateProcessInGuest(request *TerminateProcessInGuestRequestType) (*TerminateProcessInGuestResponse, error) {
 	response := &TerminateProcessInGuestResponse{}
-	err := service.client.Call("TerminateProcessInGuest", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36340,7 +36340,7 @@ func (service *VimPortType) TerminateProcessInGuest(request *TerminateProcessInG
  */
 func (service *VimPortType) ReadEnvironmentVariableInGuest(request *ReadEnvironmentVariableInGuestRequestType) (*ReadEnvironmentVariableInGuestResponse, error) {
 	response := &ReadEnvironmentVariableInGuestResponse{}
-	err := service.client.Call("ReadEnvironmentVariableInGuest", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36355,7 +36355,7 @@ func (service *VimPortType) ReadEnvironmentVariableInGuest(request *ReadEnvironm
  */
 func (service *VimPortType) DestroyPropertyFilter(request *DestroyPropertyFilterRequestType) (*DestroyPropertyFilterResponse, error) {
 	response := &DestroyPropertyFilterResponse{}
-	err := service.client.Call("DestroyPropertyFilter", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36371,7 +36371,7 @@ func (service *VimPortType) DestroyPropertyFilter(request *DestroyPropertyFilter
  */
 func (service *VimPortType) CreateFilter(request *CreateFilterRequestType) (*CreateFilterResponse, error) {
 	response := &CreateFilterResponse{}
-	err := service.client.Call("CreateFilter", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36387,7 +36387,7 @@ func (service *VimPortType) CreateFilter(request *CreateFilterRequestType) (*Cre
  */
 func (service *VimPortType) RetrieveProperties(request *RetrievePropertiesRequestType) (*RetrievePropertiesResponse, error) {
 	response := &RetrievePropertiesResponse{}
-	err := service.client.Call("RetrieveProperties", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36403,7 +36403,7 @@ func (service *VimPortType) RetrieveProperties(request *RetrievePropertiesReques
  */
 func (service *VimPortType) CheckForUpdates(request *CheckForUpdatesRequestType) (*CheckForUpdatesResponse, error) {
 	response := &CheckForUpdatesResponse{}
-	err := service.client.Call("CheckForUpdates", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36419,7 +36419,7 @@ func (service *VimPortType) CheckForUpdates(request *CheckForUpdatesRequestType)
  */
 func (service *VimPortType) WaitForUpdates(request *WaitForUpdatesRequestType) (*WaitForUpdatesResponse, error) {
 	response := &WaitForUpdatesResponse{}
-	err := service.client.Call("WaitForUpdates", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36434,7 +36434,7 @@ func (service *VimPortType) WaitForUpdates(request *WaitForUpdatesRequestType) (
  */
 func (service *VimPortType) CancelWaitForUpdates(request *CancelWaitForUpdatesRequestType) (*CancelWaitForUpdatesResponse, error) {
 	response := &CancelWaitForUpdatesResponse{}
-	err := service.client.Call("CancelWaitForUpdates", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36450,7 +36450,7 @@ func (service *VimPortType) CancelWaitForUpdates(request *CancelWaitForUpdatesRe
  */
 func (service *VimPortType) WaitForUpdatesEx(request *WaitForUpdatesExRequestType) (*WaitForUpdatesExResponse, error) {
 	response := &WaitForUpdatesExResponse{}
-	err := service.client.Call("WaitForUpdatesEx", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36466,7 +36466,7 @@ func (service *VimPortType) WaitForUpdatesEx(request *WaitForUpdatesExRequestTyp
  */
 func (service *VimPortType) RetrievePropertiesEx(request *RetrievePropertiesExRequestType) (*RetrievePropertiesExResponse, error) {
 	response := &RetrievePropertiesExResponse{}
-	err := service.client.Call("RetrievePropertiesEx", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36482,7 +36482,7 @@ func (service *VimPortType) RetrievePropertiesEx(request *RetrievePropertiesExRe
  */
 func (service *VimPortType) ContinueRetrievePropertiesEx(request *ContinueRetrievePropertiesExRequestType) (*ContinueRetrievePropertiesExResponse, error) {
 	response := &ContinueRetrievePropertiesExResponse{}
-	err := service.client.Call("ContinueRetrievePropertiesEx", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36498,7 +36498,7 @@ func (service *VimPortType) ContinueRetrievePropertiesEx(request *ContinueRetrie
  */
 func (service *VimPortType) CancelRetrievePropertiesEx(request *CancelRetrievePropertiesExRequestType) (*CancelRetrievePropertiesExResponse, error) {
 	response := &CancelRetrievePropertiesExResponse{}
-	err := service.client.Call("CancelRetrievePropertiesEx", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36513,7 +36513,7 @@ func (service *VimPortType) CancelRetrievePropertiesEx(request *CancelRetrievePr
  */
 func (service *VimPortType) CreatePropertyCollector(request *CreatePropertyCollectorRequestType) (*CreatePropertyCollectorResponse, error) {
 	response := &CreatePropertyCollectorResponse{}
-	err := service.client.Call("CreatePropertyCollector", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
@@ -36528,7 +36528,7 @@ func (service *VimPortType) CreatePropertyCollector(request *CreatePropertyColle
  */
 func (service *VimPortType) DestroyPropertyCollector(request *DestroyPropertyCollectorRequestType) (*DestroyPropertyCollectorResponse, error) {
 	response := &DestroyPropertyCollectorResponse{}
-	err := service.client.Call("DestroyPropertyCollector", "urn:vim25/5.5", request, response)
+	err := service.client.Call("urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
