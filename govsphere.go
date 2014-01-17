@@ -4,14 +4,7 @@ package govsphere
 //Do not modify
 //Copyright (c) 2014, Cloudescape. All rights reserved.
 import (
-	"bytes"
-	"crypto/tls"
-	"encoding/xml"
 	gowsdl "github.com/c4milo/gowsdl/generator"
-	"io/ioutil"
-	"log"
-	"net"
-	"net/http"
 	"time"
 )
 
@@ -26292,73 +26285,16 @@ type ReadEnvironmentVariableInGuestRequestType struct {
 	Names []string                `xml:"names,omitempty"`
 }
 
-var timeout = time.Duration(30 * time.Second)
-
-func dialTimeout(network, addr string) (net.Conn, error) {
-	return net.DialTimeout(network, addr, timeout)
-}
-
 type VimPortType struct {
-	url string
-	tls bool
+	client *gowsdl.SoapClient
 }
 
 func NewVimPortType(url string, tls bool) *VimPortType {
-	service := &VimPortType{
-		url: url,
-		tls: tls,
+	client := gowsdl.NewSoapClient(url, tls)
+
+	return &VimPortType{
+		client: client,
 	}
-
-	return service
-}
-
-func (service *VimPortType) call(operation, soapAction string, request interface{}) ([]byte, error) {
-	envelope := gowsdl.SoapEnvelope{
-		Header:        gowsdl.SoapHeader{},
-		EncodingStyle: "http://schemas.xmlsoap.org/soap/encoding/",
-	}
-
-	reqXml, err := xml.Marshal(request)
-	if err != nil {
-		return nil, err
-	}
-
-	envelope.Body = gowsdl.SoapBody{
-		Body: string(reqXml),
-	}
-
-	buffer := &bytes.Buffer{}
-
-	encoder := xml.NewEncoder(buffer)
-	//encoder.Indent("  ", "    ")
-
-	err = encoder.Encode(envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("POST", service.url, buffer)
-	req.Header.Add("Content-Type", "text/xml; charset=\"utf-8\"")
-	req.Header.Add("SOAPAction", soapAction)
-	req.Header.Set("User-Agent", "gowsdl/0.1")
-
-	tr := &http.Transport{
-		TLSClientConfig: &tls.Config{
-			InsecureSkipVerify: service.tls,
-		},
-		Dial: dialTimeout,
-	}
-
-	client := &http.Client{Transport: tr}
-	res, err := client.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	defer res.Body.Close()
-
-	body, err := ioutil.ReadAll(res.Body)
-
-	return body, nil
 }
 
 /**
@@ -26369,30 +26305,13 @@ func (service *VimPortType) call(operation, soapAction string, request interface
 * - RuntimeFault
  */
 func (service *VimPortType) AddAuthorizationRole(request *AddAuthorizationRoleRequestType) (*AddAuthorizationRoleResponse, error) {
-	data, err := service.call("AddAuthorizationRole", "urn:vim25/5.5", request)
+	response := &AddAuthorizationRoleResponse{}
+	err := service.client.Call("AddAuthorizationRole", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AddAuthorizationRoleResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -26403,30 +26322,13 @@ func (service *VimPortType) AddAuthorizationRole(request *AddAuthorizationRoleRe
 * - RuntimeFault
  */
 func (service *VimPortType) RemoveAuthorizationRole(request *RemoveAuthorizationRoleRequestType) (*RemoveAuthorizationRoleResponse, error) {
-	data, err := service.call("RemoveAuthorizationRole", "urn:vim25/5.5", request)
+	response := &RemoveAuthorizationRoleResponse{}
+	err := service.client.Call("RemoveAuthorizationRole", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RemoveAuthorizationRoleResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -26438,30 +26340,13 @@ func (service *VimPortType) RemoveAuthorizationRole(request *RemoveAuthorization
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateAuthorizationRole(request *UpdateAuthorizationRoleRequestType) (*UpdateAuthorizationRoleResponse, error) {
-	data, err := service.call("UpdateAuthorizationRole", "urn:vim25/5.5", request)
+	response := &UpdateAuthorizationRoleResponse{}
+	err := service.client.Call("UpdateAuthorizationRole", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateAuthorizationRoleResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -26472,30 +26357,13 @@ func (service *VimPortType) UpdateAuthorizationRole(request *UpdateAuthorization
 * - RuntimeFault
  */
 func (service *VimPortType) MergePermissions(request *MergePermissionsRequestType) (*MergePermissionsResponse, error) {
-	data, err := service.call("MergePermissions", "urn:vim25/5.5", request)
+	response := &MergePermissionsResponse{}
+	err := service.client.Call("MergePermissions", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &MergePermissionsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -26505,30 +26373,13 @@ func (service *VimPortType) MergePermissions(request *MergePermissionsRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) RetrieveRolePermissions(request *RetrieveRolePermissionsRequestType) (*RetrieveRolePermissionsResponse, error) {
-	data, err := service.call("RetrieveRolePermissions", "urn:vim25/5.5", request)
+	response := &RetrieveRolePermissionsResponse{}
+	err := service.client.Call("RetrieveRolePermissions", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RetrieveRolePermissionsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -26537,30 +26388,13 @@ func (service *VimPortType) RetrieveRolePermissions(request *RetrieveRolePermiss
 * - RuntimeFault
  */
 func (service *VimPortType) RetrieveEntityPermissions(request *RetrieveEntityPermissionsRequestType) (*RetrieveEntityPermissionsResponse, error) {
-	data, err := service.call("RetrieveEntityPermissions", "urn:vim25/5.5", request)
+	response := &RetrieveEntityPermissionsResponse{}
+	err := service.client.Call("RetrieveEntityPermissions", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RetrieveEntityPermissionsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -26569,30 +26403,13 @@ func (service *VimPortType) RetrieveEntityPermissions(request *RetrieveEntityPer
 * - RuntimeFault
  */
 func (service *VimPortType) RetrieveAllPermissions(request *RetrieveAllPermissionsRequestType) (*RetrieveAllPermissionsResponse, error) {
-	data, err := service.call("RetrieveAllPermissions", "urn:vim25/5.5", request)
+	response := &RetrieveAllPermissionsResponse{}
+	err := service.client.Call("RetrieveAllPermissions", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RetrieveAllPermissionsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -26604,30 +26421,13 @@ func (service *VimPortType) RetrieveAllPermissions(request *RetrieveAllPermissio
 * - RuntimeFault
  */
 func (service *VimPortType) SetEntityPermissions(request *SetEntityPermissionsRequestType) (*SetEntityPermissionsResponse, error) {
-	data, err := service.call("SetEntityPermissions", "urn:vim25/5.5", request)
+	response := &SetEntityPermissionsResponse{}
+	err := service.client.Call("SetEntityPermissions", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &SetEntityPermissionsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -26639,30 +26439,13 @@ func (service *VimPortType) SetEntityPermissions(request *SetEntityPermissionsRe
 * - RuntimeFault
  */
 func (service *VimPortType) ResetEntityPermissions(request *ResetEntityPermissionsRequestType) (*ResetEntityPermissionsResponse, error) {
-	data, err := service.call("ResetEntityPermissions", "urn:vim25/5.5", request)
+	response := &ResetEntityPermissionsResponse{}
+	err := service.client.Call("ResetEntityPermissions", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ResetEntityPermissionsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -26673,30 +26456,13 @@ func (service *VimPortType) ResetEntityPermissions(request *ResetEntityPermissio
 * - RuntimeFault
  */
 func (service *VimPortType) RemoveEntityPermission(request *RemoveEntityPermissionRequestType) (*RemoveEntityPermissionResponse, error) {
-	data, err := service.call("RemoveEntityPermission", "urn:vim25/5.5", request)
+	response := &RemoveEntityPermissionResponse{}
+	err := service.client.Call("RemoveEntityPermission", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RemoveEntityPermissionResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -26705,30 +26471,13 @@ func (service *VimPortType) RemoveEntityPermission(request *RemoveEntityPermissi
 * - RuntimeFault
  */
 func (service *VimPortType) HasPrivilegeOnEntity(request *HasPrivilegeOnEntityRequestType) (*HasPrivilegeOnEntityResponse, error) {
-	data, err := service.call("HasPrivilegeOnEntity", "urn:vim25/5.5", request)
+	response := &HasPrivilegeOnEntityResponse{}
+	err := service.client.Call("HasPrivilegeOnEntity", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &HasPrivilegeOnEntityResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -26737,30 +26486,13 @@ func (service *VimPortType) HasPrivilegeOnEntity(request *HasPrivilegeOnEntityRe
 * - RuntimeFault
  */
 func (service *VimPortType) HasPrivilegeOnEntities(request *HasPrivilegeOnEntitiesRequestType) (*HasPrivilegeOnEntitiesResponse, error) {
-	data, err := service.call("HasPrivilegeOnEntities", "urn:vim25/5.5", request)
+	response := &HasPrivilegeOnEntitiesResponse{}
+	err := service.client.Call("HasPrivilegeOnEntities", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &HasPrivilegeOnEntitiesResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -26769,30 +26501,13 @@ func (service *VimPortType) HasPrivilegeOnEntities(request *HasPrivilegeOnEntiti
 * - RuntimeFault
  */
 func (service *VimPortType) ReconfigureCluster_Task(request *ReconfigureClusterRequestType) (*ReconfigureCluster_TaskResponse, error) {
-	data, err := service.call("ReconfigureCluster_Task", "urn:vim25/5.5", request)
+	response := &ReconfigureCluster_TaskResponse{}
+	err := service.client.Call("ReconfigureCluster_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ReconfigureCluster_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -26801,30 +26516,13 @@ func (service *VimPortType) ReconfigureCluster_Task(request *ReconfigureClusterR
 * - RuntimeFault
  */
 func (service *VimPortType) ApplyRecommendation(request *ApplyRecommendationRequestType) (*ApplyRecommendationResponse, error) {
-	data, err := service.call("ApplyRecommendation", "urn:vim25/5.5", request)
+	response := &ApplyRecommendationResponse{}
+	err := service.client.Call("ApplyRecommendation", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ApplyRecommendationResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -26833,30 +26531,13 @@ func (service *VimPortType) ApplyRecommendation(request *ApplyRecommendationRequ
 * - RuntimeFault
  */
 func (service *VimPortType) CancelRecommendation(request *CancelRecommendationRequestType) (*CancelRecommendationResponse, error) {
-	data, err := service.call("CancelRecommendation", "urn:vim25/5.5", request)
+	response := &CancelRecommendationResponse{}
+	err := service.client.Call("CancelRecommendation", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CancelRecommendationResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -26865,30 +26546,13 @@ func (service *VimPortType) CancelRecommendation(request *CancelRecommendationRe
 * - RuntimeFault
  */
 func (service *VimPortType) RecommendHostsForVm(request *RecommendHostsForVmRequestType) (*RecommendHostsForVmResponse, error) {
-	data, err := service.call("RecommendHostsForVm", "urn:vim25/5.5", request)
+	response := &RecommendHostsForVmResponse{}
+	err := service.client.Call("RecommendHostsForVm", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RecommendHostsForVmResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -26900,30 +26564,13 @@ func (service *VimPortType) RecommendHostsForVm(request *RecommendHostsForVmRequ
 * - RuntimeFault
  */
 func (service *VimPortType) AddHost_Task(request *AddHostRequestType) (*AddHost_TaskResponse, error) {
-	data, err := service.call("AddHost_Task", "urn:vim25/5.5", request)
+	response := &AddHost_TaskResponse{}
+	err := service.client.Call("AddHost_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AddHost_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -26935,30 +26582,13 @@ func (service *VimPortType) AddHost_Task(request *AddHostRequestType) (*AddHost_
 * - RuntimeFault
  */
 func (service *VimPortType) MoveInto_Task(request *MoveIntoRequestType) (*MoveInto_TaskResponse, error) {
-	data, err := service.call("MoveInto_Task", "urn:vim25/5.5", request)
+	response := &MoveInto_TaskResponse{}
+	err := service.client.Call("MoveInto_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &MoveInto_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -26969,30 +26599,13 @@ func (service *VimPortType) MoveInto_Task(request *MoveIntoRequestType) (*MoveIn
 * - RuntimeFault
  */
 func (service *VimPortType) MoveHostInto_Task(request *MoveHostIntoRequestType) (*MoveHostInto_TaskResponse, error) {
-	data, err := service.call("MoveHostInto_Task", "urn:vim25/5.5", request)
+	response := &MoveHostInto_TaskResponse{}
+	err := service.client.Call("MoveHostInto_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &MoveHostInto_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27001,30 +26614,13 @@ func (service *VimPortType) MoveHostInto_Task(request *MoveHostIntoRequestType) 
 * - RuntimeFault
  */
 func (service *VimPortType) RefreshRecommendation(request *RefreshRecommendationRequestType) (*RefreshRecommendationResponse, error) {
-	data, err := service.call("RefreshRecommendation", "urn:vim25/5.5", request)
+	response := &RefreshRecommendationResponse{}
+	err := service.client.Call("RefreshRecommendation", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RefreshRecommendationResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27033,30 +26629,13 @@ func (service *VimPortType) RefreshRecommendation(request *RefreshRecommendation
 * - RuntimeFault
  */
 func (service *VimPortType) RetrieveDasAdvancedRuntimeInfo(request *RetrieveDasAdvancedRuntimeInfoRequestType) (*RetrieveDasAdvancedRuntimeInfoResponse, error) {
-	data, err := service.call("RetrieveDasAdvancedRuntimeInfo", "urn:vim25/5.5", request)
+	response := &RetrieveDasAdvancedRuntimeInfoResponse{}
+	err := service.client.Call("RetrieveDasAdvancedRuntimeInfo", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RetrieveDasAdvancedRuntimeInfoResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27065,30 +26644,13 @@ func (service *VimPortType) RetrieveDasAdvancedRuntimeInfo(request *RetrieveDasA
 * - RuntimeFault
  */
 func (service *VimPortType) ClusterEnterMaintenanceMode(request *ClusterEnterMaintenanceModeRequestType) (*ClusterEnterMaintenanceModeResponse, error) {
-	data, err := service.call("ClusterEnterMaintenanceMode", "urn:vim25/5.5", request)
+	response := &ClusterEnterMaintenanceModeResponse{}
+	err := service.client.Call("ClusterEnterMaintenanceMode", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ClusterEnterMaintenanceModeResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27097,30 +26659,13 @@ func (service *VimPortType) ClusterEnterMaintenanceMode(request *ClusterEnterMai
 * - RuntimeFault
  */
 func (service *VimPortType) ReconfigureComputeResource_Task(request *ReconfigureComputeResourceRequestType) (*ReconfigureComputeResource_TaskResponse, error) {
-	data, err := service.call("ReconfigureComputeResource_Task", "urn:vim25/5.5", request)
+	response := &ReconfigureComputeResource_TaskResponse{}
+	err := service.client.Call("ReconfigureComputeResource_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ReconfigureComputeResource_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27131,30 +26676,13 @@ func (service *VimPortType) ReconfigureComputeResource_Task(request *Reconfigure
 * - RuntimeFault
  */
 func (service *VimPortType) AddCustomFieldDef(request *AddCustomFieldDefRequestType) (*AddCustomFieldDefResponse, error) {
-	data, err := service.call("AddCustomFieldDef", "urn:vim25/5.5", request)
+	response := &AddCustomFieldDefResponse{}
+	err := service.client.Call("AddCustomFieldDef", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AddCustomFieldDefResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27163,30 +26691,13 @@ func (service *VimPortType) AddCustomFieldDef(request *AddCustomFieldDefRequestT
 * - RuntimeFault
  */
 func (service *VimPortType) RemoveCustomFieldDef(request *RemoveCustomFieldDefRequestType) (*RemoveCustomFieldDefResponse, error) {
-	data, err := service.call("RemoveCustomFieldDef", "urn:vim25/5.5", request)
+	response := &RemoveCustomFieldDefResponse{}
+	err := service.client.Call("RemoveCustomFieldDef", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RemoveCustomFieldDefResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27196,30 +26707,13 @@ func (service *VimPortType) RemoveCustomFieldDef(request *RemoveCustomFieldDefRe
 * - RuntimeFault
  */
 func (service *VimPortType) RenameCustomFieldDef(request *RenameCustomFieldDefRequestType) (*RenameCustomFieldDefResponse, error) {
-	data, err := service.call("RenameCustomFieldDef", "urn:vim25/5.5", request)
+	response := &RenameCustomFieldDefResponse{}
+	err := service.client.Call("RenameCustomFieldDef", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RenameCustomFieldDefResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27228,30 +26722,13 @@ func (service *VimPortType) RenameCustomFieldDef(request *RenameCustomFieldDefRe
 * - RuntimeFault
  */
 func (service *VimPortType) SetField(request *SetFieldRequestType) (*SetFieldResponse, error) {
-	data, err := service.call("SetField", "urn:vim25/5.5", request)
+	response := &SetFieldResponse{}
+	err := service.client.Call("SetField", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &SetFieldResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27260,30 +26737,13 @@ func (service *VimPortType) SetField(request *SetFieldRequestType) (*SetFieldRes
 * - RuntimeFault
  */
 func (service *VimPortType) DoesCustomizationSpecExist(request *DoesCustomizationSpecExistRequestType) (*DoesCustomizationSpecExistResponse, error) {
-	data, err := service.call("DoesCustomizationSpecExist", "urn:vim25/5.5", request)
+	response := &DoesCustomizationSpecExistResponse{}
+	err := service.client.Call("DoesCustomizationSpecExist", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DoesCustomizationSpecExistResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27293,30 +26753,13 @@ func (service *VimPortType) DoesCustomizationSpecExist(request *DoesCustomizatio
 * - RuntimeFault
  */
 func (service *VimPortType) GetCustomizationSpec(request *GetCustomizationSpecRequestType) (*GetCustomizationSpecResponse, error) {
-	data, err := service.call("GetCustomizationSpec", "urn:vim25/5.5", request)
+	response := &GetCustomizationSpecResponse{}
+	err := service.client.Call("GetCustomizationSpec", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &GetCustomizationSpecResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27327,30 +26770,13 @@ func (service *VimPortType) GetCustomizationSpec(request *GetCustomizationSpecRe
 * - RuntimeFault
  */
 func (service *VimPortType) CreateCustomizationSpec(request *CreateCustomizationSpecRequestType) (*CreateCustomizationSpecResponse, error) {
-	data, err := service.call("CreateCustomizationSpec", "urn:vim25/5.5", request)
+	response := &CreateCustomizationSpecResponse{}
+	err := service.client.Call("CreateCustomizationSpec", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateCustomizationSpecResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27362,30 +26788,13 @@ func (service *VimPortType) CreateCustomizationSpec(request *CreateCustomization
 * - RuntimeFault
  */
 func (service *VimPortType) OverwriteCustomizationSpec(request *OverwriteCustomizationSpecRequestType) (*OverwriteCustomizationSpecResponse, error) {
-	data, err := service.call("OverwriteCustomizationSpec", "urn:vim25/5.5", request)
+	response := &OverwriteCustomizationSpecResponse{}
+	err := service.client.Call("OverwriteCustomizationSpec", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &OverwriteCustomizationSpecResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27395,30 +26804,13 @@ func (service *VimPortType) OverwriteCustomizationSpec(request *OverwriteCustomi
 * - RuntimeFault
  */
 func (service *VimPortType) DeleteCustomizationSpec(request *DeleteCustomizationSpecRequestType) (*DeleteCustomizationSpecResponse, error) {
-	data, err := service.call("DeleteCustomizationSpec", "urn:vim25/5.5", request)
+	response := &DeleteCustomizationSpecResponse{}
+	err := service.client.Call("DeleteCustomizationSpec", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DeleteCustomizationSpecResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27429,30 +26821,13 @@ func (service *VimPortType) DeleteCustomizationSpec(request *DeleteCustomization
 * - RuntimeFault
  */
 func (service *VimPortType) DuplicateCustomizationSpec(request *DuplicateCustomizationSpecRequestType) (*DuplicateCustomizationSpecResponse, error) {
-	data, err := service.call("DuplicateCustomizationSpec", "urn:vim25/5.5", request)
+	response := &DuplicateCustomizationSpecResponse{}
+	err := service.client.Call("DuplicateCustomizationSpec", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DuplicateCustomizationSpecResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27463,30 +26838,13 @@ func (service *VimPortType) DuplicateCustomizationSpec(request *DuplicateCustomi
 * - RuntimeFault
  */
 func (service *VimPortType) RenameCustomizationSpec(request *RenameCustomizationSpecRequestType) (*RenameCustomizationSpecResponse, error) {
-	data, err := service.call("RenameCustomizationSpec", "urn:vim25/5.5", request)
+	response := &RenameCustomizationSpecResponse{}
+	err := service.client.Call("RenameCustomizationSpec", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RenameCustomizationSpecResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27495,30 +26853,13 @@ func (service *VimPortType) RenameCustomizationSpec(request *RenameCustomization
 * - RuntimeFault
  */
 func (service *VimPortType) CustomizationSpecItemToXml(request *CustomizationSpecItemToXmlRequestType) (*CustomizationSpecItemToXmlResponse, error) {
-	data, err := service.call("CustomizationSpecItemToXml", "urn:vim25/5.5", request)
+	response := &CustomizationSpecItemToXmlResponse{}
+	err := service.client.Call("CustomizationSpecItemToXml", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CustomizationSpecItemToXmlResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27528,30 +26869,13 @@ func (service *VimPortType) CustomizationSpecItemToXml(request *CustomizationSpe
 * - RuntimeFault
  */
 func (service *VimPortType) XmlToCustomizationSpecItem(request *XmlToCustomizationSpecItemRequestType) (*XmlToCustomizationSpecItemResponse, error) {
-	data, err := service.call("XmlToCustomizationSpecItem", "urn:vim25/5.5", request)
+	response := &XmlToCustomizationSpecItemResponse{}
+	err := service.client.Call("XmlToCustomizationSpecItem", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &XmlToCustomizationSpecItemResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27561,30 +26885,13 @@ func (service *VimPortType) XmlToCustomizationSpecItem(request *XmlToCustomizati
 * - RuntimeFault
  */
 func (service *VimPortType) CheckCustomizationResources(request *CheckCustomizationResourcesRequestType) (*CheckCustomizationResourcesResponse, error) {
-	data, err := service.call("CheckCustomizationResources", "urn:vim25/5.5", request)
+	response := &CheckCustomizationResourcesResponse{}
+	err := service.client.Call("CheckCustomizationResources", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CheckCustomizationResourcesResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27595,30 +26902,13 @@ func (service *VimPortType) CheckCustomizationResources(request *CheckCustomizat
 * - RuntimeFault
  */
 func (service *VimPortType) QueryConnectionInfo(request *QueryConnectionInfoRequestType) (*QueryConnectionInfoResponse, error) {
-	data, err := service.call("QueryConnectionInfo", "urn:vim25/5.5", request)
+	response := &QueryConnectionInfoResponse{}
+	err := service.client.Call("QueryConnectionInfo", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryConnectionInfoResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27627,30 +26917,13 @@ func (service *VimPortType) QueryConnectionInfo(request *QueryConnectionInfoRequ
 * - RuntimeFault
  */
 func (service *VimPortType) PowerOnMultiVM_Task(request *PowerOnMultiVMRequestType) (*PowerOnMultiVM_TaskResponse, error) {
-	data, err := service.call("PowerOnMultiVM_Task", "urn:vim25/5.5", request)
+	response := &PowerOnMultiVM_TaskResponse{}
+	err := service.client.Call("PowerOnMultiVM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &PowerOnMultiVM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27659,30 +26932,13 @@ func (service *VimPortType) PowerOnMultiVM_Task(request *PowerOnMultiVMRequestTy
 * - RuntimeFault
  */
 func (service *VimPortType) QueryDatacenterConfigOptionDescriptor(request *queryDatacenterConfigOptionDescriptorRequestType) (*queryDatacenterConfigOptionDescriptorResponse, error) {
-	data, err := service.call("queryDatacenterConfigOptionDescriptor", "urn:vim25/5.5", request)
+	response := &queryDatacenterConfigOptionDescriptorResponse{}
+	err := service.client.Call("queryDatacenterConfigOptionDescriptor", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &queryDatacenterConfigOptionDescriptorResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27691,30 +26947,13 @@ func (service *VimPortType) QueryDatacenterConfigOptionDescriptor(request *query
 * - RuntimeFault
  */
 func (service *VimPortType) ReconfigureDatacenter_Task(request *ReconfigureDatacenterRequestType) (*ReconfigureDatacenter_TaskResponse, error) {
-	data, err := service.call("ReconfigureDatacenter_Task", "urn:vim25/5.5", request)
+	response := &ReconfigureDatacenter_TaskResponse{}
+	err := service.client.Call("ReconfigureDatacenter_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ReconfigureDatacenter_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27725,30 +26964,13 @@ func (service *VimPortType) ReconfigureDatacenter_Task(request *ReconfigureDatac
 * - RuntimeFault
  */
 func (service *VimPortType) RefreshDatastore(request *RefreshDatastoreRequestType) (*RefreshDatastoreResponse, error) {
-	data, err := service.call("RefreshDatastore", "urn:vim25/5.5", request)
+	response := &RefreshDatastoreResponse{}
+	err := service.client.Call("RefreshDatastore", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RefreshDatastoreResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27757,30 +26979,13 @@ func (service *VimPortType) RefreshDatastore(request *RefreshDatastoreRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) RefreshDatastoreStorageInfo(request *RefreshDatastoreStorageInfoRequestType) (*RefreshDatastoreStorageInfoResponse, error) {
-	data, err := service.call("RefreshDatastoreStorageInfo", "urn:vim25/5.5", request)
+	response := &RefreshDatastoreStorageInfoResponse{}
+	err := service.client.Call("RefreshDatastoreStorageInfo", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RefreshDatastoreStorageInfoResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27793,30 +26998,13 @@ func (service *VimPortType) RefreshDatastoreStorageInfo(request *RefreshDatastor
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateVirtualMachineFiles_Task(request *UpdateVirtualMachineFilesRequestType) (*UpdateVirtualMachineFiles_TaskResponse, error) {
-	data, err := service.call("UpdateVirtualMachineFiles_Task", "urn:vim25/5.5", request)
+	response := &UpdateVirtualMachineFiles_TaskResponse{}
+	err := service.client.Call("UpdateVirtualMachineFiles_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateVirtualMachineFiles_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27827,30 +27015,13 @@ func (service *VimPortType) UpdateVirtualMachineFiles_Task(request *UpdateVirtua
 * - RuntimeFault
  */
 func (service *VimPortType) RenameDatastore(request *RenameDatastoreRequestType) (*RenameDatastoreResponse, error) {
-	data, err := service.call("RenameDatastore", "urn:vim25/5.5", request)
+	response := &RenameDatastoreResponse{}
+	err := service.client.Call("RenameDatastore", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RenameDatastoreResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27860,30 +27031,13 @@ func (service *VimPortType) RenameDatastore(request *RenameDatastoreRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) DestroyDatastore(request *DestroyDatastoreRequestType) (*DestroyDatastoreResponse, error) {
-	data, err := service.call("DestroyDatastore", "urn:vim25/5.5", request)
+	response := &DestroyDatastoreResponse{}
+	err := service.client.Call("DestroyDatastore", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DestroyDatastoreResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27893,30 +27047,13 @@ func (service *VimPortType) DestroyDatastore(request *DestroyDatastoreRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) DatastoreEnterMaintenanceMode(request *DatastoreEnterMaintenanceModeRequestType) (*DatastoreEnterMaintenanceModeResponse, error) {
-	data, err := service.call("DatastoreEnterMaintenanceMode", "urn:vim25/5.5", request)
+	response := &DatastoreEnterMaintenanceModeResponse{}
+	err := service.client.Call("DatastoreEnterMaintenanceMode", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DatastoreEnterMaintenanceModeResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27926,30 +27063,13 @@ func (service *VimPortType) DatastoreEnterMaintenanceMode(request *DatastoreEnte
 * - RuntimeFault
  */
 func (service *VimPortType) DatastoreExitMaintenanceMode_Task(request *DatastoreExitMaintenanceModeRequestType) (*DatastoreExitMaintenanceMode_TaskResponse, error) {
-	data, err := service.call("DatastoreExitMaintenanceMode_Task", "urn:vim25/5.5", request)
+	response := &DatastoreExitMaintenanceMode_TaskResponse{}
+	err := service.client.Call("DatastoreExitMaintenanceMode_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DatastoreExitMaintenanceMode_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27961,30 +27081,13 @@ func (service *VimPortType) DatastoreExitMaintenanceMode_Task(request *Datastore
 * - RuntimeFault
  */
 func (service *VimPortType) CreateDirectory(request *CreateDirectoryRequestType) (*CreateDirectoryResponse, error) {
-	data, err := service.call("CreateDirectory", "urn:vim25/5.5", request)
+	response := &CreateDirectoryResponse{}
+	err := service.client.Call("CreateDirectory", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateDirectoryResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -27997,30 +27100,13 @@ func (service *VimPortType) CreateDirectory(request *CreateDirectoryRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) DeleteDirectory(request *DeleteDirectoryRequestType) (*DeleteDirectoryResponse, error) {
-	data, err := service.call("DeleteDirectory", "urn:vim25/5.5", request)
+	response := &DeleteDirectoryResponse{}
+	err := service.client.Call("DeleteDirectory", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DeleteDirectoryResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28029,30 +27115,13 @@ func (service *VimPortType) DeleteDirectory(request *DeleteDirectoryRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) QueryDescriptions(request *QueryDescriptionsRequestType) (*QueryDescriptionsResponse, error) {
-	data, err := service.call("QueryDescriptions", "urn:vim25/5.5", request)
+	response := &QueryDescriptionsResponse{}
+	err := service.client.Call("QueryDescriptions", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryDescriptionsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28062,30 +27131,13 @@ func (service *VimPortType) QueryDescriptions(request *QueryDescriptionsRequestT
 * - RuntimeFault
  */
 func (service *VimPortType) BrowseDiagnosticLog(request *BrowseDiagnosticLogRequestType) (*BrowseDiagnosticLogResponse, error) {
-	data, err := service.call("BrowseDiagnosticLog", "urn:vim25/5.5", request)
+	response := &BrowseDiagnosticLogResponse{}
+	err := service.client.Call("BrowseDiagnosticLog", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &BrowseDiagnosticLogResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28096,30 +27148,13 @@ func (service *VimPortType) BrowseDiagnosticLog(request *BrowseDiagnosticLogRequ
 * - RuntimeFault
  */
 func (service *VimPortType) GenerateLogBundles_Task(request *GenerateLogBundlesRequestType) (*GenerateLogBundles_TaskResponse, error) {
-	data, err := service.call("GenerateLogBundles_Task", "urn:vim25/5.5", request)
+	response := &GenerateLogBundles_TaskResponse{}
+	err := service.client.Call("GenerateLogBundles_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &GenerateLogBundles_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28128,30 +27163,13 @@ func (service *VimPortType) GenerateLogBundles_Task(request *GenerateLogBundlesR
 * - RuntimeFault
  */
 func (service *VimPortType) FetchDVPortKeys(request *FetchDVPortKeysRequestType) (*FetchDVPortKeysResponse, error) {
-	data, err := service.call("FetchDVPortKeys", "urn:vim25/5.5", request)
+	response := &FetchDVPortKeysResponse{}
+	err := service.client.Call("FetchDVPortKeys", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &FetchDVPortKeysResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28160,30 +27178,13 @@ func (service *VimPortType) FetchDVPortKeys(request *FetchDVPortKeysRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) FetchDVPorts(request *FetchDVPortsRequestType) (*FetchDVPortsResponse, error) {
-	data, err := service.call("FetchDVPorts", "urn:vim25/5.5", request)
+	response := &FetchDVPortsResponse{}
+	err := service.client.Call("FetchDVPorts", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &FetchDVPortsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28192,30 +27193,13 @@ func (service *VimPortType) FetchDVPorts(request *FetchDVPortsRequestType) (*Fet
 * - RuntimeFault
  */
 func (service *VimPortType) QueryUsedVlanIdInDvs(request *QueryUsedVlanIdInDvsRequestType) (*QueryUsedVlanIdInDvsResponse, error) {
-	data, err := service.call("QueryUsedVlanIdInDvs", "urn:vim25/5.5", request)
+	response := &QueryUsedVlanIdInDvsResponse{}
+	err := service.client.Call("QueryUsedVlanIdInDvs", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryUsedVlanIdInDvsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28235,30 +27219,13 @@ func (service *VimPortType) QueryUsedVlanIdInDvs(request *QueryUsedVlanIdInDvsRe
 * - RuntimeFault
  */
 func (service *VimPortType) ReconfigureDvs_Task(request *ReconfigureDvsRequestType) (*ReconfigureDvs_TaskResponse, error) {
-	data, err := service.call("ReconfigureDvs_Task", "urn:vim25/5.5", request)
+	response := &ReconfigureDvs_TaskResponse{}
+	err := service.client.Call("ReconfigureDvs_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ReconfigureDvs_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28270,30 +27237,13 @@ func (service *VimPortType) ReconfigureDvs_Task(request *ReconfigureDvsRequestTy
 * - RuntimeFault
  */
 func (service *VimPortType) PerformDvsProductSpecOperation_Task(request *PerformDvsProductSpecOperationRequestType) (*PerformDvsProductSpecOperation_TaskResponse, error) {
-	data, err := service.call("PerformDvsProductSpecOperation_Task", "urn:vim25/5.5", request)
+	response := &PerformDvsProductSpecOperation_TaskResponse{}
+	err := service.client.Call("PerformDvsProductSpecOperation_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &PerformDvsProductSpecOperation_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28306,30 +27256,13 @@ func (service *VimPortType) PerformDvsProductSpecOperation_Task(request *Perform
 * - RuntimeFault
  */
 func (service *VimPortType) MergeDvs_Task(request *MergeDvsRequestType) (*MergeDvs_TaskResponse, error) {
-	data, err := service.call("MergeDvs_Task", "urn:vim25/5.5", request)
+	response := &MergeDvs_TaskResponse{}
+	err := service.client.Call("MergeDvs_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &MergeDvs_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28341,30 +27274,13 @@ func (service *VimPortType) MergeDvs_Task(request *MergeDvsRequestType) (*MergeD
 * - RuntimeFault
  */
 func (service *VimPortType) AddDVPortgroup_Task(request *AddDVPortgroupRequestType) (*AddDVPortgroup_TaskResponse, error) {
-	data, err := service.call("AddDVPortgroup_Task", "urn:vim25/5.5", request)
+	response := &AddDVPortgroup_TaskResponse{}
+	err := service.client.Call("AddDVPortgroup_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AddDVPortgroup_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28376,30 +27292,13 @@ func (service *VimPortType) AddDVPortgroup_Task(request *AddDVPortgroupRequestTy
 * - RuntimeFault
  */
 func (service *VimPortType) MoveDVPort_Task(request *MoveDVPortRequestType) (*MoveDVPort_TaskResponse, error) {
-	data, err := service.call("MoveDVPort_Task", "urn:vim25/5.5", request)
+	response := &MoveDVPort_TaskResponse{}
+	err := service.client.Call("MoveDVPort_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &MoveDVPort_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28409,30 +27308,13 @@ func (service *VimPortType) MoveDVPort_Task(request *MoveDVPortRequestType) (*Mo
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateDvsCapability(request *UpdateDvsCapabilityRequestType) (*UpdateDvsCapabilityResponse, error) {
-	data, err := service.call("UpdateDvsCapability", "urn:vim25/5.5", request)
+	response := &UpdateDvsCapabilityResponse{}
+	err := service.client.Call("UpdateDvsCapability", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateDvsCapabilityResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28445,30 +27327,13 @@ func (service *VimPortType) UpdateDvsCapability(request *UpdateDvsCapabilityRequ
 * - RuntimeFault
  */
 func (service *VimPortType) ReconfigureDVPort_Task(request *ReconfigureDVPortRequestType) (*ReconfigureDVPort_TaskResponse, error) {
-	data, err := service.call("ReconfigureDVPort_Task", "urn:vim25/5.5", request)
+	response := &ReconfigureDVPort_TaskResponse{}
+	err := service.client.Call("ReconfigureDVPort_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ReconfigureDVPort_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28479,30 +27344,13 @@ func (service *VimPortType) ReconfigureDVPort_Task(request *ReconfigureDVPortReq
 * - RuntimeFault
  */
 func (service *VimPortType) RefreshDVPortState(request *RefreshDVPortStateRequestType) (*RefreshDVPortStateResponse, error) {
-	data, err := service.call("RefreshDVPortState", "urn:vim25/5.5", request)
+	response := &RefreshDVPortStateResponse{}
+	err := service.client.Call("RefreshDVPortState", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RefreshDVPortStateResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28513,30 +27361,13 @@ func (service *VimPortType) RefreshDVPortState(request *RefreshDVPortStateReques
 * - RuntimeFault
  */
 func (service *VimPortType) RectifyDvsHost_Task(request *RectifyDvsHostRequestType) (*RectifyDvsHost_TaskResponse, error) {
-	data, err := service.call("RectifyDvsHost_Task", "urn:vim25/5.5", request)
+	response := &RectifyDvsHost_TaskResponse{}
+	err := service.client.Call("RectifyDvsHost_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RectifyDvsHost_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28549,30 +27380,13 @@ func (service *VimPortType) RectifyDvsHost_Task(request *RectifyDvsHostRequestTy
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateNetworkResourcePool(request *UpdateNetworkResourcePoolRequestType) (*UpdateNetworkResourcePoolResponse, error) {
-	data, err := service.call("UpdateNetworkResourcePool", "urn:vim25/5.5", request)
+	response := &UpdateNetworkResourcePoolResponse{}
+	err := service.client.Call("UpdateNetworkResourcePool", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateNetworkResourcePoolResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28583,30 +27397,13 @@ func (service *VimPortType) UpdateNetworkResourcePool(request *UpdateNetworkReso
 * - RuntimeFault
  */
 func (service *VimPortType) AddNetworkResourcePool(request *AddNetworkResourcePoolRequestType) (*AddNetworkResourcePoolResponse, error) {
-	data, err := service.call("AddNetworkResourcePool", "urn:vim25/5.5", request)
+	response := &AddNetworkResourcePoolResponse{}
+	err := service.client.Call("AddNetworkResourcePool", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AddNetworkResourcePoolResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28619,30 +27416,13 @@ func (service *VimPortType) AddNetworkResourcePool(request *AddNetworkResourcePo
 * - RuntimeFault
  */
 func (service *VimPortType) RemoveNetworkResourcePool(request *RemoveNetworkResourcePoolRequestType) (*RemoveNetworkResourcePoolResponse, error) {
-	data, err := service.call("RemoveNetworkResourcePool", "urn:vim25/5.5", request)
+	response := &RemoveNetworkResourcePoolResponse{}
+	err := service.client.Call("RemoveNetworkResourcePool", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RemoveNetworkResourcePoolResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28652,30 +27432,13 @@ func (service *VimPortType) RemoveNetworkResourcePool(request *RemoveNetworkReso
 * - RuntimeFault
  */
 func (service *VimPortType) EnableNetworkResourceManagement(request *EnableNetworkResourceManagementRequestType) (*EnableNetworkResourceManagementResponse, error) {
-	data, err := service.call("EnableNetworkResourceManagement", "urn:vim25/5.5", request)
+	response := &EnableNetworkResourceManagementResponse{}
+	err := service.client.Call("EnableNetworkResourceManagement", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &EnableNetworkResourceManagementResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28686,30 +27449,13 @@ func (service *VimPortType) EnableNetworkResourceManagement(request *EnableNetwo
 * - RuntimeFault
  */
 func (service *VimPortType) DVSRollback_Task(request *DVSRollbackRequestType) (*DVSRollback_TaskResponse, error) {
-	data, err := service.call("DVSRollback_Task", "urn:vim25/5.5", request)
+	response := &DVSRollback_TaskResponse{}
+	err := service.client.Call("DVSRollback_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DVSRollback_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28721,30 +27467,13 @@ func (service *VimPortType) DVSRollback_Task(request *DVSRollbackRequestType) (*
 * - RuntimeFault
  */
 func (service *VimPortType) CreateDVPortgroup_Task(request *CreateDVPortgroupRequestType) (*CreateDVPortgroup_TaskResponse, error) {
-	data, err := service.call("CreateDVPortgroup_Task", "urn:vim25/5.5", request)
+	response := &CreateDVPortgroup_TaskResponse{}
+	err := service.client.Call("CreateDVPortgroup_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateDVPortgroup_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28754,30 +27483,13 @@ func (service *VimPortType) CreateDVPortgroup_Task(request *CreateDVPortgroupReq
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateDVSHealthCheckConfig_Task(request *UpdateDVSHealthCheckConfigRequestType) (*UpdateDVSHealthCheckConfig_TaskResponse, error) {
-	data, err := service.call("UpdateDVSHealthCheckConfig_Task", "urn:vim25/5.5", request)
+	response := &UpdateDVSHealthCheckConfig_TaskResponse{}
+	err := service.client.Call("UpdateDVSHealthCheckConfig_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateDVSHealthCheckConfig_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28787,30 +27499,13 @@ func (service *VimPortType) UpdateDVSHealthCheckConfig_Task(request *UpdateDVSHe
 * - RuntimeFault
  */
 func (service *VimPortType) LookupDvPortGroup(request *LookupDvPortGroupRequestType) (*LookupDvPortGroupResponse, error) {
-	data, err := service.call("LookupDvPortGroup", "urn:vim25/5.5", request)
+	response := &LookupDvPortGroupResponse{}
+	err := service.client.Call("LookupDvPortGroup", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &LookupDvPortGroupResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28819,30 +27514,13 @@ func (service *VimPortType) LookupDvPortGroup(request *LookupDvPortGroupRequestT
 * - RuntimeFault
  */
 func (service *VimPortType) QueryConfigOptionDescriptor(request *QueryConfigOptionDescriptorRequestType) (*QueryConfigOptionDescriptorResponse, error) {
-	data, err := service.call("QueryConfigOptionDescriptor", "urn:vim25/5.5", request)
+	response := &QueryConfigOptionDescriptorResponse{}
+	err := service.client.Call("QueryConfigOptionDescriptor", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryConfigOptionDescriptorResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28851,30 +27529,13 @@ func (service *VimPortType) QueryConfigOptionDescriptor(request *QueryConfigOpti
 * - RuntimeFault
  */
 func (service *VimPortType) QueryConfigOption(request *QueryConfigOptionRequestType) (*QueryConfigOptionResponse, error) {
-	data, err := service.call("QueryConfigOption", "urn:vim25/5.5", request)
+	response := &QueryConfigOptionResponse{}
+	err := service.client.Call("QueryConfigOption", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryConfigOptionResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28883,30 +27544,13 @@ func (service *VimPortType) QueryConfigOption(request *QueryConfigOptionRequestT
 * - RuntimeFault
  */
 func (service *VimPortType) QueryConfigTarget(request *QueryConfigTargetRequestType) (*QueryConfigTargetResponse, error) {
-	data, err := service.call("QueryConfigTarget", "urn:vim25/5.5", request)
+	response := &QueryConfigTargetResponse{}
+	err := service.client.Call("QueryConfigTarget", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryConfigTargetResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28915,30 +27559,13 @@ func (service *VimPortType) QueryConfigTarget(request *QueryConfigTargetRequestT
 * - RuntimeFault
  */
 func (service *VimPortType) QueryTargetCapabilities(request *QueryTargetCapabilitiesRequestType) (*QueryTargetCapabilitiesResponse, error) {
-	data, err := service.call("QueryTargetCapabilities", "urn:vim25/5.5", request)
+	response := &QueryTargetCapabilitiesResponse{}
+	err := service.client.Call("QueryTargetCapabilities", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryTargetCapabilitiesResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28947,30 +27574,13 @@ func (service *VimPortType) QueryTargetCapabilities(request *QueryTargetCapabili
 * - RuntimeFault
  */
 func (service *VimPortType) SetCustomValue(request *setCustomValueRequestType) (*setCustomValueResponse, error) {
-	data, err := service.call("setCustomValue", "urn:vim25/5.5", request)
+	response := &setCustomValueResponse{}
+	err := service.client.Call("setCustomValue", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &setCustomValueResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -28980,30 +27590,13 @@ func (service *VimPortType) SetCustomValue(request *setCustomValueRequestType) (
 * - RuntimeFault
  */
 func (service *VimPortType) UnregisterExtension(request *UnregisterExtensionRequestType) (*UnregisterExtensionResponse, error) {
-	data, err := service.call("UnregisterExtension", "urn:vim25/5.5", request)
+	response := &UnregisterExtensionResponse{}
+	err := service.client.Call("UnregisterExtension", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UnregisterExtensionResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29012,30 +27605,13 @@ func (service *VimPortType) UnregisterExtension(request *UnregisterExtensionRequ
 * - RuntimeFault
  */
 func (service *VimPortType) FindExtension(request *FindExtensionRequestType) (*FindExtensionResponse, error) {
-	data, err := service.call("FindExtension", "urn:vim25/5.5", request)
+	response := &FindExtensionResponse{}
+	err := service.client.Call("FindExtension", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &FindExtensionResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29044,30 +27620,13 @@ func (service *VimPortType) FindExtension(request *FindExtensionRequestType) (*F
 * - RuntimeFault
  */
 func (service *VimPortType) RegisterExtension(request *RegisterExtensionRequestType) (*RegisterExtensionResponse, error) {
-	data, err := service.call("RegisterExtension", "urn:vim25/5.5", request)
+	response := &RegisterExtensionResponse{}
+	err := service.client.Call("RegisterExtension", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RegisterExtensionResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29077,30 +27636,13 @@ func (service *VimPortType) RegisterExtension(request *RegisterExtensionRequestT
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateExtension(request *UpdateExtensionRequestType) (*UpdateExtensionResponse, error) {
-	data, err := service.call("UpdateExtension", "urn:vim25/5.5", request)
+	response := &UpdateExtensionResponse{}
+	err := service.client.Call("UpdateExtension", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateExtensionResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29109,30 +27651,13 @@ func (service *VimPortType) UpdateExtension(request *UpdateExtensionRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) GetPublicKey(request *GetPublicKeyRequestType) (*GetPublicKeyResponse, error) {
-	data, err := service.call("GetPublicKey", "urn:vim25/5.5", request)
+	response := &GetPublicKeyResponse{}
+	err := service.client.Call("GetPublicKey", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &GetPublicKeyResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29141,30 +27666,13 @@ func (service *VimPortType) GetPublicKey(request *GetPublicKeyRequestType) (*Get
 * - RuntimeFault
  */
 func (service *VimPortType) SetPublicKey(request *SetPublicKeyRequestType) (*SetPublicKeyResponse, error) {
-	data, err := service.call("SetPublicKey", "urn:vim25/5.5", request)
+	response := &SetPublicKeyResponse{}
+	err := service.client.Call("SetPublicKey", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &SetPublicKeyResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29175,30 +27683,13 @@ func (service *VimPortType) SetPublicKey(request *SetPublicKeyRequestType) (*Set
 * - RuntimeFault
  */
 func (service *VimPortType) SetExtensionCertificate(request *SetExtensionCertificateRequestType) (*SetExtensionCertificateResponse, error) {
-	data, err := service.call("SetExtensionCertificate", "urn:vim25/5.5", request)
+	response := &SetExtensionCertificateResponse{}
+	err := service.client.Call("SetExtensionCertificate", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &SetExtensionCertificateResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29207,30 +27698,13 @@ func (service *VimPortType) SetExtensionCertificate(request *SetExtensionCertifi
 * - RuntimeFault
  */
 func (service *VimPortType) QueryManagedBy(request *QueryManagedByRequestType) (*QueryManagedByResponse, error) {
-	data, err := service.call("QueryManagedBy", "urn:vim25/5.5", request)
+	response := &QueryManagedByResponse{}
+	err := service.client.Call("QueryManagedBy", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryManagedByResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29239,30 +27713,13 @@ func (service *VimPortType) QueryManagedBy(request *QueryManagedByRequestType) (
 * - RuntimeFault
  */
 func (service *VimPortType) QueryExtensionIpAllocationUsage(request *QueryExtensionIpAllocationUsageRequestType) (*QueryExtensionIpAllocationUsageResponse, error) {
-	data, err := service.call("QueryExtensionIpAllocationUsage", "urn:vim25/5.5", request)
+	response := &QueryExtensionIpAllocationUsageResponse{}
+	err := service.client.Call("QueryExtensionIpAllocationUsage", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryExtensionIpAllocationUsageResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29273,30 +27730,13 @@ func (service *VimPortType) QueryExtensionIpAllocationUsage(request *QueryExtens
 * - RuntimeFault
  */
 func (service *VimPortType) MoveDatastoreFile_Task(request *MoveDatastoreFileRequestType) (*MoveDatastoreFile_TaskResponse, error) {
-	data, err := service.call("MoveDatastoreFile_Task", "urn:vim25/5.5", request)
+	response := &MoveDatastoreFile_TaskResponse{}
+	err := service.client.Call("MoveDatastoreFile_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &MoveDatastoreFile_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29307,30 +27747,13 @@ func (service *VimPortType) MoveDatastoreFile_Task(request *MoveDatastoreFileReq
 * - RuntimeFault
  */
 func (service *VimPortType) CopyDatastoreFile_Task(request *CopyDatastoreFileRequestType) (*CopyDatastoreFile_TaskResponse, error) {
-	data, err := service.call("CopyDatastoreFile_Task", "urn:vim25/5.5", request)
+	response := &CopyDatastoreFile_TaskResponse{}
+	err := service.client.Call("CopyDatastoreFile_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CopyDatastoreFile_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29341,30 +27764,13 @@ func (service *VimPortType) CopyDatastoreFile_Task(request *CopyDatastoreFileReq
 * - RuntimeFault
  */
 func (service *VimPortType) DeleteDatastoreFile_Task(request *DeleteDatastoreFileRequestType) (*DeleteDatastoreFile_TaskResponse, error) {
-	data, err := service.call("DeleteDatastoreFile_Task", "urn:vim25/5.5", request)
+	response := &DeleteDatastoreFile_TaskResponse{}
+	err := service.client.Call("DeleteDatastoreFile_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DeleteDatastoreFile_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29375,30 +27781,13 @@ func (service *VimPortType) DeleteDatastoreFile_Task(request *DeleteDatastoreFil
 * - RuntimeFault
  */
 func (service *VimPortType) MakeDirectory(request *MakeDirectoryRequestType) (*MakeDirectoryResponse, error) {
-	data, err := service.call("MakeDirectory", "urn:vim25/5.5", request)
+	response := &MakeDirectoryResponse{}
+	err := service.client.Call("MakeDirectory", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &MakeDirectoryResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29410,30 +27799,13 @@ func (service *VimPortType) MakeDirectory(request *MakeDirectoryRequestType) (*M
 * - RuntimeFault
  */
 func (service *VimPortType) ChangeOwner(request *ChangeOwnerRequestType) (*ChangeOwnerResponse, error) {
-	data, err := service.call("ChangeOwner", "urn:vim25/5.5", request)
+	response := &ChangeOwnerResponse{}
+	err := service.client.Call("ChangeOwner", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ChangeOwnerResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29444,30 +27816,13 @@ func (service *VimPortType) ChangeOwner(request *ChangeOwnerRequestType) (*Chang
 * - RuntimeFault
  */
 func (service *VimPortType) CreateFolder(request *CreateFolderRequestType) (*CreateFolderResponse, error) {
-	data, err := service.call("CreateFolder", "urn:vim25/5.5", request)
+	response := &CreateFolderResponse{}
+	err := service.client.Call("CreateFolder", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateFolderResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29479,30 +27834,13 @@ func (service *VimPortType) CreateFolder(request *CreateFolderRequestType) (*Cre
 * - RuntimeFault
  */
 func (service *VimPortType) MoveIntoFolder_Task(request *MoveIntoFolderRequestType) (*MoveIntoFolder_TaskResponse, error) {
-	data, err := service.call("MoveIntoFolder_Task", "urn:vim25/5.5", request)
+	response := &MoveIntoFolder_TaskResponse{}
+	err := service.client.Call("MoveIntoFolder_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &MoveIntoFolder_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29520,30 +27858,13 @@ func (service *VimPortType) MoveIntoFolder_Task(request *MoveIntoFolderRequestTy
 * - RuntimeFault
  */
 func (service *VimPortType) CreateVM_Task(request *CreateVMRequestType) (*CreateVM_TaskResponse, error) {
-	data, err := service.call("CreateVM_Task", "urn:vim25/5.5", request)
+	response := &CreateVM_TaskResponse{}
+	err := service.client.Call("CreateVM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateVM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29562,30 +27883,13 @@ func (service *VimPortType) CreateVM_Task(request *CreateVMRequestType) (*Create
 * - RuntimeFault
  */
 func (service *VimPortType) RegisterVM_Task(request *RegisterVMRequestType) (*RegisterVM_TaskResponse, error) {
-	data, err := service.call("RegisterVM_Task", "urn:vim25/5.5", request)
+	response := &RegisterVM_TaskResponse{}
+	err := service.client.Call("RegisterVM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RegisterVM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29596,30 +27900,13 @@ func (service *VimPortType) RegisterVM_Task(request *RegisterVMRequestType) (*Re
 * - RuntimeFault
  */
 func (service *VimPortType) CreateCluster(request *CreateClusterRequestType) (*CreateClusterResponse, error) {
-	data, err := service.call("CreateCluster", "urn:vim25/5.5", request)
+	response := &CreateClusterResponse{}
+	err := service.client.Call("CreateCluster", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateClusterResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29630,30 +27917,13 @@ func (service *VimPortType) CreateCluster(request *CreateClusterRequestType) (*C
 * - RuntimeFault
  */
 func (service *VimPortType) CreateClusterEx(request *CreateClusterExRequestType) (*CreateClusterExResponse, error) {
-	data, err := service.call("CreateClusterEx", "urn:vim25/5.5", request)
+	response := &CreateClusterExResponse{}
+	err := service.client.Call("CreateClusterEx", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateClusterExResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29665,30 +27935,13 @@ func (service *VimPortType) CreateClusterEx(request *CreateClusterExRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) AddStandaloneHost_Task(request *AddStandaloneHostRequestType) (*AddStandaloneHost_TaskResponse, error) {
-	data, err := service.call("AddStandaloneHost_Task", "urn:vim25/5.5", request)
+	response := &AddStandaloneHost_TaskResponse{}
+	err := service.client.Call("AddStandaloneHost_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AddStandaloneHost_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29699,30 +27952,13 @@ func (service *VimPortType) AddStandaloneHost_Task(request *AddStandaloneHostReq
 * - RuntimeFault
  */
 func (service *VimPortType) CreateDatacenter(request *CreateDatacenterRequestType) (*CreateDatacenterResponse, error) {
-	data, err := service.call("CreateDatacenter", "urn:vim25/5.5", request)
+	response := &CreateDatacenterResponse{}
+	err := service.client.Call("CreateDatacenter", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateDatacenterResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29733,30 +27969,13 @@ func (service *VimPortType) CreateDatacenter(request *CreateDatacenterRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) UnregisterAndDestroy_Task(request *UnregisterAndDestroyRequestType) (*UnregisterAndDestroy_TaskResponse, error) {
-	data, err := service.call("UnregisterAndDestroy_Task", "urn:vim25/5.5", request)
+	response := &UnregisterAndDestroy_TaskResponse{}
+	err := service.client.Call("UnregisterAndDestroy_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UnregisterAndDestroy_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29770,30 +27989,13 @@ func (service *VimPortType) UnregisterAndDestroy_Task(request *UnregisterAndDest
 * - RuntimeFault
  */
 func (service *VimPortType) CreateDVS_Task(request *CreateDVSRequestType) (*CreateDVS_TaskResponse, error) {
-	data, err := service.call("CreateDVS_Task", "urn:vim25/5.5", request)
+	response := &CreateDVS_TaskResponse{}
+	err := service.client.Call("CreateDVS_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateDVS_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29804,30 +28006,13 @@ func (service *VimPortType) CreateDVS_Task(request *CreateDVSRequestType) (*Crea
 * - RuntimeFault
  */
 func (service *VimPortType) CreateStoragePod(request *CreateStoragePodRequestType) (*CreateStoragePodResponse, error) {
-	data, err := service.call("CreateStoragePod", "urn:vim25/5.5", request)
+	response := &CreateStoragePodResponse{}
+	err := service.client.Call("CreateStoragePod", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateStoragePodResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29836,30 +28021,13 @@ func (service *VimPortType) CreateStoragePod(request *CreateStoragePodRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) SetCollectorPageSize(request *SetCollectorPageSizeRequestType) (*SetCollectorPageSizeResponse, error) {
-	data, err := service.call("SetCollectorPageSize", "urn:vim25/5.5", request)
+	response := &SetCollectorPageSizeResponse{}
+	err := service.client.Call("SetCollectorPageSize", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &SetCollectorPageSizeResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29868,30 +28036,13 @@ func (service *VimPortType) SetCollectorPageSize(request *SetCollectorPageSizeRe
 * - RuntimeFault
  */
 func (service *VimPortType) RewindCollector(request *RewindCollectorRequestType) (*RewindCollectorResponse, error) {
-	data, err := service.call("RewindCollector", "urn:vim25/5.5", request)
+	response := &RewindCollectorResponse{}
+	err := service.client.Call("RewindCollector", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RewindCollectorResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29900,30 +28051,13 @@ func (service *VimPortType) RewindCollector(request *RewindCollectorRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) ResetCollector(request *ResetCollectorRequestType) (*ResetCollectorResponse, error) {
-	data, err := service.call("ResetCollector", "urn:vim25/5.5", request)
+	response := &ResetCollectorResponse{}
+	err := service.client.Call("ResetCollector", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ResetCollectorResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29932,30 +28066,13 @@ func (service *VimPortType) ResetCollector(request *ResetCollectorRequestType) (
 * - RuntimeFault
  */
 func (service *VimPortType) DestroyCollector(request *DestroyCollectorRequestType) (*DestroyCollectorResponse, error) {
-	data, err := service.call("DestroyCollector", "urn:vim25/5.5", request)
+	response := &DestroyCollectorResponse{}
+	err := service.client.Call("DestroyCollector", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DestroyCollectorResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29964,30 +28081,13 @@ func (service *VimPortType) DestroyCollector(request *DestroyCollectorRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) QueryTpmAttestationReport(request *QueryTpmAttestationReportRequestType) (*QueryTpmAttestationReportResponse, error) {
-	data, err := service.call("QueryTpmAttestationReport", "urn:vim25/5.5", request)
+	response := &QueryTpmAttestationReportResponse{}
+	err := service.client.Call("QueryTpmAttestationReport", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryTpmAttestationReportResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -29996,30 +28096,13 @@ func (service *VimPortType) QueryTpmAttestationReport(request *QueryTpmAttestati
 * - RuntimeFault
  */
 func (service *VimPortType) QueryHostConnectionInfo(request *QueryHostConnectionInfoRequestType) (*QueryHostConnectionInfoResponse, error) {
-	data, err := service.call("QueryHostConnectionInfo", "urn:vim25/5.5", request)
+	response := &QueryHostConnectionInfoResponse{}
+	err := service.client.Call("QueryHostConnectionInfo", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryHostConnectionInfoResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30028,30 +28111,13 @@ func (service *VimPortType) QueryHostConnectionInfo(request *QueryHostConnection
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateSystemResources(request *UpdateSystemResourcesRequestType) (*UpdateSystemResourcesResponse, error) {
-	data, err := service.call("UpdateSystemResources", "urn:vim25/5.5", request)
+	response := &UpdateSystemResourcesResponse{}
+	err := service.client.Call("UpdateSystemResources", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateSystemResourcesResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30060,30 +28126,13 @@ func (service *VimPortType) UpdateSystemResources(request *UpdateSystemResources
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateSystemSwapConfiguration(request *UpdateSystemSwapConfigurationRequestType) (*UpdateSystemSwapConfigurationResponse, error) {
-	data, err := service.call("UpdateSystemSwapConfiguration", "urn:vim25/5.5", request)
+	response := &UpdateSystemSwapConfigurationResponse{}
+	err := service.client.Call("UpdateSystemSwapConfiguration", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateSystemSwapConfigurationResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30096,30 +28145,13 @@ func (service *VimPortType) UpdateSystemSwapConfiguration(request *UpdateSystemS
 * - RuntimeFault
  */
 func (service *VimPortType) ReconnectHost_Task(request *ReconnectHostRequestType) (*ReconnectHost_TaskResponse, error) {
-	data, err := service.call("ReconnectHost_Task", "urn:vim25/5.5", request)
+	response := &ReconnectHost_TaskResponse{}
+	err := service.client.Call("ReconnectHost_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ReconnectHost_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30128,30 +28160,13 @@ func (service *VimPortType) ReconnectHost_Task(request *ReconnectHostRequestType
 * - RuntimeFault
  */
 func (service *VimPortType) DisconnectHost_Task(request *DisconnectHostRequestType) (*DisconnectHost_TaskResponse, error) {
-	data, err := service.call("DisconnectHost_Task", "urn:vim25/5.5", request)
+	response := &DisconnectHost_TaskResponse{}
+	err := service.client.Call("DisconnectHost_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DisconnectHost_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30162,30 +28177,13 @@ func (service *VimPortType) DisconnectHost_Task(request *DisconnectHostRequestTy
 * - RuntimeFault
  */
 func (service *VimPortType) EnterMaintenanceMode_Task(request *EnterMaintenanceModeRequestType) (*EnterMaintenanceMode_TaskResponse, error) {
-	data, err := service.call("EnterMaintenanceMode_Task", "urn:vim25/5.5", request)
+	response := &EnterMaintenanceMode_TaskResponse{}
+	err := service.client.Call("EnterMaintenanceMode_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &EnterMaintenanceMode_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30196,30 +28194,13 @@ func (service *VimPortType) EnterMaintenanceMode_Task(request *EnterMaintenanceM
 * - RuntimeFault
  */
 func (service *VimPortType) ExitMaintenanceMode_Task(request *ExitMaintenanceModeRequestType) (*ExitMaintenanceMode_TaskResponse, error) {
-	data, err := service.call("ExitMaintenanceMode_Task", "urn:vim25/5.5", request)
+	response := &ExitMaintenanceMode_TaskResponse{}
+	err := service.client.Call("ExitMaintenanceMode_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ExitMaintenanceMode_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30229,30 +28210,13 @@ func (service *VimPortType) ExitMaintenanceMode_Task(request *ExitMaintenanceMod
 * - RuntimeFault
  */
 func (service *VimPortType) RebootHost_Task(request *RebootHostRequestType) (*RebootHost_TaskResponse, error) {
-	data, err := service.call("RebootHost_Task", "urn:vim25/5.5", request)
+	response := &RebootHost_TaskResponse{}
+	err := service.client.Call("RebootHost_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RebootHost_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30262,30 +28226,13 @@ func (service *VimPortType) RebootHost_Task(request *RebootHostRequestType) (*Re
 * - RuntimeFault
  */
 func (service *VimPortType) ShutdownHost_Task(request *ShutdownHostRequestType) (*ShutdownHost_TaskResponse, error) {
-	data, err := service.call("ShutdownHost_Task", "urn:vim25/5.5", request)
+	response := &ShutdownHost_TaskResponse{}
+	err := service.client.Call("ShutdownHost_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ShutdownHost_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30299,30 +28246,13 @@ func (service *VimPortType) ShutdownHost_Task(request *ShutdownHostRequestType) 
 * - RuntimeFault
  */
 func (service *VimPortType) PowerDownHostToStandBy_Task(request *PowerDownHostToStandByRequestType) (*PowerDownHostToStandBy_TaskResponse, error) {
-	data, err := service.call("PowerDownHostToStandBy_Task", "urn:vim25/5.5", request)
+	response := &PowerDownHostToStandBy_TaskResponse{}
+	err := service.client.Call("PowerDownHostToStandBy_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &PowerDownHostToStandBy_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30335,30 +28265,13 @@ func (service *VimPortType) PowerDownHostToStandBy_Task(request *PowerDownHostTo
 * - RuntimeFault
  */
 func (service *VimPortType) PowerUpHostFromStandBy_Task(request *PowerUpHostFromStandByRequestType) (*PowerUpHostFromStandBy_TaskResponse, error) {
-	data, err := service.call("PowerUpHostFromStandBy_Task", "urn:vim25/5.5", request)
+	response := &PowerUpHostFromStandBy_TaskResponse{}
+	err := service.client.Call("PowerUpHostFromStandBy_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &PowerUpHostFromStandBy_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30367,30 +28280,13 @@ func (service *VimPortType) PowerUpHostFromStandBy_Task(request *PowerUpHostFrom
 * - RuntimeFault
  */
 func (service *VimPortType) QueryMemoryOverhead(request *QueryMemoryOverheadRequestType) (*QueryMemoryOverheadResponse, error) {
-	data, err := service.call("QueryMemoryOverhead", "urn:vim25/5.5", request)
+	response := &QueryMemoryOverheadResponse{}
+	err := service.client.Call("QueryMemoryOverhead", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryMemoryOverheadResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30399,30 +28295,13 @@ func (service *VimPortType) QueryMemoryOverhead(request *QueryMemoryOverheadRequ
 * - RuntimeFault
  */
 func (service *VimPortType) QueryMemoryOverheadEx(request *QueryMemoryOverheadExRequestType) (*QueryMemoryOverheadExResponse, error) {
-	data, err := service.call("QueryMemoryOverheadEx", "urn:vim25/5.5", request)
+	response := &QueryMemoryOverheadExResponse{}
+	err := service.client.Call("QueryMemoryOverheadEx", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryMemoryOverheadExResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30432,30 +28311,13 @@ func (service *VimPortType) QueryMemoryOverheadEx(request *QueryMemoryOverheadEx
 * - RuntimeFault
  */
 func (service *VimPortType) ReconfigureHostForDAS_Task(request *ReconfigureHostForDASRequestType) (*ReconfigureHostForDAS_TaskResponse, error) {
-	data, err := service.call("ReconfigureHostForDAS_Task", "urn:vim25/5.5", request)
+	response := &ReconfigureHostForDAS_TaskResponse{}
+	err := service.client.Call("ReconfigureHostForDAS_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ReconfigureHostForDAS_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30464,30 +28326,13 @@ func (service *VimPortType) ReconfigureHostForDAS_Task(request *ReconfigureHostF
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateFlags(request *UpdateFlagsRequestType) (*UpdateFlagsResponse, error) {
-	data, err := service.call("UpdateFlags", "urn:vim25/5.5", request)
+	response := &UpdateFlagsResponse{}
+	err := service.client.Call("UpdateFlags", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateFlagsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30497,30 +28342,13 @@ func (service *VimPortType) UpdateFlags(request *UpdateFlagsRequestType) (*Updat
 * - RuntimeFault
  */
 func (service *VimPortType) EnterLockdownMode(request *EnterLockdownModeRequestType) (*EnterLockdownModeResponse, error) {
-	data, err := service.call("EnterLockdownMode", "urn:vim25/5.5", request)
+	response := &EnterLockdownModeResponse{}
+	err := service.client.Call("EnterLockdownMode", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &EnterLockdownModeResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30530,30 +28358,13 @@ func (service *VimPortType) EnterLockdownMode(request *EnterLockdownModeRequestT
 * - RuntimeFault
  */
 func (service *VimPortType) ExitLockdownMode(request *ExitLockdownModeRequestType) (*ExitLockdownModeResponse, error) {
-	data, err := service.call("ExitLockdownMode", "urn:vim25/5.5", request)
+	response := &ExitLockdownModeResponse{}
+	err := service.client.Call("ExitLockdownMode", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ExitLockdownModeResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30562,30 +28373,13 @@ func (service *VimPortType) ExitLockdownMode(request *ExitLockdownModeRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) AcquireCimServicesTicket(request *AcquireCimServicesTicketRequestType) (*AcquireCimServicesTicketResponse, error) {
-	data, err := service.call("AcquireCimServicesTicket", "urn:vim25/5.5", request)
+	response := &AcquireCimServicesTicketResponse{}
+	err := service.client.Call("AcquireCimServicesTicket", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AcquireCimServicesTicketResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30596,30 +28390,13 @@ func (service *VimPortType) AcquireCimServicesTicket(request *AcquireCimServices
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateIpmi(request *UpdateIpmiRequestType) (*UpdateIpmiResponse, error) {
-	data, err := service.call("UpdateIpmi", "urn:vim25/5.5", request)
+	response := &UpdateIpmiResponse{}
+	err := service.client.Call("UpdateIpmi", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateIpmiResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30628,30 +28405,13 @@ func (service *VimPortType) UpdateIpmi(request *UpdateIpmiRequestType) (*UpdateI
 * - RuntimeFault
  */
 func (service *VimPortType) RetrieveHardwareUptime(request *RetrieveHardwareUptimeRequestType) (*RetrieveHardwareUptimeResponse, error) {
-	data, err := service.call("RetrieveHardwareUptime", "urn:vim25/5.5", request)
+	response := &RetrieveHardwareUptimeResponse{}
+	err := service.client.Call("RetrieveHardwareUptime", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RetrieveHardwareUptimeResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30662,30 +28422,13 @@ func (service *VimPortType) RetrieveHardwareUptime(request *RetrieveHardwareUpti
 * - RuntimeFault
  */
 func (service *VimPortType) HttpNfcLeaseGetManifest(request *HttpNfcLeaseGetManifestRequestType) (*HttpNfcLeaseGetManifestResponse, error) {
-	data, err := service.call("HttpNfcLeaseGetManifest", "urn:vim25/5.5", request)
+	response := &HttpNfcLeaseGetManifestResponse{}
+	err := service.client.Call("HttpNfcLeaseGetManifest", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &HttpNfcLeaseGetManifestResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30696,30 +28439,13 @@ func (service *VimPortType) HttpNfcLeaseGetManifest(request *HttpNfcLeaseGetMani
 * - RuntimeFault
  */
 func (service *VimPortType) HttpNfcLeaseComplete(request *HttpNfcLeaseCompleteRequestType) (*HttpNfcLeaseCompleteResponse, error) {
-	data, err := service.call("HttpNfcLeaseComplete", "urn:vim25/5.5", request)
+	response := &HttpNfcLeaseCompleteResponse{}
+	err := service.client.Call("HttpNfcLeaseComplete", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &HttpNfcLeaseCompleteResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30730,30 +28456,13 @@ func (service *VimPortType) HttpNfcLeaseComplete(request *HttpNfcLeaseCompleteRe
 * - RuntimeFault
  */
 func (service *VimPortType) HttpNfcLeaseAbort(request *HttpNfcLeaseAbortRequestType) (*HttpNfcLeaseAbortResponse, error) {
-	data, err := service.call("HttpNfcLeaseAbort", "urn:vim25/5.5", request)
+	response := &HttpNfcLeaseAbortResponse{}
+	err := service.client.Call("HttpNfcLeaseAbort", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &HttpNfcLeaseAbortResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30763,30 +28472,13 @@ func (service *VimPortType) HttpNfcLeaseAbort(request *HttpNfcLeaseAbortRequestT
 * - RuntimeFault
  */
 func (service *VimPortType) HttpNfcLeaseProgress(request *HttpNfcLeaseProgressRequestType) (*HttpNfcLeaseProgressResponse, error) {
-	data, err := service.call("HttpNfcLeaseProgress", "urn:vim25/5.5", request)
+	response := &HttpNfcLeaseProgressResponse{}
+	err := service.client.Call("HttpNfcLeaseProgress", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &HttpNfcLeaseProgressResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30795,30 +28487,13 @@ func (service *VimPortType) HttpNfcLeaseProgress(request *HttpNfcLeaseProgressRe
 * - RuntimeFault
  */
 func (service *VimPortType) QueryIpPools(request *QueryIpPoolsRequestType) (*QueryIpPoolsResponse, error) {
-	data, err := service.call("QueryIpPools", "urn:vim25/5.5", request)
+	response := &QueryIpPoolsResponse{}
+	err := service.client.Call("QueryIpPools", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryIpPoolsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30827,30 +28502,13 @@ func (service *VimPortType) QueryIpPools(request *QueryIpPoolsRequestType) (*Que
 * - RuntimeFault
  */
 func (service *VimPortType) CreateIpPool(request *CreateIpPoolRequestType) (*CreateIpPoolResponse, error) {
-	data, err := service.call("CreateIpPool", "urn:vim25/5.5", request)
+	response := &CreateIpPoolResponse{}
+	err := service.client.Call("CreateIpPool", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateIpPoolResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30859,30 +28517,13 @@ func (service *VimPortType) CreateIpPool(request *CreateIpPoolRequestType) (*Cre
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateIpPool(request *UpdateIpPoolRequestType) (*UpdateIpPoolResponse, error) {
-	data, err := service.call("UpdateIpPool", "urn:vim25/5.5", request)
+	response := &UpdateIpPoolResponse{}
+	err := service.client.Call("UpdateIpPool", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateIpPoolResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30892,30 +28533,13 @@ func (service *VimPortType) UpdateIpPool(request *UpdateIpPoolRequestType) (*Upd
 * - RuntimeFault
  */
 func (service *VimPortType) DestroyIpPool(request *DestroyIpPoolRequestType) (*DestroyIpPoolResponse, error) {
-	data, err := service.call("DestroyIpPool", "urn:vim25/5.5", request)
+	response := &DestroyIpPoolResponse{}
+	err := service.client.Call("DestroyIpPool", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DestroyIpPoolResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30924,30 +28548,13 @@ func (service *VimPortType) DestroyIpPool(request *DestroyIpPoolRequestType) (*D
 * - RuntimeFault
  */
 func (service *VimPortType) AllocateIpv4Address(request *AllocateIpv4AddressRequestType) (*AllocateIpv4AddressResponse, error) {
-	data, err := service.call("AllocateIpv4Address", "urn:vim25/5.5", request)
+	response := &AllocateIpv4AddressResponse{}
+	err := service.client.Call("AllocateIpv4Address", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AllocateIpv4AddressResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30956,30 +28563,13 @@ func (service *VimPortType) AllocateIpv4Address(request *AllocateIpv4AddressRequ
 * - RuntimeFault
  */
 func (service *VimPortType) AllocateIpv6Address(request *AllocateIpv6AddressRequestType) (*AllocateIpv6AddressResponse, error) {
-	data, err := service.call("AllocateIpv6Address", "urn:vim25/5.5", request)
+	response := &AllocateIpv6AddressResponse{}
+	err := service.client.Call("AllocateIpv6Address", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AllocateIpv6AddressResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -30988,30 +28578,13 @@ func (service *VimPortType) AllocateIpv6Address(request *AllocateIpv6AddressRequ
 * - RuntimeFault
  */
 func (service *VimPortType) ReleaseIpAllocation(request *ReleaseIpAllocationRequestType) (*ReleaseIpAllocationResponse, error) {
-	data, err := service.call("ReleaseIpAllocation", "urn:vim25/5.5", request)
+	response := &ReleaseIpAllocationResponse{}
+	err := service.client.Call("ReleaseIpAllocation", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ReleaseIpAllocationResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31020,30 +28593,13 @@ func (service *VimPortType) ReleaseIpAllocation(request *ReleaseIpAllocationRequ
 * - RuntimeFault
  */
 func (service *VimPortType) QueryIPAllocations(request *QueryIPAllocationsRequestType) (*QueryIPAllocationsResponse, error) {
-	data, err := service.call("QueryIPAllocations", "urn:vim25/5.5", request)
+	response := &QueryIPAllocationsResponse{}
+	err := service.client.Call("QueryIPAllocations", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryIPAllocationsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31053,30 +28609,13 @@ func (service *VimPortType) QueryIPAllocations(request *QueryIPAllocationsReques
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateAssignedLicense(request *UpdateAssignedLicenseRequestType) (*UpdateAssignedLicenseResponse, error) {
-	data, err := service.call("UpdateAssignedLicense", "urn:vim25/5.5", request)
+	response := &UpdateAssignedLicenseResponse{}
+	err := service.client.Call("UpdateAssignedLicense", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateAssignedLicenseResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31086,30 +28625,13 @@ func (service *VimPortType) UpdateAssignedLicense(request *UpdateAssignedLicense
 * - RuntimeFault
  */
 func (service *VimPortType) RemoveAssignedLicense(request *RemoveAssignedLicenseRequestType) (*RemoveAssignedLicenseResponse, error) {
-	data, err := service.call("RemoveAssignedLicense", "urn:vim25/5.5", request)
+	response := &RemoveAssignedLicenseResponse{}
+	err := service.client.Call("RemoveAssignedLicense", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RemoveAssignedLicenseResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31118,30 +28640,13 @@ func (service *VimPortType) RemoveAssignedLicense(request *RemoveAssignedLicense
 * - RuntimeFault
  */
 func (service *VimPortType) QueryAssignedLicenses(request *QueryAssignedLicensesRequestType) (*QueryAssignedLicensesResponse, error) {
-	data, err := service.call("QueryAssignedLicenses", "urn:vim25/5.5", request)
+	response := &QueryAssignedLicensesResponse{}
+	err := service.client.Call("QueryAssignedLicenses", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryAssignedLicensesResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31150,30 +28655,13 @@ func (service *VimPortType) QueryAssignedLicenses(request *QueryAssignedLicenses
 * - RuntimeFault
  */
 func (service *VimPortType) QuerySupportedFeatures(request *QuerySupportedFeaturesRequestType) (*QuerySupportedFeaturesResponse, error) {
-	data, err := service.call("QuerySupportedFeatures", "urn:vim25/5.5", request)
+	response := &QuerySupportedFeaturesResponse{}
+	err := service.client.Call("QuerySupportedFeatures", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QuerySupportedFeaturesResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31182,30 +28670,13 @@ func (service *VimPortType) QuerySupportedFeatures(request *QuerySupportedFeatur
 * - RuntimeFault
  */
 func (service *VimPortType) QueryLicenseSourceAvailability(request *QueryLicenseSourceAvailabilityRequestType) (*QueryLicenseSourceAvailabilityResponse, error) {
-	data, err := service.call("QueryLicenseSourceAvailability", "urn:vim25/5.5", request)
+	response := &QueryLicenseSourceAvailabilityResponse{}
+	err := service.client.Call("QueryLicenseSourceAvailability", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryLicenseSourceAvailabilityResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31214,30 +28685,13 @@ func (service *VimPortType) QueryLicenseSourceAvailability(request *QueryLicense
 * - RuntimeFault
  */
 func (service *VimPortType) QueryLicenseUsage(request *QueryLicenseUsageRequestType) (*QueryLicenseUsageResponse, error) {
-	data, err := service.call("QueryLicenseUsage", "urn:vim25/5.5", request)
+	response := &QueryLicenseUsageResponse{}
+	err := service.client.Call("QueryLicenseUsage", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryLicenseUsageResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31248,30 +28702,13 @@ func (service *VimPortType) QueryLicenseUsage(request *QueryLicenseUsageRequestT
 * - RuntimeFault
  */
 func (service *VimPortType) SetLicenseEdition(request *SetLicenseEditionRequestType) (*SetLicenseEditionResponse, error) {
-	data, err := service.call("SetLicenseEdition", "urn:vim25/5.5", request)
+	response := &SetLicenseEditionResponse{}
+	err := service.client.Call("SetLicenseEdition", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &SetLicenseEditionResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31281,30 +28718,13 @@ func (service *VimPortType) SetLicenseEdition(request *SetLicenseEditionRequestT
 * - RuntimeFault
  */
 func (service *VimPortType) CheckLicenseFeature(request *CheckLicenseFeatureRequestType) (*CheckLicenseFeatureResponse, error) {
-	data, err := service.call("CheckLicenseFeature", "urn:vim25/5.5", request)
+	response := &CheckLicenseFeatureResponse{}
+	err := service.client.Call("CheckLicenseFeature", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CheckLicenseFeatureResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31315,30 +28735,13 @@ func (service *VimPortType) CheckLicenseFeature(request *CheckLicenseFeatureRequ
 * - RuntimeFault
  */
 func (service *VimPortType) EnableFeature(request *EnableFeatureRequestType) (*EnableFeatureResponse, error) {
-	data, err := service.call("EnableFeature", "urn:vim25/5.5", request)
+	response := &EnableFeatureResponse{}
+	err := service.client.Call("EnableFeature", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &EnableFeatureResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31349,30 +28752,13 @@ func (service *VimPortType) EnableFeature(request *EnableFeatureRequestType) (*E
 * - RuntimeFault
  */
 func (service *VimPortType) DisableFeature(request *DisableFeatureRequestType) (*DisableFeatureResponse, error) {
-	data, err := service.call("DisableFeature", "urn:vim25/5.5", request)
+	response := &DisableFeatureResponse{}
+	err := service.client.Call("DisableFeature", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DisableFeatureResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31384,30 +28770,13 @@ func (service *VimPortType) DisableFeature(request *DisableFeatureRequestType) (
 * - RuntimeFault
  */
 func (service *VimPortType) ConfigureLicenseSource(request *ConfigureLicenseSourceRequestType) (*ConfigureLicenseSourceResponse, error) {
-	data, err := service.call("ConfigureLicenseSource", "urn:vim25/5.5", request)
+	response := &ConfigureLicenseSourceResponse{}
+	err := service.client.Call("ConfigureLicenseSource", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ConfigureLicenseSourceResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31416,30 +28785,13 @@ func (service *VimPortType) ConfigureLicenseSource(request *ConfigureLicenseSour
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateLicense(request *UpdateLicenseRequestType) (*UpdateLicenseResponse, error) {
-	data, err := service.call("UpdateLicense", "urn:vim25/5.5", request)
+	response := &UpdateLicenseResponse{}
+	err := service.client.Call("UpdateLicense", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateLicenseResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31448,30 +28800,13 @@ func (service *VimPortType) UpdateLicense(request *UpdateLicenseRequestType) (*U
 * - RuntimeFault
  */
 func (service *VimPortType) AddLicense(request *AddLicenseRequestType) (*AddLicenseResponse, error) {
-	data, err := service.call("AddLicense", "urn:vim25/5.5", request)
+	response := &AddLicenseResponse{}
+	err := service.client.Call("AddLicense", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AddLicenseResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31480,30 +28815,13 @@ func (service *VimPortType) AddLicense(request *AddLicenseRequestType) (*AddLice
 * - RuntimeFault
  */
 func (service *VimPortType) RemoveLicense(request *RemoveLicenseRequestType) (*RemoveLicenseResponse, error) {
-	data, err := service.call("RemoveLicense", "urn:vim25/5.5", request)
+	response := &RemoveLicenseResponse{}
+	err := service.client.Call("RemoveLicense", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RemoveLicenseResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31512,30 +28830,13 @@ func (service *VimPortType) RemoveLicense(request *RemoveLicenseRequestType) (*R
 * - RuntimeFault
  */
 func (service *VimPortType) DecodeLicense(request *DecodeLicenseRequestType) (*DecodeLicenseResponse, error) {
-	data, err := service.call("DecodeLicense", "urn:vim25/5.5", request)
+	response := &DecodeLicenseResponse{}
+	err := service.client.Call("DecodeLicense", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DecodeLicenseResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31544,30 +28845,13 @@ func (service *VimPortType) DecodeLicense(request *DecodeLicenseRequestType) (*D
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateLicenseLabel(request *UpdateLicenseLabelRequestType) (*UpdateLicenseLabelResponse, error) {
-	data, err := service.call("UpdateLicenseLabel", "urn:vim25/5.5", request)
+	response := &UpdateLicenseLabelResponse{}
+	err := service.client.Call("UpdateLicenseLabel", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateLicenseLabelResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31576,30 +28860,13 @@ func (service *VimPortType) UpdateLicenseLabel(request *UpdateLicenseLabelReques
 * - RuntimeFault
  */
 func (service *VimPortType) RemoveLicenseLabel(request *RemoveLicenseLabelRequestType) (*RemoveLicenseLabelResponse, error) {
-	data, err := service.call("RemoveLicenseLabel", "urn:vim25/5.5", request)
+	response := &RemoveLicenseLabelResponse{}
+	err := service.client.Call("RemoveLicenseLabel", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RemoveLicenseLabelResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31608,30 +28875,13 @@ func (service *VimPortType) RemoveLicenseLabel(request *RemoveLicenseLabelReques
 * - RuntimeFault
  */
 func (service *VimPortType) Reload(request *ReloadRequestType) (*ReloadResponse, error) {
-	data, err := service.call("Reload", "urn:vim25/5.5", request)
+	response := &ReloadResponse{}
+	err := service.client.Call("Reload", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ReloadResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31642,30 +28892,13 @@ func (service *VimPortType) Reload(request *ReloadRequestType) (*ReloadResponse,
 * - RuntimeFault
  */
 func (service *VimPortType) Rename_Task(request *RenameRequestType) (*Rename_TaskResponse, error) {
-	data, err := service.call("Rename_Task", "urn:vim25/5.5", request)
+	response := &Rename_TaskResponse{}
+	err := service.client.Call("Rename_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &Rename_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31675,30 +28908,13 @@ func (service *VimPortType) Rename_Task(request *RenameRequestType) (*Rename_Tas
 * - RuntimeFault
  */
 func (service *VimPortType) Destroy_Task(request *DestroyRequestType) (*Destroy_TaskResponse, error) {
-	data, err := service.call("Destroy_Task", "urn:vim25/5.5", request)
+	response := &Destroy_TaskResponse{}
+	err := service.client.Call("Destroy_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &Destroy_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31708,30 +28924,13 @@ func (service *VimPortType) Destroy_Task(request *DestroyRequestType) (*Destroy_
 * - RuntimeFault
  */
 func (service *VimPortType) DestroyNetwork(request *DestroyNetworkRequestType) (*DestroyNetworkResponse, error) {
-	data, err := service.call("DestroyNetwork", "urn:vim25/5.5", request)
+	response := &DestroyNetworkResponse{}
+	err := service.client.Call("DestroyNetwork", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DestroyNetworkResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31744,30 +28943,13 @@ func (service *VimPortType) DestroyNetwork(request *DestroyNetworkRequestType) (
 * - RuntimeFault
  */
 func (service *VimPortType) ValidateHost(request *ValidateHostRequestType) (*ValidateHostResponse, error) {
-	data, err := service.call("ValidateHost", "urn:vim25/5.5", request)
+	response := &ValidateHostResponse{}
+	err := service.client.Call("ValidateHost", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ValidateHostResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31781,30 +28963,13 @@ func (service *VimPortType) ValidateHost(request *ValidateHostRequestType) (*Val
 * - RuntimeFault
  */
 func (service *VimPortType) ParseDescriptor(request *ParseDescriptorRequestType) (*ParseDescriptorResponse, error) {
-	data, err := service.call("ParseDescriptor", "urn:vim25/5.5", request)
+	response := &ParseDescriptorResponse{}
+	err := service.client.Call("ParseDescriptor", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ParseDescriptorResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31819,30 +28984,13 @@ func (service *VimPortType) ParseDescriptor(request *ParseDescriptorRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) CreateImportSpec(request *CreateImportSpecRequestType) (*CreateImportSpecResponse, error) {
-	data, err := service.call("CreateImportSpec", "urn:vim25/5.5", request)
+	response := &CreateImportSpecResponse{}
+	err := service.client.Call("CreateImportSpec", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateImportSpecResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31856,30 +29004,13 @@ func (service *VimPortType) CreateImportSpec(request *CreateImportSpecRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) CreateDescriptor(request *CreateDescriptorRequestType) (*CreateDescriptorResponse, error) {
-	data, err := service.call("CreateDescriptor", "urn:vim25/5.5", request)
+	response := &CreateDescriptorResponse{}
+	err := service.client.Call("CreateDescriptor", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateDescriptorResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31888,30 +29019,13 @@ func (service *VimPortType) CreateDescriptor(request *CreateDescriptorRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) QueryPerfProviderSummary(request *QueryPerfProviderSummaryRequestType) (*QueryPerfProviderSummaryResponse, error) {
-	data, err := service.call("QueryPerfProviderSummary", "urn:vim25/5.5", request)
+	response := &QueryPerfProviderSummaryResponse{}
+	err := service.client.Call("QueryPerfProviderSummary", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryPerfProviderSummaryResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31920,30 +29034,13 @@ func (service *VimPortType) QueryPerfProviderSummary(request *QueryPerfProviderS
 * - RuntimeFault
  */
 func (service *VimPortType) QueryAvailablePerfMetric(request *QueryAvailablePerfMetricRequestType) (*QueryAvailablePerfMetricResponse, error) {
-	data, err := service.call("QueryAvailablePerfMetric", "urn:vim25/5.5", request)
+	response := &QueryAvailablePerfMetricResponse{}
+	err := service.client.Call("QueryAvailablePerfMetric", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryAvailablePerfMetricResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31952,30 +29049,13 @@ func (service *VimPortType) QueryAvailablePerfMetric(request *QueryAvailablePerf
 * - RuntimeFault
  */
 func (service *VimPortType) QueryPerfCounter(request *QueryPerfCounterRequestType) (*QueryPerfCounterResponse, error) {
-	data, err := service.call("QueryPerfCounter", "urn:vim25/5.5", request)
+	response := &QueryPerfCounterResponse{}
+	err := service.client.Call("QueryPerfCounter", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryPerfCounterResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -31984,30 +29064,13 @@ func (service *VimPortType) QueryPerfCounter(request *QueryPerfCounterRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) QueryPerfCounterByLevel(request *QueryPerfCounterByLevelRequestType) (*QueryPerfCounterByLevelResponse, error) {
-	data, err := service.call("QueryPerfCounterByLevel", "urn:vim25/5.5", request)
+	response := &QueryPerfCounterByLevelResponse{}
+	err := service.client.Call("QueryPerfCounterByLevel", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryPerfCounterByLevelResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32016,30 +29079,13 @@ func (service *VimPortType) QueryPerfCounterByLevel(request *QueryPerfCounterByL
 * - RuntimeFault
  */
 func (service *VimPortType) QueryPerf(request *QueryPerfRequestType) (*QueryPerfResponse, error) {
-	data, err := service.call("QueryPerf", "urn:vim25/5.5", request)
+	response := &QueryPerfResponse{}
+	err := service.client.Call("QueryPerf", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryPerfResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32048,30 +29094,13 @@ func (service *VimPortType) QueryPerf(request *QueryPerfRequestType) (*QueryPerf
 * - RuntimeFault
  */
 func (service *VimPortType) QueryPerfComposite(request *QueryPerfCompositeRequestType) (*QueryPerfCompositeResponse, error) {
-	data, err := service.call("QueryPerfComposite", "urn:vim25/5.5", request)
+	response := &QueryPerfCompositeResponse{}
+	err := service.client.Call("QueryPerfComposite", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryPerfCompositeResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32080,30 +29109,13 @@ func (service *VimPortType) QueryPerfComposite(request *QueryPerfCompositeReques
 * - RuntimeFault
  */
 func (service *VimPortType) CreatePerfInterval(request *CreatePerfIntervalRequestType) (*CreatePerfIntervalResponse, error) {
-	data, err := service.call("CreatePerfInterval", "urn:vim25/5.5", request)
+	response := &CreatePerfIntervalResponse{}
+	err := service.client.Call("CreatePerfInterval", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreatePerfIntervalResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32112,30 +29124,13 @@ func (service *VimPortType) CreatePerfInterval(request *CreatePerfIntervalReques
 * - RuntimeFault
  */
 func (service *VimPortType) RemovePerfInterval(request *RemovePerfIntervalRequestType) (*RemovePerfIntervalResponse, error) {
-	data, err := service.call("RemovePerfInterval", "urn:vim25/5.5", request)
+	response := &RemovePerfIntervalResponse{}
+	err := service.client.Call("RemovePerfInterval", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RemovePerfIntervalResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32144,30 +29139,13 @@ func (service *VimPortType) RemovePerfInterval(request *RemovePerfIntervalReques
 * - RuntimeFault
  */
 func (service *VimPortType) UpdatePerfInterval(request *UpdatePerfIntervalRequestType) (*UpdatePerfIntervalResponse, error) {
-	data, err := service.call("UpdatePerfInterval", "urn:vim25/5.5", request)
+	response := &UpdatePerfIntervalResponse{}
+	err := service.client.Call("UpdatePerfInterval", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdatePerfIntervalResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32176,30 +29154,13 @@ func (service *VimPortType) UpdatePerfInterval(request *UpdatePerfIntervalReques
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateCounterLevelMapping(request *UpdateCounterLevelMappingRequestType) (*UpdateCounterLevelMappingResponse, error) {
-	data, err := service.call("UpdateCounterLevelMapping", "urn:vim25/5.5", request)
+	response := &UpdateCounterLevelMappingResponse{}
+	err := service.client.Call("UpdateCounterLevelMapping", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateCounterLevelMappingResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32208,30 +29169,13 @@ func (service *VimPortType) UpdateCounterLevelMapping(request *UpdateCounterLeve
 * - RuntimeFault
  */
 func (service *VimPortType) ResetCounterLevelMapping(request *ResetCounterLevelMappingRequestType) (*ResetCounterLevelMappingResponse, error) {
-	data, err := service.call("ResetCounterLevelMapping", "urn:vim25/5.5", request)
+	response := &ResetCounterLevelMappingResponse{}
+	err := service.client.Call("ResetCounterLevelMapping", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ResetCounterLevelMappingResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32240,30 +29184,13 @@ func (service *VimPortType) ResetCounterLevelMapping(request *ResetCounterLevelM
 * - RuntimeFault
  */
 func (service *VimPortType) EstimateDatabaseSize(request *EstimateDatabaseSizeRequestType) (*EstimateDatabaseSizeResponse, error) {
-	data, err := service.call("EstimateDatabaseSize", "urn:vim25/5.5", request)
+	response := &EstimateDatabaseSizeResponse{}
+	err := service.client.Call("EstimateDatabaseSize", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &EstimateDatabaseSizeResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32276,30 +29203,13 @@ func (service *VimPortType) EstimateDatabaseSize(request *EstimateDatabaseSizeRe
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateConfig(request *UpdateConfigRequestType) (*UpdateConfigResponse, error) {
-	data, err := service.call("UpdateConfig", "urn:vim25/5.5", request)
+	response := &UpdateConfigResponse{}
+	err := service.client.Call("UpdateConfig", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateConfigResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32310,30 +29220,13 @@ func (service *VimPortType) UpdateConfig(request *UpdateConfigRequestType) (*Upd
 * - RuntimeFault
  */
 func (service *VimPortType) MoveIntoResourcePool(request *MoveIntoResourcePoolRequestType) (*MoveIntoResourcePoolResponse, error) {
-	data, err := service.call("MoveIntoResourcePool", "urn:vim25/5.5", request)
+	response := &MoveIntoResourcePoolResponse{}
+	err := service.client.Call("MoveIntoResourcePool", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &MoveIntoResourcePoolResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32344,30 +29237,13 @@ func (service *VimPortType) MoveIntoResourcePool(request *MoveIntoResourcePoolRe
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateChildResourceConfiguration(request *UpdateChildResourceConfigurationRequestType) (*UpdateChildResourceConfigurationResponse, error) {
-	data, err := service.call("UpdateChildResourceConfiguration", "urn:vim25/5.5", request)
+	response := &UpdateChildResourceConfigurationResponse{}
+	err := service.client.Call("UpdateChildResourceConfiguration", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateChildResourceConfigurationResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32379,30 +29255,13 @@ func (service *VimPortType) UpdateChildResourceConfiguration(request *UpdateChil
 * - RuntimeFault
  */
 func (service *VimPortType) CreateResourcePool(request *CreateResourcePoolRequestType) (*CreateResourcePoolResponse, error) {
-	data, err := service.call("CreateResourcePool", "urn:vim25/5.5", request)
+	response := &CreateResourcePoolResponse{}
+	err := service.client.Call("CreateResourcePool", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateResourcePoolResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32411,30 +29270,13 @@ func (service *VimPortType) CreateResourcePool(request *CreateResourcePoolReques
 * - RuntimeFault
  */
 func (service *VimPortType) DestroyChildren(request *DestroyChildrenRequestType) (*DestroyChildrenResponse, error) {
-	data, err := service.call("DestroyChildren", "urn:vim25/5.5", request)
+	response := &DestroyChildrenResponse{}
+	err := service.client.Call("DestroyChildren", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DestroyChildrenResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32448,30 +29290,13 @@ func (service *VimPortType) DestroyChildren(request *DestroyChildrenRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) CreateVApp(request *CreateVAppRequestType) (*CreateVAppResponse, error) {
-	data, err := service.call("CreateVApp", "urn:vim25/5.5", request)
+	response := &CreateVAppResponse{}
+	err := service.client.Call("CreateVApp", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateVAppResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32486,30 +29311,13 @@ func (service *VimPortType) CreateVApp(request *CreateVAppRequestType) (*CreateV
 * - RuntimeFault
  */
 func (service *VimPortType) CreateChildVM_Task(request *CreateChildVMRequestType) (*CreateChildVM_TaskResponse, error) {
-	data, err := service.call("CreateChildVM_Task", "urn:vim25/5.5", request)
+	response := &CreateChildVM_TaskResponse{}
+	err := service.client.Call("CreateChildVM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateChildVM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32526,30 +29334,13 @@ func (service *VimPortType) CreateChildVM_Task(request *CreateChildVMRequestType
 * - RuntimeFault
  */
 func (service *VimPortType) RegisterChildVM_Task(request *RegisterChildVMRequestType) (*RegisterChildVM_TaskResponse, error) {
-	data, err := service.call("RegisterChildVM_Task", "urn:vim25/5.5", request)
+	response := &RegisterChildVM_TaskResponse{}
+	err := service.client.Call("RegisterChildVM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RegisterChildVM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32565,30 +29356,13 @@ func (service *VimPortType) RegisterChildVM_Task(request *RegisterChildVMRequest
 * - RuntimeFault
  */
 func (service *VimPortType) ImportVApp(request *ImportVAppRequestType) (*ImportVAppResponse, error) {
-	data, err := service.call("ImportVApp", "urn:vim25/5.5", request)
+	response := &ImportVAppResponse{}
+	err := service.client.Call("ImportVApp", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ImportVAppResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32597,30 +29371,13 @@ func (service *VimPortType) ImportVApp(request *ImportVAppRequestType) (*ImportV
 * - RuntimeFault
  */
 func (service *VimPortType) QueryResourceConfigOption(request *QueryResourceConfigOptionRequestType) (*QueryResourceConfigOptionResponse, error) {
-	data, err := service.call("QueryResourceConfigOption", "urn:vim25/5.5", request)
+	response := &QueryResourceConfigOptionResponse{}
+	err := service.client.Call("QueryResourceConfigOption", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryResourceConfigOptionResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32629,30 +29386,13 @@ func (service *VimPortType) QueryResourceConfigOption(request *QueryResourceConf
 * - RuntimeFault
  */
 func (service *VimPortType) RefreshRuntime(request *RefreshRuntimeRequestType) (*RefreshRuntimeResponse, error) {
-	data, err := service.call("RefreshRuntime", "urn:vim25/5.5", request)
+	response := &RefreshRuntimeResponse{}
+	err := service.client.Call("RefreshRuntime", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RefreshRuntimeResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32661,30 +29401,13 @@ func (service *VimPortType) RefreshRuntime(request *RefreshRuntimeRequestType) (
 * - RuntimeFault
  */
 func (service *VimPortType) FindByUuid(request *FindByUuidRequestType) (*FindByUuidResponse, error) {
-	data, err := service.call("FindByUuid", "urn:vim25/5.5", request)
+	response := &FindByUuidResponse{}
+	err := service.client.Call("FindByUuid", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &FindByUuidResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32694,30 +29417,13 @@ func (service *VimPortType) FindByUuid(request *FindByUuidRequestType) (*FindByU
 * - RuntimeFault
  */
 func (service *VimPortType) FindByDatastorePath(request *FindByDatastorePathRequestType) (*FindByDatastorePathResponse, error) {
-	data, err := service.call("FindByDatastorePath", "urn:vim25/5.5", request)
+	response := &FindByDatastorePathResponse{}
+	err := service.client.Call("FindByDatastorePath", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &FindByDatastorePathResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32726,30 +29432,13 @@ func (service *VimPortType) FindByDatastorePath(request *FindByDatastorePathRequ
 * - RuntimeFault
  */
 func (service *VimPortType) FindByDnsName(request *FindByDnsNameRequestType) (*FindByDnsNameResponse, error) {
-	data, err := service.call("FindByDnsName", "urn:vim25/5.5", request)
+	response := &FindByDnsNameResponse{}
+	err := service.client.Call("FindByDnsName", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &FindByDnsNameResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32758,30 +29447,13 @@ func (service *VimPortType) FindByDnsName(request *FindByDnsNameRequestType) (*F
 * - RuntimeFault
  */
 func (service *VimPortType) FindByIp(request *FindByIpRequestType) (*FindByIpResponse, error) {
-	data, err := service.call("FindByIp", "urn:vim25/5.5", request)
+	response := &FindByIpResponse{}
+	err := service.client.Call("FindByIp", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &FindByIpResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32790,30 +29462,13 @@ func (service *VimPortType) FindByIp(request *FindByIpRequestType) (*FindByIpRes
 * - RuntimeFault
  */
 func (service *VimPortType) FindByInventoryPath(request *FindByInventoryPathRequestType) (*FindByInventoryPathResponse, error) {
-	data, err := service.call("FindByInventoryPath", "urn:vim25/5.5", request)
+	response := &FindByInventoryPathResponse{}
+	err := service.client.Call("FindByInventoryPath", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &FindByInventoryPathResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32822,30 +29477,13 @@ func (service *VimPortType) FindByInventoryPath(request *FindByInventoryPathRequ
 * - RuntimeFault
  */
 func (service *VimPortType) FindChild(request *FindChildRequestType) (*FindChildResponse, error) {
-	data, err := service.call("FindChild", "urn:vim25/5.5", request)
+	response := &FindChildResponse{}
+	err := service.client.Call("FindChild", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &FindChildResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32854,30 +29492,13 @@ func (service *VimPortType) FindChild(request *FindChildRequestType) (*FindChild
 * - RuntimeFault
  */
 func (service *VimPortType) FindAllByUuid(request *FindAllByUuidRequestType) (*FindAllByUuidResponse, error) {
-	data, err := service.call("FindAllByUuid", "urn:vim25/5.5", request)
+	response := &FindAllByUuidResponse{}
+	err := service.client.Call("FindAllByUuid", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &FindAllByUuidResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32886,30 +29507,13 @@ func (service *VimPortType) FindAllByUuid(request *FindAllByUuidRequestType) (*F
 * - RuntimeFault
  */
 func (service *VimPortType) FindAllByDnsName(request *FindAllByDnsNameRequestType) (*FindAllByDnsNameResponse, error) {
-	data, err := service.call("FindAllByDnsName", "urn:vim25/5.5", request)
+	response := &FindAllByDnsNameResponse{}
+	err := service.client.Call("FindAllByDnsName", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &FindAllByDnsNameResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32918,30 +29522,13 @@ func (service *VimPortType) FindAllByDnsName(request *FindAllByDnsNameRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) FindAllByIp(request *FindAllByIpRequestType) (*FindAllByIpResponse, error) {
-	data, err := service.call("FindAllByIp", "urn:vim25/5.5", request)
+	response := &FindAllByIpResponse{}
+	err := service.client.Call("FindAllByIp", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &FindAllByIpResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32950,30 +29537,13 @@ func (service *VimPortType) FindAllByIp(request *FindAllByIpRequestType) (*FindA
 * - RuntimeFault
  */
 func (service *VimPortType) CurrentTime(request *CurrentTimeRequestType) (*CurrentTimeResponse, error) {
-	data, err := service.call("CurrentTime", "urn:vim25/5.5", request)
+	response := &CurrentTimeResponse{}
+	err := service.client.Call("CurrentTime", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CurrentTimeResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -32982,30 +29552,13 @@ func (service *VimPortType) CurrentTime(request *CurrentTimeRequestType) (*Curre
 * - RuntimeFault
  */
 func (service *VimPortType) RetrieveServiceContent(request *RetrieveServiceContentRequestType) (*RetrieveServiceContentResponse, error) {
-	data, err := service.call("RetrieveServiceContent", "urn:vim25/5.5", request)
+	response := &RetrieveServiceContentResponse{}
+	err := service.client.Call("RetrieveServiceContent", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RetrieveServiceContentResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33015,30 +29568,13 @@ func (service *VimPortType) RetrieveServiceContent(request *RetrieveServiceConte
 * - RuntimeFault
  */
 func (service *VimPortType) ValidateMigration(request *ValidateMigrationRequestType) (*ValidateMigrationResponse, error) {
-	data, err := service.call("ValidateMigration", "urn:vim25/5.5", request)
+	response := &ValidateMigrationResponse{}
+	err := service.client.Call("ValidateMigration", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ValidateMigrationResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33047,30 +29583,13 @@ func (service *VimPortType) ValidateMigration(request *ValidateMigrationRequestT
 * - RuntimeFault
  */
 func (service *VimPortType) QueryVMotionCompatibility(request *QueryVMotionCompatibilityRequestType) (*QueryVMotionCompatibilityResponse, error) {
-	data, err := service.call("QueryVMotionCompatibility", "urn:vim25/5.5", request)
+	response := &QueryVMotionCompatibilityResponse{}
+	err := service.client.Call("QueryVMotionCompatibility", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryVMotionCompatibilityResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33079,30 +29598,13 @@ func (service *VimPortType) QueryVMotionCompatibility(request *QueryVMotionCompa
 * - RuntimeFault
  */
 func (service *VimPortType) RetrieveProductComponents(request *RetrieveProductComponentsRequestType) (*RetrieveProductComponentsResponse, error) {
-	data, err := service.call("RetrieveProductComponents", "urn:vim25/5.5", request)
+	response := &RetrieveProductComponentsResponse{}
+	err := service.client.Call("RetrieveProductComponents", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RetrieveProductComponentsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33111,30 +29613,13 @@ func (service *VimPortType) RetrieveProductComponents(request *RetrieveProductCo
 * - RuntimeFault
  */
 func (service *VimPortType) QueryServiceList(request *QueryServiceListRequestType) (*QueryServiceListResponse, error) {
-	data, err := service.call("QueryServiceList", "urn:vim25/5.5", request)
+	response := &QueryServiceListResponse{}
+	err := service.client.Call("QueryServiceList", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryServiceListResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33143,30 +29628,13 @@ func (service *VimPortType) QueryServiceList(request *QueryServiceListRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateServiceMessage(request *UpdateServiceMessageRequestType) (*UpdateServiceMessageResponse, error) {
-	data, err := service.call("UpdateServiceMessage", "urn:vim25/5.5", request)
+	response := &UpdateServiceMessageResponse{}
+	err := service.client.Call("UpdateServiceMessage", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateServiceMessageResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33177,30 +29645,13 @@ func (service *VimPortType) UpdateServiceMessage(request *UpdateServiceMessageRe
 * - RuntimeFault
  */
 func (service *VimPortType) LoginByToken(request *LoginByTokenRequestType) (*LoginByTokenResponse, error) {
-	data, err := service.call("LoginByToken", "urn:vim25/5.5", request)
+	response := &LoginByTokenResponse{}
+	err := service.client.Call("LoginByToken", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &LoginByTokenResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33211,30 +29662,13 @@ func (service *VimPortType) LoginByToken(request *LoginByTokenRequestType) (*Log
 * - RuntimeFault
  */
 func (service *VimPortType) Login(request *LoginRequestType) (*LoginResponse, error) {
-	data, err := service.call("Login", "urn:vim25/5.5", request)
+	response := &LoginResponse{}
+	err := service.client.Call("Login", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &LoginResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33246,30 +29680,13 @@ func (service *VimPortType) Login(request *LoginRequestType) (*LoginResponse, er
 * - RuntimeFault
  */
 func (service *VimPortType) LoginBySSPI(request *LoginBySSPIRequestType) (*LoginBySSPIResponse, error) {
-	data, err := service.call("LoginBySSPI", "urn:vim25/5.5", request)
+	response := &LoginBySSPIResponse{}
+	err := service.client.Call("LoginBySSPI", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &LoginBySSPIResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33278,30 +29695,13 @@ func (service *VimPortType) LoginBySSPI(request *LoginBySSPIRequestType) (*Login
 * - RuntimeFault
  */
 func (service *VimPortType) Logout(request *LogoutRequestType) (*LogoutResponse, error) {
-	data, err := service.call("Logout", "urn:vim25/5.5", request)
+	response := &LogoutResponse{}
+	err := service.client.Call("Logout", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &LogoutResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33311,30 +29711,13 @@ func (service *VimPortType) Logout(request *LogoutRequestType) (*LogoutResponse,
 * - RuntimeFault
  */
 func (service *VimPortType) AcquireLocalTicket(request *AcquireLocalTicketRequestType) (*AcquireLocalTicketResponse, error) {
-	data, err := service.call("AcquireLocalTicket", "urn:vim25/5.5", request)
+	response := &AcquireLocalTicketResponse{}
+	err := service.client.Call("AcquireLocalTicket", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AcquireLocalTicketResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33343,30 +29726,13 @@ func (service *VimPortType) AcquireLocalTicket(request *AcquireLocalTicketReques
 * - RuntimeFault
  */
 func (service *VimPortType) AcquireGenericServiceTicket(request *AcquireGenericServiceTicketRequestType) (*AcquireGenericServiceTicketResponse, error) {
-	data, err := service.call("AcquireGenericServiceTicket", "urn:vim25/5.5", request)
+	response := &AcquireGenericServiceTicketResponse{}
+	err := service.client.Call("AcquireGenericServiceTicket", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AcquireGenericServiceTicketResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33376,30 +29742,13 @@ func (service *VimPortType) AcquireGenericServiceTicket(request *AcquireGenericS
 * - RuntimeFault
  */
 func (service *VimPortType) TerminateSession(request *TerminateSessionRequestType) (*TerminateSessionResponse, error) {
-	data, err := service.call("TerminateSession", "urn:vim25/5.5", request)
+	response := &TerminateSessionResponse{}
+	err := service.client.Call("TerminateSession", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &TerminateSessionResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33409,30 +29758,13 @@ func (service *VimPortType) TerminateSession(request *TerminateSessionRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) SetLocale(request *SetLocaleRequestType) (*SetLocaleResponse, error) {
-	data, err := service.call("SetLocale", "urn:vim25/5.5", request)
+	response := &SetLocaleResponse{}
+	err := service.client.Call("SetLocale", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &SetLocaleResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33446,30 +29778,13 @@ func (service *VimPortType) SetLocale(request *SetLocaleRequestType) (*SetLocale
 * - RuntimeFault
  */
 func (service *VimPortType) LoginExtensionBySubjectName(request *LoginExtensionBySubjectNameRequestType) (*LoginExtensionBySubjectNameResponse, error) {
-	data, err := service.call("LoginExtensionBySubjectName", "urn:vim25/5.5", request)
+	response := &LoginExtensionBySubjectNameResponse{}
+	err := service.client.Call("LoginExtensionBySubjectName", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &LoginExtensionBySubjectNameResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33481,30 +29796,13 @@ func (service *VimPortType) LoginExtensionBySubjectName(request *LoginExtensionB
 * - RuntimeFault
  */
 func (service *VimPortType) LoginExtensionByCertificate(request *LoginExtensionByCertificateRequestType) (*LoginExtensionByCertificateResponse, error) {
-	data, err := service.call("LoginExtensionByCertificate", "urn:vim25/5.5", request)
+	response := &LoginExtensionByCertificateResponse{}
+	err := service.client.Call("LoginExtensionByCertificate", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &LoginExtensionByCertificateResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33515,30 +29813,13 @@ func (service *VimPortType) LoginExtensionByCertificate(request *LoginExtensionB
 * - RuntimeFault
  */
 func (service *VimPortType) ImpersonateUser(request *ImpersonateUserRequestType) (*ImpersonateUserResponse, error) {
-	data, err := service.call("ImpersonateUser", "urn:vim25/5.5", request)
+	response := &ImpersonateUserResponse{}
+	err := service.client.Call("ImpersonateUser", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ImpersonateUserResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33547,30 +29828,13 @@ func (service *VimPortType) ImpersonateUser(request *ImpersonateUserRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) SessionIsActive(request *SessionIsActiveRequestType) (*SessionIsActiveResponse, error) {
-	data, err := service.call("SessionIsActive", "urn:vim25/5.5", request)
+	response := &SessionIsActiveResponse{}
+	err := service.client.Call("SessionIsActive", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &SessionIsActiveResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33579,30 +29843,13 @@ func (service *VimPortType) SessionIsActive(request *SessionIsActiveRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) AcquireCloneTicket(request *AcquireCloneTicketRequestType) (*AcquireCloneTicketResponse, error) {
-	data, err := service.call("AcquireCloneTicket", "urn:vim25/5.5", request)
+	response := &AcquireCloneTicketResponse{}
+	err := service.client.Call("AcquireCloneTicket", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AcquireCloneTicketResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33612,30 +29859,13 @@ func (service *VimPortType) AcquireCloneTicket(request *AcquireCloneTicketReques
 * - RuntimeFault
  */
 func (service *VimPortType) CloneSession(request *CloneSessionRequestType) (*CloneSessionResponse, error) {
-	data, err := service.call("CloneSession", "urn:vim25/5.5", request)
+	response := &CloneSessionResponse{}
+	err := service.client.Call("CloneSession", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CloneSessionResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33644,30 +29874,13 @@ func (service *VimPortType) CloneSession(request *CloneSessionRequestType) (*Clo
 * - RuntimeFault
  */
 func (service *VimPortType) ExecuteSimpleCommand(request *ExecuteSimpleCommandRequestType) (*ExecuteSimpleCommandResponse, error) {
-	data, err := service.call("ExecuteSimpleCommand", "urn:vim25/5.5", request)
+	response := &ExecuteSimpleCommandResponse{}
+	err := service.client.Call("ExecuteSimpleCommand", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ExecuteSimpleCommandResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33678,30 +29891,13 @@ func (service *VimPortType) ExecuteSimpleCommand(request *ExecuteSimpleCommandRe
 * - RuntimeFault
  */
 func (service *VimPortType) ConfigureDatastoreIORM_Task(request *ConfigureDatastoreIORMRequestType) (*ConfigureDatastoreIORM_TaskResponse, error) {
-	data, err := service.call("ConfigureDatastoreIORM_Task", "urn:vim25/5.5", request)
+	response := &ConfigureDatastoreIORM_TaskResponse{}
+	err := service.client.Call("ConfigureDatastoreIORM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ConfigureDatastoreIORM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33710,30 +29906,13 @@ func (service *VimPortType) ConfigureDatastoreIORM_Task(request *ConfigureDatast
 * - RuntimeFault
  */
 func (service *VimPortType) QueryIORMConfigOption(request *QueryIORMConfigOptionRequestType) (*QueryIORMConfigOptionResponse, error) {
-	data, err := service.call("QueryIORMConfigOption", "urn:vim25/5.5", request)
+	response := &QueryIORMConfigOptionResponse{}
+	err := service.client.Call("QueryIORMConfigOption", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryIORMConfigOptionResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33743,30 +29922,13 @@ func (service *VimPortType) QueryIORMConfigOption(request *QueryIORMConfigOption
 * - RuntimeFault
  */
 func (service *VimPortType) QueryDatastorePerformanceSummary(request *QueryDatastorePerformanceSummaryRequestType) (*QueryDatastorePerformanceSummaryResponse, error) {
-	data, err := service.call("QueryDatastorePerformanceSummary", "urn:vim25/5.5", request)
+	response := &QueryDatastorePerformanceSummaryResponse{}
+	err := service.client.Call("QueryDatastorePerformanceSummary", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryDatastorePerformanceSummaryResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33775,30 +29937,13 @@ func (service *VimPortType) QueryDatastorePerformanceSummary(request *QueryDatas
 * - RuntimeFault
  */
 func (service *VimPortType) ApplyStorageDrsRecommendationToPod_Task(request *ApplyStorageDrsRecommendationToPodRequestType) (*ApplyStorageDrsRecommendationToPod_TaskResponse, error) {
-	data, err := service.call("ApplyStorageDrsRecommendationToPod_Task", "urn:vim25/5.5", request)
+	response := &ApplyStorageDrsRecommendationToPod_TaskResponse{}
+	err := service.client.Call("ApplyStorageDrsRecommendationToPod_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ApplyStorageDrsRecommendationToPod_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33807,30 +29952,13 @@ func (service *VimPortType) ApplyStorageDrsRecommendationToPod_Task(request *App
 * - RuntimeFault
  */
 func (service *VimPortType) ApplyStorageDrsRecommendation_Task(request *ApplyStorageDrsRecommendationRequestType) (*ApplyStorageDrsRecommendation_TaskResponse, error) {
-	data, err := service.call("ApplyStorageDrsRecommendation_Task", "urn:vim25/5.5", request)
+	response := &ApplyStorageDrsRecommendation_TaskResponse{}
+	err := service.client.Call("ApplyStorageDrsRecommendation_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ApplyStorageDrsRecommendation_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33839,30 +29967,13 @@ func (service *VimPortType) ApplyStorageDrsRecommendation_Task(request *ApplySto
 * - RuntimeFault
  */
 func (service *VimPortType) CancelStorageDrsRecommendation(request *CancelStorageDrsRecommendationRequestType) (*CancelStorageDrsRecommendationResponse, error) {
-	data, err := service.call("CancelStorageDrsRecommendation", "urn:vim25/5.5", request)
+	response := &CancelStorageDrsRecommendationResponse{}
+	err := service.client.Call("CancelStorageDrsRecommendation", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CancelStorageDrsRecommendationResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33871,30 +29982,13 @@ func (service *VimPortType) CancelStorageDrsRecommendation(request *CancelStorag
 * - RuntimeFault
  */
 func (service *VimPortType) RefreshStorageDrsRecommendation(request *RefreshStorageDrsRecommendationRequestType) (*RefreshStorageDrsRecommendationResponse, error) {
-	data, err := service.call("RefreshStorageDrsRecommendation", "urn:vim25/5.5", request)
+	response := &RefreshStorageDrsRecommendationResponse{}
+	err := service.client.Call("RefreshStorageDrsRecommendation", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RefreshStorageDrsRecommendationResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33903,30 +29997,13 @@ func (service *VimPortType) RefreshStorageDrsRecommendation(request *RefreshStor
 * - RuntimeFault
  */
 func (service *VimPortType) ConfigureStorageDrsForPod_Task(request *ConfigureStorageDrsForPodRequestType) (*ConfigureStorageDrsForPod_TaskResponse, error) {
-	data, err := service.call("ConfigureStorageDrsForPod_Task", "urn:vim25/5.5", request)
+	response := &ConfigureStorageDrsForPod_TaskResponse{}
+	err := service.client.Call("ConfigureStorageDrsForPod_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ConfigureStorageDrsForPod_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33935,30 +30012,13 @@ func (service *VimPortType) ConfigureStorageDrsForPod_Task(request *ConfigureSto
 * - RuntimeFault
  */
 func (service *VimPortType) RecommendDatastores(request *RecommendDatastoresRequestType) (*RecommendDatastoresResponse, error) {
-	data, err := service.call("RecommendDatastores", "urn:vim25/5.5", request)
+	response := &RecommendDatastoresResponse{}
+	err := service.client.Call("RecommendDatastores", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RecommendDatastoresResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -33968,30 +30028,13 @@ func (service *VimPortType) RecommendDatastores(request *RecommendDatastoresRequ
 * - RuntimeFault
  */
 func (service *VimPortType) CancelTask(request *CancelTaskRequestType) (*CancelTaskResponse, error) {
-	data, err := service.call("CancelTask", "urn:vim25/5.5", request)
+	response := &CancelTaskResponse{}
+	err := service.client.Call("CancelTask", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CancelTaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34002,30 +30045,13 @@ func (service *VimPortType) CancelTask(request *CancelTaskRequestType) (*CancelT
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateProgress(request *UpdateProgressRequestType) (*UpdateProgressResponse, error) {
-	data, err := service.call("UpdateProgress", "urn:vim25/5.5", request)
+	response := &UpdateProgressResponse{}
+	err := service.client.Call("UpdateProgress", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateProgressResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34035,30 +30061,13 @@ func (service *VimPortType) UpdateProgress(request *UpdateProgressRequestType) (
 * - RuntimeFault
  */
 func (service *VimPortType) SetTaskState(request *SetTaskStateRequestType) (*SetTaskStateResponse, error) {
-	data, err := service.call("SetTaskState", "urn:vim25/5.5", request)
+	response := &SetTaskStateResponse{}
+	err := service.client.Call("SetTaskState", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &SetTaskStateResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34067,30 +30076,13 @@ func (service *VimPortType) SetTaskState(request *SetTaskStateRequestType) (*Set
 * - RuntimeFault
  */
 func (service *VimPortType) SetTaskDescription(request *SetTaskDescriptionRequestType) (*SetTaskDescriptionResponse, error) {
-	data, err := service.call("SetTaskDescription", "urn:vim25/5.5", request)
+	response := &SetTaskDescriptionResponse{}
+	err := service.client.Call("SetTaskDescription", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &SetTaskDescriptionResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34099,30 +30091,13 @@ func (service *VimPortType) SetTaskDescription(request *SetTaskDescriptionReques
 * - RuntimeFault
  */
 func (service *VimPortType) ReadNextTasks(request *ReadNextTasksRequestType) (*ReadNextTasksResponse, error) {
-	data, err := service.call("ReadNextTasks", "urn:vim25/5.5", request)
+	response := &ReadNextTasksResponse{}
+	err := service.client.Call("ReadNextTasks", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ReadNextTasksResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34131,30 +30106,13 @@ func (service *VimPortType) ReadNextTasks(request *ReadNextTasksRequestType) (*R
 * - RuntimeFault
  */
 func (service *VimPortType) ReadPreviousTasks(request *ReadPreviousTasksRequestType) (*ReadPreviousTasksResponse, error) {
-	data, err := service.call("ReadPreviousTasks", "urn:vim25/5.5", request)
+	response := &ReadPreviousTasksResponse{}
+	err := service.client.Call("ReadPreviousTasks", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ReadPreviousTasksResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34164,30 +30122,13 @@ func (service *VimPortType) ReadPreviousTasks(request *ReadPreviousTasksRequestT
 * - RuntimeFault
  */
 func (service *VimPortType) CreateCollectorForTasks(request *CreateCollectorForTasksRequestType) (*CreateCollectorForTasksResponse, error) {
-	data, err := service.call("CreateCollectorForTasks", "urn:vim25/5.5", request)
+	response := &CreateCollectorForTasksResponse{}
+	err := service.client.Call("CreateCollectorForTasks", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateCollectorForTasksResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34196,30 +30137,13 @@ func (service *VimPortType) CreateCollectorForTasks(request *CreateCollectorForT
 * - RuntimeFault
  */
 func (service *VimPortType) CreateTask(request *CreateTaskRequestType) (*CreateTaskResponse, error) {
-	data, err := service.call("CreateTask", "urn:vim25/5.5", request)
+	response := &CreateTaskResponse{}
+	err := service.client.Call("CreateTask", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateTaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34229,30 +30153,13 @@ func (service *VimPortType) CreateTask(request *CreateTaskRequestType) (*CreateT
 * - RuntimeFault
  */
 func (service *VimPortType) RetrieveUserGroups(request *RetrieveUserGroupsRequestType) (*RetrieveUserGroupsResponse, error) {
-	data, err := service.call("RetrieveUserGroups", "urn:vim25/5.5", request)
+	response := &RetrieveUserGroupsResponse{}
+	err := service.client.Call("RetrieveUserGroups", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RetrieveUserGroupsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34270,30 +30177,13 @@ func (service *VimPortType) RetrieveUserGroups(request *RetrieveUserGroupsReques
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateVAppConfig(request *UpdateVAppConfigRequestType) (*UpdateVAppConfigResponse, error) {
-	data, err := service.call("UpdateVAppConfig", "urn:vim25/5.5", request)
+	response := &UpdateVAppConfigResponse{}
+	err := service.client.Call("UpdateVAppConfig", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateVAppConfigResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34303,30 +30193,13 @@ func (service *VimPortType) UpdateVAppConfig(request *UpdateVAppConfigRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateLinkedChildren(request *UpdateLinkedChildrenRequestType) (*UpdateLinkedChildrenResponse, error) {
-	data, err := service.call("UpdateLinkedChildren", "urn:vim25/5.5", request)
+	response := &UpdateLinkedChildrenResponse{}
+	err := service.client.Call("UpdateLinkedChildren", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateLinkedChildrenResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34342,30 +30215,13 @@ func (service *VimPortType) UpdateLinkedChildren(request *UpdateLinkedChildrenRe
 * - RuntimeFault
  */
 func (service *VimPortType) CloneVApp_Task(request *CloneVAppRequestType) (*CloneVApp_TaskResponse, error) {
-	data, err := service.call("CloneVApp_Task", "urn:vim25/5.5", request)
+	response := &CloneVApp_TaskResponse{}
+	err := service.client.Call("CloneVApp_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CloneVApp_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34378,30 +30234,13 @@ func (service *VimPortType) CloneVApp_Task(request *CloneVAppRequestType) (*Clon
 * - RuntimeFault
  */
 func (service *VimPortType) ExportVApp(request *ExportVAppRequestType) (*ExportVAppResponse, error) {
-	data, err := service.call("ExportVApp", "urn:vim25/5.5", request)
+	response := &ExportVAppResponse{}
+	err := service.client.Call("ExportVApp", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ExportVAppResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34416,30 +30255,13 @@ func (service *VimPortType) ExportVApp(request *ExportVAppRequestType) (*ExportV
 * - RuntimeFault
  */
 func (service *VimPortType) PowerOnVApp_Task(request *PowerOnVAppRequestType) (*PowerOnVApp_TaskResponse, error) {
-	data, err := service.call("PowerOnVApp_Task", "urn:vim25/5.5", request)
+	response := &PowerOnVApp_TaskResponse{}
+	err := service.client.Call("PowerOnVApp_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &PowerOnVApp_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34451,30 +30273,13 @@ func (service *VimPortType) PowerOnVApp_Task(request *PowerOnVAppRequestType) (*
 * - RuntimeFault
  */
 func (service *VimPortType) PowerOffVApp_Task(request *PowerOffVAppRequestType) (*PowerOffVApp_TaskResponse, error) {
-	data, err := service.call("PowerOffVApp_Task", "urn:vim25/5.5", request)
+	response := &PowerOffVApp_TaskResponse{}
+	err := service.client.Call("PowerOffVApp_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &PowerOffVApp_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34486,30 +30291,13 @@ func (service *VimPortType) PowerOffVApp_Task(request *PowerOffVAppRequestType) 
 * - RuntimeFault
  */
 func (service *VimPortType) SuspendVApp_Task(request *SuspendVAppRequestType) (*SuspendVApp_TaskResponse, error) {
-	data, err := service.call("SuspendVApp_Task", "urn:vim25/5.5", request)
+	response := &SuspendVApp_TaskResponse{}
+	err := service.client.Call("SuspendVApp_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &SuspendVApp_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34520,30 +30308,13 @@ func (service *VimPortType) SuspendVApp_Task(request *SuspendVAppRequestType) (*
 * - RuntimeFault
  */
 func (service *VimPortType) UnregisterVApp_Task(request *unregisterVAppRequestType) (*unregisterVApp_TaskResponse, error) {
-	data, err := service.call("unregisterVApp_Task", "urn:vim25/5.5", request)
+	response := &unregisterVApp_TaskResponse{}
+	err := service.client.Call("unregisterVApp_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &unregisterVApp_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34554,30 +30325,13 @@ func (service *VimPortType) UnregisterVApp_Task(request *unregisterVAppRequestTy
 * - RuntimeFault
  */
 func (service *VimPortType) CreateVirtualDisk_Task(request *CreateVirtualDiskRequestType) (*CreateVirtualDisk_TaskResponse, error) {
-	data, err := service.call("CreateVirtualDisk_Task", "urn:vim25/5.5", request)
+	response := &CreateVirtualDisk_TaskResponse{}
+	err := service.client.Call("CreateVirtualDisk_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateVirtualDisk_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34588,30 +30342,13 @@ func (service *VimPortType) CreateVirtualDisk_Task(request *CreateVirtualDiskReq
 * - RuntimeFault
  */
 func (service *VimPortType) DeleteVirtualDisk_Task(request *DeleteVirtualDiskRequestType) (*DeleteVirtualDisk_TaskResponse, error) {
-	data, err := service.call("DeleteVirtualDisk_Task", "urn:vim25/5.5", request)
+	response := &DeleteVirtualDisk_TaskResponse{}
+	err := service.client.Call("DeleteVirtualDisk_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DeleteVirtualDisk_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34622,30 +30359,13 @@ func (service *VimPortType) DeleteVirtualDisk_Task(request *DeleteVirtualDiskReq
 * - RuntimeFault
  */
 func (service *VimPortType) MoveVirtualDisk_Task(request *MoveVirtualDiskRequestType) (*MoveVirtualDisk_TaskResponse, error) {
-	data, err := service.call("MoveVirtualDisk_Task", "urn:vim25/5.5", request)
+	response := &MoveVirtualDisk_TaskResponse{}
+	err := service.client.Call("MoveVirtualDisk_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &MoveVirtualDisk_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34657,30 +30377,13 @@ func (service *VimPortType) MoveVirtualDisk_Task(request *MoveVirtualDiskRequest
 * - RuntimeFault
  */
 func (service *VimPortType) CopyVirtualDisk_Task(request *CopyVirtualDiskRequestType) (*CopyVirtualDisk_TaskResponse, error) {
-	data, err := service.call("CopyVirtualDisk_Task", "urn:vim25/5.5", request)
+	response := &CopyVirtualDisk_TaskResponse{}
+	err := service.client.Call("CopyVirtualDisk_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CopyVirtualDisk_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34691,30 +30394,13 @@ func (service *VimPortType) CopyVirtualDisk_Task(request *CopyVirtualDiskRequest
 * - RuntimeFault
  */
 func (service *VimPortType) ExtendVirtualDisk_Task(request *ExtendVirtualDiskRequestType) (*ExtendVirtualDisk_TaskResponse, error) {
-	data, err := service.call("ExtendVirtualDisk_Task", "urn:vim25/5.5", request)
+	response := &ExtendVirtualDisk_TaskResponse{}
+	err := service.client.Call("ExtendVirtualDisk_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ExtendVirtualDisk_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34725,30 +30411,13 @@ func (service *VimPortType) ExtendVirtualDisk_Task(request *ExtendVirtualDiskReq
 * - RuntimeFault
  */
 func (service *VimPortType) QueryVirtualDiskFragmentation(request *QueryVirtualDiskFragmentationRequestType) (*QueryVirtualDiskFragmentationResponse, error) {
-	data, err := service.call("QueryVirtualDiskFragmentation", "urn:vim25/5.5", request)
+	response := &QueryVirtualDiskFragmentationResponse{}
+	err := service.client.Call("QueryVirtualDiskFragmentation", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryVirtualDiskFragmentationResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34759,30 +30428,13 @@ func (service *VimPortType) QueryVirtualDiskFragmentation(request *QueryVirtualD
 * - RuntimeFault
  */
 func (service *VimPortType) DefragmentVirtualDisk_Task(request *DefragmentVirtualDiskRequestType) (*DefragmentVirtualDisk_TaskResponse, error) {
-	data, err := service.call("DefragmentVirtualDisk_Task", "urn:vim25/5.5", request)
+	response := &DefragmentVirtualDisk_TaskResponse{}
+	err := service.client.Call("DefragmentVirtualDisk_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DefragmentVirtualDisk_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34793,30 +30445,13 @@ func (service *VimPortType) DefragmentVirtualDisk_Task(request *DefragmentVirtua
 * - RuntimeFault
  */
 func (service *VimPortType) ShrinkVirtualDisk_Task(request *ShrinkVirtualDiskRequestType) (*ShrinkVirtualDisk_TaskResponse, error) {
-	data, err := service.call("ShrinkVirtualDisk_Task", "urn:vim25/5.5", request)
+	response := &ShrinkVirtualDisk_TaskResponse{}
+	err := service.client.Call("ShrinkVirtualDisk_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ShrinkVirtualDisk_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34827,30 +30462,13 @@ func (service *VimPortType) ShrinkVirtualDisk_Task(request *ShrinkVirtualDiskReq
 * - RuntimeFault
  */
 func (service *VimPortType) InflateVirtualDisk_Task(request *InflateVirtualDiskRequestType) (*InflateVirtualDisk_TaskResponse, error) {
-	data, err := service.call("InflateVirtualDisk_Task", "urn:vim25/5.5", request)
+	response := &InflateVirtualDisk_TaskResponse{}
+	err := service.client.Call("InflateVirtualDisk_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &InflateVirtualDisk_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34861,30 +30479,13 @@ func (service *VimPortType) InflateVirtualDisk_Task(request *InflateVirtualDiskR
 * - RuntimeFault
  */
 func (service *VimPortType) EagerZeroVirtualDisk_Task(request *EagerZeroVirtualDiskRequestType) (*EagerZeroVirtualDisk_TaskResponse, error) {
-	data, err := service.call("EagerZeroVirtualDisk_Task", "urn:vim25/5.5", request)
+	response := &EagerZeroVirtualDisk_TaskResponse{}
+	err := service.client.Call("EagerZeroVirtualDisk_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &EagerZeroVirtualDisk_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34895,30 +30496,13 @@ func (service *VimPortType) EagerZeroVirtualDisk_Task(request *EagerZeroVirtualD
 * - RuntimeFault
  */
 func (service *VimPortType) ZeroFillVirtualDisk_Task(request *ZeroFillVirtualDiskRequestType) (*ZeroFillVirtualDisk_TaskResponse, error) {
-	data, err := service.call("ZeroFillVirtualDisk_Task", "urn:vim25/5.5", request)
+	response := &ZeroFillVirtualDisk_TaskResponse{}
+	err := service.client.Call("ZeroFillVirtualDisk_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ZeroFillVirtualDisk_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34929,30 +30513,13 @@ func (service *VimPortType) ZeroFillVirtualDisk_Task(request *ZeroFillVirtualDis
 * - RuntimeFault
  */
 func (service *VimPortType) SetVirtualDiskUuid(request *SetVirtualDiskUuidRequestType) (*SetVirtualDiskUuidResponse, error) {
-	data, err := service.call("SetVirtualDiskUuid", "urn:vim25/5.5", request)
+	response := &SetVirtualDiskUuidResponse{}
+	err := service.client.Call("SetVirtualDiskUuid", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &SetVirtualDiskUuidResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34963,30 +30530,13 @@ func (service *VimPortType) SetVirtualDiskUuid(request *SetVirtualDiskUuidReques
 * - RuntimeFault
  */
 func (service *VimPortType) QueryVirtualDiskUuid(request *QueryVirtualDiskUuidRequestType) (*QueryVirtualDiskUuidResponse, error) {
-	data, err := service.call("QueryVirtualDiskUuid", "urn:vim25/5.5", request)
+	response := &QueryVirtualDiskUuidResponse{}
+	err := service.client.Call("QueryVirtualDiskUuid", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryVirtualDiskUuidResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -34997,30 +30547,13 @@ func (service *VimPortType) QueryVirtualDiskUuid(request *QueryVirtualDiskUuidRe
 * - RuntimeFault
  */
 func (service *VimPortType) QueryVirtualDiskGeometry(request *QueryVirtualDiskGeometryRequestType) (*QueryVirtualDiskGeometryResponse, error) {
-	data, err := service.call("QueryVirtualDiskGeometry", "urn:vim25/5.5", request)
+	response := &QueryVirtualDiskGeometryResponse{}
+	err := service.client.Call("QueryVirtualDiskGeometry", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryVirtualDiskGeometryResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35029,30 +30562,13 @@ func (service *VimPortType) QueryVirtualDiskGeometry(request *QueryVirtualDiskGe
 * - RuntimeFault
  */
 func (service *VimPortType) RefreshStorageInfo(request *RefreshStorageInfoRequestType) (*RefreshStorageInfoResponse, error) {
-	data, err := service.call("RefreshStorageInfo", "urn:vim25/5.5", request)
+	response := &RefreshStorageInfoResponse{}
+	err := service.client.Call("RefreshStorageInfo", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RefreshStorageInfoResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35067,30 +30583,13 @@ func (service *VimPortType) RefreshStorageInfo(request *RefreshStorageInfoReques
 * - RuntimeFault
  */
 func (service *VimPortType) CreateSnapshot_Task(request *CreateSnapshotRequestType) (*CreateSnapshot_TaskResponse, error) {
-	data, err := service.call("CreateSnapshot_Task", "urn:vim25/5.5", request)
+	response := &CreateSnapshot_TaskResponse{}
+	err := service.client.Call("CreateSnapshot_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateSnapshot_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35105,30 +30604,13 @@ func (service *VimPortType) CreateSnapshot_Task(request *CreateSnapshotRequestTy
 * - RuntimeFault
  */
 func (service *VimPortType) RevertToCurrentSnapshot_Task(request *RevertToCurrentSnapshotRequestType) (*RevertToCurrentSnapshot_TaskResponse, error) {
-	data, err := service.call("RevertToCurrentSnapshot_Task", "urn:vim25/5.5", request)
+	response := &RevertToCurrentSnapshot_TaskResponse{}
+	err := service.client.Call("RevertToCurrentSnapshot_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RevertToCurrentSnapshot_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35140,30 +30622,13 @@ func (service *VimPortType) RevertToCurrentSnapshot_Task(request *RevertToCurren
 * - RuntimeFault
  */
 func (service *VimPortType) RemoveAllSnapshots_Task(request *RemoveAllSnapshotsRequestType) (*RemoveAllSnapshots_TaskResponse, error) {
-	data, err := service.call("RemoveAllSnapshots_Task", "urn:vim25/5.5", request)
+	response := &RemoveAllSnapshots_TaskResponse{}
+	err := service.client.Call("RemoveAllSnapshots_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RemoveAllSnapshots_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35176,30 +30641,13 @@ func (service *VimPortType) RemoveAllSnapshots_Task(request *RemoveAllSnapshotsR
 * - RuntimeFault
  */
 func (service *VimPortType) ConsolidateVMDisks_Task(request *ConsolidateVMDisksRequestType) (*ConsolidateVMDisks_TaskResponse, error) {
-	data, err := service.call("ConsolidateVMDisks_Task", "urn:vim25/5.5", request)
+	response := &ConsolidateVMDisks_TaskResponse{}
+	err := service.client.Call("ConsolidateVMDisks_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ConsolidateVMDisks_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35212,30 +30660,13 @@ func (service *VimPortType) ConsolidateVMDisks_Task(request *ConsolidateVMDisksR
 * - RuntimeFault
  */
 func (service *VimPortType) EstimateStorageForConsolidateSnapshots_Task(request *EstimateStorageForConsolidateSnapshotsRequestType) (*EstimateStorageForConsolidateSnapshots_TaskResponse, error) {
-	data, err := service.call("EstimateStorageForConsolidateSnapshots_Task", "urn:vim25/5.5", request)
+	response := &EstimateStorageForConsolidateSnapshots_TaskResponse{}
+	err := service.client.Call("EstimateStorageForConsolidateSnapshots_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &EstimateStorageForConsolidateSnapshots_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35253,30 +30684,13 @@ func (service *VimPortType) EstimateStorageForConsolidateSnapshots_Task(request 
 * - RuntimeFault
  */
 func (service *VimPortType) ReconfigVM_Task(request *ReconfigVMRequestType) (*ReconfigVM_TaskResponse, error) {
-	data, err := service.call("ReconfigVM_Task", "urn:vim25/5.5", request)
+	response := &ReconfigVM_TaskResponse{}
+	err := service.client.Call("ReconfigVM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ReconfigVM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35289,30 +30703,13 @@ func (service *VimPortType) ReconfigVM_Task(request *ReconfigVMRequestType) (*Re
 * - RuntimeFault
  */
 func (service *VimPortType) UpgradeVM_Task(request *UpgradeVMRequestType) (*UpgradeVM_TaskResponse, error) {
-	data, err := service.call("UpgradeVM_Task", "urn:vim25/5.5", request)
+	response := &UpgradeVM_TaskResponse{}
+	err := service.client.Call("UpgradeVM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpgradeVM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35322,30 +30719,13 @@ func (service *VimPortType) UpgradeVM_Task(request *UpgradeVMRequestType) (*Upgr
 * - RuntimeFault
  */
 func (service *VimPortType) ExtractOvfEnvironment(request *ExtractOvfEnvironmentRequestType) (*ExtractOvfEnvironmentResponse, error) {
-	data, err := service.call("ExtractOvfEnvironment", "urn:vim25/5.5", request)
+	response := &ExtractOvfEnvironmentResponse{}
+	err := service.client.Call("ExtractOvfEnvironment", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ExtractOvfEnvironmentResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35359,30 +30739,13 @@ func (service *VimPortType) ExtractOvfEnvironment(request *ExtractOvfEnvironment
 * - RuntimeFault
  */
 func (service *VimPortType) PowerOnVM_Task(request *PowerOnVMRequestType) (*PowerOnVM_TaskResponse, error) {
-	data, err := service.call("PowerOnVM_Task", "urn:vim25/5.5", request)
+	response := &PowerOnVM_TaskResponse{}
+	err := service.client.Call("PowerOnVM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &PowerOnVM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35393,30 +30756,13 @@ func (service *VimPortType) PowerOnVM_Task(request *PowerOnVMRequestType) (*Powe
 * - RuntimeFault
  */
 func (service *VimPortType) PowerOffVM_Task(request *PowerOffVMRequestType) (*PowerOffVM_TaskResponse, error) {
-	data, err := service.call("PowerOffVM_Task", "urn:vim25/5.5", request)
+	response := &PowerOffVM_TaskResponse{}
+	err := service.client.Call("PowerOffVM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &PowerOffVM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35427,30 +30773,13 @@ func (service *VimPortType) PowerOffVM_Task(request *PowerOffVMRequestType) (*Po
 * - RuntimeFault
  */
 func (service *VimPortType) SuspendVM_Task(request *SuspendVMRequestType) (*SuspendVM_TaskResponse, error) {
-	data, err := service.call("SuspendVM_Task", "urn:vim25/5.5", request)
+	response := &SuspendVM_TaskResponse{}
+	err := service.client.Call("SuspendVM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &SuspendVM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35461,30 +30790,13 @@ func (service *VimPortType) SuspendVM_Task(request *SuspendVMRequestType) (*Susp
 * - RuntimeFault
  */
 func (service *VimPortType) ResetVM_Task(request *ResetVMRequestType) (*ResetVM_TaskResponse, error) {
-	data, err := service.call("ResetVM_Task", "urn:vim25/5.5", request)
+	response := &ResetVM_TaskResponse{}
+	err := service.client.Call("ResetVM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ResetVM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35496,30 +30808,13 @@ func (service *VimPortType) ResetVM_Task(request *ResetVMRequestType) (*ResetVM_
 * - RuntimeFault
  */
 func (service *VimPortType) ShutdownGuest(request *ShutdownGuestRequestType) (*ShutdownGuestResponse, error) {
-	data, err := service.call("ShutdownGuest", "urn:vim25/5.5", request)
+	response := &ShutdownGuestResponse{}
+	err := service.client.Call("ShutdownGuest", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ShutdownGuestResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35531,30 +30826,13 @@ func (service *VimPortType) ShutdownGuest(request *ShutdownGuestRequestType) (*S
 * - RuntimeFault
  */
 func (service *VimPortType) RebootGuest(request *RebootGuestRequestType) (*RebootGuestResponse, error) {
-	data, err := service.call("RebootGuest", "urn:vim25/5.5", request)
+	response := &RebootGuestResponse{}
+	err := service.client.Call("RebootGuest", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RebootGuestResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35566,30 +30844,13 @@ func (service *VimPortType) RebootGuest(request *RebootGuestRequestType) (*Reboo
 * - RuntimeFault
  */
 func (service *VimPortType) StandbyGuest(request *StandbyGuestRequestType) (*StandbyGuestResponse, error) {
-	data, err := service.call("StandbyGuest", "urn:vim25/5.5", request)
+	response := &StandbyGuestResponse{}
+	err := service.client.Call("StandbyGuest", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &StandbyGuestResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35599,30 +30860,13 @@ func (service *VimPortType) StandbyGuest(request *StandbyGuestRequestType) (*Sta
 * - RuntimeFault
  */
 func (service *VimPortType) AnswerVM(request *AnswerVMRequestType) (*AnswerVMResponse, error) {
-	data, err := service.call("AnswerVM", "urn:vim25/5.5", request)
+	response := &AnswerVMResponse{}
+	err := service.client.Call("AnswerVM", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AnswerVMResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35632,30 +30876,13 @@ func (service *VimPortType) AnswerVM(request *AnswerVMRequestType) (*AnswerVMRes
 * - RuntimeFault
  */
 func (service *VimPortType) CustomizeVM_Task(request *CustomizeVMRequestType) (*CustomizeVM_TaskResponse, error) {
-	data, err := service.call("CustomizeVM_Task", "urn:vim25/5.5", request)
+	response := &CustomizeVM_TaskResponse{}
+	err := service.client.Call("CustomizeVM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CustomizeVM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35665,30 +30892,13 @@ func (service *VimPortType) CustomizeVM_Task(request *CustomizeVMRequestType) (*
 * - RuntimeFault
  */
 func (service *VimPortType) CheckCustomizationSpec(request *CheckCustomizationSpecRequestType) (*CheckCustomizationSpecResponse, error) {
-	data, err := service.call("CheckCustomizationSpec", "urn:vim25/5.5", request)
+	response := &CheckCustomizationSpecResponse{}
+	err := service.client.Call("CheckCustomizationSpec", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CheckCustomizationSpecResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35703,30 +30913,13 @@ func (service *VimPortType) CheckCustomizationSpec(request *CheckCustomizationSp
 * - RuntimeFault
  */
 func (service *VimPortType) MigrateVM_Task(request *MigrateVMRequestType) (*MigrateVM_TaskResponse, error) {
-	data, err := service.call("MigrateVM_Task", "urn:vim25/5.5", request)
+	response := &MigrateVM_TaskResponse{}
+	err := service.client.Call("MigrateVM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &MigrateVM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35742,30 +30935,13 @@ func (service *VimPortType) MigrateVM_Task(request *MigrateVMRequestType) (*Migr
 * - RuntimeFault
  */
 func (service *VimPortType) RelocateVM_Task(request *RelocateVMRequestType) (*RelocateVM_TaskResponse, error) {
-	data, err := service.call("RelocateVM_Task", "urn:vim25/5.5", request)
+	response := &RelocateVM_TaskResponse{}
+	err := service.client.Call("RelocateVM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RelocateVM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35782,30 +30958,13 @@ func (service *VimPortType) RelocateVM_Task(request *RelocateVMRequestType) (*Re
 * - RuntimeFault
  */
 func (service *VimPortType) CloneVM_Task(request *CloneVMRequestType) (*CloneVM_TaskResponse, error) {
-	data, err := service.call("CloneVM_Task", "urn:vim25/5.5", request)
+	response := &CloneVM_TaskResponse{}
+	err := service.client.Call("CloneVM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CloneVM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35818,30 +30977,13 @@ func (service *VimPortType) CloneVM_Task(request *CloneVMRequestType) (*CloneVM_
 * - RuntimeFault
  */
 func (service *VimPortType) ExportVm(request *ExportVmRequestType) (*ExportVmResponse, error) {
-	data, err := service.call("ExportVm", "urn:vim25/5.5", request)
+	response := &ExportVmResponse{}
+	err := service.client.Call("ExportVm", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ExportVmResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35853,30 +30995,13 @@ func (service *VimPortType) ExportVm(request *ExportVmRequestType) (*ExportVmRes
 * - RuntimeFault
  */
 func (service *VimPortType) MarkAsTemplate(request *MarkAsTemplateRequestType) (*MarkAsTemplateResponse, error) {
-	data, err := service.call("MarkAsTemplate", "urn:vim25/5.5", request)
+	response := &MarkAsTemplateResponse{}
+	err := service.client.Call("MarkAsTemplate", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &MarkAsTemplateResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35889,30 +31014,13 @@ func (service *VimPortType) MarkAsTemplate(request *MarkAsTemplateRequestType) (
 * - RuntimeFault
  */
 func (service *VimPortType) MarkAsVirtualMachine(request *MarkAsVirtualMachineRequestType) (*MarkAsVirtualMachineResponse, error) {
-	data, err := service.call("MarkAsVirtualMachine", "urn:vim25/5.5", request)
+	response := &MarkAsVirtualMachineResponse{}
+	err := service.client.Call("MarkAsVirtualMachine", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &MarkAsVirtualMachineResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35923,30 +31031,13 @@ func (service *VimPortType) MarkAsVirtualMachine(request *MarkAsVirtualMachineRe
 * - RuntimeFault
  */
 func (service *VimPortType) UnregisterVM(request *UnregisterVMRequestType) (*UnregisterVMResponse, error) {
-	data, err := service.call("UnregisterVM", "urn:vim25/5.5", request)
+	response := &UnregisterVMResponse{}
+	err := service.client.Call("UnregisterVM", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UnregisterVMResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35956,30 +31047,13 @@ func (service *VimPortType) UnregisterVM(request *UnregisterVMRequestType) (*Unr
 * - RuntimeFault
  */
 func (service *VimPortType) ResetGuestInformation(request *ResetGuestInformationRequestType) (*ResetGuestInformationResponse, error) {
-	data, err := service.call("ResetGuestInformation", "urn:vim25/5.5", request)
+	response := &ResetGuestInformationResponse{}
+	err := service.client.Call("ResetGuestInformation", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ResetGuestInformationResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -35991,30 +31065,13 @@ func (service *VimPortType) ResetGuestInformation(request *ResetGuestInformation
 * - RuntimeFault
  */
 func (service *VimPortType) MountToolsInstaller(request *MountToolsInstallerRequestType) (*MountToolsInstallerResponse, error) {
-	data, err := service.call("MountToolsInstaller", "urn:vim25/5.5", request)
+	response := &MountToolsInstallerResponse{}
+	err := service.client.Call("MountToolsInstaller", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &MountToolsInstallerResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36025,30 +31082,13 @@ func (service *VimPortType) MountToolsInstaller(request *MountToolsInstallerRequ
 * - RuntimeFault
  */
 func (service *VimPortType) UnmountToolsInstaller(request *UnmountToolsInstallerRequestType) (*UnmountToolsInstallerResponse, error) {
-	data, err := service.call("UnmountToolsInstaller", "urn:vim25/5.5", request)
+	response := &UnmountToolsInstallerResponse{}
+	err := service.client.Call("UnmountToolsInstaller", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UnmountToolsInstallerResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36062,30 +31102,13 @@ func (service *VimPortType) UnmountToolsInstaller(request *UnmountToolsInstaller
 * - RuntimeFault
  */
 func (service *VimPortType) UpgradeTools_Task(request *UpgradeToolsRequestType) (*UpgradeTools_TaskResponse, error) {
-	data, err := service.call("UpgradeTools_Task", "urn:vim25/5.5", request)
+	response := &UpgradeTools_TaskResponse{}
+	err := service.client.Call("UpgradeTools_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpgradeTools_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36094,30 +31117,13 @@ func (service *VimPortType) UpgradeTools_Task(request *UpgradeToolsRequestType) 
 * - RuntimeFault
  */
 func (service *VimPortType) AcquireMksTicket(request *AcquireMksTicketRequestType) (*AcquireMksTicketResponse, error) {
-	data, err := service.call("AcquireMksTicket", "urn:vim25/5.5", request)
+	response := &AcquireMksTicketResponse{}
+	err := service.client.Call("AcquireMksTicket", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AcquireMksTicketResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36127,30 +31133,13 @@ func (service *VimPortType) AcquireMksTicket(request *AcquireMksTicketRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) AcquireTicket(request *AcquireTicketRequestType) (*AcquireTicketResponse, error) {
-	data, err := service.call("AcquireTicket", "urn:vim25/5.5", request)
+	response := &AcquireTicketResponse{}
+	err := service.client.Call("AcquireTicket", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AcquireTicketResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36161,30 +31150,13 @@ func (service *VimPortType) AcquireTicket(request *AcquireTicketRequestType) (*A
 * - RuntimeFault
  */
 func (service *VimPortType) SetScreenResolution(request *SetScreenResolutionRequestType) (*SetScreenResolutionResponse, error) {
-	data, err := service.call("SetScreenResolution", "urn:vim25/5.5", request)
+	response := &SetScreenResolutionResponse{}
+	err := service.client.Call("SetScreenResolution", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &SetScreenResolutionResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36197,30 +31169,13 @@ func (service *VimPortType) SetScreenResolution(request *SetScreenResolutionRequ
 * - RuntimeFault
  */
 func (service *VimPortType) DefragmentAllDisks(request *DefragmentAllDisksRequestType) (*DefragmentAllDisksResponse, error) {
-	data, err := service.call("DefragmentAllDisks", "urn:vim25/5.5", request)
+	response := &DefragmentAllDisksResponse{}
+	err := service.client.Call("DefragmentAllDisks", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DefragmentAllDisksResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36235,30 +31190,13 @@ func (service *VimPortType) DefragmentAllDisks(request *DefragmentAllDisksReques
 * - RuntimeFault
  */
 func (service *VimPortType) CreateSecondaryVM_Task(request *CreateSecondaryVMRequestType) (*CreateSecondaryVM_TaskResponse, error) {
-	data, err := service.call("CreateSecondaryVM_Task", "urn:vim25/5.5", request)
+	response := &CreateSecondaryVM_TaskResponse{}
+	err := service.client.Call("CreateSecondaryVM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateSecondaryVM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36270,30 +31208,13 @@ func (service *VimPortType) CreateSecondaryVM_Task(request *CreateSecondaryVMReq
 * - RuntimeFault
  */
 func (service *VimPortType) TurnOffFaultToleranceForVM_Task(request *TurnOffFaultToleranceForVMRequestType) (*TurnOffFaultToleranceForVM_TaskResponse, error) {
-	data, err := service.call("TurnOffFaultToleranceForVM_Task", "urn:vim25/5.5", request)
+	response := &TurnOffFaultToleranceForVM_TaskResponse{}
+	err := service.client.Call("TurnOffFaultToleranceForVM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &TurnOffFaultToleranceForVM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36305,30 +31226,13 @@ func (service *VimPortType) TurnOffFaultToleranceForVM_Task(request *TurnOffFaul
 * - RuntimeFault
  */
 func (service *VimPortType) MakePrimaryVM_Task(request *MakePrimaryVMRequestType) (*MakePrimaryVM_TaskResponse, error) {
-	data, err := service.call("MakePrimaryVM_Task", "urn:vim25/5.5", request)
+	response := &MakePrimaryVM_TaskResponse{}
+	err := service.client.Call("MakePrimaryVM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &MakePrimaryVM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36340,30 +31244,13 @@ func (service *VimPortType) MakePrimaryVM_Task(request *MakePrimaryVMRequestType
 * - RuntimeFault
  */
 func (service *VimPortType) TerminateFaultTolerantVM_Task(request *TerminateFaultTolerantVMRequestType) (*TerminateFaultTolerantVM_TaskResponse, error) {
-	data, err := service.call("TerminateFaultTolerantVM_Task", "urn:vim25/5.5", request)
+	response := &TerminateFaultTolerantVM_TaskResponse{}
+	err := service.client.Call("TerminateFaultTolerantVM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &TerminateFaultTolerantVM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36375,30 +31262,13 @@ func (service *VimPortType) TerminateFaultTolerantVM_Task(request *TerminateFaul
 * - RuntimeFault
  */
 func (service *VimPortType) DisableSecondaryVM_Task(request *DisableSecondaryVMRequestType) (*DisableSecondaryVM_TaskResponse, error) {
-	data, err := service.call("DisableSecondaryVM_Task", "urn:vim25/5.5", request)
+	response := &DisableSecondaryVM_TaskResponse{}
+	err := service.client.Call("DisableSecondaryVM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DisableSecondaryVM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36411,30 +31281,13 @@ func (service *VimPortType) DisableSecondaryVM_Task(request *DisableSecondaryVMR
 * - RuntimeFault
  */
 func (service *VimPortType) EnableSecondaryVM_Task(request *EnableSecondaryVMRequestType) (*EnableSecondaryVM_TaskResponse, error) {
-	data, err := service.call("EnableSecondaryVM_Task", "urn:vim25/5.5", request)
+	response := &EnableSecondaryVM_TaskResponse{}
+	err := service.client.Call("EnableSecondaryVM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &EnableSecondaryVM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36445,30 +31298,13 @@ func (service *VimPortType) EnableSecondaryVM_Task(request *EnableSecondaryVMReq
 * - RuntimeFault
  */
 func (service *VimPortType) SetDisplayTopology(request *SetDisplayTopologyRequestType) (*SetDisplayTopologyResponse, error) {
-	data, err := service.call("SetDisplayTopology", "urn:vim25/5.5", request)
+	response := &SetDisplayTopologyResponse{}
+	err := service.client.Call("SetDisplayTopology", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &SetDisplayTopologyResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36486,30 +31322,13 @@ func (service *VimPortType) SetDisplayTopology(request *SetDisplayTopologyReques
 * - RuntimeFault
  */
 func (service *VimPortType) StartRecording_Task(request *StartRecordingRequestType) (*StartRecording_TaskResponse, error) {
-	data, err := service.call("StartRecording_Task", "urn:vim25/5.5", request)
+	response := &StartRecording_TaskResponse{}
+	err := service.client.Call("StartRecording_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &StartRecording_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36523,30 +31342,13 @@ func (service *VimPortType) StartRecording_Task(request *StartRecordingRequestTy
 * - RuntimeFault
  */
 func (service *VimPortType) StopRecording_Task(request *StopRecordingRequestType) (*StopRecording_TaskResponse, error) {
-	data, err := service.call("StopRecording_Task", "urn:vim25/5.5", request)
+	response := &StopRecording_TaskResponse{}
+	err := service.client.Call("StopRecording_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &StopRecording_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36564,30 +31366,13 @@ func (service *VimPortType) StopRecording_Task(request *StopRecordingRequestType
 * - RuntimeFault
  */
 func (service *VimPortType) StartReplaying_Task(request *StartReplayingRequestType) (*StartReplaying_TaskResponse, error) {
-	data, err := service.call("StartReplaying_Task", "urn:vim25/5.5", request)
+	response := &StartReplaying_TaskResponse{}
+	err := service.client.Call("StartReplaying_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &StartReplaying_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36601,30 +31386,13 @@ func (service *VimPortType) StartReplaying_Task(request *StartReplayingRequestTy
 * - RuntimeFault
  */
 func (service *VimPortType) StopReplaying_Task(request *StopReplayingRequestType) (*StopReplaying_TaskResponse, error) {
-	data, err := service.call("StopReplaying_Task", "urn:vim25/5.5", request)
+	response := &StopReplaying_TaskResponse{}
+	err := service.client.Call("StopReplaying_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &StopReplaying_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36636,30 +31404,13 @@ func (service *VimPortType) StopReplaying_Task(request *StopReplayingRequestType
 * - RuntimeFault
  */
 func (service *VimPortType) PromoteDisks_Task(request *PromoteDisksRequestType) (*PromoteDisks_TaskResponse, error) {
-	data, err := service.call("PromoteDisks_Task", "urn:vim25/5.5", request)
+	response := &PromoteDisks_TaskResponse{}
+	err := service.client.Call("PromoteDisks_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &PromoteDisks_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36671,30 +31422,13 @@ func (service *VimPortType) PromoteDisks_Task(request *PromoteDisksRequestType) 
 * - RuntimeFault
  */
 func (service *VimPortType) CreateScreenshot_Task(request *CreateScreenshotRequestType) (*CreateScreenshot_TaskResponse, error) {
-	data, err := service.call("CreateScreenshot_Task", "urn:vim25/5.5", request)
+	response := &CreateScreenshot_TaskResponse{}
+	err := service.client.Call("CreateScreenshot_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateScreenshot_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36705,30 +31439,13 @@ func (service *VimPortType) CreateScreenshot_Task(request *CreateScreenshotReque
 * - RuntimeFault
  */
 func (service *VimPortType) QueryChangedDiskAreas(request *QueryChangedDiskAreasRequestType) (*QueryChangedDiskAreasResponse, error) {
-	data, err := service.call("QueryChangedDiskAreas", "urn:vim25/5.5", request)
+	response := &QueryChangedDiskAreasResponse{}
+	err := service.client.Call("QueryChangedDiskAreas", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryChangedDiskAreasResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36737,30 +31454,13 @@ func (service *VimPortType) QueryChangedDiskAreas(request *QueryChangedDiskAreas
 * - RuntimeFault
  */
 func (service *VimPortType) QueryUnownedFiles(request *QueryUnownedFilesRequestType) (*QueryUnownedFilesResponse, error) {
-	data, err := service.call("QueryUnownedFiles", "urn:vim25/5.5", request)
+	response := &QueryUnownedFilesResponse{}
+	err := service.client.Call("QueryUnownedFiles", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryUnownedFilesResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36775,30 +31475,13 @@ func (service *VimPortType) QueryUnownedFiles(request *QueryUnownedFilesRequestT
 * - RuntimeFault
  */
 func (service *VimPortType) ReloadVirtualMachineFromPath_Task(request *reloadVirtualMachineFromPathRequestType) (*reloadVirtualMachineFromPath_TaskResponse, error) {
-	data, err := service.call("reloadVirtualMachineFromPath_Task", "urn:vim25/5.5", request)
+	response := &reloadVirtualMachineFromPath_TaskResponse{}
+	err := service.client.Call("reloadVirtualMachineFromPath_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &reloadVirtualMachineFromPath_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36809,30 +31492,13 @@ func (service *VimPortType) ReloadVirtualMachineFromPath_Task(request *reloadVir
 * - RuntimeFault
  */
 func (service *VimPortType) QueryFaultToleranceCompatibility(request *QueryFaultToleranceCompatibilityRequestType) (*QueryFaultToleranceCompatibilityResponse, error) {
-	data, err := service.call("QueryFaultToleranceCompatibility", "urn:vim25/5.5", request)
+	response := &QueryFaultToleranceCompatibilityResponse{}
+	err := service.client.Call("QueryFaultToleranceCompatibility", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryFaultToleranceCompatibilityResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36843,30 +31509,13 @@ func (service *VimPortType) QueryFaultToleranceCompatibility(request *QueryFault
 * - RuntimeFault
  */
 func (service *VimPortType) TerminateVM(request *TerminateVMRequestType) (*TerminateVMResponse, error) {
-	data, err := service.call("TerminateVM", "urn:vim25/5.5", request)
+	response := &TerminateVMResponse{}
+	err := service.client.Call("TerminateVM", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &TerminateVMResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36875,30 +31524,13 @@ func (service *VimPortType) TerminateVM(request *TerminateVMRequestType) (*Termi
 * - RuntimeFault
  */
 func (service *VimPortType) RemoveAlarm(request *RemoveAlarmRequestType) (*RemoveAlarmResponse, error) {
-	data, err := service.call("RemoveAlarm", "urn:vim25/5.5", request)
+	response := &RemoveAlarmResponse{}
+	err := service.client.Call("RemoveAlarm", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RemoveAlarmResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36909,30 +31541,13 @@ func (service *VimPortType) RemoveAlarm(request *RemoveAlarmRequestType) (*Remov
 * - RuntimeFault
  */
 func (service *VimPortType) ReconfigureAlarm(request *ReconfigureAlarmRequestType) (*ReconfigureAlarmResponse, error) {
-	data, err := service.call("ReconfigureAlarm", "urn:vim25/5.5", request)
+	response := &ReconfigureAlarmResponse{}
+	err := service.client.Call("ReconfigureAlarm", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ReconfigureAlarmResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36943,30 +31558,13 @@ func (service *VimPortType) ReconfigureAlarm(request *ReconfigureAlarmRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) CreateAlarm(request *CreateAlarmRequestType) (*CreateAlarmResponse, error) {
-	data, err := service.call("CreateAlarm", "urn:vim25/5.5", request)
+	response := &CreateAlarmResponse{}
+	err := service.client.Call("CreateAlarm", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateAlarmResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -36975,30 +31573,13 @@ func (service *VimPortType) CreateAlarm(request *CreateAlarmRequestType) (*Creat
 * - RuntimeFault
  */
 func (service *VimPortType) GetAlarm(request *GetAlarmRequestType) (*GetAlarmResponse, error) {
-	data, err := service.call("GetAlarm", "urn:vim25/5.5", request)
+	response := &GetAlarmResponse{}
+	err := service.client.Call("GetAlarm", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &GetAlarmResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37007,30 +31588,13 @@ func (service *VimPortType) GetAlarm(request *GetAlarmRequestType) (*GetAlarmRes
 * - RuntimeFault
  */
 func (service *VimPortType) AreAlarmActionsEnabled(request *AreAlarmActionsEnabledRequestType) (*AreAlarmActionsEnabledResponse, error) {
-	data, err := service.call("AreAlarmActionsEnabled", "urn:vim25/5.5", request)
+	response := &AreAlarmActionsEnabledResponse{}
+	err := service.client.Call("AreAlarmActionsEnabled", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AreAlarmActionsEnabledResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37039,30 +31603,13 @@ func (service *VimPortType) AreAlarmActionsEnabled(request *AreAlarmActionsEnabl
 * - RuntimeFault
  */
 func (service *VimPortType) EnableAlarmActions(request *EnableAlarmActionsRequestType) (*EnableAlarmActionsResponse, error) {
-	data, err := service.call("EnableAlarmActions", "urn:vim25/5.5", request)
+	response := &EnableAlarmActionsResponse{}
+	err := service.client.Call("EnableAlarmActions", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &EnableAlarmActionsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37071,30 +31618,13 @@ func (service *VimPortType) EnableAlarmActions(request *EnableAlarmActionsReques
 * - RuntimeFault
  */
 func (service *VimPortType) GetAlarmState(request *GetAlarmStateRequestType) (*GetAlarmStateResponse, error) {
-	data, err := service.call("GetAlarmState", "urn:vim25/5.5", request)
+	response := &GetAlarmStateResponse{}
+	err := service.client.Call("GetAlarmState", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &GetAlarmStateResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37103,30 +31633,13 @@ func (service *VimPortType) GetAlarmState(request *GetAlarmStateRequestType) (*G
 * - RuntimeFault
  */
 func (service *VimPortType) AcknowledgeAlarm(request *AcknowledgeAlarmRequestType) (*AcknowledgeAlarmResponse, error) {
-	data, err := service.call("AcknowledgeAlarm", "urn:vim25/5.5", request)
+	response := &AcknowledgeAlarmResponse{}
+	err := service.client.Call("AcknowledgeAlarm", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AcknowledgeAlarmResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37139,30 +31652,13 @@ func (service *VimPortType) AcknowledgeAlarm(request *AcknowledgeAlarmRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) ReconfigureDVPortgroup_Task(request *ReconfigureDVPortgroupRequestType) (*ReconfigureDVPortgroup_TaskResponse, error) {
-	data, err := service.call("ReconfigureDVPortgroup_Task", "urn:vim25/5.5", request)
+	response := &ReconfigureDVPortgroup_TaskResponse{}
+	err := service.client.Call("ReconfigureDVPortgroup_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ReconfigureDVPortgroup_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37173,30 +31669,13 @@ func (service *VimPortType) ReconfigureDVPortgroup_Task(request *ReconfigureDVPo
 * - RuntimeFault
  */
 func (service *VimPortType) DVPortgroupRollback_Task(request *DVPortgroupRollbackRequestType) (*DVPortgroupRollback_TaskResponse, error) {
-	data, err := service.call("DVPortgroupRollback_Task", "urn:vim25/5.5", request)
+	response := &DVPortgroupRollback_TaskResponse{}
+	err := service.client.Call("DVPortgroupRollback_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DVPortgroupRollback_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37205,30 +31684,13 @@ func (service *VimPortType) DVPortgroupRollback_Task(request *DVPortgroupRollbac
 * - RuntimeFault
  */
 func (service *VimPortType) QueryAvailableDvsSpec(request *QueryAvailableDvsSpecRequestType) (*QueryAvailableDvsSpecResponse, error) {
-	data, err := service.call("QueryAvailableDvsSpec", "urn:vim25/5.5", request)
+	response := &QueryAvailableDvsSpecResponse{}
+	err := service.client.Call("QueryAvailableDvsSpec", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryAvailableDvsSpecResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37237,30 +31699,13 @@ func (service *VimPortType) QueryAvailableDvsSpec(request *QueryAvailableDvsSpec
 * - RuntimeFault
  */
 func (service *VimPortType) QueryCompatibleHostForNewDvs(request *QueryCompatibleHostForNewDvsRequestType) (*QueryCompatibleHostForNewDvsResponse, error) {
-	data, err := service.call("QueryCompatibleHostForNewDvs", "urn:vim25/5.5", request)
+	response := &QueryCompatibleHostForNewDvsResponse{}
+	err := service.client.Call("QueryCompatibleHostForNewDvs", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryCompatibleHostForNewDvsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37269,30 +31714,13 @@ func (service *VimPortType) QueryCompatibleHostForNewDvs(request *QueryCompatibl
 * - RuntimeFault
  */
 func (service *VimPortType) QueryCompatibleHostForExistingDvs(request *QueryCompatibleHostForExistingDvsRequestType) (*QueryCompatibleHostForExistingDvsResponse, error) {
-	data, err := service.call("QueryCompatibleHostForExistingDvs", "urn:vim25/5.5", request)
+	response := &QueryCompatibleHostForExistingDvsResponse{}
+	err := service.client.Call("QueryCompatibleHostForExistingDvs", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryCompatibleHostForExistingDvsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37301,30 +31729,13 @@ func (service *VimPortType) QueryCompatibleHostForExistingDvs(request *QueryComp
 * - RuntimeFault
  */
 func (service *VimPortType) QueryDvsCompatibleHostSpec(request *QueryDvsCompatibleHostSpecRequestType) (*QueryDvsCompatibleHostSpecResponse, error) {
-	data, err := service.call("QueryDvsCompatibleHostSpec", "urn:vim25/5.5", request)
+	response := &QueryDvsCompatibleHostSpecResponse{}
+	err := service.client.Call("QueryDvsCompatibleHostSpec", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryDvsCompatibleHostSpecResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37333,30 +31744,13 @@ func (service *VimPortType) QueryDvsCompatibleHostSpec(request *QueryDvsCompatib
 * - RuntimeFault
  */
 func (service *VimPortType) QueryDvsFeatureCapability(request *QueryDvsFeatureCapabilityRequestType) (*QueryDvsFeatureCapabilityResponse, error) {
-	data, err := service.call("QueryDvsFeatureCapability", "urn:vim25/5.5", request)
+	response := &QueryDvsFeatureCapabilityResponse{}
+	err := service.client.Call("QueryDvsFeatureCapability", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryDvsFeatureCapabilityResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37366,30 +31760,13 @@ func (service *VimPortType) QueryDvsFeatureCapability(request *QueryDvsFeatureCa
 * - RuntimeFault
  */
 func (service *VimPortType) QueryDvsByUuid(request *QueryDvsByUuidRequestType) (*QueryDvsByUuidResponse, error) {
-	data, err := service.call("QueryDvsByUuid", "urn:vim25/5.5", request)
+	response := &QueryDvsByUuidResponse{}
+	err := service.client.Call("QueryDvsByUuid", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryDvsByUuidResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37398,30 +31775,13 @@ func (service *VimPortType) QueryDvsByUuid(request *QueryDvsByUuidRequestType) (
 * - RuntimeFault
  */
 func (service *VimPortType) QueryDvsConfigTarget(request *QueryDvsConfigTargetRequestType) (*QueryDvsConfigTargetResponse, error) {
-	data, err := service.call("QueryDvsConfigTarget", "urn:vim25/5.5", request)
+	response := &QueryDvsConfigTargetResponse{}
+	err := service.client.Call("QueryDvsConfigTarget", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryDvsConfigTargetResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37430,30 +31790,13 @@ func (service *VimPortType) QueryDvsConfigTarget(request *QueryDvsConfigTargetRe
 * - RuntimeFault
  */
 func (service *VimPortType) QueryDvsCheckCompatibility(request *QueryDvsCheckCompatibilityRequestType) (*QueryDvsCheckCompatibilityResponse, error) {
-	data, err := service.call("QueryDvsCheckCompatibility", "urn:vim25/5.5", request)
+	response := &QueryDvsCheckCompatibilityResponse{}
+	err := service.client.Call("QueryDvsCheckCompatibility", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryDvsCheckCompatibilityResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37463,30 +31806,13 @@ func (service *VimPortType) QueryDvsCheckCompatibility(request *QueryDvsCheckCom
 * - RuntimeFault
  */
 func (service *VimPortType) RectifyDvsOnHost_Task(request *RectifyDvsOnHostRequestType) (*RectifyDvsOnHost_TaskResponse, error) {
-	data, err := service.call("RectifyDvsOnHost_Task", "urn:vim25/5.5", request)
+	response := &RectifyDvsOnHost_TaskResponse{}
+	err := service.client.Call("RectifyDvsOnHost_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RectifyDvsOnHost_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37497,30 +31823,13 @@ func (service *VimPortType) RectifyDvsOnHost_Task(request *RectifyDvsOnHostReque
 * - RuntimeFault
  */
 func (service *VimPortType) DVSManagerExportEntity_Task(request *DVSManagerExportEntityRequestType) (*DVSManagerExportEntity_TaskResponse, error) {
-	data, err := service.call("DVSManagerExportEntity_Task", "urn:vim25/5.5", request)
+	response := &DVSManagerExportEntity_TaskResponse{}
+	err := service.client.Call("DVSManagerExportEntity_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DVSManagerExportEntity_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37531,30 +31840,13 @@ func (service *VimPortType) DVSManagerExportEntity_Task(request *DVSManagerExpor
 * - RuntimeFault
  */
 func (service *VimPortType) DVSManagerImportEntity_Task(request *DVSManagerImportEntityRequestType) (*DVSManagerImportEntity_TaskResponse, error) {
-	data, err := service.call("DVSManagerImportEntity_Task", "urn:vim25/5.5", request)
+	response := &DVSManagerImportEntity_TaskResponse{}
+	err := service.client.Call("DVSManagerImportEntity_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DVSManagerImportEntity_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37564,30 +31856,13 @@ func (service *VimPortType) DVSManagerImportEntity_Task(request *DVSManagerImpor
 * - RuntimeFault
  */
 func (service *VimPortType) DVSManagerLookupDvPortGroup(request *DVSManagerLookupDvPortGroupRequestType) (*DVSManagerLookupDvPortGroupResponse, error) {
-	data, err := service.call("DVSManagerLookupDvPortGroup", "urn:vim25/5.5", request)
+	response := &DVSManagerLookupDvPortGroupResponse{}
+	err := service.client.Call("DVSManagerLookupDvPortGroup", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DVSManagerLookupDvPortGroupResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37597,30 +31872,13 @@ func (service *VimPortType) DVSManagerLookupDvPortGroup(request *DVSManagerLooku
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateDVSLacpGroupConfig_Task(request *UpdateDVSLacpGroupConfigRequestType) (*UpdateDVSLacpGroupConfig_TaskResponse, error) {
-	data, err := service.call("UpdateDVSLacpGroupConfig_Task", "urn:vim25/5.5", request)
+	response := &UpdateDVSLacpGroupConfig_TaskResponse{}
+	err := service.client.Call("UpdateDVSLacpGroupConfig_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateDVSLacpGroupConfig_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37629,30 +31887,13 @@ func (service *VimPortType) UpdateDVSLacpGroupConfig_Task(request *UpdateDVSLacp
 * - RuntimeFault
  */
 func (service *VimPortType) ReadNextEvents(request *ReadNextEventsRequestType) (*ReadNextEventsResponse, error) {
-	data, err := service.call("ReadNextEvents", "urn:vim25/5.5", request)
+	response := &ReadNextEventsResponse{}
+	err := service.client.Call("ReadNextEvents", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ReadNextEventsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37661,30 +31902,13 @@ func (service *VimPortType) ReadNextEvents(request *ReadNextEventsRequestType) (
 * - RuntimeFault
  */
 func (service *VimPortType) ReadPreviousEvents(request *ReadPreviousEventsRequestType) (*ReadPreviousEventsResponse, error) {
-	data, err := service.call("ReadPreviousEvents", "urn:vim25/5.5", request)
+	response := &ReadPreviousEventsResponse{}
+	err := service.client.Call("ReadPreviousEvents", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ReadPreviousEventsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37693,30 +31917,13 @@ func (service *VimPortType) ReadPreviousEvents(request *ReadPreviousEventsReques
 * - RuntimeFault
  */
 func (service *VimPortType) RetrieveArgumentDescription(request *RetrieveArgumentDescriptionRequestType) (*RetrieveArgumentDescriptionResponse, error) {
-	data, err := service.call("RetrieveArgumentDescription", "urn:vim25/5.5", request)
+	response := &RetrieveArgumentDescriptionResponse{}
+	err := service.client.Call("RetrieveArgumentDescription", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RetrieveArgumentDescriptionResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37726,30 +31933,13 @@ func (service *VimPortType) RetrieveArgumentDescription(request *RetrieveArgumen
 * - RuntimeFault
  */
 func (service *VimPortType) CreateCollectorForEvents(request *CreateCollectorForEventsRequestType) (*CreateCollectorForEventsResponse, error) {
-	data, err := service.call("CreateCollectorForEvents", "urn:vim25/5.5", request)
+	response := &CreateCollectorForEventsResponse{}
+	err := service.client.Call("CreateCollectorForEvents", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateCollectorForEventsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37758,30 +31948,13 @@ func (service *VimPortType) CreateCollectorForEvents(request *CreateCollectorFor
 * - RuntimeFault
  */
 func (service *VimPortType) LogUserEvent(request *LogUserEventRequestType) (*LogUserEventResponse, error) {
-	data, err := service.call("LogUserEvent", "urn:vim25/5.5", request)
+	response := &LogUserEventResponse{}
+	err := service.client.Call("LogUserEvent", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &LogUserEventResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37790,30 +31963,13 @@ func (service *VimPortType) LogUserEvent(request *LogUserEventRequestType) (*Log
 * - RuntimeFault
  */
 func (service *VimPortType) QueryEvents(request *QueryEventsRequestType) (*QueryEventsResponse, error) {
-	data, err := service.call("QueryEvents", "urn:vim25/5.5", request)
+	response := &QueryEventsResponse{}
+	err := service.client.Call("QueryEvents", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryEventsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37823,30 +31979,13 @@ func (service *VimPortType) QueryEvents(request *QueryEventsRequestType) (*Query
 * - RuntimeFault
  */
 func (service *VimPortType) PostEvent(request *PostEventRequestType) (*PostEventResponse, error) {
-	data, err := service.call("PostEvent", "urn:vim25/5.5", request)
+	response := &PostEventResponse{}
+	err := service.client.Call("PostEvent", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &PostEventResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37860,30 +31999,13 @@ func (service *VimPortType) PostEvent(request *PostEventRequestType) (*PostEvent
 * - RuntimeFault
  */
 func (service *VimPortType) JoinDomain_Task(request *JoinDomainRequestType) (*JoinDomain_TaskResponse, error) {
-	data, err := service.call("JoinDomain_Task", "urn:vim25/5.5", request)
+	response := &JoinDomain_TaskResponse{}
+	err := service.client.Call("JoinDomain_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &JoinDomain_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37896,30 +32018,13 @@ func (service *VimPortType) JoinDomain_Task(request *JoinDomainRequestType) (*Jo
 * - RuntimeFault
  */
 func (service *VimPortType) JoinDomainWithCAM_Task(request *JoinDomainWithCAMRequestType) (*JoinDomainWithCAM_TaskResponse, error) {
-	data, err := service.call("JoinDomainWithCAM_Task", "urn:vim25/5.5", request)
+	response := &JoinDomainWithCAM_TaskResponse{}
+	err := service.client.Call("JoinDomainWithCAM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &JoinDomainWithCAM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37930,30 +32035,13 @@ func (service *VimPortType) JoinDomainWithCAM_Task(request *JoinDomainWithCAMReq
 * - RuntimeFault
  */
 func (service *VimPortType) ImportCertificateForCAM_Task(request *ImportCertificateForCAMRequestType) (*ImportCertificateForCAM_TaskResponse, error) {
-	data, err := service.call("ImportCertificateForCAM_Task", "urn:vim25/5.5", request)
+	response := &ImportCertificateForCAM_TaskResponse{}
+	err := service.client.Call("ImportCertificateForCAM_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ImportCertificateForCAM_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37966,30 +32054,13 @@ func (service *VimPortType) ImportCertificateForCAM_Task(request *ImportCertific
 * - RuntimeFault
  */
 func (service *VimPortType) LeaveCurrentDomain_Task(request *LeaveCurrentDomainRequestType) (*LeaveCurrentDomain_TaskResponse, error) {
-	data, err := service.call("LeaveCurrentDomain_Task", "urn:vim25/5.5", request)
+	response := &LeaveCurrentDomain_TaskResponse{}
+	err := service.client.Call("LeaveCurrentDomain_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &LeaveCurrentDomain_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -37998,30 +32069,13 @@ func (service *VimPortType) LeaveCurrentDomain_Task(request *LeaveCurrentDomainR
 * - RuntimeFault
  */
 func (service *VimPortType) ReconfigureAutostart(request *ReconfigureAutostartRequestType) (*ReconfigureAutostartResponse, error) {
-	data, err := service.call("ReconfigureAutostart", "urn:vim25/5.5", request)
+	response := &ReconfigureAutostartResponse{}
+	err := service.client.Call("ReconfigureAutostart", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ReconfigureAutostartResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38030,30 +32084,13 @@ func (service *VimPortType) ReconfigureAutostart(request *ReconfigureAutostartRe
 * - RuntimeFault
  */
 func (service *VimPortType) AutoStartPowerOn(request *AutoStartPowerOnRequestType) (*AutoStartPowerOnResponse, error) {
-	data, err := service.call("AutoStartPowerOn", "urn:vim25/5.5", request)
+	response := &AutoStartPowerOnResponse{}
+	err := service.client.Call("AutoStartPowerOn", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AutoStartPowerOnResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38062,30 +32099,13 @@ func (service *VimPortType) AutoStartPowerOn(request *AutoStartPowerOnRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) AutoStartPowerOff(request *AutoStartPowerOffRequestType) (*AutoStartPowerOffResponse, error) {
-	data, err := service.call("AutoStartPowerOff", "urn:vim25/5.5", request)
+	response := &AutoStartPowerOffResponse{}
+	err := service.client.Call("AutoStartPowerOff", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AutoStartPowerOffResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38094,30 +32114,13 @@ func (service *VimPortType) AutoStartPowerOff(request *AutoStartPowerOffRequestT
 * - RuntimeFault
  */
 func (service *VimPortType) QueryBootDevices(request *QueryBootDevicesRequestType) (*QueryBootDevicesResponse, error) {
-	data, err := service.call("QueryBootDevices", "urn:vim25/5.5", request)
+	response := &QueryBootDevicesResponse{}
+	err := service.client.Call("QueryBootDevices", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryBootDevicesResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38126,30 +32129,13 @@ func (service *VimPortType) QueryBootDevices(request *QueryBootDevicesRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateBootDevice(request *UpdateBootDeviceRequestType) (*UpdateBootDeviceResponse, error) {
-	data, err := service.call("UpdateBootDevice", "urn:vim25/5.5", request)
+	response := &UpdateBootDeviceResponse{}
+	err := service.client.Call("UpdateBootDevice", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateBootDeviceResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38158,30 +32144,13 @@ func (service *VimPortType) UpdateBootDevice(request *UpdateBootDeviceRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) ConfigureHostCache_Task(request *ConfigureHostCacheRequestType) (*ConfigureHostCache_TaskResponse, error) {
-	data, err := service.call("ConfigureHostCache_Task", "urn:vim25/5.5", request)
+	response := &ConfigureHostCache_TaskResponse{}
+	err := service.client.Call("ConfigureHostCache_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ConfigureHostCache_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38190,30 +32159,13 @@ func (service *VimPortType) ConfigureHostCache_Task(request *ConfigureHostCacheR
 * - RuntimeFault
  */
 func (service *VimPortType) EnableHyperThreading(request *EnableHyperThreadingRequestType) (*EnableHyperThreadingResponse, error) {
-	data, err := service.call("EnableHyperThreading", "urn:vim25/5.5", request)
+	response := &EnableHyperThreadingResponse{}
+	err := service.client.Call("EnableHyperThreading", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &EnableHyperThreadingResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38222,30 +32174,13 @@ func (service *VimPortType) EnableHyperThreading(request *EnableHyperThreadingRe
 * - RuntimeFault
  */
 func (service *VimPortType) DisableHyperThreading(request *DisableHyperThreadingRequestType) (*DisableHyperThreadingResponse, error) {
-	data, err := service.call("DisableHyperThreading", "urn:vim25/5.5", request)
+	response := &DisableHyperThreadingResponse{}
+	err := service.client.Call("DisableHyperThreading", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DisableHyperThreadingResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38256,30 +32191,13 @@ func (service *VimPortType) DisableHyperThreading(request *DisableHyperThreading
 * - RuntimeFault
  */
 func (service *VimPortType) SearchDatastore_Task(request *SearchDatastoreRequestType) (*SearchDatastore_TaskResponse, error) {
-	data, err := service.call("SearchDatastore_Task", "urn:vim25/5.5", request)
+	response := &SearchDatastore_TaskResponse{}
+	err := service.client.Call("SearchDatastore_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &SearchDatastore_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38290,30 +32208,13 @@ func (service *VimPortType) SearchDatastore_Task(request *SearchDatastoreRequest
 * - RuntimeFault
  */
 func (service *VimPortType) SearchDatastoreSubFolders_Task(request *SearchDatastoreSubFoldersRequestType) (*SearchDatastoreSubFolders_TaskResponse, error) {
-	data, err := service.call("SearchDatastoreSubFolders_Task", "urn:vim25/5.5", request)
+	response := &SearchDatastoreSubFolders_TaskResponse{}
+	err := service.client.Call("SearchDatastoreSubFolders_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &SearchDatastoreSubFolders_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38324,30 +32225,13 @@ func (service *VimPortType) SearchDatastoreSubFolders_Task(request *SearchDatast
 * - RuntimeFault
  */
 func (service *VimPortType) DeleteFile(request *DeleteFileRequestType) (*DeleteFileResponse, error) {
-	data, err := service.call("DeleteFile", "urn:vim25/5.5", request)
+	response := &DeleteFileResponse{}
+	err := service.client.Call("DeleteFile", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DeleteFileResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38358,30 +32242,13 @@ func (service *VimPortType) DeleteFile(request *DeleteFileRequestType) (*DeleteF
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateLocalSwapDatastore(request *UpdateLocalSwapDatastoreRequestType) (*UpdateLocalSwapDatastoreResponse, error) {
-	data, err := service.call("UpdateLocalSwapDatastore", "urn:vim25/5.5", request)
+	response := &UpdateLocalSwapDatastoreResponse{}
+	err := service.client.Call("UpdateLocalSwapDatastore", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateLocalSwapDatastoreResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38392,30 +32259,13 @@ func (service *VimPortType) UpdateLocalSwapDatastore(request *UpdateLocalSwapDat
 * - RuntimeFault
  */
 func (service *VimPortType) QueryAvailableDisksForVmfs(request *QueryAvailableDisksForVmfsRequestType) (*QueryAvailableDisksForVmfsResponse, error) {
-	data, err := service.call("QueryAvailableDisksForVmfs", "urn:vim25/5.5", request)
+	response := &QueryAvailableDisksForVmfsResponse{}
+	err := service.client.Call("QueryAvailableDisksForVmfs", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryAvailableDisksForVmfsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38426,30 +32276,13 @@ func (service *VimPortType) QueryAvailableDisksForVmfs(request *QueryAvailableDi
 * - RuntimeFault
  */
 func (service *VimPortType) QueryVmfsDatastoreCreateOptions(request *QueryVmfsDatastoreCreateOptionsRequestType) (*QueryVmfsDatastoreCreateOptionsResponse, error) {
-	data, err := service.call("QueryVmfsDatastoreCreateOptions", "urn:vim25/5.5", request)
+	response := &QueryVmfsDatastoreCreateOptionsResponse{}
+	err := service.client.Call("QueryVmfsDatastoreCreateOptions", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryVmfsDatastoreCreateOptionsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38460,30 +32293,13 @@ func (service *VimPortType) QueryVmfsDatastoreCreateOptions(request *QueryVmfsDa
 * - RuntimeFault
  */
 func (service *VimPortType) CreateVmfsDatastore(request *CreateVmfsDatastoreRequestType) (*CreateVmfsDatastoreResponse, error) {
-	data, err := service.call("CreateVmfsDatastore", "urn:vim25/5.5", request)
+	response := &CreateVmfsDatastoreResponse{}
+	err := service.client.Call("CreateVmfsDatastore", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateVmfsDatastoreResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38494,30 +32310,13 @@ func (service *VimPortType) CreateVmfsDatastore(request *CreateVmfsDatastoreRequ
 * - RuntimeFault
  */
 func (service *VimPortType) QueryVmfsDatastoreExtendOptions(request *QueryVmfsDatastoreExtendOptionsRequestType) (*QueryVmfsDatastoreExtendOptionsResponse, error) {
-	data, err := service.call("QueryVmfsDatastoreExtendOptions", "urn:vim25/5.5", request)
+	response := &QueryVmfsDatastoreExtendOptionsResponse{}
+	err := service.client.Call("QueryVmfsDatastoreExtendOptions", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryVmfsDatastoreExtendOptionsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38528,30 +32327,13 @@ func (service *VimPortType) QueryVmfsDatastoreExtendOptions(request *QueryVmfsDa
 * - RuntimeFault
  */
 func (service *VimPortType) QueryVmfsDatastoreExpandOptions(request *QueryVmfsDatastoreExpandOptionsRequestType) (*QueryVmfsDatastoreExpandOptionsResponse, error) {
-	data, err := service.call("QueryVmfsDatastoreExpandOptions", "urn:vim25/5.5", request)
+	response := &QueryVmfsDatastoreExpandOptionsResponse{}
+	err := service.client.Call("QueryVmfsDatastoreExpandOptions", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryVmfsDatastoreExpandOptionsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38562,30 +32344,13 @@ func (service *VimPortType) QueryVmfsDatastoreExpandOptions(request *QueryVmfsDa
 * - RuntimeFault
  */
 func (service *VimPortType) ExtendVmfsDatastore(request *ExtendVmfsDatastoreRequestType) (*ExtendVmfsDatastoreResponse, error) {
-	data, err := service.call("ExtendVmfsDatastore", "urn:vim25/5.5", request)
+	response := &ExtendVmfsDatastoreResponse{}
+	err := service.client.Call("ExtendVmfsDatastore", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ExtendVmfsDatastoreResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38596,30 +32361,13 @@ func (service *VimPortType) ExtendVmfsDatastore(request *ExtendVmfsDatastoreRequ
 * - RuntimeFault
  */
 func (service *VimPortType) ExpandVmfsDatastore(request *ExpandVmfsDatastoreRequestType) (*ExpandVmfsDatastoreResponse, error) {
-	data, err := service.call("ExpandVmfsDatastore", "urn:vim25/5.5", request)
+	response := &ExpandVmfsDatastoreResponse{}
+	err := service.client.Call("ExpandVmfsDatastore", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ExpandVmfsDatastoreResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38631,30 +32379,13 @@ func (service *VimPortType) ExpandVmfsDatastore(request *ExpandVmfsDatastoreRequ
 * - RuntimeFault
  */
 func (service *VimPortType) CreateNasDatastore(request *CreateNasDatastoreRequestType) (*CreateNasDatastoreResponse, error) {
-	data, err := service.call("CreateNasDatastore", "urn:vim25/5.5", request)
+	response := &CreateNasDatastoreResponse{}
+	err := service.client.Call("CreateNasDatastore", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateNasDatastoreResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38667,30 +32398,13 @@ func (service *VimPortType) CreateNasDatastore(request *CreateNasDatastoreReques
 * - RuntimeFault
  */
 func (service *VimPortType) CreateLocalDatastore(request *CreateLocalDatastoreRequestType) (*CreateLocalDatastoreResponse, error) {
-	data, err := service.call("CreateLocalDatastore", "urn:vim25/5.5", request)
+	response := &CreateLocalDatastoreResponse{}
+	err := service.client.Call("CreateLocalDatastore", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateLocalDatastoreResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38702,30 +32416,13 @@ func (service *VimPortType) CreateLocalDatastore(request *CreateLocalDatastoreRe
 * - RuntimeFault
  */
 func (service *VimPortType) RemoveDatastore(request *RemoveDatastoreRequestType) (*RemoveDatastoreResponse, error) {
-	data, err := service.call("RemoveDatastore", "urn:vim25/5.5", request)
+	response := &RemoveDatastoreResponse{}
+	err := service.client.Call("RemoveDatastore", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RemoveDatastoreResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38736,30 +32433,13 @@ func (service *VimPortType) RemoveDatastore(request *RemoveDatastoreRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) ConfigureDatastorePrincipal(request *ConfigureDatastorePrincipalRequestType) (*ConfigureDatastorePrincipalResponse, error) {
-	data, err := service.call("ConfigureDatastorePrincipal", "urn:vim25/5.5", request)
+	response := &ConfigureDatastorePrincipalResponse{}
+	err := service.client.Call("ConfigureDatastorePrincipal", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ConfigureDatastorePrincipalResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38768,30 +32448,13 @@ func (service *VimPortType) ConfigureDatastorePrincipal(request *ConfigureDatast
 * - RuntimeFault
  */
 func (service *VimPortType) QueryUnresolvedVmfsVolumes(request *QueryUnresolvedVmfsVolumesRequestType) (*QueryUnresolvedVmfsVolumesResponse, error) {
-	data, err := service.call("QueryUnresolvedVmfsVolumes", "urn:vim25/5.5", request)
+	response := &QueryUnresolvedVmfsVolumesResponse{}
+	err := service.client.Call("QueryUnresolvedVmfsVolumes", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryUnresolvedVmfsVolumesResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38802,30 +32465,13 @@ func (service *VimPortType) QueryUnresolvedVmfsVolumes(request *QueryUnresolvedV
 * - RuntimeFault
  */
 func (service *VimPortType) ResignatureUnresolvedVmfsVolume_Task(request *ResignatureUnresolvedVmfsVolumeRequestType) (*ResignatureUnresolvedVmfsVolume_TaskResponse, error) {
-	data, err := service.call("ResignatureUnresolvedVmfsVolume_Task", "urn:vim25/5.5", request)
+	response := &ResignatureUnresolvedVmfsVolume_TaskResponse{}
+	err := service.client.Call("ResignatureUnresolvedVmfsVolume_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ResignatureUnresolvedVmfsVolume_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38835,30 +32481,13 @@ func (service *VimPortType) ResignatureUnresolvedVmfsVolume_Task(request *Resign
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateDateTimeConfig(request *UpdateDateTimeConfigRequestType) (*UpdateDateTimeConfigResponse, error) {
-	data, err := service.call("UpdateDateTimeConfig", "urn:vim25/5.5", request)
+	response := &UpdateDateTimeConfigResponse{}
+	err := service.client.Call("UpdateDateTimeConfig", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateDateTimeConfigResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38867,30 +32496,13 @@ func (service *VimPortType) UpdateDateTimeConfig(request *UpdateDateTimeConfigRe
 * - RuntimeFault
  */
 func (service *VimPortType) QueryAvailableTimeZones(request *QueryAvailableTimeZonesRequestType) (*QueryAvailableTimeZonesResponse, error) {
-	data, err := service.call("QueryAvailableTimeZones", "urn:vim25/5.5", request)
+	response := &QueryAvailableTimeZonesResponse{}
+	err := service.client.Call("QueryAvailableTimeZones", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryAvailableTimeZonesResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38899,30 +32511,13 @@ func (service *VimPortType) QueryAvailableTimeZones(request *QueryAvailableTimeZ
 * - RuntimeFault
  */
 func (service *VimPortType) QueryDateTime(request *QueryDateTimeRequestType) (*QueryDateTimeResponse, error) {
-	data, err := service.call("QueryDateTime", "urn:vim25/5.5", request)
+	response := &QueryDateTimeResponse{}
+	err := service.client.Call("QueryDateTime", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryDateTimeResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38932,30 +32527,13 @@ func (service *VimPortType) QueryDateTime(request *QueryDateTimeRequestType) (*Q
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateDateTime(request *UpdateDateTimeRequestType) (*UpdateDateTimeResponse, error) {
-	data, err := service.call("UpdateDateTime", "urn:vim25/5.5", request)
+	response := &UpdateDateTimeResponse{}
+	err := service.client.Call("UpdateDateTime", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateDateTimeResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38964,30 +32542,13 @@ func (service *VimPortType) UpdateDateTime(request *UpdateDateTimeRequestType) (
 * - RuntimeFault
  */
 func (service *VimPortType) RefreshDateTimeSystem(request *RefreshDateTimeSystemRequestType) (*RefreshDateTimeSystemResponse, error) {
-	data, err := service.call("RefreshDateTimeSystem", "urn:vim25/5.5", request)
+	response := &RefreshDateTimeSystemResponse{}
+	err := service.client.Call("RefreshDateTimeSystem", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RefreshDateTimeSystemResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -38997,30 +32558,13 @@ func (service *VimPortType) RefreshDateTimeSystem(request *RefreshDateTimeSystem
 * - RuntimeFault
  */
 func (service *VimPortType) QueryAvailablePartition(request *QueryAvailablePartitionRequestType) (*QueryAvailablePartitionResponse, error) {
-	data, err := service.call("QueryAvailablePartition", "urn:vim25/5.5", request)
+	response := &QueryAvailablePartitionResponse{}
+	err := service.client.Call("QueryAvailablePartition", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryAvailablePartitionResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39031,30 +32575,13 @@ func (service *VimPortType) QueryAvailablePartition(request *QueryAvailableParti
 * - RuntimeFault
  */
 func (service *VimPortType) SelectActivePartition(request *SelectActivePartitionRequestType) (*SelectActivePartitionResponse, error) {
-	data, err := service.call("SelectActivePartition", "urn:vim25/5.5", request)
+	response := &SelectActivePartitionResponse{}
+	err := service.client.Call("SelectActivePartition", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &SelectActivePartitionResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39064,30 +32591,13 @@ func (service *VimPortType) SelectActivePartition(request *SelectActivePartition
 * - RuntimeFault
  */
 func (service *VimPortType) QueryPartitionCreateOptions(request *QueryPartitionCreateOptionsRequestType) (*QueryPartitionCreateOptionsResponse, error) {
-	data, err := service.call("QueryPartitionCreateOptions", "urn:vim25/5.5", request)
+	response := &QueryPartitionCreateOptionsResponse{}
+	err := service.client.Call("QueryPartitionCreateOptions", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryPartitionCreateOptionsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39098,30 +32608,13 @@ func (service *VimPortType) QueryPartitionCreateOptions(request *QueryPartitionC
 * - RuntimeFault
  */
 func (service *VimPortType) QueryPartitionCreateDesc(request *QueryPartitionCreateDescRequestType) (*QueryPartitionCreateDescResponse, error) {
-	data, err := service.call("QueryPartitionCreateDesc", "urn:vim25/5.5", request)
+	response := &QueryPartitionCreateDescResponse{}
+	err := service.client.Call("QueryPartitionCreateDesc", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryPartitionCreateDescResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39132,30 +32625,13 @@ func (service *VimPortType) QueryPartitionCreateDesc(request *QueryPartitionCrea
 * - RuntimeFault
  */
 func (service *VimPortType) CreateDiagnosticPartition(request *CreateDiagnosticPartitionRequestType) (*CreateDiagnosticPartitionResponse, error) {
-	data, err := service.call("CreateDiagnosticPartition", "urn:vim25/5.5", request)
+	response := &CreateDiagnosticPartitionResponse{}
+	err := service.client.Call("CreateDiagnosticPartition", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateDiagnosticPartitionResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39165,30 +32641,13 @@ func (service *VimPortType) CreateDiagnosticPartition(request *CreateDiagnosticP
 * - RuntimeFault
  */
 func (service *VimPortType) EsxAgentHostManagerUpdateConfig(request *EsxAgentHostManagerUpdateConfigRequestType) (*EsxAgentHostManagerUpdateConfigResponse, error) {
-	data, err := service.call("EsxAgentHostManagerUpdateConfig", "urn:vim25/5.5", request)
+	response := &EsxAgentHostManagerUpdateConfigResponse{}
+	err := service.client.Call("EsxAgentHostManagerUpdateConfig", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &EsxAgentHostManagerUpdateConfigResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39197,30 +32656,13 @@ func (service *VimPortType) EsxAgentHostManagerUpdateConfig(request *EsxAgentHos
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateDefaultPolicy(request *UpdateDefaultPolicyRequestType) (*UpdateDefaultPolicyResponse, error) {
-	data, err := service.call("UpdateDefaultPolicy", "urn:vim25/5.5", request)
+	response := &UpdateDefaultPolicyResponse{}
+	err := service.client.Call("UpdateDefaultPolicy", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateDefaultPolicyResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39231,30 +32673,13 @@ func (service *VimPortType) UpdateDefaultPolicy(request *UpdateDefaultPolicyRequ
 * - RuntimeFault
  */
 func (service *VimPortType) EnableRuleset(request *EnableRulesetRequestType) (*EnableRulesetResponse, error) {
-	data, err := service.call("EnableRuleset", "urn:vim25/5.5", request)
+	response := &EnableRulesetResponse{}
+	err := service.client.Call("EnableRuleset", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &EnableRulesetResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39265,30 +32690,13 @@ func (service *VimPortType) EnableRuleset(request *EnableRulesetRequestType) (*E
 * - RuntimeFault
  */
 func (service *VimPortType) DisableRuleset(request *DisableRulesetRequestType) (*DisableRulesetResponse, error) {
-	data, err := service.call("DisableRuleset", "urn:vim25/5.5", request)
+	response := &DisableRulesetResponse{}
+	err := service.client.Call("DisableRuleset", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DisableRulesetResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39299,30 +32707,13 @@ func (service *VimPortType) DisableRuleset(request *DisableRulesetRequestType) (
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateRuleset(request *UpdateRulesetRequestType) (*UpdateRulesetResponse, error) {
-	data, err := service.call("UpdateRuleset", "urn:vim25/5.5", request)
+	response := &UpdateRulesetResponse{}
+	err := service.client.Call("UpdateRuleset", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateRulesetResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39331,30 +32722,13 @@ func (service *VimPortType) UpdateRuleset(request *UpdateRulesetRequestType) (*U
 * - RuntimeFault
  */
 func (service *VimPortType) RefreshFirewall(request *RefreshFirewallRequestType) (*RefreshFirewallResponse, error) {
-	data, err := service.call("RefreshFirewall", "urn:vim25/5.5", request)
+	response := &RefreshFirewallResponse{}
+	err := service.client.Call("RefreshFirewall", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RefreshFirewallResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39364,30 +32738,13 @@ func (service *VimPortType) RefreshFirewall(request *RefreshFirewallRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) ResetFirmwareToFactoryDefaults(request *ResetFirmwareToFactoryDefaultsRequestType) (*ResetFirmwareToFactoryDefaultsResponse, error) {
-	data, err := service.call("ResetFirmwareToFactoryDefaults", "urn:vim25/5.5", request)
+	response := &ResetFirmwareToFactoryDefaultsResponse{}
+	err := service.client.Call("ResetFirmwareToFactoryDefaults", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ResetFirmwareToFactoryDefaultsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39396,30 +32753,13 @@ func (service *VimPortType) ResetFirmwareToFactoryDefaults(request *ResetFirmwar
 * - RuntimeFault
  */
 func (service *VimPortType) BackupFirmwareConfiguration(request *BackupFirmwareConfigurationRequestType) (*BackupFirmwareConfigurationResponse, error) {
-	data, err := service.call("BackupFirmwareConfiguration", "urn:vim25/5.5", request)
+	response := &BackupFirmwareConfigurationResponse{}
+	err := service.client.Call("BackupFirmwareConfiguration", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &BackupFirmwareConfigurationResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39428,30 +32768,13 @@ func (service *VimPortType) BackupFirmwareConfiguration(request *BackupFirmwareC
 * - RuntimeFault
  */
 func (service *VimPortType) QueryFirmwareConfigUploadURL(request *QueryFirmwareConfigUploadURLRequestType) (*QueryFirmwareConfigUploadURLResponse, error) {
-	data, err := service.call("QueryFirmwareConfigUploadURL", "urn:vim25/5.5", request)
+	response := &QueryFirmwareConfigUploadURLResponse{}
+	err := service.client.Call("QueryFirmwareConfigUploadURL", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryFirmwareConfigUploadURLResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39464,30 +32787,13 @@ func (service *VimPortType) QueryFirmwareConfigUploadURL(request *QueryFirmwareC
 * - RuntimeFault
  */
 func (service *VimPortType) RestoreFirmwareConfiguration(request *RestoreFirmwareConfigurationRequestType) (*RestoreFirmwareConfigurationResponse, error) {
-	data, err := service.call("RestoreFirmwareConfiguration", "urn:vim25/5.5", request)
+	response := &RestoreFirmwareConfigurationResponse{}
+	err := service.client.Call("RestoreFirmwareConfiguration", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RestoreFirmwareConfigurationResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39496,30 +32802,13 @@ func (service *VimPortType) RestoreFirmwareConfiguration(request *RestoreFirmwar
 * - RuntimeFault
  */
 func (service *VimPortType) RefreshGraphicsManager(request *RefreshGraphicsManagerRequestType) (*RefreshGraphicsManagerResponse, error) {
-	data, err := service.call("RefreshGraphicsManager", "urn:vim25/5.5", request)
+	response := &RefreshGraphicsManagerResponse{}
+	err := service.client.Call("RefreshGraphicsManager", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RefreshGraphicsManagerResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39528,30 +32817,13 @@ func (service *VimPortType) RefreshGraphicsManager(request *RefreshGraphicsManag
 * - RuntimeFault
  */
 func (service *VimPortType) IsSharedGraphicsActive(request *IsSharedGraphicsActiveRequestType) (*IsSharedGraphicsActiveResponse, error) {
-	data, err := service.call("IsSharedGraphicsActive", "urn:vim25/5.5", request)
+	response := &IsSharedGraphicsActiveResponse{}
+	err := service.client.Call("IsSharedGraphicsActive", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &IsSharedGraphicsActiveResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39560,30 +32832,13 @@ func (service *VimPortType) IsSharedGraphicsActive(request *IsSharedGraphicsActi
 * - RuntimeFault
  */
 func (service *VimPortType) RefreshHealthStatusSystem(request *RefreshHealthStatusSystemRequestType) (*RefreshHealthStatusSystemResponse, error) {
-	data, err := service.call("RefreshHealthStatusSystem", "urn:vim25/5.5", request)
+	response := &RefreshHealthStatusSystemResponse{}
+	err := service.client.Call("RefreshHealthStatusSystem", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RefreshHealthStatusSystemResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39592,30 +32847,13 @@ func (service *VimPortType) RefreshHealthStatusSystem(request *RefreshHealthStat
 * - RuntimeFault
  */
 func (service *VimPortType) ResetSystemHealthInfo(request *ResetSystemHealthInfoRequestType) (*ResetSystemHealthInfoResponse, error) {
-	data, err := service.call("ResetSystemHealthInfo", "urn:vim25/5.5", request)
+	response := &ResetSystemHealthInfoResponse{}
+	err := service.client.Call("ResetSystemHealthInfo", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ResetSystemHealthInfoResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39625,30 +32863,13 @@ func (service *VimPortType) ResetSystemHealthInfo(request *ResetSystemHealthInfo
 * - RuntimeFault
  */
 func (service *VimPortType) HostImageConfigGetAcceptance(request *HostImageConfigGetAcceptanceRequestType) (*HostImageConfigGetAcceptanceResponse, error) {
-	data, err := service.call("HostImageConfigGetAcceptance", "urn:vim25/5.5", request)
+	response := &HostImageConfigGetAcceptanceResponse{}
+	err := service.client.Call("HostImageConfigGetAcceptance", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &HostImageConfigGetAcceptanceResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39657,30 +32878,13 @@ func (service *VimPortType) HostImageConfigGetAcceptance(request *HostImageConfi
 * - RuntimeFault
  */
 func (service *VimPortType) HostImageConfigGetProfile(request *HostImageConfigGetProfileRequestType) (*HostImageConfigGetProfileResponse, error) {
-	data, err := service.call("HostImageConfigGetProfile", "urn:vim25/5.5", request)
+	response := &HostImageConfigGetProfileResponse{}
+	err := service.client.Call("HostImageConfigGetProfile", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &HostImageConfigGetProfileResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39690,30 +32894,13 @@ func (service *VimPortType) HostImageConfigGetProfile(request *HostImageConfigGe
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateHostImageAcceptanceLevel(request *UpdateHostImageAcceptanceLevelRequestType) (*UpdateHostImageAcceptanceLevelResponse, error) {
-	data, err := service.call("UpdateHostImageAcceptanceLevel", "urn:vim25/5.5", request)
+	response := &UpdateHostImageAcceptanceLevelResponse{}
+	err := service.client.Call("UpdateHostImageAcceptanceLevel", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateHostImageAcceptanceLevelResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39723,30 +32910,13 @@ func (service *VimPortType) UpdateHostImageAcceptanceLevel(request *UpdateHostIm
 * - RuntimeFault
  */
 func (service *VimPortType) QueryVnicStatus(request *QueryVnicStatusRequestType) (*QueryVnicStatusResponse, error) {
-	data, err := service.call("QueryVnicStatus", "urn:vim25/5.5", request)
+	response := &QueryVnicStatusResponse{}
+	err := service.client.Call("QueryVnicStatus", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryVnicStatusResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39756,30 +32926,13 @@ func (service *VimPortType) QueryVnicStatus(request *QueryVnicStatusRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) QueryPnicStatus(request *QueryPnicStatusRequestType) (*QueryPnicStatusResponse, error) {
-	data, err := service.call("QueryPnicStatus", "urn:vim25/5.5", request)
+	response := &QueryPnicStatusResponse{}
+	err := service.client.Call("QueryPnicStatus", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryPnicStatusResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39790,30 +32943,13 @@ func (service *VimPortType) QueryPnicStatus(request *QueryPnicStatusRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) QueryBoundVnics(request *QueryBoundVnicsRequestType) (*QueryBoundVnicsResponse, error) {
-	data, err := service.call("QueryBoundVnics", "urn:vim25/5.5", request)
+	response := &QueryBoundVnicsResponse{}
+	err := service.client.Call("QueryBoundVnics", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryBoundVnicsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39824,30 +32960,13 @@ func (service *VimPortType) QueryBoundVnics(request *QueryBoundVnicsRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) QueryCandidateNics(request *QueryCandidateNicsRequestType) (*QueryCandidateNicsResponse, error) {
-	data, err := service.call("QueryCandidateNics", "urn:vim25/5.5", request)
+	response := &QueryCandidateNicsResponse{}
+	err := service.client.Call("QueryCandidateNics", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryCandidateNicsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39865,30 +32984,13 @@ func (service *VimPortType) QueryCandidateNics(request *QueryCandidateNicsReques
 * - RuntimeFault
  */
 func (service *VimPortType) BindVnic(request *BindVnicRequestType) (*BindVnicResponse, error) {
-	data, err := service.call("BindVnic", "urn:vim25/5.5", request)
+	response := &BindVnicResponse{}
+	err := service.client.Call("BindVnic", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &BindVnicResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39903,30 +33005,13 @@ func (service *VimPortType) BindVnic(request *BindVnicRequestType) (*BindVnicRes
 * - RuntimeFault
  */
 func (service *VimPortType) UnbindVnic(request *UnbindVnicRequestType) (*UnbindVnicResponse, error) {
-	data, err := service.call("UnbindVnic", "urn:vim25/5.5", request)
+	response := &UnbindVnicResponse{}
+	err := service.client.Call("UnbindVnic", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UnbindVnicResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39935,30 +33020,13 @@ func (service *VimPortType) UnbindVnic(request *UnbindVnicRequestType) (*UnbindV
 * - RuntimeFault
  */
 func (service *VimPortType) QueryMigrationDependencies(request *QueryMigrationDependenciesRequestType) (*QueryMigrationDependenciesResponse, error) {
-	data, err := service.call("QueryMigrationDependencies", "urn:vim25/5.5", request)
+	response := &QueryMigrationDependenciesResponse{}
+	err := service.client.Call("QueryMigrationDependencies", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryMigrationDependenciesResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -39967,30 +33035,13 @@ func (service *VimPortType) QueryMigrationDependencies(request *QueryMigrationDe
 * - RuntimeFault
  */
 func (service *VimPortType) QueryModules(request *QueryModulesRequestType) (*QueryModulesResponse, error) {
-	data, err := service.call("QueryModules", "urn:vim25/5.5", request)
+	response := &QueryModulesResponse{}
+	err := service.client.Call("QueryModules", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryModulesResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40000,30 +33051,13 @@ func (service *VimPortType) QueryModules(request *QueryModulesRequestType) (*Que
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateModuleOptionString(request *UpdateModuleOptionStringRequestType) (*UpdateModuleOptionStringResponse, error) {
-	data, err := service.call("UpdateModuleOptionString", "urn:vim25/5.5", request)
+	response := &UpdateModuleOptionStringResponse{}
+	err := service.client.Call("UpdateModuleOptionString", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateModuleOptionStringResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40033,30 +33067,13 @@ func (service *VimPortType) UpdateModuleOptionString(request *UpdateModuleOption
 * - RuntimeFault
  */
 func (service *VimPortType) QueryConfiguredModuleOptionString(request *QueryConfiguredModuleOptionStringRequestType) (*QueryConfiguredModuleOptionStringResponse, error) {
-	data, err := service.call("QueryConfiguredModuleOptionString", "urn:vim25/5.5", request)
+	response := &QueryConfiguredModuleOptionStringResponse{}
+	err := service.client.Call("QueryConfiguredModuleOptionString", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryConfiguredModuleOptionStringResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40066,30 +33083,13 @@ func (service *VimPortType) QueryConfiguredModuleOptionString(request *QueryConf
 * - RuntimeFault
  */
 func (service *VimPortType) CreateUser(request *CreateUserRequestType) (*CreateUserResponse, error) {
-	data, err := service.call("CreateUser", "urn:vim25/5.5", request)
+	response := &CreateUserResponse{}
+	err := service.client.Call("CreateUser", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateUserResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40100,30 +33100,13 @@ func (service *VimPortType) CreateUser(request *CreateUserRequestType) (*CreateU
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateUser(request *UpdateUserRequestType) (*UpdateUserResponse, error) {
-	data, err := service.call("UpdateUser", "urn:vim25/5.5", request)
+	response := &UpdateUserResponse{}
+	err := service.client.Call("UpdateUser", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateUserResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40133,30 +33116,13 @@ func (service *VimPortType) UpdateUser(request *UpdateUserRequestType) (*UpdateU
 * - RuntimeFault
  */
 func (service *VimPortType) CreateGroup(request *CreateGroupRequestType) (*CreateGroupResponse, error) {
-	data, err := service.call("CreateGroup", "urn:vim25/5.5", request)
+	response := &CreateGroupResponse{}
+	err := service.client.Call("CreateGroup", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateGroupResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40166,30 +33132,13 @@ func (service *VimPortType) CreateGroup(request *CreateGroupRequestType) (*Creat
 * - RuntimeFault
  */
 func (service *VimPortType) RemoveUser(request *RemoveUserRequestType) (*RemoveUserResponse, error) {
-	data, err := service.call("RemoveUser", "urn:vim25/5.5", request)
+	response := &RemoveUserResponse{}
+	err := service.client.Call("RemoveUser", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RemoveUserResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40199,30 +33148,13 @@ func (service *VimPortType) RemoveUser(request *RemoveUserRequestType) (*RemoveU
 * - RuntimeFault
  */
 func (service *VimPortType) RemoveGroup(request *RemoveGroupRequestType) (*RemoveGroupResponse, error) {
-	data, err := service.call("RemoveGroup", "urn:vim25/5.5", request)
+	response := &RemoveGroupResponse{}
+	err := service.client.Call("RemoveGroup", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RemoveGroupResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40233,30 +33165,13 @@ func (service *VimPortType) RemoveGroup(request *RemoveGroupRequestType) (*Remov
 * - RuntimeFault
  */
 func (service *VimPortType) AssignUserToGroup(request *AssignUserToGroupRequestType) (*AssignUserToGroupResponse, error) {
-	data, err := service.call("AssignUserToGroup", "urn:vim25/5.5", request)
+	response := &AssignUserToGroupResponse{}
+	err := service.client.Call("AssignUserToGroup", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AssignUserToGroupResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40266,30 +33181,13 @@ func (service *VimPortType) AssignUserToGroup(request *AssignUserToGroupRequestT
 * - RuntimeFault
  */
 func (service *VimPortType) UnassignUserFromGroup(request *UnassignUserFromGroupRequestType) (*UnassignUserFromGroupResponse, error) {
-	data, err := service.call("UnassignUserFromGroup", "urn:vim25/5.5", request)
+	response := &UnassignUserFromGroupResponse{}
+	err := service.client.Call("UnassignUserFromGroup", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UnassignUserFromGroupResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40298,30 +33196,13 @@ func (service *VimPortType) UnassignUserFromGroup(request *UnassignUserFromGroup
 * - RuntimeFault
  */
 func (service *VimPortType) ReconfigureServiceConsoleReservation(request *ReconfigureServiceConsoleReservationRequestType) (*ReconfigureServiceConsoleReservationResponse, error) {
-	data, err := service.call("ReconfigureServiceConsoleReservation", "urn:vim25/5.5", request)
+	response := &ReconfigureServiceConsoleReservationResponse{}
+	err := service.client.Call("ReconfigureServiceConsoleReservation", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ReconfigureServiceConsoleReservationResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40330,30 +33211,13 @@ func (service *VimPortType) ReconfigureServiceConsoleReservation(request *Reconf
 * - RuntimeFault
  */
 func (service *VimPortType) ReconfigureVirtualMachineReservation(request *ReconfigureVirtualMachineReservationRequestType) (*ReconfigureVirtualMachineReservationResponse, error) {
-	data, err := service.call("ReconfigureVirtualMachineReservation", "urn:vim25/5.5", request)
+	response := &ReconfigureVirtualMachineReservationResponse{}
+	err := service.client.Call("ReconfigureVirtualMachineReservation", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ReconfigureVirtualMachineReservationResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40366,30 +33230,13 @@ func (service *VimPortType) ReconfigureVirtualMachineReservation(request *Reconf
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateNetworkConfig(request *UpdateNetworkConfigRequestType) (*UpdateNetworkConfigResponse, error) {
-	data, err := service.call("UpdateNetworkConfig", "urn:vim25/5.5", request)
+	response := &UpdateNetworkConfigResponse{}
+	err := service.client.Call("UpdateNetworkConfig", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateNetworkConfigResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40400,30 +33247,13 @@ func (service *VimPortType) UpdateNetworkConfig(request *UpdateNetworkConfigRequ
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateDnsConfig(request *UpdateDnsConfigRequestType) (*UpdateDnsConfigResponse, error) {
-	data, err := service.call("UpdateDnsConfig", "urn:vim25/5.5", request)
+	response := &UpdateDnsConfigResponse{}
+	err := service.client.Call("UpdateDnsConfig", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateDnsConfigResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40434,30 +33264,13 @@ func (service *VimPortType) UpdateDnsConfig(request *UpdateDnsConfigRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateIpRouteConfig(request *UpdateIpRouteConfigRequestType) (*UpdateIpRouteConfigResponse, error) {
-	data, err := service.call("UpdateIpRouteConfig", "urn:vim25/5.5", request)
+	response := &UpdateIpRouteConfigResponse{}
+	err := service.client.Call("UpdateIpRouteConfig", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateIpRouteConfigResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40467,30 +33280,13 @@ func (service *VimPortType) UpdateIpRouteConfig(request *UpdateIpRouteConfigRequ
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateConsoleIpRouteConfig(request *UpdateConsoleIpRouteConfigRequestType) (*UpdateConsoleIpRouteConfigResponse, error) {
-	data, err := service.call("UpdateConsoleIpRouteConfig", "urn:vim25/5.5", request)
+	response := &UpdateConsoleIpRouteConfigResponse{}
+	err := service.client.Call("UpdateConsoleIpRouteConfig", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateConsoleIpRouteConfigResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40500,30 +33296,13 @@ func (service *VimPortType) UpdateConsoleIpRouteConfig(request *UpdateConsoleIpR
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateIpRouteTableConfig(request *UpdateIpRouteTableConfigRequestType) (*UpdateIpRouteTableConfigResponse, error) {
-	data, err := service.call("UpdateIpRouteTableConfig", "urn:vim25/5.5", request)
+	response := &UpdateIpRouteTableConfigResponse{}
+	err := service.client.Call("UpdateIpRouteTableConfig", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateIpRouteTableConfigResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40535,30 +33314,13 @@ func (service *VimPortType) UpdateIpRouteTableConfig(request *UpdateIpRouteTable
 * - RuntimeFault
  */
 func (service *VimPortType) AddVirtualSwitch(request *AddVirtualSwitchRequestType) (*AddVirtualSwitchResponse, error) {
-	data, err := service.call("AddVirtualSwitch", "urn:vim25/5.5", request)
+	response := &AddVirtualSwitchResponse{}
+	err := service.client.Call("AddVirtualSwitch", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AddVirtualSwitchResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40570,30 +33332,13 @@ func (service *VimPortType) AddVirtualSwitch(request *AddVirtualSwitchRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) RemoveVirtualSwitch(request *RemoveVirtualSwitchRequestType) (*RemoveVirtualSwitchResponse, error) {
-	data, err := service.call("RemoveVirtualSwitch", "urn:vim25/5.5", request)
+	response := &RemoveVirtualSwitchResponse{}
+	err := service.client.Call("RemoveVirtualSwitch", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RemoveVirtualSwitchResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40605,30 +33350,13 @@ func (service *VimPortType) RemoveVirtualSwitch(request *RemoveVirtualSwitchRequ
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateVirtualSwitch(request *UpdateVirtualSwitchRequestType) (*UpdateVirtualSwitchResponse, error) {
-	data, err := service.call("UpdateVirtualSwitch", "urn:vim25/5.5", request)
+	response := &UpdateVirtualSwitchResponse{}
+	err := service.client.Call("UpdateVirtualSwitch", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateVirtualSwitchResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40640,30 +33368,13 @@ func (service *VimPortType) UpdateVirtualSwitch(request *UpdateVirtualSwitchRequ
 * - RuntimeFault
  */
 func (service *VimPortType) AddPortGroup(request *AddPortGroupRequestType) (*AddPortGroupResponse, error) {
-	data, err := service.call("AddPortGroup", "urn:vim25/5.5", request)
+	response := &AddPortGroupResponse{}
+	err := service.client.Call("AddPortGroup", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AddPortGroupResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40675,30 +33386,13 @@ func (service *VimPortType) AddPortGroup(request *AddPortGroupRequestType) (*Add
 * - RuntimeFault
  */
 func (service *VimPortType) RemovePortGroup(request *RemovePortGroupRequestType) (*RemovePortGroupResponse, error) {
-	data, err := service.call("RemovePortGroup", "urn:vim25/5.5", request)
+	response := &RemovePortGroupResponse{}
+	err := service.client.Call("RemovePortGroup", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RemovePortGroupResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40710,30 +33404,13 @@ func (service *VimPortType) RemovePortGroup(request *RemovePortGroupRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) UpdatePortGroup(request *UpdatePortGroupRequestType) (*UpdatePortGroupResponse, error) {
-	data, err := service.call("UpdatePortGroup", "urn:vim25/5.5", request)
+	response := &UpdatePortGroupResponse{}
+	err := service.client.Call("UpdatePortGroup", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdatePortGroupResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40744,30 +33421,13 @@ func (service *VimPortType) UpdatePortGroup(request *UpdatePortGroupRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) UpdatePhysicalNicLinkSpeed(request *UpdatePhysicalNicLinkSpeedRequestType) (*UpdatePhysicalNicLinkSpeedResponse, error) {
-	data, err := service.call("UpdatePhysicalNicLinkSpeed", "urn:vim25/5.5", request)
+	response := &UpdatePhysicalNicLinkSpeedResponse{}
+	err := service.client.Call("UpdatePhysicalNicLinkSpeed", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdatePhysicalNicLinkSpeedResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40778,30 +33438,13 @@ func (service *VimPortType) UpdatePhysicalNicLinkSpeed(request *UpdatePhysicalNi
 * - RuntimeFault
  */
 func (service *VimPortType) QueryNetworkHint(request *QueryNetworkHintRequestType) (*QueryNetworkHintResponse, error) {
-	data, err := service.call("QueryNetworkHint", "urn:vim25/5.5", request)
+	response := &QueryNetworkHintResponse{}
+	err := service.client.Call("QueryNetworkHint", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryNetworkHintResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40813,30 +33456,13 @@ func (service *VimPortType) QueryNetworkHint(request *QueryNetworkHintRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) AddVirtualNic(request *AddVirtualNicRequestType) (*AddVirtualNicResponse, error) {
-	data, err := service.call("AddVirtualNic", "urn:vim25/5.5", request)
+	response := &AddVirtualNicResponse{}
+	err := service.client.Call("AddVirtualNic", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AddVirtualNicResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40847,30 +33473,13 @@ func (service *VimPortType) AddVirtualNic(request *AddVirtualNicRequestType) (*A
 * - RuntimeFault
  */
 func (service *VimPortType) RemoveVirtualNic(request *RemoveVirtualNicRequestType) (*RemoveVirtualNicResponse, error) {
-	data, err := service.call("RemoveVirtualNic", "urn:vim25/5.5", request)
+	response := &RemoveVirtualNicResponse{}
+	err := service.client.Call("RemoveVirtualNic", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RemoveVirtualNicResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40882,30 +33491,13 @@ func (service *VimPortType) RemoveVirtualNic(request *RemoveVirtualNicRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateVirtualNic(request *UpdateVirtualNicRequestType) (*UpdateVirtualNicResponse, error) {
-	data, err := service.call("UpdateVirtualNic", "urn:vim25/5.5", request)
+	response := &UpdateVirtualNicResponse{}
+	err := service.client.Call("UpdateVirtualNic", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateVirtualNicResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40915,30 +33507,13 @@ func (service *VimPortType) UpdateVirtualNic(request *UpdateVirtualNicRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) AddServiceConsoleVirtualNic(request *AddServiceConsoleVirtualNicRequestType) (*AddServiceConsoleVirtualNicResponse, error) {
-	data, err := service.call("AddServiceConsoleVirtualNic", "urn:vim25/5.5", request)
+	response := &AddServiceConsoleVirtualNicResponse{}
+	err := service.client.Call("AddServiceConsoleVirtualNic", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AddServiceConsoleVirtualNicResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40950,30 +33525,13 @@ func (service *VimPortType) AddServiceConsoleVirtualNic(request *AddServiceConso
 * - RuntimeFault
  */
 func (service *VimPortType) RemoveServiceConsoleVirtualNic(request *RemoveServiceConsoleVirtualNicRequestType) (*RemoveServiceConsoleVirtualNicResponse, error) {
-	data, err := service.call("RemoveServiceConsoleVirtualNic", "urn:vim25/5.5", request)
+	response := &RemoveServiceConsoleVirtualNicResponse{}
+	err := service.client.Call("RemoveServiceConsoleVirtualNic", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RemoveServiceConsoleVirtualNicResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -40985,30 +33543,13 @@ func (service *VimPortType) RemoveServiceConsoleVirtualNic(request *RemoveServic
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateServiceConsoleVirtualNic(request *UpdateServiceConsoleVirtualNicRequestType) (*UpdateServiceConsoleVirtualNicResponse, error) {
-	data, err := service.call("UpdateServiceConsoleVirtualNic", "urn:vim25/5.5", request)
+	response := &UpdateServiceConsoleVirtualNicResponse{}
+	err := service.client.Call("UpdateServiceConsoleVirtualNic", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateServiceConsoleVirtualNicResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41019,30 +33560,13 @@ func (service *VimPortType) UpdateServiceConsoleVirtualNic(request *UpdateServic
 * - RuntimeFault
  */
 func (service *VimPortType) RestartServiceConsoleVirtualNic(request *RestartServiceConsoleVirtualNicRequestType) (*RestartServiceConsoleVirtualNicResponse, error) {
-	data, err := service.call("RestartServiceConsoleVirtualNic", "urn:vim25/5.5", request)
+	response := &RestartServiceConsoleVirtualNicResponse{}
+	err := service.client.Call("RestartServiceConsoleVirtualNic", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RestartServiceConsoleVirtualNicResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41051,30 +33575,13 @@ func (service *VimPortType) RestartServiceConsoleVirtualNic(request *RestartServ
 * - RuntimeFault
  */
 func (service *VimPortType) RefreshNetworkSystem(request *RefreshNetworkSystemRequestType) (*RefreshNetworkSystemResponse, error) {
-	data, err := service.call("RefreshNetworkSystem", "urn:vim25/5.5", request)
+	response := &RefreshNetworkSystemResponse{}
+	err := service.client.Call("RefreshNetworkSystem", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RefreshNetworkSystemResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41087,30 +33594,13 @@ func (service *VimPortType) RefreshNetworkSystem(request *RefreshNetworkSystemRe
 * - RuntimeFault
  */
 func (service *VimPortType) CheckHostPatch_Task(request *CheckHostPatchRequestType) (*CheckHostPatch_TaskResponse, error) {
-	data, err := service.call("CheckHostPatch_Task", "urn:vim25/5.5", request)
+	response := &CheckHostPatch_TaskResponse{}
+	err := service.client.Call("CheckHostPatch_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CheckHostPatch_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41122,30 +33612,13 @@ func (service *VimPortType) CheckHostPatch_Task(request *CheckHostPatchRequestTy
 * - RuntimeFault
  */
 func (service *VimPortType) ScanHostPatch_Task(request *ScanHostPatchRequestType) (*ScanHostPatch_TaskResponse, error) {
-	data, err := service.call("ScanHostPatch_Task", "urn:vim25/5.5", request)
+	response := &ScanHostPatch_TaskResponse{}
+	err := service.client.Call("ScanHostPatch_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ScanHostPatch_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41158,30 +33631,13 @@ func (service *VimPortType) ScanHostPatch_Task(request *ScanHostPatchRequestType
 * - RuntimeFault
  */
 func (service *VimPortType) ScanHostPatchV2_Task(request *ScanHostPatchV2RequestType) (*ScanHostPatchV2_TaskResponse, error) {
-	data, err := service.call("ScanHostPatchV2_Task", "urn:vim25/5.5", request)
+	response := &ScanHostPatchV2_TaskResponse{}
+	err := service.client.Call("ScanHostPatchV2_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ScanHostPatchV2_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41194,30 +33650,13 @@ func (service *VimPortType) ScanHostPatchV2_Task(request *ScanHostPatchV2Request
 * - RuntimeFault
  */
 func (service *VimPortType) StageHostPatch_Task(request *StageHostPatchRequestType) (*StageHostPatch_TaskResponse, error) {
-	data, err := service.call("StageHostPatch_Task", "urn:vim25/5.5", request)
+	response := &StageHostPatch_TaskResponse{}
+	err := service.client.Call("StageHostPatch_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &StageHostPatch_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41234,30 +33673,13 @@ func (service *VimPortType) StageHostPatch_Task(request *StageHostPatchRequestTy
 * - RuntimeFault
  */
 func (service *VimPortType) InstallHostPatch_Task(request *InstallHostPatchRequestType) (*InstallHostPatch_TaskResponse, error) {
-	data, err := service.call("InstallHostPatch_Task", "urn:vim25/5.5", request)
+	response := &InstallHostPatch_TaskResponse{}
+	err := service.client.Call("InstallHostPatch_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &InstallHostPatch_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41270,30 +33692,13 @@ func (service *VimPortType) InstallHostPatch_Task(request *InstallHostPatchReque
 * - RuntimeFault
  */
 func (service *VimPortType) InstallHostPatchV2_Task(request *InstallHostPatchV2RequestType) (*InstallHostPatchV2_TaskResponse, error) {
-	data, err := service.call("InstallHostPatchV2_Task", "urn:vim25/5.5", request)
+	response := &InstallHostPatchV2_TaskResponse{}
+	err := service.client.Call("InstallHostPatchV2_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &InstallHostPatchV2_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41305,30 +33710,13 @@ func (service *VimPortType) InstallHostPatchV2_Task(request *InstallHostPatchV2R
 * - RuntimeFault
  */
 func (service *VimPortType) UninstallHostPatch_Task(request *UninstallHostPatchRequestType) (*UninstallHostPatch_TaskResponse, error) {
-	data, err := service.call("UninstallHostPatch_Task", "urn:vim25/5.5", request)
+	response := &UninstallHostPatch_TaskResponse{}
+	err := service.client.Call("UninstallHostPatch_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UninstallHostPatch_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41341,30 +33729,13 @@ func (service *VimPortType) UninstallHostPatch_Task(request *UninstallHostPatchR
 * - RuntimeFault
  */
 func (service *VimPortType) QueryHostPatch_Task(request *QueryHostPatchRequestType) (*QueryHostPatch_TaskResponse, error) {
-	data, err := service.call("QueryHostPatch_Task", "urn:vim25/5.5", request)
+	response := &QueryHostPatch_TaskResponse{}
+	err := service.client.Call("QueryHostPatch_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryHostPatch_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41373,30 +33744,13 @@ func (service *VimPortType) QueryHostPatch_Task(request *QueryHostPatchRequestTy
 * - RuntimeFault
  */
 func (service *VimPortType) Refresh(request *RefreshRequestType) (*RefreshResponse, error) {
-	data, err := service.call("Refresh", "urn:vim25/5.5", request)
+	response := &RefreshResponse{}
+	err := service.client.Call("Refresh", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RefreshResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41406,30 +33760,13 @@ func (service *VimPortType) Refresh(request *RefreshRequestType) (*RefreshRespon
 * - RuntimeFault
  */
 func (service *VimPortType) UpdatePassthruConfig(request *UpdatePassthruConfigRequestType) (*UpdatePassthruConfigResponse, error) {
-	data, err := service.call("UpdatePassthruConfig", "urn:vim25/5.5", request)
+	response := &UpdatePassthruConfigResponse{}
+	err := service.client.Call("UpdatePassthruConfig", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdatePassthruConfigResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41439,30 +33776,13 @@ func (service *VimPortType) UpdatePassthruConfig(request *UpdatePassthruConfigRe
 * - RuntimeFault
  */
 func (service *VimPortType) ConfigurePowerPolicy(request *ConfigurePowerPolicyRequestType) (*ConfigurePowerPolicyResponse, error) {
-	data, err := service.call("ConfigurePowerPolicy", "urn:vim25/5.5", request)
+	response := &ConfigurePowerPolicyResponse{}
+	err := service.client.Call("ConfigurePowerPolicy", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ConfigurePowerPolicyResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41473,30 +33793,13 @@ func (service *VimPortType) ConfigurePowerPolicy(request *ConfigurePowerPolicyRe
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateServicePolicy(request *UpdateServicePolicyRequestType) (*UpdateServicePolicyResponse, error) {
-	data, err := service.call("UpdateServicePolicy", "urn:vim25/5.5", request)
+	response := &UpdateServicePolicyResponse{}
+	err := service.client.Call("UpdateServicePolicy", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateServicePolicyResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41508,30 +33811,13 @@ func (service *VimPortType) UpdateServicePolicy(request *UpdateServicePolicyRequ
 * - RuntimeFault
  */
 func (service *VimPortType) StartService(request *StartServiceRequestType) (*StartServiceResponse, error) {
-	data, err := service.call("StartService", "urn:vim25/5.5", request)
+	response := &StartServiceResponse{}
+	err := service.client.Call("StartService", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &StartServiceResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41543,30 +33829,13 @@ func (service *VimPortType) StartService(request *StartServiceRequestType) (*Sta
 * - RuntimeFault
  */
 func (service *VimPortType) StopService(request *StopServiceRequestType) (*StopServiceResponse, error) {
-	data, err := service.call("StopService", "urn:vim25/5.5", request)
+	response := &StopServiceResponse{}
+	err := service.client.Call("StopService", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &StopServiceResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41578,30 +33847,13 @@ func (service *VimPortType) StopService(request *StopServiceRequestType) (*StopS
 * - RuntimeFault
  */
 func (service *VimPortType) RestartService(request *RestartServiceRequestType) (*RestartServiceResponse, error) {
-	data, err := service.call("RestartService", "urn:vim25/5.5", request)
+	response := &RestartServiceResponse{}
+	err := service.client.Call("RestartService", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RestartServiceResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41612,30 +33864,13 @@ func (service *VimPortType) RestartService(request *RestartServiceRequestType) (
 * - RuntimeFault
  */
 func (service *VimPortType) UninstallService(request *UninstallServiceRequestType) (*UninstallServiceResponse, error) {
-	data, err := service.call("UninstallService", "urn:vim25/5.5", request)
+	response := &UninstallServiceResponse{}
+	err := service.client.Call("UninstallService", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UninstallServiceResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41644,30 +33879,13 @@ func (service *VimPortType) UninstallService(request *UninstallServiceRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) RefreshServices(request *RefreshServicesRequestType) (*RefreshServicesResponse, error) {
-	data, err := service.call("RefreshServices", "urn:vim25/5.5", request)
+	response := &RefreshServicesResponse{}
+	err := service.client.Call("RefreshServices", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RefreshServicesResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41678,30 +33896,13 @@ func (service *VimPortType) RefreshServices(request *RefreshServicesRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) ReconfigureSnmpAgent(request *ReconfigureSnmpAgentRequestType) (*ReconfigureSnmpAgentResponse, error) {
-	data, err := service.call("ReconfigureSnmpAgent", "urn:vim25/5.5", request)
+	response := &ReconfigureSnmpAgentResponse{}
+	err := service.client.Call("ReconfigureSnmpAgent", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ReconfigureSnmpAgentResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41712,30 +33913,13 @@ func (service *VimPortType) ReconfigureSnmpAgent(request *ReconfigureSnmpAgentRe
 * - RuntimeFault
  */
 func (service *VimPortType) SendTestNotification(request *SendTestNotificationRequestType) (*SendTestNotificationResponse, error) {
-	data, err := service.call("SendTestNotification", "urn:vim25/5.5", request)
+	response := &SendTestNotificationResponse{}
+	err := service.client.Call("SendTestNotification", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &SendTestNotificationResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41744,30 +33928,13 @@ func (service *VimPortType) SendTestNotification(request *SendTestNotificationRe
 * - RuntimeFault
  */
 func (service *VimPortType) RetrieveDiskPartitionInfo(request *RetrieveDiskPartitionInfoRequestType) (*RetrieveDiskPartitionInfoResponse, error) {
-	data, err := service.call("RetrieveDiskPartitionInfo", "urn:vim25/5.5", request)
+	response := &RetrieveDiskPartitionInfoResponse{}
+	err := service.client.Call("RetrieveDiskPartitionInfo", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RetrieveDiskPartitionInfoResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41778,30 +33945,13 @@ func (service *VimPortType) RetrieveDiskPartitionInfo(request *RetrieveDiskParti
 * - RuntimeFault
  */
 func (service *VimPortType) ComputeDiskPartitionInfo(request *ComputeDiskPartitionInfoRequestType) (*ComputeDiskPartitionInfoResponse, error) {
-	data, err := service.call("ComputeDiskPartitionInfo", "urn:vim25/5.5", request)
+	response := &ComputeDiskPartitionInfoResponse{}
+	err := service.client.Call("ComputeDiskPartitionInfo", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ComputeDiskPartitionInfoResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41812,30 +33962,13 @@ func (service *VimPortType) ComputeDiskPartitionInfo(request *ComputeDiskPartiti
 * - RuntimeFault
  */
 func (service *VimPortType) ComputeDiskPartitionInfoForResize(request *ComputeDiskPartitionInfoForResizeRequestType) (*ComputeDiskPartitionInfoForResizeResponse, error) {
-	data, err := service.call("ComputeDiskPartitionInfoForResize", "urn:vim25/5.5", request)
+	response := &ComputeDiskPartitionInfoForResizeResponse{}
+	err := service.client.Call("ComputeDiskPartitionInfoForResize", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ComputeDiskPartitionInfoForResizeResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41846,30 +33979,13 @@ func (service *VimPortType) ComputeDiskPartitionInfoForResize(request *ComputeDi
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateDiskPartitions(request *UpdateDiskPartitionsRequestType) (*UpdateDiskPartitionsResponse, error) {
-	data, err := service.call("UpdateDiskPartitions", "urn:vim25/5.5", request)
+	response := &UpdateDiskPartitionsResponse{}
+	err := service.client.Call("UpdateDiskPartitions", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateDiskPartitionsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41880,30 +33996,13 @@ func (service *VimPortType) UpdateDiskPartitions(request *UpdateDiskPartitionsRe
 * - RuntimeFault
  */
 func (service *VimPortType) FormatVmfs(request *FormatVmfsRequestType) (*FormatVmfsResponse, error) {
-	data, err := service.call("FormatVmfs", "urn:vim25/5.5", request)
+	response := &FormatVmfsResponse{}
+	err := service.client.Call("FormatVmfs", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &FormatVmfsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41916,30 +34015,13 @@ func (service *VimPortType) FormatVmfs(request *FormatVmfsRequestType) (*FormatV
 * - RuntimeFault
  */
 func (service *VimPortType) MountVmfsVolume(request *MountVmfsVolumeRequestType) (*MountVmfsVolumeResponse, error) {
-	data, err := service.call("MountVmfsVolume", "urn:vim25/5.5", request)
+	response := &MountVmfsVolumeResponse{}
+	err := service.client.Call("MountVmfsVolume", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &MountVmfsVolumeResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41952,30 +34034,13 @@ func (service *VimPortType) MountVmfsVolume(request *MountVmfsVolumeRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) UnmountVmfsVolume(request *UnmountVmfsVolumeRequestType) (*UnmountVmfsVolumeResponse, error) {
-	data, err := service.call("UnmountVmfsVolume", "urn:vim25/5.5", request)
+	response := &UnmountVmfsVolumeResponse{}
+	err := service.client.Call("UnmountVmfsVolume", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UnmountVmfsVolumeResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -41985,30 +34050,13 @@ func (service *VimPortType) UnmountVmfsVolume(request *UnmountVmfsVolumeRequestT
 * - RuntimeFault
  */
 func (service *VimPortType) DeleteVmfsVolumeState(request *DeleteVmfsVolumeStateRequestType) (*DeleteVmfsVolumeStateResponse, error) {
-	data, err := service.call("DeleteVmfsVolumeState", "urn:vim25/5.5", request)
+	response := &DeleteVmfsVolumeStateResponse{}
+	err := service.client.Call("DeleteVmfsVolumeState", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DeleteVmfsVolumeStateResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42018,30 +34066,13 @@ func (service *VimPortType) DeleteVmfsVolumeState(request *DeleteVmfsVolumeState
 * - RuntimeFault
  */
 func (service *VimPortType) RescanVmfs(request *RescanVmfsRequestType) (*RescanVmfsResponse, error) {
-	data, err := service.call("RescanVmfs", "urn:vim25/5.5", request)
+	response := &RescanVmfsResponse{}
+	err := service.client.Call("RescanVmfs", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RescanVmfsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42052,30 +34083,13 @@ func (service *VimPortType) RescanVmfs(request *RescanVmfsRequestType) (*RescanV
 * - RuntimeFault
  */
 func (service *VimPortType) AttachVmfsExtent(request *AttachVmfsExtentRequestType) (*AttachVmfsExtentResponse, error) {
-	data, err := service.call("AttachVmfsExtent", "urn:vim25/5.5", request)
+	response := &AttachVmfsExtentResponse{}
+	err := service.client.Call("AttachVmfsExtent", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AttachVmfsExtentResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42086,30 +34100,13 @@ func (service *VimPortType) AttachVmfsExtent(request *AttachVmfsExtentRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) ExpandVmfsExtent(request *ExpandVmfsExtentRequestType) (*ExpandVmfsExtentResponse, error) {
-	data, err := service.call("ExpandVmfsExtent", "urn:vim25/5.5", request)
+	response := &ExpandVmfsExtentResponse{}
+	err := service.client.Call("ExpandVmfsExtent", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ExpandVmfsExtentResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42120,30 +34117,13 @@ func (service *VimPortType) ExpandVmfsExtent(request *ExpandVmfsExtentRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) UpgradeVmfs(request *UpgradeVmfsRequestType) (*UpgradeVmfsResponse, error) {
-	data, err := service.call("UpgradeVmfs", "urn:vim25/5.5", request)
+	response := &UpgradeVmfsResponse{}
+	err := service.client.Call("UpgradeVmfs", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpgradeVmfsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42152,30 +34132,13 @@ func (service *VimPortType) UpgradeVmfs(request *UpgradeVmfsRequestType) (*Upgra
 * - RuntimeFault
  */
 func (service *VimPortType) UpgradeVmLayout(request *UpgradeVmLayoutRequestType) (*UpgradeVmLayoutResponse, error) {
-	data, err := service.call("UpgradeVmLayout", "urn:vim25/5.5", request)
+	response := &UpgradeVmLayoutResponse{}
+	err := service.client.Call("UpgradeVmLayout", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpgradeVmLayoutResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42184,30 +34147,13 @@ func (service *VimPortType) UpgradeVmLayout(request *UpgradeVmLayoutRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) QueryUnresolvedVmfsVolume(request *QueryUnresolvedVmfsVolumeRequestType) (*QueryUnresolvedVmfsVolumeResponse, error) {
-	data, err := service.call("QueryUnresolvedVmfsVolume", "urn:vim25/5.5", request)
+	response := &QueryUnresolvedVmfsVolumeResponse{}
+	err := service.client.Call("QueryUnresolvedVmfsVolume", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryUnresolvedVmfsVolumeResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42217,30 +34163,13 @@ func (service *VimPortType) QueryUnresolvedVmfsVolume(request *QueryUnresolvedVm
 * - RuntimeFault
  */
 func (service *VimPortType) ResolveMultipleUnresolvedVmfsVolumes(request *ResolveMultipleUnresolvedVmfsVolumesRequestType) (*ResolveMultipleUnresolvedVmfsVolumesResponse, error) {
-	data, err := service.call("ResolveMultipleUnresolvedVmfsVolumes", "urn:vim25/5.5", request)
+	response := &ResolveMultipleUnresolvedVmfsVolumesResponse{}
+	err := service.client.Call("ResolveMultipleUnresolvedVmfsVolumes", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ResolveMultipleUnresolvedVmfsVolumesResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42250,30 +34179,13 @@ func (service *VimPortType) ResolveMultipleUnresolvedVmfsVolumes(request *Resolv
 * - RuntimeFault
  */
 func (service *VimPortType) ResolveMultipleUnresolvedVmfsVolumesEx_Task(request *ResolveMultipleUnresolvedVmfsVolumesExRequestType) (*ResolveMultipleUnresolvedVmfsVolumesEx_TaskResponse, error) {
-	data, err := service.call("ResolveMultipleUnresolvedVmfsVolumesEx_Task", "urn:vim25/5.5", request)
+	response := &ResolveMultipleUnresolvedVmfsVolumesEx_TaskResponse{}
+	err := service.client.Call("ResolveMultipleUnresolvedVmfsVolumesEx_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ResolveMultipleUnresolvedVmfsVolumesEx_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42284,30 +34196,13 @@ func (service *VimPortType) ResolveMultipleUnresolvedVmfsVolumesEx_Task(request 
 * - RuntimeFault
  */
 func (service *VimPortType) UnmountForceMountedVmfsVolume(request *UnmountForceMountedVmfsVolumeRequestType) (*UnmountForceMountedVmfsVolumeResponse, error) {
-	data, err := service.call("UnmountForceMountedVmfsVolume", "urn:vim25/5.5", request)
+	response := &UnmountForceMountedVmfsVolumeResponse{}
+	err := service.client.Call("UnmountForceMountedVmfsVolume", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UnmountForceMountedVmfsVolumeResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42318,30 +34213,13 @@ func (service *VimPortType) UnmountForceMountedVmfsVolume(request *UnmountForceM
 * - RuntimeFault
  */
 func (service *VimPortType) RescanHba(request *RescanHbaRequestType) (*RescanHbaResponse, error) {
-	data, err := service.call("RescanHba", "urn:vim25/5.5", request)
+	response := &RescanHbaResponse{}
+	err := service.client.Call("RescanHba", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RescanHbaResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42351,30 +34229,13 @@ func (service *VimPortType) RescanHba(request *RescanHbaRequestType) (*RescanHba
 * - RuntimeFault
  */
 func (service *VimPortType) RescanAllHba(request *RescanAllHbaRequestType) (*RescanAllHbaResponse, error) {
-	data, err := service.call("RescanAllHba", "urn:vim25/5.5", request)
+	response := &RescanAllHbaResponse{}
+	err := service.client.Call("RescanAllHba", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RescanAllHbaResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42384,30 +34245,13 @@ func (service *VimPortType) RescanAllHba(request *RescanAllHbaRequestType) (*Res
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateSoftwareInternetScsiEnabled(request *UpdateSoftwareInternetScsiEnabledRequestType) (*UpdateSoftwareInternetScsiEnabledResponse, error) {
-	data, err := service.call("UpdateSoftwareInternetScsiEnabled", "urn:vim25/5.5", request)
+	response := &UpdateSoftwareInternetScsiEnabledResponse{}
+	err := service.client.Call("UpdateSoftwareInternetScsiEnabled", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateSoftwareInternetScsiEnabledResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42418,30 +34262,13 @@ func (service *VimPortType) UpdateSoftwareInternetScsiEnabled(request *UpdateSof
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateInternetScsiDiscoveryProperties(request *UpdateInternetScsiDiscoveryPropertiesRequestType) (*UpdateInternetScsiDiscoveryPropertiesResponse, error) {
-	data, err := service.call("UpdateInternetScsiDiscoveryProperties", "urn:vim25/5.5", request)
+	response := &UpdateInternetScsiDiscoveryPropertiesResponse{}
+	err := service.client.Call("UpdateInternetScsiDiscoveryProperties", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateInternetScsiDiscoveryPropertiesResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42452,30 +34279,13 @@ func (service *VimPortType) UpdateInternetScsiDiscoveryProperties(request *Updat
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateInternetScsiAuthenticationProperties(request *UpdateInternetScsiAuthenticationPropertiesRequestType) (*UpdateInternetScsiAuthenticationPropertiesResponse, error) {
-	data, err := service.call("UpdateInternetScsiAuthenticationProperties", "urn:vim25/5.5", request)
+	response := &UpdateInternetScsiAuthenticationPropertiesResponse{}
+	err := service.client.Call("UpdateInternetScsiAuthenticationProperties", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateInternetScsiAuthenticationPropertiesResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42486,30 +34296,13 @@ func (service *VimPortType) UpdateInternetScsiAuthenticationProperties(request *
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateInternetScsiDigestProperties(request *UpdateInternetScsiDigestPropertiesRequestType) (*UpdateInternetScsiDigestPropertiesResponse, error) {
-	data, err := service.call("UpdateInternetScsiDigestProperties", "urn:vim25/5.5", request)
+	response := &UpdateInternetScsiDigestPropertiesResponse{}
+	err := service.client.Call("UpdateInternetScsiDigestProperties", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateInternetScsiDigestPropertiesResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42520,30 +34313,13 @@ func (service *VimPortType) UpdateInternetScsiDigestProperties(request *UpdateIn
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateInternetScsiAdvancedOptions(request *UpdateInternetScsiAdvancedOptionsRequestType) (*UpdateInternetScsiAdvancedOptionsResponse, error) {
-	data, err := service.call("UpdateInternetScsiAdvancedOptions", "urn:vim25/5.5", request)
+	response := &UpdateInternetScsiAdvancedOptionsResponse{}
+	err := service.client.Call("UpdateInternetScsiAdvancedOptions", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateInternetScsiAdvancedOptionsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42554,30 +34330,13 @@ func (service *VimPortType) UpdateInternetScsiAdvancedOptions(request *UpdateInt
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateInternetScsiIPProperties(request *UpdateInternetScsiIPPropertiesRequestType) (*UpdateInternetScsiIPPropertiesResponse, error) {
-	data, err := service.call("UpdateInternetScsiIPProperties", "urn:vim25/5.5", request)
+	response := &UpdateInternetScsiIPPropertiesResponse{}
+	err := service.client.Call("UpdateInternetScsiIPProperties", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateInternetScsiIPPropertiesResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42588,30 +34347,13 @@ func (service *VimPortType) UpdateInternetScsiIPProperties(request *UpdateIntern
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateInternetScsiName(request *UpdateInternetScsiNameRequestType) (*UpdateInternetScsiNameResponse, error) {
-	data, err := service.call("UpdateInternetScsiName", "urn:vim25/5.5", request)
+	response := &UpdateInternetScsiNameResponse{}
+	err := service.client.Call("UpdateInternetScsiName", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateInternetScsiNameResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42622,30 +34364,13 @@ func (service *VimPortType) UpdateInternetScsiName(request *UpdateInternetScsiNa
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateInternetScsiAlias(request *UpdateInternetScsiAliasRequestType) (*UpdateInternetScsiAliasResponse, error) {
-	data, err := service.call("UpdateInternetScsiAlias", "urn:vim25/5.5", request)
+	response := &UpdateInternetScsiAliasResponse{}
+	err := service.client.Call("UpdateInternetScsiAlias", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateInternetScsiAliasResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42656,30 +34381,13 @@ func (service *VimPortType) UpdateInternetScsiAlias(request *UpdateInternetScsiA
 * - RuntimeFault
  */
 func (service *VimPortType) AddInternetScsiSendTargets(request *AddInternetScsiSendTargetsRequestType) (*AddInternetScsiSendTargetsResponse, error) {
-	data, err := service.call("AddInternetScsiSendTargets", "urn:vim25/5.5", request)
+	response := &AddInternetScsiSendTargetsResponse{}
+	err := service.client.Call("AddInternetScsiSendTargets", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AddInternetScsiSendTargetsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42690,30 +34398,13 @@ func (service *VimPortType) AddInternetScsiSendTargets(request *AddInternetScsiS
 * - RuntimeFault
  */
 func (service *VimPortType) RemoveInternetScsiSendTargets(request *RemoveInternetScsiSendTargetsRequestType) (*RemoveInternetScsiSendTargetsResponse, error) {
-	data, err := service.call("RemoveInternetScsiSendTargets", "urn:vim25/5.5", request)
+	response := &RemoveInternetScsiSendTargetsResponse{}
+	err := service.client.Call("RemoveInternetScsiSendTargets", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RemoveInternetScsiSendTargetsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42724,30 +34415,13 @@ func (service *VimPortType) RemoveInternetScsiSendTargets(request *RemoveInterne
 * - RuntimeFault
  */
 func (service *VimPortType) AddInternetScsiStaticTargets(request *AddInternetScsiStaticTargetsRequestType) (*AddInternetScsiStaticTargetsResponse, error) {
-	data, err := service.call("AddInternetScsiStaticTargets", "urn:vim25/5.5", request)
+	response := &AddInternetScsiStaticTargetsResponse{}
+	err := service.client.Call("AddInternetScsiStaticTargets", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AddInternetScsiStaticTargetsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42758,30 +34432,13 @@ func (service *VimPortType) AddInternetScsiStaticTargets(request *AddInternetScs
 * - RuntimeFault
  */
 func (service *VimPortType) RemoveInternetScsiStaticTargets(request *RemoveInternetScsiStaticTargetsRequestType) (*RemoveInternetScsiStaticTargetsResponse, error) {
-	data, err := service.call("RemoveInternetScsiStaticTargets", "urn:vim25/5.5", request)
+	response := &RemoveInternetScsiStaticTargetsResponse{}
+	err := service.client.Call("RemoveInternetScsiStaticTargets", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RemoveInternetScsiStaticTargetsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42792,30 +34449,13 @@ func (service *VimPortType) RemoveInternetScsiStaticTargets(request *RemoveInter
 * - RuntimeFault
  */
 func (service *VimPortType) EnableMultipathPath(request *EnableMultipathPathRequestType) (*EnableMultipathPathResponse, error) {
-	data, err := service.call("EnableMultipathPath", "urn:vim25/5.5", request)
+	response := &EnableMultipathPathResponse{}
+	err := service.client.Call("EnableMultipathPath", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &EnableMultipathPathResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42826,30 +34466,13 @@ func (service *VimPortType) EnableMultipathPath(request *EnableMultipathPathRequ
 * - RuntimeFault
  */
 func (service *VimPortType) DisableMultipathPath(request *DisableMultipathPathRequestType) (*DisableMultipathPathResponse, error) {
-	data, err := service.call("DisableMultipathPath", "urn:vim25/5.5", request)
+	response := &DisableMultipathPathResponse{}
+	err := service.client.Call("DisableMultipathPath", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DisableMultipathPathResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42860,30 +34483,13 @@ func (service *VimPortType) DisableMultipathPath(request *DisableMultipathPathRe
 * - RuntimeFault
  */
 func (service *VimPortType) SetMultipathLunPolicy(request *SetMultipathLunPolicyRequestType) (*SetMultipathLunPolicyResponse, error) {
-	data, err := service.call("SetMultipathLunPolicy", "urn:vim25/5.5", request)
+	response := &SetMultipathLunPolicyResponse{}
+	err := service.client.Call("SetMultipathLunPolicy", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &SetMultipathLunPolicyResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42893,30 +34499,13 @@ func (service *VimPortType) SetMultipathLunPolicy(request *SetMultipathLunPolicy
 * - RuntimeFault
  */
 func (service *VimPortType) QueryPathSelectionPolicyOptions(request *QueryPathSelectionPolicyOptionsRequestType) (*QueryPathSelectionPolicyOptionsResponse, error) {
-	data, err := service.call("QueryPathSelectionPolicyOptions", "urn:vim25/5.5", request)
+	response := &QueryPathSelectionPolicyOptionsResponse{}
+	err := service.client.Call("QueryPathSelectionPolicyOptions", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryPathSelectionPolicyOptionsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42926,30 +34515,13 @@ func (service *VimPortType) QueryPathSelectionPolicyOptions(request *QueryPathSe
 * - RuntimeFault
  */
 func (service *VimPortType) QueryStorageArrayTypePolicyOptions(request *QueryStorageArrayTypePolicyOptionsRequestType) (*QueryStorageArrayTypePolicyOptionsResponse, error) {
-	data, err := service.call("QueryStorageArrayTypePolicyOptions", "urn:vim25/5.5", request)
+	response := &QueryStorageArrayTypePolicyOptionsResponse{}
+	err := service.client.Call("QueryStorageArrayTypePolicyOptions", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryStorageArrayTypePolicyOptionsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42962,30 +34534,13 @@ func (service *VimPortType) QueryStorageArrayTypePolicyOptions(request *QuerySto
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateScsiLunDisplayName(request *UpdateScsiLunDisplayNameRequestType) (*UpdateScsiLunDisplayNameResponse, error) {
-	data, err := service.call("UpdateScsiLunDisplayName", "urn:vim25/5.5", request)
+	response := &UpdateScsiLunDisplayNameResponse{}
+	err := service.client.Call("UpdateScsiLunDisplayName", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateScsiLunDisplayNameResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -42998,30 +34553,13 @@ func (service *VimPortType) UpdateScsiLunDisplayName(request *UpdateScsiLunDispl
 * - RuntimeFault
  */
 func (service *VimPortType) DetachScsiLun(request *DetachScsiLunRequestType) (*DetachScsiLunResponse, error) {
-	data, err := service.call("DetachScsiLun", "urn:vim25/5.5", request)
+	response := &DetachScsiLunResponse{}
+	err := service.client.Call("DetachScsiLun", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DetachScsiLunResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43031,30 +34569,13 @@ func (service *VimPortType) DetachScsiLun(request *DetachScsiLunRequestType) (*D
 * - RuntimeFault
  */
 func (service *VimPortType) DeleteScsiLunState(request *DeleteScsiLunStateRequestType) (*DeleteScsiLunStateResponse, error) {
-	data, err := service.call("DeleteScsiLunState", "urn:vim25/5.5", request)
+	response := &DeleteScsiLunStateResponse{}
+	err := service.client.Call("DeleteScsiLunState", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DeleteScsiLunStateResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43066,30 +34587,13 @@ func (service *VimPortType) DeleteScsiLunState(request *DeleteScsiLunStateReques
 * - RuntimeFault
  */
 func (service *VimPortType) AttachScsiLun(request *AttachScsiLunRequestType) (*AttachScsiLunResponse, error) {
-	data, err := service.call("AttachScsiLun", "urn:vim25/5.5", request)
+	response := &AttachScsiLunResponse{}
+	err := service.client.Call("AttachScsiLun", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AttachScsiLunResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43098,30 +34602,13 @@ func (service *VimPortType) AttachScsiLun(request *AttachScsiLunRequestType) (*A
 * - RuntimeFault
  */
 func (service *VimPortType) RefreshStorageSystem(request *RefreshStorageSystemRequestType) (*RefreshStorageSystemResponse, error) {
-	data, err := service.call("RefreshStorageSystem", "urn:vim25/5.5", request)
+	response := &RefreshStorageSystemResponse{}
+	err := service.client.Call("RefreshStorageSystem", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RefreshStorageSystemResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43133,30 +34620,13 @@ func (service *VimPortType) RefreshStorageSystem(request *RefreshStorageSystemRe
 * - RuntimeFault
  */
 func (service *VimPortType) DiscoverFcoeHbas(request *DiscoverFcoeHbasRequestType) (*DiscoverFcoeHbasResponse, error) {
-	data, err := service.call("DiscoverFcoeHbas", "urn:vim25/5.5", request)
+	response := &DiscoverFcoeHbasResponse{}
+	err := service.client.Call("DiscoverFcoeHbas", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DiscoverFcoeHbasResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43167,30 +34637,13 @@ func (service *VimPortType) DiscoverFcoeHbas(request *DiscoverFcoeHbasRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) MarkForRemoval(request *MarkForRemovalRequestType) (*MarkForRemovalResponse, error) {
-	data, err := service.call("MarkForRemoval", "urn:vim25/5.5", request)
+	response := &MarkForRemovalResponse{}
+	err := service.client.Call("MarkForRemoval", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &MarkForRemovalResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43202,30 +34655,13 @@ func (service *VimPortType) MarkForRemoval(request *MarkForRemovalRequestType) (
 * - RuntimeFault
  */
 func (service *VimPortType) FormatVffs(request *FormatVffsRequestType) (*FormatVffsResponse, error) {
-	data, err := service.call("FormatVffs", "urn:vim25/5.5", request)
+	response := &FormatVffsResponse{}
+	err := service.client.Call("FormatVffs", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &FormatVffsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43237,30 +34673,13 @@ func (service *VimPortType) FormatVffs(request *FormatVffsRequestType) (*FormatV
 * - RuntimeFault
  */
 func (service *VimPortType) ExtendVffs(request *ExtendVffsRequestType) (*ExtendVffsResponse, error) {
-	data, err := service.call("ExtendVffs", "urn:vim25/5.5", request)
+	response := &ExtendVffsResponse{}
+	err := service.client.Call("ExtendVffs", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ExtendVffsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43272,30 +34691,13 @@ func (service *VimPortType) ExtendVffs(request *ExtendVffsRequestType) (*ExtendV
 * - RuntimeFault
  */
 func (service *VimPortType) DestroyVffs(request *DestroyVffsRequestType) (*DestroyVffsResponse, error) {
-	data, err := service.call("DestroyVffs", "urn:vim25/5.5", request)
+	response := &DestroyVffsResponse{}
+	err := service.client.Call("DestroyVffs", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DestroyVffsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43308,30 +34710,13 @@ func (service *VimPortType) DestroyVffs(request *DestroyVffsRequestType) (*Destr
 * - RuntimeFault
  */
 func (service *VimPortType) MountVffsVolume(request *MountVffsVolumeRequestType) (*MountVffsVolumeResponse, error) {
-	data, err := service.call("MountVffsVolume", "urn:vim25/5.5", request)
+	response := &MountVffsVolumeResponse{}
+	err := service.client.Call("MountVffsVolume", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &MountVffsVolumeResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43344,30 +34729,13 @@ func (service *VimPortType) MountVffsVolume(request *MountVffsVolumeRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) UnmountVffsVolume(request *UnmountVffsVolumeRequestType) (*UnmountVffsVolumeResponse, error) {
-	data, err := service.call("UnmountVffsVolume", "urn:vim25/5.5", request)
+	response := &UnmountVffsVolumeResponse{}
+	err := service.client.Call("UnmountVffsVolume", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UnmountVffsVolumeResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43377,30 +34745,13 @@ func (service *VimPortType) UnmountVffsVolume(request *UnmountVffsVolumeRequestT
 * - RuntimeFault
  */
 func (service *VimPortType) DeleteVffsVolumeState(request *DeleteVffsVolumeStateRequestType) (*DeleteVffsVolumeStateResponse, error) {
-	data, err := service.call("DeleteVffsVolumeState", "urn:vim25/5.5", request)
+	response := &DeleteVffsVolumeStateResponse{}
+	err := service.client.Call("DeleteVffsVolumeState", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DeleteVffsVolumeStateResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43410,30 +34761,13 @@ func (service *VimPortType) DeleteVffsVolumeState(request *DeleteVffsVolumeState
 * - RuntimeFault
  */
 func (service *VimPortType) RescanVffs(request *RescanVffsRequestType) (*RescanVffsResponse, error) {
-	data, err := service.call("RescanVffs", "urn:vim25/5.5", request)
+	response := &RescanVffsResponse{}
+	err := service.client.Call("RescanVffs", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RescanVffsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43444,30 +34778,13 @@ func (service *VimPortType) RescanVffs(request *RescanVffsRequestType) (*RescanV
 * - RuntimeFault
  */
 func (service *VimPortType) QueryAvailableSsds(request *QueryAvailableSsdsRequestType) (*QueryAvailableSsdsResponse, error) {
-	data, err := service.call("QueryAvailableSsds", "urn:vim25/5.5", request)
+	response := &QueryAvailableSsdsResponse{}
+	err := service.client.Call("QueryAvailableSsds", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryAvailableSsdsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43477,30 +34794,13 @@ func (service *VimPortType) QueryAvailableSsds(request *QueryAvailableSsdsReques
 * - RuntimeFault
  */
 func (service *VimPortType) ConfigureVFlashResourceEx_Task(request *ConfigureVFlashResourceExRequestType) (*ConfigureVFlashResourceEx_TaskResponse, error) {
-	data, err := service.call("ConfigureVFlashResourceEx_Task", "urn:vim25/5.5", request)
+	response := &ConfigureVFlashResourceEx_TaskResponse{}
+	err := service.client.Call("ConfigureVFlashResourceEx_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ConfigureVFlashResourceEx_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43511,30 +34811,13 @@ func (service *VimPortType) ConfigureVFlashResourceEx_Task(request *ConfigureVFl
 * - RuntimeFault
  */
 func (service *VimPortType) HostConfigureVFlashResource(request *HostConfigureVFlashResourceRequestType) (*HostConfigureVFlashResourceResponse, error) {
-	data, err := service.call("HostConfigureVFlashResource", "urn:vim25/5.5", request)
+	response := &HostConfigureVFlashResourceResponse{}
+	err := service.client.Call("HostConfigureVFlashResource", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &HostConfigureVFlashResourceResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43546,30 +34829,13 @@ func (service *VimPortType) HostConfigureVFlashResource(request *HostConfigureVF
 * - RuntimeFault
  */
 func (service *VimPortType) HostRemoveVFlashResource(request *HostRemoveVFlashResourceRequestType) (*HostRemoveVFlashResourceResponse, error) {
-	data, err := service.call("HostRemoveVFlashResource", "urn:vim25/5.5", request)
+	response := &HostRemoveVFlashResourceResponse{}
+	err := service.client.Call("HostRemoveVFlashResource", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &HostRemoveVFlashResourceResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43581,30 +34847,13 @@ func (service *VimPortType) HostRemoveVFlashResource(request *HostRemoveVFlashRe
 * - RuntimeFault
  */
 func (service *VimPortType) HostConfigVFlashCache(request *HostConfigVFlashCacheRequestType) (*HostConfigVFlashCacheResponse, error) {
-	data, err := service.call("HostConfigVFlashCache", "urn:vim25/5.5", request)
+	response := &HostConfigVFlashCacheResponse{}
+	err := service.client.Call("HostConfigVFlashCache", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &HostConfigVFlashCacheResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43615,30 +34864,13 @@ func (service *VimPortType) HostConfigVFlashCache(request *HostConfigVFlashCache
 * - RuntimeFault
  */
 func (service *VimPortType) HostGetVFlashModuleDefaultConfig(request *HostGetVFlashModuleDefaultConfigRequestType) (*HostGetVFlashModuleDefaultConfigResponse, error) {
-	data, err := service.call("HostGetVFlashModuleDefaultConfig", "urn:vim25/5.5", request)
+	response := &HostGetVFlashModuleDefaultConfigResponse{}
+	err := service.client.Call("HostGetVFlashModuleDefaultConfig", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &HostGetVFlashModuleDefaultConfigResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43649,30 +34881,13 @@ func (service *VimPortType) HostGetVFlashModuleDefaultConfig(request *HostGetVFl
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateIpConfig(request *UpdateIpConfigRequestType) (*UpdateIpConfigResponse, error) {
-	data, err := service.call("UpdateIpConfig", "urn:vim25/5.5", request)
+	response := &UpdateIpConfigResponse{}
+	err := service.client.Call("UpdateIpConfig", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateIpConfigResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43682,30 +34897,13 @@ func (service *VimPortType) UpdateIpConfig(request *UpdateIpConfigRequestType) (
 * - RuntimeFault
  */
 func (service *VimPortType) SelectVnic(request *SelectVnicRequestType) (*SelectVnicResponse, error) {
-	data, err := service.call("SelectVnic", "urn:vim25/5.5", request)
+	response := &SelectVnicResponse{}
+	err := service.client.Call("SelectVnic", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &SelectVnicResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43715,30 +34913,13 @@ func (service *VimPortType) SelectVnic(request *SelectVnicRequestType) (*SelectV
 * - RuntimeFault
  */
 func (service *VimPortType) DeselectVnic(request *DeselectVnicRequestType) (*DeselectVnicResponse, error) {
-	data, err := service.call("DeselectVnic", "urn:vim25/5.5", request)
+	response := &DeselectVnicResponse{}
+	err := service.client.Call("DeselectVnic", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DeselectVnicResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43749,30 +34930,13 @@ func (service *VimPortType) DeselectVnic(request *DeselectVnicRequestType) (*Des
 * - RuntimeFault
  */
 func (service *VimPortType) QueryNetConfig(request *QueryNetConfigRequestType) (*QueryNetConfigResponse, error) {
-	data, err := service.call("QueryNetConfig", "urn:vim25/5.5", request)
+	response := &QueryNetConfigResponse{}
+	err := service.client.Call("QueryNetConfig", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryNetConfigResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43783,30 +34947,13 @@ func (service *VimPortType) QueryNetConfig(request *QueryNetConfigRequestType) (
 * - RuntimeFault
  */
 func (service *VimPortType) SelectVnicForNicType(request *SelectVnicForNicTypeRequestType) (*SelectVnicForNicTypeResponse, error) {
-	data, err := service.call("SelectVnicForNicType", "urn:vim25/5.5", request)
+	response := &SelectVnicForNicTypeResponse{}
+	err := service.client.Call("SelectVnicForNicType", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &SelectVnicForNicTypeResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43817,30 +34964,13 @@ func (service *VimPortType) SelectVnicForNicType(request *SelectVnicForNicTypeRe
 * - RuntimeFault
  */
 func (service *VimPortType) DeselectVnicForNicType(request *DeselectVnicForNicTypeRequestType) (*DeselectVnicForNicTypeResponse, error) {
-	data, err := service.call("DeselectVnicForNicType", "urn:vim25/5.5", request)
+	response := &DeselectVnicForNicTypeResponse{}
+	err := service.client.Call("DeselectVnicForNicType", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DeselectVnicForNicTypeResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43849,30 +34979,13 @@ func (service *VimPortType) DeselectVnicForNicType(request *DeselectVnicForNicTy
 * - RuntimeFault
  */
 func (service *VimPortType) QueryCmmds(request *QueryCmmdsRequestType) (*QueryCmmdsResponse, error) {
-	data, err := service.call("QueryCmmds", "urn:vim25/5.5", request)
+	response := &QueryCmmdsResponse{}
+	err := service.client.Call("QueryCmmds", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryCmmdsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43881,30 +34994,13 @@ func (service *VimPortType) QueryCmmds(request *QueryCmmdsRequestType) (*QueryCm
 * - RuntimeFault
  */
 func (service *VimPortType) QueryPhysicalVsanDisks(request *QueryPhysicalVsanDisksRequestType) (*QueryPhysicalVsanDisksResponse, error) {
-	data, err := service.call("QueryPhysicalVsanDisks", "urn:vim25/5.5", request)
+	response := &QueryPhysicalVsanDisksResponse{}
+	err := service.client.Call("QueryPhysicalVsanDisks", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryPhysicalVsanDisksResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43913,30 +35009,13 @@ func (service *VimPortType) QueryPhysicalVsanDisks(request *QueryPhysicalVsanDis
 * - RuntimeFault
  */
 func (service *VimPortType) QueryVsanObjects(request *QueryVsanObjectsRequestType) (*QueryVsanObjectsResponse, error) {
-	data, err := service.call("QueryVsanObjects", "urn:vim25/5.5", request)
+	response := &QueryVsanObjectsResponse{}
+	err := service.client.Call("QueryVsanObjects", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryVsanObjectsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43945,30 +35024,13 @@ func (service *VimPortType) QueryVsanObjects(request *QueryVsanObjectsRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) QueryObjectsOnPhysicalVsanDisk(request *QueryObjectsOnPhysicalVsanDiskRequestType) (*QueryObjectsOnPhysicalVsanDiskResponse, error) {
-	data, err := service.call("QueryObjectsOnPhysicalVsanDisk", "urn:vim25/5.5", request)
+	response := &QueryObjectsOnPhysicalVsanDiskResponse{}
+	err := service.client.Call("QueryObjectsOnPhysicalVsanDisk", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryObjectsOnPhysicalVsanDiskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -43977,30 +35039,13 @@ func (service *VimPortType) QueryObjectsOnPhysicalVsanDisk(request *QueryObjects
 * - RuntimeFault
  */
 func (service *VimPortType) QueryDisksForVsan(request *QueryDisksForVsanRequestType) (*QueryDisksForVsanResponse, error) {
-	data, err := service.call("QueryDisksForVsan", "urn:vim25/5.5", request)
+	response := &QueryDisksForVsanResponse{}
+	err := service.client.Call("QueryDisksForVsan", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryDisksForVsanResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44009,30 +35054,13 @@ func (service *VimPortType) QueryDisksForVsan(request *QueryDisksForVsanRequestT
 * - RuntimeFault
  */
 func (service *VimPortType) AddDisks_Task(request *AddDisksRequestType) (*AddDisks_TaskResponse, error) {
-	data, err := service.call("AddDisks_Task", "urn:vim25/5.5", request)
+	response := &AddDisks_TaskResponse{}
+	err := service.client.Call("AddDisks_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AddDisks_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44041,30 +35069,13 @@ func (service *VimPortType) AddDisks_Task(request *AddDisksRequestType) (*AddDis
 * - RuntimeFault
  */
 func (service *VimPortType) InitializeDisks_Task(request *InitializeDisksRequestType) (*InitializeDisks_TaskResponse, error) {
-	data, err := service.call("InitializeDisks_Task", "urn:vim25/5.5", request)
+	response := &InitializeDisks_TaskResponse{}
+	err := service.client.Call("InitializeDisks_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &InitializeDisks_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44073,30 +35084,13 @@ func (service *VimPortType) InitializeDisks_Task(request *InitializeDisksRequest
 * - RuntimeFault
  */
 func (service *VimPortType) RemoveDisk_Task(request *RemoveDiskRequestType) (*RemoveDisk_TaskResponse, error) {
-	data, err := service.call("RemoveDisk_Task", "urn:vim25/5.5", request)
+	response := &RemoveDisk_TaskResponse{}
+	err := service.client.Call("RemoveDisk_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RemoveDisk_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44105,30 +35099,13 @@ func (service *VimPortType) RemoveDisk_Task(request *RemoveDiskRequestType) (*Re
 * - RuntimeFault
  */
 func (service *VimPortType) RemoveDiskMapping_Task(request *RemoveDiskMappingRequestType) (*RemoveDiskMapping_TaskResponse, error) {
-	data, err := service.call("RemoveDiskMapping_Task", "urn:vim25/5.5", request)
+	response := &RemoveDiskMapping_TaskResponse{}
+	err := service.client.Call("RemoveDiskMapping_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RemoveDiskMapping_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44137,30 +35114,13 @@ func (service *VimPortType) RemoveDiskMapping_Task(request *RemoveDiskMappingReq
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateVsan_Task(request *UpdateVsanRequestType) (*UpdateVsan_TaskResponse, error) {
-	data, err := service.call("UpdateVsan_Task", "urn:vim25/5.5", request)
+	response := &UpdateVsan_TaskResponse{}
+	err := service.client.Call("UpdateVsan_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateVsan_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44169,30 +35129,13 @@ func (service *VimPortType) UpdateVsan_Task(request *UpdateVsanRequestType) (*Up
 * - RuntimeFault
  */
 func (service *VimPortType) QueryHostStatus(request *QueryHostStatusRequestType) (*QueryHostStatusResponse, error) {
-	data, err := service.call("QueryHostStatus", "urn:vim25/5.5", request)
+	response := &QueryHostStatusResponse{}
+	err := service.client.Call("QueryHostStatus", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryHostStatusResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44202,30 +35145,13 @@ func (service *VimPortType) QueryHostStatus(request *QueryHostStatusRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) QueryOptions(request *QueryOptionsRequestType) (*QueryOptionsResponse, error) {
-	data, err := service.call("QueryOptions", "urn:vim25/5.5", request)
+	response := &QueryOptionsResponse{}
+	err := service.client.Call("QueryOptions", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryOptionsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44235,30 +35161,13 @@ func (service *VimPortType) QueryOptions(request *QueryOptionsRequestType) (*Que
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateOptions(request *UpdateOptionsRequestType) (*UpdateOptionsResponse, error) {
-	data, err := service.call("UpdateOptions", "urn:vim25/5.5", request)
+	response := &UpdateOptionsResponse{}
+	err := service.client.Call("UpdateOptions", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateOptionsResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44267,30 +35176,13 @@ func (service *VimPortType) UpdateOptions(request *UpdateOptionsRequestType) (*U
 * - RuntimeFault
  */
 func (service *VimPortType) CheckCompliance_Task(request *CheckComplianceRequestType) (*CheckCompliance_TaskResponse, error) {
-	data, err := service.call("CheckCompliance_Task", "urn:vim25/5.5", request)
+	response := &CheckCompliance_TaskResponse{}
+	err := service.client.Call("CheckCompliance_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CheckCompliance_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44299,30 +35191,13 @@ func (service *VimPortType) CheckCompliance_Task(request *CheckComplianceRequest
 * - RuntimeFault
  */
 func (service *VimPortType) QueryComplianceStatus(request *QueryComplianceStatusRequestType) (*QueryComplianceStatusResponse, error) {
-	data, err := service.call("QueryComplianceStatus", "urn:vim25/5.5", request)
+	response := &QueryComplianceStatusResponse{}
+	err := service.client.Call("QueryComplianceStatus", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryComplianceStatusResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44331,30 +35206,13 @@ func (service *VimPortType) QueryComplianceStatus(request *QueryComplianceStatus
 * - RuntimeFault
  */
 func (service *VimPortType) ClearComplianceStatus(request *ClearComplianceStatusRequestType) (*ClearComplianceStatusResponse, error) {
-	data, err := service.call("ClearComplianceStatus", "urn:vim25/5.5", request)
+	response := &ClearComplianceStatusResponse{}
+	err := service.client.Call("ClearComplianceStatus", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ClearComplianceStatusResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44363,30 +35221,13 @@ func (service *VimPortType) ClearComplianceStatus(request *ClearComplianceStatus
 * - RuntimeFault
  */
 func (service *VimPortType) QueryExpressionMetadata(request *QueryExpressionMetadataRequestType) (*QueryExpressionMetadataResponse, error) {
-	data, err := service.call("QueryExpressionMetadata", "urn:vim25/5.5", request)
+	response := &QueryExpressionMetadataResponse{}
+	err := service.client.Call("QueryExpressionMetadata", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryExpressionMetadataResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44395,30 +35236,13 @@ func (service *VimPortType) QueryExpressionMetadata(request *QueryExpressionMeta
 * - RuntimeFault
  */
 func (service *VimPortType) RetrieveDescription(request *RetrieveDescriptionRequestType) (*RetrieveDescriptionResponse, error) {
-	data, err := service.call("RetrieveDescription", "urn:vim25/5.5", request)
+	response := &RetrieveDescriptionResponse{}
+	err := service.client.Call("RetrieveDescription", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RetrieveDescriptionResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44427,30 +35251,13 @@ func (service *VimPortType) RetrieveDescription(request *RetrieveDescriptionRequ
 * - RuntimeFault
  */
 func (service *VimPortType) DestroyProfile(request *DestroyProfileRequestType) (*DestroyProfileResponse, error) {
-	data, err := service.call("DestroyProfile", "urn:vim25/5.5", request)
+	response := &DestroyProfileResponse{}
+	err := service.client.Call("DestroyProfile", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DestroyProfileResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44459,30 +35266,13 @@ func (service *VimPortType) DestroyProfile(request *DestroyProfileRequestType) (
 * - RuntimeFault
  */
 func (service *VimPortType) AssociateProfile(request *AssociateProfileRequestType) (*AssociateProfileResponse, error) {
-	data, err := service.call("AssociateProfile", "urn:vim25/5.5", request)
+	response := &AssociateProfileResponse{}
+	err := service.client.Call("AssociateProfile", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AssociateProfileResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44491,30 +35281,13 @@ func (service *VimPortType) AssociateProfile(request *AssociateProfileRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) DissociateProfile(request *DissociateProfileRequestType) (*DissociateProfileResponse, error) {
-	data, err := service.call("DissociateProfile", "urn:vim25/5.5", request)
+	response := &DissociateProfileResponse{}
+	err := service.client.Call("DissociateProfile", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DissociateProfileResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44523,30 +35296,13 @@ func (service *VimPortType) DissociateProfile(request *DissociateProfileRequestT
 * - RuntimeFault
  */
 func (service *VimPortType) CheckProfileCompliance_Task(request *CheckProfileComplianceRequestType) (*CheckProfileCompliance_TaskResponse, error) {
-	data, err := service.call("CheckProfileCompliance_Task", "urn:vim25/5.5", request)
+	response := &CheckProfileCompliance_TaskResponse{}
+	err := service.client.Call("CheckProfileCompliance_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CheckProfileCompliance_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44555,30 +35311,13 @@ func (service *VimPortType) CheckProfileCompliance_Task(request *CheckProfileCom
 * - RuntimeFault
  */
 func (service *VimPortType) ExportProfile(request *ExportProfileRequestType) (*ExportProfileResponse, error) {
-	data, err := service.call("ExportProfile", "urn:vim25/5.5", request)
+	response := &ExportProfileResponse{}
+	err := service.client.Call("ExportProfile", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ExportProfileResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44588,30 +35327,13 @@ func (service *VimPortType) ExportProfile(request *ExportProfileRequestType) (*E
 * - RuntimeFault
  */
 func (service *VimPortType) CreateProfile(request *CreateProfileRequestType) (*CreateProfileResponse, error) {
-	data, err := service.call("CreateProfile", "urn:vim25/5.5", request)
+	response := &CreateProfileResponse{}
+	err := service.client.Call("CreateProfile", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateProfileResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44620,30 +35342,13 @@ func (service *VimPortType) CreateProfile(request *CreateProfileRequestType) (*C
 * - RuntimeFault
  */
 func (service *VimPortType) QueryPolicyMetadata(request *QueryPolicyMetadataRequestType) (*QueryPolicyMetadataResponse, error) {
-	data, err := service.call("QueryPolicyMetadata", "urn:vim25/5.5", request)
+	response := &QueryPolicyMetadataResponse{}
+	err := service.client.Call("QueryPolicyMetadata", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryPolicyMetadataResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44652,30 +35357,13 @@ func (service *VimPortType) QueryPolicyMetadata(request *QueryPolicyMetadataRequ
 * - RuntimeFault
  */
 func (service *VimPortType) FindAssociatedProfile(request *FindAssociatedProfileRequestType) (*FindAssociatedProfileResponse, error) {
-	data, err := service.call("FindAssociatedProfile", "urn:vim25/5.5", request)
+	response := &FindAssociatedProfileResponse{}
+	err := service.client.Call("FindAssociatedProfile", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &FindAssociatedProfileResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44685,30 +35373,13 @@ func (service *VimPortType) FindAssociatedProfile(request *FindAssociatedProfile
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateClusterProfile(request *UpdateClusterProfileRequestType) (*UpdateClusterProfileResponse, error) {
-	data, err := service.call("UpdateClusterProfile", "urn:vim25/5.5", request)
+	response := &UpdateClusterProfileResponse{}
+	err := service.client.Call("UpdateClusterProfile", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateClusterProfileResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44717,30 +35388,13 @@ func (service *VimPortType) UpdateClusterProfile(request *UpdateClusterProfileRe
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateReferenceHost(request *UpdateReferenceHostRequestType) (*UpdateReferenceHostResponse, error) {
-	data, err := service.call("UpdateReferenceHost", "urn:vim25/5.5", request)
+	response := &UpdateReferenceHostResponse{}
+	err := service.client.Call("UpdateReferenceHost", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateReferenceHostResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44751,30 +35405,13 @@ func (service *VimPortType) UpdateReferenceHost(request *UpdateReferenceHostRequ
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateHostProfile(request *UpdateHostProfileRequestType) (*UpdateHostProfileResponse, error) {
-	data, err := service.call("UpdateHostProfile", "urn:vim25/5.5", request)
+	response := &UpdateHostProfileResponse{}
+	err := service.client.Call("UpdateHostProfile", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateHostProfileResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44783,30 +35420,13 @@ func (service *VimPortType) UpdateHostProfile(request *UpdateHostProfileRequestT
 * - RuntimeFault
  */
 func (service *VimPortType) ExecuteHostProfile(request *ExecuteHostProfileRequestType) (*ExecuteHostProfileResponse, error) {
-	data, err := service.call("ExecuteHostProfile", "urn:vim25/5.5", request)
+	response := &ExecuteHostProfileResponse{}
+	err := service.client.Call("ExecuteHostProfile", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ExecuteHostProfileResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44817,30 +35437,13 @@ func (service *VimPortType) ExecuteHostProfile(request *ExecuteHostProfileReques
 * - RuntimeFault
  */
 func (service *VimPortType) ApplyHostConfig_Task(request *ApplyHostConfigRequestType) (*ApplyHostConfig_TaskResponse, error) {
-	data, err := service.call("ApplyHostConfig_Task", "urn:vim25/5.5", request)
+	response := &ApplyHostConfig_TaskResponse{}
+	err := service.client.Call("ApplyHostConfig_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ApplyHostConfig_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44849,30 +35452,13 @@ func (service *VimPortType) ApplyHostConfig_Task(request *ApplyHostConfigRequest
 * - RuntimeFault
  */
 func (service *VimPortType) GenerateConfigTaskList(request *GenerateConfigTaskListRequestType) (*GenerateConfigTaskListResponse, error) {
-	data, err := service.call("GenerateConfigTaskList", "urn:vim25/5.5", request)
+	response := &GenerateConfigTaskListResponse{}
+	err := service.client.Call("GenerateConfigTaskList", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &GenerateConfigTaskListResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44881,30 +35467,13 @@ func (service *VimPortType) GenerateConfigTaskList(request *GenerateConfigTaskLi
 * - RuntimeFault
  */
 func (service *VimPortType) GenerateHostProfileTaskList_Task(request *GenerateHostProfileTaskListRequestType) (*GenerateHostProfileTaskList_TaskResponse, error) {
-	data, err := service.call("GenerateHostProfileTaskList_Task", "urn:vim25/5.5", request)
+	response := &GenerateHostProfileTaskList_TaskResponse{}
+	err := service.client.Call("GenerateHostProfileTaskList_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &GenerateHostProfileTaskList_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44913,30 +35482,13 @@ func (service *VimPortType) GenerateHostProfileTaskList_Task(request *GenerateHo
 * - RuntimeFault
  */
 func (service *VimPortType) QueryHostProfileMetadata(request *QueryHostProfileMetadataRequestType) (*QueryHostProfileMetadataResponse, error) {
-	data, err := service.call("QueryHostProfileMetadata", "urn:vim25/5.5", request)
+	response := &QueryHostProfileMetadataResponse{}
+	err := service.client.Call("QueryHostProfileMetadata", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryHostProfileMetadataResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44945,30 +35497,13 @@ func (service *VimPortType) QueryHostProfileMetadata(request *QueryHostProfileMe
 * - RuntimeFault
  */
 func (service *VimPortType) QueryProfileStructure(request *QueryProfileStructureRequestType) (*QueryProfileStructureResponse, error) {
-	data, err := service.call("QueryProfileStructure", "urn:vim25/5.5", request)
+	response := &QueryProfileStructureResponse{}
+	err := service.client.Call("QueryProfileStructure", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryProfileStructureResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -44977,30 +35512,13 @@ func (service *VimPortType) QueryProfileStructure(request *QueryProfileStructure
 * - RuntimeFault
  */
 func (service *VimPortType) CreateDefaultProfile(request *CreateDefaultProfileRequestType) (*CreateDefaultProfileResponse, error) {
-	data, err := service.call("CreateDefaultProfile", "urn:vim25/5.5", request)
+	response := &CreateDefaultProfileResponse{}
+	err := service.client.Call("CreateDefaultProfile", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateDefaultProfileResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45010,30 +35528,13 @@ func (service *VimPortType) CreateDefaultProfile(request *CreateDefaultProfileRe
 * - RuntimeFault
  */
 func (service *VimPortType) UpdateAnswerFile_Task(request *UpdateAnswerFileRequestType) (*UpdateAnswerFile_TaskResponse, error) {
-	data, err := service.call("UpdateAnswerFile_Task", "urn:vim25/5.5", request)
+	response := &UpdateAnswerFile_TaskResponse{}
+	err := service.client.Call("UpdateAnswerFile_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &UpdateAnswerFile_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45042,30 +35543,13 @@ func (service *VimPortType) UpdateAnswerFile_Task(request *UpdateAnswerFileReque
 * - RuntimeFault
  */
 func (service *VimPortType) RetrieveAnswerFile(request *RetrieveAnswerFileRequestType) (*RetrieveAnswerFileResponse, error) {
-	data, err := service.call("RetrieveAnswerFile", "urn:vim25/5.5", request)
+	response := &RetrieveAnswerFileResponse{}
+	err := service.client.Call("RetrieveAnswerFile", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RetrieveAnswerFileResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45074,30 +35558,13 @@ func (service *VimPortType) RetrieveAnswerFile(request *RetrieveAnswerFileReques
 * - RuntimeFault
  */
 func (service *VimPortType) RetrieveAnswerFileForProfile(request *RetrieveAnswerFileForProfileRequestType) (*RetrieveAnswerFileForProfileResponse, error) {
-	data, err := service.call("RetrieveAnswerFileForProfile", "urn:vim25/5.5", request)
+	response := &RetrieveAnswerFileForProfileResponse{}
+	err := service.client.Call("RetrieveAnswerFileForProfile", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RetrieveAnswerFileForProfileResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45106,30 +35573,13 @@ func (service *VimPortType) RetrieveAnswerFileForProfile(request *RetrieveAnswer
 * - RuntimeFault
  */
 func (service *VimPortType) ExportAnswerFile_Task(request *ExportAnswerFileRequestType) (*ExportAnswerFile_TaskResponse, error) {
-	data, err := service.call("ExportAnswerFile_Task", "urn:vim25/5.5", request)
+	response := &ExportAnswerFile_TaskResponse{}
+	err := service.client.Call("ExportAnswerFile_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ExportAnswerFile_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45138,30 +35588,13 @@ func (service *VimPortType) ExportAnswerFile_Task(request *ExportAnswerFileReque
 * - RuntimeFault
  */
 func (service *VimPortType) CheckAnswerFileStatus_Task(request *CheckAnswerFileStatusRequestType) (*CheckAnswerFileStatus_TaskResponse, error) {
-	data, err := service.call("CheckAnswerFileStatus_Task", "urn:vim25/5.5", request)
+	response := &CheckAnswerFileStatus_TaskResponse{}
+	err := service.client.Call("CheckAnswerFileStatus_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CheckAnswerFileStatus_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45170,30 +35603,13 @@ func (service *VimPortType) CheckAnswerFileStatus_Task(request *CheckAnswerFileS
 * - RuntimeFault
  */
 func (service *VimPortType) QueryAnswerFileStatus(request *QueryAnswerFileStatusRequestType) (*QueryAnswerFileStatusResponse, error) {
-	data, err := service.call("QueryAnswerFileStatus", "urn:vim25/5.5", request)
+	response := &QueryAnswerFileStatusResponse{}
+	err := service.client.Call("QueryAnswerFileStatus", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryAnswerFileStatusResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45203,30 +35619,13 @@ func (service *VimPortType) QueryAnswerFileStatus(request *QueryAnswerFileStatus
 * - RuntimeFault
  */
 func (service *VimPortType) RemoveScheduledTask(request *RemoveScheduledTaskRequestType) (*RemoveScheduledTaskResponse, error) {
-	data, err := service.call("RemoveScheduledTask", "urn:vim25/5.5", request)
+	response := &RemoveScheduledTaskResponse{}
+	err := service.client.Call("RemoveScheduledTask", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RemoveScheduledTaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45238,30 +35637,13 @@ func (service *VimPortType) RemoveScheduledTask(request *RemoveScheduledTaskRequ
 * - RuntimeFault
  */
 func (service *VimPortType) ReconfigureScheduledTask(request *ReconfigureScheduledTaskRequestType) (*ReconfigureScheduledTaskResponse, error) {
-	data, err := service.call("ReconfigureScheduledTask", "urn:vim25/5.5", request)
+	response := &ReconfigureScheduledTaskResponse{}
+	err := service.client.Call("ReconfigureScheduledTask", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ReconfigureScheduledTaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45271,30 +35653,13 @@ func (service *VimPortType) ReconfigureScheduledTask(request *ReconfigureSchedul
 * - RuntimeFault
  */
 func (service *VimPortType) RunScheduledTask(request *RunScheduledTaskRequestType) (*RunScheduledTaskResponse, error) {
-	data, err := service.call("RunScheduledTask", "urn:vim25/5.5", request)
+	response := &RunScheduledTaskResponse{}
+	err := service.client.Call("RunScheduledTask", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RunScheduledTaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45305,30 +35670,13 @@ func (service *VimPortType) RunScheduledTask(request *RunScheduledTaskRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) CreateScheduledTask(request *CreateScheduledTaskRequestType) (*CreateScheduledTaskResponse, error) {
-	data, err := service.call("CreateScheduledTask", "urn:vim25/5.5", request)
+	response := &CreateScheduledTaskResponse{}
+	err := service.client.Call("CreateScheduledTask", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateScheduledTaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45337,30 +35685,13 @@ func (service *VimPortType) CreateScheduledTask(request *CreateScheduledTaskRequ
 * - RuntimeFault
  */
 func (service *VimPortType) RetrieveEntityScheduledTask(request *RetrieveEntityScheduledTaskRequestType) (*RetrieveEntityScheduledTaskResponse, error) {
-	data, err := service.call("RetrieveEntityScheduledTask", "urn:vim25/5.5", request)
+	response := &RetrieveEntityScheduledTaskResponse{}
+	err := service.client.Call("RetrieveEntityScheduledTask", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RetrieveEntityScheduledTaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45371,30 +35702,13 @@ func (service *VimPortType) RetrieveEntityScheduledTask(request *RetrieveEntityS
 * - RuntimeFault
  */
 func (service *VimPortType) CreateObjectScheduledTask(request *CreateObjectScheduledTaskRequestType) (*CreateObjectScheduledTaskResponse, error) {
-	data, err := service.call("CreateObjectScheduledTask", "urn:vim25/5.5", request)
+	response := &CreateObjectScheduledTaskResponse{}
+	err := service.client.Call("CreateObjectScheduledTask", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateObjectScheduledTaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45403,30 +35717,13 @@ func (service *VimPortType) CreateObjectScheduledTask(request *CreateObjectSched
 * - RuntimeFault
  */
 func (service *VimPortType) RetrieveObjectScheduledTask(request *RetrieveObjectScheduledTaskRequestType) (*RetrieveObjectScheduledTaskResponse, error) {
-	data, err := service.call("RetrieveObjectScheduledTask", "urn:vim25/5.5", request)
+	response := &RetrieveObjectScheduledTaskResponse{}
+	err := service.client.Call("RetrieveObjectScheduledTask", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RetrieveObjectScheduledTaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45435,30 +35732,13 @@ func (service *VimPortType) RetrieveObjectScheduledTask(request *RetrieveObjectS
 * - RuntimeFault
  */
 func (service *VimPortType) OpenInventoryViewFolder(request *OpenInventoryViewFolderRequestType) (*OpenInventoryViewFolderResponse, error) {
-	data, err := service.call("OpenInventoryViewFolder", "urn:vim25/5.5", request)
+	response := &OpenInventoryViewFolderResponse{}
+	err := service.client.Call("OpenInventoryViewFolder", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &OpenInventoryViewFolderResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45467,30 +35747,13 @@ func (service *VimPortType) OpenInventoryViewFolder(request *OpenInventoryViewFo
 * - RuntimeFault
  */
 func (service *VimPortType) CloseInventoryViewFolder(request *CloseInventoryViewFolderRequestType) (*CloseInventoryViewFolderResponse, error) {
-	data, err := service.call("CloseInventoryViewFolder", "urn:vim25/5.5", request)
+	response := &CloseInventoryViewFolderResponse{}
+	err := service.client.Call("CloseInventoryViewFolder", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CloseInventoryViewFolderResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45499,30 +35762,13 @@ func (service *VimPortType) CloseInventoryViewFolder(request *CloseInventoryView
 * - RuntimeFault
  */
 func (service *VimPortType) ModifyListView(request *ModifyListViewRequestType) (*ModifyListViewResponse, error) {
-	data, err := service.call("ModifyListView", "urn:vim25/5.5", request)
+	response := &ModifyListViewResponse{}
+	err := service.client.Call("ModifyListView", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ModifyListViewResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45531,30 +35777,13 @@ func (service *VimPortType) ModifyListView(request *ModifyListViewRequestType) (
 * - RuntimeFault
  */
 func (service *VimPortType) ResetListView(request *ResetListViewRequestType) (*ResetListViewResponse, error) {
-	data, err := service.call("ResetListView", "urn:vim25/5.5", request)
+	response := &ResetListViewResponse{}
+	err := service.client.Call("ResetListView", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ResetListViewResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45563,30 +35792,13 @@ func (service *VimPortType) ResetListView(request *ResetListViewRequestType) (*R
 * - RuntimeFault
  */
 func (service *VimPortType) ResetListViewFromView(request *ResetListViewFromViewRequestType) (*ResetListViewFromViewResponse, error) {
-	data, err := service.call("ResetListViewFromView", "urn:vim25/5.5", request)
+	response := &ResetListViewFromViewResponse{}
+	err := service.client.Call("ResetListViewFromView", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ResetListViewFromViewResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45595,30 +35807,13 @@ func (service *VimPortType) ResetListViewFromView(request *ResetListViewFromView
 * - RuntimeFault
  */
 func (service *VimPortType) DestroyView(request *DestroyViewRequestType) (*DestroyViewResponse, error) {
-	data, err := service.call("DestroyView", "urn:vim25/5.5", request)
+	response := &DestroyViewResponse{}
+	err := service.client.Call("DestroyView", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DestroyViewResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45627,30 +35822,13 @@ func (service *VimPortType) DestroyView(request *DestroyViewRequestType) (*Destr
 * - RuntimeFault
  */
 func (service *VimPortType) CreateInventoryView(request *CreateInventoryViewRequestType) (*CreateInventoryViewResponse, error) {
-	data, err := service.call("CreateInventoryView", "urn:vim25/5.5", request)
+	response := &CreateInventoryViewResponse{}
+	err := service.client.Call("CreateInventoryView", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateInventoryViewResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45659,30 +35837,13 @@ func (service *VimPortType) CreateInventoryView(request *CreateInventoryViewRequ
 * - RuntimeFault
  */
 func (service *VimPortType) CreateContainerView(request *CreateContainerViewRequestType) (*CreateContainerViewResponse, error) {
-	data, err := service.call("CreateContainerView", "urn:vim25/5.5", request)
+	response := &CreateContainerViewResponse{}
+	err := service.client.Call("CreateContainerView", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateContainerViewResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45691,30 +35852,13 @@ func (service *VimPortType) CreateContainerView(request *CreateContainerViewRequ
 * - RuntimeFault
  */
 func (service *VimPortType) CreateListView(request *CreateListViewRequestType) (*CreateListViewResponse, error) {
-	data, err := service.call("CreateListView", "urn:vim25/5.5", request)
+	response := &CreateListViewResponse{}
+	err := service.client.Call("CreateListView", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateListViewResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45723,30 +35867,13 @@ func (service *VimPortType) CreateListView(request *CreateListViewRequestType) (
 * - RuntimeFault
  */
 func (service *VimPortType) CreateListViewFromView(request *CreateListViewFromViewRequestType) (*CreateListViewFromViewResponse, error) {
-	data, err := service.call("CreateListViewFromView", "urn:vim25/5.5", request)
+	response := &CreateListViewFromViewResponse{}
+	err := service.client.Call("CreateListViewFromView", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateListViewFromViewResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45760,30 +35887,13 @@ func (service *VimPortType) CreateListViewFromView(request *CreateListViewFromVi
 * - RuntimeFault
  */
 func (service *VimPortType) RevertToSnapshot_Task(request *RevertToSnapshotRequestType) (*RevertToSnapshot_TaskResponse, error) {
-	data, err := service.call("RevertToSnapshot_Task", "urn:vim25/5.5", request)
+	response := &RevertToSnapshot_TaskResponse{}
+	err := service.client.Call("RevertToSnapshot_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RevertToSnapshot_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45793,30 +35903,13 @@ func (service *VimPortType) RevertToSnapshot_Task(request *RevertToSnapshotReque
 * - RuntimeFault
  */
 func (service *VimPortType) RemoveSnapshot_Task(request *RemoveSnapshotRequestType) (*RemoveSnapshot_TaskResponse, error) {
-	data, err := service.call("RemoveSnapshot_Task", "urn:vim25/5.5", request)
+	response := &RemoveSnapshot_TaskResponse{}
+	err := service.client.Call("RemoveSnapshot_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RemoveSnapshot_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45828,30 +35921,13 @@ func (service *VimPortType) RemoveSnapshot_Task(request *RemoveSnapshotRequestTy
 * - RuntimeFault
  */
 func (service *VimPortType) RenameSnapshot(request *RenameSnapshotRequestType) (*RenameSnapshotResponse, error) {
-	data, err := service.call("RenameSnapshot", "urn:vim25/5.5", request)
+	response := &RenameSnapshotResponse{}
+	err := service.client.Call("RenameSnapshot", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RenameSnapshotResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45863,30 +35939,13 @@ func (service *VimPortType) RenameSnapshot(request *RenameSnapshotRequestType) (
 * - RuntimeFault
  */
 func (service *VimPortType) ExportSnapshot(request *ExportSnapshotRequestType) (*ExportSnapshotResponse, error) {
-	data, err := service.call("ExportSnapshot", "urn:vim25/5.5", request)
+	response := &ExportSnapshotResponse{}
+	err := service.client.Call("ExportSnapshot", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ExportSnapshotResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45897,30 +35956,13 @@ func (service *VimPortType) ExportSnapshot(request *ExportSnapshotRequestType) (
 * - RuntimeFault
  */
 func (service *VimPortType) CheckCompatibility_Task(request *CheckCompatibilityRequestType) (*CheckCompatibility_TaskResponse, error) {
-	data, err := service.call("CheckCompatibility_Task", "urn:vim25/5.5", request)
+	response := &CheckCompatibility_TaskResponse{}
+	err := service.client.Call("CheckCompatibility_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CheckCompatibility_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45929,30 +35971,13 @@ func (service *VimPortType) CheckCompatibility_Task(request *CheckCompatibilityR
 * - RuntimeFault
  */
 func (service *VimPortType) QueryVMotionCompatibilityEx_Task(request *QueryVMotionCompatibilityExRequestType) (*QueryVMotionCompatibilityEx_TaskResponse, error) {
-	data, err := service.call("QueryVMotionCompatibilityEx_Task", "urn:vim25/5.5", request)
+	response := &QueryVMotionCompatibilityEx_TaskResponse{}
+	err := service.client.Call("QueryVMotionCompatibilityEx_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &QueryVMotionCompatibilityEx_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45962,30 +35987,13 @@ func (service *VimPortType) QueryVMotionCompatibilityEx_Task(request *QueryVMoti
 * - RuntimeFault
  */
 func (service *VimPortType) CheckMigrate_Task(request *CheckMigrateRequestType) (*CheckMigrate_TaskResponse, error) {
-	data, err := service.call("CheckMigrate_Task", "urn:vim25/5.5", request)
+	response := &CheckMigrate_TaskResponse{}
+	err := service.client.Call("CheckMigrate_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CheckMigrate_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -45995,30 +36003,13 @@ func (service *VimPortType) CheckMigrate_Task(request *CheckMigrateRequestType) 
 * - RuntimeFault
  */
 func (service *VimPortType) CheckRelocate_Task(request *CheckRelocateRequestType) (*CheckRelocate_TaskResponse, error) {
-	data, err := service.call("CheckRelocate_Task", "urn:vim25/5.5", request)
+	response := &CheckRelocate_TaskResponse{}
+	err := service.client.Call("CheckRelocate_Task", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CheckRelocate_TaskResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46030,30 +36021,13 @@ func (service *VimPortType) CheckRelocate_Task(request *CheckRelocateRequestType
 * - RuntimeFault
  */
 func (service *VimPortType) ValidateCredentialsInGuest(request *ValidateCredentialsInGuestRequestType) (*ValidateCredentialsInGuestResponse, error) {
-	data, err := service.call("ValidateCredentialsInGuest", "urn:vim25/5.5", request)
+	response := &ValidateCredentialsInGuestResponse{}
+	err := service.client.Call("ValidateCredentialsInGuest", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ValidateCredentialsInGuestResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46065,30 +36039,13 @@ func (service *VimPortType) ValidateCredentialsInGuest(request *ValidateCredenti
 * - RuntimeFault
  */
 func (service *VimPortType) AcquireCredentialsInGuest(request *AcquireCredentialsInGuestRequestType) (*AcquireCredentialsInGuestResponse, error) {
-	data, err := service.call("AcquireCredentialsInGuest", "urn:vim25/5.5", request)
+	response := &AcquireCredentialsInGuestResponse{}
+	err := service.client.Call("AcquireCredentialsInGuest", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &AcquireCredentialsInGuestResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46100,30 +36057,13 @@ func (service *VimPortType) AcquireCredentialsInGuest(request *AcquireCredential
 * - RuntimeFault
  */
 func (service *VimPortType) ReleaseCredentialsInGuest(request *ReleaseCredentialsInGuestRequestType) (*ReleaseCredentialsInGuestResponse, error) {
-	data, err := service.call("ReleaseCredentialsInGuest", "urn:vim25/5.5", request)
+	response := &ReleaseCredentialsInGuestResponse{}
+	err := service.client.Call("ReleaseCredentialsInGuest", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ReleaseCredentialsInGuestResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46136,30 +36076,13 @@ func (service *VimPortType) ReleaseCredentialsInGuest(request *ReleaseCredential
 * - RuntimeFault
  */
 func (service *VimPortType) MakeDirectoryInGuest(request *MakeDirectoryInGuestRequestType) (*MakeDirectoryInGuestResponse, error) {
-	data, err := service.call("MakeDirectoryInGuest", "urn:vim25/5.5", request)
+	response := &MakeDirectoryInGuestResponse{}
+	err := service.client.Call("MakeDirectoryInGuest", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &MakeDirectoryInGuestResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46172,30 +36095,13 @@ func (service *VimPortType) MakeDirectoryInGuest(request *MakeDirectoryInGuestRe
 * - RuntimeFault
  */
 func (service *VimPortType) DeleteFileInGuest(request *DeleteFileInGuestRequestType) (*DeleteFileInGuestResponse, error) {
-	data, err := service.call("DeleteFileInGuest", "urn:vim25/5.5", request)
+	response := &DeleteFileInGuestResponse{}
+	err := service.client.Call("DeleteFileInGuest", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DeleteFileInGuestResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46208,30 +36114,13 @@ func (service *VimPortType) DeleteFileInGuest(request *DeleteFileInGuestRequestT
 * - RuntimeFault
  */
 func (service *VimPortType) DeleteDirectoryInGuest(request *DeleteDirectoryInGuestRequestType) (*DeleteDirectoryInGuestResponse, error) {
-	data, err := service.call("DeleteDirectoryInGuest", "urn:vim25/5.5", request)
+	response := &DeleteDirectoryInGuestResponse{}
+	err := service.client.Call("DeleteDirectoryInGuest", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DeleteDirectoryInGuestResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46244,30 +36133,13 @@ func (service *VimPortType) DeleteDirectoryInGuest(request *DeleteDirectoryInGue
 * - RuntimeFault
  */
 func (service *VimPortType) MoveDirectoryInGuest(request *MoveDirectoryInGuestRequestType) (*MoveDirectoryInGuestResponse, error) {
-	data, err := service.call("MoveDirectoryInGuest", "urn:vim25/5.5", request)
+	response := &MoveDirectoryInGuestResponse{}
+	err := service.client.Call("MoveDirectoryInGuest", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &MoveDirectoryInGuestResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46280,30 +36152,13 @@ func (service *VimPortType) MoveDirectoryInGuest(request *MoveDirectoryInGuestRe
 * - RuntimeFault
  */
 func (service *VimPortType) MoveFileInGuest(request *MoveFileInGuestRequestType) (*MoveFileInGuestResponse, error) {
-	data, err := service.call("MoveFileInGuest", "urn:vim25/5.5", request)
+	response := &MoveFileInGuestResponse{}
+	err := service.client.Call("MoveFileInGuest", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &MoveFileInGuestResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46316,30 +36171,13 @@ func (service *VimPortType) MoveFileInGuest(request *MoveFileInGuestRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) CreateTemporaryFileInGuest(request *CreateTemporaryFileInGuestRequestType) (*CreateTemporaryFileInGuestResponse, error) {
-	data, err := service.call("CreateTemporaryFileInGuest", "urn:vim25/5.5", request)
+	response := &CreateTemporaryFileInGuestResponse{}
+	err := service.client.Call("CreateTemporaryFileInGuest", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateTemporaryFileInGuestResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46352,30 +36190,13 @@ func (service *VimPortType) CreateTemporaryFileInGuest(request *CreateTemporaryF
 * - RuntimeFault
  */
 func (service *VimPortType) CreateTemporaryDirectoryInGuest(request *CreateTemporaryDirectoryInGuestRequestType) (*CreateTemporaryDirectoryInGuestResponse, error) {
-	data, err := service.call("CreateTemporaryDirectoryInGuest", "urn:vim25/5.5", request)
+	response := &CreateTemporaryDirectoryInGuestResponse{}
+	err := service.client.Call("CreateTemporaryDirectoryInGuest", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateTemporaryDirectoryInGuestResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46388,30 +36209,13 @@ func (service *VimPortType) CreateTemporaryDirectoryInGuest(request *CreateTempo
 * - RuntimeFault
  */
 func (service *VimPortType) ListFilesInGuest(request *ListFilesInGuestRequestType) (*ListFilesInGuestResponse, error) {
-	data, err := service.call("ListFilesInGuest", "urn:vim25/5.5", request)
+	response := &ListFilesInGuestResponse{}
+	err := service.client.Call("ListFilesInGuest", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ListFilesInGuestResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46424,30 +36228,13 @@ func (service *VimPortType) ListFilesInGuest(request *ListFilesInGuestRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) ChangeFileAttributesInGuest(request *ChangeFileAttributesInGuestRequestType) (*ChangeFileAttributesInGuestResponse, error) {
-	data, err := service.call("ChangeFileAttributesInGuest", "urn:vim25/5.5", request)
+	response := &ChangeFileAttributesInGuestResponse{}
+	err := service.client.Call("ChangeFileAttributesInGuest", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ChangeFileAttributesInGuestResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46460,30 +36247,13 @@ func (service *VimPortType) ChangeFileAttributesInGuest(request *ChangeFileAttri
 * - RuntimeFault
  */
 func (service *VimPortType) InitiateFileTransferFromGuest(request *InitiateFileTransferFromGuestRequestType) (*InitiateFileTransferFromGuestResponse, error) {
-	data, err := service.call("InitiateFileTransferFromGuest", "urn:vim25/5.5", request)
+	response := &InitiateFileTransferFromGuestResponse{}
+	err := service.client.Call("InitiateFileTransferFromGuest", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &InitiateFileTransferFromGuestResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46496,30 +36266,13 @@ func (service *VimPortType) InitiateFileTransferFromGuest(request *InitiateFileT
 * - RuntimeFault
  */
 func (service *VimPortType) InitiateFileTransferToGuest(request *InitiateFileTransferToGuestRequestType) (*InitiateFileTransferToGuestResponse, error) {
-	data, err := service.call("InitiateFileTransferToGuest", "urn:vim25/5.5", request)
+	response := &InitiateFileTransferToGuestResponse{}
+	err := service.client.Call("InitiateFileTransferToGuest", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &InitiateFileTransferToGuestResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46532,30 +36285,13 @@ func (service *VimPortType) InitiateFileTransferToGuest(request *InitiateFileTra
 * - RuntimeFault
  */
 func (service *VimPortType) StartProgramInGuest(request *StartProgramInGuestRequestType) (*StartProgramInGuestResponse, error) {
-	data, err := service.call("StartProgramInGuest", "urn:vim25/5.5", request)
+	response := &StartProgramInGuestResponse{}
+	err := service.client.Call("StartProgramInGuest", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &StartProgramInGuestResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46567,30 +36303,13 @@ func (service *VimPortType) StartProgramInGuest(request *StartProgramInGuestRequ
 * - RuntimeFault
  */
 func (service *VimPortType) ListProcessesInGuest(request *ListProcessesInGuestRequestType) (*ListProcessesInGuestResponse, error) {
-	data, err := service.call("ListProcessesInGuest", "urn:vim25/5.5", request)
+	response := &ListProcessesInGuestResponse{}
+	err := service.client.Call("ListProcessesInGuest", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ListProcessesInGuestResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46602,30 +36321,13 @@ func (service *VimPortType) ListProcessesInGuest(request *ListProcessesInGuestRe
 * - RuntimeFault
  */
 func (service *VimPortType) TerminateProcessInGuest(request *TerminateProcessInGuestRequestType) (*TerminateProcessInGuestResponse, error) {
-	data, err := service.call("TerminateProcessInGuest", "urn:vim25/5.5", request)
+	response := &TerminateProcessInGuestResponse{}
+	err := service.client.Call("TerminateProcessInGuest", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &TerminateProcessInGuestResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46637,30 +36339,13 @@ func (service *VimPortType) TerminateProcessInGuest(request *TerminateProcessInG
 * - RuntimeFault
  */
 func (service *VimPortType) ReadEnvironmentVariableInGuest(request *ReadEnvironmentVariableInGuestRequestType) (*ReadEnvironmentVariableInGuestResponse, error) {
-	data, err := service.call("ReadEnvironmentVariableInGuest", "urn:vim25/5.5", request)
+	response := &ReadEnvironmentVariableInGuestResponse{}
+	err := service.client.Call("ReadEnvironmentVariableInGuest", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ReadEnvironmentVariableInGuestResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46669,30 +36354,13 @@ func (service *VimPortType) ReadEnvironmentVariableInGuest(request *ReadEnvironm
 * - RuntimeFault
  */
 func (service *VimPortType) DestroyPropertyFilter(request *DestroyPropertyFilterRequestType) (*DestroyPropertyFilterResponse, error) {
-	data, err := service.call("DestroyPropertyFilter", "urn:vim25/5.5", request)
+	response := &DestroyPropertyFilterResponse{}
+	err := service.client.Call("DestroyPropertyFilter", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DestroyPropertyFilterResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46702,30 +36370,13 @@ func (service *VimPortType) DestroyPropertyFilter(request *DestroyPropertyFilter
 * - RuntimeFault
  */
 func (service *VimPortType) CreateFilter(request *CreateFilterRequestType) (*CreateFilterResponse, error) {
-	data, err := service.call("CreateFilter", "urn:vim25/5.5", request)
+	response := &CreateFilterResponse{}
+	err := service.client.Call("CreateFilter", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreateFilterResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46735,30 +36386,13 @@ func (service *VimPortType) CreateFilter(request *CreateFilterRequestType) (*Cre
 * - RuntimeFault
  */
 func (service *VimPortType) RetrieveProperties(request *RetrievePropertiesRequestType) (*RetrievePropertiesResponse, error) {
-	data, err := service.call("RetrieveProperties", "urn:vim25/5.5", request)
+	response := &RetrievePropertiesResponse{}
+	err := service.client.Call("RetrieveProperties", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RetrievePropertiesResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46768,30 +36402,13 @@ func (service *VimPortType) RetrieveProperties(request *RetrievePropertiesReques
 * - RuntimeFault
  */
 func (service *VimPortType) CheckForUpdates(request *CheckForUpdatesRequestType) (*CheckForUpdatesResponse, error) {
-	data, err := service.call("CheckForUpdates", "urn:vim25/5.5", request)
+	response := &CheckForUpdatesResponse{}
+	err := service.client.Call("CheckForUpdates", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CheckForUpdatesResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46801,30 +36418,13 @@ func (service *VimPortType) CheckForUpdates(request *CheckForUpdatesRequestType)
 * - RuntimeFault
  */
 func (service *VimPortType) WaitForUpdates(request *WaitForUpdatesRequestType) (*WaitForUpdatesResponse, error) {
-	data, err := service.call("WaitForUpdates", "urn:vim25/5.5", request)
+	response := &WaitForUpdatesResponse{}
+	err := service.client.Call("WaitForUpdates", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &WaitForUpdatesResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46833,30 +36433,13 @@ func (service *VimPortType) WaitForUpdates(request *WaitForUpdatesRequestType) (
 * - RuntimeFault
  */
 func (service *VimPortType) CancelWaitForUpdates(request *CancelWaitForUpdatesRequestType) (*CancelWaitForUpdatesResponse, error) {
-	data, err := service.call("CancelWaitForUpdates", "urn:vim25/5.5", request)
+	response := &CancelWaitForUpdatesResponse{}
+	err := service.client.Call("CancelWaitForUpdates", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CancelWaitForUpdatesResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46866,30 +36449,13 @@ func (service *VimPortType) CancelWaitForUpdates(request *CancelWaitForUpdatesRe
 * - RuntimeFault
  */
 func (service *VimPortType) WaitForUpdatesEx(request *WaitForUpdatesExRequestType) (*WaitForUpdatesExResponse, error) {
-	data, err := service.call("WaitForUpdatesEx", "urn:vim25/5.5", request)
+	response := &WaitForUpdatesExResponse{}
+	err := service.client.Call("WaitForUpdatesEx", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &WaitForUpdatesExResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46899,30 +36465,13 @@ func (service *VimPortType) WaitForUpdatesEx(request *WaitForUpdatesExRequestTyp
 * - RuntimeFault
  */
 func (service *VimPortType) RetrievePropertiesEx(request *RetrievePropertiesExRequestType) (*RetrievePropertiesExResponse, error) {
-	data, err := service.call("RetrievePropertiesEx", "urn:vim25/5.5", request)
+	response := &RetrievePropertiesExResponse{}
+	err := service.client.Call("RetrievePropertiesEx", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &RetrievePropertiesExResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46932,30 +36481,13 @@ func (service *VimPortType) RetrievePropertiesEx(request *RetrievePropertiesExRe
 * - RuntimeFault
  */
 func (service *VimPortType) ContinueRetrievePropertiesEx(request *ContinueRetrievePropertiesExRequestType) (*ContinueRetrievePropertiesExResponse, error) {
-	data, err := service.call("ContinueRetrievePropertiesEx", "urn:vim25/5.5", request)
+	response := &ContinueRetrievePropertiesExResponse{}
+	err := service.client.Call("ContinueRetrievePropertiesEx", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &ContinueRetrievePropertiesExResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46965,30 +36497,13 @@ func (service *VimPortType) ContinueRetrievePropertiesEx(request *ContinueRetrie
 * - RuntimeFault
  */
 func (service *VimPortType) CancelRetrievePropertiesEx(request *CancelRetrievePropertiesExRequestType) (*CancelRetrievePropertiesExResponse, error) {
-	data, err := service.call("CancelRetrievePropertiesEx", "urn:vim25/5.5", request)
+	response := &CancelRetrievePropertiesExResponse{}
+	err := service.client.Call("CancelRetrievePropertiesEx", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CancelRetrievePropertiesExResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -46997,30 +36512,13 @@ func (service *VimPortType) CancelRetrievePropertiesEx(request *CancelRetrievePr
 * - RuntimeFault
  */
 func (service *VimPortType) CreatePropertyCollector(request *CreatePropertyCollectorRequestType) (*CreatePropertyCollectorResponse, error) {
-	data, err := service.call("CreatePropertyCollector", "urn:vim25/5.5", request)
+	response := &CreatePropertyCollectorResponse{}
+	err := service.client.Call("CreatePropertyCollector", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &CreatePropertyCollectorResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
 
 /**
@@ -47029,28 +36527,11 @@ func (service *VimPortType) CreatePropertyCollector(request *CreatePropertyColle
 * - RuntimeFault
  */
 func (service *VimPortType) DestroyPropertyCollector(request *DestroyPropertyCollectorRequestType) (*DestroyPropertyCollectorResponse, error) {
-	data, err := service.call("DestroyPropertyCollector", "urn:vim25/5.5", request)
+	response := &DestroyPropertyCollectorResponse{}
+	err := service.client.Call("DestroyPropertyCollector", "urn:vim25/5.5", request, response)
 	if err != nil {
 		return nil, err
 	}
 
-	envelope := &gowsdl.SoapEnvelope{}
-
-	err = xml.Unmarshal(data, envelope)
-	if err != nil {
-		return nil, err
-	}
-
-	if envelope.Body.Body == "" {
-		log.Printf("%#v\n", envelope.Body)
-		return nil, nil
-	}
-
-	res := &DestroyPropertyCollectorResponse{}
-	err = xml.Unmarshal([]byte(envelope.Body.Body), res)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return response, nil
 }
