@@ -2359,6 +2359,9 @@ type UnexpectedFault struct {
 }
 
 type ManagedObjectReference struct {
+	Value string
+
+	Type string
 }
 
 type ArrayOfString struct {
