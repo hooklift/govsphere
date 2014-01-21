@@ -1,11 +1,9 @@
 package main
 
 import (
-	//"encoding/json"
 	"github.com/PuerkitoBio/goquery"
 	"log"
 	"os"
-	//"runtime"
 	"regexp"
 	"strings"
 	"sync"
@@ -44,8 +42,8 @@ type Method struct {
 	Since              string       `json:"since"`
 	Parameters         []*Parameter `json:"parameters"`
 	ReturnValue        Value        `json:"return_value"`
-	Faults             []*Value     `json:"faults"`
-	Events             []*Value     `json:"events"`
+	Faults             []Value      `json:"faults"`
+	Events             []Value      `json:"events"`
 }
 
 type Object struct {
@@ -267,11 +265,23 @@ func scrapeObject(path, name string, channel chan *Object) {
 
 					//Faults
 					sel6 := sel5.NextFilteredUntil(`p[class="table-title"]`, `table[cellspacing="0"]`).Next()
-					m.Faults = make([]*Parameter, sel6.Find(`tbody > tr`).Length()-1)
+					m.Faults = make([]Value, sel6.Find(`tbody > tr`).Length()-1)
 
 					sel6.Find("tbody > tr").Each(func(k int, sel7 *goquery.Selection) {
-						f := &Fault{}
+						f := Value{}
 
+						type_ := sel7.Find("td:nth-child(1) > a")
+						if type_.Length() == 2 {
+							f.Type_ = strings.TrimSpace(type_.Last().Text())
+						} else {
+							f.Type_ = strings.TrimSpace(type_.Text())
+						}
+
+						f.Description = sel7.Find("td:nth-child(2)").Text()
+						if f.Type_ != "" {
+							m.Faults = append(m.Faults, f)
+							log.Printf("%#v\n", f)
+						}
 					})
 				})
 				obj.Methods = append(obj.Methods, m)
