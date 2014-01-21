@@ -6,7 +6,6 @@ import (
 	"os"
 	"regexp"
 	"strings"
-	"sync"
 )
 
 var apiBaseUrl = "http://pubs.vmware.com/vsphere-55/topic/com.vmware.wssdk.apiref.doc"
@@ -81,52 +80,49 @@ func init() {
 }
 
 func main() {
-	var wg sync.WaitGroup
+	channel := make(chan *Object)
+	closeChannelAt := 0
+	totalObjects := 0
 
-	totalMos := 0
-	totalDos := 0
-	totalEnums := 0
-
-	wg.Add(1)
 	go func() {
-		defer wg.Done()
-		totalMos = scrape(mosIndex)
+		closeChannelAt += scrape(mosIndex, channel)
 	}()
 
-	wg.Add(1)
 	go func() {
-		defer wg.Done()
-		totalDos = scrape(doIndex)
+		closeChannelAt += scrape(doIndex, channel)
 	}()
 
-	wg.Add(1)
 	go func() {
-		defer wg.Done()
-		totalEnums = scrape(enumIndex)
+		closeChannelAt += scrape(enumIndex, channel)
 	}()
-	wg.Wait()
+
+	for obj := range channel {
+		totalObjects++
+
+		log.Println("===============")
+		log.Println("type: " + obj.Name)
+		log.Println("===============")
+
+		if totalObjects == closeChannelAt {
+			break
+		}
+	}
 
 	log.Println("\n")
-	log.Printf("Managed Objects: %d\n", totalMos)
-	log.Printf("Data Objects: %d\n", totalDos)
-	log.Printf("Enum types: %d\n", totalEnums)
+	log.Printf("Close channel at: %d\n", closeChannelAt)
+	log.Printf("Total objects extracted: %d\n", totalObjects)
 	log.Println("Done 💩")
 }
 
-func scrape(url string) int {
+func scrape(url string, channel chan *Object) int {
 	d, err := goquery.NewDocument(url)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	totalObjects := 0
-	channel := make(chan *Object)
-
 	handler := func(i int, sel *goquery.Selection) {
 		href, _ := sel.Attr("href")
 		name, _ := sel.Attr("title")
-
-		totalObjects++
 
 		go scrapeObject(href, name, channel)
 	}
@@ -137,7 +133,7 @@ func scrape(url string) int {
 	pt := d.Find("#PT > nobr > a")
 	uz := d.Find("#UZ > nobr > a")
 
-	var closeChannelAt = ae.Length() + fj.Length() + ko.Length() + pt.Length() + uz.Length()
+	closeChannelAt := ae.Length() + fj.Length() + ko.Length() + pt.Length() + uz.Length()
 
 	ae.Each(handler)
 	fj.Each(handler)
@@ -145,17 +141,7 @@ func scrape(url string) int {
 	pt.Each(handler)
 	uz.Each(handler)
 
-	for obj := range channel {
-		if totalObjects == closeChannelAt {
-			break
-		}
-
-		log.Println("===============")
-		log.Println("type: " + obj.Name)
-		log.Println("===============")
-	}
-
-	return totalObjects
+	return closeChannelAt
 }
 
 func scrapeObject(path, name string, channel chan *Object) {
