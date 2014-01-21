@@ -13,10 +13,11 @@ var apiBaseUrl = "http://pubs.vmware.com/vsphere-55/topic/com.vmware.wssdk.apire
 
 var mosIndex = apiBaseUrl + "/index-mo_types.html"
 var doIndex = apiBaseUrl + "/index-do_types.html"
+var enumIndex = apiBaseUrl + "/index-e_types.html"
 
 type Property struct {
 	Name               string `json:"name"`
-	Type_              string `json:"type"`
+	Type               string `json:"type"`
 	Description        string `json:"description"`
 	Optional           bool   `json:"optional"`
 	RequiredPrivileges string `json:"required_privileges"`
@@ -24,14 +25,14 @@ type Property struct {
 
 type Parameter struct {
 	Name               string `json:"name"`
-	Type_              string `json:"type"`
+	Type               string `json:"type"`
 	Description        string `json:"description"`
 	Optional           bool   `json:"optional"`
 	RequiredPrivileges string `json:"required_privileges"`
 }
 
 type Value struct {
-	Type_       string `json:"type"`
+	Type        string `json:"type"`
 	Description string `json:"description"`
 }
 
@@ -53,6 +54,12 @@ type Object struct {
 	Description string      `json:"description"`
 	Properties  []*Property `json:"properties"`
 	Methods     []*Method   `json:"methods"`
+	Constants   []Constant  `json:"constants"`
+}
+
+type Constant struct {
+	Name        string `json:"name"`
+	Description string `json:"description"`
 }
 
 var objDescRegex *regexp.Regexp
@@ -78,6 +85,7 @@ func main() {
 
 	totalMos := 0
 	totalDos := 0
+	totalEnums := 0
 
 	wg.Add(1)
 	go func() {
@@ -85,20 +93,25 @@ func main() {
 		totalMos = scrape(mosIndex)
 	}()
 
-	// wg.Add(1)
-	// go func() {
-	// 	defer wg.Done()
-	// 	totalDos = scrape(doIndex)
-	// }()
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		totalDos = scrape(doIndex)
+	}()
+
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		totalEnums = scrape(enumIndex)
+	}()
 	wg.Wait()
 
 	log.Println("\n")
 	log.Printf("Managed Objects: %d\n", totalMos)
 	log.Printf("Data Objects: %d\n", totalDos)
+	log.Printf("Enum types: %d\n", totalEnums)
 	log.Println("Done 💩")
 }
-
-var closeChannel bool = false
 
 func scrape(url string) int {
 	d, err := goquery.NewDocument(url)
@@ -118,19 +131,28 @@ func scrape(url string) int {
 		go scrapeObject(href, name, channel)
 	}
 
-	d.Find("#AE > nobr > a").Each(handler)
-	//d.Find("#FJ > nobr > a").Each(handler)
-	// d.Find("#KO > nobr > a").Each(handler)
-	// d.Find("#PT > nobr > a").Each(handler)
-	// d.Find("#UZ > nobr > a").Each(handler)
+	ae := d.Find("#AE > nobr > a")
+	fj := d.Find("#FJ > nobr > a")
+	ko := d.Find("#KO > nobr > a")
+	pt := d.Find("#PT > nobr > a")
+	uz := d.Find("#UZ > nobr > a")
 
-	for _ = range channel {
-		if closeChannel {
+	var closeChannelAt = ae.Length() + fj.Length() + ko.Length() + pt.Length() + uz.Length()
+
+	ae.Each(handler)
+	fj.Each(handler)
+	ko.Each(handler)
+	pt.Each(handler)
+	uz.Each(handler)
+
+	for obj := range channel {
+		if totalObjects == closeChannelAt {
 			break
 		}
-		// log.Println("===============")
-		// log.Printf("%v\n", obj)
-		// log.Println("===============")
+
+		log.Println("===============")
+		log.Println("type: " + obj.Name)
+		log.Println("===============")
 	}
 
 	return totalObjects
@@ -160,13 +182,14 @@ func scrapeObject(path, name string, channel chan *Object) {
 	}
 	obj.Description = getObjectDesc(html)
 
-	log.Println("type: " + name)
+	//log.Println("type: " + name)
 	//log.Println(obj.Description)
 
 	d.Find(`body > table`).Each(func(i int, sel *goquery.Selection) {
 		prev := strings.TrimSpace(sel.Prev().Text())
+
 		if prev == "Properties" {
-			obj.Properties = make([]*Property, sel.Find(`tbody > tr`).Length()-1)
+			//obj.Properties = make([]*Property, sel.Find(`tbody > tr`).Length()-1)
 
 			sel.Find("tbody > tr").Each(func(j int, sel2 *goquery.Selection) {
 				if sel2.HasClass("r1") || sel2.HasClass("r0") {
@@ -186,29 +209,34 @@ func scrapeObject(path, name string, channel chan *Object) {
 
 					type_ := sel2.Find("td:nth-child(2) > a")
 					if type_.Length() == 2 {
-						p.Type_ = strings.TrimSpace(type_.Last().Text())
+						//Instead of getting ManagedReferenceObjecte it gets
+						//the real type
+						p.Type = strings.TrimSpace(type_.Last().Text())
+					} else if type_.Length() == 1 {
+						p.Type = strings.TrimSpace(type_.Text())
 					} else {
-						p.Type_ = strings.TrimSpace(type_.Text())
+						//Gets primitive types such as: xsd:string, xsd:long, etc
+						p.Type = strings.TrimSpace(sel2.Find("td:nth-child(2)").Text())
 					}
 
 					p.Description = strings.TrimSpace(sel2.Find("td:nth-child(3)").Text())
 
 					if p.Name != "" {
 						obj.Properties = append(obj.Properties, p)
-						log.Printf("%#v\n", p)
+						//log.Printf("%#v\n", p)
 					}
 				}
 			})
 		} else if prev == "Methods" {
 			methods := sel.Find("tbody > tr:nth-child(2) > td > a")
-			obj.Methods = make([]*Method, methods.Length())
+			//obj.Methods = make([]*Method, methods.Length())
 
 			methods.Each(func(i int, sel2 *goquery.Selection) {
 				mname := sel2.Text()
 				m := &Method{}
 				m.Name = mname
 
-				log.Println("method: " + mname)
+				//log.Println("method: " + mname)
 
 				m.Description = getMethodDesc(mname, html)
 
@@ -219,8 +247,7 @@ func scrapeObject(path, name string, channel chan *Object) {
 
 					//Parameters
 					sel4 := sel3.NextFilteredUntil(`p[class="table-title"]`, `table[cellspacing="0"]`).Next()
-
-					m.Parameters = make([]*Parameter, sel4.Find(`tbody > tr`).Length()-1)
+					//m.Parameters = make([]*Parameter, sel4.Find(`tbody > tr`).Length()-1)
 
 					sel4.Find("tbody > tr").Each(func(k int, sel5 *goquery.Selection) {
 						p := &Parameter{}
@@ -237,7 +264,7 @@ func scrapeObject(path, name string, channel chan *Object) {
 							}
 						})
 
-						p.Type_ = strings.TrimSpace(sel5.Find("td:nth-child(2) > a").Text())
+						p.Type = strings.TrimSpace(sel5.Find("td:nth-child(2) > a").Text())
 						p.Description = strings.TrimSpace(sel5.Find("td:nth-child(3)").Text())
 
 						if p.Name != "" {
@@ -249,15 +276,21 @@ func scrapeObject(path, name string, channel chan *Object) {
 					sel5 := sel4.NextFilteredUntil(`p[class="table-title"]`, `table[cellspacing="0"]`).Next()
 					sel5.Find("tbody > tr").Each(func(k int, sel6 *goquery.Selection) {
 						v := Value{}
+
 						type_ := sel6.Find("td:nth-child(1) > a")
 						if type_.Length() == 2 {
-							v.Type_ = strings.TrimSpace(type_.Last().Text())
+							//Instead of getting ManagedReferenceObjecte it gets
+							//the real type
+							v.Type = strings.TrimSpace(type_.Last().Text())
+						} else if type_.Length() == 1 {
+							v.Type = strings.TrimSpace(type_.Text())
 						} else {
-							v.Type_ = strings.TrimSpace(type_.Text())
+							//Gets primitive types such as: xsd:string, xsd:long, etc
+							v.Type = strings.TrimSpace(sel6.Find("td:nth-child(1)").Text())
 						}
 
 						v.Description = sel6.Find("td:nth-child(2)").Text()
-						if v.Type_ != "" {
+						if v.Type != "" {
 							m.ReturnValue = v
 							//log.Printf("%#v\n", v)
 						}
@@ -265,32 +298,49 @@ func scrapeObject(path, name string, channel chan *Object) {
 
 					//Faults
 					sel6 := sel5.NextFilteredUntil(`p[class="table-title"]`, `table[cellspacing="0"]`).Next()
-					m.Faults = make([]Value, sel6.Find(`tbody > tr`).Length()-1)
+					//m.Faults = make([]Value, sel6.Find(`tbody > tr`).Length()-1)
 
 					sel6.Find("tbody > tr").Each(func(k int, sel7 *goquery.Selection) {
 						f := Value{}
 
 						type_ := sel7.Find("td:nth-child(1) > a")
 						if type_.Length() == 2 {
-							f.Type_ = strings.TrimSpace(type_.Last().Text())
+							//Instead of getting ManagedReferenceObjecte it gets
+							//the real type
+							f.Type = strings.TrimSpace(type_.Last().Text())
+						} else if type_.Length() == 1 {
+							f.Type = strings.TrimSpace(type_.Text())
 						} else {
-							f.Type_ = strings.TrimSpace(type_.Text())
+							//Gets primitive types such as: xsd:string, xsd:long, etc
+							f.Type = strings.TrimSpace(sel7.Find("td:nth-child(1)").Text())
 						}
 
 						f.Description = sel7.Find("td:nth-child(2)").Text()
-						if f.Type_ != "" {
+						if f.Type != "" {
 							m.Faults = append(m.Faults, f)
-							log.Printf("%#v\n", f)
+							//log.Printf("%#v\n", f)
 						}
 					})
 				})
 				obj.Methods = append(obj.Methods, m)
 			})
+		} else if prev == "Enum Constants" {
+			//obj.Constants = make([]Constant, sel.Find(`tbody > tr`).Length()-1)
+
+			sel.Find("tbody > tr").Each(func(j int, sel2 *goquery.Selection) {
+				c := Constant{}
+
+				c.Name = sel2.Find("td:nth-child(1)").Text()
+				c.Description = strings.TrimSpace(sel2.Find("td:nth-child(2)").Text())
+				if c.Name != "" {
+					obj.Constants = append(obj.Constants, c)
+					//log.Printf("%#v\n", c)
+				}
+			})
 		}
 	})
 
 	channel <- obj
-	//closeChannel = true
 }
 
 func getObjectDesc(html string) string {
