@@ -1,7 +1,9 @@
 package main
 
 import (
+	"encoding/json"
 	"github.com/PuerkitoBio/goquery"
+	"io/ioutil"
 	"log"
 	"os"
 	"regexp"
@@ -83,6 +85,7 @@ func main() {
 	channel := make(chan *Object)
 	closeChannelAt := 0
 	totalObjects := 0
+	var objs []*Object
 
 	go func() {
 		closeChannelAt += scrape(mosIndex, channel)
@@ -99,18 +102,28 @@ func main() {
 	for obj := range channel {
 		totalObjects++
 
-		log.Println("===============")
 		log.Println("type: " + obj.Name)
-		log.Println("===============")
+		objs = append(objs, obj)
 
 		if totalObjects == closeChannelAt {
 			break
 		}
 	}
 
+	data, err := json.MarshalIndent(objs, "", "  ")
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	err = ioutil.WriteFile("./api.json", data, 0644)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
 	log.Println("\n")
 	log.Printf("Close channel at: %d\n", closeChannelAt)
 	log.Printf("Total objects extracted: %d\n", totalObjects)
+	log.Println("vSphere API definition was generated in ./api.json")
 	log.Println("Done 💩")
 }
 
