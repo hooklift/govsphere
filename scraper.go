@@ -5,9 +5,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	"io/ioutil"
 	"log"
-	"os"
 	"regexp"
-	"runtime"
 	"strings"
 )
 
@@ -50,6 +48,11 @@ type Method struct {
 	Events             []Value      `json:"events"`
 }
 
+type Constant struct {
+	Name        string `json:"name"`
+	Description string `json:"description"`
+}
+
 type Object struct {
 	Name        string      `json:"name"`
 	Extends     string      `json:"extends"`
@@ -60,49 +63,40 @@ type Object struct {
 	Constants   []Constant  `json:"constants"`
 }
 
-type Constant struct {
-	Name        string `json:"name"`
-	Description string `json:"description"`
-}
-
 var objDescRegex *regexp.Regexp
 
 func init() {
-	if os.Getenv("GOMAXPROCS") == "" {
-		runtime.GOMAXPROCS(runtime.NumCPU())
-	}
-
 	/**
 	* HTML is not well formed so we need this regexp to extract
 	* Objects descriptions.
 	 */
 	objDescRegex = regexp.MustCompile(`</h2>((?s).+?)<p class="table-title">`)
-
-	log.SetFlags(0)
-	log.SetOutput(os.Stdout)
-	log.SetPrefix("--> ")
 }
 
-func main() {
+func scrape() {
 	channel := make(chan *Object)
 	closeChannelAt := 0
 	totalObjects := 0
 	var objs []*Object
 
+	//ManagedObjects
 	go func() {
-		closeChannelAt += scrape(mosIndex, channel)
+		closeChannelAt += scrapeIndex(mosIndex, channel)
 	}()
 
+	//DataObjects
 	go func() {
-		closeChannelAt += scrape(doIndex, channel)
+		closeChannelAt += scrapeIndex(doIndex, channel)
 	}()
 
+	//Enums
 	go func() {
-		closeChannelAt += scrape(enumIndex, channel)
+		closeChannelAt += scrapeIndex(enumIndex, channel)
 	}()
 
+	//Faults
 	go func() {
-		closeChannelAt += scrape(faultIndex, channel)
+		closeChannelAt += scrapeIndex(faultIndex, channel)
 	}()
 
 	for obj := range channel {
@@ -133,7 +127,7 @@ func main() {
 	log.Println("Done 💩")
 }
 
-func scrape(url string, channel chan *Object) int {
+func scrapeIndex(url string, channel chan *Object) int {
 	d, err := goquery.NewDocument(url)
 	if err != nil {
 		log.Fatalln(err)
@@ -295,7 +289,7 @@ func scrapeObject(path, name string, channel chan *Object) {
 						}
 
 						v.Description = sel6.Find("td:nth-child(2)").Text()
-						if v.Type != "" {
+						if v.Type != "" && v.Type != "None" {
 							m.ReturnValue = v
 							//log.Printf("%#v\n", v)
 						}
