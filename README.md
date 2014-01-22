@@ -22,6 +22,10 @@ from where the command was executed.
 
 `$ govsphere scrape`
 
+Example output: 
+
+![](https://i.cloudup.com/sEiUVA9a8L.png)
+
 ## Documentation
 TODO
 
