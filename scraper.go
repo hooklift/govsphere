@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"regexp"
+	"runtime"
 	"strings"
 )
 
@@ -15,6 +16,7 @@ var apiBaseUrl = "http://pubs.vmware.com/vsphere-55/topic/com.vmware.wssdk.apire
 var mosIndex = apiBaseUrl + "/index-mo_types.html"
 var doIndex = apiBaseUrl + "/index-do_types.html"
 var enumIndex = apiBaseUrl + "/index-e_types.html"
+var faultIndex = apiBaseUrl + "/index-faults.html"
 
 type Property struct {
 	Name               string `json:"name"`
@@ -66,9 +68,9 @@ type Constant struct {
 var objDescRegex *regexp.Regexp
 
 func init() {
-	// if os.Getenv("GOMAXPROCS") == "" {
-	// 	runtime.GOMAXPROCS(runtime.NumCPU())
-	// }
+	if os.Getenv("GOMAXPROCS") == "" {
+		runtime.GOMAXPROCS(runtime.NumCPU())
+	}
 
 	/**
 	* HTML is not well formed so we need this regexp to extract
@@ -97,6 +99,10 @@ func main() {
 
 	go func() {
 		closeChannelAt += scrape(enumIndex, channel)
+	}()
+
+	go func() {
+		closeChannelAt += scrape(faultIndex, channel)
 	}()
 
 	for obj := range channel {
