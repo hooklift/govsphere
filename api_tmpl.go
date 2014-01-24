@@ -20,28 +20,31 @@ var doTmpl = `
 {{$type := makePublic .Name true}}
 {{if $comment}} {{$comment}} {{end}}
 type {{$type}} struct {
-	{{toGoType .Extends}}
+	{{$extends := toGoType .Extends}}
+	{{$namespace := .Namespace}}
+	{{lookUpNamespace $extends $namespace}}
 	{{range .Properties}}
 		{{$fieldComment := comment .Description}}
+		{{$fieldType := toGoType .Type}}
 		{{if $fieldComment}} {{$fieldComment}} {{end}}
-		{{makePublic .Name true}} {{toGoType .Type}}
+		{{makePublic .Name true}} {{lookUpNamespace $fieldType $namespace}}
 	{{end}}
 }
-`
 
-// {{range .Methods}}
-// {{$mcomment := comment .Description}}
-// {{if $mcomment}} {{$mcomment}} {{end}}
-// func (do *{{$type}}) {{makePublic .Name true}}(
-// {{range .Parameters}} {{.Name}} {{toGoType .Type}}, {{end}}
-// ) ({{if .ReturnValue.Type}}{{toGoType .ReturnValue.Type}},{{end}} error) {
-// 	{{if .ReturnValue.Type}}
-// 		return nil, nil
-// 	{{else}}
-// 		return nil
-// 	{{end}}
-// }
-// {{end}}
+{{range .Methods}}
+{{$mcomment := comment .Description}}
+{{if $mcomment}} {{$mcomment}} {{end}}
+func ({{$namespace}} *{{$type}}) {{makePublic .Name true}}(
+{{range .Parameters}} {{$ptype := toGoType .Type}} {{replaceReservedWords .Name}} {{lookUpNamespace $ptype $namespace}}, {{end}}
+) ({{if .ReturnValue.Type}}{{toGoType .ReturnValue.Type}},{{end}} error) {
+	{{if .ReturnValue.Type}}
+		return nil, nil
+	{{else}}
+		return nil
+	{{end}}
+}
+{{end}}
+`
 
 var enumTmpl = `
 {{$type := .Name}}
@@ -57,8 +60,4 @@ const (
 )
 `
 
-var faultTmpl = `
-type {{.Name}} struct {
-
-}
-`
+var faultTmpl = doTmpl
