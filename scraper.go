@@ -123,7 +123,7 @@ func scrape() {
 	for obj := range channel {
 		totalObjects++
 
-		//log.Println("type: " + obj.Name)
+		log.Println("type: " + obj.Name)
 		objs = append(objs, obj)
 
 		counter.Lock()
@@ -132,6 +132,15 @@ func scrape() {
 		}
 		counter.Unlock()
 	}
+
+	//Sorts data api in order
+	//to keep easily track of
+	//changes through
+	//a diff tool
+	name := func(o1, o2 *Object) bool {
+		return o1.Name < o2.Name
+	}
+	By(name).Sort(objs)
 
 	data, err := json.MarshalIndent(objs, "", "  ")
 	if err != nil {
@@ -260,7 +269,7 @@ func scrapeObject(refFile, name, namespace string, channel chan *Object) {
 				} else if type_.Length() == 2 {
 					//Instead of getting ManagedReferenceObject, it gets
 					//the real type
-					p.Type = "mo." + strings.TrimSpace(type_.Last().Text())
+					p.Type = strings.TrimSpace(type_.Last().Text())
 				} else {
 					//Gets primitive types such as: xsd:string, xsd:long, etc
 					typeSel := sel2.Find("td:nth-child(2)")
