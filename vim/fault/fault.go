@@ -4,997 +4,148 @@
 
 package fault
 
-type InvalidCAMServer struct {
-}
-
-type ActiveDirectoryFault struct {
+type CannotAddHostWithFTVmAsStandalone struct {
 }
 
 type AdminDisabled struct {
 }
 
-type AdminNotDisabled struct {
+type CustomizationPending struct {
 }
 
-type AffinityConfigured struct {
-}
-
-type AgentInstallFailed struct {
-}
-
-type AlreadyBeingManaged struct {
-}
-
-type AlreadyConnected struct {
-}
-
-type AlreadyUpgraded struct {
-}
-
-type ApplicationQuiesceFault struct {
-}
-
-type CannotAccessNetwork struct {
-}
-
-type CannotChangeDrsBehaviorForFtSecondary struct {
-}
-
-type CannotDisableSnapshot struct {
-}
-
-type CAMServerRefusedConnection struct {
-}
-
-type AnswerFileUpdateFailed struct {
-}
-
-type CannotPlaceWithoutPrerequisiteMoves struct {
-}
-
-type CannotAddHostWithFTVmAsStandalone struct {
-}
-
-type CannotAccessLocalSource struct {
-}
-
-type ConflictingConfiguration struct {
-}
-
-type CannotAddHostWithFTVmToNonHACluster struct {
-}
-
-type CannotDecryptPasswords struct {
-}
-
-type CustomizationFault struct {
-}
-
-type CannotDisableDrsOnClustersWithVApps struct {
-}
-
-type CannotMoveVmWithDeltaDisk struct {
-}
-
-type CloneFromSnapshotNotSupported struct {
-}
-
-type DestinationVsanDisabled struct {
-}
-
-type CannotMoveVsanEnabledHost struct {
-}
-
-type DirectoryNotEmpty struct {
-}
-
-type ConcurrentAccess struct {
-}
-
-type CpuIncompatible struct {
-}
-
-type DiskIsNonLocal struct {
-}
-
-type DatastoreNotWritableOnHost struct {
-}
-
-type CpuIncompatible81EDX struct {
-}
-
-type BackupBlobReadFailure struct {
-}
-
-type AuthMinimumAdminPermission struct {
-}
-
-type DuplicateDisks struct {
-}
-
-type CannotAccessVmComponent struct {
-}
-
-type DeviceNotSupported struct {
-}
-
-type DestinationSwitchFull struct {
-}
-
-type CannotAccessVmConfig struct {
-}
-
-type DvsScopeViolated struct {
-}
-
-type DisallowedOperationOnFailoverHost struct {
-}
-
-type CannotChangeVsanClusterUuid struct {
-}
-
-type DeviceUnsupportedForVmVersion struct {
-}
-
-type EVCAdmissionFailedHostDisconnected struct {
-}
-
-type DomainNotFound struct {
-}
-
-type DiskIsLastRemainingNonSSD struct {
-}
-
-type FailToEnableSPBM struct {
-}
-
-type DrsVmotionIncompatibleFault struct {
-}
-
-type DvsFault struct {
-}
-
-type CannotAccessFile struct {
-}
-
-type FaultTolerancePrimaryPowerOnNotAttempted struct {
-}
-
-type EVCAdmissionFailedCPUModelForMode struct {
-}
-
-type DvsOperationBulkFault struct {
-}
-
-type CannotAddHostWithFTVmToDifferentCluster struct {
-}
-
-type CannotDisconnectHostWithFaultToleranceVm struct {
-}
-
-type ExpiredEditionLicense struct {
-}
-
-type FileLocked struct {
-}
-
-type CannotPowerOffVmInCluster struct {
-}
-
-type CannotDeleteFile struct {
-}
-
-type EVCAdmissionFailedCPUVendorUnknown struct {
-}
-
-type BlockedByFirewall struct {
-}
-
-type FaultToleranceNeedsThickDisk struct {
-}
-
-type CannotReconfigureVsanWhenHaEnabled struct {
-}
-
-type GenericDrsFault struct {
-}
-
-type ConflictingDatastoreFound struct {
-}
-
-type CannotMoveVmWithNativeDeltaDisk struct {
-}
-
-type ExtendedFault struct {
-}
-
-type FileAlreadyExists struct {
-}
-
-type HAErrorsAtDest struct {
-}
-
-type ConnectedIso struct {
-}
-
-type CannotAccessVmDisk struct {
-}
-
-type CollectorAddressUnset struct {
-}
-
-type FaultToleranceNotSameBuild struct {
-}
-
-type FileTooLarge struct {
-}
-
-type CannotCreateFile struct {
-}
-
-type GuestOperationsUnavailable struct {
-}
-
-type CpuIncompatible1ECX struct {
-}
-
-type CannotMoveHostWithFaultToleranceVm struct {
-}
-
-type FileFault struct {
-}
-
-type HostConnectFault struct {
-}
-
-type DeviceControllerNotSupported struct {
-}
-
-type ClockSkew struct {
-}
-
-type DeltaDiskFormatNotSupported struct {
-}
-
-type FullStorageVMotionNotSupported struct {
-}
-
-type HotSnapshotMoveNotSupported struct {
-}
-
-type DisallowedChangeByService struct {
-}
-
-type DeviceUnsupportedForVmPlatform struct {
-}
-
-type GuestProcessNotFound struct {
-}
-
-type CpuHotPlugNotSupported struct {
-}
-
-type IncompatibleSetting struct {
-}
-
-type DiskHasPartitions struct {
-}
-
-type DeviceBackingNotSupported struct {
-}
-
-type HostIncompatibleForRecordReplay struct {
-}
-
-type DrsDisabledOnVm struct {
-}
-
-type DatacenterMismatch struct {
-}
-
-type InsufficientHostCapacityFault struct {
-}
-
-type DisableAdminNotSupported struct {
-}
-
-type ImportHostAddFailure struct {
-}
-
-type InsufficientStandbyResource struct {
-}
-
-type DiskIsUSB struct {
-}
-
-type IncorrectHostInformation struct {
-}
-
-type DeviceNotFound struct {
-}
-
-type DvsNotAuthorized struct {
-}
-
-type InvalidCAMCertificate struct {
-}
-
-type EVCAdmissionFailedCPUVendor struct {
-}
-
-type InsufficientHostMemoryCapacityFault struct {
-}
-
-type DuplicateName struct {
-}
-
-type InvalidDatastorePath struct {
-}
-
-type DisallowedMigrationDeviceAttached struct {
-}
-
-type ExpiredFeatureLicense struct {
-}
-
-type EightHostLimitViolated struct {
-}
-
-type InvalidEvent struct {
-}
-
-type InsufficientVFlashResourcesFault struct {
-}
-
-type DiskTooSmall struct {
-}
-
-type FaultToleranceNotLicensed struct {
-}
-
-type CannotAccessVmDevice struct {
-}
-
-type EVCAdmissionFailedHostSoftware struct {
-}
-
-type InvalidClientCertificate struct {
-}
-
-type ImportOperationBulkFault struct {
-}
-
-type DvsApplyOperationFault struct {
-}
-
-type FileBackedPortNotSupported struct {
-}
-
-type CannotChangeVsanNodeUuid struct {
-}
-
-type EVCAdmissionFailed struct {
-}
-
-type InvalidDeviceBacking struct {
-}
-
-type FailToLockFaultToleranceVMs struct {
-}
-
-type IndependentDiskVMotionNotSupported struct {
-}
-
-type EVCAdmissionFailedCPUModel struct {
-}
-
-type InvalidNetworkInType struct {
+type BackupBlobWriteFailure struct {
 }
 
 type CannotMoveFaultToleranceVm struct {
 }
 
-type InvalidFormat struct {
-}
-
-type EVCAdmissionFailedHostSoftwareForMode struct {
-}
-
-type FtIssuesOnHost struct {
-}
-
-type FaultToleranceVmNotDasProtected struct {
-}
-
-type ExpiredAddonLicense struct {
-}
-
-type InsufficientMemoryResourcesFault struct {
-}
-
-type InvalidPropertyValue struct {
-}
-
-type CannotUseNetwork struct {
-}
-
-type FileNameTooLong struct {
-}
-
-type InvalidIpmiMacAddress struct {
-}
-
-type GuestPermissionDenied struct {
-}
-
-type FaultToleranceAntiAffinityViolated struct {
-}
-
-type InUseFeatureManipulationDisallowed struct {
-}
-
-type FaultToleranceCpuIncompatible struct {
-}
-
-type IORMNotSupportedHostOnDatastore struct {
-}
-
-type InvalidOperationOnSecondaryVm struct {
-}
-
-type HostIncompatibleForFaultTolerance struct {
-}
-
-type InvalidCollectorVersion struct {
-}
-
-type FcoeFault struct {
-}
-
-type GenericVmConfigFault struct {
-}
-
-type IscsiFaultInvalidVnic struct {
-}
-
-type NetworkInaccessible struct {
-}
-
-type OvfConsumerCommunicationError struct {
-}
-
-type OvfUnsupportedDiskProvisioning struct {
-}
-
-type SnapshotFault struct {
-}
-
-type HostInDomain struct {
-}
-
-type UnsupportedDatastore struct {
-}
-
-type VspanPromiscuousPortNotSupported struct {
-}
-
-type InvalidAffinitySettingFault struct {
-}
-
-type IscsiFaultVnicNotBound struct {
-}
-
-type NoCompatibleHostWithAccessToDevice struct {
-}
-
-type OvfDiskMappingNotFound struct {
-}
-
-type FeatureRequirementsNotMet struct {
-}
-
-type IDEDiskNotSupported struct {
-}
-
-type CannotChangeHaSettingsForFtSecondary struct {
-}
-
-type OvfXmlFormat struct {
-}
-
-type DasConfigFault struct {
-}
-
-type SoftRuleVioCorrectionImpact struct {
-}
-
-type VAppOperationInProgress struct {
-}
-
-type IscsiFaultVnicIsLastPath struct {
-}
-
-type NoCompatibleHost struct {
-}
-
-type OvfCpuCompatibilityCheckNotSupported struct {
-}
-
-type OvfWrongNamespace struct {
-}
-
-type FileNotFound struct {
-}
-
-type SoftRuleVioCorrectionDisallowed struct {
-}
-
-type InvalidArgument struct {
-}
-
-type InvalidPowerState struct {
-}
-
-type VAppNotRunning struct {
-}
-
-type MissingPowerOffConfiguration struct {
-}
-
-type IscsiFaultVnicNotFound struct {
-}
-
-type InvalidController struct {
-}
-
-type NoVirtualNic struct {
-}
-
-type NoCompatibleSoftAffinityHost struct {
-}
-
-type LicenseExpired struct {
-}
-
-type OvfPropertyQualifierDuplicate struct {
-}
-
-type OvfDiskOrderConstraint struct {
-}
-
-type PatchAlreadyInstalled struct {
-}
-
-type ResourceInUse struct {
-}
-
-type NoHost struct {
-}
-
-type SsdDiskNotAvailable struct {
-}
-
-type TooManyConcurrentNativeClones struct {
-}
-
-type OvfExport struct {
-}
-
-type VMotionProtocolIncompatible struct {
-}
-
-type VAppPropertyFault struct {
-}
-
-type InvalidDeviceOperation struct {
-}
-
-type InvalidGuestLogin struct {
-}
-
-type PatchMissingDependencies struct {
-}
-
-type InsufficientAgentVmsDeployed struct {
-}
-
-type MethodAlreadyDisabledFault struct {
-}
-
-type StorageDrsCannotMoveManuallyPlacedSwapFile struct {
-}
-
-type NotAuthenticated struct {
-}
-
-type VirtualEthernetCardNotSupported struct {
-}
-
-type InvalidState struct {
-}
-
-type EVCAdmissionFailedVmActive struct {
-}
-
-type OvfInvalidValueReference struct {
-}
-
-type NamespaceWriteProtected struct {
-}
-
-type CpuCompatibilityUnknown struct {
-}
-
-type InsufficientDisks struct {
-}
-
-type CustomizationPending struct {
-}
-
-type RDMPointsToInaccessibleDisk struct {
-}
-
-type OutOfBounds struct {
-}
-
-type InvalidVmConfig struct {
-}
-
-type InvalidSnapshotFormat struct {
-}
-
-type SwapDatastoreUnset struct {
-}
-
-type InvalidDasConfigArgument struct {
-}
-
-type OvfUnknownDeviceBacking struct {
-}
-
-type VmfsMountFault struct {
-}
-
-type NamespaceLimitReached struct {
-}
-
-type LicenseKeyEntityMismatch struct {
-}
-
-type NasConnectionLimitReached struct {
-}
-
-type SecondaryVmNotRegistered struct {
-}
-
-type HostInventoryFull struct {
-}
-
-type NoHostSuitableForFtSecondary struct {
-}
-
-type OperationNotSupportedByGuest struct {
-}
-
-type OvfConnectedDevice struct {
-}
-
-type InvalidLocale struct {
-}
-
-type UncommittedUndoableDisk struct {
-}
-
-type OvfUnknownDevice struct {
-}
-
-type OvfExportFailed struct {
-}
-
-type OvfUnsupportedAttribute struct {
-}
-
-type VsanFault struct {
-}
-
-type PatchNotApplicable struct {
-}
-
-type MismatchedNetworkPolicies struct {
-}
-
-type SecondaryVmAlreadyRegistered struct {
-}
-
-type SharedBusControllerNotSupported struct {
-}
-
-type InsufficientCpuResourcesFault struct {
-}
-
-type StorageDrsCannotMoveManuallyPlacedVm struct {
-}
-
-type TooManySnapshotLevels struct {
-}
-
-type NotSupportedHostForVFlash struct {
-}
-
-type InvalidLicense struct {
-}
-
-type UncustomizableGuest struct {
-}
-
-type VsanDiskFault struct {
-}
-
-type OvfNoSpaceOnController struct {
-}
-
-type VirtualHardwareCompatibilityIssue struct {
-}
-
-type InvalidType struct {
-}
-
-type InsufficientPerCpuCapacity struct {
-}
-
-type VspanPortConflict struct {
-}
-
-type MismatchedBundle struct {
-}
-
-type ReplicationFault struct {
-}
-
-type HostAccessRestrictedToManagementServer struct {
-}
-
-type ToolsAutoUpgradeNotSupported struct {
-}
-
-type IscsiFaultPnicInUse struct {
-}
-
-type NotSupportedHost struct {
-}
-
-type NasConfigFault struct {
-}
-
-type NetworksMayNotBeTheSame struct {
-}
-
-type VMotionInterfaceIssue struct {
-}
-
-type OvfNoHostNic struct {
-}
-
-type FaultToleranceCannotEditMem struct {
-}
-
-type OvfAttribute struct {
-}
-
-type HostNotConnected struct {
-}
-
-type OvfConsumerFault struct {
-}
-
-type ReplicationDiskConfigFault struct {
-}
-
-type InsufficientStandbyCpuResource struct {
-}
-
-type InvalidLogin struct {
-}
-
-type SecurityError struct {
-}
-
-type ToolsAlreadyUpgraded struct {
-}
-
-type OvfUnsupportedElement struct {
-}
-
-type IscsiFaultVnicHasActivePaths struct {
-}
-
-type UnconfiguredPropertyValue struct {
-}
-
-type MismatchedVMotionNetworkNames struct {
-}
-
-type VMotionAcrossNetworkNotSupported struct {
-}
-
-type SnapshotIncompatibleDeviceInVm struct {
-}
-
-type LicenseEntityNotFound struct {
-}
-
-type NoActiveHostInCluster struct {
-}
-
-type VspanDestPortConflict struct {
-}
-
-type InaccessibleDatastore struct {
-}
-
-type NoGuestHeartbeat struct {
-}
-
-type UnSupportedDatastoreForVFlash struct {
-}
-
-type OvfConsumerPowerOnFault struct {
-}
-
-type DVPortNotSupported struct {
-}
-
-type InvalidPrivilege struct {
-}
-
-type OvfUnsupportedPackage struct {
-}
-
-type OvfElementInvalidValue struct {
-}
-
-type VspanSameSessionPortConflict struct {
-}
-
-type NotSupportedHostForVsan struct {
-}
-
-type HostNotReachable struct {
-}
-
-type MissingPowerOnConfiguration struct {
-}
-
-type SnapshotMoveFromNonHomeNotSupported struct {
-}
-
-type PatchMetadataNotFound struct {
-}
-
-type OvfNoSupportedHardwareFamily struct {
-}
-
-type NoVmInVApp struct {
-}
-
-type InsufficientResourcesFault struct {
-}
-
-type UnsupportedVimApiVersion struct {
-}
-
-type StorageDrsCannotMoveIndependentDisk struct {
-}
-
-type ReplicationIncompatibleWithFT struct {
-}
-
-type InvalidName struct {
-}
-
-type IscsiFaultVnicAlreadyBound struct {
-}
-
-type OvfPropertyQualifierIgnored struct {
-}
-
-type WakeOnLanNotSupportedByVmotionNIC struct {
-}
-
-type ToolsImageCopyFailed struct {
-}
-
-type MissingBmcSupport struct {
-}
-
-type VirtualDiskModeNotSupported struct {
-}
-
-type NicSettingMismatch struct {
-}
-
-type ResourceNotAvailable struct {
-}
-
-type VmotionInterfaceNotEnabled struct {
-}
-
-type NotSupportedHostInCluster struct {
-}
-
-type OvfConsumerInvalidSection struct {
-}
-
-type TooManyConsecutiveOverrides struct {
+type OvfConsumerUndefinedPrefix struct {
 }
 
 type DisallowedDiskModeChange struct {
 }
 
-type LogBundlingFailed struct {
+type CannotMoveVsanEnabledHost struct {
+}
+
+type OvfConsumerCallbackFault struct {
+}
+
+type LicenseDowngradeDisallowed struct {
+}
+
+type NotEnoughLicenses struct {
+}
+
+type DVPortNotSupported struct {
+}
+
+type AnswerFileUpdateFailed struct {
+}
+
+type CannotAddHostWithFTVmToNonHACluster struct {
+}
+
+type CannotPowerOffVmInCluster struct {
+}
+
+type HostConnectFault struct {
+}
+
+type NoPermissionOnAD struct {
+}
+
+type DisableAdminNotSupported struct {
+}
+
+type NotSupportedHostForVsan struct {
+}
+
+type InvalidDasConfigArgument struct {
+}
+
+type CannotReconfigureVsanWhenHaEnabled struct {
+}
+
+type InvalidIpmiMacAddress struct {
+}
+
+type OvfConsumerFault struct {
+}
+
+type OvfConnectedDeviceIso struct {
+}
+
+type MemorySnapshotOnIndependentDisk struct {
+}
+
+type MissingNetworkIpConfig struct {
+}
+
+type InvalidHostState struct {
+}
+
+type CannotUseNetwork struct {
+}
+
+type OvfHardwareExport struct {
+}
+
+type DrsVmotionIncompatibleFault struct {
+}
+
+type HostCommunication struct {
+}
+
+type DvsOperationBulkFault struct {
+}
+
+type IscsiFaultVnicInUse struct {
+}
+
+type MemorySizeNotSupported struct {
+}
+
+type InsufficientVFlashResourcesFault struct {
+}
+
+type IORMNotSupportedHostOnDatastore struct {
+}
+
+type IscsiFaultVnicNotFound struct {
+}
+
+type CannotAccessLocalSource struct {
+}
+
+type DuplicateVsanNetworkInterface struct {
+}
+
+type NamespaceWriteProtected struct {
+}
+
+type MultipleCertificatesVerifyFault struct {
+}
+
+type FaultToleranceVmNotDasProtected struct {
+}
+
+type CpuCompatibilityUnknown struct {
+}
+
+type CpuIncompatible struct {
+}
+
+type OvfDuplicatedPropertyIdImport struct {
+}
+
+type NotSupportedHostInCluster struct {
 }
 
 type OvfProperty struct {
 }
 
-type VmPowerOnDisabled struct {
-}
-
-type OvfUnsupportedElementValue struct {
-}
-
-type NoPeerHostFound struct {
-}
-
-type GuestComponentsOutOfDate struct {
-}
-
-type ReplicationInvalidOptions struct {
-}
-
-type SnapshotLocked struct {
-}
-
-type InaccessibleVFlashSource struct {
-}
-
-type InvalidDrsBehaviorForFtVm struct {
-}
-
-type ToolsImageNotAvailable struct {
-}
-
-type UnsupportedGuest struct {
-}
-
-type OvfImport struct {
-}
-
-type MemoryHotPlugNotSupported struct {
-}
-
-type InvalidProfileReferenceHost struct {
-}
-
-type VMotionLinkCapacityLow struct {
-}
-
-type ProfileUpdateFailed struct {
-}
-
-type WakeOnLanNotSupported struct {
-}
-
-type NoPermissionOnHost struct {
-}
-
-type StorageDrsDatacentersCannotShareDatastore struct {
-}
-
-type InvalidDeviceSpec struct {
-}
-
-type MissingWindowsCustResources struct {
+type CannotChangeVsanClusterUuid struct {
 }
 
 type EVCAdmissionFailedCPUFeaturesForMode struct {
@@ -1003,905 +154,1754 @@ type EVCAdmissionFailedCPUFeaturesForMode struct {
 type OvfInvalidPackage struct {
 }
 
-type MaintenanceModeFileMove struct {
+type OvfConnectedDevice struct {
 }
 
-type VmFaultToleranceConfigIssue struct {
-}
-
-type BackupBlobWriteFailure struct {
-}
-
-type NumVirtualCoresPerSocketNotSupported struct {
-}
-
-type RawDiskNotSupported struct {
-}
-
-type IncompatibleDefaultDevice struct {
-}
-
-type NoPermission struct {
-}
-
-type InvalidHostConnectionState struct {
-}
-
-type InvalidProperty struct {
-}
-
-type InvalidIpfixConfig struct {
-}
-
-type IscsiFaultVnicHasNoUplinks struct {
-}
-
-type CannotModifyConfigCpuRequirements struct {
-}
-
-type DiskMoveTypeNotSupported struct {
-}
-
-type DuplicateVsanNetworkInterface struct {
-}
-
-type VmFaultToleranceConfigIssueWrapper struct {
-}
-
-type VmFaultToleranceInvalidFileBacking struct {
-}
-
-type SSLDisabledFault struct {
-}
-
-type OvfInternalError struct {
-}
-
-type NoConnectedDatastore struct {
-}
-
-type OvfPropertyType struct {
-}
-
-type GuestAuthenticationChallenge struct {
-}
-
-type StorageDrsDisabledOnVm struct {
-}
-
-type DatabaseError struct {
-}
-
-type StorageDrsIolbDisabledInternally struct {
-}
-
-type VAppTaskInProgress struct {
-}
-
-type PatchBinariesNotFound struct {
-}
-
-type NoPermissionOnAD struct {
-}
-
-type LargeRDMConversionNotSupported struct {
-}
-
-type OvfImportFailed struct {
-}
-
-type QuestionPending struct {
-}
-
-type InvalidDiskFormat struct {
-}
-
-type FcoeFaultPnicHasNoPortSet struct {
-}
-
-type QuiesceDatastoreIOForHAFailed struct {
-}
-
-type OvfDuplicatedElementBoundary struct {
-}
-
-type MethodDisabled struct {
-}
-
-type ManagedObjectNotFound struct {
-}
-
-type InvalidBmcRole struct {
-}
-
-type ReplicationNotSupportedOnHost struct {
-}
-
-type VmFaultToleranceTooManyVMsOnHost struct {
-}
-
-type VspanPortMoveFault struct {
-}
-
-type OvfInvalidVmName struct {
-}
-
-type OvfMappedOsId struct {
-}
-
-type NoLicenseServerConfigured struct {
-}
-
-type MissingController struct {
-}
-
-type OvfInvalidValueConfiguration struct {
-}
-
-type OvfUnsupportedDeviceBackingOption struct {
-}
-
-type SwapDatastoreNotWritableOnHost struct {
-}
-
-type InvalidHostName struct {
-}
-
-type FileNotWritable struct {
-}
-
-type InvalidNasCredentials struct {
-}
-
-type NoSubjectName struct {
-}
-
-type OvfConstraint struct {
-}
-
-type RDMNotSupportedOnDatastore struct {
-}
-
-type OvfPropertyExport struct {
-}
-
-type HostCommunication struct {
-}
-
-type StorageVMotionNotSupported struct {
-}
-
-type DeviceHotPlugNotSupported struct {
-}
-
-type UnrecognizedHost struct {
-}
-
-type VirtualHardwareVersionNotSupported struct {
-}
-
-type ToolsImageSignatureCheckFailed struct {
-}
-
-type NotEnoughCpus struct {
-}
-
-type VMotionLinkDown struct {
-}
-
-type InsufficientHostCpuCapacityFault struct {
-}
-
-type HostPowerOpFailed struct {
-}
-
-type MemorySnapshotOnIndependentDisk struct {
-}
-
-type IpHostnameGeneratorError struct {
-}
-
-type NotEnoughLicenses struct {
-}
-
-type NotAFile struct {
-}
-
-type ReadHostResourcePoolTreeFailed struct {
-}
-
-type LicenseRestricted struct {
-}
-
-type MemorySizeNotSupported struct {
-}
-
-type SwapPlacementOverrideNotSupported struct {
-}
-
-type ReadOnlyDisksWithLegacyDestination struct {
-}
-
-type NetworkCopyFault struct {
-}
-
-type NotSupportedHostInDvs struct {
-}
-
-type SwitchIpUnset struct {
-}
-
-type OvfInvalidValueFormatMalformed struct {
-}
-
-type PatchSuperseded struct {
-}
-
-type RDMNotPreserved struct {
-}
-
-type VmHostAffinityRuleViolation struct {
-}
-
-type SnapshotCopyNotSupported struct {
-}
-
-type OvfFault struct {
-}
-
-type VMINotSupported struct {
-}
-
-type StorageDrsCannotMoveSharedDisk struct {
-}
-
-type VmfsAmbiguousMount struct {
-}
-
-type MethodFault struct {
-}
-
-type InvalidDasRestartPriorityForFtVm struct {
-}
-
-type MountError struct {
-}
-
-type OvfMissingElementNormalBoundary struct {
-}
-
-type InvalidPropertyType struct {
-}
-
-type NotImplemented struct {
-}
-
-type OvfUnsupportedType struct {
-}
-
-type Timedout struct {
-}
-
-type OvfConsumerValidationFault struct {
-}
-
-type ReplicationConfigFault struct {
-}
-
-type VmWwnConflict struct {
-}
-
-type IscsiFaultVnicHasWrongUplink struct {
-}
-
-type NotSupportedDeviceForFT struct {
-}
-
-type NumVirtualCpusIncompatible struct {
-}
-
-type RemoteDeviceNotSupported struct {
-}
-
-type SnapshotNoChange struct {
-}
-
-type VMOnVirtualIntranet struct {
-}
-
-type TooManyGuestLogons struct {
-}
-
-type VMotionNotSupported struct {
-}
-
-type ReplicationVmConfigFault struct {
-}
-
-type StorageDrsCannotMoveDiskInMultiWriterMode struct {
-}
-
-type NoAvailableIp struct {
-}
-
-type OvfConsumerCallbackFault struct {
-}
-
-type PowerOnFtSecondaryFailed struct {
-}
-
-type OvfConnectedDeviceFloppy struct {
-}
-
-type PhysCompatRDMNotSupported struct {
-}
-
-type TooManyNativeClonesOnFile struct {
-}
-
-type NoPermissionOnNasVolume struct {
-}
-
-type OvfToXmlUnsupportedElement struct {
-}
-
-type MemorySizeNotSupportedByDatastore struct {
-}
-
-type StorageDrsUnableToMoveFiles struct {
-}
-
-type OvfConsumerUndeclaredSection struct {
-}
-
-type RestrictedVersion struct {
-}
-
-type ReplicationVmFault struct {
-}
-
-type TooManyNativeCloneLevels struct {
-}
-
-type RollbackFailure struct {
-}
-
-type OvfUnsupportedDeviceExport struct {
-}
-
-type VirtualDiskBlocksNotFullyProvisioned struct {
-}
-
-type ToolsInstallationInProgress struct {
-}
-
-type StorageDrsCannotMoveTemplate struct {
-}
-
-type StorageDrsCannotMoveVmWithMountedCDROM struct {
-}
-
-type PatchIntegrityError struct {
-}
-
-type VimFault struct {
-}
-
-type NotADirectory struct {
-}
-
-type NotEnoughLogicalCpus struct {
-}
-
-type OvfInvalidValue struct {
-}
-
-type ToolsUnavailable struct {
-}
-
-type OvfUnsupportedAttributeValue struct {
-}
-
-type VsanClusterUuidMismatch struct {
-}
-
-type VMOnConflictDVPort struct {
-}
-
-type OvfUnsupportedSection struct {
-}
-
-type RuntimeFault struct {
-}
-
-type VMotionNotConfigured struct {
-}
-
-type UnusedVirtualDiskBlocksNotScrubbed struct {
-}
-
-type VramLimitLicense struct {
-}
-
-type SnapshotDisabled struct {
-}
-
-type TooManyDisksOnLegacyHost struct {
-}
-
-type TaskInProgress struct {
-}
-
-type OvfMissingElement struct {
-}
-
-type RDMConversionNotSupported struct {
-}
-
-type VmConfigIncompatibleForFaultTolerance struct {
-}
-
-type OvfMissingAttribute struct {
-}
-
-type SSPIChallenge struct {
-}
-
-type TooManyDevices struct {
-}
-
-type InvalidBundle struct {
-}
-
-type ShrinkDiskFault struct {
-}
-
-type NasVolumeNotMounted struct {
-}
-
-type VMotionNotLicensed struct {
-}
-
-type OvfInvalidValueEmpty struct {
-}
-
-type OvfSystemFault struct {
-}
-
-type TooManyHosts struct {
-}
-
-type IscsiFaultVnicInUse struct {
-}
-
-type WillModifyConfigCpuRequirements struct {
-}
-
-type SnapshotMoveNotSupported struct {
-}
-
-type LinuxVolumeNotClean struct {
-}
-
-type VmAlreadyExistsInDatacenter struct {
-}
-
-type VmConfigFault struct {
-}
-
-type RecordReplayDisabled struct {
-}
-
-type UnsharedSwapVMotionNotSupported struct {
-}
-
-type InvalidResourcePoolStructureFault struct {
-}
-
-type UserNotFound struct {
-}
-
-type StorageVmotionIncompatible struct {
-}
-
-type VmValidateMaxDevice struct {
-}
-
-type RebootRequired struct {
-}
-
-type VmMonitorIncompatibleForFaultTolerance struct {
-}
-
-type RDMNotSupported struct {
-}
-
-type VspanPortgroupPromiscChangeFault struct {
-}
-
-type OvfConnectedDeviceIso struct {
-}
-
-type VmToolsUpgradeFault struct {
-}
-
-type VFlashModuleVersionIncompatible struct {
-}
-
-type NoCompatibleHardAffinityHost struct {
-}
-
-type InvalidDatastoreState struct {
-}
-
-type LargeRDMNotSupportedOnDatastore struct {
-}
-
-type NonVmwareOuiMacNotSupportedHost struct {
-}
-
-type LicenseDowngradeDisallowed struct {
-}
-
-type IncorrectFileType struct {
-}
-
-type InvalidIpmiLoginInfo struct {
-}
-
-type VmFaultToleranceIssue struct {
-}
-
-type InvalidNetworkResource struct {
-}
-
-type SystemError struct {
-}
-
-type UnsupportedVmxLocation struct {
-}
-
-type WillResetSnapshotDirectory struct {
-}
-
-type NoVcManagedIpConfigured struct {
-}
-
-type UnexpectedCustomizationFault struct {
-}
-
-type RuleViolation struct {
-}
-
-type MissingIpPool struct {
-}
-
-type VspanPortPromiscChangeFault struct {
-}
-
-type SwitchNotInUpgradeMode struct {
-}
-
-type VolumeEditorError struct {
-}
-
-type OvfUnsupportedDeviceBackingInfo struct {
-}
-
-type VmFaultToleranceOpIssuesList struct {
-}
-
-type LimitExceeded struct {
-}
-
-type OvfCpuCompatibility struct {
-}
-
-type MissingNetworkIpConfig struct {
-}
-
-type InsufficientFailoverResourcesFault struct {
-}
-
-type InvalidDatastore struct {
-}
-
-type NoDiskFound struct {
-}
-
-type WillLoseHAProtection struct {
-}
-
-type MigrationFeatureNotSupported struct {
-}
-
-type MissingLinuxCustResources struct {
-}
-
-type FilesystemQuiesceFault struct {
-}
-
-type OvfDuplicatedPropertyIdExport struct {
-}
-
-type VmMetadataManagerFault struct {
-}
-
-type NotSupportedHostInHACluster struct {
-}
-
-type InsufficientStorageSpace struct {
-}
-
-type NonPersistentDisksNotSupported struct {
-}
-
-type NotSupported struct {
-}
-
-type OvfPropertyQualifier struct {
-}
-
-type DiskNotSupported struct {
-}
-
-type LegacyNetworkInterfaceInUse struct {
-}
-
-type LicenseAssignmentFailed struct {
-}
-
-type NoClientCertificate struct {
+type InvalidType struct {
 }
 
 type NamespaceFull struct {
 }
 
-type LicenseServerUnavailable struct {
-}
-
-type SuspendedRelocateNotSupported struct {
-}
-
-type NotUserConfigurableProperty struct {
-}
-
-type SnapshotCloneNotSupported struct {
-}
-
-type NoGateway struct {
-}
-
-type PatchInstallFailed struct {
-}
-
-type InventoryHasStandardAloneHosts struct {
-}
-
-type OvfHostValueNotParsed struct {
-}
-
-type OvfWrongElement struct {
-}
-
-type NoDisksToCustomize struct {
-}
-
-type OvfPropertyNetwork struct {
-}
-
-type HostConfigFault struct {
-}
-
-type MultipleCertificatesVerifyFault struct {
-}
-
-type OvfHostResourceConstraint struct {
-}
-
-type MigrationFault struct {
-}
-
-type NumVirtualCpusExceedsLimit struct {
-}
-
-type OperationDisallowedOnHost struct {
-}
-
-type RequestCanceled struct {
-}
-
-type OvfMissingHardware struct {
-}
-
-type VmfsAlreadyMounted struct {
-}
-
-type HostConfigFailed struct {
-}
-
-type NonHomeRDMVMotionNotSupported struct {
-}
-
-type OvfPropertyNetworkExport struct {
-}
-
-type UnexpectedFault struct {
-}
-
-type NoDiskSpace struct {
-}
-
-type OvfNetworkMappingNotSupported struct {
-}
-
-type OvfElement struct {
-}
-
-type StorageDrsCannotMoveVmInUserFolder struct {
-}
-
-type NonADUserRequired struct {
-}
-
-type GuestOperationsFault struct {
-}
-
-type SnapshotRevertIssue struct {
-}
-
-type NasSessionCredentialConflict struct {
-}
-
-type IncompatibleHostForFtSecondary struct {
-}
-
-type NumVirtualCpusNotSupported struct {
-}
-
-type OvfConsumerUndefinedPrefix struct {
-}
-
-type OvfDuplicateElement struct {
-}
-
-type SSLVerifyFault struct {
-}
-
-type OperationDisabledByGuest struct {
-}
-
-type PowerOnFtSecondaryTimedout struct {
-}
-
-type InvalidIndexArgument struct {
-}
-
-type OvfPropertyValue struct {
-}
-
-type ToolsUpgradeCancelled struct {
-}
-
-type RemoveFailed struct {
-}
-
-type NoCompatibleDatastore struct {
-}
-
-type OvfUnexpectedElement struct {
-}
-
-type OvfDuplicatedPropertyIdImport struct {
-}
-
-type OvfHardwareExport struct {
-}
-
-type InvalidHostState struct {
-}
-
-type InsufficientStandbyMemoryResource struct {
-}
-
-type VspanPortgroupTypeChangeFault struct {
-}
-
-type IscsiFault struct {
-}
-
-type PatchMetadataInvalid struct {
-}
-
-type PatchMetadataCorrupted struct {
-}
-
-type VAppConfigFault struct {
-}
-
-type VFlashModuleNotSupported struct {
-}
-
-type OvfUnsupportedSubType struct {
-}
-
-type InvalidEditionLicense struct {
-}
-
-type SecondaryVmAlreadyEnabled struct {
-}
-
-type ThirdPartyLicenseAssignmentFailed struct {
-}
-
-type StorageDrsCannotMoveVmWithNoFilesInLayout struct {
+type InvalidClientCertificate struct {
 }
 
 type MigrationNotReady struct {
 }
 
-type OvfUnableToExportDisk struct {
+type DiskNotSupported struct {
 }
 
-type MigrationDisabled struct {
+type DeviceNotFound struct {
 }
 
-type PlatformConfigFault struct {
+type MemoryHotPlugNotSupported struct {
 }
 
-type MethodNotFound struct {
+type NotSupportedDeviceForFT struct {
 }
 
-type MksConnectionLimitReached struct {
+type LicenseKeyEntityMismatch struct {
 }
 
-type NetworkDisruptedAndConfigRolledBack struct {
+type NoConnectedDatastore struct {
 }
 
-type StorageDrsCannotMoveFTVm struct {
+type ImportHostAddFailure struct {
 }
 
-type VmLimitLicense struct {
+type OvfMissingElementNormalBoundary struct {
 }
 
-type MemorySizeNotRecommended struct {
+type DatabaseError struct {
 }
 
-type SnapshotMoveToNonHomeNotSupported struct {
+type InvalidNetworkInType struct {
 }
 
-type InvalidFolder struct {
+type NicSettingMismatch struct {
 }
 
-type VmConfigIncompatibleForRecordReplay struct {
+type InvalidDatastorePath struct {
 }
 
-type WipeDiskFault struct {
+type ConnectedIso struct {
 }
 
-type NotFound struct {
+type LicenseRestricted struct {
 }
 
-type SecondaryVmAlreadyDisabled struct {
+type InvalidPrivilege struct {
+}
+
+type InvalidState struct {
+}
+
+type DomainNotFound struct {
+}
+
+type AlreadyBeingManaged struct {
+}
+
+type InvalidArgument struct {
+}
+
+type OvfUnsupportedAttribute struct {
+}
+
+type InsufficientAgentVmsDeployed struct {
+}
+
+type MethodDisabled struct {
+}
+
+type FullStorageVMotionNotSupported struct {
+}
+
+type FaultToleranceNotSameBuild struct {
+}
+
+type BackupBlobReadFailure struct {
+}
+
+type HostInventoryFull struct {
+}
+
+type OvfDuplicatedElementBoundary struct {
+}
+
+type MissingIpPool struct {
+}
+
+type NoLicenseServerConfigured struct {
+}
+
+type NoCompatibleSoftAffinityHost struct {
+}
+
+type AuthMinimumAdminPermission struct {
+}
+
+type HostNotConnected struct {
+}
+
+type CannotDecryptPasswords struct {
+}
+
+type CAMServerRefusedConnection struct {
+}
+
+type FaultToleranceNeedsThickDisk struct {
+}
+
+type IncompatibleSetting struct {
+}
+
+type DeviceBackingNotSupported struct {
+}
+
+type OvfDiskMappingNotFound struct {
+}
+
+type DuplicateName struct {
+}
+
+type OvfMissingAttribute struct {
+}
+
+type CannotDisableDrsOnClustersWithVApps struct {
+}
+
+type DiskIsLastRemainingNonSSD struct {
+}
+
+type StorageDrsCannotMoveDiskInMultiWriterMode struct {
 }
 
 type LicenseSourceUnavailable struct {
 }
 
-type InvalidRequest struct {
+type OvfPropertyNetwork struct {
+}
+
+type FcoeFaultPnicHasNoPortSet struct {
+}
+
+type NasConnectionLimitReached struct {
+}
+
+type NoVmInVApp struct {
+}
+
+type InvalidDiskFormat struct {
+}
+
+type IscsiFaultVnicHasNoUplinks struct {
+}
+
+type FileNameTooLong struct {
+}
+
+type NotImplemented struct {
+}
+
+type InsufficientStandbyCpuResource struct {
+}
+
+type InvalidResourcePoolStructureFault struct {
+}
+
+type OvfPropertyValue struct {
+}
+
+type OvfAttribute struct {
+}
+
+type MismatchedNetworkPolicies struct {
+}
+
+type NoClientCertificate struct {
+}
+
+type InvalidBmcRole struct {
+}
+
+type ExpiredEditionLicense struct {
+}
+
+type ConcurrentAccess struct {
+}
+
+type InvalidName struct {
+}
+
+type DatastoreNotWritableOnHost struct {
+}
+
+type IscsiFaultVnicNotBound struct {
+}
+
+type CloneFromSnapshotNotSupported struct {
+}
+
+type OvfHostValueNotParsed struct {
+}
+
+type GenericVmConfigFault struct {
+}
+
+type NoCompatibleHostWithAccessToDevice struct {
+}
+
+type IscsiFaultVnicHasActivePaths struct {
+}
+
+type InaccessibleDatastore struct {
+}
+
+type InsufficientStandbyResource struct {
+}
+
+type GuestOperationsUnavailable struct {
+}
+
+type InvalidLocale struct {
+}
+
+type ManagedObjectNotFound struct {
+}
+
+type GuestAuthenticationChallenge struct {
+}
+
+type NumVirtualCpusNotSupported struct {
+}
+
+type MissingPowerOnConfiguration struct {
+}
+
+type HostIncompatibleForRecordReplay struct {
+}
+
+type AgentInstallFailed struct {
+}
+
+type HostConfigFailed struct {
+}
+
+type InvalidProfileReferenceHost struct {
+}
+
+type InvalidController struct {
+}
+
+type HostNotReachable struct {
+}
+
+type DasConfigFault struct {
+}
+
+type MethodFault struct {
+}
+
+type FileNotWritable struct {
+}
+
+type InvalidVmConfig struct {
+}
+
+type InvalidHostName struct {
+}
+
+type HotSnapshotMoveNotSupported struct {
+}
+
+type GuestProcessNotFound struct {
+}
+
+type InvalidEvent struct {
+}
+
+type InvalidLogin struct {
+}
+
+type InvalidPropertyValue struct {
+}
+
+type PowerOnFtSecondaryTimedout struct {
+}
+
+type FaultToleranceCannotEditMem struct {
+}
+
+type ExtendedFault struct {
+}
+
+type NetworksMayNotBeTheSame struct {
+}
+
+type PatchSuperseded struct {
+}
+
+type MaintenanceModeFileMove struct {
+}
+
+type ReplicationNotSupportedOnHost struct {
+}
+
+type DiskIsUSB struct {
+}
+
+type NoHostSuitableForFtSecondary struct {
+}
+
+type CpuIncompatible81EDX struct {
+}
+
+type InvalidOperationOnSecondaryVm struct {
 }
 
 type AlreadyExists struct {
 }
 
-type OvfHardwareCheck struct {
+type VmConfigFault struct {
+}
+
+type HostAccessRestrictedToManagementServer struct {
+}
+
+type DiskMoveTypeNotSupported struct {
+}
+
+type MismatchedVMotionNetworkNames struct {
+}
+
+type FileFault struct {
+}
+
+type IscsiFaultVnicHasWrongUplink struct {
+}
+
+type NumVirtualCoresPerSocketNotSupported struct {
+}
+
+type NoCompatibleHardAffinityHost struct {
+}
+
+type InvalidIpfixConfig struct {
+}
+
+type BlockedByFirewall struct {
+}
+
+type RDMNotPreserved struct {
+}
+
+type CannotAccessVmComponent struct {
+}
+
+type InsufficientPerCpuCapacity struct {
+}
+
+type MigrationDisabled struct {
+}
+
+type CannotModifyConfigCpuRequirements struct {
+}
+
+type PatchMissingDependencies struct {
+}
+
+type FileAlreadyExists struct {
+}
+
+type NumVirtualCpusExceedsLimit struct {
+}
+
+type GuestComponentsOutOfDate struct {
+}
+
+type FaultToleranceNotLicensed struct {
+}
+
+type NetworkDisruptedAndConfigRolledBack struct {
+}
+
+type OvfExport struct {
+}
+
+type OvfConsumerPowerOnFault struct {
+}
+
+type FaultToleranceAntiAffinityViolated struct {
+}
+
+type AffinityConfigured struct {
+}
+
+type FailToLockFaultToleranceVMs struct {
+}
+
+type InsufficientCpuResourcesFault struct {
+}
+
+type CannotMoveVmWithDeltaDisk struct {
+}
+
+type DvsFault struct {
+}
+
+type InvalidAffinitySettingFault struct {
+}
+
+type InvalidDeviceSpec struct {
+}
+
+type DeviceNotSupported struct {
+}
+
+type EVCAdmissionFailedHostSoftwareForMode struct {
+}
+
+type InvalidFormat struct {
+}
+
+type VimFault struct {
+}
+
+type InvalidProperty struct {
+}
+
+type NoGateway struct {
+}
+
+type IscsiFault struct {
+}
+
+type DeviceUnsupportedForVmVersion struct {
+}
+
+type OvfInvalidValueEmpty struct {
+}
+
+type IscsiFaultVnicAlreadyBound struct {
+}
+
+type InaccessibleVFlashSource struct {
+}
+
+type SuspendedRelocateNotSupported struct {
+}
+
+type InvalidDeviceBacking struct {
+}
+
+type FileTooLarge struct {
+}
+
+type NotAFile struct {
+}
+
+type NotSupportedHostForVFlash struct {
+}
+
+type NonHomeRDMVMotionNotSupported struct {
+}
+
+type MigrationFeatureNotSupported struct {
+}
+
+type EVCAdmissionFailedCPUVendorUnknown struct {
+}
+
+type EVCAdmissionFailedHostSoftware struct {
+}
+
+type CannotAccessVmDevice struct {
+}
+
+type NotEnoughLogicalCpus struct {
+}
+
+type ClockSkew struct {
+}
+
+type PatchInstallFailed struct {
+}
+
+type EightHostLimitViolated struct {
+}
+
+type VmToolsUpgradeFault struct {
+}
+
+type OvfUnsupportedSection struct {
+}
+
+type OvfUnsupportedElement struct {
+}
+
+type RestrictedVersion struct {
+}
+
+type InvalidDrsBehaviorForFtVm struct {
+}
+
+type VramLimitLicense struct {
+}
+
+type CannotChangeVsanNodeUuid struct {
+}
+
+type MksConnectionLimitReached struct {
+}
+
+type ToolsAlreadyUpgraded struct {
+}
+
+type MethodNotFound struct {
+}
+
+type VmFaultToleranceConfigIssueWrapper struct {
+}
+
+type InsufficientHostCapacityFault struct {
+}
+
+type CannotChangeHaSettingsForFtSecondary struct {
+}
+
+type ConflictingDatastoreFound struct {
 }
 
 type IscsiFaultVnicHasMultipleUplinks struct {
 }
 
+type EVCAdmissionFailedCPUModelForMode struct {
+}
+
+type DestinationSwitchFull struct {
+}
+
+type InsufficientDisks struct {
+}
+
+type FileLocked struct {
+}
+
+type OvfWrongElement struct {
+}
+
+type IscsiFaultPnicInUse struct {
+}
+
+type NotEnoughCpus struct {
+}
+
+type LegacyNetworkInterfaceInUse struct {
+}
+
+type OvfMissingElement struct {
+}
+
+type NoActiveHostInCluster struct {
+}
+
+type EVCAdmissionFailedVmActive struct {
+}
+
+type StorageVMotionNotSupported struct {
+}
+
+type EVCAdmissionFailedHostDisconnected struct {
+}
+
+type InsufficientHostMemoryCapacityFault struct {
+}
+
+type NasVolumeNotMounted struct {
+}
+
+type MissingBmcSupport struct {
+}
+
+type SwapDatastoreNotWritableOnHost struct {
+}
+
+type DisallowedChangeByService struct {
+}
+
+type MigrationFault struct {
+}
+
+type EVCAdmissionFailedCPUModel struct {
+}
+
+type EVCAdmissionFailed struct {
+}
+
+type IscsiFaultInvalidVnic struct {
+}
+
+type VspanPromiscuousPortNotSupported struct {
+}
+
+type LicenseExpired struct {
+}
+
+type InvalidEditionLicense struct {
+}
+
+type MethodAlreadyDisabledFault struct {
+}
+
+type OvfInvalidValueConfiguration struct {
+}
+
+type CannotChangeDrsBehaviorForFtSecondary struct {
+}
+
+type OvfCpuCompatibility struct {
+}
+
+type FailToEnableSPBM struct {
+}
+
+type NoDiskSpace struct {
+}
+
+type DrsDisabledOnVm struct {
+}
+
+type LargeRDMConversionNotSupported struct {
+}
+
+type IncompatibleDefaultDevice struct {
+}
+
+type InvalidCAMCertificate struct {
+}
+
+type WakeOnLanNotSupportedByVmotionNIC struct {
+}
+
+type DeviceHotPlugNotSupported struct {
+}
+
+type LinuxVolumeNotClean struct {
+}
+
+type NoDiskFound struct {
+}
+
+type VmfsAlreadyMounted struct {
+}
+
+type OvfPropertyExport struct {
+}
+
+type NoHost struct {
+}
+
+type VspanPortgroupTypeChangeFault struct {
+}
+
+type IncorrectHostInformation struct {
+}
+
+type FileBackedPortNotSupported struct {
+}
+
+type FcoeFault struct {
+}
+
+type IscsiFaultVnicIsLastPath struct {
+}
+
+type AlreadyUpgraded struct {
+}
+
+type VsanDiskFault struct {
+}
+
+type NumVirtualCpusIncompatible struct {
+}
+
+type OperationDisallowedOnHost struct {
+}
+
+type DeviceControllerNotSupported struct {
+}
+
+type NasConfigFault struct {
+}
+
+type MissingWindowsCustResources struct {
+}
+
+type VirtualHardwareCompatibilityIssue struct {
+}
+
+type DisallowedOperationOnFailoverHost struct {
+}
+
+type UnSupportedDatastoreForVFlash struct {
+}
+
+type CustomizationFault struct {
+}
+
+type VMOnVirtualIntranet struct {
+}
+
+type NoPermissionOnHost struct {
+}
+
+type InUseFeatureManipulationDisallowed struct {
+}
+
+type VMotionLinkCapacityLow struct {
+}
+
+type ReadHostResourcePoolTreeFailed struct {
+}
+
+type OvfHardwareCheck struct {
+}
+
+type CannotMoveVmWithNativeDeltaDisk struct {
+}
+
+type InvalidDasRestartPriorityForFtVm struct {
+}
+
 type MultipleSnapshotsNotSupported struct {
 }
 
+type NotFound struct {
+}
+
+type OvfUnsupportedDiskProvisioning struct {
+}
+
+type OvfElement struct {
+}
+
+type DiskIsNonLocal struct {
+}
+
+type VmConfigIncompatibleForFaultTolerance struct {
+}
+
+type EVCAdmissionFailedCPUVendor struct {
+}
+
+type NoAvailableIp struct {
+}
+
+type HostInDomain struct {
+}
+
+type OperationNotSupportedByGuest struct {
+}
+
+type InsufficientStandbyMemoryResource struct {
+}
+
+type VmLimitLicense struct {
+}
+
+type CannotPlaceWithoutPrerequisiteMoves struct {
+}
+
+type VmFaultToleranceConfigIssue struct {
+}
+
+type StorageDrsDatacentersCannotShareDatastore struct {
+}
+
+type InvalidIndexArgument struct {
+}
+
+type OvfExportFailed struct {
+}
+
+type CannotAccessVmDisk struct {
+}
+
+type WillLoseHAProtection struct {
+}
+
+type HostConfigFault struct {
+}
+
+type UnconfiguredPropertyValue struct {
+}
+
+type OvfUnexpectedElement struct {
+}
+
+type SecondaryVmAlreadyEnabled struct {
+}
+
+type FaultToleranceCpuIncompatible struct {
+}
+
+type DiskTooSmall struct {
+}
+
+type VMotionNotLicensed struct {
+}
+
+type GuestPermissionDenied struct {
+}
+
+type DatacenterMismatch struct {
+}
+
+type OvfUnknownDevice struct {
+}
+
+type InsufficientResourcesFault struct {
+}
+
+type CpuHotPlugNotSupported struct {
+}
+
+type OvfUnsupportedSubType struct {
+}
+
+type VmfsMountFault struct {
+}
+
+type MemorySizeNotSupportedByDatastore struct {
+}
+
+type ReplicationDiskConfigFault struct {
+}
+
+type RuntimeFault struct {
+}
+
+type MemorySizeNotRecommended struct {
+}
+
+type NoVirtualNic struct {
+}
+
+type OvfNoHostNic struct {
+}
+
+type ReplicationIncompatibleWithFT struct {
+}
+
+type OvfPropertyQualifierDuplicate struct {
+}
+
+type OvfConsumerCommunicationError struct {
+}
+
+type NetworkCopyFault struct {
+}
+
+type NoGuestHeartbeat struct {
+}
+
+type ActiveDirectoryFault struct {
+}
+
+type LicenseServerUnavailable struct {
+}
+
+type RequestCanceled struct {
+}
+
+type ToolsUnavailable struct {
+}
+
+type MissingController struct {
+}
+
+type OvfDuplicatedPropertyIdExport struct {
+}
+
+type VirtualDiskModeNotSupported struct {
+}
+
+type SwapPlacementOverrideNotSupported struct {
+}
+
+type InvalidCAMServer struct {
+}
+
+type FtIssuesOnHost struct {
+}
+
+type TooManyGuestLogons struct {
+}
+
+type DvsApplyOperationFault struct {
+}
+
+type UnsupportedGuest struct {
+}
+
+type VMotionNotSupported struct {
+}
+
 type OvfUnknownEntity struct {
+}
+
+type ApplicationQuiesceFault struct {
+}
+
+type OvfToXmlUnsupportedElement struct {
+}
+
+type OvfCpuCompatibilityCheckNotSupported struct {
+}
+
+type IpHostnameGeneratorError struct {
+}
+
+type TooManySnapshotLevels struct {
+}
+
+type SnapshotRevertIssue struct {
+}
+
+type PowerOnFtSecondaryFailed struct {
+}
+
+type ProfileUpdateFailed struct {
+}
+
+type CannotCreateFile struct {
+}
+
+type CannotAccessNetwork struct {
+}
+
+type ToolsImageSignatureCheckFailed struct {
+}
+
+type VspanPortMoveFault struct {
+}
+
+type NonADUserRequired struct {
+}
+
+type VmMetadataManagerFault struct {
+}
+
+type NoDisksToCustomize struct {
+}
+
+type OvfInvalidValueReference struct {
+}
+
+type TooManyConcurrentNativeClones struct {
+}
+
+type CannotAddHostWithFTVmToDifferentCluster struct {
+}
+
+type InsufficientStorageSpace struct {
+}
+
+type StorageVmotionIncompatible struct {
+}
+
+type NamespaceLimitReached struct {
+}
+
+type SecurityError struct {
+}
+
+type AlreadyConnected struct {
+}
+
+type SSPIChallenge struct {
+}
+
+type OvfInvalidValue struct {
+}
+
+type StorageDrsCannotMoveManuallyPlacedVm struct {
+}
+
+type RDMConversionNotSupported struct {
+}
+
+type MountError struct {
+}
+
+type NotUserConfigurableProperty struct {
+}
+
+type SoftRuleVioCorrectionImpact struct {
+}
+
+type OvfPropertyNetworkExport struct {
+}
+
+type SnapshotCopyNotSupported struct {
+}
+
+type OvfNoSupportedHardwareFamily struct {
+}
+
+type UnsupportedDatastore struct {
+}
+
+type FaultTolerancePrimaryPowerOnNotAttempted struct {
+}
+
+type SnapshotMoveNotSupported struct {
+}
+
+type SnapshotNoChange struct {
+}
+
+type DestinationVsanDisabled struct {
+}
+
+type GenericDrsFault struct {
+}
+
+type DirectoryNotEmpty struct {
+}
+
+type SystemError struct {
+}
+
+type MismatchedBundle struct {
+}
+
+type CollectorAddressUnset struct {
+}
+
+type OvfUnsupportedElementValue struct {
+}
+
+type VAppNotRunning struct {
+}
+
+type HostPowerOpFailed struct {
+}
+
+type OvfNetworkMappingNotSupported struct {
+}
+
+type VirtualEthernetCardNotSupported struct {
+}
+
+type OvfPropertyQualifierIgnored struct {
+}
+
+type AdminNotDisabled struct {
+}
+
+type VMINotSupported struct {
+}
+
+type PhysCompatRDMNotSupported struct {
+}
+
+type StorageDrsCannotMoveManuallyPlacedSwapFile struct {
+}
+
+type RDMNotSupported struct {
+}
+
+type OvfDiskOrderConstraint struct {
+}
+
+type TooManyConsecutiveOverrides struct {
+}
+
+type RollbackFailure struct {
+}
+
+type InvalidDatastore struct {
+}
+
+type ReplicationConfigFault struct {
+}
+
+type WipeDiskFault struct {
+}
+
+type CannotAccessFile struct {
+}
+
+type OvfUnsupportedPackage struct {
+}
+
+type PatchMetadataInvalid struct {
+}
+
+type VMotionNotConfigured struct {
+}
+
+type FeatureRequirementsNotMet struct {
+}
+
+type NoCompatibleHost struct {
+}
+
+type RemoteDeviceNotSupported struct {
+}
+
+type OvfUnsupportedType struct {
+}
+
+type VspanDestPortConflict struct {
+}
+
+type VAppPropertyFault struct {
+}
+
+type ReadOnlyDisksWithLegacyDestination struct {
+}
+
+type SnapshotMoveFromNonHomeNotSupported struct {
+}
+
+type OvfUnsupportedAttributeValue struct {
+}
+
+type PatchAlreadyInstalled struct {
+}
+
+type OvfUnableToExportDisk struct {
+}
+
+type TooManyDevices struct {
+}
+
+type VmHostAffinityRuleViolation struct {
+}
+
+type ToolsImageCopyFailed struct {
+}
+
+type SecondaryVmAlreadyDisabled struct {
+}
+
+type IndependentDiskVMotionNotSupported struct {
+}
+
+type CannotDisableSnapshot struct {
+}
+
+type VsanClusterUuidMismatch struct {
+}
+
+type InvalidCollectorVersion struct {
+}
+
+type UnsupportedVimApiVersion struct {
+}
+
+type SsdDiskNotAvailable struct {
+}
+
+type VAppTaskInProgress struct {
+}
+
+type VAppConfigFault struct {
+}
+
+type SecondaryVmNotRegistered struct {
+}
+
+type LargeRDMNotSupportedOnDatastore struct {
+}
+
+type PatchIntegrityError struct {
+}
+
+type MissingPowerOffConfiguration struct {
+}
+
+type OvfInternalError struct {
+}
+
+type SnapshotDisabled struct {
+}
+
+type SwitchIpUnset struct {
+}
+
+type SSLVerifyFault struct {
+}
+
+type StorageDrsIolbDisabledInternally struct {
+}
+
+type OperationDisabledByGuest struct {
+}
+
+type OvfHostResourceConstraint struct {
+}
+
+type WillResetSnapshotDirectory struct {
+}
+
+type TaskInProgress struct {
+}
+
+type OvfImportFailed struct {
+}
+
+type RebootRequired struct {
+}
+
+type SnapshotIncompatibleDeviceInVm struct {
+}
+
+type TooManyDisksOnLegacyHost struct {
+}
+
+type SwitchNotInUpgradeMode struct {
+}
+
+type VMOnConflictDVPort struct {
+}
+
+type OvfXmlFormat struct {
+}
+
+type UnexpectedFault struct {
+}
+
+type SharedBusControllerNotSupported struct {
+}
+
+type StorageDrsDisabledOnVm struct {
+}
+
+type DuplicateDisks struct {
+}
+
+type OvfWrongNamespace struct {
+}
+
+type OvfNoSpaceOnController struct {
+}
+
+type ThirdPartyLicenseAssignmentFailed struct {
+}
+
+type OvfSystemFault struct {
+}
+
+type PatchBinariesNotFound struct {
+}
+
+type NotSupported struct {
+}
+
+type VmfsAmbiguousMount struct {
+}
+
+type OvfConsumerInvalidSection struct {
+}
+
+type ReplicationVmFault struct {
+}
+
+type ConflictingConfiguration struct {
+}
+
+type RuleViolation struct {
+}
+
+type InvalidLicense struct {
+}
+
+type PatchMetadataNotFound struct {
+}
+
+type UncustomizableGuest struct {
+}
+
+type ImportOperationBulkFault struct {
+}
+
+type VirtualHardwareVersionNotSupported struct {
+}
+
+type OvfUnsupportedDeviceBackingOption struct {
+}
+
+type VmConfigIncompatibleForRecordReplay struct {
+}
+
+type SnapshotFault struct {
+}
+
+type UnrecognizedHost struct {
+}
+
+type OvfInvalidVmName struct {
+}
+
+type SwapDatastoreUnset struct {
+}
+
+type IncorrectFileType struct {
+}
+
+type VmotionInterfaceNotEnabled struct {
+}
+
+type NotSupportedHost struct {
+}
+
+type InsufficientFailoverResourcesFault struct {
+}
+
+type RDMNotSupportedOnDatastore struct {
+}
+
+type ResourceInUse struct {
+}
+
+type IncompatibleHostForFtSecondary struct {
+}
+
+type OvfPropertyQualifier struct {
+}
+
+type OvfConnectedDeviceFloppy struct {
+}
+
+type ToolsAutoUpgradeNotSupported struct {
+}
+
+type InvalidGuestLogin struct {
+}
+
+type UserNotFound struct {
+}
+
+type PatchNotApplicable struct {
+}
+
+type NotADirectory struct {
+}
+
+type QuestionPending struct {
+}
+
+type WakeOnLanNotSupported struct {
+}
+
+type StorageDrsCannotMoveVmWithNoFilesInLayout struct {
+}
+
+type RawDiskNotSupported struct {
+}
+
+type OvfElementInvalidValue struct {
+}
+
+type StorageDrsCannotMoveSharedDisk struct {
+}
+
+type DvsScopeViolated struct {
+}
+
+type OvfPropertyType struct {
+}
+
+type RemoveFailed struct {
+}
+
+type VmPowerOnDisabled struct {
+}
+
+type DiskHasPartitions struct {
+}
+
+type VMotionInterfaceIssue struct {
+}
+
+type MissingLinuxCustResources struct {
+}
+
+type VmFaultToleranceTooManyVMsOnHost struct {
+}
+
+type ExpiredAddonLicense struct {
+}
+
+type SnapshotMoveToNonHomeNotSupported struct {
+}
+
+type UnsharedSwapVMotionNotSupported struct {
+}
+
+type StorageDrsCannotMoveTemplate struct {
+}
+
+type CannotAccessVmConfig struct {
+}
+
+type VFlashModuleNotSupported struct {
+}
+
+type RecordReplayDisabled struct {
+}
+
+type VspanPortgroupPromiscChangeFault struct {
+}
+
+type DeviceUnsupportedForVmPlatform struct {
+}
+
+type RDMPointsToInaccessibleDisk struct {
+}
+
+type DeltaDiskFormatNotSupported struct {
+}
+
+type SnapshotCloneNotSupported struct {
+}
+
+type OvfInvalidValueFormatMalformed struct {
+}
+
+type InvalidNasCredentials struct {
+}
+
+type VmWwnConflict struct {
+}
+
+type VmFaultToleranceInvalidFileBacking struct {
+}
+
+type VMotionProtocolIncompatible struct {
+}
+
+type NoCompatibleDatastore struct {
+}
+
+type PatchMetadataCorrupted struct {
+}
+
+type DisallowedMigrationDeviceAttached struct {
+}
+
+type InvalidDeviceOperation struct {
+}
+
+type StorageDrsCannotMoveVmWithMountedCDROM struct {
+}
+
+type GuestOperationsFault struct {
+}
+
+type LimitExceeded struct {
+}
+
+type LicenseAssignmentFailed struct {
+}
+
+type StorageDrsCannotMoveVmInUserFolder struct {
+}
+
+type ToolsInstallationInProgress struct {
+}
+
+type InventoryHasStandardAloneHosts struct {
+}
+
+type NotSupportedHostInDvs struct {
+}
+
+type UnexpectedCustomizationFault struct {
+}
+
+type VspanPortConflict struct {
+}
+
+type VmValidateMaxDevice struct {
+}
+
+type VmMonitorIncompatibleForFaultTolerance struct {
+}
+
+type InvalidIpmiLoginInfo struct {
+}
+
+type HostIncompatibleForFaultTolerance struct {
+}
+
+type InvalidFolder struct {
+}
+
+type CannotMoveHostWithFaultToleranceVm struct {
+}
+
+type OutOfBounds struct {
+}
+
+type InsufficientHostCpuCapacityFault struct {
+}
+
+type ReplicationVmConfigFault struct {
+}
+
+type NetworkInaccessible struct {
+}
+
+type NotAuthenticated struct {
+}
+
+type NonPersistentDisksNotSupported struct {
+}
+
+type OvfMappedOsId struct {
+}
+
+type NasSessionCredentialConflict struct {
+}
+
+type ResourceNotAvailable struct {
+}
+
+type VspanPortPromiscChangeFault struct {
+}
+
+type LicenseEntityNotFound struct {
+}
+
+type InvalidDatastoreState struct {
+}
+
+type InvalidSnapshotFormat struct {
+}
+
+type VirtualDiskBlocksNotFullyProvisioned struct {
+}
+
+type TooManyNativeCloneLevels struct {
+}
+
+type OvfConsumerValidationFault struct {
+}
+
+type TooManyNativeClonesOnFile struct {
+}
+
+type ToolsImageNotAvailable struct {
+}
+
+type VspanSameSessionPortConflict struct {
+}
+
+type VMotionLinkDown struct {
+}
+
+type StorageDrsCannotMoveIndependentDisk struct {
+}
+
+type ToolsUpgradeCancelled struct {
+}
+
+type InvalidPowerState struct {
+}
+
+type CannotDeleteFile struct {
+}
+
+type WillModifyConfigCpuRequirements struct {
+}
+
+type SecondaryVmAlreadyRegistered struct {
+}
+
+type LogBundlingFailed struct {
+}
+
+type OvfConsumerUndeclaredSection struct {
+}
+
+type InsufficientMemoryResourcesFault struct {
+}
+
+type OvfMissingHardware struct {
+}
+
+type InvalidPropertyType struct {
+}
+
+type OvfDuplicateElement struct {
+}
+
+type VsanFault struct {
+}
+
+type TooManyHosts struct {
+}
+
+type SSLDisabledFault struct {
+}
+
+type UncommittedUndoableDisk struct {
+}
+
+type UnsupportedVmxLocation struct {
+}
+
+type UnusedVirtualDiskBlocksNotScrubbed struct {
+}
+
+type ReplicationFault struct {
+}
+
+type StorageDrsCannotMoveFTVm struct {
+}
+
+type VmAlreadyExistsInDatacenter struct {
+}
+
+type OvfUnsupportedDeviceBackingInfo struct {
+}
+
+type CpuIncompatible1ECX struct {
+}
+
+type ReplicationInvalidOptions struct {
+}
+
+type VAppOperationInProgress struct {
+}
+
+type OvfFault struct {
+}
+
+type VFlashModuleVersionIncompatible struct {
+}
+
+type PlatformConfigFault struct {
+}
+
+type OvfUnknownDeviceBacking struct {
+}
+
+type ExpiredFeatureLicense struct {
+}
+
+type VMotionAcrossNetworkNotSupported struct {
+}
+
+type StorageDrsUnableToMoveFiles struct {
+}
+
+type HAErrorsAtDest struct {
+}
+
+type InvalidHostConnectionState struct {
+}
+
+type OvfImport struct {
+}
+
+type InvalidNetworkResource struct {
+}
+
+type ShrinkDiskFault struct {
+}
+
+type OvfConstraint struct {
+}
+
+type NoPermissionOnNasVolume struct {
+}
+
+type OvfUnsupportedDeviceExport struct {
+}
+
+type VolumeEditorError struct {
+}
+
+type VmFaultToleranceIssue struct {
+}
+
+type Timedout struct {
+}
+
+type NotSupportedHostInHACluster struct {
+}
+
+type NoSubjectName struct {
+}
+
+type DvsNotAuthorized struct {
+}
+
+type NoPeerHostFound struct {
+}
+
+type InvalidBundle struct {
+}
+
+type FilesystemQuiesceFault struct {
+}
+
+type SoftRuleVioCorrectionDisallowed struct {
+}
+
+type SnapshotLocked struct {
+}
+
+type NoVcManagedIpConfigured struct {
+}
+
+type VmFaultToleranceOpIssuesList struct {
+}
+
+type NoPermission struct {
+}
+
+type NonVmwareOuiMacNotSupportedHost struct {
+}
+
+type CannotDisconnectHostWithFaultToleranceVm struct {
+}
+
+type InvalidRequest struct {
+}
+
+type FileNotFound struct {
+}
+
+type IDEDiskNotSupported struct {
+}
+
+type QuiesceDatastoreIOForHAFailed struct {
 }
