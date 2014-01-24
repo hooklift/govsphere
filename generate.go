@@ -160,12 +160,48 @@ func comment(text string) string {
 	return ""
 }
 
+//This is how we look for the package
+//or namespace associated to one particular
+//type. This is needed because 4 packages
+//are being created such as: mo, enum, do and faults
+//in order to make the API more idiomatic
+//for users to use. Once a type is found
+//this map is going to be used to find its
+//namespace or package.
+var objnsmap map[string]string
+
+func lookUpNamespace(type_, currentNs string) string {
+	//Embeddeds or extends are often times empty
+	if type_ == "" {
+		return type_
+	}
+
+	var prefix string
+	if type_[0:1] == "*" {
+		prefix = "*"
+		type_ = type_[1:]
+	} else if type_[0:3] == "[]*" {
+		prefix = "[]*"
+		type_ = type_[3:]
+	} else if type_[0:2] == "[]" {
+		prefix = "[]"
+		type_ = type_[2:]
+	}
+	targetNs := objnsmap[type_]
+	if targetNs == "" || targetNs == currentNs {
+		return prefix + type_
+	}
+
+	return prefix + targetNs + "." + type_
+}
+
 var funcMap = template.FuncMap{
 	"toGoType":             toGoType,
 	"stripns":              stripns,
 	"replaceReservedWords": replaceReservedWords,
 	"makePublic":           makePublic,
 	"comment":              comment,
+	"lookUpNamespace":      lookUpNamespace,
 }
 
 func generate(apiDefFile string) {
@@ -178,6 +214,12 @@ func generate(apiDefFile string) {
 	err = json.Unmarshal(apiDef, &objects)
 	if err != nil {
 		log.Fatalln(err)
+	}
+
+	//Populates objnsmap
+	objnsmap = make(map[string]string)
+	for _, obj := range objects {
+		objnsmap[obj.Name] = obj.Namespace
 	}
 
 	mainPkg := "./vim"
@@ -240,6 +282,7 @@ func genCode(objects []Object, mainPkg, tmpl, namespace string) {
 	} else if namespace == "mo" {
 		data.WriteString(`
 			import (
+				"github.com/c4milo/govsphere/vim/do"
 				"time"
 			)
 		`)
