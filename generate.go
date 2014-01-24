@@ -283,6 +283,7 @@ func genCode(objects []Object, mainPkg, tmpl, namespace string) {
 		data.WriteString(`
 			import (
 				"github.com/c4milo/govsphere/vim/do"
+				"github.com/c4milo/govsphere/vim/fault"
 				"time"
 			)
 		`)

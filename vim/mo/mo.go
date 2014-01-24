@@ -6,6 +6,7 @@ package mo
 
 import (
 	"github.com/c4milo/govsphere/vim/do"
+	"github.com/c4milo/govsphere/vim/fault"
 	"time"
 )
 
