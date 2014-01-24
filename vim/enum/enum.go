@@ -5,213 +5,79 @@
 package enum
 
 //
-// User specification of congestion threshold mode on a given datastore
+// These constant strings can be used as parameters in user-specified
+// email subject and body templates as well as in scripts. The action processor
+// in VirtualCenter substitutes the run-time values for the parameters.
 //
-// For more information, see
-// congestionThreshold
+// For example, an email subject provided by the client could be the string:
+// "Alarm - {alarmName} Description:\n{eventDescription}".
+// Or a script action provided could be: "myScript {alarmName}"
 //
 //
-//
-type StorageIORMThresholdMode string
+type ActionParameter string
 
 const (
 
-	// Storagage IO Control will choose appropriate congestion threshold value
-	// for that datastore to operate at given percentage of peak throughput.
-	// This is the default setting
-	Automatic_StorageIORMThresholdMode StorageIORMThresholdMode = "automatic"
+	// The object of the triggering alarm.
+	Alarm_ActionParameter ActionParameter = "alarm"
 
-	// Use user specified Storage IO Control congestion threshold value
-	Manual_StorageIORMThresholdMode StorageIORMThresholdMode = "manual"
+	// The name of the triggering alarm.
+	AlarmName_ActionParameter ActionParameter = "alarmName"
+
+	// A summary of declarations made during the triggering of the alarm.
+	DeclaringSummary_ActionParameter ActionParameter = "declaringSummary"
+
+	// The event description.
+	EventDescription_ActionParameter ActionParameter = "eventDescription"
+
+	// The status after the alarm is triggered.
+	NewStatus_ActionParameter ActionParameter = "newStatus"
+
+	// The status prior to the alarm being triggered.
+	OldStatus_ActionParameter ActionParameter = "oldStatus"
+
+	// The object of the entity where the alarm is assocaited.
+	Target_ActionParameter ActionParameter = "target"
+
+	// The name of the entity where the alarm is triggered.
+	TargetName_ActionParameter ActionParameter = "targetName"
+
+	// A summary of information involved in triggering the alarm.
+	TriggeringSummary_ActionParameter ActionParameter = "triggeringSummary"
 )
 
 //
-// The EntityType enum identifies
-// the type of entity that was exported
-// (DVSManagerExportEntity_Task).
+// Pre-defined constants for possible action types. Virtual Center
+// uses this information to coordinate with the clients.
 //
 //
-type EntityType string
+type ActionType string
 
 const (
 
-	// Indicates the exported entity is a DistributedVirtualPortgroup.
-	DistributedVirtualPortgroup_EntityType EntityType = "distributedVirtualPortgroup"
-
-	// Indicates the exported entity is a DistributedVirtualSwitch.
-	DistributedVirtualSwitch_EntityType EntityType = "distributedVirtualSwitch"
-)
-
-//
-// Constants for defined formats. For more information, see the comment for the
-// format property.
-//
-//
-type DiagnosticManagerLogFormat string
-
-const (
-
-	// A standard ASCII-based line-based log file.
-	Plain_DiagnosticManagerLogFormat DiagnosticManagerLogFormat = "plain"
-)
-
-//
-// The set of digest methods that can be used by TPM to calculate the PCR
-// values.
-//
-//
-type HostDigestInfoDigestMethodType string
-
-const (
-	MD5_HostDigestInfoDigestMethodType HostDigestInfoDigestMethodType = "MD5"
-
-	SHA1_HostDigestInfoDigestMethodType HostDigestInfoDigestMethodType = "SHA1"
-)
-
-//
-// Defines the storage placement operation type.
-//
-//
-//
-//
-type StoragePlacementSpecPlacementType string
-
-const (
-
-	// Clone a VM.
-	Clone_StoragePlacementSpecPlacementType StoragePlacementSpecPlacementType = "clone"
-
-	// Create a VM.
-	Create_StoragePlacementSpecPlacementType StoragePlacementSpecPlacementType = "create"
-
-	// Reconfigure a VM.
-	Reconfigure_StoragePlacementSpecPlacementType StoragePlacementSpecPlacementType = "reconfigure"
-
-	// Relocate a VM.
-	Relocate_StoragePlacementSpecPlacementType StoragePlacementSpecPlacementType = "relocate"
-)
-
-//
-// IP protocols supported by the guest.
-//
-//
-type VAppIPAssignmentInfoProtocols string
-
-const (
-
-	// The vApp supports IPv4 protocol.
-	IPv4_VAppIPAssignmentInfoProtocols VAppIPAssignmentInfoProtocols = "IPv4"
-
-	// The vApp supports IPv6 protocol.
-	IPv6_VAppIPAssignmentInfoProtocols VAppIPAssignmentInfoProtocols = "IPv6"
-)
-
-//
-// Set of possible values for vmDirectPathGen2SupportedMode.
-//
-//
-type PhysicalNicVmDirectPathGen2SupportedMode string
-
-const (
-	Upt_PhysicalNicVmDirectPathGen2SupportedMode PhysicalNicVmDirectPathGen2SupportedMode = "upt"
-)
-
-type HostActiveDirectoryInfoDomainMembershipStatus string
-
-const (
-
-	// The client side of the trust relationship is broken.
-	ClientTrustBroken_HostActiveDirectoryInfoDomainMembershipStatus HostActiveDirectoryInfoDomainMembershipStatus = "clientTrustBroken"
-
-	// Unexpected domain controller responded.
-	InconsistentTrust_HostActiveDirectoryInfoDomainMembershipStatus HostActiveDirectoryInfoDomainMembershipStatus = "inconsistentTrust"
-
-	// The host thinks it's part of a domain,
-	// but no domain controllers could be reached to confirm.
-	NoServers_HostActiveDirectoryInfoDomainMembershipStatus HostActiveDirectoryInfoDomainMembershipStatus = "noServers"
-
-	// No problems with the domain membership.
-	Ok_HostActiveDirectoryInfoDomainMembershipStatus HostActiveDirectoryInfoDomainMembershipStatus = "ok"
-
-	// There's some problem with the domain membership.
-	OtherProblem_HostActiveDirectoryInfoDomainMembershipStatus HostActiveDirectoryInfoDomainMembershipStatus = "otherProblem"
-
-	// The server side of the trust relationship is broken
-	// (or bad machine password).
-	ServerTrustBroken_HostActiveDirectoryInfoDomainMembershipStatus HostActiveDirectoryInfoDomainMembershipStatus = "serverTrustBroken"
-
-	// The Active Directory integration provider does not support
-	// domain trust checks.
-	Unknown_HostActiveDirectoryInfoDomainMembershipStatus HostActiveDirectoryInfoDomainMembershipStatus = "unknown"
-)
-
-type HostDisconnectedEventReasonCode string
-
-const (
-
-	// Agent is out of date
+	// Host entering maintenance mode action type
 	//
-	// Since vSphere API 4.1
-	AgentOutOfDate_HostDisconnectedEventReasonCode HostDisconnectedEventReasonCode = "agentOutOfDate"
+	// Since vSphere API 5.0
+	HostMaintenanceV1_ActionType ActionType = "HostMaintenanceV1"
 
-	// Agent is being upgraded
-	AgentUpgrade_HostDisconnectedEventReasonCode HostDisconnectedEventReasonCode = "agentUpgrade"
+	// Host power action type
+	HostPowerV1_ActionType ActionType = "HostPowerV1"
 
-	// License not available after host upgrade
-	InsufficientLicenses_HostDisconnectedEventReasonCode HostDisconnectedEventReasonCode = "insufficientLicenses"
+	// Migration action type
+	MigrationV1_ActionType ActionType = "MigrationV1"
 
-	// License expired for the host
-	LicenseExpired_HostDisconnectedEventReasonCode HostDisconnectedEventReasonCode = "licenseExpired"
-
-	// Failed to decrypt password
+	// Storage migration action type
 	//
-	// Since vSphere API 4.1
-	PasswordDecryptFailure_HostDisconnectedEventReasonCode HostDisconnectedEventReasonCode = "passwordDecryptFailure"
+	// Since vSphere API 5.0
+	StorageMigrationV1_ActionType ActionType = "StorageMigrationV1"
 
-	// Failed to verify SSL thumbprint
-	SslThumbprintVerifyFailed_HostDisconnectedEventReasonCode HostDisconnectedEventReasonCode = "sslThumbprintVerifyFailed"
-
-	// Unknown reason
+	// Initial placement action for a virtual machine or a virtual disk
 	//
-	// Since vSphere API 4.1
-	Unknown_HostDisconnectedEventReasonCode HostDisconnectedEventReasonCode = "unknown"
+	// Since vSphere API 5.0
+	StoragePlacementV1_ActionType ActionType = "StoragePlacementV1"
 
-	// User requested disconnect
-	UserRequest_HostDisconnectedEventReasonCode HostDisconnectedEventReasonCode = "userRequest"
-
-	// The vRAM capacity of vCenter will be exceeded
-	//
-	// Since vSphere API 5.1
-	VcVRAMCapacityExceeded_HostDisconnectedEventReasonCode HostDisconnectedEventReasonCode = "vcVRAMCapacityExceeded"
-)
-
-//
-// List of possible teaming modes supported by the vNetwork Distributed
-// Switch. The different policy modes define the way traffic is routed
-// through the different uplink ports in a team.
-//
-//
-type DistributedVirtualSwitchNicTeamingPolicyMode string
-
-const (
-
-	// Use explicit failover order
-	Failover_explicit_DistributedVirtualSwitchNicTeamingPolicyMode DistributedVirtualSwitchNicTeamingPolicyMode = "failover_explicit"
-
-	// Routing based on IP hash
-	Loadbalance_ip_DistributedVirtualSwitchNicTeamingPolicyMode DistributedVirtualSwitchNicTeamingPolicyMode = "loadbalance_ip"
-
-	// Routing based by dynamically balancing traffic through the NICs
-	// in a team. This is the recommended teaming policy when the
-	// network I/O control feature is enabled for the vNetwork
-	// Distributed Switch.
-	Loadbalance_loadbased_DistributedVirtualSwitchNicTeamingPolicyMode DistributedVirtualSwitchNicTeamingPolicyMode = "loadbalance_loadbased"
-
-	// Route based on the source of the port ID
-	Loadbalance_srcid_DistributedVirtualSwitchNicTeamingPolicyMode DistributedVirtualSwitchNicTeamingPolicyMode = "loadbalance_srcid"
-
-	// Route based on source MAC hash
-	Loadbalance_srcmac_DistributedVirtualSwitchNicTeamingPolicyMode DistributedVirtualSwitchNicTeamingPolicyMode = "loadbalance_srcmac"
+	// Virtual machine power action type
+	VmPowerV1_ActionType ActionType = "VmPowerV1"
 )
 
 //
@@ -224,6 +90,340 @@ const (
 	Cpu_AffinityType AffinityType = "cpu"
 
 	Memory_AffinityType AffinityType = "memory"
+)
+
+type AgentInstallFailedReason string
+
+const (
+
+	// The agent was installed but did not respond to requests.
+	AgentNotReachable_AgentInstallFailedReason AgentInstallFailedReason = "AgentNotReachable"
+
+	// The agent was installed but is not running.
+	AgentNotRunning_AgentInstallFailedReason AgentInstallFailedReason = "AgentNotRunning"
+
+	// Failed to upload the agent installer.
+	AgentUploadFailed_AgentInstallFailedReason AgentInstallFailedReason = "AgentUploadFailed"
+
+	// The agent upload took too long.
+	AgentUploadTimedout_AgentInstallFailedReason AgentInstallFailedReason = "AgentUploadTimedout"
+
+	// The agent install took too long.
+	InstallTimedout_AgentInstallFailedReason AgentInstallFailedReason = "InstallTimedout"
+
+	// There is not enough storage space on the host to install the agent.
+	NotEnoughSpaceOnDevice_AgentInstallFailedReason AgentInstallFailedReason = "NotEnoughSpaceOnDevice"
+
+	// Failed to initialize the upgrade directory on the host.
+	PrepareToUpgradeFailed_AgentInstallFailedReason AgentInstallFailedReason = "PrepareToUpgradeFailed"
+
+	// The signature verification for the installer failed.
+	SignatureVerificationFailed_AgentInstallFailedReason AgentInstallFailedReason = "SignatureVerificationFailed"
+
+	// The agent installer failed for an unknown reason.
+	UnknownInstallerError_AgentInstallFailedReason AgentInstallFailedReason = "UnknownInstallerError"
+)
+
+//
+// This list specifies the type of operation being performed on the array.
+//
+//
+type ArrayUpdateOperation string
+
+const (
+
+	// indicates an addition to the array.
+	Add_ArrayUpdateOperation ArrayUpdateOperation = "add"
+
+	// indicates changes to an element in the array.
+	Edit_ArrayUpdateOperation ArrayUpdateOperation = "edit"
+
+	// indicates the removal of an element in the
+	// array. In this case the key field must contain the key of the element
+	// to be removed.
+	Remove_ArrayUpdateOperation ArrayUpdateOperation = "remove"
+)
+
+type AutoStartAction string
+
+const (
+
+	// The guest operating system for a virtual machine is shut down when that
+	// virtual machine in next in the auto-stop order.
+	GuestShutdown_AutoStartAction AutoStartAction = "guestShutdown"
+
+	// No action is taken for this virtual machine. This virtual machine is
+	// not a part of the auto-start sequence. This can be used for both auto-start
+	// and auto-start settings.
+	None_AutoStartAction AutoStartAction = "none"
+
+	// This virtual machine is powered off when it is next in the auto-stop order.
+	// This is the default stopAction.
+	PowerOff_AutoStartAction AutoStartAction = "powerOff"
+
+	// This virtual machine is powered on when it is next in the auto-start order.
+	PowerOn_AutoStartAction AutoStartAction = "powerOn"
+
+	// This virtual machine is suspended when it is next in the auto-stop order.
+	Suspend_AutoStartAction AutoStartAction = "suspend"
+
+	// The default system action is taken for this virtual machine when it is next in
+	// the auto-start order. This can be used for both auto-start and auto-start
+	// settings.
+	SystemDefault_AutoStartAction AutoStartAction = "systemDefault"
+)
+
+//
+// Determines if the virtual machine should start after receiving a heartbeat,
+// ignore heartbeats and start after the startDelay has elapsed, or follow the
+// system default before powering on. When a virtual machine is next in the start
+// order, the system either waits a specified period of time for a virtual
+// machine to power on or it waits until it receives a successful heartbeat from a
+// powered on virtual machine. By default, this is set to no.
+//
+//
+type AutoStartWaitHeartbeatSetting string
+
+const (
+
+	// The system does not wait to receive a heartbeat before powering on the next
+	// machine in the order. This is the default setting.
+	No_AutoStartWaitHeartbeatSetting AutoStartWaitHeartbeatSetting = "no"
+
+	// The system uses the default value to determine whether or not to wait to
+	// receive a heartbeat before powering on the next machine in the order.
+	SystemDefault_AutoStartWaitHeartbeatSetting AutoStartWaitHeartbeatSetting = "systemDefault"
+
+	// The system waits until receiving a heartbeat before powering on the next
+	// machine in the order.
+	Yes_AutoStartWaitHeartbeatSetting AutoStartWaitHeartbeatSetting = "yes"
+)
+
+type CannotMoveFaultToleranceVmMoveType string
+
+const (
+
+	// Move out of the cluster
+	Cluster_CannotMoveFaultToleranceVmMoveType CannotMoveFaultToleranceVmMoveType = "cluster"
+
+	// Move out of the resouce pool
+	ResourcePool_CannotMoveFaultToleranceVmMoveType CannotMoveFaultToleranceVmMoveType = "resourcePool"
+)
+
+type CannotPowerOffVmInClusterOperation string
+
+const (
+
+	// guest shutdown
+	GuestShutdown_CannotPowerOffVmInClusterOperation CannotPowerOffVmInClusterOperation = "guestShutdown"
+
+	// guest suspend
+	GuestSuspend_CannotPowerOffVmInClusterOperation CannotPowerOffVmInClusterOperation = "guestSuspend"
+
+	// power off
+	PowerOff_CannotPowerOffVmInClusterOperation CannotPowerOffVmInClusterOperation = "powerOff"
+
+	// suspend
+	Suspend_CannotPowerOffVmInClusterOperation CannotPowerOffVmInClusterOperation = "suspend"
+)
+
+type CannotUseNetworkReason string
+
+const (
+
+	// Source and destination DVS do not have same version or vendor
+	MismatchedDvsVersionOrVendor_CannotUseNetworkReason CannotUseNetworkReason = "MismatchedDvsVersionOrVendor"
+
+	// Source and destination networks do not have same security policies
+	MismatchedNetworkPolicies_CannotUseNetworkReason CannotUseNetworkReason = "MismatchedNetworkPolicies"
+
+	// Network does not support reservation
+	NetworkReservationNotSupported_CannotUseNetworkReason CannotUseNetworkReason = "NetworkReservationNotSupported"
+
+	// VMotion to unsupported destination network type
+	VMotionToUnsupportedNetworkType_CannotUseNetworkReason CannotUseNetworkReason = "VMotionToUnsupportedNetworkType"
+)
+
+//
+// The types of tests which can requested by any of the methods in either
+// VirtualMachineCompatibilityChecker or VirtualMachineProvisioningChecker.
+//
+//
+type CheckTestType string
+
+const (
+
+	// Tests that check that the
+	// destination host or cluster can see the datastores where the virtual
+	// machine's virtual disks are going to be located. The destination
+	// resource pool is irrelevant.
+	DatastoreTests_CheckTestType CheckTestType = "datastoreTests"
+
+	// Tests that examine both the virtual
+	// machine and the destination host or cluster; the destination
+	// resource pool is irrelevant. This set excludes tests that fall
+	// into the datastoreTests group.
+	HostTests_CheckTestType CheckTestType = "hostTests"
+
+	// Tests that check that the
+	// destination host or cluster can see the networks that the virtual
+	// machine's virtual nic devices are going to be connected.
+	//
+	// Since vSphere API 5.5
+	NetworkTests_CheckTestType CheckTestType = "networkTests"
+
+	// Tests that check that the destination resource
+	// pool can support the virtual machine if it is powered on. The
+	// destination host or cluster is relevant because it will affect the
+	// amount of overhead memory required to run the virtual machine.
+	ResourcePoolTests_CheckTestType CheckTestType = "resourcePoolTests"
+
+	// Tests that examine only the configuration
+	// of the virtual machine and its current host; the destination
+	// resource pool and host or cluster are irrelevant.
+	SourceTests_CheckTestType CheckTestType = "sourceTests"
+)
+
+//
+// The ClusterDasAamNodeStateDasState enumerated type defines
+// values for host HA configuration and runtime state properties
+// (configState and
+// runtimeState).
+//
+//
+type ClusterDasAamNodeStateDasState string
+
+const (
+
+	// The HA agent has been shut down.
+	AgentShutdown_ClusterDasAamNodeStateDasState ClusterDasAamNodeStateDasState = "agentShutdown"
+
+	// HA configuration is in progress.
+	Configuring_ClusterDasAamNodeStateDasState ClusterDasAamNodeStateDasState = "configuring"
+
+	// There is an error condition. This can represent a configuration
+	// error or a host agent runtime error.
+	Error_ClusterDasAamNodeStateDasState ClusterDasAamNodeStateDasState = "error"
+
+	// HA agents have been installed but are not running on the the host.
+	Initialized_ClusterDasAamNodeStateDasState ClusterDasAamNodeStateDasState = "initialized"
+
+	// The host is not reachable. This can represent a host failure
+	// or an isolated host.
+	NodeFailed_ClusterDasAamNodeStateDasState ClusterDasAamNodeStateDasState = "nodeFailed"
+
+	// HA agent is running on this host.
+	Running_ClusterDasAamNodeStateDasState ClusterDasAamNodeStateDasState = "running"
+
+	// HA configuration is being removed.
+	Unconfiguring_ClusterDasAamNodeStateDasState ClusterDasAamNodeStateDasState = "unconfiguring"
+
+	// HA has never been enabled on the the host.
+	Uninitialized_ClusterDasAamNodeStateDasState ClusterDasAamNodeStateDasState = "uninitialized"
+)
+
+//
+// The policy to determine the candidates from which vCenter Server can
+// choose heartbeat datastores.
+//
+//
+type ClusterDasConfigInfoHBDatastoreCandidate string
+
+const (
+
+	// vCenter Server chooses heartbeat datastores from all the feasible ones,
+	// i.e., the datastores that are accessible to more than one host in
+	// the cluster. The choice will be made without giving preference to those
+	// specified by the user (see heartbeatDatastore).
+	AllFeasibleDs_ClusterDasConfigInfoHBDatastoreCandidate ClusterDasConfigInfoHBDatastoreCandidate = "allFeasibleDs"
+
+	// vCenter Server chooses heartbeat datastores from all the feasible ones
+	// while giving preference to those specified by the user (see heartbeatDatastore).
+	// More specifically, the datastores not included in heartbeatDatastore will be
+	// chosen if and only if the specified ones are not sufficient.
+	AllFeasibleDsWithUserPreference_ClusterDasConfigInfoHBDatastoreCandidate ClusterDasConfigInfoHBDatastoreCandidate = "allFeasibleDsWithUserPreference"
+
+	// vCenter Server chooses heartbeat datastores from the set specified
+	// by the user (see heartbeatDatastore). More specifically,
+	// datastores not included in the set will not be chosen. Note that if
+	// heartbeatDatastore is empty, datastore heartbeating will
+	// be disabled for HA.
+	UserSelectedDs_ClusterDasConfigInfoHBDatastoreCandidate ClusterDasConfigInfoHBDatastoreCandidate = "userSelectedDs"
+)
+
+//
+// Possible states of an HA service. All services support the
+// disabled and enabled states.
+//
+//
+type ClusterDasConfigInfoServiceState string
+
+const (
+
+	// HA service is disabled.
+	Disabled_ClusterDasConfigInfoServiceState ClusterDasConfigInfoServiceState = "disabled"
+
+	// HA service is enabled.
+	Enabled_ClusterDasConfigInfoServiceState ClusterDasConfigInfoServiceState = "enabled"
+)
+
+//
+// The ClusterDasConfigInfoVmMonitoringState enum defines values that indicate
+// the state of Virtual Machine Health Monitoring. Health Monitoring
+// uses the vmTools (guest) and application agent heartbeat modules.
+// You can configure HA to respond to heartbeat failures of either one
+// or both modules. You can also disable the HA response to heartbeat failures.
+//
+//
+// •
+// To set the cluster default for health monitoring, use the
+// ClusterConfigSpecEx.dasConfig.vmMonitoring property.
+//
+//
+// •
+// To set health monitoring for a virtual machine, use the
+// ClusterConfigSpecEx.dasVmConfigSpec.info.dasSettings.vmToolsMonitoringSettings property.
+//
+//
+// •
+// To retrieve the current state of health monitoring (cluster setting), use the
+// ClusterConfigInfoEx.dasConfig.vmMonitoring
+// property.
+//
+//
+// •
+// To retrieve the current state of health monitoring for a virtual machine, use the
+// ClusterConfigInfoEx.dasVmConfig[].dasSettings.vmToolsMonitoringSettings.vmMonitoring
+// property.
+//
+//
+//
+//
+//
+//
+type ClusterDasConfigInfoVmMonitoringState string
+
+const (
+
+	// HA response to both guest and application heartbeat failure is enabled.
+	//
+	// To retrieve the guest heartbeat status, use the
+	// VirtualMachine.guestHeartbeatStatus
+	// property.
+	// To retrieve the application heartbeat status, use the
+	// GuestInfo.appHeartbeatStatus
+	// property.
+	VmAndAppMonitoring_ClusterDasConfigInfoVmMonitoringState ClusterDasConfigInfoVmMonitoringState = "vmAndAppMonitoring"
+
+	// Virtual machine health monitoring is disabled. In this state,
+	// HA response to guest and application heartbeat failures are disabled.
+	VmMonitoringDisabled_ClusterDasConfigInfoVmMonitoringState ClusterDasConfigInfoVmMonitoringState = "vmMonitoringDisabled"
+
+	// HA response to guest heartbeat failure is enabled.
+	// To retrieve the guest heartbeat status, use the
+	// VirtualMachine.guestHeartbeatStatus
+	// property.
+	VmMonitoringOnly_ClusterDasConfigInfoVmMonitoringState ClusterDasConfigInfoVmMonitoringState = "vmMonitoringOnly"
 )
 
 //
@@ -312,1426 +512,6 @@ const (
 )
 
 //
-// The method of discovery of an iScsi target.
-// staticMethod: static discovery
-// sendTargetsMethod: sendtarget discovery
-// slpMethod: Service Location Protocol discovery
-// isnsMethod: Internet Storage Name Service discovery
-// unknownMethod: discovery method not identified by iscsi stack
-//
-//
-type HostInternetScsiHbaStaticTargetTargetDiscoveryMethod string
-
-const (
-	IsnsMethod_HostInternetScsiHbaStaticTargetTargetDiscoveryMethod HostInternetScsiHbaStaticTargetTargetDiscoveryMethod = "isnsMethod"
-
-	SendTargetMethod_HostInternetScsiHbaStaticTargetTargetDiscoveryMethod HostInternetScsiHbaStaticTargetTargetDiscoveryMethod = "sendTargetMethod"
-
-	SlpMethod_HostInternetScsiHbaStaticTargetTargetDiscoveryMethod HostInternetScsiHbaStaticTargetTargetDiscoveryMethod = "slpMethod"
-
-	StaticMethod_HostInternetScsiHbaStaticTargetTargetDiscoveryMethod HostInternetScsiHbaStaticTargetTargetDiscoveryMethod = "staticMethod"
-
-	UnknownMethod_HostInternetScsiHbaStaticTargetTargetDiscoveryMethod HostInternetScsiHbaStaticTargetTargetDiscoveryMethod = "unknownMethod"
-)
-
-//
-// This specifies how the ipv6 address is configured for the interface.
-// We follow rfc4293 in defining the values for the configType.
-//
-//
-type HostIpConfigIpV6AddressConfigType string
-
-const (
-
-	// The address is configured through dhcp.
-	Dhcp_HostIpConfigIpV6AddressConfigType HostIpConfigIpV6AddressConfigType = "dhcp"
-
-	// The address is obtained through stateless autoconfiguration.
-	Linklayer_HostIpConfigIpV6AddressConfigType HostIpConfigIpV6AddressConfigType = "linklayer"
-
-	// The address is configured manually.
-	Manual_HostIpConfigIpV6AddressConfigType HostIpConfigIpV6AddressConfigType = "manual"
-
-	// Any other type of address configuration other than the below
-	// mentioned ones will fall under this category. For e.g., automatic
-	// address configuration for the link local address falls under
-	// this type.
-	Other_HostIpConfigIpV6AddressConfigType HostIpConfigIpV6AddressConfigType = "other"
-
-	// The address is chosen by the system at random
-	// e.g., an IPv4 address within 169.254/16, or an RFC
-	// 3041 privacy address.
-	Random_HostIpConfigIpV6AddressConfigType HostIpConfigIpV6AddressConfigType = "random"
-)
-
-//
-// Storage DRS behavior.
-//
-//
-type StorageDrsPodConfigInfoBehavior string
-
-const (
-
-	// Specifies that VirtualCenter should generate recommendations for
-	// virtual disk migration and for placement with a datastore.
-	// The recommendations for virtual disk migrations will be executed automatically,
-	// but the placement recommendations will be done manually.
-	Automated_StorageDrsPodConfigInfoBehavior StorageDrsPodConfigInfoBehavior = "automated"
-
-	// Specifies that VirtualCenter should generate recommendations for
-	// virtual disk migration and for placement with a datastore,
-	// but should not execute the recommendations automatically.
-	Manual_StorageDrsPodConfigInfoBehavior StorageDrsPodConfigInfoBehavior = "manual"
-)
-
-//
-// The type of component connected to a port group.
-//
-//
-type PortGroupConnecteeType string
-
-const (
-
-	// The VMkernel is connected to this port group.
-	Host_PortGroupConnecteeType PortGroupConnecteeType = "host"
-
-	// A system management entity (service console)
-	// is connected to this port group.
-	SystemManagement_PortGroupConnecteeType PortGroupConnecteeType = "systemManagement"
-
-	// This port group serves an entity of unspecified kind.
-	Unknown_PortGroupConnecteeType PortGroupConnecteeType = "unknown"
-
-	// A virtual machine is connected to this port group.
-	VirtualMachine_PortGroupConnecteeType PortGroupConnecteeType = "virtualMachine"
-)
-
-//
-// Firmware types
-//
-//
-type GuestOsDescriptorFirmwareType string
-
-const (
-
-	// BIOS firmware
-	Bios_GuestOsDescriptorFirmwareType GuestOsDescriptorFirmwareType = "bios"
-
-	// Extensible Firmware Interface
-	Efi_GuestOsDescriptorFirmwareType GuestOsDescriptorFirmwareType = "efi"
-)
-
-//
-// The policy setting used to determine when to perform scheduled
-// upgrades for a virtual machine.
-//
-//
-type ScheduledHardwareUpgradeInfoHardwareUpgradePolicy string
-
-const (
-
-	// Always run scheduled upgrades.
-	Always_ScheduledHardwareUpgradeInfoHardwareUpgradePolicy ScheduledHardwareUpgradeInfoHardwareUpgradePolicy = "always"
-
-	// No scheduled upgrades.
-	Never_ScheduledHardwareUpgradeInfoHardwareUpgradePolicy ScheduledHardwareUpgradeInfoHardwareUpgradePolicy = "never"
-
-	// Run scheduled upgrades only on normal guest OS shutdown.
-	OnSoftPowerOff_ScheduledHardwareUpgradeInfoHardwareUpgradePolicy ScheduledHardwareUpgradeInfoHardwareUpgradePolicy = "onSoftPowerOff"
-)
-
-//
-// Specifies the connectable virtual device status.
-//
-//
-type VirtualDeviceConnectInfoStatus string
-
-const (
-
-	// The device is working correctly.
-	Ok_VirtualDeviceConnectInfoStatus VirtualDeviceConnectInfoStatus = "ok"
-
-	// The device has reported a recoverable error. For example,
-	// attempting to connect to floppy device that is being used by
-	// another virtual machine or some other program would result in
-	// this status.
-	RecoverableError_VirtualDeviceConnectInfoStatus VirtualDeviceConnectInfoStatus = "recoverableError"
-
-	// The device cannot be used. For example, attempting to connect to
-	// a floppy device that does not exist would result in this status.
-	UnrecoverableError_VirtualDeviceConnectInfoStatus VirtualDeviceConnectInfoStatus = "unrecoverableError"
-
-	// The device status is unknown, or it has not been requested to
-	// connect when the VM is powered on.
-	Untried_VirtualDeviceConnectInfoStatus VirtualDeviceConnectInfoStatus = "untried"
-)
-
-//
-// The types of tests which can requested by any of the methods in either
-// VirtualMachineCompatibilityChecker or VirtualMachineProvisioningChecker.
-//
-//
-type CheckTestType string
-
-const (
-
-	// Tests that check that the
-	// destination host or cluster can see the datastores where the virtual
-	// machine's virtual disks are going to be located. The destination
-	// resource pool is irrelevant.
-	DatastoreTests_CheckTestType CheckTestType = "datastoreTests"
-
-	// Tests that examine both the virtual
-	// machine and the destination host or cluster; the destination
-	// resource pool is irrelevant. This set excludes tests that fall
-	// into the datastoreTests group.
-	HostTests_CheckTestType CheckTestType = "hostTests"
-
-	// Tests that check that the
-	// destination host or cluster can see the networks that the virtual
-	// machine's virtual nic devices are going to be connected.
-	//
-	// Since vSphere API 5.5
-	NetworkTests_CheckTestType CheckTestType = "networkTests"
-
-	// Tests that check that the destination resource
-	// pool can support the virtual machine if it is powered on. The
-	// destination host or cluster is relevant because it will affect the
-	// amount of overhead memory required to run the virtual machine.
-	ResourcePoolTests_CheckTestType CheckTestType = "resourcePoolTests"
-
-	// Tests that examine only the configuration
-	// of the virtual machine and its current host; the destination
-	// resource pool and host or cluster are irrelevant.
-	SourceTests_CheckTestType CheckTestType = "sourceTests"
-)
-
-type NetIpConfigInfoIpAddressStatus string
-
-const (
-
-	// Indicates that this is a valid but deprecated address
-	// that should no longer be used as a source address.
-	Deprecated_NetIpConfigInfoIpAddressStatus NetIpConfigInfoIpAddressStatus = "deprecated"
-
-	// Indicates the address has been determined to be non-unique
-	// on the link, this address will not be reachable.
-	Duplicate_NetIpConfigInfoIpAddressStatus NetIpConfigInfoIpAddressStatus = "duplicate"
-
-	// Indicates that the address is not accessible because
-	// interface is not operational.
-	Inaccessible_NetIpConfigInfoIpAddressStatus NetIpConfigInfoIpAddressStatus = "inaccessible"
-
-	// Indicates that this isn't a valid.
-	Invalid_NetIpConfigInfoIpAddressStatus NetIpConfigInfoIpAddressStatus = "invalid"
-
-	// Indicates that this is a valid address.
-	Preferred_NetIpConfigInfoIpAddressStatus NetIpConfigInfoIpAddressStatus = "preferred"
-
-	// Indicates that the uniqueness of the
-	// address on the link is presently being verified.
-	Tentative_NetIpConfigInfoIpAddressStatus NetIpConfigInfoIpAddressStatus = "tentative"
-
-	// Indicates that the status cannot be determined.
-	Unknown_NetIpConfigInfoIpAddressStatus NetIpConfigInfoIpAddressStatus = "unknown"
-)
-
-//
-// Defines a host's connection state.
-//
-//
-type HostSystemConnectionState string
-
-const (
-
-	// Connected to the server. For ESX Server, this is always the setting.
-	Connected_HostSystemConnectionState HostSystemConnectionState = "connected"
-
-	// The user has explicitly taken the host down. VirtualCenter does not expect to
-	// receive heartbeats from the host. The next time a heartbeat is received, the
-	// host is moved to the connected state again and an event is logged.
-	Disconnected_HostSystemConnectionState HostSystemConnectionState = "disconnected"
-
-	// VirtualCenter is not receiving heartbeats from the server. The state
-	// automatically changes to connected once heartbeats are received
-	// again. This state is typically used to trigger an alarm on the host.
-	NotResponding_HostSystemConnectionState HostSystemConnectionState = "notResponding"
-)
-
-//
-// Define the instance state type
-//
-//
-type HostRuntimeInfoNetStackInstanceRuntimeInfoState string
-
-const (
-
-	// Reserved state for future proofing asynchronous creation
-	Activating_HostRuntimeInfoNetStackInstanceRuntimeInfoState HostRuntimeInfoNetStackInstanceRuntimeInfoState = "activating"
-
-	// The instance is running
-	Active_HostRuntimeInfoNetStackInstanceRuntimeInfoState HostRuntimeInfoNetStackInstanceRuntimeInfoState = "active"
-
-	// The instance is in the progress of asynchronous deletion
-	Deactivating_HostRuntimeInfoNetStackInstanceRuntimeInfoState HostRuntimeInfoNetStackInstanceRuntimeInfoState = "deactivating"
-
-	// The instance is deleted or not running
-	Inactive_HostRuntimeInfoNetStackInstanceRuntimeInfoState HostRuntimeInfoNetStackInstanceRuntimeInfoState = "inactive"
-)
-
-//
-// A datastore can become inaccessible due to a number of reasons as
-// defined in this enum InaccessibleReason.
-// The reason for a datastore being inaccessibile is reported in
-// inaccessibleReason.
-//
-// APD ("All Paths Down") is a condition where a SAN or NFS storage has
-// become inaccessible for unknown reasons. It only indicates loss of
-// connectivity and does not indicate storage device failure or
-// LUN removal (Permanent Device Loss or PDL)
-//
-// A difference between APD and PDL is that APD may recover
-// in which case all use cases will start to work as before. In case of PDL
-// the failed datastore/device is unlikely to recover and hence the device
-// path information and data cache will be emptied. If the PDL condition
-// recovers, the failed datastores have to be added back to the host. Once
-// in PDL a datastore cannot be added back until there are no longer any
-// open files on the datastore.
-//
-// PDL is not linked to the APD and can happen at any time with or without APD
-// preceding. If APD and PDL occur at the same time, APD  will be reported first.
-// Once (and if) the APD condition clears, PermanentDataLoss will be reported if
-// PDL condition still exists.
-//
-//
-type HostMountInfoInaccessibleReason string
-
-const (
-
-	// AllPathsDown_Start value is reported when all paths down state is detected
-	AllPathsDown_Start_HostMountInfoInaccessibleReason HostMountInfoInaccessibleReason = "AllPathsDown_Start"
-
-	// After a wait for a system default time (which is user modifiable)
-	// to ascertain the state is indeed an APD, AllPathsDown_Timeout property
-	// is reported. The host advanced option used to set timeout period
-	// is "/Misc/APDTimeout"
-	//
-	// After the datastore property is set to AllPathsDown_Timeout, all data i/o
-	// to the datastore will be fast-failed (failed immediately).
-	AllPathsDown_Timeout_HostMountInfoInaccessibleReason HostMountInfoInaccessibleReason = "AllPathsDown_Timeout"
-
-	// A PDL condition is reported as PermanentDeviceLoss.
-	PermanentDeviceLoss_HostMountInfoInaccessibleReason HostMountInfoInaccessibleReason = "PermanentDeviceLoss"
-)
-
-//
-// The current status of the hardware
-//
-//
-type HostHardwareElementStatus string
-
-const (
-
-	// The physical element is functioning as expected
-	Green_HostHardwareElementStatus HostHardwareElementStatus = "Green"
-
-	// The physical element is failing. It is possible that some or all
-	// functionalities of this physical element is degraded or not working.
-	Red_HostHardwareElementStatus HostHardwareElementStatus = "Red"
-
-	// The implementation cannot report on the current status of the
-	// physical element
-	Unknown_HostHardwareElementStatus HostHardwareElementStatus = "Unknown"
-
-	// All functionality is available but some might be degraded.
-	Yellow_HostHardwareElementStatus HostHardwareElementStatus = "Yellow"
-)
-
-//
-// Possible values for Current CPU power management policy
-//
-//
-type HostCpuPowerManagementInfoPolicyType string
-
-const (
-	DynamicPolicy_HostCpuPowerManagementInfoPolicyType HostCpuPowerManagementInfoPolicyType = "dynamicPolicy"
-
-	Off_HostCpuPowerManagementInfoPolicyType HostCpuPowerManagementInfoPolicyType = "off"
-
-	StaticPolicy_HostCpuPowerManagementInfoPolicyType HostCpuPowerManagementInfoPolicyType = "staticPolicy"
-)
-
-//
-// Reasons why fault tolerance is not supported on the host.
-//
-//
-type HostIncompatibleForFaultToleranceReason string
-
-const (
-
-	// The product supports fault tolerance but the host CPU does not.
-	Processor_HostIncompatibleForFaultToleranceReason HostIncompatibleForFaultToleranceReason = "processor"
-
-	// The product does not support fault tolerance.
-	Product_HostIncompatibleForFaultToleranceReason HostIncompatibleForFaultToleranceReason = "product"
-)
-
-//
-// Possible states of an HA service. All services support the
-// disabled and enabled states.
-//
-//
-type ClusterDasConfigInfoServiceState string
-
-const (
-
-	// HA service is disabled.
-	Disabled_ClusterDasConfigInfoServiceState ClusterDasConfigInfoServiceState = "disabled"
-
-	// HA service is enabled.
-	Enabled_ClusterDasConfigInfoServiceState ClusterDasConfigInfoServiceState = "enabled"
-)
-
-//
-// Set of valid port protocols.
-//
-//
-type HostFirewallRuleProtocol string
-
-const (
-	Tcp_HostFirewallRuleProtocol HostFirewallRuleProtocol = "tcp"
-
-	Udp_HostFirewallRuleProtocol HostFirewallRuleProtocol = "udp"
-)
-
-//
-// Pre-defined constants for possible creators of log files.
-//
-//
-type DiagnosticManagerLogCreator string
-
-const (
-
-	// Host agent
-	Hostd_DiagnosticManagerLogCreator DiagnosticManagerLogCreator = "hostd"
-
-	// Installation
-	Install_DiagnosticManagerLogCreator DiagnosticManagerLogCreator = "install"
-
-	// System Record Log
-	//
-	// Since VI API 2.5
-	RecordLog_DiagnosticManagerLogCreator DiagnosticManagerLogCreator = "recordLog"
-
-	// Host server agent
-	Serverd_DiagnosticManagerLogCreator DiagnosticManagerLogCreator = "serverd"
-
-	// VirtualCenter agent
-	Vpxa_DiagnosticManagerLogCreator DiagnosticManagerLogCreator = "vpxa"
-
-	// Virtual infrastructure client
-	VpxClient_DiagnosticManagerLogCreator DiagnosticManagerLogCreator = "vpxClient"
-
-	// VirtualCenter service
-	Vpxd_DiagnosticManagerLogCreator DiagnosticManagerLogCreator = "vpxd"
-)
-
-//
-// Config spec operation type.
-//
-//
-type ConfigSpecOperation string
-
-const (
-
-	// Indicates the addition of an element to the configuration.
-	Add_ConfigSpecOperation ConfigSpecOperation = "add"
-
-	// Indicates the change of an element in the configuration.
-	Edit_ConfigSpecOperation ConfigSpecOperation = "edit"
-
-	// Indicates the removal of an element in the configuration.
-	Remove_ConfigSpecOperation ConfigSpecOperation = "remove"
-)
-
-//
-// Indicates the unit of measure represented by a counter or statistical
-// value.
-//
-//
-type PerformanceManagerUnit string
-
-const (
-
-	// Joules
-	//
-	// Since vSphere API 4.1
-	Joule_PerformanceManagerUnit PerformanceManagerUnit = "joule"
-
-	// Kilobytes.
-	KiloBytes_PerformanceManagerUnit PerformanceManagerUnit = "kiloBytes"
-
-	// Kilobytes per second.
-	KiloBytesPerSecond_PerformanceManagerUnit PerformanceManagerUnit = "kiloBytesPerSecond"
-
-	// Megabytes.
-	MegaBytes_PerformanceManagerUnit PerformanceManagerUnit = "megaBytes"
-
-	// Megabytes per second.
-	MegaBytesPerSecond_PerformanceManagerUnit PerformanceManagerUnit = "megaBytesPerSecond"
-
-	// Megahertz.
-	MegaHertz_PerformanceManagerUnit PerformanceManagerUnit = "megaHertz"
-
-	// The time in microseconds.
-	//
-	// Since vSphere API 4.0
-	Microsecond_PerformanceManagerUnit PerformanceManagerUnit = "microsecond"
-
-	// The time in milliseconds.
-	Millisecond_PerformanceManagerUnit PerformanceManagerUnit = "millisecond"
-
-	// A quantity of items, for example, the number of CPUs.
-	Number_PerformanceManagerUnit PerformanceManagerUnit = "number"
-
-	// Percentage values in units of 1/100th of a percent. For example 100
-	// represents 1%.
-	Percent_PerformanceManagerUnit PerformanceManagerUnit = "percent"
-
-	// The time in seconds.
-	Second_PerformanceManagerUnit PerformanceManagerUnit = "second"
-
-	// Watts
-	//
-	// Since vSphere API 4.1
-	Watt_PerformanceManagerUnit PerformanceManagerUnit = "watt"
-)
-
-//
-// Define TCP congestion control algorithm used by an instance
-//
-//
-type HostNetStackInstanceCongestionControlAlgorithmType string
-
-const (
-
-	// Cubic Algorithm.
-	// See http://tools.ietf.org/id/draft-rhee-tcp-cubic-00.txt for detail.
-	Cubic_HostNetStackInstanceCongestionControlAlgorithmType HostNetStackInstanceCongestionControlAlgorithmType = "cubic"
-
-	// New Reno Algorithm.
-	// See http://tools.ietf.org/html/rfc3782 for detail.
-	Newreno_HostNetStackInstanceCongestionControlAlgorithmType HostNetStackInstanceCongestionControlAlgorithmType = "newreno"
-)
-
-type VFlashModuleNotSupportedReason string
-
-const (
-	CacheBlockSizeNotSupported_VFlashModuleNotSupportedReason VFlashModuleNotSupportedReason = "CacheBlockSizeNotSupported"
-
-	CacheConsistencyTypeNotSupported_VFlashModuleNotSupportedReason VFlashModuleNotSupportedReason = "CacheConsistencyTypeNotSupported"
-
-	CacheModeNotSupported_VFlashModuleNotSupportedReason VFlashModuleNotSupportedReason = "CacheModeNotSupported"
-
-	CacheReservationNotSupported_VFlashModuleNotSupportedReason VFlashModuleNotSupportedReason = "CacheReservationNotSupported"
-
-	DiskSizeNotSupported_VFlashModuleNotSupportedReason VFlashModuleNotSupportedReason = "DiskSizeNotSupported"
-)
-
-//
-// These constant strings can be used as parameters in user-specified
-// email subject and body templates as well as in scripts. The action processor
-// in VirtualCenter substitutes the run-time values for the parameters.
-//
-// For example, an email subject provided by the client could be the string:
-// "Alarm - {alarmName} Description:\n{eventDescription}".
-// Or a script action provided could be: "myScript {alarmName}"
-//
-//
-type ActionParameter string
-
-const (
-
-	// The object of the triggering alarm.
-	Alarm_ActionParameter ActionParameter = "alarm"
-
-	// The name of the triggering alarm.
-	AlarmName_ActionParameter ActionParameter = "alarmName"
-
-	// A summary of declarations made during the triggering of the alarm.
-	DeclaringSummary_ActionParameter ActionParameter = "declaringSummary"
-
-	// The event description.
-	EventDescription_ActionParameter ActionParameter = "eventDescription"
-
-	// The status after the alarm is triggered.
-	NewStatus_ActionParameter ActionParameter = "newStatus"
-
-	// The status prior to the alarm being triggered.
-	OldStatus_ActionParameter ActionParameter = "oldStatus"
-
-	// The object of the entity where the alarm is assocaited.
-	Target_ActionParameter ActionParameter = "target"
-
-	// The name of the entity where the alarm is triggered.
-	TargetName_ActionParameter ActionParameter = "targetName"
-
-	// A summary of information involved in triggering the alarm.
-	TriggeringSummary_ActionParameter ActionParameter = "triggeringSummary"
-)
-
-//
-// Enumeration of different kinds of updates.
-//
-//
-type ObjectUpdateKind string
-
-const (
-
-	// A managed object became visible to a filter for the first time.
-	// For instance, this can happen if a virtual machine is added to a
-	// folder.
-	Enter_ObjectUpdateKind ObjectUpdateKind = "enter"
-
-	// A managed object left the set of objects visible to a filter.  For
-	// instance, this can happen when a virtual machine is destroyed.
-	Leave_ObjectUpdateKind ObjectUpdateKind = "leave"
-
-	// A property of the managed object changed its value.
-	Modify_ObjectUpdateKind ObjectUpdateKind = "modify"
-)
-
-//
-// The available iSNS discovery methods.
-//
-//
-type InternetScsiSnsDiscoveryMethod string
-
-const (
-	IsnsDhcp_InternetScsiSnsDiscoveryMethod InternetScsiSnsDiscoveryMethod = "isnsDhcp"
-
-	IsnsSlp_InternetScsiSnsDiscoveryMethod InternetScsiSnsDiscoveryMethod = "isnsSlp"
-
-	IsnsStatic_InternetScsiSnsDiscoveryMethod InternetScsiSnsDiscoveryMethod = "isnsStatic"
-)
-
-//
-// This list specifies the type of operation being performed on the array.
-//
-//
-type ArrayUpdateOperation string
-
-const (
-
-	// indicates an addition to the array.
-	Add_ArrayUpdateOperation ArrayUpdateOperation = "add"
-
-	// indicates changes to an element in the array.
-	Edit_ArrayUpdateOperation ArrayUpdateOperation = "edit"
-
-	// indicates the removal of an element in the
-	// array. In this case the key field must contain the key of the element
-	// to be removed.
-	Remove_ArrayUpdateOperation ArrayUpdateOperation = "remove"
-)
-
-//
-// HostSelectionType defines how the host was selected
-//
-//
-type FtIssuesOnHostHostSelectionType string
-
-const (
-
-	// The host was selected by DRS
-	Drs_FtIssuesOnHostHostSelectionType FtIssuesOnHostHostSelectionType = "drs"
-
-	// The host was specified by the user
-	User_FtIssuesOnHostHostSelectionType FtIssuesOnHostHostSelectionType = "user"
-
-	// The host was selected by Virtual Center
-	Vc_FtIssuesOnHostHostSelectionType FtIssuesOnHostHostSelectionType = "vc"
-)
-
-type HostDasErrorEventHostDasErrorReason string
-
-const (
-
-	// HA agent has an error
-	AgentFailed_HostDasErrorEventHostDasErrorReason HostDasErrorEventHostDasErrorReason = "agentFailed"
-
-	// HA agent was shutdown
-	AgentShutdown_HostDasErrorEventHostDasErrorReason HostDasErrorEventHostDasErrorReason = "agentShutdown"
-
-	// HA communication initialization failed
-	CommunicationInitFailed_HostDasErrorEventHostDasErrorReason HostDasErrorEventHostDasErrorReason = "communicationInitFailed"
-
-	// Error while configuring/unconfiguring HA
-	ConfigFailed_HostDasErrorEventHostDasErrorReason HostDasErrorEventHostDasErrorReason = "configFailed"
-
-	// Health check script failed
-	HealthCheckScriptFailed_HostDasErrorEventHostDasErrorReason HostDasErrorEventHostDasErrorReason = "healthCheckScriptFailed"
-
-	// HA isolation address unpingable
-	//
-	// Since vSphere API 4.1
-	IsolationAddressUnpingable_HostDasErrorEventHostDasErrorReason HostDasErrorEventHostDasErrorReason = "isolationAddressUnpingable"
-
-	// Other reason
-	Other_HostDasErrorEventHostDasErrorReason HostDasErrorEventHostDasErrorReason = "other"
-
-	// Timeout while communicating with HA agent
-	Timeout_HostDasErrorEventHostDasErrorReason HostDasErrorEventHostDasErrorReason = "timeout"
-)
-
-//
-// Acceptance level definitions
-//
-//
-type HostImageAcceptanceLevel string
-
-const (
-
-	// "Community-supported"
-	Community_HostImageAcceptanceLevel HostImageAcceptanceLevel = "community"
-
-	// "Partner-supported"
-	Partner_HostImageAcceptanceLevel HostImageAcceptanceLevel = "partner"
-
-	// "VMware-accepted"
-	Vmware_accepted_HostImageAcceptanceLevel HostImageAcceptanceLevel = "vmware_accepted"
-
-	// "VMware-certified"
-	Vmware_certified_HostImageAcceptanceLevel HostImageAcceptanceLevel = "vmware_certified"
-)
-
-//
-// Pre-defined constants for possible recommendation types. Virtual Center
-// uses this information to coordinate with the clients.
-//
-//
-type RecommendationType string
-
-const (
-	V1_RecommendationType RecommendationType = "V1"
-)
-
-//
-// The ClusterDasConfigInfoVmMonitoringState enum defines values that indicate
-// the state of Virtual Machine Health Monitoring. Health Monitoring
-// uses the vmTools (guest) and application agent heartbeat modules.
-// You can configure HA to respond to heartbeat failures of either one
-// or both modules. You can also disable the HA response to heartbeat failures.
-//
-//
-// •
-// To set the cluster default for health monitoring, use the
-// ClusterConfigSpecEx.dasConfig.vmMonitoring property.
-//
-//
-// •
-// To set health monitoring for a virtual machine, use the
-// ClusterConfigSpecEx.dasVmConfigSpec.info.dasSettings.vmToolsMonitoringSettings property.
-//
-//
-// •
-// To retrieve the current state of health monitoring (cluster setting), use the
-// ClusterConfigInfoEx.dasConfig.vmMonitoring
-// property.
-//
-//
-// •
-// To retrieve the current state of health monitoring for a virtual machine, use the
-// ClusterConfigInfoEx.dasVmConfig[].dasSettings.vmToolsMonitoringSettings.vmMonitoring
-// property.
-//
-//
-//
-//
-//
-//
-type ClusterDasConfigInfoVmMonitoringState string
-
-const (
-
-	// HA response to both guest and application heartbeat failure is enabled.
-	//
-	// To retrieve the guest heartbeat status, use the
-	// VirtualMachine.guestHeartbeatStatus
-	// property.
-	// To retrieve the application heartbeat status, use the
-	// GuestInfo.appHeartbeatStatus
-	// property.
-	VmAndAppMonitoring_ClusterDasConfigInfoVmMonitoringState ClusterDasConfigInfoVmMonitoringState = "vmAndAppMonitoring"
-
-	// Virtual machine health monitoring is disabled. In this state,
-	// HA response to guest and application heartbeat failures are disabled.
-	VmMonitoringDisabled_ClusterDasConfigInfoVmMonitoringState ClusterDasConfigInfoVmMonitoringState = "vmMonitoringDisabled"
-
-	// HA response to guest heartbeat failure is enabled.
-	// To retrieve the guest heartbeat status, use the
-	// VirtualMachine.guestHeartbeatStatus
-	// property.
-	VmMonitoringOnly_ClusterDasConfigInfoVmMonitoringState ClusterDasConfigInfoVmMonitoringState = "vmMonitoringOnly"
-)
-
-//
-// Enumerates different operations supported for comparing
-// numerical values.
-//
-//
-type ProfileNumericComparator string
-
-const (
-	Equal_ProfileNumericComparator ProfileNumericComparator = "equal"
-
-	GreaterThan_ProfileNumericComparator ProfileNumericComparator = "greaterThan"
-
-	GreaterThanEqual_ProfileNumericComparator ProfileNumericComparator = "greaterThanEqual"
-
-	LessThan_ProfileNumericComparator ProfileNumericComparator = "lessThan"
-
-	LessThanEqual_ProfileNumericComparator ProfileNumericComparator = "lessThanEqual"
-
-	NotEqual_ProfileNumericComparator ProfileNumericComparator = "notEqual"
-)
-
-type NotSupportedDeviceForFTDeviceType string
-
-const (
-
-	// paravirtualized SCSI controller
-	ParaVirtualSCSIController_NotSupportedDeviceForFTDeviceType NotSupportedDeviceForFTDeviceType = "paraVirtualSCSIController"
-
-	// vmxnet3 virtual Ethernet adapter
-	VirtualVmxnet3_NotSupportedDeviceForFTDeviceType NotSupportedDeviceForFTDeviceType = "virtualVmxnet3"
-)
-
-//
-// A VsanHostHealthState represents the state of a participating
-// host in the VSAN service.See VsanHostClusterStatus
-//
-//
-type VsanHostHealthState string
-
-const (
-
-	// Node is considered healthy.
-	Healthy_VsanHostHealthState VsanHostHealthState = "healthy"
-
-	// Node is considered unhealthy.
-	Unhealthy_VsanHostHealthState VsanHostHealthState = "unhealthy"
-
-	// Node health is unknown.
-	Unknown_VsanHostHealthState VsanHostHealthState = "unknown"
-)
-
-//
-// Describes the state of the host proxy switch.
-//
-//
-type DistributedVirtualSwitchHostMemberHostComponentState string
-
-const (
-
-	// The host is disconnected or it is not responding.
-	Disconnected_DistributedVirtualSwitchHostMemberHostComponentState DistributedVirtualSwitchHostMemberHostComponentState = "disconnected"
-
-	// The host proxy is down.
-	Down_DistributedVirtualSwitchHostMemberHostComponentState DistributedVirtualSwitchHostMemberHostComponentState = "down"
-
-	// The proxy switch configuration is not the same as the
-	// distributed virtual switch configuration in the vCenter Server.
-	OutOfSync_DistributedVirtualSwitchHostMemberHostComponentState DistributedVirtualSwitchHostMemberHostComponentState = "outOfSync"
-
-	// The host proxy switch is waiting to be initialized.
-	Pending_DistributedVirtualSwitchHostMemberHostComponentState DistributedVirtualSwitchHostMemberHostComponentState = "pending"
-
-	// The host proxy switch is up and running.
-	Up_DistributedVirtualSwitchHostMemberHostComponentState DistributedVirtualSwitchHostMemberHostComponentState = "up"
-
-	// The host requires attention.
-	Warning_DistributedVirtualSwitchHostMemberHostComponentState DistributedVirtualSwitchHostMemberHostComponentState = "warning"
-)
-
-//
-// The PowerState type defines a simple set of states for a virtual machine:
-// poweredOn, poweredOff, and suspended. This type does not model substates,
-// such as when a task is running to change the virtual machine state.
-// If the virtual machine is in a state with a task in progress, it
-// transitions to a new state when the task completes. For example, a virtual
-// machine continues to be in the poweredOn state while a suspend task
-// is running, and changes to the suspended state once the task finishes.
-//
-// As a consequence of this approach, clients interested in monitoring
-// the status of a virtual machine should typically track the
-// activeTask data object in addition to the
-// powerState object.
-//
-//
-//
-type VirtualMachinePowerState string
-
-const (
-
-	// The virtual machine is currently powered off.
-	PoweredOff_VirtualMachinePowerState VirtualMachinePowerState = "poweredOff"
-
-	// The virtual machine is currently powered on.
-	PoweredOn_VirtualMachinePowerState VirtualMachinePowerState = "poweredOn"
-
-	// The virtual machine is currently suspended.
-	Suspended_VirtualMachinePowerState VirtualMachinePowerState = "suspended"
-)
-
-//
-// The HostProfileManagerAnswerFileStatus enum
-// defines possible values for answer file status.
-//
-//
-type HostProfileManagerAnswerFileStatus string
-
-const (
-
-	// Answer file is not valid. The file is either missing or incomplete.
-	//
-	// To produce an answer file, pass host-specific data (user input) to the
-	// HostProfileManager.ApplyHostConfig_Task
-	// method.
-	// To produce a complete answer file, call the
-	// HostProfile.ExecuteHostProfile
-	// method and fill in any missing parameters in the returned
-	// ProfileExecuteResult.requireInput
-	// list. After you execute the profile successfully, you can pass the complete required
-	// input list to the apply method.
-	Invalid_HostProfileManagerAnswerFileStatus HostProfileManagerAnswerFileStatus = "invalid"
-
-	// Answer file status is not known.
-	Unknown_HostProfileManagerAnswerFileStatus HostProfileManagerAnswerFileStatus = "unknown"
-
-	// Answer file is valid.
-	Valid_HostProfileManagerAnswerFileStatus HostProfileManagerAnswerFileStatus = "valid"
-)
-
-//
-// Indicates how multiple samples of a specific counter type are
-// transformed into a single statistical value.
-//
-//
-type PerfSummaryType string
-
-const (
-
-	// The actual value collected or the average of all values collected
-	// during the summary period.
-	Average_PerfSummaryType PerfSummaryType = "average"
-
-	// The most recent value of the performance counter over the
-	// summarization period.
-	Latest_PerfSummaryType PerfSummaryType = "latest"
-
-	// The maximum value of the performance counter value over the
-	// summarization period.
-	Maximum_PerfSummaryType PerfSummaryType = "maximum"
-
-	// The minimum value of the performance counter value over the
-	// summarization period.
-	Minimum_PerfSummaryType PerfSummaryType = "minimum"
-
-	// The counter is never rolled up.
-	None_PerfSummaryType PerfSummaryType = "none"
-
-	// The sum of all the values of the performance counter over the
-	// summarization period.
-	Summation_PerfSummaryType PerfSummaryType = "summation"
-)
-
-//
-// The EntityImportType enum defines the import type for a
-// DistributedVirtualSwitchManager.DVSManagerImportEntity_Task
-// operation.
-//
-//
-type EntityImportType string
-
-const (
-
-	// Apply the configuration specified in the
-	// EntityBackupConfig.configBlob
-	// property to the entity specified in the
-	// EntityBackupConfig.entityType and
-	// EntityBackupConfig.key
-	// properties. If you specify
-	// EntityBackupConfig.name,
-	// the Server uses the specified name to rename the entity.
-	//
-	// The Server ignores any value for the
-	// EntityBackupConfig.container
-	// property.
-	ApplyToEntitySpecified_EntityImportType EntityImportType = "applyToEntitySpecified"
-
-	// Create the entity with new identifiers. Specify the
-	// EntityBackupConfig.name and
-	// EntityBackupConfig.container
-	// properties.
-	//
-	// The Server ignores any value for the
-	// EntityBackupConfig.key
-	// property.
-	CreateEntityWithNewIdentifier_EntityImportType EntityImportType = "createEntityWithNewIdentifier"
-
-	// Recreate the entities with the original identifiers of the entity from which backup was created.
-	// The Server throws an exception if an entity with the same identifier already exists.
-	// This option will also add the host members to the DistributedVirtualSwitch and will
-	// try to get the virtual machine networking back with the same DistributedVirtualPortgroup.
-	// Specify a Folder as the
-	// EntityBackupConfig.container
-	// for EntityBackupConfig.entityType
-	// "distributedVirtualSwitch".
-	//
-	// The Server ignores any values for the
-	// EntityBackupConfig.key and
-	// EntityBackupConfig.name
-	// properties.
-	CreateEntityWithOriginalIdentifier_EntityImportType EntityImportType = "createEntityWithOriginalIdentifier"
-)
-
-type DayOfWeek string
-
-const (
-	Friday_DayOfWeek DayOfWeek = "friday"
-
-	Monday_DayOfWeek DayOfWeek = "monday"
-
-	Saturday_DayOfWeek DayOfWeek = "saturday"
-
-	Sunday_DayOfWeek DayOfWeek = "sunday"
-
-	Thursday_DayOfWeek DayOfWeek = "thursday"
-
-	Tuesday_DayOfWeek DayOfWeek = "tuesday"
-
-	Wednesday_DayOfWeek DayOfWeek = "wednesday"
-)
-
-//
-// The type of diagnostic partition. Private diagnostic partition has one
-// slot, so can only be used by one host. Shared diagnostic parititon
-// needs multiple slots so to be usable by multiple hosts.
-//
-//
-type DiagnosticPartitionType string
-
-const (
-	MultiHost_DiagnosticPartitionType DiagnosticPartitionType = "multiHost"
-
-	SingleHost_DiagnosticPartitionType DiagnosticPartitionType = "singleHost"
-)
-
-//
-// List of possible states of a task.
-//
-//
-type TaskInfoState string
-
-const (
-
-	// When a running task has encountered an error.
-	Error_TaskInfoState TaskInfoState = "error"
-
-	// When there are too many tasks for threads to handle.
-	Queued_TaskInfoState TaskInfoState = "queued"
-
-	// When the busy thread is freed from its current task by
-	// finishing the task, it picks a queued task to run.
-	// Then the queued tasks are marked as running.
-	Running_TaskInfoState TaskInfoState = "running"
-
-	// When a running task has completed.
-	Success_TaskInfoState TaskInfoState = "success"
-)
-
-//
-// The meta tag names recognizable in the
-// portNameFormat string.
-//
-//
-type DistributedVirtualPortgroupMetaTagName string
-
-const (
-
-	// This tag will be expanded to the name of the switch.
-	DvsName_DistributedVirtualPortgroupMetaTagName DistributedVirtualPortgroupMetaTagName = "dvsName"
-
-	// This tag will be expanded to the name of the portgroup.
-	PortgroupName_DistributedVirtualPortgroupMetaTagName DistributedVirtualPortgroupMetaTagName = "portgroupName"
-
-	// This tag will be expanded to the current index of the port.
-	PortIndex_DistributedVirtualPortgroupMetaTagName DistributedVirtualPortgroupMetaTagName = "portIndex"
-)
-
-//
-// Pre-defined constants for cache consistency types
-//
-//
-type VirtualDiskVFlashCacheConfigInfoCacheConsistencyType string
-
-const (
-
-	// With strong consistency, it ensures that
-	// a crash will leave the cache data consistent.
-	Strong_VirtualDiskVFlashCacheConfigInfoCacheConsistencyType VirtualDiskVFlashCacheConfigInfoCacheConsistencyType = "strong"
-
-	// Cache data consistency is not guaranteed after a crash.
-	Weak_VirtualDiskVFlashCacheConfigInfoCacheConsistencyType VirtualDiskVFlashCacheConfigInfoCacheConsistencyType = "weak"
-)
-
-//
-// NetBIOS setting for Windows.
-//
-//
-type CustomizationNetBIOSMode string
-
-const (
-
-	// Never use NetBIOS.
-	DisableNetBIOS_CustomizationNetBIOSMode CustomizationNetBIOSMode = "disableNetBIOS"
-
-	// Always use NetBIOS.
-	EnableNetBIOS_CustomizationNetBIOSMode CustomizationNetBIOSMode = "enableNetBIOS"
-
-	// DHCP server decides whether or not to use NetBIOS.
-	EnableNetBIOSViaDhcp_CustomizationNetBIOSMode CustomizationNetBIOSMode = "enableNetBIOSViaDhcp"
-)
-
-//
-// Device speed.
-//
-//
-type VirtualMachineUsbInfoSpeed string
-
-const (
-
-	// This device operates at full speed (12Mb/s).
-	Full_VirtualMachineUsbInfoSpeed VirtualMachineUsbInfoSpeed = "full"
-
-	// This device can operate at high speed (480Mb/s)
-	High_VirtualMachineUsbInfoSpeed VirtualMachineUsbInfoSpeed = "high"
-
-	// This device operates at low speed (1.5Mb/s).
-	Low_VirtualMachineUsbInfoSpeed VirtualMachineUsbInfoSpeed = "low"
-
-	// This device can operate at super speed (4.8Gb/s)
-	//
-	// Since vSphere API 5.0
-	SuperSpeed_VirtualMachineUsbInfoSpeed VirtualMachineUsbInfoSpeed = "superSpeed"
-
-	// This device's speed is unknown.
-	UnknownSpeed_VirtualMachineUsbInfoSpeed VirtualMachineUsbInfoSpeed = "unknownSpeed"
-)
-
-//
-// The SPBM(Storage Policy Based Management) license state for a host
-//
-//
-type ComputeResourceHostSPBMLicenseInfoHostSPBMLicenseState string
-
-const (
-
-	// The host is licensed
-	Licensed_ComputeResourceHostSPBMLicenseInfoHostSPBMLicenseState ComputeResourceHostSPBMLicenseInfoHostSPBMLicenseState = "licensed"
-
-	// The host license information is unknown, this could happen if the
-	// host is not in a available state
-	Unknown_ComputeResourceHostSPBMLicenseInfoHostSPBMLicenseState ComputeResourceHostSPBMLicenseInfoHostSPBMLicenseState = "unknown"
-
-	// The host is not licensed
-	Unlicensed_ComputeResourceHostSPBMLicenseInfoHostSPBMLicenseState ComputeResourceHostSPBMLicenseInfoHostSPBMLicenseState = "unlicensed"
-)
-
-//
-// Severity level constants.
-//
-//
-type EventEventSeverity string
-
-const (
-
-	// Something that must be corrected
-	Error_EventEventSeverity EventEventSeverity = "error"
-
-	// An informational message
-	Info_EventEventSeverity EventEventSeverity = "info"
-
-	// A user-related message
-	User_EventEventSeverity EventEventSeverity = "user"
-
-	// Should be corrected, but the system can continue operating normally
-	Warning_EventEventSeverity EventEventSeverity = "warning"
-)
-
-//
-// Guest OS support level
-//
-//
-type GuestOsDescriptorSupportLevel string
-
-const (
-
-	// Support for this operating system will be terminated in the future.
-	// Please migrate to using a different operating system.
-	//
-	// Since vSphere API 5.1
-	Deprecated_GuestOsDescriptorSupportLevel GuestOsDescriptorSupportLevel = "deprecated"
-
-	// This operating system is not supported,
-	// but may be supported in the future.
-	Experimental_GuestOsDescriptorSupportLevel GuestOsDescriptorSupportLevel = "experimental"
-
-	// This operating system is not fully supported,
-	// but may have been supported in the past.
-	Legacy_GuestOsDescriptorSupportLevel GuestOsDescriptorSupportLevel = "legacy"
-
-	// Fully supported.
-	Supported_GuestOsDescriptorSupportLevel GuestOsDescriptorSupportLevel = "supported"
-
-	// This operating system may not be supported yet,
-	// please check VMware compatibility guide.
-	//
-	// Since vSphere API 5.1
-	TechPreview_GuestOsDescriptorSupportLevel GuestOsDescriptorSupportLevel = "techPreview"
-
-	// No longer supported.
-	Terminated_GuestOsDescriptorSupportLevel GuestOsDescriptorSupportLevel = "terminated"
-
-	// This operating system is not supported.
-	//
-	// Since vSphere API 5.1
-	Unsupported_GuestOsDescriptorSupportLevel GuestOsDescriptorSupportLevel = "unsupported"
-)
-
-//
-// This is a global mode on a configuration specification indicating
-// whether the structure represents the desired state or the set of
-// operations to apply on the managed object.
-//
-//
-//
-//
-type HostConfigChangeMode string
-
-const (
-
-	// Indicates that the structure represents the
-	// set of operations to apply on the managed object.
-	Modify_HostConfigChangeMode HostConfigChangeMode = "modify"
-
-	// Indicates that the structure represents the
-	// desired state of the managed object.
-	Replace_HostConfigChangeMode HostConfigChangeMode = "replace"
-)
-
-//
-// Status for last attempt to run scheduled hardware upgrade.
-//
-//
-type ScheduledHardwareUpgradeInfoHardwareUpgradeStatus string
-
-const (
-
-	// Upgrade failed.
-	//
-	// For more information about the failureSee fault
-	Failed_ScheduledHardwareUpgradeInfoHardwareUpgradeStatus ScheduledHardwareUpgradeInfoHardwareUpgradeStatus = "failed"
-
-	// No scheduled upgrade ever happened.
-	None_ScheduledHardwareUpgradeInfoHardwareUpgradeStatus ScheduledHardwareUpgradeInfoHardwareUpgradeStatus = "none"
-
-	// Upgrade is scheduled, but was not run yet.
-	Pending_ScheduledHardwareUpgradeInfoHardwareUpgradeStatus ScheduledHardwareUpgradeInfoHardwareUpgradeStatus = "pending"
-
-	// Upgrade succeeded.
-	Success_ScheduledHardwareUpgradeInfoHardwareUpgradeStatus ScheduledHardwareUpgradeInfoHardwareUpgradeStatus = "success"
-)
-
-type DasConfigFaultDasConfigFaultReason string
-
-const (
-
-	// There is a problem with the host configuration.
-	HostMisconfiguration_DasConfigFaultDasConfigFaultReason DasConfigFaultDasConfigFaultReason = "HostMisconfiguration"
-
-	// There is a problem with the host network configuration.
-	HostNetworkMisconfiguration_DasConfigFaultDasConfigFaultReason DasConfigFaultDasConfigFaultReason = "HostNetworkMisconfiguration"
-
-	// The privileges were insuffient for the operation.
-	InsufficientPrivileges_DasConfigFaultDasConfigFaultReason DasConfigFaultDasConfigFaultReason = "InsufficientPrivileges"
-
-	// No datastores defined for this host
-	//
-	// Since vSphere API 5.1
-	NoDatastoresConfigured_DasConfigFaultDasConfigFaultReason DasConfigFaultDasConfigFaultReason = "NoDatastoresConfigured"
-
-	// There was no running primary agent available to contact.
-	// Check that your other hosts don't have HA errors
-	NoPrimaryAgentAvailable_DasConfigFaultDasConfigFaultReason DasConfigFaultDasConfigFaultReason = "NoPrimaryAgentAvailable"
-
-	// The HA configuration failed for other reasons.
-	Other_DasConfigFaultDasConfigFaultReason DasConfigFaultDasConfigFaultReason = "Other"
-
-	// Host in vSAN cluster does not support vSAN.
-	//
-	// Since vSphere API 5.5
-	VSanNotSupportedOnHost_DasConfigFaultDasConfigFaultReason DasConfigFaultDasConfigFaultReason = "VSanNotSupportedOnHost"
-)
-
-//
-// Type of partition indicating the type of storage on which the partition
-// resides.  If the diagnostic partition is local only, it will only need
-// one slot.  If the diagnostic partition is on shared storage, it could
-// be used by multiple hosts.  As a result, it will need multiple slots.
-//
-//
-type DiagnosticPartitionStorageType string
-
-const (
-	DirectAttached_DiagnosticPartitionStorageType DiagnosticPartitionStorageType = "directAttached"
-
-	NetworkAttached_DiagnosticPartitionStorageType DiagnosticPartitionStorageType = "networkAttached"
-)
-
-//
-// The connectivity state of a virtual machine. When the API is provided directly by
-// a server product, such as ESX Server, then the disconnected state is not
-// possible. However, when accessed through VirtualCenter, the state of a virtual
-// machine is set to disconnected if the hosts that manage the virtual
-// machine becomes unavailable.
-//
-//
-type VirtualMachineConnectionState string
-
-const (
-
-	// The server has access to the virtual machine.
-	Connected_VirtualMachineConnectionState VirtualMachineConnectionState = "connected"
-
-	// The server is currently disconnected from the virtual machine, since its
-	// host is disconnected. See general comment for this enumerated type for more
-	// details.
-	Disconnected_VirtualMachineConnectionState VirtualMachineConnectionState = "disconnected"
-
-	// One or more of the virtual machine configuration files are inaccessible. For
-	// example, this can be due to transient disk failures. In this case, no
-	// configuration can be returned for a virtual machine.
-	Inaccessible_VirtualMachineConnectionState VirtualMachineConnectionState = "inaccessible"
-
-	// The virtual machine configuration format is invalid. Thus, it is accessible
-	// on disk, but corrupted in a way that does not allow the server to read the
-	// content. In this case, no configuration can be returned for a virtual
-	// machine.
-	Invalid_VirtualMachineConnectionState VirtualMachineConnectionState = "invalid"
-
-	// The virtual machine is no longer registered on the host it is associated
-	// with. For example, a virtual machine that is unregistered or deleted
-	// directly on a host managed by VirtualCenter shows up in this state.
-	Orphaned_VirtualMachineConnectionState VirtualMachineConnectionState = "orphaned"
-)
-
-//
-// Set of possible values for
-// ftCompatibilityIssues
-//
-//
-type HostCapabilityFtUnsupportedReason string
-
-const (
-
-	// Host does not have proper FT license
-	FtNotLicensed_HostCapabilityFtUnsupportedReason HostCapabilityFtUnsupportedReason = "ftNotLicensed"
-
-	// Host does not have HA agent running properly
-	HaAgentIssue_HostCapabilityFtUnsupportedReason HostCapabilityFtUnsupportedReason = "haAgentIssue"
-
-	// FT logging nic is not configured on the host
-	MissingFTLoggingNic_HostCapabilityFtUnsupportedReason HostCapabilityFtUnsupportedReason = "missingFTLoggingNic"
-
-	// VMotion nic is not configured on the host
-	MissingVMotionNic_HostCapabilityFtUnsupportedReason HostCapabilityFtUnsupportedReason = "missingVMotionNic"
-
-	// No VMotion license
-	VMotionNotLicensed_HostCapabilityFtUnsupportedReason HostCapabilityFtUnsupportedReason = "vMotionNotLicensed"
-)
-
-//
-// The format in which performance counter data is returned.
-//
-//
-type PerfFormat string
-
-const (
-
-	// Counters returned in comma-separate value (CSV) format.
-	Csv_PerfFormat PerfFormat = "csv"
-
-	// Counters returned in an array of data objects.
-	Normal_PerfFormat PerfFormat = "normal"
-)
-
-//
-// The types of virtual disk adapters used by virtual disks
-//
-//
-type VirtualDiskAdapterType string
-
-const (
-
-	// Use BusLogic emulation for the virtual disk
-	BusLogic_VirtualDiskAdapterType VirtualDiskAdapterType = "busLogic"
-
-	// Use IDE emulation for the virtual disk
-	Ide_VirtualDiskAdapterType VirtualDiskAdapterType = "ide"
-
-	// Use LSILogic emulation for the virtual disk
-	LsiLogic_VirtualDiskAdapterType VirtualDiskAdapterType = "lsiLogic"
-)
-
-//
-// IP Stack keeps state on entries in IpNetToMedia table to perform
-// physical address lookups for IP addresses. Here are the standard
-// states perSee RFC
-//
-//
-type NetIpStackInfoEntryType string
-
-const (
-
-	// This entry has been learned using ARP or NDP.
-	Dynamic_NetIpStackInfoEntryType NetIpStackInfoEntryType = "dynamic"
-
-	// The IP Stack has marked this entry as not useable.
-	Invalid_NetIpStackInfoEntryType NetIpStackInfoEntryType = "invalid"
-
-	// This entry was set manually.
-	Manual_NetIpStackInfoEntryType NetIpStackInfoEntryType = "manual"
-
-	// This implementation is reporting something other than
-	// what states are listed below.
-	Other_NetIpStackInfoEntryType NetIpStackInfoEntryType = "other"
-)
-
-//
-// The disallowed change type.
-//
-//
-type DisallowedChangeByServiceDisallowedChange string
-
-const (
-
-	// Online extend disk operation.
-	HotExtendDisk_DisallowedChangeByServiceDisallowedChange DisallowedChangeByServiceDisallowedChange = "hotExtendDisk"
-)
-
-//
 // The ClusterDasVmSettingsIsolationResponse enum defines
 // values that indicate whether or not the virtual machine should be
 // powered off if a host determines that it is isolated from
@@ -1812,24 +592,290 @@ const (
 )
 
 //
-// State of licensing subsystem.
+// The ClusterDasVmSettingsRestartPriority enum
+// defines virtual machine restart priority values to resolve
+// resource contention.
+// The priority determines the preference that HA gives
+// to a virtual machine if sufficient capacity is not available
+// to power on all failed virtual machines. For example, high priority
+// virtual machines on a host get preference over low priority
+// virtual machines.
+//
+// All priority values are valid for the restart priority
+// specified in a single virtual machine HA configuration
+// (dasSettings).
+// All values except for clusterRestartPriority
+// are valid for the cluster-wide default HA configuration
+// for virtual machines (defaultVmSettings).
 //
 //
-type LicenseManagerState string
+//
+type ClusterDasVmSettingsRestartPriority string
 
 const (
 
-	// Initialization has failed or grace period expired.
-	Fault_LicenseManagerState LicenseManagerState = "fault"
+	// Virtual machines with this priority use the default restart
+	// priority defined for the cluster that contains this virtual machine.
+	ClusterRestartPriority_ClusterDasVmSettingsRestartPriority ClusterDasVmSettingsRestartPriority = "clusterRestartPriority"
 
-	// Setting or resetting configuration in progress.
-	Initializing_LicenseManagerState LicenseManagerState = "initializing"
+	// vSphere HA is disabled for this virtual machine.
+	Disabled_ClusterDasVmSettingsRestartPriority ClusterDasVmSettingsRestartPriority = "disabled"
 
-	// License source unavailable, using license cache.
-	Marginal_LicenseManagerState LicenseManagerState = "marginal"
+	// Virtual machines with this priority have a higher chance of powering on after a
+	// failure if there is insufficient capacity on hosts to meet all virtual machine
+	// needs.
+	High_ClusterDasVmSettingsRestartPriority ClusterDasVmSettingsRestartPriority = "high"
 
-	// Running within operating parameters.
-	Normal_LicenseManagerState LicenseManagerState = "normal"
+	// Virtual machines with this priority have a lower chance of powering on after a
+	// failure if there is insufficient capacity on hosts to meet all virtual machine
+	// needs.
+	Low_ClusterDasVmSettingsRestartPriority ClusterDasVmSettingsRestartPriority = "low"
+
+	// Virtual machines with this priority have an intermediate chance of powering
+	// on after a failure if there is insufficient capacity on hosts to meet all
+	// virtual machine needs.
+	Medium_ClusterDasVmSettingsRestartPriority ClusterDasVmSettingsRestartPriority = "medium"
+)
+
+//
+// Defines the options for a Datacenter::powerOnVm() invocation.
+//
+//
+type ClusterPowerOnVmOption string
+
+const (
+
+	// Override the DRS automation level.
+	// Value type: DrsBehavior
+	// Default value: current behavior
+	OverrideAutomationLevel_ClusterPowerOnVmOption ClusterPowerOnVmOption = "OverrideAutomationLevel"
+
+	// Reserve resources for the powering-on VMs throughout the
+	// power-on session. When this option is set to true, the server
+	// will return at most one recommended host per manual VM, and
+	// the VM's reservations are held on the recommended host until
+	// the VM is actually powered on (either by applying the
+	// recommendation or by a power-on request on the VM), or until
+	// the recommendation is cancelled, or until the recommendation
+	// expires. The expiration time is currently set to 10
+	// minutes. This option does not have an effect on automatic VMs
+	// since their recommendations are executed immediately. This
+	// option is effective on DRS clusters only.
+	// Value type: boolean
+	// Default value: false
+	ReserveResources_ClusterPowerOnVmOption ClusterPowerOnVmOption = "ReserveResources"
+)
+
+//
+// Type of services for which Profile can be requested for
+//
+//
+type ClusterProfileServiceType string
+
+const (
+
+	// Distributed Power Management
+	DPM_ClusterProfileServiceType ClusterProfileServiceType = "DPM"
+
+	// Distributed Resource Scheduling
+	DRS_ClusterProfileServiceType ClusterProfileServiceType = "DRS"
+
+	// Fault tolerance
+	FT_ClusterProfileServiceType ClusterProfileServiceType = "FT"
+
+	// High Availability
+	HA_ClusterProfileServiceType ClusterProfileServiceType = "HA"
+)
+
+type ComplianceResultStatus string
+
+const (
+
+	// Entity is in Compliance
+	Compliant_ComplianceResultStatus ComplianceResultStatus = "compliant"
+
+	// Entity is out of Compliance
+	NonCompliant_ComplianceResultStatus ComplianceResultStatus = "nonCompliant"
+
+	// Compliance status of the entity is not known
+	Unknown_ComplianceResultStatus ComplianceResultStatus = "unknown"
+)
+
+//
+// The SPBM(Storage Policy Based Management) license state for a host
+//
+//
+type ComputeResourceHostSPBMLicenseInfoHostSPBMLicenseState string
+
+const (
+
+	// The host is licensed
+	Licensed_ComputeResourceHostSPBMLicenseInfoHostSPBMLicenseState ComputeResourceHostSPBMLicenseInfoHostSPBMLicenseState = "licensed"
+
+	// The host license information is unknown, this could happen if the
+	// host is not in a available state
+	Unknown_ComputeResourceHostSPBMLicenseInfoHostSPBMLicenseState ComputeResourceHostSPBMLicenseInfoHostSPBMLicenseState = "unknown"
+
+	// The host is not licensed
+	Unlicensed_ComputeResourceHostSPBMLicenseInfoHostSPBMLicenseState ComputeResourceHostSPBMLicenseInfoHostSPBMLicenseState = "unlicensed"
+)
+
+//
+// Config spec operation type.
+//
+//
+type ConfigSpecOperation string
+
+const (
+
+	// Indicates the addition of an element to the configuration.
+	Add_ConfigSpecOperation ConfigSpecOperation = "add"
+
+	// Indicates the change of an element in the configuration.
+	Edit_ConfigSpecOperation ConfigSpecOperation = "edit"
+
+	// Indicates the removal of an element in the configuration.
+	Remove_ConfigSpecOperation ConfigSpecOperation = "remove"
+)
+
+//
+// Enumeration of AutoMode values.
+//
+//
+type CustomizationLicenseDataMode string
+
+const (
+
+	// Indicates that a client access license has been purchased for each computer
+	// that accesses the VirtualCenter server.
+	PerSeat_CustomizationLicenseDataMode CustomizationLicenseDataMode = "perSeat"
+
+	// Indicates that client access licenses have been purchased for the server,
+	// allowing a certain number of concurrent connections to the VirtualCenter
+	// server.
+	PerServer_CustomizationLicenseDataMode CustomizationLicenseDataMode = "perServer"
+)
+
+//
+// NetBIOS setting for Windows.
+//
+//
+type CustomizationNetBIOSMode string
+
+const (
+
+	// Never use NetBIOS.
+	DisableNetBIOS_CustomizationNetBIOSMode CustomizationNetBIOSMode = "disableNetBIOS"
+
+	// Always use NetBIOS.
+	EnableNetBIOS_CustomizationNetBIOSMode CustomizationNetBIOSMode = "enableNetBIOS"
+
+	// DHCP server decides whether or not to use NetBIOS.
+	EnableNetBIOSViaDhcp_CustomizationNetBIOSMode CustomizationNetBIOSMode = "enableNetBIOSViaDhcp"
+)
+
+//
+// A enum constant specifying what should be done to the guest vm after running
+// sysprep.
+//
+//
+type CustomizationSysprepRebootOption string
+
+const (
+
+	// Take no action. Leave the guest os running after running sysprep. This
+	// option can be used to look at values for debugging purposes after
+	// running sysprep.
+	Noreboot_CustomizationSysprepRebootOption CustomizationSysprepRebootOption = "noreboot"
+
+	// Reboot the machine after running sysprep. This will cause values
+	// specified in the sysprep.inf to be applied immediately.
+	Reboot_CustomizationSysprepRebootOption CustomizationSysprepRebootOption = "reboot"
+
+	// Shutdown the machine after running sysprep. This puts the vm in a
+	// sealed state.
+	Shutdown_CustomizationSysprepRebootOption CustomizationSysprepRebootOption = "shutdown"
+)
+
+//
+// Set of possible values for
+// DVPortStatus.vmDirectPathGen2InactiveReasonNetwork.
+//
+//
+type DVPortStatusVmDirectPathGen2InactiveReasonNetwork string
+
+const (
+
+	// VMDirectPath Gen 2 has been explicitly disabled for this port.
+	PortNptDisabledForPort_DVPortStatusVmDirectPathGen2InactiveReasonNetwork DVPortStatusVmDirectPathGen2InactiveReasonNetwork = "portNptDisabledForPort"
+
+	// The switch for which this port is defined does not support VMDirectPath Gen 2.
+	// See
+	// DVSFeatureCapability.vmDirectPathGen2Supported.
+	PortNptIncompatibleDvs_DVPortStatusVmDirectPathGen2InactiveReasonNetwork DVPortStatusVmDirectPathGen2InactiveReasonNetwork = "portNptIncompatibleDvs"
+
+	// None of the physical NICs used as uplinks for this port support
+	// VMDirectPath Gen 2.See vmDirectPathGen2Supported
+	PortNptNoCompatibleNics_DVPortStatusVmDirectPathGen2InactiveReasonNetwork DVPortStatusVmDirectPathGen2InactiveReasonNetwork = "portNptNoCompatibleNics"
+
+	// At least some of the physical NICs used as uplinks for this port
+	// support VMDirectPath Gen 2, but all available network-passthrough
+	// resources are in use by other ports.
+	PortNptNoVirtualFunctionsAvailable_DVPortStatusVmDirectPathGen2InactiveReasonNetwork DVPortStatusVmDirectPathGen2InactiveReasonNetwork = "portNptNoVirtualFunctionsAvailable"
+)
+
+//
+// Set of possible values for
+// DVPortStatus.vmDirectPathGen2InactiveReasonOther.
+//
+//
+type DVPortStatusVmDirectPathGen2InactiveReasonOther string
+
+const (
+
+	// Configuration or state of the port's connectee prevents
+	// VMDirectPath Gen 2. See
+	// vmDirectPathGen2InactiveReasonVm
+	// and/or
+	// vmDirectPathGen2InactiveReasonExtended
+	// in the appropriate element of the RuntimeInfo.device array of the
+	// virtual machine connected to this port.
+	PortNptIncompatibleConnectee_DVPortStatusVmDirectPathGen2InactiveReasonOther DVPortStatusVmDirectPathGen2InactiveReasonOther = "portNptIncompatibleConnectee"
+
+	// The host for which this port is defined does not support VMDirectPath Gen 2.
+	// See HostCapability.vmDirectPathGen2Supported
+	PortNptIncompatibleHost_DVPortStatusVmDirectPathGen2InactiveReasonOther DVPortStatusVmDirectPathGen2InactiveReasonOther = "portNptIncompatibleHost"
+)
+
+type DasConfigFaultDasConfigFaultReason string
+
+const (
+
+	// There is a problem with the host configuration.
+	HostMisconfiguration_DasConfigFaultDasConfigFaultReason DasConfigFaultDasConfigFaultReason = "HostMisconfiguration"
+
+	// There is a problem with the host network configuration.
+	HostNetworkMisconfiguration_DasConfigFaultDasConfigFaultReason DasConfigFaultDasConfigFaultReason = "HostNetworkMisconfiguration"
+
+	// The privileges were insuffient for the operation.
+	InsufficientPrivileges_DasConfigFaultDasConfigFaultReason DasConfigFaultDasConfigFaultReason = "InsufficientPrivileges"
+
+	// No datastores defined for this host
+	//
+	// Since vSphere API 5.1
+	NoDatastoresConfigured_DasConfigFaultDasConfigFaultReason DasConfigFaultDasConfigFaultReason = "NoDatastoresConfigured"
+
+	// There was no running primary agent available to contact.
+	// Check that your other hosts don't have HA errors
+	NoPrimaryAgentAvailable_DasConfigFaultDasConfigFaultReason DasConfigFaultDasConfigFaultReason = "NoPrimaryAgentAvailable"
+
+	// The HA configuration failed for other reasons.
+	Other_DasConfigFaultDasConfigFaultReason DasConfigFaultDasConfigFaultReason = "Other"
+
+	// Host in vSAN cluster does not support vSAN.
+	//
+	// Since vSphere API 5.5
+	VSanNotSupportedOnHost_DasConfigFaultDasConfigFaultReason DasConfigFaultDasConfigFaultReason = "VSanNotSupportedOnHost"
 )
 
 // Deprecated.
@@ -1866,23 +912,1981 @@ const (
 	Medium_DasVmPriority DasVmPriority = "medium"
 )
 
-//
-// Some licenses may only be allowed to load from a specified source.
-// This enum indicates what restrictions exist for this license if any.
-//
-//
-type LicenseFeatureInfoSourceRestriction string
+type DatastoreAccessible string
 
 const (
 
-	// The feature's license can only come from a file.
-	File_LicenseFeatureInfoSourceRestriction LicenseFeatureInfoSourceRestriction = "file"
+	// Is not accessible
+	False_DatastoreAccessible DatastoreAccessible = "False"
 
-	// The feature's license can only be served.
-	Served_LicenseFeatureInfoSourceRestriction LicenseFeatureInfoSourceRestriction = "served"
+	// Is accessible
+	True_DatastoreAccessible DatastoreAccessible = "True"
+)
 
-	// The feature does not have a source restriction.
-	Unrestricted_LicenseFeatureInfoSourceRestriction LicenseFeatureInfoSourceRestriction = "unrestricted"
+//
+// Defines the current maintenance mode state of the datastore.
+//
+//
+type DatastoreSummaryMaintenanceModeState string
+
+const (
+
+	// Started entering maintenance mode, but not finished.
+	// This could happen when waiting for user input or for
+	// long-running vmotions to complete.
+	EnteringMaintenance_DatastoreSummaryMaintenanceModeState DatastoreSummaryMaintenanceModeState = "enteringMaintenance"
+
+	// Successfully entered maintenance mode.
+	InMaintenance_DatastoreSummaryMaintenanceModeState DatastoreSummaryMaintenanceModeState = "inMaintenance"
+
+	// Default state.
+	Normal_DatastoreSummaryMaintenanceModeState DatastoreSummaryMaintenanceModeState = "normal"
+)
+
+type DayOfWeek string
+
+const (
+	Friday_DayOfWeek DayOfWeek = "friday"
+
+	Monday_DayOfWeek DayOfWeek = "monday"
+
+	Saturday_DayOfWeek DayOfWeek = "saturday"
+
+	Sunday_DayOfWeek DayOfWeek = "sunday"
+
+	Thursday_DayOfWeek DayOfWeek = "thursday"
+
+	Tuesday_DayOfWeek DayOfWeek = "tuesday"
+
+	Wednesday_DayOfWeek DayOfWeek = "wednesday"
+)
+
+//
+// Reasons why a virtual device would not be supported on a host.
+//
+//
+type DeviceNotSupportedReason string
+
+const (
+
+	// The device is supported by the host in general, but not for
+	// the specific guest OS the virtual machine is using.
+	Guest_DeviceNotSupportedReason DeviceNotSupportedReason = "guest"
+
+	// The host does not support this virtual device at all.
+	Host_DeviceNotSupportedReason DeviceNotSupportedReason = "host"
+)
+
+//
+// Pre-defined constants for possible creators of log files.
+//
+//
+type DiagnosticManagerLogCreator string
+
+const (
+
+	// Host agent
+	Hostd_DiagnosticManagerLogCreator DiagnosticManagerLogCreator = "hostd"
+
+	// Installation
+	Install_DiagnosticManagerLogCreator DiagnosticManagerLogCreator = "install"
+
+	// System Record Log
+	//
+	// Since VI API 2.5
+	RecordLog_DiagnosticManagerLogCreator DiagnosticManagerLogCreator = "recordLog"
+
+	// Host server agent
+	Serverd_DiagnosticManagerLogCreator DiagnosticManagerLogCreator = "serverd"
+
+	// VirtualCenter agent
+	Vpxa_DiagnosticManagerLogCreator DiagnosticManagerLogCreator = "vpxa"
+
+	// Virtual infrastructure client
+	VpxClient_DiagnosticManagerLogCreator DiagnosticManagerLogCreator = "vpxClient"
+
+	// VirtualCenter service
+	Vpxd_DiagnosticManagerLogCreator DiagnosticManagerLogCreator = "vpxd"
+)
+
+//
+// Constants for defined formats. For more information, see the comment for the
+// format property.
+//
+//
+type DiagnosticManagerLogFormat string
+
+const (
+
+	// A standard ASCII-based line-based log file.
+	Plain_DiagnosticManagerLogFormat DiagnosticManagerLogFormat = "plain"
+)
+
+//
+// Type of partition indicating the type of storage on which the partition
+// resides.  If the diagnostic partition is local only, it will only need
+// one slot.  If the diagnostic partition is on shared storage, it could
+// be used by multiple hosts.  As a result, it will need multiple slots.
+//
+//
+type DiagnosticPartitionStorageType string
+
+const (
+	DirectAttached_DiagnosticPartitionStorageType DiagnosticPartitionStorageType = "directAttached"
+
+	NetworkAttached_DiagnosticPartitionStorageType DiagnosticPartitionStorageType = "networkAttached"
+)
+
+//
+// The type of diagnostic partition. Private diagnostic partition has one
+// slot, so can only be used by one host. Shared diagnostic parititon
+// needs multiple slots so to be usable by multiple hosts.
+//
+//
+type DiagnosticPartitionType string
+
+const (
+	MultiHost_DiagnosticPartitionType DiagnosticPartitionType = "multiHost"
+
+	SingleHost_DiagnosticPartitionType DiagnosticPartitionType = "singleHost"
+)
+
+//
+// The disallowed change type.
+//
+//
+type DisallowedChangeByServiceDisallowedChange string
+
+const (
+
+	// Online extend disk operation.
+	HotExtendDisk_DisallowedChangeByServiceDisallowedChange DisallowedChangeByServiceDisallowedChange = "hotExtendDisk"
+)
+
+//
+// The meta tag names recognizable in the
+// portNameFormat string.
+//
+//
+type DistributedVirtualPortgroupMetaTagName string
+
+const (
+
+	// This tag will be expanded to the name of the switch.
+	DvsName_DistributedVirtualPortgroupMetaTagName DistributedVirtualPortgroupMetaTagName = "dvsName"
+
+	// This tag will be expanded to the name of the portgroup.
+	PortgroupName_DistributedVirtualPortgroupMetaTagName DistributedVirtualPortgroupMetaTagName = "portgroupName"
+
+	// This tag will be expanded to the current index of the port.
+	PortIndex_DistributedVirtualPortgroupMetaTagName DistributedVirtualPortgroupMetaTagName = "portIndex"
+)
+
+//
+// The DistributedVirtualPortgroupPortgroupType enum defines
+// the distributed virtual portgroup types
+// (DistributedVirtualPortgroup.config.type). Early binding specifies a static set of ports that are created
+// when you create the distributed virtual portgroup. An ephemeral portgroup uses dynamic
+// ports that are created when you power on a virtual machine.
+//
+//
+type DistributedVirtualPortgroupPortgroupType string
+
+const (
+
+	// A free DistributedVirtualPort will be selected and assigned to
+	// a VirtualMachine when the virtual machine is reconfigured to
+	// connect to the portgroup.
+	EarlyBinding_DistributedVirtualPortgroupPortgroupType DistributedVirtualPortgroupPortgroupType = "earlyBinding"
+
+	// A DistributedVirtualPort will be created and assigned to a
+	// VirtualMachine when the virtual machine is powered on, and will
+	// be deleted when the virtual machine is powered off. An ephemeral portgroup has
+	// no limit on the number of ports that can be a part of this portgroup.
+	// In cases where the vCenter Server is unavailable the host can
+	// create conflict ports in this portgroup to be used by a virtual machine
+	// at power on.
+	Ephemeral_DistributedVirtualPortgroupPortgroupType DistributedVirtualPortgroupPortgroupType = "ephemeral"
+
+	// Deprecated as of vSphere API 5.0. A free distributed virtual port
+	// will be selected and assigned to a virtual machine when the virtual
+	// machine is powered on.
+	LateBinding_DistributedVirtualPortgroupPortgroupType DistributedVirtualPortgroupPortgroupType = "lateBinding"
+)
+
+//
+// List of possible host infrastructure traffic classes
+//
+//
+type DistributedVirtualSwitchHostInfrastructureTrafficClass string
+
+const (
+
+	// Fault Tolerance (FT) Traffic
+	FaultTolerance_DistributedVirtualSwitchHostInfrastructureTrafficClass DistributedVirtualSwitchHostInfrastructureTrafficClass = "faultTolerance"
+
+	// vSphere Replication (VR) Traffic
+	Hbr_DistributedVirtualSwitchHostInfrastructureTrafficClass DistributedVirtualSwitchHostInfrastructureTrafficClass = "hbr"
+
+	// iSCSI Traffic
+	ISCSI_DistributedVirtualSwitchHostInfrastructureTrafficClass DistributedVirtualSwitchHostInfrastructureTrafficClass = "iSCSI"
+
+	// Management Traffic
+	Management_DistributedVirtualSwitchHostInfrastructureTrafficClass DistributedVirtualSwitchHostInfrastructureTrafficClass = "management"
+
+	// NFS Traffic
+	Nfs_DistributedVirtualSwitchHostInfrastructureTrafficClass DistributedVirtualSwitchHostInfrastructureTrafficClass = "nfs"
+
+	// Virtual Machine Traffic
+	VirtualMachine_DistributedVirtualSwitchHostInfrastructureTrafficClass DistributedVirtualSwitchHostInfrastructureTrafficClass = "virtualMachine"
+
+	// vMotion Traffic
+	Vmotion_DistributedVirtualSwitchHostInfrastructureTrafficClass DistributedVirtualSwitchHostInfrastructureTrafficClass = "vmotion"
+
+	// vSphere Storage Area Network Traffic
+	Vsan_DistributedVirtualSwitchHostInfrastructureTrafficClass DistributedVirtualSwitchHostInfrastructureTrafficClass = "vsan"
+)
+
+//
+// Describes the state of the host proxy switch.
+//
+//
+type DistributedVirtualSwitchHostMemberHostComponentState string
+
+const (
+
+	// The host is disconnected or it is not responding.
+	Disconnected_DistributedVirtualSwitchHostMemberHostComponentState DistributedVirtualSwitchHostMemberHostComponentState = "disconnected"
+
+	// The host proxy is down.
+	Down_DistributedVirtualSwitchHostMemberHostComponentState DistributedVirtualSwitchHostMemberHostComponentState = "down"
+
+	// The proxy switch configuration is not the same as the
+	// distributed virtual switch configuration in the vCenter Server.
+	OutOfSync_DistributedVirtualSwitchHostMemberHostComponentState DistributedVirtualSwitchHostMemberHostComponentState = "outOfSync"
+
+	// The host proxy switch is waiting to be initialized.
+	Pending_DistributedVirtualSwitchHostMemberHostComponentState DistributedVirtualSwitchHostMemberHostComponentState = "pending"
+
+	// The host proxy switch is up and running.
+	Up_DistributedVirtualSwitchHostMemberHostComponentState DistributedVirtualSwitchHostMemberHostComponentState = "up"
+
+	// The host requires attention.
+	Warning_DistributedVirtualSwitchHostMemberHostComponentState DistributedVirtualSwitchHostMemberHostComponentState = "warning"
+)
+
+//
+// List of possible teaming modes supported by the vNetwork Distributed
+// Switch. The different policy modes define the way traffic is routed
+// through the different uplink ports in a team.
+//
+//
+type DistributedVirtualSwitchNicTeamingPolicyMode string
+
+const (
+
+	// Use explicit failover order
+	Failover_explicit_DistributedVirtualSwitchNicTeamingPolicyMode DistributedVirtualSwitchNicTeamingPolicyMode = "failover_explicit"
+
+	// Routing based on IP hash
+	Loadbalance_ip_DistributedVirtualSwitchNicTeamingPolicyMode DistributedVirtualSwitchNicTeamingPolicyMode = "loadbalance_ip"
+
+	// Routing based by dynamically balancing traffic through the NICs
+	// in a team. This is the recommended teaming policy when the
+	// network I/O control feature is enabled for the vNetwork
+	// Distributed Switch.
+	Loadbalance_loadbased_DistributedVirtualSwitchNicTeamingPolicyMode DistributedVirtualSwitchNicTeamingPolicyMode = "loadbalance_loadbased"
+
+	// Route based on the source of the port ID
+	Loadbalance_srcid_DistributedVirtualSwitchNicTeamingPolicyMode DistributedVirtualSwitchNicTeamingPolicyMode = "loadbalance_srcid"
+
+	// Route based on source MAC hash
+	Loadbalance_srcmac_DistributedVirtualSwitchNicTeamingPolicyMode DistributedVirtualSwitchNicTeamingPolicyMode = "loadbalance_srcmac"
+)
+
+//
+// The connectee types.
+//
+//
+type DistributedVirtualSwitchPortConnecteeConnecteeType string
+
+const (
+
+	// The port connects to a console Virtual NIC on a host.
+	HostConsoleVnic_DistributedVirtualSwitchPortConnecteeConnecteeType DistributedVirtualSwitchPortConnecteeConnecteeType = "hostConsoleVnic"
+
+	// The port connects to a VMkernel Virtual NIC on a host.
+	HostVmkVnic_DistributedVirtualSwitchPortConnecteeConnecteeType DistributedVirtualSwitchPortConnecteeConnecteeType = "hostVmkVnic"
+
+	// The port connects to a Physical NIC.
+	Pnic_DistributedVirtualSwitchPortConnecteeConnecteeType DistributedVirtualSwitchPortConnecteeConnecteeType = "pnic"
+
+	// The port connects to a Virtual NIC in a Virtual Machine.
+	VmVnic_DistributedVirtualSwitchPortConnecteeConnecteeType DistributedVirtualSwitchPortConnecteeConnecteeType = "vmVnic"
+)
+
+//
+// The product spec operation types.
+//
+//
+type DistributedVirtualSwitchProductSpecOperationType string
+
+const (
+
+	// Set the product information for an available switch upgrade that
+	// would be done by the switch implementation. This operation will post
+	// a config issue on the switch to signal the availability of an upgrade.
+	// This operation is applicable only in the case when switch policy
+	// autoUpgradeAllowed
+	// is set to false.
+	NotifyAvailableUpgrade_DistributedVirtualSwitchProductSpecOperationType DistributedVirtualSwitchProductSpecOperationType = "notifyAvailableUpgrade"
+
+	// Push the switch's host component of the specified product info to the
+	// host members of the switch at a fixed location known by the host.
+	PreInstall_DistributedVirtualSwitchProductSpecOperationType DistributedVirtualSwitchProductSpecOperationType = "preInstall"
+
+	// If productSpec is set to be same as that in the
+	// DvsUpgradeAvailableEvent configIssue, the switch
+	// implementation will proceed with the upgrade. To reject or stop the
+	// upgrade, leave the productSpec unset. If productSpec is set but does not
+	// match that in DvsUpgradeAvailableEvent configIssue,
+	// a fault will be raised.
+	// This operation is applicable only in the case when switch policy
+	// autoUpgradeAllowed
+	// is set to false.
+	ProceedWithUpgrade_DistributedVirtualSwitchProductSpecOperationType DistributedVirtualSwitchProductSpecOperationType = "proceedWithUpgrade"
+
+	// Update the bundle URL and ID information. If other properties in
+	// the specified product info differ from the
+	// corresponding properties of the switch's product info, a fault will
+	// be thrown. Updating the bundle ID will result in installing the new host
+	// component identified by the bundle ID.
+	UpdateBundleInfo_DistributedVirtualSwitchProductSpecOperationType DistributedVirtualSwitchProductSpecOperationType = "updateBundleInfo"
+
+	// Change the switch implementation to use the specified one. If the
+	// property values in the specified product info are different from
+	// those of the corresponding properties in the switch's product info,
+	// a host component preinstall and switch upgrade will be performed.
+	Upgrade_DistributedVirtualSwitchProductSpecOperationType DistributedVirtualSwitchProductSpecOperationType = "upgrade"
+)
+
+type DpmBehavior string
+
+const (
+
+	// Specifies that VirtualCenter should generate recommendations
+	// for host power operations, and should execute the
+	// recommendations automatically.
+	Automated_DpmBehavior DpmBehavior = "automated"
+
+	// Specifies that VirtualCenter should generate recommendations
+	// for host power operations, but should not execute the
+	// recommendations automatically.
+	Manual_DpmBehavior DpmBehavior = "manual"
+)
+
+type DrsBehavior string
+
+const (
+
+	// Specifies that VirtualCenter should automate both the migration
+	// of virtual machines and their placement with a host at power on.
+	FullyAutomated_DrsBehavior DrsBehavior = "fullyAutomated"
+
+	// Specifies that VirtualCenter should generate recommendations for
+	// virtual machine migration and for placement with a host,
+	// but should not implement the recommendations automatically.
+	Manual_DrsBehavior DrsBehavior = "manual"
+
+	// Specifies that VirtualCenter should generate recommendations for
+	// virtual machine migration and for placement with a host,
+	// but should automatically implement only the placement at power on.
+	PartiallyAutomated_DrsBehavior DrsBehavior = "partiallyAutomated"
+)
+
+//
+// Correlation state as computed by storageRM
+// module on host.
+//
+//
+type DrsInjectorWorkloadCorrelationState string
+
+const (
+	Correlated_DrsInjectorWorkloadCorrelationState DrsInjectorWorkloadCorrelationState = "Correlated"
+
+	Uncorrelated_DrsInjectorWorkloadCorrelationState DrsInjectorWorkloadCorrelationState = "Uncorrelated"
+)
+
+// Deprecated.
+// As of VI API 2.5 use RecommendationReasonCode.
+//
+//
+// List of defined migration reason codes:
+//
+//
+type DrsRecommendationReasonCode string
+
+const (
+
+	// Fulfill anti-affinity rule.
+	AntiAffin_DrsRecommendationReasonCode DrsRecommendationReasonCode = "antiAffin"
+
+	// Balance average CPU utilization.
+	FairnessCpuAvg_DrsRecommendationReasonCode DrsRecommendationReasonCode = "fairnessCpuAvg"
+
+	// Balance average memory utilization.
+	FairnessMemAvg_DrsRecommendationReasonCode DrsRecommendationReasonCode = "fairnessMemAvg"
+
+	// Host entering maintenance mode.
+	HostMaint_DrsRecommendationReasonCode DrsRecommendationReasonCode = "hostMaint"
+
+	// Fulfill affinity rule.
+	JointAffin_DrsRecommendationReasonCode DrsRecommendationReasonCode = "jointAffin"
+)
+
+//
+// Network Filter on Failure Type. It specifies whether all the
+// packets will be allowed or all the packets will be denied when
+// Filter fails to configure.
+//
+//
+type DvsFilterOnFailure string
+
+const (
+
+	// Denies all the packets when the Filter fails to configure.
+	FailClosed_DvsFilterOnFailure DvsFilterOnFailure = "failClosed"
+
+	// Allows all the packets when the Filter fails to configure.
+	FailOpen_DvsFilterOnFailure DvsFilterOnFailure = "failOpen"
+)
+
+//
+// Network Traffic Rule direction types. It specifies whether rule
+//
+// needs to be applied for packets which are incoming/outgoing or both.
+//
+//
+type DvsNetworkRuleDirectionType string
+
+const (
+
+	// This specifies that the network rule has to be applied only for
+	//
+	// both incoming and outgoing packets.
+	Both_DvsNetworkRuleDirectionType DvsNetworkRuleDirectionType = "both"
+
+	// This specifies that the network rule has to be applied only for
+	//
+	// incoming packets.
+	IncomingPackets_DvsNetworkRuleDirectionType DvsNetworkRuleDirectionType = "incomingPackets"
+
+	// This specifies that the network rule has to be applied only for
+	//
+	// outgoing packets.
+	OutgoingPackets_DvsNetworkRuleDirectionType DvsNetworkRuleDirectionType = "outgoingPackets"
+)
+
+//
+// The EntityImportType enum defines the import type for a
+// DistributedVirtualSwitchManager.DVSManagerImportEntity_Task
+// operation.
+//
+//
+type EntityImportType string
+
+const (
+
+	// Apply the configuration specified in the
+	// EntityBackupConfig.configBlob
+	// property to the entity specified in the
+	// EntityBackupConfig.entityType and
+	// EntityBackupConfig.key
+	// properties. If you specify
+	// EntityBackupConfig.name,
+	// the Server uses the specified name to rename the entity.
+	//
+	// The Server ignores any value for the
+	// EntityBackupConfig.container
+	// property.
+	ApplyToEntitySpecified_EntityImportType EntityImportType = "applyToEntitySpecified"
+
+	// Create the entity with new identifiers. Specify the
+	// EntityBackupConfig.name and
+	// EntityBackupConfig.container
+	// properties.
+	//
+	// The Server ignores any value for the
+	// EntityBackupConfig.key
+	// property.
+	CreateEntityWithNewIdentifier_EntityImportType EntityImportType = "createEntityWithNewIdentifier"
+
+	// Recreate the entities with the original identifiers of the entity from which backup was created.
+	// The Server throws an exception if an entity with the same identifier already exists.
+	// This option will also add the host members to the DistributedVirtualSwitch and will
+	// try to get the virtual machine networking back with the same DistributedVirtualPortgroup.
+	// Specify a Folder as the
+	// EntityBackupConfig.container
+	// for EntityBackupConfig.entityType
+	// "distributedVirtualSwitch".
+	//
+	// The Server ignores any values for the
+	// EntityBackupConfig.key and
+	// EntityBackupConfig.name
+	// properties.
+	CreateEntityWithOriginalIdentifier_EntityImportType EntityImportType = "createEntityWithOriginalIdentifier"
+)
+
+//
+// The EntityType enum identifies
+// the type of entity that was exported
+// (DVSManagerExportEntity_Task).
+//
+//
+type EntityType string
+
+const (
+
+	// Indicates the exported entity is a DistributedVirtualPortgroup.
+	DistributedVirtualPortgroup_EntityType EntityType = "distributedVirtualPortgroup"
+
+	// Indicates the exported entity is a DistributedVirtualSwitch.
+	DistributedVirtualSwitch_EntityType EntityType = "distributedVirtualSwitch"
+)
+
+//
+// Basic Comparison operators
+//
+//
+type EventAlarmExpressionComparisonOperator string
+
+const (
+
+	// attribute does not end with specified value
+	DoesNotEndWith_EventAlarmExpressionComparisonOperator EventAlarmExpressionComparisonOperator = "doesNotEndWith"
+
+	// attribute does not start with specified value
+	DoesNotStartWith_EventAlarmExpressionComparisonOperator EventAlarmExpressionComparisonOperator = "doesNotStartWith"
+
+	// attribute ends with specified value
+	EndsWith_EventAlarmExpressionComparisonOperator EventAlarmExpressionComparisonOperator = "endsWith"
+
+	// attribute equals specified value
+	Equals_EventAlarmExpressionComparisonOperator EventAlarmExpressionComparisonOperator = "equals"
+
+	// attribute does not equal specified value
+	NotEqualTo_EventAlarmExpressionComparisonOperator EventAlarmExpressionComparisonOperator = "notEqualTo"
+
+	// attribute starts with specified value
+	StartsWith_EventAlarmExpressionComparisonOperator EventAlarmExpressionComparisonOperator = "startsWith"
+)
+
+type EventCategory string
+
+const (
+
+	// Returns error events.
+	Error_EventCategory EventCategory = "error"
+
+	// Returns informational events.
+	Info_EventCategory EventCategory = "info"
+
+	// Returns events pertaining to users.
+	User_EventCategory EventCategory = "user"
+
+	// Returns warning events.
+	Warning_EventCategory EventCategory = "warning"
+)
+
+//
+// Severity level constants.
+//
+//
+type EventEventSeverity string
+
+const (
+
+	// Something that must be corrected
+	Error_EventEventSeverity EventEventSeverity = "error"
+
+	// An informational message
+	Info_EventEventSeverity EventEventSeverity = "info"
+
+	// A user-related message
+	User_EventEventSeverity EventEventSeverity = "user"
+
+	// Should be corrected, but the system can continue operating normally
+	Warning_EventEventSeverity EventEventSeverity = "warning"
+)
+
+//
+// This option specifies how to select events based on child relationships
+// in the inventory hierarchy. If a managed entity has children, their events
+// can be retrieved with this filter option.
+//
+//
+type EventFilterSpecRecursionOption string
+
+const (
+
+	// Returns events pertaining either to the specified managed entity
+	// or to its child entities.
+	All_EventFilterSpecRecursionOption EventFilterSpecRecursionOption = "all"
+
+	// Returns events pertaining to child entities only. Excludes
+	// events pertaining to the specified managed entity itself.
+	Children_EventFilterSpecRecursionOption EventFilterSpecRecursionOption = "children"
+
+	// Returns events that pertain only to the specified managed entity,
+	// and not its children.
+	Self_EventFilterSpecRecursionOption EventFilterSpecRecursionOption = "self"
+)
+
+//
+// The operating mode of the adapter.
+//
+//
+type FibreChannelPortType string
+
+const (
+	Fabric_FibreChannelPortType FibreChannelPortType = "fabric"
+
+	Loop_FibreChannelPortType FibreChannelPortType = "loop"
+
+	PointToPoint_FibreChannelPortType FibreChannelPortType = "pointToPoint"
+
+	Unknown_FibreChannelPortType FibreChannelPortType = "unknown"
+)
+
+//
+// Status of volume's support for vStorage hardware acceleration.
+// The ESX Server determines the status based on the capabilities
+// of the devices that support the file system volume.
+// When a host boots, the support status is unknown.
+// As the ESX host attempts hardware-accelerated operations,
+// it determines whether the storage device supports hardware
+// acceleration and sets the vStorageSupport
+// property accordingly.
+//
+//
+type FileSystemMountInfoVStorageSupportStatus string
+
+const (
+
+	// Storage device supports hardware acceleration.
+	// The ESX host will use the feature to offload certain
+	// storage-related operations to the device.
+	VStorageSupported_FileSystemMountInfoVStorageSupportStatus FileSystemMountInfoVStorageSupportStatus = "vStorageSupported"
+
+	// Initial support status value.
+	VStorageUnknown_FileSystemMountInfoVStorageSupportStatus FileSystemMountInfoVStorageSupportStatus = "vStorageUnknown"
+
+	// Storage device does not support hardware acceleration.
+	// The ESX host will handle all storage-related operations.
+	VStorageUnsupported_FileSystemMountInfoVStorageSupportStatus FileSystemMountInfoVStorageSupportStatus = "vStorageUnsupported"
+)
+
+//
+// HostSelectionType defines how the host was selected
+//
+//
+type FtIssuesOnHostHostSelectionType string
+
+const (
+
+	// The host was selected by DRS
+	Drs_FtIssuesOnHostHostSelectionType FtIssuesOnHostHostSelectionType = "drs"
+
+	// The host was specified by the user
+	User_FtIssuesOnHostHostSelectionType FtIssuesOnHostHostSelectionType = "user"
+
+	// The host was selected by Virtual Center
+	Vc_FtIssuesOnHostHostSelectionType FtIssuesOnHostHostSelectionType = "vc"
+)
+
+type GuestFileType string
+
+const (
+
+	// directory
+	Directory_GuestFileType GuestFileType = "directory"
+
+	// normal file
+	File_GuestFileType GuestFileType = "file"
+
+	// symbolic link
+	Symlink_GuestFileType GuestFileType = "symlink"
+)
+
+//
+// Application state type.
+//
+//
+type GuestInfoAppStateType string
+
+const (
+
+	// Guest's application agent asks for immediate reset
+	AppStateNeedReset_GuestInfoAppStateType GuestInfoAppStateType = "appStateNeedReset"
+
+	// The guest's application agent declared its state as normal and doesn't
+	// require any action
+	AppStateOk_GuestInfoAppStateType GuestInfoAppStateType = "appStateOk"
+
+	// The application state wasn't set from the guest by the application agent.
+	// This is the default.
+	None_GuestInfoAppStateType GuestInfoAppStateType = "none"
+)
+
+//
+// Firmware types
+//
+//
+type GuestOsDescriptorFirmwareType string
+
+const (
+
+	// BIOS firmware
+	Bios_GuestOsDescriptorFirmwareType GuestOsDescriptorFirmwareType = "bios"
+
+	// Extensible Firmware Interface
+	Efi_GuestOsDescriptorFirmwareType GuestOsDescriptorFirmwareType = "efi"
+)
+
+//
+// Guest OS support level
+//
+//
+type GuestOsDescriptorSupportLevel string
+
+const (
+
+	// Support for this operating system will be terminated in the future.
+	// Please migrate to using a different operating system.
+	//
+	// Since vSphere API 5.1
+	Deprecated_GuestOsDescriptorSupportLevel GuestOsDescriptorSupportLevel = "deprecated"
+
+	// This operating system is not supported,
+	// but may be supported in the future.
+	Experimental_GuestOsDescriptorSupportLevel GuestOsDescriptorSupportLevel = "experimental"
+
+	// This operating system is not fully supported,
+	// but may have been supported in the past.
+	Legacy_GuestOsDescriptorSupportLevel GuestOsDescriptorSupportLevel = "legacy"
+
+	// Fully supported.
+	Supported_GuestOsDescriptorSupportLevel GuestOsDescriptorSupportLevel = "supported"
+
+	// This operating system may not be supported yet,
+	// please check VMware compatibility guide.
+	//
+	// Since vSphere API 5.1
+	TechPreview_GuestOsDescriptorSupportLevel GuestOsDescriptorSupportLevel = "techPreview"
+
+	// No longer supported.
+	Terminated_GuestOsDescriptorSupportLevel GuestOsDescriptorSupportLevel = "terminated"
+
+	// This operating system is not supported.
+	//
+	// Since vSphere API 5.1
+	Unsupported_GuestOsDescriptorSupportLevel GuestOsDescriptorSupportLevel = "unsupported"
+)
+
+type HostActiveDirectoryInfoDomainMembershipStatus string
+
+const (
+
+	// The client side of the trust relationship is broken.
+	ClientTrustBroken_HostActiveDirectoryInfoDomainMembershipStatus HostActiveDirectoryInfoDomainMembershipStatus = "clientTrustBroken"
+
+	// Unexpected domain controller responded.
+	InconsistentTrust_HostActiveDirectoryInfoDomainMembershipStatus HostActiveDirectoryInfoDomainMembershipStatus = "inconsistentTrust"
+
+	// The host thinks it's part of a domain,
+	// but no domain controllers could be reached to confirm.
+	NoServers_HostActiveDirectoryInfoDomainMembershipStatus HostActiveDirectoryInfoDomainMembershipStatus = "noServers"
+
+	// No problems with the domain membership.
+	Ok_HostActiveDirectoryInfoDomainMembershipStatus HostActiveDirectoryInfoDomainMembershipStatus = "ok"
+
+	// There's some problem with the domain membership.
+	OtherProblem_HostActiveDirectoryInfoDomainMembershipStatus HostActiveDirectoryInfoDomainMembershipStatus = "otherProblem"
+
+	// The server side of the trust relationship is broken
+	// (or bad machine password).
+	ServerTrustBroken_HostActiveDirectoryInfoDomainMembershipStatus HostActiveDirectoryInfoDomainMembershipStatus = "serverTrustBroken"
+
+	// The Active Directory integration provider does not support
+	// domain trust checks.
+	Unknown_HostActiveDirectoryInfoDomainMembershipStatus HostActiveDirectoryInfoDomainMembershipStatus = "unknown"
+)
+
+//
+// Set of possible values for
+// ftCompatibilityIssues
+//
+//
+type HostCapabilityFtUnsupportedReason string
+
+const (
+
+	// Host does not have proper FT license
+	FtNotLicensed_HostCapabilityFtUnsupportedReason HostCapabilityFtUnsupportedReason = "ftNotLicensed"
+
+	// Host does not have HA agent running properly
+	HaAgentIssue_HostCapabilityFtUnsupportedReason HostCapabilityFtUnsupportedReason = "haAgentIssue"
+
+	// FT logging nic is not configured on the host
+	MissingFTLoggingNic_HostCapabilityFtUnsupportedReason HostCapabilityFtUnsupportedReason = "missingFTLoggingNic"
+
+	// VMotion nic is not configured on the host
+	MissingVMotionNic_HostCapabilityFtUnsupportedReason HostCapabilityFtUnsupportedReason = "missingVMotionNic"
+
+	// No VMotion license
+	VMotionNotLicensed_HostCapabilityFtUnsupportedReason HostCapabilityFtUnsupportedReason = "vMotionNotLicensed"
+)
+
+//
+// Set of possible values for vmDirectPathGen2UnsupportedReason.
+//
+//
+type HostCapabilityVmDirectPathGen2UnsupportedReason string
+
+const (
+
+	// The host is configured to disable VMDirectPath Gen 2.
+	HostNptDisabled_HostCapabilityVmDirectPathGen2UnsupportedReason HostCapabilityVmDirectPathGen2UnsupportedReason = "hostNptDisabled"
+
+	// The host hardware does not support VMDirectPath Gen 2. Note that
+	// this is a general capability for the host and is independent of
+	// support by a given physical NIC.
+	HostNptIncompatibleHardware_HostCapabilityVmDirectPathGen2UnsupportedReason HostCapabilityVmDirectPathGen2UnsupportedReason = "hostNptIncompatibleHardware"
+
+	// The host software does not support VMDirectPath Gen 2.
+	HostNptIncompatibleProduct_HostCapabilityVmDirectPathGen2UnsupportedReason HostCapabilityVmDirectPathGen2UnsupportedReason = "hostNptIncompatibleProduct"
+)
+
+//
+// This is a global mode on a configuration specification indicating
+// whether the structure represents the desired state or the set of
+// operations to apply on the managed object.
+//
+//
+//
+//
+type HostConfigChangeMode string
+
+const (
+
+	// Indicates that the structure represents the
+	// set of operations to apply on the managed object.
+	Modify_HostConfigChangeMode HostConfigChangeMode = "modify"
+
+	// Indicates that the structure represents the
+	// desired state of the managed object.
+	Replace_HostConfigChangeMode HostConfigChangeMode = "replace"
+)
+
+//
+// This list indicates the operation that should be performed for a
+// network entity.
+//
+//
+//
+//
+type HostConfigChangeOperation string
+
+const (
+
+	// Indicates the addition of a network entity to
+	// the configuration.
+	Add_HostConfigChangeOperation HostConfigChangeOperation = "add"
+
+	// Indicates changes on the network entity.  The
+	// entity must exist or a NotFound error
+	// will be thrown.
+	Edit_HostConfigChangeOperation HostConfigChangeOperation = "edit"
+
+	// Indicates the removal of a network entity from
+	// the configuration.
+	Remove_HostConfigChangeOperation HostConfigChangeOperation = "remove"
+)
+
+type HostCpuPackageVendor string
+
+const (
+	Amd_HostCpuPackageVendor HostCpuPackageVendor = "amd"
+
+	Intel_HostCpuPackageVendor HostCpuPackageVendor = "intel"
+
+	Unknown_HostCpuPackageVendor HostCpuPackageVendor = "unknown"
+)
+
+//
+// Possible values for Current CPU power management policy
+//
+//
+type HostCpuPowerManagementInfoPolicyType string
+
+const (
+	DynamicPolicy_HostCpuPowerManagementInfoPolicyType HostCpuPowerManagementInfoPolicyType = "dynamicPolicy"
+
+	Off_HostCpuPowerManagementInfoPolicyType HostCpuPowerManagementInfoPolicyType = "off"
+
+	StaticPolicy_HostCpuPowerManagementInfoPolicyType HostCpuPowerManagementInfoPolicyType = "staticPolicy"
+)
+
+type HostDasErrorEventHostDasErrorReason string
+
+const (
+
+	// HA agent has an error
+	AgentFailed_HostDasErrorEventHostDasErrorReason HostDasErrorEventHostDasErrorReason = "agentFailed"
+
+	// HA agent was shutdown
+	AgentShutdown_HostDasErrorEventHostDasErrorReason HostDasErrorEventHostDasErrorReason = "agentShutdown"
+
+	// HA communication initialization failed
+	CommunicationInitFailed_HostDasErrorEventHostDasErrorReason HostDasErrorEventHostDasErrorReason = "communicationInitFailed"
+
+	// Error while configuring/unconfiguring HA
+	ConfigFailed_HostDasErrorEventHostDasErrorReason HostDasErrorEventHostDasErrorReason = "configFailed"
+
+	// Health check script failed
+	HealthCheckScriptFailed_HostDasErrorEventHostDasErrorReason HostDasErrorEventHostDasErrorReason = "healthCheckScriptFailed"
+
+	// HA isolation address unpingable
+	//
+	// Since vSphere API 4.1
+	IsolationAddressUnpingable_HostDasErrorEventHostDasErrorReason HostDasErrorEventHostDasErrorReason = "isolationAddressUnpingable"
+
+	// Other reason
+	Other_HostDasErrorEventHostDasErrorReason HostDasErrorEventHostDasErrorReason = "other"
+
+	// Timeout while communicating with HA agent
+	Timeout_HostDasErrorEventHostDasErrorReason HostDasErrorEventHostDasErrorReason = "timeout"
+)
+
+//
+// The set of digest methods that can be used by TPM to calculate the PCR
+// values.
+//
+//
+type HostDigestInfoDigestMethodType string
+
+const (
+	MD5_HostDigestInfoDigestMethodType HostDigestInfoDigestMethodType = "MD5"
+
+	SHA1_HostDigestInfoDigestMethodType HostDigestInfoDigestMethodType = "SHA1"
+)
+
+type HostDisconnectedEventReasonCode string
+
+const (
+
+	// Agent is out of date
+	//
+	// Since vSphere API 4.1
+	AgentOutOfDate_HostDisconnectedEventReasonCode HostDisconnectedEventReasonCode = "agentOutOfDate"
+
+	// Agent is being upgraded
+	AgentUpgrade_HostDisconnectedEventReasonCode HostDisconnectedEventReasonCode = "agentUpgrade"
+
+	// License not available after host upgrade
+	InsufficientLicenses_HostDisconnectedEventReasonCode HostDisconnectedEventReasonCode = "insufficientLicenses"
+
+	// License expired for the host
+	LicenseExpired_HostDisconnectedEventReasonCode HostDisconnectedEventReasonCode = "licenseExpired"
+
+	// Failed to decrypt password
+	//
+	// Since vSphere API 4.1
+	PasswordDecryptFailure_HostDisconnectedEventReasonCode HostDisconnectedEventReasonCode = "passwordDecryptFailure"
+
+	// Failed to verify SSL thumbprint
+	SslThumbprintVerifyFailed_HostDisconnectedEventReasonCode HostDisconnectedEventReasonCode = "sslThumbprintVerifyFailed"
+
+	// Unknown reason
+	//
+	// Since vSphere API 4.1
+	Unknown_HostDisconnectedEventReasonCode HostDisconnectedEventReasonCode = "unknown"
+
+	// User requested disconnect
+	UserRequest_HostDisconnectedEventReasonCode HostDisconnectedEventReasonCode = "userRequest"
+
+	// The vRAM capacity of vCenter will be exceeded
+	//
+	// Since vSphere API 5.1
+	VcVRAMCapacityExceeded_HostDisconnectedEventReasonCode HostDisconnectedEventReasonCode = "vcVRAMCapacityExceeded"
+)
+
+//
+// List of partition format types. This denotes the partition table layout.
+//
+//
+type HostDiskPartitionInfoPartitionFormat string
+
+const (
+	Gpt_HostDiskPartitionInfoPartitionFormat HostDiskPartitionInfoPartitionFormat = "gpt"
+
+	Mbr_HostDiskPartitionInfoPartitionFormat HostDiskPartitionInfoPartitionFormat = "mbr"
+
+	Unknown_HostDiskPartitionInfoPartitionFormat HostDiskPartitionInfoPartitionFormat = "unknown"
+)
+
+//
+// List of symbol partition types
+//
+//
+type HostDiskPartitionInfoType string
+
+const (
+	Extended_HostDiskPartitionInfoType HostDiskPartitionInfoType = "extended"
+
+	LinuxNative_HostDiskPartitionInfoType HostDiskPartitionInfoType = "linuxNative"
+
+	LinuxSwap_HostDiskPartitionInfoType HostDiskPartitionInfoType = "linuxSwap"
+
+	None_HostDiskPartitionInfoType HostDiskPartitionInfoType = "none"
+
+	Ntfs_HostDiskPartitionInfoType HostDiskPartitionInfoType = "ntfs"
+
+	// Since vSphere API 5.5
+	Vffs_HostDiskPartitionInfoType HostDiskPartitionInfoType = "vffs"
+
+	Vmfs_HostDiskPartitionInfoType HostDiskPartitionInfoType = "vmfs"
+
+	VmkDiagnostic_HostDiskPartitionInfoType HostDiskPartitionInfoType = "vmkDiagnostic"
+)
+
+//
+// Set of possible values for
+// key, which
+// is a unique key that identifies a feature.
+//
+//
+type HostFeatureVersionKey string
+
+const (
+
+	// VMware Fault Tolerance feature. For pre-4.1 hosts, the
+	// version value reported will be empty in which case
+	// build should be used. For all
+	// other hosts, the version number reported will be a component-specific
+	// version identifier of the form X.Y.Z, where:
+	// X refers to host agent Fault Tolerance version number,
+	// Y refers to VMX Fault Tolerance version number,
+	// Z refers to VMkernal Fault Tolerance version
+	FaultTolerance_HostFeatureVersionKey HostFeatureVersionKey = "faultTolerance"
+)
+
+//
+// Enumeration of port directions.
+//
+//
+type HostFirewallRuleDirection string
+
+const (
+	Inbound_HostFirewallRuleDirection HostFirewallRuleDirection = "inbound"
+
+	Outbound_HostFirewallRuleDirection HostFirewallRuleDirection = "outbound"
+)
+
+//
+// Enumeration of port types.
+//
+//
+type HostFirewallRulePortType string
+
+const (
+	Dst_HostFirewallRulePortType HostFirewallRulePortType = "dst"
+
+	Src_HostFirewallRulePortType HostFirewallRulePortType = "src"
+)
+
+//
+// Set of valid port protocols.
+//
+//
+type HostFirewallRuleProtocol string
+
+const (
+	Tcp_HostFirewallRuleProtocol HostFirewallRuleProtocol = "tcp"
+
+	Udp_HostFirewallRuleProtocol HostFirewallRuleProtocol = "udp"
+)
+
+//
+// Possible values for graphics type.
+//
+//
+type HostGraphicsInfoGraphicsType string
+
+const (
+
+	// Basic graphics when no host driver is available.
+	Basic_HostGraphicsInfoGraphicsType HostGraphicsInfoGraphicsType = "basic"
+
+	// Direct graphics (ie. pass through).
+	Direct_HostGraphicsInfoGraphicsType HostGraphicsInfoGraphicsType = "direct"
+
+	// Shared graphics.
+	Shared_HostGraphicsInfoGraphicsType HostGraphicsInfoGraphicsType = "shared"
+)
+
+//
+// The current status of the hardware
+//
+//
+type HostHardwareElementStatus string
+
+const (
+
+	// The physical element is functioning as expected
+	Green_HostHardwareElementStatus HostHardwareElementStatus = "Green"
+
+	// The physical element is failing. It is possible that some or all
+	// functionalities of this physical element is degraded or not working.
+	Red_HostHardwareElementStatus HostHardwareElementStatus = "Red"
+
+	// The implementation cannot report on the current status of the
+	// physical element
+	Unknown_HostHardwareElementStatus HostHardwareElementStatus = "Unknown"
+
+	// All functionality is available but some might be degraded.
+	Yellow_HostHardwareElementStatus HostHardwareElementStatus = "Yellow"
+)
+
+//
+// Acceptance level definitions
+//
+//
+type HostImageAcceptanceLevel string
+
+const (
+
+	// "Community-supported"
+	Community_HostImageAcceptanceLevel HostImageAcceptanceLevel = "community"
+
+	// "Partner-supported"
+	Partner_HostImageAcceptanceLevel HostImageAcceptanceLevel = "partner"
+
+	// "VMware-accepted"
+	Vmware_accepted_HostImageAcceptanceLevel HostImageAcceptanceLevel = "vmware_accepted"
+
+	// "VMware-certified"
+	Vmware_certified_HostImageAcceptanceLevel HostImageAcceptanceLevel = "vmware_certified"
+)
+
+//
+// Reasons why fault tolerance is not supported on the host.
+//
+//
+type HostIncompatibleForFaultToleranceReason string
+
+const (
+
+	// The product supports fault tolerance but the host CPU does not.
+	Processor_HostIncompatibleForFaultToleranceReason HostIncompatibleForFaultToleranceReason = "processor"
+
+	// The product does not support fault tolerance.
+	Product_HostIncompatibleForFaultToleranceReason HostIncompatibleForFaultToleranceReason = "product"
+)
+
+//
+// Reasons why record/replay is not supported on a host.
+//
+//
+type HostIncompatibleForRecordReplayReason string
+
+const (
+
+	// The product supports record/replay but the host CPU does not.
+	Processor_HostIncompatibleForRecordReplayReason HostIncompatibleForRecordReplayReason = "processor"
+
+	// The product does not support record/replay.
+	Product_HostIncompatibleForRecordReplayReason HostIncompatibleForRecordReplayReason = "product"
+)
+
+//
+// The type of CHAP authentication setting to use.
+// prohibited  : do not use CHAP.
+// preferred   : use CHAP if successfully negotiated,
+// but allow non-CHAP connections as fallback
+// discouraged : use non-CHAP, but allow CHAP connectsion as fallback
+// required    : use CHAP for connection strictly, and fail if CHAP
+// negotiation fails.
+//
+// Defaults to preferred on first configuration if unspecified.
+//
+//
+type HostInternetScsiHbaChapAuthenticationType string
+
+const (
+	ChapDiscouraged_HostInternetScsiHbaChapAuthenticationType HostInternetScsiHbaChapAuthenticationType = "chapDiscouraged"
+
+	ChapPreferred_HostInternetScsiHbaChapAuthenticationType HostInternetScsiHbaChapAuthenticationType = "chapPreferred"
+
+	ChapProhibited_HostInternetScsiHbaChapAuthenticationType HostInternetScsiHbaChapAuthenticationType = "chapProhibited"
+
+	ChapRequired_HostInternetScsiHbaChapAuthenticationType HostInternetScsiHbaChapAuthenticationType = "chapRequired"
+)
+
+//
+// The type of integrity checks to use. The digest setting for header
+// and data traffic can be separately configured.
+// prohibited  : do not use digest.
+// preferred   : use digest if successfully negotiated, but skip the use
+// of digest otherwise.
+// discouraged : do not use digest if target allows, otherwise use digest.
+// required    : use digest strictly, and fail if target does not support
+// digest.
+//
+// Defaults to preferred on first configuration if unspecified.
+//
+//
+type HostInternetScsiHbaDigestType string
+
+const (
+	DigestDiscouraged_HostInternetScsiHbaDigestType HostInternetScsiHbaDigestType = "digestDiscouraged"
+
+	DigestPreferred_HostInternetScsiHbaDigestType HostInternetScsiHbaDigestType = "digestPreferred"
+
+	DigestProhibited_HostInternetScsiHbaDigestType HostInternetScsiHbaDigestType = "digestProhibited"
+
+	DigestRequired_HostInternetScsiHbaDigestType HostInternetScsiHbaDigestType = "digestRequired"
+)
+
+//
+// The binding mode of the adapter.
+//
+//
+type HostInternetScsiHbaNetworkBindingSupportType string
+
+const (
+	Notsupported_HostInternetScsiHbaNetworkBindingSupportType HostInternetScsiHbaNetworkBindingSupportType = "notsupported"
+
+	Optional_HostInternetScsiHbaNetworkBindingSupportType HostInternetScsiHbaNetworkBindingSupportType = "optional"
+
+	Required_HostInternetScsiHbaNetworkBindingSupportType HostInternetScsiHbaNetworkBindingSupportType = "required"
+)
+
+//
+// The method of discovery of an iScsi target.
+// staticMethod: static discovery
+// sendTargetsMethod: sendtarget discovery
+// slpMethod: Service Location Protocol discovery
+// isnsMethod: Internet Storage Name Service discovery
+// unknownMethod: discovery method not identified by iscsi stack
+//
+//
+type HostInternetScsiHbaStaticTargetTargetDiscoveryMethod string
+
+const (
+	IsnsMethod_HostInternetScsiHbaStaticTargetTargetDiscoveryMethod HostInternetScsiHbaStaticTargetTargetDiscoveryMethod = "isnsMethod"
+
+	SendTargetMethod_HostInternetScsiHbaStaticTargetTargetDiscoveryMethod HostInternetScsiHbaStaticTargetTargetDiscoveryMethod = "sendTargetMethod"
+
+	SlpMethod_HostInternetScsiHbaStaticTargetTargetDiscoveryMethod HostInternetScsiHbaStaticTargetTargetDiscoveryMethod = "slpMethod"
+
+	StaticMethod_HostInternetScsiHbaStaticTargetTargetDiscoveryMethod HostInternetScsiHbaStaticTargetTargetDiscoveryMethod = "staticMethod"
+
+	UnknownMethod_HostInternetScsiHbaStaticTargetTargetDiscoveryMethod HostInternetScsiHbaStaticTargetTargetDiscoveryMethod = "unknownMethod"
+)
+
+//
+// This specifies how the ipv6 address is configured for the interface.
+// We follow rfc4293 in defining the values for the configType.
+//
+//
+type HostIpConfigIpV6AddressConfigType string
+
+const (
+
+	// The address is configured through dhcp.
+	Dhcp_HostIpConfigIpV6AddressConfigType HostIpConfigIpV6AddressConfigType = "dhcp"
+
+	// The address is obtained through stateless autoconfiguration.
+	Linklayer_HostIpConfigIpV6AddressConfigType HostIpConfigIpV6AddressConfigType = "linklayer"
+
+	// The address is configured manually.
+	Manual_HostIpConfigIpV6AddressConfigType HostIpConfigIpV6AddressConfigType = "manual"
+
+	// Any other type of address configuration other than the below
+	// mentioned ones will fall under this category. For e.g., automatic
+	// address configuration for the link local address falls under
+	// this type.
+	Other_HostIpConfigIpV6AddressConfigType HostIpConfigIpV6AddressConfigType = "other"
+
+	// The address is chosen by the system at random
+	// e.g., an IPv4 address within 169.254/16, or an RFC
+	// 3041 privacy address.
+	Random_HostIpConfigIpV6AddressConfigType HostIpConfigIpV6AddressConfigType = "random"
+)
+
+type HostIpConfigIpV6AddressStatus string
+
+const (
+
+	// Indicates that this is a valid but deprecated address
+	// that should no longer be used as a source address.
+	Deprecated_HostIpConfigIpV6AddressStatus HostIpConfigIpV6AddressStatus = "deprecated"
+
+	// Indicates the address has been determined to be non-unique
+	// on the link, this address will not be reachable.
+	Duplicate_HostIpConfigIpV6AddressStatus HostIpConfigIpV6AddressStatus = "duplicate"
+
+	// Indicates that the address is not accessible because
+	// interface is not operational.
+	Inaccessible_HostIpConfigIpV6AddressStatus HostIpConfigIpV6AddressStatus = "inaccessible"
+
+	// Indicates that this isn't a valid.
+	Invalid_HostIpConfigIpV6AddressStatus HostIpConfigIpV6AddressStatus = "invalid"
+
+	// Indicates that this is a valid address.
+	Preferred_HostIpConfigIpV6AddressStatus HostIpConfigIpV6AddressStatus = "preferred"
+
+	// Indicates that the uniqueness of the
+	// address on the link is presently being verified.
+	Tentative_HostIpConfigIpV6AddressStatus HostIpConfigIpV6AddressStatus = "tentative"
+
+	// Indicates that the status cannot be determined.
+	Unknown_HostIpConfigIpV6AddressStatus HostIpConfigIpV6AddressStatus = "unknown"
+)
+
+//
+// Identifiers of currently supported resources.
+//
+//
+type HostLicensableResourceKey string
+
+const (
+
+	// Total size of memory configured for VMs on this host, measured in kilobytes.
+	MemoryForVms_HostLicensableResourceKey HostLicensableResourceKey = "memoryForVms"
+
+	// Total size of memory installed on this host, measured in kilobytes.
+	MemorySize_HostLicensableResourceKey HostLicensableResourceKey = "memorySize"
+
+	// Number of licensable CPU cores/compute-units on this host.
+	NumCpuCores_HostLicensableResourceKey HostLicensableResourceKey = "numCpuCores"
+
+	// Number of CPU packages on this host.
+	NumCpuPackages_HostLicensableResourceKey HostLicensableResourceKey = "numCpuPackages"
+
+	// Number of VMs already running on this host.
+	NumVmsStarted_HostLicensableResourceKey HostLicensableResourceKey = "numVmsStarted"
+
+	// Number of VMs that are currently powering-on, immigrating, etc.
+	NumVmsStarting_HostLicensableResourceKey HostLicensableResourceKey = "numVmsStarting"
+)
+
+//
+// The target of the disk reload.
+//
+//
+type HostLowLevelProvisioningManagerReloadTarget string
+
+const (
+
+	// Specifies the reload of the current config of the virtual machine.
+	CurrentConfig_HostLowLevelProvisioningManagerReloadTarget HostLowLevelProvisioningManagerReloadTarget = "currentConfig"
+
+	// Specifies the reload of the snapshot config of the virtual machine.
+	// If the virtual machine has multiple snapshots, all of the snapshot's
+	// config will be reloaded.
+	SnapshotConfig_HostLowLevelProvisioningManagerReloadTarget HostLowLevelProvisioningManagerReloadTarget = "snapshotConfig"
+)
+
+//
+// A datastore can become inaccessible due to a number of reasons as
+// defined in this enum InaccessibleReason.
+// The reason for a datastore being inaccessibile is reported in
+// inaccessibleReason.
+//
+// APD ("All Paths Down") is a condition where a SAN or NFS storage has
+// become inaccessible for unknown reasons. It only indicates loss of
+// connectivity and does not indicate storage device failure or
+// LUN removal (Permanent Device Loss or PDL)
+//
+// A difference between APD and PDL is that APD may recover
+// in which case all use cases will start to work as before. In case of PDL
+// the failed datastore/device is unlikely to recover and hence the device
+// path information and data cache will be emptied. If the PDL condition
+// recovers, the failed datastores have to be added back to the host. Once
+// in PDL a datastore cannot be added back until there are no longer any
+// open files on the datastore.
+//
+// PDL is not linked to the APD and can happen at any time with or without APD
+// preceding. If APD and PDL occur at the same time, APD  will be reported first.
+// Once (and if) the APD condition clears, PermanentDataLoss will be reported if
+// PDL condition still exists.
+//
+//
+type HostMountInfoInaccessibleReason string
+
+const (
+
+	// AllPathsDown_Start value is reported when all paths down state is detected
+	AllPathsDown_Start_HostMountInfoInaccessibleReason HostMountInfoInaccessibleReason = "AllPathsDown_Start"
+
+	// After a wait for a system default time (which is user modifiable)
+	// to ascertain the state is indeed an APD, AllPathsDown_Timeout property
+	// is reported. The host advanced option used to set timeout period
+	// is "/Misc/APDTimeout"
+	//
+	// After the datastore property is set to AllPathsDown_Timeout, all data i/o
+	// to the datastore will be fast-failed (failed immediately).
+	AllPathsDown_Timeout_HostMountInfoInaccessibleReason HostMountInfoInaccessibleReason = "AllPathsDown_Timeout"
+
+	// A PDL condition is reported as PermanentDeviceLoss.
+	PermanentDeviceLoss_HostMountInfoInaccessibleReason HostMountInfoInaccessibleReason = "PermanentDeviceLoss"
+)
+
+//
+// Defines the access mode of the datastore.
+//
+//
+type HostMountMode string
+
+const (
+
+	// The host system has read-only access to the file system.
+	ReadOnly_HostMountMode HostMountMode = "readOnly"
+
+	// The host system has read/write access to the file system.
+	ReadWrite_HostMountMode HostMountMode = "readWrite"
+)
+
+//
+// Define TCP congestion control algorithm used by an instance
+//
+//
+type HostNetStackInstanceCongestionControlAlgorithmType string
+
+const (
+
+	// Cubic Algorithm.
+	// See http://tools.ietf.org/id/draft-rhee-tcp-cubic-00.txt for detail.
+	Cubic_HostNetStackInstanceCongestionControlAlgorithmType HostNetStackInstanceCongestionControlAlgorithmType = "cubic"
+
+	// New Reno Algorithm.
+	// See http://tools.ietf.org/html/rfc3782 for detail.
+	Newreno_HostNetStackInstanceCongestionControlAlgorithmType HostNetStackInstanceCongestionControlAlgorithmType = "newreno"
+)
+
+//
+// Define the instance identifier for different traffic type
+//
+//
+type HostNetStackInstanceSystemStackKey string
+
+const (
+
+	// The default stack used by applications
+	DefaultTcpipStack_HostNetStackInstanceSystemStackKey HostNetStackInstanceSystemStackKey = "defaultTcpipStack"
+)
+
+//
+// Health state of the numeric sensor as reported by the sensor probes.
+//
+//
+type HostNumericSensorHealthState string
+
+const (
+
+	// The sensor is operating under normal conditions
+	Green_HostNumericSensorHealthState HostNumericSensorHealthState = "green"
+
+	// The sensor is operating under critical or fatal conditions. This may
+	// directly affect the functioning of both the sensor and related
+	// components.
+	Red_HostNumericSensorHealthState HostNumericSensorHealthState = "red"
+
+	// The implementation cannot report on the current health state of the
+	// physical element
+	Unknown_HostNumericSensorHealthState HostNumericSensorHealthState = "unknown"
+
+	// The sensor is operating under conditions that are non-critical.
+	Yellow_HostNumericSensorHealthState HostNumericSensorHealthState = "yellow"
+)
+
+type HostNumericSensorType string
+
+const (
+
+	// Fan sensor
+	Fan_HostNumericSensorType HostNumericSensorType = "fan"
+
+	// Other sensor.
+	Other_HostNumericSensorType HostNumericSensorType = "other"
+
+	// Power sensor
+	Power_HostNumericSensorType HostNumericSensorType = "power"
+
+	// Temperature sensor
+	Temperature_HostNumericSensorType HostNumericSensorType = "temperature"
+
+	// Voltage Sensor
+	Voltage_HostNumericSensorType HostNumericSensorType = "voltage"
+)
+
+//
+// The installation state if the update is installed on the server.
+//
+//
+type HostPatchManagerInstallState string
+
+const (
+
+	// The server has been restarted since the update installation.
+	HostRestarted_HostPatchManagerInstallState HostPatchManagerInstallState = "hostRestarted"
+
+	// Indicates if the newly installed image is active on the server
+	ImageActive_HostPatchManagerInstallState HostPatchManagerInstallState = "imageActive"
+)
+
+//
+// The integrity validation status.
+//
+//
+type HostPatchManagerIntegrityStatus string
+
+const (
+
+	// A digital signature of the update does not match.
+	DigestMismatch_HostPatchManagerIntegrityStatus HostPatchManagerIntegrityStatus = "digestMismatch"
+
+	// A public key to verify the update is expired.
+	KeyExpired_HostPatchManagerIntegrityStatus HostPatchManagerIntegrityStatus = "keyExpired"
+
+	// The integrity can not be verified since a public key to
+	// verify the update cannot be found.
+	KeyNotFound_HostPatchManagerIntegrityStatus HostPatchManagerIntegrityStatus = "keyNotFound"
+
+	// A public key to verify the update has been revoked.
+	KeyRevoked_HostPatchManagerIntegrityStatus HostPatchManagerIntegrityStatus = "keyRevoked"
+
+	// Not enough signed signatures on the update.
+	NotEnoughSignatures_HostPatchManagerIntegrityStatus HostPatchManagerIntegrityStatus = "notEnoughSignatures"
+
+	// The update is successfully validated.
+	Validated_HostPatchManagerIntegrityStatus HostPatchManagerIntegrityStatus = "validated"
+
+	// The integrity validation failed.
+	ValidationError_HostPatchManagerIntegrityStatus HostPatchManagerIntegrityStatus = "validationError"
+)
+
+//
+// Reasons why an update is not applicable to the ESX host.
+//
+//
+type HostPatchManagerReason string
+
+const (
+
+	// The update conflicts with RPMs or libraries installed on the
+	// host.
+	ConflictLib_HostPatchManagerReason HostPatchManagerReason = "conflictLib"
+
+	// The update conflicts with certain updates that are already
+	// installed on the host.
+	ConflictPatch_HostPatchManagerReason HostPatchManagerReason = "conflictPatch"
+
+	// The update depends on an update that is not installed but is
+	// in the scanned list of updates.
+	HasDependentPatch_HostPatchManagerReason HostPatchManagerReason = "hasDependentPatch"
+
+	// The update depends on certain libraries or RPMs that are not
+	// available.
+	MissingLib_HostPatchManagerReason HostPatchManagerReason = "missingLib"
+
+	// The update depends on another update that is neither installed
+	// nor in the scanned list of updates.
+	MissingPatch_HostPatchManagerReason HostPatchManagerReason = "missingPatch"
+
+	// The update is made obsolete by other patches installed on the host.
+	Obsoleted_HostPatchManagerReason HostPatchManagerReason = "obsoleted"
+)
+
+type HostPowerOperationType string
+
+const (
+
+	// Power Off Operation. Power off operation puts the host in
+	// a state that can be woken up remotely.
+	PowerOff_HostPowerOperationType HostPowerOperationType = "powerOff"
+
+	// Power On Operation
+	PowerOn_HostPowerOperationType HostPowerOperationType = "powerOn"
+)
+
+//
+// The HostProfileManagerAnswerFileStatus enum
+// defines possible values for answer file status.
+//
+//
+type HostProfileManagerAnswerFileStatus string
+
+const (
+
+	// Answer file is not valid. The file is either missing or incomplete.
+	//
+	// To produce an answer file, pass host-specific data (user input) to the
+	// HostProfileManager.ApplyHostConfig_Task
+	// method.
+	// To produce a complete answer file, call the
+	// HostProfile.ExecuteHostProfile
+	// method and fill in any missing parameters in the returned
+	// ProfileExecuteResult.requireInput
+	// list. After you execute the profile successfully, you can pass the complete required
+	// input list to the apply method.
+	Invalid_HostProfileManagerAnswerFileStatus HostProfileManagerAnswerFileStatus = "invalid"
+
+	// Answer file status is not known.
+	Unknown_HostProfileManagerAnswerFileStatus HostProfileManagerAnswerFileStatus = "unknown"
+
+	// Answer file is valid.
+	Valid_HostProfileManagerAnswerFileStatus HostProfileManagerAnswerFileStatus = "valid"
+)
+
+//
+// Set of possible values for
+// replayUnsupportedReason and
+// replayCompatibilityIssues.
+//
+//
+type HostReplayUnsupportedReason string
+
+const (
+	CpuidLimitSet_HostReplayUnsupportedReason HostReplayUnsupportedReason = "cpuidLimitSet"
+
+	HvDisabled_HostReplayUnsupportedReason HostReplayUnsupportedReason = "hvDisabled"
+
+	IncompatibleCpu_HostReplayUnsupportedReason HostReplayUnsupportedReason = "incompatibleCpu"
+
+	IncompatibleProduct_HostReplayUnsupportedReason HostReplayUnsupportedReason = "incompatibleProduct"
+
+	OldBIOS_HostReplayUnsupportedReason HostReplayUnsupportedReason = "oldBIOS"
+
+	Unknown_HostReplayUnsupportedReason HostReplayUnsupportedReason = "unknown"
+)
+
+//
+// Define the instance state type
+//
+//
+type HostRuntimeInfoNetStackInstanceRuntimeInfoState string
+
+const (
+
+	// Reserved state for future proofing asynchronous creation
+	Activating_HostRuntimeInfoNetStackInstanceRuntimeInfoState HostRuntimeInfoNetStackInstanceRuntimeInfoState = "activating"
+
+	// The instance is running
+	Active_HostRuntimeInfoNetStackInstanceRuntimeInfoState HostRuntimeInfoNetStackInstanceRuntimeInfoState = "active"
+
+	// The instance is in the progress of asynchronous deletion
+	Deactivating_HostRuntimeInfoNetStackInstanceRuntimeInfoState HostRuntimeInfoNetStackInstanceRuntimeInfoState = "deactivating"
+
+	// The instance is deleted or not running
+	Inactive_HostRuntimeInfoNetStackInstanceRuntimeInfoState HostRuntimeInfoNetStackInstanceRuntimeInfoState = "inactive"
+)
+
+//
+// Set of valid service policy strings.
+//
+//
+type HostServicePolicy string
+
+const (
+
+	// Service should run if and only if it has open firewall ports.
+	Automatic_HostServicePolicy HostServicePolicy = "automatic"
+
+	// Service should not be started when the host starts up.
+	Off_HostServicePolicy HostServicePolicy = "off"
+
+	// Service should be started when the host starts up.
+	On_HostServicePolicy HostServicePolicy = "on"
+)
+
+//
+// SNMP Agent supported capabilities enum
+//
+//
+type HostSnmpAgentCapability string
+
+const (
+
+	// Implements test notifications and allows agent configuration
+	COMPLETE_HostSnmpAgentCapability HostSnmpAgentCapability = "COMPLETE"
+
+	// Allows for agent configuration only
+	CONFIGURATION_HostSnmpAgentCapability HostSnmpAgentCapability = "CONFIGURATION"
+
+	// Implements only test notification capability only
+	DIAGNOSTICS_HostSnmpAgentCapability HostSnmpAgentCapability = "DIAGNOSTICS"
+)
+
+//
+// Defines a host's standby mode.
+//
+//
+type HostStandbyMode string
+
+const (
+
+	// The host is entering standby mode.
+	Entering_HostStandbyMode HostStandbyMode = "entering"
+
+	// The host is exiting standby mode.
+	Exiting_HostStandbyMode HostStandbyMode = "exiting"
+
+	// The host is in standby mode.
+	In_HostStandbyMode HostStandbyMode = "in"
+
+	// The host is not in standy mode. And it is not
+	// in the process of entering/exiting standby mode.
+	None_HostStandbyMode HostStandbyMode = "none"
+)
+
+//
+// Defines a host's connection state.
+//
+//
+type HostSystemConnectionState string
+
+const (
+
+	// Connected to the server. For ESX Server, this is always the setting.
+	Connected_HostSystemConnectionState HostSystemConnectionState = "connected"
+
+	// The user has explicitly taken the host down. VirtualCenter does not expect to
+	// receive heartbeats from the host. The next time a heartbeat is received, the
+	// host is moved to the connected state again and an event is logged.
+	Disconnected_HostSystemConnectionState HostSystemConnectionState = "disconnected"
+
+	// VirtualCenter is not receiving heartbeats from the server. The state
+	// automatically changes to connected once heartbeats are received
+	// again. This state is typically used to trigger an alarm on the host.
+	NotResponding_HostSystemConnectionState HostSystemConnectionState = "notResponding"
+)
+
+type HostSystemIdentificationInfoIdentifier string
+
+const (
+
+	// The Asset tag of the system
+	AssetTag_HostSystemIdentificationInfoIdentifier HostSystemIdentificationInfoIdentifier = "AssetTag"
+
+	// OEM specific string
+	//
+	// Since vSphere API 5.0
+	OemSpecificString_HostSystemIdentificationInfoIdentifier HostSystemIdentificationInfoIdentifier = "OemSpecificString"
+
+	// The Service tag of the system
+	ServiceTag_HostSystemIdentificationInfoIdentifier HostSystemIdentificationInfoIdentifier = "ServiceTag"
+)
+
+//
+// Defines a host's power state.
+//
+//
+type HostSystemPowerState string
+
+const (
+
+	// The host was specifically powered off by the user through
+	// VirtualCenter. This state is not a cetain state, because
+	// after VirtualCenter issues the command to power off the host,
+	// the host might crash, or kill all the processes but fail to
+	// power off.
+	PoweredOff_HostSystemPowerState HostSystemPowerState = "poweredOff"
+
+	// The host is powered on. A host that is entering standby mode
+	// entering is also in this state.
+	PoweredOn_HostSystemPowerState HostSystemPowerState = "poweredOn"
+
+	// The host was specifically put in standby mode, either
+	// explicitly by the user, or automatically by DPM. This state
+	// is not a cetain state, because after VirtualCenter issues the
+	// command to put the host in standby state, the host might
+	// crash, or kill all the processes but fail to power off. A host
+	// that is exiting standby mode exiting
+	// is also in this state.
+	StandBy_HostSystemPowerState HostSystemPowerState = "standBy"
+
+	// If the host is disconnected, or notResponding, we cannot
+	// possibly have knowledge of its power state. Hence, the host
+	// is marked as unknown.
+	Unknown_HostSystemPowerState HostSystemPowerState = "unknown"
+)
+
+//
+// Reasons for identifying the disk extent
+// as copy of VMFS volume extent.
+//
+//
+type HostUnresolvedVmfsExtentUnresolvedReason string
+
+const (
+
+	// The VMFS detected 'diskid' does not match with
+	// LVM detected 'diskId'
+	DiskIdMismatch_HostUnresolvedVmfsExtentUnresolvedReason HostUnresolvedVmfsExtentUnresolvedReason = "diskIdMismatch"
+
+	// VMFS 'uuid' does not match
+	UuidConflict_HostUnresolvedVmfsExtentUnresolvedReason HostUnresolvedVmfsExtentUnresolvedReason = "uuidConflict"
+)
+
+type HostUnresolvedVmfsResolutionSpecVmfsUuidResolution string
+
+const (
+
+	// Keep the original Uuid of the VMFS volume and mount it
+	//
+	// In the event the volume to be force mounted contains multiple
+	// extents but only a single copy of each extent exists, only the
+	// head extent needs to be specified.
+	ForceMount_HostUnresolvedVmfsResolutionSpecVmfsUuidResolution HostUnresolvedVmfsResolutionSpecVmfsUuidResolution = "forceMount"
+
+	// Resignature the Unresolved VMFS volume.
+	//
+	// In the event the volume to be resignatured contains multiple
+	// extents but only a single copy of each extent exists, only the
+	// head extent needs to be specified.
+	Resignature_HostUnresolvedVmfsResolutionSpecVmfsUuidResolution HostUnresolvedVmfsResolutionSpecVmfsUuidResolution = "resignature"
+)
+
+type HostVirtualNicManagerNicType string
+
+const (
+
+	// The VirtualNic is used for Fault Tolerance logging.
+	FaultToleranceLogging_HostVirtualNicManagerNicType HostVirtualNicManagerNicType = "faultToleranceLogging"
+
+	// The VirtualNic is used for management network traffic .
+	// This nicType is available only when the system does not
+	// support service console adapters.See usesServiceConsoleNic
+	Management_HostVirtualNicManagerNicType HostVirtualNicManagerNicType = "management"
+
+	// The VirtualNic is used for VMotion.
+	Vmotion_HostVirtualNicManagerNicType HostVirtualNicManagerNicType = "vmotion"
+
+	// The VirtualNic is used for VSAN traffic.
+	// To enable or disable a VirtualNic for VSAN networking,
+	// use UpdateVsan_Task.See HostVsanSystemSee UpdateVsan_TaskSee ReconfigureComputeResource_Task
+	//
+	// Since vSphere API 5.5
+	Vsan_HostVirtualNicManagerNicType HostVirtualNicManagerNicType = "vsan"
+
+	// The VirtualNic is used for vSphere Replication LWD traffic
+	// (i.e From the primary host to the VR server).
+	//
+	// Since vSphere API 5.1
+	VSphereReplication_HostVirtualNicManagerNicType HostVirtualNicManagerNicType = "vSphereReplication"
+)
+
+//
+// Set of possible values for mode field in AccessSpec.
+//
+//
+type HostVmciAccessManagerMode string
+
+const (
+
+	// Grant access to specified services in addition to existing services.
+	Grant_HostVmciAccessManagerMode HostVmciAccessManagerMode = "grant"
+
+	// Replace existing services with specified services.
+	Replace_HostVmciAccessManagerMode HostVmciAccessManagerMode = "replace"
+
+	// Revoke the specified services.
+	Revoke_HostVmciAccessManagerMode HostVmciAccessManagerMode = "revoke"
+)
+
+//
+// List of possible states of a lease.
+//
+//
+type HttpNfcLeaseState string
+
+const (
+
+	// When the import/export session is completed, and the lease
+	// is no longer held.
+	Done_HttpNfcLeaseState HttpNfcLeaseState = "done"
+
+	// When an error has occurred.
+	Error_HttpNfcLeaseState HttpNfcLeaseState = "error"
+
+	// When the lease is being initialized.
+	Initializing_HttpNfcLeaseState HttpNfcLeaseState = "initializing"
+
+	// When the lease is ready and disks may be transferred.
+	Ready_HttpNfcLeaseState HttpNfcLeaseState = "ready"
+)
+
+//
+// The available iSNS discovery methods.
+//
+//
+type InternetScsiSnsDiscoveryMethod string
+
+const (
+	IsnsDhcp_InternetScsiSnsDiscoveryMethod InternetScsiSnsDiscoveryMethod = "isnsDhcp"
+
+	IsnsSlp_InternetScsiSnsDiscoveryMethod InternetScsiSnsDiscoveryMethod = "isnsSlp"
+
+	IsnsStatic_InternetScsiSnsDiscoveryMethod InternetScsiSnsDiscoveryMethod = "isnsStatic"
+)
+
+type InvalidDasConfigArgumentEntryForInvalidArgument string
+
+const (
+
+	// Policies for admission control
+	AdmissionControl_InvalidDasConfigArgumentEntryForInvalidArgument InvalidDasConfigArgumentEntryForInvalidArgument = "admissionControl"
+
+	// User-specified heartbeat datastores
+	UserHeartbeatDs_InvalidDasConfigArgumentEntryForInvalidArgument InvalidDasConfigArgumentEntryForInvalidArgument = "userHeartbeatDs"
+
+	// VM override
+	VmConfig_InvalidDasConfigArgumentEntryForInvalidArgument InvalidDasConfigArgumentEntryForInvalidArgument = "vmConfig"
+)
+
+type InvalidProfileReferenceHostReason string
+
+const (
+
+	// The associated host and profile version are incompatible.
+	IncompatibleVersion_InvalidProfileReferenceHostReason InvalidProfileReferenceHostReason = "incompatibleVersion"
+
+	// There is no reference host associated with the profile.
+	MissingReferenceHost_InvalidProfileReferenceHostReason InvalidProfileReferenceHostReason = "missingReferenceHost"
+)
+
+type IscsiPortInfoPathStatus string
+
+const (
+
+	// All paths on this Virtual NIC are standby paths from SCSI stack
+	// perspective.
+	Active_IscsiPortInfoPathStatus IscsiPortInfoPathStatus = "active"
+
+	// One or more paths on the Virtual NIC is the last active
+	// path to a particular storage device.
+	LastActive_IscsiPortInfoPathStatus IscsiPortInfoPathStatus = "lastActive"
+
+	// There are no paths on this Virtual NIC
+	NotUsed_IscsiPortInfoPathStatus IscsiPortInfoPathStatus = "notUsed"
+
+	// One or more paths on the Virtual NIC are active paths to
+	// storage. Unbinding this Virtual NIC will cause storage path
+	// transitions.
+	StandBy_IscsiPortInfoPathStatus IscsiPortInfoPathStatus = "standBy"
 )
 
 //
@@ -1923,6 +2927,931 @@ const (
 	//
 	// This is the default latency-sensitivity value.
 	Normal_LatencySensitivitySensitivityLevel LatencySensitivitySensitivityLevel = "normal"
+)
+
+type LicenseAssignmentFailedReason string
+
+const (
+
+	// The license downgrade is disallowed because some features are in use.
+	DowngradeDisallowed_LicenseAssignmentFailedReason LicenseAssignmentFailedReason = "downgradeDisallowed"
+
+	// The inventory has hosts that need the license server to be configured unless vCenter is in evaluation
+	HostsUnmanageableByVirtualCenterWithoutLicenseServer_LicenseAssignmentFailedReason LicenseAssignmentFailedReason = "hostsUnmanageableByVirtualCenterWithoutLicenseServer"
+
+	// The inventory has hosts which are not manageable by vCenter unless in evaluation.
+	InventoryNotManageableByVirtualCenter_LicenseAssignmentFailedReason LicenseAssignmentFailedReason = "inventoryNotManageableByVirtualCenter"
+
+	// The license and the entity to which it is to be assigned are not compatible.
+	KeyEntityMismatch_LicenseAssignmentFailedReason LicenseAssignmentFailedReason = "keyEntityMismatch"
+)
+
+//
+// Some licenses may only be allowed to load from a specified source.
+// This enum indicates what restrictions exist for this license if any.
+//
+//
+type LicenseFeatureInfoSourceRestriction string
+
+const (
+
+	// The feature's license can only come from a file.
+	File_LicenseFeatureInfoSourceRestriction LicenseFeatureInfoSourceRestriction = "file"
+
+	// The feature's license can only be served.
+	Served_LicenseFeatureInfoSourceRestriction LicenseFeatureInfoSourceRestriction = "served"
+
+	// The feature does not have a source restriction.
+	Unrestricted_LicenseFeatureInfoSourceRestriction LicenseFeatureInfoSourceRestriction = "unrestricted"
+)
+
+//
+// Describes the state of the feature.
+//
+//
+type LicenseFeatureInfoState string
+
+const (
+
+	// The current edition license does not allow this additional feature.
+	Disabled_LicenseFeatureInfoState LicenseFeatureInfoState = "disabled"
+
+	// The current edition license has implicitly enabled this additional feature.
+	Enabled_LicenseFeatureInfoState LicenseFeatureInfoState = "enabled"
+
+	// The current edition license allows this additional feature. The
+	// EnableFeature and DisableFeature methods can be used to enable or disable
+	// this feature.
+	Optional_LicenseFeatureInfoState LicenseFeatureInfoState = "optional"
+)
+
+//
+// Cost units apply to licenses for the purpose of determining
+// how many licenses are needed.
+//
+//
+type LicenseFeatureInfoUnit string
+
+const (
+
+	// One license is acquired per CPU core.
+	CpuCore_LicenseFeatureInfoUnit LicenseFeatureInfoUnit = "cpuCore"
+
+	// One license is acquired per CPU package.
+	CpuPackage_LicenseFeatureInfoUnit LicenseFeatureInfoUnit = "cpuPackage"
+
+	// One license is acquired per host.
+	Host_LicenseFeatureInfoUnit LicenseFeatureInfoUnit = "host"
+
+	// One license is acquired per server.
+	Server_LicenseFeatureInfoUnit LicenseFeatureInfoUnit = "server"
+
+	// One license is acquired per virtual machine.
+	Vm_LicenseFeatureInfoUnit LicenseFeatureInfoUnit = "vm"
+)
+
+// Deprecated.
+// As of VI API 2.5, use QueryLicenseSourceAvailability
+// to obtain an array of LicenseAvailabilityInfo data
+// objects.
+//
+//
+// Licensed features have unique keys to identify them.
+//
+//
+type LicenseManagerLicenseKey string
+
+const (
+
+	// Enable ESX Server consolidated backup feature. This is a per CPU package
+	// license.
+	Backup_LicenseManagerLicenseKey LicenseManagerLicenseKey = "backup"
+
+	// Enable VirtualCenter HA. This is a per ESX server CPU package license.
+	Das_LicenseManagerLicenseKey LicenseManagerLicenseKey = "das"
+
+	// Enable VirtualCenter Distributed Resource Scheduler. This is a per ESX server
+	// CPU package license.
+	Drs_LicenseManagerLicenseKey LicenseManagerLicenseKey = "drs"
+
+	// Enable VirtualCenter DRS Power Management Functionality. This is a per CPU package
+	//
+	// Since VI API 2.5
+	DrsPower_LicenseManagerLicenseKey LicenseManagerLicenseKey = "drsPower"
+
+	// The edition license for the ESX server, Starter edition. This is a per CPU
+	// package license.
+	EsxExpress_LicenseManagerLicenseKey LicenseManagerLicenseKey = "esxExpress"
+
+	// The edition license for the ESX Server, Standard edition. This is a per
+	// CPU package license.
+	EsxFull_LicenseManagerLicenseKey LicenseManagerLicenseKey = "esxFull"
+
+	// Enable VirtualCenter ESX Server host management functionality. This is a per
+	// ESX server CPU package license.
+	EsxHost_LicenseManagerLicenseKey LicenseManagerLicenseKey = "esxHost"
+
+	// The edition license for the ESX server, VMTN edition. This is a per CPU package
+	// license.
+	EsxVmtn_LicenseManagerLicenseKey LicenseManagerLicenseKey = "esxVmtn"
+
+	// Enable VirtualCenter GSX Server host management functionality. This is a per
+	// GSX server CPU package license.
+	GsxHost_LicenseManagerLicenseKey LicenseManagerLicenseKey = "gsxHost"
+
+	// Enable use of iSCSI. This is a per CPU package license.
+	Iscsi_LicenseManagerLicenseKey LicenseManagerLicenseKey = "iscsi"
+
+	// Enable use of NAS. This is a per CPU package license.
+	Nas_LicenseManagerLicenseKey LicenseManagerLicenseKey = "nas"
+
+	// Enable use of SAN. This is a per CPU package license.
+	San_LicenseManagerLicenseKey LicenseManagerLicenseKey = "san"
+
+	// Enable VirtualCenter VMware server host management functionality. This is a per
+	// VMware server CPU package license.
+	//
+	// Since VI API 2.5
+	ServerHost_LicenseManagerLicenseKey LicenseManagerLicenseKey = "serverHost"
+
+	// The edition license for a VirtualCenter server, full edition. This license
+	// is independent of the number of CPU packages for the VirtualCenter host.
+	Vc_LicenseManagerLicenseKey LicenseManagerLicenseKey = "vc"
+
+	// The edition license for a VirtualCenter server, starter edition. This license
+	// limits the number of hosts (esxHost or serverHost) that can be managed by the
+	// VirtualCenter product.
+	//
+	// Since VI API 2.5
+	VcExpress_LicenseManagerLicenseKey LicenseManagerLicenseKey = "vcExpress"
+
+	// Enable VMotion. This is a per ESX server CPU package license.
+	Vmotion_LicenseManagerLicenseKey LicenseManagerLicenseKey = "vmotion"
+
+	// Enable up to 4-way VSMP feature. This is a per CPU package license.
+	Vsmp_LicenseManagerLicenseKey LicenseManagerLicenseKey = "vsmp"
+)
+
+//
+// State of licensing subsystem.
+//
+//
+type LicenseManagerState string
+
+const (
+
+	// Initialization has failed or grace period expired.
+	Fault_LicenseManagerState LicenseManagerState = "fault"
+
+	// Setting or resetting configuration in progress.
+	Initializing_LicenseManagerState LicenseManagerState = "initializing"
+
+	// License source unavailable, using license cache.
+	Marginal_LicenseManagerState LicenseManagerState = "marginal"
+
+	// Running within operating parameters.
+	Normal_LicenseManagerState LicenseManagerState = "normal"
+)
+
+//
+// Describes the reservation state of a license.
+//
+//
+type LicenseReservationInfoState string
+
+const (
+
+	// The required number of licenses have been acquired from the license source.
+	Licensed_LicenseReservationInfoState LicenseReservationInfoState = "licensed"
+
+	// This indicates that the license has expired or the system attempted to acquire
+	// the license but was not successful in reserving it.
+	NoLicense_LicenseReservationInfoState LicenseReservationInfoState = "noLicense"
+
+	// This license is currently unused by the system, or the feature does not
+	// apply. For example, a DRS license appears as NotUsed if the host is not
+	// part of a DRS-enabled cluster.
+	NotUsed_LicenseReservationInfoState LicenseReservationInfoState = "notUsed"
+
+	// The LicenseManager failed to acquire a license but the implementation
+	// policy allows us to use the licensed feature anyway. This is possible, for
+	// example, when a license server becomes unavailable after a license had been
+	// successfully reserved from it.
+	UnlicensedUse_LicenseReservationInfoState LicenseReservationInfoState = "unlicensedUse"
+)
+
+//
+// The Discovery Protocol operation.
+//
+//
+type LinkDiscoveryProtocolConfigOperationType string
+
+const (
+
+	// Sent discovery packets for the switch, but don't listen for incoming
+	// discovery packets.
+	Advertise_LinkDiscoveryProtocolConfigOperationType LinkDiscoveryProtocolConfigOperationType = "advertise"
+
+	// Sent discovery packets for the switch and listen for incoming
+	// discovery packets.
+	Both_LinkDiscoveryProtocolConfigOperationType LinkDiscoveryProtocolConfigOperationType = "both"
+
+	// Listen for incoming discovery packets but don't sent discovery packet
+	// for the switch.
+	Listen_LinkDiscoveryProtocolConfigOperationType LinkDiscoveryProtocolConfigOperationType = "listen"
+
+	// Don't listen for incoming discovery packets and don't sent  discover
+	// packets for the switch either.
+	None_LinkDiscoveryProtocolConfigOperationType LinkDiscoveryProtocolConfigOperationType = "none"
+)
+
+//
+// The Discovery Protocol types.
+//
+//
+type LinkDiscoveryProtocolConfigProtocolType string
+
+const (
+
+	// Cisco Discovery Protocol
+	Cdp_LinkDiscoveryProtocolConfigProtocolType LinkDiscoveryProtocolConfigProtocolType = "cdp"
+
+	// Link Layer Discovery Protocol
+	Lldp_LinkDiscoveryProtocolConfigProtocolType LinkDiscoveryProtocolConfigProtocolType = "lldp"
+)
+
+//
+// The Status enumeration defines a general "health" value for a managed entity.
+//
+//
+type ManagedEntityStatus string
+
+const (
+
+	// The status is unknown.
+	Gray_ManagedEntityStatus ManagedEntityStatus = "gray"
+
+	// The entity is OK.
+	Green_ManagedEntityStatus ManagedEntityStatus = "green"
+
+	// The entity definitely has a problem.
+	Red_ManagedEntityStatus ManagedEntityStatus = "red"
+
+	// The entity might have a problem.
+	Yellow_ManagedEntityStatus ManagedEntityStatus = "yellow"
+)
+
+//
+// The operation on the target metric item.
+//
+//
+type MetricAlarmOperator string
+
+const (
+
+	// Test if the target metric item is above the given red or yellow values.
+	IsAbove_MetricAlarmOperator MetricAlarmOperator = "isAbove"
+
+	// Test if the target metric item is below the given red or yellow values.
+	IsBelow_MetricAlarmOperator MetricAlarmOperator = "isBelow"
+)
+
+//
+// Set of constants defining the possible states of a multipath path.
+//
+//
+type MultipathState string
+
+const (
+	Active_MultipathState MultipathState = "active"
+
+	Dead_MultipathState MultipathState = "dead"
+
+	Disabled_MultipathState MultipathState = "disabled"
+
+	Standby_MultipathState MultipathState = "standby"
+
+	Unknown_MultipathState MultipathState = "unknown"
+)
+
+//
+// NetBIOS configuration mode.
+//
+//
+type NetBIOSConfigInfoMode string
+
+const (
+
+	// NetBIOS is disabled.
+	Disabled_NetBIOSConfigInfoMode NetBIOSConfigInfoMode = "disabled"
+
+	// NetBIOS is enabled.
+	Enabled_NetBIOSConfigInfoMode NetBIOSConfigInfoMode = "enabled"
+
+	// DHCP server decides whether or not to use NetBIOS.
+	EnabledViaDHCP_NetBIOSConfigInfoMode NetBIOSConfigInfoMode = "enabledViaDHCP"
+
+	// Mode of NetBIOS is unknown.
+	Unknown_NetBIOSConfigInfoMode NetBIOSConfigInfoMode = "unknown"
+)
+
+//
+// This specifies how an IP address was obtained for a given interface.
+// See RFC 4293 IpAddressOriginTC.
+//
+//
+type NetIpConfigInfoIpAddressOrigin string
+
+const (
+
+	// The address is configured through dhcp.
+	Dhcp_NetIpConfigInfoIpAddressOrigin NetIpConfigInfoIpAddressOrigin = "dhcp"
+
+	// The address is obtained through stateless autoconfiguration (autoconf).
+	// See RFC 4862, IPv6 Stateless Address Autoconfiguration.
+	Linklayer_NetIpConfigInfoIpAddressOrigin NetIpConfigInfoIpAddressOrigin = "linklayer"
+
+	// The address is configured manually. The term 'static' is a synonym.
+	Manual_NetIpConfigInfoIpAddressOrigin NetIpConfigInfoIpAddressOrigin = "manual"
+
+	// Any other type of address configuration other than the below
+	// mentioned ones will fall under this category. For e.g., automatic
+	// address configuration for the link local address falls under
+	// this type.
+	Other_NetIpConfigInfoIpAddressOrigin NetIpConfigInfoIpAddressOrigin = "other"
+
+	// The address is chosen by the system at random
+	// e.g., an IPv4 address within 169.254/16, or an RFC 3041 privacy address.
+	Random_NetIpConfigInfoIpAddressOrigin NetIpConfigInfoIpAddressOrigin = "random"
+)
+
+type NetIpConfigInfoIpAddressStatus string
+
+const (
+
+	// Indicates that this is a valid but deprecated address
+	// that should no longer be used as a source address.
+	Deprecated_NetIpConfigInfoIpAddressStatus NetIpConfigInfoIpAddressStatus = "deprecated"
+
+	// Indicates the address has been determined to be non-unique
+	// on the link, this address will not be reachable.
+	Duplicate_NetIpConfigInfoIpAddressStatus NetIpConfigInfoIpAddressStatus = "duplicate"
+
+	// Indicates that the address is not accessible because
+	// interface is not operational.
+	Inaccessible_NetIpConfigInfoIpAddressStatus NetIpConfigInfoIpAddressStatus = "inaccessible"
+
+	// Indicates that this isn't a valid.
+	Invalid_NetIpConfigInfoIpAddressStatus NetIpConfigInfoIpAddressStatus = "invalid"
+
+	// Indicates that this is a valid address.
+	Preferred_NetIpConfigInfoIpAddressStatus NetIpConfigInfoIpAddressStatus = "preferred"
+
+	// Indicates that the uniqueness of the
+	// address on the link is presently being verified.
+	Tentative_NetIpConfigInfoIpAddressStatus NetIpConfigInfoIpAddressStatus = "tentative"
+
+	// Indicates that the status cannot be determined.
+	Unknown_NetIpConfigInfoIpAddressStatus NetIpConfigInfoIpAddressStatus = "unknown"
+)
+
+//
+// IP Stack keeps state on entries in IpNetToMedia table to perform
+// physical address lookups for IP addresses. Here are the standard
+// states perSee RFC
+//
+//
+type NetIpStackInfoEntryType string
+
+const (
+
+	// This entry has been learned using ARP or NDP.
+	Dynamic_NetIpStackInfoEntryType NetIpStackInfoEntryType = "dynamic"
+
+	// The IP Stack has marked this entry as not useable.
+	Invalid_NetIpStackInfoEntryType NetIpStackInfoEntryType = "invalid"
+
+	// This entry was set manually.
+	Manual_NetIpStackInfoEntryType NetIpStackInfoEntryType = "manual"
+
+	// This implementation is reporting something other than
+	// what states are listed below.
+	Other_NetIpStackInfoEntryType NetIpStackInfoEntryType = "other"
+)
+
+//
+// The set of values used to determine ordering of default routers.
+// See RFC 4293 ipDefaultRouterPreference.
+//
+//
+type NetIpStackInfoPreference string
+
+const (
+	High_NetIpStackInfoPreference NetIpStackInfoPreference = "high"
+
+	Low_NetIpStackInfoPreference NetIpStackInfoPreference = "low"
+
+	Medium_NetIpStackInfoPreference NetIpStackInfoPreference = "medium"
+
+	Reserved_NetIpStackInfoPreference NetIpStackInfoPreference = "reserved"
+)
+
+type NotSupportedDeviceForFTDeviceType string
+
+const (
+
+	// paravirtualized SCSI controller
+	ParaVirtualSCSIController_NotSupportedDeviceForFTDeviceType NotSupportedDeviceForFTDeviceType = "paraVirtualSCSIController"
+
+	// vmxnet3 virtual Ethernet adapter
+	VirtualVmxnet3_NotSupportedDeviceForFTDeviceType NotSupportedDeviceForFTDeviceType = "virtualVmxnet3"
+)
+
+//
+// Reasons why the number of virtual CPUs is incompatible.
+//
+//
+type NumVirtualCpusIncompatibleReason string
+
+const (
+	FaultTolerance_NumVirtualCpusIncompatibleReason NumVirtualCpusIncompatibleReason = "faultTolerance"
+
+	RecordReplay_NumVirtualCpusIncompatibleReason NumVirtualCpusIncompatibleReason = "recordReplay"
+)
+
+//
+// Enumeration of different kinds of updates.
+//
+//
+type ObjectUpdateKind string
+
+const (
+
+	// A managed object became visible to a filter for the first time.
+	// For instance, this can happen if a virtual machine is added to a
+	// folder.
+	Enter_ObjectUpdateKind ObjectUpdateKind = "enter"
+
+	// A managed object left the set of objects visible to a filter.  For
+	// instance, this can happen when a virtual machine is destroyed.
+	Leave_ObjectUpdateKind ObjectUpdateKind = "leave"
+
+	// A property of the managed object changed its value.
+	Modify_ObjectUpdateKind ObjectUpdateKind = "modify"
+)
+
+//
+// The type of an OST node.
+//
+// Each OST node corresponds to an element in the OVF descriptor. See OstNode
+// for a description of the different node types.
+//
+//
+//
+type OvfConsumerOstNodeType string
+
+const (
+	Envelope_OvfConsumerOstNodeType OvfConsumerOstNodeType = "envelope"
+
+	VirtualSystem_OvfConsumerOstNodeType OvfConsumerOstNodeType = "virtualSystem"
+
+	VirtualSystemCollection_OvfConsumerOstNodeType OvfConsumerOstNodeType = "virtualSystemCollection"
+)
+
+//
+// Types of disk provisioning that can be set for the disk in the deployed OVF
+// package.
+//
+//
+type OvfCreateImportSpecParamsDiskProvisioningType string
+
+const (
+
+	// An eager zeroed thick disk has all space allocated and wiped clean
+	// of any previous contents on the physical media at creation time.
+	// Such disks may take longer time during creation compared to other
+	// disk formats.
+	//
+	// Since vSphere API 5.0
+	EagerZeroedThick_OvfCreateImportSpecParamsDiskProvisioningType OvfCreateImportSpecParamsDiskProvisioningType = "eagerZeroedThick"
+
+	// Depending on the host type, Flat is mapped to either
+	// MonolithicFlat or Thick.
+	Flat_OvfCreateImportSpecParamsDiskProvisioningType OvfCreateImportSpecParamsDiskProvisioningType = "flat"
+
+	// A preallocated monolithic disk. Disks in this format can be used with
+	// other VMware products.
+	MonolithicFlat_OvfCreateImportSpecParamsDiskProvisioningType OvfCreateImportSpecParamsDiskProvisioningType = "monolithicFlat"
+
+	// A sparse (allocate on demand) monolithic disk. Disks in this format can
+	// be used with other VMware products.
+	MonolithicSparse_OvfCreateImportSpecParamsDiskProvisioningType OvfCreateImportSpecParamsDiskProvisioningType = "monolithicSparse"
+
+	// A sparse (allocate on demand) format with additional space
+	// optimizations.
+	//
+	// Since vSphere API 5.1
+	SeSparse_OvfCreateImportSpecParamsDiskProvisioningType OvfCreateImportSpecParamsDiskProvisioningType = "seSparse"
+
+	// Depending on the host type, Sparse is mapped to either
+	// MonolithicSparse or Thin.
+	Sparse_OvfCreateImportSpecParamsDiskProvisioningType OvfCreateImportSpecParamsDiskProvisioningType = "sparse"
+
+	// A thick disk has all space allocated at creation time
+	// and the space is zeroed on demand as the space is used.
+	Thick_OvfCreateImportSpecParamsDiskProvisioningType OvfCreateImportSpecParamsDiskProvisioningType = "thick"
+
+	// Space required for thin-provisioned virtual disk is allocated and
+	// zeroed on demand as the space is used.
+	Thin_OvfCreateImportSpecParamsDiskProvisioningType OvfCreateImportSpecParamsDiskProvisioningType = "thin"
+
+	// A preallocated disk with 2GB maximum extent size. Disks in this format
+	// can be used with other VMware products. The 2GB extent size
+	// makes these disks easier to burn to dvd or use on filesystems that
+	// don't support large files.
+	TwoGbMaxExtentFlat_OvfCreateImportSpecParamsDiskProvisioningType OvfCreateImportSpecParamsDiskProvisioningType = "twoGbMaxExtentFlat"
+
+	// A sparse (allocate on demand) disk with 2GB maximum extent size.
+	// Disks in this format can be used with other VMware products. The 2GB
+	// extent size makes these disks easier to burn to dvd or use on
+	// filesystems that don't support large files.
+	TwoGbMaxExtentSparse_OvfCreateImportSpecParamsDiskProvisioningType OvfCreateImportSpecParamsDiskProvisioningType = "twoGbMaxExtentSparse"
+)
+
+//
+// The format in which performance counter data is returned.
+//
+//
+type PerfFormat string
+
+const (
+
+	// Counters returned in comma-separate value (CSV) format.
+	Csv_PerfFormat PerfFormat = "csv"
+
+	// Counters returned in an array of data objects.
+	Normal_PerfFormat PerfFormat = "normal"
+)
+
+//
+// Indicates the type of statistical measurement that a counter’s
+// value represents. Valid types are “absolute”,
+// “delta”, or “rate”.
+//
+//
+type PerfStatsType string
+
+const (
+
+	// Represents an actual value, level, or state of the counter. For
+	// example, the “uptime” counter (system group)
+	// represents the actual number of seconds since startup. The
+	// “capacity” counter represents the actual configured size
+	// of the specified datastore. In other words, number of samples,
+	// samplingPeriod, and intervals have no bearing on an
+	// “absolute” counter“s value.
+	Absolute_PerfStatsType PerfStatsType = "absolute"
+
+	// Represents an amount of change for the counter during the samplingPeriod as compared to the previous
+	// interval. The first sampling interval
+	Delta_PerfStatsType PerfStatsType = "delta"
+
+	// Represents a value that has been normalized over the samplingPeriod, enabling values for the same
+	// counter type to be compared, regardless of interval. For example,
+	// the number of reads per second.
+	Rate_PerfStatsType PerfStatsType = "rate"
+)
+
+//
+// Indicates how multiple samples of a specific counter type are
+// transformed into a single statistical value.
+//
+//
+type PerfSummaryType string
+
+const (
+
+	// The actual value collected or the average of all values collected
+	// during the summary period.
+	Average_PerfSummaryType PerfSummaryType = "average"
+
+	// The most recent value of the performance counter over the
+	// summarization period.
+	Latest_PerfSummaryType PerfSummaryType = "latest"
+
+	// The maximum value of the performance counter value over the
+	// summarization period.
+	Maximum_PerfSummaryType PerfSummaryType = "maximum"
+
+	// The minimum value of the performance counter value over the
+	// summarization period.
+	Minimum_PerfSummaryType PerfSummaryType = "minimum"
+
+	// The counter is never rolled up.
+	None_PerfSummaryType PerfSummaryType = "none"
+
+	// The sum of all the values of the performance counter over the
+	// summarization period.
+	Summation_PerfSummaryType PerfSummaryType = "summation"
+)
+
+//
+// Indicates the unit of measure represented by a counter or statistical
+// value.
+//
+//
+type PerformanceManagerUnit string
+
+const (
+
+	// Joules
+	//
+	// Since vSphere API 4.1
+	Joule_PerformanceManagerUnit PerformanceManagerUnit = "joule"
+
+	// Kilobytes.
+	KiloBytes_PerformanceManagerUnit PerformanceManagerUnit = "kiloBytes"
+
+	// Kilobytes per second.
+	KiloBytesPerSecond_PerformanceManagerUnit PerformanceManagerUnit = "kiloBytesPerSecond"
+
+	// Megabytes.
+	MegaBytes_PerformanceManagerUnit PerformanceManagerUnit = "megaBytes"
+
+	// Megabytes per second.
+	MegaBytesPerSecond_PerformanceManagerUnit PerformanceManagerUnit = "megaBytesPerSecond"
+
+	// Megahertz.
+	MegaHertz_PerformanceManagerUnit PerformanceManagerUnit = "megaHertz"
+
+	// The time in microseconds.
+	//
+	// Since vSphere API 4.0
+	Microsecond_PerformanceManagerUnit PerformanceManagerUnit = "microsecond"
+
+	// The time in milliseconds.
+	Millisecond_PerformanceManagerUnit PerformanceManagerUnit = "millisecond"
+
+	// A quantity of items, for example, the number of CPUs.
+	Number_PerformanceManagerUnit PerformanceManagerUnit = "number"
+
+	// Percentage values in units of 1/100th of a percent. For example 100
+	// represents 1%.
+	Percent_PerformanceManagerUnit PerformanceManagerUnit = "percent"
+
+	// The time in seconds.
+	Second_PerformanceManagerUnit PerformanceManagerUnit = "second"
+
+	// Watts
+	//
+	// Since vSphere API 4.1
+	Watt_PerformanceManagerUnit PerformanceManagerUnit = "watt"
+)
+
+type PhysicalNicResourcePoolSchedulerDisallowedReason string
+
+const (
+
+	// Indicates that the NIC device does is not capable of resource pool
+	// based scheduling.
+	HardwareUnsupported_PhysicalNicResourcePoolSchedulerDisallowedReason PhysicalNicResourcePoolSchedulerDisallowedReason = "hardwareUnsupported"
+
+	// Indicates that the user has opted out the Physical NIC from resource pool
+	// based scheduling.
+	UserOptOut_PhysicalNicResourcePoolSchedulerDisallowedReason PhysicalNicResourcePoolSchedulerDisallowedReason = "userOptOut"
+)
+
+//
+// Set of possible values for vmDirectPathGen2SupportedMode.
+//
+//
+type PhysicalNicVmDirectPathGen2SupportedMode string
+
+const (
+	Upt_PhysicalNicVmDirectPathGen2SupportedMode PhysicalNicVmDirectPathGen2SupportedMode = "upt"
+)
+
+//
+// The type of component connected to a port group.
+//
+//
+type PortGroupConnecteeType string
+
+const (
+
+	// The VMkernel is connected to this port group.
+	Host_PortGroupConnecteeType PortGroupConnecteeType = "host"
+
+	// A system management entity (service console)
+	// is connected to this port group.
+	SystemManagement_PortGroupConnecteeType PortGroupConnecteeType = "systemManagement"
+
+	// This port group serves an entity of unspecified kind.
+	Unknown_PortGroupConnecteeType PortGroupConnecteeType = "unknown"
+
+	// A virtual machine is connected to this port group.
+	VirtualMachine_PortGroupConnecteeType PortGroupConnecteeType = "virtualMachine"
+)
+
+//
+// Defines the result status values for a
+// HostProfile.ExecuteHostProfile
+// operation. The result data is contained in the
+// ProfileExecuteResult data object.
+//
+//
+type ProfileExecuteResultStatus string
+
+const (
+
+	// Profile execution generated an error.
+	// See ProfileExecuteResult.error.
+	Error_ProfileExecuteResultStatus ProfileExecuteResultStatus = "error"
+
+	// Additional data is required to complete the operation.
+	// The data requirements are defined in the list of policy options for the profile
+	// (ApplyProfile.policy[]).
+	NeedInput_ProfileExecuteResultStatus ProfileExecuteResultStatus = "needInput"
+
+	// Profile execution was successful. You can use the output configuration data
+	// to apply the profile to a host.
+	Success_ProfileExecuteResultStatus ProfileExecuteResultStatus = "success"
+)
+
+//
+// Enumerates different operations supported for comparing
+// numerical values.
+//
+//
+type ProfileNumericComparator string
+
+const (
+	Equal_ProfileNumericComparator ProfileNumericComparator = "equal"
+
+	GreaterThan_ProfileNumericComparator ProfileNumericComparator = "greaterThan"
+
+	GreaterThanEqual_ProfileNumericComparator ProfileNumericComparator = "greaterThanEqual"
+
+	LessThan_ProfileNumericComparator ProfileNumericComparator = "lessThan"
+
+	LessThanEqual_ProfileNumericComparator ProfileNumericComparator = "lessThanEqual"
+
+	NotEqual_ProfileNumericComparator ProfileNumericComparator = "notEqual"
+)
+
+//
+// Enumeration of possible changes to a property.
+//
+//
+type PropertyChangeOp string
+
+const (
+	Add_PropertyChangeOp PropertyChangeOp = "add"
+
+	Assign_PropertyChangeOp PropertyChangeOp = "assign"
+
+	IndirectRemove_PropertyChangeOp PropertyChangeOp = "indirectRemove"
+
+	Remove_PropertyChangeOp PropertyChangeOp = "remove"
+)
+
+//
+// List of defined migration reason codes:
+//
+//
+type RecommendationReasonCode string
+
+const (
+
+	// Fulfill anti-affinity rule.
+	AntiAffin_RecommendationReasonCode RecommendationReasonCode = "antiAffin"
+
+	// Balance datastore I/O workload.
+	//
+	// Since vSphere API 5.0
+	BalanceDatastoreIOLoad_RecommendationReasonCode RecommendationReasonCode = "balanceDatastoreIOLoad"
+
+	// Balance datastore space usage.
+	//
+	// Since vSphere API 5.0
+	BalanceDatastoreSpaceUsage_RecommendationReasonCode RecommendationReasonCode = "balanceDatastoreSpaceUsage"
+
+	// Sanity-check resource pool hierarchy
+	//
+	// Since vSphere API 4.0
+	CheckResource_RecommendationReasonCode RecommendationReasonCode = "checkResource"
+
+	// Datastore entering maintenance mode.
+	//
+	// Since vSphere API 5.0
+	DatastoreMaint_RecommendationReasonCode RecommendationReasonCode = "datastoreMaint"
+
+	// Fix the issue that a datastore run out of space.
+	//
+	// Since vSphere API 5.0
+	DatastoreSpaceOutage_RecommendationReasonCode RecommendationReasonCode = "datastoreSpaceOutage"
+
+	// Host entering standby mode.
+	EnterStandby_RecommendationReasonCode RecommendationReasonCode = "enterStandby"
+
+	// Balance average CPU utilization.
+	FairnessCpuAvg_RecommendationReasonCode RecommendationReasonCode = "fairnessCpuAvg"
+
+	// Balance average memory utilization.
+	FairnessMemAvg_RecommendationReasonCode RecommendationReasonCode = "fairnessMemAvg"
+
+	// Host entering maintenance mode.
+	HostMaint_RecommendationReasonCode RecommendationReasonCode = "hostMaint"
+
+	// Power on host to increase cluster capacity
+	IncreaseCapacity_RecommendationReasonCode RecommendationReasonCode = "increaseCapacity"
+
+	// IO load balancing was disabled internally.
+	//
+	// Since vSphere API 5.0
+	IolbDisabledInternal_RecommendationReasonCode RecommendationReasonCode = "iolbDisabledInternal"
+
+	// Fulfill affinity rule.
+	JointAffin_RecommendationReasonCode RecommendationReasonCode = "jointAffin"
+
+	// Power on virtual machine
+	PowerOnVm_RecommendationReasonCode RecommendationReasonCode = "powerOnVm"
+
+	// Power off host for power savings
+	PowerSaving_RecommendationReasonCode RecommendationReasonCode = "powerSaving"
+
+	// balance CPU reservations
+	ReservationCpu_RecommendationReasonCode RecommendationReasonCode = "reservationCpu"
+
+	// balance memory reservations
+	ReservationMem_RecommendationReasonCode RecommendationReasonCode = "reservationMem"
+
+	// Satisfy storage initial placement requests.
+	//
+	// Since vSphere API 5.0
+	StoragePlacement_RecommendationReasonCode RecommendationReasonCode = "storagePlacement"
+
+	// Maintain unreserved capacity
+	//
+	// Since vSphere API 4.0
+	UnreservedCapacity_RecommendationReasonCode RecommendationReasonCode = "unreservedCapacity"
+
+	// Fix virtual disk anti-affinity rule violation.
+	//
+	// Since vSphere API 5.0
+	VirtualDiskAntiAffin_RecommendationReasonCode RecommendationReasonCode = "virtualDiskAntiAffin"
+
+	// Fix virtual disk affinity rule violation.
+	//
+	// Since vSphere API 5.0
+	VirtualDiskJointAffin_RecommendationReasonCode RecommendationReasonCode = "virtualDiskJointAffin"
+
+	// Fix hard VM/host affinity rule violation
+	//
+	// Since vSphere API 4.1
+	VmHostHardAffinity_RecommendationReasonCode RecommendationReasonCode = "vmHostHardAffinity"
+
+	// Fix soft VM/host affinity rule violation
+	//
+	// Since vSphere API 4.1
+	VmHostSoftAffinity_RecommendationReasonCode RecommendationReasonCode = "vmHostSoftAffinity"
+)
+
+//
+// Pre-defined constants for possible recommendation types. Virtual Center
+// uses this information to coordinate with the clients.
+//
+//
+type RecommendationType string
+
+const (
+	V1_RecommendationType RecommendationType = "V1"
+)
+
+type ReplicationDiskConfigFaultReasonForFault string
+
+const (
+
+	// Could not look up device by key
+	DiskNotFound_ReplicationDiskConfigFaultReasonForFault ReplicationDiskConfigFaultReasonForFault = "diskNotFound"
+
+	// Replication not supported for disk type or backend
+	DiskTypeNotSupported_ReplicationDiskConfigFaultReasonForFault ReplicationDiskConfigFaultReasonForFault = "diskTypeNotSupported"
+
+	// Another disk in the VM has the same replication ID
+	DuplicateDiskReplicationId_ReplicationDiskConfigFaultReasonForFault ReplicationDiskConfigFaultReasonForFault = "duplicateDiskReplicationId"
+
+	// Invalid key value
+	InvalidDiskKey_ReplicationDiskConfigFaultReasonForFault ReplicationDiskConfigFaultReasonForFault = "invalidDiskKey"
+
+	// Invalid disk replication ID string
+	InvalidDiskReplicationId_ReplicationDiskConfigFaultReasonForFault ReplicationDiskConfigFaultReasonForFault = "invalidDiskReplicationId"
+
+	// Invalid path (string) for the persistent file
+	InvalidPersistentFilePath_ReplicationDiskConfigFaultReasonForFault ReplicationDiskConfigFaultReasonForFault = "invalidPersistentFilePath"
+
+	// Attempting to re-configure the disk's replication ID
+	ReconfigureDiskReplicationIdNotAllowed_ReplicationDiskConfigFaultReasonForFault ReplicationDiskConfigFaultReasonForFault = "reconfigureDiskReplicationIdNotAllowed"
 )
 
 type ReplicationVmConfigFaultReasonForFault string
@@ -1974,14 +3903,137 @@ const (
 	StaleGenerationNumber_ReplicationVmConfigFaultReasonForFault ReplicationVmConfigFaultReasonForFault = "staleGenerationNumber"
 )
 
-type HostCpuPackageVendor string
+type ReplicationVmFaultReasonForFault string
 
 const (
-	Amd_HostCpuPackageVendor HostCpuPackageVendor = "amd"
 
-	Intel_HostCpuPackageVendor HostCpuPackageVendor = "intel"
+	// The specified instanceId does not match the VirtualMachine
+	// instanceId
+	InvalidInstanceId_ReplicationVmFaultReasonForFault ReplicationVmFaultReasonForFault = "invalidInstanceId"
 
-	Unknown_HostCpuPackageVendor HostCpuPackageVendor = "unknown"
+	// VirtualMachine is in an invalid state
+	InvalidState_ReplicationVmFaultReasonForFault ReplicationVmFaultReasonForFault = "invalidState"
+
+	// VirtualMachine is not configured for replication
+	NotConfigured_ReplicationVmFaultReasonForFault ReplicationVmFaultReasonForFault = "notConfigured"
+
+	// VirtualMachine is in the process of creating an
+	// an offline instance.
+	OfflineReplicating_ReplicationVmFaultReasonForFault ReplicationVmFaultReasonForFault = "offlineReplicating"
+
+	// VirtualMachine is powered off (and is not undergoing
+	// offline replication)
+	PoweredOff_ReplicationVmFaultReasonForFault ReplicationVmFaultReasonForFault = "poweredOff"
+
+	// VirtualMachine is powered on
+	PoweredOn_ReplicationVmFaultReasonForFault ReplicationVmFaultReasonForFault = "poweredOn"
+
+	// VirtualMachine is suspended (and is not undergoing
+	// offline replication)
+	Suspended_ReplicationVmFaultReasonForFault ReplicationVmFaultReasonForFault = "suspended"
+)
+
+//
+// Describes the current state of a replicated VirtualMachine
+//
+//
+type ReplicationVmState string
+
+const (
+
+	// The VirtualMachine is in the process of having
+	// a consistent instance created.
+	Active_ReplicationVmState ReplicationVmState = "active"
+
+	// The VirtualMachine is unable to replicate due to
+	// errors.
+	//
+	// XXX Currently unused.
+	Error_ReplicationVmState ReplicationVmState = "error"
+
+	// The VirtualMachine is being replicated but is not
+	// currently in the process of having a consistent instance created.
+	Idle_ReplicationVmState ReplicationVmState = "idle"
+
+	// The VirtualMachine has no current replication state.
+	// This is a virtual machine that is configured for replication, but is
+	// powered off and not undergoing offline replication.
+	None_ReplicationVmState ReplicationVmState = "none"
+
+	// The VirtualMachine replication is paused.
+	Paused_ReplicationVmState ReplicationVmState = "paused"
+
+	// One or more of the VirtualMachine disks is in the
+	// process of an initial synchronization with the remote site.
+	Syncing_ReplicationVmState ReplicationVmState = "syncing"
+)
+
+//
+// The policy setting used to determine when to perform scheduled
+// upgrades for a virtual machine.
+//
+//
+type ScheduledHardwareUpgradeInfoHardwareUpgradePolicy string
+
+const (
+
+	// Always run scheduled upgrades.
+	Always_ScheduledHardwareUpgradeInfoHardwareUpgradePolicy ScheduledHardwareUpgradeInfoHardwareUpgradePolicy = "always"
+
+	// No scheduled upgrades.
+	Never_ScheduledHardwareUpgradeInfoHardwareUpgradePolicy ScheduledHardwareUpgradeInfoHardwareUpgradePolicy = "never"
+
+	// Run scheduled upgrades only on normal guest OS shutdown.
+	OnSoftPowerOff_ScheduledHardwareUpgradeInfoHardwareUpgradePolicy ScheduledHardwareUpgradeInfoHardwareUpgradePolicy = "onSoftPowerOff"
+)
+
+//
+// Status for last attempt to run scheduled hardware upgrade.
+//
+//
+type ScheduledHardwareUpgradeInfoHardwareUpgradeStatus string
+
+const (
+
+	// Upgrade failed.
+	//
+	// For more information about the failureSee fault
+	Failed_ScheduledHardwareUpgradeInfoHardwareUpgradeStatus ScheduledHardwareUpgradeInfoHardwareUpgradeStatus = "failed"
+
+	// No scheduled upgrade ever happened.
+	None_ScheduledHardwareUpgradeInfoHardwareUpgradeStatus ScheduledHardwareUpgradeInfoHardwareUpgradeStatus = "none"
+
+	// Upgrade is scheduled, but was not run yet.
+	Pending_ScheduledHardwareUpgradeInfoHardwareUpgradeStatus ScheduledHardwareUpgradeInfoHardwareUpgradeStatus = "pending"
+
+	// Upgrade succeeded.
+	Success_ScheduledHardwareUpgradeInfoHardwareUpgradeStatus ScheduledHardwareUpgradeInfoHardwareUpgradeStatus = "success"
+)
+
+//
+// An indicator of the utility of Descriptor in being used as an
+// identifier that is stable, unique, and correlatable.
+//
+//
+type ScsiLunDescriptorQuality string
+
+const (
+
+	// The Descriptor has an identifier that is useful for identification
+	// and correlation across hosts.
+	HighQuality_ScsiLunDescriptorQuality ScsiLunDescriptorQuality = "highQuality"
+
+	// The Descriptor has an identifier that should not be used for
+	// identification and correlation across hosts.
+	LowQuality_ScsiLunDescriptorQuality ScsiLunDescriptorQuality = "lowQuality"
+
+	// The Descriptor has an identifier that may be used for identification
+	// and correlation across hosts.
+	MediumQuality_ScsiLunDescriptorQuality ScsiLunDescriptorQuality = "mediumQuality"
+
+	// The Descriptor has an identifier that may or may not be useful for
+	// identification and correlation across hosts.
+	UnknownQuality_ScsiLunDescriptorQuality ScsiLunDescriptorQuality = "unknownQuality"
 )
 
 //
@@ -2027,175 +4079,641 @@ const (
 )
 
 //
-// List of possible host infrastructure traffic classes
+// The list of SCSI device types.  These values correspond to values
+// published in the SCSI specification.
 //
 //
-type DistributedVirtualSwitchHostInfrastructureTrafficClass string
+type ScsiLunType string
 
 const (
+	Cdrom_ScsiLunType ScsiLunType = "cdrom"
 
-	// Fault Tolerance (FT) Traffic
-	FaultTolerance_DistributedVirtualSwitchHostInfrastructureTrafficClass DistributedVirtualSwitchHostInfrastructureTrafficClass = "faultTolerance"
+	Communications_ScsiLunType ScsiLunType = "communications"
 
-	// vSphere Replication (VR) Traffic
-	Hbr_DistributedVirtualSwitchHostInfrastructureTrafficClass DistributedVirtualSwitchHostInfrastructureTrafficClass = "hbr"
+	Disk_ScsiLunType ScsiLunType = "disk"
 
-	// iSCSI Traffic
-	ISCSI_DistributedVirtualSwitchHostInfrastructureTrafficClass DistributedVirtualSwitchHostInfrastructureTrafficClass = "iSCSI"
+	Enclosure_ScsiLunType ScsiLunType = "enclosure"
 
-	// Management Traffic
-	Management_DistributedVirtualSwitchHostInfrastructureTrafficClass DistributedVirtualSwitchHostInfrastructureTrafficClass = "management"
+	MediaChanger_ScsiLunType ScsiLunType = "mediaChanger"
 
-	// NFS Traffic
-	Nfs_DistributedVirtualSwitchHostInfrastructureTrafficClass DistributedVirtualSwitchHostInfrastructureTrafficClass = "nfs"
+	OpticalDevice_ScsiLunType ScsiLunType = "opticalDevice"
 
-	// Virtual Machine Traffic
-	VirtualMachine_DistributedVirtualSwitchHostInfrastructureTrafficClass DistributedVirtualSwitchHostInfrastructureTrafficClass = "virtualMachine"
+	Printer_ScsiLunType ScsiLunType = "printer"
 
-	// vMotion Traffic
-	Vmotion_DistributedVirtualSwitchHostInfrastructureTrafficClass DistributedVirtualSwitchHostInfrastructureTrafficClass = "vmotion"
+	Processor_ScsiLunType ScsiLunType = "processor"
 
-	// vSphere Storage Area Network Traffic
-	Vsan_DistributedVirtualSwitchHostInfrastructureTrafficClass DistributedVirtualSwitchHostInfrastructureTrafficClass = "vsan"
+	Scanner_ScsiLunType ScsiLunType = "scanner"
+
+	StorageArrayController_ScsiLunType ScsiLunType = "storageArrayController"
+
+	Tape_ScsiLunType ScsiLunType = "tape"
+
+	Unknown_ScsiLunType ScsiLunType = "unknown"
+
+	Worm_ScsiLunType ScsiLunType = "worm"
 )
 
 //
-// Set of possible values for virtualMmuUsage.
+// Storage array hardware acceleration support status.
+// When a host boots, the support status is unknown.
+// As a host attempts hardware-accelerated operations,
+// it determines whether the storage device supports hardware acceleration
+// and sets the vStorageSupport property accordingly.
 //
 //
-type VirtualMachineFlagInfoVirtualMmuUsage string
+type ScsiLunVStorageSupportStatus string
 
 const (
 
-	// Determine automatically whether to use nested page table hardware support.
-	Automatic_VirtualMachineFlagInfoVirtualMmuUsage VirtualMachineFlagInfoVirtualMmuUsage = "automatic"
+	// Storage device supports hardware acceleration.
+	// The ESX host will use the feature to offload certain
+	// storage-related operations to the device.
+	VStorageSupported_ScsiLunVStorageSupportStatus ScsiLunVStorageSupportStatus = "vStorageSupported"
 
-	// Do not use nested page table hardware support.
-	Off_VirtualMachineFlagInfoVirtualMmuUsage VirtualMachineFlagInfoVirtualMmuUsage = "off"
+	// Initial support status value.
+	VStorageUnknown_ScsiLunVStorageSupportStatus ScsiLunVStorageSupportStatus = "vStorageUnknown"
 
-	// Use nested paging hardware support if the physical hardware supports it.
-	On_VirtualMachineFlagInfoVirtualMmuUsage VirtualMachineFlagInfoVirtualMmuUsage = "on"
+	// Storage device does not support hardware acceleration.
+	// The ESX host will handle all storage-related operations.
+	VStorageUnsupported_ScsiLunVStorageSupportStatus ScsiLunVStorageSupportStatus = "vStorageUnsupported"
 )
 
 //
-// The product spec operation types.
+// HTTP request methods.
 //
 //
-type DistributedVirtualSwitchProductSpecOperationType string
+type SessionManagerHttpServiceRequestSpecMethod string
+
+const (
+	HttpConnect_SessionManagerHttpServiceRequestSpecMethod SessionManagerHttpServiceRequestSpecMethod = "httpConnect"
+
+	HttpDelete_SessionManagerHttpServiceRequestSpecMethod SessionManagerHttpServiceRequestSpecMethod = "httpDelete"
+
+	HttpGet_SessionManagerHttpServiceRequestSpecMethod SessionManagerHttpServiceRequestSpecMethod = "httpGet"
+
+	HttpHead_SessionManagerHttpServiceRequestSpecMethod SessionManagerHttpServiceRequestSpecMethod = "httpHead"
+
+	HttpOptions_SessionManagerHttpServiceRequestSpecMethod SessionManagerHttpServiceRequestSpecMethod = "httpOptions"
+
+	HttpPost_SessionManagerHttpServiceRequestSpecMethod SessionManagerHttpServiceRequestSpecMethod = "httpPost"
+
+	HttpPut_SessionManagerHttpServiceRequestSpecMethod SessionManagerHttpServiceRequestSpecMethod = "httpPut"
+
+	HttpTrace_SessionManagerHttpServiceRequestSpecMethod SessionManagerHttpServiceRequestSpecMethod = "httpTrace"
+)
+
+//
+// Simplified shares notation.
+// These designations have different meanings for different resources.
+//
+//
+type SharesLevel string
 
 const (
 
-	// Set the product information for an available switch upgrade that
-	// would be done by the switch implementation. This operation will post
-	// a config issue on the switch to signal the availability of an upgrade.
-	// This operation is applicable only in the case when switch policy
-	// autoUpgradeAllowed
-	// is set to false.
-	NotifyAvailableUpgrade_DistributedVirtualSwitchProductSpecOperationType DistributedVirtualSwitchProductSpecOperationType = "notifyAvailableUpgrade"
+	// If you specify custom for the level property, when there is resource contention the Server uses the shares value to determine resource allocation.
+	Custom_SharesLevel SharesLevel = "custom"
 
-	// Push the switch's host component of the specified product info to the
-	// host members of the switch at a fixed location known by the host.
-	PreInstall_DistributedVirtualSwitchProductSpecOperationType DistributedVirtualSwitchProductSpecOperationType = "preInstall"
+	// For CPU:     Shares = 2000 * nmumber of virtual CPUs
+	// For Memory:  Shares =   20 * virtual machine memory size in megabytes
+	// For Disk:    Shares = 2000
+	// For Network: Shares = networkResourcePoolHighShareValue
+	High_SharesLevel SharesLevel = "high"
 
-	// If productSpec is set to be same as that in the
-	// DvsUpgradeAvailableEvent configIssue, the switch
-	// implementation will proceed with the upgrade. To reject or stop the
-	// upgrade, leave the productSpec unset. If productSpec is set but does not
-	// match that in DvsUpgradeAvailableEvent configIssue,
-	// a fault will be raised.
-	// This operation is applicable only in the case when switch policy
-	// autoUpgradeAllowed
-	// is set to false.
-	ProceedWithUpgrade_DistributedVirtualSwitchProductSpecOperationType DistributedVirtualSwitchProductSpecOperationType = "proceedWithUpgrade"
+	// For CPU:     Shares = 500 * number of virtual CPUs
+	// For Memory:  Shares =   5 * virtual machine memory size in megabytes
+	// For Disk:    Shares = 500
+	// For Network: Shares = 0.25 * networkResourcePoolHighShareValue
+	Low_SharesLevel SharesLevel = "low"
 
-	// Update the bundle URL and ID information. If other properties in
-	// the specified product info differ from the
-	// corresponding properties of the switch's product info, a fault will
-	// be thrown. Updating the bundle ID will result in installing the new host
-	// component identified by the bundle ID.
-	UpdateBundleInfo_DistributedVirtualSwitchProductSpecOperationType DistributedVirtualSwitchProductSpecOperationType = "updateBundleInfo"
-
-	// Change the switch implementation to use the specified one. If the
-	// property values in the specified product info are different from
-	// those of the corresponding properties in the switch's product info,
-	// a host component preinstall and switch upgrade will be performed.
-	Upgrade_DistributedVirtualSwitchProductSpecOperationType DistributedVirtualSwitchProductSpecOperationType = "upgrade"
+	// For CPU:     Shares = 1000 * number of virtual CPUs
+	// For Memory:  Shares =   10 * virtual machine memory size in megabytes
+	// For Disk:    Shares = 1000
+	// For Network: Shares = 0.5 * networkResourcePoolHighShareValue
+	Normal_SharesLevel SharesLevel = "normal"
 )
 
 //
-// The type of CHAP authentication setting to use.
-// prohibited  : do not use CHAP.
-// preferred   : use CHAP if successfully negotiated,
-// but allow non-CHAP connections as fallback
-// discouraged : use non-CHAP, but allow CHAP connectsion as fallback
-// required    : use CHAP for connection strictly, and fail if CHAP
-// negotiation fails.
-//
-// Defaults to preferred on first configuration if unspecified.
+// The encoding of the resultant return data. This is a hint to the client side
+// to indicate the format of the information being returned.
 //
 //
-type HostInternetScsiHbaChapAuthenticationType string
+type SimpleCommandEncoding string
 
 const (
-	ChapDiscouraged_HostInternetScsiHbaChapAuthenticationType HostInternetScsiHbaChapAuthenticationType = "chapDiscouraged"
 
-	ChapPreferred_HostInternetScsiHbaChapAuthenticationType HostInternetScsiHbaChapAuthenticationType = "chapPreferred"
+	// Comma separated values
+	CSV_SimpleCommandEncoding SimpleCommandEncoding = "CSV"
 
-	ChapProhibited_HostInternetScsiHbaChapAuthenticationType HostInternetScsiHbaChapAuthenticationType = "chapProhibited"
+	// Hex encoded binary data
+	HEX_SimpleCommandEncoding SimpleCommandEncoding = "HEX"
 
-	ChapRequired_HostInternetScsiHbaChapAuthenticationType HostInternetScsiHbaChapAuthenticationType = "chapRequired"
+	STRING_SimpleCommandEncoding SimpleCommandEncoding = "STRING"
 )
 
-type AutoStartAction string
+//
+// The available SLP discovery methods.
+//
+//
+type SlpDiscoveryMethod string
+
+const (
+
+	// Use the well known multicast address to find DAs.
+	SlpAutoMulticast_SlpDiscoveryMethod SlpDiscoveryMethod = "slpAutoMulticast"
+
+	// Use broadcasting to find SLP DAs.
+	// Only DAs on the current subnet will be found.
+	SlpAutoUnicast_SlpDiscoveryMethod SlpDiscoveryMethod = "slpAutoUnicast"
+
+	// Use DHCP to find the SLP DAs.
+	SlpDhcp_SlpDiscoveryMethod SlpDiscoveryMethod = "slpDhcp"
+
+	// User specified address for a DA.
+	SlpManual_SlpDiscoveryMethod SlpDiscoveryMethod = "slpManual"
+)
+
+//
+// The operation on the target state.
+//
+//
+type StateAlarmOperator string
+
+const (
+
+	// Test if the target state matches the given red or yellow states.
+	IsEqual_StateAlarmOperator StateAlarmOperator = "isEqual"
+
+	// Test if the target state does not match the given red or yellow states.
+	IsUnequal_StateAlarmOperator StateAlarmOperator = "isUnequal"
+)
+
+//
+// Storage DRS behavior.
+//
+//
+type StorageDrsPodConfigInfoBehavior string
+
+const (
+
+	// Specifies that VirtualCenter should generate recommendations for
+	// virtual disk migration and for placement with a datastore.
+	// The recommendations for virtual disk migrations will be executed automatically,
+	// but the placement recommendations will be done manually.
+	Automated_StorageDrsPodConfigInfoBehavior StorageDrsPodConfigInfoBehavior = "automated"
+
+	// Specifies that VirtualCenter should generate recommendations for
+	// virtual disk migration and for placement with a datastore,
+	// but should not execute the recommendations automatically.
+	Manual_StorageDrsPodConfigInfoBehavior StorageDrsPodConfigInfoBehavior = "manual"
+)
+
+//
+// User specification of congestion threshold mode on a given datastore
+//
+// For more information, see
+// congestionThreshold
+//
+//
+//
+type StorageIORMThresholdMode string
+
+const (
+
+	// Storagage IO Control will choose appropriate congestion threshold value
+	// for that datastore to operate at given percentage of peak throughput.
+	// This is the default setting
+	Automatic_StorageIORMThresholdMode StorageIORMThresholdMode = "automatic"
+
+	// Use user specified Storage IO Control congestion threshold value
+	Manual_StorageIORMThresholdMode StorageIORMThresholdMode = "manual"
+)
+
+//
+// Defines the storage placement operation type.
+//
+//
+//
+//
+type StoragePlacementSpecPlacementType string
+
+const (
+
+	// Clone a VM.
+	Clone_StoragePlacementSpecPlacementType StoragePlacementSpecPlacementType = "clone"
+
+	// Create a VM.
+	Create_StoragePlacementSpecPlacementType StoragePlacementSpecPlacementType = "create"
+
+	// Reconfigure a VM.
+	Reconfigure_StoragePlacementSpecPlacementType StoragePlacementSpecPlacementType = "reconfigure"
+
+	// Relocate a VM.
+	Relocate_StoragePlacementSpecPlacementType StoragePlacementSpecPlacementType = "relocate"
+)
+
+//
+// This option specifies how to select tasks based on child relationships
+// in the inventory hierarchy. If a managed entity has children, their tasks
+// can be retrieved with this filter option.
+//
+//
+type TaskFilterSpecRecursionOption string
+
+const (
+
+	// Returns tasks pertaining either to the specified managed entity
+	// or to its child entities.
+	All_TaskFilterSpecRecursionOption TaskFilterSpecRecursionOption = "all"
+
+	// Returns tasks pertaining to child entities only. Excludes
+	// tasks pertaining to the specified managed entity itself.
+	Children_TaskFilterSpecRecursionOption TaskFilterSpecRecursionOption = "children"
+
+	// Returns tasks that pertain only to the specified managed entity,
+	// and not its children.
+	Self_TaskFilterSpecRecursionOption TaskFilterSpecRecursionOption = "self"
+)
+
+//
+// This option specifies a time stamp governing the selection of tasks.
+//
+//
+type TaskFilterSpecTimeOption string
+
+const (
+
+	// The time stamp when the task finished.
+	CompletedTime_TaskFilterSpecTimeOption TaskFilterSpecTimeOption = "completedTime"
+
+	// The time stamp when the task was created and queued.
+	QueuedTime_TaskFilterSpecTimeOption TaskFilterSpecTimeOption = "queuedTime"
+
+	// The time stamp when the task started.
+	StartedTime_TaskFilterSpecTimeOption TaskFilterSpecTimeOption = "startedTime"
+)
+
+//
+// List of possible states of a task.
+//
+//
+type TaskInfoState string
+
+const (
+
+	// When a running task has encountered an error.
+	Error_TaskInfoState TaskInfoState = "error"
+
+	// When there are too many tasks for threads to handle.
+	Queued_TaskInfoState TaskInfoState = "queued"
+
+	// When the busy thread is freed from its current task by
+	// finishing the task, it picks a queued task to run.
+	// Then the queued tasks are marked as running.
+	Running_TaskInfoState TaskInfoState = "running"
+
+	// When a running task has completed.
+	Success_TaskInfoState TaskInfoState = "success"
+)
+
+type ThirdPartyLicenseAssignmentFailedReason string
+
+const (
+
+	// A general failure has occured during assigning license to the 3rd party module
+	LicenseAssignmentFailed_ThirdPartyLicenseAssignmentFailedReason ThirdPartyLicenseAssignmentFailedReason = "licenseAssignmentFailed"
+
+	// The 3rd party module we are trying to license is not installed.
+	ModuleNotInstalled_ThirdPartyLicenseAssignmentFailedReason ThirdPartyLicenseAssignmentFailedReason = "moduleNotInstalled"
+)
+
+//
+// The policy setting used to determine when tools are auto-upgraded for
+// a virtual machine
+//
+//
+type UpgradePolicy string
+
+const (
+
+	// No auto-upgrades for tools will be performed for this
+	// virtual machine. Users must manually invoke the UpgradeTools
+	// operation to update the tools.
+	Manual_UpgradePolicy UpgradePolicy = "manual"
+
+	// When the virtual machine is power-cycled, the system checks
+	// for a newer version of tools when the VM comes back up. If it
+	// is available, a tools upgrade is automatically performed on the
+	// virtual machine and it is rebooted if necessary.
+	UpgradeAtPowerCycle_UpgradePolicy UpgradePolicy = "upgradeAtPowerCycle"
+)
+
+type VAppAutoStartAction string
 
 const (
 
 	// The guest operating system for a virtual machine is shut down when that
 	// virtual machine in next in the auto-stop order.
-	GuestShutdown_AutoStartAction AutoStartAction = "guestShutdown"
+	GuestShutdown_VAppAutoStartAction VAppAutoStartAction = "guestShutdown"
 
 	// No action is taken for this virtual machine. This virtual machine is
 	// not a part of the auto-start sequence. This can be used for both auto-start
 	// and auto-start settings.
-	None_AutoStartAction AutoStartAction = "none"
+	None_VAppAutoStartAction VAppAutoStartAction = "none"
 
 	// This virtual machine is powered off when it is next in the auto-stop order.
 	// This is the default stopAction.
-	PowerOff_AutoStartAction AutoStartAction = "powerOff"
+	PowerOff_VAppAutoStartAction VAppAutoStartAction = "powerOff"
 
 	// This virtual machine is powered on when it is next in the auto-start order.
-	PowerOn_AutoStartAction AutoStartAction = "powerOn"
+	PowerOn_VAppAutoStartAction VAppAutoStartAction = "powerOn"
 
 	// This virtual machine is suspended when it is next in the auto-stop order.
-	Suspend_AutoStartAction AutoStartAction = "suspend"
-
-	// The default system action is taken for this virtual machine when it is next in
-	// the auto-start order. This can be used for both auto-start and auto-start
-	// settings.
-	SystemDefault_AutoStartAction AutoStartAction = "systemDefault"
+	Suspend_VAppAutoStartAction VAppAutoStartAction = "suspend"
 )
 
 //
-// Enumeration of port types.
+// The cloned VMs can either be provisioned the same way as the VMs
+// they are a clone of, thin provisioned or thick provisioned, or
+// linked clones (i.e., using delta disks).
 //
 //
-type HostFirewallRulePortType string
+type VAppCloneSpecProvisioningType string
 
 const (
-	Dst_HostFirewallRulePortType HostFirewallRulePortType = "dst"
 
-	Src_HostFirewallRulePortType HostFirewallRulePortType = "src"
+	// Each disk in the cloned virtual machines will have the same
+	// type of disk as the source vApp.
+	SameAsSource_VAppCloneSpecProvisioningType VAppCloneSpecProvisioningType = "sameAsSource"
+
+	// Each disk in the cloned virtual machines are allocated and
+	// committed in full size immediately.
+	Thick_VAppCloneSpecProvisioningType VAppCloneSpecProvisioningType = "thick"
+
+	// Each disk in the cloned virtual machines is allocated in full
+	// size now and committed on demand. This is only supported on
+	// VMFS-3 and newer datastores. Other types of datastores may
+	// create thick disks.
+	Thin_VAppCloneSpecProvisioningType VAppCloneSpecProvisioningType = "thin"
 )
 
-type CannotMoveFaultToleranceVmMoveType string
+//
+// IP allocation schemes supported by the guest.
+//
+//
+type VAppIPAssignmentInfoAllocationSchemes string
 
 const (
 
-	// Move out of the cluster
-	Cluster_CannotMoveFaultToleranceVmMoveType CannotMoveFaultToleranceVmMoveType = "cluster"
+	// The vApp supports DHCP to acquire IP configuration.
+	Dhcp_VAppIPAssignmentInfoAllocationSchemes VAppIPAssignmentInfoAllocationSchemes = "dhcp"
 
-	// Move out of the resouce pool
-	ResourcePool_CannotMoveFaultToleranceVmMoveType CannotMoveFaultToleranceVmMoveType = "resourcePool"
+	// The vApp supports setting the IP configuration through the
+	// properties provided in the OVF environment.
+	Ovfenv_VAppIPAssignmentInfoAllocationSchemes VAppIPAssignmentInfoAllocationSchemes = "ovfenv"
+)
+
+//
+// IP allocation policy for a deployment.
+//
+//
+type VAppIPAssignmentInfoIpAllocationPolicy string
+
+const (
+
+	// Specifies that DHCP must be used to allocate IP addresses to the vApp
+	DhcpPolicy_VAppIPAssignmentInfoIpAllocationPolicy VAppIPAssignmentInfoIpAllocationPolicy = "dhcpPolicy"
+
+	// Specifies that IP allocation is done through the range managed by the VI
+	// platform. The IP addresses are allocated at first power-on, and remain
+	// allocated at power-off. This will ensure that a vApp gets a consistent
+	// IP for its life-time.
+	//
+	// Since vSphere API 5.1
+	FixedAllocatedPolicy_VAppIPAssignmentInfoIpAllocationPolicy VAppIPAssignmentInfoIpAllocationPolicy = "fixedAllocatedPolicy"
+
+	// Specifies that IP addresses are configured manually when the vApp is deployed
+	// and will be kept until reconfigured or the vApp destroyed. This will ensure
+	// that a vApp gets a consistent IP for its life-time.
+	FixedPolicy_VAppIPAssignmentInfoIpAllocationPolicy VAppIPAssignmentInfoIpAllocationPolicy = "fixedPolicy"
+
+	// Specifies that IP allocation is done through the range managed by the
+	// vSphere platform. The IP addresses are allocated when needed, typically at
+	// power-on, and deallocated during power-off. There is no guarantee that a
+	// vApp will get the same IP address when restarted.
+	TransientPolicy_VAppIPAssignmentInfoIpAllocationPolicy VAppIPAssignmentInfoIpAllocationPolicy = "transientPolicy"
+)
+
+//
+// IP protocols supported by the guest.
+//
+//
+type VAppIPAssignmentInfoProtocols string
+
+const (
+
+	// The vApp supports IPv4 protocol.
+	IPv4_VAppIPAssignmentInfoProtocols VAppIPAssignmentInfoProtocols = "IPv4"
+
+	// The vApp supports IPv6 protocol.
+	IPv6_VAppIPAssignmentInfoProtocols VAppIPAssignmentInfoProtocols = "IPv6"
+)
+
+type VFlashModuleNotSupportedReason string
+
+const (
+	CacheBlockSizeNotSupported_VFlashModuleNotSupportedReason VFlashModuleNotSupportedReason = "CacheBlockSizeNotSupported"
+
+	CacheConsistencyTypeNotSupported_VFlashModuleNotSupportedReason VFlashModuleNotSupportedReason = "CacheConsistencyTypeNotSupported"
+
+	CacheModeNotSupported_VFlashModuleNotSupportedReason VFlashModuleNotSupportedReason = "CacheModeNotSupported"
+
+	CacheReservationNotSupported_VFlashModuleNotSupportedReason VFlashModuleNotSupportedReason = "CacheReservationNotSupported"
+
+	DiskSizeNotSupported_VFlashModuleNotSupportedReason VFlashModuleNotSupportedReason = "DiskSizeNotSupported"
+)
+
+//
+// Types of a host's compatibility with a designated virtual machine
+// that is a candidate for VMotion. Used with queryVMotionCompatibility
+// both as inputs (to designate which compatibility types to test for)
+// and as outputs (to specify which compatibility types apply for
+// each host).
+//
+//
+type VMotionCompatibilityType string
+
+const (
+
+	// The host's CPU features are compatible with the
+	// the virtual machine's requirements.
+	Cpu_VMotionCompatibilityType VMotionCompatibilityType = "cpu"
+
+	// The software platform on the host supports VMotion
+	// and is compatible with the virtual machine.
+	Software_VMotionCompatibilityType VMotionCompatibilityType = "software"
+)
+
+//
+// The teaming health check match status.
+//
+//
+type VMwareDVSTeamingMatchStatus string
+
+const (
+
+	// The value of 'loadbalance_ip' is used in a uplink teaming policy
+	// policy
+	// in the vSphere Distributed Switch, and the external physical switch
+	// has the matching EtherChannel configuration.
+	IphashMatch_VMwareDVSTeamingMatchStatus VMwareDVSTeamingMatchStatus = "iphashMatch"
+
+	// The value of 'loadbalance_ip' is used in a uplink teaming policy
+	// policy
+	// in the vSphere Distributed Switch, but the external physical switch
+	// does not have the matching EtherChannel configuration.
+	IphashMismatch_VMwareDVSTeamingMatchStatus VMwareDVSTeamingMatchStatus = "iphashMismatch"
+
+	// The value of 'loadbalance_ip' is not used in a uplink teaming policy
+	// policy
+	// in the vSphere Distributed Switch, and the external physical switch
+	// does not have EtherChannel configuration.
+	NonIphashMatch_VMwareDVSTeamingMatchStatus VMwareDVSTeamingMatchStatus = "nonIphashMatch"
+
+	// The value of 'loadbalance_ip' is not used in a uplink teaming policy
+	// policy
+	// in the vSphere Distributed Switch, but the external physical switch
+	// has EtherChannel configuration.
+	NonIphashMismatch_VMwareDVSTeamingMatchStatus VMwareDVSTeamingMatchStatus = "nonIphashMismatch"
+)
+
+//
+// Distributed Port Mirroring session types.
+//
+//
+type VMwareDVSVspanSessionType string
+
+const (
+
+	// In dvPortMirror session, Distributed Ports can be used as both source
+	// and destination entities.
+	DvPortMirror_VMwareDVSVspanSessionType VMwareDVSVspanSessionType = "dvPortMirror"
+
+	// In encapsulatedRemoteMirrorSource session, Distributed Ports can be used as source entities,
+	// and Ip address can be used as destination entities.
+	EncapsulatedRemoteMirrorSource_VMwareDVSVspanSessionType VMwareDVSVspanSessionType = "encapsulatedRemoteMirrorSource"
+
+	// In mixedDestMirror session, Distributed Ports can be used as source entities,
+	// and both Distributed Ports and Uplink Ports Name can be used as destination entities.
+	MixedDestMirror_VMwareDVSVspanSessionType VMwareDVSVspanSessionType = "mixedDestMirror"
+
+	// In remoteMirrorDest session, vlan Ids can be used as source entities,
+	// and Distributed Ports can be used as destination entities.
+	RemoteMirrorDest_VMwareDVSVspanSessionType VMwareDVSVspanSessionType = "remoteMirrorDest"
+
+	// In remoteMirrorSource session, Distributed Ports can be used as source entities,
+	// and uplink ports name can be used as destination entities.
+	RemoteMirrorSource_VMwareDVSVspanSessionType VMwareDVSVspanSessionType = "remoteMirrorSource"
+)
+
+//
+// Link Aggregation Control Protocol API versions.
+//
+//
+type VMwareDvsLacpApiVersion string
+
+const (
+
+	// Multiple Link Aggregation Control Protocol in the switch.
+	MultipleLag_VMwareDvsLacpApiVersion VMwareDvsLacpApiVersion = "multipleLag"
+
+	// One Link Aggregation Control Protocol group in the switch
+	SingleLag_VMwareDvsLacpApiVersion VMwareDvsLacpApiVersion = "singleLag"
+)
+
+//
+// Load balance algorithm in a Link Aggregation Control Protocol group.
+//
+//
+type VMwareDvsLacpLoadBalanceAlgorithm string
+
+const (
+
+	// Destination IP
+	DestIp_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "destIp"
+
+	// Destination IP and TCP/UDP port number
+	DestIpTcpUdpPort_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "destIpTcpUdpPort"
+
+	// Destination IP, TCP/UDP port number and VLAN
+	DestIpTcpUdpPortVlan_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "destIpTcpUdpPortVlan"
+
+	// Destination IP and VLAN
+	DestIpVlan_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "destIpVlan"
+
+	// Destination MAC address
+	DestMac_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "destMac"
+
+	// Destination TCP/UDP port number
+	DestTcpUdpPort_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "destTcpUdpPort"
+
+	// Source and Destination IP
+	SrcDestIp_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcDestIp"
+
+	// Source and destination IP and TCP/UDP port number
+	SrcDestIpTcpUdpPort_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcDestIpTcpUdpPort"
+
+	// Source and destination IP,
+	// source and destination TCP/UDP port number and VLAN.
+	SrcDestIpTcpUdpPortVlan_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcDestIpTcpUdpPortVlan"
+
+	// Source and destination IP and VLAN
+	SrcDestIpVlan_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcDestIpVlan"
+
+	// Source and destination MAC address
+	SrcDestMac_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcDestMac"
+
+	// Source and destination TCP/UDP port number
+	SrcDestTcpUdpPort_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcDestTcpUdpPort"
+
+	// Source IP
+	SrcIp_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcIp"
+
+	// Source IP and TCP/UDP port number
+	SrcIpTcpUdpPort_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcIpTcpUdpPort"
+
+	// Source IP, TCP/UDP port number and VLAN
+	SrcIpTcpUdpPortVlan_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcIpTcpUdpPortVlan"
+
+	// Source IP and VLAN
+	SrcIpVlan_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcIpVlan"
+
+	// Source MAC address
+	SrcMac_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcMac"
+
+	// Source Virtual Port Id
+	SrcPortId_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcPortId"
+
+	// Source TCP/UDP port number
+	SrcTcpUdpPort_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcTcpUdpPort"
+
+	// VLAN only
+	Vlan_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "vlan"
+)
+
+//
+// Link Aggregation Control Protocol policy modes.
+//
+//
+type VMwareUplinkLacpMode string
+
+const (
+
+	// Link Aggregation Control Protocol always sends frames along the configured uplinks
+	Active_VMwareUplinkLacpMode VMwareUplinkLacpMode = "active"
+
+	// Link Aggregation Control Protocol acts as "speak when spoken to".
+	Passive_VMwareUplinkLacpMode VMwareUplinkLacpMode = "passive"
 )
 
 // Deprecated.
@@ -2236,380 +4754,28 @@ const (
 	SourceTests_ValidateMigrationTestType ValidateMigrationTestType = "sourceTests"
 )
 
-type HostUnresolvedVmfsResolutionSpecVmfsUuidResolution string
+//
+// The VAppState type defines the set of states a vApp can be
+// in. The transitory states between started and stopped is modeled explicitly,
+// since the starting or stopping of a vApp is typically a time-consuming
+// process that might take minutes to complete.
+//
+//
+type VirtualAppVAppState string
 
 const (
 
-	// Keep the original Uuid of the VMFS volume and mount it
-	//
-	// In the event the volume to be force mounted contains multiple
-	// extents but only a single copy of each extent exists, only the
-	// head extent needs to be specified.
-	ForceMount_HostUnresolvedVmfsResolutionSpecVmfsUuidResolution HostUnresolvedVmfsResolutionSpecVmfsUuidResolution = "forceMount"
+	// The vApp is currently powered on .
+	Started_VirtualAppVAppState VirtualAppVAppState = "started"
 
-	// Resignature the Unresolved VMFS volume.
-	//
-	// In the event the volume to be resignatured contains multiple
-	// extents but only a single copy of each extent exists, only the
-	// head extent needs to be specified.
-	Resignature_HostUnresolvedVmfsResolutionSpecVmfsUuidResolution HostUnresolvedVmfsResolutionSpecVmfsUuidResolution = "resignature"
-)
+	// The vApp is in the process of starting.
+	Starting_VirtualAppVAppState VirtualAppVAppState = "starting"
 
-//
-// Defines a host's power state.
-//
-//
-type HostSystemPowerState string
+	// The vApp is currently powered off or suspended.
+	Stopped_VirtualAppVAppState VirtualAppVAppState = "stopped"
 
-const (
-
-	// The host was specifically powered off by the user through
-	// VirtualCenter. This state is not a cetain state, because
-	// after VirtualCenter issues the command to power off the host,
-	// the host might crash, or kill all the processes but fail to
-	// power off.
-	PoweredOff_HostSystemPowerState HostSystemPowerState = "poweredOff"
-
-	// The host is powered on. A host that is entering standby mode
-	// entering is also in this state.
-	PoweredOn_HostSystemPowerState HostSystemPowerState = "poweredOn"
-
-	// The host was specifically put in standby mode, either
-	// explicitly by the user, or automatically by DPM. This state
-	// is not a cetain state, because after VirtualCenter issues the
-	// command to put the host in standby state, the host might
-	// crash, or kill all the processes but fail to power off. A host
-	// that is exiting standby mode exiting
-	// is also in this state.
-	StandBy_HostSystemPowerState HostSystemPowerState = "standBy"
-
-	// If the host is disconnected, or notResponding, we cannot
-	// possibly have knowledge of its power state. Hence, the host
-	// is marked as unknown.
-	Unknown_HostSystemPowerState HostSystemPowerState = "unknown"
-)
-
-//
-// Set of possible values for
-// DVPortStatus.vmDirectPathGen2InactiveReasonOther.
-//
-//
-type DVPortStatusVmDirectPathGen2InactiveReasonOther string
-
-const (
-
-	// Configuration or state of the port's connectee prevents
-	// VMDirectPath Gen 2. See
-	// vmDirectPathGen2InactiveReasonVm
-	// and/or
-	// vmDirectPathGen2InactiveReasonExtended
-	// in the appropriate element of the RuntimeInfo.device array of the
-	// virtual machine connected to this port.
-	PortNptIncompatibleConnectee_DVPortStatusVmDirectPathGen2InactiveReasonOther DVPortStatusVmDirectPathGen2InactiveReasonOther = "portNptIncompatibleConnectee"
-
-	// The host for which this port is defined does not support VMDirectPath Gen 2.
-	// See HostCapability.vmDirectPathGen2Supported
-	PortNptIncompatibleHost_DVPortStatusVmDirectPathGen2InactiveReasonOther DVPortStatusVmDirectPathGen2InactiveReasonOther = "portNptIncompatibleHost"
-)
-
-//
-// Indicates the type of statistical measurement that a counter’s
-// value represents. Valid types are “absolute”,
-// “delta”, or “rate”.
-//
-//
-type PerfStatsType string
-
-const (
-
-	// Represents an actual value, level, or state of the counter. For
-	// example, the “uptime” counter (system group)
-	// represents the actual number of seconds since startup. The
-	// “capacity” counter represents the actual configured size
-	// of the specified datastore. In other words, number of samples,
-	// samplingPeriod, and intervals have no bearing on an
-	// “absolute” counter“s value.
-	Absolute_PerfStatsType PerfStatsType = "absolute"
-
-	// Represents an amount of change for the counter during the samplingPeriod as compared to the previous
-	// interval. The first sampling interval
-	Delta_PerfStatsType PerfStatsType = "delta"
-
-	// Represents a value that has been normalized over the samplingPeriod, enabling values for the same
-	// counter type to be compared, regardless of interval. For example,
-	// the number of reads per second.
-	Rate_PerfStatsType PerfStatsType = "rate"
-)
-
-//
-// Describes the reservation state of a license.
-//
-//
-type LicenseReservationInfoState string
-
-const (
-
-	// The required number of licenses have been acquired from the license source.
-	Licensed_LicenseReservationInfoState LicenseReservationInfoState = "licensed"
-
-	// This indicates that the license has expired or the system attempted to acquire
-	// the license but was not successful in reserving it.
-	NoLicense_LicenseReservationInfoState LicenseReservationInfoState = "noLicense"
-
-	// This license is currently unused by the system, or the feature does not
-	// apply. For example, a DRS license appears as NotUsed if the host is not
-	// part of a DRS-enabled cluster.
-	NotUsed_LicenseReservationInfoState LicenseReservationInfoState = "notUsed"
-
-	// The LicenseManager failed to acquire a license but the implementation
-	// policy allows us to use the licensed feature anyway. This is possible, for
-	// example, when a license server becomes unavailable after a license had been
-	// successfully reserved from it.
-	UnlicensedUse_LicenseReservationInfoState LicenseReservationInfoState = "unlicensedUse"
-)
-
-//
-// Reasons for identifying the disk extent
-// as copy of VMFS volume extent.
-//
-//
-type HostUnresolvedVmfsExtentUnresolvedReason string
-
-const (
-
-	// The VMFS detected 'diskid' does not match with
-	// LVM detected 'diskId'
-	DiskIdMismatch_HostUnresolvedVmfsExtentUnresolvedReason HostUnresolvedVmfsExtentUnresolvedReason = "diskIdMismatch"
-
-	// VMFS 'uuid' does not match
-	UuidConflict_HostUnresolvedVmfsExtentUnresolvedReason HostUnresolvedVmfsExtentUnresolvedReason = "uuidConflict"
-)
-
-//
-// Correlation state as computed by storageRM
-// module on host.
-//
-//
-type DrsInjectorWorkloadCorrelationState string
-
-const (
-	Correlated_DrsInjectorWorkloadCorrelationState DrsInjectorWorkloadCorrelationState = "Correlated"
-
-	Uncorrelated_DrsInjectorWorkloadCorrelationState DrsInjectorWorkloadCorrelationState = "Uncorrelated"
-)
-
-//
-// SNMP Agent supported capabilities enum
-//
-//
-type HostSnmpAgentCapability string
-
-const (
-
-	// Implements test notifications and allows agent configuration
-	COMPLETE_HostSnmpAgentCapability HostSnmpAgentCapability = "COMPLETE"
-
-	// Allows for agent configuration only
-	CONFIGURATION_HostSnmpAgentCapability HostSnmpAgentCapability = "CONFIGURATION"
-
-	// Implements only test notification capability only
-	DIAGNOSTICS_HostSnmpAgentCapability HostSnmpAgentCapability = "DIAGNOSTICS"
-)
-
-//
-// The Status enumeration defines a general "health" value for a managed entity.
-//
-//
-type ManagedEntityStatus string
-
-const (
-
-	// The status is unknown.
-	Gray_ManagedEntityStatus ManagedEntityStatus = "gray"
-
-	// The entity is OK.
-	Green_ManagedEntityStatus ManagedEntityStatus = "green"
-
-	// The entity definitely has a problem.
-	Red_ManagedEntityStatus ManagedEntityStatus = "red"
-
-	// The entity might have a problem.
-	Yellow_ManagedEntityStatus ManagedEntityStatus = "yellow"
-)
-
-//
-// Enumeration of port directions.
-//
-//
-type HostFirewallRuleDirection string
-
-const (
-	Inbound_HostFirewallRuleDirection HostFirewallRuleDirection = "inbound"
-
-	Outbound_HostFirewallRuleDirection HostFirewallRuleDirection = "outbound"
-)
-
-//
-// Types of a host's compatibility with a designated virtual machine
-// that is a candidate for VMotion. Used with queryVMotionCompatibility
-// both as inputs (to designate which compatibility types to test for)
-// and as outputs (to specify which compatibility types apply for
-// each host).
-//
-//
-type VMotionCompatibilityType string
-
-const (
-
-	// The host's CPU features are compatible with the
-	// the virtual machine's requirements.
-	Cpu_VMotionCompatibilityType VMotionCompatibilityType = "cpu"
-
-	// The software platform on the host supports VMotion
-	// and is compatible with the virtual machine.
-	Software_VMotionCompatibilityType VMotionCompatibilityType = "software"
-)
-
-//
-// Health state of the numeric sensor as reported by the sensor probes.
-//
-//
-type HostNumericSensorHealthState string
-
-const (
-
-	// The sensor is operating under normal conditions
-	Green_HostNumericSensorHealthState HostNumericSensorHealthState = "green"
-
-	// The sensor is operating under critical or fatal conditions. This may
-	// directly affect the functioning of both the sensor and related
-	// components.
-	Red_HostNumericSensorHealthState HostNumericSensorHealthState = "red"
-
-	// The implementation cannot report on the current health state of the
-	// physical element
-	Unknown_HostNumericSensorHealthState HostNumericSensorHealthState = "unknown"
-
-	// The sensor is operating under conditions that are non-critical.
-	Yellow_HostNumericSensorHealthState HostNumericSensorHealthState = "yellow"
-)
-
-//
-// The RecordReplayState type defines a simple set of record and replay
-// states for a virtual machine.
-//
-//
-type VirtualMachineRecordReplayState string
-
-const (
-
-	// The virtual machine is currently not participating
-	// in record or replay.
-	Inactive_VirtualMachineRecordReplayState VirtualMachineRecordReplayState = "inactive"
-
-	// The virtual machine is recording.
-	Recording_VirtualMachineRecordReplayState VirtualMachineRecordReplayState = "recording"
-
-	// The virtual machine is replaying.
-	Replaying_VirtualMachineRecordReplayState VirtualMachineRecordReplayState = "replaying"
-)
-
-//
-// Define the instance identifier for different traffic type
-//
-//
-type HostNetStackInstanceSystemStackKey string
-
-const (
-
-	// The default stack used by applications
-	DefaultTcpipStack_HostNetStackInstanceSystemStackKey HostNetStackInstanceSystemStackKey = "defaultTcpipStack"
-)
-
-//
-// Network Filter on Failure Type. It specifies whether all the
-// packets will be allowed or all the packets will be denied when
-// Filter fails to configure.
-//
-//
-type DvsFilterOnFailure string
-
-const (
-
-	// Denies all the packets when the Filter fails to configure.
-	FailClosed_DvsFilterOnFailure DvsFilterOnFailure = "failClosed"
-
-	// Allows all the packets when the Filter fails to configure.
-	FailOpen_DvsFilterOnFailure DvsFilterOnFailure = "failOpen"
-)
-
-type CannotUseNetworkReason string
-
-const (
-
-	// Source and destination DVS do not have same version or vendor
-	MismatchedDvsVersionOrVendor_CannotUseNetworkReason CannotUseNetworkReason = "MismatchedDvsVersionOrVendor"
-
-	// Source and destination networks do not have same security policies
-	MismatchedNetworkPolicies_CannotUseNetworkReason CannotUseNetworkReason = "MismatchedNetworkPolicies"
-
-	// Network does not support reservation
-	NetworkReservationNotSupported_CannotUseNetworkReason CannotUseNetworkReason = "NetworkReservationNotSupported"
-
-	// VMotion to unsupported destination network type
-	VMotionToUnsupportedNetworkType_CannotUseNetworkReason CannotUseNetworkReason = "VMotionToUnsupportedNetworkType"
-)
-
-type EventCategory string
-
-const (
-
-	// Returns error events.
-	Error_EventCategory EventCategory = "error"
-
-	// Returns informational events.
-	Info_EventCategory EventCategory = "info"
-
-	// Returns events pertaining to users.
-	User_EventCategory EventCategory = "user"
-
-	// Returns warning events.
-	Warning_EventCategory EventCategory = "warning"
-)
-
-//
-// Set of possible values for
-// key, which
-// is a unique key that identifies a feature.
-//
-//
-type HostFeatureVersionKey string
-
-const (
-
-	// VMware Fault Tolerance feature. For pre-4.1 hosts, the
-	// version value reported will be empty in which case
-	// build should be used. For all
-	// other hosts, the version number reported will be a component-specific
-	// version identifier of the form X.Y.Z, where:
-	// X refers to host agent Fault Tolerance version number,
-	// Y refers to VMX Fault Tolerance version number,
-	// Z refers to VMkernal Fault Tolerance version
-	FaultTolerance_HostFeatureVersionKey HostFeatureVersionKey = "faultTolerance"
-)
-
-//
-// List of partition format types. This denotes the partition table layout.
-//
-//
-type HostDiskPartitionInfoPartitionFormat string
-
-const (
-	Gpt_HostDiskPartitionInfoPartitionFormat HostDiskPartitionInfoPartitionFormat = "gpt"
-
-	Mbr_HostDiskPartitionInfoPartitionFormat HostDiskPartitionInfoPartitionFormat = "mbr"
-
-	Unknown_HostDiskPartitionInfoPartitionFormat HostDiskPartitionInfoPartitionFormat = "unknown"
+	// The vApp is in the process of stopping.
+	Stopping_VirtualAppVAppState VirtualAppVAppState = "stopping"
 )
 
 //
@@ -2634,233 +4800,109 @@ const (
 )
 
 //
-// This enum represents the set of legal operations
+// The type of operation being performed on the specified virtual device.
+// Valid values are:
 //
 //
-type VirtualMachineMetadataManagerVmMetadataOp string
+type VirtualDeviceConfigSpecOperation string
 
 const (
 
-	// Remove the Metadata for the specified VM
-	Remove_VirtualMachineMetadataManagerVmMetadataOp VirtualMachineMetadataManagerVmMetadataOp = "Remove"
+	// Specifies the addition of a virtual device to the configuration.
+	Add_VirtualDeviceConfigSpecOperation VirtualDeviceConfigSpecOperation = "add"
 
-	// Create or update the Metadata for the specified VM
-	Update_VirtualMachineMetadataManagerVmMetadataOp VirtualMachineMetadataManagerVmMetadataOp = "Update"
+	// Specifies changes to the virtual device specification.
+	Edit_VirtualDeviceConfigSpecOperation VirtualDeviceConfigSpecOperation = "edit"
+
+	// Specifies the removal of a virtual device.
+	Remove_VirtualDeviceConfigSpecOperation VirtualDeviceConfigSpecOperation = "remove"
 )
 
 //
-// The installation state if the update is installed on the server.
+// Specifies the connectable virtual device status.
 //
 //
-type HostPatchManagerInstallState string
+type VirtualDeviceConnectInfoStatus string
 
 const (
 
-	// The server has been restarted since the update installation.
-	HostRestarted_HostPatchManagerInstallState HostPatchManagerInstallState = "hostRestarted"
+	// The device is working correctly.
+	Ok_VirtualDeviceConnectInfoStatus VirtualDeviceConnectInfoStatus = "ok"
 
-	// Indicates if the newly installed image is active on the server
-	ImageActive_HostPatchManagerInstallState HostPatchManagerInstallState = "imageActive"
+	// The device has reported a recoverable error. For example,
+	// attempting to connect to floppy device that is being used by
+	// another virtual machine or some other program would result in
+	// this status.
+	RecoverableError_VirtualDeviceConnectInfoStatus VirtualDeviceConnectInfoStatus = "recoverableError"
+
+	// The device cannot be used. For example, attempting to connect to
+	// a floppy device that does not exist would result in this status.
+	UnrecoverableError_VirtualDeviceConnectInfoStatus VirtualDeviceConnectInfoStatus = "unrecoverableError"
+
+	// The device status is unknown, or it has not been requested to
+	// connect when the VM is powered on.
+	Untried_VirtualDeviceConnectInfoStatus VirtualDeviceConnectInfoStatus = "untried"
 )
 
 //
-// A VsanHostNodeState represents the state of participation of a host
-// in the VSAN service.See VsanHostClusterStatusSee VsanHostClusterStatusState
+// All known file extensions. Valid ones are:
 //
 //
-type VsanHostNodeState string
+type VirtualDeviceFileExtension string
 
 const (
 
-	// The node is enabled for the VSAN service and is serving as an agent.
-	Agent_VsanHostNodeState VsanHostNodeState = "agent"
+	// legacy virtual disks
+	Dsk_VirtualDeviceFileExtension VirtualDeviceFileExtension = "dsk"
 
-	// The node is enabled for the VSAN service and is serving as the backup.
-	Backup_VsanHostNodeState VsanHostNodeState = "backup"
+	// Floppy File Backings
+	Flp_VirtualDeviceFileExtension VirtualDeviceFileExtension = "flp"
 
-	// The node is being decommissioned from the VSAN service; this state is
-	// considered transitory.
-	Decommissioning_VsanHostNodeState VsanHostNodeState = "decommissioning"
+	// CD ISO Image backings
+	Iso_VirtualDeviceFileExtension VirtualDeviceFileExtension = "iso"
 
-	// The node is disabled for the VSAN service.
-	Disabled_VsanHostNodeState VsanHostNodeState = "disabled"
+	// pre 3.0 virtual disks using Raw Disk Maps
+	Rdm_VirtualDeviceFileExtension VirtualDeviceFileExtension = "rdm"
 
-	// The node is entering maintenance mode; this state is considered
-	// transitory.See EnterMaintenanceMode_Task
-	EnteringMaintenanceMode_VsanHostNodeState VsanHostNodeState = "enteringMaintenanceMode"
-
-	// The node is enabled for the VSAN service but has some configuration
-	// error which prevents participation.
-	Error_VsanHostNodeState VsanHostNodeState = "error"
-
-	// The node is exiting maintenance mode; this state is considered
-	// transitory.See ExitMaintenanceMode_Task
-	ExitingMaintenanceMode_VsanHostNodeState VsanHostNodeState = "exitingMaintenanceMode"
-
-	// The node is enabled for the VSAN service and is serving as the master.
-	Master_VsanHostNodeState VsanHostNodeState = "master"
-
-	// The node is starting the VSAN service; this state is considered
-	// transitory.
-	Starting_VsanHostNodeState VsanHostNodeState = "starting"
-
-	// The node is stopping the VSAN service; this state is considered
-	// transitory.
-	Stopping_VsanHostNodeState VsanHostNodeState = "stopping"
+	// virtual disks
+	Vmdk_VirtualDeviceFileExtension VirtualDeviceFileExtension = "vmdk"
 )
 
 //
-// The VirtualSerialPortEndPoint enum defines
-// endpoint values for virtual serial port pipe backing.
-// When you use serial port pipe backing to connect a virtual machine
-// to another process, you must define the endpoints.
-// See the endpoint
-// property for the virtual serial port pipe backing information data object.
-//
-// The possible endpoint values are:
+// The VirtualDeviceURIBackingOptionDirection enum type
+// provides values for the direction of a network connection.
 //
 //
-//
-// • client
-//
-// • server
-//
-//
-//
-//
-// For the supported choices, see the
-// endpoint
-// property for the virtual serial port pipe backing option data object.
-//
-//
-//
-type VirtualSerialPortEndPoint string
-
-const ()
-
-//
-// Current running status of VMware Tools running in the guest
-// operating system.
-//
-//
-type VirtualMachineToolsRunningStatus string
+type VirtualDeviceURIBackingOptionDirection string
 
 const (
 
-	// VMware Tools is starting.
-	GuestToolsExecutingScripts_VirtualMachineToolsRunningStatus VirtualMachineToolsRunningStatus = "guestToolsExecutingScripts"
+	// Indicates that the virtual machine can initiate a connection
+	// with a system on the network using the specified
+	// serviceURI.
+	Client_VirtualDeviceURIBackingOptionDirection VirtualDeviceURIBackingOptionDirection = "client"
 
-	// VMware Tools is not running.
-	GuestToolsNotRunning_VirtualMachineToolsRunningStatus VirtualMachineToolsRunningStatus = "guestToolsNotRunning"
-
-	// VMware Tools is running.
-	GuestToolsRunning_VirtualMachineToolsRunningStatus VirtualMachineToolsRunningStatus = "guestToolsRunning"
+	// Indicates that the virtual machine can listen for a connection
+	// on the specified serviceURI.
+	Server_VirtualDeviceURIBackingOptionDirection VirtualDeviceURIBackingOptionDirection = "server"
 )
 
 //
-// Reasons why the number of virtual CPUs is incompatible.
+// The types of virtual disk adapters used by virtual disks
 //
 //
-type NumVirtualCpusIncompatibleReason string
-
-const (
-	FaultTolerance_NumVirtualCpusIncompatibleReason NumVirtualCpusIncompatibleReason = "faultTolerance"
-
-	RecordReplay_NumVirtualCpusIncompatibleReason NumVirtualCpusIncompatibleReason = "recordReplay"
-)
-
-//
-// Defines the access mode of the datastore.
-//
-//
-type HostMountMode string
+type VirtualDiskAdapterType string
 
 const (
 
-	// The host system has read-only access to the file system.
-	ReadOnly_HostMountMode HostMountMode = "readOnly"
+	// Use BusLogic emulation for the virtual disk
+	BusLogic_VirtualDiskAdapterType VirtualDiskAdapterType = "busLogic"
 
-	// The host system has read/write access to the file system.
-	ReadWrite_HostMountMode HostMountMode = "readWrite"
-)
+	// Use IDE emulation for the virtual disk
+	Ide_VirtualDiskAdapterType VirtualDiskAdapterType = "ide"
 
-//
-// An indicator of the utility of Descriptor in being used as an
-// identifier that is stable, unique, and correlatable.
-//
-//
-type ScsiLunDescriptorQuality string
-
-const (
-
-	// The Descriptor has an identifier that is useful for identification
-	// and correlation across hosts.
-	HighQuality_ScsiLunDescriptorQuality ScsiLunDescriptorQuality = "highQuality"
-
-	// The Descriptor has an identifier that should not be used for
-	// identification and correlation across hosts.
-	LowQuality_ScsiLunDescriptorQuality ScsiLunDescriptorQuality = "lowQuality"
-
-	// The Descriptor has an identifier that may be used for identification
-	// and correlation across hosts.
-	MediumQuality_ScsiLunDescriptorQuality ScsiLunDescriptorQuality = "mediumQuality"
-
-	// The Descriptor has an identifier that may or may not be useful for
-	// identification and correlation across hosts.
-	UnknownQuality_ScsiLunDescriptorQuality ScsiLunDescriptorQuality = "unknownQuality"
-)
-
-//
-// Storage array hardware acceleration support status.
-// When a host boots, the support status is unknown.
-// As a host attempts hardware-accelerated operations,
-// it determines whether the storage device supports hardware acceleration
-// and sets the vStorageSupport property accordingly.
-//
-//
-type ScsiLunVStorageSupportStatus string
-
-const (
-
-	// Storage device supports hardware acceleration.
-	// The ESX host will use the feature to offload certain
-	// storage-related operations to the device.
-	VStorageSupported_ScsiLunVStorageSupportStatus ScsiLunVStorageSupportStatus = "vStorageSupported"
-
-	// Initial support status value.
-	VStorageUnknown_ScsiLunVStorageSupportStatus ScsiLunVStorageSupportStatus = "vStorageUnknown"
-
-	// Storage device does not support hardware acceleration.
-	// The ESX host will handle all storage-related operations.
-	VStorageUnsupported_ScsiLunVStorageSupportStatus ScsiLunVStorageSupportStatus = "vStorageUnsupported"
-)
-
-//
-// Status of volume's support for vStorage hardware acceleration.
-// The ESX Server determines the status based on the capabilities
-// of the devices that support the file system volume.
-// When a host boots, the support status is unknown.
-// As the ESX host attempts hardware-accelerated operations,
-// it determines whether the storage device supports hardware
-// acceleration and sets the vStorageSupport
-// property accordingly.
-//
-//
-type FileSystemMountInfoVStorageSupportStatus string
-
-const (
-
-	// Storage device supports hardware acceleration.
-	// The ESX host will use the feature to offload certain
-	// storage-related operations to the device.
-	VStorageSupported_FileSystemMountInfoVStorageSupportStatus FileSystemMountInfoVStorageSupportStatus = "vStorageSupported"
-
-	// Initial support status value.
-	VStorageUnknown_FileSystemMountInfoVStorageSupportStatus FileSystemMountInfoVStorageSupportStatus = "vStorageUnknown"
-
-	// Storage device does not support hardware acceleration.
-	// The ESX host will handle all storage-related operations.
-	VStorageUnsupported_FileSystemMountInfoVStorageSupportStatus FileSystemMountInfoVStorageSupportStatus = "vStorageUnsupported"
+	// Use LSILogic emulation for the virtual disk
+	LsiLogic_VirtualDiskAdapterType VirtualDiskAdapterType = "lsiLogic"
 )
 
 //
@@ -2891,153 +4933,650 @@ const (
 )
 
 //
-// List of symbol partition types
+// The delta disk format constants
 //
 //
-type HostDiskPartitionInfoType string
-
-const (
-	Extended_HostDiskPartitionInfoType HostDiskPartitionInfoType = "extended"
-
-	LinuxNative_HostDiskPartitionInfoType HostDiskPartitionInfoType = "linuxNative"
-
-	LinuxSwap_HostDiskPartitionInfoType HostDiskPartitionInfoType = "linuxSwap"
-
-	None_HostDiskPartitionInfoType HostDiskPartitionInfoType = "none"
-
-	Ntfs_HostDiskPartitionInfoType HostDiskPartitionInfoType = "ntfs"
-
-	// Since vSphere API 5.5
-	Vffs_HostDiskPartitionInfoType HostDiskPartitionInfoType = "vffs"
-
-	Vmfs_HostDiskPartitionInfoType HostDiskPartitionInfoType = "vmfs"
-
-	VmkDiagnostic_HostDiskPartitionInfoType HostDiskPartitionInfoType = "vmkDiagnostic"
-)
-
-//
-// Basic Comparison operators
-//
-//
-type EventAlarmExpressionComparisonOperator string
+type VirtualDiskDeltaDiskFormat string
 
 const (
 
-	// attribute does not end with specified value
-	DoesNotEndWith_EventAlarmExpressionComparisonOperator EventAlarmExpressionComparisonOperator = "doesNotEndWith"
+	// native snapshot format
+	NativeFormat_VirtualDiskDeltaDiskFormat VirtualDiskDeltaDiskFormat = "nativeFormat"
 
-	// attribute does not start with specified value
-	DoesNotStartWith_EventAlarmExpressionComparisonOperator EventAlarmExpressionComparisonOperator = "doesNotStartWith"
+	// redo-log based format
+	RedoLogFormat_VirtualDiskDeltaDiskFormat VirtualDiskDeltaDiskFormat = "redoLogFormat"
 
-	// attribute ends with specified value
-	EndsWith_EventAlarmExpressionComparisonOperator EventAlarmExpressionComparisonOperator = "endsWith"
-
-	// attribute equals specified value
-	Equals_EventAlarmExpressionComparisonOperator EventAlarmExpressionComparisonOperator = "equals"
-
-	// attribute does not equal specified value
-	NotEqualTo_EventAlarmExpressionComparisonOperator EventAlarmExpressionComparisonOperator = "notEqualTo"
-
-	// attribute starts with specified value
-	StartsWith_EventAlarmExpressionComparisonOperator EventAlarmExpressionComparisonOperator = "startsWith"
-)
-
-type LicenseAssignmentFailedReason string
-
-const (
-
-	// The license downgrade is disallowed because some features are in use.
-	DowngradeDisallowed_LicenseAssignmentFailedReason LicenseAssignmentFailedReason = "downgradeDisallowed"
-
-	// The inventory has hosts that need the license server to be configured unless vCenter is in evaluation
-	HostsUnmanageableByVirtualCenterWithoutLicenseServer_LicenseAssignmentFailedReason LicenseAssignmentFailedReason = "hostsUnmanageableByVirtualCenterWithoutLicenseServer"
-
-	// The inventory has hosts which are not manageable by vCenter unless in evaluation.
-	InventoryNotManageableByVirtualCenter_LicenseAssignmentFailedReason LicenseAssignmentFailedReason = "inventoryNotManageableByVirtualCenter"
-
-	// The license and the entity to which it is to be assigned are not compatible.
-	KeyEntityMismatch_LicenseAssignmentFailedReason LicenseAssignmentFailedReason = "keyEntityMismatch"
-)
-
-//
-// The encoding of the resultant return data. This is a hint to the client side
-// to indicate the format of the information being returned.
-//
-//
-type SimpleCommandEncoding string
-
-const (
-
-	// Comma separated values
-	CSV_SimpleCommandEncoding SimpleCommandEncoding = "CSV"
-
-	// Hex encoded binary data
-	HEX_SimpleCommandEncoding SimpleCommandEncoding = "HEX"
-
-	STRING_SimpleCommandEncoding SimpleCommandEncoding = "STRING"
-)
-
-type ComplianceResultStatus string
-
-const (
-
-	// Entity is in Compliance
-	Compliant_ComplianceResultStatus ComplianceResultStatus = "compliant"
-
-	// Entity is out of Compliance
-	NonCompliant_ComplianceResultStatus ComplianceResultStatus = "nonCompliant"
-
-	// Compliance status of the entity is not known
-	Unknown_ComplianceResultStatus ComplianceResultStatus = "unknown"
-)
-
-//
-// Defines the current maintenance mode state of the datastore.
-//
-//
-type DatastoreSummaryMaintenanceModeState string
-
-const (
-
-	// Started entering maintenance mode, but not finished.
-	// This could happen when waiting for user input or for
-	// long-running vmotions to complete.
-	EnteringMaintenance_DatastoreSummaryMaintenanceModeState DatastoreSummaryMaintenanceModeState = "enteringMaintenance"
-
-	// Successfully entered maintenance mode.
-	InMaintenance_DatastoreSummaryMaintenanceModeState DatastoreSummaryMaintenanceModeState = "inMaintenance"
-
-	// Default state.
-	Normal_DatastoreSummaryMaintenanceModeState DatastoreSummaryMaintenanceModeState = "normal"
-)
-
-type HostVirtualNicManagerNicType string
-
-const (
-
-	// The VirtualNic is used for Fault Tolerance logging.
-	FaultToleranceLogging_HostVirtualNicManagerNicType HostVirtualNicManagerNicType = "faultToleranceLogging"
-
-	// The VirtualNic is used for management network traffic .
-	// This nicType is available only when the system does not
-	// support service console adapters.See usesServiceConsoleNic
-	Management_HostVirtualNicManagerNicType HostVirtualNicManagerNicType = "management"
-
-	// The VirtualNic is used for VMotion.
-	Vmotion_HostVirtualNicManagerNicType HostVirtualNicManagerNicType = "vmotion"
-
-	// The VirtualNic is used for VSAN traffic.
-	// To enable or disable a VirtualNic for VSAN networking,
-	// use UpdateVsan_Task.See HostVsanSystemSee UpdateVsan_TaskSee ReconfigureComputeResource_Task
-	//
-	// Since vSphere API 5.5
-	Vsan_HostVirtualNicManagerNicType HostVirtualNicManagerNicType = "vsan"
-
-	// The VirtualNic is used for vSphere Replication LWD traffic
-	// (i.e From the primary host to the VR server).
+	// Flex-SE redo-log based format
 	//
 	// Since vSphere API 5.1
-	VSphereReplication_HostVirtualNicManagerNicType HostVirtualNicManagerNicType = "vSphereReplication"
+	SeSparseFormat_VirtualDiskDeltaDiskFormat VirtualDiskDeltaDiskFormat = "seSparseFormat"
+)
+
+//
+// The list of known disk modes.
+//
+// The list of supported disk modes varies by the backing type. The "persistent"
+// mode is supported by every backing type.
+//
+//
+//
+type VirtualDiskMode string
+
+const (
+
+	// Changes are appended to the redo log; you revoke changes by removing the undo log.
+	Append_VirtualDiskMode VirtualDiskMode = "append"
+
+	// Same as nonpersistent, but not affected by snapshots.
+	Independent_nonpersistent_VirtualDiskMode VirtualDiskMode = "independent_nonpersistent"
+
+	// Same as persistent, but not affected by snapshots.
+	Independent_persistent_VirtualDiskMode VirtualDiskMode = "independent_persistent"
+
+	// Changes to virtual disk are made to a redo log and discarded at power off.
+	Nonpersistent_VirtualDiskMode VirtualDiskMode = "nonpersistent"
+
+	// Changes are immediately and permanently written to the virtual disk.
+	Persistent_VirtualDiskMode VirtualDiskMode = "persistent"
+
+	// Changes are made to a redo log, but you are given the option to commit or undo.
+	Undoable_VirtualDiskMode VirtualDiskMode = "undoable"
+)
+
+//
+// The types of virtual disks that can be created or cloned.
+//
+//
+type VirtualDiskType string
+
+const (
+
+	// A redo log disk. This format is only applicable as a destination format
+	// in a clone operation, and not usable for disk creation.
+	//
+	// Since vSphere API 5.5
+	Delta_VirtualDiskType VirtualDiskType = "delta"
+
+	// An eager zeroed thick disk has all space allocated and wiped clean
+	// of any previous contents on the physical media at creation time.
+	// Such disks may take longer time during creation  compared to other
+	// disk formats.
+	EagerZeroedThick_VirtualDiskType VirtualDiskType = "eagerZeroedThick"
+
+	// A preallocated monolithic disk.  Disks in this format can be used with
+	// other VMware products. This format is only applicable as a destination
+	// format in a clone operation, and not usable for disk creation.
+	//
+	// Since vSphere API 4.0
+	FlatMonolithic_VirtualDiskType VirtualDiskType = "flatMonolithic"
+
+	// A preallocated disk has all space allocated at creation time
+	// and the space is zeroed on demand as the space is used.
+	Preallocated_VirtualDiskType VirtualDiskType = "preallocated"
+
+	// Raw device.
+	Raw_VirtualDiskType VirtualDiskType = "raw"
+
+	// Virtual compatibility mode raw disk mapping.  An rdm virtual disk
+	// grants access to the entire raw disk and the virtual disk can
+	// participate in snapshots.
+	Rdm_VirtualDiskType VirtualDiskType = "rdm"
+
+	// Physical compatibility mode (pass-through) raw disk mapping. An rdmp
+	// virtual disk passes SCSI commands directly to the hardware, but the
+	// virtual disk cannot participate in snapshots.
+	Rdmp_VirtualDiskType VirtualDiskType = "rdmp"
+
+	// A sparse (allocate on demand) format with additional space
+	// optimizations.
+	//
+	// Since vSphere API 5.1
+	SeSparse_VirtualDiskType VirtualDiskType = "seSparse"
+
+	// A sparse disk with 2GB maximum extent size.  Disks in this format
+	// can be used with other VMware products.  The 2GB extent size
+	// makes these disks easier to burn to dvd or use on filesystems that
+	// don't support large files. This format is only applicable as a
+	// destination format in a clone operation, and not usable for disk
+	// creation.
+	Sparse2Gb_VirtualDiskType VirtualDiskType = "sparse2Gb"
+
+	// A sparse monolithic disk.  Disks in this format can be used with other
+	// VMware products. This format is only applicable as a destination
+	// format in a clone operation, and not usable for disk creation.
+	//
+	// Since vSphere API 4.0
+	SparseMonolithic_VirtualDiskType VirtualDiskType = "sparseMonolithic"
+
+	// A thick disk has all space allocated at creation time.  This
+	// space may contain stale data on the physical media.  Thick disks
+	// are primarily used for virtual machine clustering, but they are
+	// generally insecure and should not be used. Due to better performance
+	// and security properties, the use of the 'preallocated' format is
+	// preferred over this format.
+	Thick_VirtualDiskType VirtualDiskType = "thick"
+
+	// A thick disk with 2GB maximum extent size.  Disks in this format
+	// can be used with other VMware products.  The 2GB extent size
+	// makes these disks easier to burn to dvd or use on filesystems that
+	// don't support large files. This format is only applicable as a
+	// destination format in a clone operation, and not usable for disk
+	// creation.
+	Thick2Gb_VirtualDiskType VirtualDiskType = "thick2Gb"
+
+	// Space required for thin-provisioned virtual disk is allocated and
+	// zeroed on demand as the space is used.
+	Thin_VirtualDiskType VirtualDiskType = "thin"
+)
+
+//
+// Pre-defined constants for cache consistency types
+//
+//
+type VirtualDiskVFlashCacheConfigInfoCacheConsistencyType string
+
+const (
+
+	// With strong consistency, it ensures that
+	// a crash will leave the cache data consistent.
+	Strong_VirtualDiskVFlashCacheConfigInfoCacheConsistencyType VirtualDiskVFlashCacheConfigInfoCacheConsistencyType = "strong"
+
+	// Cache data consistency is not guaranteed after a crash.
+	Weak_VirtualDiskVFlashCacheConfigInfoCacheConsistencyType VirtualDiskVFlashCacheConfigInfoCacheConsistencyType = "weak"
+)
+
+//
+// Pre-defined constants for cache modes.
+//
+//
+type VirtualDiskVFlashCacheConfigInfoCacheMode string
+
+const (
+
+	// In write-back mode, writes to the cache do not go to the underlying storage
+	// right away. Cache holds data temporarily till it can be permanently saved or
+	// otherwise modified.
+	Write_back_VirtualDiskVFlashCacheConfigInfoCacheMode VirtualDiskVFlashCacheConfigInfoCacheMode = "write_back"
+
+	// In write-through cache mode, writes to the cache cause writes
+	// to the underlying storage. The cache acts as a facade to the underlying
+	// storage.
+	Write_thru_VirtualDiskVFlashCacheConfigInfoCacheMode VirtualDiskVFlashCacheConfigInfoCacheMode = "write_thru"
+)
+
+//
+// Possible device names for legacy network backing option are listed below.
+// Note: This is not an exhaustive list. It is possible to specify
+// a specific device as well.
+// For example, on ESX hosts, the device name could be specified as "vmnic[0-9]"
+// or vmnet_[0-9].
+// For VMware Server Windows hosts, the device name could be specified as "vmnet[0-9]"
+// and for VMware Server Linux hosts, the device name could be specified as "/dev/vmnet[0-9]"
+// depending on what devices are available on that particular host.
+//
+//
+type VirtualEthernetCardLegacyNetworkDeviceName string
+
+const (
+	Bridged_VirtualEthernetCardLegacyNetworkDeviceName VirtualEthernetCardLegacyNetworkDeviceName = "bridged"
+
+	Hostonly_VirtualEthernetCardLegacyNetworkDeviceName VirtualEthernetCardLegacyNetworkDeviceName = "hostonly"
+
+	Nat_VirtualEthernetCardLegacyNetworkDeviceName VirtualEthernetCardLegacyNetworkDeviceName = "nat"
+)
+
+//
+// The enumeration of all known valid MAC address types.
+//
+//
+type VirtualEthernetCardMacType string
+
+const (
+
+	// A MAC address assigned by VirtualCenter.
+	Assigned_VirtualEthernetCardMacType VirtualEthernetCardMacType = "assigned"
+
+	// An automatically generated MAC address.
+	Generated_VirtualEthernetCardMacType VirtualEthernetCardMacType = "generated"
+
+	// A statistically assigned MAC address.
+	Manual_VirtualEthernetCardMacType VirtualEthernetCardMacType = "manual"
+)
+
+//
+// Application heartbeat status type.
+//
+//
+type VirtualMachineAppHeartbeatStatusType string
+
+const (
+
+	// Heartbeat status is disabled
+	AppStatusGray_VirtualMachineAppHeartbeatStatusType VirtualMachineAppHeartbeatStatusType = "appStatusGray"
+
+	// Heartbeat status is OK
+	AppStatusGreen_VirtualMachineAppHeartbeatStatusType VirtualMachineAppHeartbeatStatusType = "appStatusGreen"
+
+	// Heartbeating has stopped
+	AppStatusRed_VirtualMachineAppHeartbeatStatusType VirtualMachineAppHeartbeatStatusType = "appStatusRed"
+)
+
+//
+// The NPIV WWN source type.
+//
+//
+type VirtualMachineConfigInfoNpivWwnType string
+
+const (
+
+	// This set of WWNs is provided by the client.
+	External_VirtualMachineConfigInfoNpivWwnType VirtualMachineConfigInfoNpivWwnType = "external"
+
+	// This set of WWNs is generated by Host Agent.
+	Host_VirtualMachineConfigInfoNpivWwnType VirtualMachineConfigInfoNpivWwnType = "host"
+
+	// This set of WWNs is generated by VC server.
+	Vc_VirtualMachineConfigInfoNpivWwnType VirtualMachineConfigInfoNpivWwnType = "vc"
+)
+
+//
+// Available choices for virtual machine swapfile placement policy. This is
+// the set of legal values for the virtual machine configuration's
+// swapPlacement property. All
+// values except for "inherit" and "vmConfigured" are also valid values for
+// a compute resource configuration's
+// vmSwapPlacement
+// property.
+//
+//
+type VirtualMachineConfigInfoSwapPlacementType string
+
+const (
+
+	// Store the swapfile in the datastore specified by the
+	// localSwapDatastore
+	// property of the virtual machine's host, if that property is set and
+	// indicates a datastore with sufficient free space. Otherwise store the
+	// swapfile in the same directory as the virtual machine.
+	//
+	// Note: This setting may degrade VMotion performance.
+	HostLocal_VirtualMachineConfigInfoSwapPlacementType VirtualMachineConfigInfoSwapPlacementType = "hostLocal"
+
+	// Honor the virtual machine swapfile placement policy of the compute
+	// resource that contains this virtual machine.
+	Inherit_VirtualMachineConfigInfoSwapPlacementType VirtualMachineConfigInfoSwapPlacementType = "inherit"
+
+	// Store the swapfile in the same directory as the virtual machine.
+	VmDirectory_VirtualMachineConfigInfoSwapPlacementType VirtualMachineConfigInfoSwapPlacementType = "vmDirectory"
+)
+
+//
+// The root WWN operation mode.
+//
+//
+type VirtualMachineConfigSpecNpivWwnOp string
+
+const (
+
+	// Generate a new set of WWNs and append them to the existing list
+	//
+	// Since vSphere API 4.0
+	Extend_VirtualMachineConfigSpecNpivWwnOp VirtualMachineConfigSpecNpivWwnOp = "extend"
+
+	// Generate a new set of WWNs and assign it to the virtual machine.
+	Generate_VirtualMachineConfigSpecNpivWwnOp VirtualMachineConfigSpecNpivWwnOp = "generate"
+
+	// Remove the currently assigned WWNs from the virtual machine.
+	Remove_VirtualMachineConfigSpecNpivWwnOp VirtualMachineConfigSpecNpivWwnOp = "remove"
+
+	// Take a client-specified set of WWNs (specified in "wwn" property) and
+	// assign them to the virtual machine. If the new WWN quntity are more
+	// than existing then we will append them to the existing list of WWNs.
+	Set_VirtualMachineConfigSpecNpivWwnOp VirtualMachineConfigSpecNpivWwnOp = "set"
+)
+
+//
+// The connectivity state of a virtual machine. When the API is provided directly by
+// a server product, such as ESX Server, then the disconnected state is not
+// possible. However, when accessed through VirtualCenter, the state of a virtual
+// machine is set to disconnected if the hosts that manage the virtual
+// machine becomes unavailable.
+//
+//
+type VirtualMachineConnectionState string
+
+const (
+
+	// The server has access to the virtual machine.
+	Connected_VirtualMachineConnectionState VirtualMachineConnectionState = "connected"
+
+	// The server is currently disconnected from the virtual machine, since its
+	// host is disconnected. See general comment for this enumerated type for more
+	// details.
+	Disconnected_VirtualMachineConnectionState VirtualMachineConnectionState = "disconnected"
+
+	// One or more of the virtual machine configuration files are inaccessible. For
+	// example, this can be due to transient disk failures. In this case, no
+	// configuration can be returned for a virtual machine.
+	Inaccessible_VirtualMachineConnectionState VirtualMachineConnectionState = "inaccessible"
+
+	// The virtual machine configuration format is invalid. Thus, it is accessible
+	// on disk, but corrupted in a way that does not allow the server to read the
+	// content. In this case, no configuration can be returned for a virtual
+	// machine.
+	Invalid_VirtualMachineConnectionState VirtualMachineConnectionState = "invalid"
+
+	// The virtual machine is no longer registered on the host it is associated
+	// with. For example, a virtual machine that is unregistered or deleted
+	// directly on a host managed by VirtualCenter shows up in this state.
+	Orphaned_VirtualMachineConnectionState VirtualMachineConnectionState = "orphaned"
+)
+
+type VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonOther string
+
+const (
+
+	// The virtual machine's host does not support VMDirectPath Gen 2.See vmDirectPathGen2Supported
+	VmNptIncompatibleHost_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonOther VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonOther = "vmNptIncompatibleHost"
+
+	// The configuration or state of the attached network prevents
+	// VMDirectPath Gen 2. Refer to
+	// vmDirectPathGen2InactiveReasonNetwork
+	// and/or
+	// vmDirectPathGen2InactiveReasonExtended
+	// in the RuntimeInfo of the DistributedVirtualPort connected to this
+	// device.
+	VmNptIncompatibleNetwork_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonOther VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonOther = "vmNptIncompatibleNetwork"
+)
+
+type VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm string
+
+const (
+
+	// Some networking feature has placed a conflicting IOChain on
+	// the network adapter, which prevents VMDirectPath Gen 2.  Examples
+	// include DVFilter.
+	VmNptConflictingIOChainConfigured_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptConflictingIOChainConfigured"
+
+	// VMDirectPath Gen 2 is temporarily suspended while the virtual
+	// machine executes an operation such as suspend.
+	VmNptConflictingOperationInProgress_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptConflictingOperationInProgress"
+
+	// The virtual machine's network adapter is disabled or
+	// disconnected, and thus is not participating in VMDirectPath Gen 2.
+	VmNptDisabledOrDisconnectedAdapter_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptDisabledOrDisconnectedAdapter"
+
+	// The virtual machine is configured for Fault Tolerance or
+	// Record & Replay, which prevents VMDirectPath Gen 2.
+	VmNptFaultToleranceOrRecordReplayConfigured_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptFaultToleranceOrRecordReplayConfigured"
+
+	// The virtual machine's network adapter has features enabled
+	// which preclude it participating in VMDirectPath Gen 2 such
+	// as INT-x or PXE booting.
+	VmNptIncompatibleAdapterFeatures_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptIncompatibleAdapterFeatures"
+
+	// The device type does not support VMDirectPath Gen 2.See vmDirectPathGen2Supported
+	VmNptIncompatibleAdapterType_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptIncompatibleAdapterType"
+
+	// The device backing is not a DistributedVirtualPortBacking.
+	VmNptIncompatibleBackingType_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptIncompatibleBackingType"
+
+	// The virtual machine's guest OS does not support
+	// VMDirectPath Gen 2.
+	VmNptIncompatibleGuest_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptIncompatibleGuest"
+
+	// The virtual machine's guest network driver does not support
+	// VMDirectPath Gen 2.
+	VmNptIncompatibleGuestDriver_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptIncompatibleGuestDriver"
+
+	// The virtual machine does not have full memory reservation
+	// required to activate VMDirectPath Gen 2.
+	VmNptInsufficientMemoryReservation_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptInsufficientMemoryReservation"
+
+	// The virtual machine monitor is exercising functionality which
+	// which prevents VMDirectPath Gen 2.
+	VmNptMonitorBlocks_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptMonitorBlocks"
+
+	// VMDirectPath Gen 2 is unavailable due to host run out of intr
+	// vector in host. Guest can configure the vNIC to use less rx/tx
+	// queues or use MSI instead of MSIX.
+	VmNptOutOfIntrVector_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptOutOfIntrVector"
+
+	// VMDirectPath Gen 2 is unavailable due to an unforeseen runtime error
+	// in the virtualization platform (typically resource constraints.)
+	VmNptRuntimeError_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptRuntimeError"
+
+	// VMDirectPath Gen 2 is unavailable due to Incompatibe feature
+	// VMCI is active in the current VM. Kill the relevant VMCI
+	// application(s) and restart the VM will allow the vNIC(s) to enter
+	// passthrough mode.
+	//
+	// Since vSphere API 5.1
+	VmNptVMCIActive_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptVMCIActive"
+)
+
+//
+// The FaultToleranceState type defines a simple set of states for a
+// fault tolerant virtual machine:
+// disabled, starting, and enabled.
+//
+//
+//
+//
+type VirtualMachineFaultToleranceState string
+
+const (
+
+	// For a virtual machine that is the primary in a fault tolerant group,
+	// this state indicates that the virtual machine has at least one
+	// registered secondary, but no secondary is enabled.
+	//
+	// For a virtual machine that is the secondary in a fault tolerant
+	// group, this state indicates that the secondary is disabled.
+	Disabled_VirtualMachineFaultToleranceState VirtualMachineFaultToleranceState = "disabled"
+
+	// For a virtual machine that is the primary in a fault tolerant group,
+	// this state indicates that the virtual machine is not currently
+	// powered on, but has at least one enabled secondary
+	//
+	// For a virtual machine that is the secondary in a fault tolerant
+	// group, this state indicates that the secondary is enabled, but is
+	// not currently powered on.
+	Enabled_VirtualMachineFaultToleranceState VirtualMachineFaultToleranceState = "enabled"
+
+	// For a virtual machine that is the primary in a fault tolerant group,
+	// this state indicates that the virtual machine is powered on and
+	// has at least one enabled secondary, but no secondary is currenly
+	// active.
+	//
+	// This state is not valid for a virtual machine that is a secondary
+	// in a fault tolerant group.
+	NeedSecondary_VirtualMachineFaultToleranceState VirtualMachineFaultToleranceState = "needSecondary"
+
+	// This state indicates that the virtual machine has not been
+	// configured for fault tolerance.
+	NotConfigured_VirtualMachineFaultToleranceState VirtualMachineFaultToleranceState = "notConfigured"
+
+	// This state indicates that the virtual machine is running with fault
+	// tolerance protection.
+	Running_VirtualMachineFaultToleranceState VirtualMachineFaultToleranceState = "running"
+
+	// For a virtual machine that is the primary in a fault tolerant group,
+	// this state indicates that the virtual machine is powered on and has
+	// at least one secondary that is synchronizing its state with the
+	// primary.
+	//
+	// For a virtual machine that is the secondary in a fault tolerant
+	// group, this state indicates that the secondary is powered on and is
+	// synchronizing its state with the primary virtual machine.
+	Starting_VirtualMachineFaultToleranceState VirtualMachineFaultToleranceState = "starting"
+)
+
+//
+// File-type constants.
+//
+//
+type VirtualMachineFileLayoutExFileType string
+
+const (
+
+	// Config (vmx) file.
+	Config_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "config"
+
+	// Core (core) file.
+	Core_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "core"
+
+	// Disk digest descriptor file.
+	//
+	// Since vSphere API 5.0
+	DigestDescriptor_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "digestDescriptor"
+
+	// Disk digest extent file.
+	//
+	// Since vSphere API 5.0
+	DigestExtent_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "digestExtent"
+
+	// Disk descriptor (vmdk) file.
+	DiskDescriptor_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "diskDescriptor"
+
+	// Disk extent (-flat/-delta/-s/-rdm/-rdmp.vmdk) file.
+	DiskExtent_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "diskExtent"
+
+	// Host based replicated disk persistent state (psf) file.
+	//
+	// Since vSphere API 5.0
+	DiskReplicationState_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "diskReplicationState"
+
+	// Extended config (vmxf) file.
+	ExtendedConfig_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "extendedConfig"
+
+	// Log (log) file.
+	Log_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "log"
+
+	// Namespace data file.
+	//
+	// Since vSphere API 5.1
+	NamespaceData_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "namespaceData"
+
+	// Non-volatile RAM (nvram) file.
+	Nvram_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "nvram"
+
+	// Screenshot file.
+	Screenshot_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "screenshot"
+
+	// Snapshot data (vmsn) file.
+	SnapshotData_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "snapshotData"
+
+	// Snapshot metadata (vmsd) file.
+	SnapshotList_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "snapshotList"
+
+	// Snapshot manifest metadata (-aux.xml) file.
+	//
+	// This file is still being created but is no longer necessary since
+	// the manifest metadata is now available in the snapshot metadata
+	// (vmsd) file in vSphere 5.0. This type will be deprecated when
+	// vSphere 4.1 is no longer supported.
+	//
+	// Since vSphere API 5.0
+	SnapshotManifestList_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "snapshotManifestList"
+
+	// Virtual machine statistics (stat) file.
+	Stat_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "stat"
+
+	// Suspend (vmss) file.
+	Suspend_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "suspend"
+
+	// Swap (vswp/vmem) file.
+	Swap_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "swap"
+
+	// File generated by VMware ESX kernel for a running virtual
+	// machine.
+	//
+	// Since vSphere API 5.0
+	Uwswap_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "uwswap"
+)
+
+//
+// Set of possible values for monitorType.
+//
+//
+type VirtualMachineFlagInfoMonitorType string
+
+const (
+
+	// Run vmx in debug mode.
+	Debug_VirtualMachineFlagInfoMonitorType VirtualMachineFlagInfoMonitorType = "debug"
+
+	// Run vmx in default mode, matching the build type of vmkernel.
+	Release_VirtualMachineFlagInfoMonitorType VirtualMachineFlagInfoMonitorType = "release"
+
+	// Run vmx in stats mode.
+	Stats_VirtualMachineFlagInfoMonitorType VirtualMachineFlagInfoMonitorType = "stats"
+)
+
+//
+// Set of possible values for virtualExecUsage.
+//
+//
+type VirtualMachineFlagInfoVirtualExecUsage string
+
+const (
+
+	// Determine automatically whether to use hardware virtualization (HV) support.
+	HvAuto_VirtualMachineFlagInfoVirtualExecUsage VirtualMachineFlagInfoVirtualExecUsage = "hvAuto"
+
+	// Do not use hardware virtualization (HV) support.
+	HvOff_VirtualMachineFlagInfoVirtualExecUsage VirtualMachineFlagInfoVirtualExecUsage = "hvOff"
+
+	// Use hardware virtualization (HV) support if the physical hardware supports it.
+	HvOn_VirtualMachineFlagInfoVirtualExecUsage VirtualMachineFlagInfoVirtualExecUsage = "hvOn"
+)
+
+//
+// Set of possible values for virtualMmuUsage.
+//
+//
+type VirtualMachineFlagInfoVirtualMmuUsage string
+
+const (
+
+	// Determine automatically whether to use nested page table hardware support.
+	Automatic_VirtualMachineFlagInfoVirtualMmuUsage VirtualMachineFlagInfoVirtualMmuUsage = "automatic"
+
+	// Do not use nested page table hardware support.
+	Off_VirtualMachineFlagInfoVirtualMmuUsage VirtualMachineFlagInfoVirtualMmuUsage = "off"
+
+	// Use nested paging hardware support if the physical hardware supports it.
+	On_VirtualMachineFlagInfoVirtualMmuUsage VirtualMachineFlagInfoVirtualMmuUsage = "on"
+)
+
+//
+// Guest operating system family constants.
+//
+//
+type VirtualMachineGuestOsFamily string
+
+const (
+
+	// Mac OS operating system
+	//
+	// Since vSphere API 5.0
+	DarwinGuestFamily_VirtualMachineGuestOsFamily VirtualMachineGuestOsFamily = "darwinGuestFamily"
+
+	// Linux operating system
+	LinuxGuest_VirtualMachineGuestOsFamily VirtualMachineGuestOsFamily = "linuxGuest"
+
+	// Novell Netware
+	NetwareGuest_VirtualMachineGuestOsFamily VirtualMachineGuestOsFamily = "netwareGuest"
+
+	// Other operating systems
+	OtherGuestFamily_VirtualMachineGuestOsFamily VirtualMachineGuestOsFamily = "otherGuestFamily"
+
+	// Solaris operating system
+	SolarisGuest_VirtualMachineGuestOsFamily VirtualMachineGuestOsFamily = "solarisGuest"
+
+	// Windows operating system
+	WindowsGuest_VirtualMachineGuestOsFamily VirtualMachineGuestOsFamily = "windowsGuest"
 )
 
 //
@@ -3546,2756 +6085,24 @@ const (
 )
 
 //
-// Set of possible values for virtualExecUsage.
+// The possible hints that the guest could display about current tasks
+// inside the guest.
 //
 //
-type VirtualMachineFlagInfoVirtualExecUsage string
+type VirtualMachineGuestState string
 
 const (
+	NotRunning_VirtualMachineGuestState VirtualMachineGuestState = "notRunning"
 
-	// Determine automatically whether to use hardware virtualization (HV) support.
-	HvAuto_VirtualMachineFlagInfoVirtualExecUsage VirtualMachineFlagInfoVirtualExecUsage = "hvAuto"
+	Resetting_VirtualMachineGuestState VirtualMachineGuestState = "resetting"
 
-	// Do not use hardware virtualization (HV) support.
-	HvOff_VirtualMachineFlagInfoVirtualExecUsage VirtualMachineFlagInfoVirtualExecUsage = "hvOff"
+	Running_VirtualMachineGuestState VirtualMachineGuestState = "running"
 
-	// Use hardware virtualization (HV) support if the physical hardware supports it.
-	HvOn_VirtualMachineFlagInfoVirtualExecUsage VirtualMachineFlagInfoVirtualExecUsage = "hvOn"
-)
+	ShuttingDown_VirtualMachineGuestState VirtualMachineGuestState = "shuttingDown"
 
-//
-// The operating mode of the adapter.
-//
-//
-type FibreChannelPortType string
-
-const (
-	Fabric_FibreChannelPortType FibreChannelPortType = "fabric"
-
-	Loop_FibreChannelPortType FibreChannelPortType = "loop"
-
-	PointToPoint_FibreChannelPortType FibreChannelPortType = "pointToPoint"
-
-	Unknown_FibreChannelPortType FibreChannelPortType = "unknown"
-)
-
-//
-// Defines the options for a Datacenter::powerOnVm() invocation.
-//
-//
-type ClusterPowerOnVmOption string
-
-const (
-
-	// Override the DRS automation level.
-	// Value type: DrsBehavior
-	// Default value: current behavior
-	OverrideAutomationLevel_ClusterPowerOnVmOption ClusterPowerOnVmOption = "OverrideAutomationLevel"
-
-	// Reserve resources for the powering-on VMs throughout the
-	// power-on session. When this option is set to true, the server
-	// will return at most one recommended host per manual VM, and
-	// the VM's reservations are held on the recommended host until
-	// the VM is actually powered on (either by applying the
-	// recommendation or by a power-on request on the VM), or until
-	// the recommendation is cancelled, or until the recommendation
-	// expires. The expiration time is currently set to 10
-	// minutes. This option does not have an effect on automatic VMs
-	// since their recommendations are executed immediately. This
-	// option is effective on DRS clusters only.
-	// Value type: boolean
-	// Default value: false
-	ReserveResources_ClusterPowerOnVmOption ClusterPowerOnVmOption = "ReserveResources"
-)
-
-//
-// Application state type.
-//
-//
-type GuestInfoAppStateType string
-
-const (
-
-	// Guest's application agent asks for immediate reset
-	AppStateNeedReset_GuestInfoAppStateType GuestInfoAppStateType = "appStateNeedReset"
-
-	// The guest's application agent declared its state as normal and doesn't
-	// require any action
-	AppStateOk_GuestInfoAppStateType GuestInfoAppStateType = "appStateOk"
-
-	// The application state wasn't set from the guest by the application agent.
-	// This is the default.
-	None_GuestInfoAppStateType GuestInfoAppStateType = "none"
-)
-
-type AgentInstallFailedReason string
-
-const (
-
-	// The agent was installed but did not respond to requests.
-	AgentNotReachable_AgentInstallFailedReason AgentInstallFailedReason = "AgentNotReachable"
-
-	// The agent was installed but is not running.
-	AgentNotRunning_AgentInstallFailedReason AgentInstallFailedReason = "AgentNotRunning"
-
-	// Failed to upload the agent installer.
-	AgentUploadFailed_AgentInstallFailedReason AgentInstallFailedReason = "AgentUploadFailed"
-
-	// The agent upload took too long.
-	AgentUploadTimedout_AgentInstallFailedReason AgentInstallFailedReason = "AgentUploadTimedout"
-
-	// The agent install took too long.
-	InstallTimedout_AgentInstallFailedReason AgentInstallFailedReason = "InstallTimedout"
-
-	// There is not enough storage space on the host to install the agent.
-	NotEnoughSpaceOnDevice_AgentInstallFailedReason AgentInstallFailedReason = "NotEnoughSpaceOnDevice"
-
-	// Failed to initialize the upgrade directory on the host.
-	PrepareToUpgradeFailed_AgentInstallFailedReason AgentInstallFailedReason = "PrepareToUpgradeFailed"
-
-	// The signature verification for the installer failed.
-	SignatureVerificationFailed_AgentInstallFailedReason AgentInstallFailedReason = "SignatureVerificationFailed"
-
-	// The agent installer failed for an unknown reason.
-	UnknownInstallerError_AgentInstallFailedReason AgentInstallFailedReason = "UnknownInstallerError"
-)
-
-//
-// Link Aggregation Control Protocol API versions.
-//
-//
-type VMwareDvsLacpApiVersion string
-
-const (
-
-	// Multiple Link Aggregation Control Protocol in the switch.
-	MultipleLag_VMwareDvsLacpApiVersion VMwareDvsLacpApiVersion = "multipleLag"
-
-	// One Link Aggregation Control Protocol group in the switch
-	SingleLag_VMwareDvsLacpApiVersion VMwareDvsLacpApiVersion = "singleLag"
-)
-
-//
-// The available SLP discovery methods.
-//
-//
-type SlpDiscoveryMethod string
-
-const (
-
-	// Use the well known multicast address to find DAs.
-	SlpAutoMulticast_SlpDiscoveryMethod SlpDiscoveryMethod = "slpAutoMulticast"
-
-	// Use broadcasting to find SLP DAs.
-	// Only DAs on the current subnet will be found.
-	SlpAutoUnicast_SlpDiscoveryMethod SlpDiscoveryMethod = "slpAutoUnicast"
-
-	// Use DHCP to find the SLP DAs.
-	SlpDhcp_SlpDiscoveryMethod SlpDiscoveryMethod = "slpDhcp"
-
-	// User specified address for a DA.
-	SlpManual_SlpDiscoveryMethod SlpDiscoveryMethod = "slpManual"
-)
-
-//
-// Defines a host's standby mode.
-//
-//
-type HostStandbyMode string
-
-const (
-
-	// The host is entering standby mode.
-	Entering_HostStandbyMode HostStandbyMode = "entering"
-
-	// The host is exiting standby mode.
-	Exiting_HostStandbyMode HostStandbyMode = "exiting"
-
-	// The host is in standby mode.
-	In_HostStandbyMode HostStandbyMode = "in"
-
-	// The host is not in standy mode. And it is not
-	// in the process of entering/exiting standby mode.
-	None_HostStandbyMode HostStandbyMode = "none"
-)
-
-//
-// Set of possible values for
-// replayUnsupportedReason and
-// replayCompatibilityIssues.
-//
-//
-type HostReplayUnsupportedReason string
-
-const (
-	CpuidLimitSet_HostReplayUnsupportedReason HostReplayUnsupportedReason = "cpuidLimitSet"
-
-	HvDisabled_HostReplayUnsupportedReason HostReplayUnsupportedReason = "hvDisabled"
-
-	IncompatibleCpu_HostReplayUnsupportedReason HostReplayUnsupportedReason = "incompatibleCpu"
-
-	IncompatibleProduct_HostReplayUnsupportedReason HostReplayUnsupportedReason = "incompatibleProduct"
-
-	OldBIOS_HostReplayUnsupportedReason HostReplayUnsupportedReason = "oldBIOS"
-
-	Unknown_HostReplayUnsupportedReason HostReplayUnsupportedReason = "unknown"
-)
-
-//
-// The type of integrity checks to use. The digest setting for header
-// and data traffic can be separately configured.
-// prohibited  : do not use digest.
-// preferred   : use digest if successfully negotiated, but skip the use
-// of digest otherwise.
-// discouraged : do not use digest if target allows, otherwise use digest.
-// required    : use digest strictly, and fail if target does not support
-// digest.
-//
-// Defaults to preferred on first configuration if unspecified.
-//
-//
-type HostInternetScsiHbaDigestType string
-
-const (
-	DigestDiscouraged_HostInternetScsiHbaDigestType HostInternetScsiHbaDigestType = "digestDiscouraged"
-
-	DigestPreferred_HostInternetScsiHbaDigestType HostInternetScsiHbaDigestType = "digestPreferred"
-
-	DigestProhibited_HostInternetScsiHbaDigestType HostInternetScsiHbaDigestType = "digestProhibited"
-
-	DigestRequired_HostInternetScsiHbaDigestType HostInternetScsiHbaDigestType = "digestRequired"
-)
-
-//
-// Available choices for virtual machine swapfile placement policy. This is
-// the set of legal values for the virtual machine configuration's
-// swapPlacement property. All
-// values except for "inherit" and "vmConfigured" are also valid values for
-// a compute resource configuration's
-// vmSwapPlacement
-// property.
-//
-//
-type VirtualMachineConfigInfoSwapPlacementType string
-
-const (
-
-	// Store the swapfile in the datastore specified by the
-	// localSwapDatastore
-	// property of the virtual machine's host, if that property is set and
-	// indicates a datastore with sufficient free space. Otherwise store the
-	// swapfile in the same directory as the virtual machine.
-	//
-	// Note: This setting may degrade VMotion performance.
-	HostLocal_VirtualMachineConfigInfoSwapPlacementType VirtualMachineConfigInfoSwapPlacementType = "hostLocal"
-
-	// Honor the virtual machine swapfile placement policy of the compute
-	// resource that contains this virtual machine.
-	Inherit_VirtualMachineConfigInfoSwapPlacementType VirtualMachineConfigInfoSwapPlacementType = "inherit"
-
-	// Store the swapfile in the same directory as the virtual machine.
-	VmDirectory_VirtualMachineConfigInfoSwapPlacementType VirtualMachineConfigInfoSwapPlacementType = "vmDirectory"
-)
-
-//
-// The FaultToleranceState type defines a simple set of states for a
-// fault tolerant virtual machine:
-// disabled, starting, and enabled.
-//
-//
-//
-//
-type VirtualMachineFaultToleranceState string
-
-const (
-
-	// For a virtual machine that is the primary in a fault tolerant group,
-	// this state indicates that the virtual machine has at least one
-	// registered secondary, but no secondary is enabled.
-	//
-	// For a virtual machine that is the secondary in a fault tolerant
-	// group, this state indicates that the secondary is disabled.
-	Disabled_VirtualMachineFaultToleranceState VirtualMachineFaultToleranceState = "disabled"
-
-	// For a virtual machine that is the primary in a fault tolerant group,
-	// this state indicates that the virtual machine is not currently
-	// powered on, but has at least one enabled secondary
-	//
-	// For a virtual machine that is the secondary in a fault tolerant
-	// group, this state indicates that the secondary is enabled, but is
-	// not currently powered on.
-	Enabled_VirtualMachineFaultToleranceState VirtualMachineFaultToleranceState = "enabled"
-
-	// For a virtual machine that is the primary in a fault tolerant group,
-	// this state indicates that the virtual machine is powered on and
-	// has at least one enabled secondary, but no secondary is currenly
-	// active.
-	//
-	// This state is not valid for a virtual machine that is a secondary
-	// in a fault tolerant group.
-	NeedSecondary_VirtualMachineFaultToleranceState VirtualMachineFaultToleranceState = "needSecondary"
-
-	// This state indicates that the virtual machine has not been
-	// configured for fault tolerance.
-	NotConfigured_VirtualMachineFaultToleranceState VirtualMachineFaultToleranceState = "notConfigured"
-
-	// This state indicates that the virtual machine is running with fault
-	// tolerance protection.
-	Running_VirtualMachineFaultToleranceState VirtualMachineFaultToleranceState = "running"
-
-	// For a virtual machine that is the primary in a fault tolerant group,
-	// this state indicates that the virtual machine is powered on and has
-	// at least one secondary that is synchronizing its state with the
-	// primary.
-	//
-	// For a virtual machine that is the secondary in a fault tolerant
-	// group, this state indicates that the secondary is powered on and is
-	// synchronizing its state with the primary virtual machine.
-	Starting_VirtualMachineFaultToleranceState VirtualMachineFaultToleranceState = "starting"
-)
-
-//
-// Cost units apply to licenses for the purpose of determining
-// how many licenses are needed.
-//
-//
-type LicenseFeatureInfoUnit string
-
-const (
-
-	// One license is acquired per CPU core.
-	CpuCore_LicenseFeatureInfoUnit LicenseFeatureInfoUnit = "cpuCore"
-
-	// One license is acquired per CPU package.
-	CpuPackage_LicenseFeatureInfoUnit LicenseFeatureInfoUnit = "cpuPackage"
-
-	// One license is acquired per host.
-	Host_LicenseFeatureInfoUnit LicenseFeatureInfoUnit = "host"
-
-	// One license is acquired per server.
-	Server_LicenseFeatureInfoUnit LicenseFeatureInfoUnit = "server"
-
-	// One license is acquired per virtual machine.
-	Vm_LicenseFeatureInfoUnit LicenseFeatureInfoUnit = "vm"
-)
-
-type HostPowerOperationType string
-
-const (
-
-	// Power Off Operation. Power off operation puts the host in
-	// a state that can be woken up remotely.
-	PowerOff_HostPowerOperationType HostPowerOperationType = "powerOff"
-
-	// Power On Operation
-	PowerOn_HostPowerOperationType HostPowerOperationType = "powerOn"
-)
-
-//
-// Reasons why an update is not applicable to the ESX host.
-//
-//
-type HostPatchManagerReason string
-
-const (
-
-	// The update conflicts with RPMs or libraries installed on the
-	// host.
-	ConflictLib_HostPatchManagerReason HostPatchManagerReason = "conflictLib"
-
-	// The update conflicts with certain updates that are already
-	// installed on the host.
-	ConflictPatch_HostPatchManagerReason HostPatchManagerReason = "conflictPatch"
-
-	// The update depends on an update that is not installed but is
-	// in the scanned list of updates.
-	HasDependentPatch_HostPatchManagerReason HostPatchManagerReason = "hasDependentPatch"
-
-	// The update depends on certain libraries or RPMs that are not
-	// available.
-	MissingLib_HostPatchManagerReason HostPatchManagerReason = "missingLib"
-
-	// The update depends on another update that is neither installed
-	// nor in the scanned list of updates.
-	MissingPatch_HostPatchManagerReason HostPatchManagerReason = "missingPatch"
-
-	// The update is made obsolete by other patches installed on the host.
-	Obsoleted_HostPatchManagerReason HostPatchManagerReason = "obsoleted"
-)
-
-//
-// Network Traffic Rule direction types. It specifies whether rule
-//
-// needs to be applied for packets which are incoming/outgoing or both.
-//
-//
-type DvsNetworkRuleDirectionType string
-
-const (
-
-	// This specifies that the network rule has to be applied only for
-	//
-	// both incoming and outgoing packets.
-	Both_DvsNetworkRuleDirectionType DvsNetworkRuleDirectionType = "both"
-
-	// This specifies that the network rule has to be applied only for
-	//
-	// incoming packets.
-	IncomingPackets_DvsNetworkRuleDirectionType DvsNetworkRuleDirectionType = "incomingPackets"
-
-	// This specifies that the network rule has to be applied only for
-	//
-	// outgoing packets.
-	OutgoingPackets_DvsNetworkRuleDirectionType DvsNetworkRuleDirectionType = "outgoingPackets"
-)
-
-//
-// Set of constants defining the possible states of a multipath path.
-//
-//
-type MultipathState string
-
-const (
-	Active_MultipathState MultipathState = "active"
-
-	Dead_MultipathState MultipathState = "dead"
-
-	Disabled_MultipathState MultipathState = "disabled"
-
-	Standby_MultipathState MultipathState = "standby"
-
-	Unknown_MultipathState MultipathState = "unknown"
-)
-
-//
-// The action to take with regard to storage objects upon decommissioning
-// a host from use with the VSAN service.
-//
-//
-type VsanHostDecommissionModeObjectAction string
-
-const (
-
-	// VSAN data reconfiguration should be performed to ensure storage
-	// object accessibility.
-	EnsureObjectAccessibility_VsanHostDecommissionModeObjectAction VsanHostDecommissionModeObjectAction = "ensureObjectAccessibility"
-
-	// VSAN data evacuation should be performed such that all storage
-	// object data is removed from the host.
-	EvacuateAllData_VsanHostDecommissionModeObjectAction VsanHostDecommissionModeObjectAction = "evacuateAllData"
-
-	// No special action should take place regarding VSAN data.
-	NoAction_VsanHostDecommissionModeObjectAction VsanHostDecommissionModeObjectAction = "noAction"
-)
-
-//
-// Means for allocating additional memory for virtual machines.
-//
-//
-type VirtualMachineMemoryAllocationPolicy string
-
-const (
-
-	// Allow most virtual machine memory to be swapped.
-	SwapMost_VirtualMachineMemoryAllocationPolicy VirtualMachineMemoryAllocationPolicy = "swapMost"
-
-	// Fit all virtual machine memory into reserved host memory.
-	SwapNone_VirtualMachineMemoryAllocationPolicy VirtualMachineMemoryAllocationPolicy = "swapNone"
-
-	// Allow some virtual machine memory to be swapped.
-	SwapSome_VirtualMachineMemoryAllocationPolicy VirtualMachineMemoryAllocationPolicy = "swapSome"
-)
-
-//
-// A enum constant specifying what should be done to the guest vm after running
-// sysprep.
-//
-//
-type CustomizationSysprepRebootOption string
-
-const (
-
-	// Take no action. Leave the guest os running after running sysprep. This
-	// option can be used to look at values for debugging purposes after
-	// running sysprep.
-	Noreboot_CustomizationSysprepRebootOption CustomizationSysprepRebootOption = "noreboot"
-
-	// Reboot the machine after running sysprep. This will cause values
-	// specified in the sysprep.inf to be applied immediately.
-	Reboot_CustomizationSysprepRebootOption CustomizationSysprepRebootOption = "reboot"
-
-	// Shutdown the machine after running sysprep. This puts the vm in a
-	// sealed state.
-	Shutdown_CustomizationSysprepRebootOption CustomizationSysprepRebootOption = "shutdown"
-)
-
-type DpmBehavior string
-
-const (
-
-	// Specifies that VirtualCenter should generate recommendations
-	// for host power operations, and should execute the
-	// recommendations automatically.
-	Automated_DpmBehavior DpmBehavior = "automated"
-
-	// Specifies that VirtualCenter should generate recommendations
-	// for host power operations, but should not execute the
-	// recommendations automatically.
-	Manual_DpmBehavior DpmBehavior = "manual"
-)
-
-//
-// The cloned VMs can either be provisioned the same way as the VMs
-// they are a clone of, thin provisioned or thick provisioned, or
-// linked clones (i.e., using delta disks).
-//
-//
-type VAppCloneSpecProvisioningType string
-
-const (
-
-	// Each disk in the cloned virtual machines will have the same
-	// type of disk as the source vApp.
-	SameAsSource_VAppCloneSpecProvisioningType VAppCloneSpecProvisioningType = "sameAsSource"
-
-	// Each disk in the cloned virtual machines are allocated and
-	// committed in full size immediately.
-	Thick_VAppCloneSpecProvisioningType VAppCloneSpecProvisioningType = "thick"
-
-	// Each disk in the cloned virtual machines is allocated in full
-	// size now and committed on demand. This is only supported on
-	// VMFS-3 and newer datastores. Other types of datastores may
-	// create thick disks.
-	Thin_VAppCloneSpecProvisioningType VAppCloneSpecProvisioningType = "thin"
-)
-
-//
-// The ClusterDasAamNodeStateDasState enumerated type defines
-// values for host HA configuration and runtime state properties
-// (configState and
-// runtimeState).
-//
-//
-type ClusterDasAamNodeStateDasState string
-
-const (
-
-	// The HA agent has been shut down.
-	AgentShutdown_ClusterDasAamNodeStateDasState ClusterDasAamNodeStateDasState = "agentShutdown"
-
-	// HA configuration is in progress.
-	Configuring_ClusterDasAamNodeStateDasState ClusterDasAamNodeStateDasState = "configuring"
-
-	// There is an error condition. This can represent a configuration
-	// error or a host agent runtime error.
-	Error_ClusterDasAamNodeStateDasState ClusterDasAamNodeStateDasState = "error"
-
-	// HA agents have been installed but are not running on the the host.
-	Initialized_ClusterDasAamNodeStateDasState ClusterDasAamNodeStateDasState = "initialized"
-
-	// The host is not reachable. This can represent a host failure
-	// or an isolated host.
-	NodeFailed_ClusterDasAamNodeStateDasState ClusterDasAamNodeStateDasState = "nodeFailed"
-
-	// HA agent is running on this host.
-	Running_ClusterDasAamNodeStateDasState ClusterDasAamNodeStateDasState = "running"
-
-	// HA configuration is being removed.
-	Unconfiguring_ClusterDasAamNodeStateDasState ClusterDasAamNodeStateDasState = "unconfiguring"
-
-	// HA has never been enabled on the the host.
-	Uninitialized_ClusterDasAamNodeStateDasState ClusterDasAamNodeStateDasState = "uninitialized"
-)
-
-//
-// Type of services for which Profile can be requested for
-//
-//
-type ClusterProfileServiceType string
-
-const (
-
-	// Distributed Power Management
-	DPM_ClusterProfileServiceType ClusterProfileServiceType = "DPM"
-
-	// Distributed Resource Scheduling
-	DRS_ClusterProfileServiceType ClusterProfileServiceType = "DRS"
-
-	// Fault tolerance
-	FT_ClusterProfileServiceType ClusterProfileServiceType = "FT"
-
-	// High Availability
-	HA_ClusterProfileServiceType ClusterProfileServiceType = "HA"
-)
-
-type IscsiPortInfoPathStatus string
-
-const (
-
-	// All paths on this Virtual NIC are standby paths from SCSI stack
-	// perspective.
-	Active_IscsiPortInfoPathStatus IscsiPortInfoPathStatus = "active"
-
-	// One or more paths on the Virtual NIC is the last active
-	// path to a particular storage device.
-	LastActive_IscsiPortInfoPathStatus IscsiPortInfoPathStatus = "lastActive"
-
-	// There are no paths on this Virtual NIC
-	NotUsed_IscsiPortInfoPathStatus IscsiPortInfoPathStatus = "notUsed"
-
-	// One or more paths on the Virtual NIC are active paths to
-	// storage. Unbinding this Virtual NIC will cause storage path
-	// transitions.
-	StandBy_IscsiPortInfoPathStatus IscsiPortInfoPathStatus = "standBy"
-)
-
-//
-// Reasons why a virtual device would not be supported on a host.
-//
-//
-type DeviceNotSupportedReason string
-
-const (
-
-	// The device is supported by the host in general, but not for
-	// the specific guest OS the virtual machine is using.
-	Guest_DeviceNotSupportedReason DeviceNotSupportedReason = "guest"
-
-	// The host does not support this virtual device at all.
-	Host_DeviceNotSupportedReason DeviceNotSupportedReason = "host"
-)
-
-type HostNumericSensorType string
-
-const (
-
-	// Fan sensor
-	Fan_HostNumericSensorType HostNumericSensorType = "fan"
-
-	// Other sensor.
-	Other_HostNumericSensorType HostNumericSensorType = "other"
-
-	// Power sensor
-	Power_HostNumericSensorType HostNumericSensorType = "power"
-
-	// Temperature sensor
-	Temperature_HostNumericSensorType HostNumericSensorType = "temperature"
-
-	// Voltage Sensor
-	Voltage_HostNumericSensorType HostNumericSensorType = "voltage"
-)
-
-//
-// Set of possible values for vmDirectPathGen2UnsupportedReason.
-//
-//
-type HostCapabilityVmDirectPathGen2UnsupportedReason string
-
-const (
-
-	// The host is configured to disable VMDirectPath Gen 2.
-	HostNptDisabled_HostCapabilityVmDirectPathGen2UnsupportedReason HostCapabilityVmDirectPathGen2UnsupportedReason = "hostNptDisabled"
-
-	// The host hardware does not support VMDirectPath Gen 2. Note that
-	// this is a general capability for the host and is independent of
-	// support by a given physical NIC.
-	HostNptIncompatibleHardware_HostCapabilityVmDirectPathGen2UnsupportedReason HostCapabilityVmDirectPathGen2UnsupportedReason = "hostNptIncompatibleHardware"
-
-	// The host software does not support VMDirectPath Gen 2.
-	HostNptIncompatibleProduct_HostCapabilityVmDirectPathGen2UnsupportedReason HostCapabilityVmDirectPathGen2UnsupportedReason = "hostNptIncompatibleProduct"
-)
-
-//
-// The list of possible standby actions that the virtual machine can take
-// for S1 ACPI.
-//
-//
-type VirtualMachineStandbyActionType string
-
-const (
-	Checkpoint_VirtualMachineStandbyActionType VirtualMachineStandbyActionType = "checkpoint"
-
-	PowerOnSuspend_VirtualMachineStandbyActionType VirtualMachineStandbyActionType = "powerOnSuspend"
-)
-
-//
-// The ClusterDasVmSettingsRestartPriority enum
-// defines virtual machine restart priority values to resolve
-// resource contention.
-// The priority determines the preference that HA gives
-// to a virtual machine if sufficient capacity is not available
-// to power on all failed virtual machines. For example, high priority
-// virtual machines on a host get preference over low priority
-// virtual machines.
-//
-// All priority values are valid for the restart priority
-// specified in a single virtual machine HA configuration
-// (dasSettings).
-// All values except for clusterRestartPriority
-// are valid for the cluster-wide default HA configuration
-// for virtual machines (defaultVmSettings).
-//
-//
-//
-type ClusterDasVmSettingsRestartPriority string
-
-const (
-
-	// Virtual machines with this priority use the default restart
-	// priority defined for the cluster that contains this virtual machine.
-	ClusterRestartPriority_ClusterDasVmSettingsRestartPriority ClusterDasVmSettingsRestartPriority = "clusterRestartPriority"
-
-	// vSphere HA is disabled for this virtual machine.
-	Disabled_ClusterDasVmSettingsRestartPriority ClusterDasVmSettingsRestartPriority = "disabled"
-
-	// Virtual machines with this priority have a higher chance of powering on after a
-	// failure if there is insufficient capacity on hosts to meet all virtual machine
-	// needs.
-	High_ClusterDasVmSettingsRestartPriority ClusterDasVmSettingsRestartPriority = "high"
-
-	// Virtual machines with this priority have a lower chance of powering on after a
-	// failure if there is insufficient capacity on hosts to meet all virtual machine
-	// needs.
-	Low_ClusterDasVmSettingsRestartPriority ClusterDasVmSettingsRestartPriority = "low"
-
-	// Virtual machines with this priority have an intermediate chance of powering
-	// on after a failure if there is insufficient capacity on hosts to meet all
-	// virtual machine needs.
-	Medium_ClusterDasVmSettingsRestartPriority ClusterDasVmSettingsRestartPriority = "medium"
-)
-
-type VmFaultToleranceConfigIssueReasonForIssue string
-
-const (
-
-	// The virtual machine is an ESX agent VM
-	//
-	// Since vSphere API 5.0
-	EsxAgentVm_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "esxAgentVm"
-
-	// The virtual machine is a fault tolerance secondary virtual machine
-	FtSecondaryVm_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "ftSecondaryVm"
-
-	// The host ftSupported flag is not set because of hardware issues
-	FtUnsupportedHardware_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "ftUnsupportedHardware"
-
-	// The host ftSupported flag is not set because of it is a
-	// VMware Server 2.0
-	FtUnsupportedProduct_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "ftUnsupportedProduct"
-
-	// HA is not enabled on the cluster
-	HaNotEnabled_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "haNotEnabled"
-
-	// The virtual machine has one or more disks on local datastore
-	HasLocalDisk_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "hasLocalDisk"
-
-	// Nested HV and FT are mutually exclusive. Disallow turning on FT
-	// when nested HV configuration is enabled on VM.
-	//
-	// Since vSphere API 5.1
-	HasNestedHVConfiguration_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "hasNestedHVConfiguration"
-
-	// The virtual machine has one or more snapshots
-	HasSnapshots_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "hasSnapshots"
-
-	// Since vSphere API 5.1
-	HasUnsupportedDisk_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "hasUnsupportedDisk"
-
-	// The virtual machine has a vFlash memory device or/and disks with
-	// vFlash cache configured.
-	//
-	// Since vSphere API 5.5
-	HasVFlashConfiguration_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "hasVFlashConfiguration"
-
-	// The host is not active
-	HostInactive_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "hostInactive"
-
-	// FT logging nic is not configured on the host
-	MissingFTLoggingNic_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "missingFTLoggingNic"
-
-	// No VMotion license or VMotion nic is not configured on the host
-	MissingVMotionNic_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "missingVMotionNic"
-
-	// There is already a secondary virtual machine for the primary
-	// virtual machine
-	MoreThanOneSecondary_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "moreThanOneSecondary"
-
-	// The virtual machine has more than one virtual CPU
-	MultipleVCPU_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "multipleVCPU"
-
-	// No configuration information is available for the virtual machine
-	NoConfig_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "noConfig"
-
-	// The virtual machine does not support record/replay.
-	// Vm::Capability.RecordReplaySupported is false.
-	RecordReplayNotSupported_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "recordReplayNotSupported"
-
-	// It is not possible to turn on Fault Tolerance on this powered-on VM.
-	// The support for record/replay should be enabled or Fault Tolerance
-	// turned on, when this VM is powered off.
-	ReplayNotSupported_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "replayNotSupported"
-
-	// The virtual machine is a template
-	TemplateVm_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "templateVm"
-
-	// The virtual machine has thin provisioned disks
-	ThinDisk_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "thinDisk"
-
-	// The "check host certificate" flag is not set
-	VerifySSLCertificateFlagNotSet_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "verifySSLCertificateFlagNotSet"
-
-	// The virtual machine video device has 3D enabled
-	//
-	// Since vSphere API 5.0
-	Video3dEnabled_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "video3dEnabled"
-)
-
-//
-// The target of the disk reload.
-//
-//
-type HostLowLevelProvisioningManagerReloadTarget string
-
-const (
-
-	// Specifies the reload of the current config of the virtual machine.
-	CurrentConfig_HostLowLevelProvisioningManagerReloadTarget HostLowLevelProvisioningManagerReloadTarget = "currentConfig"
-
-	// Specifies the reload of the snapshot config of the virtual machine.
-	// If the virtual machine has multiple snapshots, all of the snapshot's
-	// config will be reloaded.
-	SnapshotConfig_HostLowLevelProvisioningManagerReloadTarget HostLowLevelProvisioningManagerReloadTarget = "snapshotConfig"
-)
-
-type HostIpConfigIpV6AddressStatus string
-
-const (
-
-	// Indicates that this is a valid but deprecated address
-	// that should no longer be used as a source address.
-	Deprecated_HostIpConfigIpV6AddressStatus HostIpConfigIpV6AddressStatus = "deprecated"
-
-	// Indicates the address has been determined to be non-unique
-	// on the link, this address will not be reachable.
-	Duplicate_HostIpConfigIpV6AddressStatus HostIpConfigIpV6AddressStatus = "duplicate"
-
-	// Indicates that the address is not accessible because
-	// interface is not operational.
-	Inaccessible_HostIpConfigIpV6AddressStatus HostIpConfigIpV6AddressStatus = "inaccessible"
-
-	// Indicates that this isn't a valid.
-	Invalid_HostIpConfigIpV6AddressStatus HostIpConfigIpV6AddressStatus = "invalid"
-
-	// Indicates that this is a valid address.
-	Preferred_HostIpConfigIpV6AddressStatus HostIpConfigIpV6AddressStatus = "preferred"
-
-	// Indicates that the uniqueness of the
-	// address on the link is presently being verified.
-	Tentative_HostIpConfigIpV6AddressStatus HostIpConfigIpV6AddressStatus = "tentative"
-
-	// Indicates that the status cannot be determined.
-	Unknown_HostIpConfigIpV6AddressStatus HostIpConfigIpV6AddressStatus = "unknown"
-)
-
-//
-// File-type constants.
-//
-//
-type VirtualMachineFileLayoutExFileType string
-
-const (
-
-	// Config (vmx) file.
-	Config_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "config"
-
-	// Core (core) file.
-	Core_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "core"
-
-	// Disk digest descriptor file.
-	//
-	// Since vSphere API 5.0
-	DigestDescriptor_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "digestDescriptor"
-
-	// Disk digest extent file.
-	//
-	// Since vSphere API 5.0
-	DigestExtent_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "digestExtent"
-
-	// Disk descriptor (vmdk) file.
-	DiskDescriptor_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "diskDescriptor"
-
-	// Disk extent (-flat/-delta/-s/-rdm/-rdmp.vmdk) file.
-	DiskExtent_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "diskExtent"
-
-	// Host based replicated disk persistent state (psf) file.
-	//
-	// Since vSphere API 5.0
-	DiskReplicationState_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "diskReplicationState"
-
-	// Extended config (vmxf) file.
-	ExtendedConfig_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "extendedConfig"
-
-	// Log (log) file.
-	Log_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "log"
-
-	// Namespace data file.
-	//
-	// Since vSphere API 5.1
-	NamespaceData_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "namespaceData"
-
-	// Non-volatile RAM (nvram) file.
-	Nvram_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "nvram"
-
-	// Screenshot file.
-	Screenshot_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "screenshot"
-
-	// Snapshot data (vmsn) file.
-	SnapshotData_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "snapshotData"
-
-	// Snapshot metadata (vmsd) file.
-	SnapshotList_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "snapshotList"
-
-	// Snapshot manifest metadata (-aux.xml) file.
-	//
-	// This file is still being created but is no longer necessary since
-	// the manifest metadata is now available in the snapshot metadata
-	// (vmsd) file in vSphere 5.0. This type will be deprecated when
-	// vSphere 4.1 is no longer supported.
-	//
-	// Since vSphere API 5.0
-	SnapshotManifestList_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "snapshotManifestList"
-
-	// Virtual machine statistics (stat) file.
-	Stat_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "stat"
-
-	// Suspend (vmss) file.
-	Suspend_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "suspend"
-
-	// Swap (vswp/vmem) file.
-	Swap_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "swap"
-
-	// File generated by VMware ESX kernel for a running virtual
-	// machine.
-	//
-	// Since vSphere API 5.0
-	Uwswap_VirtualMachineFileLayoutExFileType VirtualMachineFileLayoutExFileType = "uwswap"
-)
-
-// Deprecated.
-// As of vSphere API 4.0 use VirtualMachineToolsVersionStatus
-// and VirtualMachineToolsRunningStatus.
-//
-//
-// Current status of VMware Tools running in the guest operating system.
-//
-//
-type VirtualMachineToolsStatus string
-
-const (
-
-	// VMware Tools has never been installed
-	// or has not run in the virtual machine.
-	ToolsNotInstalled_VirtualMachineToolsStatus VirtualMachineToolsStatus = "toolsNotInstalled"
-
-	// VMware Tools is not running.
-	ToolsNotRunning_VirtualMachineToolsStatus VirtualMachineToolsStatus = "toolsNotRunning"
-
-	// VMware Tools is running and the version is current.
-	ToolsOk_VirtualMachineToolsStatus VirtualMachineToolsStatus = "toolsOk"
-
-	// VMware Tools is running, but the version is not current.
-	ToolsOld_VirtualMachineToolsStatus VirtualMachineToolsStatus = "toolsOld"
-)
-
-//
-// Reasons why record/replay is not supported on a host.
-//
-//
-type HostIncompatibleForRecordReplayReason string
-
-const (
-
-	// The product supports record/replay but the host CPU does not.
-	Processor_HostIncompatibleForRecordReplayReason HostIncompatibleForRecordReplayReason = "processor"
-
-	// The product does not support record/replay.
-	Product_HostIncompatibleForRecordReplayReason HostIncompatibleForRecordReplayReason = "product"
-)
-
-//
-// The teaming health check match status.
-//
-//
-type VMwareDVSTeamingMatchStatus string
-
-const (
-
-	// The value of 'loadbalance_ip' is used in a uplink teaming policy
-	// policy
-	// in the vSphere Distributed Switch, and the external physical switch
-	// has the matching EtherChannel configuration.
-	IphashMatch_VMwareDVSTeamingMatchStatus VMwareDVSTeamingMatchStatus = "iphashMatch"
-
-	// The value of 'loadbalance_ip' is used in a uplink teaming policy
-	// policy
-	// in the vSphere Distributed Switch, but the external physical switch
-	// does not have the matching EtherChannel configuration.
-	IphashMismatch_VMwareDVSTeamingMatchStatus VMwareDVSTeamingMatchStatus = "iphashMismatch"
-
-	// The value of 'loadbalance_ip' is not used in a uplink teaming policy
-	// policy
-	// in the vSphere Distributed Switch, and the external physical switch
-	// does not have EtherChannel configuration.
-	NonIphashMatch_VMwareDVSTeamingMatchStatus VMwareDVSTeamingMatchStatus = "nonIphashMatch"
-
-	// The value of 'loadbalance_ip' is not used in a uplink teaming policy
-	// policy
-	// in the vSphere Distributed Switch, but the external physical switch
-	// has EtherChannel configuration.
-	NonIphashMismatch_VMwareDVSTeamingMatchStatus VMwareDVSTeamingMatchStatus = "nonIphashMismatch"
-)
-
-//
-// Application heartbeat status type.
-//
-//
-type VirtualMachineAppHeartbeatStatusType string
-
-const (
-
-	// Heartbeat status is disabled
-	AppStatusGray_VirtualMachineAppHeartbeatStatusType VirtualMachineAppHeartbeatStatusType = "appStatusGray"
-
-	// Heartbeat status is OK
-	AppStatusGreen_VirtualMachineAppHeartbeatStatusType VirtualMachineAppHeartbeatStatusType = "appStatusGreen"
-
-	// Heartbeating has stopped
-	AppStatusRed_VirtualMachineAppHeartbeatStatusType VirtualMachineAppHeartbeatStatusType = "appStatusRed"
-)
-
-type ThirdPartyLicenseAssignmentFailedReason string
-
-const (
-
-	// A general failure has occured during assigning license to the 3rd party module
-	LicenseAssignmentFailed_ThirdPartyLicenseAssignmentFailedReason ThirdPartyLicenseAssignmentFailedReason = "licenseAssignmentFailed"
-
-	// The 3rd party module we are trying to license is not installed.
-	ModuleNotInstalled_ThirdPartyLicenseAssignmentFailedReason ThirdPartyLicenseAssignmentFailedReason = "moduleNotInstalled"
-)
-
-//
-// Set of possible values for mode field in AccessSpec.
-//
-//
-type HostVmciAccessManagerMode string
-
-const (
-
-	// Grant access to specified services in addition to existing services.
-	Grant_HostVmciAccessManagerMode HostVmciAccessManagerMode = "grant"
-
-	// Replace existing services with specified services.
-	Replace_HostVmciAccessManagerMode HostVmciAccessManagerMode = "replace"
-
-	// Revoke the specified services.
-	Revoke_HostVmciAccessManagerMode HostVmciAccessManagerMode = "revoke"
-)
-
-//
-// Device class family.
-//
-//
-type VirtualMachineUsbInfoFamily string
-
-const (
-
-	// Audio capable device.
-	Audio_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "audio"
-
-	// Standard bluetooth adapter that uses HCI protocol,
-	// this is a subset of wireless controllers.
-	Bluetooth_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "bluetooth"
-
-	// Communication device.
-	Communication_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "communication"
-
-	// Human interface device.
-	Hid_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "hid"
-
-	// Bootable human interface device, this is a subset of HID devices.
-	Hid_bootable_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "hid_bootable"
-
-	// USB hubs.
-	Hub_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "hub"
-
-	// Still imaging device.
-	Imaging_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "imaging"
-
-	// Other miscellaneous device.
-	Other_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "other"
-
-	// Palm PDA, and Micorsoft ActiveSync PDA.
-	Pda_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "pda"
-
-	// Physical interface device.
-	Physical_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "physical"
-
-	// Printer device.
-	Printer_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "printer"
-
-	// Content security device.
-	Security_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "security"
-
-	// Smart card device.
-	Smart_card_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "smart_card"
-
-	// Mass storage device.
-	Storage_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "storage"
-
-	// There was an error in determining this device's classes
-	// accurately.
-	UnknownFamily_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "unknownFamily"
-
-	// Device that has an interface using a vendor-specific protocol.
-	Vendor_specific_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "vendor_specific"
-
-	// Video device.
-	Video_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "video"
-
-	// Wireless controller.
-	Wireless_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "wireless"
-
-	// Wireless device related to the Wireless USB standard,
-	// this is a subset of wireless controllers,
-	Wusb_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "wusb"
-)
-
-type DatastoreAccessible string
-
-const (
-
-	// Is not accessible
-	False_DatastoreAccessible DatastoreAccessible = "False"
-
-	// Is accessible
-	True_DatastoreAccessible DatastoreAccessible = "True"
-)
-
-//
-// Identifiers of currently supported resources.
-//
-//
-type HostLicensableResourceKey string
-
-const (
-
-	// Total size of memory configured for VMs on this host, measured in kilobytes.
-	MemoryForVms_HostLicensableResourceKey HostLicensableResourceKey = "memoryForVms"
-
-	// Total size of memory installed on this host, measured in kilobytes.
-	MemorySize_HostLicensableResourceKey HostLicensableResourceKey = "memorySize"
-
-	// Number of licensable CPU cores/compute-units on this host.
-	NumCpuCores_HostLicensableResourceKey HostLicensableResourceKey = "numCpuCores"
-
-	// Number of CPU packages on this host.
-	NumCpuPackages_HostLicensableResourceKey HostLicensableResourceKey = "numCpuPackages"
-
-	// Number of VMs already running on this host.
-	NumVmsStarted_HostLicensableResourceKey HostLicensableResourceKey = "numVmsStarted"
-
-	// Number of VMs that are currently powering-on, immigrating, etc.
-	NumVmsStarting_HostLicensableResourceKey HostLicensableResourceKey = "numVmsStarting"
-)
-
-//
-// This option specifies how to select events based on child relationships
-// in the inventory hierarchy. If a managed entity has children, their events
-// can be retrieved with this filter option.
-//
-//
-type EventFilterSpecRecursionOption string
-
-const (
-
-	// Returns events pertaining either to the specified managed entity
-	// or to its child entities.
-	All_EventFilterSpecRecursionOption EventFilterSpecRecursionOption = "all"
-
-	// Returns events pertaining to child entities only. Excludes
-	// events pertaining to the specified managed entity itself.
-	Children_EventFilterSpecRecursionOption EventFilterSpecRecursionOption = "children"
-
-	// Returns events that pertain only to the specified managed entity,
-	// and not its children.
-	Self_EventFilterSpecRecursionOption EventFilterSpecRecursionOption = "self"
-)
-
-type WillLoseHAProtectionResolution string
-
-const (
-
-	// relocate resolution
-	Relocate_WillLoseHAProtectionResolution WillLoseHAProtectionResolution = "relocate"
-
-	// storage vmotion resolution
-	Svmotion_WillLoseHAProtectionResolution WillLoseHAProtectionResolution = "svmotion"
-)
-
-//
-// Set of possible values for
-// DVPortStatus.vmDirectPathGen2InactiveReasonNetwork.
-//
-//
-type DVPortStatusVmDirectPathGen2InactiveReasonNetwork string
-
-const (
-
-	// VMDirectPath Gen 2 has been explicitly disabled for this port.
-	PortNptDisabledForPort_DVPortStatusVmDirectPathGen2InactiveReasonNetwork DVPortStatusVmDirectPathGen2InactiveReasonNetwork = "portNptDisabledForPort"
-
-	// The switch for which this port is defined does not support VMDirectPath Gen 2.
-	// See
-	// DVSFeatureCapability.vmDirectPathGen2Supported.
-	PortNptIncompatibleDvs_DVPortStatusVmDirectPathGen2InactiveReasonNetwork DVPortStatusVmDirectPathGen2InactiveReasonNetwork = "portNptIncompatibleDvs"
-
-	// None of the physical NICs used as uplinks for this port support
-	// VMDirectPath Gen 2.See vmDirectPathGen2Supported
-	PortNptNoCompatibleNics_DVPortStatusVmDirectPathGen2InactiveReasonNetwork DVPortStatusVmDirectPathGen2InactiveReasonNetwork = "portNptNoCompatibleNics"
-
-	// At least some of the physical NICs used as uplinks for this port
-	// support VMDirectPath Gen 2, but all available network-passthrough
-	// resources are in use by other ports.
-	PortNptNoVirtualFunctionsAvailable_DVPortStatusVmDirectPathGen2InactiveReasonNetwork DVPortStatusVmDirectPathGen2InactiveReasonNetwork = "portNptNoVirtualFunctionsAvailable"
-)
-
-//
-// The reason for the failure.
-//
-//
-type VmFailedStartingSecondaryEventFailureReason string
-
-const (
-
-	// Remote host is incompatible for secondary virtual machine.
-	// For instance, the host doesn't have access to the virtual machine's
-	// network or datastore.
-	IncompatibleHost_VmFailedStartingSecondaryEventFailureReason VmFailedStartingSecondaryEventFailureReason = "incompatibleHost"
-
-	// Login to remote host failed.
-	LoginFailed_VmFailedStartingSecondaryEventFailureReason VmFailedStartingSecondaryEventFailureReason = "loginFailed"
-
-	// Migration failed.
-	MigrateFailed_VmFailedStartingSecondaryEventFailureReason VmFailedStartingSecondaryEventFailureReason = "migrateFailed"
-
-	// Registration of the secondary virtual machine
-	// on the remote host failed.
-	RegisterVmFailed_VmFailedStartingSecondaryEventFailureReason VmFailedStartingSecondaryEventFailureReason = "registerVmFailed"
-)
-
-type PhysicalNicResourcePoolSchedulerDisallowedReason string
-
-const (
-
-	// Indicates that the NIC device does is not capable of resource pool
-	// based scheduling.
-	HardwareUnsupported_PhysicalNicResourcePoolSchedulerDisallowedReason PhysicalNicResourcePoolSchedulerDisallowedReason = "hardwareUnsupported"
-
-	// Indicates that the user has opted out the Physical NIC from resource pool
-	// based scheduling.
-	UserOptOut_PhysicalNicResourcePoolSchedulerDisallowedReason PhysicalNicResourcePoolSchedulerDisallowedReason = "userOptOut"
-)
-
-//
-// The policy setting used to determine when tools are auto-upgraded for
-// a virtual machine
-//
-//
-type UpgradePolicy string
-
-const (
-
-	// No auto-upgrades for tools will be performed for this
-	// virtual machine. Users must manually invoke the UpgradeTools
-	// operation to update the tools.
-	Manual_UpgradePolicy UpgradePolicy = "manual"
-
-	// When the virtual machine is power-cycled, the system checks
-	// for a newer version of tools when the VM comes back up. If it
-	// is available, a tools upgrade is automatically performed on the
-	// virtual machine and it is rebooted if necessary.
-	UpgradeAtPowerCycle_UpgradePolicy UpgradePolicy = "upgradeAtPowerCycle"
-)
-
-//
-// The virtual machine ticket type.
-//
-//
-type VirtualMachineTicketType string
-
-const (
-
-	// Remote device ticket.
-	Device_VirtualMachineTicketType VirtualMachineTicketType = "device"
-
-	// Guest operation ticket.
-	GuestControl_VirtualMachineTicketType VirtualMachineTicketType = "guestControl"
-
-	// Remote mouse-keyboard-screen ticket.
-	Mks_VirtualMachineTicketType VirtualMachineTicketType = "mks"
-)
-
-//
-// Sharing describes three possible ways of sharing the SCSI bus:
-//
-// One of these values is assigned to the sharedBus object to determine
-// if or how the SCSI bus is shared.
-//
-//
-type VirtualSCSISharing string
-
-const (
-
-	// The virtual SCSI bus is not shared.
-	NoSharing_VirtualSCSISharing VirtualSCSISharing = "noSharing"
-
-	// The virtual SCSI bus is shared between two or more virtual machines
-	// residing on different physical hosts.
-	PhysicalSharing_VirtualSCSISharing VirtualSCSISharing = "physicalSharing"
-
-	// The virtual SCSI bus is shared between two or more virtual machines.
-	// In this case, no physical machine is involved.
-	VirtualSharing_VirtualSCSISharing VirtualSCSISharing = "virtualSharing"
-)
-
-//
-// The PVLAN port types.
-//
-//
-type VmwareDistributedVirtualSwitchPvlanPortType string
-
-const (
-
-	// The ports communicates with other community ports and with
-	// promiscuous ports within the same PVLAN. any other traffics are
-	// blocked.
-	Community_VmwareDistributedVirtualSwitchPvlanPortType VmwareDistributedVirtualSwitchPvlanPortType = "community"
-
-	// The port can only communicate with the promiscuous ports within the
-	// same PVLAN, any other traffics are blocked.
-	Isolated_VmwareDistributedVirtualSwitchPvlanPortType VmwareDistributedVirtualSwitchPvlanPortType = "isolated"
-
-	// The port can communicate with all other ports within the same PVLAN,
-	// including the isolated and community ports .
-	Promiscuous_VmwareDistributedVirtualSwitchPvlanPortType VmwareDistributedVirtualSwitchPvlanPortType = "promiscuous"
-)
-
-//
-// All known file extensions. Valid ones are:
-//
-//
-type VirtualDeviceFileExtension string
-
-const (
-
-	// legacy virtual disks
-	Dsk_VirtualDeviceFileExtension VirtualDeviceFileExtension = "dsk"
-
-	// Floppy File Backings
-	Flp_VirtualDeviceFileExtension VirtualDeviceFileExtension = "flp"
-
-	// CD ISO Image backings
-	Iso_VirtualDeviceFileExtension VirtualDeviceFileExtension = "iso"
-
-	// pre 3.0 virtual disks using Raw Disk Maps
-	Rdm_VirtualDeviceFileExtension VirtualDeviceFileExtension = "rdm"
-
-	// virtual disks
-	Vmdk_VirtualDeviceFileExtension VirtualDeviceFileExtension = "vmdk"
-)
-
-//
-// Values used for indicating a disk's status for use by the VSAN service.See state
-//
-//
-type VsanHostDiskResultState string
-
-const (
-
-	// Disk is considered eligible for use by the VSAN service,
-	// but is not currently in use.
-	Eligible_VsanHostDiskResultState VsanHostDiskResultState = "eligible"
-
-	// Disk is considered ineligible for use by the VSAN service,
-	// and is not currently in use.See error
-	Ineligible_VsanHostDiskResultState VsanHostDiskResultState = "ineligible"
-
-	// Disk is currently in use by the VSAN service.
-	//
-	// A disk may be considered in use by the VSAN service regardless of
-	// whether the VSAN service is enabled.  As long as a disk is in use
-	// by VSAN, it is reserved exclusively for VSAN and may not be used
-	// for other purposes.See error
-	InUse_VsanHostDiskResultState VsanHostDiskResultState = "inUse"
-)
-
-// Deprecated.
-// as of vSphere API 5.0.
-//
-//
-// The set of tranformations that can be performed on the virtual disks
-// as part of the copy.
-//
-//
-type VirtualMachineRelocateTransformation string
-
-const (
-	Flat_VirtualMachineRelocateTransformation VirtualMachineRelocateTransformation = "flat"
-
-	Sparse_VirtualMachineRelocateTransformation VirtualMachineRelocateTransformation = "sparse"
-)
-
-//
-// Possible device names for legacy network backing option are listed below.
-// Note: This is not an exhaustive list. It is possible to specify
-// a specific device as well.
-// For example, on ESX hosts, the device name could be specified as "vmnic[0-9]"
-// or vmnet_[0-9].
-// For VMware Server Windows hosts, the device name could be specified as "vmnet[0-9]"
-// and for VMware Server Linux hosts, the device name could be specified as "/dev/vmnet[0-9]"
-// depending on what devices are available on that particular host.
-//
-//
-type VirtualEthernetCardLegacyNetworkDeviceName string
-
-const (
-	Bridged_VirtualEthernetCardLegacyNetworkDeviceName VirtualEthernetCardLegacyNetworkDeviceName = "bridged"
-
-	Hostonly_VirtualEthernetCardLegacyNetworkDeviceName VirtualEthernetCardLegacyNetworkDeviceName = "hostonly"
-
-	Nat_VirtualEthernetCardLegacyNetworkDeviceName VirtualEthernetCardLegacyNetworkDeviceName = "nat"
-)
-
-//
-// HTTP request methods.
-//
-//
-type SessionManagerHttpServiceRequestSpecMethod string
-
-const (
-	HttpConnect_SessionManagerHttpServiceRequestSpecMethod SessionManagerHttpServiceRequestSpecMethod = "httpConnect"
-
-	HttpDelete_SessionManagerHttpServiceRequestSpecMethod SessionManagerHttpServiceRequestSpecMethod = "httpDelete"
-
-	HttpGet_SessionManagerHttpServiceRequestSpecMethod SessionManagerHttpServiceRequestSpecMethod = "httpGet"
-
-	HttpHead_SessionManagerHttpServiceRequestSpecMethod SessionManagerHttpServiceRequestSpecMethod = "httpHead"
-
-	HttpOptions_SessionManagerHttpServiceRequestSpecMethod SessionManagerHttpServiceRequestSpecMethod = "httpOptions"
-
-	HttpPost_SessionManagerHttpServiceRequestSpecMethod SessionManagerHttpServiceRequestSpecMethod = "httpPost"
-
-	HttpPut_SessionManagerHttpServiceRequestSpecMethod SessionManagerHttpServiceRequestSpecMethod = "httpPut"
-
-	HttpTrace_SessionManagerHttpServiceRequestSpecMethod SessionManagerHttpServiceRequestSpecMethod = "httpTrace"
-)
-
-//
-// Defines the result status values for a
-// HostProfile.ExecuteHostProfile
-// operation. The result data is contained in the
-// ProfileExecuteResult data object.
-//
-//
-type ProfileExecuteResultStatus string
-
-const (
-
-	// Profile execution generated an error.
-	// See ProfileExecuteResult.error.
-	Error_ProfileExecuteResultStatus ProfileExecuteResultStatus = "error"
-
-	// Additional data is required to complete the operation.
-	// The data requirements are defined in the list of policy options for the profile
-	// (ApplyProfile.policy[]).
-	NeedInput_ProfileExecuteResultStatus ProfileExecuteResultStatus = "needInput"
-
-	// Profile execution was successful. You can use the output configuration data
-	// to apply the profile to a host.
-	Success_ProfileExecuteResultStatus ProfileExecuteResultStatus = "success"
-)
-
-//
-// This option specifies a time stamp governing the selection of tasks.
-//
-//
-type TaskFilterSpecTimeOption string
-
-const (
-
-	// The time stamp when the task finished.
-	CompletedTime_TaskFilterSpecTimeOption TaskFilterSpecTimeOption = "completedTime"
-
-	// The time stamp when the task was created and queued.
-	QueuedTime_TaskFilterSpecTimeOption TaskFilterSpecTimeOption = "queuedTime"
-
-	// The time stamp when the task started.
-	StartedTime_TaskFilterSpecTimeOption TaskFilterSpecTimeOption = "startedTime"
-)
-
-//
-// Determines if the virtual machine should start after receiving a heartbeat,
-// ignore heartbeats and start after the startDelay has elapsed, or follow the
-// system default before powering on. When a virtual machine is next in the start
-// order, the system either waits a specified period of time for a virtual
-// machine to power on or it waits until it receives a successful heartbeat from a
-// powered on virtual machine. By default, this is set to no.
-//
-//
-type AutoStartWaitHeartbeatSetting string
-
-const (
-
-	// The system does not wait to receive a heartbeat before powering on the next
-	// machine in the order. This is the default setting.
-	No_AutoStartWaitHeartbeatSetting AutoStartWaitHeartbeatSetting = "no"
-
-	// The system uses the default value to determine whether or not to wait to
-	// receive a heartbeat before powering on the next machine in the order.
-	SystemDefault_AutoStartWaitHeartbeatSetting AutoStartWaitHeartbeatSetting = "systemDefault"
-
-	// The system waits until receiving a heartbeat before powering on the next
-	// machine in the order.
-	Yes_AutoStartWaitHeartbeatSetting AutoStartWaitHeartbeatSetting = "yes"
-)
-
-//
-// Distributed Port Mirroring session types.
-//
-//
-type VMwareDVSVspanSessionType string
-
-const (
-
-	// In dvPortMirror session, Distributed Ports can be used as both source
-	// and destination entities.
-	DvPortMirror_VMwareDVSVspanSessionType VMwareDVSVspanSessionType = "dvPortMirror"
-
-	// In encapsulatedRemoteMirrorSource session, Distributed Ports can be used as source entities,
-	// and Ip address can be used as destination entities.
-	EncapsulatedRemoteMirrorSource_VMwareDVSVspanSessionType VMwareDVSVspanSessionType = "encapsulatedRemoteMirrorSource"
-
-	// In mixedDestMirror session, Distributed Ports can be used as source entities,
-	// and both Distributed Ports and Uplink Ports Name can be used as destination entities.
-	MixedDestMirror_VMwareDVSVspanSessionType VMwareDVSVspanSessionType = "mixedDestMirror"
-
-	// In remoteMirrorDest session, vlan Ids can be used as source entities,
-	// and Distributed Ports can be used as destination entities.
-	RemoteMirrorDest_VMwareDVSVspanSessionType VMwareDVSVspanSessionType = "remoteMirrorDest"
-
-	// In remoteMirrorSource session, Distributed Ports can be used as source entities,
-	// and uplink ports name can be used as destination entities.
-	RemoteMirrorSource_VMwareDVSVspanSessionType VMwareDVSVspanSessionType = "remoteMirrorSource"
-)
-
-//
-// Possible values for graphics type.
-//
-//
-type HostGraphicsInfoGraphicsType string
-
-const (
-
-	// Basic graphics when no host driver is available.
-	Basic_HostGraphicsInfoGraphicsType HostGraphicsInfoGraphicsType = "basic"
-
-	// Direct graphics (ie. pass through).
-	Direct_HostGraphicsInfoGraphicsType HostGraphicsInfoGraphicsType = "direct"
-
-	// Shared graphics.
-	Shared_HostGraphicsInfoGraphicsType HostGraphicsInfoGraphicsType = "shared"
-)
-
-//
-// The integrity validation status.
-//
-//
-type HostPatchManagerIntegrityStatus string
-
-const (
-
-	// A digital signature of the update does not match.
-	DigestMismatch_HostPatchManagerIntegrityStatus HostPatchManagerIntegrityStatus = "digestMismatch"
-
-	// A public key to verify the update is expired.
-	KeyExpired_HostPatchManagerIntegrityStatus HostPatchManagerIntegrityStatus = "keyExpired"
-
-	// The integrity can not be verified since a public key to
-	// verify the update cannot be found.
-	KeyNotFound_HostPatchManagerIntegrityStatus HostPatchManagerIntegrityStatus = "keyNotFound"
-
-	// A public key to verify the update has been revoked.
-	KeyRevoked_HostPatchManagerIntegrityStatus HostPatchManagerIntegrityStatus = "keyRevoked"
-
-	// Not enough signed signatures on the update.
-	NotEnoughSignatures_HostPatchManagerIntegrityStatus HostPatchManagerIntegrityStatus = "notEnoughSignatures"
-
-	// The update is successfully validated.
-	Validated_HostPatchManagerIntegrityStatus HostPatchManagerIntegrityStatus = "validated"
-
-	// The integrity validation failed.
-	ValidationError_HostPatchManagerIntegrityStatus HostPatchManagerIntegrityStatus = "validationError"
-)
-
-//
-// The VAppState type defines the set of states a vApp can be
-// in. The transitory states between started and stopped is modeled explicitly,
-// since the starting or stopping of a vApp is typically a time-consuming
-// process that might take minutes to complete.
-//
-//
-type VirtualAppVAppState string
-
-const (
-
-	// The vApp is currently powered on .
-	Started_VirtualAppVAppState VirtualAppVAppState = "started"
-
-	// The vApp is in the process of starting.
-	Starting_VirtualAppVAppState VirtualAppVAppState = "starting"
-
-	// The vApp is currently powered off or suspended.
-	Stopped_VirtualAppVAppState VirtualAppVAppState = "stopped"
-
-	// The vApp is in the process of stopping.
-	Stopping_VirtualAppVAppState VirtualAppVAppState = "stopping"
-)
-
-//
-// Enumeration of AutoMode values.
-//
-//
-type CustomizationLicenseDataMode string
-
-const (
-
-	// Indicates that a client access license has been purchased for each computer
-	// that accesses the VirtualCenter server.
-	PerSeat_CustomizationLicenseDataMode CustomizationLicenseDataMode = "perSeat"
-
-	// Indicates that client access licenses have been purchased for the server,
-	// allowing a certain number of concurrent connections to the VirtualCenter
-	// server.
-	PerServer_CustomizationLicenseDataMode CustomizationLicenseDataMode = "perServer"
-)
-
-//
-// MovePriority is an enumeration of values that indicate the priority of the task
-// that moves a virtual machine from one host to another or one storage location
-// to another. Note this priority can affect both the source and target hosts.
-//
-//
-type VirtualMachineMovePriority string
-
-const (
-
-	// The task of moving this virtual machine is the default priority.
-	DefaultPriority_VirtualMachineMovePriority VirtualMachineMovePriority = "defaultPriority"
-
-	// The task of moving this virtual machine is high priority.
-	HighPriority_VirtualMachineMovePriority VirtualMachineMovePriority = "highPriority"
-
-	// The task of moving this virtual machine is low priority.
-	LowPriority_VirtualMachineMovePriority VirtualMachineMovePriority = "lowPriority"
-)
-
-//
-// The list of possible default power operations available for the virtual machine
-//
-//
-type VirtualMachinePowerOpType string
-
-const (
-	Hard_VirtualMachinePowerOpType VirtualMachinePowerOpType = "hard"
-
-	Preset_VirtualMachinePowerOpType VirtualMachinePowerOpType = "preset"
-
-	Soft_VirtualMachinePowerOpType VirtualMachinePowerOpType = "soft"
-)
-
-//
-// This option specifies how to select tasks based on child relationships
-// in the inventory hierarchy. If a managed entity has children, their tasks
-// can be retrieved with this filter option.
-//
-//
-type TaskFilterSpecRecursionOption string
-
-const (
-
-	// Returns tasks pertaining either to the specified managed entity
-	// or to its child entities.
-	All_TaskFilterSpecRecursionOption TaskFilterSpecRecursionOption = "all"
-
-	// Returns tasks pertaining to child entities only. Excludes
-	// tasks pertaining to the specified managed entity itself.
-	Children_TaskFilterSpecRecursionOption TaskFilterSpecRecursionOption = "children"
-
-	// Returns tasks that pertain only to the specified managed entity,
-	// and not its children.
-	Self_TaskFilterSpecRecursionOption TaskFilterSpecRecursionOption = "self"
-)
-
-type VmFaultToleranceInvalidFileBackingDeviceType string
-
-const (
-
-	// virtual Cdrom
-	VirtualCdrom_VmFaultToleranceInvalidFileBackingDeviceType VmFaultToleranceInvalidFileBackingDeviceType = "virtualCdrom"
-
-	// virtual disk
-	VirtualDisk_VmFaultToleranceInvalidFileBackingDeviceType VmFaultToleranceInvalidFileBackingDeviceType = "virtualDisk"
-
-	// virtual floppy
-	VirtualFloppy_VmFaultToleranceInvalidFileBackingDeviceType VmFaultToleranceInvalidFileBackingDeviceType = "virtualFloppy"
-
-	// virtual parallel port
-	VirtualParallelPort_VmFaultToleranceInvalidFileBackingDeviceType VmFaultToleranceInvalidFileBackingDeviceType = "virtualParallelPort"
-
-	// virtual serial port
-	VirtualSerialPort_VmFaultToleranceInvalidFileBackingDeviceType VmFaultToleranceInvalidFileBackingDeviceType = "virtualSerialPort"
-)
-
-type InvalidProfileReferenceHostReason string
-
-const (
-
-	// The associated host and profile version are incompatible.
-	IncompatibleVersion_InvalidProfileReferenceHostReason InvalidProfileReferenceHostReason = "incompatibleVersion"
-
-	// There is no reference host associated with the profile.
-	MissingReferenceHost_InvalidProfileReferenceHostReason InvalidProfileReferenceHostReason = "missingReferenceHost"
-)
-
-//
-// The delta disk format constants
-//
-//
-type VirtualDiskDeltaDiskFormat string
-
-const (
-
-	// native snapshot format
-	NativeFormat_VirtualDiskDeltaDiskFormat VirtualDiskDeltaDiskFormat = "nativeFormat"
-
-	// redo-log based format
-	RedoLogFormat_VirtualDiskDeltaDiskFormat VirtualDiskDeltaDiskFormat = "redoLogFormat"
-
-	// Flex-SE redo-log based format
-	//
-	// Since vSphere API 5.1
-	SeSparseFormat_VirtualDiskDeltaDiskFormat VirtualDiskDeltaDiskFormat = "seSparseFormat"
-)
-
-//
-// IP allocation policy for a deployment.
-//
-//
-type VAppIPAssignmentInfoIpAllocationPolicy string
-
-const (
-
-	// Specifies that DHCP must be used to allocate IP addresses to the vApp
-	DhcpPolicy_VAppIPAssignmentInfoIpAllocationPolicy VAppIPAssignmentInfoIpAllocationPolicy = "dhcpPolicy"
-
-	// Specifies that IP allocation is done through the range managed by the VI
-	// platform. The IP addresses are allocated at first power-on, and remain
-	// allocated at power-off. This will ensure that a vApp gets a consistent
-	// IP for its life-time.
-	//
-	// Since vSphere API 5.1
-	FixedAllocatedPolicy_VAppIPAssignmentInfoIpAllocationPolicy VAppIPAssignmentInfoIpAllocationPolicy = "fixedAllocatedPolicy"
-
-	// Specifies that IP addresses are configured manually when the vApp is deployed
-	// and will be kept until reconfigured or the vApp destroyed. This will ensure
-	// that a vApp gets a consistent IP for its life-time.
-	FixedPolicy_VAppIPAssignmentInfoIpAllocationPolicy VAppIPAssignmentInfoIpAllocationPolicy = "fixedPolicy"
-
-	// Specifies that IP allocation is done through the range managed by the
-	// vSphere platform. The IP addresses are allocated when needed, typically at
-	// power-on, and deallocated during power-off. There is no guarantee that a
-	// vApp will get the same IP address when restarted.
-	TransientPolicy_VAppIPAssignmentInfoIpAllocationPolicy VAppIPAssignmentInfoIpAllocationPolicy = "transientPolicy"
-)
-
-type VAppAutoStartAction string
-
-const (
-
-	// The guest operating system for a virtual machine is shut down when that
-	// virtual machine in next in the auto-stop order.
-	GuestShutdown_VAppAutoStartAction VAppAutoStartAction = "guestShutdown"
-
-	// No action is taken for this virtual machine. This virtual machine is
-	// not a part of the auto-start sequence. This can be used for both auto-start
-	// and auto-start settings.
-	None_VAppAutoStartAction VAppAutoStartAction = "none"
-
-	// This virtual machine is powered off when it is next in the auto-stop order.
-	// This is the default stopAction.
-	PowerOff_VAppAutoStartAction VAppAutoStartAction = "powerOff"
-
-	// This virtual machine is powered on when it is next in the auto-start order.
-	PowerOn_VAppAutoStartAction VAppAutoStartAction = "powerOn"
-
-	// This virtual machine is suspended when it is next in the auto-stop order.
-	Suspend_VAppAutoStartAction VAppAutoStartAction = "suspend"
-)
-
-//
-// The operation on the target metric item.
-//
-//
-type MetricAlarmOperator string
-
-const (
-
-	// Test if the target metric item is above the given red or yellow values.
-	IsAbove_MetricAlarmOperator MetricAlarmOperator = "isAbove"
-
-	// Test if the target metric item is below the given red or yellow values.
-	IsBelow_MetricAlarmOperator MetricAlarmOperator = "isBelow"
-)
-
-//
-// The set of values used to determine ordering of default routers.
-// See RFC 4293 ipDefaultRouterPreference.
-//
-//
-type NetIpStackInfoPreference string
-
-const (
-	High_NetIpStackInfoPreference NetIpStackInfoPreference = "high"
-
-	Low_NetIpStackInfoPreference NetIpStackInfoPreference = "low"
-
-	Medium_NetIpStackInfoPreference NetIpStackInfoPreference = "medium"
-
-	Reserved_NetIpStackInfoPreference NetIpStackInfoPreference = "reserved"
-)
-
-type GuestFileType string
-
-const (
-
-	// directory
-	Directory_GuestFileType GuestFileType = "directory"
-
-	// normal file
-	File_GuestFileType GuestFileType = "file"
-
-	// symbolic link
-	Symlink_GuestFileType GuestFileType = "symlink"
-)
-
-//
-// The type of an OST node.
-//
-// Each OST node corresponds to an element in the OVF descriptor. See OstNode
-// for a description of the different node types.
-//
-//
-//
-type OvfConsumerOstNodeType string
-
-const (
-	Envelope_OvfConsumerOstNodeType OvfConsumerOstNodeType = "envelope"
-
-	VirtualSystem_OvfConsumerOstNodeType OvfConsumerOstNodeType = "virtualSystem"
-
-	VirtualSystemCollection_OvfConsumerOstNodeType OvfConsumerOstNodeType = "virtualSystemCollection"
-)
-
-//
-// The list of known disk modes.
-//
-// The list of supported disk modes varies by the backing type. The "persistent"
-// mode is supported by every backing type.
-//
-//
-//
-type VirtualDiskMode string
-
-const (
-
-	// Changes are appended to the redo log; you revoke changes by removing the undo log.
-	Append_VirtualDiskMode VirtualDiskMode = "append"
-
-	// Same as nonpersistent, but not affected by snapshots.
-	Independent_nonpersistent_VirtualDiskMode VirtualDiskMode = "independent_nonpersistent"
-
-	// Same as persistent, but not affected by snapshots.
-	Independent_persistent_VirtualDiskMode VirtualDiskMode = "independent_persistent"
-
-	// Changes to virtual disk are made to a redo log and discarded at power off.
-	Nonpersistent_VirtualDiskMode VirtualDiskMode = "nonpersistent"
-
-	// Changes are immediately and permanently written to the virtual disk.
-	Persistent_VirtualDiskMode VirtualDiskMode = "persistent"
-
-	// Changes are made to a redo log, but you are given the option to commit or undo.
-	Undoable_VirtualDiskMode VirtualDiskMode = "undoable"
-)
-
-//
-// Guest operating system family constants.
-//
-//
-type VirtualMachineGuestOsFamily string
-
-const (
-
-	// Mac OS operating system
-	//
-	// Since vSphere API 5.0
-	DarwinGuestFamily_VirtualMachineGuestOsFamily VirtualMachineGuestOsFamily = "darwinGuestFamily"
-
-	// Linux operating system
-	LinuxGuest_VirtualMachineGuestOsFamily VirtualMachineGuestOsFamily = "linuxGuest"
-
-	// Novell Netware
-	NetwareGuest_VirtualMachineGuestOsFamily VirtualMachineGuestOsFamily = "netwareGuest"
-
-	// Other operating systems
-	OtherGuestFamily_VirtualMachineGuestOsFamily VirtualMachineGuestOsFamily = "otherGuestFamily"
-
-	// Solaris operating system
-	SolarisGuest_VirtualMachineGuestOsFamily VirtualMachineGuestOsFamily = "solarisGuest"
-
-	// Windows operating system
-	WindowsGuest_VirtualMachineGuestOsFamily VirtualMachineGuestOsFamily = "windowsGuest"
-)
-
-type VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm string
-
-const (
-
-	// Some networking feature has placed a conflicting IOChain on
-	// the network adapter, which prevents VMDirectPath Gen 2.  Examples
-	// include DVFilter.
-	VmNptConflictingIOChainConfigured_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptConflictingIOChainConfigured"
-
-	// VMDirectPath Gen 2 is temporarily suspended while the virtual
-	// machine executes an operation such as suspend.
-	VmNptConflictingOperationInProgress_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptConflictingOperationInProgress"
-
-	// The virtual machine's network adapter is disabled or
-	// disconnected, and thus is not participating in VMDirectPath Gen 2.
-	VmNptDisabledOrDisconnectedAdapter_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptDisabledOrDisconnectedAdapter"
-
-	// The virtual machine is configured for Fault Tolerance or
-	// Record & Replay, which prevents VMDirectPath Gen 2.
-	VmNptFaultToleranceOrRecordReplayConfigured_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptFaultToleranceOrRecordReplayConfigured"
-
-	// The virtual machine's network adapter has features enabled
-	// which preclude it participating in VMDirectPath Gen 2 such
-	// as INT-x or PXE booting.
-	VmNptIncompatibleAdapterFeatures_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptIncompatibleAdapterFeatures"
-
-	// The device type does not support VMDirectPath Gen 2.See vmDirectPathGen2Supported
-	VmNptIncompatibleAdapterType_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptIncompatibleAdapterType"
-
-	// The device backing is not a DistributedVirtualPortBacking.
-	VmNptIncompatibleBackingType_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptIncompatibleBackingType"
-
-	// The virtual machine's guest OS does not support
-	// VMDirectPath Gen 2.
-	VmNptIncompatibleGuest_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptIncompatibleGuest"
-
-	// The virtual machine's guest network driver does not support
-	// VMDirectPath Gen 2.
-	VmNptIncompatibleGuestDriver_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptIncompatibleGuestDriver"
-
-	// The virtual machine does not have full memory reservation
-	// required to activate VMDirectPath Gen 2.
-	VmNptInsufficientMemoryReservation_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptInsufficientMemoryReservation"
-
-	// The virtual machine monitor is exercising functionality which
-	// which prevents VMDirectPath Gen 2.
-	VmNptMonitorBlocks_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptMonitorBlocks"
-
-	// VMDirectPath Gen 2 is unavailable due to host run out of intr
-	// vector in host. Guest can configure the vNIC to use less rx/tx
-	// queues or use MSI instead of MSIX.
-	VmNptOutOfIntrVector_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptOutOfIntrVector"
-
-	// VMDirectPath Gen 2 is unavailable due to an unforeseen runtime error
-	// in the virtualization platform (typically resource constraints.)
-	VmNptRuntimeError_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptRuntimeError"
-
-	// VMDirectPath Gen 2 is unavailable due to Incompatibe feature
-	// VMCI is active in the current VM. Kill the relevant VMCI
-	// application(s) and restart the VM will allow the vNIC(s) to enter
-	// passthrough mode.
-	//
-	// Since vSphere API 5.1
-	VmNptVMCIActive_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm = "vmNptVMCIActive"
-)
-
-// Deprecated.
-// As of VI API 2.5, use QueryLicenseSourceAvailability
-// to obtain an array of LicenseAvailabilityInfo data
-// objects.
-//
-//
-// Licensed features have unique keys to identify them.
-//
-//
-type LicenseManagerLicenseKey string
-
-const (
-
-	// Enable ESX Server consolidated backup feature. This is a per CPU package
-	// license.
-	Backup_LicenseManagerLicenseKey LicenseManagerLicenseKey = "backup"
-
-	// Enable VirtualCenter HA. This is a per ESX server CPU package license.
-	Das_LicenseManagerLicenseKey LicenseManagerLicenseKey = "das"
-
-	// Enable VirtualCenter Distributed Resource Scheduler. This is a per ESX server
-	// CPU package license.
-	Drs_LicenseManagerLicenseKey LicenseManagerLicenseKey = "drs"
-
-	// Enable VirtualCenter DRS Power Management Functionality. This is a per CPU package
-	//
-	// Since VI API 2.5
-	DrsPower_LicenseManagerLicenseKey LicenseManagerLicenseKey = "drsPower"
-
-	// The edition license for the ESX server, Starter edition. This is a per CPU
-	// package license.
-	EsxExpress_LicenseManagerLicenseKey LicenseManagerLicenseKey = "esxExpress"
-
-	// The edition license for the ESX Server, Standard edition. This is a per
-	// CPU package license.
-	EsxFull_LicenseManagerLicenseKey LicenseManagerLicenseKey = "esxFull"
-
-	// Enable VirtualCenter ESX Server host management functionality. This is a per
-	// ESX server CPU package license.
-	EsxHost_LicenseManagerLicenseKey LicenseManagerLicenseKey = "esxHost"
-
-	// The edition license for the ESX server, VMTN edition. This is a per CPU package
-	// license.
-	EsxVmtn_LicenseManagerLicenseKey LicenseManagerLicenseKey = "esxVmtn"
-
-	// Enable VirtualCenter GSX Server host management functionality. This is a per
-	// GSX server CPU package license.
-	GsxHost_LicenseManagerLicenseKey LicenseManagerLicenseKey = "gsxHost"
-
-	// Enable use of iSCSI. This is a per CPU package license.
-	Iscsi_LicenseManagerLicenseKey LicenseManagerLicenseKey = "iscsi"
-
-	// Enable use of NAS. This is a per CPU package license.
-	Nas_LicenseManagerLicenseKey LicenseManagerLicenseKey = "nas"
-
-	// Enable use of SAN. This is a per CPU package license.
-	San_LicenseManagerLicenseKey LicenseManagerLicenseKey = "san"
-
-	// Enable VirtualCenter VMware server host management functionality. This is a per
-	// VMware server CPU package license.
-	//
-	// Since VI API 2.5
-	ServerHost_LicenseManagerLicenseKey LicenseManagerLicenseKey = "serverHost"
-
-	// The edition license for a VirtualCenter server, full edition. This license
-	// is independent of the number of CPU packages for the VirtualCenter host.
-	Vc_LicenseManagerLicenseKey LicenseManagerLicenseKey = "vc"
-
-	// The edition license for a VirtualCenter server, starter edition. This license
-	// limits the number of hosts (esxHost or serverHost) that can be managed by the
-	// VirtualCenter product.
-	//
-	// Since VI API 2.5
-	VcExpress_LicenseManagerLicenseKey LicenseManagerLicenseKey = "vcExpress"
-
-	// Enable VMotion. This is a per ESX server CPU package license.
-	Vmotion_LicenseManagerLicenseKey LicenseManagerLicenseKey = "vmotion"
-
-	// Enable up to 4-way VSMP feature. This is a per CPU package license.
-	Vsmp_LicenseManagerLicenseKey LicenseManagerLicenseKey = "vsmp"
-)
-
-//
-// The NPIV WWN source type.
-//
-//
-type VirtualMachineConfigInfoNpivWwnType string
-
-const (
-
-	// This set of WWNs is provided by the client.
-	External_VirtualMachineConfigInfoNpivWwnType VirtualMachineConfigInfoNpivWwnType = "external"
-
-	// This set of WWNs is generated by Host Agent.
-	Host_VirtualMachineConfigInfoNpivWwnType VirtualMachineConfigInfoNpivWwnType = "host"
-
-	// This set of WWNs is generated by VC server.
-	Vc_VirtualMachineConfigInfoNpivWwnType VirtualMachineConfigInfoNpivWwnType = "vc"
-)
-
-//
-// This enum contains a list of valid owner values for
-// the name field
-//
-//
-type VirtualMachineMetadataManagerVmMetadataOwnerOwner string
-
-const (
-	ComVmwareVsphereHA_VirtualMachineMetadataManagerVmMetadataOwnerOwner VirtualMachineMetadataManagerVmMetadataOwnerOwner = "ComVmwareVsphereHA"
-)
-
-type VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonOther string
-
-const (
-
-	// The virtual machine's host does not support VMDirectPath Gen 2.See vmDirectPathGen2Supported
-	VmNptIncompatibleHost_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonOther VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonOther = "vmNptIncompatibleHost"
-
-	// The configuration or state of the attached network prevents
-	// VMDirectPath Gen 2. Refer to
-	// vmDirectPathGen2InactiveReasonNetwork
-	// and/or
-	// vmDirectPathGen2InactiveReasonExtended
-	// in the RuntimeInfo of the DistributedVirtualPort connected to this
-	// device.
-	VmNptIncompatibleNetwork_VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonOther VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonOther = "vmNptIncompatibleNetwork"
-)
-
-//
-// NetBIOS configuration mode.
-//
-//
-type NetBIOSConfigInfoMode string
-
-const (
-
-	// NetBIOS is disabled.
-	Disabled_NetBIOSConfigInfoMode NetBIOSConfigInfoMode = "disabled"
-
-	// NetBIOS is enabled.
-	Enabled_NetBIOSConfigInfoMode NetBIOSConfigInfoMode = "enabled"
-
-	// DHCP server decides whether or not to use NetBIOS.
-	EnabledViaDHCP_NetBIOSConfigInfoMode NetBIOSConfigInfoMode = "enabledViaDHCP"
-
-	// Mode of NetBIOS is unknown.
-	Unknown_NetBIOSConfigInfoMode NetBIOSConfigInfoMode = "unknown"
-)
-
-//
-// Possible SCSI classes.
-//
-//
-type VirtualMachineScsiPassthroughType string
-
-const (
-	Cdrom_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "cdrom"
-
-	Com_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "com"
-
-	Disk_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "disk"
-
-	Media_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "media"
-
-	Optical_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "optical"
-
-	Printer_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "printer"
-
-	Processor_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "processor"
-
-	Raid_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "raid"
-
-	Scanner_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "scanner"
-
-	Tape_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "tape"
-
-	Unknown_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "unknown"
-
-	Worm_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "worm"
-)
-
-//
-// Types of disk provisioning that can be set for the disk in the deployed OVF
-// package.
-//
-//
-type OvfCreateImportSpecParamsDiskProvisioningType string
-
-const (
-
-	// An eager zeroed thick disk has all space allocated and wiped clean
-	// of any previous contents on the physical media at creation time.
-	// Such disks may take longer time during creation compared to other
-	// disk formats.
-	//
-	// Since vSphere API 5.0
-	EagerZeroedThick_OvfCreateImportSpecParamsDiskProvisioningType OvfCreateImportSpecParamsDiskProvisioningType = "eagerZeroedThick"
-
-	// Depending on the host type, Flat is mapped to either
-	// MonolithicFlat or Thick.
-	Flat_OvfCreateImportSpecParamsDiskProvisioningType OvfCreateImportSpecParamsDiskProvisioningType = "flat"
-
-	// A preallocated monolithic disk. Disks in this format can be used with
-	// other VMware products.
-	MonolithicFlat_OvfCreateImportSpecParamsDiskProvisioningType OvfCreateImportSpecParamsDiskProvisioningType = "monolithicFlat"
-
-	// A sparse (allocate on demand) monolithic disk. Disks in this format can
-	// be used with other VMware products.
-	MonolithicSparse_OvfCreateImportSpecParamsDiskProvisioningType OvfCreateImportSpecParamsDiskProvisioningType = "monolithicSparse"
-
-	// A sparse (allocate on demand) format with additional space
-	// optimizations.
-	//
-	// Since vSphere API 5.1
-	SeSparse_OvfCreateImportSpecParamsDiskProvisioningType OvfCreateImportSpecParamsDiskProvisioningType = "seSparse"
-
-	// Depending on the host type, Sparse is mapped to either
-	// MonolithicSparse or Thin.
-	Sparse_OvfCreateImportSpecParamsDiskProvisioningType OvfCreateImportSpecParamsDiskProvisioningType = "sparse"
-
-	// A thick disk has all space allocated at creation time
-	// and the space is zeroed on demand as the space is used.
-	Thick_OvfCreateImportSpecParamsDiskProvisioningType OvfCreateImportSpecParamsDiskProvisioningType = "thick"
-
-	// Space required for thin-provisioned virtual disk is allocated and
-	// zeroed on demand as the space is used.
-	Thin_OvfCreateImportSpecParamsDiskProvisioningType OvfCreateImportSpecParamsDiskProvisioningType = "thin"
-
-	// A preallocated disk with 2GB maximum extent size. Disks in this format
-	// can be used with other VMware products. The 2GB extent size
-	// makes these disks easier to burn to dvd or use on filesystems that
-	// don't support large files.
-	TwoGbMaxExtentFlat_OvfCreateImportSpecParamsDiskProvisioningType OvfCreateImportSpecParamsDiskProvisioningType = "twoGbMaxExtentFlat"
-
-	// A sparse (allocate on demand) disk with 2GB maximum extent size.
-	// Disks in this format can be used with other VMware products. The 2GB
-	// extent size makes these disks easier to burn to dvd or use on
-	// filesystems that don't support large files.
-	TwoGbMaxExtentSparse_OvfCreateImportSpecParamsDiskProvisioningType OvfCreateImportSpecParamsDiskProvisioningType = "twoGbMaxExtentSparse"
-)
-
-//
-// The types of virtual disks that can be created or cloned.
-//
-//
-type VirtualDiskType string
-
-const (
-
-	// A redo log disk. This format is only applicable as a destination format
-	// in a clone operation, and not usable for disk creation.
-	//
-	// Since vSphere API 5.5
-	Delta_VirtualDiskType VirtualDiskType = "delta"
-
-	// An eager zeroed thick disk has all space allocated and wiped clean
-	// of any previous contents on the physical media at creation time.
-	// Such disks may take longer time during creation  compared to other
-	// disk formats.
-	EagerZeroedThick_VirtualDiskType VirtualDiskType = "eagerZeroedThick"
-
-	// A preallocated monolithic disk.  Disks in this format can be used with
-	// other VMware products. This format is only applicable as a destination
-	// format in a clone operation, and not usable for disk creation.
-	//
-	// Since vSphere API 4.0
-	FlatMonolithic_VirtualDiskType VirtualDiskType = "flatMonolithic"
-
-	// A preallocated disk has all space allocated at creation time
-	// and the space is zeroed on demand as the space is used.
-	Preallocated_VirtualDiskType VirtualDiskType = "preallocated"
-
-	// Raw device.
-	Raw_VirtualDiskType VirtualDiskType = "raw"
-
-	// Virtual compatibility mode raw disk mapping.  An rdm virtual disk
-	// grants access to the entire raw disk and the virtual disk can
-	// participate in snapshots.
-	Rdm_VirtualDiskType VirtualDiskType = "rdm"
-
-	// Physical compatibility mode (pass-through) raw disk mapping. An rdmp
-	// virtual disk passes SCSI commands directly to the hardware, but the
-	// virtual disk cannot participate in snapshots.
-	Rdmp_VirtualDiskType VirtualDiskType = "rdmp"
-
-	// A sparse (allocate on demand) format with additional space
-	// optimizations.
-	//
-	// Since vSphere API 5.1
-	SeSparse_VirtualDiskType VirtualDiskType = "seSparse"
-
-	// A sparse disk with 2GB maximum extent size.  Disks in this format
-	// can be used with other VMware products.  The 2GB extent size
-	// makes these disks easier to burn to dvd or use on filesystems that
-	// don't support large files. This format is only applicable as a
-	// destination format in a clone operation, and not usable for disk
-	// creation.
-	Sparse2Gb_VirtualDiskType VirtualDiskType = "sparse2Gb"
-
-	// A sparse monolithic disk.  Disks in this format can be used with other
-	// VMware products. This format is only applicable as a destination
-	// format in a clone operation, and not usable for disk creation.
-	//
-	// Since vSphere API 4.0
-	SparseMonolithic_VirtualDiskType VirtualDiskType = "sparseMonolithic"
-
-	// A thick disk has all space allocated at creation time.  This
-	// space may contain stale data on the physical media.  Thick disks
-	// are primarily used for virtual machine clustering, but they are
-	// generally insecure and should not be used. Due to better performance
-	// and security properties, the use of the 'preallocated' format is
-	// preferred over this format.
-	Thick_VirtualDiskType VirtualDiskType = "thick"
-
-	// A thick disk with 2GB maximum extent size.  Disks in this format
-	// can be used with other VMware products.  The 2GB extent size
-	// makes these disks easier to burn to dvd or use on filesystems that
-	// don't support large files. This format is only applicable as a
-	// destination format in a clone operation, and not usable for disk
-	// creation.
-	Thick2Gb_VirtualDiskType VirtualDiskType = "thick2Gb"
-
-	// Space required for thin-provisioned virtual disk is allocated and
-	// zeroed on demand as the space is used.
-	Thin_VirtualDiskType VirtualDiskType = "thin"
-)
-
-//
-// The valid choices for host pointing devices are:
-//
-//
-//
-//
-//
-type VirtualPointingDeviceHostChoice string
-
-const (
-
-	// Automatically detects the host mouse type.
-	Autodetect_VirtualPointingDeviceHostChoice VirtualPointingDeviceHostChoice = "autodetect"
-
-	// The Microsoft IntelliMouse Explorer.
-	IntellimouseExplorer_VirtualPointingDeviceHostChoice VirtualPointingDeviceHostChoice = "intellimouseExplorer"
-
-	// The Microsoft Intellimouse with a PS2 connection.
-	IntellimousePs2_VirtualPointingDeviceHostChoice VirtualPointingDeviceHostChoice = "intellimousePs2"
-
-	// The Logitech MouseMan.
-	LogitechMouseman_VirtualPointingDeviceHostChoice VirtualPointingDeviceHostChoice = "logitechMouseman"
-
-	// The Microsoft Serial Mouse.
-	Microsoft_serial_VirtualPointingDeviceHostChoice VirtualPointingDeviceHostChoice = "microsoft_serial"
-
-	// The Logitech MouseMan Serial Bus Mouse.
-	MousemanSerial_VirtualPointingDeviceHostChoice VirtualPointingDeviceHostChoice = "mousemanSerial"
-
-	// The Mouse Systems Mouse.
-	MouseSystems_VirtualPointingDeviceHostChoice VirtualPointingDeviceHostChoice = "mouseSystems"
-
-	// A generic mouse with a PS2 connection.
-	Ps2_VirtualPointingDeviceHostChoice VirtualPointingDeviceHostChoice = "ps2"
-)
-
-//
-// Set of possible values for use3dRenderer.
-//
-//
-type VirtualMachineVideoCardUse3dRenderer string
-
-const (
-
-	// Determine automatically whether to render 3D with software or hardware.
-	Automatic_VirtualMachineVideoCardUse3dRenderer VirtualMachineVideoCardUse3dRenderer = "automatic"
-
-	// Render 3D with graphics hardware.
-	Hardware_VirtualMachineVideoCardUse3dRenderer VirtualMachineVideoCardUse3dRenderer = "hardware"
-
-	// Render 3D with software.
-	Software_VirtualMachineVideoCardUse3dRenderer VirtualMachineVideoCardUse3dRenderer = "software"
-)
-
-//
-// This specifies how an IP address was obtained for a given interface.
-// See RFC 4293 IpAddressOriginTC.
-//
-//
-type NetIpConfigInfoIpAddressOrigin string
-
-const (
-
-	// The address is configured through dhcp.
-	Dhcp_NetIpConfigInfoIpAddressOrigin NetIpConfigInfoIpAddressOrigin = "dhcp"
-
-	// The address is obtained through stateless autoconfiguration (autoconf).
-	// See RFC 4862, IPv6 Stateless Address Autoconfiguration.
-	Linklayer_NetIpConfigInfoIpAddressOrigin NetIpConfigInfoIpAddressOrigin = "linklayer"
-
-	// The address is configured manually. The term 'static' is a synonym.
-	Manual_NetIpConfigInfoIpAddressOrigin NetIpConfigInfoIpAddressOrigin = "manual"
-
-	// Any other type of address configuration other than the below
-	// mentioned ones will fall under this category. For e.g., automatic
-	// address configuration for the link local address falls under
-	// this type.
-	Other_NetIpConfigInfoIpAddressOrigin NetIpConfigInfoIpAddressOrigin = "other"
-
-	// The address is chosen by the system at random
-	// e.g., an IPv4 address within 169.254/16, or an RFC 3041 privacy address.
-	Random_NetIpConfigInfoIpAddressOrigin NetIpConfigInfoIpAddressOrigin = "random"
-)
-
-type InvalidDasConfigArgumentEntryForInvalidArgument string
-
-const (
-
-	// Policies for admission control
-	AdmissionControl_InvalidDasConfigArgumentEntryForInvalidArgument InvalidDasConfigArgumentEntryForInvalidArgument = "admissionControl"
-
-	// User-specified heartbeat datastores
-	UserHeartbeatDs_InvalidDasConfigArgumentEntryForInvalidArgument InvalidDasConfigArgumentEntryForInvalidArgument = "userHeartbeatDs"
-
-	// VM override
-	VmConfig_InvalidDasConfigArgumentEntryForInvalidArgument InvalidDasConfigArgumentEntryForInvalidArgument = "vmConfig"
-)
-
-type WeekOfMonth string
-
-const (
-	First_WeekOfMonth WeekOfMonth = "first"
-
-	Fourth_WeekOfMonth WeekOfMonth = "fourth"
-
-	Last_WeekOfMonth WeekOfMonth = "last"
-
-	Second_WeekOfMonth WeekOfMonth = "second"
-
-	Third_WeekOfMonth WeekOfMonth = "third"
-)
-
-//
-// The Discovery Protocol types.
-//
-//
-type LinkDiscoveryProtocolConfigProtocolType string
-
-const (
-
-	// Cisco Discovery Protocol
-	Cdp_LinkDiscoveryProtocolConfigProtocolType LinkDiscoveryProtocolConfigProtocolType = "cdp"
-
-	// Link Layer Discovery Protocol
-	Lldp_LinkDiscoveryProtocolConfigProtocolType LinkDiscoveryProtocolConfigProtocolType = "lldp"
-)
-
-//
-// The NeedSecondaryReason type defines all reasons a virtual machine is
-// in the needSecondary Fault Tolerance state following a failure.
-//
-//
-type VirtualMachineNeedSecondaryReason string
-
-const (
-
-	// Divergence
-	Divergence_VirtualMachineNeedSecondaryReason VirtualMachineNeedSecondaryReason = "divergence"
-
-	// Initializing FT
-	Initializing_VirtualMachineNeedSecondaryReason VirtualMachineNeedSecondaryReason = "initializing"
-
-	// Lose connection to secondary
-	LostConnection_VirtualMachineNeedSecondaryReason VirtualMachineNeedSecondaryReason = "lostConnection"
-
-	// All other reasons
-	Other_VirtualMachineNeedSecondaryReason VirtualMachineNeedSecondaryReason = "other"
-
-	// Partial hardware failure
-	PartialHardwareFailure_VirtualMachineNeedSecondaryReason VirtualMachineNeedSecondaryReason = "partialHardwareFailure"
-
-	// Terminated by user
-	UserAction_VirtualMachineNeedSecondaryReason VirtualMachineNeedSecondaryReason = "userAction"
-)
-
-//
-// The type of operation being performed on the specified virtual device.
-// Valid values are:
-//
-//
-type VirtualDeviceConfigSpecOperation string
-
-const (
-
-	// Specifies the addition of a virtual device to the configuration.
-	Add_VirtualDeviceConfigSpecOperation VirtualDeviceConfigSpecOperation = "add"
-
-	// Specifies changes to the virtual device specification.
-	Edit_VirtualDeviceConfigSpecOperation VirtualDeviceConfigSpecOperation = "edit"
-
-	// Specifies the removal of a virtual device.
-	Remove_VirtualDeviceConfigSpecOperation VirtualDeviceConfigSpecOperation = "remove"
-)
-
-//
-// Link Aggregation Control Protocol policy modes.
-//
-//
-type VMwareUplinkLacpMode string
-
-const (
-
-	// Link Aggregation Control Protocol always sends frames along the configured uplinks
-	Active_VMwareUplinkLacpMode VMwareUplinkLacpMode = "active"
-
-	// Link Aggregation Control Protocol acts as "speak when spoken to".
-	Passive_VMwareUplinkLacpMode VMwareUplinkLacpMode = "passive"
-)
-
-//
-// Pre-defined constants for cache modes.
-//
-//
-type VirtualDiskVFlashCacheConfigInfoCacheMode string
-
-const (
-
-	// In write-back mode, writes to the cache do not go to the underlying storage
-	// right away. Cache holds data temporarily till it can be permanently saved or
-	// otherwise modified.
-	Write_back_VirtualDiskVFlashCacheConfigInfoCacheMode VirtualDiskVFlashCacheConfigInfoCacheMode = "write_back"
-
-	// In write-through cache mode, writes to the cache cause writes
-	// to the underlying storage. The cache acts as a facade to the underlying
-	// storage.
-	Write_thru_VirtualDiskVFlashCacheConfigInfoCacheMode VirtualDiskVFlashCacheConfigInfoCacheMode = "write_thru"
-)
-
-//
-// Set of valid service policy strings.
-//
-//
-type HostServicePolicy string
-
-const (
-
-	// Service should run if and only if it has open firewall ports.
-	Automatic_HostServicePolicy HostServicePolicy = "automatic"
-
-	// Service should not be started when the host starts up.
-	Off_HostServicePolicy HostServicePolicy = "off"
-
-	// Service should be started when the host starts up.
-	On_HostServicePolicy HostServicePolicy = "on"
-)
-
-//
-// Current version status of VMware Tools installed in the guest operating
-// system.
-//
-//
-type VirtualMachineToolsVersionStatus string
-
-const (
-
-	// VMware Tools is installed, but the installed version is
-	// known to have a grave bug and should be immediately upgraded.
-	//
-	// Since vSphere API 5.0
-	GuestToolsBlacklisted_VirtualMachineToolsVersionStatus VirtualMachineToolsVersionStatus = "guestToolsBlacklisted"
-
-	// VMware Tools is installed, and the version is current.
-	GuestToolsCurrent_VirtualMachineToolsVersionStatus VirtualMachineToolsVersionStatus = "guestToolsCurrent"
-
-	// VMware Tools is installed, but the version is not current.
-	GuestToolsNeedUpgrade_VirtualMachineToolsVersionStatus VirtualMachineToolsVersionStatus = "guestToolsNeedUpgrade"
-
-	// VMware Tools has never been installed.
-	GuestToolsNotInstalled_VirtualMachineToolsVersionStatus VirtualMachineToolsVersionStatus = "guestToolsNotInstalled"
-
-	// VMware Tools is installed, supported, and newer
-	// than the version available on the host.
-	//
-	// Since vSphere API 5.0
-	GuestToolsSupportedNew_VirtualMachineToolsVersionStatus VirtualMachineToolsVersionStatus = "guestToolsSupportedNew"
-
-	// VMware Tools is installed, supported, but a newer version is available.
-	//
-	// Since vSphere API 5.0
-	GuestToolsSupportedOld_VirtualMachineToolsVersionStatus VirtualMachineToolsVersionStatus = "guestToolsSupportedOld"
-
-	// VMware Tools is installed, and the version is known to be
-	// too new to work correctly with this virtual machine.
-	//
-	// Since vSphere API 5.0
-	GuestToolsTooNew_VirtualMachineToolsVersionStatus VirtualMachineToolsVersionStatus = "guestToolsTooNew"
-
-	// VMware Tools is installed, but the version is too old.
-	//
-	// Since vSphere API 5.0
-	GuestToolsTooOld_VirtualMachineToolsVersionStatus VirtualMachineToolsVersionStatus = "guestToolsTooOld"
-
-	// VMware Tools is installed, but it is not managed by VMWare.
-	GuestToolsUnmanaged_VirtualMachineToolsVersionStatus VirtualMachineToolsVersionStatus = "guestToolsUnmanaged"
-)
-
-//
-// Describes the current state of a replicated VirtualMachine
-//
-//
-type ReplicationVmState string
-
-const (
-
-	// The VirtualMachine is in the process of having
-	// a consistent instance created.
-	Active_ReplicationVmState ReplicationVmState = "active"
-
-	// The VirtualMachine is unable to replicate due to
-	// errors.
-	//
-	// XXX Currently unused.
-	Error_ReplicationVmState ReplicationVmState = "error"
-
-	// The VirtualMachine is being replicated but is not
-	// currently in the process of having a consistent instance created.
-	Idle_ReplicationVmState ReplicationVmState = "idle"
-
-	// The VirtualMachine has no current replication state.
-	// This is a virtual machine that is configured for replication, but is
-	// powered off and not undergoing offline replication.
-	None_ReplicationVmState ReplicationVmState = "none"
-
-	// The VirtualMachine replication is paused.
-	Paused_ReplicationVmState ReplicationVmState = "paused"
-
-	// One or more of the VirtualMachine disks is in the
-	// process of an initial synchronization with the remote site.
-	Syncing_ReplicationVmState ReplicationVmState = "syncing"
-)
-
-//
-// Set of possible values for snapshotPowerOffBehavior.
-//
-//
-type VirtualMachinePowerOffBehavior string
-
-const (
-
-	// Just power off the virtual machine.
-	PowerOff_VirtualMachinePowerOffBehavior VirtualMachinePowerOffBehavior = "powerOff"
-
-	// Prompt the user for instructions at power-off time.
-	Prompt_VirtualMachinePowerOffBehavior VirtualMachinePowerOffBehavior = "prompt"
-
-	// Revert to the snapshot.
-	Revert_VirtualMachinePowerOffBehavior VirtualMachinePowerOffBehavior = "revert"
-)
-
-type HostSystemIdentificationInfoIdentifier string
-
-const (
-
-	// The Asset tag of the system
-	AssetTag_HostSystemIdentificationInfoIdentifier HostSystemIdentificationInfoIdentifier = "AssetTag"
-
-	// OEM specific string
-	//
-	// Since vSphere API 5.0
-	OemSpecificString_HostSystemIdentificationInfoIdentifier HostSystemIdentificationInfoIdentifier = "OemSpecificString"
-
-	// The Service tag of the system
-	ServiceTag_HostSystemIdentificationInfoIdentifier HostSystemIdentificationInfoIdentifier = "ServiceTag"
-)
-
-type ReplicationVmFaultReasonForFault string
-
-const (
-
-	// The specified instanceId does not match the VirtualMachine
-	// instanceId
-	InvalidInstanceId_ReplicationVmFaultReasonForFault ReplicationVmFaultReasonForFault = "invalidInstanceId"
-
-	// VirtualMachine is in an invalid state
-	InvalidState_ReplicationVmFaultReasonForFault ReplicationVmFaultReasonForFault = "invalidState"
-
-	// VirtualMachine is not configured for replication
-	NotConfigured_ReplicationVmFaultReasonForFault ReplicationVmFaultReasonForFault = "notConfigured"
-
-	// VirtualMachine is in the process of creating an
-	// an offline instance.
-	OfflineReplicating_ReplicationVmFaultReasonForFault ReplicationVmFaultReasonForFault = "offlineReplicating"
-
-	// VirtualMachine is powered off (and is not undergoing
-	// offline replication)
-	PoweredOff_ReplicationVmFaultReasonForFault ReplicationVmFaultReasonForFault = "poweredOff"
-
-	// VirtualMachine is powered on
-	PoweredOn_ReplicationVmFaultReasonForFault ReplicationVmFaultReasonForFault = "poweredOn"
-
-	// VirtualMachine is suspended (and is not undergoing
-	// offline replication)
-	Suspended_ReplicationVmFaultReasonForFault ReplicationVmFaultReasonForFault = "suspended"
-)
-
-//
-// The operation on the target state.
-//
-//
-type StateAlarmOperator string
-
-const (
-
-	// Test if the target state matches the given red or yellow states.
-	IsEqual_StateAlarmOperator StateAlarmOperator = "isEqual"
-
-	// Test if the target state does not match the given red or yellow states.
-	IsUnequal_StateAlarmOperator StateAlarmOperator = "isUnequal"
-)
-
-type VmShutdownOnIsolationEventOperation string
-
-const (
-
-	// The virtual machine was powered off because shut down failed
-	PoweredOff_VmShutdownOnIsolationEventOperation VmShutdownOnIsolationEventOperation = "poweredOff"
-
-	// The virtual machine was shut down
-	Shutdown_VmShutdownOnIsolationEventOperation VmShutdownOnIsolationEventOperation = "shutdown"
-)
-
-// Deprecated.
-// As of VI API 2.5 use RecommendationReasonCode.
-//
-//
-// List of defined migration reason codes:
-//
-//
-type DrsRecommendationReasonCode string
-
-const (
-
-	// Fulfill anti-affinity rule.
-	AntiAffin_DrsRecommendationReasonCode DrsRecommendationReasonCode = "antiAffin"
-
-	// Balance average CPU utilization.
-	FairnessCpuAvg_DrsRecommendationReasonCode DrsRecommendationReasonCode = "fairnessCpuAvg"
-
-	// Balance average memory utilization.
-	FairnessMemAvg_DrsRecommendationReasonCode DrsRecommendationReasonCode = "fairnessMemAvg"
-
-	// Host entering maintenance mode.
-	HostMaint_DrsRecommendationReasonCode DrsRecommendationReasonCode = "hostMaint"
+	Standby_VirtualMachineGuestState VirtualMachineGuestState = "standby"
 
-	// Fulfill affinity rule.
-	JointAffin_DrsRecommendationReasonCode DrsRecommendationReasonCode = "jointAffin"
+	Unknown_VirtualMachineGuestState VirtualMachineGuestState = "unknown"
 )
 
 //
@@ -6329,53 +6136,177 @@ const (
 )
 
 //
-// List of possible states of a lease.
+// Means for allocating additional memory for virtual machines.
 //
 //
-type HttpNfcLeaseState string
+type VirtualMachineMemoryAllocationPolicy string
 
 const (
 
-	// When the import/export session is completed, and the lease
-	// is no longer held.
-	Done_HttpNfcLeaseState HttpNfcLeaseState = "done"
+	// Allow most virtual machine memory to be swapped.
+	SwapMost_VirtualMachineMemoryAllocationPolicy VirtualMachineMemoryAllocationPolicy = "swapMost"
 
-	// When an error has occurred.
-	Error_HttpNfcLeaseState HttpNfcLeaseState = "error"
+	// Fit all virtual machine memory into reserved host memory.
+	SwapNone_VirtualMachineMemoryAllocationPolicy VirtualMachineMemoryAllocationPolicy = "swapNone"
 
-	// When the lease is being initialized.
-	Initializing_HttpNfcLeaseState HttpNfcLeaseState = "initializing"
-
-	// When the lease is ready and disks may be transferred.
-	Ready_HttpNfcLeaseState HttpNfcLeaseState = "ready"
+	// Allow some virtual machine memory to be swapped.
+	SwapSome_VirtualMachineMemoryAllocationPolicy VirtualMachineMemoryAllocationPolicy = "swapSome"
 )
 
 //
-// The list of disk issues.
+// This enum represents the set of legal operations
 //
 //
-type VsanDiskIssueType string
+type VirtualMachineMetadataManagerVmMetadataOp string
 
 const (
-	NonExist_VsanDiskIssueType VsanDiskIssueType = "nonExist"
 
-	StampMismatch_VsanDiskIssueType VsanDiskIssueType = "stampMismatch"
+	// Remove the Metadata for the specified VM
+	Remove_VirtualMachineMetadataManagerVmMetadataOp VirtualMachineMetadataManagerVmMetadataOp = "Remove"
 
-	Unknown_VsanDiskIssueType VsanDiskIssueType = "unknown"
+	// Create or update the Metadata for the specified VM
+	Update_VirtualMachineMetadataManagerVmMetadataOp VirtualMachineMetadataManagerVmMetadataOp = "Update"
 )
 
 //
-// The binding mode of the adapter.
+// This enum contains a list of valid owner values for
+// the name field
 //
 //
-type HostInternetScsiHbaNetworkBindingSupportType string
+type VirtualMachineMetadataManagerVmMetadataOwnerOwner string
 
 const (
-	Notsupported_HostInternetScsiHbaNetworkBindingSupportType HostInternetScsiHbaNetworkBindingSupportType = "notsupported"
+	ComVmwareVsphereHA_VirtualMachineMetadataManagerVmMetadataOwnerOwner VirtualMachineMetadataManagerVmMetadataOwnerOwner = "ComVmwareVsphereHA"
+)
 
-	Optional_HostInternetScsiHbaNetworkBindingSupportType HostInternetScsiHbaNetworkBindingSupportType = "optional"
+//
+// MovePriority is an enumeration of values that indicate the priority of the task
+// that moves a virtual machine from one host to another or one storage location
+// to another. Note this priority can affect both the source and target hosts.
+//
+//
+type VirtualMachineMovePriority string
 
-	Required_HostInternetScsiHbaNetworkBindingSupportType HostInternetScsiHbaNetworkBindingSupportType = "required"
+const (
+
+	// The task of moving this virtual machine is the default priority.
+	DefaultPriority_VirtualMachineMovePriority VirtualMachineMovePriority = "defaultPriority"
+
+	// The task of moving this virtual machine is high priority.
+	HighPriority_VirtualMachineMovePriority VirtualMachineMovePriority = "highPriority"
+
+	// The task of moving this virtual machine is low priority.
+	LowPriority_VirtualMachineMovePriority VirtualMachineMovePriority = "lowPriority"
+)
+
+//
+// The NeedSecondaryReason type defines all reasons a virtual machine is
+// in the needSecondary Fault Tolerance state following a failure.
+//
+//
+type VirtualMachineNeedSecondaryReason string
+
+const (
+
+	// Divergence
+	Divergence_VirtualMachineNeedSecondaryReason VirtualMachineNeedSecondaryReason = "divergence"
+
+	// Initializing FT
+	Initializing_VirtualMachineNeedSecondaryReason VirtualMachineNeedSecondaryReason = "initializing"
+
+	// Lose connection to secondary
+	LostConnection_VirtualMachineNeedSecondaryReason VirtualMachineNeedSecondaryReason = "lostConnection"
+
+	// All other reasons
+	Other_VirtualMachineNeedSecondaryReason VirtualMachineNeedSecondaryReason = "other"
+
+	// Partial hardware failure
+	PartialHardwareFailure_VirtualMachineNeedSecondaryReason VirtualMachineNeedSecondaryReason = "partialHardwareFailure"
+
+	// Terminated by user
+	UserAction_VirtualMachineNeedSecondaryReason VirtualMachineNeedSecondaryReason = "userAction"
+)
+
+//
+// Set of possible values for snapshotPowerOffBehavior.
+//
+//
+type VirtualMachinePowerOffBehavior string
+
+const (
+
+	// Just power off the virtual machine.
+	PowerOff_VirtualMachinePowerOffBehavior VirtualMachinePowerOffBehavior = "powerOff"
+
+	// Prompt the user for instructions at power-off time.
+	Prompt_VirtualMachinePowerOffBehavior VirtualMachinePowerOffBehavior = "prompt"
+
+	// Revert to the snapshot.
+	Revert_VirtualMachinePowerOffBehavior VirtualMachinePowerOffBehavior = "revert"
+)
+
+//
+// The list of possible default power operations available for the virtual machine
+//
+//
+type VirtualMachinePowerOpType string
+
+const (
+	Hard_VirtualMachinePowerOpType VirtualMachinePowerOpType = "hard"
+
+	Preset_VirtualMachinePowerOpType VirtualMachinePowerOpType = "preset"
+
+	Soft_VirtualMachinePowerOpType VirtualMachinePowerOpType = "soft"
+)
+
+//
+// The PowerState type defines a simple set of states for a virtual machine:
+// poweredOn, poweredOff, and suspended. This type does not model substates,
+// such as when a task is running to change the virtual machine state.
+// If the virtual machine is in a state with a task in progress, it
+// transitions to a new state when the task completes. For example, a virtual
+// machine continues to be in the poweredOn state while a suspend task
+// is running, and changes to the suspended state once the task finishes.
+//
+// As a consequence of this approach, clients interested in monitoring
+// the status of a virtual machine should typically track the
+// activeTask data object in addition to the
+// powerState object.
+//
+//
+//
+type VirtualMachinePowerState string
+
+const (
+
+	// The virtual machine is currently powered off.
+	PoweredOff_VirtualMachinePowerState VirtualMachinePowerState = "poweredOff"
+
+	// The virtual machine is currently powered on.
+	PoweredOn_VirtualMachinePowerState VirtualMachinePowerState = "poweredOn"
+
+	// The virtual machine is currently suspended.
+	Suspended_VirtualMachinePowerState VirtualMachinePowerState = "suspended"
+)
+
+//
+// The RecordReplayState type defines a simple set of record and replay
+// states for a virtual machine.
+//
+//
+type VirtualMachineRecordReplayState string
+
+const (
+
+	// The virtual machine is currently not participating
+	// in record or replay.
+	Inactive_VirtualMachineRecordReplayState VirtualMachineRecordReplayState = "inactive"
+
+	// The virtual machine is recording.
+	Recording_VirtualMachineRecordReplayState VirtualMachineRecordReplayState = "recording"
+
+	// The virtual machine is replaying.
+	Replaying_VirtualMachineRecordReplayState VirtualMachineRecordReplayState = "replaying"
 )
 
 //
@@ -6464,419 +6395,65 @@ const (
 	MoveChildMostDiskBacking_VirtualMachineRelocateDiskMoveOptions VirtualMachineRelocateDiskMoveOptions = "moveChildMostDiskBacking"
 )
 
+// Deprecated.
+// as of vSphere API 5.0.
 //
-// The root WWN operation mode.
+//
+// The set of tranformations that can be performed on the virtual disks
+// as part of the copy.
 //
 //
-type VirtualMachineConfigSpecNpivWwnOp string
+type VirtualMachineRelocateTransformation string
 
 const (
+	Flat_VirtualMachineRelocateTransformation VirtualMachineRelocateTransformation = "flat"
 
-	// Generate a new set of WWNs and append them to the existing list
-	//
-	// Since vSphere API 4.0
-	Extend_VirtualMachineConfigSpecNpivWwnOp VirtualMachineConfigSpecNpivWwnOp = "extend"
-
-	// Generate a new set of WWNs and assign it to the virtual machine.
-	Generate_VirtualMachineConfigSpecNpivWwnOp VirtualMachineConfigSpecNpivWwnOp = "generate"
-
-	// Remove the currently assigned WWNs from the virtual machine.
-	Remove_VirtualMachineConfigSpecNpivWwnOp VirtualMachineConfigSpecNpivWwnOp = "remove"
-
-	// Take a client-specified set of WWNs (specified in "wwn" property) and
-	// assign them to the virtual machine. If the new WWN quntity are more
-	// than existing then we will append them to the existing list of WWNs.
-	Set_VirtualMachineConfigSpecNpivWwnOp VirtualMachineConfigSpecNpivWwnOp = "set"
-)
-
-type CannotPowerOffVmInClusterOperation string
-
-const (
-
-	// guest shutdown
-	GuestShutdown_CannotPowerOffVmInClusterOperation CannotPowerOffVmInClusterOperation = "guestShutdown"
-
-	// guest suspend
-	GuestSuspend_CannotPowerOffVmInClusterOperation CannotPowerOffVmInClusterOperation = "guestSuspend"
-
-	// power off
-	PowerOff_CannotPowerOffVmInClusterOperation CannotPowerOffVmInClusterOperation = "powerOff"
-
-	// suspend
-	Suspend_CannotPowerOffVmInClusterOperation CannotPowerOffVmInClusterOperation = "suspend"
+	Sparse_VirtualMachineRelocateTransformation VirtualMachineRelocateTransformation = "sparse"
 )
 
 //
-// List of defined migration reason codes:
+// Possible SCSI classes.
 //
 //
-type RecommendationReasonCode string
+type VirtualMachineScsiPassthroughType string
 
 const (
+	Cdrom_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "cdrom"
 
-	// Fulfill anti-affinity rule.
-	AntiAffin_RecommendationReasonCode RecommendationReasonCode = "antiAffin"
+	Com_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "com"
 
-	// Balance datastore I/O workload.
-	//
-	// Since vSphere API 5.0
-	BalanceDatastoreIOLoad_RecommendationReasonCode RecommendationReasonCode = "balanceDatastoreIOLoad"
+	Disk_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "disk"
 
-	// Balance datastore space usage.
-	//
-	// Since vSphere API 5.0
-	BalanceDatastoreSpaceUsage_RecommendationReasonCode RecommendationReasonCode = "balanceDatastoreSpaceUsage"
+	Media_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "media"
 
-	// Sanity-check resource pool hierarchy
-	//
-	// Since vSphere API 4.0
-	CheckResource_RecommendationReasonCode RecommendationReasonCode = "checkResource"
+	Optical_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "optical"
 
-	// Datastore entering maintenance mode.
-	//
-	// Since vSphere API 5.0
-	DatastoreMaint_RecommendationReasonCode RecommendationReasonCode = "datastoreMaint"
+	Printer_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "printer"
 
-	// Fix the issue that a datastore run out of space.
-	//
-	// Since vSphere API 5.0
-	DatastoreSpaceOutage_RecommendationReasonCode RecommendationReasonCode = "datastoreSpaceOutage"
+	Processor_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "processor"
 
-	// Host entering standby mode.
-	EnterStandby_RecommendationReasonCode RecommendationReasonCode = "enterStandby"
+	Raid_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "raid"
 
-	// Balance average CPU utilization.
-	FairnessCpuAvg_RecommendationReasonCode RecommendationReasonCode = "fairnessCpuAvg"
+	Scanner_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "scanner"
 
-	// Balance average memory utilization.
-	FairnessMemAvg_RecommendationReasonCode RecommendationReasonCode = "fairnessMemAvg"
+	Tape_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "tape"
 
-	// Host entering maintenance mode.
-	HostMaint_RecommendationReasonCode RecommendationReasonCode = "hostMaint"
+	Unknown_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "unknown"
 
-	// Power on host to increase cluster capacity
-	IncreaseCapacity_RecommendationReasonCode RecommendationReasonCode = "increaseCapacity"
-
-	// IO load balancing was disabled internally.
-	//
-	// Since vSphere API 5.0
-	IolbDisabledInternal_RecommendationReasonCode RecommendationReasonCode = "iolbDisabledInternal"
-
-	// Fulfill affinity rule.
-	JointAffin_RecommendationReasonCode RecommendationReasonCode = "jointAffin"
-
-	// Power on virtual machine
-	PowerOnVm_RecommendationReasonCode RecommendationReasonCode = "powerOnVm"
-
-	// Power off host for power savings
-	PowerSaving_RecommendationReasonCode RecommendationReasonCode = "powerSaving"
-
-	// balance CPU reservations
-	ReservationCpu_RecommendationReasonCode RecommendationReasonCode = "reservationCpu"
-
-	// balance memory reservations
-	ReservationMem_RecommendationReasonCode RecommendationReasonCode = "reservationMem"
-
-	// Satisfy storage initial placement requests.
-	//
-	// Since vSphere API 5.0
-	StoragePlacement_RecommendationReasonCode RecommendationReasonCode = "storagePlacement"
-
-	// Maintain unreserved capacity
-	//
-	// Since vSphere API 4.0
-	UnreservedCapacity_RecommendationReasonCode RecommendationReasonCode = "unreservedCapacity"
-
-	// Fix virtual disk anti-affinity rule violation.
-	//
-	// Since vSphere API 5.0
-	VirtualDiskAntiAffin_RecommendationReasonCode RecommendationReasonCode = "virtualDiskAntiAffin"
-
-	// Fix virtual disk affinity rule violation.
-	//
-	// Since vSphere API 5.0
-	VirtualDiskJointAffin_RecommendationReasonCode RecommendationReasonCode = "virtualDiskJointAffin"
-
-	// Fix hard VM/host affinity rule violation
-	//
-	// Since vSphere API 4.1
-	VmHostHardAffinity_RecommendationReasonCode RecommendationReasonCode = "vmHostHardAffinity"
-
-	// Fix soft VM/host affinity rule violation
-	//
-	// Since vSphere API 4.1
-	VmHostSoftAffinity_RecommendationReasonCode RecommendationReasonCode = "vmHostSoftAffinity"
-)
-
-type VmDasBeingResetEventReasonCode string
-
-const (
-
-	// application heartbeat failure
-	AppHeartbeatFailure_VmDasBeingResetEventReasonCode VmDasBeingResetEventReasonCode = "appHeartbeatFailure"
-
-	// immediate reset request
-	//
-	// Since vSphere API 5.5
-	AppImmediateResetRequest_VmDasBeingResetEventReasonCode VmDasBeingResetEventReasonCode = "appImmediateResetRequest"
-
-	// vmtools heartbeat failure
-	VmtoolsHeartbeatFailure_VmDasBeingResetEventReasonCode VmDasBeingResetEventReasonCode = "vmtoolsHeartbeatFailure"
+	Worm_VirtualMachineScsiPassthroughType VirtualMachineScsiPassthroughType = "worm"
 )
 
 //
-// Enumeration of possible changes to a property.
+// The list of possible standby actions that the virtual machine can take
+// for S1 ACPI.
 //
 //
-type PropertyChangeOp string
+type VirtualMachineStandbyActionType string
 
 const (
-	Add_PropertyChangeOp PropertyChangeOp = "add"
+	Checkpoint_VirtualMachineStandbyActionType VirtualMachineStandbyActionType = "checkpoint"
 
-	Assign_PropertyChangeOp PropertyChangeOp = "assign"
-
-	IndirectRemove_PropertyChangeOp PropertyChangeOp = "indirectRemove"
-
-	Remove_PropertyChangeOp PropertyChangeOp = "remove"
-)
-
-//
-// The VirtualDeviceURIBackingOptionDirection enum type
-// provides values for the direction of a network connection.
-//
-//
-type VirtualDeviceURIBackingOptionDirection string
-
-const (
-
-	// Indicates that the virtual machine can initiate a connection
-	// with a system on the network using the specified
-	// serviceURI.
-	Client_VirtualDeviceURIBackingOptionDirection VirtualDeviceURIBackingOptionDirection = "client"
-
-	// Indicates that the virtual machine can listen for a connection
-	// on the specified serviceURI.
-	Server_VirtualDeviceURIBackingOptionDirection VirtualDeviceURIBackingOptionDirection = "server"
-)
-
-//
-// The connectee types.
-//
-//
-type DistributedVirtualSwitchPortConnecteeConnecteeType string
-
-const (
-
-	// The port connects to a console Virtual NIC on a host.
-	HostConsoleVnic_DistributedVirtualSwitchPortConnecteeConnecteeType DistributedVirtualSwitchPortConnecteeConnecteeType = "hostConsoleVnic"
-
-	// The port connects to a VMkernel Virtual NIC on a host.
-	HostVmkVnic_DistributedVirtualSwitchPortConnecteeConnecteeType DistributedVirtualSwitchPortConnecteeConnecteeType = "hostVmkVnic"
-
-	// The port connects to a Physical NIC.
-	Pnic_DistributedVirtualSwitchPortConnecteeConnecteeType DistributedVirtualSwitchPortConnecteeConnecteeType = "pnic"
-
-	// The port connects to a Virtual NIC in a Virtual Machine.
-	VmVnic_DistributedVirtualSwitchPortConnecteeConnecteeType DistributedVirtualSwitchPortConnecteeConnecteeType = "vmVnic"
-)
-
-//
-// The policy to determine the candidates from which vCenter Server can
-// choose heartbeat datastores.
-//
-//
-type ClusterDasConfigInfoHBDatastoreCandidate string
-
-const (
-
-	// vCenter Server chooses heartbeat datastores from all the feasible ones,
-	// i.e., the datastores that are accessible to more than one host in
-	// the cluster. The choice will be made without giving preference to those
-	// specified by the user (see heartbeatDatastore).
-	AllFeasibleDs_ClusterDasConfigInfoHBDatastoreCandidate ClusterDasConfigInfoHBDatastoreCandidate = "allFeasibleDs"
-
-	// vCenter Server chooses heartbeat datastores from all the feasible ones
-	// while giving preference to those specified by the user (see heartbeatDatastore).
-	// More specifically, the datastores not included in heartbeatDatastore will be
-	// chosen if and only if the specified ones are not sufficient.
-	AllFeasibleDsWithUserPreference_ClusterDasConfigInfoHBDatastoreCandidate ClusterDasConfigInfoHBDatastoreCandidate = "allFeasibleDsWithUserPreference"
-
-	// vCenter Server chooses heartbeat datastores from the set specified
-	// by the user (see heartbeatDatastore). More specifically,
-	// datastores not included in the set will not be chosen. Note that if
-	// heartbeatDatastore is empty, datastore heartbeating will
-	// be disabled for HA.
-	UserSelectedDs_ClusterDasConfigInfoHBDatastoreCandidate ClusterDasConfigInfoHBDatastoreCandidate = "userSelectedDs"
-)
-
-//
-// The possible hints that the guest could display about current tasks
-// inside the guest.
-//
-//
-type VirtualMachineGuestState string
-
-const (
-	NotRunning_VirtualMachineGuestState VirtualMachineGuestState = "notRunning"
-
-	Resetting_VirtualMachineGuestState VirtualMachineGuestState = "resetting"
-
-	Running_VirtualMachineGuestState VirtualMachineGuestState = "running"
-
-	ShuttingDown_VirtualMachineGuestState VirtualMachineGuestState = "shuttingDown"
-
-	Standby_VirtualMachineGuestState VirtualMachineGuestState = "standby"
-
-	Unknown_VirtualMachineGuestState VirtualMachineGuestState = "unknown"
-)
-
-type DrsBehavior string
-
-const (
-
-	// Specifies that VirtualCenter should automate both the migration
-	// of virtual machines and their placement with a host at power on.
-	FullyAutomated_DrsBehavior DrsBehavior = "fullyAutomated"
-
-	// Specifies that VirtualCenter should generate recommendations for
-	// virtual machine migration and for placement with a host,
-	// but should not implement the recommendations automatically.
-	Manual_DrsBehavior DrsBehavior = "manual"
-
-	// Specifies that VirtualCenter should generate recommendations for
-	// virtual machine migration and for placement with a host,
-	// but should automatically implement only the placement at power on.
-	PartiallyAutomated_DrsBehavior DrsBehavior = "partiallyAutomated"
-)
-
-//
-// Set of possible values for monitorType.
-//
-//
-type VirtualMachineFlagInfoMonitorType string
-
-const (
-
-	// Run vmx in debug mode.
-	Debug_VirtualMachineFlagInfoMonitorType VirtualMachineFlagInfoMonitorType = "debug"
-
-	// Run vmx in default mode, matching the build type of vmkernel.
-	Release_VirtualMachineFlagInfoMonitorType VirtualMachineFlagInfoMonitorType = "release"
-
-	// Run vmx in stats mode.
-	Stats_VirtualMachineFlagInfoMonitorType VirtualMachineFlagInfoMonitorType = "stats"
-)
-
-//
-// Describes the state of the feature.
-//
-//
-type LicenseFeatureInfoState string
-
-const (
-
-	// The current edition license does not allow this additional feature.
-	Disabled_LicenseFeatureInfoState LicenseFeatureInfoState = "disabled"
-
-	// The current edition license has implicitly enabled this additional feature.
-	Enabled_LicenseFeatureInfoState LicenseFeatureInfoState = "enabled"
-
-	// The current edition license allows this additional feature. The
-	// EnableFeature and DisableFeature methods can be used to enable or disable
-	// this feature.
-	Optional_LicenseFeatureInfoState LicenseFeatureInfoState = "optional"
-)
-
-type ReplicationDiskConfigFaultReasonForFault string
-
-const (
-
-	// Could not look up device by key
-	DiskNotFound_ReplicationDiskConfigFaultReasonForFault ReplicationDiskConfigFaultReasonForFault = "diskNotFound"
-
-	// Replication not supported for disk type or backend
-	DiskTypeNotSupported_ReplicationDiskConfigFaultReasonForFault ReplicationDiskConfigFaultReasonForFault = "diskTypeNotSupported"
-
-	// Another disk in the VM has the same replication ID
-	DuplicateDiskReplicationId_ReplicationDiskConfigFaultReasonForFault ReplicationDiskConfigFaultReasonForFault = "duplicateDiskReplicationId"
-
-	// Invalid key value
-	InvalidDiskKey_ReplicationDiskConfigFaultReasonForFault ReplicationDiskConfigFaultReasonForFault = "invalidDiskKey"
-
-	// Invalid disk replication ID string
-	InvalidDiskReplicationId_ReplicationDiskConfigFaultReasonForFault ReplicationDiskConfigFaultReasonForFault = "invalidDiskReplicationId"
-
-	// Invalid path (string) for the persistent file
-	InvalidPersistentFilePath_ReplicationDiskConfigFaultReasonForFault ReplicationDiskConfigFaultReasonForFault = "invalidPersistentFilePath"
-
-	// Attempting to re-configure the disk's replication ID
-	ReconfigureDiskReplicationIdNotAllowed_ReplicationDiskConfigFaultReasonForFault ReplicationDiskConfigFaultReasonForFault = "reconfigureDiskReplicationIdNotAllowed"
-)
-
-//
-// Simplified shares notation.
-// These designations have different meanings for different resources.
-//
-//
-type SharesLevel string
-
-const (
-
-	// If you specify custom for the level property, when there is resource contention the Server uses the shares value to determine resource allocation.
-	Custom_SharesLevel SharesLevel = "custom"
-
-	// For CPU:     Shares = 2000 * nmumber of virtual CPUs
-	// For Memory:  Shares =   20 * virtual machine memory size in megabytes
-	// For Disk:    Shares = 2000
-	// For Network: Shares = networkResourcePoolHighShareValue
-	High_SharesLevel SharesLevel = "high"
-
-	// For CPU:     Shares = 500 * number of virtual CPUs
-	// For Memory:  Shares =   5 * virtual machine memory size in megabytes
-	// For Disk:    Shares = 500
-	// For Network: Shares = 0.25 * networkResourcePoolHighShareValue
-	Low_SharesLevel SharesLevel = "low"
-
-	// For CPU:     Shares = 1000 * number of virtual CPUs
-	// For Memory:  Shares =   10 * virtual machine memory size in megabytes
-	// For Disk:    Shares = 1000
-	// For Network: Shares = 0.5 * networkResourcePoolHighShareValue
-	Normal_SharesLevel SharesLevel = "normal"
-)
-
-//
-// The list of SCSI device types.  These values correspond to values
-// published in the SCSI specification.
-//
-//
-type ScsiLunType string
-
-const (
-	Cdrom_ScsiLunType ScsiLunType = "cdrom"
-
-	Communications_ScsiLunType ScsiLunType = "communications"
-
-	Disk_ScsiLunType ScsiLunType = "disk"
-
-	Enclosure_ScsiLunType ScsiLunType = "enclosure"
-
-	MediaChanger_ScsiLunType ScsiLunType = "mediaChanger"
-
-	OpticalDevice_ScsiLunType ScsiLunType = "opticalDevice"
-
-	Printer_ScsiLunType ScsiLunType = "printer"
-
-	Processor_ScsiLunType ScsiLunType = "processor"
-
-	Scanner_ScsiLunType ScsiLunType = "scanner"
-
-	StorageArrayController_ScsiLunType ScsiLunType = "storageArrayController"
-
-	Tape_ScsiLunType ScsiLunType = "tape"
-
-	Unknown_ScsiLunType ScsiLunType = "unknown"
-
-	Worm_ScsiLunType ScsiLunType = "worm"
+	PowerOnSuspend_VirtualMachineStandbyActionType VirtualMachineStandbyActionType = "powerOnSuspend"
 )
 
 //
@@ -6897,221 +6474,644 @@ const (
 )
 
 //
-// Load balance algorithm in a Link Aggregation Control Protocol group.
+// The virtual machine ticket type.
 //
 //
-type VMwareDvsLacpLoadBalanceAlgorithm string
+type VirtualMachineTicketType string
 
 const (
 
-	// Destination IP
-	DestIp_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "destIp"
+	// Remote device ticket.
+	Device_VirtualMachineTicketType VirtualMachineTicketType = "device"
 
-	// Destination IP and TCP/UDP port number
-	DestIpTcpUdpPort_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "destIpTcpUdpPort"
+	// Guest operation ticket.
+	GuestControl_VirtualMachineTicketType VirtualMachineTicketType = "guestControl"
 
-	// Destination IP, TCP/UDP port number and VLAN
-	DestIpTcpUdpPortVlan_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "destIpTcpUdpPortVlan"
-
-	// Destination IP and VLAN
-	DestIpVlan_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "destIpVlan"
-
-	// Destination MAC address
-	DestMac_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "destMac"
-
-	// Destination TCP/UDP port number
-	DestTcpUdpPort_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "destTcpUdpPort"
-
-	// Source and Destination IP
-	SrcDestIp_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcDestIp"
-
-	// Source and destination IP and TCP/UDP port number
-	SrcDestIpTcpUdpPort_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcDestIpTcpUdpPort"
-
-	// Source and destination IP,
-	// source and destination TCP/UDP port number and VLAN.
-	SrcDestIpTcpUdpPortVlan_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcDestIpTcpUdpPortVlan"
-
-	// Source and destination IP and VLAN
-	SrcDestIpVlan_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcDestIpVlan"
-
-	// Source and destination MAC address
-	SrcDestMac_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcDestMac"
-
-	// Source and destination TCP/UDP port number
-	SrcDestTcpUdpPort_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcDestTcpUdpPort"
-
-	// Source IP
-	SrcIp_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcIp"
-
-	// Source IP and TCP/UDP port number
-	SrcIpTcpUdpPort_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcIpTcpUdpPort"
-
-	// Source IP, TCP/UDP port number and VLAN
-	SrcIpTcpUdpPortVlan_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcIpTcpUdpPortVlan"
-
-	// Source IP and VLAN
-	SrcIpVlan_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcIpVlan"
-
-	// Source MAC address
-	SrcMac_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcMac"
-
-	// Source Virtual Port Id
-	SrcPortId_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcPortId"
-
-	// Source TCP/UDP port number
-	SrcTcpUdpPort_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "srcTcpUdpPort"
-
-	// VLAN only
-	Vlan_VMwareDvsLacpLoadBalanceAlgorithm VMwareDvsLacpLoadBalanceAlgorithm = "vlan"
+	// Remote mouse-keyboard-screen ticket.
+	Mks_VirtualMachineTicketType VirtualMachineTicketType = "mks"
 )
 
 //
-// Pre-defined constants for possible action types. Virtual Center
-// uses this information to coordinate with the clients.
+// Current running status of VMware Tools running in the guest
+// operating system.
 //
 //
-type ActionType string
+type VirtualMachineToolsRunningStatus string
 
 const (
 
-	// Host entering maintenance mode action type
+	// VMware Tools is starting.
+	GuestToolsExecutingScripts_VirtualMachineToolsRunningStatus VirtualMachineToolsRunningStatus = "guestToolsExecutingScripts"
+
+	// VMware Tools is not running.
+	GuestToolsNotRunning_VirtualMachineToolsRunningStatus VirtualMachineToolsRunningStatus = "guestToolsNotRunning"
+
+	// VMware Tools is running.
+	GuestToolsRunning_VirtualMachineToolsRunningStatus VirtualMachineToolsRunningStatus = "guestToolsRunning"
+)
+
+// Deprecated.
+// As of vSphere API 4.0 use VirtualMachineToolsVersionStatus
+// and VirtualMachineToolsRunningStatus.
+//
+//
+// Current status of VMware Tools running in the guest operating system.
+//
+//
+type VirtualMachineToolsStatus string
+
+const (
+
+	// VMware Tools has never been installed
+	// or has not run in the virtual machine.
+	ToolsNotInstalled_VirtualMachineToolsStatus VirtualMachineToolsStatus = "toolsNotInstalled"
+
+	// VMware Tools is not running.
+	ToolsNotRunning_VirtualMachineToolsStatus VirtualMachineToolsStatus = "toolsNotRunning"
+
+	// VMware Tools is running and the version is current.
+	ToolsOk_VirtualMachineToolsStatus VirtualMachineToolsStatus = "toolsOk"
+
+	// VMware Tools is running, but the version is not current.
+	ToolsOld_VirtualMachineToolsStatus VirtualMachineToolsStatus = "toolsOld"
+)
+
+//
+// Current version status of VMware Tools installed in the guest operating
+// system.
+//
+//
+type VirtualMachineToolsVersionStatus string
+
+const (
+
+	// VMware Tools is installed, but the installed version is
+	// known to have a grave bug and should be immediately upgraded.
 	//
 	// Since vSphere API 5.0
-	HostMaintenanceV1_ActionType ActionType = "HostMaintenanceV1"
+	GuestToolsBlacklisted_VirtualMachineToolsVersionStatus VirtualMachineToolsVersionStatus = "guestToolsBlacklisted"
 
-	// Host power action type
-	HostPowerV1_ActionType ActionType = "HostPowerV1"
+	// VMware Tools is installed, and the version is current.
+	GuestToolsCurrent_VirtualMachineToolsVersionStatus VirtualMachineToolsVersionStatus = "guestToolsCurrent"
 
-	// Migration action type
-	MigrationV1_ActionType ActionType = "MigrationV1"
+	// VMware Tools is installed, but the version is not current.
+	GuestToolsNeedUpgrade_VirtualMachineToolsVersionStatus VirtualMachineToolsVersionStatus = "guestToolsNeedUpgrade"
 
-	// Storage migration action type
+	// VMware Tools has never been installed.
+	GuestToolsNotInstalled_VirtualMachineToolsVersionStatus VirtualMachineToolsVersionStatus = "guestToolsNotInstalled"
+
+	// VMware Tools is installed, supported, and newer
+	// than the version available on the host.
 	//
 	// Since vSphere API 5.0
-	StorageMigrationV1_ActionType ActionType = "StorageMigrationV1"
+	GuestToolsSupportedNew_VirtualMachineToolsVersionStatus VirtualMachineToolsVersionStatus = "guestToolsSupportedNew"
 
-	// Initial placement action for a virtual machine or a virtual disk
+	// VMware Tools is installed, supported, but a newer version is available.
 	//
 	// Since vSphere API 5.0
-	StoragePlacementV1_ActionType ActionType = "StoragePlacementV1"
+	GuestToolsSupportedOld_VirtualMachineToolsVersionStatus VirtualMachineToolsVersionStatus = "guestToolsSupportedOld"
 
-	// Virtual machine power action type
-	VmPowerV1_ActionType ActionType = "VmPowerV1"
+	// VMware Tools is installed, and the version is known to be
+	// too new to work correctly with this virtual machine.
+	//
+	// Since vSphere API 5.0
+	GuestToolsTooNew_VirtualMachineToolsVersionStatus VirtualMachineToolsVersionStatus = "guestToolsTooNew"
+
+	// VMware Tools is installed, but the version is too old.
+	//
+	// Since vSphere API 5.0
+	GuestToolsTooOld_VirtualMachineToolsVersionStatus VirtualMachineToolsVersionStatus = "guestToolsTooOld"
+
+	// VMware Tools is installed, but it is not managed by VMWare.
+	GuestToolsUnmanaged_VirtualMachineToolsVersionStatus VirtualMachineToolsVersionStatus = "guestToolsUnmanaged"
 )
 
 //
-// The Discovery Protocol operation.
+// Device class family.
 //
 //
-type LinkDiscoveryProtocolConfigOperationType string
+type VirtualMachineUsbInfoFamily string
 
 const (
 
-	// Sent discovery packets for the switch, but don't listen for incoming
-	// discovery packets.
-	Advertise_LinkDiscoveryProtocolConfigOperationType LinkDiscoveryProtocolConfigOperationType = "advertise"
+	// Audio capable device.
+	Audio_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "audio"
 
-	// Sent discovery packets for the switch and listen for incoming
-	// discovery packets.
-	Both_LinkDiscoveryProtocolConfigOperationType LinkDiscoveryProtocolConfigOperationType = "both"
+	// Standard bluetooth adapter that uses HCI protocol,
+	// this is a subset of wireless controllers.
+	Bluetooth_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "bluetooth"
 
-	// Listen for incoming discovery packets but don't sent discovery packet
-	// for the switch.
-	Listen_LinkDiscoveryProtocolConfigOperationType LinkDiscoveryProtocolConfigOperationType = "listen"
+	// Communication device.
+	Communication_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "communication"
 
-	// Don't listen for incoming discovery packets and don't sent  discover
-	// packets for the switch either.
-	None_LinkDiscoveryProtocolConfigOperationType LinkDiscoveryProtocolConfigOperationType = "none"
+	// Human interface device.
+	Hid_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "hid"
+
+	// Bootable human interface device, this is a subset of HID devices.
+	Hid_bootable_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "hid_bootable"
+
+	// USB hubs.
+	Hub_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "hub"
+
+	// Still imaging device.
+	Imaging_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "imaging"
+
+	// Other miscellaneous device.
+	Other_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "other"
+
+	// Palm PDA, and Micorsoft ActiveSync PDA.
+	Pda_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "pda"
+
+	// Physical interface device.
+	Physical_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "physical"
+
+	// Printer device.
+	Printer_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "printer"
+
+	// Content security device.
+	Security_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "security"
+
+	// Smart card device.
+	Smart_card_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "smart_card"
+
+	// Mass storage device.
+	Storage_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "storage"
+
+	// There was an error in determining this device's classes
+	// accurately.
+	UnknownFamily_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "unknownFamily"
+
+	// Device that has an interface using a vendor-specific protocol.
+	Vendor_specific_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "vendor_specific"
+
+	// Video device.
+	Video_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "video"
+
+	// Wireless controller.
+	Wireless_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "wireless"
+
+	// Wireless device related to the Wireless USB standard,
+	// this is a subset of wireless controllers,
+	Wusb_VirtualMachineUsbInfoFamily VirtualMachineUsbInfoFamily = "wusb"
 )
 
 //
-// The enumeration of all known valid MAC address types.
+// Device speed.
 //
 //
-type VirtualEthernetCardMacType string
+type VirtualMachineUsbInfoSpeed string
 
 const (
 
-	// A MAC address assigned by VirtualCenter.
-	Assigned_VirtualEthernetCardMacType VirtualEthernetCardMacType = "assigned"
+	// This device operates at full speed (12Mb/s).
+	Full_VirtualMachineUsbInfoSpeed VirtualMachineUsbInfoSpeed = "full"
 
-	// An automatically generated MAC address.
-	Generated_VirtualEthernetCardMacType VirtualEthernetCardMacType = "generated"
+	// This device can operate at high speed (480Mb/s)
+	High_VirtualMachineUsbInfoSpeed VirtualMachineUsbInfoSpeed = "high"
 
-	// A statistically assigned MAC address.
-	Manual_VirtualEthernetCardMacType VirtualEthernetCardMacType = "manual"
+	// This device operates at low speed (1.5Mb/s).
+	Low_VirtualMachineUsbInfoSpeed VirtualMachineUsbInfoSpeed = "low"
+
+	// This device can operate at super speed (4.8Gb/s)
+	//
+	// Since vSphere API 5.0
+	SuperSpeed_VirtualMachineUsbInfoSpeed VirtualMachineUsbInfoSpeed = "superSpeed"
+
+	// This device's speed is unknown.
+	UnknownSpeed_VirtualMachineUsbInfoSpeed VirtualMachineUsbInfoSpeed = "unknownSpeed"
 )
 
 //
-// The DistributedVirtualPortgroupPortgroupType enum defines
-// the distributed virtual portgroup types
-// (DistributedVirtualPortgroup.config.type). Early binding specifies a static set of ports that are created
-// when you create the distributed virtual portgroup. An ephemeral portgroup uses dynamic
-// ports that are created when you power on a virtual machine.
+// Set of possible values for use3dRenderer.
 //
 //
-type DistributedVirtualPortgroupPortgroupType string
+type VirtualMachineVideoCardUse3dRenderer string
 
 const (
 
-	// A free DistributedVirtualPort will be selected and assigned to
-	// a VirtualMachine when the virtual machine is reconfigured to
-	// connect to the portgroup.
-	EarlyBinding_DistributedVirtualPortgroupPortgroupType DistributedVirtualPortgroupPortgroupType = "earlyBinding"
+	// Determine automatically whether to render 3D with software or hardware.
+	Automatic_VirtualMachineVideoCardUse3dRenderer VirtualMachineVideoCardUse3dRenderer = "automatic"
 
-	// A DistributedVirtualPort will be created and assigned to a
-	// VirtualMachine when the virtual machine is powered on, and will
-	// be deleted when the virtual machine is powered off. An ephemeral portgroup has
-	// no limit on the number of ports that can be a part of this portgroup.
-	// In cases where the vCenter Server is unavailable the host can
-	// create conflict ports in this portgroup to be used by a virtual machine
-	// at power on.
-	Ephemeral_DistributedVirtualPortgroupPortgroupType DistributedVirtualPortgroupPortgroupType = "ephemeral"
+	// Render 3D with graphics hardware.
+	Hardware_VirtualMachineVideoCardUse3dRenderer VirtualMachineVideoCardUse3dRenderer = "hardware"
 
-	// Deprecated as of vSphere API 5.0. A free distributed virtual port
-	// will be selected and assigned to a virtual machine when the virtual
-	// machine is powered on.
-	LateBinding_DistributedVirtualPortgroupPortgroupType DistributedVirtualPortgroupPortgroupType = "lateBinding"
+	// Render 3D with software.
+	Software_VirtualMachineVideoCardUse3dRenderer VirtualMachineVideoCardUse3dRenderer = "software"
 )
 
 //
-// This list indicates the operation that should be performed for a
-// network entity.
+// The valid choices for host pointing devices are:
 //
 //
 //
 //
-type HostConfigChangeOperation string
+//
+type VirtualPointingDeviceHostChoice string
 
 const (
 
-	// Indicates the addition of a network entity to
-	// the configuration.
-	Add_HostConfigChangeOperation HostConfigChangeOperation = "add"
+	// Automatically detects the host mouse type.
+	Autodetect_VirtualPointingDeviceHostChoice VirtualPointingDeviceHostChoice = "autodetect"
 
-	// Indicates changes on the network entity.  The
-	// entity must exist or a NotFound error
-	// will be thrown.
-	Edit_HostConfigChangeOperation HostConfigChangeOperation = "edit"
+	// The Microsoft IntelliMouse Explorer.
+	IntellimouseExplorer_VirtualPointingDeviceHostChoice VirtualPointingDeviceHostChoice = "intellimouseExplorer"
 
-	// Indicates the removal of a network entity from
-	// the configuration.
-	Remove_HostConfigChangeOperation HostConfigChangeOperation = "remove"
+	// The Microsoft Intellimouse with a PS2 connection.
+	IntellimousePs2_VirtualPointingDeviceHostChoice VirtualPointingDeviceHostChoice = "intellimousePs2"
+
+	// The Logitech MouseMan.
+	LogitechMouseman_VirtualPointingDeviceHostChoice VirtualPointingDeviceHostChoice = "logitechMouseman"
+
+	// The Microsoft Serial Mouse.
+	Microsoft_serial_VirtualPointingDeviceHostChoice VirtualPointingDeviceHostChoice = "microsoft_serial"
+
+	// The Logitech MouseMan Serial Bus Mouse.
+	MousemanSerial_VirtualPointingDeviceHostChoice VirtualPointingDeviceHostChoice = "mousemanSerial"
+
+	// The Mouse Systems Mouse.
+	MouseSystems_VirtualPointingDeviceHostChoice VirtualPointingDeviceHostChoice = "mouseSystems"
+
+	// A generic mouse with a PS2 connection.
+	Ps2_VirtualPointingDeviceHostChoice VirtualPointingDeviceHostChoice = "ps2"
 )
 
 //
-// IP allocation schemes supported by the guest.
+// Sharing describes three possible ways of sharing the SCSI bus:
+//
+// One of these values is assigned to the sharedBus object to determine
+// if or how the SCSI bus is shared.
 //
 //
-type VAppIPAssignmentInfoAllocationSchemes string
+type VirtualSCSISharing string
 
 const (
 
-	// The vApp supports DHCP to acquire IP configuration.
-	Dhcp_VAppIPAssignmentInfoAllocationSchemes VAppIPAssignmentInfoAllocationSchemes = "dhcp"
+	// The virtual SCSI bus is not shared.
+	NoSharing_VirtualSCSISharing VirtualSCSISharing = "noSharing"
 
-	// The vApp supports setting the IP configuration through the
-	// properties provided in the OVF environment.
-	Ovfenv_VAppIPAssignmentInfoAllocationSchemes VAppIPAssignmentInfoAllocationSchemes = "ovfenv"
+	// The virtual SCSI bus is shared between two or more virtual machines
+	// residing on different physical hosts.
+	PhysicalSharing_VirtualSCSISharing VirtualSCSISharing = "physicalSharing"
+
+	// The virtual SCSI bus is shared between two or more virtual machines.
+	// In this case, no physical machine is involved.
+	VirtualSharing_VirtualSCSISharing VirtualSCSISharing = "virtualSharing"
+)
+
+//
+// The VirtualSerialPortEndPoint enum defines
+// endpoint values for virtual serial port pipe backing.
+// When you use serial port pipe backing to connect a virtual machine
+// to another process, you must define the endpoints.
+// See the endpoint
+// property for the virtual serial port pipe backing information data object.
+//
+// The possible endpoint values are:
+//
+//
+//
+// • client
+//
+// • server
+//
+//
+//
+//
+// For the supported choices, see the
+// endpoint
+// property for the virtual serial port pipe backing option data object.
+//
+//
+//
+type VirtualSerialPortEndPoint string
+
+const ()
+
+type VmDasBeingResetEventReasonCode string
+
+const (
+
+	// application heartbeat failure
+	AppHeartbeatFailure_VmDasBeingResetEventReasonCode VmDasBeingResetEventReasonCode = "appHeartbeatFailure"
+
+	// immediate reset request
+	//
+	// Since vSphere API 5.5
+	AppImmediateResetRequest_VmDasBeingResetEventReasonCode VmDasBeingResetEventReasonCode = "appImmediateResetRequest"
+
+	// vmtools heartbeat failure
+	VmtoolsHeartbeatFailure_VmDasBeingResetEventReasonCode VmDasBeingResetEventReasonCode = "vmtoolsHeartbeatFailure"
+)
+
+//
+// The reason for the failure.
+//
+//
+type VmFailedStartingSecondaryEventFailureReason string
+
+const (
+
+	// Remote host is incompatible for secondary virtual machine.
+	// For instance, the host doesn't have access to the virtual machine's
+	// network or datastore.
+	IncompatibleHost_VmFailedStartingSecondaryEventFailureReason VmFailedStartingSecondaryEventFailureReason = "incompatibleHost"
+
+	// Login to remote host failed.
+	LoginFailed_VmFailedStartingSecondaryEventFailureReason VmFailedStartingSecondaryEventFailureReason = "loginFailed"
+
+	// Migration failed.
+	MigrateFailed_VmFailedStartingSecondaryEventFailureReason VmFailedStartingSecondaryEventFailureReason = "migrateFailed"
+
+	// Registration of the secondary virtual machine
+	// on the remote host failed.
+	RegisterVmFailed_VmFailedStartingSecondaryEventFailureReason VmFailedStartingSecondaryEventFailureReason = "registerVmFailed"
+)
+
+type VmFaultToleranceConfigIssueReasonForIssue string
+
+const (
+
+	// The virtual machine is an ESX agent VM
+	//
+	// Since vSphere API 5.0
+	EsxAgentVm_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "esxAgentVm"
+
+	// The virtual machine is a fault tolerance secondary virtual machine
+	FtSecondaryVm_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "ftSecondaryVm"
+
+	// The host ftSupported flag is not set because of hardware issues
+	FtUnsupportedHardware_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "ftUnsupportedHardware"
+
+	// The host ftSupported flag is not set because of it is a
+	// VMware Server 2.0
+	FtUnsupportedProduct_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "ftUnsupportedProduct"
+
+	// HA is not enabled on the cluster
+	HaNotEnabled_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "haNotEnabled"
+
+	// The virtual machine has one or more disks on local datastore
+	HasLocalDisk_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "hasLocalDisk"
+
+	// Nested HV and FT are mutually exclusive. Disallow turning on FT
+	// when nested HV configuration is enabled on VM.
+	//
+	// Since vSphere API 5.1
+	HasNestedHVConfiguration_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "hasNestedHVConfiguration"
+
+	// The virtual machine has one or more snapshots
+	HasSnapshots_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "hasSnapshots"
+
+	// Since vSphere API 5.1
+	HasUnsupportedDisk_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "hasUnsupportedDisk"
+
+	// The virtual machine has a vFlash memory device or/and disks with
+	// vFlash cache configured.
+	//
+	// Since vSphere API 5.5
+	HasVFlashConfiguration_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "hasVFlashConfiguration"
+
+	// The host is not active
+	HostInactive_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "hostInactive"
+
+	// FT logging nic is not configured on the host
+	MissingFTLoggingNic_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "missingFTLoggingNic"
+
+	// No VMotion license or VMotion nic is not configured on the host
+	MissingVMotionNic_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "missingVMotionNic"
+
+	// There is already a secondary virtual machine for the primary
+	// virtual machine
+	MoreThanOneSecondary_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "moreThanOneSecondary"
+
+	// The virtual machine has more than one virtual CPU
+	MultipleVCPU_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "multipleVCPU"
+
+	// No configuration information is available for the virtual machine
+	NoConfig_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "noConfig"
+
+	// The virtual machine does not support record/replay.
+	// Vm::Capability.RecordReplaySupported is false.
+	RecordReplayNotSupported_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "recordReplayNotSupported"
+
+	// It is not possible to turn on Fault Tolerance on this powered-on VM.
+	// The support for record/replay should be enabled or Fault Tolerance
+	// turned on, when this VM is powered off.
+	ReplayNotSupported_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "replayNotSupported"
+
+	// The virtual machine is a template
+	TemplateVm_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "templateVm"
+
+	// The virtual machine has thin provisioned disks
+	ThinDisk_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "thinDisk"
+
+	// The "check host certificate" flag is not set
+	VerifySSLCertificateFlagNotSet_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "verifySSLCertificateFlagNotSet"
+
+	// The virtual machine video device has 3D enabled
+	//
+	// Since vSphere API 5.0
+	Video3dEnabled_VmFaultToleranceConfigIssueReasonForIssue VmFaultToleranceConfigIssueReasonForIssue = "video3dEnabled"
+)
+
+type VmFaultToleranceInvalidFileBackingDeviceType string
+
+const (
+
+	// virtual Cdrom
+	VirtualCdrom_VmFaultToleranceInvalidFileBackingDeviceType VmFaultToleranceInvalidFileBackingDeviceType = "virtualCdrom"
+
+	// virtual disk
+	VirtualDisk_VmFaultToleranceInvalidFileBackingDeviceType VmFaultToleranceInvalidFileBackingDeviceType = "virtualDisk"
+
+	// virtual floppy
+	VirtualFloppy_VmFaultToleranceInvalidFileBackingDeviceType VmFaultToleranceInvalidFileBackingDeviceType = "virtualFloppy"
+
+	// virtual parallel port
+	VirtualParallelPort_VmFaultToleranceInvalidFileBackingDeviceType VmFaultToleranceInvalidFileBackingDeviceType = "virtualParallelPort"
+
+	// virtual serial port
+	VirtualSerialPort_VmFaultToleranceInvalidFileBackingDeviceType VmFaultToleranceInvalidFileBackingDeviceType = "virtualSerialPort"
+)
+
+type VmShutdownOnIsolationEventOperation string
+
+const (
+
+	// The virtual machine was powered off because shut down failed
+	PoweredOff_VmShutdownOnIsolationEventOperation VmShutdownOnIsolationEventOperation = "poweredOff"
+
+	// The virtual machine was shut down
+	Shutdown_VmShutdownOnIsolationEventOperation VmShutdownOnIsolationEventOperation = "shutdown"
+)
+
+//
+// The PVLAN port types.
+//
+//
+type VmwareDistributedVirtualSwitchPvlanPortType string
+
+const (
+
+	// The ports communicates with other community ports and with
+	// promiscuous ports within the same PVLAN. any other traffics are
+	// blocked.
+	Community_VmwareDistributedVirtualSwitchPvlanPortType VmwareDistributedVirtualSwitchPvlanPortType = "community"
+
+	// The port can only communicate with the promiscuous ports within the
+	// same PVLAN, any other traffics are blocked.
+	Isolated_VmwareDistributedVirtualSwitchPvlanPortType VmwareDistributedVirtualSwitchPvlanPortType = "isolated"
+
+	// The port can communicate with all other ports within the same PVLAN,
+	// including the isolated and community ports .
+	Promiscuous_VmwareDistributedVirtualSwitchPvlanPortType VmwareDistributedVirtualSwitchPvlanPortType = "promiscuous"
+)
+
+//
+// The list of disk issues.
+//
+//
+type VsanDiskIssueType string
+
+const (
+	NonExist_VsanDiskIssueType VsanDiskIssueType = "nonExist"
+
+	StampMismatch_VsanDiskIssueType VsanDiskIssueType = "stampMismatch"
+
+	Unknown_VsanDiskIssueType VsanDiskIssueType = "unknown"
+)
+
+//
+// The action to take with regard to storage objects upon decommissioning
+// a host from use with the VSAN service.
+//
+//
+type VsanHostDecommissionModeObjectAction string
+
+const (
+
+	// VSAN data reconfiguration should be performed to ensure storage
+	// object accessibility.
+	EnsureObjectAccessibility_VsanHostDecommissionModeObjectAction VsanHostDecommissionModeObjectAction = "ensureObjectAccessibility"
+
+	// VSAN data evacuation should be performed such that all storage
+	// object data is removed from the host.
+	EvacuateAllData_VsanHostDecommissionModeObjectAction VsanHostDecommissionModeObjectAction = "evacuateAllData"
+
+	// No special action should take place regarding VSAN data.
+	NoAction_VsanHostDecommissionModeObjectAction VsanHostDecommissionModeObjectAction = "noAction"
+)
+
+//
+// Values used for indicating a disk's status for use by the VSAN service.See state
+//
+//
+type VsanHostDiskResultState string
+
+const (
+
+	// Disk is considered eligible for use by the VSAN service,
+	// but is not currently in use.
+	Eligible_VsanHostDiskResultState VsanHostDiskResultState = "eligible"
+
+	// Disk is considered ineligible for use by the VSAN service,
+	// and is not currently in use.See error
+	Ineligible_VsanHostDiskResultState VsanHostDiskResultState = "ineligible"
+
+	// Disk is currently in use by the VSAN service.
+	//
+	// A disk may be considered in use by the VSAN service regardless of
+	// whether the VSAN service is enabled.  As long as a disk is in use
+	// by VSAN, it is reserved exclusively for VSAN and may not be used
+	// for other purposes.See error
+	InUse_VsanHostDiskResultState VsanHostDiskResultState = "inUse"
+)
+
+//
+// A VsanHostHealthState represents the state of a participating
+// host in the VSAN service.See VsanHostClusterStatus
+//
+//
+type VsanHostHealthState string
+
+const (
+
+	// Node is considered healthy.
+	Healthy_VsanHostHealthState VsanHostHealthState = "healthy"
+
+	// Node is considered unhealthy.
+	Unhealthy_VsanHostHealthState VsanHostHealthState = "unhealthy"
+
+	// Node health is unknown.
+	Unknown_VsanHostHealthState VsanHostHealthState = "unknown"
+)
+
+//
+// A VsanHostNodeState represents the state of participation of a host
+// in the VSAN service.See VsanHostClusterStatusSee VsanHostClusterStatusState
+//
+//
+type VsanHostNodeState string
+
+const (
+
+	// The node is enabled for the VSAN service and is serving as an agent.
+	Agent_VsanHostNodeState VsanHostNodeState = "agent"
+
+	// The node is enabled for the VSAN service and is serving as the backup.
+	Backup_VsanHostNodeState VsanHostNodeState = "backup"
+
+	// The node is being decommissioned from the VSAN service; this state is
+	// considered transitory.
+	Decommissioning_VsanHostNodeState VsanHostNodeState = "decommissioning"
+
+	// The node is disabled for the VSAN service.
+	Disabled_VsanHostNodeState VsanHostNodeState = "disabled"
+
+	// The node is entering maintenance mode; this state is considered
+	// transitory.See EnterMaintenanceMode_Task
+	EnteringMaintenanceMode_VsanHostNodeState VsanHostNodeState = "enteringMaintenanceMode"
+
+	// The node is enabled for the VSAN service but has some configuration
+	// error which prevents participation.
+	Error_VsanHostNodeState VsanHostNodeState = "error"
+
+	// The node is exiting maintenance mode; this state is considered
+	// transitory.See ExitMaintenanceMode_Task
+	ExitingMaintenanceMode_VsanHostNodeState VsanHostNodeState = "exitingMaintenanceMode"
+
+	// The node is enabled for the VSAN service and is serving as the master.
+	Master_VsanHostNodeState VsanHostNodeState = "master"
+
+	// The node is starting the VSAN service; this state is considered
+	// transitory.
+	Starting_VsanHostNodeState VsanHostNodeState = "starting"
+
+	// The node is stopping the VSAN service; this state is considered
+	// transitory.
+	Stopping_VsanHostNodeState VsanHostNodeState = "stopping"
+)
+
+type WeekOfMonth string
+
+const (
+	First_WeekOfMonth WeekOfMonth = "first"
+
+	Fourth_WeekOfMonth WeekOfMonth = "fourth"
+
+	Last_WeekOfMonth WeekOfMonth = "last"
+
+	Second_WeekOfMonth WeekOfMonth = "second"
+
+	Third_WeekOfMonth WeekOfMonth = "third"
+)
+
+type WillLoseHAProtectionResolution string
+
+const (
+
+	// relocate resolution
+	Relocate_WillLoseHAProtectionResolution WillLoseHAProtectionResolution = "relocate"
+
+	// storage vmotion resolution
+	Svmotion_WillLoseHAProtectionResolution WillLoseHAProtectionResolution = "svmotion"
 )
