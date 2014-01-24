@@ -1,0 +1,408 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.RuntimeInfo" name="vim.vm.RuntimeInfo"></a>
+<h1>Data Object - VirtualMachineRuntimeInfo</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.VirtualMachine.html#field_detail">VirtualMachine</a>, <a href="vim.vm.Summary.html#field_detail">VirtualMachineSummary</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.FeatureMask.html">HostFeatureMask</a>, <a href="vim.HostSystem.html">HostSystem</a>, <a href="vim.VirtualMachine.ConnectionState.html">VirtualMachineConnectionState</a>, <a href="vim.vm.DeviceRuntimeInfo.html">VirtualMachineDeviceRuntimeInfo</a>, <a href="vim.VirtualMachine.FaultToleranceState.html">VirtualMachineFaultToleranceState</a>, <a href="vim.vm.FeatureRequirement.html">VirtualMachineFeatureRequirement</a>, <a href="vim.VirtualMachine.PowerState.html">VirtualMachinePowerState</a>, <a href="vim.vm.QuestionInfo.html">VirtualMachineQuestionInfo</a>, <a href="vim.VirtualMachine.RecordReplayState.html">VirtualMachineRecordReplayState</a>, <a href="vim.vm.RuntimeInfo.DasProtectionState.html">VirtualMachineRuntimeInfoDasProtectionState</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The RuntimeInfo data object type provides information about
+  the execution state and history of a virtual machine.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="bootTime" name="bootTime"></a><strong>bootTime</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:dateTime</td><td>
+<p></p>
+         The timestamp when the virtual machine was most recently powered on.
+  <p>
+  This property is updated when the virtual machine is powered on
+  from the poweredOff state, and is cleared when the virtual machine is
+  powered off. This property is not updated when a virtual machine is resumed
+  from a suspended state.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="cleanPowerOff" name="cleanPowerOff"></a><strong>cleanPowerOff</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         For a powered off virtual machine, indicates whether the virtual
+   machine's last shutdown was an orderly power off or not. Unset if
+   the virtual machine is running or suspended.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="connectionState" name="connectionState"></a><strong>connectionState</strong></td><td><a href="vim.VirtualMachine.ConnectionState.html">VirtualMachineConnectionState</a></td><td>
+<p></p>
+         Indicates whether or not the virtual machine is available for management.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="consolidationNeeded" name="consolidationNeeded"></a><strong>consolidationNeeded</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Whether any disk of the virtual machine requires consolidation.
+  This can happen for example when a snapshot is deleted but its
+  associated disk is not committed back to the base disk.
+
+  Use <a href="vim.VirtualMachine.html#consolidateDisks">ConsolidateVMDisks_Task</a> to consolidate if
+  needed.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="dasVmProtection" name="dasVmProtection"></a><strong>dasVmProtection</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.RuntimeInfo.DasProtectionState.html">VirtualMachineRuntimeInfoDasProtectionState</a></td><td>
+<p></p>
+         The vSphere HA protection state for a virtual machine. Property
+  is unset if vSphere HA is not enabled.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="device" name="device"></a><strong>device</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.DeviceRuntimeInfo.html">VirtualMachineDeviceRuntimeInfo[]</a></td><td>
+<p></p>
+         Per-device runtime info. This array will be empty if the host
+  software does not provide runtime info for any of the device
+  types currently in use by the virtual machine.
+
+  In releases after vSphere API 5.0, vSphere Servers might not
+  generate property collector update notifications for this property.
+  To obtain the latest value of the property, you can use
+  PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+  If you use the PropertyCollector.WaitForUpdatesEx method, specify
+  an empty string for the version parameter.
+
+  Since this property is on a DataObject, an update returned by WaitForUpdatesEx may
+  contain values for this property when some other property on the DataObject changes.
+  If this update is a result of a call to WaitForUpdatesEx with a non-empty
+  version parameter, the value for this property may not be current.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="faultToleranceState" name="faultToleranceState"></a><strong>faultToleranceState</strong></td><td><a href="vim.VirtualMachine.FaultToleranceState.html">VirtualMachineFaultToleranceState</a></td><td>
+<p></p>
+         The fault tolerance state of the virtual machine.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="featureMask" name="featureMask"></a><strong>featureMask</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.FeatureMask.html">HostFeatureMask[]</a></td><td>
+<p></p>
+         The masks applied to an individual virtual machine as a result of its
+  configuration.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="featureRequirement" name="featureRequirement"></a><strong>featureRequirement</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.FeatureRequirement.html">VirtualMachineFeatureRequirement[]</a></td><td>
+<p></p>
+         These requirements must have equivalent host capabilities
+  <a href="vim.host.ConfigInfo.html#featureCapability">featureCapability</a> in order to power on,
+  resume, or migrate to the host.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="host" name="host"></a><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         The host that is responsible for running a virtual machine.
+  This property is null if the virtual machine is not running and is
+  not assigned to run on a particular host.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="maxCpuUsage" name="maxCpuUsage"></a><strong>maxCpuUsage</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Current upper-bound on CPU usage. The upper-bound is based on the host
+  the virtual machine is current running on, as well as limits configured
+  on the virtual machine itself or any parent resource pool.
+  Valid while the virtual machine is running.
+
+  In releases after vSphere API 5.0, vSphere Servers might not
+  generate property collector update notifications for this property.
+  To obtain the latest value of the property, you can use
+  PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+  If you use the PropertyCollector.WaitForUpdatesEx method, specify
+  an empty string for the version parameter.
+
+  Since this property is on a DataObject, an update returned by WaitForUpdatesEx may
+  contain values for this property when some other property on the DataObject changes.
+  If this update is a result of a call to WaitForUpdatesEx with a non-empty
+  version parameter, the value for this property may not be current.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="maxMemoryUsage" name="maxMemoryUsage"></a><strong>maxMemoryUsage</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Current upper-bound on memory usage. The upper-bound is based on memory
+  configuration of the virtual machine, as well as limits configured
+  on the virtual machine itself or any parent resource pool.
+  Valid while the virtual machine is running.
+
+  In releases after vSphere API 5.0, vSphere Servers might not
+  generate property collector update notifications for this property.
+  To obtain the latest value of the property, you can use
+  PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+  If you use the PropertyCollector.WaitForUpdatesEx method, specify
+  an empty string for the version parameter.
+
+  Since this property is on a DataObject, an update returned by WaitForUpdatesEx may
+  contain values for this property when some other property on the DataObject changes.
+  If this update is a result of a call to WaitForUpdatesEx with a non-empty
+  version parameter, the value for this property may not be current.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="memoryOverhead" name="memoryOverhead"></a><strong>memoryOverhead</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td><B>Deprecated.</B><I>
+         As of vSphere API 4.1, use the <a href="vim.PerformanceManager.html">PerformanceManager</a>
+  memory overhead counter to get this value.
+      </I>
+<p></p>
+         The amount of memory resource (in bytes) that will be used by
+  the virtual machine above its guest memory requirements.
+  This value is set if and only if the virtual machine is registered
+  on a host that supports memory resource allocation features.
+  <p>
+  For powered off VMs, this is the minimum overhead required to
+  power on the VM on the registered host.
+  <p>
+  For powered on VMs, this is the current overhead reservation, a
+  value which is almost always larger than the minimum overhead, and
+  which grows with time.
+  <p><br>See <a href="vim.HostSystem.html#queryOverheadEx">QueryMemoryOverheadEx</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="minRequiredEVCModeKey" name="minRequiredEVCModeKey"></a><strong>minRequiredEVCModeKey</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         For a powered-on or suspended virtual machine in a cluster with Enhanced
+  VMotion Compatibility (EVC) enabled, this identifies the least-featured
+  EVC mode (among those for the appropriate CPU vendor) that could admit
+  the virtual machine. See <a href="vim.EVCMode.html">EVCMode</a>. This property will
+  be unset if the virtual machine is powered off or is not in an EVC
+  cluster.
+  <p>
+  This property may be used as a general indicator of the CPU feature
+  baseline currently in use by the virtual machine. However, the virtual
+  machine may be suppressing some of the features present in the CPU
+  feature baseline of the indicated mode, either explicitly (in the
+  virtual machine's configured
+  <a href="vim.vm.ConfigInfo.html#cpuFeatureMask">cpuFeatureMask</a>) or implicitly
+  (in the default masks for the
+  <a href="vim.vm.GuestOsDescriptor.html">GuestOsDescriptor</a> appropriate for the
+  virtual machine's configured guest OS).
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="needSecondaryReason" name="needSecondaryReason"></a><strong>needSecondaryReason</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         If set, indicates the reason the virtual machine needs a secondary.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="numMksConnections" name="numMksConnections"></a><strong>numMksConnections</strong></td><td>xsd:int</td><td>
+<p></p>
+         Number of active MKS connections to this virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="offlineFeatureRequirement" name="offlineFeatureRequirement"></a><strong>offlineFeatureRequirement</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.FeatureRequirement.html">VirtualMachineFeatureRequirement[]</a></td><td>
+<p></p>
+         These requirements must have equivalent host capabilities
+  <a href="vim.host.ConfigInfo.html#featureCapability">featureCapability</a> in order to power on.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="onlineStandby" name="onlineStandby"></a><strong>onlineStandby</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         This property indicates whether the guest has gone into one of the
+   s1, s2 or s3 standby modes, false indicates the guest is awake.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="powerState" name="powerState"></a><strong>powerState</strong></td><td><a href="vim.VirtualMachine.PowerState.html">VirtualMachinePowerState</a></td><td>
+<p></p>
+         The current power state of the virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="question" name="question"></a><strong>question</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.QuestionInfo.html">VirtualMachineQuestionInfo</a></td><td>
+<p></p>
+         The current question, if any, that is blocking the virtual machine's execution.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="recordReplayState" name="recordReplayState"></a><strong>recordReplayState</strong></td><td><a href="vim.VirtualMachine.RecordReplayState.html">VirtualMachineRecordReplayState</a></td><td>
+<p></p>
+         Record / replay state of this virtual machine.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="suspendInterval" name="suspendInterval"></a><strong>suspendInterval</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         The total time the virtual machine has been suspended
+  since it was initially powered on. This time excludes the current period,
+  if the virtual machine is currently suspended.  This property is updated
+  when the virtual machine resumes, and is reset to zero when the virtual machine
+  is powered off.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="suspendTime" name="suspendTime"></a><strong>suspendTime</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:dateTime</td><td>
+<p></p>
+         The timestamp when the virtual machine was most recently suspended.
+  <p>
+  This property is updated every time the virtual machine is suspended.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="toolsInstallerMounted" name="toolsInstallerMounted"></a><strong>toolsInstallerMounted</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to indicate whether or not the VMware Tools installer
+  is mounted as a CD-ROM.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vFlashCacheAllocation" name="vFlashCacheAllocation"></a><strong>vFlashCacheAllocation</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         Specifies the total allocated vFlash resource for the vFlash caches associated with VM's
+ VMDKs when VM is powered on, in bytes.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VirtualMachineRuntimeInfo">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="device" type="vim25:VirtualMachineDeviceRuntimeInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="host" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="connectionState" type="vim25:VirtualMachineConnectionState"/>
+                     <element name="powerState" type="vim25:VirtualMachinePowerState"/>
+                     <element name="faultToleranceState" type="vim25:VirtualMachineFaultToleranceState" minOccurs="0"/>
+                     <element name="dasVmProtection" type="vim25:VirtualMachineRuntimeInfoDasProtectionState" minOccurs="0"/>
+                     <element name="toolsInstallerMounted" type="xsd:boolean"/>
+                     <element name="suspendTime" type="xsd:dateTime" minOccurs="0"/>
+                     <element name="bootTime" type="xsd:dateTime" minOccurs="0"/>
+                     <element name="suspendInterval" type="xsd:long" minOccurs="0"/>
+                     <element name="question" type="vim25:VirtualMachineQuestionInfo" minOccurs="0"/>
+                     <element name="memoryOverhead" type="xsd:long" minOccurs="0"/>
+                     <element name="maxCpuUsage" type="xsd:int" minOccurs="0"/>
+                     <element name="maxMemoryUsage" type="xsd:int" minOccurs="0"/>
+                     <element name="numMksConnections" type="xsd:int"/>
+                     <element name="recordReplayState" type="vim25:VirtualMachineRecordReplayState" minOccurs="0"/>
+                     <element name="cleanPowerOff" type="xsd:boolean" minOccurs="0"/>
+                     <element name="needSecondaryReason" type="xsd:string" minOccurs="0"/>
+                     <element name="onlineStandby" type="xsd:boolean" minOccurs="0"/>
+                     <element name="minRequiredEVCModeKey" type="xsd:string" minOccurs="0"/>
+                     <element name="consolidationNeeded" type="xsd:boolean" minOccurs="0"/>
+                     <element name="offlineFeatureRequirement" type="vim25:VirtualMachineFeatureRequirement" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="featureRequirement" type="vim25:VirtualMachineFeatureRequirement" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="featureMask" type="vim25:HostFeatureMask" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="vFlashCacheAllocation" type="xsd:long" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

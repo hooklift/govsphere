@@ -1,0 +1,212 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.fault.OvfFault" name="vim.fault.OvfFault"></a>
+<h1>Fault - OvfFault</h1>
+<dl>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.fault.OvfConsumerCallbackFault.html">OvfConsumerCallbackFault</a>, <a href="vim.fault.OvfExport.html">OvfExport</a>, <a href="vim.fault.OvfImport.html">OvfImport</a>, <a href="vim.fault.OvfInvalidPackage.html">OvfInvalidPackage</a>, <a href="vim.fault.OvfSystemFault.html">OvfSystemFault</a>, <a href="vim.fault.OvfUnsupportedPackage.html">OvfUnsupportedPackage</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.fault.VimFault.html">VimFault</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<H2>Fault 
+                  Description</H2>
+<p></p>
+         A common base type fault for all Ovf related faults.
+ 
+ The structure of OvfFault is as listed.
+ <p>
+ <ul>
+   <li>OvfFault</li>
+   <ul>
+     <li>OvfInvalidPackage</li>
+     <ul>
+       <li>OvfXmlFormat</li>
+       <li>OvfWrongNamespace</li>
+       <li>OvfElement</li>
+       <ul>
+         <li>OvfElementInvalidValue</li>
+         <li>OvfUnexpectedElement</li>
+         <li>OvfDuplicateElement</li>
+         <li>OvfMissingElement</li>
+         <li>OvfMissingElementNormalBoundary</li>
+         <li>OvfDuplicatedElementBoundary</li>
+       </ul>
+       <li>OvfAttribute</li>
+       <ul>
+         <li>OvfMissingAttribute</li>
+         <li>OvfInvalidValue</li>
+         <ul>
+           <li>OvfInvalidValueFormatMalformed</li>
+           <li>OvfInvalidValueConfiguration</li>
+           <li>OvfInvalidValueReference</li>
+           <li>OvfInvalidValueEmpty</li>
+         </ul>
+       </ul>
+       <li>OvfProperty</li>
+       <ul>
+         <li>OvfPropertyType</li>
+         <li>OvfPropertyValue</li>
+         <li>OvfPropertyNetwork</li>
+         <li>OvfPropertyQualifier</li>
+         <li>OvfPropertyQualifierWarning</li>
+       </ul>
+     </ul>
+     <li>OvfConstraint</li>
+     <ul>
+       <li>OvfDiskOrderConstraint</li>
+       <li>OvfHostResourceConstraint</li>
+     </ul>
+     <li>OvfUnsupportedPackage</li>
+     <ul>
+       <li>OvfNoHostNic</li>
+       <li>OvfInvalidVmName</li>
+       <li>OvfUnsupportedAttribute</li>
+       <ul>
+         <li>OvfUnsupportedAttributeValue</li>
+       </ul>
+ 		<li>OvfUnsupportedElement</li>
+       <ul>
+         <li>OvfUnsupportedElementValue</li>
+         <li>OvfUnsupportedSection</li>
+         <li>OvfNoSpaceOnController</li>
+       </ul>
+ 		<li>OvfUnsupportedType</li>
+       <li>OvfUnsupportedSubType</li>
+ 		<li>OvfHardwareCheck</li>
+       <li>OvfNoSupportedHardwareFamily</li>
+     </ul>
+     <li>OvfExport</li>
+     <ul>
+       <li>OvfExportFailed</li>
+ 		<li>OvfHardwareExport</li>
+       <ul>
+         <li>OvfUnsupportedDeviceExport</li>
+         <li>OvfUnknownDeviceBacking</li>
+         <li>OvfConnectedDevice</li>
+         <ul>
+           <li>OvfConnectedDeviceISO</li>
+         </ul>
+         <li>OvfUnableToExportDisk</li>
+       </ul>
+       <li>OvfPropertyExport</li>
+       <li>OvfPropertyNetworkExport</li>
+       <li>OvfDuplicatedPropertyIdExport</li>
+     </ul>
+     <li>OvfImport  (these are typically returned as warnings</li>)
+     <ul>
+       <li>OvfImportFailed</li>
+       <li>OvfHardwareCheck</li>
+       <li>OvfMissingHardware</li>
+       <li>OvfCpuCompatibility</li>
+       <li>OvfCpuCompatibilityCheckNotSupported</li>
+       <li>OvfUnsupportedDiskProvisioning</li>
+       <li>OvfDuplicatedPropertyIdImport</li>
+       <li>OvfNetworkMappingNotSupported</li>
+     </ul>
+     <li>OvfSystemFault</li>
+     <ul>
+ 		<li>OvfDiskMappingNotFound</li>
+ 		<li>OvfHostValueNotParsed</li>
+       <li>OvfInternalError</li>
+ 		<li>OvfUnsupportedDeviceBackingOption</li>
+ 		<li>OvfUnsupportedDeviceBackingInfo</li>
+ 		<li>OvfToXmlUnsupportedElement</li>
+ 		<li>OvfUnknownDevice</li>
+       <li>OvfUnknownEntity</li>
+     </ul>
+     <li>OvfConsumerCallbackFault</li>
+     <ul>
+       <li>OvfConsumerFault</li>
+       <li>OvfConsumerCommunicationError</li>
+       <li>OvfConsumerInvalidSection</li>
+       <li>OvfConsumerUndeclaredSection</li>
+       <li>OvfConsumerUndefinedPrefix</li>
+     </ul>
+   </ul>
+ </ul>
+ <p>
+ All messages go into the vimlocale
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.fault.VimFault.html">VimFault</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.MethodFault.html">MethodFault</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.MethodFault.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.MethodFault.html#dynamicType">dynamicType</a>, <a href="vmodl.MethodFault.html#faultCause">faultCause</a>, <a href="vmodl.MethodFault.html#faultMessage">faultMessage</a></td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="OvfFault">
+            <complexContent>
+               <extension base="vim25:VimFault">
+                  <sequence>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

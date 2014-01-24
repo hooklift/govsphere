@@ -1,0 +1,201 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.MultipathInfo.Path" name="vim.host.MultipathInfo.Path"></a>
+<h1>Data Object - HostMultipathInfoPath</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.host.MultipathInfo.LogicalUnit.html#field_detail">HostMultipathInfoLogicalUnit</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.HostBusAdapter.html">HostHostBusAdapter</a>, <a href="vim.host.MultipathInfo.LogicalUnit.html">HostMultipathInfoLogicalUnit</a>, <a href="vim.host.TargetTransport.html">HostTargetTransport</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The <a href="vim.host.MultipathInfo.Path.html">HostMultipathInfoPath</a> data object
+  is a storage entity that represents a topological path from a
+  host bus adapter to a SCSI logical unit.  Each path is unique although each
+  host bus adapter/SCSI logical unit pair can have multiple paths.
+  <p>
+  Path objects are identified by a key.  The specifics of how
+  the key is formatted are dependent on the implementation.  Example
+  implementations include using strings like "vmhba1:0:0:0".
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="adapter" name="adapter"></a><strong>adapter</strong></td><td>xsd:string</td><td>
+<p></p>
+         The host bus adapter at one endpoint of this path.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="isWorkingPath" name="isWorkingPath"></a><strong>isWorkingPath</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         A path, managed by a given path selection policy(psp) plugin, is
+ denoted to be a Working Path if the psp plugin is likely to select the
+ path for performing I/O in the near future.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="key" name="key"></a><strong>key</strong></td><td>xsd:string</td><td>
+<p></p>
+         Identifier of the path.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="lun" name="lun"></a><strong>lun</strong></td><td>xsd:string</td><td>
+<p></p>
+         The logical unit at one endpoint of this path.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="name" name="name"></a><strong>name</strong></td><td>xsd:string</td><td>
+<p></p>
+         Name of path.
+  <p>
+  Use this name to configure LogicalUnit multipathing policy using <a href="vim.host.StorageSystem.html#enableMultipathPath">EnableMultipathPath</a> and <a href="vim.host.StorageSystem.html#disableMultipathPath">DisableMultipathPath</a>.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="pathState" name="pathState"></a><strong>pathState</strong></td><td>xsd:string</td><td><B>Deprecated.</B><I>
+         As of VI API 4.0:
+  <ul>
+  <li>System reported path states are available in <a href="vim.host.MultipathInfo.Path.html#state">state</a>.</li>
+  <li>Paths slated for I/O can be found using <a href="vim.host.MultipathInfo.Path.html#isWorkingPath">isWorkingPath</a>.</li>
+  </ul>
+      </I>
+<p></p>
+         State of the path.  Must be one of the values of
+  <a href="vim.host.MultipathInfo.PathState.html">MultipathState</a>
+  <dl>
+    <dt>active</dt>
+    <dd>Path can be used for I/O and is currently a working path.</dd>
+    <dt>standby</dt>
+    <dd>Path can be used for I/O but is not a working path or can be
+    used if active paths fail.</dd>
+    <dt>disabled</dt>
+    <dd>Path has been administratively disabled.</dd>
+    <dt>dead</dt>
+    <dd>Path cannot be used for I/O.</dd>
+    <dt>unknown</dt>
+    <dd>Path is in unknown error state.</dd>
+  </dl>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="state" name="state"></a><strong>state</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         System-reported state of the path. Must be one of the values of
+  <a href="vim.host.MultipathInfo.PathState.html">MultipathState</a>
+ <dl>
+    <dt>active</dt>
+    <dd>Path can be used for I/O.</dd>
+    <dt>standby</dt>
+    <dd>Path can be used for I/O if active paths fail.</dd>
+    <dt>disabled</dt>
+    <dd>Path has been administratively disabled.</dd>
+    <dt>dead</dt>
+    <dd>Path cannot be used for I/O.</dd>
+    <dt>unknown</dt>
+    <dd>Path is in unknown error state.</dd>
+ </dl>
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="transport" name="transport"></a><strong>transport</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.TargetTransport.html">HostTargetTransport</a></td><td>
+<p></p>
+         Transport information for the target end of the path.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostMultipathInfoPath">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="key" type="xsd:string"/>
+                     <element name="name" type="xsd:string"/>
+                     <element name="pathState" type="xsd:string"/>
+                     <element name="state" type="xsd:string" minOccurs="0"/>
+                     <element name="isWorkingPath" type="xsd:boolean" minOccurs="0"/>
+                     <element name="adapter" type="xsd:string"/>
+                     <element name="lun" type="xsd:string"/>
+                     <element name="transport" type="vim25:HostTargetTransport" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

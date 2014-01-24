@@ -1,0 +1,163 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.fault.ReplicationVmConfigFault.ReasonForFault" name="vim.fault.ReplicationVmConfigFault.ReasonForFault"></a>
+<h1>Enum - 
+						ReplicationVmConfigFaultReasonForFault</h1>
+<dl>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+<p></p>
+</dl>
+<br>
+<h2>Enum Description</h2>
+<p></p>
+<p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Enum Constants</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><a id="cannotRetrieveVmReplicationConfiguration" name="cannotRetrieveVmReplicationConfiguration"></a>cannotRetrieveVmReplicationConfiguration</td><td>
+      Could not retrieve the VM configuration
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="incompatibleHwVersion" name="incompatibleHwVersion"></a>incompatibleHwVersion</td><td>
+      Incompatible VM hardware version
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="invalidDestinationIpAddress" name="invalidDestinationIpAddress"></a>invalidDestinationIpAddress</td><td>
+      Invalid destination IP address
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="invalidDestinationPort" name="invalidDestinationPort"></a>invalidDestinationPort</td><td>
+      Invalid destination port
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="invalidExtraVmOptions" name="invalidExtraVmOptions"></a>invalidExtraVmOptions</td><td>
+      Malformed extra options list
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="invalidGenerationNumber" name="invalidGenerationNumber"></a>invalidGenerationNumber</td><td>
+      Invalid generation number in VM's configuration
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="invalidPriorConfiguration" name="invalidPriorConfiguration"></a>invalidPriorConfiguration</td><td>
+      The existing replication configuration of the VM is broken 
+ (applicable to re-configuration only).
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="invalidVmReplicationId" name="invalidVmReplicationId"></a>invalidVmReplicationId</td><td>
+      Invalid VM Replication ID string
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="outOfBoundsRpoValue" name="outOfBoundsRpoValue"></a>outOfBoundsRpoValue</td><td>
+      Invalid RPO value (out of bounds)
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="reconfigureVmReplicationIdNotAllowed" name="reconfigureVmReplicationIdNotAllowed"></a>reconfigureVmReplicationIdNotAllowed</td><td>
+      Attempting to re-configure the VM replication ID
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="replicationAlreadyEnabled" name="replicationAlreadyEnabled"></a>replicationAlreadyEnabled</td><td>
+      Attempting to re-enable replication for the VM
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="replicationConfigurationFailed" name="replicationConfigurationFailed"></a>replicationConfigurationFailed</td><td>
+      Failed to commit the new replication properties for the VM.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="replicationNotEnabled" name="replicationNotEnabled"></a>replicationNotEnabled</td><td>
+      Attempting to re-configure or disable replication for a VM
+ for which replication has not been enabled.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="staleGenerationNumber" name="staleGenerationNumber"></a>staleGenerationNumber</td><td>
+      Mis-matching generation number (stale)
+   <br>
+</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <simpleType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ReplicationVmConfigFaultReasonForFault">
+            <restriction base="xsd:string">
+               <enumeration value="incompatibleHwVersion"/>
+               <enumeration value="invalidVmReplicationId"/>
+               <enumeration value="invalidGenerationNumber"/>
+               <enumeration value="outOfBoundsRpoValue"/>
+               <enumeration value="invalidDestinationIpAddress"/>
+               <enumeration value="invalidDestinationPort"/>
+               <enumeration value="invalidExtraVmOptions"/>
+               <enumeration value="staleGenerationNumber"/>
+               <enumeration value="reconfigureVmReplicationIdNotAllowed"/>
+               <enumeration value="cannotRetrieveVmReplicationConfiguration"/>
+               <enumeration value="replicationAlreadyEnabled"/>
+               <enumeration value="invalidPriorConfiguration"/>
+               <enumeration value="replicationNotEnabled"/>
+               <enumeration value="replicationConfigurationFailed"/>
+            </restriction>
+         </simpleType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

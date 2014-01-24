@@ -1,0 +1,1060 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.StorageResourceManager" name="vim.StorageResourceManager"></a>
+<h1>Managed Object -  
+						StorageResourceManager</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.ServiceInstanceContent.html#field_detail">ServiceContent</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.storageDrs.ApplyRecommendationResult.html">ApplyStorageRecommendationResult</a>, <a href="vim.Datastore.html">Datastore</a>, <a href="vim.HostSystem.html">HostSystem</a>, <a href="vim.storageDrs.ConfigSpec.html">StorageDrsConfigSpec</a>, <a href="vim.StorageResourceManager.IORMConfigOption.html">StorageIORMConfigOption</a>, <a href="vim.StorageResourceManager.IORMConfigSpec.html">StorageIORMConfigSpec</a>, <a href="vim.StorageResourceManager.StoragePerformanceSummary.html">StoragePerformanceSummary</a>, <a href="vim.storageDrs.StoragePlacementResult.html">StoragePlacementResult</a>, <a href="vim.storageDrs.StoragePlacementSpec.html">StoragePlacementSpec</a>, <a href="vim.StoragePod.html">StoragePod</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         This managed object type provides a way to configure resource usage for
+  storage resources.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+</table>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#applyRecommendation">ApplyStorageDrsRecommendation_Task</a>, <a href="#applyRecommendationToPod">ApplyStorageDrsRecommendationToPod_Task</a>, <a href="#cancelRecommendation">CancelStorageDrsRecommendation</a>, <a href="#ConfigureDatastoreIORM">ConfigureDatastoreIORM_Task</a>, <a href="#configureStorageDrsForPod">ConfigureStorageDrsForPod_Task</a>, <a href="#queryDatastorePerformanceSummary">QueryDatastorePerformanceSummary</a>, <a href="#QueryIORMConfigOption">QueryIORMConfigOption</a>, <a href="#recommendDatastores">RecommendDatastores</a>, <a href="#refreshRecommendation">RefreshStorageDrsRecommendation</a></td>
+</tr>
+</table>
+<br>
+<a id="applyRecommendation" name="applyRecommendation"></a>
+<h1>ApplyStorageDrsRecommendation_Task</h1>
+<p></p>
+         Applies a recommendation from the recommendation list. Each recommendation can be
+  applied only once. In the case of CreateVm and CloneVm a VirtualMachine is returned.
+  Other workflows don't have a return value.
+  <p>
+  Requires Resource.ApplyRecommendation privilege on the storage pod.
+  Additionally, depending on the workflow where this API is called from, it may require
+  the privileges of invoking one of following APIs:
+  <ul>
+    <li>CreateVm <a href="vim.Folder.html#createVm">CreateVM_Task</a></li>
+    <li>AddDisk <a href="vim.VirtualMachine.html#reconfigure">ReconfigVM_Task</a></li>
+    <li>RelocateVm <a href="vim.VirtualMachine.html#relocate">RelocateVM_Task</a></li>
+    <li>CloneVm <a href="vim.VirtualMachine.html#clone">CloneVM_Task</a></li>
+  </ul>
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.StorageResourceManager.html">StorageResourceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>key</strong></td><td>xsd:string[]</td><td>
+<p></p>
+         The key fields of the Recommendations that are applied.
+  <p>
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the specified key refers to a non-existent or an already executed recommendation. <p></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="applyRecommendationToPod" name="applyRecommendationToPod"></a>
+<h1>ApplyStorageDrsRecommendationToPod_Task</h1>
+<p></p>
+         Applies a recommendation from the recommendation list. Each recommendation can be
+  applied only once.
+  <p>
+  Requires Resource.ApplyRecommendation privilege on the storage pod. And requires
+  Resource.ColdMigrate privilege on the virtual machine(s) that are relocated.
+  Additionally requires Resource.HotMigrate privilege if the virtual machine is
+  powered on (for Storage VMotion). Also requires Datastore.AllocateSpace on any
+  datastore the virtual machine or its disks are relocated to.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.StorageResourceManager.html">StorageResourceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>pod</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.StoragePod.html">StoragePod</a></td><td>
+<p></p>
+         The storage pod.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>key</strong></td><td>xsd:string</td><td>
+<p></p>
+         The key field of the Recommendation.
+  <p>
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the specified key refers to a non-existent or an already executed recommendation. <p></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="cancelRecommendation" name="cancelRecommendation"></a>
+<h1>CancelStorageDrsRecommendation</h1>
+<p></p>
+         Cancels a recommendation. Currently only initial placement
+  recommendations can be cancelled. Migration recommendations cannot.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.StorageResourceManager.html">StorageResourceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>key</strong></td><td>xsd:string[]</td><td>
+<p></p>
+         The key field of the Recommendation.
+  <p>
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the specified key refers to a non-existent or an already executed recommendation. <p></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CancelStorageDrsRecommendation-textarea');expandcontent(this, 'CancelStorageDrsRecommendation-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CancelStorageDrsRecommendation-div">
+<textarea cols="20" rows="10" name="CancelStorageDrsRecommendation-textarea" wrap="off" readonly="1" id="CancelStorageDrsRecommendation-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CancelStorageDrsRecommendation" type="vim25:CancelStorageDrsRecommendationRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CancelStorageDrsRecommendationResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="ConfigureDatastoreIORM" name="ConfigureDatastoreIORM"></a>
+<h1>ConfigureDatastoreIORM_Task</h1>
+<p></p>
+         Changes configuration of storage I/O resource management for a given datastore.
+  The changes are applied to all the backing storage devices for the datastore.
+  Currently we only support storage I/O resource management on VMFS volumes.
+  In order to enable storage I/O resource management on a datstore, we require
+  that all the hosts that are attached to the datastore support this feature.
+  <p>
+  This method is only supported by vCenter server.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.StorageResourceManager.html">StorageResourceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>datastore</strong><span title="Required Privilege: Datastore.Config" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datastore.html">Datastore</a></td><td>
+<p></p>
+         The datastore to be configured.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.StorageResourceManager.IORMConfigSpec.html">StorageIORMConfigSpec</a></td><td>
+<p></p>
+         The configuration spec.
+  <p>
+      <br>
+</td>
+</tr>
+</table>
+<span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  Datastore.Config</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation. <p></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InaccessibleDatastore.html">InaccessibleDatastore</a></td><td>Thrown if cannot access the datastore from any of the hosts.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if 1. IORMConfigSpec.congestionThreshold is not within the desired range (5 to 100 milliseconds). 2. IORMConfigSpec.congestionThresholdMode is not specified and IORMConfigSpec.congestionThreshold is specified. To set congestionThreshold, congestionThresholdMode should be set to manual</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.IORMNotSupportedHostOnDatastore.html">IORMNotSupportedHostOnDatastore</a></td><td>Thrown if called on a datastore that is connected to a host that does not support storage I/O resource management.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if called directly on a host or if called on a datastore that does not have VMFS Volume.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="configureStorageDrsForPod" name="configureStorageDrsForPod"></a>
+<h1>ConfigureStorageDrsForPod_Task</h1>
+<p></p>
+         Change the storage DRS configuration for a pod <a href="vim.StoragePod.html">StoragePod</a>.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.StorageResourceManager.html">StorageResourceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>pod</strong><span title="Required Privilege: StoragePod.Config" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.StoragePod.html">StoragePod</a></td><td>
+<p></p>
+         The storage pod.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.storageDrs.ConfigSpec.html">StorageDrsConfigSpec</a></td><td>
+<p></p>
+         A set of storage Drs configuration changes to apply to the storage pod.
+              The specification can be a complete set of changes or a partial
+              set of changes, applied incrementally.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>modify</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to specify whether the specification ("spec") should
+                be applied incrementally. If "modify" is false and the
+                operation succeeds, then the configuration of the storage pod
+                matches the specification exactly; in this case any unset
+                portions of the specification will result in unset or
+                default portions of the configuration.
+  <p>
+      <br>
+</td>
+</tr>
+</table>
+<span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  StoragePod.Config</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation. <p></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="queryDatastorePerformanceSummary" name="queryDatastorePerformanceSummary"></a>
+<h1>QueryDatastorePerformanceSummary</h1>
+<p></p>
+         Returns datastore summary performance statistics.
+
+ <p> This is an experimental interface that is not intended for
+ use in production code.
+
+ <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.1</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.StorageResourceManager.html">StorageResourceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>datastore</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datastore.html">Datastore</a></td><td>
+<p></p>
+         Datastore for which summary statistics is requested.
+ </p>
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.StorageResourceManager.StoragePerformanceSummary.html">StoragePerformanceSummary[]</a></td><td>Summary performance statistics for the datastore. The summary contains latency, throughput, and SIOC activity.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if input datastore cannot be found</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryDatastorePerformanceSummary-textarea');expandcontent(this, 'QueryDatastorePerformanceSummary-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryDatastorePerformanceSummary-div">
+<textarea cols="20" rows="10" name="QueryDatastorePerformanceSummary-textarea" wrap="off" readonly="1" id="QueryDatastorePerformanceSummary-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryDatastorePerformanceSummary" type="vim25:QueryDatastorePerformanceSummaryRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryDatastorePerformanceSummaryResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:StoragePerformanceSummary" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="QueryIORMConfigOption" name="QueryIORMConfigOption"></a>
+<h1>QueryIORMConfigOption</h1>
+<p></p>
+         Query configuration options for storage I/O resource management.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Datastore.Config</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.StorageResourceManager.html">StorageResourceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         [in] - The host VC will forward the query
+  to. This parameter is ignored by host if this method is
+  called on a host directly.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.StorageResourceManager.IORMConfigOption.html">StorageIORMConfigOption</a></td><td>configuration option object.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryIORMConfigOption-textarea');expandcontent(this, 'QueryIORMConfigOption-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryIORMConfigOption-div">
+<textarea cols="20" rows="10" name="QueryIORMConfigOption-textarea" wrap="off" readonly="1" id="QueryIORMConfigOption-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryIORMConfigOption" type="vim25:QueryIORMConfigOptionRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryIORMConfigOptionResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:StorageIORMConfigOption"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="recommendDatastores" name="recommendDatastores"></a>
+<h1>RecommendDatastores</h1>
+<p></p>
+         <p>
+  This method returns a <a href="vim.storageDrs.StoragePlacementResult.html">StoragePlacementResult</a> object.
+
+  This API is intended to replace the following existing APIs for
+  SDRS-enabled pods:
+
+  CreateVm: StoragePlacementSpec::type == create = 
+  <a href="vim.Folder.html#createVm">CreateVM_Task</a>
+
+  AddDisk: StoragePlacementSpec::type == reconfigure = 
+  <a href="vim.VirtualMachine.html#reconfigure">ReconfigVM_Task</a>
+
+  RelocateVm: StoragePlacementSpec::type == relocate = 
+  <a href="vim.VirtualMachine.html#relocate">RelocateVM_Task</a>
+
+  CloneVm: StoragePlacementSpec::type == clone =
+  <a href="vim.VirtualMachine.html#clone">CloneVM_Task</a>
+
+  The PodSelectionSpec parameter in StoragePlacementSpec is required
+  for all workflows. It specifies which SDRS-enabled pod the user
+  has selected for the VM and/or for each disk. 
+
+  For CreateVm, RelocateVm and CloneVm, PodSelectionSpec.storagePod is
+  the user selected SDRS pod for the VM, i.e., its system files. 
+
+  For all workflows, PodSelectionSpec.disk.storagePod is the
+  user selected SDRS pod for the given disk. Note that a
+  DiskLocator must be specified for each disk that the user
+  requests to create, migrate or clone into an SDRS pod, even if it's
+  the same pod as the VM or the user has manually selected a datastore
+  within the pod. If the user has manually selected a datastore, the
+  datastore must be specified in the workflow specific fields as described below.
+
+  For CreateVm and AddDisk, the manually selected datastore must be specified in
+  ConfigSpec.files or ConfigSpec.deviceChange.device.backing.datastore, the fields
+  should will be unset if the user wants SDRS to recommend the datastore.
+  For RelocateVm, the manually selected datastore must be specified in
+  RelocateSpec.datastore or RelocateSpec.disk.datastore; the fields should be
+  unset iff the user wants SDRS recommendations. For CloneVm, the manually selected
+  datastore must be specified in CloneSpec.location.datastore or
+  CloneSpec.location.disk[].datastore; the fields should be unset
+  iff the user wants SDRS recommendations.
+
+  The remaining expected input parameters in StoragePlacementSpec
+  will be the same as those for the existing API as determined by
+  StoragePlacementSpec::type. If a parameter is optional in the
+  existing API, it will also be optional in the new API.
+
+  <ul>
+  <li>
+  For CreateVm, the Folder, ConfigSpec, ResourcePool and HostSystem
+  parameters will be expected in StoragePlacementSpec. The disks
+  to be created can be determined by ConfigSpec -&gt;
+  VirtualDeviceSpec[] (deviceChange) -&gt; VirtualDevice (device) -&gt;
+  VirtualDisk (subclass).
+  <li>
+  For AddDisk, the VirtualMachine and ConfigSpec parameters will
+  be expected. The use of the ConfigSpec for determining the disks
+  to add will be the same as that in CreateVm.
+  <li>
+  For RelocateVm, the VirtualMachine, RelocateSpec and
+  MovePriority parameters will be expected.
+  <li>
+  For CloneVm, the VirtualMachine, CloneSpec, Folder and cloneName
+  parameters will be expected.
+  </ul>
+
+  SDRS takes into account constraints such as space usages,
+  (anti-) affinity rules, datastore maintenance mode, etc. when
+  making placement recommendations. Given that the constraints are
+  satisfied, SDRS tries to balance space usages and I/O loads in
+  the placement.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.StorageResourceManager.html">StorageResourceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>storageSpec</strong></td><td><a href="vim.storageDrs.StoragePlacementSpec.html">StoragePlacementSpec</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.storageDrs.StoragePlacementResult.html">StoragePlacementResult</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RecommendDatastores-textarea');expandcontent(this, 'RecommendDatastores-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RecommendDatastores-div">
+<textarea cols="20" rows="10" name="RecommendDatastores-textarea" wrap="off" readonly="1" id="RecommendDatastores-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RecommendDatastores" type="vim25:RecommendDatastoresRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RecommendDatastoresResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:StoragePlacementResult"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="refreshRecommendation" name="refreshRecommendation"></a>
+<h1>RefreshStorageDrsRecommendation</h1>
+<p></p>
+         Make Storage DRS invoke again on the specified pod <a href="vim.StoragePod.html">StoragePod</a>
+  and return a new list of recommendations. Concurrent "refresh" requests may be combined
+  together and trigger only one Storage DRS invocation.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.StorageResourceManager.html">StorageResourceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>pod</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.StoragePod.html">StoragePod</a></td><td>
+<p></p>
+         The storage pod.
+  The recommendations generated is stored at PodStorageDrsEntry#recommendation.
+  <p>
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RefreshStorageDrsRecommendation-textarea');expandcontent(this, 'RefreshStorageDrsRecommendation-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RefreshStorageDrsRecommendation-div">
+<textarea cols="20" rows="10" name="RefreshStorageDrsRecommendation-textarea" wrap="off" readonly="1" id="RefreshStorageDrsRecommendation-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RefreshStorageDrsRecommendation" type="vim25:RefreshStorageDrsRecommendationRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RefreshStorageDrsRecommendationResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

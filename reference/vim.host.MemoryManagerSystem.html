@@ -1,0 +1,307 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.MemoryManagerSystem" name="vim.host.MemoryManagerSystem"></a>
+<h1>Managed Object -  
+						HostMemorySystem</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.host.ConfigManager.html#field_detail">HostConfigManager</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.MemoryManagerSystem.ServiceConsoleReservationInfo.html">ServiceConsoleReservationInfo</a>, <a href="vim.host.MemoryManagerSystem.VirtualMachineReservationInfo.html">VirtualMachineMemoryReservationInfo</a>, <a href="vim.host.MemoryManagerSystem.VirtualMachineReservationSpec.html">VirtualMachineMemoryReservationSpec</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         The MemoryManagerSystem managed object provides an interface through which
+  the host memory management policies that affect the performance of running
+  virtual machines can be gathered and configured.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="consoleReservationInfo" name="consoleReservationInfo"></a><strong>consoleReservationInfo</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.host.MemoryManagerSystem.ServiceConsoleReservationInfo.html">ServiceConsoleReservationInfo</a></td><td>
+<p></p>
+         Service console reservation information for the memory manager.  The
+  existence of this data object indicates if the service console memory
+  reservation must be configured for this host.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="virtualMachineReservationInfo" name="virtualMachineReservationInfo"></a><strong>virtualMachineReservationInfo</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.host.MemoryManagerSystem.VirtualMachineReservationInfo.html">VirtualMachineMemoryReservationInfo</a></td><td>
+<p></p>
+         Virtual machine reservation information for the memory manager.  The
+  existence of this data object indicates if the virtual machine memory
+  reservation must be configured for this host.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.ExtensibleManagedObject.html#availableField">availableField</a>, <a href="vim.ExtensibleManagedObject.html#value">value</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#reconfigureServiceConsoleReservation">ReconfigureServiceConsoleReservation</a>, <a href="#reconfigureVirtualMachineReservation">ReconfigureVirtualMachineReservation</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.ExtensibleManagedObject.html#setCustomValue">setCustomValue</a></td>
+</tr>
+</table>
+<br>
+<a id="reconfigureServiceConsoleReservation" name="reconfigureServiceConsoleReservation"></a>
+<h1>ReconfigureServiceConsoleReservation</h1>
+<p></p>
+         Sets the configured service console memory reservation.  This change
+  affects only the serviceConsoleReservedCfg property.  The
+  configuration change
+  propagates to the other properties after the next boot.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Memory</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.MemoryManagerSystem.html">HostMemorySystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>cfgBytes</strong></td><td>xsd:long</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if cfgBytes is negative or is greater than the total memory available.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the service console memory reservation does not apply to this host. The existence of the consoleReservation property will indicate if this feature is applicable.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ReconfigureServiceConsoleReservation-textarea');expandcontent(this, 'ReconfigureServiceConsoleReservation-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ReconfigureServiceConsoleReservation-div">
+<textarea cols="20" rows="10" name="ReconfigureServiceConsoleReservation-textarea" wrap="off" readonly="1" id="ReconfigureServiceConsoleReservation-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ReconfigureServiceConsoleReservation" type="vim25:ReconfigureServiceConsoleReservationRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ReconfigureServiceConsoleReservationResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="reconfigureVirtualMachineReservation" name="reconfigureVirtualMachineReservation"></a>
+<h1>ReconfigureVirtualMachineReservation</h1>
+<p></p>
+         Updates the virtual machine reservation information.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Memory</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.MemoryManagerSystem.html">HostMemorySystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.host.MemoryManagerSystem.VirtualMachineReservationSpec.html">VirtualMachineMemoryReservationSpec</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if virtualMachineReserved is negative or is greater than the maximum amount reservable.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the virtualMachine reservation does not apply to this host. The existence of the virtualMachineReservationInfo property will indicate if this feature is applicable.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ReconfigureVirtualMachineReservation-textarea');expandcontent(this, 'ReconfigureVirtualMachineReservation-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ReconfigureVirtualMachineReservation-div">
+<textarea cols="20" rows="10" name="ReconfigureVirtualMachineReservation-textarea" wrap="off" readonly="1" id="ReconfigureVirtualMachineReservation-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ReconfigureVirtualMachineReservation" type="vim25:ReconfigureVirtualMachineReservationRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ReconfigureVirtualMachineReservationResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

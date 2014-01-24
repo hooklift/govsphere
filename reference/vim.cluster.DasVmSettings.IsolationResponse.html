@@ -1,0 +1,142 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.cluster.DasVmSettings.IsolationResponse" name="vim.cluster.DasVmSettings.IsolationResponse"></a>
+<h1>Enum - 
+						ClusterDasVmSettingsIsolationResponse</h1>
+<dl>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+<p></p>
+</dl>
+<br>
+<h2>Enum Description</h2>
+<p></p>
+         The <a href="vim.cluster.DasVmSettings.IsolationResponse.html">ClusterDasVmSettingsIsolationResponse</a> enum defines
+  values that indicate whether or not the virtual machine should be
+  powered off if a host determines that it is isolated from
+  the rest of the cluster.
+ <p>
+ Host network isolation occurs when a host is still running
+ but it can no longer communicate with other hosts in the cluster
+ and it cannot ping the configured isolation address(es).
+ When the HA agent on a host loses contact with the other hosts,
+ it will ping the isolation addresses. If the pings fail, the host
+ will declare itself isolated.
+ <p>
+ Once the HA agent declares the host isolated, it will
+ initiate the isolation response workflow after a 30 second delay. You can use
+ the FDM advanced option fdm.isolationPolicyDelaySec to increase the delay.
+ For each virtual machine, the HA agent attempts to determine if a master is
+ responsible for restarting the virtual machine. If it cannot make the determination,
+ or there is a master that is responsible, the agent will apply the configured
+ isolation response. This workflow will continue until the configuration policy,
+ has been applied to all virtual machines, the agent reconnects to another HA agent
+ in the cluster, or the isolation address pings start succeeding. If there is a
+ master agent in the cluster, it will attempt to restart the virtual machines
+ that were powered off during isolation.
+ <p>
+ By default, the isolated host leaves its virtual machines powered on.
+ You can override the isolation response default with a cluster-wide setting
+ (<a href="vim.cluster.DasConfigInfo.html#defaultVmSettings">defaultVmSettings</a>)
+ or a virtual machine setting
+ (<a href="vim.cluster.DasVmSettings.html#isolationResponse">isolationResponse</a>).
+ <ul>
+ <li>All isolation response values are valid for the
+ <a href="vim.cluster.DasVmSettings.html#isolationResponse">isolationResponse</a>
+ property specified in a single virtual machine HA configuration.</li>
+ <li>All values except for <code>clusterIsolationResponse</code> are valid
+ for the cluster-wide default HA configuration for virtual machines
+ (<a href="vim.cluster.DasConfigInfo.html#defaultVmSettings">defaultVmSettings</a>).
+ </ul>
+  <p>
+  If you ensure that your network infrastructure is sufficiently redundant
+  and that at least one network path is available at all times, host network
+  isolation should be a rare occurrence.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Enum Constants</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><a id="clusterIsolationResponse" name="clusterIsolationResponse"></a>clusterIsolationResponse</td><td>
+      Use the default isolation reponse defined for the cluster
+  that contains this virtual machine.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="none" name="none"></a>none</td><td>
+      Do not power off the virtual machine in the event of a host network isolation.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="powerOff" name="powerOff"></a>powerOff</td><td>
+      Power off the virtual machine in the event of a host network isolation.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="shutdown" name="shutdown"></a>shutdown</td><td>
+      Shut down the virtual machine guest operating system
+  in the event of a host network isolation.
+  If the guest operating system fails to shutdown within five minutes,
+  HA will initiate a forced power off.
+  <p>
+  When you use the shutdown isolation response, failover can take
+  longer (compared to the
+  <a href="vim.cluster.DasVmSettings.IsolationResponse.html#powerOff">powerOff</a>
+  response) because the virtual machine cannot fail over until it is shutdown.
+   <p></p>
+<B><I>Since </I></B>VI API 2.5u2<br>
+</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <simpleType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ClusterDasVmSettingsIsolationResponse">
+            <restriction base="xsd:string">
+               <enumeration value="none"/>
+               <enumeration value="powerOff"/>
+               <enumeration value="shutdown"/>
+               <enumeration value="clusterIsolationResponse"/>
+            </restriction>
+         </simpleType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

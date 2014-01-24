@@ -1,0 +1,421 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.DiagnosticManager" name="vim.DiagnosticManager"></a>
+<h1>Managed Object -  
+						DiagnosticManager</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.ServiceInstanceContent.html#field_detail">ServiceContent</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.DiagnosticManager.BundleInfo.html">DiagnosticManagerBundleInfo</a>, <a href="vim.DiagnosticManager.LogDescriptor.html">DiagnosticManagerLogDescriptor</a>, <a href="vim.DiagnosticManager.LogHeader.html">DiagnosticManagerLogHeader</a>, <a href="vim.HostSystem.html">HostSystem</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         Provides an interface to get low-level debugging logs or diagnostic bundles
+  for a server. For VirtualCenter, this includes the log files
+  for the server daemon. For an ESX Server host, this includes detailed
+  log files for the VMkernel.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+</table>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#browse">BrowseDiagnosticLog</a>, <a href="#generateLogBundles">GenerateLogBundles_Task</a>, <a href="#queryDescriptions">QueryDescriptions</a></td>
+</tr>
+</table>
+<br>
+<a id="browse" name="browse"></a>
+<h1>BrowseDiagnosticLog</h1>
+<p></p>
+         Returns part of a log file. Log entries are always returned
+  chronologically, typically with the newest event last.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Global.Diagnostics</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.DiagnosticManager.html">DiagnosticManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         Specifies the host. If not specified, then it defaults
+               to the default server. For example, if called on
+               VirtualCenter, then the value defaults to VirtualCenter logs.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>key</strong></td><td>xsd:string</td><td>
+<p></p>
+         A string key specifying the key for the log file to
+                browse. Keys can be obtained using the queryDescriptions
+                method.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>start</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The line number for the first entry to be returned. If the
+                parameter is not specified, then the operation returns
+                with lines starting from the top of the log.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>lines</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The number of lines to return. If not specified, then
+                all lines are returned from the start value to the end of
+                the file.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.DiagnosticManager.LogHeader.html">DiagnosticManagerLogHeader</a></td><td>A LogHeader that includes the log lines. Sometimes fewer log lines are returned than were requested. For example, fewer lines are returned than expected if the client requests lines that do not exist or if the server limits the number of lines that it returns. If zero lines are returned, then the end of the log file may have been reached.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.CannotAccessFile.html">CannotAccessFile</a></td><td>Thrown if the key refers to a file that cannot be accessed at the present time.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the key refers to a nonexistent log file or the log file is not of type "plain".</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('BrowseDiagnosticLog-textarea');expandcontent(this, 'BrowseDiagnosticLog-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="BrowseDiagnosticLog-div">
+<textarea cols="20" rows="10" name="BrowseDiagnosticLog-textarea" wrap="off" readonly="1" id="BrowseDiagnosticLog-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="BrowseDiagnosticLog" type="vim25:BrowseDiagnosticLogRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="BrowseDiagnosticLogResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:DiagnosticManagerLogHeader"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="generateLogBundles" name="generateLogBundles"></a>
+<h1>GenerateLogBundles_Task</h1>
+<p></p>
+         Instructs the server to generate diagnostic bundles. A diagnostic bundle
+  includes log files and other configuration information that can be used
+  to investigate potential server issues. Virtual machine and guest
+  operation system state is excluded from diagnostic bundles.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Global.Diagnostics</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.DiagnosticManager.html">DiagnosticManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>includeDefault</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Specifies if the bundle should include the
+                         default server. If called on a VirtualCenter
+                         server, then this means the VirtualCenter
+                         diagnostic files. If called directly on a host,
+                         then includeDefault must be set to true.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem[]</a></td><td>
+<p></p>
+         Lists hosts that are included. This is only used
+                         when called on VirtualCenter. If called directly
+                         on a host, then this parameter must be empty.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation. Upon success, the <a href="vim.TaskInfo.html#result">info.result</a> property in the <a href="vim.Task.html">Task</a> contains a list of <a href="vim.DiagnosticManager.BundleInfo.html">DiagnosticManagerBundleInfo</a> objects for each diagnostic bundle that has been generated.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.LogBundlingFailed.html">LogBundlingFailed</a></td><td>Thrown if generation of support bundle failed.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.TaskInProgress.html">TaskInProgress</a></td><td>Thrown if there is a pending request to generate a support bundle. <p> The caller can download the bundles using an HTTP GET operation for each returned URL. Bundles are usually available for at least 24 hours, but the caller should not assume that the returned URLs are valid indefinitely. Servers often automatically delete generated diagnostic bundles after some given period of time.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="queryDescriptions" name="queryDescriptions"></a>
+<h1>QueryDescriptions</h1>
+<p></p>
+         Returns a list of diagnostic files for a given system.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Global.Diagnostics</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.DiagnosticManager.html">DiagnosticManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         Specifies the host. If not specified, then it defaults
+               to the server itself. For example, if called on
+               VirtualCenter, then the value defaults to VirtualCenter logs.
+               When called on an ESX server host, the host should not be
+               specified.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.DiagnosticManager.LogDescriptor.html">DiagnosticManagerLogDescriptor[]</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the host does not exist or is specified on a host.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryDescriptions-textarea');expandcontent(this, 'QueryDescriptions-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryDescriptions-div">
+<textarea cols="20" rows="10" name="QueryDescriptions-textarea" wrap="off" readonly="1" id="QueryDescriptions-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryDescriptions" type="vim25:QueryDescriptionsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryDescriptionsResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:DiagnosticManagerLogDescriptor" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

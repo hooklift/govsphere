@@ -1,0 +1,979 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.PatchManager" name="vim.host.PatchManager"></a>
+<h1>Managed Object -  
+						HostPatchManager</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.host.ConfigManager.html#field_detail">HostConfigManager</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.PatchManager.Locator.html">HostPatchManagerLocator</a>, <a href="vim.host.PatchManager.PatchManagerOperationSpec.html">HostPatchManagerPatchManagerOperationSpec</a>, <a href="vim.host.PatchManager.Result.html">HostPatchManagerResult</a>, <a href="vim.host.PatchManager.Status.html">HostPatchManagerStatus</a>
+</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         This managed object is the interface for scanning and patching an ESX
+  server.
+
+  VMware publishes updates through its external website. A patch update is
+  synonymous with a bulletin. An update may contain many individual patch
+  binaries, but its installation and uninstallation are atomic.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+</table>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#Check">CheckHostPatch_Task</a>, <a href="#Install">InstallHostPatch_Task</a>, <a href="#InstallV2">InstallHostPatchV2_Task</a>, <a href="#Query">QueryHostPatch_Task</a>, <a href="#Scan">ScanHostPatch_Task</a>, <a href="#ScanV2">ScanHostPatchV2_Task</a>, <a href="#Stage">StageHostPatch_Task</a>, <a href="#Uninstall">UninstallHostPatch_Task</a></td>
+</tr>
+</table>
+<br>
+<a id="Check" name="Check"></a>
+<h1>CheckHostPatch_Task</h1>
+<p></p>
+         Check the list of metadata and returns the dependency, obsolete and conflict information
+  The operation is cancelable through the returned <a href="vim.Task.html">Task</a> object. No integrity checks
+  are performed on the metadata.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Read</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.PatchManager.html">HostPatchManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>metaUrls</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         a list of urls pointing to metadata.zip.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>bundleUrls</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         a list of urls pointing to an "offline" bundle. It is not supported in 5.0 or later.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>spec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.PatchManager.PatchManagerOperationSpec.html">HostPatchManagerPatchManagerOperationSpec</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation. The <a href="vim.TaskInfo.html#result">info.result</a> property in the <a href="vim.Task.html">Task</a> contains the <a href="vim.host.PatchManager.Status.html">HostPatchManagerStatus</a> upon success.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the feature cannot be supported on the platform, potentially because the hardware configuration does not support it.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.PlatformConfigFault.html">PlatformConfigFault</a></td><td>Thrown if any error occurs during the operation. More detailed information will be returned within the payload of the exception as xml string.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.RequestCanceled.html">RequestCanceled</a></td><td>Thrown if the operation is canceled.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.TaskInProgress.html">TaskInProgress</a></td><td>Thrown if there is already a patch installation in progress.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="Install" name="Install"></a>
+<h1>InstallHostPatch_Task</h1>
+<B>Deprecated.</B><I>
+         Method is deprecated, use <a href="vim.host.PatchManager.html#InstallV2">InstallHostPatchV2_Task</a> instead.
+      </I>
+<p></p>
+         Patch the host. The operation is not cancelable. If the
+  patch installation failed, an atomic rollback of the installation will
+  be attempted. Manual rollback is required if the atomic rollback
+  failed, see <a href="vim.fault.PatchInstallFailed.html">PatchInstallFailed</a> for details.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Patch</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.PatchManager.html">HostPatchManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>repository</strong></td><td><a href="vim.host.PatchManager.Locator.html">HostPatchManagerLocator</a></td><td>
+<p></p>
+         Location of the repository that contains the
+         bulletin depot. The depot must be organized as a flat
+         collection of bulletins with each one being a folder named
+         after the bulletin ID. Each folder must contain both
+         update metadata and required binaries.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>updateID</strong></td><td>xsd:string</td><td>
+<p></p>
+         The update to be installed on the host.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>force</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Specify whether to force reinstall an update.
+         By default, installing an already-installed update would fail
+         with the <a href="vim.fault.PatchAlreadyInstalled.html">PatchAlreadyInstalled</a> fault. If
+         force is set to true, the update will be forcifully reinstalled,
+         thus overwriting the already installed update.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the host is not in maintenance mode but the patch install requires all virtual machines to be powered off.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NoDiskSpace.html">NoDiskSpace</a></td><td>Thrown if the update can not be installed because there is insufficent disk space for the installation, including temporary space used for rollback.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.PatchBinariesNotFound.html">PatchBinariesNotFound</a></td><td>Thrown if required update related binaries were not available.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.PatchInstallFailed.html">PatchInstallFailed</a></td><td>Thrown if the installation failed, <a href="vim.fault.PlatformConfigFault.html#text">text</a> has details of the failure. Automatic rollback might have succeeded or failed.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.PatchMetadataInvalid.html">PatchMetadataInvalid</a></td><td>Thrown if the requried metadata is invalid--for example, it is not found in the repository, is corrupted and so on. Typically a more specific subclass of PatchMetadataInvalid is thrown.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.PatchNotApplicable.html">PatchNotApplicable</a></td><td>Thrown if the patch is not applicable. Typically a more specific subclass of PatchNotApplicable is thrown to indicate a specific problem--for example, PatchSuperseded if the patch is superseded, MissingDependency if required patch or libraries are not installed, AlreadyInstalled if the patch is already installed.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.RebootRequired.html">RebootRequired</a></td><td>Thrown if the update cannot be installed without restarting the host. This might occur on account of a prior update installation which needed to be installed separately from other updates.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.TaskInProgress.html">TaskInProgress</a></td><td>Thrown if there is already a patch installation in progress.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="InstallV2" name="InstallV2"></a>
+<h1>InstallHostPatchV2_Task</h1>
+<p></p>
+         Patch the host. The operation is not cancelable. If the
+  patch installation failed, an atomic rollback of the installation will
+  be attempted. Manual rollback is required if the atomic rollback
+  failed, see <a href="vim.fault.PatchInstallFailed.html">PatchInstallFailed</a> for details.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Patch</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.PatchManager.html">HostPatchManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>metaUrls</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         A list of urls pointing to metadata.zip.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>bundleUrls</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         a list of urls pointing to an "offline" bundle. It is not supported in 5.0 or later.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vibUrls</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         The urls of update binary files to be installed.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>spec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.PatchManager.PatchManagerOperationSpec.html">HostPatchManagerPatchManagerOperationSpec</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the feature cannot be supported on the platform, potentially because the hardware configuration does not support it.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.PlatformConfigFault.html">PlatformConfigFault</a></td><td></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.RequestCanceled.html">RequestCanceled</a></td><td>Thrown if the operation is canceled.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.TaskInProgress.html">TaskInProgress</a></td><td>Thrown if there is already a patch installation in progress.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="Query" name="Query"></a>
+<h1>QueryHostPatch_Task</h1>
+<p></p>
+         Query the host for installed bulletins.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Read</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.PatchManager.html">HostPatchManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>spec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.PatchManager.PatchManagerOperationSpec.html">HostPatchManagerPatchManagerOperationSpec</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the bulletin ID did not exist.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.PlatformConfigFault.html">PlatformConfigFault</a></td><td></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.RequestCanceled.html">RequestCanceled</a></td><td></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.TaskInProgress.html">TaskInProgress</a></td><td>Thrown if there is already a patch installation in progress.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="Scan" name="Scan"></a>
+<h1>ScanHostPatch_Task</h1>
+<B>Deprecated.</B><I>
+         As of VI API 4.0, use <a href="vim.host.PatchManager.html#ScanV2">ScanHostPatchV2_Task</a>.
+      </I>
+<p></p>
+         Scan the host for the patch status. The operation is cancelable
+  through the returned <a href="vim.Task.html">Task</a> object. Integrity checks are
+  performed on the metadata only during the scan operation.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Read</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.PatchManager.html">HostPatchManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>repository</strong></td><td><a href="vim.host.PatchManager.Locator.html">HostPatchManagerLocator</a></td><td>
+<p></p>
+         Location of the repository that contains the
+         bulletin depot. The depot must be organized as a flat
+         collection of bulletins with each one being a folder named
+         after the bulletin ID. Each folder must contain the full
+         update metadata.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>updateID</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         The updates to scan. Wildcards can be used to specify
+         the update IDs. The wildcards will be expanded to include all
+         updates whose IDs match the specified wildcard and whose metadata
+         is available in the repository. Specifying no update is
+         equivalent to a wildcard "*". In this case all updates available
+         in the repository will be scanned.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation. The <a href="vim.TaskInfo.html#result">info.result</a> property in the <a href="vim.Task.html">Task</a> contains the <a href="vim.host.PatchManager.Status.html">HostPatchManagerStatus</a> upon success.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.PatchMetadataInvalid.html">PatchMetadataInvalid</a></td><td>Thrown if query required metadata is invalid--for example, it is not found in the repository, is corrupted and so on. Typically a more specific subclass of PatchMetadataInvalid is thrown.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.PlatformConfigFault.html">PlatformConfigFault</a></td><td>Thrown if there is any error in the repository access, metadata download, repository level integrity check, or reading the metadata. See <a href="vim.fault.PlatformConfigFault.html#text">text</a> for specific details.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.RequestCanceled.html">RequestCanceled</a></td><td>Thrown if the operation is canceled.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="ScanV2" name="ScanV2"></a>
+<h1>ScanHostPatchV2_Task</h1>
+<p></p>
+         Scan the host for the patch status. The operation is cancelable
+  through the returned <a href="vim.Task.html">Task</a> object. Integrity checks are
+  performed on the metadata only during the scan operation.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Read</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.PatchManager.html">HostPatchManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>metaUrls</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         a list of urls pointing to metadata.zip.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>bundleUrls</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         a list of urls pointing to an "offline" bundle. It is not supported in 5.0 or later.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>spec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.PatchManager.PatchManagerOperationSpec.html">HostPatchManagerPatchManagerOperationSpec</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation. The <a href="vim.TaskInfo.html#result">info.result</a> property in the <a href="vim.Task.html">Task</a> contains the <a href="vim.host.PatchManager.Status.html">HostPatchManagerStatus</a> upon success.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the feature cannot be supported on the platform, potentially because the hardware configuration does not support it.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.PlatformConfigFault.html">PlatformConfigFault</a></td><td>Thrown if there is any error in the repository access, metadata download, repository level integrity check, or reading the metadata. See <a href="vim.fault.PlatformConfigFault.html#text">text</a> for specific details.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.RequestCanceled.html">RequestCanceled</a></td><td>Thrown if the operation is canceled.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.TaskInProgress.html">TaskInProgress</a></td><td>Thrown if there is already a patch installation in progress.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="Stage" name="Stage"></a>
+<h1>StageHostPatch_Task</h1>
+<p></p>
+         Stage the vib files to esx local location and possibly do some run time check.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Patch</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.PatchManager.html">HostPatchManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>metaUrls</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         A list of urls pointing to metadata.zip.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>bundleUrls</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         a list of urls pointing to an "offline" bundle. It is not supported in 5.0 or later.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vibUrls</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         The urls of update binary files to be staged.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>spec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.PatchManager.PatchManagerOperationSpec.html">HostPatchManagerPatchManagerOperationSpec</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation. The <a href="vim.TaskInfo.html#result">info.result</a> property in the <a href="vim.Task.html">Task</a> contains the <a href="vim.host.PatchManager.Status.html">HostPatchManagerStatus</a> upon success.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the feature cannot be supported on the platform, potentially because the hardware configuration does not support it.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.PlatformConfigFault.html">PlatformConfigFault</a></td><td>Thrown if any error occurs during the operation. More detailed information will be returned within the payload of the exception as xml string.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.RequestCanceled.html">RequestCanceled</a></td><td>Thrown if the operation is canceled.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.TaskInProgress.html">TaskInProgress</a></td><td>Thrown if there is already a patch installation in progress.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="Uninstall" name="Uninstall"></a>
+<h1>UninstallHostPatch_Task</h1>
+<p></p>
+         Uninstall patch from the host. The operation is not cancelable.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Patch</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.PatchManager.html">HostPatchManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>bulletinIds</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         A list of bulletin IDs to be removed.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>spec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.PatchManager.PatchManagerOperationSpec.html">HostPatchManagerPatchManagerOperationSpec</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the feature cannot be supported on the platform, potentially because the hardware configuration does not support it.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.PlatformConfigFault.html">PlatformConfigFault</a></td><td></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.TaskInProgress.html">TaskInProgress</a></td><td>Thrown if there is already a patch installation in progress.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

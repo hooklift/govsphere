@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>VMware vSphere API Reference</title>
+<script language="JavaScript" src="./commonRes.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="doc-style.css"/>
+</head>
+<body>
+<h1>New and Changed Enumerated Type Elements in 5.5</h1>
+<p>
+ The following sections list the new enumerated type API elements:
+<ul>
+<li><a href="#newEnums">Enumerated Types</a></li>
+<li><a href="#newConstants">Enumerated Type Constants</a></li>
+</ul>
+<h2><a name="newEnums">New Enumerated Types</a></h2>
+<table border="1" cellpadding="5" cellspacing="0">
+<tr><th><strong>New Enumerated Types</strong></th></tr>
+<tr><td><a href="vim.fault.CannotUseNetwork.Reason.html">CannotUseNetworkReason</a></td></tr>
+<tr><td><a href="vim.DistributedVirtualSwitch.HostInfrastructureTrafficClass.html">DistributedVirtualSwitchHostInfrastructureTrafficClass</a></td></tr>
+<tr><td><a href="vim.dvs.DistributedVirtualPort.FilterOnFailure.html">DvsFilterOnFailure</a></td></tr>
+<tr><td><a href="vim.dvs.TrafficRule.RuleDirectionType.html">DvsNetworkRuleDirectionType</a></td></tr>
+<tr><td><a href="vim.vm.GuestInfo.AppStateType.html">GuestInfoAppStateType</a></td></tr>
+<tr><td><a href="vim.host.GraphicsInfo.GraphicsType.html">HostGraphicsInfoGraphicsType</a></td></tr>
+<tr><td><a href="vim.host.NetStackInstance.CongestionControlAlgorithmType.html">HostNetStackInstanceCongestionControlAlgorithmType</a></td></tr>
+<tr><td><a href="vim.host.NetStackInstance.SystemStackKey.html">HostNetStackInstanceSystemStackKey</a></td></tr>
+<tr><td><a href="vim.host.RuntimeInfo.NetStackInstanceRuntimeInfo.State.html">HostRuntimeInfoNetStackInstanceRuntimeInfoState</a></td></tr>
+<tr><td><a href="vim.fault.VFlashModuleNotSupported.Reason.html">VFlashModuleNotSupportedReason</a></td></tr>
+<tr><td><a href="vim.dvs.VmwareDistributedVirtualSwitch.LacpApiVersion.html">VMwareDvsLacpApiVersion</a></td></tr>
+<tr><td><a href="vim.dvs.VmwareDistributedVirtualSwitch.LacpLoadBalanceAlgorithm.html">VMwareDvsLacpLoadBalanceAlgorithm</a></td></tr>
+<tr><td><a href="vim.vm.device.VirtualDisk.VFlashCacheConfigInfo.CacheConsistencyType.html">VirtualDiskVFlashCacheConfigInfoCacheConsistencyType</a></td></tr>
+<tr><td><a href="vim.vm.device.VirtualDisk.VFlashCacheConfigInfo.CacheMode.html">VirtualDiskVFlashCacheConfigInfoCacheMode</a></td></tr>
+<tr><td><a href="vim.vm.MetadataManager.VmMetadataOp.html">VirtualMachineMetadataManagerVmMetadataOp</a></td></tr>
+<tr><td><a href="vim.vm.MetadataManager.VmMetadataOwner.Owner.html">VirtualMachineMetadataManagerVmMetadataOwnerOwner</a></td></tr>
+<tr><td><a href="vim.vsan.host.VsanRuntimeInfo.DiskIssueType.html">VsanDiskIssueType</a></td></tr>
+<tr><td><a href="vim.vsan.host.DecommissionMode.ObjectAction.html">VsanHostDecommissionModeObjectAction</a></td></tr>
+<tr><td><a href="vim.vsan.host.DiskResult.State.html">VsanHostDiskResultState</a></td></tr>
+<tr><td><a href="vim.vsan.host.HealthState.html">VsanHostHealthState</a></td></tr>
+<tr><td><a href="vim.vsan.host.NodeState.html">VsanHostNodeState</a></td></tr>
+</table>
+<h2><a name="newConstants">New Enumerated Type Constants</a></h2>
+<table border="1" cellpadding="5" cellspacing="0">
+<tr><th><strong>Enumerated Type</strong></th>
+<th><strong>Enumerated Type Constant</strong></th></tr>
+<tr><td><a href="vim.vm.check.TestType.html">CheckTestType</a></td>
+<td><a href="vim.vm.check.TestType.html#networkTests">networkTests</a></td></tr>
+<tr><td><a href="vim.fault.DasConfigFault.DasConfigFaultReason.html">DasConfigFaultDasConfigFaultReason</a></td>
+<td><a href="vim.fault.DasConfigFault.DasConfigFaultReason.html#VSanNotSupportedOnHost">VSanNotSupportedOnHost</a></td></tr>
+<tr><td><a href="vim.host.DiskPartitionInfo.Type.html">HostDiskPartitionInfoType</a></td>
+<td><a href="vim.host.DiskPartitionInfo.Type.html#vffs">vffs</a></td></tr>
+<tr><td><a href="vim.host.VirtualNicManager.NicType.html">HostVirtualNicManagerNicType</a></td>
+<td><a href="vim.host.VirtualNicManager.NicType.html#vsan">vsan</a></td></tr>
+<tr><td><a href="vim.VirtualDiskManager.VirtualDiskType.html">VirtualDiskType</a></td>
+<td><a href="vim.VirtualDiskManager.VirtualDiskType.html#delta">delta</a></td></tr>
+<tr><td rowspan="13"><a href="vim.vm.GuestOsDescriptor.GuestOsIdentifier.html">VirtualMachineGuestOsIdentifier</a></td>
+<td><a href="vim.vm.GuestOsDescriptor.GuestOsIdentifier.html#darwin12_64Guest">darwin12_64Guest</a></td></tr>
+<td><a href="vim.vm.GuestOsDescriptor.GuestOsIdentifier.html#darwin13_64Guest">darwin13_64Guest</a></td></tr>
+<td><a href="vim.vm.GuestOsDescriptor.GuestOsIdentifier.html#debian7Guest">debian7Guest</a></td></tr>
+<td><a href="vim.vm.GuestOsDescriptor.GuestOsIdentifier.html#debian7_64Guest">debian7_64Guest</a></td></tr>
+<td><a href="vim.vm.GuestOsDescriptor.GuestOsIdentifier.html#genericLinuxGuest">genericLinuxGuest</a></td></tr>
+<td><a href="vim.vm.GuestOsDescriptor.GuestOsIdentifier.html#mandrakeGuest">mandrakeGuest</a></td></tr>
+<td><a href="vim.vm.GuestOsDescriptor.GuestOsIdentifier.html#other3xLinux64Guest">other3xLinux64Guest</a></td></tr>
+<td><a href="vim.vm.GuestOsDescriptor.GuestOsIdentifier.html#other3xLinuxGuest">other3xLinuxGuest</a></td></tr>
+<td><a href="vim.vm.GuestOsDescriptor.GuestOsIdentifier.html#rhel7Guest">rhel7Guest</a></td></tr>
+<td><a href="vim.vm.GuestOsDescriptor.GuestOsIdentifier.html#rhel7_64Guest">rhel7_64Guest</a></td></tr>
+<td><a href="vim.vm.GuestOsDescriptor.GuestOsIdentifier.html#sles12Guest">sles12Guest</a></td></tr>
+<td><a href="vim.vm.GuestOsDescriptor.GuestOsIdentifier.html#sles12_64Guest">sles12_64Guest</a></td></tr>
+<td><a href="vim.vm.GuestOsDescriptor.GuestOsIdentifier.html#windowsHyperVGuest">windowsHyperVGuest</a></td></tr>
+<tr><td><a href="vim.event.VmDasBeingResetEvent.ReasonCode.html">VmDasBeingResetEventReasonCode</a></td>
+<td><a href="vim.event.VmDasBeingResetEvent.ReasonCode.html#appImmediateResetRequest">appImmediateResetRequest</a></td></tr>
+<tr><td><a href="vim.fault.VmFaultToleranceConfigIssue.ReasonForIssue.html">VmFaultToleranceConfigIssueReasonForIssue</a></td>
+<td><a href="vim.fault.VmFaultToleranceConfigIssue.ReasonForIssue.html#hasVFlashConfiguration">hasVFlashConfiguration</a></td></tr>
+</table>
+<p>
+<script language="javascript" type="text/javascript">document.write(ID_Copyright);</script>
+<br><script language="javascript" type="text/javascript">document.write(ID_VersionInformation);</script>
+</p>
+</body>
+</html>

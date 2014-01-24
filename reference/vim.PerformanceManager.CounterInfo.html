@@ -1,0 +1,199 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.PerformanceManager.CounterInfo" name="vim.PerformanceManager.CounterInfo"></a>
+<h1>Data Object - PerfCounterInfo</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.PerformanceManager.html#field_detail">PerformanceManager</a>
+</dd>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.PerformanceManager.html#queryCounter">QueryPerfCounter</a>, <a href="vim.PerformanceManager.html#queryCounterByLevel">QueryPerfCounterByLevel</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.ElementDescription.html">ElementDescription</a>, <a href="vim.PerformanceManager.CounterInfo.StatsType.html">PerfStatsType</a>, <a href="vim.PerformanceManager.CounterInfo.RollupType.html">PerfSummaryType</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This data object type contains metadata for a performance counter. See
+  <a href="vim.PerformanceManager.html">PerformanceManager</a> for definitions of available counters.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="associatedCounterId" name="associatedCounterId"></a><strong>associatedCounterId</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int[]</td><td><B>Deprecated.</B><I>
+         As of VI API 2.5, this property is not used.
+      </I>
+<p></p>
+         The counter IDs associated with the same performance counter name for
+  the same device type. For example, the rollup types for CPU Usage for
+  a host are average, minimum, and maximum&#46; Therefore, their counter
+  IDs are associated.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="groupInfo" name="groupInfo"></a><strong>groupInfo</strong></td><td><a href="vim.ElementDescription.html">ElementDescription</a></td><td>
+<p></p>
+         The group of the performance counter with its label and summary
+  details. Counter groups include "cpu," "mem," "net," "disk," "system,"
+  "rescpu," and "clusterServices," for example.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="key" name="key"></a><strong>key</strong></td><td>xsd:int</td><td>
+<p></p>
+         A system-generated number that uniquely identifies the counter in the
+  context of the system. The performance counter ID.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="level" name="level"></a><strong>level</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Minimum level at which metrics of this type will be collected by
+  VirtualCenter Server. The value for this property for any performance
+  counter is a number from 1 to 4. The higher the setting, the more data
+  is collected by VirtualCenter Server. The default setting for
+  VirtualCenter Server is 1, which collects the minimal amount of
+  performance data that is typically useful to administrators and
+  developers alike. The specific level of each counter is documented in
+  the respective counter-documentation pages, by group. See <a href="vim.PerformanceManager.html">PerformanceManager</a> for links to the counter group pages.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="nameInfo" name="nameInfo"></a><strong>nameInfo</strong></td><td><a href="vim.ElementDescription.html">ElementDescription</a></td><td>
+<p></p>
+         The name of the counter with label and summary details. For example,
+  the counter with name "usage" for the "cpu" group of performance
+  counters.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="perDeviceLevel" name="perDeviceLevel"></a><strong>perDeviceLevel</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Minimum level at which the per device metrics of this type will be
+  collected by vCenter Server. The value for this property for any
+  performance counter is a number from 1 to 4. By default all per device
+  metrics are calculated at level 3 or more. If a certain per device
+  counter is collected at a certain level, the aggregate metric is also
+  calculated at that level, i.e., perDeviceLevel is greater than or
+  equal to level.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="rollupType" name="rollupType"></a><strong>rollupType</strong></td><td><a href="vim.PerformanceManager.CounterInfo.RollupType.html">PerfSummaryType</a></td><td>
+<p></p>
+         The counter type. Valid values include average, maximum, minimum,
+  latest, summation, or none. This determines the type of statistical
+  values that are returned for the counter. None means that the counter
+  is never rolled up.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="statsType" name="statsType"></a><strong>statsType</strong></td><td><a href="vim.PerformanceManager.CounterInfo.StatsType.html">PerfStatsType</a></td><td>
+<p></p>
+         Statistics type for the counter. Valid values include absolute, delta,
+  or rate.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="unitInfo" name="unitInfo"></a><strong>unitInfo</strong></td><td><a href="vim.ElementDescription.html">ElementDescription</a></td><td>
+<p></p>
+         The unit for the values of the performance counter with its label and
+  summary details. See <a href="vim.PerformanceManager.CounterInfo.Unit.html">PerformanceManagerUnit</a> for a
+  description of the valid values.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="PerfCounterInfo">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="key" type="xsd:int"/>
+                     <element name="nameInfo" type="vim25:ElementDescription"/>
+                     <element name="groupInfo" type="vim25:ElementDescription"/>
+                     <element name="unitInfo" type="vim25:ElementDescription"/>
+                     <element name="rollupType" type="vim25:PerfSummaryType"/>
+                     <element name="statsType" type="vim25:PerfStatsType"/>
+                     <element name="level" type="xsd:int" minOccurs="0"/>
+                     <element name="perDeviceLevel" type="xsd:int" minOccurs="0"/>
+                     <element name="associatedCounterId" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

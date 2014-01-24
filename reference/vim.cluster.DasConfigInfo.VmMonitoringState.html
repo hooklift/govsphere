@@ -1,0 +1,121 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.cluster.DasConfigInfo.VmMonitoringState" name="vim.cluster.DasConfigInfo.VmMonitoringState"></a>
+<h1>Enum - 
+						ClusterDasConfigInfoVmMonitoringState</h1>
+<dl>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+<p></p>
+</dl>
+<br>
+<h2>Enum Description</h2>
+<p></p>
+         The <a href="vim.cluster.DasConfigInfo.VmMonitoringState.html">ClusterDasConfigInfoVmMonitoringState</a> enum defines values that indicate
+ the state of Virtual Machine Health Monitoring. Health Monitoring
+ uses the vmTools (guest) and application agent heartbeat modules.
+ You can configure HA to respond to heartbeat failures of either one
+ or both modules. You can also disable the HA response to heartbeat failures.
+ <ul>
+ <li>
+ To set the cluster default for health monitoring, use the
+ ClusterConfigSpecEx.dasConfig.<a href="vim.cluster.DasConfigInfo.html#vmMonitoring">vmMonitoring</a> property.
+ </li>
+ <li>
+ To set health monitoring for a virtual machine, use the
+ ClusterConfigSpecEx.dasVmConfigSpec.info.dasSettings.<a href="vim.cluster.DasVmSettings.html#vmToolsMonitoringSettings">vmToolsMonitoringSettings</a> property.
+ </li>
+ <li>
+ To retrieve the current state of health monitoring (cluster setting), use the
+ ClusterConfigInfoEx.dasConfig.<a href="vim.cluster.DasConfigInfo.html#vmMonitoring">vmMonitoring</a>
+ property.
+ </li>
+ <li>
+ To retrieve the current state of health monitoring for a virtual machine, use the
+ ClusterConfigInfoEx.dasVmConfig[].dasSettings.vmToolsMonitoringSettings.<a href="vim.cluster.VmToolsMonitoringSettings.html#vmMonitoring">vmMonitoring</a>
+ property.
+ </li>
+ </ul>
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Enum Constants</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><a id="vmAndAppMonitoring" name="vmAndAppMonitoring"></a>vmAndAppMonitoring</td><td>
+      HA response to both guest and application heartbeat failure is enabled.
+ <ul>
+ <li>To retrieve the guest heartbeat status, use the
+ <a href="vim.VirtualMachine.html">VirtualMachine</a>.<a href="vim.VirtualMachine.html#guestHeartbeatStatus">guestHeartbeatStatus</a>
+ property.</li>
+ <li>To retrieve the application heartbeat status, use the
+ <a href="vim.vm.GuestInfo.html">GuestInfo</a>.<a href="vim.vm.GuestInfo.html#appHeartbeatStatus">appHeartbeatStatus</a>
+ property.</li>
+ </ul>
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="vmMonitoringDisabled" name="vmMonitoringDisabled"></a>vmMonitoringDisabled</td><td>
+      Virtual machine health monitoring is disabled. In this state,
+ HA response to guest and application heartbeat failures are disabled.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="vmMonitoringOnly" name="vmMonitoringOnly"></a>vmMonitoringOnly</td><td>
+      HA response to guest heartbeat failure is enabled.
+ To retrieve the guest heartbeat status, use the
+ <a href="vim.VirtualMachine.html">VirtualMachine</a>.<a href="vim.VirtualMachine.html#guestHeartbeatStatus">guestHeartbeatStatus</a>
+ property.
+   <br>
+</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <simpleType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ClusterDasConfigInfoVmMonitoringState">
+            <restriction base="xsd:string">
+               <enumeration value="vmMonitoringDisabled"/>
+               <enumeration value="vmMonitoringOnly"/>
+               <enumeration value="vmAndAppMonitoring"/>
+            </restriction>
+         </simpleType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

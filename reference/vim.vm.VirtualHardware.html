@@ -1,0 +1,146 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.VirtualHardware" name="vim.vm.VirtualHardware"></a>
+<h1>Data Object - VirtualHardware</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.vm.ConfigInfo.html#field_detail">VirtualMachineConfigInfo</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.vm.device.VirtualDevice.html">VirtualDevice</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The VirtualHardware data object type contains the complete configuration
+  of the hardware in a virtual machine.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="device" name="device"></a><strong>device</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.device.VirtualDevice.html">VirtualDevice[]</a></td><td>
+<p></p>
+         The set of virtual devices belonging to the virtual machine.
+  This list is unordered.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="memoryMB" name="memoryMB"></a><strong>memoryMB</strong></td><td>xsd:int</td><td>
+<p></p>
+         Memory size, in MB.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="numCoresPerSocket" name="numCoresPerSocket"></a><strong>numCoresPerSocket</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Number of cores used to distribute virtual CPUs among sockets
+  in this virtual machine.
+  If the value is unset it implies to numCoresPerSocket = 1.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="numCPU" name="numCPU"></a><strong>numCPU</strong></td><td>xsd:int</td><td>
+<p></p>
+         Number of virtual CPUs present in this virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="virtualICH7MPresent" name="virtualICH7MPresent"></a><strong>virtualICH7MPresent</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Does this virtual machine have Virtual Intel I/O Controller Hub 7
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="virtualSMCPresent" name="virtualSMCPresent"></a><strong>virtualSMCPresent</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Does this virtual machine have System Management Controller
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VirtualHardware">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="numCPU" type="xsd:int"/>
+                     <element name="numCoresPerSocket" type="xsd:int" minOccurs="0"/>
+                     <element name="memoryMB" type="xsd:int"/>
+                     <element name="virtualICH7MPresent" type="xsd:boolean" minOccurs="0"/>
+                     <element name="virtualSMCPresent" type="xsd:boolean" minOccurs="0"/>
+                     <element name="device" type="vim25:VirtualDevice" minOccurs="0" maxOccurs="unbounded"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

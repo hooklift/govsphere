@@ -1,0 +1,655 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.ManagedEntity" name="vim.ManagedEntity"></a>
+<h1>Managed Object -  
+						ManagedEntity</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.alarm.AlarmInfo.html#field_detail">AlarmInfo</a>, <a href="vim.alarm.AlarmState.html#field_detail">AlarmState</a>, <a href="vim.profile.ComplianceResult.html#field_detail">ComplianceResult</a>, <a href="vim.fault.ConflictingConfiguration.Config.html#field_detail">ConflictingConfigurationConfig</a>, <a href="vim.view.ContainerView.html#field_detail">ContainerView</a>, <a href="vim.fault.DatacenterMismatch.Argument.html#field_detail">DatacenterMismatchArgument</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.HostContainer.html#field_detail">DistributedVirtualSwitchManagerHostContainer</a>, <a href="vim.dvs.PortConnectee.html#field_detail">DistributedVirtualSwitchPortConnectee</a>, <a href="vim.dvs.PortCriteria.html#field_detail">DistributedVirtualSwitchPortCriteria</a>, <a href="vim.dvs.DistributedVirtualPort.ConfigInfo.html#field_detail">DVPortConfigInfo</a>, <a href="vim.dvs.DistributedVirtualPort.ConfigSpec.html#field_detail">DVPortConfigSpec</a>, <a href="vim.dvs.DistributedVirtualPortgroup.ConfigInfo.html#field_detail">DVPortgroupConfigInfo</a>, <a href="vim.dvs.DistributedVirtualPortgroup.ConfigSpec.html#field_detail">DVPortgroupConfigSpec</a>, <a href="vim.fault.DvsScopeViolated.html#field_detail">DvsScopeViolated</a>, <a href="vim.dvs.EntityBackup.Config.html#field_detail">EntityBackupConfig</a>, <a href="vim.AuthorizationManager.EntityPrivilege.html#field_detail">EntityPrivilege</a>, <a href="vim.event.EventFilterSpec.ByEntity.html#field_detail">EventFilterSpecByEntity</a>, <a href="vim.ext.ExtendedProductInfo.html#field_detail">ExtExtendedProductInfo</a>, <a href="vim.Folder.html#field_detail">Folder</a>, <a href="vim.HttpNfcLease.Info.html#field_detail">HttpNfcLeaseInfo</a>, <a href="vim.fault.InvalidFolder.html#field_detail">InvalidFolder</a>, <a href="vim.fault.InvalidName.html#field_detail">InvalidName</a>, <a href="vim.ManagedEntity.html#field_detail">ManagedEntity</a>, <a href="vim.event.ManagedEntityEventArgument.html#field_detail">ManagedEntityEventArgument</a>, <a href="vim.OvfConsumer.OstNode.html#field_detail">OvfConsumerOstNode</a>, <a href="vim.AuthorizationManager.Permission.html#field_detail">Permission</a>, <a href="vim.profile.Profile.html#field_detail">Profile</a>, <a href="vim.fault.ReplicationInvalidOptions.html#field_detail">ReplicationInvalidOptions</a>, <a href="vim.ResourceConfigSpec.html#field_detail">ResourceConfigSpec</a>, <a href="vim.scheduler.ScheduledTaskInfo.html#field_detail">ScheduledTaskInfo</a>, <a href="vim.TaskFilterSpec.ByEntity.html#field_detail">TaskFilterSpecByEntity</a>, <a href="vim.TaskInfo.html#field_detail">TaskInfo</a>, <a href="vim.TaskReasonAlarm.html#field_detail">TaskReasonAlarm</a>, <a href="vim.vApp.CloneSpec.ResourceMap.html#field_detail">VAppCloneSpecResourceMap</a>, <a href="vim.vApp.EntityConfigInfo.html#field_detail">VAppEntityConfigInfo</a>, <a href="vim.VirtualApp.html#field_detail">VirtualApp</a>, <a href="vim.VirtualApp.LinkInfo.html#field_detail">VirtualAppLinkInfo</a>, <a href="vim.VirtualMachine.html#field_detail">VirtualMachine</a>, <a href="vim.fault.VmFaultToleranceConfigIssue.html#field_detail">VmFaultToleranceConfigIssue</a>, <a href="vim.fault.VmFaultToleranceConfigIssueWrapper.html#field_detail">VmFaultToleranceConfigIssueWrapper</a>
+</dd>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.alarm.AlarmManager.html#acknowledgeAlarm">AcknowledgeAlarm</a>, <a href="vim.alarm.AlarmManager.html#getAlarmActionsEnabled">AreAlarmActionsEnabled</a>, <a href="vim.profile.Profile.html#associateEntities">AssociateProfile</a>, <a href="vim.profile.ComplianceManager.html#checkCompliance">CheckCompliance_Task</a>, <a href="vim.profile.Profile.html#checkCompliance">CheckProfileCompliance_Task</a>, <a href="vim.profile.ComplianceManager.html#clearComplianceStatus">ClearComplianceStatus</a>, <a href="vim.view.InventoryView.html#closeFolder">CloseInventoryViewFolder</a>, <a href="vim.alarm.AlarmManager.html#create">CreateAlarm</a>, <a href="vim.view.ViewManager.html#createContainerView">CreateContainerView</a>, <a href="vim.OvfManager.html#createDescriptor">CreateDescriptor</a>, <a href="vim.scheduler.ScheduledTaskManager.html#create">CreateScheduledTask</a>, <a href="vim.profile.Profile.html#dissociateEntities">DissociateProfile</a>, <a href="vim.alarm.AlarmManager.html#setAlarmActionsEnabled">EnableAlarmActions</a>, <a href="vim.profile.ProfileManager.html#findAssociatedProfile">FindAssociatedProfile</a>, <a href="vim.SearchIndex.html#findChild">FindChild</a>, <a href="vim.alarm.AlarmManager.html#getAlarm">GetAlarm</a>, <a href="vim.alarm.AlarmManager.html#getAlarmState">GetAlarmState</a>, <a href="vim.AuthorizationManager.html#hasPrivilegeOnEntities">HasPrivilegeOnEntities</a>, <a href="vim.AuthorizationManager.html#hasPrivilegeOnEntity">HasPrivilegeOnEntity</a>, <a href="vim.event.EventManager.html#logUserEvent">LogUserEvent</a>, <a href="vim.Folder.html#moveInto">MoveIntoFolder_Task</a>, <a href="vim.ResourcePool.html#moveInto">MoveIntoResourcePool</a>, <a href="vim.view.InventoryView.html#openFolder">OpenInventoryViewFolder</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.html#queryCompatibleHostForExistingDvs">QueryCompatibleHostForExistingDvs</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.html#queryCompatibleHostForNewDvs">QueryCompatibleHostForNewDvs</a>, <a href="vim.profile.ComplianceManager.html#queryComplianceStatus">QueryComplianceStatus</a>, <a href="vim.AuthorizationManager.html#removeEntityPermission">RemoveEntityPermission</a>, <a href="vim.AuthorizationManager.html#resetEntityPermissions">ResetEntityPermissions</a>, <a href="vim.AuthorizationManager.html#retrieveEntityPermissions">RetrieveEntityPermissions</a>, <a href="vim.scheduler.ScheduledTaskManager.html#retrieveEntityScheduledTask">RetrieveEntityScheduledTask</a>, <a href="vim.AuthorizationManager.html#setEntityPermissions">SetEntityPermissions</a>, <a href="vim.CustomFieldsManager.html#setField">SetField</a>, <a href="vim.VirtualApp.html#updateLinkedChildren">UpdateLinkedChildren</a>
+</dd>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.view.InventoryView.html#closeFolder">CloseInventoryViewFolder</a>, <a href="vim.SearchIndex.html#findAllByDnsName">FindAllByDnsName</a>, <a href="vim.SearchIndex.html#findAllByIp">FindAllByIp</a>, <a href="vim.SearchIndex.html#findAllByUuid">FindAllByUuid</a>, <a href="vim.SearchIndex.html#findByDnsName">FindByDnsName</a>, <a href="vim.SearchIndex.html#findByInventoryPath">FindByInventoryPath</a>, <a href="vim.SearchIndex.html#findByIp">FindByIp</a>, <a href="vim.SearchIndex.html#findByUuid">FindByUuid</a>, <a href="vim.SearchIndex.html#findChild">FindChild</a>, <a href="vim.view.InventoryView.html#openFolder">OpenInventoryViewFolder</a>, <a href="vim.ExtensionManager.html#queryManagedBy">QueryManagedBy</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.ComputeResource.html">ComputeResource</a>, <a href="vim.Datacenter.html">Datacenter</a>, <a href="vim.Datastore.html">Datastore</a>, <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a>, <a href="vim.Folder.html">Folder</a>, <a href="vim.HostSystem.html">HostSystem</a>, <a href="vim.Network.html">Network</a>, <a href="vim.ResourcePool.html">ResourcePool</a>, <a href="vim.VirtualMachine.html">VirtualMachine</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.alarm.AlarmState.html">AlarmState</a>, <a href="vim.CustomFieldsManager.Value.html">CustomFieldValue</a>, <a href="vim.event.Event.html">Event</a>, <a href="vim.ManagedEntity.Status.html">ManagedEntityStatus</a>, <a href="vim.AuthorizationManager.Permission.html">Permission</a>, <a href="vim.Tag.html">Tag</a>, <a href="vim.Task.html">Task</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         ManagedEntity is an abstract base type for all managed objects present in
+  the inventory tree. The base type provides common functionality for traversing the
+  tree structure, as well as health monitoring and other basic functions.
+  <p>
+  Most Virtual Infrastructure managed object types extend this type.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="alarmActionsEnabled" name="alarmActionsEnabled"></a><strong>alarmActionsEnabled</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.Read" class="privilege-ref"> P</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Whether alarm actions are enabled for this entity.
+ True if enabled; false otherwise.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="configIssue" name="configIssue"></a><strong>configIssue</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.event.Event.html">Event[]</a></td><td>
+<p></p>
+         Current configuration issues that have been detected for this entity. Typically,
+  these issues have already been logged as events. The entity stores these
+  events as long as they are still current. The
+  <a href="vim.ManagedEntity.html#configStatus">configStatus</a> property provides an overall status
+  based on these events.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="configStatus" name="configStatus"></a><strong>configStatus</strong></td><td><a href="vim.ManagedEntity.Status.html">ManagedEntityStatus</a></td><td>
+<p></p>
+         The configStatus indicates whether or not the system has detected a configuration
+  issue involving this entity. For example, it might have detected a
+  duplicate IP address or MAC address, or a host in a cluster
+  might be out of compliance. The meanings of the configStatus values are:
+  <ul>
+  <li>red:    A problem has been detected involving the entity.
+  <li>yellow: A problem is about to occur or a transient condition
+              has occurred (For example, reconfigure fail-over policy).
+  <li>green:  No configuration issues have been detected.
+  <li>gray:   The configuration status of the entity is not being monitored.
+  </ul>
+  A green status indicates only that a problem has not been detected;
+  it is not a guarantee that the entity is problem-free.
+  <p>
+  The <a href="vim.ManagedEntity.html#configIssue">configIssue</a> property contains a list of the
+  problems that have been detected.
+
+  In releases after vSphere API 5.0, vSphere Servers might not
+  generate property collector update notifications for this property.
+  To obtain the latest value of the property, you can use
+  PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+  If you use the PropertyCollector.WaitForUpdatesEx method, specify
+  an empty string for the version parameter. Any other version value will not
+  produce any property values as no updates are generated.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="customValue" name="customValue"></a><strong>customValue</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vim.CustomFieldsManager.Value.html">CustomFieldValue[]</a></td><td>
+<p></p>
+         Custom field values.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="declaredAlarmState" name="declaredAlarmState"></a><strong>declaredAlarmState</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vim.alarm.AlarmState.html">AlarmState[]</a></td><td>
+<p></p>
+         A set of alarm states for alarms that apply to this managed entity.
+  The set includes alarms defined on this entity
+  and alarms inherited from the parent entity,
+  or from any ancestors in the inventory hierarchy.
+  <p>
+  Alarms are inherited if they can be triggered by this entity or its descendants.
+  This set does not include alarms that are defined on descendants of this entity.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="disabledMethod" name="disabledMethod"></a><strong>disabledMethod</strong><span title="May not be present" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         List of operations that are disabled, given the current runtime
+  state of the entity. For example, a power-on operation always fails if a
+  virtual machine is already powered on. This list can be used by clients to
+  enable or disable operations in a graphical user interface.
+  <p>
+  Note: This list is determined by the current runtime state of an entity,
+  not by its permissions.
+  <p>
+  This list may include the following operations for a HostSystem:
+  <ul>
+  <li><a href="vim.HostSystem.html#enterMaintenanceMode">EnterMaintenanceMode_Task</a>
+  <li><a href="vim.HostSystem.html#exitMaintenanceMode">ExitMaintenanceMode_Task</a>
+  <li><a href="vim.HostSystem.html#reboot">RebootHost_Task</a>
+  <li><a href="vim.HostSystem.html#shutdown">ShutdownHost_Task</a>
+  <li><a href="vim.HostSystem.html#reconnect">ReconnectHost_Task</a>
+  <li><a href="vim.HostSystem.html#disconnect">DisconnectHost_Task</a>
+  </ul>
+  <p>
+  This list may include the following operations for a VirtualMachine:
+  <ul>
+  <li><a href="vim.VirtualMachine.html#answer">AnswerVM</a>
+  <li><a href="vim.ManagedEntity.html#rename">Rename_Task</a>
+  <li><a href="vim.VirtualMachine.html#clone">CloneVM_Task</a>
+  <li><a href="vim.VirtualMachine.html#powerOff">PowerOffVM_Task</a>
+  <li><a href="vim.VirtualMachine.html#powerOn">PowerOnVM_Task</a>
+  <li><a href="vim.VirtualMachine.html#suspend">SuspendVM_Task</a>
+  <li><a href="vim.VirtualMachine.html#reset">ResetVM_Task</a>
+  <li><a href="vim.VirtualMachine.html#reconfigure">ReconfigVM_Task</a>
+  <li><a href="vim.VirtualMachine.html#relocate">RelocateVM_Task</a>
+  <li><a href="vim.VirtualMachine.html#migrate">MigrateVM_Task</a>
+  <li><a href="vim.VirtualMachine.html#customize">CustomizeVM_Task</a>
+  <li><a href="vim.VirtualMachine.html#shutdownGuest">ShutdownGuest</a>
+  <li><a href="vim.VirtualMachine.html#standbyGuest">StandbyGuest</a>
+  <li><a href="vim.VirtualMachine.html#rebootGuest">RebootGuest</a>
+  <li><a href="vim.VirtualMachine.html#createSnapshot">CreateSnapshot_Task</a>
+  <li><a href="vim.VirtualMachine.html#removeAllSnapshots">RemoveAllSnapshots_Task</a>
+  <li><a href="vim.VirtualMachine.html#revertToCurrentSnapshot">RevertToCurrentSnapshot_Task</a>
+  <li><a href="vim.VirtualMachine.html#markAsTemplate">MarkAsTemplate</a>
+  <li><a href="vim.VirtualMachine.html#markAsVirtualMachine">MarkAsVirtualMachine</a>
+  <li><a href="vim.VirtualMachine.html#resetGuestInformation">ResetGuestInformation</a>
+  <li><a href="vim.VirtualMachine.html#mountToolsInstaller">MountToolsInstaller</a>
+  <li><a href="vim.VirtualMachine.html#unmountToolsInstaller">UnmountToolsInstaller</a>
+  <li><a href="vim.ManagedEntity.html#destroy">Destroy_Task</a>
+  <li><a href="vim.VirtualMachine.html#upgradeVirtualHardware">UpgradeVM_Task</a>
+  <li><a href="vim.VirtualMachine.html#exportVm">ExportVm</a>
+  </ul>
+  <p>
+  This list may include the following operations for a ResourcePool:
+  <ul>
+  <li><a href="vim.ResourcePool.html#importVApp">ImportVApp</a>
+  <li><a href="vim.ResourcePool.html#createVm">CreateChildVM_Task</a>
+  <li><a href="vim.ResourcePool.html#updateConfig">UpdateConfig</a>
+  <li><a href="vim.Folder.html#createVm">CreateVM_Task</a>
+  <li><a href="vim.ManagedEntity.html#destroy">Destroy_Task</a>
+  <li><a href="vim.ManagedEntity.html#rename">Rename_Task</a>
+  </ul>
+  This list may include the following operations for a VirtualApp:
+  <ul>
+  <li><a href="vim.ManagedEntity.html#destroy">Destroy_Task</a>
+  <li><a href="vim.VirtualApp.html#clone">CloneVApp_Task</a>
+  <li><a href="vim.VirtualApp.html#unregister">unregisterVApp_Task</a>
+  <li><a href="vim.VirtualApp.html#exportVApp">ExportVApp</a>
+  <li><a href="vim.VirtualApp.html#powerOn">PowerOnVApp_Task</a>
+  <li><a href="vim.VirtualApp.html#powerOff">PowerOffVApp_Task</a>
+  <li><a href="vim.VirtualApp.html#updateVAppConfig">UpdateVAppConfig</a>
+  </ul>
+ <p>
+
+  In releases after vSphere API 5.0, vSphere Servers might not
+  generate property collector update notifications for this property.
+  To obtain the latest value of the property, you can use
+  PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+  If you use the PropertyCollector.WaitForUpdatesEx method, specify
+  an empty string for the version parameter. Any other version value will not
+  produce any property values as no updates are generated.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="effectiveRole" name="effectiveRole"></a><strong>effectiveRole</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td>xsd:int[]</td><td>
+<p></p>
+         Access rights the current session has to this entity.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="name" name="name"></a><strong>name</strong><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td>xsd:string</td><td>
+<p></p>
+         Name of this entity, unique relative to its parent.
+  <p>
+  Any / (slash), \ (backslash), character used in this
+  name element will be escaped. Similarly, any % (percent) character used in
+ this name element will be escaped, unless it is used to start an escape
+  sequence. A slash is escaped as %2F or %2f. A backslash is escaped as %5C or
+  %5c, and a percent is escaped as %25.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="overallStatus" name="overallStatus"></a><strong>overallStatus</strong></td><td><a href="vim.ManagedEntity.Status.html">ManagedEntityStatus</a></td><td>
+<p></p>
+         General health of this managed entity.
+  The overall status of the managed entity is computed as the worst status
+  among its alarms and the configuration issues detected on the entity.
+  The status is reported as one of the following values:
+  <ul>
+  <li>red:    The entity has alarms or configuration issues with a red status.
+  <li>yellow: The entity does not have alarms or configuration issues with a
+              red status, and has at least one with a yellow status.
+  <li>green:  The entity does not have alarms or configuration issues with a
+              red or yellow status, and has at least one with a green status.
+  <li>gray:   All of the entity's alarms have a gray status and the
+              configuration status of the entity is not being monitored.
+  </ul>
+
+  In releases after vSphere API 5.0, vSphere Servers might not
+  generate property collector update notifications for this property.
+  To obtain the latest value of the property, you can use
+  PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+  If you use the PropertyCollector.WaitForUpdatesEx method, specify
+  an empty string for the version parameter. Any other version value will not
+  produce any property values as no updates are generated.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="parent" name="parent"></a><strong>parent</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity</a></td><td>
+<p></p>
+         Parent of this entity.
+  <p>
+  This value is null for the root object and for
+  <a href="vim.VirtualMachine.html">VirtualMachine</a> objects that are part of
+  a <a href="vim.VirtualApp.html">VirtualApp</a>.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="permission" name="permission"></a><strong>permission</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.AuthorizationManager.Permission.html">Permission[]</a></td><td>
+<p></p>
+         List of permissions defined for this entity.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="recentTask" name="recentTask"></a><strong>recentTask</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.Task.html">Task[]</a></td><td>
+<p></p>
+         The set of recent tasks operating on this managed entity. This is a subset
+  of <a href="vim.TaskManager.html#recentTask">recentTask</a> belong to this entity. A task in this
+  list could be in one of the four states: pending, running, success or error.
+  <p>
+  This property can be used to deduce intermediate power states for
+  a virtual machine entity. For example, if the current powerState is "poweredOn"
+  and there is a running task performing the "suspend" operation, then the virtual
+  machine's intermediate state might be described as "suspending."
+  <p>
+  Most tasks (such as power operations) obtain exclusive access to the virtual
+  machine, so it is unusual for this list to contain more than one running task.
+  One exception, however, is the task of cloning a virtual machine.
+
+  In releases after vSphere API 5.0, vSphere Servers might not
+  generate property collector update notifications for this property.
+  To obtain the latest value of the property, you can use
+  PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+  If you use the PropertyCollector.WaitForUpdatesEx method, specify
+  an empty string for the version parameter. Any other version value will not
+  produce any property values as no updates are generated.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="tag" name="tag"></a><strong>tag</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vim.Tag.html">Tag[]</a></td><td>
+<p></p>
+         The set of tags associated with this managed entity.
+  Experimental. Subject to change.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="triggeredAlarmState" name="triggeredAlarmState"></a><strong>triggeredAlarmState</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vim.alarm.AlarmState.html">AlarmState[]</a></td><td>
+<p></p>
+         A set of alarm states for alarms triggered by this entity
+  or by its descendants.
+  <p>
+  Triggered alarms are propagated up the inventory hierarchy
+  so that a user can readily tell when a descendant has triggered an alarm.
+
+  In releases after vSphere API 5.0, vSphere Servers might not
+  generate property collector update notifications for this property.
+  To obtain the latest value of the property, you can use
+  PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+  If you use the PropertyCollector.WaitForUpdatesEx method, specify
+  an empty string for the version parameter. Any other version value will not
+  produce any property values as no updates are generated.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.ExtensibleManagedObject.html#availableField">availableField</a>, <a href="vim.ExtensibleManagedObject.html#value">value</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span><span class="privilege-ref">P</span><span class="footnote">Required privilege - see tooltip for details</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#destroy">Destroy_Task</a>, <a href="#reload">Reload</a>, <a href="#rename">Rename_Task</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.ExtensibleManagedObject.html#setCustomValue">setCustomValue</a></td>
+</tr>
+</table>
+<br>
+<a id="destroy" name="destroy"></a>
+<h1>Destroy_Task</h1>
+<p></p>
+         Destroys this object, deleting its contents and removing it from its parent
+  folder (if any).
+  <p>
+  NOTE: The appropriate privilege must be held on the parent of the destroyed
+  entity as well as the entity itself.
+  </p>
+  This method can throw one of several exceptions. The exact set of exceptions
+  depends on the kind of entity that is being removed.  See comments for
+  each entity for more information on destroy behavior.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>When object is <strong>VirtualMachine</strong> - VirtualMachine.Inventory.Delete<br>When object is <strong>Datacenter</strong> - Datacenter.Delete<br>When object is <strong>Folder</strong> - Folder.Delete<br>When object is <strong>HostSystem</strong> - Host.Inventory.RemoveHostFromCluster<br>When object is <strong>VirtualApp</strong> - VApp.Delete<br>When object is <strong>ResourcePool</strong> - Resource.DeletePool<br>When object is <strong>ComputeResource</strong> - Host.Inventory.RemoveHostFromCluster<br>When object is <strong>ClusterComputeResource</strong> - Host.Inventory.DeleteCluster<br>When object is <strong>DistributedVirtualSwitch</strong> - DVSwitch.Delete<br>When object is <strong>DistributedVirtualPortgroup</strong> - DVPortgroup.Delete<br>When object is <strong>Datastore</strong> - System.Read<br>When object is <strong>Network</strong> - System.Read<br>
+</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ManagedEntity.html">ManagedEntity</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.VimFault.html">VimFault</a></td><td></td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="reload" name="reload"></a>
+<h1>Reload</h1>
+<p></p>
+         Reload the entity state. Clients only need to call this method
+  if they changed some external state that affects the service
+  without using the Web service interface to perform the change.
+  For example, hand-editing a virtual machine configuration file
+  affects the configuration of the associated virtual machine but
+  the service managing the virtual machine might not monitor the
+  file for changes. In this case, after such an edit, a client
+  would call "reload" on the associated virtual machine to ensure
+  the service and its clients have current data for the
+  virtual machine.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Read</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ManagedEntity.html">ManagedEntity</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('Reload-textarea');expandcontent(this, 'Reload-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="Reload-div">
+<textarea cols="20" rows="10" name="Reload-textarea" wrap="off" readonly="1" id="Reload-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="Reload" type="vim25:ReloadRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ReloadResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="rename" name="rename"></a>
+<h1>Rename_Task</h1>
+<p></p>
+         Renames this managed entity.
+ <p>
+ Any % (percent) character used in this name parameter
+ must be escaped, unless it is used to start an escape
+ sequence. Clients may also escape any other characters in
+ this name parameter.
+ <p><br>See <a href="vim.ManagedEntity.html#name">name</a><br>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>When object is <strong>VirtualMachine</strong> - VirtualMachine.Config.Rename<br>When object is <strong>Datacenter</strong> - Datacenter.Rename<br>When object is <strong>Folder</strong> - Folder.Rename<br>When object is <strong>VirtualApp</strong> - VApp.Rename<br>When object is <strong>ResourcePool</strong> - Resource.RenamePool<br>When object is <strong>ClusterComputeResource</strong> - Host.Inventory.RenameCluster<br>When object is <strong>DistributedVirtualSwitch</strong> - DVSwitch.Modify<br>When object is <strong>DistributedVirtualPortgroup</strong> - DVPortgroup.Modify<br>When object is <strong>Datastore</strong> - Datastore.Rename<br>When object is <strong>Network</strong> - System.Read<br>
+</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ManagedEntity.html">ManagedEntity</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>newName</strong></td><td>xsd:string</td><td>
+<p></p>
+         <br>See <a href="vim.ManagedEntity.html#name">name</a><br>
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if another object in the same folder has the target name.<br>See <a href="vim.ManagedEntity.html#name">name</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td>Thrown if the new name is not a valid entity name.<br>See <a href="vim.ManagedEntity.html#name">name</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

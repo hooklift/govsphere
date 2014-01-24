@@ -1,0 +1,502 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.Task" name="vim.Task"></a>
+<h1>Managed Object -  
+						Task</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.cluster.AttemptedVmInfo.html#field_detail">ClusterAttemptedVmInfo</a>, <a href="vim.ManagedEntity.html#field_detail">ManagedEntity</a>, <a href="vim.scheduler.ScheduledTaskInfo.html#field_detail">ScheduledTaskInfo</a>, <a href="vim.storageDrs.StoragePlacementResult.html#field_detail">StoragePlacementResult</a>, <a href="vim.TaskInfo.html#field_detail">TaskInfo</a>, <a href="vim.fault.TaskInProgress.html#field_detail">TaskInProgress</a>, <a href="vim.TaskManager.html#field_detail">TaskManager</a>
+</dd>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.host.VsanSystem.html#addDisks">AddDisks_Task</a>, <a href="vim.DistributedVirtualSwitch.html#addPortgroups">AddDVPortgroup_Task</a>, <a href="vim.ClusterComputeResource.html#addHost">AddHost_Task</a>, <a href="vim.Folder.html#addStandaloneHost">AddStandaloneHost_Task</a>, <a href="vim.profile.host.ProfileManager.html#applyHostConfiguration">ApplyHostConfig_Task</a>, <a href="vim.StorageResourceManager.html#applyRecommendation">ApplyStorageDrsRecommendation_Task</a>, <a href="vim.StorageResourceManager.html#applyRecommendationToPod">ApplyStorageDrsRecommendationToPod_Task</a>, <a href="vim.profile.host.ProfileManager.html#checkAnswerFileStatus">CheckAnswerFileStatus_Task</a>, <a href="vim.vm.check.CompatibilityChecker.html#checkCompatibility">CheckCompatibility_Task</a>, <a href="vim.profile.ComplianceManager.html#checkCompliance">CheckCompliance_Task</a>, <a href="vim.host.PatchManager.html#Check">CheckHostPatch_Task</a>, <a href="vim.vm.check.ProvisioningChecker.html#checkMigrate">CheckMigrate_Task</a>, <a href="vim.profile.Profile.html#checkCompliance">CheckProfileCompliance_Task</a>, <a href="vim.vm.check.ProvisioningChecker.html#checkRelocate">CheckRelocate_Task</a>, <a href="vim.VirtualApp.html#clone">CloneVApp_Task</a>, <a href="vim.VirtualMachine.html#clone">CloneVM_Task</a>, <a href="vim.StorageResourceManager.html#ConfigureDatastoreIORM">ConfigureDatastoreIORM_Task</a>, <a href="vim.host.CacheConfigurationManager.html#configureCache">ConfigureHostCache_Task</a>, <a href="vim.StorageResourceManager.html#configureStorageDrsForPod">ConfigureStorageDrsForPod_Task</a>, <a href="vim.host.VFlashManager.html#configureVFlashResourceEx">ConfigureVFlashResourceEx_Task</a>, <a href="vim.VirtualMachine.html#consolidateDisks">ConsolidateVMDisks_Task</a>, <a href="vim.FileManager.html#copyFile">CopyDatastoreFile_Task</a>, <a href="vim.VirtualDiskManager.html#copyVirtualDisk">CopyVirtualDisk_Task</a>, <a href="vim.ResourcePool.html#createVm">CreateChildVM_Task</a>, <a href="vim.DistributedVirtualSwitch.html#addPortgroup">CreateDVPortgroup_Task</a>, <a href="vim.Folder.html#createDistributedVirtualSwitch">CreateDVS_Task</a>, <a href="vim.VirtualMachine.html#createScreenshot">CreateScreenshot_Task</a>, <a href="vim.VirtualMachine.html#createSecondary">CreateSecondaryVM_Task</a>, <a href="vim.VirtualMachine.html#createSnapshot">CreateSnapshot_Task</a>, <a href="vim.VirtualDiskManager.html#createVirtualDisk">CreateVirtualDisk_Task</a>, <a href="vim.Folder.html#createVm">CreateVM_Task</a>, <a href="vim.VirtualMachine.html#customize">CustomizeVM_Task</a>, <a href="vim.Datastore.html#exitMaintenanceMode">DatastoreExitMaintenanceMode_Task</a>, <a href="vim.VirtualDiskManager.html#defragmentVirtualDisk">DefragmentVirtualDisk_Task</a>, <a href="vim.FileManager.html#deleteFile">DeleteDatastoreFile_Task</a>, <a href="vim.VirtualDiskManager.html#deleteVirtualDisk">DeleteVirtualDisk_Task</a>, <a href="vim.ManagedEntity.html#destroy">Destroy_Task</a>, <a href="vim.VirtualMachine.html#disableSecondary">DisableSecondaryVM_Task</a>, <a href="vim.HostSystem.html#disconnect">DisconnectHost_Task</a>, <a href="vim.dvs.DistributedVirtualPortgroup.html#rollback">DVPortgroupRollback_Task</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.html#exportEntity">DVSManagerExportEntity_Task</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.html#importEntity">DVSManagerImportEntity_Task</a>, <a href="vim.DistributedVirtualSwitch.html#rollback">DVSRollback_Task</a>, <a href="vim.VirtualDiskManager.html#eagerZeroVirtualDisk">EagerZeroVirtualDisk_Task</a>, <a href="vim.VirtualMachine.html#enableSecondary">EnableSecondaryVM_Task</a>, <a href="vim.HostSystem.html#enterMaintenanceMode">EnterMaintenanceMode_Task</a>, <a href="vim.VirtualMachine.html#estimateStorageRequirementForConsolidate">EstimateStorageForConsolidateSnapshots_Task</a>, <a href="vim.HostSystem.html#exitMaintenanceMode">ExitMaintenanceMode_Task</a>, <a href="vim.profile.host.ProfileManager.html#exportAnswerFile">ExportAnswerFile_Task</a>, <a href="vim.VirtualDiskManager.html#extendVirtualDisk">ExtendVirtualDisk_Task</a>, <a href="vim.profile.host.ProfileManager.html#generateTaskList">GenerateHostProfileTaskList_Task</a>, <a href="vim.DiagnosticManager.html#generateLogBundles">GenerateLogBundles_Task</a>, <a href="vim.host.ActiveDirectoryAuthentication.html#importCertificateForCAM">ImportCertificateForCAM_Task</a>, <a href="vim.VirtualDiskManager.html#inflateVirtualDisk">InflateVirtualDisk_Task</a>, <a href="vim.host.VsanSystem.html#initializeDisks">InitializeDisks_Task</a>, <a href="vim.host.PatchManager.html#Install">InstallHostPatch_Task</a>, <a href="vim.host.PatchManager.html#InstallV2">InstallHostPatchV2_Task</a>, <a href="vim.host.ActiveDirectoryAuthentication.html#joinDomain">JoinDomain_Task</a>, <a href="vim.host.ActiveDirectoryAuthentication.html#joinDomainWithCAM">JoinDomainWithCAM_Task</a>, <a href="vim.host.ActiveDirectoryAuthentication.html#leaveCurrentDomain">LeaveCurrentDomain_Task</a>, <a href="vim.VirtualMachine.html#makePrimary">MakePrimaryVM_Task</a>, <a href="vim.DistributedVirtualSwitch.html#merge">MergeDvs_Task</a>, <a href="vim.VirtualMachine.html#migrate">MigrateVM_Task</a>, <a href="vim.FileManager.html#moveFile">MoveDatastoreFile_Task</a>, <a href="vim.DistributedVirtualSwitch.html#movePort">MoveDVPort_Task</a>, <a href="vim.ClusterComputeResource.html#moveHostInto">MoveHostInto_Task</a>, <a href="vim.ClusterComputeResource.html#moveInto">MoveInto_Task</a>, <a href="vim.Folder.html#moveInto">MoveIntoFolder_Task</a>, <a href="vim.VirtualDiskManager.html#moveVirtualDisk">MoveVirtualDisk_Task</a>, <a href="vim.DistributedVirtualSwitch.html#performProductSpecOperation">PerformDvsProductSpecOperation_Task</a>, <a href="vim.HostSystem.html#enterStandbyMode">PowerDownHostToStandBy_Task</a>, <a href="vim.VirtualApp.html#powerOff">PowerOffVApp_Task</a>, <a href="vim.VirtualMachine.html#powerOff">PowerOffVM_Task</a>, <a href="vim.Datacenter.html#powerOnVm">PowerOnMultiVM_Task</a>, <a href="vim.VirtualApp.html#powerOn">PowerOnVApp_Task</a>, <a href="vim.VirtualMachine.html#powerOn">PowerOnVM_Task</a>, <a href="vim.HostSystem.html#exitStandbyMode">PowerUpHostFromStandBy_Task</a>, <a href="vim.VirtualMachine.html#promoteDisks">PromoteDisks_Task</a>, <a href="vim.host.PatchManager.html#Query">QueryHostPatch_Task</a>, <a href="vim.vm.check.ProvisioningChecker.html#queryVMotionCompatibilityEx">QueryVMotionCompatibilityEx_Task</a>, <a href="vim.HostSystem.html#reboot">RebootHost_Task</a>, <a href="vim.ClusterComputeResource.html#reconfigure">ReconfigureCluster_Task</a>, <a href="vim.ComputeResource.html#reconfigureEx">ReconfigureComputeResource_Task</a>, <a href="vim.Datacenter.html#reconfigure">ReconfigureDatacenter_Task</a>, <a href="vim.DistributedVirtualSwitch.html#reconfigurePort">ReconfigureDVPort_Task</a>, <a href="vim.dvs.DistributedVirtualPortgroup.html#reconfigure">ReconfigureDVPortgroup_Task</a>, <a href="vim.DistributedVirtualSwitch.html#reconfigure">ReconfigureDvs_Task</a>, <a href="vim.HostSystem.html#reconfigureDAS">ReconfigureHostForDAS_Task</a>, <a href="vim.VirtualMachine.html#reconfigure">ReconfigVM_Task</a>, <a href="vim.HostSystem.html#reconnect">ReconnectHost_Task</a>, <a href="vim.DistributedVirtualSwitch.html#rectifyHost">RectifyDvsHost_Task</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.html#rectifyHost">RectifyDvsOnHost_Task</a>, <a href="vim.ResourcePool.html#registerVm">RegisterChildVM_Task</a>, <a href="vim.Folder.html#registerVm">RegisterVM_Task</a>, <a href="vim.VirtualMachine.html#reloadFromPath">reloadVirtualMachineFromPath_Task</a>, <a href="vim.VirtualMachine.html#relocate">RelocateVM_Task</a>, <a href="vim.VirtualMachine.html#removeAllSnapshots">RemoveAllSnapshots_Task</a>, <a href="vim.host.VsanSystem.html#removeDisk">RemoveDisk_Task</a>, <a href="vim.host.VsanSystem.html#removeDiskMapping">RemoveDiskMapping_Task</a>, <a href="vim.vm.Snapshot.html#remove">RemoveSnapshot_Task</a>, <a href="vim.ManagedEntity.html#rename">Rename_Task</a>, <a href="vim.VirtualMachine.html#reset">ResetVM_Task</a>, <a href="vim.host.DatastoreSystem.html#resignatureUnresolvedVmfsVolume">ResignatureUnresolvedVmfsVolume_Task</a>, <a href="vim.host.StorageSystem.html#resolveMultipleUnresolvedVmfsVolumesEx">ResolveMultipleUnresolvedVmfsVolumesEx_Task</a>, <a href="vim.VirtualMachine.html#revertToCurrentSnapshot">RevertToCurrentSnapshot_Task</a>, <a href="vim.vm.Snapshot.html#revert">RevertToSnapshot_Task</a>, <a href="vim.host.PatchManager.html#Scan">ScanHostPatch_Task</a>, <a href="vim.host.PatchManager.html#ScanV2">ScanHostPatchV2_Task</a>, <a href="vim.host.DatastoreBrowser.html#search">SearchDatastore_Task</a>, <a href="vim.host.DatastoreBrowser.html#searchSubFolders">SearchDatastoreSubFolders_Task</a>, <a href="vim.VirtualDiskManager.html#shrinkVirtualDisk">ShrinkVirtualDisk_Task</a>, <a href="vim.HostSystem.html#shutdown">ShutdownHost_Task</a>, <a href="vim.host.PatchManager.html#Stage">StageHostPatch_Task</a>, <a href="vim.VirtualMachine.html#startRecording">StartRecording_Task</a>, <a href="vim.VirtualMachine.html#startReplaying">StartReplaying_Task</a>, <a href="vim.VirtualMachine.html#stopRecording">StopRecording_Task</a>, <a href="vim.VirtualMachine.html#stopReplaying">StopReplaying_Task</a>, <a href="vim.VirtualApp.html#suspend">SuspendVApp_Task</a>, <a href="vim.VirtualMachine.html#suspend">SuspendVM_Task</a>, <a href="vim.VirtualMachine.html#terminateFaultTolerantVM">TerminateFaultTolerantVM_Task</a>, <a href="vim.VirtualMachine.html#turnOffFaultTolerance">TurnOffFaultToleranceForVM_Task</a>, <a href="vim.host.PatchManager.html#Uninstall">UninstallHostPatch_Task</a>, <a href="vim.Folder.html#unregisterAndDestroy">UnregisterAndDestroy_Task</a>, <a href="vim.VirtualApp.html#unregister">unregisterVApp_Task</a>, <a href="vim.profile.host.ProfileManager.html#updateAnswerFile">UpdateAnswerFile_Task</a>, <a href="vim.DistributedVirtualSwitch.html#updateHealthCheckConfig">UpdateDVSHealthCheckConfig_Task</a>, <a href="vim.dvs.VmwareDistributedVirtualSwitch.html#updateLacpGroupConfig">UpdateDVSLacpGroupConfig_Task</a>, <a href="vim.Datastore.html#updateVirtualMachineFiles">UpdateVirtualMachineFiles_Task</a>, <a href="vim.host.VsanSystem.html#update">UpdateVsan_Task</a>, <a href="vim.VirtualMachine.html#upgradeTools">UpgradeTools_Task</a>, <a href="vim.VirtualMachine.html#upgradeVirtualHardware">UpgradeVM_Task</a>, <a href="vim.VirtualDiskManager.html#zeroFillVirtualDisk">ZeroFillVirtualDisk_Task</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vmodl.LocalizableMessage.html">LocalizableMessage</a>, <a href="vmodl.MethodFault.html">MethodFault</a>, <a href="vim.TaskInfo.html">TaskInfo</a>, <a href="vim.TaskInfo.State.html">TaskInfoState</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         A task is used to monitor and potentially cancel long
+  running operations.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="info" name="info"></a><strong>info</strong></td><td><a href="vim.TaskInfo.html">TaskInfo</a></td><td>
+<p></p>
+         Detailed information about this task.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.ExtensibleManagedObject.html#availableField">availableField</a>, <a href="vim.ExtensibleManagedObject.html#value">value</a></td>
+</tr>
+</table>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#cancel">CancelTask</a>, <a href="#UpdateDescription">SetTaskDescription</a>, <a href="#setState">SetTaskState</a>, <a href="#UpdateProgress">UpdateProgress</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.ExtensibleManagedObject.html#setCustomValue">setCustomValue</a></td>
+</tr>
+</table>
+<br>
+<a id="cancel" name="cancel"></a>
+<h1>CancelTask</h1>
+<p></p>
+         Cancels a running or queued task.  A task may only be canceled if it is
+  cancelable.  Multiple cancel requests will be treated as a single
+  cancelation request.  Canceling a completed or already canceled task
+  will throw an InvalidState exception.  
+  <p>
+  If a task is canceled, its runtime state will be set to error and its
+  error state will be set to <a href="vmodl.fault.RequestCanceled.html">RequestCanceled</a>.
+  <p>
+  A cancel operation is asynchronous.  The operation may return before
+  the task is canceled.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Global.CancelTask</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.Task.html">Task</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the task is already canceled or completed.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the task is not cancelable.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CancelTask-textarea');expandcontent(this, 'CancelTask-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CancelTask-div">
+<textarea cols="20" rows="10" name="CancelTask-textarea" wrap="off" readonly="1" id="CancelTask-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CancelTask" type="vim25:CancelTaskRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CancelTaskResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="UpdateDescription" name="UpdateDescription"></a>
+<h1>SetTaskDescription</h1>
+<p></p>
+         Updates task description to describe the current phase of the task.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Task.Update</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.Task.html">Task</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>description</strong></td><td><a href="vmodl.LocalizableMessage.html">LocalizableMessage</a></td><td>
+<p></p>
+         New description for task
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('SetTaskDescription-textarea');expandcontent(this, 'SetTaskDescription-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="SetTaskDescription-div">
+<textarea cols="20" rows="10" name="SetTaskDescription-textarea" wrap="off" readonly="1" id="SetTaskDescription-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="SetTaskDescription" type="vim25:SetTaskDescriptionRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="SetTaskDescriptionResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="setState" name="setState"></a>
+<h1>SetTaskState</h1>
+<p></p>
+         Sets task state and optionally sets results or fault,
+  as appropriate for state
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Task.Update</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.Task.html">Task</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>state</strong></td><td><a href="vim.TaskInfo.State.html">TaskInfoState</a></td><td>
+<p></p>
+         New state for task
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>result</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:anyType</td><td>
+<p></p>
+         Result to set, valid only if task state is 
+    TaskInfo.State.success
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>fault</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.MethodFault.html">MethodFault</a></td><td>
+<p></p>
+         Fault to set, valid only if task state is
+    <a href="vim.TaskInfo.State.html#error">error</a>.  The fault must be a of a fault type that
+    directly or indirectly extends <a href="vim.fault.VimFault.html">VimFault</a>.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if attempting to change states after task is completed or in error, or attempting to set the result or fault incorrectly</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('SetTaskState-textarea');expandcontent(this, 'SetTaskState-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="SetTaskState-div">
+<textarea cols="20" rows="10" name="SetTaskState-textarea" wrap="off" readonly="1" id="SetTaskState-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="SetTaskState" type="vim25:SetTaskStateRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="SetTaskStateResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="UpdateProgress" name="UpdateProgress"></a>
+<h1>UpdateProgress</h1>
+<p></p>
+         Sets percentage done for this task and recalculates overall
+  percentage done. If a percentDone value of less than zero or
+  greater than 100 is specified, a value of zero or 100
+  respectively is used.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Task.Update</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.Task.html">Task</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>percentDone</strong></td><td>xsd:int</td><td>
+<p></p>
+         Percentage to set for this task
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if task is not running</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.OutOfBounds.html">OutOfBounds</a></td><td>VirtualCenter 2.x servers throw this fault if percentDone is less than 0 or greater than 100. Newer versions behave as described above, and never throw this fault.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateProgress-textarea');expandcontent(this, 'UpdateProgress-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateProgress-div">
+<textarea cols="20" rows="10" name="UpdateProgress-textarea" wrap="off" readonly="1" id="UpdateProgress-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateProgress" type="vim25:UpdateProgressRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateProgressResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

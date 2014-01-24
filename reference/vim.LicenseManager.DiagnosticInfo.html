@@ -1,0 +1,179 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.LicenseManager.DiagnosticInfo" name="vim.LicenseManager.DiagnosticInfo"></a>
+<h1>Data Object - LicenseDiagnostics</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.LicenseManager.html#field_detail">LicenseManager</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.LicenseManager.LicenseState.html">LicenseManagerState</a>
+</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This data object type provides summary status and diagnostic information for
+  <a href="vim.LicenseManager.html">LicenseManager</a>. Counters in this property can be reset to zero. The
+  property specified as a discontinuity is used to determine when this last
+  occurred.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="lastStatusUpdate" name="lastStatusUpdate"></a><strong>lastStatusUpdate</strong></td><td>xsd:dateTime</td><td>
+<p></p>
+         A timestamp of when opState was last updated.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="licenseFeatureUnknowns" name="licenseFeatureUnknowns"></a><strong>licenseFeatureUnknowns</strong></td><td>xsd:string</td><td>
+<p></p>
+         Counter to track Total number of license features parsed from
+  License source that are not recognized.
+  This value starts at zero and wraps at 2^32-1 to zero.
+  Discontinuity: sourceLastChanged.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="licenseRequestFailures" name="licenseRequestFailures"></a><strong>licenseRequestFailures</strong></td><td>xsd:string</td><td>
+<p></p>
+         Counter to track Total number of licenses requests that were
+  not fulfilled (denied, timeout, or other).
+  This value starts at zero and wraps at 2^32-1 to zero.
+  Discontinuity: sourceLastChanged.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="licenseRequests" name="licenseRequests"></a><strong>licenseRequests</strong></td><td>xsd:string</td><td>
+<p></p>
+         Counter to track total number of licenses requested.
+  This value starts at zero and wraps at 2^32-1 to zero.
+  Discontinuity: sourceLastChanged.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="opFailureMessage" name="opFailureMessage"></a><strong>opFailureMessage</strong></td><td>xsd:string</td><td>
+<p></p>
+         A human readable reason when optState reports Fault condition.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="opState" name="opState"></a><strong>opState</strong></td><td><a href="vim.LicenseManager.LicenseState.html">LicenseManagerState</a></td><td>
+<p></p>
+         The general state of the license subsystem.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="sourceLastChanged" name="sourceLastChanged"></a><strong>sourceLastChanged</strong></td><td>xsd:dateTime</td><td>
+<p></p>
+         A timestamp of when sourceAvailable last changed state, expressed in UTC.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="sourceLatency" name="sourceLatency"></a><strong>sourceLatency</strong></td><td>xsd:float</td><td>
+<p></p>
+         Exponentially decaying average of the transaction time for license
+  acquisition and routine communications with LicenseSource.
+  Units: milliseconds.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="sourceLost" name="sourceLost"></a><strong>sourceLost</strong></td><td>xsd:string</td><td>
+<p></p>
+         Counter to track number of times connection to source was lost.
+  This value starts at zero and wraps at 2^32-1 to zero.
+  Discontinuity: sourceLastChanged.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="LicenseDiagnostics">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="sourceLastChanged" type="xsd:dateTime"/>
+                     <element name="sourceLost" type="xsd:string"/>
+                     <element name="sourceLatency" type="xsd:float"/>
+                     <element name="licenseRequests" type="xsd:string"/>
+                     <element name="licenseRequestFailures" type="xsd:string"/>
+                     <element name="licenseFeatureUnknowns" type="xsd:string"/>
+                     <element name="opState" type="vim25:LicenseManagerState"/>
+                     <element name="lastStatusUpdate" type="xsd:dateTime"/>
+                     <element name="opFailureMessage" type="xsd:string"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

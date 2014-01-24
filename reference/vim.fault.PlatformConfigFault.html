@@ -1,0 +1,119 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.fault.PlatformConfigFault" name="vim.fault.PlatformConfigFault"></a>
+<h1>Fault - PlatformConfigFault</h1>
+<dl>
+<dt>Thrown by</dt>
+<dd>
+<a href="vim.host.IscsiManager.html#bindVnic">BindVnic</a>, <a href="vim.host.PatchManager.html#Check">CheckHostPatch_Task</a>, <a href="vim.host.PatchManager.html#InstallV2">InstallHostPatchV2_Task</a>, <a href="vim.host.PatchManager.html#Query">QueryHostPatch_Task</a>, <a href="vim.host.PatchManager.html#Scan">ScanHostPatch_Task</a>, <a href="vim.host.PatchManager.html#ScanV2">ScanHostPatchV2_Task</a>, <a href="vim.host.PatchManager.html#Stage">StageHostPatch_Task</a>, <a href="vim.host.IscsiManager.html#unbindVnic">UnbindVnic</a>, <a href="vim.host.PatchManager.html#Uninstall">UninstallHostPatch_Task</a>, <a href="vim.Datastore.html#updateVirtualMachineFiles">UpdateVirtualMachineFiles_Task</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.fault.InvalidBundle.html">InvalidBundle</a>, <a href="vim.fault.PatchInstallFailed.html">PatchInstallFailed</a>, <a href="vim.fault.PatchIntegrityError.html">PatchIntegrityError</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.fault.HostConfigFault.html">HostConfigFault</a>
+</dd>
+<p></p>
+</dl>
+<H2>Fault 
+                  Description</H2>
+<p></p>
+         A PlatformConfigFault is a catch-all fault indicating that some error has
+  occurred regarding the configuration of the host.  Data about the fault is
+  available and will be presented as a platform specific string.
+  <p>
+  This information carried by this fault cannot be localized.  Most likely
+  this information will already have been localized to the locale of the
+  server that generated this fault.  Where possible, a more specific fault
+  will be thrown.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="text" name="text"></a><strong>text</strong></td><td>xsd:string</td><td>
+<p></p>
+         Platform specific text string describing this error.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">None</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.fault.VimFault.html">VimFault</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">None</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.MethodFault.html">MethodFault</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.MethodFault.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.MethodFault.html#dynamicType">dynamicType</a>, <a href="vmodl.MethodFault.html#faultCause">faultCause</a>, <a href="vmodl.MethodFault.html#faultMessage">faultMessage</a></td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="PlatformConfigFault">
+            <complexContent>
+               <extension base="vim25:HostConfigFault">
+                  <sequence>
+                     <element name="text" type="xsd:string"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

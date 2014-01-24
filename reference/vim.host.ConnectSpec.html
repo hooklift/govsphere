@@ -1,0 +1,213 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.ConnectSpec" name="vim.host.ConnectSpec"></a>
+<h1>Data Object - HostConnectSpec</h1>
+<dl>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.ClusterComputeResource.html#addHost">AddHost_Task</a>, <a href="vim.Folder.html#addStandaloneHost">AddStandaloneHost_Task</a>, <a href="vim.HostSystem.html#reconnect">ReconnectHost_Task</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.Folder.html">Folder</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         Specifies the parameters needed to add a single host. This includes
+  a small set of optional information about the host configuration. 
+  This allows the network and datastore configuration of the host to 
+  be synchronized with the naming conventions of the datacenter, as well 
+  as the configuration of a vim account (the username/password for the
+  virtual machine files that is created on disk).
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="force" name="force"></a><strong>force</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         If this flag is set to "true", then the connection succeeds even 
+  if the host is already being managed by another VirtualCenter server. 
+  The original VirtualCenter server loses connection to the host.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="hostName" name="hostName"></a><strong>hostName</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The DNS name or IP address of the host. (Required for adding 
+  a host.)
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="managementIp" name="managementIp"></a><strong>managementIp</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The IP address of the VirtualCenter server that will manage this host.
+  This field can be used to control which IP address the VirtualCenter agent
+  will send heartbeats to. If it is not set, VirtualCenter will use the local IP
+  address used when communicating with the host. Setting this field is useful
+  when the VirtualCenter server is behind a NAT in which case the external NAT 
+  address must be used.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="password" name="password"></a><strong>password</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The password for the administration account. (Required for adding 
+  a host.)
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="port" name="port"></a><strong>port</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The port number for the connection. If this is not specified, 
+  the default port number is used. For ESX 2.x hosts this is the authd
+  port (902 by default). For ESX 3.x and above and VMware Server hosts
+  this is the https port (443 by default).
+  If this is a reconnect, the port number is unchanged.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="sslThumbprint" name="sslThumbprint"></a><strong>sslThumbprint</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The thumbprint of the SSL certificate, which the host is
+  expected to have.  If this value is set and matches the
+  certificate thumbprint presented by the host, then the host is
+  authenticated. If this value is not set or does not match the
+  certificate thumbprint presented by the host, then the host's
+  certificate is verified by checking whether it was signed by a
+  recognized CA.
+  <p>
+  The thumbprint is always computed using the SHA1 hash and is
+  the string representation of that hash in the format:
+  xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx
+  where, 'x' represents a hexadecimal digit
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="userName" name="userName"></a><strong>userName</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The administration account on the host. (Required for adding 
+  a host.)
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vimAccountName" name="vimAccountName"></a><strong>vimAccountName</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The username to be used for accessing the virtual
+  machine files on the disk.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vimAccountPassword" name="vimAccountPassword"></a><strong>vimAccountPassword</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The password to be used  with the 
+  <a href="vim.host.ConnectSpec.html#vimAccountName">vimAccountName</a> 
+  property for accessing the virtual
+  machine files on the disk.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vmFolder" name="vmFolder"></a><strong>vmFolder</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Folder.html">Folder</a></td><td>
+<p></p>
+         The folder in which to store the existing virtual machines on the host.
+  If this folder is not specified, a default folder is chosen 
+  (and possibly created) by the VirtualCenter.  This folder exists (or
+  is possibly created) on the
+  VirtualCenter server and is called "Discovered VM".
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostConnectSpec">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="hostName" type="xsd:string" minOccurs="0"/>
+                     <element name="port" type="xsd:int" minOccurs="0"/>
+                     <element name="sslThumbprint" type="xsd:string" minOccurs="0"/>
+                     <element name="userName" type="xsd:string" minOccurs="0"/>
+                     <element name="password" type="xsd:string" minOccurs="0"/>
+                     <element name="vmFolder" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="force" type="xsd:boolean"/>
+                     <element name="vimAccountName" type="xsd:string" minOccurs="0"/>
+                     <element name="vimAccountPassword" type="xsd:string" minOccurs="0"/>
+                     <element name="managementIp" type="xsd:string" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

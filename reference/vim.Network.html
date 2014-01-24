@@ -1,0 +1,250 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.Network" name="vim.Network"></a>
+<h1>Managed Object -  
+						Network</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.ComputeResource.html#field_detail">ComputeResource</a>, <a href="vim.Datacenter.html#field_detail">Datacenter</a>, <a href="vim.host.Summary.ConfigSummary.html#field_detail">HostConfigSummary</a>, <a href="vim.host.EsxAgentHostManager.ConfigInfo.html#field_detail">HostEsxAgentHostManagerConfigInfo</a>, <a href="vim.HostSystem.html#field_detail">HostSystem</a>, <a href="vim.vApp.IpPool.Association.html#field_detail">IpPoolAssociation</a>, <a href="vim.event.NetworkEventArgument.html#field_detail">NetworkEventArgument</a>, <a href="vim.Network.Summary.html#field_detail">NetworkSummary</a>, <a href="vim.fault.NoAvailableIp.html#field_detail">NoAvailableIp</a>, <a href="vim.OvfManager.NetworkMapping.html#field_detail">OvfNetworkMapping</a>, <a href="vim.vApp.CloneSpec.NetworkMappingPair.html#field_detail">VAppCloneSpecNetworkMappingPair</a>, <a href="vim.VirtualApp.html#field_detail">VirtualApp</a>, <a href="vim.vm.device.VirtualEthernetCard.NetworkBackingInfo.html#field_detail">VirtualEthernetCardNetworkBackingInfo</a>, <a href="vim.VirtualMachine.html#field_detail">VirtualMachine</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.dvs.DistributedVirtualPortgroup.html">DistributedVirtualPortgroup</a>, <a href="vim.OpaqueNetwork.html">OpaqueNetwork</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.ManagedEntity.html">ManagedEntity</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.HostSystem.html">HostSystem</a>, <a href="vim.Network.Summary.html">NetworkSummary</a>, <a href="vim.VirtualMachine.html">VirtualMachine</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         Represents a network accessible by either hosts or virtual machines. This can be a
+  physical network or a logical network, such as a VLAN.
+  <p>
+  Networks are created:
+  <ul>
+     <li>explicitly when configuring a host.
+     <li>automatically when adding a host to VirtualCenter.
+     <li>automatically when adding a new virtual machine to a host or to
+         VirtualCenter.
+  </ul>
+  <p>
+  To configure network access for hosts and virtual machines, use
+  <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a> and
+  <a href="vim.dvs.DistributedVirtualPortgroup.html">DistributedVirtualPortgroup</a> managed objects.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="host" name="host"></a><strong>host</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem[]</a></td><td>
+<p></p>
+         Hosts attached to this network.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="name" name="name"></a><strong>name</strong></td><td>xsd:string</td><td>
+<p></p>
+         Name of this network.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="summary" name="summary"></a><strong>summary</strong></td><td><a href="vim.Network.Summary.html">NetworkSummary</a></td><td>
+<p></p>
+         Properties of a network.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vm" name="vm"></a><strong>vm</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.VirtualMachine.html">VirtualMachine[]</a></td><td>
+<p></p>
+         Virtual machines using this network.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.ManagedEntity.html">ManagedEntity</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.ManagedEntity.html#alarmActionsEnabled">alarmActionsEnabled</a>, <a href="vim.ManagedEntity.html#configIssue">configIssue</a>, <a href="vim.ManagedEntity.html#configStatus">configStatus</a>, <a href="vim.ManagedEntity.html#customValue">customValue</a>, <a href="vim.ManagedEntity.html#declaredAlarmState">declaredAlarmState</a>, <a href="vim.ManagedEntity.html#disabledMethod">disabledMethod</a>, <a href="vim.ManagedEntity.html#effectiveRole">effectiveRole</a>, <a href="vim.ManagedEntity.html#name">name</a>, <a href="vim.ManagedEntity.html#overallStatus">overallStatus</a>, <a href="vim.ManagedEntity.html#parent">parent</a>, <a href="vim.ManagedEntity.html#permission">permission</a>, <a href="vim.ManagedEntity.html#recentTask">recentTask</a>, <a href="vim.ManagedEntity.html#tag">tag</a>, <a href="vim.ManagedEntity.html#triggeredAlarmState">triggeredAlarmState</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.ExtensibleManagedObject.html#availableField">availableField</a>, <a href="vim.ExtensibleManagedObject.html#value">value</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#destroyNetwork">DestroyNetwork</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.ManagedEntity.html">ManagedEntity</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.ManagedEntity.html#destroy">Destroy_Task</a>, <a href="vim.ManagedEntity.html#reload">Reload</a>, <a href="vim.ManagedEntity.html#rename">Rename_Task</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.ExtensibleManagedObject.html#setCustomValue">setCustomValue</a></td>
+</tr>
+</table>
+<br>
+<a id="destroyNetwork" name="destroyNetwork"></a>
+<h1>DestroyNetwork</h1>
+<B>Deprecated.</B><I>
+         As of VI API 2.5 do not use this method. This method throws
+              <a href="vim.fault.ResourceInUse.html">ResourceInUse</a>.  Networks are automatically
+              removed when no longer in use, so this method is unnecessary.
+      </I>
+<p></p>
+         Removes a network. A network can be removed only if it is not used by any host or
+  virtual machine.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Network.Delete</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.Network.html">Network</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.ResourceInUse.html">ResourceInUse</a></td><td>Thrown if one or more hosts or virtual machines are configured to use the network.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('DestroyNetwork-textarea');expandcontent(this, 'DestroyNetwork-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="DestroyNetwork-div">
+<textarea cols="20" rows="10" name="DestroyNetwork-textarea" wrap="off" readonly="1" id="DestroyNetwork-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DestroyNetwork" type="vim25:DestroyNetworkRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DestroyNetworkResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

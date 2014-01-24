@@ -1,0 +1,1676 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.DatastoreSystem" name="vim.host.DatastoreSystem"></a>
+<h1>Managed Object -  
+						HostDatastoreSystem</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.host.ConfigManager.html#field_detail">HostConfigManager</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.Datastore.html">Datastore</a>, <a href="vim.host.DatastoreSystem.Capabilities.html">HostDatastoreSystemCapabilities</a>, <a href="vim.host.NasVolume.Specification.html">HostNasVolumeSpec</a>, <a href="vim.host.ResignatureRescanResult.html">HostResignatureRescanResult</a>, <a href="vim.host.ScsiDisk.html">HostScsiDisk</a>, <a href="vim.host.UnresolvedVmfsResignatureSpec.html">HostUnresolvedVmfsResignatureSpec</a>, <a href="vim.host.UnresolvedVmfsVolume.html">HostUnresolvedVmfsVolume</a>, <a href="vim.host.VmfsDatastoreCreateSpec.html">VmfsDatastoreCreateSpec</a>, <a href="vim.host.VmfsDatastoreExpandSpec.html">VmfsDatastoreExpandSpec</a>, <a href="vim.host.VmfsDatastoreExtendSpec.html">VmfsDatastoreExtendSpec</a>, <a href="vim.host.VmfsDatastoreOption.html">VmfsDatastoreOption</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         This managed object creates and removes datastores from the host.
+  <p>
+  To a host, a datastore is a storage abstraction that is backed by one
+  of several types of storage volumes:
+  <dl>
+  <dt><b>Local file system</b></dt>
+  <dd>
+  A datastore that is backed by a local file system volume uses a host native
+  local file system such as NTFS or ext3.  The datastore is created by
+  identifying a file path for a directory in which virtual machine data will
+  be stored.  When the datastore is deleted, the mapping from the datastore to
+  the file is deleted.  The contents of the directory are not deleted.
+  </dd>
+  <p>
+  <dt><b>NAS Volume</b></dt>
+  <dd>
+  A datastore that is backed by a network-attached storage device is created
+  by specifying the required data needed to attach the volume to the host.
+  Destroying the datastore detaches the volume from the host.
+  </dd>
+  <p>
+  <dt><b>VMFS</b></dt>
+  <dd>
+  A datastore that is backed by a VMware File System (VMFS) is created by
+  specifying a disk with unpartitioned space, the desired disk partition
+  format on the disk, and some VMFS attributes.
+  <p>
+  An ESX Server system automatically discovers the VMFS volume on attached Logical
+  Unit Numbers (LUNs) on startup and after re-scanning the host bus adapter.
+  Datastores are automatically created.  The datastore label is based on the
+  VMFS volume label.  If there is a conflict with an existing datastore,
+  it is made unique by appending a suffix.  The VMFS volume label will
+  be unchanged.
+  <p>
+  Destroying the datastore removes the partitions that compose the VMFS volume.
+  </dd>
+  </dl>
+  Datastores are never automatically removed because transient storage
+  connection outages may occur.  They must be removed from the host using
+  this interface.<br>See <a href="vim.Datastore.html">Datastore</a><br>
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="capabilities" name="capabilities"></a><strong>capabilities</strong></td><td><a href="vim.host.DatastoreSystem.Capabilities.html">HostDatastoreSystemCapabilities</a></td><td>
+<p></p>
+         Capability vector indicating the available product features.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="datastore" name="datastore"></a><strong>datastore</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.Datastore.html">Datastore[]</a></td><td>
+<p></p>
+         List of datastores on this host.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  System.View</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#configureDatastorePrincipal">ConfigureDatastorePrincipal</a>, <a href="#createLocalDatastore">CreateLocalDatastore</a>, <a href="#createNasDatastore">CreateNasDatastore</a>, <a href="#createVmfsDatastore">CreateVmfsDatastore</a>, <a href="#expandVmfsDatastore">ExpandVmfsDatastore</a>, <a href="#extendVmfsDatastore">ExtendVmfsDatastore</a>, <a href="#queryAvailableDisksForVmfs">QueryAvailableDisksForVmfs</a>, <a href="#queryUnresolvedVmfsVolumes">QueryUnresolvedVmfsVolumes</a>, <a href="#queryVmfsDatastoreCreateOptions">QueryVmfsDatastoreCreateOptions</a>, <a href="#queryVmfsDatastoreExpandOptions">QueryVmfsDatastoreExpandOptions</a>, <a href="#queryVmfsDatastoreExtendOptions">QueryVmfsDatastoreExtendOptions</a>, <a href="#removeDatastore">RemoveDatastore</a>, <a href="#resignatureUnresolvedVmfsVolume">ResignatureUnresolvedVmfsVolume_Task</a>, <a href="#updateLocalSwapDatastore">UpdateLocalSwapDatastore</a></td>
+</tr>
+</table>
+<br>
+<a id="configureDatastorePrincipal" name="configureDatastorePrincipal"></a>
+<h1>ConfigureDatastorePrincipal</h1>
+<p></p>
+         Configures datastore principal user for the host.
+  <p>
+  All virtual machine-related file I/O is performed under
+  this user. Configuring datastore principal user
+  will result in all virtual machine files (configuration, disk,
+  and so on) being checked for proper access. If necessary, ownership
+  and permissions are modified.  Note that in some environments,
+  file ownership and permissions modification may not be possible.
+  For example, virtual machine files stored on NFS cannot be
+  modified for ownership and permissions if root squashing is
+  enabled.  Ownership and permissions for these files must be
+  manually changed by a system administrator.  In general, if
+  server process does not have rights to change ownership
+  and file permissions of virtual machine files, they must
+  be modified manually.  If a virtual machine files are not
+  read/writeable by this user, virtual machine related operations such as
+  power on/off, configuration, and so on will fail.  This operation
+  must be performed while in maintenance mode and requires host
+  reboot.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Maintenance</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.DatastoreSystem.html">HostDatastoreSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>userName</strong></td><td>xsd:string</td><td>
+<p></p>
+         Datastore principal user name.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>password</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Optional password for systems that require password for
+                   user impersonation.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if unable to configure the datastore principal.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if userName or password is not valid.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the host is not in maintenance mode.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if this feature is not supported on the host.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ConfigureDatastorePrincipal-textarea');expandcontent(this, 'ConfigureDatastorePrincipal-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ConfigureDatastorePrincipal-div">
+<textarea cols="20" rows="10" name="ConfigureDatastorePrincipal-textarea" wrap="off" readonly="1" id="ConfigureDatastorePrincipal-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ConfigureDatastorePrincipal" type="vim25:ConfigureDatastorePrincipalRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ConfigureDatastorePrincipalResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="createLocalDatastore" name="createLocalDatastore"></a>
+<h1>CreateLocalDatastore</h1>
+<p></p>
+         Creates a new local datastore.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.DatastoreSystem.html">HostDatastoreSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>name</strong></td><td>xsd:string</td><td>
+<p></p>
+         The name of a datastore to create on the local host.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>path</strong></td><td>xsd:string</td><td>
+<p></p>
+         The file path for a directory in which the virtual machine data
+              will be stored.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datastore.html">Datastore</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if a datastore with the same name already exists.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.FileNotFound.html">FileNotFound</a></td><td>Thrown if path doesn't exist</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if unable to create the datastore on host.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td>Thrown if name is not valid datastore name</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CreateLocalDatastore-textarea');expandcontent(this, 'CreateLocalDatastore-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CreateLocalDatastore-div">
+<textarea cols="20" rows="10" name="CreateLocalDatastore-textarea" wrap="off" readonly="1" id="CreateLocalDatastore-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateLocalDatastore" type="vim25:CreateLocalDatastoreRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateLocalDatastoreResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="createNasDatastore" name="createNasDatastore"></a>
+<h1>CreateNasDatastore</h1>
+<p></p>
+         Creates a new network-attached storage datastore.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.DatastoreSystem.html">HostDatastoreSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.host.NasVolume.Specification.html">HostNasVolumeSpec</a></td><td>
+<p></p>
+         The specification for creating a network-attached storage volume.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datastore.html">Datastore</a></td><td>The newly created datastore.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AlreadyExists.html">AlreadyExists</a></td><td>Thrown if the local path already exists on the host, or the remote path is already mounted on the host.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if a datastore with the same name already exists.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if unable to mount the NAS volume.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the datastore name is invalid, or the spec is invalid.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NoGateway.html">NoGateway</a></td><td>Thrown if VMkernel gateway is not configured.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NoVirtualNic.html">NoVirtualNic</a></td><td>Thrown if VMkernel TCPIP stack is not configured.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CreateNasDatastore-textarea');expandcontent(this, 'CreateNasDatastore-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CreateNasDatastore-div">
+<textarea cols="20" rows="10" name="CreateNasDatastore-textarea" wrap="off" readonly="1" id="CreateNasDatastore-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateNasDatastore" type="vim25:CreateNasDatastoreRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateNasDatastoreResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="createVmfsDatastore" name="createVmfsDatastore"></a>
+<h1>CreateVmfsDatastore</h1>
+<p></p>
+         Creates a new VMFS datastore.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.DatastoreSystem.html">HostDatastoreSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.host.VmfsDatastoreCreateSpec.html">VmfsDatastoreCreateSpec</a></td><td>
+<p></p>
+         The specification for creating a datastore backed by a VMFS.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datastore.html">Datastore</a></td><td>The newly created datastore.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if a datastore with the same name already exists.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if unable to format the VMFS volume or gather information about the created volume.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the datastore name is invalid, or the spec is invalid.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the host is not an ESX Server system.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CreateVmfsDatastore-textarea');expandcontent(this, 'CreateVmfsDatastore-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CreateVmfsDatastore-div">
+<textarea cols="20" rows="10" name="CreateVmfsDatastore-textarea" wrap="off" readonly="1" id="CreateVmfsDatastore-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateVmfsDatastore" type="vim25:CreateVmfsDatastoreRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateVmfsDatastoreResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="expandVmfsDatastore" name="expandVmfsDatastore"></a>
+<h1>ExpandVmfsDatastore</h1>
+<p></p>
+         Increases the capacity of an existing VMFS datastore by expanding
+  (increasing the size of) an existing extent of the datastore.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.DatastoreSystem.html">HostDatastoreSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>datastore</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datastore.html">Datastore</a></td><td>
+<p></p>
+         The datastore whose capacity should be increased.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.host.VmfsDatastoreExpandSpec.html">VmfsDatastoreExpandSpec</a></td><td>
+<p></p>
+         The specification describing which extent of the VMFS
+              datastore to expand.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datastore.html">Datastore</a></td><td>The expanded datastore.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if unable to expand the VMFS volume.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if a datastore with the name could not be found.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the host is not an ESX Server.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ExpandVmfsDatastore-textarea');expandcontent(this, 'ExpandVmfsDatastore-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ExpandVmfsDatastore-div">
+<textarea cols="20" rows="10" name="ExpandVmfsDatastore-textarea" wrap="off" readonly="1" id="ExpandVmfsDatastore-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ExpandVmfsDatastore" type="vim25:ExpandVmfsDatastoreRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ExpandVmfsDatastoreResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="extendVmfsDatastore" name="extendVmfsDatastore"></a>
+<h1>ExtendVmfsDatastore</h1>
+<p></p>
+         Increases the capacity of an existing VMFS datastore by adding new
+  extents to the datastore.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.DatastoreSystem.html">HostDatastoreSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>datastore</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datastore.html">Datastore</a></td><td>
+<p></p>
+         The datastore whose capacity should be increased.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.host.VmfsDatastoreExtendSpec.html">VmfsDatastoreExtendSpec</a></td><td>
+<p></p>
+         The specification describing what extents to add to a
+              VMFS datastore.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datastore.html">Datastore</a></td><td>The extended datastore.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if unable to extend the VMFS volume.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if a datastore with the name could not be found.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the host is not an ESX Server.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ExtendVmfsDatastore-textarea');expandcontent(this, 'ExtendVmfsDatastore-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ExtendVmfsDatastore-div">
+<textarea cols="20" rows="10" name="ExtendVmfsDatastore-textarea" wrap="off" readonly="1" id="ExtendVmfsDatastore-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ExtendVmfsDatastore" type="vim25:ExtendVmfsDatastoreRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ExtendVmfsDatastoreResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryAvailableDisksForVmfs" name="queryAvailableDisksForVmfs"></a>
+<h1>QueryAvailableDisksForVmfs</h1>
+<p></p>
+         Query to list disks that can be used to contain VMFS datastore extents.
+  If the optional parameter name is supplied, queries for disks that can be
+  used to contain extents for a VMFS datastore identified by the supplied
+  name.  Otherwise, the method retrieves disks that can be used to contain
+  new VMFS datastores.
+  <p>
+  This operation will filter out disks that are currently in use by an
+  existing VMFS unless the VMFS using the disk is one being extended.
+  It will also filter out management LUNs and disks that are referenced by
+  RDMs.  These disk LUNs are also unsuited for use by a VMFS.
+  <p>
+  Disk LUNs referenced by RDMs are found by examining all virtual machines
+  known to the system and visiting their virtual disk backends.  If a
+  virtual disk backend uses an RDM that is referencing a disk LUN, the disk
+  LUN becomes ineligible for use by a VMFS datastore.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.DatastoreSystem.html">HostDatastoreSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>datastore</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datastore.html">Datastore</a></td><td>
+<p></p>
+         The managed object reference of the VMFS datastore
+                   you want extents for.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.host.ScsiDisk.html">HostScsiDisk[]</a></td><td>An array of data objects describing SCSI disks.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if unable to query disk information.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if named VMFS datastore is not a VMFS datastore.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the named VMFS datastore is not found.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the host is not an ESX Server.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryAvailableDisksForVmfs-textarea');expandcontent(this, 'QueryAvailableDisksForVmfs-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryAvailableDisksForVmfs-div">
+<textarea cols="20" rows="10" name="QueryAvailableDisksForVmfs-textarea" wrap="off" readonly="1" id="QueryAvailableDisksForVmfs-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryAvailableDisksForVmfs" type="vim25:QueryAvailableDisksForVmfsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryAvailableDisksForVmfsResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:HostScsiDisk" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryUnresolvedVmfsVolumes" name="queryUnresolvedVmfsVolumes"></a>
+<h1>QueryUnresolvedVmfsVolumes</h1>
+<p></p>
+         Get the list of unbound VMFS volumes.
+  For sharing a volume across hosts, a VMFS volume is bound to its
+  underlying block device storage. When a low level block copy is
+  performed to copy or move the VMFS volume, the copied volume will
+  be unbound.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Read</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.DatastoreSystem.html">HostDatastoreSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.host.UnresolvedVmfsVolume.html">HostUnresolvedVmfsVolume[]</a></td><td>An array of unbound VMFS datastore</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryUnresolvedVmfsVolumes-textarea');expandcontent(this, 'QueryUnresolvedVmfsVolumes-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryUnresolvedVmfsVolumes-div">
+<textarea cols="20" rows="10" name="QueryUnresolvedVmfsVolumes-textarea" wrap="off" readonly="1" id="QueryUnresolvedVmfsVolumes-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryUnresolvedVmfsVolumes" type="vim25:QueryUnresolvedVmfsVolumesRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryUnresolvedVmfsVolumesResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:HostUnresolvedVmfsVolume" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryVmfsDatastoreCreateOptions" name="queryVmfsDatastoreCreateOptions"></a>
+<h1>QueryVmfsDatastoreCreateOptions</h1>
+<p></p>
+         Queries options for creating a new VMFS datastore for a disk.<br>See <a href="vim.host.ScsiDisk.html#devicePath">devicePath</a><br>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.DatastoreSystem.html">HostDatastoreSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>devicePath</strong></td><td>xsd:string</td><td>
+<p></p>
+         The devicePath of the disk on which datastore creation
+                    options are generated.<br>See <a href="vim.host.ScsiDisk.html#devicePath">devicePath</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>vmfsMajorVersion</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         major version of VMFS to be used for
+                          formatting the datastore. If this
+                          parameter is not specified, then the highest
+                          <a href="vim.host.Capability.html#supportedVmfsMajorVersion">supported VMFS major version</a> for the host
+                          is used.<br>See <a href="vim.host.ScsiDisk.html#devicePath">devicePath</a><br>
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.host.VmfsDatastoreOption.html">VmfsDatastoreOption[]</a></td><td>An array of VMFS datastore provisioning options that can be applied on a disk.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if unable to get the current partition information for the device.<br>See <a href="vim.host.ScsiDisk.html#devicePath">devicePath</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the device is not found.<br>See <a href="vim.host.ScsiDisk.html#devicePath">devicePath</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the host is not an ESX Server.<br>See <a href="vim.host.ScsiDisk.html#devicePath">devicePath</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryVmfsDatastoreCreateOptions-textarea');expandcontent(this, 'QueryVmfsDatastoreCreateOptions-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryVmfsDatastoreCreateOptions-div">
+<textarea cols="20" rows="10" name="QueryVmfsDatastoreCreateOptions-textarea" wrap="off" readonly="1" id="QueryVmfsDatastoreCreateOptions-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryVmfsDatastoreCreateOptions" type="vim25:QueryVmfsDatastoreCreateOptionsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryVmfsDatastoreCreateOptionsResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:VmfsDatastoreOption" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryVmfsDatastoreExpandOptions" name="queryVmfsDatastoreExpandOptions"></a>
+<h1>QueryVmfsDatastoreExpandOptions</h1>
+<p></p>
+         Queries for options for increasing the capacity of an existing VMFS
+  datastore by expanding (increasing the size of) an existing extent of
+  the datastore.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.DatastoreSystem.html">HostDatastoreSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>datastore</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datastore.html">Datastore</a></td><td>
+<p></p>
+         The datastore to be expanded.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.host.VmfsDatastoreOption.html">VmfsDatastoreOption[]</a></td><td>An array of VMFS datastore expansion options that can be applied.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if unable to get partition information for the devices on which the extents reside</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the specified datastore could not be found or is unmounted.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the host is not an ESX Server.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryVmfsDatastoreExpandOptions-textarea');expandcontent(this, 'QueryVmfsDatastoreExpandOptions-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryVmfsDatastoreExpandOptions-div">
+<textarea cols="20" rows="10" name="QueryVmfsDatastoreExpandOptions-textarea" wrap="off" readonly="1" id="QueryVmfsDatastoreExpandOptions-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryVmfsDatastoreExpandOptions" type="vim25:QueryVmfsDatastoreExpandOptionsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryVmfsDatastoreExpandOptionsResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:VmfsDatastoreOption" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryVmfsDatastoreExtendOptions" name="queryVmfsDatastoreExtendOptions"></a>
+<h1>QueryVmfsDatastoreExtendOptions</h1>
+<p></p>
+         Queries for options for increasing the capacity of an existing VMFS
+  datastore by adding new extents using space from the specified disk.<br>See <a href="vim.host.ScsiDisk.html#devicePath">devicePath</a><br>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.DatastoreSystem.html">HostDatastoreSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>datastore</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datastore.html">Datastore</a></td><td>
+<p></p>
+         The datastore to be extended.<br>See <a href="vim.host.ScsiDisk.html#devicePath">devicePath</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>devicePath</strong></td><td>xsd:string</td><td>
+<p></p>
+         The devicePath of the disk on which datastore extension
+                    options are generated.<br>See <a href="vim.host.ScsiDisk.html#devicePath">devicePath</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>suppressExpandCandidates</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether to exclude options that can be
+         used for extent expansion also.
+         Free space can be used for adding an extent or expanding an existing
+         extent. If this parameter is set to true, the list of options
+         returned will not include free space that can be used for expansion.<br>See <a href="vim.host.ScsiDisk.html#devicePath">devicePath</a><br>
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.host.VmfsDatastoreOption.html">VmfsDatastoreOption[]</a></td><td>An array of VMFS datastore provisioning options that can be applied on a disk.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if unable to get the current partition information for the device.<br>See <a href="vim.host.ScsiDisk.html#devicePath">devicePath</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if a datastore or device with the given name could not be found or if the datastore is unmounted.<br>See <a href="vim.host.ScsiDisk.html#devicePath">devicePath</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the host is not an ESX Server.<br>See <a href="vim.host.ScsiDisk.html#devicePath">devicePath</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryVmfsDatastoreExtendOptions-textarea');expandcontent(this, 'QueryVmfsDatastoreExtendOptions-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryVmfsDatastoreExtendOptions-div">
+<textarea cols="20" rows="10" name="QueryVmfsDatastoreExtendOptions-textarea" wrap="off" readonly="1" id="QueryVmfsDatastoreExtendOptions-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryVmfsDatastoreExtendOptions" type="vim25:QueryVmfsDatastoreExtendOptionsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryVmfsDatastoreExtendOptionsResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:VmfsDatastoreOption" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="removeDatastore" name="removeDatastore"></a>
+<h1>RemoveDatastore</h1>
+<p></p>
+         Removes a datastore from a host.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.DatastoreSystem.html">HostDatastoreSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>datastore</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datastore.html">Datastore</a></td><td>
+<p></p>
+         The datastore to be removed.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if unable to umount the NAS volume for NAS datastore, or gather the existing volume information.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the datastore could not be found.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.ResourceInUse.html">ResourceInUse</a></td><td>Thrown for a VMFS volume if there is any VM registered on any host attached to this datastore.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RemoveDatastore-textarea');expandcontent(this, 'RemoveDatastore-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RemoveDatastore-div">
+<textarea cols="20" rows="10" name="RemoveDatastore-textarea" wrap="off" readonly="1" id="RemoveDatastore-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveDatastore" type="vim25:RemoveDatastoreRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveDatastoreResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="resignatureUnresolvedVmfsVolume" name="resignatureUnresolvedVmfsVolume"></a>
+<h1>ResignatureUnresolvedVmfsVolume_Task</h1>
+<p></p>
+         Resignature an unbound VMFS volume.
+
+  To safely enable sharing of the volume across hosts, a VMFS volume
+  is bound to its underlying block device storage.  When a low level
+  block copy is performed to copy or move the VMFS volume, the copied
+  volume will be unbound.  In order for the VMFS volume to be usable,
+  a resolution operation is needed to determine whether the VMFS volume
+  should be treated as a new volume or not and what extents compose
+  that volume in the event there is more than one unbound volume.
+  <p>
+  With 'Resignature' operation, a new Vmfs Uuid is assigned to the
+  volume but its contents are kept intact. Resignature results in a
+  new Vmfs volume on the host. Users can specify a list of hosts on which
+  the volume will be auto-mounted.
+
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.DatastoreSystem.html">HostDatastoreSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>resolutionSpec</strong></td><td><a href="vim.host.UnresolvedVmfsResignatureSpec.html">HostUnresolvedVmfsResignatureSpec</a></td><td>
+<p></p>
+         A data object that describes what the disk
+                        extents to be used for creating the new
+                        VMFS volume.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation. The task result (<a href="vim.Task.html#info">info</a>.<a href="vim.TaskInfo.html#result">result</a>) contains a <a href="vim.host.ResignatureRescanResult.html">HostResignatureRescanResult</a> object that identifies the newly created VMFS datastore.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.VmfsAmbiguousMount.html">VmfsAmbiguousMount</a></td><td>when ESX is unable to resolve the extents of a VMFS volume unambiguously. This is thrown only when a VMFS volume has multiple extents and multiple copies of non-head extents are detected, and the user has not specified one copy of every extent. Please note that some versions of ESX may not support resolving the situation where multiple copies of non-head extents are detected, even if one copy of every extent is specified in the method parameter. To resolve such a situation, the user is expected to change the configuration (for example, using array management tools) so that only one copy of each non-head extent is presented to ESX.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="updateLocalSwapDatastore" name="updateLocalSwapDatastore"></a>
+<h1>UpdateLocalSwapDatastore</h1>
+<p></p>
+         Choose the
+  <a href="vim.host.ConfigInfo.html#localSwapDatastore">localSwapDatastore</a>
+  for this host. Any change to this setting will affect virtual machines
+  that subsequently power on or resume from a suspended state at this host,
+  or that migrate to this host while powered on; virtual machines that are
+  currently powered on at this host will not yet be affected.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.DatastoreSystem.html">HostDatastoreSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>datastore</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datastore.html">Datastore</a></td><td>
+<p></p>
+         The selected datastore. If this argument is unset, then
+  the <a href="vim.host.ConfigInfo.html#localSwapDatastore">localSwapDatastore</a>
+  property becomes unset. Otherwise, the host must have read/write
+  access to the indicated datastore.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DatastoreNotWritableOnHost.html">DatastoreNotWritableOnHost</a></td><td>Thrown if the datastore argument is set and the host cannot write to the indicated datastore.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InaccessibleDatastore.html">InaccessibleDatastore</a></td><td>Thrown if the datastore argument is set and the host cannot access the indicated datastore.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the datastore argument is set and the <a href="vim.host.Capability.html#localSwapDatastoreSupported">localSwapDatastoreSupported</a> capability is not true for the host.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateLocalSwapDatastore-textarea');expandcontent(this, 'UpdateLocalSwapDatastore-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateLocalSwapDatastore-div">
+<textarea cols="20" rows="10" name="UpdateLocalSwapDatastore-textarea" wrap="off" readonly="1" id="UpdateLocalSwapDatastore-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateLocalSwapDatastore" type="vim25:UpdateLocalSwapDatastoreRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateLocalSwapDatastoreResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

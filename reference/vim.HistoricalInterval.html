@@ -1,0 +1,299 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.HistoricalInterval" name="vim.HistoricalInterval"></a>
+<h1>Data Object - PerfInterval</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.PerformanceManager.html#field_detail">PerformanceManager</a>, <a href="vim.ResourcePlanningManager.PerfStatsDescription.html#field_detail">PerformanceStatisticsDescription</a>
+</dd>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.PerformanceManager.html#createHistoricalInterval">CreatePerfInterval</a>, <a href="vim.PerformanceManager.html#updateHistoricalInterval">UpdatePerfInterval</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This data object type contains metadata about a performance interval.
+  <ul>
+
+  <li> For VirtualCenter Server systems, instances of this data object are
+       referred to as &#147;historical intervals&#148; because they control
+       how data collected from the ESX systems will be aggregated and stored
+       in the database.</li>
+
+  <li> For ESX system, this data object is typically referred to simply as the
+       &#147;interval&#148; or &#147;performance interval&#148; because ESX
+       does not aggregate statistical data. </li>
+
+  </ul>
+
+  <p> For ESX systems, a single instance of this data object exists. It cannot
+  be modified. It has these properties:
+
+  <table border="1" width="100%">
+
+  <tr>
+     <th>key</th>
+     <th>samplingPeriod</th>
+     <th>length</th>
+     <th>name</th>
+     <th>level</th>
+     <th>enabled</th>
+  </tr>
+
+  <tr>
+     <td>1</td>
+     <td>300</td>
+     <td>129600</td>
+     <td>PastDay</td>
+     <td>null</td>
+     <td>true</td>
+  </tr>
+
+  </table>
+
+  <p> VirtualCenter Server system provides four instances of this data object
+  by default, that apply globally to all system entities.
+
+  <p> <b>Example Collection Levels</b><br/>VirtualCenter Server
+  uses the specifications configured in its historical intervals to collect metrics
+  from the ESX systems that it manages. The quantity of data collected depends on
+  the level settings for the server, and the level associated with a specific counter.
+  Both factors may change from one version of the products to the next. In general,
+  the lower the number, the smaller the amount of data collected. For VirtualCenter
+  Server 2.5, for example, the levels 1 through 4 collected data as follows: <ol>
+
+  <li> Basic counters defined with "average" <a href="vim.PerformanceManager.CounterInfo.RollupType.html">rollup type</a> for CPU, Memory,
+       Disk, and Network; plus counters for System Uptime, System Heartbeat,
+       and DRS (Distributed Resource Scheduler, tracked in the
+       "clusterServices" group). Does not include counters for devices. </li>
+
+  <li> Counters defined with "average," "summation," and "latest" <a href="vim.PerformanceManager.CounterInfo.RollupType.html">rollup types</a> for CPU,
+       Memory, Disk, and Network; plus counters for System Uptime, System
+       Heartbeat, and DRS (clusterServices). Does not include counters for
+       devices. </li>
+
+  <li> Counters defined with "average," "summmation," and "latest" <a href="vim.PerformanceManager.CounterInfo.RollupType.html">rollup types</a> for CPU,
+       Memory, Disk, Network, and all devices; plus counters for System
+       Uptime, System Heartbeat, and DRS (clusterServices). </li>
+
+  <li> All counters defined for all entities and devices, for every <a href="vim.PerformanceManager.CounterInfo.RollupType.html">rollup type</a>, including
+       &#147;minimum&#148; and &#147;maximum&#46;&#148; </li>
+
+  </ol>
+
+  <p> Default properties for the four built-in historical intervals
+  include:
+
+  <table border="1" width="100%">
+
+  <tr>
+     <th>key</th>
+     <th>samplingPeriod</th>
+     <th>length</th>
+     <th>name</th>
+     <th>level</th>
+     <th>enabled</th>
+  </tr>
+
+  <tr>
+     <td>1</td>
+     <td>300</td>
+     <td>86400</td>
+     <td>Past&nbsp;day</td>
+     <td>1</td>
+     <td>true</td>
+  </tr>
+
+  <tr>
+     <td>2</td>
+     <td>1800</td>
+     <td>604800</td>
+     <td>Past&nbsp;week</td>
+     <td>1</td>
+     <td>true</td>
+  </tr>
+
+  <tr>
+     <td>3</td>
+     <td>7200</td>
+     <td>2592000</td>
+     <td>Past&nbsp;month</td>
+     <td>1</td>
+     <td>true</td>
+  </tr>
+
+  <tr>
+     <td>4</td>
+     <td>66400</td>
+     <td>31536000</td>
+     <td>Past&nbsp;year</td>
+     <td>1</td>
+     <td>true</td>
+  </tr>
+
+  </table>
+
+  <p> All values are in seconds. The default setting for vCenter Server is
+  level 1, which retains sampled statistical data as follows: <ul>
+  <li> 5-minute samples for the past day </li>
+  <li> 30-minute samples for the past week </li>
+  <li> 2-hour samples for the past month </li>
+  <li> 1-day samples for the past year </li>
+  </ul>
+
+  <p> Data older than a year is purged from the vCenter Server database.
+
+  <p> Prior to version 2&#46;5 of the API, this data object could be used in
+  conjunction with the <a href="vim.PerformanceManager.html#createHistoricalInterval">CreatePerfInterval</a>
+  operation, to define new, custom historical intervals. That operation has
+  been deprecated: Adding and deleting objects of this type is no longer
+  supported. However, the default historical intervals can be enabled or
+  disabled, and can be modified within certain limits (with the <a href="vim.PerformanceManager.html#updateHistoricalInterval">UpdatePerfInterval</a> operation)&#46;
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="enabled" name="enabled"></a><strong>enabled</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the interval is enabled (true) or disabled (false).
+  Disabling a historical interval prevents vCenter Server from collecting
+  metrics for that interval and all higher (longer) intervals.
+
+  <p> For example, disabling the "Past Month" interval disables both "Past
+  Month" and "Past Year" intervals. The system will aggregate and retain
+  performance data using the "Past Day" and "Past Week" intervals only.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="key" name="key"></a><strong>key</strong></td><td>xsd:int</td><td>
+<p></p>
+         A unique identifier for the interval.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="length" name="length"></a><strong>length</strong></td><td>xsd:int</td><td>
+<p></p>
+         Number of seconds that the statistics corresponding to this interval are
+  kept on the system.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="level" name="level"></a><strong>level</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Statistics collection level for this historical interval. vCenter Server
+  will aggregate only those statistics that match the value of this
+  property for this historical interval. For ESX, the value of this
+  property is null. For vCenter Server, the value will be a number from 1
+  to 4.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="name" name="name"></a><strong>name</strong></td><td>xsd:string</td><td>
+<p></p>
+         The name of the historical interval. A localized string that provides a
+  name for the interval. Names include: <ul>
+  <li>"Past Day"</li>
+  <li>"Past Week"</li>
+  <li>"Past Month"</li>
+  <li>"Past Year"</li>
+  </ul>
+  The name is not meaningful in terms of system behavior. That is, the
+  interval named &#147;Past Week&#148; works as it does because of its
+  length, level, and so on, not because of the value of this string.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="samplingPeriod" name="samplingPeriod"></a><strong>samplingPeriod</strong></td><td>xsd:int</td><td>
+<p></p>
+         Number of seconds that data is sampled for this interval. The real-time
+  samplingPeriod is 20 seconds.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="PerfInterval">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="key" type="xsd:int"/>
+                     <element name="samplingPeriod" type="xsd:int"/>
+                     <element name="name" type="xsd:string"/>
+                     <element name="length" type="xsd:int"/>
+                     <element name="level" type="xsd:int" minOccurs="0"/>
+                     <element name="enabled" type="xsd:boolean"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

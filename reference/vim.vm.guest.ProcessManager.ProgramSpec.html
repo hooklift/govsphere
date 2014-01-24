@@ -1,0 +1,160 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.guest.ProcessManager.ProgramSpec" name="vim.vm.guest.ProcessManager.ProgramSpec"></a>
+<h1>Data Object - GuestProgramSpec</h1>
+<dl>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.vm.guest.ProcessManager.html#startProgram">StartProgramInGuest</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.vm.guest.ProcessManager.WindowsProgramSpec.html">GuestWindowsProgramSpec</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This describes the arguments to <a href="vim.vm.guest.ProcessManager.html#startProgram">StartProgramInGuest</a>.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="arguments" name="arguments"></a><strong>arguments</strong></td><td>xsd:string</td><td>
+<p></p>
+         The arguments to the program.  In Linux and Solaris guest operating
+ systems, the program will be executed by a guest shell.
+ This allows stdio redirection, but may also
+ require that characters which must be escaped to the shell also
+ be escaped on the command line provided.
+
+ <p>
+
+ For Windows guest operating systems, prefixing the command with
+ "cmd /c" can provide stdio redirection.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="envVariables" name="envVariables"></a><strong>envVariables</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         An array of environment variables, specified
+ in the guest OS notation (eg PATH=c:\bin;c:\windows\system32
+ or LD_LIBRARY_PATH=/usr/lib:/lib), to be set for the program
+ being run.  Note that these are not additions to the default
+ environment variables; they define the complete set available to
+ the program. If none are specified the values are guest dependent.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="programPath" name="programPath"></a><strong>programPath</strong></td><td>xsd:string</td><td>
+<p></p>
+         The absolute path to the program to start.
+ <p>
+ For Linux guest operating systems, /bin/bash is used to start the
+ program.
+ <p>
+ For Solaris guest operating systems, /bin/bash is used to start
+ the program if it exists.
+ Otherwise /bin/sh is used.  If /bin/sh is used, then the process ID
+ returned by <a href="vim.vm.guest.ProcessManager.html#startProgram">StartProgramInGuest</a> will be that of the shell used
+ to start the program, rather than the program itself, due to the
+ differences in how /bin/sh and /bin/bash work.  This PID will
+ still be usable for watching the process with
+ <a href="vim.vm.guest.ProcessManager.html#listProcesses">ListProcessesInGuest</a> to
+ find its exit code and elapsed time.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="workingDirectory" name="workingDirectory"></a><strong>workingDirectory</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The absolute path of the working directory for the program to be
+ run.  VMware recommends explicitly setting the working directory
+ for the program to be run.  If this value is unset or is an empty
+ string, the behavior depends on the guest operating system.
+ For Linux guest operating systems, if this value is unset or is
+ an empty string, the working directory will be the home directory
+ of the user associated with the guest authentication.
+ For other guest operating systems, if this value is unset, the
+ behavior is unspecified.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="GuestProgramSpec">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="programPath" type="xsd:string"/>
+                     <element name="arguments" type="xsd:string"/>
+                     <element name="workingDirectory" type="xsd:string" minOccurs="0"/>
+                     <element name="envVariables" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

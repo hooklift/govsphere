@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<html>
+<head>
+<title>Resource Scheduler Counters</title>
+<script language="JavaScript" src="./commonRes.js" type="text/javascript"></script>
+<link rel="StyleSheet" type="text/css" href="doc-style.css"></link>
+
+<style type="text/css">
+.code {
+    font-size: 11px; font-family:
+    "Courier New", Courier, monospace;
+}
+.BoldRedText {
+    FONT-WEIGHT: bold; COLOR: #CC0000; TEXT-DECORATION: none
+}
+
+h2 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #3366AA;
+    margin-top: 25px;
+    padding-bottom: 10px;
+    border-bottom-width: 1px;
+    border-bottom-style: dashed;
+}
+h3 {
+    margin-top: 25px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+table {
+    border-collapse:collapse;
+    border-top: 1px solid #999;
+    border-left: 1px solid #999;
+    width:100%;
+    margin-right: 4px;
+    margin-left: 4px;
+}
+
+table.navcontainer, topnavcontainer {
+    border:0; margin-right: 2px; margin-left: 2px; padding:0;vertical-align:bottom;
+}
+
+table.nested {
+    border-collapse:collapse;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+th {
+    background-color: #555555;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 10px;
+    text-align: center;
+    vertical-align:middle;
+}
+
+th.nested {
+    border:0; padding:0; text-align: center;
+}
+
+td {
+    font-size: 11px;
+    vertical-align: top;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+td.yes {font-size: 18px;}
+td.no {font-size: 12px;}
+
+a.white:link {color: #ffffff}
+a.white:visited {color: #ffffff}
+a.white:hover {color: #ffffff; cursor:hand;}
+a.white:active {color: #ffffff}
+
+a.noline:link {color: #3366AA; text-decoration:none; }
+a.noline:visited {color: #3366AA; text-decoration:none;}
+a.noline:hover {color: #3366AA; cursor:hand; text-decoration:none;}
+a.noline:active {color: #3366AA; text-decoration:none;}
+
+p {font-size:12px; margin: 12px 72px 5px 0px; }
+p.nolead {margin: 3px 72px 5px 0px}
+
+.back {
+    font-size:9px; text-transform: uppercase; FONT-WEIGHT: bold; COLOR: #3366AA;
+}
+.back:link {color: #ffffff; text-decoration: none;}
+.back:visited {color: #ffffff}
+.back:hover {color: #ffffff; cursor:hand;}
+.back:active {color: #ffffff}
+
+.back2 {
+    font-size:11px; text-transform: none; FONT-WEIGHT: bold; COLOR: #3366AA;
+}
+
+.top {
+    font-size:10px; text-transform: uppercase; FONT-WEIGHT: bold; COLOR: #3366AA;
+}
+
+ul {
+    font-size: 12px;
+    vertical-align: top;
+}
+ul.small{font-size: 11px;}
+
+</style>
+</head>
+
+<body>
+<span class="back"><a href="vim.PerformanceManager.html" class="noline">Back to</a></span>
+<span class="back2"><a href="vim.PerformanceManager.html" class="noline">PerformanceManager</a></span><br />
+<p></p>
+<a name="top"></a>
+<h1>Resource Scheduler Counters</h1>
+<table class="topnavcontainer"><tr><td valign="top">
+
+<p class="nolead">Performance counters are modeled using the 
+<a href="vim.PerformanceManager.CounterInfo.html">PerfCounterInfo</a> data object type.
+Each instance of a <a href="vim.PerformanceManager.CounterInfo.html">PerfCounterInfo</a> data object 
+contains metadata about a specific metric available from the system. The <strong>rescpu</strong> counter group 
+provides CPU-load-history statistics about resource pools and virtual machines. 
+</p>
+<p>A vSphere vCenter Server stores statistics based on these counters for host&#146;s root resource pool,
+and for virtual machines configured for high availability (using vSphere HA) and vSphere DRS
+(Distributed Resource Scheduler). The VMkernel makes recommendations for relocation of virtual machines
+based on these statistics. Statistics obtained for a host represent the total of all virtual machines
+running on the specified host. Statistics include both average and peak values over 1-minute,
+5-minute, and 15-minute intervals:</p>
+
+<ul><li>The <strong>active</strong> counters (<span class="code">actpk1</span>, <span class="code">actpk5</span>,
+<span class="code">actpk15</span>) summarize the &#147;average&#148; metric values for runtime 
+(<span class="code">runav1</span>, <span class="code">runav5</span>, <span class="code">runav15</span>)
+and readytime for each virtual machine, during the interval. Statistics based on these counters represent 
+amount of time a virtual machine occupies the CPU during a given interval. The &#147;ready&#148; time 
+is not available as a separate counter, but is tracked and applied by the VMkernel, to the values 
+of the active counters. (&#147;Ready&#148; time is the amount of time during the interval that the virtual machine
+is ready to run but cannot be scheduled on the CPU for any number of reasons.)</li>
+<li>The <strong>runtime</strong> counters (<span class="code">runav1</span>, <span class="code">runav5</span>,
+<span class="code">runav15</span>, and <span class="code">runpk1</span>, <span class="code">runkpk5</span>,
+<span class="code">runpk15</span>) represent the average of the actual time the virtual machine is scheduled
+and running during the interval, and the highest amount of CPU utilization (peak), respectively, during the interval.</li>
+<li>The <strong>maxLimited</strong> counters (<span class="code">maxLimited1</span>, <span class="code">maxLimited5</span>,
+<span class="code">maxLimited15</span>) represent the time that the virtual machine could not run because doing so
+would violate the <span class="code">limit</span> setting of the virtual machine or resource pool.</li>
+</ul>
+<p>
+<strong>Note:</strong> The counters on this page are available through the vSphere API only. 
+They are not displayed in any of the vSphere Client charts.
+</p>
+
+</td></tr></table>
+<!-- heading for table -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+
+<tr>
+<th width="10%" valign="middle" title="PerfCounterInfo.nameInfo.key property">Counter</th>
+<!--<th rowspan="2" width="200">Description</th>-->
+<th width="10%"><a href="vim.PerformanceManager.CounterInfo.StatsType.html" class="white" title="StatsType">StatsType</a></th>
+<th width="10%"><a href="vim.PerformanceManager.CounterInfo.Unit.html" class="white">Unit</a></th>
+
+<th width="5%"><a href="vim.HistoricalInterval.html#level" class="white" title="The 'level' property is 'null' for ESX... Statistics are collected by vCenter Server and rolled-up based on the collection-level setting (1 is the default).">Level</a></th>
+<th width="5%"><a href="vim.PerformanceManager.CounterInfo.html" class="white" title="Per Device Level">Per<br />Device<br />Level</a></th>
+
+<th width="10%"><a href="vim.PerformanceManager.CounterInfo.RollupType.html" class="white" title="RollupType">RollupType</a></th>
+<th width="15%"><a href="vim.PerformanceManager.CounterInfo.html" class="white" title="PerfCounterInfo.nameInfo property is used to populate vSphere Client charts...">Label</a></th>
+<th width="10%"><a href="vim.ManagedEntity.html" class="white" title="Entity for which the counter is supported.">Entity</a></th>
+<th width="10%"><a href="vim.PerformanceManager.MetricId.html" class="white" title="Indicates whether collection is from 
+an individual instance or aggregate">Instance/<br />Aggregate</a></th>
+<th width="10%"><a href="" class="white" title="ESX version(s) for which this counter is supported.">ESX<br />Versions</a></th>
+</tr>
+<!-- close heading for table -->
+<tr><td rowspan="2">actav1</td>
+<td>absolute</td><td>percent</td><td>3</td><td>3</td><td>latest</td><td>
+Active (1 min. average)
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">CPU active average over 1 minute</td></tr>
+
+
+<tr><td rowspan="2">actav15</td>
+<td>absolute</td><td>percent</td><td>3</td><td>3</td><td>latest</td><td>
+Active (15 min. average)
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">CPU active average over 15 minutes</td></tr>
+
+
+<tr><td rowspan="2">actav5</td>
+<td>absolute</td><td>percent</td><td>3</td><td>3</td><td>latest</td><td>
+Active (5 min. average)
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">CPU active average over 5 minutes</td></tr>
+
+
+<tr><td rowspan="2">actpk1</td>
+<td>absolute</td><td>percent</td><td>3</td><td>3</td><td>latest</td><td>
+Active (1 min. peak)
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">CPU active peak over 1 minute</td></tr>
+
+
+<tr><td rowspan="2">actpk15</td>
+<td>absolute</td><td>percent</td><td>3</td><td>3</td><td>latest</td><td>
+Active (15 min. peak)
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">CPU active peak over 15 minutes</td></tr>
+
+
+<tr><td rowspan="2">actpk5</td>
+<td>absolute</td><td>percent</td><td>3</td><td>3</td><td>latest</td><td>
+Active (5 min. peak)
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">CPU active peak over 5 minutes</td></tr>
+
+
+<tr><td rowspan="2">maxLimited1</td>
+<td>absolute</td><td>percent</td><td>3</td><td>3</td><td>latest</td><td>
+Throttled (1 min. average)
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">Amount of CPU resources over the limit that were refused, average over 1 minute</td></tr>
+
+
+<tr><td rowspan="2">maxLimited15</td>
+<td>absolute</td><td>percent</td><td>3</td><td>3</td><td>latest</td><td>
+Throttled (15 min. average)
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">Amount of CPU resources over the limit that were refused, average over 15 minutes</td></tr>
+
+
+<tr><td rowspan="2">maxLimited5</td>
+<td>absolute</td><td>percent</td><td>3</td><td>3</td><td>latest</td><td>
+Throttled (5 min. average)
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">Amount of CPU resources over the limit that were refused, average over 5 minutes</td></tr>
+
+
+<tr><td rowspan="2">runav1</td>
+<td>absolute</td><td>percent</td><td>3</td><td>3</td><td>latest</td><td>
+Running (1 min. average)
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">CPU running average over 1 minute</td></tr>
+
+
+<tr><td rowspan="2">runav15</td>
+<td>absolute</td><td>percent</td><td>3</td><td>3</td><td>latest</td><td>
+Running (15 min. average)
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">CPU running average over 15 minutes</td></tr>
+
+
+<tr><td rowspan="2">runav5</td>
+<td>absolute</td><td>percent</td><td>3</td><td>3</td><td>latest</td><td>
+Running (5 min. average)
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">CPU running average over 5 minutes</td></tr>
+
+
+<tr><td rowspan="2">runpk1</td>
+<td>absolute</td><td>percent</td><td>3</td><td>3</td><td>latest</td><td>
+Running (1 min. peak)
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">CPU running peak over 1 minute</td></tr>
+
+
+<tr><td rowspan="2">runpk15</td>
+<td>absolute</td><td>percent</td><td>3</td><td>3</td><td>latest</td><td>
+Running (15 min. peak)
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">CPU running peak over 15 minutes</td></tr>
+
+
+<tr><td rowspan="2">runpk5</td>
+<td>absolute</td><td>percent</td><td>3</td><td>3</td><td>latest</td><td>
+Running (5 min. peak)
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">CPU running peak over 5 minutes</td></tr>
+
+
+<tr><td rowspan="2">sampleCount</td>
+<td>absolute</td><td>number</td><td>3</td><td>3</td><td>latest</td><td>
+Group CPU sample count
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">group CPU sample count</td></tr>
+
+
+<tr><td rowspan="2">samplePeriod</td>
+<td>absolute</td><td>millisecond</td><td>3</td><td>3</td><td>latest</td><td>
+Group CPU sample period
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="10">Group CPU sample period.</td></tr>
+
+
+</table>
+<p>&#160;</p>
+<span class="back"><a href="#top" class="noline">Back to</a></span> 
+<span class="back2"><a href="#top" class="noline">Top of page</a></span><br />
+<span class="back"><a href="vim.PerformanceManager.html" class="noline">Back to</a></span> 
+<span class="back2"><a href="vim.PerformanceManager.html" class="noline">PerformanceManager</a></span><br />
+<p>&#160;</p>
+<p>&#160;</p>
+<p><script language="javascript" type="text/javascript">document.write(ID_Copyright);</script><br />
+<script language="javascript" type="text/javascript">document.write(ID_VersionInformation);</script></p>
+</body>
+</html>

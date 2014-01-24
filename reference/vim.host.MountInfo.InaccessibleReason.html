@@ -1,0 +1,112 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.MountInfo.InaccessibleReason" name="vim.host.MountInfo.InaccessibleReason"></a>
+<h1>Enum - 
+						HostMountInfoInaccessibleReason</h1>
+<dl>
+<dt>Since </dt>
+<dd>vSphere API 5.1</dd>
+<p></p>
+</dl>
+<br>
+<h2>Enum Description</h2>
+<p></p>
+         A datastore can become inaccessible due to a number of reasons as 
+  defined in this enum InaccessibleReason.
+  The reason for a datastore being inaccessibile is reported in
+  <a href="vim.host.MountInfo.html#inaccessibleReason">inaccessibleReason</a>.
+
+  APD ("All Paths Down") is a condition where a SAN or NFS storage has
+  become inaccessible for unknown reasons. It only indicates loss of
+  connectivity and does not indicate storage device failure or
+  LUN removal (Permanent Device Loss or PDL)
+
+  A difference between APD and PDL is that APD may recover
+  in which case all use cases will start to work as before. In case of PDL
+  the failed datastore/device is unlikely to recover and hence the device
+  path information and data cache will be emptied. If the PDL condition
+  recovers, the failed datastores have to be added back to the host. Once
+  in PDL a datastore cannot be added back until there are no longer any
+  open files on the datastore.
+
+  PDL is not linked to the APD and can happen at any time with or without APD
+  preceding. If APD and PDL occur at the same time, APD  will be reported first.
+  Once (and if) the APD condition clears, PermanentDataLoss will be reported if
+  PDL condition still exists.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Enum Constants</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><a id="AllPathsDown_Start" name="AllPathsDown_Start"></a>AllPathsDown_Start</td><td>
+      AllPathsDown_Start value is reported when all paths down state is detected
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="AllPathsDown_Timeout" name="AllPathsDown_Timeout"></a>AllPathsDown_Timeout</td><td>
+      After a wait for a system default time (which is user modifiable)
+  to ascertain the state is indeed an APD, AllPathsDown_Timeout property
+  is reported. The host advanced option used to set timeout period
+  is "/Misc/APDTimeout"
+
+  After the datastore property is set to AllPathsDown_Timeout, all data i/o
+  to the datastore will be fast-failed (failed immediately).
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="PermanentDeviceLoss" name="PermanentDeviceLoss"></a>PermanentDeviceLoss</td><td>
+      A PDL condition is reported as PermanentDeviceLoss.
+   <br>
+</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <simpleType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostMountInfoInaccessibleReason">
+            <restriction base="xsd:string">
+               <enumeration value="AllPathsDown_Start"/>
+               <enumeration value="AllPathsDown_Timeout"/>
+               <enumeration value="PermanentDeviceLoss"/>
+            </restriction>
+         </simpleType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

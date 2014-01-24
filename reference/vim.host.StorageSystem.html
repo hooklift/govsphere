@@ -1,0 +1,5394 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.StorageSystem" name="vim.host.StorageSystem"></a>
+<h1>Managed Object -  
+						HostStorageSystem</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.host.ConfigManager.html#field_detail">HostConfigManager</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.FcoeConfig.FcoeSpecification.html">FcoeConfigFcoeSpecification</a>, <a href="vim.host.DiskPartitionInfo.BlockRange.html">HostDiskPartitionBlockRange</a>, <a href="vim.host.DiskPartitionInfo.html">HostDiskPartitionInfo</a>, <a href="vim.host.DiskPartitionInfo.Layout.html">HostDiskPartitionLayout</a>, <a href="vim.host.DiskPartitionInfo.Specification.html">HostDiskPartitionSpec</a>, <a href="vim.host.FileSystemVolumeInfo.html">HostFileSystemVolumeInfo</a>, <a href="vim.host.InternetScsiHba.AuthenticationProperties.html">HostInternetScsiHbaAuthenticationProperties</a>, <a href="vim.host.InternetScsiHba.DigestProperties.html">HostInternetScsiHbaDigestProperties</a>, <a href="vim.host.InternetScsiHba.DiscoveryProperties.html">HostInternetScsiHbaDiscoveryProperties</a>, <a href="vim.host.InternetScsiHba.IPProperties.html">HostInternetScsiHbaIPProperties</a>, <a href="vim.host.InternetScsiHba.ParamValue.html">HostInternetScsiHbaParamValue</a>, <a href="vim.host.InternetScsiHba.SendTarget.html">HostInternetScsiHbaSendTarget</a>, <a href="vim.host.InternetScsiHba.StaticTarget.html">HostInternetScsiHbaStaticTarget</a>, <a href="vim.host.InternetScsiHba.TargetSet.html">HostInternetScsiHbaTargetSet</a>, <a href="vim.host.MultipathInfo.LogicalUnitPolicy.html">HostMultipathInfoLogicalUnitPolicy</a>, <a href="vim.host.MultipathStateInfo.html">HostMultipathStateInfo</a>, <a href="vim.host.PathSelectionPolicyOption.html">HostPathSelectionPolicyOption</a>, <a href="vim.host.ScsiDisk.html">HostScsiDisk</a>, <a href="vim.host.ScsiDisk.Partition.html">HostScsiDiskPartition</a>, <a href="vim.host.StorageArrayTypePolicyOption.html">HostStorageArrayTypePolicyOption</a>, <a href="vim.host.StorageDeviceInfo.html">HostStorageDeviceInfo</a>, <a href="vim.host.UnresolvedVmfsResolutionResult.html">HostUnresolvedVmfsResolutionResult</a>, <a href="vim.host.UnresolvedVmfsResolutionSpec.html">HostUnresolvedVmfsResolutionSpec</a>, <a href="vim.host.UnresolvedVmfsVolume.html">HostUnresolvedVmfsVolume</a>, <a href="vim.host.VffsVolume.Specification.html">HostVffsSpec</a>, <a href="vim.host.VffsVolume.html">HostVffsVolume</a>, <a href="vim.host.VmfsVolume.Specification.html">HostVmfsSpec</a>, <a href="vim.host.VmfsVolume.html">HostVmfsVolume</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         This managed object gets and sets configuration information
+  about the host's storage subsystem.  The properties and operations are
+  used to configure the host to make storage available for virtual machines.
+
+  This object contains properties that are specific to ESX Server and
+  general to both the ESX Server system and the hosted architecture.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="fileSystemVolumeInfo" name="fileSystemVolumeInfo"></a><strong>fileSystemVolumeInfo</strong></td><td><a href="vim.host.FileSystemVolumeInfo.html">HostFileSystemVolumeInfo</a></td><td>
+<p></p>
+         File system volume information for the host.  See the
+  <a href="vim.host.FileSystemVolumeInfo.html">FileSystemVolumeInfo</a> data
+  object type for more information.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="multipathStateInfo" name="multipathStateInfo"></a><strong>multipathStateInfo</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.host.MultipathStateInfo.html">HostMultipathStateInfo</a></td><td>
+<p></p>
+         Runtime information about the state of a multipath path.
+  A null value will be returned if path state information is not available
+  for this system.
+  <p>
+  In systems prior to the plug-store architecture, the state of a path
+  may be accessible on the <a href="vim.host.MultipathInfo.html">HostMultipathInfo</a> data object
+  of the <a href="vim.host.StorageSystem.html#storageDeviceInfo">storageDeviceInfo</a> property.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="storageDeviceInfo" name="storageDeviceInfo"></a><strong>storageDeviceInfo</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.host.StorageDeviceInfo.html">HostStorageDeviceInfo</a></td><td>
+<p></p>
+         Host storage information up to the device level.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="systemFile" name="systemFile"></a><strong>systemFile</strong><span title="May not be present" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         Datastore paths of files used by the host system on
+  mounted volumes, for instance, the COS vmdk file of the
+  host. For information on datastore paths, see <a href="vim.Datastore.html">Datastore</a>.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.ExtensibleManagedObject.html#availableField">availableField</a>, <a href="vim.ExtensibleManagedObject.html#value">value</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#addInternetScsiSendTargets">AddInternetScsiSendTargets</a>, <a href="#addInternetScsiStaticTargets">AddInternetScsiStaticTargets</a>, <a href="#attachScsiLun">AttachScsiLun</a>, <a href="#attachVmfsExtent">AttachVmfsExtent</a>, <a href="#computeDiskPartitionInfo">ComputeDiskPartitionInfo</a>, <a href="#computeDiskPartitionInfoForResize">ComputeDiskPartitionInfoForResize</a>, <a href="#deleteScsiLunState">DeleteScsiLunState</a>, <a href="#deleteVffsVolumeState">DeleteVffsVolumeState</a>, <a href="#deleteVmfsVolumeState">DeleteVmfsVolumeState</a>, <a href="#destroyVffs">DestroyVffs</a>, <a href="#detachScsiLun">DetachScsiLun</a>, <a href="#disableMultipathPath">DisableMultipathPath</a>, <a href="#discoverFcoeHbas">DiscoverFcoeHbas</a>, <a href="#enableMultipathPath">EnableMultipathPath</a>, <a href="#expandVmfsExtent">ExpandVmfsExtent</a>, <a href="#extendVffs">ExtendVffs</a>, <a href="#formatVffs">FormatVffs</a>, <a href="#formatVmfs">FormatVmfs</a>, <a href="#markForRemoval">MarkForRemoval</a>, <a href="#mountVffsVolume">MountVffsVolume</a>, <a href="#mountVmfsVolume">MountVmfsVolume</a>, <a href="#queryAvailableSsds">QueryAvailableSsds</a>, <a href="#queryPathSelectionPolicyOptions">QueryPathSelectionPolicyOptions</a>, <a href="#queryStorageArrayTypePolicyOptions">QueryStorageArrayTypePolicyOptions</a>, <a href="#queryUnresolvedVmfsVolume">QueryUnresolvedVmfsVolume</a>, <a href="#refresh">RefreshStorageSystem</a>, <a href="#removeInternetScsiSendTargets">RemoveInternetScsiSendTargets</a>, <a href="#removeInternetScsiStaticTargets">RemoveInternetScsiStaticTargets</a>, <a href="#rescanAllHba">RescanAllHba</a>, <a href="#rescanHba">RescanHba</a>, <a href="#rescanVffs">RescanVffs</a>, <a href="#rescanVmfs">RescanVmfs</a>, <a href="#resolveMultipleUnresolvedVmfsVolumes">ResolveMultipleUnresolvedVmfsVolumes</a>, <a href="#resolveMultipleUnresolvedVmfsVolumesEx">ResolveMultipleUnresolvedVmfsVolumesEx_Task</a>, <a href="#retrieveDiskPartitionInfo">RetrieveDiskPartitionInfo</a>, <a href="#setMultipathLunPolicy">SetMultipathLunPolicy</a>, <a href="#unmountForceMountedVmfsVolume">UnmountForceMountedVmfsVolume</a>, <a href="#unmountVffsVolume">UnmountVffsVolume</a>, <a href="#unmountVmfsVolume">UnmountVmfsVolume</a>, <a href="#updateDiskPartitions">UpdateDiskPartitions</a>, <a href="#updateInternetScsiAdvancedOptions">UpdateInternetScsiAdvancedOptions</a>, <a href="#updateInternetScsiAlias">UpdateInternetScsiAlias</a>, <a href="#updateInternetScsiAuthenticationProperties">UpdateInternetScsiAuthenticationProperties</a>, <a href="#updateInternetScsiDigestProperties">UpdateInternetScsiDigestProperties</a>, <a href="#updateInternetScsiDiscoveryProperties">UpdateInternetScsiDiscoveryProperties</a>, <a href="#updateInternetScsiIPProperties">UpdateInternetScsiIPProperties</a>, <a href="#updateInternetScsiName">UpdateInternetScsiName</a>, <a href="#updateScsiLunDisplayName">UpdateScsiLunDisplayName</a>, <a href="#updateSoftwareInternetScsiEnabled">UpdateSoftwareInternetScsiEnabled</a>, <a href="#upgradeVmfs">UpgradeVmfs</a>, <a href="#upgradeVmLayout">UpgradeVmLayout</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.ExtensibleManagedObject.html#setCustomValue">setCustomValue</a></td>
+</tr>
+</table>
+<br>
+<a id="addInternetScsiSendTargets" name="addInternetScsiSendTargets"></a>
+<h1>AddInternetScsiSendTargets</h1>
+<p></p>
+         Adds Send Target entries to the host bus adapter discovery list.
+  The DiscoveryProperties.sendTargetsDiscoveryEnabled flag
+  must be set to true.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>iScsiHbaDevice</strong></td><td>xsd:string</td><td>
+<p></p>
+         The device of the Internet SCSI HBA adapter.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>targets</strong></td><td><a href="vim.host.InternetScsiHba.SendTarget.html">HostInternetScsiHbaSendTarget[]</a></td><td>
+<p></p>
+         An array of iSCSI send targets.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the discovery list could not be found.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('AddInternetScsiSendTargets-textarea');expandcontent(this, 'AddInternetScsiSendTargets-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="AddInternetScsiSendTargets-div">
+<textarea cols="20" rows="10" name="AddInternetScsiSendTargets-textarea" wrap="off" readonly="1" id="AddInternetScsiSendTargets-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AddInternetScsiSendTargets" type="vim25:AddInternetScsiSendTargetsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AddInternetScsiSendTargetsResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="addInternetScsiStaticTargets" name="addInternetScsiStaticTargets"></a>
+<h1>AddInternetScsiStaticTargets</h1>
+<p></p>
+         Adds Static Target entries to the host bus adapter discovery list.
+  The DiscoveryProperty.staticTargetDiscoveryEnabled must be set to true.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>iScsiHbaDevice</strong></td><td>xsd:string</td><td>
+<p></p>
+         The device of the Internet SCSI HBA adapter.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>targets</strong></td><td><a href="vim.host.InternetScsiHba.StaticTarget.html">HostInternetScsiHbaStaticTarget[]</a></td><td>
+<p></p>
+         An array of iSCSI static targets to add.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the host bus adaptor discovery list was not found.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('AddInternetScsiStaticTargets-textarea');expandcontent(this, 'AddInternetScsiStaticTargets-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="AddInternetScsiStaticTargets-div">
+<textarea cols="20" rows="10" name="AddInternetScsiStaticTargets-textarea" wrap="off" readonly="1" id="AddInternetScsiStaticTargets-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AddInternetScsiStaticTargets" type="vim25:AddInternetScsiStaticTargetsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AddInternetScsiStaticTargetsResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="attachScsiLun" name="attachScsiLun"></a>
+<h1>AttachScsiLun</h1>
+<p></p>
+         Allow I/O issue to the specified detached ScsiLun. The ScsiLun is
+  administratively configured on, if the attach operation is successful.
+  See <a href="vim.host.StorageSystem.html#detachScsiLun">DetachScsiLun</a>.
+  <p>
+  attachScsiLun is part of the Unmount, Detach workflow used
+  when a device will be permanently removed.
+  See also <a href="vim.host.StorageSystem.html#unmountVmfsVolume">UnmountVmfsVolume</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>lunUuid</strong></td><td>xsd:string</td><td>
+<p></p>
+         The uuid of the ScsiLun to update.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if <ul> <li>The device is already attached. i.e. Device state is not 'off' in <a href="vim.host.ScsiLun.html#operationalState">operationalState</a>.</li> <li>The device is unreachable. See <a href="vim.host.ScsiLun.html#operationalState">operationalState</a>.</li> </ul></td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the device could not be found.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('AttachScsiLun-textarea');expandcontent(this, 'AttachScsiLun-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="AttachScsiLun-div">
+<textarea cols="20" rows="10" name="AttachScsiLun-textarea" wrap="off" readonly="1" id="AttachScsiLun-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AttachScsiLun" type="vim25:AttachScsiLunRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AttachScsiLunResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="attachVmfsExtent" name="attachVmfsExtent"></a>
+<h1>AttachVmfsExtent</h1>
+<p></p>
+         Extends a VMFS by attaching a disk partition as an extent.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vmfsPath</strong></td><td>xsd:string</td><td>
+<p></p>
+         The path of the VMFS to extend. See <a href="vim.host.FileSystemMountInfo.html">FileSystemMountInfo</a>.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>extent</strong></td><td><a href="vim.host.ScsiDisk.Partition.html">HostScsiDiskPartition</a></td><td>
+<p></p>
+         A data object that describes the specification of a
+                Disk partition.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the new extent is already used by another vmfs volume, does not exist, or is of an invalid partition type.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the VMFS cannot be found or is unmounted.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('AttachVmfsExtent-textarea');expandcontent(this, 'AttachVmfsExtent-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="AttachVmfsExtent-div">
+<textarea cols="20" rows="10" name="AttachVmfsExtent-textarea" wrap="off" readonly="1" id="AttachVmfsExtent-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AttachVmfsExtent" type="vim25:AttachVmfsExtentRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AttachVmfsExtentResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="computeDiskPartitionInfo" name="computeDiskPartitionInfo"></a>
+<h1>ComputeDiskPartitionInfo</h1>
+<p></p>
+         Computes the disk partition information given the desired disk layout.
+  The server computes a new partition information object for a specific
+  disk representing the desired layout.<br>See <a href="vim.host.DiskPartitionInfo.PartitionFormat.html">HostDiskPartitionInfoPartitionFormat</a><br>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>devicePath</strong></td><td>xsd:string</td><td>
+<p></p>
+         The name of the device path for the specific disk.<br>See <a href="vim.host.DiskPartitionInfo.PartitionFormat.html">HostDiskPartitionInfoPartitionFormat</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>layout</strong></td><td><a href="vim.host.DiskPartitionInfo.Layout.html">HostDiskPartitionLayout</a></td><td>
+<p></p>
+         A data object that describes the disk partition layout.<br>See <a href="vim.host.DiskPartitionInfo.PartitionFormat.html">HostDiskPartitionInfoPartitionFormat</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>partitionFormat</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Specifies the desired partition format to be
+         computed from the block range.
+         If partitionFormat is not specified, the existing partitionFormat
+         on disk is used, if the disk is not blank and mbr otherwise.<br>See <a href="vim.host.DiskPartitionInfo.PartitionFormat.html">HostDiskPartitionInfoPartitionFormat</a><br>
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.host.DiskPartitionInfo.html">HostDiskPartitionInfo</a></td><td>A data object that contains information about the partitions on a disk</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if unable to get the current partition information for the device.<br>See <a href="vim.host.DiskPartitionInfo.PartitionFormat.html">HostDiskPartitionInfoPartitionFormat</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the layout is invalid.<br>See <a href="vim.host.DiskPartitionInfo.PartitionFormat.html">HostDiskPartitionInfoPartitionFormat</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the device could not be found.<br>See <a href="vim.host.DiskPartitionInfo.PartitionFormat.html">HostDiskPartitionInfoPartitionFormat</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ComputeDiskPartitionInfo-textarea');expandcontent(this, 'ComputeDiskPartitionInfo-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ComputeDiskPartitionInfo-div">
+<textarea cols="20" rows="10" name="ComputeDiskPartitionInfo-textarea" wrap="off" readonly="1" id="ComputeDiskPartitionInfo-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ComputeDiskPartitionInfo" type="vim25:ComputeDiskPartitionInfoRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ComputeDiskPartitionInfoResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:HostDiskPartitionInfo"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="computeDiskPartitionInfoForResize" name="computeDiskPartitionInfoForResize"></a>
+<h1>ComputeDiskPartitionInfoForResize</h1>
+<p></p>
+         Computes the disk partition information for the purpose of resizing
+  a given partition.<br>See <a href="vim.host.DiskPartitionInfo.PartitionFormat.html">HostDiskPartitionInfoPartitionFormat</a><br>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>partition</strong></td><td><a href="vim.host.ScsiDisk.Partition.html">HostScsiDiskPartition</a></td><td>
+<p></p>
+         The disk partition to resize.<br>See <a href="vim.host.DiskPartitionInfo.PartitionFormat.html">HostDiskPartitionInfoPartitionFormat</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>blockRange</strong></td><td><a href="vim.host.DiskPartitionInfo.BlockRange.html">HostDiskPartitionBlockRange</a></td><td>
+<p></p>
+         Specifies the desired block range for the resized
+         partition. The start of the block range specified should match
+         that of the current partition.<br>See <a href="vim.host.DiskPartitionInfo.PartitionFormat.html">HostDiskPartitionInfoPartitionFormat</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>partitionFormat</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Specifies the desired partition format to be
+         computed from the block range.
+         If partitionFormat is not specified, the existing partitionFormat
+         on disk is used, if the disk is not blank and mbr otherwise.<br>See <a href="vim.host.DiskPartitionInfo.PartitionFormat.html">HostDiskPartitionInfoPartitionFormat</a><br>
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.host.DiskPartitionInfo.html">HostDiskPartitionInfo</a></td><td>resized disk partition information</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if unable to get the current partition information for the device.<br>See <a href="vim.host.DiskPartitionInfo.PartitionFormat.html">HostDiskPartitionInfoPartitionFormat</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if blockRange or partition is invalid.<br>See <a href="vim.host.DiskPartitionInfo.PartitionFormat.html">HostDiskPartitionInfoPartitionFormat</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the device could not be found.<br>See <a href="vim.host.DiskPartitionInfo.PartitionFormat.html">HostDiskPartitionInfoPartitionFormat</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ComputeDiskPartitionInfoForResize-textarea');expandcontent(this, 'ComputeDiskPartitionInfoForResize-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ComputeDiskPartitionInfoForResize-div">
+<textarea cols="20" rows="10" name="ComputeDiskPartitionInfoForResize-textarea" wrap="off" readonly="1" id="ComputeDiskPartitionInfoForResize-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ComputeDiskPartitionInfoForResize" type="vim25:ComputeDiskPartitionInfoForResizeRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ComputeDiskPartitionInfoForResizeResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:HostDiskPartitionInfo"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="deleteScsiLunState" name="deleteScsiLunState"></a>
+<h1>DeleteScsiLunState</h1>
+<p></p>
+         For previously detached SCSI Lun, remove the state information from
+  host. 
+
+  Detach SCSI Lun marks the device where I/Os are not allowed.
+  Host still maintains the entry of this device and its state.
+  If a LUN is detached using detachScsiLun, ESX will not automatically 
+  attach this LUN durng a rescan or after a reboot.
+  See <a href="vim.host.StorageSystem.html#detachScsiLun">DetachScsiLun</a>.
+
+  Please note: The API takes 'canonicalName' of the ScsiLun object
+  instead of the ScsiLun.uuid.<br>See <a href="vim.host.ScsiLun.html#canonicalName">canonicalName</a><br>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.1</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>lunCanonicalName</strong></td><td>xsd:string</td><td>
+<p></p>
+         The 'canonicalName' of the ScsiLun
+                          whose state needs to be deleted.<br>See <a href="vim.host.ScsiLun.html#canonicalName">canonicalName</a><br>
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for any configuration failures.<br>See <a href="vim.host.ScsiLun.html#canonicalName">canonicalName</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('DeleteScsiLunState-textarea');expandcontent(this, 'DeleteScsiLunState-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="DeleteScsiLunState-div">
+<textarea cols="20" rows="10" name="DeleteScsiLunState-textarea" wrap="off" readonly="1" id="DeleteScsiLunState-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DeleteScsiLunState" type="vim25:DeleteScsiLunStateRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DeleteScsiLunStateResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="deleteVffsVolumeState" name="deleteVffsVolumeState"></a>
+<h1>DeleteVffsVolumeState</h1>
+<p></p>
+         For previously unmounted VFFS volume, remove the state information from
+  host.
+
+  VFFS volumes mount state is maintained by host.
+  <p>
+  deleteVffsVolumeState is part of the Unmount/Detach workflow used
+  when the device will be permanently removed.
+  See also <a href="vim.host.StorageSystem.html#unmountVffsVolume">UnmountVffsVolume</a>.
+
+  If the VFFS volume is unmounted using unmountVffsVolume, ESX maintains
+  the state of VFFS volume. This API will remove the state from the host.
+
+  If the underlying storage device is going to be un-provisioned on the
+  array side, please detach the storage device.
+  See also <a href="vim.host.StorageSystem.html#detachScsiLun">DetachScsiLun</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vffsUuid</strong></td><td>xsd:string</td><td>
+<p></p>
+         The VFFS UUID.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for any configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('DeleteVffsVolumeState-textarea');expandcontent(this, 'DeleteVffsVolumeState-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="DeleteVffsVolumeState-div">
+<textarea cols="20" rows="10" name="DeleteVffsVolumeState-textarea" wrap="off" readonly="1" id="DeleteVffsVolumeState-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DeleteVffsVolumeState" type="vim25:DeleteVffsVolumeStateRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DeleteVffsVolumeStateResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="deleteVmfsVolumeState" name="deleteVmfsVolumeState"></a>
+<h1>DeleteVmfsVolumeState</h1>
+<p></p>
+         For previously unmounted VMFS volume, remove the state information from
+  host. 
+
+  VMFS volumes mount state is maintained by host. 
+
+  <p>
+  deleteVmfsVolumeState is part of the Unmount/Detach workflow used
+  when the device will be permanently removed.
+  See also <a href="vim.host.StorageSystem.html#unmountVmfsVolume">UnmountVmfsVolume</a>.
+
+  If the VMFS volume is unmounted using unmountVmfsVolume, ESX maintains 
+  the state of VMFS volume. This API will remove the state from the host.
+
+  If the underlying storage device is going to be un-provisioned on the
+  array side, please detach the storage device.
+  See also <a href="vim.host.StorageSystem.html#detachScsiLun">DetachScsiLun</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.1</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vmfsUuid</strong></td><td>xsd:string</td><td>
+<p></p>
+         The VMFS UUID.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for any configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('DeleteVmfsVolumeState-textarea');expandcontent(this, 'DeleteVmfsVolumeState-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="DeleteVmfsVolumeState-div">
+<textarea cols="20" rows="10" name="DeleteVmfsVolumeState-textarea" wrap="off" readonly="1" id="DeleteVmfsVolumeState-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DeleteVmfsVolumeState" type="vim25:DeleteVmfsVolumeStateRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DeleteVmfsVolumeStateResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="destroyVffs" name="destroyVffs"></a>
+<h1>DestroyVffs</h1>
+<p></p>
+         Destroy a VFFS volume.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vffsPath</strong></td><td>xsd:string</td><td>
+<p></p>
+         The path of the VFFS to destroy. See <a href="vim.host.FileSystemMountInfo.html">FileSystemMountInfo</a>.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the VFFS cannot be found or is unmounted.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.ResourceInUse.html">ResourceInUse</a></td><td>VFFS volume is being used.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('DestroyVffs-textarea');expandcontent(this, 'DestroyVffs-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="DestroyVffs-div">
+<textarea cols="20" rows="10" name="DestroyVffs-textarea" wrap="off" readonly="1" id="DestroyVffs-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DestroyVffs" type="vim25:DestroyVffsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DestroyVffsResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="detachScsiLun" name="detachScsiLun"></a>
+<h1>DetachScsiLun</h1>
+<p></p>
+         Disallow I/O issue to the specified ScsiLun. The ScsiLun is
+  detached, i.e. administratively configured off until a subsequent
+  attachScsiLun is performed, if the operation is successful.
+  See <a href="vim.host.StorageSystem.html#attachScsiLun">AttachScsiLun</a>.
+  <p>
+  detachScsiLun is part of the Unmount / Detach workflow used
+  when a device will be permanently removed.
+  See also <a href="vim.host.StorageSystem.html#unmountVmfsVolume">UnmountVmfsVolume</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>lunUuid</strong></td><td>xsd:string</td><td>
+<p></p>
+         The uuid of the ScsiLun device to detach.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if <ul> <li>The device is already detached(turned 'off'). See <a href="vim.host.ScsiLun.html#operationalState">operationalState</a>.</li> </ul></td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the device could not be found.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.ResourceInUse.html">ResourceInUse</a></td><td>Thrown if <ul> <li>This device is backing a Vm with a Raw Device Mapped Virtual Disk.</li> <li>1 or more programs have I/O outstanding on this device.</li> <li>1 or more mounted vmfs volumes have extents residing on this device.</li> <li>The device is configured for use by the host e.g. diagnostic partition is configured on this device.</li> </ul></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('DetachScsiLun-textarea');expandcontent(this, 'DetachScsiLun-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="DetachScsiLun-div">
+<textarea cols="20" rows="10" name="DetachScsiLun-textarea" wrap="off" readonly="1" id="DetachScsiLun-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DetachScsiLun" type="vim25:DetachScsiLunRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DetachScsiLunResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="disableMultipathPath" name="disableMultipathPath"></a>
+<h1>DisableMultipathPath</h1>
+<p></p>
+         Disables an enabled path for a Logical Unit.
+  Use the path name from <a href="vim.host.MultipathStateInfo.Path.html">HostMultipathStateInfoPath</a>
+  or <a href="vim.host.MultipathInfo.Path.html">HostMultipathInfoPath</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>pathName</strong></td><td>xsd:string</td><td>
+<p></p>
+         The name of the path to disable.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the LUN could not be found.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('DisableMultipathPath-textarea');expandcontent(this, 'DisableMultipathPath-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="DisableMultipathPath-div">
+<textarea cols="20" rows="10" name="DisableMultipathPath-textarea" wrap="off" readonly="1" id="DisableMultipathPath-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DisableMultipathPath" type="vim25:DisableMultipathPathRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DisableMultipathPathResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="discoverFcoeHbas" name="discoverFcoeHbas"></a>
+<h1>DiscoverFcoeHbas</h1>
+<p></p>
+         Initiates FCoE discovery using the given FcoeSpecification.
+
+ Upon success, discovered VNPorts will have registered with the
+ system as FCoE HBAs.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>fcoeSpec</strong></td><td><a href="vim.host.FcoeConfig.FcoeSpecification.html">FcoeConfigFcoeSpecification</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.FcoeFaultPnicHasNoPortSet.html">FcoeFaultPnicHasNoPortSet</a></td><td></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if the host is unable to issue FCoE discovery.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if any parameter in the given FcoeSpecification is invalid.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the given HBA could not be found.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('DiscoverFcoeHbas-textarea');expandcontent(this, 'DiscoverFcoeHbas-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="DiscoverFcoeHbas-div">
+<textarea cols="20" rows="10" name="DiscoverFcoeHbas-textarea" wrap="off" readonly="1" id="DiscoverFcoeHbas-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DiscoverFcoeHbas" type="vim25:DiscoverFcoeHbasRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DiscoverFcoeHbasResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="enableMultipathPath" name="enableMultipathPath"></a>
+<h1>EnableMultipathPath</h1>
+<p></p>
+         Enables a disabled path for a Logical Unit.
+  Use the path name from <a href="vim.host.MultipathStateInfo.Path.html">HostMultipathStateInfoPath</a>
+  or <a href="vim.host.MultipathInfo.Path.html">HostMultipathInfoPath</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>pathName</strong></td><td>xsd:string</td><td>
+<p></p>
+         The name of the path to enable.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the LUN could not be found.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('EnableMultipathPath-textarea');expandcontent(this, 'EnableMultipathPath-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="EnableMultipathPath-div">
+<textarea cols="20" rows="10" name="EnableMultipathPath-textarea" wrap="off" readonly="1" id="EnableMultipathPath-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="EnableMultipathPath" type="vim25:EnableMultipathPathRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="EnableMultipathPathResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="expandVmfsExtent" name="expandVmfsExtent"></a>
+<h1>ExpandVmfsExtent</h1>
+<p></p>
+         Expands a VMFS extent as specified by the Disk partition specification.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vmfsPath</strong></td><td>xsd:string</td><td>
+<p></p>
+         The path of the VMFS to expand. See <a href="vim.host.FileSystemMountInfo.html">FileSystemMountInfo</a>.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>extent</strong></td><td><a href="vim.host.ScsiDisk.Partition.html">HostScsiDiskPartition</a></td><td>
+<p></p>
+         The disk partition corresponding to the extent to be
+         expanded.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the extent is not part of the VMFS volume.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the VMFS cannot be found or is unmounted.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ExpandVmfsExtent-textarea');expandcontent(this, 'ExpandVmfsExtent-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ExpandVmfsExtent-div">
+<textarea cols="20" rows="10" name="ExpandVmfsExtent-textarea" wrap="off" readonly="1" id="ExpandVmfsExtent-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ExpandVmfsExtent" type="vim25:ExpandVmfsExtentRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ExpandVmfsExtentResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="extendVffs" name="extendVffs"></a>
+<h1>ExtendVffs</h1>
+<p></p>
+         Extends a VFFS by attaching a SSD.<br>See <a href="vim.host.ScsiDisk.html#devicePath">devicePath</a><br>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vffsPath</strong></td><td>xsd:string</td><td>
+<p></p>
+         The path of the VFFS to extend. See <a href="vim.host.FileSystemMountInfo.html">FileSystemMountInfo</a>.<br>See <a href="vim.host.ScsiDisk.html#devicePath">devicePath</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>devicePath</strong></td><td>xsd:string</td><td>
+<p></p>
+         Device path of the SSD disk.<br>See <a href="vim.host.ScsiDisk.html#devicePath">devicePath</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>spec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.DiskPartitionInfo.Specification.html">HostDiskPartitionSpec</a></td><td>
+<p></p>
+         A data object that describes the SSD disk partition
+              information. If this property is not provided, partition
+              information will be computed and generated.<br>See <a href="vim.host.ScsiDisk.html#devicePath">devicePath</a><br>
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.<br>See <a href="vim.host.ScsiDisk.html#devicePath">devicePath</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the new SSD is already used by another VFFS volume, does not exist, or is of an invalid partition type.<br>See <a href="vim.host.ScsiDisk.html#devicePath">devicePath</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the VFFS cannot be found or is unmounted.<br>See <a href="vim.host.ScsiDisk.html#devicePath">devicePath</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.ResourceInUse.html">ResourceInUse</a></td><td>VFFS volume is being used.<br>See <a href="vim.host.ScsiDisk.html#devicePath">devicePath</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ExtendVffs-textarea');expandcontent(this, 'ExtendVffs-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ExtendVffs-div">
+<textarea cols="20" rows="10" name="ExtendVffs-textarea" wrap="off" readonly="1" id="ExtendVffs-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ExtendVffs" type="vim25:ExtendVffsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ExtendVffsResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="formatVffs" name="formatVffs"></a>
+<h1>FormatVffs</h1>
+<p></p>
+         Format a new VFFS on a SSD disk
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>createSpec</strong></td><td><a href="vim.host.VffsVolume.Specification.html">HostVffsSpec</a></td><td>
+<p></p>
+         A data object that describes the VFFS volume
+                    creation specification.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.host.VffsVolume.html">HostVffsVolume</a></td><td>A data object that represents the VFFS file system.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AlreadyExists.html">AlreadyExists</a></td><td>Thrown if the volume name is already being used by another volume on the host.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if VFFS version is invalid, the SSD disk does not exist or is of an invalid type.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.ResourceInUse.html">ResourceInUse</a></td><td>VFFS volume is being used.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('FormatVffs-textarea');expandcontent(this, 'FormatVffs-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="FormatVffs-div">
+<textarea cols="20" rows="10" name="FormatVffs-textarea" wrap="off" readonly="1" id="FormatVffs-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FormatVffs" type="vim25:FormatVffsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FormatVffsResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:HostVffsVolume"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="formatVmfs" name="formatVmfs"></a>
+<h1>FormatVmfs</h1>
+<p></p>
+         Formats a new VMFS on a disk partition.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>createSpec</strong></td><td><a href="vim.host.VmfsVolume.Specification.html">HostVmfsSpec</a></td><td>
+<p></p>
+         A data object that describes the VMware File System
+                    (VMFS) creation specification.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.host.VmfsVolume.html">HostVmfsVolume</a></td><td>A data object that represents the VMFS file system.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AlreadyExists.html">AlreadyExists</a></td><td>Thrown if the volume name is already being used by another volume on the host.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if VMFS version specified is not 2 or 3, if blocksize, lock mode, or volume label are invalid, the partition does not exist or is of an invalid type.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('FormatVmfs-textarea');expandcontent(this, 'FormatVmfs-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="FormatVmfs-div">
+<textarea cols="20" rows="10" name="FormatVmfs-textarea" wrap="off" readonly="1" id="FormatVmfs-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FormatVmfs" type="vim25:FormatVmfsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FormatVmfsResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:HostVmfsVolume"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="markForRemoval" name="markForRemoval"></a>
+<h1>MarkForRemoval</h1>
+<p></p>
+         Mark or unmark the given FCoE HBA for removal from the host system.
+
+ Marking an FCoE HBA for removal will result in the HBA
+ not being discovered upon host reboot.  Until reboot,
+ the HBA remains visible in the storage topology.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>hbaName</strong></td><td>xsd:string</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>remove</strong></td><td>xsd:boolean</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if the host does not support removing the given HBA.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the given HBA is not an FCoE HBA.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the given HBA could not be found.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('MarkForRemoval-textarea');expandcontent(this, 'MarkForRemoval-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="MarkForRemoval-div">
+<textarea cols="20" rows="10" name="MarkForRemoval-textarea" wrap="off" readonly="1" id="MarkForRemoval-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="MarkForRemoval" type="vim25:MarkForRemovalRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="MarkForRemovalResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="mountVffsVolume" name="mountVffsVolume"></a>
+<h1>MountVffsVolume</h1>
+<p></p>
+         Mount the unmounted VFFS volume.  See <a href="vim.host.StorageSystem.html#unmountVffsVolume">UnmountVffsVolume</a>.
+  <p>
+  mountVffsVolume is part of the Unmount / Detach workflow used
+  when a device will be permanently removed.
+    See also <a href="vim.host.StorageSystem.html#detachScsiLun">DetachScsiLun</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vffsUuid</strong></td><td>xsd:string</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if <ul> <li> The volume is already mounted. </li> <li> The volume is inaccessible. </li> </ul></td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if VFFS uuid is not found on the host.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.ResourceInUse.html">ResourceInUse</a></td><td>VFFS volume is being used.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('MountVffsVolume-textarea');expandcontent(this, 'MountVffsVolume-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="MountVffsVolume-div">
+<textarea cols="20" rows="10" name="MountVffsVolume-textarea" wrap="off" readonly="1" id="MountVffsVolume-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="MountVffsVolume" type="vim25:MountVffsVolumeRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="MountVffsVolumeResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="mountVmfsVolume" name="mountVmfsVolume"></a>
+<h1>MountVmfsVolume</h1>
+<p></p>
+         Mount the unmounted Vmfs volume. A newly discovered vmfs volume will be
+  mounted unless, it has been explicitly unmounted. The default mount
+  behavior of Vmfs volumes is auto-mount. See <a href="vim.host.StorageSystem.html#unmountVmfsVolume">UnmountVmfsVolume</a>.
+  <p>
+  mountVmfsVolume is part of the Unmount / Detach workflow used
+  when a device will be permanently removed. 
+    See also <a href="vim.host.StorageSystem.html#detachScsiLun">DetachScsiLun</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vmfsUuid</strong></td><td>xsd:string</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if <ul> <li> The volume is already mounted. </li> <li> The volume is inaccessible. </li> </ul></td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if VMFS Uuid is not found on the host.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.ResourceInUse.html">ResourceInUse</a></td><td></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('MountVmfsVolume-textarea');expandcontent(this, 'MountVmfsVolume-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="MountVmfsVolume-div">
+<textarea cols="20" rows="10" name="MountVmfsVolume-textarea" wrap="off" readonly="1" id="MountVmfsVolume-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="MountVmfsVolume" type="vim25:MountVmfsVolumeRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="MountVmfsVolumeResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryAvailableSsds" name="queryAvailableSsds"></a>
+<h1>QueryAvailableSsds</h1>
+<p></p>
+         Query the list SSD disks that can be used to contain a VFFS volume.
+  If the optional parameter name is supplied, queries for the SSD
+  disks that can be used to contain extents of the specified VFFS volume. Otherwise,
+  the method retrieves the SSD disks that can be used to contain the new VFFS volume.
+  <p>
+  This operation will filter out SSD disks that are currently in use by an existing VFFS volume.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vffsPath</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The path of the VFFS to extend. See <a href="vim.host.FileSystemMountInfo.html">FileSystemMountInfo</a>.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.host.ScsiDisk.html">HostScsiDisk[]</a></td><td>An array of data objects descrbing SSD disks.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if unable to query disk information.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if named VFFS volume is not a VFFS volume</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the named VFFS volume is not found.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryAvailableSsds-textarea');expandcontent(this, 'QueryAvailableSsds-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryAvailableSsds-div">
+<textarea cols="20" rows="10" name="QueryAvailableSsds-textarea" wrap="off" readonly="1" id="QueryAvailableSsds-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryAvailableSsds" type="vim25:QueryAvailableSsdsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryAvailableSsdsResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:HostScsiDisk" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryPathSelectionPolicyOptions" name="queryPathSelectionPolicyOptions"></a>
+<h1>QueryPathSelectionPolicyOptions</h1>
+<p></p>
+         Queries the set of path selection policy options.  The set of policy
+  options indicates what path selection policies can be used by a
+  device managed by native multipathing.  Devices managed through native
+  multipathing are described in the <a href="vim.host.MultipathInfo.html">HostMultipathInfo</a> data
+  object.
+  <p>
+  Filtering capabilities are not currently present but may be added in
+  the future.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Read</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.host.PathSelectionPolicyOption.html">HostPathSelectionPolicyOption[]</a></td><td>The list of path selection policy descriptions that match the search criteria. Details about the policies will also be provided in accordance to the query specification.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for system configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryPathSelectionPolicyOptions-textarea');expandcontent(this, 'QueryPathSelectionPolicyOptions-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryPathSelectionPolicyOptions-div">
+<textarea cols="20" rows="10" name="QueryPathSelectionPolicyOptions-textarea" wrap="off" readonly="1" id="QueryPathSelectionPolicyOptions-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryPathSelectionPolicyOptions" type="vim25:QueryPathSelectionPolicyOptionsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryPathSelectionPolicyOptionsResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:HostPathSelectionPolicyOption" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryStorageArrayTypePolicyOptions" name="queryStorageArrayTypePolicyOptions"></a>
+<h1>QueryStorageArrayTypePolicyOptions</h1>
+<p></p>
+         Queries the set of storage array type policy options.  The set of policy
+  options indicates what storage array type policies can be used by a
+  device managed by native multipathing.  Devices managed through native
+  multipathing are described in the <a href="vim.host.MultipathInfo.html">HostMultipathInfo</a> data
+  object.
+  <p>
+  Filtering capabilities are not currently present but may be added in
+  the future.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Read</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.host.StorageArrayTypePolicyOption.html">HostStorageArrayTypePolicyOption[]</a></td><td>The list of storage array type policy descriptions.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for system configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryStorageArrayTypePolicyOptions-textarea');expandcontent(this, 'QueryStorageArrayTypePolicyOptions-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryStorageArrayTypePolicyOptions-div">
+<textarea cols="20" rows="10" name="QueryStorageArrayTypePolicyOptions-textarea" wrap="off" readonly="1" id="QueryStorageArrayTypePolicyOptions-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryStorageArrayTypePolicyOptions" type="vim25:QueryStorageArrayTypePolicyOptionsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryStorageArrayTypePolicyOptionsResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:HostStorageArrayTypePolicyOption" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryUnresolvedVmfsVolume" name="queryUnresolvedVmfsVolume"></a>
+<h1>QueryUnresolvedVmfsVolume</h1>
+<p></p>
+         Get the list of unbound VMFS volumes.
+  For sharing a volume across hosts, a VMFS volume is bound to its
+  underlying block device storage. When a low level block copy is
+  performed to copy or move the VMFS volume, the copied volume will
+  be unbound.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Read</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.host.UnresolvedVmfsVolume.html">HostUnresolvedVmfsVolume[]</a></td><td>An array of unbound VMFS volumes.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryUnresolvedVmfsVolume-textarea');expandcontent(this, 'QueryUnresolvedVmfsVolume-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryUnresolvedVmfsVolume-div">
+<textarea cols="20" rows="10" name="QueryUnresolvedVmfsVolume-textarea" wrap="off" readonly="1" id="QueryUnresolvedVmfsVolume-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryUnresolvedVmfsVolume" type="vim25:QueryUnresolvedVmfsVolumeRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryUnresolvedVmfsVolumeResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:HostUnresolvedVmfsVolume" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="refresh" name="refresh"></a>
+<h1>RefreshStorageSystem</h1>
+<p></p>
+         Obtains the latest host storage information related to storage devices, topology,
+  and file systems. The ESX host updates its storage information asynchronously.
+  The <a href="vim.host.StorageSystem.html#refresh">RefreshStorageSystem</a> method obtains information from
+  the host platform and it performs a rescan of VMFS volumes. It does not look for new devices.
+  <p>
+  This method may update the following inventory elements:
+  <ul>
+  <li>Devices and storage topology
+      (<a href="vim.HostSystem.html">HostSystem</a>.<a href="vim.HostSystem.html#config">config</a>.<a href="vim.host.ConfigInfo.html#storageDevice">storageDevice</a>).</li>
+  <li>VMFS and NFS datastores (<a href="vim.HostSystem.html">HostSystem</a>.<a href="vim.HostSystem.html#datastore">datastore</a>).</li>
+  <li>File system volumes
+   (<a href="vim.HostSystem.html">HostSystem</a>.<a href="vim.HostSystem.html#config">config</a>.<a href="vim.host.ConfigInfo.html#fileSystemVolume">fileSystemVolume</a>).</li>
+  </ul>
+  <p>
+  The Server performs asynchronous updates to the inventory. Use the
+  <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>.<a href="vmodl.query.PropertyCollector.html#waitForUpdatesEx">WaitForUpdatesEx</a>
+  method to obtain the property changes.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RefreshStorageSystem-textarea');expandcontent(this, 'RefreshStorageSystem-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RefreshStorageSystem-div">
+<textarea cols="20" rows="10" name="RefreshStorageSystem-textarea" wrap="off" readonly="1" id="RefreshStorageSystem-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RefreshStorageSystem" type="vim25:RefreshStorageSystemRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RefreshStorageSystemResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="removeInternetScsiSendTargets" name="removeInternetScsiSendTargets"></a>
+<h1>RemoveInternetScsiSendTargets</h1>
+<p></p>
+         Removes Send Target entries from the host bus adapter discovery list.
+  The DiscoveryProperty.sendTargetsDiscoveryEnabled must be set to true.
+  If any of the targets provided as parameters are not found in
+  the existing list, the other targets are removed and an exception
+  is thrown.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>iScsiHbaDevice</strong></td><td>xsd:string</td><td>
+<p></p>
+         The device of the Internet SCSI HBA adapter.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>targets</strong></td><td><a href="vim.host.InternetScsiHba.SendTarget.html">HostInternetScsiHbaSendTarget[]</a></td><td>
+<p></p>
+         An array of iSCSI send targets to remove.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if at least one target was not found.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RemoveInternetScsiSendTargets-textarea');expandcontent(this, 'RemoveInternetScsiSendTargets-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RemoveInternetScsiSendTargets-div">
+<textarea cols="20" rows="10" name="RemoveInternetScsiSendTargets-textarea" wrap="off" readonly="1" id="RemoveInternetScsiSendTargets-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveInternetScsiSendTargets" type="vim25:RemoveInternetScsiSendTargetsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveInternetScsiSendTargetsResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="removeInternetScsiStaticTargets" name="removeInternetScsiStaticTargets"></a>
+<h1>RemoveInternetScsiStaticTargets</h1>
+<p></p>
+         Removes static target entries from the host bus adapter discovery list.
+  The DiscoveryProperty.staticTargetDiscoveryEnabled must be set to true.
+  If any of the targets provided as parameters are not found in
+  the existing list, the other targets are removed and an exception
+  is thrown.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>iScsiHbaDevice</strong></td><td>xsd:string</td><td>
+<p></p>
+         The device of the Internet SCSI HBA adapter.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>targets</strong></td><td><a href="vim.host.InternetScsiHba.StaticTarget.html">HostInternetScsiHbaStaticTarget[]</a></td><td>
+<p></p>
+         An array of iSCSI static targets to remove.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if at least one target was not found.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RemoveInternetScsiStaticTargets-textarea');expandcontent(this, 'RemoveInternetScsiStaticTargets-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RemoveInternetScsiStaticTargets-div">
+<textarea cols="20" rows="10" name="RemoveInternetScsiStaticTargets-textarea" wrap="off" readonly="1" id="RemoveInternetScsiStaticTargets-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveInternetScsiStaticTargets" type="vim25:RemoveInternetScsiStaticTargetsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveInternetScsiStaticTargetsResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="rescanAllHba" name="rescanAllHba"></a>
+<h1>RescanAllHba</h1>
+<p></p>
+         Scans all host bus adapters to obtain the current list of devices and device topology.
+  The <a href="vim.host.StorageSystem.html#rescanAllHba">RescanAllHba</a> method looks for new devices,
+  removed devices, and path changes.
+  <p>
+  This method may update the following inventory elements:
+  <ul>
+  <li>Devices and storage topology
+      (<a href="vim.HostSystem.html">HostSystem</a>.<a href="vim.HostSystem.html#config">config</a>.<a href="vim.host.ConfigInfo.html#storageDevice">storageDevice</a>).</li>
+  <li>VMFS and NFS datastores (<a href="vim.HostSystem.html">HostSystem</a>.<a href="vim.HostSystem.html#datastore">datastore</a>).</li>
+  <li>File system volumes (<a href="vim.HostSystem.html">HostSystem</a>.<a href="vim.HostSystem.html#config">config</a>.<a href="vim.host.ConfigInfo.html#fileSystemVolume">fileSystemVolume</a>).</li>
+  </ul>
+  <p>
+  The Server performs asynchronous updates to the inventory. Use the
+  <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>.<a href="vmodl.query.PropertyCollector.html#waitForUpdatesEx">WaitForUpdatesEx</a>
+  method to obtain the property changes.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if rescan failed.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RescanAllHba-textarea');expandcontent(this, 'RescanAllHba-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RescanAllHba-div">
+<textarea cols="20" rows="10" name="RescanAllHba-textarea" wrap="off" readonly="1" id="RescanAllHba-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RescanAllHba" type="vim25:RescanAllHbaRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RescanAllHbaResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="rescanHba" name="rescanHba"></a>
+<h1>RescanHba</h1>
+<p></p>
+         Issues a request to rescan a specific host bus adapter
+  for new storage devices.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>hbaDevice</strong></td><td>xsd:string</td><td>
+<p></p>
+         The device of the host bus adapter.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the host bus adapter cannot be found.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RescanHba-textarea');expandcontent(this, 'RescanHba-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RescanHba-div">
+<textarea cols="20" rows="10" name="RescanHba-textarea" wrap="off" readonly="1" id="RescanHba-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RescanHba" type="vim25:RescanHbaRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RescanHbaResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="rescanVffs" name="rescanVffs"></a>
+<h1>RescanVffs</h1>
+<p></p>
+         Rescans for new VFFS.
+  The <a href="vim.host.StorageSystem.html#refresh">RefreshStorageSystem</a> method also performs a VFFS rescan.
+  <p>
+  <a href="vim.host.StorageSystem.html#rescanVffs">RescanVffs</a> may update the
+  <a href="vim.HostSystem.html">HostSystem</a>.<a href="vim.HostSystem.html#config">config</a>.<a href="vim.host.ConfigInfo.html#fileSystemVolume">fileSystemVolume</a> property.
+  The Server performs asynchronous updates to the inventory. Use the
+  <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>.<a href="vmodl.query.PropertyCollector.html#waitForUpdatesEx">WaitForUpdatesEx</a>
+  method to obtain the property changes.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if configuration fails.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RescanVffs-textarea');expandcontent(this, 'RescanVffs-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RescanVffs-div">
+<textarea cols="20" rows="10" name="RescanVffs-textarea" wrap="off" readonly="1" id="RescanVffs-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RescanVffs" type="vim25:RescanVffsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RescanVffsResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="rescanVmfs" name="rescanVmfs"></a>
+<h1>RescanVmfs</h1>
+<p></p>
+         Rescans for new Virtual Machine File Systems (VMFS).
+  The <a href="vim.host.StorageSystem.html#refresh">RefreshStorageSystem</a> method also performs a VMFS rescan.   
+  <p> 
+  <a href="vim.host.StorageSystem.html#rescanVmfs">RescanVmfs</a> may update the
+  <a href="vim.HostSystem.html">HostSystem</a>.<a href="vim.HostSystem.html#config">config</a>.<a href="vim.host.ConfigInfo.html#fileSystemVolume">fileSystemVolume</a> property.
+  The Server performs asynchronous updates to the inventory. Use the
+  <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>.<a href="vmodl.query.PropertyCollector.html#waitForUpdatesEx">WaitForUpdatesEx</a>
+  method to obtain the property changes.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if configuration fails.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RescanVmfs-textarea');expandcontent(this, 'RescanVmfs-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RescanVmfs-div">
+<textarea cols="20" rows="10" name="RescanVmfs-textarea" wrap="off" readonly="1" id="RescanVmfs-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RescanVmfs" type="vim25:RescanVmfsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RescanVmfsResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="resolveMultipleUnresolvedVmfsVolumes" name="resolveMultipleUnresolvedVmfsVolumes"></a>
+<h1>ResolveMultipleUnresolvedVmfsVolumes</h1>
+<p></p>
+         Resignature or 'Force Mount' list of unbound VMFS volumes.
+
+  To safely enable sharing of the volume across hosts, a VMFS volume
+  is bound to its underlying block device storage.  When a low level
+  block copy is performed to copy or move the VMFS volume, the copied
+  volume will be unbound.  In order for the VMFS volume to be usable,
+  a resolution operation is needed to determine whether the VMFS volume
+  should be treated as a new volume or not and what extents compose
+  that volume in the event there is more than one unbound volume.
+  <p>
+  Resignature results in a new VMFS volume on the host.
+  Operations performed at the StorageSystem interface apply only to a
+  specific host.  Hence, callers of this method are responsible for
+  issuing rescan operations to detect the new VMFS volume on other hosts.
+  Alternatively, callers that want VirtualCenter to handle rescanning
+  the necessary hosts should use the DatastoreSystem interface.
+  <p>
+  When user wants to keep the original Vmfs Uuid and  mount it
+  on the host, set the 'resolutionSpec.uuidResolution' to 'forceMounted'
+  This is per-host operation.
+
+  It will return an array of ResolutionResult describing success or failure
+  associated with each specification.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>resolutionSpec</strong></td><td><a href="vim.host.UnresolvedVmfsResolutionSpec.html">HostUnresolvedVmfsResolutionSpec[]</a></td><td>
+<p></p>
+         List of data object that describes what the disk
+                        extents to be used for creating the new
+                        VMFS volume.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.host.UnresolvedVmfsResolutionResult.html">HostUnresolvedVmfsResolutionResult[]</a></td><td>A data object that represents the VMFS file system and return status value.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if batch operation fails on the host. Because the returned array of ResolutionResult contains the new VMFS volume or fault for each operation, as of vSphere API 5.x, we won't throw fault when batch operation fails.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ResolveMultipleUnresolvedVmfsVolumes-textarea');expandcontent(this, 'ResolveMultipleUnresolvedVmfsVolumes-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ResolveMultipleUnresolvedVmfsVolumes-div">
+<textarea cols="20" rows="10" name="ResolveMultipleUnresolvedVmfsVolumes-textarea" wrap="off" readonly="1" id="ResolveMultipleUnresolvedVmfsVolumes-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ResolveMultipleUnresolvedVmfsVolumes" type="vim25:ResolveMultipleUnresolvedVmfsVolumesRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ResolveMultipleUnresolvedVmfsVolumesResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:HostUnresolvedVmfsResolutionResult" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="resolveMultipleUnresolvedVmfsVolumesEx" name="resolveMultipleUnresolvedVmfsVolumesEx"></a>
+<h1>ResolveMultipleUnresolvedVmfsVolumesEx_Task</h1>
+<p></p>
+         Resignature or 'Force Mount' list of unbound VMFS volumes.
+  <p>
+  To safely enable sharing of the volume across hosts, a VMFS volume
+  is bound to its underlying block device storage.  When a low level
+  block copy is performed to copy or move the VMFS volume, the copied
+  volume will be unbound.  In order for the VMFS volume to be usable,
+  a resolution operation is needed to determine whether the VMFS volume
+  should be treated as a new volume or not and what extents compose
+  that volume in the event there is more than one unbound volume.
+  <p>
+  Resignature results in a new VMFS volume on the host.
+  Operations performed at the <a href="vim.host.StorageSystem.html">HostStorageSystem</a> interface apply only to a
+  specific host.  Hence, callers of this method are responsible for
+  issuing rescan operations to detect the new VMFS volume on other hosts.
+  Alternatively, callers that want VirtualCenter to handle rescanning
+  the necessary hosts should use the <a href="vim.host.DatastoreSystem.html">HostDatastoreSystem</a> interface.
+  <p>
+  When user wants to keep the original VMFS UUID and mount it
+  on the host, set the resolutionSpec.uuidResolution
+  (<a href="vim.host.UnresolvedVmfsResolutionSpec.html#uuidResolution">uuidResolution</a>)
+  to <a href="vim.host.UnresolvedVmfsResolutionSpec.VmfsUuidResolution.html#forceMount">forceMount</a>.
+  This is per-host operation.
+  <p>
+  It will return an array of <a href="vim.host.UnresolvedVmfsResolutionResult.html">HostUnresolvedVmfsResolutionResult</a>
+  describing success or failure associated with each specification.
+  <p>
+  This method behaves the same as <a href="vim.host.StorageSystem.html#resolveMultipleUnresolvedVmfsVolumes">ResolveMultipleUnresolvedVmfsVolumes</a>
+  except that it returns a task to support monitoring the operation.
+  This is important for operations with large number of
+  unresolved volumes which may take potentially dozens of minutes to complete.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>resolutionSpec</strong></td><td><a href="vim.host.UnresolvedVmfsResolutionSpec.html">HostUnresolvedVmfsResolutionSpec[]</a></td><td>
+<p></p>
+         List of data object that describes what the disk
+                        extents to be used for creating the new
+                        VMFS volume.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation. The <a href="vim.TaskInfo.html#result">info.result</a> property in the <a href="vim.Task.html">Task</a> contains an array of <a href="vim.host.UnresolvedVmfsResolutionResult.html">HostUnresolvedVmfsResolutionResult</a> describing success or failure associated with each specification.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if batch operation fails on the host. Because the returned array of ResolutionResult contains the new VMFS volume or fault for each operation, as of vSphere API 5.x, we won't throw fault when batch operation fails.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="retrieveDiskPartitionInfo" name="retrieveDiskPartitionInfo"></a>
+<h1>RetrieveDiskPartitionInfo</h1>
+<p></p>
+         Gets the partition information for the disks named by the device names.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Read</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>devicePath</strong></td><td>xsd:string[]</td><td>
+<p></p>
+         An array of device path names that identify disks.
+                    See <a href="vim.host.ScsiDisk.html">ScsiDisk</a>.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.host.DiskPartitionInfo.html">HostDiskPartitionInfo[]</a></td><td>An array of information about the partitions.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RetrieveDiskPartitionInfo-textarea');expandcontent(this, 'RetrieveDiskPartitionInfo-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RetrieveDiskPartitionInfo-div">
+<textarea cols="20" rows="10" name="RetrieveDiskPartitionInfo-textarea" wrap="off" readonly="1" id="RetrieveDiskPartitionInfo-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrieveDiskPartitionInfo" type="vim25:RetrieveDiskPartitionInfoRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrieveDiskPartitionInfoResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:HostDiskPartitionInfo" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="setMultipathLunPolicy" name="setMultipathLunPolicy"></a>
+<h1>SetMultipathLunPolicy</h1>
+<p></p>
+         Updates the path selection policy for a Logical Unit.
+  Use the LUN uuid from <a href="vim.host.MultipathInfo.LogicalUnit.html">HostMultipathInfoLogicalUnit</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>lunId</strong></td><td>xsd:string</td><td>
+<p></p>
+         The logical unit ID
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>policy</strong></td><td><a href="vim.host.MultipathInfo.LogicalUnitPolicy.html">HostMultipathInfoLogicalUnitPolicy</a></td><td>
+<p></p>
+         A data object that describes a path selection policy for
+                the logical unit.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the policy is invalid.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the LUN could not be found.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('SetMultipathLunPolicy-textarea');expandcontent(this, 'SetMultipathLunPolicy-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="SetMultipathLunPolicy-div">
+<textarea cols="20" rows="10" name="SetMultipathLunPolicy-textarea" wrap="off" readonly="1" id="SetMultipathLunPolicy-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="SetMultipathLunPolicy" type="vim25:SetMultipathLunPolicyRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="SetMultipathLunPolicyResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="unmountForceMountedVmfsVolume" name="unmountForceMountedVmfsVolume"></a>
+<h1>UnmountForceMountedVmfsVolume</h1>
+<p></p>
+         Unmount the 'forceMounted' Vmfs volume.
+
+  When a low level block copy is performed to copy or move the
+  VMFS volume, the copied volume is unresolved. For the VMFS
+  volume to be usable, a resolution operation is applied. As
+  part of resolution operation, user may decide to keep the
+  original VMFS Uuid. Once the resolution is applied, the VMFS
+  volume is mounted on the host for its use. User can unmount
+  the VMFS volume if it is not being used by any registered
+  VMs.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vmfsUuid</strong></td><td>xsd:string</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if VMFS Uuid is not found on the host.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UnmountForceMountedVmfsVolume-textarea');expandcontent(this, 'UnmountForceMountedVmfsVolume-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UnmountForceMountedVmfsVolume-div">
+<textarea cols="20" rows="10" name="UnmountForceMountedVmfsVolume-textarea" wrap="off" readonly="1" id="UnmountForceMountedVmfsVolume-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UnmountForceMountedVmfsVolume" type="vim25:UnmountForceMountedVmfsVolumeRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UnmountForceMountedVmfsVolumeResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="unmountVffsVolume" name="unmountVffsVolume"></a>
+<h1>UnmountVffsVolume</h1>
+<p></p>
+         Unmount the VFFS volume. An unmounted volume cannot be used for any
+  filesystem operation requiring I/O. In contrast to removal, this
+  operation does not destroy or alter partitions on which VFFS volumes
+  reside. The mountState will be persisted across filesystem rescans and
+  host reboots. See <a href="vim.host.StorageSystem.html#mountVffsVolume">MountVffsVolume</a>.
+  <p>
+  unmountVffsVolume is part of the Unmount / Detach workflow used
+  when a device will be permanently removed.
+  See also <a href="vim.host.StorageSystem.html#detachScsiLun">DetachScsiLun</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vffsUuid</strong></td><td>xsd:string</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if <ul> <li>The volume is already unmounted.</li> <li>The volume is inaccessible.</li> </ul></td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if VFFS uuid is not found on the host.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.ResourceInUse.html">ResourceInUse</a></td><td>Thrown if <ul> <li>1 or more programs have I/O outstanding on this volume.</li> </ul></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UnmountVffsVolume-textarea');expandcontent(this, 'UnmountVffsVolume-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UnmountVffsVolume-div">
+<textarea cols="20" rows="10" name="UnmountVffsVolume-textarea" wrap="off" readonly="1" id="UnmountVffsVolume-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UnmountVffsVolume" type="vim25:UnmountVffsVolumeRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UnmountVffsVolumeResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="unmountVmfsVolume" name="unmountVmfsVolume"></a>
+<h1>UnmountVmfsVolume</h1>
+<p></p>
+         Unmount the Vmfs volume. An unmounted volume cannot be used for any
+  filesystem operation requiring I/O. In contrast to removal, this
+  operation does not destroy or alter partitions on which vmfs volumes
+  reside. The mountState will be persisted across filesystem rescans and
+  host reboots. See <a href="vim.host.StorageSystem.html#mountVmfsVolume">MountVmfsVolume</a>.
+  <p>
+  unmountVmfsVolume is part of the Unmount / Detach workflow used
+  when a device will be permanently removed.
+
+  <pre>
+                     Mounted Vmfs Volume
+    unmountVmfsVolume  |  ^ mountVmfsVolume
+                       V  |
+                     Unmounted Vmfs Volume
+
+         Attached Scsi Device (honors I/O)
+    detachScsiLun      |  ^ attachScsiLun
+                       V  |
+  Detached Scsi Device (does not honor I/O)
+  </pre>
+  <p>
+  It is safe to unprovision a Lun from the Storage array *only*
+  after a Scsi device is detached.
+  <p>
+  The best practice for decommisioning a Lun would be to find
+  out the set of subsystems that a Lun is being used for.
+  Many of the systems are listed as exceptions in the
+  function documentation.
+  <p>
+    One typical workflow could be:
+  <p>
+  <ul>
+    <li>Find out if the device is used as a Vmfs Extent. (See VmfsVolume.Extent API)</li>
+    <li>Unmount the Vmfs Volume.</li>
+    <li>Find out if device is used by the Diagnostic system (See Diagnostic System API).</li>
+    <li>Deactivate the diagnostic system, if it is being used.</li>
+    <li>Find out if this device is used to back a VM's RDM (See VirtualMachine API).</li>
+    <li>Remove this device from the VM.</li>
+    <li>Detach the Scsi device.</li>
+    <li>On success, it is safe to decommision the Lun at this point.</li>
+  </ul>
+  See also <a href="vim.host.StorageSystem.html#detachScsiLun">DetachScsiLun</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vmfsUuid</strong></td><td>xsd:string</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if <ul> <li>The volume is already unmounted.</li> <li>The volume is inaccessible.</li> </ul></td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if VMFS Uuid is not found on the host.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.ResourceInUse.html">ResourceInUse</a></td><td>Thrown if <ul> <li>There is any VM registered on this volume.</li> <li>1 or more programs have I/O outstanding on this volume.</li> </ul></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UnmountVmfsVolume-textarea');expandcontent(this, 'UnmountVmfsVolume-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UnmountVmfsVolume-div">
+<textarea cols="20" rows="10" name="UnmountVmfsVolume-textarea" wrap="off" readonly="1" id="UnmountVmfsVolume-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UnmountVmfsVolume" type="vim25:UnmountVmfsVolumeRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UnmountVmfsVolumeResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateDiskPartitions" name="updateDiskPartitions"></a>
+<h1>UpdateDiskPartitions</h1>
+<p></p>
+         Changes the partitions on the disk by supplying a partition specification
+  and the device name.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>devicePath</strong></td><td>xsd:string</td><td>
+<p></p>
+         The name of the device path for the specific disk.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.host.DiskPartitionInfo.Specification.html">HostDiskPartitionSpec</a></td><td>
+<p></p>
+         A data object that describes the disk partition table
+               specification used to configure the partitions on a disk.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the spec is invalid.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the device could not be found.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateDiskPartitions-textarea');expandcontent(this, 'UpdateDiskPartitions-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateDiskPartitions-div">
+<textarea cols="20" rows="10" name="UpdateDiskPartitions-textarea" wrap="off" readonly="1" id="UpdateDiskPartitions-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateDiskPartitions" type="vim25:UpdateDiskPartitionsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateDiskPartitionsResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateInternetScsiAdvancedOptions" name="updateInternetScsiAdvancedOptions"></a>
+<h1>UpdateInternetScsiAdvancedOptions</h1>
+<p></p>
+         Updates the advanced options the iSCSI host bus adapter or the
+  discovery addresses and targets associated with it.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>iScsiHbaDevice</strong></td><td>xsd:string</td><td>
+<p></p>
+         The device of the Internet SCSI HBA adapter.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>targetSet</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.InternetScsiHba.TargetSet.html">HostInternetScsiHbaTargetSet</a></td><td>
+<p></p>
+         The set the targets to configure. If not provided,
+         the settings will be applied to the host bus adapter itself.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>options</strong></td><td><a href="vim.host.InternetScsiHba.ParamValue.html">HostInternetScsiHbaParamValue[]</a></td><td>
+<p></p>
+         The list of options to set.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the host bus adapter could not be found.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateInternetScsiAdvancedOptions-textarea');expandcontent(this, 'UpdateInternetScsiAdvancedOptions-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateInternetScsiAdvancedOptions-div">
+<textarea cols="20" rows="10" name="UpdateInternetScsiAdvancedOptions-textarea" wrap="off" readonly="1" id="UpdateInternetScsiAdvancedOptions-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateInternetScsiAdvancedOptions" type="vim25:UpdateInternetScsiAdvancedOptionsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateInternetScsiAdvancedOptionsResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateInternetScsiAlias" name="updateInternetScsiAlias"></a>
+<h1>UpdateInternetScsiAlias</h1>
+<p></p>
+         Updates the alias of an iSCSI host bus adapter.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>iScsiHbaDevice</strong></td><td>xsd:string</td><td>
+<p></p>
+         The device of the Internet SCSI HBA adapter.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>iScsiAlias</strong></td><td>xsd:string</td><td>
+<p></p>
+         The new value for the alias of the adapter.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the host bus adapter could not be found.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateInternetScsiAlias-textarea');expandcontent(this, 'UpdateInternetScsiAlias-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateInternetScsiAlias-div">
+<textarea cols="20" rows="10" name="UpdateInternetScsiAlias-textarea" wrap="off" readonly="1" id="UpdateInternetScsiAlias-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateInternetScsiAlias" type="vim25:UpdateInternetScsiAliasRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateInternetScsiAliasResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateInternetScsiAuthenticationProperties" name="updateInternetScsiAuthenticationProperties"></a>
+<h1>UpdateInternetScsiAuthenticationProperties</h1>
+<p></p>
+         Updates the authentication properties for one or more targets or
+  discovery addresses associated with an iSCSI host bus adapter.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>iScsiHbaDevice</strong></td><td>xsd:string</td><td>
+<p></p>
+         The device of the Internet SCSI HBA adapter.
+         associated with the target.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>authenticationProperties</strong></td><td><a href="vim.host.InternetScsiHba.AuthenticationProperties.html">HostInternetScsiHbaAuthenticationProperties</a></td><td>
+<p></p>
+         The data object that represents
+         the authentication settings to set.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>targetSet</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.InternetScsiHba.TargetSet.html">HostInternetScsiHbaTargetSet</a></td><td>
+<p></p>
+         The set the targets to configure. Optional,
+         when obmitted will configura the authentication properties
+         for the adapter instead.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the host bus adapter could not be found.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateInternetScsiAuthenticationProperties-textarea');expandcontent(this, 'UpdateInternetScsiAuthenticationProperties-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateInternetScsiAuthenticationProperties-div">
+<textarea cols="20" rows="10" name="UpdateInternetScsiAuthenticationProperties-textarea" wrap="off" readonly="1" id="UpdateInternetScsiAuthenticationProperties-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateInternetScsiAuthenticationProperties" type="vim25:UpdateInternetScsiAuthenticationPropertiesRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateInternetScsiAuthenticationPropertiesResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateInternetScsiDigestProperties" name="updateInternetScsiDigestProperties"></a>
+<h1>UpdateInternetScsiDigestProperties</h1>
+<p></p>
+         Updates the digest properties for the iSCSI host bus adapter or the
+  discovery addresses and targets associated with it.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>iScsiHbaDevice</strong></td><td>xsd:string</td><td>
+<p></p>
+         The device of the Internet SCSI HBA adapter.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>targetSet</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.InternetScsiHba.TargetSet.html">HostInternetScsiHbaTargetSet</a></td><td>
+<p></p>
+         The set the targets to configure. If not provided,
+         the settings will be applied to the host bus adapter itself.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>digestProperties</strong></td><td><a href="vim.host.InternetScsiHba.DigestProperties.html">HostInternetScsiHbaDigestProperties</a></td><td>
+<p></p>
+         The data object that represents the digest
+         settings to set.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the host bus adapter could not be found.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateInternetScsiDigestProperties-textarea');expandcontent(this, 'UpdateInternetScsiDigestProperties-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateInternetScsiDigestProperties-div">
+<textarea cols="20" rows="10" name="UpdateInternetScsiDigestProperties-textarea" wrap="off" readonly="1" id="UpdateInternetScsiDigestProperties-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateInternetScsiDigestProperties" type="vim25:UpdateInternetScsiDigestPropertiesRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateInternetScsiDigestPropertiesResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateInternetScsiDiscoveryProperties" name="updateInternetScsiDiscoveryProperties"></a>
+<h1>UpdateInternetScsiDiscoveryProperties</h1>
+<p></p>
+         Updates the Discovery properties for an iSCSI host bus adapter.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>iScsiHbaDevice</strong></td><td>xsd:string</td><td>
+<p></p>
+         The device of the Internet SCSI HBA adapter.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>discoveryProperties</strong></td><td><a href="vim.host.InternetScsiHba.DiscoveryProperties.html">HostInternetScsiHbaDiscoveryProperties</a></td><td>
+<p></p>
+         The discovery settings for this host bus adapter.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the host bus adapter could not be found.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateInternetScsiDiscoveryProperties-textarea');expandcontent(this, 'UpdateInternetScsiDiscoveryProperties-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateInternetScsiDiscoveryProperties-div">
+<textarea cols="20" rows="10" name="UpdateInternetScsiDiscoveryProperties-textarea" wrap="off" readonly="1" id="UpdateInternetScsiDiscoveryProperties-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateInternetScsiDiscoveryProperties" type="vim25:UpdateInternetScsiDiscoveryPropertiesRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateInternetScsiDiscoveryPropertiesResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateInternetScsiIPProperties" name="updateInternetScsiIPProperties"></a>
+<h1>UpdateInternetScsiIPProperties</h1>
+<p></p>
+         Updates the IP properties for an iSCSI host bus adapter.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>iScsiHbaDevice</strong></td><td>xsd:string</td><td>
+<p></p>
+         The device of the Internet SCSI HBA adapter.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>ipProperties</strong></td><td><a href="vim.host.InternetScsiHba.IPProperties.html">HostInternetScsiHbaIPProperties</a></td><td>
+<p></p>
+         A data object representing the IP properties
+                      for the host bus adapter
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the host bus adapter could not be found.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateInternetScsiIPProperties-textarea');expandcontent(this, 'UpdateInternetScsiIPProperties-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateInternetScsiIPProperties-div">
+<textarea cols="20" rows="10" name="UpdateInternetScsiIPProperties-textarea" wrap="off" readonly="1" id="UpdateInternetScsiIPProperties-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateInternetScsiIPProperties" type="vim25:UpdateInternetScsiIPPropertiesRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateInternetScsiIPPropertiesResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateInternetScsiName" name="updateInternetScsiName"></a>
+<h1>UpdateInternetScsiName</h1>
+<p></p>
+         Updates the name of an iSCSI host bus adapter.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>iScsiHbaDevice</strong></td><td>xsd:string</td><td>
+<p></p>
+         The current name of the Internet SCSI HBA adapter.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>iScsiName</strong></td><td>xsd:string</td><td>
+<p></p>
+         The new name for the Internet SCSI HBA adapter
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the host bus adapter could not be found.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateInternetScsiName-textarea');expandcontent(this, 'UpdateInternetScsiName-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateInternetScsiName-div">
+<textarea cols="20" rows="10" name="UpdateInternetScsiName-textarea" wrap="off" readonly="1" id="UpdateInternetScsiName-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateInternetScsiName" type="vim25:UpdateInternetScsiNameRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateInternetScsiNameResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateScsiLunDisplayName" name="updateScsiLunDisplayName"></a>
+<h1>UpdateScsiLunDisplayName</h1>
+<p></p>
+         Update the mutable display name associated with a ScsiLun.  The ScsiLun
+  to be updated is identified using the specified uuid.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>lunUuid</strong></td><td>xsd:string</td><td>
+<p></p>
+         The uuid of the ScsiLun to update.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>displayName</strong></td><td>xsd:string</td><td>
+<p></p>
+         The new name to assign to the ScsiLun object.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if the name does not name uniqueness restrictions. Name uniqueness restrictions will vary based on the context in which this method is invoked. <p> When this method is invoked on a host directly, no uniqueness checks will be performed on the name. <p> When this method is invoked on a VC server, uniqueness checks will be performed on the name. The uniqueness check will ensure that the name is unique with respect to the entire VC instance.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td>Thrown if the name does not meet name restrictions such as an 80 character limit.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the device could not be found.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateScsiLunDisplayName-textarea');expandcontent(this, 'UpdateScsiLunDisplayName-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateScsiLunDisplayName-div">
+<textarea cols="20" rows="10" name="UpdateScsiLunDisplayName-textarea" wrap="off" readonly="1" id="UpdateScsiLunDisplayName-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateScsiLunDisplayName" type="vim25:UpdateScsiLunDisplayNameRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateScsiLunDisplayNameResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateSoftwareInternetScsiEnabled" name="updateSoftwareInternetScsiEnabled"></a>
+<h1>UpdateSoftwareInternetScsiEnabled</h1>
+<p></p>
+         Enables or disables Software iSCSI.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>enabled</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         True to enable the iSCSI; false to disable it
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for any configuration failure.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateSoftwareInternetScsiEnabled-textarea');expandcontent(this, 'UpdateSoftwareInternetScsiEnabled-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateSoftwareInternetScsiEnabled-div">
+<textarea cols="20" rows="10" name="UpdateSoftwareInternetScsiEnabled-textarea" wrap="off" readonly="1" id="UpdateSoftwareInternetScsiEnabled-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateSoftwareInternetScsiEnabled" type="vim25:UpdateSoftwareInternetScsiEnabledRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateSoftwareInternetScsiEnabledResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="upgradeVmfs" name="upgradeVmfs"></a>
+<h1>UpgradeVmfs</h1>
+<p></p>
+         Upgrades the VMFS to the <a href="vim.host.Capability.html#supportedVmfsMajorVersion">latest
+  supported VMFS version</a>.
+  <p> Prerequisite:<br>
+  All hosts that have mounted the volume must support the VMFS
+  version to which the volume will be upgraded.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vmfsPath</strong></td><td>xsd:string</td><td>
+<p></p>
+         The path of the VMFS.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if the prerequisite is not satisfied or for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the VMFS cannot be found or is unmounted.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpgradeVmfs-textarea');expandcontent(this, 'UpgradeVmfs-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpgradeVmfs-div">
+<textarea cols="20" rows="10" name="UpgradeVmfs-textarea" wrap="off" readonly="1" id="UpgradeVmfs-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpgradeVmfs" type="vim25:UpgradeVmfsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpgradeVmfsResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="upgradeVmLayout" name="upgradeVmLayout"></a>
+<h1>UpgradeVmLayout</h1>
+<p></p>
+         Iterates over all registered virtual machines. For each VM which .vmx file
+  is located on the service console and all disks are available on VMFS3 or NAS,
+  it will relocate the disks into directories if stored in the ROOT, and
+  relocate the VMX file into the directory too. Events are logged for each
+  virtual machine that is relocated.
+  <p>
+  On ESXi systems, this operation has no effect.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.StorageSystem.html">HostStorageSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpgradeVmLayout-textarea');expandcontent(this, 'UpgradeVmLayout-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpgradeVmLayout-div">
+<textarea cols="20" rows="10" name="UpgradeVmLayout-textarea" wrap="off" readonly="1" id="UpgradeVmLayout-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpgradeVmLayout" type="vim25:UpgradeVmLayoutRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpgradeVmLayoutResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

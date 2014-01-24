@@ -1,0 +1,169 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.DeviceRuntimeInfo.VirtualEthernetCardRuntimeState" name="vim.vm.DeviceRuntimeInfo.VirtualEthernetCardRuntimeState"></a>
+<h1>Data Object - VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeState</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.vm.DeviceRuntimeInfo.DeviceRuntimeState.html">VirtualMachineDeviceRuntimeInfoDeviceRuntimeState</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         Runtime state of a virtual ethernet card device.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="reservationStatus" name="reservationStatus"></a><strong>reservationStatus</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The status indicating whether network reservation requirement is violated
+ or not on the virtual network adapter. See <a href="vim.ManagedEntity.Status.html">ManagedEntityStatus</a>
+ for possible values.
+ <p>
+ <a href="vim.ManagedEntity.Status.html#red">red</a> indicates that reservation specified on the virtual
+ network adapter is not being fulfilled. This can happen if the reservation requested is
+ greater than the available capacity reserved for virtual machine traffic on the host.
+ <p>
+ <a href="vim.ManagedEntity.Status.html#green">green</a> indicates that the reservation specified on the
+ virtual network adapter is being fulfilled.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vmDirectPathGen2Active" name="vmDirectPathGen2Active"></a><strong>vmDirectPathGen2Active</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to indicate whether VMDirectPath Gen 2 is active on this device.
+  If false, the reason(s) for inactivity will be provided in one or
+  more of <a href="vim.vm.DeviceRuntimeInfo.VirtualEthernetCardRuntimeState.html#vmDirectPathGen2InactiveReasonVm">vmDirectPathGen2InactiveReasonVm</a>,
+  <a href="vim.vm.DeviceRuntimeInfo.VirtualEthernetCardRuntimeState.html#vmDirectPathGen2InactiveReasonOther">vmDirectPathGen2InactiveReasonOther</a>,
+  and <a href="vim.vm.DeviceRuntimeInfo.VirtualEthernetCardRuntimeState.html#vmDirectPathGen2InactiveReasonExtended">vmDirectPathGen2InactiveReasonExtended</a>.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vmDirectPathGen2InactiveReasonExtended" name="vmDirectPathGen2InactiveReasonExtended"></a><strong>vmDirectPathGen2InactiveReasonExtended</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         If <a href="vim.vm.DeviceRuntimeInfo.VirtualEthernetCardRuntimeState.html#vmDirectPathGen2Active">vmDirectPathGen2Active</a> is false, this property may
+  contain an explanation provided by the platform, beyond the reasons
+  (if any) enumerated in <a href="vim.vm.DeviceRuntimeInfo.VirtualEthernetCardRuntimeState.html#vmDirectPathGen2InactiveReasonVm">vmDirectPathGen2InactiveReasonVm</a>
+  and/or <a href="vim.vm.DeviceRuntimeInfo.VirtualEthernetCardRuntimeState.html#vmDirectPathGen2InactiveReasonOther">vmDirectPathGen2InactiveReasonOther</a>.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vmDirectPathGen2InactiveReasonOther" name="vmDirectPathGen2InactiveReasonOther"></a><strong>vmDirectPathGen2InactiveReasonOther</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         If <a href="vim.vm.DeviceRuntimeInfo.VirtualEthernetCardRuntimeState.html#vmDirectPathGen2Active">vmDirectPathGen2Active</a> is false, this array will be
+  populated with reasons for the inactivity that are not related to
+  virtual machine state or configuration (chosen from
+  VmDirectPathGen2InactiveReasonOther). Virtual machine
+  related reasons for inactivity will be provided in
+  <a href="vim.vm.DeviceRuntimeInfo.VirtualEthernetCardRuntimeState.html#vmDirectPathGen2InactiveReasonVm">vmDirectPathGen2InactiveReasonVm</a>. If there is a reason
+  for inactivity that cannot be described by the available constants,
+  <a href="vim.vm.DeviceRuntimeInfo.VirtualEthernetCardRuntimeState.html#vmDirectPathGen2InactiveReasonExtended">vmDirectPathGen2InactiveReasonExtended</a> will be populated
+  with an additional explanation provided by the platform.
+  <p>
+  Note that this list of reasons is not guaranteed to be exhaustive.<br>See <a href="vim.host.Capability.html#vmDirectPathGen2Supported">vmDirectPathGen2Supported</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vmDirectPathGen2InactiveReasonVm" name="vmDirectPathGen2InactiveReasonVm"></a><strong>vmDirectPathGen2InactiveReasonVm</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         If <a href="vim.vm.DeviceRuntimeInfo.VirtualEthernetCardRuntimeState.html#vmDirectPathGen2Active">vmDirectPathGen2Active</a> is false, this array will be
+  populated with reasons for the inactivity that are related to virtual
+  machine state or configuration (chosen from
+  VmDirectPathGen2InactiveReasonVm). Other reasons for
+  inactivity will be provided in
+  <a href="vim.vm.DeviceRuntimeInfo.VirtualEthernetCardRuntimeState.html#vmDirectPathGen2InactiveReasonOther">vmDirectPathGen2InactiveReasonOther</a>. If there is a reason
+  for inactivity that cannot be described by the available constants,
+  <a href="vim.vm.DeviceRuntimeInfo.VirtualEthernetCardRuntimeState.html#vmDirectPathGen2InactiveReasonExtended">vmDirectPathGen2InactiveReasonExtended</a> will be populated
+  with an additional explanation provided by the platform.
+  <p>
+  Note that this list of reasons is not guaranteed to be exhaustive.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.vm.DeviceRuntimeInfo.DeviceRuntimeState.html">VirtualMachineDeviceRuntimeInfoDeviceRuntimeState</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">None</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeState">
+            <complexContent>
+               <extension base="vim25:VirtualMachineDeviceRuntimeInfoDeviceRuntimeState">
+                  <sequence>
+                     <element name="vmDirectPathGen2Active" type="xsd:boolean"/>
+                     <element name="vmDirectPathGen2InactiveReasonVm" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="vmDirectPathGen2InactiveReasonOther" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="vmDirectPathGen2InactiveReasonExtended" type="xsd:string" minOccurs="0"/>
+                     <element name="reservationStatus" type="xsd:string" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

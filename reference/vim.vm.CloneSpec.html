@@ -1,0 +1,203 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.CloneSpec" name="vim.vm.CloneSpec"></a>
+<h1>Data Object - VirtualMachineCloneSpec</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.storageDrs.StoragePlacementSpec.html#field_detail">StoragePlacementSpec</a>
+</dd>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.VirtualMachine.html#clone">CloneVM_Task</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.vm.customization.Specification.html">CustomizationSpec</a>, <a href="vim.vm.ConfigSpec.html">VirtualMachineConfigSpec</a>, <a href="vim.vm.RelocateSpec.html">VirtualMachineRelocateSpec</a>, <a href="vim.vm.Snapshot.html">VirtualMachineSnapshot</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         Specification for a virtual machine cloning operation.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="config" name="config"></a><strong>config</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.ConfigSpec.html">VirtualMachineConfigSpec</a></td><td>
+<p></p>
+         An optional specification of changes to the virtual hardware. For example,
+  this can be used to, (but not limited to) reconfigure the networks the virtual
+  switches are hooked up to in the cloned virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="customization" name="customization"></a><strong>customization</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.customization.Specification.html">CustomizationSpec</a></td><td>
+<p></p>
+         An optional guest operating system customization specification. This value
+  is ignored if a template is being created.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="location" name="location"></a><strong>location</strong></td><td><a href="vim.vm.RelocateSpec.html">VirtualMachineRelocateSpec</a></td><td>
+<p></p>
+         A type of RelocateSpec that specifies the location of resources the newly cloned 
+  virtual machine will use. The location specifies:
+  <ul>
+    <li> A datastore where the virtual machine will be located on physical storage. 
+         This is always provided because it indicates where the newly created clone
+         will be copied. 
+    <li> a resource pool and optionally a host. The resource pool determines what 
+         compute resources will be available to the clone and the host indicates 
+         which machine will host the clone.
+  </ul>
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="memory" name="memory"></a><strong>memory</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag indicating whether to retain a copy of the source virtual machine's
+ memory state in the clone. Retaining the memory state during
+ clone results in a clone in suspended state with all network adapters
+ removed to avoid network conflicts, except those with a
+ VirtualEthernetCard.addressType of "manual".
+ Users of this flag should take special care so that, when adding a network
+ adapter back to the clone, the VM is not resumed on the same VM network
+ as the source VM, or else MAC address conflicts could occur.
+ When cloning between two hosts with different CPUs outside an EVC cluster,
+ users of this flag should be aware that vCenter does not verify
+ CPU compatibility between the clone's memory state and the target host
+ prior to the clone operation, so the clone may fail to resume
+ until it is migrated to a host with a compatible CPU.
+ <p>
+ This flag is ignored if the snapshot parameter is unset. This flag
+ only applies for a snapshot taken on a running or suspended
+ virtual machine with the 'memory' parameter set to true, because otherwise
+ the snapshot has no memory state. This flag defaults to false.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="powerOn" name="powerOn"></a><strong>powerOn</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Specifies whether or not the new VirtualMachine should be powered on after
+  creation. As part of a customization, this flag is normally set to true,
+  since the first power-on operation completes the customization process.
+  This flag is ignored if a template is being created.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="snapshot" name="snapshot"></a><strong>snapshot</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.vm.Snapshot.html">VirtualMachineSnapshot</a></td><td>
+<p></p>
+         Snapshot reference from which to base the clone.
+  <p>
+  If this parameter is set, the clone is based off of the snapshot
+  point.  This means that the newly created virtual machine will 
+  have the same configuration as the virtual machine at the time 
+  the snapshot was taken.
+  <p>
+  If this property is not set then the clone is based off of the 
+  virtual machine's current configuration.
+  <p>
+  Setting this is only supported if the host this virtual machine 
+  is currently residing on <a href="vim.host.Capability.html#cloneFromSnapshotSupported">supports cloning from a snapshot point</a>.  Such support does not need to exist
+  on the destination host for the clone.
+  <p>
+  Setting this is only supported if the virtual machine supports
+  reporting snapshot configuration information.  See <a href="vim.vm.Capability.html#snapshotConfigSupported">snapshotConfigSupported</a>.  Such support does not need to
+  exist on the destination host for the clone.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="template" name="template"></a><strong>template</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Specifies whether or not the new virtual machine should be marked as a template.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VirtualMachineCloneSpec">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="location" type="vim25:VirtualMachineRelocateSpec"/>
+                     <element name="template" type="xsd:boolean"/>
+                     <element name="config" type="vim25:VirtualMachineConfigSpec" minOccurs="0"/>
+                     <element name="customization" type="vim25:CustomizationSpec" minOccurs="0"/>
+                     <element name="powerOn" type="xsd:boolean"/>
+                     <element name="snapshot" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="memory" type="xsd:boolean" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

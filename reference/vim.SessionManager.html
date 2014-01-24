@@ -1,0 +1,1797 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.SessionManager" name="vim.SessionManager"></a>
+<h1>Managed Object -  
+						SessionManager</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.ServiceInstanceContent.html#field_detail">ServiceContent</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.SessionManager.GenericServiceTicket.html">SessionManagerGenericServiceTicket</a>, <a href="vim.SessionManager.LocalTicket.html">SessionManagerLocalTicket</a>, <a href="vim.SessionManager.ServiceRequestSpec.html">SessionManagerServiceRequestSpec</a>, <a href="vim.UserSession.html">UserSession</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         This managed object type includes methods for logging on and
+  logging off clients, determining which clients are currently
+  logged on, and forcing clients to log off.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="currentSession" name="currentSession"></a><strong>currentSession</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.Anonymous" class="privilege-ref"> P</span></td><td><a href="vim.UserSession.html">UserSession</a></td><td>
+<p></p>
+         This property contains information about the client's current session.
+  If the client is not logged on, the value is null.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="defaultLocale" name="defaultLocale"></a><strong>defaultLocale</strong><span title="Required Privilege: System.Anonymous" class="privilege-ref"> P</span></td><td>xsd:string</td><td>
+<p></p>
+         This is the default server locale.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="message" name="message"></a><strong>message</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td>xsd:string</td><td>
+<p></p>
+         The system global message from the server.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="messageLocaleList" name="messageLocaleList"></a><strong>messageLocaleList</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.Anonymous" class="privilege-ref"> P</span></td><td>xsd:string[]</td><td>
+<p></p>
+         Provides the list of locales for which the server has localized messages.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="sessionList" name="sessionList"></a><strong>sessionList</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: Sessions.TerminateSession" class="privilege-ref"> P</span></td><td><a href="vim.UserSession.html">UserSession[]</a></td><td>
+<p></p>
+         The list of currently active sessions.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="supportedLocaleList" name="supportedLocaleList"></a><strong>supportedLocaleList</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.Anonymous" class="privilege-ref"> P</span></td><td>xsd:string[]</td><td>
+<p></p>
+         Provides the list of locales that the server supports.
+  Listing a locale ensures that some standardized information such as dates appear
+  in the appropriate format. Other localized information, such as error messages,
+  are displayed, if available. If localized information is not available, the
+  message is returned using the system locale.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span><span class="privilege-ref">P</span><span class="footnote">Required privilege - see tooltip for details</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#acquireCloneTicket">AcquireCloneTicket</a>, <a href="#acquireGenericServiceTicket">AcquireGenericServiceTicket</a>, <a href="#acquireLocalTicket">AcquireLocalTicket</a>, <a href="#cloneSession">CloneSession</a>, <a href="#impersonateUser">ImpersonateUser</a>, <a href="#login">Login</a>, <a href="#loginBySSPI">LoginBySSPI</a>, <a href="#loginByToken">LoginByToken</a>, <a href="#loginExtensionByCertificate">LoginExtensionByCertificate</a>, <a href="#loginExtensionBySubjectName">LoginExtensionBySubjectName</a>, <a href="#logout">Logout</a>, <a href="#sessionIsActive">SessionIsActive</a>, <a href="#setLocale">SetLocale</a>, <a href="#terminate">TerminateSession</a>, <a href="#updateMessage">UpdateServiceMessage</a></td>
+</tr>
+</table>
+<br>
+<a id="acquireCloneTicket" name="acquireCloneTicket"></a>
+<h1>AcquireCloneTicket</h1>
+<p></p>
+         Acquire a session-specific ticket string which can be used to clone
+   the current session. The caller of this operation can pass the ticket
+   value to another entity on the client. The recipient can then call
+   <a href="vim.SessionManager.html#cloneSession">CloneSession</a> with the ticket string on an unauthenticated
+   session and avoid having to re-enter credentials.
+   <p>
+   The ticket may only be used once and becomes invalid after use. The
+   ticket is also invalidated when the corresponding session is closed or
+   expires.  The ticket is only valid on the server which issued it.
+   <p>
+   This sequence of operations is conceptually similar to the
+   functionality provided by <a href="vim.SessionManager.html#acquireLocalTicket">AcquireLocalTicket</a>, however the
+   methods can be used by remote clients and do not require a shared
+   filesystem for transport.<br>See <a href="vim.SessionManager.html#cloneSession">CloneSession</a><br>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SessionManager.html">SessionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td>xsd:string</td><td>one-time secret ticket string.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotAuthenticated.html">NotAuthenticated</a></td><td>Thrown if the current session is not authenticated<br>See <a href="vim.SessionManager.html#cloneSession">CloneSession</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('AcquireCloneTicket-textarea');expandcontent(this, 'AcquireCloneTicket-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="AcquireCloneTicket-div">
+<textarea cols="20" rows="10" name="AcquireCloneTicket-textarea" wrap="off" readonly="1" id="AcquireCloneTicket-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AcquireCloneTicket" type="vim25:AcquireCloneTicketRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AcquireCloneTicketResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="xsd:string"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="acquireGenericServiceTicket" name="acquireGenericServiceTicket"></a>
+<h1>AcquireGenericServiceTicket</h1>
+<p></p>
+         Creates and returns a one-time credential that may be used to make the
+  specified request.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Anonymous</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SessionManager.html">SessionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.SessionManager.ServiceRequestSpec.html">SessionManagerServiceRequestSpec</a></td><td>
+<p></p>
+         specification for the service request which will be
+              invoked with the ticket.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.SessionManager.GenericServiceTicket.html">SessionManagerGenericServiceTicket</a></td><td>A ticket that may be used to invoke the specified request.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the spec is not supported or not valid.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NoPermission.html">NoPermission</a></td><td>Thrown if the client does not have enough privileges to be granted a ticket.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotAuthenticated.html">NotAuthenticated</a></td><td>Thrown if the current session is not authenticated for clone session request</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('AcquireGenericServiceTicket-textarea');expandcontent(this, 'AcquireGenericServiceTicket-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="AcquireGenericServiceTicket-div">
+<textarea cols="20" rows="10" name="AcquireGenericServiceTicket-textarea" wrap="off" readonly="1" id="AcquireGenericServiceTicket-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AcquireGenericServiceTicket" type="vim25:AcquireGenericServiceTicketRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AcquireGenericServiceTicketResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:SessionManagerGenericServiceTicket"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="acquireLocalTicket" name="acquireLocalTicket"></a>
+<h1>AcquireLocalTicket</h1>
+<p></p>
+         Acquires a one-time ticket for mutual authentication between a server and client.
+ <p>
+ The caller of this operation can use the user name and file content of
+ the returned object as the userName and password arguments for login
+ operation.  The local ticket that is returned becomes invalid either
+ after it is used or after a server-determined ticket expiration time
+ passes. This operation can be used by servers and clients to avoid
+ re-entering user credentials after authentication by the operating
+ system has already happened.
+ <p>
+ For example, service console utilities that connect to a host agent
+ should not require users to re-enter their passwords every time the
+ utilities run. Since the one-time password file is readable only by
+ the given user, the identity of the one-time password user is protected
+ by the operating system file permission.
+ <p>
+ Only local clients are allowed to call this operation. Remote clients
+ receive an InvalidRequest fault upon calling this operation.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Anonymous</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SessionManager.html">SessionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>userName</strong></td><td>xsd:string</td><td>
+<p></p>
+         User requesting one-time password.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.SessionManager.LocalTicket.html">SessionManagerLocalTicket</a></td><td>LocalTicket object containing userName and path to file containing one-time password for use in login operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidLogin.html">InvalidLogin</a></td><td>Thrown if the userName is invalid.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NoPermission.html">NoPermission</a></td><td>Thrown if the user and password are valid, but the user has no access granted.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the server does not support this operation.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('AcquireLocalTicket-textarea');expandcontent(this, 'AcquireLocalTicket-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="AcquireLocalTicket-div">
+<textarea cols="20" rows="10" name="AcquireLocalTicket-textarea" wrap="off" readonly="1" id="AcquireLocalTicket-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AcquireLocalTicket" type="vim25:AcquireLocalTicketRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AcquireLocalTicketResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:SessionManagerLocalTicket"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="cloneSession" name="cloneSession"></a>
+<h1>CloneSession</h1>
+<p></p>
+         Clone the session specified by the clone ticket and associate it with
+  the current connection. The current session will take on the identity
+  and authorization level of the UserSession associated with the
+  specified cloning ticket.<br>See <a href="vim.SessionManager.html#acquireCloneTicket">AcquireCloneTicket</a><br>See <a href="vim.SessionManager.html#acquireGenericServiceTicket">AcquireGenericServiceTicket</a><br>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Anonymous</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SessionManager.html">SessionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>cloneTicket</strong></td><td>xsd:string</td><td>
+<p></p>
+         ticket string acquired via <a href="vim.SessionManager.html#acquireCloneTicket">AcquireCloneTicket</a>.<br>See <a href="vim.SessionManager.html#acquireCloneTicket">AcquireCloneTicket</a><br>See <a href="vim.SessionManager.html#acquireGenericServiceTicket">AcquireGenericServiceTicket</a><br>
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.UserSession.html">UserSession</a></td><td>The new/cloned UserSession object.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidLogin.html">InvalidLogin</a></td><td>Thrown if the specified ticket value is not valid.<br>See <a href="vim.SessionManager.html#acquireCloneTicket">AcquireCloneTicket</a><br>See <a href="vim.SessionManager.html#acquireGenericServiceTicket">AcquireGenericServiceTicket</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the server does not support this operation.<br>See <a href="vim.SessionManager.html#acquireCloneTicket">AcquireCloneTicket</a><br>See <a href="vim.SessionManager.html#acquireGenericServiceTicket">AcquireGenericServiceTicket</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CloneSession-textarea');expandcontent(this, 'CloneSession-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CloneSession-div">
+<textarea cols="20" rows="10" name="CloneSession-textarea" wrap="off" readonly="1" id="CloneSession-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CloneSession" type="vim25:CloneSessionRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CloneSessionResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:UserSession"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="impersonateUser" name="impersonateUser"></a>
+<h1>ImpersonateUser</h1>
+<p></p>
+         Converts current session to impersonate the specified user.
+  The current session will take on the identity and authorization level of
+  the user. That user must have a currently-active session.
+  If the given userName is an extension key and this key does
+  not overlap with a user name of any currently-active session, it will
+  take on the identity and  authorization level of that extension provided
+  the current session has the same authorization level of that extension.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Sessions.ImpersonateUser</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SessionManager.html">SessionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>userName</strong></td><td>xsd:string</td><td>
+<p></p>
+         The user or extension key to impersonate.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>locale</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         A two-character ISO-639 language ID (like "en")
+                optionally followed by an
+                underscore and a two-character ISO 3166 country ID (like "US").
+                <p>
+                Examples are "de", "fr_CA", "zh", "zh_CN", and "zh_TW".
+                Note: The method uses the server default locale when
+                a locale is not provided. This default can be configured in the
+                server configuration file. If unspecified, it defaults to the
+                locale of the server environment or English ("en") if unsupported.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.UserSession.html">UserSession</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidLocale.html">InvalidLocale</a></td><td></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidLogin.html">InvalidLogin</a></td><td></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ImpersonateUser-textarea');expandcontent(this, 'ImpersonateUser-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ImpersonateUser-div">
+<textarea cols="20" rows="10" name="ImpersonateUser-textarea" wrap="off" readonly="1" id="ImpersonateUser-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ImpersonateUser" type="vim25:ImpersonateUserRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ImpersonateUserResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:UserSession"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="login" name="login"></a>
+<h1>Login</h1>
+<p></p>
+         Log on to the server.  This method fails if the user name and password are
+  incorrect, or if the user is valid but has no permissions granted.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Anonymous</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SessionManager.html">SessionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>userName</strong></td><td>xsd:string</td><td>
+<p></p>
+         The <a href="vim.host.LocalAccountManager.AccountSpecification.html#id">ID</a>
+                  of the user who is logging on to the server.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>password</strong></td><td>xsd:string</td><td>
+<p></p>
+         The <a href="vim.host.LocalAccountManager.AccountSpecification.html#password">password</a>
+                  of the user who is logging on to the server.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>locale</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         A two-character ISO-639 language ID (like "en")
+                optionally followed by an
+                underscore and a two-character ISO 3166 country ID (like "US").
+                <p>
+                Examples are "de", "fr_CA", "zh", "zh_CN", and "zh_TW".
+                Note: The method uses the server default locale when
+                a locale is not provided. This default can be configured in the
+                server configuration file. If unspecified, it defaults to the
+                locale of the server environment or English ("en") if unsupported.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.UserSession.html">UserSession</a></td><td>The UserSession object. <p> As of vSphere API 5.1 for VirtualCenter login use SSO style <a href="vim.SessionManager.html#loginByToken">LoginByToken</a></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidLocale.html">InvalidLocale</a></td><td>Thrown if the locale is invalid or unknown to the server.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidLogin.html">InvalidLogin</a></td><td>Thrown if the user and password combination is invalid.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NoPermission.html">NoPermission</a></td><td>Thrown if the user is valid, but has no access granted.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('Login-textarea');expandcontent(this, 'Login-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="Login-div">
+<textarea cols="20" rows="10" name="Login-textarea" wrap="off" readonly="1" id="Login-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="Login" type="vim25:LoginRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="LoginResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:UserSession"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="loginBySSPI" name="loginBySSPI"></a>
+<h1>LoginBySSPI</h1>
+<p></p>
+         Log on to the server using SSPI pass-through authentication.
+  <p>
+  This method provides support for passing credentials of the calling
+  process to the server without using a password, by leveraging the
+  Windows Security Support Provider Interface (SSPI) library.
+  <p>
+  If the function is not supported, this throws a NotSupported fault.
+  <p>
+  The client first calls AcquireCredentialsHandle().  If Kerberos is
+  used, this should include the desired credential to pass.  The client then
+  calls InitializeSecurityContext().  The resulting partially-formed
+  context is passed in Base-64 encoded form to this method.
+  <p>
+  If the context has been successfully formed, the server proceeds with
+  login and behaves like <a href="vim.SessionManager.html#login">Login</a>.  If further
+  negotiation is needed, the server throws an SSPIChallenge fault with
+  a challenge token, which the client should again pass to
+  InitializeSecurityContext(), followed by calling this method again.
+  <p>
+  For more information, see the MSDN documentation on SSPI.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Anonymous</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SessionManager.html">SessionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>base64Token</strong></td><td>xsd:string</td><td>
+<p></p>
+         The partially formed context returned from
+                     InitializeSecurityContext().
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>locale</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         A two-character ISO-639 language ID (like "en")
+                optionally followed by an
+                underscore and a two-character ISO 3166 country ID (like "US").
+                <p>
+                Examples are "de", "fr_CA", "zh", "zh_CN", and "zh_TW".
+                Note: The method uses the server default locale when
+                a locale is not provided. This default can be configured in the
+                server configuration file. If unspecified, it defaults to the
+                locale of the server environment or English ("en") if unsupported.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.UserSession.html">UserSession</a></td><td>The UserSession object. <p> As of vSphere API 5.1 for VirtualCenter login use SSO style <a href="vim.SessionManager.html#loginByToken">LoginByToken</a></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidLocale.html">InvalidLocale</a></td><td>Thrown if the locale is invalid or unknown to the server.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidLogin.html">InvalidLogin</a></td><td>Thrown if the user context could not be passed successfully, or the context is not valid on the server.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NoPermission.html">NoPermission</a></td><td>Thrown if the user is valid, but has no access granted.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the service does not support SSPI authentication.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.SSPIChallenge.html">SSPIChallenge</a></td><td>Thrown if further negotiation is required.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('LoginBySSPI-textarea');expandcontent(this, 'LoginBySSPI-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="LoginBySSPI-div">
+<textarea cols="20" rows="10" name="LoginBySSPI-textarea" wrap="off" readonly="1" id="LoginBySSPI-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="LoginBySSPI" type="vim25:LoginBySSPIRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="LoginBySSPIResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:UserSession"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="loginByToken" name="loginByToken"></a>
+<h1>LoginByToken</h1>
+<p></p>
+         Log on to the server through token representing principal identity.
+  The token is obtained from SSO (single sign-on) service. This method
+  fails if the token is not valid, or the principal has no permissions
+  granted. Two type of sso tokens are supported by this method: Bearer
+  and Holder-of-Key (HoK). If the token type obliges the method caller
+  to prove his rights to present this token (HoK), then a signature is
+  supplied as well. The token and the security signature if available
+  are provided in a transport specific way.
+
+  <p>
+  If the communication with the VirtualCenter is SOAP based read the
+  WS-Security specification (SAML Token profile) to understand how
+  to transport the SSO token and signature.
+
+  <p>
+  Usual login scenario:
+  <ol>
+  <li>Acquire HoK token from the SSO service. Different authentication
+     mechanisms are available for acquiring token (user/password,
+     certificate, SSPI and so on). For more details consult the SSO
+     documentation. To find the location of your SSO service consult the
+     Virtual Infrastructure documentation.
+  </li>
+
+  <li>Once SSO token is acquired successfully <a href="vim.SessionManager.html#loginByToken">LoginByToken</a> could be
+     invoked.
+  </li>
+  </ol>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Anonymous</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.1</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SessionManager.html">SessionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>locale</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         A two-character ISO-639 language ID (like "en")
+                optionally followed by an
+                underscore and a two-character ISO 3166 country ID (like "US").
+                <p>
+                Examples are "de", "fr_CA", "zh", "zh_CN", and "zh_TW".
+                Note: The method uses the server default locale when
+                a locale is not provided. This default can be configured in the
+                server configuration file. If unspecified, it defaults to the
+                locale of the server environment or English ("en") if unsupported.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.UserSession.html">UserSession</a></td><td>The UserSession object.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidLocale.html">InvalidLocale</a></td><td>Thrown if the locale is invalid or unknown to the server.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidLogin.html">InvalidLogin</a></td><td>Thrown if there is no token provided or the token could not be validated.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NoPermission.html">NoPermission</a></td><td>Thrown if the principal is valid, but has no access granted.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('LoginByToken-textarea');expandcontent(this, 'LoginByToken-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="LoginByToken-div">
+<textarea cols="20" rows="10" name="LoginByToken-textarea" wrap="off" readonly="1" id="LoginByToken-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="LoginByToken" type="vim25:LoginByTokenRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="LoginByTokenResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:UserSession"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="loginExtensionByCertificate" name="loginExtensionByCertificate"></a>
+<h1>LoginExtensionByCertificate</h1>
+<p></p>
+         Creates a special privileged session that includes
+  the Sessions.ImpersonateUser privilege. Requires that the client connect
+  over SSL and provide an X.509 certificate for which they hold the private key.
+  The certificate must match the certificate used in an earlier call to
+  <a href="vim.ExtensionManager.html#setCertificate">SetExtensionCertificate</a>.
+  <p>
+  NOTE: Verification of the received certificate (such as expiry, revocation,
+  and trust chain) is not required for successful authentication using
+  this method.  If certificate verification is desired, use the
+  <a href="vim.SessionManager.html#loginExtensionBySubjectName">LoginExtensionBySubjectName</a> method instead.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Anonymous</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SessionManager.html">SessionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>extensionKey</strong></td><td>xsd:string</td><td>
+<p></p>
+         Key of extension that is logging in.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>locale</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         A two-character ISO-639 language ID (like "en")
+                optionally followed by an
+                underscore and a two-character ISO 3166 country ID (like "US").
+                <p>
+                Examples are "de", "fr_CA", "zh", "zh_CN", and "zh_TW".
+                Note: The method uses the server default locale when
+                a locale is not provided. This default can be configured in the
+                server configuration file. If unspecified, it defaults to the
+                locale of the server environment or English ("en") if unsupported.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.UserSession.html">UserSession</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidLocale.html">InvalidLocale</a></td><td>Thrown if the supplied locale is not valid</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidLogin.html">InvalidLogin</a></td><td>Thrown if the extension is not registered, or the certificate does not match the expected value.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NoClientCertificate.html">NoClientCertificate</a></td><td>Thrown if no certificate was used by the client to connect</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('LoginExtensionByCertificate-textarea');expandcontent(this, 'LoginExtensionByCertificate-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="LoginExtensionByCertificate-div">
+<textarea cols="20" rows="10" name="LoginExtensionByCertificate-textarea" wrap="off" readonly="1" id="LoginExtensionByCertificate-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="LoginExtensionByCertificate" type="vim25:LoginExtensionByCertificateRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="LoginExtensionByCertificateResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:UserSession"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="loginExtensionBySubjectName" name="loginExtensionBySubjectName"></a>
+<h1>LoginExtensionBySubjectName</h1>
+<p></p>
+         Creates a special privileged session that includes
+  the Sessions.ImpersonateUser privilege. Requires that the extension connected
+  using SSL, with a certificate that has a subject name that matches the subject
+  name registered for the extension.
+  <p>
+  As of vSphere API 4.0, the NotFound fault is no longer thrown.  Instead, InvalidLogin
+  is thrown if the specified extension is not registered.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Anonymous</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SessionManager.html">SessionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>extensionKey</strong></td><td>xsd:string</td><td>
+<p></p>
+         Key of extension that is logging in.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>locale</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         A two-character ISO-639 language ID (like "en")
+                optionally followed by an
+                underscore and a two-character ISO 3166 country ID (like "US").
+                <p>
+                Examples are "de", "fr_CA", "zh", "zh_CN", and "zh_TW".
+                Note: The method uses the server default locale when
+                a locale is not provided. This default can be configured in the
+                server configuration file. If unspecified, it defaults to the
+                locale of the server environment or English ("en") if unsupported.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.UserSession.html">UserSession</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidClientCertificate.html">InvalidClientCertificate</a></td><td>Thrown if the client cerificate fails the verification at the server</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidLocale.html">InvalidLocale</a></td><td>Thrown if the supplied locale is not valid</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidLogin.html">InvalidLogin</a></td><td>Thrown if the extension is not registered, or the subject name doesn't match the subject name of the extension.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NoClientCertificate.html">NoClientCertificate</a></td><td>Thrown if no certificate was used by the client to connect</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NoSubjectName.html">NoSubjectName</a></td><td>Thrown if the extension was registered without a subject name</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if no extension is associated with the given key</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('LoginExtensionBySubjectName-textarea');expandcontent(this, 'LoginExtensionBySubjectName-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="LoginExtensionBySubjectName-div">
+<textarea cols="20" rows="10" name="LoginExtensionBySubjectName-textarea" wrap="off" readonly="1" id="LoginExtensionBySubjectName-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="LoginExtensionBySubjectName" type="vim25:LoginExtensionBySubjectNameRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="LoginExtensionBySubjectNameResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:UserSession"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="logout" name="logout"></a>
+<h1>Logout</h1>
+<p></p>
+         Log out and terminate the current session.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SessionManager.html">SessionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('Logout-textarea');expandcontent(this, 'Logout-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="Logout-div">
+<textarea cols="20" rows="10" name="Logout-textarea" wrap="off" readonly="1" id="Logout-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="Logout" type="vim25:LogoutRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="LogoutResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="sessionIsActive" name="sessionIsActive"></a>
+<h1>SessionIsActive</h1>
+<p></p>
+         Validates that a currently-active session exists with the specified
+  sessionID and userName associated with it. Returns true
+  if session exists.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Sessions.ValidateSession</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SessionManager.html">SessionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>sessionID</strong></td><td>xsd:string</td><td>
+<p></p>
+         Session ID to validate.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>userName</strong></td><td>xsd:string</td><td>
+<p></p>
+         User name to validate.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td>xsd:boolean</td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('SessionIsActive-textarea');expandcontent(this, 'SessionIsActive-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="SessionIsActive-div">
+<textarea cols="20" rows="10" name="SessionIsActive-textarea" wrap="off" readonly="1" id="SessionIsActive-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="SessionIsActive" type="vim25:SessionIsActiveRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="SessionIsActiveResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="xsd:boolean"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="setLocale" name="setLocale"></a>
+<h1>SetLocale</h1>
+<p></p>
+         Sets the session locale.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SessionManager.html">SessionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>locale</strong></td><td>xsd:string</td><td>
+<p></p>
+         A two-character ISO-639 language ID (like "en")
+                optionally followed by an
+                underscore and a two-character ISO 3166 country ID (like "US").
+                <p>
+                Examples are "de", "fr_CA", "zh", "zh_CN", and "zh_TW".
+                Note: The method uses the server default locale when
+                a locale is not provided. This default can be configured in the
+                server configuration file. If unspecified, it defaults to the
+                locale of the server environment or English ("en") if unsupported.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidLocale.html">InvalidLocale</a></td><td>Thrown if the locale is invalid or unknown to the server.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('SetLocale-textarea');expandcontent(this, 'SetLocale-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="SetLocale-div">
+<textarea cols="20" rows="10" name="SetLocale-textarea" wrap="off" readonly="1" id="SetLocale-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="SetLocale" type="vim25:SetLocaleRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="SetLocaleResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="terminate" name="terminate"></a>
+<h1>TerminateSession</h1>
+<p></p>
+         Log off and terminate the provided list of sessions.
+  <p>
+  This method is only transactional for each session ID. The set of sessions
+  are terminated sequentially, as specified in the list. If a failure
+  occurs, for example, because of an unknown sessionID, the method aborts with
+  an exception. When the method aborts, any sessions that have not yet been
+  terminated are left in their unterminated state.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Sessions.TerminateSession</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SessionManager.html">SessionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>sessionId</strong></td><td>xsd:string[]</td><td>
+<p></p>
+         A list of sessions to terminate.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if a sessionId matches the current session. Use the logout method to terminate the current session.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if a sessionId could not be found as a valid logged-on session.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('TerminateSession-textarea');expandcontent(this, 'TerminateSession-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="TerminateSession-div">
+<textarea cols="20" rows="10" name="TerminateSession-textarea" wrap="off" readonly="1" id="TerminateSession-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="TerminateSession" type="vim25:TerminateSessionRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="TerminateSessionResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateMessage" name="updateMessage"></a>
+<h1>UpdateServiceMessage</h1>
+<p></p>
+         Updates the system global message. If not blank, the message is immediately
+  displayed to currently logged-on users. When set, the message is shown by new
+  clients upon logging in.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Sessions.GlobalMessage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SessionManager.html">SessionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>message</strong></td><td>xsd:string</td><td>
+<p></p>
+         The message to send. Newline characters may be included.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateServiceMessage-textarea');expandcontent(this, 'UpdateServiceMessage-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateServiceMessage-div">
+<textarea cols="20" rows="10" name="UpdateServiceMessage-textarea" wrap="off" readonly="1" id="UpdateServiceMessage-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateServiceMessage" type="vim25:UpdateServiceMessageRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateServiceMessageResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Counters Extracted from VirtualCenter Server 4.0 System</title>
+<script language="JavaScript" src="./commonRes.js" type="text/javascript"></script>
+<link rel="StyleSheet" type="text/css" href="doc-style.css"></link>
+
+<style type="text/css">
+table {
+  border-collapse:collapse;
+  border-top: 1px solid #999;
+  border-left: 1px solid #999;
+  width:100%;
+}
+
+textarea {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 10px;
+  color: #000;
+  background-color: #f4f4f4;
+  border: 1px solid #999;
+  width:80%;
+}
+
+p.table-title {
+  font-weight: bold;
+  margin: 0px 0px 0px 0px;
+}
+
+td, th {
+  font-size: 10px;
+  padding: 1px 1px 1px 1px;
+  border-bottom: 1px solid #999;
+  border-right: 1px solid #999;
+  vertical-align: top;
+}
+
+th {
+  background-color: #555555;
+  color: #fff;
+  text-transform: none;
+  font-size: 10px;
+  text-align: center;
+
+
+</style>
+
+</head>
+<body>
+<h1>
+VirtualCenter Server 4.0 Beta 2 System
+</h1>
+<h2>Counter Documentation from the PerfCounterInfo Data Object</h2>
+<pre>
+
+Descriptions from actual system:
+-------------------------------------
+
+VMware VirtualCenter 4.0.0 build-114075
+API type is VirtualCenter
+API version is 4.0
+
+</pre>
+
+
+
+<!-- heading for table -->
+<table width="100%" cellpadding="0" cellspacing="0">
+<tr>
+<th>counter.key</th><th>groupInfo.key</th><th>statsType</th><th>RollupType</th><th>Level</th><th>desc.key</th><th>desc.label</th><th>desc.summary</th><th>unit.key</th><th>unit.label</th></tr>
+<!-- close heading for table -->
+
+
+<tr><td>1</td><td>cpu</td><td>rate</td><td>none</td><td>4</td><td>usage</td><td>CPU Usage (None)</td><td>CPU usage as a percentage over the collected interval</td><td>percent</td><td>Percent</td></tr>
+<tr><td>2</td><td>cpu</td><td>rate</td><td>average</td><td>1</td><td>usage</td><td>CPU Usage (Average)</td><td>CPU usage as a percentage over the collected interval</td><td>percent</td><td>Percent</td></tr>
+<tr><td>3</td><td>cpu</td><td>rate</td><td>minimum</td><td>4</td><td>usage</td><td>CPU Usage (Minimum)</td><td>CPU usage as a percentage over the collected interval</td><td>percent</td><td>Percent</td></tr>
+<tr><td>4</td><td>cpu</td><td>rate</td><td>maximum</td><td>4</td><td>usage</td><td>CPU Usage (Maximum)</td><td>CPU usage as a percentage over the collected interval</td><td>percent</td><td>Percent</td></tr>
+<tr><td>5</td><td>cpu</td><td>rate</td><td>none</td><td>4</td><td>usagemhz</td><td>CPU Usage in MHz (None)</td><td>CPU usage in MHz over the collected interval. For hosts this can be represented on a per Virtual Machine basis as a stacked graph</td><td>megaHertz</td><td>MHz</td></tr>
+<tr><td>6</td><td>cpu</td><td>rate</td><td>average</td><td>1</td><td>usagemhz</td><td>CPU Usage in MHz (Average)</td><td>CPU usage in MHz over the collected interval. For hosts this can be represented on a per Virtual Machine basis as a stacked graph</td><td>megaHertz</td><td>MHz</td></tr>
+<tr><td>7</td><td>cpu</td><td>rate</td><td>minimum</td><td>4</td><td>usagemhz</td><td>CPU Usage in MHz (Minimum)</td><td>CPU usage in MHz over the collected interval. For hosts this can be represented on a per Virtual Machine basis as a stacked graph</td><td>megaHertz</td><td>MHz</td></tr>
+<tr><td>8</td><td>cpu</td><td>rate</td><td>maximum</td><td>4</td><td>usagemhz</td><td>CPU Usage in MHz (Maximum)</td><td>CPU usage in MHz over the collected interval. For hosts this can be represented on a per Virtual Machine basis as a stacked graph</td><td>megaHertz</td><td>MHz</td></tr>
+<tr><td>9</td><td>cpu</td><td>absolute</td><td>average</td><td>2</td><td>reservedcapacity</td><td>CPU Reserved Capacity</td><td>Total CPU capacity reserved by the virtual machines</td><td>megaHertz</td><td>MHz</td></tr>
+<tr><td>10</td><td>cpu</td><td>delta</td><td>summation</td><td>3</td><td>system</td><td>CPU System</td><td>CPU time spent on system processes</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>11</td><td>cpu</td><td>delta</td><td>summation</td><td>3</td><td>wait</td><td>CPU Wait</td><td>CPU time spent in wait state</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>12</td><td>cpu</td><td>delta</td><td>summation</td><td>3</td><td>ready</td><td>CPU Ready</td><td>CPU time spent in ready state</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>13</td><td>cpu</td><td>delta</td><td>summation</td><td>3</td><td>extra</td><td>CPU Extra</td><td>CPU time that is extra</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>14</td><td>cpu</td><td>delta</td><td>summation</td><td>3</td><td>used</td><td>CPU Used</td><td>CPU time that is used</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>15</td><td>cpu</td><td>delta</td><td>latest</td><td>3</td><td>guaranteed</td><td>CPU Guaranteed</td><td>CPU time that is guaranteed</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>16</td><td>mem</td><td>absolute</td><td>none</td><td>4</td><td>usage</td><td>Memory Usage (None)</td><td>Memory usage as percentage of total configured or available memory</td><td>percent</td><td>Percent</td></tr>
+<tr><td>17</td><td>mem</td><td>absolute</td><td>average</td><td>2</td><td>usage</td><td>Memory Usage (Average)</td><td>Memory usage as percentage of total configured or available memory</td><td>percent</td><td>Percent</td></tr>
+<tr><td>18</td><td>mem</td><td>absolute</td><td>minimum</td><td>4</td><td>usage</td><td>Memory Usage (Minimum)</td><td>Memory usage as percentage of total configured or available memory</td><td>percent</td><td>Percent</td></tr>
+<tr><td>19</td><td>mem</td><td>absolute</td><td>maximum</td><td>4</td><td>usage</td><td>Memory Usage (Maximum)</td><td>Memory usage as percentage of total configured or available memory</td><td>percent</td><td>Percent</td></tr>
+<tr><td>20</td><td>mem</td><td>absolute</td><td>average</td><td>2</td><td>reservedcapacity</td><td>Memory Reserved Capacity</td><td>Amount of memory reserved by the virtual machines</td><td>megaBytes</td><td>MB</td></tr>
+<tr><td>21</td><td>mem</td><td>absolute</td><td>none</td><td>4</td><td>granted</td><td>Memory Granted (None)</td><td>Amount of memory granted. For hosts this can be represented on a per Virtual Machine basis as a stacked graph.</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>22</td><td>mem</td><td>absolute</td><td>average</td><td>2</td><td>granted</td><td>Memory Granted (Average)</td><td>Amount of memory granted. For hosts this can be represented on a per Virtual Machine basis as a stacked graph.</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>23</td><td>mem</td><td>absolute</td><td>minimum</td><td>4</td><td>granted</td><td>Memory Granted (Minimum)</td><td>Amount of memory granted. For hosts this can be represented on a per Virtual Machine basis as a stacked graph.</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>24</td><td>mem</td><td>absolute</td><td>maximum</td><td>4</td><td>granted</td><td>Memory Granted (Maximum)</td><td>Amount of memory granted. For hosts this can be represented on a per Virtual Machine basis as a stacked graph.</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>25</td><td>mem</td><td>absolute</td><td>none</td><td>4</td><td>active</td><td>Memory Active (None)</td><td>Amount of memory that is actively used</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>26</td><td>mem</td><td>absolute</td><td>average</td><td>2</td><td>active</td><td>Memory Active (Average)</td><td>Amount of memory that is actively used</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>27</td><td>mem</td><td>absolute</td><td>minimum</td><td>4</td><td>active</td><td>Memory Active (Minimum)</td><td>Amount of memory that is actively used</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>28</td><td>mem</td><td>absolute</td><td>maximum</td><td>4</td><td>active</td><td>Memory Active (Maximum)</td><td>Amount of memory that is actively used</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>29</td><td>mem</td><td>absolute</td><td>none</td><td>4</td><td>shared</td><td>Memory Shared (None)</td><td>Amount of memory that is shared</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>30</td><td>mem</td><td>absolute</td><td>average</td><td>2</td><td>shared</td><td>Memory Shared (Average)</td><td>Amount of memory that is shared</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>31</td><td>mem</td><td>absolute</td><td>minimum</td><td>4</td><td>shared</td><td>Memory Shared (Minimum)</td><td>Amount of memory that is shared</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>32</td><td>mem</td><td>absolute</td><td>maximum</td><td>4</td><td>shared</td><td>Memory Shared (Maximum)</td><td>Amount of memory that is shared</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>33</td><td>mem</td><td>absolute</td><td>none</td><td>4</td><td>zero</td><td>Memory Zero (None)</td><td>Amount of memory that is zeroed out</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>34</td><td>mem</td><td>absolute</td><td>average</td><td>2</td><td>zero</td><td>Memory Zero (Average)</td><td>Amount of memory that is zeroed out</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>35</td><td>mem</td><td>absolute</td><td>minimum</td><td>4</td><td>zero</td><td>Memory Zero (Minimum)</td><td>Amount of memory that is zeroed out</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>36</td><td>mem</td><td>absolute</td><td>maximum</td><td>4</td><td>zero</td><td>Memory Zero (Maximum)</td><td>Amount of memory that is zeroed out</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>37</td><td>mem</td><td>absolute</td><td>none</td><td>4</td><td>unreserved</td><td>Memory Unreserved (None)</td><td>Amount of memory that is unreserved</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>38</td><td>mem</td><td>absolute</td><td>average</td><td>2</td><td>unreserved</td><td>Memory Unreserved (Average)</td><td>Amount of memory that is unreserved</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>39</td><td>mem</td><td>absolute</td><td>minimum</td><td>4</td><td>unreserved</td><td>Memory Unreserved (Minimum)</td><td>Amount of memory that is unreserved</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>40</td><td>mem</td><td>absolute</td><td>maximum</td><td>4</td><td>unreserved</td><td>Memory Unreserved (Maximum)</td><td>Amount of memory that is unreserved</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>41</td><td>mem</td><td>absolute</td><td>none</td><td>4</td><td>swapused</td><td>Memory Swap Used (None)</td><td>Amount of memory that is used by swap</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>42</td><td>mem</td><td>absolute</td><td>average</td><td>2</td><td>swapused</td><td>Memory Swap Used (Average)</td><td>Amount of memory that is used by swap</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>43</td><td>mem</td><td>absolute</td><td>minimum</td><td>4</td><td>swapused</td><td>Memory Swap Used (Minimum)</td><td>Amount of memory that is used by swap</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>44</td><td>mem</td><td>absolute</td><td>maximum</td><td>4</td><td>swapused</td><td>Memory Swap Used (Maximum)</td><td>Amount of memory that is used by swap</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>45</td><td>mem</td><td>absolute</td><td>none</td><td>4</td><td>swapunreserved</td><td>Memory Swap Unreserved (None)</td><td>Amount of memory that is unreserved by swap</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>46</td><td>mem</td><td>absolute</td><td>average</td><td>2</td><td>swapunreserved</td><td>Memory Swap Unreserved (Average)</td><td>Amount of memory that is unreserved by swap</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>47</td><td>mem</td><td>absolute</td><td>minimum</td><td>4</td><td>swapunreserved</td><td>Memory Swap Unreserved (Minimum)</td><td>Amount of memory that is unreserved by swap</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>48</td><td>mem</td><td>absolute</td><td>maximum</td><td>4</td><td>swapunreserved</td><td>Memory Swap Unreserved (Maximum)</td><td>Amount of memory that is unreserved by swap</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>49</td><td>mem</td><td>absolute</td><td>none</td><td>4</td><td>sharedcommon</td><td>Memory Shared Common (None)</td><td>Amount of memory that is shared by common</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>50</td><td>mem</td><td>absolute</td><td>average</td><td>2</td><td>sharedcommon</td><td>Memory Shared Common (Average)</td><td>Amount of memory that is shared by common</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>51</td><td>mem</td><td>absolute</td><td>minimum</td><td>4</td><td>sharedcommon</td><td>Memory Shared Common (Minimum)</td><td>Amount of memory that is shared by common</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>52</td><td>mem</td><td>absolute</td><td>maximum</td><td>4</td><td>sharedcommon</td><td>Memory Shared Common (Maximum)</td><td>Amount of memory that is shared by common</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>53</td><td>mem</td><td>absolute</td><td>none</td><td>4</td><td>heap</td><td>Memory Heap (None)</td><td>Amount of memory allocated for heap</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>54</td><td>mem</td><td>absolute</td><td>average</td><td>2</td><td>heap</td><td>Memory Heap (Average)</td><td>Amount of memory allocated for heap</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>55</td><td>mem</td><td>absolute</td><td>minimum</td><td>4</td><td>heap</td><td>Memory Heap (Minimum)</td><td>Amount of memory allocated for heap</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>56</td><td>mem</td><td>absolute</td><td>maximum</td><td>4</td><td>heap</td><td>Memory Heap (Maximum)</td><td>Amount of memory allocated for heap</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>57</td><td>mem</td><td>absolute</td><td>none</td><td>4</td><td>heapfree</td><td>Memory Heap Free (None)</td><td>Free space in memory heap</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>58</td><td>mem</td><td>absolute</td><td>average</td><td>2</td><td>heapfree</td><td>Memory Heap Free (Average)</td><td>Free space in memory heap</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>59</td><td>mem</td><td>absolute</td><td>minimum</td><td>4</td><td>heapfree</td><td>Memory Heap Free (Minimum)</td><td>Free space in memory heap</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>60</td><td>mem</td><td>absolute</td><td>maximum</td><td>4</td><td>heapfree</td><td>Memory Heap Free (Maximum)</td><td>Free space in memory heap</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>61</td><td>mem</td><td>absolute</td><td>latest</td><td>2</td><td>state</td><td>Memory State</td><td>Memory state</td><td>number</td><td>Number</td></tr>
+<tr><td>62</td><td>mem</td><td>absolute</td><td>none</td><td>4</td><td>swapped</td><td>Memory Swapped (None)</td><td>Amount of memory that is swapped</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>63</td><td>mem</td><td>absolute</td><td>average</td><td>2</td><td>swapped</td><td>Memory Swapped (Average)</td><td>Amount of memory that is swapped</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>64</td><td>mem</td><td>absolute</td><td>minimum</td><td>4</td><td>swapped</td><td>Memory Swapped (Minimum)</td><td>Amount of memory that is swapped</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>65</td><td>mem</td><td>absolute</td><td>maximum</td><td>4</td><td>swapped</td><td>Memory Swapped (Maximum)</td><td>Amount of memory that is swapped</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>66</td><td>mem</td><td>absolute</td><td>none</td><td>4</td><td>swaptarget</td><td>Memory Swap Target (None)</td><td>Amount of memory that can be swapped</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>67</td><td>mem</td><td>absolute</td><td>average</td><td>2</td><td>swaptarget</td><td>Memory Swap Target (Average)</td><td>Amount of memory that can be swapped</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>68</td><td>mem</td><td>absolute</td><td>minimum</td><td>4</td><td>swaptarget</td><td>Memory Swap Target (Minimum)</td><td>Amount of memory that can be swapped</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>69</td><td>mem</td><td>absolute</td><td>maximum</td><td>4</td><td>swaptarget</td><td>Memory Swap Target (Maximum)</td><td>Amount of memory that can be swapped</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>70</td><td>mem</td><td>absolute</td><td>none</td><td>4</td><td>swapin</td><td>Memory Swap In (None)</td><td>Amount of memory that is swapped in</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>71</td><td>mem</td><td>absolute</td><td>average</td><td>2</td><td>swapin</td><td>Memory Swap In (Average)</td><td>Amount of memory that is swapped in</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>72</td><td>mem</td><td>absolute</td><td>minimum</td><td>4</td><td>swapin</td><td>Memory Swap In (Minimum)</td><td>Amount of memory that is swapped in</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>73</td><td>mem</td><td>absolute</td><td>maximum</td><td>4</td><td>swapin</td><td>Memory Swap In (Maximum)</td><td>Amount of memory that is swapped in</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>74</td><td>mem</td><td>absolute</td><td>none</td><td>4</td><td>swapout</td><td>Memory Swap Out (None)</td><td>Amount of memory that is swapped out</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>75</td><td>mem</td><td>absolute</td><td>average</td><td>2</td><td>swapout</td><td>Memory Swap Out (Average)</td><td>Amount of memory that is swapped out</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>76</td><td>mem</td><td>absolute</td><td>minimum</td><td>4</td><td>swapout</td><td>Memory Swap Out (Minimum)</td><td>Amount of memory that is swapped out</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>77</td><td>mem</td><td>absolute</td><td>maximum</td><td>4</td><td>swapout</td><td>Memory Swap Out (Maximum)</td><td>Amount of memory that is swapped out</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>78</td><td>mem</td><td>absolute</td><td>none</td><td>4</td><td>vmmemctl</td><td>Memory Balloon (None)</td><td>Amount of memory used by memory control</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>79</td><td>mem</td><td>absolute</td><td>average</td><td>2</td><td>vmmemctl</td><td>Memory Balloon (Average)</td><td>Amount of memory used by memory control</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>80</td><td>mem</td><td>absolute</td><td>minimum</td><td>4</td><td>vmmemctl</td><td>Memory Balloon (Minimum)</td><td>Amount of memory used by memory control</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>81</td><td>mem</td><td>absolute</td><td>maximum</td><td>4</td><td>vmmemctl</td><td>Memory Balloon (Maximum)</td><td>Amount of memory used by memory control</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>82</td><td>mem</td><td>absolute</td><td>none</td><td>4</td><td>vmmemctltarget</td><td>Memory Balloon Target (None)</td><td>Amount of memory that can be used by memory control</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>83</td><td>mem</td><td>absolute</td><td>average</td><td>2</td><td>vmmemctltarget</td><td>Memory Balloon Target (Average)</td><td>Amount of memory that can be used by memory control</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>84</td><td>mem</td><td>absolute</td><td>minimum</td><td>4</td><td>vmmemctltarget</td><td>Memory Balloon Target (Minimum)</td><td>Amount of memory that can be used by memory control</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>85</td><td>mem</td><td>absolute</td><td>maximum</td><td>4</td><td>vmmemctltarget</td><td>Memory Balloon Target (Maximum)</td><td>Amount of memory that can be used by memory control</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>86</td><td>mem</td><td>absolute</td><td>none</td><td>4</td><td>consumed</td><td>Memory Consumed (None)</td><td>Amount of host memory consumed by the virtual machine for guest memory</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>87</td><td>mem</td><td>absolute</td><td>average</td><td>1</td><td>consumed</td><td>Memory Consumed (Average)</td><td>Amount of host memory consumed by the virtual machine for guest memory</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>88</td><td>mem</td><td>absolute</td><td>minimum</td><td>4</td><td>consumed</td><td>Memory Consumed (Minimum)</td><td>Amount of host memory consumed by the virtual machine for guest memory</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>89</td><td>mem</td><td>absolute</td><td>maximum</td><td>4</td><td>consumed</td><td>Memory Consumed (Maximum)</td><td>Amount of host memory consumed by the virtual machine for guest memory</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>90</td><td>mem</td><td>absolute</td><td>none</td><td>4</td><td>overhead</td><td>Memory Overhead (None)</td><td>Amount of additional host memory allocated to the virtual machine</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>91</td><td>mem</td><td>absolute</td><td>average</td><td>1</td><td>overhead</td><td>Memory Overhead (Average)</td><td>Amount of additional host memory allocated to the virtual machine</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>92</td><td>mem</td><td>absolute</td><td>minimum</td><td>4</td><td>overhead</td><td>Memory Overhead (Minimum)</td><td>Amount of additional host memory allocated to the virtual machine</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>93</td><td>mem</td><td>absolute</td><td>maximum</td><td>4</td><td>overhead</td><td>Memory Overhead (Maximum)</td><td>Amount of additional host memory allocated to the virtual machine</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>94</td><td>disk</td><td>rate</td><td>none</td><td>4</td><td>usage</td><td>Disk Usage (None)</td><td>Aggregated storage performance statistics. For hosts this can be represented on a per Virtual Machine basis as a stacked graph</td><td>kiloBytesPerSecond</td><td>KBps</td></tr>
+<tr><td>95</td><td>disk</td><td>rate</td><td>average</td><td>1</td><td>usage</td><td>Disk Usage (Average)</td><td>Aggregated storage performance statistics. For hosts this can be represented on a per Virtual Machine basis as a stacked graph</td><td>kiloBytesPerSecond</td><td>KBps</td></tr>
+<tr><td>96</td><td>disk</td><td>rate</td><td>minimum</td><td>4</td><td>usage</td><td>Disk Usage (Minimum)</td><td>Aggregated storage performance statistics. For hosts this can be represented on a per Virtual Machine basis as a stacked graph</td><td>kiloBytesPerSecond</td><td>KBps</td></tr>
+<tr><td>97</td><td>disk</td><td>rate</td><td>maximum</td><td>4</td><td>usage</td><td>Disk Usage (Maximum)</td><td>Aggregated storage performance statistics. For hosts this can be represented on a per Virtual Machine basis as a stacked graph</td><td>kiloBytesPerSecond</td><td>KBps</td></tr>
+<tr><td>98</td><td>disk</td><td>delta</td><td>summation</td><td>3</td><td>numberRead</td><td>Disk Read Requests</td><td>Number of disk reads in the period</td><td>number</td><td>Number</td></tr>
+<tr><td>99</td><td>disk</td><td>delta</td><td>summation</td><td>3</td><td>numberWrite</td><td>Disk Write Requests</td><td>Number of disk writes in the period</td><td>number</td><td>Number</td></tr>
+<tr><td>100</td><td>disk</td><td>rate</td><td>average</td><td>3</td><td>read</td><td>Disk Read Rate</td><td>Rate of reading data from the disk</td><td>kiloBytesPerSecond</td><td>KBps</td></tr>
+<tr><td>101</td><td>disk</td><td>rate</td><td>average</td><td>3</td><td>write</td><td>Disk Write Rate</td><td>Rate of writing data to the disk</td><td>kiloBytesPerSecond</td><td>KBps</td></tr>
+<tr><td>102</td><td>net</td><td>rate</td><td>none</td><td>4</td><td>usage</td><td>Network Usage (None)</td><td>Aggregated network performance statistics. For hosts this can be represented on a per Virtual Machine basis as a stacked graph</td><td>kiloBytesPerSecond</td><td>KBps</td></tr>
+<tr><td>103</td><td>net</td><td>rate</td><td>average</td><td>1</td><td>usage</td><td>Network Usage (Average)</td><td>Aggregated network performance statistics. For hosts this can be represented on a per Virtual Machine basis as a stacked graph</td><td>kiloBytesPerSecond</td><td>KBps</td></tr>
+<tr><td>104</td><td>net</td><td>rate</td><td>minimum</td><td>4</td><td>usage</td><td>Network Usage (Minimum)</td><td>Aggregated network performance statistics. For hosts this can be represented on a per Virtual Machine basis as a stacked graph</td><td>kiloBytesPerSecond</td><td>KBps</td></tr>
+<tr><td>105</td><td>net</td><td>rate</td><td>maximum</td><td>4</td><td>usage</td><td>Network Usage (Maximum)</td><td>Aggregated network performance statistics. For hosts this can be represented on a per Virtual Machine basis as a stacked graph</td><td>kiloBytesPerSecond</td><td>KBps</td></tr>
+<tr><td>106</td><td>net</td><td>delta</td><td>summation</td><td>3</td><td>packetsRx</td><td>Network Packets Received</td><td>Number of packets received in the period</td><td>number</td><td>Number</td></tr>
+<tr><td>107</td><td>net</td><td>delta</td><td>summation</td><td>3</td><td>packetsTx</td><td>Network Packets Transmitted</td><td>Number of packets transmitted in the period</td><td>number</td><td>Number</td></tr>
+<tr><td>108</td><td>net</td><td>rate</td><td>average</td><td>3</td><td>received</td><td>Network Data Receive Rate</td><td>Rate at which data is received</td><td>kiloBytesPerSecond</td><td>KBps</td></tr>
+<tr><td>109</td><td>net</td><td>rate</td><td>average</td><td>3</td><td>transmitted</td><td>Network Data Transmit Rate</td><td>Rate at which data is transmitted</td><td>kiloBytesPerSecond</td><td>KBps</td></tr>
+<tr><td>110</td><td>sys</td><td>absolute</td><td>latest</td><td>1</td><td>uptime</td><td>Uptime</td><td>Total time elapsed since last startup</td><td>second</td><td>Second</td></tr>
+<tr><td>111</td><td>sys</td><td>delta</td><td>summation</td><td>1</td><td>heartbeat</td><td>Heartbeat</td><td>Number of heartbeats in this period</td><td>number</td><td>Number</td></tr>
+<tr><td>112</td><td>cpu</td><td>absolute</td><td>latest</td><td>1</td><td>cpuentitlement</td><td>CPU Entitlement</td><td>CPU resources devoted by the scheduler to the virtual machines and resource pools</td><td>number</td><td>Number</td></tr>
+<tr><td>113</td><td>mem</td><td>absolute</td><td>latest</td><td>1</td><td>mementitlement</td><td>Memory Entitlement</td><td>Memory resources that the scheduler thinks the virtual machines or resource pools should receive</td><td>number</td><td>Number</td></tr>
+<tr><td>114</td><td>clusterServices</td><td>absolute</td><td>latest</td><td>1</td><td>cpufairness</td><td>CPU Fairness</td><td>Fairness of distributed cpu resource allocation</td><td>number</td><td>Number</td></tr>
+<tr><td>115</td><td>clusterServices</td><td>absolute</td><td>latest</td><td>1</td><td>memfairness</td><td>Memory Fairness</td><td>Aggregate available memory resources of all the hosts within a cluster</td><td>number</td><td>Number</td></tr>
+<tr><td>116</td><td>vmop</td><td>absolute</td><td>latest</td><td>1</td><td>numPoweron</td><td>numPoweron</td><td>numPoweron</td><td>number</td><td>Number</td></tr>
+<tr><td>117</td><td>vmop</td><td>absolute</td><td>latest</td><td>1</td><td>numPoweroff</td><td>numPoweroff</td><td>numPoweroff</td><td>number</td><td>Number</td></tr>
+<tr><td>118</td><td>vmop</td><td>absolute</td><td>latest</td><td>1</td><td>numSuspend</td><td>numSuspend</td><td>numSuspend</td><td>number</td><td>Number</td></tr>
+<tr><td>119</td><td>vmop</td><td>absolute</td><td>latest</td><td>1</td><td>numReset</td><td>numReset</td><td>numReset</td><td>number</td><td>Number</td></tr>
+<tr><td>120</td><td>vmop</td><td>absolute</td><td>latest</td><td>1</td><td>numRebootGuest</td><td>numRebootGuest</td><td>numRebootGuest</td><td>number</td><td>Number</td></tr>
+<tr><td>121</td><td>vmop</td><td>absolute</td><td>latest</td><td>1</td><td>numStandbyGuest</td><td>numStandbyGuest</td><td>numStandbyGuest</td><td>number</td><td>Number</td></tr>
+<tr><td>122</td><td>vmop</td><td>absolute</td><td>latest</td><td>1</td><td>numShutdownGuest</td><td>numShutdownGuest</td><td>numShutdownGuest</td><td>number</td><td>Number</td></tr>
+<tr><td>123</td><td>vmop</td><td>absolute</td><td>latest</td><td>1</td><td>numCreate</td><td>numCreate</td><td>numCreate</td><td>number</td><td>Number</td></tr>
+<tr><td>124</td><td>vmop</td><td>absolute</td><td>latest</td><td>1</td><td>numDestroy</td><td>numDestroy</td><td>numDestroy</td><td>number</td><td>Number</td></tr>
+<tr><td>125</td><td>vmop</td><td>absolute</td><td>latest</td><td>1</td><td>numRegister</td><td>numRegister</td><td>numRegister</td><td>number</td><td>Number</td></tr>
+<tr><td>126</td><td>vmop</td><td>absolute</td><td>latest</td><td>1</td><td>numUnregister</td><td>numUnregister</td><td>numUnregister</td><td>number</td><td>Number</td></tr>
+<tr><td>127</td><td>vmop</td><td>absolute</td><td>latest</td><td>1</td><td>numReconfigure</td><td>numReconfigure</td><td>numReconfigure</td><td>number</td><td>Number</td></tr>
+<tr><td>128</td><td>vmop</td><td>absolute</td><td>latest</td><td>1</td><td>numClone</td><td>numClone</td><td>numClone</td><td>number</td><td>Number</td></tr>
+<tr><td>129</td><td>vmop</td><td>absolute</td><td>latest</td><td>1</td><td>numDeploy</td><td>numDeploy</td><td>numDeploy</td><td>number</td><td>Number</td></tr>
+<tr><td>130</td><td>vmop</td><td>absolute</td><td>latest</td><td>1</td><td>numChangeHost</td><td>numChangeHost</td><td>numChangeHost</td><td>number</td><td>Number</td></tr>
+<tr><td>131</td><td>vmop</td><td>absolute</td><td>latest</td><td>1</td><td>numChangeDS</td><td>numChangeDS</td><td>numChangeDS</td><td>number</td><td>Number</td></tr>
+<tr><td>132</td><td>vmop</td><td>absolute</td><td>latest</td><td>1</td><td>numChangeHostDS</td><td>numChangeHostDS</td><td>numChangeHostDS</td><td>number</td><td>Number</td></tr>
+<tr><td>133</td><td>vmop</td><td>absolute</td><td>latest</td><td>1</td><td>numVMotion</td><td>numVMotion</td><td>numVMotion</td><td>number</td><td>Number</td></tr>
+<tr><td>134</td><td>vmop</td><td>absolute</td><td>latest</td><td>1</td><td>numSVMotion</td><td>numSVMotion</td><td>numSVMotion</td><td>number</td><td>Number</td></tr>
+<tr><td>135</td><td>clusterServices</td><td>rate</td><td>average</td><td>1</td><td>effectivecpu</td><td>Effective CPU Resources</td><td>Aggregate available CPU resources of all the hosts within a cluster</td><td>megaHertz</td><td>MHz</td></tr>
+<tr><td>136</td><td>clusterServices</td><td>absolute</td><td>average</td><td>1</td><td>effectivemem</td><td>Effective Memory Resources</td><td>VMware DRS Effective Memory resources available</td><td>megaBytes</td><td>MB</td></tr>
+<tr><td>137</td><td>cpu</td><td>rate</td><td>average</td><td>1</td><td>totalmhz</td><td>CPU total</td><td>Aggregate available CPU resources of all the hosts within a cluster</td><td>megaHertz</td><td>MHz</td></tr>
+<tr><td>138</td><td>mem</td><td>absolute</td><td>average</td><td>1</td><td>totalmb</td><td>Memory Total</td><td>Aggregate available memory resources of all the hosts within a cluster</td><td>megaBytes</td><td>MB</td></tr>
+<tr><td>139</td><td>clusterServices</td><td>absolute</td><td>latest</td><td>1</td><td>failover</td><td>Current failover level</td><td>vSphere HA Number of failures that can be tolerated</td><td>number</td><td>Number</td></tr>
+<tr><td>140</td><td>disk</td><td>absolute</td><td>latest</td><td>1</td><td>used</td><td>Storage space actually used</td><td>Storage space actually used by a virtual machine or a datastore</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>141</td><td>disk</td><td>absolute</td><td>latest</td><td>1</td><td>provisioned</td><td>Storage space potentially used</td><td>Storage size upto which a virtual machine or files on a datastore can potentially grow</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>142</td><td>disk</td><td>absolute</td><td>latest</td><td>1</td><td>capacity</td><td>Storage capacity</td><td>Storage capacity of a datastore</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>143</td><td>disk</td><td>absolute</td><td>latest</td><td>1</td><td>unshared</td><td>Storage space not shared</td><td>Storage space not shared by a virtual machine with others</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>144</td><td>disk</td><td>absolute</td><td>latest</td><td>2</td><td>deltaused</td><td>Storage overhead due to delta disk backings</td><td>Storage overhead of a virtual machine or a datastore due to delta disk backings</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>145</td><td>vcDebugInfo</td><td>absolute</td><td>maximum</td><td>1</td><td>activationlatencystats</td><td>Activation Latency</td><td>The latency of an activation operation in VirtualCenter</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>146</td><td>vcDebugInfo</td><td>absolute</td><td>minimum</td><td>1</td><td>activationlatencystats</td><td>Activation Latency</td><td>The latency of an activation operation in VirtualCenter</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>147</td><td>vcDebugInfo</td><td>absolute</td><td>summation</td><td>1</td><td>activationlatencystats</td><td>Activation Latency</td><td>The latency of an activation operation in VirtualCenter</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>148</td><td>vcDebugInfo</td><td>absolute</td><td>maximum</td><td>1</td><td>activationstats</td><td>Activation Count</td><td>The number of activation operations in VirtualCenter</td><td>number</td><td>Number</td></tr>
+<tr><td>149</td><td>vcDebugInfo</td><td>absolute</td><td>minimum</td><td>1</td><td>activationstats</td><td>Activation Count</td><td>The number of activation operations in VirtualCenter</td><td>number</td><td>Number</td></tr>
+<tr><td>150</td><td>vcDebugInfo</td><td>absolute</td><td>summation</td><td>1</td><td>activationstats</td><td>Activation Count</td><td>The number of activation operations in VirtualCenter</td><td>number</td><td>Number</td></tr>
+<tr><td>151</td><td>vcResources</td><td>rate</td><td>average</td><td>1</td><td>ctxswitchesrate</td><td>Context Switch Rate</td><td>Number of context switches per second on the system where VirtualCenter is running</td><td>number</td><td>Number</td></tr>
+<tr><td>152</td><td>vcResources</td><td>absolute</td><td>average</td><td>1</td><td>cpuqueuelength</td><td>CPU Queue Length</td><td>Processor queue length on the system where VirtualCenter is running</td><td>number</td><td>Number</td></tr>
+<tr><td>153</td><td>vcResources</td><td>absolute</td><td>average</td><td>1</td><td>diskqueuelength</td><td>Disk Queue Length</td><td>Disk queue length on the system where VirtualCenter is running</td><td>number</td><td>Number</td></tr>
+<tr><td>154</td><td>vcResources</td><td>rate</td><td>average</td><td>1</td><td>diskreadbytesrate</td><td>Disk Bytes Read Rate</td><td>Number of bytes read from the disk per second on the system where VirtualCenter is running</td><td>number</td><td>Number</td></tr>
+<tr><td>155</td><td>vcResources</td><td>rate</td><td>average</td><td>1</td><td>diskreadsrate</td><td>Disk Read Rate</td><td>Number of disk reads per second on the system where VirtualCenter is running</td><td>number</td><td>Number</td></tr>
+<tr><td>156</td><td>vcResources</td><td>rate</td><td>average</td><td>1</td><td>diskwritebytesrate</td><td>Disk Bytes Written Rate</td><td>Number of bytes written to the disk per second on the system where VirtualCenter is running</td><td>number</td><td>Number</td></tr>
+<tr><td>157</td><td>vcResources</td><td>rate</td><td>average</td><td>1</td><td>diskwritesrate</td><td>Disk Write Rate</td><td>Number of disk writes per second on the system where VirtualCenter is running</td><td>number</td><td>Number</td></tr>
+<tr><td>158</td><td>vcDebugInfo</td><td>absolute</td><td>maximum</td><td>1</td><td>hostsynclatencystats</td><td>Host Sync Latency</td><td>The latency of a host sync operation in VirtualCenter</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>159</td><td>vcDebugInfo</td><td>absolute</td><td>minimum</td><td>1</td><td>hostsynclatencystats</td><td>Host Sync Latency</td><td>The latency of a host sync operation in VirtualCenter</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>160</td><td>vcDebugInfo</td><td>absolute</td><td>summation</td><td>1</td><td>hostsynclatencystats</td><td>Host Sync Latency</td><td>The latency of a host sync operation in VirtualCenter</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>161</td><td>vcDebugInfo</td><td>absolute</td><td>maximum</td><td>1</td><td>hostsyncstats</td><td>Host Sync Count</td><td>The number of host sync operations in VirtualCenter</td><td>number</td><td>Number</td></tr>
+<tr><td>162</td><td>vcDebugInfo</td><td>absolute</td><td>minimum</td><td>1</td><td>hostsyncstats</td><td>Host Sync Count</td><td>The number of host sync operations in VirtualCenter</td><td>number</td><td>Number</td></tr>
+<tr><td>163</td><td>vcDebugInfo</td><td>absolute</td><td>summation</td><td>1</td><td>hostsyncstats</td><td>Host Sync Count</td><td>The number of host sync operations in VirtualCenter</td><td>number</td><td>Number</td></tr>
+<tr><td>164</td><td>vcDebugInfo</td><td>absolute</td><td>maximum</td><td>1</td><td>inventorystats</td><td>Inventory Statistics</td><td>VirtualCenter Inventory related statistics</td><td>number</td><td>Number</td></tr>
+<tr><td>165</td><td>vcDebugInfo</td><td>absolute</td><td>minimum</td><td>1</td><td>inventorystats</td><td>Inventory Statistics</td><td>VirtualCenter Inventory related statistics</td><td>number</td><td>Number</td></tr>
+<tr><td>166</td><td>vcDebugInfo</td><td>absolute</td><td>summation</td><td>1</td><td>inventorystats</td><td>Inventory Statistics</td><td>VirtualCenter Inventory related statistics</td><td>number</td><td>Number</td></tr>
+<tr><td>167</td><td>vcDebugInfo</td><td>absolute</td><td>maximum</td><td>1</td><td>lrostats</td><td>VirtualCenter LRO Statistics</td><td>VirtualCenter lro related statistics</td><td>number</td><td>Number</td></tr>
+<tr><td>168</td><td>vcDebugInfo</td><td>absolute</td><td>minimum</td><td>1</td><td>lrostats</td><td>VirtualCenter LRO Statistics</td><td>VirtualCenter lro related statistics</td><td>number</td><td>Number</td></tr>
+<tr><td>169</td><td>vcDebugInfo</td><td>absolute</td><td>summation</td><td>1</td><td>lrostats</td><td>VirtualCenter LRO Statistics</td><td>VirtualCenter lro related statistics</td><td>number</td><td>Number</td></tr>
+<tr><td>170</td><td>vcDebugInfo</td><td>absolute</td><td>maximum</td><td>1</td><td>miscstats</td><td>Miscellaneous</td><td>Miscellaneous statistics</td><td>number</td><td>Number</td></tr>
+<tr><td>171</td><td>vcDebugInfo</td><td>absolute</td><td>minimum</td><td>1</td><td>miscstats</td><td>Miscellaneous</td><td>Miscellaneous statistics</td><td>number</td><td>Number</td></tr>
+<tr><td>172</td><td>vcDebugInfo</td><td>absolute</td><td>summation</td><td>1</td><td>miscstats</td><td>Miscellaneous</td><td>Miscellaneous statistics</td><td>number</td><td>Number</td></tr>
+<tr><td>173</td><td>vcDebugInfo</td><td>absolute</td><td>maximum</td><td>1</td><td>morefregstats</td><td>Managed Object Reference Statistics</td><td>Managed Object Reference counts in VirtualCenter</td><td>number</td><td>Number</td></tr>
+<tr><td>174</td><td>vcDebugInfo</td><td>absolute</td><td>minimum</td><td>1</td><td>morefregstats</td><td>Managed Object Reference Statistics</td><td>Managed Object Reference counts in VirtualCenter</td><td>number</td><td>Number</td></tr>
+<tr><td>175</td><td>vcDebugInfo</td><td>absolute</td><td>summation</td><td>1</td><td>morefregstats</td><td>Managed Object Reference Statistics</td><td>Managed Object Reference counts in VirtualCenter</td><td>number</td><td>Number</td></tr>
+<tr><td>176</td><td>vcResources</td><td>rate</td><td>average</td><td>1</td><td>packetrate</td><td>Total Packet Rate</td><td>The number of total packets sent and received per second on the system where VirtualCenter is running</td><td>number</td><td>Number</td></tr>
+<tr><td>177</td><td>vcResources</td><td>rate</td><td>average</td><td>1</td><td>packetrecvrate</td><td>Received Packet Rate</td><td>The rate of the number of total packets received per second on the system where VirtualCenter is running</td><td>number</td><td>Number</td></tr>
+<tr><td>178</td><td>vcResources</td><td>rate</td><td>average</td><td>1</td><td>packetsentrate</td><td>Sent Packet Rate</td><td>The number of total packets sent per second on the system where VirtualCenter is running</td><td>number</td><td>Number</td></tr>
+<tr><td>179</td><td>vcResources</td><td>absolute</td><td>average</td><td>1</td><td>netqueuelength</td><td>Network Queue Length</td><td>Network queue length on the system where VirtualCenter is running</td><td>number</td><td>Number</td></tr>
+<tr><td>180</td><td>vcResources</td><td>rate</td><td>average</td><td>1</td><td>systemnetusage</td><td>Network Usage</td><td>Total network bytes received and sent per second on the system where VirtualCenter is running</td><td>percent</td><td>Percent</td></tr>
+<tr><td>181</td><td>vcResources</td><td>rate</td><td>average</td><td>1</td><td>systemcpuusage</td><td>CPU System</td><td>Total system CPU used on the system where VirtualCenter in running</td><td>percent</td><td>Percent</td></tr>
+<tr><td>182</td><td>vcResources</td><td>absolute</td><td>average</td><td>1</td><td>systemthreads</td><td>System Threads</td><td>Number of threads on the system where VirtualCenter is running</td><td>number</td><td>Number</td></tr>
+<tr><td>183</td><td>vcResources</td><td>rate</td><td>average</td><td>1</td><td>pagefaultrate</td><td>Page Fault Rate</td><td>Number of page faults per second on the system where VirtualCenter is running</td><td>number</td><td>Number</td></tr>
+<tr><td>184</td><td>vcResources</td><td>absolute</td><td>average</td><td>1</td><td>physicalmemusage</td><td>Physical Memory</td><td>Amount of physical memory used by VirtualCenter</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>185</td><td>vcResources</td><td>absolute</td><td>average</td><td>1</td><td>poolnonpagedbytes</td><td>Pool Non Paged Bytes</td><td>Amount of memory pooled for non paged bytes on the system where VirtualCenter is running</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>186</td><td>vcResources</td><td>absolute</td><td>average</td><td>1</td><td>poolpagedbytes</td><td>Pool Paged Bytes</td><td>Amount of memory pooled for paged bytes on the system where VirtualCenter is running</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>187</td><td>vcResources</td><td>rate</td><td>average</td><td>1</td><td>priviledgedcpuusage</td><td>CPU Privileged</td><td>CPU used by VirtualCenter in privileged mode</td><td>percent</td><td>Percent</td></tr>
+<tr><td>188</td><td>vcResources</td><td>absolute</td><td>average</td><td>1</td><td>processhandles</td><td>Process Handles</td><td>Number of handles used by VirtualCenter</td><td>number</td><td>Number</td></tr>
+<tr><td>189</td><td>vcResources</td><td>absolute</td><td>average</td><td>1</td><td>processthreads</td><td>Process Threads</td><td>Number of threads used by VirtualCenter</td><td>number</td><td>Number</td></tr>
+<tr><td>190</td><td>vcResources</td><td>rate</td><td>average</td><td>1</td><td>processcpuusage</td><td>CPU Process</td><td>Total CPU used by VirtualCenter</td><td>percent</td><td>Percent</td></tr>
+<tr><td>191</td><td>vcDebugInfo</td><td>absolute</td><td>maximum</td><td>4</td><td>scoreboard</td><td>Scoreboard Statistics</td><td>Object counts in VirtualCenter</td><td>number</td><td>Number</td></tr>
+<tr><td>192</td><td>vcDebugInfo</td><td>absolute</td><td>minimum</td><td>4</td><td>scoreboard</td><td>Scoreboard Statistics</td><td>Object counts in VirtualCenter</td><td>number</td><td>Number</td></tr>
+<tr><td>193</td><td>vcDebugInfo</td><td>absolute</td><td>summation</td><td>3</td><td>scoreboard</td><td>Scoreboard Statistics</td><td>Object counts in VirtualCenter</td><td>number</td><td>Number</td></tr>
+<tr><td>194</td><td>vcDebugInfo</td><td>absolute</td><td>maximum</td><td>1</td><td>sessionstats</td><td>Session Statistics</td><td>The statistics related to client sessions talking to VirtualCenter</td><td>number</td><td>Number</td></tr>
+<tr><td>195</td><td>vcDebugInfo</td><td>absolute</td><td>minimum</td><td>1</td><td>sessionstats</td><td>Session Statistics</td><td>The statistics related to client sessions talking to VirtualCenter</td><td>number</td><td>Number</td></tr>
+<tr><td>196</td><td>vcDebugInfo</td><td>absolute</td><td>summation</td><td>1</td><td>sessionstats</td><td>Session Statistics</td><td>The statistics related to client sessions talking to VirtualCenter</td><td>number</td><td>Number</td></tr>
+<tr><td>197</td><td>vcResources</td><td>rate</td><td>average</td><td>1</td><td>syscallsrate</td><td>System Call Rate</td><td>The number of systems calls made per second on the system where VirtualCenter is running</td><td>number</td><td>Number</td></tr>
+<tr><td>198</td><td>vcDebugInfo</td><td>absolute</td><td>maximum</td><td>1</td><td>systemstats</td><td>System Statistics</td><td>The statistics related to VirtualCenter as a running system such as thread statistics, heap statistics</td><td>number</td><td>Number</td></tr>
+<tr><td>199</td><td>vcDebugInfo</td><td>absolute</td><td>minimum</td><td>1</td><td>systemstats</td><td>System Statistics</td><td>The statistics related to VirtualCenter as a running system such as thread statistics, heap statistics</td><td>number</td><td>Number</td></tr>
+<tr><td>200</td><td>vcDebugInfo</td><td>absolute</td><td>summation</td><td>1</td><td>systemstats</td><td>System Statistics</td><td>The statistics related to VirtualCenter as a running system such as thread statistics, heap statistics</td><td>number</td><td>Number</td></tr>
+<tr><td>201</td><td>vcResources</td><td>rate</td><td>average</td><td>1</td><td>usercpuusage</td><td>CPU User</td><td>CPU used by VirtualCenter in user mode</td><td>percent</td><td>Percent</td></tr>
+<tr><td>202</td><td>vcDebugInfo</td><td>absolute</td><td>maximum</td><td>1</td><td>vcservicestats</td><td>VirtualCenter Service Statistics</td><td>VirtualCenter service related statistics such as events, alarms, tasks</td><td>number</td><td>Number</td></tr>
+<tr><td>203</td><td>vcDebugInfo</td><td>absolute</td><td>minimum</td><td>1</td><td>vcservicestats</td><td>VirtualCenter Service Statistics</td><td>VirtualCenter service related statistics such as events, alarms, tasks</td><td>number</td><td>Number</td></tr>
+<tr><td>204</td><td>vcDebugInfo</td><td>absolute</td><td>summation</td><td>1</td><td>vcservicestats</td><td>VirtualCenter Service Statistics</td><td>VirtualCenter service related statistics such as events, alarms, tasks</td><td>number</td><td>Number</td></tr>
+<tr><td>205</td><td>vcResources</td><td>absolute</td><td>average</td><td>1</td><td>virtualmemusage</td><td>Virtual Memory</td><td>Amount of virtual memory used by VirtualCenter</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>206</td><td>vcDebugInfo</td><td>absolute</td><td>maximum</td><td>1</td><td>lockstats</td><td>Locking Statistics</td><td>VirtualCenter locking related statistics</td><td>number</td><td>Number</td></tr>
+<tr><td>207</td><td>vcDebugInfo</td><td>absolute</td><td>minimum</td><td>1</td><td>lockstats</td><td>Locking Statistics</td><td>VirtualCenter locking related statistics</td><td>number</td><td>Number</td></tr>
+<tr><td>208</td><td>vcDebugInfo</td><td>absolute</td><td>summation</td><td>1</td><td>lockstats</td><td>Locking Statistics</td><td>VirtualCenter locking related statistics</td><td>number</td><td>Number</td></tr>
+<tr><td>211</td><td>cpu</td><td>absolute</td><td>average</td><td>2</td><td>reservedCapacity</td><td>CPU Reserved Capacity</td><td>Total CPU capacity reserved by the virtual machines</td><td>megaHertz</td><td>MHz</td></tr>
+<tr><td>212</td><td>cpu</td><td>absolute</td><td>latest</td><td>3</td><td>guaranteed</td><td>CPU Guaranteed</td><td>CPU time that is guaranteed</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>213</td><td>cpu</td><td>delta</td><td>summation</td><td>2</td><td>idle</td><td>CPU Idle</td><td>CPU time spent in idle state</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>214</td><td>disk</td><td>delta</td><td>summation</td><td>2</td><td>commands</td><td>Disk Commands Issued</td><td>Number of disk commands issued in the period</td><td>number</td><td>Number</td></tr>
+<tr><td>215</td><td>disk</td><td>delta</td><td>summation</td><td>2</td><td>commandsAborted</td><td>Disk Command Aborts</td><td>Number of disk commands aborted in the period</td><td>number</td><td>Number</td></tr>
+<tr><td>216</td><td>disk</td><td>delta</td><td>summation</td><td>2</td><td>busResets</td><td>Disk Bus Resets</td><td>Number of bus resets in the period</td><td>number</td><td>Number</td></tr>
+<tr><td>217</td><td>disk</td><td>absolute</td><td>average</td><td>2</td><td>deviceReadLatency</td><td>Physical Device Read Latency</td><td>The average time taken to complete a read from the physical device.</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>218</td><td>disk</td><td>absolute</td><td>average</td><td>2</td><td>kernelReadLatency</td><td>Kernel Disk Read Latency</td><td>The average time spent in ESX Server VMKernel per read.</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>219</td><td>disk</td><td>absolute</td><td>average</td><td>2</td><td>totalReadLatency</td><td>Disk Read Latency</td><td>The average amount of time taken for a read from the perspective of a Guest OS. This is the sum of Kernel Read Latency and Physical Device Read Latency.</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>220</td><td>disk</td><td>absolute</td><td>average</td><td>2</td><td>queueReadLatency</td><td>Queue Read Latency</td><td>The average time spent in the ESX Server VMKernel queue per read.</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>221</td><td>disk</td><td>absolute</td><td>average</td><td>2</td><td>deviceWriteLatency</td><td>Physical Device Write Latency</td><td>The average time taken to complete a write from the physical device.</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>222</td><td>disk</td><td>absolute</td><td>average</td><td>2</td><td>kernelWriteLatency</td><td>Kernel Disk Write Latency</td><td>The average time spent in ESX Server VMKernel per write.</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>223</td><td>disk</td><td>absolute</td><td>average</td><td>2</td><td>totalWriteLatency</td><td>Disk Write Latency</td><td>The average amount of time taken for a write from the perspective of a Guest OS. This is the sum of Kernel Write Latency and Physical Device Write Latency.</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>224</td><td>disk</td><td>absolute</td><td>average</td><td>2</td><td>queueWriteLatency</td><td>Queue Write Latency</td><td>The average time spent in the ESX Server VMKernel queue per write.</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>225</td><td>disk</td><td>absolute</td><td>average</td><td>2</td><td>deviceLatency</td><td>Physical Device Command Latency</td><td>The average time taken to complete a command from the physical device.</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>226</td><td>disk</td><td>absolute</td><td>average</td><td>2</td><td>kernelLatency</td><td>Kernel Disk Command Latency</td><td>The average time spent in ESX Server VMKernel per command.</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>227</td><td>disk</td><td>absolute</td><td>average</td><td>2</td><td>totalLatency</td><td>Disk Command Latency</td><td>The average amount of time taken for a command from the perspective of a Guest OS. This is the sum of Kernel Command Latency and Physical Device Command Latency.</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>228</td><td>disk</td><td>absolute</td><td>average</td><td>2</td><td>queueLatency</td><td>Queue Command Latency</td><td>The average time spent in the ESX Server VMKernel queue per command.</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>229</td><td>sys</td><td>rate</td><td>none</td><td>4</td><td>resourceCpuUsage</td><td>Resource CPU Usage (None)</td><td>Resource CPU usage</td><td>megaHertz</td><td>MHz</td></tr>
+<tr><td>230</td><td>sys</td><td>rate</td><td>average</td><td>3</td><td>resourceCpuUsage</td><td>Resource CPU Usage (Average)</td><td>Resource CPU usage</td><td>megaHertz</td><td>MHz</td></tr>
+<tr><td>231</td><td>sys</td><td>rate</td><td>maximum</td><td>4</td><td>resourceCpuUsage</td><td>Resource CPU Usage (Maximum)</td><td>Resource CPU usage</td><td>megaHertz</td><td>MHz</td></tr>
+<tr><td>232</td><td>sys</td><td>rate</td><td>minimum</td><td>4</td><td>resourceCpuUsage</td><td>Resource CPU Usage (Minimum)</td><td>Resource CPU usage</td><td>megaHertz</td><td>MHz</td></tr>
+<tr><td>233</td><td>managementAgent</td><td>absolute</td><td>average</td><td>3</td><td>memUsed</td><td>Memory Used (Average)</td><td>Memory Used as percentage of total configured or available memory</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>234</td><td>managementAgent</td><td>absolute</td><td>average</td><td>3</td><td>swapUsed</td><td>Memory Swap Used (Average)</td><td>Amount of memory that is used by swap</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>235</td><td>managementAgent</td><td>rate</td><td>average</td><td>3</td><td>swapIn</td><td>Memory Swap In (Average)</td><td>Amount of memory that is swapped in</td><td>kiloBytesPerSecond</td><td>KBps</td></tr>
+<tr><td>236</td><td>managementAgent</td><td>rate</td><td>average</td><td>3</td><td>swapOut</td><td>Memory Swap Out (Average)</td><td>Amount of memory that is swapped out</td><td>kiloBytesPerSecond</td><td>KBps</td></tr>
+<tr><td>237</td><td>rescpu</td><td>absolute</td><td>latest</td><td>3</td><td>actav1</td><td>CPU Active (1 min. average)</td><td>CPU active average over 1 minute</td><td>percent</td><td>Percent</td></tr>
+<tr><td>238</td><td>rescpu</td><td>absolute</td><td>latest</td><td>3</td><td>actpk1</td><td>CPU Active (1 min. peak)</td><td>CPU active peak over 1 minute</td><td>percent</td><td>Percent</td></tr>
+<tr><td>239</td><td>rescpu</td><td>absolute</td><td>latest</td><td>3</td><td>runav1</td><td>CPU Running (1 min. average)</td><td>CPU running average over 1 minute</td><td>percent</td><td>Percent</td></tr>
+<tr><td>240</td><td>rescpu</td><td>absolute</td><td>latest</td><td>3</td><td>actav5</td><td>CPU Active (5 min. average)</td><td>CPU active average over 5 minutes</td><td>percent</td><td>Percent</td></tr>
+<tr><td>241</td><td>mem</td><td>absolute</td><td>average</td><td>2</td><td>reservedCapacity</td><td>Memory Reserved Capacity</td><td>Amount of memory reserved by the virtual machines</td><td>megaBytes</td><td>MB</td></tr>
+<tr><td>242</td><td>rescpu</td><td>absolute</td><td>latest</td><td>3</td><td>actpk5</td><td>CPU Active (5 min. peak)</td><td>CPU active peak over 5 minutes</td><td>percent</td><td>Percent</td></tr>
+<tr><td>243</td><td>rescpu</td><td>absolute</td><td>latest</td><td>3</td><td>runav5</td><td>CPU Running (5 min. average)</td><td>CPU running average over 5 minutes</td><td>percent</td><td>Percent</td></tr>
+<tr><td>244</td><td>rescpu</td><td>absolute</td><td>latest</td><td>3</td><td>actav15</td><td>CPU Active (15 min. average)</td><td>CPU active average over 15 minutes</td><td>percent</td><td>Percent</td></tr>
+<tr><td>245</td><td>rescpu</td><td>absolute</td><td>latest</td><td>3</td><td>actpk15</td><td>CPU Active (15 min. peak)</td><td>CPU active peak over 15 minutes</td><td>percent</td><td>Percent</td></tr>
+<tr><td>246</td><td>rescpu</td><td>absolute</td><td>latest</td><td>3</td><td>runav15</td><td>CPU Running (15 min. average)</td><td>CPU running average over 15 minutes</td><td>percent</td><td>Percent</td></tr>
+<tr><td>247</td><td>rescpu</td><td>absolute</td><td>latest</td><td>3</td><td>runpk1</td><td>CPU Running (1 min. peak)</td><td>CPU running peak over 1 minute</td><td>percent</td><td>Percent</td></tr>
+<tr><td>248</td><td>rescpu</td><td>absolute</td><td>latest</td><td>3</td><td>maxLimited1</td><td>CPU Throttled (1 min. average)</td><td>Amount of CPU resources over the limit that were refused, average over 1 minute</td><td>percent</td><td>Percent</td></tr>
+<tr><td>249</td><td>rescpu</td><td>absolute</td><td>latest</td><td>3</td><td>runpk5</td><td>CPU Running (5 min. peak)</td><td>CPU running peak over 5 minutes</td><td>percent</td><td>Percent</td></tr>
+<tr><td>250</td><td>rescpu</td><td>absolute</td><td>latest</td><td>3</td><td>maxLimited5</td><td>CPU Throttled (5 min. average)</td><td>Amount of CPU resources over the limit that were refused, average over 5 minutes</td><td>percent</td><td>Percent</td></tr>
+<tr><td>251</td><td>rescpu</td><td>absolute</td><td>latest</td><td>3</td><td>runpk15</td><td>CPU Running (15 min. peak)</td><td>CPU running peak over 15 minutes</td><td>percent</td><td>Percent</td></tr>
+<tr><td>252</td><td>rescpu</td><td>absolute</td><td>latest</td><td>3</td><td>maxLimited15</td><td>CPU Throttled (15 min. average)</td><td>Amount of CPU resources over the limit that were refused, average over 15 minutes</td><td>percent</td><td>Percent</td></tr>
+<tr><td>253</td><td>rescpu</td><td>absolute</td><td>latest</td><td>3</td><td>sampleCount</td><td>Group CPU Sample Count</td><td>group CPU sample count</td><td>number</td><td>Number</td></tr>
+<tr><td>254</td><td>rescpu</td><td>absolute</td><td>latest</td><td>3</td><td>samplePeriod</td><td>Group CPU Sample Period</td><td>group CPU sample period</td><td>millisecond</td><td>Millisecond</td></tr>
+<tr><td>255</td><td>mem</td><td>absolute</td><td>none</td><td>4</td><td>sysUsage</td><td>Memory Used by vmkernel</td><td>Amount of memory used by the vmkernel</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>256</td><td>mem</td><td>absolute</td><td>average</td><td>2</td><td>sysUsage</td><td>Memory Used by vmkernel</td><td>Amount of memory used by the vmkernel</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>257</td><td>mem</td><td>absolute</td><td>maximum</td><td>4</td><td>sysUsage</td><td>Memory Used by vmkernel</td><td>Amount of memory used by the vmkernel</td><td>kiloBytes</td><td>KB</td></tr>
+<tr><td>258</td><td>mem</td><td>absolute</td><td>minimum</td><td>4</td><td>sysUsage</td><td>Memory Used by vmkernel</td><td>Amount of memory used by the vmkernel</td><td>kiloBytes</td><td>KB</td></tr>
+
+
+
+</table>
+
+
+
+</body>
+</html>

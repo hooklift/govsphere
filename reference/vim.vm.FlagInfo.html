@@ -1,0 +1,276 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.FlagInfo" name="vim.vm.FlagInfo"></a>
+<h1>Data Object - VirtualMachineFlagInfo</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.vm.ConfigInfo.html#field_detail">VirtualMachineConfigInfo</a>, <a href="vim.vm.ConfigSpec.html#field_detail">VirtualMachineConfigSpec</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The FlagInfo data object type encapsulates the flag settings
+  for a virtual machine.
+  These properties are optional since the same structure
+  is used to change the values during an edit or create operation.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="disableAcceleration" name="disableAcceleration"></a><strong>disableAcceleration</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to turn off video acceleration for a virtual machine console window.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="diskUuidEnabled" name="diskUuidEnabled"></a><strong>diskUuidEnabled</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether disk UUIDs are being used by this virtual machine.               
+  If this flag is set to false, disk UUIDs are not exposed to the guest.             
+  <p>                                                                                
+  Since products before ESX 3.1 do not support disk UUIDs, moving virtual            
+  machines from a platform that supports UUID to a platform that does                
+  not support UUIDs could result in unspecified guest behavior. For                  
+  virtual machines where the ability to move to older platforms is                   
+  important, this flag should be set to false. If the value is unset, 
+  the behavior 'false' will be used.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="enableLogging" name="enableLogging"></a><strong>enableLogging</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to enable logging for a virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="htSharing" name="htSharing"></a><strong>htSharing</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Specifies how the VCPUs of a virtual machine are allowed to
+ share physical cores on a hyperthreaded system. Two VCPUs are
+ "sharing" a core if they are both running on logical CPUs of
+ the core at the same time.<br>See <a href="vim.vm.FlagInfo.HtSharing.html">VirtualMachineHtSharing</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="monitorType" name="monitorType"></a><strong>monitorType</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         vmx process type. See <a href="vim.vm.FlagInfo.MonitorType.html">VirtualMachineFlagInfoMonitorType</a>
+  for possible values for this property.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="recordReplayEnabled" name="recordReplayEnabled"></a><strong>recordReplayEnabled</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to specify whether record and replay operations are 
+  allowed for this virtual machine. 
+
+  If this flag is set to 'true', instruction virtualization 
+  will use hardware virtualization (HV) support. I.e., 
+  virtualExecUsage will be set to 'hvOn'.
+
+  If this flag is set to 'false' for a virtual machine that
+  already has a recording, replay will be disallowed, though
+  the recording will be preserved. 
+
+  If the value is unset, the behavior 'false' will be used.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="runWithDebugInfo" name="runWithDebugInfo"></a><strong>runWithDebugInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td><B>Deprecated.</B><I>
+         As of VI API 2.5, use <a href="vim.vm.FlagInfo.html#monitorType">monitorType</a>.
+      </I>
+<p></p>
+         Flag to specify whether or not to run in debug mode.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="snapshotDisabled" name="snapshotDisabled"></a><strong>snapshotDisabled</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td><B>Deprecated.</B><I>
+         As of vSphere API 4.0. The flag is ignored by the server.
+      </I>
+<p></p>
+         Flag to specify whether snapshots are disabled for this virtual 
+  machine.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="snapshotLocked" name="snapshotLocked"></a><strong>snapshotLocked</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to specify whether the snapshot tree is locked for this virtual machine.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="snapshotPowerOffBehavior" name="snapshotPowerOffBehavior"></a><strong>snapshotPowerOffBehavior</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Specifies the power-off behavior for a virtual machine that has
+  a snapshot.  If the value is unset, the behavior 'powerOff' will
+  be used.<br>See <a href="vim.vm.FlagInfo.PowerOffBehavior.html">VirtualMachinePowerOffBehavior</a><br>
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="useToe" name="useToe"></a><strong>useToe</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to specify whether or not to use TOE (TCP/IP Offloading).
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="virtualExecUsage" name="virtualExecUsage"></a><strong>virtualExecUsage</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Indicates whether or not the system will try to use Hardware 
+  Virtualization (HV) support for instruction virtualization, 
+  if available.
+  <p>
+  By default, VMware software will determine whether or not
+  to use hardware virtualization support based on various factors such
+  as the guest operating system type and the physical hardware.
+  Certain workloads can benefit from explicitly turning 
+  hardware virtualization support on or off.
+  If the value is unset, the value will default to hvAuto.
+  <p>
+  <a href="vim.vm.FlagInfo.VirtualExecUsage.html">VirtualMachineFlagInfoVirtualExecUsage</a> represents the set of
+  possible values.
+  <p>
+  New processors can enable two hardware acceleration technologies 
+  for virtualization, one for instruction virtualization and the 
+  other for MMU virtualization. Intel names its hardware-assisted 
+  instruction virtualization as VT, and its hardware-assisted 
+  MMU virtualization as EPT. AMD calls them as AMD-V and RVI,
+  respectively. For details on these technologies, please refer 
+  to documents from the processor vendors.
+  <p>
+  <a href="vim.vm.FlagInfo.html#virtualExecUsage">virtualExecUsage</a> controls instruction 
+  virtualization; while <a href="vim.vm.FlagInfo.html#virtualMmuUsage">virtualMmuUsage</a> 
+  controls MMU virtualization. "On" allows hardware acceleration, 
+  while "off" only allows software solution.
+  <p>
+  There are four meaningful combinations.
+  <p>
+  (hvAuto, automatic) - The host chooses which feature to use.
+  (hvOn, on)          - Use both VT/AMD-V and EPT/RVI.
+  (hvOn, off)         - Use VT/AMD-V but do not use EPT/RVI.
+  (hvOff, off)        - Do not use any of these hardware acceleration technologies.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="virtualMmuUsage" name="virtualMmuUsage"></a><strong>virtualMmuUsage</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Indicates whether or not the system will try to use nested page
+  table hardware support, if available.
+  <p>
+  By default, VMware software will determine whether or not
+  to use nested page table hardware support based on various factors such
+  as the guest operating system type and the physical hardware.
+  Certain workloads can benefit from explicitly turning 
+  nested page table hardware support on or off; this can be set using
+  nptUsage flag.
+  If the value is unset, the value will default to automatic.
+  <p>
+  <a href="vim.vm.FlagInfo.VirtualMmuUsage.html">VirtualMachineFlagInfoVirtualMmuUsage</a> represents the set of
+  possible values.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VirtualMachineFlagInfo">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="disableAcceleration" type="xsd:boolean" minOccurs="0"/>
+                     <element name="enableLogging" type="xsd:boolean" minOccurs="0"/>
+                     <element name="useToe" type="xsd:boolean" minOccurs="0"/>
+                     <element name="runWithDebugInfo" type="xsd:boolean" minOccurs="0"/>
+                     <element name="monitorType" type="xsd:string" minOccurs="0"/>
+                     <element name="htSharing" type="xsd:string" minOccurs="0"/>
+                     <element name="snapshotDisabled" type="xsd:boolean" minOccurs="0"/>
+                     <element name="snapshotLocked" type="xsd:boolean" minOccurs="0"/>
+                     <element name="diskUuidEnabled" type="xsd:boolean" minOccurs="0"/>
+                     <element name="virtualMmuUsage" type="xsd:string" minOccurs="0"/>
+                     <element name="virtualExecUsage" type="xsd:string" minOccurs="0"/>
+                     <element name="snapshotPowerOffBehavior" type="xsd:string" minOccurs="0"/>
+                     <element name="recordReplayEnabled" type="xsd:boolean" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

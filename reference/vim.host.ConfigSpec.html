@@ -1,0 +1,237 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.ConfigSpec" name="vim.host.ConfigSpec"></a>
+<h1>Data Object - HostConfigSpec</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.profile.host.ProfileManager.ConfigTaskList.html#field_detail">HostProfileManagerConfigTaskList</a>, <a href="vim.profile.host.ExecuteResult.html#field_detail">ProfileExecuteResult</a>
+</dd>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.profile.host.ProfileManager.html#applyHostConfiguration">ApplyHostConfig_Task</a>, <a href="vim.profile.host.ProfileManager.html#generateConfigTaskList">GenerateConfigTaskList</a>, <a href="vim.profile.host.ProfileManager.html#generateTaskList">GenerateHostProfileTaskList_Task</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.LocalAccountManager.AccountSpecification.html">HostAccountSpec</a>, <a href="vim.host.ActiveDirectorySpec.html">HostActiveDirectory</a>, <a href="vim.host.DateTimeConfig.html">HostDateTimeConfig</a>, <a href="vim.host.FirewallConfig.html">HostFirewallConfig</a>, <a href="vim.host.LicenseSpec.html">HostLicenseSpec</a>, <a href="vim.host.MemorySpec.html">HostMemorySpec</a>, <a href="vim.host.NasVolume.Config.html">HostNasVolumeConfig</a>, <a href="vim.host.NetworkConfig.html">HostNetworkConfig</a>, <a href="vim.host.SecuritySpec.html">HostSecuritySpec</a>, <a href="vim.host.ServiceConfig.html">HostServiceConfig</a>, <a href="vim.host.StorageDeviceInfo.html">HostStorageDeviceInfo</a>, <a href="vim.host.VirtualNicManager.NicTypeSelection.html">HostVirtualNicManagerNicTypeSelection</a>, <a href="vmodl.KeyAnyValue.html">KeyAnyValue</a>, <a href="vim.option.OptionValue.html">OptionValue</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The <a href="vim.host.ConfigSpec.html">HostConfigSpec</a> data object provides access to data objects
+  that specify configuration changes to be applied to an ESX host.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="activeDirectory" name="activeDirectory"></a><strong>activeDirectory</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.ActiveDirectorySpec.html">HostActiveDirectory[]</a></td><td>
+<p></p>
+         Active Directory configuration change.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="datastorePrincipal" name="datastorePrincipal"></a><strong>datastorePrincipal</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Datastore principal user.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="datastorePrincipalPasswd" name="datastorePrincipalPasswd"></a><strong>datastorePrincipalPasswd</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Password for the datastore principal.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="datetime" name="datetime"></a><strong>datetime</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.DateTimeConfig.html">HostDateTimeConfig</a></td><td>
+<p></p>
+         DateTime Configuration.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="firewall" name="firewall"></a><strong>firewall</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.FirewallConfig.html">HostFirewallConfig</a></td><td>
+<p></p>
+         Firewall configuration.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="genericConfig" name="genericConfig"></a><strong>genericConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.KeyAnyValue.html">KeyAnyValue[]</a></td><td>
+<p></p>
+         Advanced configuration.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="license" name="license"></a><strong>license</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.LicenseSpec.html">HostLicenseSpec</a></td><td>
+<p></p>
+         License configuration for the host.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="memory" name="memory"></a><strong>memory</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.MemorySpec.html">HostMemorySpec</a></td><td>
+<p></p>
+         Memory configuration for the host.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="nasDatastore" name="nasDatastore"></a><strong>nasDatastore</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.NasVolume.Config.html">HostNasVolumeConfig[]</a></td><td>
+<p></p>
+         Configurations to create NAS datastores.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="network" name="network"></a><strong>network</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.NetworkConfig.html">HostNetworkConfig</a></td><td>
+<p></p>
+         Network system information.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="nicTypeSelection" name="nicTypeSelection"></a><strong>nicTypeSelection</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.VirtualNicManager.NicTypeSelection.html">HostVirtualNicManagerNicTypeSelection[]</a></td><td>
+<p></p>
+         Type selection for different VirtualNics.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="option" name="option"></a><strong>option</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.option.OptionValue.html">OptionValue[]</a></td><td>
+<p></p>
+         Host configuration options as defined by the
+  <a href="vim.option.OptionValue.html">OptionValue</a> data object type.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="security" name="security"></a><strong>security</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.SecuritySpec.html">HostSecuritySpec</a></td><td>
+<p></p>
+         Security specification.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="service" name="service"></a><strong>service</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.ServiceConfig.html">HostServiceConfig[]</a></td><td>
+<p></p>
+         Host service configuration.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="storageDevice" name="storageDevice"></a><strong>storageDevice</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.StorageDeviceInfo.html">HostStorageDeviceInfo</a></td><td>
+<p></p>
+         Storage system information.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="userAccount" name="userAccount"></a><strong>userAccount</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.LocalAccountManager.AccountSpecification.html">HostAccountSpec[]</a></td><td>
+<p></p>
+         List of users to create/update with new password.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="usergroupAccount" name="usergroupAccount"></a><strong>usergroupAccount</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.LocalAccountManager.AccountSpecification.html">HostAccountSpec[]</a></td><td>
+<p></p>
+         List of users to create/update with new password.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostConfigSpec">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="nasDatastore" type="vim25:HostNasVolumeConfig" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="network" type="vim25:HostNetworkConfig" minOccurs="0"/>
+                     <element name="nicTypeSelection" type="vim25:HostVirtualNicManagerNicTypeSelection" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="service" type="vim25:HostServiceConfig" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="firewall" type="vim25:HostFirewallConfig" minOccurs="0"/>
+                     <element name="option" type="vim25:OptionValue" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="datastorePrincipal" type="xsd:string" minOccurs="0"/>
+                     <element name="datastorePrincipalPasswd" type="xsd:string" minOccurs="0"/>
+                     <element name="datetime" type="vim25:HostDateTimeConfig" minOccurs="0"/>
+                     <element name="storageDevice" type="vim25:HostStorageDeviceInfo" minOccurs="0"/>
+                     <element name="license" type="vim25:HostLicenseSpec" minOccurs="0"/>
+                     <element name="security" type="vim25:HostSecuritySpec" minOccurs="0"/>
+                     <element name="userAccount" type="vim25:HostAccountSpec" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="usergroupAccount" type="vim25:HostAccountSpec" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="memory" type="vim25:HostMemorySpec" minOccurs="0"/>
+                     <element name="activeDirectory" type="vim25:HostActiveDirectory" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="genericConfig" type="vim25:KeyAnyValue" minOccurs="0" maxOccurs="unbounded"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

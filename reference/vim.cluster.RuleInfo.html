@@ -1,0 +1,234 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.cluster.RuleInfo" name="vim.cluster.RuleInfo"></a>
+<h1>Data Object - ClusterRuleInfo</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.cluster.ConfigInfo.html#field_detail">ClusterConfigInfo</a>, <a href="vim.cluster.ConfigInfoEx.html#field_detail">ClusterConfigInfoEx</a>, <a href="vim.cluster.RuleSpec.html#field_detail">ClusterRuleSpec</a>, <a href="vim.fault.RuleViolation.html#field_detail">RuleViolation</a>, <a href="vim.storageDrs.PodConfigInfo.html#field_detail">StorageDrsPodConfigInfo</a>, <a href="vim.storageDrs.PodSelectionSpec.VmPodConfig.html#field_detail">VmPodConfigForPlacement</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.cluster.AffinityRuleSpec.html">ClusterAffinityRuleSpec</a>, <a href="vim.cluster.AntiAffinityRuleSpec.html">ClusterAntiAffinityRuleSpec</a>, <a href="vim.cluster.VmHostRuleInfo.html">ClusterVmHostRuleInfo</a>, <a href="vim.storageDrs.VirtualDiskAntiAffinityRuleSpec.html">VirtualDiskAntiAffinityRuleSpec</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.ManagedEntity.Status.html">ManagedEntityStatus</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The <a href="vim.cluster.RuleInfo.html">ClusterRuleInfo</a> data object is the base type for affinity
+ and anti-affinity rules. The affinity and anti-affinity rules
+ are DRS (Distributed Resource Scheduling) rules that affect the placement
+ of virtual machines in a cluster. Hosts and virtual machines referenced
+ in a DRS rule must be in the same cluster.
+ <p>
+ Note: DRS rules are different than an individual host's CPU affinity rules
+ (<a href="vim.vm.AffinityInfo.html">VirtualMachineAffinityInfo</a>).
+ <p>
+ The Server uses DRS rule objects to describe the current rule configuration
+ (<a href="vim.cluster.ConfigInfoEx.html">ClusterConfigInfoEx</a>.<a href="vim.cluster.ConfigInfoEx.html#rule">rule</a>).
+ Your client application uses rule objects to configure the affinity and
+ anti-affinity rules
+ (<a href="vim.cluster.ConfigSpecEx.html">ClusterConfigSpecEx</a>.<a href="vim.cluster.ConfigSpecEx.html#rulesSpec">rulesSpec</a>).
+ <p>
+ You can create the following types of rules:
+ <ul>
+ <li>An affinity rule defines a set of virtual machines that should run
+ on the same host.
+ The <a href="vim.cluster.AffinityRuleSpec.html">ClusterAffinityRuleSpec</a> object describes a rule that
+ identifies virtual machines, but does not identify any specific host.</li>
+ <li>An anti-affinity rule defines a set of virtual machines that should run
+ on different hosts.
+ The <a href="vim.cluster.AntiAffinityRuleSpec.html">ClusterAntiAffinityRuleSpec</a> object describes a rule that
+ identifies virtual machines, but does not identify any specific host.</li>
+ <li>A VM-Host rule defines affinity and anti-affinity relationships between
+ virtual machines and hosts.
+ The <a href="vim.cluster.VmHostRuleInfo.html">ClusterVmHostRuleInfo</a> object describes a rule that identifies
+ a virtual machine group (<a href="vim.cluster.VmGroup.html">ClusterVmGroup</a>) and affinity and
+ anti-affinity host groups (<a href="vim.cluster.HostGroup.html">ClusterHostGroup</a>).</li>
+ </ul>
+ <p>
+ Rule configuration is a dynamic process. When you create or modify a DRS rule,
+ the Server applies the rule to the cluster. If the existing cluster configuration
+ violates the rule, the Server attempts to correct the situation. If that is not
+ possible, the Server generates a fault and produces a log event.
+ DRS rules do not have precedence; all rules are applied equally.
+ DRS does not validate one rule against another. If you create conflicting
+ rules, the older rule takes precedence and DRS disables the newer rule.
+ <p>
+ Improperly used, DRS rules can fragment the cluster and inhibit the proper
+ functioning of DRS, HA, and DPM services. vSphere services never
+ take any actions that would result in the violation of mandatory DRS rules.
+ An operation that violates a mandatory rule would produce the following
+ consequences.
+ <ul>
+   <li>DRS does not evacuate virtual machines to place a host in maintenance
+       mode.</li>
+   <li>DRS does not place virtual machines for power-on or load balance virtual
+       machines.</li>
+   <li>HA does not perform failovers.</li>
+   <li>DPM does not optimize power management by placing hosts into standby
+       mode.</li>
+   </ul>
+ <p>
+ To avoid these situations, exercise caution when creating more than one
+ mandatory rule, or consider using only optional rules. Make sure that
+ the number of hosts with which a virtual machine is related by affinity rule
+ is large enough that losing a host does not prevent the virtual machine
+ from running.
+ <p>
+ For manual and partially automated DRS clusters, the Server produces migration
+ recommendations to satisfy the DRS rules. You are not required to act on the
+ recommendations, but the Server maintains the recommendations until the rules
+ are satisfied.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="enabled" name="enabled"></a><strong>enabled</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to indicate whether or not the rule is enabled. Set this property
+ when you configure the rule. The default value is false (disabled).
+ If there is a rule conflict, the Server can override the setting to disable
+ a rule.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="inCompliance" name="inCompliance"></a><strong>inCompliance</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to indicate whether or not the placement of Virtual Machines is currently
+ in compliance with this rule. The Server does not currently use this property.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="key" name="key"></a><strong>key</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Unique ID for rules. When adding a new rule, do not specify this property.
+  The Server will assign the key.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="mandatory" name="mandatory"></a><strong>mandatory</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to indicate whether compliance with this rule is mandatory or optional.
+ The default value is false (optional).
+ <ul>
+ <li>A mandatory rule will prevent a virtual machine from being powered on
+ or migrated to a host that does not satisfy the rule.
+ <li>An optional rule specifies a preference. DRS takes an optional rule
+ into consideration when it places a virtual machine in the cluster.
+ DRS will act on an optional rule as long as it does not impact
+ the ability of the host to satisfy current CPU or memory requirements
+ for virtual machines on the system. (As long as the operation does not
+ cause any host to be more than 100% utilized.)
+ </ul>
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="name" name="name"></a><strong>name</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Name of the rule.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="status" name="status"></a><strong>status</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.ManagedEntity.Status.html">ManagedEntityStatus</a></td><td>
+<p></p>
+         Flag to indicate whether or not the rule is currently satisfied.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="userCreated" name="userCreated"></a><strong>userCreated</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to indicate whether the rule is created by the user or the system.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ClusterRuleInfo">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="key" type="xsd:int" minOccurs="0"/>
+                     <element name="status" type="vim25:ManagedEntityStatus" minOccurs="0"/>
+                     <element name="enabled" type="xsd:boolean" minOccurs="0"/>
+                     <element name="name" type="xsd:string" minOccurs="0"/>
+                     <element name="mandatory" type="xsd:boolean" minOccurs="0"/>
+                     <element name="userCreated" type="xsd:boolean" minOccurs="0"/>
+                     <element name="inCompliance" type="xsd:boolean" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

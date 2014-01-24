@@ -1,0 +1,733 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.VsanSystem" name="vim.host.VsanSystem"></a>
+<h1>Managed Object -  
+						HostVsanSystem</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.host.ConfigManager.html#field_detail">HostConfigManager</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.ScsiDisk.html">HostScsiDisk</a>, <a href="vim.vsan.host.ClusterStatus.html">VsanHostClusterStatus</a>, <a href="vim.vsan.host.ConfigInfo.html">VsanHostConfigInfo</a>, <a href="vim.vsan.host.DiskMapping.html">VsanHostDiskMapping</a>, <a href="vim.vsan.host.DiskMapResult.html">VsanHostDiskMapResult</a>, <a href="vim.vsan.host.DiskResult.html">VsanHostDiskResult</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.5</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         The VsanSystem managed object type exposes VSAN configuration
+ primitives and serves as a host-level access point for relevant
+ VSAN data objects.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="config" name="config"></a><strong>config</strong><span title="Required Privilege: System.Read" class="privilege-ref"> P</span></td><td><a href="vim.vsan.host.ConfigInfo.html">VsanHostConfigInfo</a></td><td>
+<p></p>
+         The current VSAN service configuration information for this host.
+      <br>
+</td>
+</tr>
+</table>
+<span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  System.Read</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#addDisks">AddDisks_Task</a>, <a href="#initializeDisks">InitializeDisks_Task</a>, <a href="#queryDisksForVsan">QueryDisksForVsan</a>, <a href="#queryHostStatus">QueryHostStatus</a>, <a href="#removeDisk">RemoveDisk_Task</a>, <a href="#removeDiskMapping">RemoveDiskMapping_Task</a>, <a href="#update">UpdateVsan_Task</a></td>
+</tr>
+</table>
+<br>
+<a id="addDisks" name="addDisks"></a>
+<h1>AddDisks_Task</h1>
+<p></p>
+         Add the set of given disks for use by the VSAN service on this host.
+ Users may use this API to manually add disks for use by VSAN, without
+ specifying an explicit DiskMapping, when the VSAN service not
+ configured to automatically claim storage. Any ineligible disk in
+ the set of given disks and disks which would have exceeded
+ the capacity will be ignored and will not be published in
+ returned <a href="vim.TaskInfo.html#result">result</a>.
+ <p>
+ Upon successful completion of the returned <a href="vim.Task.html">Task</a>, its
+ <a href="vim.TaskInfo.html#result">result</a> field will be populated with a
+ <a href="vim.vsan.host.DiskMapResult.html">VsanHostDiskMapResult</a>[] and caller must inspect
+ <a href="vim.vsan.host.DiskMapResult.html">VsanHostDiskMapResult</a>[] to check result for individual
+ DiskMapping.<br>See <a href="vim.host.VsanSystem.html#queryDisksForVsan">QueryDisksForVsan</a><br>See <a href="vim.vsan.host.ConfigInfo.StorageInfo.html#autoClaimStorage">autoClaimStorage</a><br>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.VsanSystem.html">HostVsanSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>disk</strong></td><td><a href="vim.host.ScsiDisk.html">HostScsiDisk[]</a></td><td>
+<p></p>
+         list of disks to add for use by the VSAN service<br>See <a href="vim.host.VsanSystem.html#queryDisksForVsan">QueryDisksForVsan</a><br>See <a href="vim.vsan.host.ConfigInfo.StorageInfo.html#autoClaimStorage">autoClaimStorage</a><br>
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="initializeDisks" name="initializeDisks"></a>
+<h1>InitializeDisks_Task</h1>
+<p></p>
+         Initialize and use the sets of disks in the given DiskMapping list
+ for the VSAN service on this host.  Users may use this API to specify or
+ change disk mappings when the VSAN service is not configured to
+ automatically claim storage. For appending new non-SSDs to an existing
+ DiskMapping, users need to specify only the new non-SSDs with its
+ DiskMapping#ssd.
+ <p>
+ Upon successful completion of the returned <a href="vim.Task.html">Task</a>, its
+ <a href="vim.TaskInfo.html#result">result</a> field will be populated with a
+ <a href="vim.vsan.host.DiskMapResult.html">VsanHostDiskMapResult</a>[] and caller must inspect
+ <a href="vim.vsan.host.DiskMapResult.html">VsanHostDiskMapResult</a>[] to check result for individual
+ DiskMapping.<br>See <a href="vim.host.VsanSystem.html#queryDisksForVsan">QueryDisksForVsan</a><br>See <a href="vim.vsan.host.ConfigInfo.StorageInfo.html#autoClaimStorage">autoClaimStorage</a><br>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.VsanSystem.html">HostVsanSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>mapping</strong></td><td><a href="vim.vsan.host.DiskMapping.html">VsanHostDiskMapping[]</a></td><td>
+<p></p>
+         list of disk mappings to initialize<br>See <a href="vim.host.VsanSystem.html#queryDisksForVsan">QueryDisksForVsan</a><br>See <a href="vim.vsan.host.ConfigInfo.StorageInfo.html#autoClaimStorage">autoClaimStorage</a><br>
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="queryDisksForVsan" name="queryDisksForVsan"></a>
+<h1>QueryDisksForVsan</h1>
+<p></p>
+         Queries disks on this host for suitability to use with the VSAN service,
+ and returns the result.<br>See vim.host.ScsiDisk#canonicalName
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Read</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.VsanSystem.html">HostVsanSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>canonicalName</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         may be set to restrict the query to the list of
+        <a href="vim.host.ScsiDisk.html">HostScsiDisk</a> objects named by the
+        given paths<br>See vim.host.ScsiDisk#canonicalName
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.vsan.host.DiskResult.html">VsanHostDiskResult[]</a></td><td>A list of populated <a href="vim.vsan.host.DiskResult.html">VsanHostDiskResult</a> entries</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryDisksForVsan-textarea');expandcontent(this, 'QueryDisksForVsan-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryDisksForVsan-div">
+<textarea cols="20" rows="10" name="QueryDisksForVsan-textarea" wrap="off" readonly="1" id="QueryDisksForVsan-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryDisksForVsan" type="vim25:QueryDisksForVsanRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryDisksForVsanResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:VsanHostDiskResult" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryHostStatus" name="queryHostStatus"></a>
+<h1>QueryHostStatus</h1>
+<p></p>
+         Queries this host's current runtime status for the VSAN service.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Read</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.VsanSystem.html">HostVsanSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.vsan.host.ClusterStatus.html">VsanHostClusterStatus</a></td><td>A populated <a href="vim.vsan.host.ClusterStatus.html">VsanHostClusterStatus</a> entry</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryHostStatus-textarea');expandcontent(this, 'QueryHostStatus-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryHostStatus-div">
+<textarea cols="20" rows="10" name="QueryHostStatus-textarea" wrap="off" readonly="1" id="QueryHostStatus-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryHostStatus" type="vim25:QueryHostStatusRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryHostStatusResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:VsanHostClusterStatus"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="removeDisk" name="removeDisk"></a>
+<h1>RemoveDisk_Task</h1>
+<p></p>
+         Remove the set of given disks from use by the VSAN service on this host.
+ Users may use this API to manually remove a DiskMapping#nonSsd
+ from a DiskMapping. This operation is only permitted if the VSAN
+ service on this host is not configured to automatically claim storage.
+ <p>
+ This method may not be used to remove the last DiskMapping#nonSsd
+ from any given DiskMapping. Removal of the last
+ DiskMapping#nonSsd can be accomplished by using
+ <a href="vim.host.VsanSystem.html#removeDiskMapping">RemoveDiskMapping_Task</a>.
+ <p>
+ Upon successful completion of the returned <a href="vim.Task.html">Task</a>, its
+ <a href="vim.TaskInfo.html#result">result</a> field will be populated with a
+ <a href="vim.vsan.host.DiskResult.html">VsanHostDiskResult</a>[]. Sets DiskIsLastRemainingNonSSD fault
+ in returned task if specified disk is the last DiskMapping#nonSsd
+ member of DiskMapping.<br>See <a href="vim.host.VsanSystem.html#removeDiskMapping">RemoveDiskMapping_Task</a><br>See <a href="vim.host.VsanSystem.html#update">UpdateVsan_Task</a><br>See <a href="vim.vsan.host.ConfigInfo.StorageInfo.html#autoClaimStorage">autoClaimStorage</a><br>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.VsanSystem.html">HostVsanSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>disk</strong></td><td><a href="vim.host.ScsiDisk.html">HostScsiDisk[]</a></td><td>
+<p></p>
+         list of disks to be removed from use by the VSAN service.<br>See <a href="vim.host.VsanSystem.html#removeDiskMapping">RemoveDiskMapping_Task</a><br>See <a href="vim.host.VsanSystem.html#update">UpdateVsan_Task</a><br>See <a href="vim.vsan.host.ConfigInfo.StorageInfo.html#autoClaimStorage">autoClaimStorage</a><br>
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="removeDiskMapping" name="removeDiskMapping"></a>
+<h1>RemoveDiskMapping_Task</h1>
+<p></p>
+         Delete given set of disk mappings from use by the VSAN service on this host.
+ This API may be used to remove all disks in a given mapping,
+ including its DiskMapping#ssd. This operation is only permitted
+ if the VSAN service on this host is not configured to automatically
+ claim storage.
+ <p>
+ Upon successful completion of the returned <a href="vim.Task.html">Task</a>, its
+ <a href="vim.TaskInfo.html#result">result</a> field will be populated with an empty
+ <a href="vim.vsan.host.DiskMapResult.html">VsanHostDiskMapResult</a>[]. If any errors are encountered,
+ the returned field will instead contain populated error information.<br>See <a href="vim.host.VsanSystem.html#removeDisk">RemoveDisk_Task</a><br>See <a href="vim.host.VsanSystem.html#update">UpdateVsan_Task</a><br>See <a href="vim.vsan.host.ConfigInfo.StorageInfo.html#autoClaimStorage">autoClaimStorage</a><br>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.VsanSystem.html">HostVsanSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>mapping</strong></td><td><a href="vim.vsan.host.DiskMapping.html">VsanHostDiskMapping[]</a></td><td>
+<p></p>
+         list of disk mappings to be removed from VSAN usage.<br>See <a href="vim.host.VsanSystem.html#removeDisk">RemoveDisk_Task</a><br>See <a href="vim.host.VsanSystem.html#update">UpdateVsan_Task</a><br>See <a href="vim.vsan.host.ConfigInfo.StorageInfo.html#autoClaimStorage">autoClaimStorage</a><br>
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="update" name="update"></a>
+<h1>UpdateVsan_Task</h1>
+<p></p>
+         Update the VSAN service on this host according to the given host
+ configuration specification.
+ <p>
+ Enabling and disabling the VSAN service can be achieved by using
+ the <a href="vim.vsan.host.ConfigInfo.html#enabled">enabled</a> flag.
+
+ Host storage settings can be specified through use of
+ <a href="vim.vsan.host.ConfigInfo.html#storageInfo">storageInfo</a>.  If this value is omitted,
+ changes will not be made to the existing storage configuration.
+
+ Host cluster settings can be specified through use of
+ <a href="vim.vsan.host.ConfigInfo.html#clusterInfo">clusterInfo</a>.  If this value is omitted,
+ changes will not be made to the existing cluster configuration.
+
+ Host network settings can be specified through use of
+ <a href="vim.vsan.host.ConfigInfo.html#networkInfo">networkInfo</a>.  If this value is omitted,
+ changes will not be made to the existing network configuration.<br>See <a href="vim.vsan.host.ConfigInfo.html">VsanHostConfigInfo</a><br>See <a href="vim.vsan.host.ConfigInfo.html#storageInfo">storageInfo</a><br>See <a href="vim.vsan.host.ConfigInfo.html#clusterInfo">clusterInfo</a><br>See <a href="vim.vsan.host.ConfigInfo.html#networkInfo">networkInfo</a><br>See <a href="vim.host.VsanSystem.html#queryDisksForVsan">QueryDisksForVsan</a><br>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.VsanSystem.html">HostVsanSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>config</strong></td><td><a href="vim.vsan.host.ConfigInfo.html">VsanHostConfigInfo</a></td><td>
+<p></p>
+         host configuration settings to use for the VSAN service.<br>See <a href="vim.vsan.host.ConfigInfo.html">VsanHostConfigInfo</a><br>See <a href="vim.vsan.host.ConfigInfo.html#storageInfo">storageInfo</a><br>See <a href="vim.vsan.host.ConfigInfo.html#clusterInfo">clusterInfo</a><br>See <a href="vim.vsan.host.ConfigInfo.html#networkInfo">networkInfo</a><br>See <a href="vim.host.VsanSystem.html#queryDisksForVsan">QueryDisksForVsan</a><br>
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

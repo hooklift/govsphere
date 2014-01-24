@@ -1,0 +1,206 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.CpuIdInfo" name="vim.host.CpuIdInfo"></a>
+<h1>Data Object - HostCpuIdInfo</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.EVCMode.html#field_detail">EVCMode</a>, <a href="vim.vm.GuestOsDescriptor.html#field_detail">GuestOsDescriptor</a>, <a href="vim.host.Capability.html#field_detail">HostCapability</a>, <a href="vim.host.CpuPackage.html#field_detail">HostCpuPackage</a>, <a href="vim.host.HardwareInfo.html#field_detail">HostHardwareInfo</a>, <a href="vim.vm.ConfigInfo.html#field_detail">VirtualMachineConfigInfo</a>, <a href="vim.vm.ConfigSpec.CpuIdInfoSpec.html#field_detail">VirtualMachineCpuIdInfoSpec</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The CpuIdInfo data object type is used to represent the CPU features of 
+   a particular host or product, or to specify what the CPU feature
+   requirements are for a particular virtual machine or guest operating
+   system.
+   <p>
+   For each register (eax,ebx,ecx,edx), the string is a bit mask of the form:
+   <pre>
+       ????:????:????:????:????:????:????:????
+   </pre>
+    <p>
+   When used to represent the features of a specific processor package
+   (<a href="vim.host.HardwareInfo.html#cpuPkg">cpuPkg</a>), the features common to all
+   processors on a host (<a href="vim.host.HardwareInfo.html#cpuFeature">cpuFeature</a>), or the
+   features supported by a virtualization platform
+   (<a href="vim.host.Capability.html#supportedCpuFeature">supportedCpuFeature</a>), each bit is either '0'
+   or '1', or '-' for unknown/unspecified. In these feature vectors, the
+   vendor field is never set.
+   <p>
+   Optional values in these feature vectors default to
+   '----:----:----:----:----:----:----:----'.
+   <p>
+   When specifying the required feature set for a virtual machine or a guest
+   operating system, the bits can take on the values as described below, and
+   the vendor field may be set. The total feature requirements for a virtual
+   machine are composed by using any requirements listed in the virtual
+   machine's configuration to override the requirements listed in the
+   descriptor for the virtual machine's guest OS.
+   <p>
+   Bits used for specifying requirements:
+   <ul>
+   <li><b>x</b>: Unused by guest software.
+   <li><b>T</b>: Feature that the guest software requires to be enabled.
+   <li><b>F</b>: Feature that the guest software requires to be disabled.
+   <li><b>1</b>: Feature will be reported as enabled if queried by the guest
+                 software.
+   <li><b>0</b>: Feature will be reported as disabled if queried by the guest
+                 software.
+   <li><b>R</b>: Feature will be reported as disabled if queried by the guest
+                 software; however, for VMotion the actual value of this
+                 feature is required to be the same on both hosts.
+   <li><b>H</b>: Used by guest software. For VMotion the value of this
+                 feature is required to be the same on both hosts.
+   <li><b>-</b>: This bit type is only used in the requirements stored in
+                 the virtual machine's configuration. It indicates that, for
+                 this bit position, the requirement from the guest OS
+                 descriptor should be used instead.
+   </ul>
+   The values 'F' and '1' are rarely used but included for completeness. The
+   '0' and '1' values do not promise a faithful virtualization of these
+   features; whether the features work when forced to 0 or 1 is highly
+   dependent on the guest software.
+   <p>
+   Optional values in the requirements from the virtual machine's
+   configuration default to '----:----:----:----:----:----:----:----'.
+   Optional values in the requirements from the guest OS descriptor default
+   to 'xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx'.
+   <p>
+   Once the feature requirements for a virtual machine have been composed
+   from the virtual machine's configuration and guest OS descriptor, the bit
+   types above are used to identify whether or not the virtual machine
+   can be powered on or be migrated with VMotion to a particular host.
+   The rules are as follows:
+   <ul>
+   <li><b>Power-on</b>: Requirements marked as 'T' or 'F' must match bits
+   '1' or '0', respectively, in the features advertised by the HardwareInfo
+   of the power-on host.
+   <li><b>VMotion</b>: Requirements marked as 'T' or 'F' must match bits
+   '1' or '0', respectively, in the features advertised by the HardwareInfo
+   of the destination host. Also, at the positions where requirements are
+   marked 'H' or 'R', the advertised value of that feature for the source
+   host must match that of the destination host.
+   </ul>
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="eax" name="eax"></a><strong>eax</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         String representing the required EAX bits.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="ebx" name="ebx"></a><strong>ebx</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         String representing the required EBX bits.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="ecx" name="ecx"></a><strong>ecx</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         String representing the required ECX bits.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="edx" name="edx"></a><strong>edx</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         String representing the required EDX bits.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="level" name="level"></a><strong>level</strong></td><td>xsd:int</td><td>
+<p></p>
+         Level (EAX input to CPUID).
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vendor" name="vendor"></a><strong>vendor</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Used if this mask is for a particular vendor.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostCpuIdInfo">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="level" type="xsd:int"/>
+                     <element name="vendor" type="xsd:string" minOccurs="0"/>
+                     <element name="eax" type="xsd:string" minOccurs="0"/>
+                     <element name="ebx" type="xsd:string" minOccurs="0"/>
+                     <element name="ecx" type="xsd:string" minOccurs="0"/>
+                     <element name="edx" type="xsd:string" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

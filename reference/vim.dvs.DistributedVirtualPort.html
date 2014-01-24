@@ -1,0 +1,229 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.dvs.DistributedVirtualPort" name="vim.dvs.DistributedVirtualPort"></a>
+<h1>Data Object - DistributedVirtualPort</h1>
+<dl>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.DistributedVirtualSwitch.html#fetchPorts">FetchDVPorts</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.dvs.PortConnectee.html">DistributedVirtualSwitchPortConnectee</a>, <a href="vim.dvs.DistributedVirtualPort.ConfigInfo.html">DVPortConfigInfo</a>, <a href="vim.dvs.DistributedVirtualPort.State.html">DVPortState</a>, <a href="vim.HostSystem.html">HostSystem</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The <a href="vim.dvs.DistributedVirtualPort.html">DistributedVirtualPort</a> data object represents a port in a
+  <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a>. Virtual ports are part of a distributed
+  virtual portgroup. Servers create virtual ports according to the portgroup type
+  (<a href="vim.dvs.DistributedVirtualPortgroup.html">DistributedVirtualPortgroup</a>.<a href="vim.dvs.DistributedVirtualPortgroup.html#config">config</a>.<a href="vim.dvs.DistributedVirtualPortgroup.ConfigInfo.html#type">type</a>).
+  See <a href="vim.dvs.DistributedVirtualPortgroup.PortgroupType.html">DistributedVirtualPortgroupPortgroupType</a>.<br />
+  <ul>
+  <li>To configure host network access by port, set the distributed virtual port
+  in the host virtual NIC specification
+  (<a href="vim.host.VirtualNic.Specification.html">HostVirtualNicSpec</a>.<a href="vim.host.VirtualNic.Specification.html#distributedVirtualPort">distributedVirtualPort</a>.<a href="vim.dvs.PortConnection.html#portKey">portKey</a>).
+   </li><br />
+   <li>To configure virtual machine network access by port, set the port
+   in the virtual Ethernet card backing
+   (<a href="vim.vm.device.VirtualEthernetCard.html">VirtualEthernetCard</a>.<a href="vim.vm.device.VirtualDevice.html#backing">backing</a>.<a href="vim.vm.device.VirtualEthernetCard.DistributedVirtualPortBackingInfo.html#port">port</a>.<a href="vim.dvs.PortConnection.html#portKey">portKey</a>).
+  </li>
+  </ul>
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="config" name="config"></a><strong>config</strong></td><td><a href="vim.dvs.DistributedVirtualPort.ConfigInfo.html">DVPortConfigInfo</a></td><td>
+<p></p>
+         Port configuration, including identifying information, network
+ settings, and the set of entities that can connect to the port.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="conflict" name="conflict"></a><strong>conflict</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Specifies whether the port is a conflict port. A port could be marked
+  as conflict if an entity is discovered connecting to a port that is
+  already occupied, or if the host creates a port without conferring
+  with vCenter Server.
+  <p>
+  The distributed virtual switch does not persist the runtime state
+  of a conflict port. Also, the port cannot move away from the host.
+  vCenter Server will not move a virtual machine (VMotion) that is
+  using a conflict port.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="conflictPortKey" name="conflictPortKey"></a><strong>conflictPortKey</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         If the port is marked conflict in the case of two entities connecting to
+  the same port (see
+  <a href="vim.dvs.DistributedVirtualPort.html#conflict">conflict</a>), this is the
+  key of the port which the connected entity is contending for.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="connectee" name="connectee"></a><strong>connectee</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.dvs.PortConnectee.html">DistributedVirtualSwitchPortConnectee</a></td><td>
+<p></p>
+         Entity that connects to the port.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="connectionCookie" name="connectionCookie"></a><strong>connectionCookie</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Cookie representing the current instance of association between a
+  port and a virtual or physical NIC. See <a href="vim.dvs.PortConnection.html">DistributedVirtualSwitchPortConnection</a>.
+  The same cookie is present in the physical or virtual NIC configuration
+  (<a href="vim.dvs.PortConnection.html">DistributedVirtualSwitchPortConnection</a>.<a href="vim.dvs.PortConnection.html#connectionCookie">connectionCookie</a>)
+  so that the Server can verify that the entity is the rightful
+  connectee of the port.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="dvsUuid" name="dvsUuid"></a><strong>dvsUuid</strong></td><td>xsd:string</td><td>
+<p></p>
+         UUID of the <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a> to which the port belongs.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="hostLocalPort" name="hostLocalPort"></a><strong>hostLocalPort</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Specifies whether the port is a host local port. A host local port is  created
+  to resurrect the management network connection on a VMkernel virtual NIC.
+  You cannot use vCenter Server to reconfigure this port and you cannot
+  reassign the port.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="key" name="key"></a><strong>key</strong></td><td>xsd:string</td><td>
+<p></p>
+         Port key.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="lastStatusChange" name="lastStatusChange"></a><strong>lastStatusChange</strong></td><td>xsd:dateTime</td><td>
+<p></p>
+         The last time the
+ <a href="vim.dvs.DistributedVirtualPort.html#state">state</a>.<a href="vim.dvs.DistributedVirtualPort.State.html#runtimeInfo">runtimeInfo</a>
+  value was changed.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="portgroupKey" name="portgroupKey"></a><strong>portgroupKey</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Key of the portgroup <a href="vim.dvs.DistributedVirtualPortgroup.html">DistributedVirtualPortgroup</a> to which
+ the port belongs, if any.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="proxyHost" name="proxyHost"></a><strong>proxyHost</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         <a href="vim.HostSystem.html">HostSystem</a> that services this port.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="state" name="state"></a><strong>state</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.dvs.DistributedVirtualPort.State.html">DVPortState</a></td><td>
+<p></p>
+         Runtime state of the port.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DistributedVirtualPort">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="key" type="xsd:string"/>
+                     <element name="config" type="vim25:DVPortConfigInfo"/>
+                     <element name="dvsUuid" type="xsd:string"/>
+                     <element name="portgroupKey" type="xsd:string" minOccurs="0"/>
+                     <element name="proxyHost" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="connectee" type="vim25:DistributedVirtualSwitchPortConnectee" minOccurs="0"/>
+                     <element name="conflict" type="xsd:boolean"/>
+                     <element name="conflictPortKey" type="xsd:string" minOccurs="0"/>
+                     <element name="state" type="vim25:DVPortState" minOccurs="0"/>
+                     <element name="connectionCookie" type="xsd:int" minOccurs="0"/>
+                     <element name="lastStatusChange" type="xsd:dateTime"/>
+                     <element name="hostLocalPort" type="xsd:boolean" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

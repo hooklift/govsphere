@@ -1,0 +1,434 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.GuestOsDescriptor" name="vim.vm.GuestOsDescriptor"></a>
+<h1>Data Object - GuestOsDescriptor</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.vm.ConfigOption.html#field_detail">VirtualMachineConfigOption</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.CpuIdInfo.html">HostCpuIdInfo</a>, <a href="vim.option.IntOption.html">IntOption</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This data object type contains information to describe a
+  particular guest operating system.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="cpuFeatureMask" name="cpuFeatureMask"></a><strong>cpuFeatureMask</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.CpuIdInfo.html">HostCpuIdInfo[]</a></td><td>
+<p></p>
+         Specifies the CPU feature compatibility masks.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="family" name="family"></a><strong>family</strong></td><td>xsd:string</td><td>
+<p></p>
+         Family to which this guest operating system belongs.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="fullName" name="fullName"></a><strong>fullName</strong></td><td>xsd:string</td><td>
+<p></p>
+         Full name of the guest operating system.
+  For example, if the value of "id" is "win2000Pro", then
+  the value of "fullName" is "Windows 2000 Professional".
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="ich7mRecommended" name="ich7mRecommended"></a><strong>ich7mRecommended</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Whether I/O Controller Hub is recommended for this guest.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="id" name="id"></a><strong>id</strong></td><td>xsd:string</td><td>
+<p></p>
+         Identifier (short name) for the guest operating system.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="numSupportedCoresPerSocket" name="numSupportedCoresPerSocket"></a><strong>numSupportedCoresPerSocket</strong></td><td>xsd:int</td><td>
+<p></p>
+         Maximum number of cores per socket for this guest.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="numSupportedPhysicalSockets" name="numSupportedPhysicalSockets"></a><strong>numSupportedPhysicalSockets</strong></td><td>xsd:int</td><td>
+<p></p>
+         Maximum number of sockets supported for this guest.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="recommended3D" name="recommended3D"></a><strong>recommended3D</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Recommended 3D graphics for this guest.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="recommendedCdromController" name="recommendedCdromController"></a><strong>recommendedCdromController</strong></td><td>xsd:string</td><td>
+<p></p>
+         Recommended default CD-ROM type for this guest.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="recommendedColorDepth" name="recommendedColorDepth"></a><strong>recommendedColorDepth</strong></td><td>xsd:int</td><td>
+<p></p>
+         Recommended default color depth for this guest.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="recommendedDiskController" name="recommendedDiskController"></a><strong>recommendedDiskController</strong></td><td>xsd:string</td><td>
+<p></p>
+         Recommended default disk controller type for this guest.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="recommendedDiskSizeMB" name="recommendedDiskSizeMB"></a><strong>recommendedDiskSizeMB</strong></td><td>xsd:int</td><td>
+<p></p>
+         Recommended default disk size for this guest, in MB.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="recommendedEthernetCard" name="recommendedEthernetCard"></a><strong>recommendedEthernetCard</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Recommended default ethernet controller type for this guest.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="recommendedFirmware" name="recommendedFirmware"></a><strong>recommendedFirmware</strong></td><td>xsd:string</td><td>
+<p></p>
+         Recommended firmware type for this guest.
+
+  Possible values are described in
+  <a href="vim.vm.GuestOsDescriptor.FirmwareType.html">GuestOsDescriptorFirmwareType</a>
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="recommendedMemMB" name="recommendedMemMB"></a><strong>recommendedMemMB</strong></td><td>xsd:int</td><td>
+<p></p>
+         Recommended default memory size for this guest, in MB.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="recommendedSCSIController" name="recommendedSCSIController"></a><strong>recommendedSCSIController</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Recommended default SCSI controller type for this guest.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="recommendedUSBController" name="recommendedUSBController"></a><strong>recommendedUSBController</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Recommended default USB controller type for this guest.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="smcRecommended" name="smcRecommended"></a><strong>smcRecommended</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Whether SMC (Apple hardware) is recommended for this guest.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="smcRequired" name="smcRequired"></a><strong>smcRequired</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag that indicates wether the guest requires an SMC (Apple hardware).
+ This is logically equivalent to GuestOS = Mac OS
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="supportedDiskControllerList" name="supportedDiskControllerList"></a><strong>supportedDiskControllerList</strong></td><td>xsd:string[]</td><td>
+<p></p>
+         List of supported disk controller types for this guest.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="supportedEthernetCard" name="supportedEthernetCard"></a><strong>supportedEthernetCard</strong></td><td>xsd:string[]</td><td>
+<p></p>
+         List of supported ethernet cards for this guest.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="supportedFirmware" name="supportedFirmware"></a><strong>supportedFirmware</strong></td><td>xsd:string[]</td><td>
+<p></p>
+         Supported firmware types for this guest.
+
+  Possible values are described in
+  <a href="vim.vm.GuestOsDescriptor.FirmwareType.html">GuestOsDescriptorFirmwareType</a>
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="supportedForCreate" name="supportedForCreate"></a><strong>supportedForCreate</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Whether or not this guest should be allowed for selection
+ during virtual machine creation.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="supportedMaxCPUs" name="supportedMaxCPUs"></a><strong>supportedMaxCPUs</strong></td><td>xsd:int</td><td>
+<p></p>
+         Maximum number of processors supported for this guest.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="supportedMaxMemMB" name="supportedMaxMemMB"></a><strong>supportedMaxMemMB</strong></td><td>xsd:int</td><td>
+<p></p>
+         Maximum memory requirements supported for this guest, in MB.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="supportedMinMemMB" name="supportedMinMemMB"></a><strong>supportedMinMemMB</strong></td><td>xsd:int</td><td>
+<p></p>
+         Minimum memory requirements supported for this guest, in MB.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="supportedNumDisks" name="supportedNumDisks"></a><strong>supportedNumDisks</strong></td><td>xsd:int</td><td>
+<p></p>
+         Number of disks supported for this guest.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="supportedUSBControllerList" name="supportedUSBControllerList"></a><strong>supportedUSBControllerList</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         List of supported USB controllers for this guest.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="supportLevel" name="supportLevel"></a><strong>supportLevel</strong></td><td>xsd:string</td><td>
+<p></p>
+         Support level of this Guest
+
+  Possible values are described in
+  <a href="vim.vm.GuestOsDescriptor.SupportLevel.html">GuestOsDescriptorSupportLevel</a>
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="supports3D" name="supports3D"></a><strong>supports3D</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Whether this guest supports 3D graphics.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="supportsCpuHotAdd" name="supportsCpuHotAdd"></a><strong>supportsCpuHotAdd</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Whether virtual CPUs can be added to this guest
+  while the virtual machine is running.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="supportsCpuHotRemove" name="supportsCpuHotRemove"></a><strong>supportsCpuHotRemove</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Whether virtual CPUs can be removed from this guest
+  while the virtual machine is running.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="supportsMemoryHotAdd" name="supportsMemoryHotAdd"></a><strong>supportsMemoryHotAdd</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Whether the memory size for this guest can be changed
+  while the virtual machine is running.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="supportsSlaveDisk" name="supportsSlaveDisk"></a><strong>supportsSlaveDisk</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to indicate whether or not this guest can support
+  a disk configured as a slave.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="supportsVMI" name="supportsVMI"></a><strong>supportsVMI</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag indicating whether or not this guest supports the virtual
+  machine interface.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="supportsWakeOnLan" name="supportsWakeOnLan"></a><strong>supportsWakeOnLan</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to indicate whether or not this guest can support Wake-on-LAN.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="usbRecommended" name="usbRecommended"></a><strong>usbRecommended</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Whether USB controller is recommended for this guest.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vRAMSizeInKB" name="vRAMSizeInKB"></a><strong>vRAMSizeInKB</strong></td><td><a href="vim.option.IntOption.html">IntOption</a></td><td>
+<p></p>
+         Video RAM size limits supported by this guest, in KB.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="GuestOsDescriptor">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="id" type="xsd:string"/>
+                     <element name="family" type="xsd:string"/>
+                     <element name="fullName" type="xsd:string"/>
+                     <element name="supportedMaxCPUs" type="xsd:int"/>
+                     <element name="numSupportedPhysicalSockets" type="xsd:int" minOccurs="0"/>
+                     <element name="numSupportedCoresPerSocket" type="xsd:int" minOccurs="0"/>
+                     <element name="supportedMinMemMB" type="xsd:int"/>
+                     <element name="supportedMaxMemMB" type="xsd:int"/>
+                     <element name="recommendedMemMB" type="xsd:int"/>
+                     <element name="recommendedColorDepth" type="xsd:int"/>
+                     <element name="supportedDiskControllerList" type="xsd:string" maxOccurs="unbounded"/>
+                     <element name="recommendedSCSIController" type="xsd:string" minOccurs="0"/>
+                     <element name="recommendedDiskController" type="xsd:string"/>
+                     <element name="supportedNumDisks" type="xsd:int"/>
+                     <element name="recommendedDiskSizeMB" type="xsd:int"/>
+                     <element name="recommendedCdromController" type="xsd:string" minOccurs="0"/>
+                     <element name="supportedEthernetCard" type="xsd:string" maxOccurs="unbounded"/>
+                     <element name="recommendedEthernetCard" type="xsd:string" minOccurs="0"/>
+                     <element name="supportsSlaveDisk" type="xsd:boolean" minOccurs="0"/>
+                     <element name="cpuFeatureMask" type="vim25:HostCpuIdInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="smcRequired" type="xsd:boolean" minOccurs="0"/>
+                     <element name="supportsWakeOnLan" type="xsd:boolean"/>
+                     <element name="supportsVMI" type="xsd:boolean" minOccurs="0"/>
+                     <element name="supportsMemoryHotAdd" type="xsd:boolean" minOccurs="0"/>
+                     <element name="supportsCpuHotAdd" type="xsd:boolean" minOccurs="0"/>
+                     <element name="supportsCpuHotRemove" type="xsd:boolean" minOccurs="0"/>
+                     <element name="supportedFirmware" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="recommendedFirmware" type="xsd:string" minOccurs="0"/>
+                     <element name="supportedUSBControllerList" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="recommendedUSBController" type="xsd:string" minOccurs="0"/>
+                     <element name="supports3D" type="xsd:boolean" minOccurs="0"/>
+                     <element name="recommended3D" type="xsd:boolean" minOccurs="0"/>
+                     <element name="smcRecommended" type="xsd:boolean" minOccurs="0"/>
+                     <element name="ich7mRecommended" type="xsd:boolean" minOccurs="0"/>
+                     <element name="usbRecommended" type="xsd:boolean" minOccurs="0"/>
+                     <element name="supportLevel" type="xsd:string" minOccurs="0"/>
+                     <element name="supportedForCreate" type="xsd:boolean" minOccurs="0"/>
+                     <element name="vRAMSizeInKB" type="vim25:IntOption" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

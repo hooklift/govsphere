@@ -1,0 +1,192 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vApp.VmConfigSpec" name="vim.vApp.VmConfigSpec"></a>
+<h1>Data Object - VmConfigSpec</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.vm.ConfigSpec.html#field_detail">VirtualMachineConfigSpec</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.vApp.VAppConfigSpec.html">VAppConfigSpec</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.vApp.IPAssignmentInfo.html">VAppIPAssignmentInfo</a>, <a href="vim.vApp.OvfSectionSpec.html">VAppOvfSectionSpec</a>, <a href="vim.vApp.ProductSpec.html">VAppProductSpec</a>, <a href="vim.vApp.PropertySpec.html">VAppPropertySpec</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         vApp related configuration of a VM.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="eula" name="eula"></a><strong>eula</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         End User Liceses Agreements. 
+ <p>
+ If this list is set, it replaces all exiting  licenses. An empty list will not 
+ make any changes to installed licenses. A list with a single element {""} will 
+ remove all licenses and leave an empty list.
+ <p>
+ Reconfigure privilege: VApp.ApplicationConfig
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="installBootRequired" name="installBootRequired"></a><strong>installBootRequired</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         If this is on a VirtualMachine object, it specifies whether the VM needs an
+  initial boot before the deployment is complete. If this is on a vApp object,
+  it indicates than one or more VMs needs an initial reboot. This flag is
+  automatically reset once the reboot has happened.
+ <p>
+ Reconfigure privilege: VApp.ApplicationConfig
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="installBootStopDelay" name="installBootStopDelay"></a><strong>installBootStopDelay</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Specifies the delay in seconds to wait for the VM to power off after the initial
+ boot (used only if installBootRequired is true). A value of 0 means wait forever. 
+ <p>
+ Reconfigure privilege: VApp.ApplicationConfig
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="ipAssignment" name="ipAssignment"></a><strong>ipAssignment</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vApp.IPAssignmentInfo.html">VAppIPAssignmentInfo</a></td><td>
+<p></p>
+         IP assignment policy and DHCP support configuration.
+ <p>
+ Reconfigure privilege: See <a href="vim.vApp.IPAssignmentInfo.html">VAppIPAssignmentInfo</a>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="ovfEnvironmentTransport" name="ovfEnvironmentTransport"></a><strong>ovfEnvironmentTransport</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         List the transports to use for properties. Supported values are: iso and
+ com.vmware.guestInfo.
+ <p>
+ If this list is set, it replaces all exiting entries. An empty list will not make
+ any changes. A list with a single element {""} will clear the list of transports.
+ <p>
+ Reconfigure privilege: VApp.ApplicationConfig
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="ovfSection" name="ovfSection"></a><strong>ovfSection</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vApp.OvfSectionSpec.html">VAppOvfSectionSpec[]</a></td><td>
+<p></p>
+         List of uninterpreted OVF meta-data sections.
+ <p>
+ Reconfigure privilege: VApp.ApplicationConfig
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="product" name="product"></a><strong>product</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vApp.ProductSpec.html">VAppProductSpec[]</a></td><td>
+<p></p>
+         Information about the product.
+ <p>
+ Reconfigure privilege: VApp.ApplicationConfig
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="property" name="property"></a><strong>property</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vApp.PropertySpec.html">VAppPropertySpec[]</a></td><td>
+<p></p>
+         List of properties.
+ <p>
+ Adding and editing properties requires various privileges depending on which fields
+ are affected. See <a href="vim.vApp.PropertyInfo.html">VAppPropertyInfo</a> for details.
+ <p>
+ Deleting properties requires the privilege VApp.ApplicationConfig.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VmConfigSpec">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="product" type="vim25:VAppProductSpec" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="property" type="vim25:VAppPropertySpec" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="ipAssignment" type="vim25:VAppIPAssignmentInfo" minOccurs="0"/>
+                     <element name="eula" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="ovfSection" type="vim25:VAppOvfSectionSpec" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="ovfEnvironmentTransport" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="installBootRequired" type="xsd:boolean" minOccurs="0"/>
+                     <element name="installBootStopDelay" type="xsd:int" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

@@ -1,0 +1,1306 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vmodl.query.PropertyCollector" name="vmodl.query.PropertyCollector"></a>
+<h1>Managed Object -  
+						PropertyCollector</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.ServiceInstanceContent.html#field_detail">ServiceContent</a>
+</dd>
+<dt>Returned by</dt>
+<dd>
+<a href="vmodl.query.PropertyCollector.html#createPropertyCollector">CreatePropertyCollector</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vmodl.query.PropertyCollector.ObjectContent.html">ObjectContent</a>, <a href="vmodl.query.PropertyCollector.Filter.html">PropertyFilter</a>, <a href="vmodl.query.PropertyCollector.FilterSpec.html">PropertyFilterSpec</a>, <a href="vmodl.query.PropertyCollector.RetrieveOptions.html">RetrieveOptions</a>, <a href="vmodl.query.PropertyCollector.RetrieveResult.html">RetrieveResult</a>, <a href="vmodl.query.PropertyCollector.UpdateSet.html">UpdateSet</a>, <a href="vmodl.query.PropertyCollector.WaitOptions.html">WaitOptions</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         The <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> managed object retrieves and detects changes
+  to the properties of other managed objects. The <a href="vmodl.query.PropertyCollector.html#retrievePropertiesEx">RetrievePropertiesEx</a> method provides one-time property retrieval. The
+  <a href="vmodl.query.PropertyCollector.html#waitForUpdatesEx">WaitForUpdatesEx</a> method provides incremental change detection and
+  supports both polling and notification.
+
+  <p> For change detection a client creates one or more filters to specify the
+  subset of managed objects in which the client is interested. Filters keep
+  per-session state to track incremental changes. Because this state is
+  per-session: <ul>
+
+  <li> A session cannot share its <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> filters with other
+       sessions
+
+  <li> two different clients can share the same session, and so can
+       share the same filters, but this is not recommended
+
+  <li> When a session terminates, the associated <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> filters
+       are automatically destroyed.
+
+  </ul>
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="filter" name="filter"></a><strong>filter</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vmodl.query.PropertyCollector.Filter.html">PropertyFilter[]</a></td><td>
+<p></p>
+         The filters that this <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> uses to determine the list of
+  properties for which it detects incremental changes.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  System.View</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#cancelRetrievePropertiesEx">CancelRetrievePropertiesEx</a>, <a href="#cancelWaitForUpdates">CancelWaitForUpdates</a>, <a href="#checkForUpdates">CheckForUpdates</a>, <a href="#continueRetrievePropertiesEx">ContinueRetrievePropertiesEx</a>, <a href="#createFilter">CreateFilter</a>, <a href="#createPropertyCollector">CreatePropertyCollector</a>, <a href="#destroy">DestroyPropertyCollector</a>, <a href="#retrieveContents">RetrieveProperties</a>, <a href="#retrievePropertiesEx">RetrievePropertiesEx</a>, <a href="#waitForUpdates">WaitForUpdates</a>, <a href="#waitForUpdatesEx">WaitForUpdatesEx</a></td>
+</tr>
+</table>
+<br>
+<a id="cancelRetrievePropertiesEx" name="cancelRetrievePropertiesEx"></a>
+<h1>CancelRetrievePropertiesEx</h1>
+<p></p>
+         Discards remaining results from a retrieval started by <a href="vmodl.query.PropertyCollector.html#retrievePropertiesEx">RetrievePropertiesEx</a> on the same session on the same <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Anonymous</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>token</strong></td><td>xsd:string</td><td>
+<p></p>
+         the token returned in the previous <a href="vmodl.query.PropertyCollector.RetrieveResult.html">RetrieveResult</a> returned on the same session by the
+     same <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the token does not match the token from the previous <a href="vmodl.query.PropertyCollector.RetrieveResult.html">RetrieveResult</a> returned on the same session by the same <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.query.InvalidProperty.html">InvalidProperty</a></td><td></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CancelRetrievePropertiesEx-textarea');expandcontent(this, 'CancelRetrievePropertiesEx-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CancelRetrievePropertiesEx-div">
+<textarea cols="20" rows="10" name="CancelRetrievePropertiesEx-textarea" wrap="off" readonly="1" id="CancelRetrievePropertiesEx-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CancelRetrievePropertiesEx" type="vim25:CancelRetrievePropertiesExRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CancelRetrievePropertiesExResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="cancelWaitForUpdates" name="cancelWaitForUpdates"></a>
+<h1>CancelWaitForUpdates</h1>
+<p></p>
+         Attempts to cancel outstanding calls to <a href="vmodl.query.PropertyCollector.html#waitForUpdates">WaitForUpdates</a> or <a href="vmodl.query.PropertyCollector.html#waitForUpdatesEx">WaitForUpdatesEx</a> in the current session.  If an update calculation is
+  in process this method has no effect. If an update calculation is not in
+  process any waiting calls complete quickly and report a <a href="vmodl.fault.RequestCanceled.html">RequestCanceled</a> fault.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CancelWaitForUpdates-textarea');expandcontent(this, 'CancelWaitForUpdates-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CancelWaitForUpdates-div">
+<textarea cols="20" rows="10" name="CancelWaitForUpdates-textarea" wrap="off" readonly="1" id="CancelWaitForUpdates-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CancelWaitForUpdates" type="vim25:CancelWaitForUpdatesRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CancelWaitForUpdatesResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="checkForUpdates" name="checkForUpdates"></a>
+<h1>CheckForUpdates</h1>
+<B>Deprecated.</B><I>
+         As of vSphere API 4.1, use
+  <a href="vmodl.query.PropertyCollector.html#waitForUpdatesEx">WaitForUpdatesEx</a> with a
+  <a href="vmodl.query.PropertyCollector.WaitOptions.html#maxWaitSeconds">maxWaitSeconds</a> of 0.
+      </I>
+<p></p>
+         Checks for updates on properties specified by the union of all current
+  filters. If no updates are pending, this method returns null.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>version</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The data version currently known to the client. The value
+     must be either <ul>
+
+     <li> the special initial version (an empty string)
+
+     <li> a data version returned from <a href="vmodl.query.PropertyCollector.html#checkForUpdates">CheckForUpdates</a> or <a href="vmodl.query.PropertyCollector.html#waitForUpdates">WaitForUpdates</a> by the same <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> on the same session.
+
+     <li> a non-truncated data version returned from <a href="vmodl.query.PropertyCollector.html#waitForUpdatesEx">WaitForUpdatesEx</a> by the same <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> on the same
+          session.
+
+     </ul>
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.query.PropertyCollector.UpdateSet.html">UpdateSet</a></td><td>Changes since the passed in data version. If no updates are pending, then this method returns null.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.query.InvalidCollectorVersion.html">InvalidCollectorVersion</a></td><td>Thrown if the data version does not meet the requirements above.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.RequestCanceled.html">RequestCanceled</a></td><td>Thrown if <a href="vmodl.query.PropertyCollector.html#cancelWaitForUpdates">CancelWaitForUpdates</a> has been called or the session was closed or the <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> was destroyed at some point after the call was received but before the update calculation was actually started</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CheckForUpdates-textarea');expandcontent(this, 'CheckForUpdates-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CheckForUpdates-div">
+<textarea cols="20" rows="10" name="CheckForUpdates-textarea" wrap="off" readonly="1" id="CheckForUpdates-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CheckForUpdates" type="vim25:CheckForUpdatesRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CheckForUpdatesResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:UpdateSet" minOccurs="0"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="continueRetrievePropertiesEx" name="continueRetrievePropertiesEx"></a>
+<h1>ContinueRetrievePropertiesEx</h1>
+<p></p>
+         Retrieves additional results from a retrieval started by <a href="vmodl.query.PropertyCollector.html#retrievePropertiesEx">RetrievePropertiesEx</a> on the same session on the same <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Anonymous</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>token</strong></td><td>xsd:string</td><td>
+<p></p>
+         the token returned in the previous <a href="vmodl.query.PropertyCollector.RetrieveResult.html">RetrieveResult</a> returned on the same session by the
+     same <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.query.PropertyCollector.RetrieveResult.html">RetrieveResult</a></td><td>retrieved objects.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the token does not match the token from the previous <a href="vmodl.query.PropertyCollector.RetrieveResult.html">RetrieveResult</a> returned on the same session by the same <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.query.InvalidProperty.html">InvalidProperty</a></td><td></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ContinueRetrievePropertiesEx-textarea');expandcontent(this, 'ContinueRetrievePropertiesEx-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ContinueRetrievePropertiesEx-div">
+<textarea cols="20" rows="10" name="ContinueRetrievePropertiesEx-textarea" wrap="off" readonly="1" id="ContinueRetrievePropertiesEx-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ContinueRetrievePropertiesEx" type="vim25:ContinueRetrievePropertiesExRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ContinueRetrievePropertiesExResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:RetrieveResult"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="createFilter" name="createFilter"></a>
+<h1>CreateFilter</h1>
+<p></p>
+         Creates a new filter for the given set of managed objects.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vmodl.query.PropertyCollector.FilterSpec.html">PropertyFilterSpec</a></td><td>
+<p></p>
+         The specifications for the filter.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>partialUpdates</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to specify whether a change to a nested property should report
+     only the nested change or the entire specified property value.  If the
+     value is true, a change should report only the nested property.  If
+     the value is false, a change should report the enclosing property
+     named in the filter.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vmodl.query.PropertyCollector.Filter.html">PropertyFilter</a></td><td>A reference to the new filter.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if any of the following is true: <ul> <li>"spec" is empty. <li>"spec" contains a selection with properties not defined on its type. </ul></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.query.InvalidProperty.html">InvalidProperty</a></td><td>Thrown if "spec" has a property that is not defined on one of the objects.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidType.html">InvalidType</a></td><td>Thrown if "spec" contains, directly or indirectly, a type name that does not refer to a known type.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.ManagedObjectNotFound.html">ManagedObjectNotFound</a></td><td>See <a href="vmodl.query.PropertyCollector.FilterSpec.html#reportMissingObjectsInResults">reportMissingObjectsInResults</a>.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CreateFilter-textarea');expandcontent(this, 'CreateFilter-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CreateFilter-div">
+<textarea cols="20" rows="10" name="CreateFilter-textarea" wrap="off" readonly="1" id="CreateFilter-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateFilter" type="vim25:CreateFilterRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateFilterResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="createPropertyCollector" name="createPropertyCollector"></a>
+<h1>CreatePropertyCollector</h1>
+<p></p>
+         Creates a new session-specific <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> that can
+  be used to retrieve property updates independent of any other
+  <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>.  The newly created <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>
+  is not tied to the creating <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> in any way and
+  exists until it is destroyed
+  by a call to <a href="vmodl.query.PropertyCollector.html#destroy">DestroyPropertyCollector</a> or until the session
+  on which the PropertyCollector was created is closed.  This is in contrast
+  to the default <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>, which always exists, but still has
+  session-specific data such as filters and unfinished update calculations
+  that are discarded when the associated session is closed.
+
+  <p> A new <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> can be useful when multiple modules or even
+  multiple clients that share the
+  same session need to create their own <a href="vmodl.query.PropertyCollector.Filter.html">PropertyFilter</a>
+  objects and process updates independently.  They may also be useful
+  to allow important updates to be seen on one <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> while
+  a large update is being calculated on another.  The underlying
+  issue that this addresses is that any call to <a href="vmodl.query.PropertyCollector.html#waitForUpdates">WaitForUpdates</a>,
+  <a href="vmodl.query.PropertyCollector.html#checkForUpdates">CheckForUpdates</a>, or <a href="vmodl.query.PropertyCollector.html#waitForUpdatesEx">WaitForUpdatesEx</a> does updates on all the
+  filters created on a given <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> on a given session.
+
+  <p> A more subtle use of multiple <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> objects is implied
+  by the fact that the returned version value for the various updates
+  calculations is strongly ordered.  The only way this can make sense is that
+  two different versions calculated on the same <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> on
+  the same session cannot ever be created in parallel.  This means that multiple
+  calls to <a href="vmodl.query.PropertyCollector.html#waitForUpdates">WaitForUpdates</a>, <a href="vmodl.query.PropertyCollector.html#checkForUpdates">CheckForUpdates</a>, or
+  <a href="vmodl.query.PropertyCollector.html#waitForUpdatesEx">WaitForUpdatesEx</a> made to the same <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> on the
+  same session on different threads of the same client, or even on different
+  clients that share the same session are still handled on the server serially.
+  Use of different <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> instances allows the server to
+  handle these calculations in parallel.
+
+  <p> Typically a service that supports the <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> managed
+  object type will automatically create a default <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>
+  and provide some way to obtain a reference to this
+  <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>.  If not, it will have to provide some
+  service-specific way to create the a <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a></td><td>A reference to the new <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CreatePropertyCollector-textarea');expandcontent(this, 'CreatePropertyCollector-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CreatePropertyCollector-div">
+<textarea cols="20" rows="10" name="CreatePropertyCollector-textarea" wrap="off" readonly="1" id="CreatePropertyCollector-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreatePropertyCollector" type="vim25:CreatePropertyCollectorRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreatePropertyCollectorResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="destroy" name="destroy"></a>
+<h1>DestroyPropertyCollector</h1>
+<p></p>
+         Destroys this <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>.
+
+  <p> A <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> that was created by
+  <a href="vmodl.query.PropertyCollector.html#createPropertyCollector">CreatePropertyCollector</a> is automatically destroyed when the
+  session on which it was created is closed. This method can be used to
+  destroy them explicitly.
+
+  <p> An automatically created <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> provided by a service
+  is not session specific and may not be destroyed.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if this <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> is not allowed to be destroyed.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('DestroyPropertyCollector-textarea');expandcontent(this, 'DestroyPropertyCollector-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="DestroyPropertyCollector-div">
+<textarea cols="20" rows="10" name="DestroyPropertyCollector-textarea" wrap="off" readonly="1" id="DestroyPropertyCollector-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DestroyPropertyCollector" type="vim25:DestroyPropertyCollectorRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DestroyPropertyCollectorResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="retrieveContents" name="retrieveContents"></a>
+<h1>RetrieveProperties</h1>
+<B>Deprecated.</B><I>
+         As of vSphere API 4.1, use <a href="vmodl.query.PropertyCollector.html#retrievePropertiesEx">RetrievePropertiesEx</a>.
+      </I>
+<p></p>
+         Retrieves the specified properties of the specified managed objects.
+
+  <p> This method is similar to creating the filters, receiving the
+  property values, and destroying the filters. The main difference is that
+  the output blends the results from all the filters and reports a given
+  managed object at most once no matter how many filters apply.
+
+  <p> The filter creation step can throw all of the same faults as <a href="vmodl.query.PropertyCollector.html#createFilter">CreateFilter</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Anonymous</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>specSet</strong></td><td><a href="vmodl.query.PropertyCollector.FilterSpec.html">PropertyFilterSpec[]</a></td><td>
+<p></p>
+         Specifies the properties to retrieve.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.query.PropertyCollector.ObjectContent.html">ObjectContent[]</a></td><td>The data contents of the specified objects.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>See <a href="vmodl.query.PropertyCollector.html#createFilter">CreateFilter</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.query.InvalidProperty.html">InvalidProperty</a></td><td>See <a href="vmodl.query.PropertyCollector.html#createFilter">CreateFilter</a></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidType.html">InvalidType</a></td><td>See <a href="vmodl.query.PropertyCollector.html#createFilter">CreateFilter</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.ManagedObjectNotFound.html">ManagedObjectNotFound</a></td><td>See <a href="vmodl.query.PropertyCollector.html#createFilter">CreateFilter</a></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RetrieveProperties-textarea');expandcontent(this, 'RetrieveProperties-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RetrieveProperties-div">
+<textarea cols="20" rows="10" name="RetrieveProperties-textarea" wrap="off" readonly="1" id="RetrieveProperties-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrieveProperties" type="vim25:RetrievePropertiesRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrievePropertiesResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ObjectContent" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="retrievePropertiesEx" name="retrievePropertiesEx"></a>
+<h1>RetrievePropertiesEx</h1>
+<p></p>
+         Retrieves the specified properties of the specified managed objects.
+
+  <p> This method is similar to creating the filters, receiving the
+  property values, and destroying the filters. The main difference is that
+  the output blends the results from all the filters and reports a given
+  managed object at most once no matter how many filters apply.
+
+  <p> The filter creation step can throw all of the same faults as <a href="vmodl.query.PropertyCollector.html#createFilter">CreateFilter</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Anonymous</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>specSet</strong></td><td><a href="vmodl.query.PropertyCollector.FilterSpec.html">PropertyFilterSpec[]</a></td><td>
+<p></p>
+         Specifies the properties to retrieve.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>options</strong></td><td><a href="vmodl.query.PropertyCollector.RetrieveOptions.html">RetrieveOptions</a></td><td>
+<p></p>
+         Additional method options.  If omitted, equivalent to an options
+     argument with no fields set.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.query.PropertyCollector.RetrieveResult.html">RetrieveResult</a></td><td>retrieved objects or null if there are no matching objects.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if any of the following is true: See <a href="vmodl.query.PropertyCollector.html#createFilter">CreateFilter</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.query.InvalidProperty.html">InvalidProperty</a></td><td>See <a href="vmodl.query.PropertyCollector.html#createFilter">CreateFilter</a></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidType.html">InvalidType</a></td><td>See <a href="vmodl.query.PropertyCollector.html#createFilter">CreateFilter</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.ManagedObjectNotFound.html">ManagedObjectNotFound</a></td><td>See <a href="vmodl.query.PropertyCollector.html#createFilter">CreateFilter</a></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RetrievePropertiesEx-textarea');expandcontent(this, 'RetrievePropertiesEx-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RetrievePropertiesEx-div">
+<textarea cols="20" rows="10" name="RetrievePropertiesEx-textarea" wrap="off" readonly="1" id="RetrievePropertiesEx-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrievePropertiesEx" type="vim25:RetrievePropertiesExRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrievePropertiesExResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:RetrieveResult" minOccurs="0"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="waitForUpdates" name="waitForUpdates"></a>
+<h1>WaitForUpdates</h1>
+<B>Deprecated.</B><I>
+         As of vSphere API 4.1, use <a href="vmodl.query.PropertyCollector.html#waitForUpdatesEx">WaitForUpdatesEx</a>.
+      </I>
+<p></p>
+         Calculate the set of updates for each existing filter in the session,
+  returning when at least one filter has updates.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>version</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The data version currently known to the client. The value
+     must be either <ul>
+
+     <li> the special initial version (an empty string)
+
+     <li> a data version returned from <a href="vmodl.query.PropertyCollector.html#checkForUpdates">CheckForUpdates</a> or <a href="vmodl.query.PropertyCollector.html#waitForUpdates">WaitForUpdates</a> by the same <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> on the same session
+
+     <li> a non-truncated data version returned from <a href="vmodl.query.PropertyCollector.html#waitForUpdatesEx">WaitForUpdatesEx</a> by the same <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> on the same
+          session.
+
+     </ul>
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.query.PropertyCollector.UpdateSet.html">UpdateSet</a></td><td>Changes since the passed in data version.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.query.InvalidCollectorVersion.html">InvalidCollectorVersion</a></td><td>Thrown if the data version does not meet the requirements above.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.RequestCanceled.html">RequestCanceled</a></td><td>Thrown if <a href="vmodl.query.PropertyCollector.html#cancelWaitForUpdates">CancelWaitForUpdates</a> has been called or the session was closed or the <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> was destroyed at some point after the call was received</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('WaitForUpdates-textarea');expandcontent(this, 'WaitForUpdates-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="WaitForUpdates-div">
+<textarea cols="20" rows="10" name="WaitForUpdates-textarea" wrap="off" readonly="1" id="WaitForUpdates-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="WaitForUpdates" type="vim25:WaitForUpdatesRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="WaitForUpdatesResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:UpdateSet"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="waitForUpdatesEx" name="waitForUpdatesEx"></a>
+<h1>WaitForUpdatesEx</h1>
+<p></p>
+         Calculate the set of updates for each existing filter in the session.
+
+  <p> <a href="vmodl.query.PropertyCollector.html#waitForUpdatesEx">WaitForUpdatesEx</a> may return only partial update
+  calculations. See <a href="vmodl.query.PropertyCollector.UpdateSet.html#truncated">truncated</a> for a
+  more detailed explanation. <a href="vmodl.query.PropertyCollector.html#waitForUpdatesEx">WaitForUpdatesEx</a> may also return null
+  after a timeout, either as requested by <a href="vmodl.query.PropertyCollector.WaitOptions.html#maxWaitSeconds">maxWaitSeconds</a> or due to <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>
+  policy.
+
+  <p> If an application uses waitForUpdatesEx it is strongly recommended
+  that it not make concurrent calls to <a href="vmodl.query.PropertyCollector.html#waitForUpdates">WaitForUpdates</a>, <a href="vmodl.query.PropertyCollector.html#checkForUpdates">CheckForUpdates</a>, or <a href="vmodl.query.PropertyCollector.html#waitForUpdatesEx">WaitForUpdatesEx</a> in the same
+  session. Concurrent calls may cause suspended change calculations to be
+  discarded.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>version</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The data version currently known to the client. The value must be
+     either <ul>
+
+     <li> the special initial data version (an empty string),
+
+     <li> a data version returned from <a href="vmodl.query.PropertyCollector.html#checkForUpdates">CheckForUpdates</a> or <a href="vmodl.query.PropertyCollector.html#waitForUpdates">WaitForUpdates</a>
+
+     <li> a non-truncated data version returned from <a href="vmodl.query.PropertyCollector.html#waitForUpdatesEx">WaitForUpdatesEx</a>
+
+     <li> a truncated data version returned from the last call to <a href="vmodl.query.PropertyCollector.html#waitForUpdatesEx">WaitForUpdatesEx</a> with no intervening calls to <a href="vmodl.query.PropertyCollector.html#waitForUpdates">WaitForUpdates</a> or <a href="vmodl.query.PropertyCollector.html#checkForUpdates">CheckForUpdates</a>.
+
+     </ul>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>options</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.query.PropertyCollector.WaitOptions.html">WaitOptions</a></td><td>
+<p></p>
+         Additional options controlling the change calculation.  If omitted,
+     equivalent to an options argument with no fields set.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.query.PropertyCollector.UpdateSet.html">UpdateSet</a></td><td>Changes since the passed in version or null if there are no changes.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.query.InvalidCollectorVersion.html">InvalidCollectorVersion</a></td><td>Thrown if the data version does not meet the requirements above.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.RequestCanceled.html">RequestCanceled</a></td><td>Thrown if <a href="vmodl.query.PropertyCollector.html#cancelWaitForUpdates">CancelWaitForUpdates</a> has been called or the session was closed or the <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> was destroyed at some point after the call was received</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('WaitForUpdatesEx-textarea');expandcontent(this, 'WaitForUpdatesEx-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="WaitForUpdatesEx-div">
+<textarea cols="20" rows="10" name="WaitForUpdatesEx-textarea" wrap="off" readonly="1" id="WaitForUpdatesEx-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="WaitForUpdatesEx" type="vim25:WaitForUpdatesExRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="WaitForUpdatesExResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:UpdateSet" minOccurs="0"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

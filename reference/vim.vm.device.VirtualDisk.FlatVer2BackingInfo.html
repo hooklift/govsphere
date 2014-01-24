@@ -1,0 +1,317 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.device.VirtualDisk.FlatVer2BackingInfo" name="vim.vm.device.VirtualDisk.FlatVer2BackingInfo"></a>
+<h1>Data Object - VirtualDiskFlatVer2BackingInfo</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.vm.device.VirtualDisk.FlatVer2BackingInfo.html#field_detail">VirtualDiskFlatVer2BackingInfo</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.vm.device.VirtualDevice.FileBackingInfo.html">VirtualDeviceFileBackingInfo</a>
+</dd>
+<dt>See also</dt>
+<dd></dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This data object type contains information about backing a virtual disk using a
+  virtual disk file on the host, in the flat file format used by VMware Server,
+  ESX Server 2.x, and ESX Server 3.x.
+  Flat disks are allocated when created, unlike sparse disks, which
+  grow as needed.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="changeId" name="changeId"></a><strong>changeId</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The change ID of the virtual disk for the corresponding
+ snapshot or virtual machine. This can be used to track
+ incremental changes to a virtual disk. See 
+ <a href="vim.VirtualMachine.html#queryChangedDiskAreas">QueryChangedDiskAreas</a>.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="contentId" name="contentId"></a><strong>contentId</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Content ID of the virtual disk file, if available.
+ <p>
+ A content ID indicates the logical contents of the disk backing and its parents.
+ <p>
+ This property is only guaranteed to be up to date if this disk backing is not
+ currently being written to by any virtual machine.
+ <p>
+ The only supported operation is comparing if two content IDs are equal or not.
+ The guarantee provided by the content ID is that if two disk backings have the
+ same content ID and are not currently being written to, then reads issued from
+ the guest operating system to those disk backings will return the same data.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="deltaDiskFormat" name="deltaDiskFormat"></a><strong>deltaDiskFormat</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The format of the delta disk.
+  <p>
+  This field is valid only for a delta disk.
+  <p>
+  See <a href="vim.vm.device.VirtualDisk.DeltaDiskFormat.html">DeltaDiskFormat</a> for the
+  supported formats. If not specified, the default value used is
+  <a href="vim.vm.device.VirtualDisk.DeltaDiskFormat.html#redoLogFormat">redoLogFormat</a>.
+  <p>
+  If <a href="vim.vm.device.VirtualDisk.DeltaDiskFormat.html#nativeFormat">nativeFormat</a>
+  is specified and the datastore does not support this format or the parent is
+  on a different datastore,
+  <a href="vim.fault.DeltaDiskFormatNotSupported.html">DeltaDiskFormatNotSupported</a> is
+  thrown.
+  <p>
+  vSphere server does not support relocation of virtual machines with
+  <a href="vim.vm.device.VirtualDisk.DeltaDiskFormat.html#nativeFormat">nativeFormat</a>.
+  An exception is thrown for such requests.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="deltaGrainSize" name="deltaGrainSize"></a><strong>deltaGrainSize</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Grain size in kB for a delta disk of format type seSparseFormat.  The default
+ size is 1024 kB.
+
+ This setting is used to specify the grain size of
+ <a href="vim.vm.device.VirtualDisk.SeSparseBackingInfo.html">Flex-SE</a> delta disks
+ when the base disk is of type FlatVer2BackingInfo.
+ The <a href="vim.vm.device.VirtualDisk.DeltaDiskFormat.html">DeltaDiskFormat</a> must also
+ be set to seSparseFormat.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="digestEnabled" name="digestEnabled"></a><strong>digestEnabled</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the disk backing has digest file enabled.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="diskMode" name="diskMode"></a><strong>diskMode</strong></td><td>xsd:string</td><td>
+<p></p>
+         The disk persistence mode. Valid modes are:
+  <ul>
+  <li><a href="vim.vm.device.VirtualDiskOption.DiskMode.html#persistent">persistent</a>
+  <li><a href="vim.vm.device.VirtualDiskOption.DiskMode.html#independent_persistent">independent_persistent</a>
+  <li><a href="vim.vm.device.VirtualDiskOption.DiskMode.html#independent_nonpersistent">independent_nonpersistent</a>
+  <li><a href="vim.vm.device.VirtualDiskOption.DiskMode.html#nonpersistent">nonpersistent</a>
+  <li><a href="vim.vm.device.VirtualDiskOption.DiskMode.html#undoable">undoable</a>
+  <li><a href="vim.vm.device.VirtualDiskOption.DiskMode.html#append">append</a>
+  </ul><br>See <a href="vim.vm.device.VirtualDiskOption.DiskMode.html">VirtualDiskMode</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="eagerlyScrub" name="eagerlyScrub"></a><strong>eagerlyScrub</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to indicate to the underlying filesystem whether the
+ virtual disk backing file should be scrubbed completely at
+ this time. 
+ <p>
+ Virtual disks on some filesystems like VMFS3 are zeroed-out 
+ lazily so that disk creation time doesn't take too long.
+ However, clustering applications and features like
+ Fault Tolerance require that the virtual disk be 
+ completely scrubbed. This setting allows controlling the 
+ scrubbing policy on a per-disk basis. 
+ <p>
+ If this flag is unset or set to false when creating a new disk,
+ the disk scrubbing policy will be decided by the filesystem. If
+ this flag is unset or set to false when editing an existing disk,
+ it is ignored.
+
+ When returned as part of a <a href="vim.vm.ConfigInfo.html">VirtualMachineConfigInfo</a>, this
+ property may be unset if its value is unknown.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="parent" name="parent"></a><strong>parent</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.device.VirtualDisk.FlatVer2BackingInfo.html">VirtualDiskFlatVer2BackingInfo</a></td><td>
+<p></p>
+         The parent of this virtual disk file, if this is a delta disk backing.
+ This will be unset if this is not a delta disk backing.
+ <p>
+ A delta disk backing is a way to preserve a virtual disk backing
+ at some point in time.  A delta disk backing is a file backing which in
+ turn points to the original virtual disk backing (the parent).  After a delta
+ disk backing is added, all writes go to the delta disk backing.  All reads
+ first try the delta disk backing and then try the parent backing if needed.
+ <p>
+ A delta disk backing can be added to a disk either implicitly during
+ snapshot operations, or explicitly during create or reconfigure of the virtual
+ machine.
+ <p>
+ Note that the type of the backing is consistent throughout the chain; any new
+ delta disk backing which is added is of the same type as the original disk .
+ Also note that since the parent backing is not being written to,
+ it is possible that the parent backing may be shared among multiple
+ disks belonging to multiple virtual machines.
+ <p>
+ During virtual machine <a href="vim.Folder.html#createVm">creation</a> and
+ <a href="vim.VirtualMachine.html#reconfigure">reconfiguration</a> this property is
+ only checked if the <a href="vim.vm.device.VirtualDeviceSpec.html">VirtualDeviceConfigSpec</a> specifies
+ an <a href="vim.vm.device.VirtualDeviceSpec.Operation.html#add">add operation</a> with a
+ <a href="vim.vm.device.VirtualDeviceSpec.FileOperation.html#create">create file operation</a>.
+ In this case, a new delta disk backing is created which points to the parent
+ disk backing.  Only the <a href="vim.vm.device.VirtualDevice.FileBackingInfo.html#fileName">fileName</a>
+ property is important; all other properties will be ignored.  The parent backing
+ is assumed to exist and will not be recursively created.
+ <p>
+ This property may only be set if
+ <a href="vim.host.Capability.html#deltaDiskBackingsSupported">deltaDiskBackingsSupported</a>
+ is true.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="split" name="split"></a><strong>split</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to indicate the type of virtual disk file: split or monolithic.
+  If true, the virtual disk is stored in multiple files, each 2GB.
+
+  On ESX this property is ignored when creating new disks or
+  editing existing disks. This property is always false for disks
+  created on ESX.
+
+  When an existing split disk such as those created by VMware
+  Server is added to a virtual machine on ESX, the property will
+  be set to true when retrieved from <a href="vim.vm.ConfigInfo.html">VirtualMachineConfigInfo</a>.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="thinProvisioned" name="thinProvisioned"></a><strong>thinProvisioned</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to indicate to the underlying filesystem, whether the
+ virtual disk backing file should be allocated lazily (using
+ thin provisioning). This flag is only used for file systems
+ that support configuring the provisioning policy on a per file
+ basis, such as VMFS3.<br>See <a href="vim.Datastore.Capability.html#perFileThinProvisioningSupported">perFileThinProvisioningSupported</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="uuid" name="uuid"></a><strong>uuid</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Disk UUID for the virtual disk, if available.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="writeThrough" name="writeThrough"></a><strong>writeThrough</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to indicate whether writes should go directly to the file system
+  or should be buffered.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.vm.device.VirtualDevice.FileBackingInfo.html">VirtualDeviceFileBackingInfo</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.vm.device.VirtualDevice.FileBackingInfo.html#backingObjectId">backingObjectId</a>, <a href="vim.vm.device.VirtualDevice.FileBackingInfo.html#datastore">datastore</a>, <a href="vim.vm.device.VirtualDevice.FileBackingInfo.html#fileName">fileName</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.vm.device.VirtualDevice.BackingInfo.html">VirtualDeviceBackingInfo</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VirtualDiskFlatVer2BackingInfo">
+            <complexContent>
+               <extension base="vim25:VirtualDeviceFileBackingInfo">
+                  <sequence>
+                     <element name="diskMode" type="xsd:string"/>
+                     <element name="split" type="xsd:boolean" minOccurs="0"/>
+                     <element name="writeThrough" type="xsd:boolean" minOccurs="0"/>
+                     <element name="thinProvisioned" type="xsd:boolean" minOccurs="0"/>
+                     <element name="eagerlyScrub" type="xsd:boolean" minOccurs="0"/>
+                     <element name="uuid" type="xsd:string" minOccurs="0"/>
+                     <element name="contentId" type="xsd:string" minOccurs="0"/>
+                     <element name="changeId" type="xsd:string" minOccurs="0"/>
+                     <element name="parent" type="vim25:VirtualDiskFlatVer2BackingInfo" minOccurs="0"/>
+                     <element name="deltaDiskFormat" type="xsd:string" minOccurs="0"/>
+                     <element name="digestEnabled" type="xsd:boolean" minOccurs="0"/>
+                     <element name="deltaGrainSize" type="xsd:int" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.device.VirtualDevice" name="vim.vm.device.VirtualDevice"></a>
+<h1>Data Object - VirtualDevice</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.fault.OvfHardwareExport.html#field_detail">OvfHardwareExport</a>, <a href="vim.fault.OvfUnknownDevice.html#field_detail">OvfUnknownDevice</a>, <a href="vim.vm.device.VirtualDeviceSpec.html#field_detail">VirtualDeviceConfigSpec</a>, <a href="vim.vm.VirtualHardware.html#field_detail">VirtualHardware</a>, <a href="vim.vm.ConfigOption.html#field_detail">VirtualMachineConfigOption</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.vm.device.VirtualCdrom.html">VirtualCdrom</a>, <a href="vim.vm.device.VirtualController.html">VirtualController</a>, <a href="vim.vm.device.VirtualDisk.html">VirtualDisk</a>, <a href="vim.vm.device.VirtualEthernetCard.html">VirtualEthernetCard</a>, <a href="vim.vm.device.VirtualFloppy.html">VirtualFloppy</a>, <a href="vim.vm.device.VirtualKeyboard.html">VirtualKeyboard</a>, <a href="vim.vm.device.VirtualVideoCard.html">VirtualMachineVideoCard</a>, <a href="vim.vm.device.VirtualVMCIDevice.html">VirtualMachineVMCIDevice</a>, <a href="vim.vm.device.VirtualVMIROM.html">VirtualMachineVMIROM</a>, <a href="vim.vm.device.VirtualParallelPort.html">VirtualParallelPort</a>, <a href="vim.vm.device.VirtualPCIPassthrough.html">VirtualPCIPassthrough</a>, <a href="vim.vm.device.VirtualPointingDevice.html">VirtualPointingDevice</a>, <a href="vim.vm.device.VirtualSCSIPassthrough.html">VirtualSCSIPassthrough</a>, <a href="vim.vm.device.VirtualSerialPort.html">VirtualSerialPort</a>, <a href="vim.vm.device.VirtualSoundCard.html">VirtualSoundCard</a>, <a href="vim.vm.device.VirtualUSB.html">VirtualUSB</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.Description.html">Description</a>, <a href="vim.vm.device.VirtualDevice.BackingInfo.html">VirtualDeviceBackingInfo</a>, <a href="vim.vm.device.VirtualDevice.BusSlotInfo.html">VirtualDeviceBusSlotInfo</a>, <a href="vim.vm.device.VirtualDevice.ConnectInfo.html">VirtualDeviceConnectInfo</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         VirtualDevice is the base data object type for devices in a virtual machine.
+  This type contains enough information about a virtual device to allow clients
+  to display devices they do not recognize. For example, a client with an
+  older version than the server to which it connects may see a device
+  without knowing what it is.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="backing" name="backing"></a><strong>backing</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.device.VirtualDevice.BackingInfo.html">VirtualDeviceBackingInfo</a></td><td>
+<p></p>
+         Information about the backing of this virtual device presented
+  in the context of the virtual machine's environment.
+  Not all devices are required to have backing information.<br>See <a href="vim.vm.ConfigOption.html">VirtualMachineConfigOption</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="connectable" name="connectable"></a><strong>connectable</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.device.VirtualDevice.ConnectInfo.html">VirtualDeviceConnectInfo</a></td><td>
+<p></p>
+         Provides information about restrictions on removing this device while
+  a virtual machine is running. If the device is not removable, then
+  this property is null.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="controllerKey" name="controllerKey"></a><strong>controllerKey</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Object key for the controller object for this device.
+
+  This property contains the key property value of the controller device
+  object.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="deviceInfo" name="deviceInfo"></a><strong>deviceInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.Description.html">Description</a></td><td>
+<p></p>
+         Provides a label and summary information for the device.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="key" name="key"></a><strong>key</strong></td><td>xsd:int</td><td>
+<p></p>
+         A unique key that distinguishes this device from other
+  devices in the same virtual machine. Keys are immutable but may be
+  recycled; that is, a key does not change as long as the device is
+  associated with a particular virtual machine. However, once a device is
+  removed, its key may be used when another device is added.
+  <p>
+  This property is not read-only, but the client cannot control its value.
+  Persistent device keys are always assigned and managed by the server, which
+  guarantees that all devices will have non-negative key values.
+  <p>
+  When adding new devices, it may be necessary for a client to assign keys
+  temporarily in order to associate controllers with devices in
+  configuring a virtual machine. However, the server does not allow a
+  client to reassign a device key, and the server may assign a different
+  value from the one passed during configuration. Clients should ensure
+  that existing device keys are not reused as temporary key values for the
+  new device to be added (for example, by using unique negative integers as
+  temporary keys).
+  <p>
+  When editing or deleting a device, clients must use the server-provided key
+  to refer to an existing device.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="slotInfo" name="slotInfo"></a><strong>slotInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.device.VirtualDevice.BusSlotInfo.html">VirtualDeviceBusSlotInfo</a></td><td>
+<p></p>
+         Information about the bus slot of a device in a virtual machine.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="unitNumber" name="unitNumber"></a><strong>unitNumber</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The unit number of this device on its controller. This property is null if
+  the controller property is null (for example, when the device is not
+  attached to a specific controller object).
+  <p>
+  Normally, two devices on the same controller
+  may not be assigned the same unit number. If
+  multiple devices could exist on a controller,
+  then unit number has to be specified to
+  configure respective devices.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VirtualDevice">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="key" type="xsd:int"/>
+                     <element name="deviceInfo" type="vim25:Description" minOccurs="0"/>
+                     <element name="backing" type="vim25:VirtualDeviceBackingInfo" minOccurs="0"/>
+                     <element name="connectable" type="vim25:VirtualDeviceConnectInfo" minOccurs="0"/>
+                     <element name="slotInfo" type="vim25:VirtualDeviceBusSlotInfo" minOccurs="0"/>
+                     <element name="controllerKey" type="xsd:int" minOccurs="0"/>
+                     <element name="unitNumber" type="xsd:int" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

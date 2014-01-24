@@ -1,0 +1,98 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.ConfigInfo.SwapPlacementType" name="vim.vm.ConfigInfo.SwapPlacementType"></a>
+<h1>Enum - 
+						VirtualMachineConfigInfoSwapPlacementType</h1>
+<dl>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+<p></p>
+</dl>
+<br>
+<h2>Enum Description</h2>
+<p></p>
+         Available choices for virtual machine swapfile placement policy. This is
+  the set of legal values for the virtual machine configuration's
+  <a href="vim.vm.ConfigInfo.html#swapPlacement">swapPlacement</a> property. All
+  values except for "inherit" and "vmConfigured" are also valid values for
+  a compute resource configuration's
+  <a href="vim.ComputeResource.ConfigInfo.html#vmSwapPlacement">vmSwapPlacement</a>
+  property.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Enum Constants</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><a id="hostLocal" name="hostLocal"></a>hostLocal</td><td>
+      Store the swapfile in the datastore specified by the
+  <a href="vim.host.ConfigInfo.html#localSwapDatastore">localSwapDatastore</a>
+  property of the virtual machine's host, if that property is set and
+  indicates a datastore with sufficient free space. Otherwise store the
+  swapfile in the same directory as the virtual machine.
+  <p>
+  Note: This setting may degrade VMotion performance.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="inherit" name="inherit"></a>inherit</td><td>
+      Honor the virtual machine swapfile placement policy of the compute
+  resource that contains this virtual machine.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="vmDirectory" name="vmDirectory"></a>vmDirectory</td><td>
+      Store the swapfile in the same directory as the virtual machine.
+   <br>
+</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <simpleType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VirtualMachineConfigInfoSwapPlacementType">
+            <restriction base="xsd:string">
+               <enumeration value="inherit"/>
+               <enumeration value="vmDirectory"/>
+               <enumeration value="hostLocal"/>
+            </restriction>
+         </simpleType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

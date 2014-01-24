@@ -1,0 +1,139 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.device.VirtualSerialPort.PipeBackingInfo" name="vim.vm.device.VirtualSerialPort.PipeBackingInfo"></a>
+<h1>Data Object - VirtualSerialPortPipeBackingInfo</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.vm.device.VirtualDevice.PipeBackingInfo.html">VirtualDevicePipeBackingInfo</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The <code><a href="vim.vm.device.VirtualSerialPort.PipeBackingInfo.html">VirtualSerialPortPipeBackingInfo</a></code> data object defines information
+  for backing a <code><a href="vim.vm.device.VirtualSerialPort.html">VirtualSerialPort</a></code> with a named pipe.
+  You can use a pipe to connect a virtual serial port to a host
+  application or to another virtual machine on the host computer.
+  This is useful for capturing debugging information sent through
+  the virtual serial port.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="endpoint" name="endpoint"></a><strong>endpoint</strong></td><td>xsd:string</td><td>
+<p></p>
+         Indicates the role the virtual machine assumes as an endpoint
+  for the pipe. The valid values are "client" or "server".
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="noRxLoss" name="noRxLoss"></a><strong>noRxLoss</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Enables optimized data transfer over the pipe. When you use this feature,
+  the ESX server buffers data to prevent data overrun.
+  This allows the virtual machine to read
+  all of the data transferred over the pipe with no data loss.
+  To use optimized data transfer, set <code>noRxLoss</code> to <code>true</code>.
+  To disable this feature, set the property to <code>false</false>.
+  <p>
+  This property is optional. If this property is not set, the ESX server
+  uses the default value specified in the pipe backing options
+  (noRxLoss.defaultValue - see
+  <code><a href="vim.vm.device.VirtualSerialPortOption.PipeBackingOption.html#noRxLoss">noRxLoss</a></code>
+  in the pipe backing option object).
+  <p>
+  To use this property, optimized data transfer must be supported on the host.
+  (See <code><a href="vim.vm.device.VirtualSerialPortOption.PipeBackingOption.html#noRxLoss">noRxLoss</a></code>
+  in the pipe backing option object.)
+  If the ESX server does not support the option, it ignores the
+  <code>noRxLoss</code> setting in the pipe backing information object.
+  <p>
+  <b>Note</b>: You can use this feature even if the other end of the pipe
+  is not an application, but this is more likely to fail.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.vm.device.VirtualDevice.PipeBackingInfo.html">VirtualDevicePipeBackingInfo</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.vm.device.VirtualDevice.PipeBackingInfo.html#pipeName">pipeName</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.vm.device.VirtualDevice.BackingInfo.html">VirtualDeviceBackingInfo</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VirtualSerialPortPipeBackingInfo">
+            <complexContent>
+               <extension base="vim25:VirtualDevicePipeBackingInfo">
+                  <sequence>
+                     <element name="endpoint" type="xsd:string"/>
+                     <element name="noRxLoss" type="xsd:boolean" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

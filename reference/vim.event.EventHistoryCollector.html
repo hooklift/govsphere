@@ -1,0 +1,307 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.event.EventHistoryCollector" name="vim.event.EventHistoryCollector"></a>
+<h1>Managed Object -  
+						EventHistoryCollector</h1>
+<dl>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.event.EventManager.html#createCollector">CreateCollectorForEvents</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.HistoryCollector.html">HistoryCollector</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.event.Event.html">Event</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         EventHistoryCollector provides a mechanism for
+ retrieving historical data and updates when the server appends new
+ events.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="latestPage" name="latestPage"></a><strong>latestPage</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.event.Event.html">Event[]</a></td><td>
+<p></p>
+         The items in the 'viewable latest page'. As new events that match the
+ collector's <a href="vim.event.EventFilterSpec.html">EventFilterSpec</a> are created, they are added to this
+ page, and the oldest events are removed from the collector to keep the
+ size of the page to that allowed by
+ HistoryCollector#setLatestPageSize.
+ <p>
+ The "oldest event" is the one with the smallest key (event ID). The
+ events in the returned page are unordered.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.HistoryCollector.html">HistoryCollector</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.HistoryCollector.html#filter">filter</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#readNext">ReadNextEvents</a>, <a href="#readPrev">ReadPreviousEvents</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.HistoryCollector.html">HistoryCollector</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.HistoryCollector.html#remove">DestroyCollector</a>, <a href="vim.HistoryCollector.html#reset">ResetCollector</a>, <a href="vim.HistoryCollector.html#rewind">RewindCollector</a>, <a href="vim.HistoryCollector.html#setLatestPageSize">SetCollectorPageSize</a></td>
+</tr>
+</table>
+<br>
+<a id="readNext" name="readNext"></a>
+<h1>ReadNextEvents</h1>
+<p></p>
+         Reads the 'scrollable view' from the current position. The scrollable
+ position is moved to the next newer page after the read. No item is
+ returned when the end of the collector is reached.
+ <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.event.EventHistoryCollector.html">EventHistoryCollector</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>maxCount</strong></td><td>xsd:int</td><td>
+<p></p>
+         The maximum number of items in the page.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.event.Event.html">Event[]</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if maxCount is out of range.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ReadNextEvents-textarea');expandcontent(this, 'ReadNextEvents-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ReadNextEvents-div">
+<textarea cols="20" rows="10" name="ReadNextEvents-textarea" wrap="off" readonly="1" id="ReadNextEvents-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ReadNextEvents" type="vim25:ReadNextEventsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ReadNextEventsResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:Event" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="readPrev" name="readPrev"></a>
+<h1>ReadPreviousEvents</h1>
+<p></p>
+         Reads the 'scrollable view' from the current position. The scrollable
+ position is moved to the next older page after the read. No item is
+ returned when the head of the collector is reached.
+ <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.event.EventHistoryCollector.html">EventHistoryCollector</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>maxCount</strong></td><td>xsd:int</td><td>
+<p></p>
+         The maximum number of items in the page.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.event.Event.html">Event[]</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if maxCount is out of range.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ReadPreviousEvents-textarea');expandcontent(this, 'ReadPreviousEvents-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ReadPreviousEvents-div">
+<textarea cols="20" rows="10" name="ReadPreviousEvents-textarea" wrap="off" readonly="1" id="ReadPreviousEvents-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ReadPreviousEvents" type="vim25:ReadPreviousEventsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ReadPreviousEventsResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:Event" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

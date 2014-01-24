@@ -1,0 +1,974 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.ExtensionManager" name="vim.ExtensionManager"></a>
+<h1>Managed Object -  
+						ExtensionManager</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.ServiceInstanceContent.html#field_detail">ServiceContent</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.Extension.html">Extension</a>, <a href="vim.ExtensionManager.IpAllocationUsage.html">ExtensionManagerIpAllocationUsage</a>, <a href="vim.ManagedEntity.html">ManagedEntity</a>
+</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         This managed object type provides directory and basic management
+  services for all registered extensions.
+  <p>
+  Clients use the ExtensionManager, available in
+  <a href="vim.ServiceInstance.html">ServiceInstance</a>,
+  to access extension objects.
+  <p>
+  While several authentication methods are available for extension
+  servers to use (see <a href="vim.SessionManager.html">SessionManager</a>), only one
+  authentication method is valid for an extension at any given
+  time.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="extensionList" name="extensionList"></a><strong>extensionList</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vim.Extension.html">Extension[]</a></td><td>
+<p></p>
+         The list of currently registered extensions.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  System.View</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#findExtension">FindExtension</a>, <a href="#getPublicKey">GetPublicKey</a>, <a href="#queryExtensionIpAllocationUsage">QueryExtensionIpAllocationUsage</a>, <a href="#queryManagedBy">QueryManagedBy</a>, <a href="#registerExtension">RegisterExtension</a>, <a href="#setCertificate">SetExtensionCertificate</a>, <a href="#setPublicKey">SetPublicKey</a>, <a href="#unregisterExtension">UnregisterExtension</a>, <a href="#updateExtension">UpdateExtension</a></td>
+</tr>
+</table>
+<br>
+<a id="findExtension" name="findExtension"></a>
+<h1>FindExtension</h1>
+<p></p>
+         Returns extension with the given key, if any.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ExtensionManager.html">ExtensionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>extensionKey</strong></td><td>xsd:string</td><td>
+<p></p>
+         Key to search for.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.Extension.html">Extension</a></td><td>Extension that matches given key, if any.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('FindExtension-textarea');expandcontent(this, 'FindExtension-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="FindExtension-div">
+<textarea cols="20" rows="10" name="FindExtension-textarea" wrap="off" readonly="1" id="FindExtension-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FindExtension" type="vim25:FindExtensionRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FindExtensionResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:Extension" minOccurs="0"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="getPublicKey" name="getPublicKey"></a>
+<h1>GetPublicKey</h1>
+<B>Deprecated.</B><I>
+         As of VI 4.0, use trusted certificates and
+     <a href="vim.SessionManager.html#loginExtensionBySubjectName">LoginExtensionBySubjectName</a> or
+     <a href="vim.ExtensionManager.html#setCertificate">SetExtensionCertificate</a> and
+     <a href="vim.SessionManager.html#loginExtensionByCertificate">LoginExtensionByCertificate</a>.
+      </I>
+<p></p>
+         Returns VirtualCenter Server public key.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ExtensionManager.html">ExtensionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td>xsd:string</td><td>Public key of VirtualCenter Server, encoded in PEM (privacy-enhanced mail) format.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('GetPublicKey-textarea');expandcontent(this, 'GetPublicKey-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="GetPublicKey-div">
+<textarea cols="20" rows="10" name="GetPublicKey-textarea" wrap="off" readonly="1" id="GetPublicKey-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="GetPublicKey" type="vim25:GetPublicKeyRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="GetPublicKeyResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="xsd:string"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryExtensionIpAllocationUsage" name="queryExtensionIpAllocationUsage"></a>
+<h1>QueryExtensionIpAllocationUsage</h1>
+<p></p>
+         Query statistics about IP allocation usage, either system wide or for 
+ specified extensions.
+ <p>
+ Refer to <a href="vim.IpPoolManager.html">IpPoolManager</a> for details.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.1</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ExtensionManager.html">ExtensionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>extensionKeys</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         List of extensions whose IP allocation is being queried.
+                      If no extension keys are specified then allocation data
+                      for all registered extensions are returned.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.ExtensionManager.IpAllocationUsage.html">ExtensionManagerIpAllocationUsage[]</a></td><td>List of IP allocation usage.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryExtensionIpAllocationUsage-textarea');expandcontent(this, 'QueryExtensionIpAllocationUsage-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryExtensionIpAllocationUsage-div">
+<textarea cols="20" rows="10" name="QueryExtensionIpAllocationUsage-textarea" wrap="off" readonly="1" id="QueryExtensionIpAllocationUsage-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryExtensionIpAllocationUsage" type="vim25:QueryExtensionIpAllocationUsageRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryExtensionIpAllocationUsageResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ExtensionManagerIpAllocationUsage" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryManagedBy" name="queryManagedBy"></a>
+<h1>QueryManagedBy</h1>
+<p></p>
+         Find entities managed by an extension. These can be either virtual machines
+ or vApps.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ExtensionManager.html">ExtensionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>extensionKey</strong></td><td>xsd:string</td><td>
+<p></p>
+         Key of the extension to find managed entities for.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity[]</a></td><td>List of entities managed by the extension.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryManagedBy-textarea');expandcontent(this, 'QueryManagedBy-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryManagedBy-div">
+<textarea cols="20" rows="10" name="QueryManagedBy-textarea" wrap="off" readonly="1" id="QueryManagedBy-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryManagedBy" type="vim25:QueryManagedByRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryManagedByResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="registerExtension" name="registerExtension"></a>
+<h1>RegisterExtension</h1>
+<p></p>
+         Registers extension.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Extension.Register</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ExtensionManager.html">ExtensionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>extension</strong></td><td><a href="vim.Extension.html">Extension</a></td><td>
+<p></p>
+         Extension description to register.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the Extension description is incomplete or an extension is already registered with the given unique key, or if the extension is an OVF extension and its section types overlap with other registered OVF extensions.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RegisterExtension-textarea');expandcontent(this, 'RegisterExtension-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RegisterExtension-div">
+<textarea cols="20" rows="10" name="RegisterExtension-textarea" wrap="off" readonly="1" id="RegisterExtension-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RegisterExtension" type="vim25:RegisterExtensionRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RegisterExtensionResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="setCertificate" name="setCertificate"></a>
+<h1>SetExtensionCertificate</h1>
+<p></p>
+         Update the stored authentication certificate for a specified extension.
+
+  Updates the registration of the specified extension with the
+  thumbprint of the X.509 client certificate provided over SSL handshake,
+  or by the &quot;certificatePem&quot;argument.  The thumbprint
+  will be used to authenticate the extension during invocations of
+  <a href="vim.SessionManager.html#loginExtensionByCertificate">LoginExtensionByCertificate</a>.
+  <p>
+  NOTE: No verification is performed on the received certificate, such as
+  expiry or revocation.
+  <p>
+  This method will unset any public key or subject name
+  associated with the extension.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Extension.Update</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ExtensionManager.html">ExtensionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>extensionKey</strong></td><td>xsd:string</td><td>
+<p></p>
+         Key of extension to update.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>certificatePem</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         PEM encoded certificate.  If not specified, the
+                        certificate passed over SSL handshake is used.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the certificate described by &quot;certificatePem&quot; is not in PEM format, or could not be decoded to an X.509 certificate.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NoClientCertificate.html">NoClientCertificate</a></td><td>Thrown if certificatePem is not specified, and no certificate was passed over SSL handshake.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if an extension specified by &quot;extensionKey&quot; is not registered.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('SetExtensionCertificate-textarea');expandcontent(this, 'SetExtensionCertificate-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="SetExtensionCertificate-div">
+<textarea cols="20" rows="10" name="SetExtensionCertificate-textarea" wrap="off" readonly="1" id="SetExtensionCertificate-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="SetExtensionCertificate" type="vim25:SetExtensionCertificateRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="SetExtensionCertificateResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="setPublicKey" name="setPublicKey"></a>
+<h1>SetPublicKey</h1>
+<B>Deprecated.</B><I>
+         As of VI 4.0, use trusted certificates and
+     <a href="vim.SessionManager.html#loginExtensionBySubjectName">LoginExtensionBySubjectName</a> or
+     <a href="vim.ExtensionManager.html#setCertificate">SetExtensionCertificate</a> and
+     <a href="vim.SessionManager.html#loginExtensionByCertificate">LoginExtensionByCertificate</a>.
+      </I>
+<p></p>
+         Sets extension's public key.
+  <p>
+  This method will unset any subject name or
+  certificate associated with the extension.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Extension.Update</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ExtensionManager.html">ExtensionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>extensionKey</strong></td><td>xsd:string</td><td>
+<p></p>
+         Key of extension to update.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>publicKey</strong></td><td>xsd:string</td><td>
+<p></p>
+         Public key of extension, encoded
+     in PEM (privacy-enhanced mail) format.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the public key is invalid.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('SetPublicKey-textarea');expandcontent(this, 'SetPublicKey-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="SetPublicKey-div">
+<textarea cols="20" rows="10" name="SetPublicKey-textarea" wrap="off" readonly="1" id="SetPublicKey-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="SetPublicKey" type="vim25:SetPublicKeyRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="SetPublicKeyResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="unregisterExtension" name="unregisterExtension"></a>
+<h1>UnregisterExtension</h1>
+<p></p>
+         Unregisters the specified extension if it exists.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Extension.Unregister</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ExtensionManager.html">ExtensionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>extensionKey</strong></td><td>xsd:string</td><td>
+<p></p>
+         Unique name of extension to unregister.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the specified extension is not registered.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UnregisterExtension-textarea');expandcontent(this, 'UnregisterExtension-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UnregisterExtension-div">
+<textarea cols="20" rows="10" name="UnregisterExtension-textarea" wrap="off" readonly="1" id="UnregisterExtension-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UnregisterExtension" type="vim25:UnregisterExtensionRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UnregisterExtensionResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateExtension" name="updateExtension"></a>
+<h1>UpdateExtension</h1>
+<p></p>
+         If the key specified in the extension exists, 
+  the existing record is updated.
+  <p>
+  If the &quot;subjectName&quot; property of the Extension
+  object has a value, and it is different from the existing
+  value, this method will unset any public key or
+  certificate associated with the extension.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Extension.Update</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ExtensionManager.html">ExtensionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>extension</strong></td><td><a href="vim.Extension.html">Extension</a></td><td>
+<p></p>
+         Updated extension description.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the Extension description is incomplete or invalid, or if the extension is an OVF extension and its section types overlap with other registered OVF extensions.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the specified extension key is not registered.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateExtension-textarea');expandcontent(this, 'UpdateExtension-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateExtension-div">
+<textarea cols="20" rows="10" name="UpdateExtension-textarea" wrap="off" readonly="1" id="UpdateExtension-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateExtension" type="vim25:UpdateExtensionRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateExtensionResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

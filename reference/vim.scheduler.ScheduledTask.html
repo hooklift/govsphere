@@ -1,0 +1,372 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.scheduler.ScheduledTask" name="vim.scheduler.ScheduledTask"></a>
+<h1>Managed Object -  
+						ScheduledTask</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.event.EventFilterSpec.html#field_detail">EventFilterSpec</a>, <a href="vim.event.ScheduledTaskEventArgument.html#field_detail">ScheduledTaskEventArgument</a>, <a href="vim.scheduler.ScheduledTaskInfo.html#field_detail">ScheduledTaskInfo</a>, <a href="vim.scheduler.ScheduledTaskManager.html#field_detail">ScheduledTaskManager</a>, <a href="vim.TaskFilterSpec.html#field_detail">TaskFilterSpec</a>, <a href="vim.TaskReasonSchedule.html#field_detail">TaskReasonSchedule</a>
+</dd>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.scheduler.ScheduledTaskManager.html#createObjectScheduledTask">CreateObjectScheduledTask</a>, <a href="vim.scheduler.ScheduledTaskManager.html#create">CreateScheduledTask</a>, <a href="vim.scheduler.ScheduledTaskManager.html#retrieveEntityScheduledTask">RetrieveEntityScheduledTask</a>, <a href="vim.scheduler.ScheduledTaskManager.html#retrieveObjectScheduledTask">RetrieveObjectScheduledTask</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.scheduler.ScheduledTaskInfo.html">ScheduledTaskInfo</a>, <a href="vim.scheduler.ScheduledTaskSpec.html">ScheduledTaskSpec</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         The scheduled task object.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="info" name="info"></a><strong>info</strong></td><td><a href="vim.scheduler.ScheduledTaskInfo.html">ScheduledTaskInfo</a></td><td>
+<p></p>
+         Information about the current scheduled task.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.ExtensibleManagedObject.html#availableField">availableField</a>, <a href="vim.ExtensibleManagedObject.html#value">value</a></td>
+</tr>
+</table>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#reconfigure">ReconfigureScheduledTask</a>, <a href="#remove">RemoveScheduledTask</a>, <a href="#run">RunScheduledTask</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.ExtensibleManagedObject.html#setCustomValue">setCustomValue</a></td>
+</tr>
+</table>
+<br>
+<a id="reconfigure" name="reconfigure"></a>
+<h1>ReconfigureScheduledTask</h1>
+<p></p>
+         Reconfigures the scheduled task properties.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>ScheduledTask.Edit</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.scheduler.ScheduledTask.html">ScheduledTask</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.scheduler.ScheduledTaskSpec.html">ScheduledTaskSpec</a></td><td>
+<p></p>
+         The new specification for the scheduled task.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if a scheduled task with the name already exists.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the specification is invalid.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td>Thrown if the scheduled task name is empty or too long.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the scheduled task is running.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ReconfigureScheduledTask-textarea');expandcontent(this, 'ReconfigureScheduledTask-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ReconfigureScheduledTask-div">
+<textarea cols="20" rows="10" name="ReconfigureScheduledTask-textarea" wrap="off" readonly="1" id="ReconfigureScheduledTask-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ReconfigureScheduledTask" type="vim25:ReconfigureScheduledTaskRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ReconfigureScheduledTaskResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="remove" name="remove"></a>
+<h1>RemoveScheduledTask</h1>
+<p></p>
+         Removes the scheduled task.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>ScheduledTask.Delete</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.scheduler.ScheduledTask.html">ScheduledTask</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the scheduled task is running.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RemoveScheduledTask-textarea');expandcontent(this, 'RemoveScheduledTask-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RemoveScheduledTask-div">
+<textarea cols="20" rows="10" name="RemoveScheduledTask-textarea" wrap="off" readonly="1" id="RemoveScheduledTask-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveScheduledTask" type="vim25:RemoveScheduledTaskRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveScheduledTaskResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="run" name="run"></a>
+<h1>RunScheduledTask</h1>
+<p></p>
+         Runs the scheduled task immediately.
+  The schedule for future runs remains in effect.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>ScheduledTask.Run</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.scheduler.ScheduledTask.html">ScheduledTask</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the scheduled task is running already.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RunScheduledTask-textarea');expandcontent(this, 'RunScheduledTask-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RunScheduledTask-div">
+<textarea cols="20" rows="10" name="RunScheduledTask-textarea" wrap="off" readonly="1" id="RunScheduledTask-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RunScheduledTask" type="vim25:RunScheduledTaskRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RunScheduledTaskResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

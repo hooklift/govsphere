@@ -1,0 +1,287 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.cluster.DasConfigInfo" name="vim.cluster.DasConfigInfo"></a>
+<h1>Data Object - ClusterDasConfigInfo</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.cluster.ConfigInfo.html#field_detail">ClusterConfigInfo</a>, <a href="vim.cluster.ConfigInfoEx.html#field_detail">ClusterConfigInfoEx</a>, <a href="vim.cluster.ConfigSpec.html#field_detail">ClusterConfigSpec</a>, <a href="vim.cluster.ConfigSpecEx.html#field_detail">ClusterConfigSpecEx</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.cluster.DasAdmissionControlPolicy.html">ClusterDasAdmissionControlPolicy</a>, <a href="vim.cluster.DasVmSettings.html">ClusterDasVmSettings</a>, <a href="vim.Datastore.html">Datastore</a>, <a href="vim.option.OptionValue.html">OptionValue</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The <a href="vim.cluster.DasConfigInfo.html">ClusterDasConfigInfo</a> data object contains configuration data
+  about the HA service on a cluster.
+  <p>
+  All fields are optional. If you set the <code>modify</code>
+  parameter to <code>true</code> when you call
+  <a href="vim.ComputeResource.html#reconfigureEx">ReconfigureComputeResource_Task</a>, an unset property has no effect
+  on the existing property value in the cluster configuration on the Server.
+  If you set the <code>modify</code> parameter to <code>false</code> when you
+  reconfigure a cluster, the cluster configuration is reverted to the default
+  values, then the new configuration values are applied.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="admissionControlEnabled" name="admissionControlEnabled"></a><strong>admissionControlEnabled</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag that determines whether strict admission control is enabled.
+  When you use admission control, the following operations are
+  prevented, if doing so would violate the <a href="vim.cluster.DasConfigInfo.html#admissionControlPolicy">admissionControlPolicy</a>.
+  <ul>
+  <li>Powering on a virtual machine in the cluster.</li>
+  <li>Migrating a virtual machine into the cluster.</li>
+  <li>Increasing the CPU or memory reservation of powered-on
+      virtual machines in the cluster.</li>
+  </ul>
+  <p>
+  With admission control disabled, there is no assurance that
+  all virtual machines in the HA cluster can be restarted after
+  a host failure. VMware recommends that you do not disable
+  admission control, but you might need to do so temporarily,
+  for the following reasons:
+  <ul>
+  <li>If you need to violate the failover constraints when there
+      are not enough resources to support them (for example,
+      if you are placing hosts in standby mode to test them
+      for use with DPM).
+  </li>
+  <li>If an automated process needs to take actions that might
+      temporarily violate the failover constraints (for example,
+      as part of an upgrade directed by VMware Update Manager).
+  </li>
+  <li>If you need to perform testing or maintenance operations.</li>
+  </ul>
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="admissionControlPolicy" name="admissionControlPolicy"></a><strong>admissionControlPolicy</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.cluster.DasAdmissionControlPolicy.html">ClusterDasAdmissionControlPolicy</a></td><td>
+<p></p>
+         Virtual machine admission control policy for vSphere HA.
+ The policies specify resource availability for failover support.
+ <ul>
+ <li>Failover host admission policy
+     <a href="vim.cluster.FailoverHostAdmissionControlPolicy.html">ClusterFailoverHostAdmissionControlPolicy</a> -
+     currently you can specify only one failover host.</li>
+ <li>Failover level policy
+     <a href="vim.cluster.FailoverLevelAdmissionControlPolicy.html">ClusterFailoverLevelAdmissionControlPolicy</a> -
+     the limit of host failures for which resources are reserved.
+     When you use the failover level policy,
+     HA partitions resources into slots. A slot represents the minimum
+     CPU and memory resources that are required to support
+     any powered on virtual machine in the cluster.
+     To retrieve information about partitioned resources, use the
+     <a href="vim.ClusterComputeResource.html#retrieveDasAdvancedRuntimeInfo">RetrieveDasAdvancedRuntimeInfo</a>
+     method. </li>
+ <li>Resources admission policy
+     <a href="vim.cluster.FailoverResourcesAdmissionControlPolicy.html">ClusterFailoverResourcesAdmissionControlPolicy</a> -
+     CPU and memory resources reserved for failover support.
+     When you use the resources policy, you can reserve
+     a percentage of the aggregate cluster resource for failover.
+     </li>
+ </ul>
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="defaultVmSettings" name="defaultVmSettings"></a><strong>defaultVmSettings</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.cluster.DasVmSettings.html">ClusterDasVmSettings</a></td><td>
+<p></p>
+         Cluster-wide defaults for virtual machine HA settings.
+  When a virtual machine has no HA configuration
+  (<a href="vim.cluster.DasVmConfigSpec.html">ClusterDasVmConfigSpec</a>), it uses the values
+  specified here.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="enabled" name="enabled"></a><strong>enabled</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to indicate whether or not vSphere HA feature is enabled.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="failoverLevel" name="failoverLevel"></a><strong>failoverLevel</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td><B>Deprecated.</B><I>
+         As of vSphere API 4.0, use 
+  <a href="vim.cluster.FailoverLevelAdmissionControlPolicy.html">ClusterFailoverLevelAdmissionControlPolicy</a> to set
+  <a href="vim.cluster.DasConfigInfo.html#admissionControlPolicy">admissionControlPolicy</a>.
+      </I>
+<p></p>
+         Configured failover level. This is the number of physical host failures
+  that can be tolerated without impacting the ability to satisfy the
+  minimums for all running virtual machines. Acceptable values range from one to 
+  four.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="hBDatastoreCandidatePolicy" name="hBDatastoreCandidatePolicy"></a><strong>hBDatastoreCandidatePolicy</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The policy on what datastores will be used by vCenter Server to choose
+ heartbeat datastores.
+ See <a href="vim.cluster.DasConfigInfo.HBDatastoreCandidate.html">ClusterDasConfigInfoHBDatastoreCandidate</a> for all options.
+ The default value is
+ <a href="vim.cluster.DasConfigInfo.HBDatastoreCandidate.html#allFeasibleDsWithUserPreference">allFeasibleDsWithUserPreference</a>.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="heartbeatDatastore" name="heartbeatDatastore"></a><strong>heartbeatDatastore</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.Datastore.html">Datastore[]</a></td><td>
+<p></p>
+         The list of preferred datastores to use for storage heartbeating.
+ Each of the specified datastores should be active and mounted
+ by more than one host. There is no limit on the number of specified
+ datastores and no priority among them.
+ The specified datastores will replace those previously specified and
+ an empty list will delete all such earlier specified ones.
+ <p>
+ vCenter Server chooses the heartbeat datastores for a host from the
+ set specified by <a href="vim.cluster.DasConfigInfo.html#hBDatastoreCandidatePolicy">hBDatastoreCandidatePolicy</a>.
+ The choice is made based on datastore connectivity and storage array
+ redundancy (in case of VMFS).
+ <p>
+ The final set of selected heartbeat datastores is reported via
+ <a href="vim.cluster.DasAdvancedRuntimeInfo.html#heartbeatDatastoreInfo">heartbeatDatastoreInfo</a>.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="hostMonitoring" name="hostMonitoring"></a><strong>hostMonitoring</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Determines whether HA restarts virtual machines after a host fails.
+  The default value is
+  <a href="vim.cluster.DasConfigInfo.ServiceState.html">ClusterDasConfigInfoServiceState</a>.<a href="vim.cluster.DasConfigInfo.ServiceState.html#enabled">enabled</a>.
+  This property is meaningful only when
+  <a href="vim.cluster.DasConfigInfo.html">ClusterDasConfigInfo</a>.<a href="vim.cluster.DasConfigInfo.html#enabled">enabled</a> is <code>true</code>.
+  <p>
+  When <code>hostMonitoring</code> is
+  <a href="vim.cluster.DasConfigInfo.ServiceState.html#enabled">enabled</a>, HA restarts virtual machines
+  after a host fails.
+  <p>
+  When <code>hostMonitoring</code> is
+  <a href="vim.cluster.DasConfigInfo.ServiceState.html#disabled">disabled</a>, HA does not restart
+  virtual machines after a host fails.
+  The status of Host Monitoring does not affect other services such
+  as virtual machine Health Monitoring or Fault Tolerance.
+  The rest of the cluster operations follow normal processing.
+  No configuration information is lost and re-enabling the service
+  is a quick operation.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="option" name="option"></a><strong>option</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.option.OptionValue.html">OptionValue[]</a></td><td>
+<p></p>
+         Advanced settings.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vmMonitoring" name="vmMonitoring"></a><strong>vmMonitoring</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Level of HA Virtual Machine Health Monitoring Service.
+  You can monitor both guest and application heartbeats, guest heartbeats only,
+  or you can disable the service. See <a href="vim.cluster.DasConfigInfo.VmMonitoringState.html">ClusterDasConfigInfoVmMonitoringState</a>.
+  The default value is <a href="vim.cluster.DasConfigInfo.VmMonitoringState.html#vmMonitoringDisabled">vmMonitoringDisabled</a>.
+ <p>
+ The Service level specified for the cluster determines
+ the possible monitoring settings that you can use for individual virtual machines.
+ See <a href="vim.cluster.VmToolsMonitoringSettings.html">ClusterVmToolsMonitoringSettings</a>.<a href="vim.cluster.VmToolsMonitoringSettings.html#vmMonitoring">vmMonitoring</a>.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ClusterDasConfigInfo">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="enabled" type="xsd:boolean" minOccurs="0"/>
+                     <element name="vmMonitoring" type="xsd:string" minOccurs="0"/>
+                     <element name="hostMonitoring" type="xsd:string" minOccurs="0"/>
+                     <element name="failoverLevel" type="xsd:int" minOccurs="0"/>
+                     <element name="admissionControlPolicy" type="vim25:ClusterDasAdmissionControlPolicy" minOccurs="0"/>
+                     <element name="admissionControlEnabled" type="xsd:boolean" minOccurs="0"/>
+                     <element name="defaultVmSettings" type="vim25:ClusterDasVmSettings" minOccurs="0"/>
+                     <element name="option" type="vim25:OptionValue" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="heartbeatDatastore" type="vim25:ManagedObjectReference" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="hBDatastoreCandidatePolicy" type="xsd:string" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

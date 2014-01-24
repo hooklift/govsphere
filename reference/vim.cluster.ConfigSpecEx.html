@@ -1,0 +1,380 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.cluster.ConfigSpecEx" name="vim.cluster.ConfigSpecEx"></a>
+<h1>Data Object - ClusterConfigSpecEx</h1>
+<dl>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.Folder.html#createClusterEx">CreateClusterEx</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.ComputeResource.ConfigSpec.html">ComputeResourceConfigSpec</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.cluster.DasConfigInfo.html">ClusterDasConfigInfo</a>, <a href="vim.cluster.DasVmConfigSpec.html">ClusterDasVmConfigSpec</a>, <a href="vim.cluster.DpmConfigInfo.html">ClusterDpmConfigInfo</a>, <a href="vim.cluster.DpmHostConfigSpec.html">ClusterDpmHostConfigSpec</a>, <a href="vim.cluster.DrsConfigInfo.html">ClusterDrsConfigInfo</a>, <a href="vim.cluster.DrsVmConfigSpec.html">ClusterDrsVmConfigSpec</a>, <a href="vim.cluster.GroupSpec.html">ClusterGroupSpec</a>, <a href="vim.cluster.RuleSpec.html">ClusterRuleSpec</a>, <a href="vim.vsan.cluster.ConfigInfo.html">VsanClusterConfigInfo</a>, <a href="vim.vsan.host.ConfigInfo.html">VsanHostConfigInfo</a>
+</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The <a href="vim.cluster.ConfigSpecEx.html">ClusterConfigSpecEx</a> data object provides a set of update
+  specifications for complete cluster configuration.
+  You can configure a cluster when you create a new cluster
+  (the <a href="vim.Folder.html#createClusterEx">CreateClusterEx</a> method) or when you
+  reconfigure an existing cluster
+  (the <a href="vim.ComputeResource.html#reconfigureEx">ReconfigureComputeResource_Task</a> method).
+  <p>
+  All fields are optional. If you set the <code>modify</code>
+  parameter to <code>true</code> when you call
+  <a href="vim.ComputeResource.html#reconfigureEx">ReconfigureComputeResource_Task</a>, an unset property has no effect
+  on the existing property value in the cluster configuration on the Server.
+  If you set the <code>modify</code> parameter to <code>false</code> when you
+  reconfigure a cluster, the cluster configuration is reverted to the default
+  values, then the new configuration values are applied.
+  <p>
+  Use the properties defined for this object to configure
+  the following services:
+  <ul>
+    <li>HA (High Availability) -
+        provides failover protection for virtual machines
+        running in a cluster of ESX Server hosts.
+        The virtual machines are located in a <a href="vim.Datastore.html">Datastore</a>, which
+        provides shared storage for the cluster.
+        When a failure occurs that affects a protected virtual machine,
+        HA will restart the virtual machine on another host.
+        When HA detects a host failure, either the host has failed or it may be
+        isolated from the network. The HA agent on an isolated host will power off
+        or shutdown the virtual machines running on that host so that they
+        can be restarted elsewhere.
+        See <a href="vim.cluster.DasVmSettings.IsolationResponse.html">ClusterDasVmSettingsIsolationResponse</a> for information
+        about how a host handles network isolation.
+        <p>
+        When it chooses a failover host, HA selects a host that is compatible
+        with the virtual machine and that can support resource allocation for
+        that virtual machine so that service level guarantees remain intact.
+        HA does not consider hosts that are in maintenance mode, standby mode,
+        or which are disconnected from the vCenter Server. When a host powers
+        on or becomes available again, HA is reenabled on that host,
+        so it becomes available for failover again.
+        VMware recommends that you configure hosts and virtual machines
+        so that all virtual machines can run on all hosts in the cluster.
+        This will maximize the chances of restarting a VM after a failure.
+        <p>
+        HA also restarts a virtual machine after a guest operating system failure.
+        In this case, the virtual machine health monitoring service detects
+        the guest failure, and HA restarts the virtual machine on the same host.
+        The service monitors heartbeats from the VmTools service and optionally
+        heartbeats that are generated by a third-party application monitor.
+        See <a href="vim.cluster.VmToolsMonitoringSettings.html">ClusterVmToolsMonitoringSettings</a> and
+        <a href="vim.cluster.DasConfigInfo.html">ClusterDasConfigInfo</a>.<a href="vim.cluster.DasConfigInfo.html#vmMonitoring">vmMonitoring</a>.
+        <p>
+        To enable HA for a cluster, set the
+        <a href="vim.cluster.DasConfigInfo.html">ClusterDasConfigInfo</a>.<a href="vim.cluster.DasConfigInfo.html#enabled">enabled</a>
+        property to <code>true</code> and the
+        <a href="vim.cluster.DasConfigInfo.html">ClusterDasConfigInfo</a>.<a href="vim.cluster.DasConfigInfo.html#hostMonitoring">hostMonitoring</a>
+        property to <a href="vim.cluster.DasConfigInfo.ServiceState.html#enabled">enabled</a>.
+        (The vSphere API uses the substring "das" in object, property,
+        and method names for HA.<sup>1</sup>)
+    </li>
+    <li>DRS (Distributed Resource Scheduling) - provides automatic initial
+        virtual machine placement on any of the hosts in the cluster. DRS
+        also makes automatic resource relocation and optimization decisions
+        as hosts or virtual machines are added or removed from the cluster.
+        You can also configure DRS for manual control, so that it only makes
+        recommendations that you can review and carry out.
+        <p>
+        To enable DRS for a cluster, set the
+       <a href="vim.cluster.DrsConfigInfo.html">ClusterDrsConfigInfo</a>.<a href="vim.cluster.DrsConfigInfo.html#enabled">enabled</a>
+       property to <code>true</code>.
+    </li>
+    <li>DPM (Distributed Power Management) - supports optimized power
+        consumption on the cluster. When virtual machines in a DRS
+        cluster require fewer resources, DPM consolidates workloads
+        onto fewer servers while maintaining quality of service guarantees
+        and powers off the rest to reduce power consumption.
+        When more resources are required, DPM brings the powered-down hosts online.
+       <p>
+       To enable DPM for a cluster, set the
+       <a href="vim.cluster.DpmConfigInfo.html">ClusterDpmConfigInfo</a>.<a href="vim.cluster.DpmConfigInfo.html#enabled">enabled</a>
+       property to <code>true</code>.
+    </li>
+    <li>VSAN - aggregrates hosts' local disks to present a single
+        shared datastore to the cluster.
+        <p/>
+        To enable VSAN for a cluster, set the
+        <a href="vim.vsan.cluster.ConfigInfo.html#enabled">enabled</a> property to
+        <code>true</code> for <a href="vim.cluster.ConfigSpecEx.html#vsanConfig">vsanConfig</a>.
+    </li>
+  </ul>
+ <p>
+ The HA, DRS, and DPM services are integrated with the FT (Fault Tolerance)
+ and EVC (Enhanced vMotion Compatibility) services.
+ Use the <a href="vim.VirtualMachine.html#createSecondary">CreateSecondaryVM_Task</a> method to establish
+ fault tolerance for a virtual machine. Use the vSphere Client to configure EVC.
+ The HA, DRS, DPM, FT, and EVC services interact under
+ the following circumstances.
+ <ul>
+   <li>To determine initial placement of a virtual machine, DRS
+       checks to see if the HA admission control policy on a
+       potential host supports the addition of the powered on
+       virtual machine. With the default setting, DRS will not
+       power on more than four FT virtual machines per host.
+       You can use the configuration editor in the vSphere Client
+       to set the HA advanced option <code>das.maxFtVmsPerHost</code>
+       to the desired number or to zero to disable.
+   <li>When a host fails, HA determines placement within
+       the cluster when it restarts the virtual machines.
+       If there is insufficient capacity, and DPM has put one or more
+       compatible hosts into standby, HA relies on DPM to bring more
+       capacity online.
+   </li>
+   <li>To use FT in a cluster, the cluster must be HA-enabled.</li>
+   <li>You can disable HA in a cluster while there are FT virtual
+       machines registered on hosts in the cluster.
+       While HA is disabled, powered on FT virtual machines will continue
+       to run, but HA will not restart any virtual machines after a failure.
+       When HA is disabled, you cannot use the following FT operations:
+       <ul>
+       <li>Turn on FT (<a href="vim.VirtualMachine.html#createSecondary">CreateSecondaryVM_Task</a>)</li>
+       <li>Enable FT (<a href="vim.VirtualMachine.html#enableSecondary">EnableSecondaryVM_Task</a>)</li>
+       <li>Power on an FT virtual machine
+           (<a href="vim.VirtualMachine.html#powerOn">PowerOnVM_Task</a>)</li>
+       <li>Test failover and test secondary restart
+           (<a href="vim.VirtualMachine.html#terminateFaultTolerantVM">TerminateFaultTolerantVM_Task</a>)</li>
+       </ul>
+   </li>
+   <li>In a cluster using DRS and HA with admission control turned on
+   (<a href="vim.cluster.DasConfigInfo.html">ClusterDasConfigInfo</a>.<a href="vim.cluster.DasConfigInfo.html#admissionControlEnabled">admissionControlEnabled</a>),
+   the vCenter Server might not migrate virtual machines from hosts
+   entering maintenance mode. This is because resources are reserved
+   to maintain the failover level. You must use vMotion to manually
+   migrate the virtual machines off the hosts.
+   <p>
+   When admission control is disabled, failover resource constraints
+   are not passed on to DRS and DPM. The constraints are not enforced.
+     <ul>
+     <li>DRS determines virtual machine placement and status
+       (maintenance mode, standby mode) regardless of the impact
+       this might have on failover requirements.
+     </li>
+     <li>DPM powers off hosts (places them in standby mode)
+         even if doing so violates failover requirements.
+         If there is insufficient capacity when a failover
+         occurs, DPM will attempt to bring more capacity online
+         in order to correct the situation.
+     </li>
+     </ul>
+   </li>
+   <li>You must enable EVC in a cluster to enable DRS to manage FT primary
+       and secondary virtual machine pairs in the cluster.
+       For information about EVC clusters, see <a href="vim.EVCMode.html">EVCMode</a>.
+       <p>
+       If EVC is disabled, vCenter automatically creates overrides
+       to disable DRS for FT primary/secondary pairs in the cluster.
+       vCenter will still use DRS to place a secondary virtual machine
+       when it powers on.
+       Attempts to remove the overrides or to enable DRS operations
+       will fail.
+  </li>
+   <li>EVC clusters support load balancing of powered on FT primary
+       and secondary virtual machines. DRS behavior
+       is governed by the overrides defined for the primary virtual
+       machine. The secondary inherits DRS behavior from its primary.
+       If you do not configure a DRS override for an FT virtual
+       machine, DRS uses the cluster default
+       (<a href="vim.cluster.DrsConfigInfo.html#defaultVmBehavior">defaultVmBehavior</a>).
+   </li>
+ </ul>
+
+ <sup>1</sup>High Availability was previously called Distributed
+        Availability Services.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="dasConfig" name="dasConfig"></a><strong>dasConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.cluster.DasConfigInfo.html">ClusterDasConfigInfo</a></td><td>
+<p></p>
+         HA configuration; includes default settings for virtual machines.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="dasVmConfigSpec" name="dasVmConfigSpec"></a><strong>dasVmConfigSpec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.cluster.DasVmConfigSpec.html">ClusterDasVmConfigSpec[]</a></td><td>
+<p></p>
+         HA configuration for individual virtual machines.
+ The entries in this array override the cluster default
+ settings
+ (<a href="vim.cluster.DasConfigInfo.html">ClusterDasConfigInfo</a>.<a href="vim.cluster.DasConfigInfo.html#defaultVmSettings">defaultVmSettings</a>).
+ You cannot specify an HA override for a secondary FT virtual
+ machine. The secondary virtual machine will inherit whatever
+ settings apply to its primary virtual machine. If you
+ include an entry for a secondary, the reconfigure method
+ will throw the fault
+ <a href="vim.fault.CannotChangeHaSettingsForFtSecondary.html">CannotChangeHaSettingsForFtSecondary</a>.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="dpmConfig" name="dpmConfig"></a><strong>dpmConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.cluster.DpmConfigInfo.html">ClusterDpmConfigInfo</a></td><td>
+<p></p>
+         DPM configuration; includes default settings for hosts.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="dpmHostConfigSpec" name="dpmHostConfigSpec"></a><strong>dpmHostConfigSpec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.cluster.DpmHostConfigSpec.html">ClusterDpmHostConfigSpec[]</a></td><td>
+<p></p>
+         DPM configuration for individual hosts.
+ The entries in this array override the cluster default
+ settings
+ (<a href="vim.cluster.DpmConfigInfo.html">ClusterDpmConfigInfo</a>.<a href="vim.cluster.DpmConfigInfo.html#defaultDpmBehavior">defaultDpmBehavior</a>).
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="drsConfig" name="drsConfig"></a><strong>drsConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.cluster.DrsConfigInfo.html">ClusterDrsConfigInfo</a></td><td>
+<p></p>
+         DRS configuration; includes default settings for virtual machines.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="drsVmConfigSpec" name="drsVmConfigSpec"></a><strong>drsVmConfigSpec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.cluster.DrsVmConfigSpec.html">ClusterDrsVmConfigSpec[]</a></td><td>
+<p></p>
+         DRS configuration for individual virtual machines.
+ The entries in this array override the cluster default
+ settings
+ (<a href="vim.cluster.DrsConfigInfo.html">ClusterDrsConfigInfo</a>.<a href="vim.cluster.DrsConfigInfo.html#defaultVmBehavior">defaultVmBehavior</a>).
+ You cannot specify a DRS override for a secondary FT virtual
+ machine. The secondary virtual machine will inherit whatever
+ setting applies to its primary virtual machine. If you
+ include an entry for a secondary, the reconfigure method
+ will throw the fault
+ <a href="vim.fault.CannotChangeDrsBehaviorForFtSecondary.html">CannotChangeDrsBehaviorForFtSecondary</a>.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="groupSpec" name="groupSpec"></a><strong>groupSpec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.cluster.GroupSpec.html">ClusterGroupSpec[]</a></td><td>
+<p></p>
+         Cluster-wide group configuration.
+ The array contains one or more group specification objects.
+ A group specification object contains a virtual machine group
+ (<a href="vim.cluster.VmGroup.html">ClusterVmGroup</a>) or a host group (<a href="vim.cluster.HostGroup.html">ClusterHostGroup</a>).
+ Groups can be related; see <a href="vim.cluster.VmHostRuleInfo.html">ClusterVmHostRuleInfo</a>.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="rulesSpec" name="rulesSpec"></a><strong>rulesSpec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.cluster.RuleSpec.html">ClusterRuleSpec[]</a></td><td>
+<p></p>
+         Cluster affinity and anti-affinity rule configuration.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vsanConfig" name="vsanConfig"></a><strong>vsanConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vsan.cluster.ConfigInfo.html">VsanClusterConfigInfo</a></td><td>
+<p></p>
+         VSAN configuration; includes default settings for hosts.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vsanHostConfigSpec" name="vsanHostConfigSpec"></a><strong>vsanHostConfigSpec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vsan.host.ConfigInfo.html">VsanHostConfigInfo[]</a></td><td>
+<p></p>
+         VSAN configuration for individual hosts.
+ The entries in this array override the cluster default settings
+ as specified in <a href="vim.vsan.cluster.ConfigInfo.html">VsanClusterConfigInfo</a>.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.ComputeResource.ConfigSpec.html">ComputeResourceConfigSpec</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.ComputeResource.ConfigSpec.html#defaultHardwareVersionKey">defaultHardwareVersionKey</a>, <a href="vim.ComputeResource.ConfigSpec.html#spbmEnabled">spbmEnabled</a>, <a href="vim.ComputeResource.ConfigSpec.html#vmSwapPlacement">vmSwapPlacement</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ClusterConfigSpecEx">
+            <complexContent>
+               <extension base="vim25:ComputeResourceConfigSpec">
+                  <sequence>
+                     <element name="dasConfig" type="vim25:ClusterDasConfigInfo" minOccurs="0"/>
+                     <element name="dasVmConfigSpec" type="vim25:ClusterDasVmConfigSpec" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="drsConfig" type="vim25:ClusterDrsConfigInfo" minOccurs="0"/>
+                     <element name="drsVmConfigSpec" type="vim25:ClusterDrsVmConfigSpec" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="rulesSpec" type="vim25:ClusterRuleSpec" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="dpmConfig" type="vim25:ClusterDpmConfigInfo" minOccurs="0"/>
+                     <element name="dpmHostConfigSpec" type="vim25:ClusterDpmHostConfigSpec" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="vsanConfig" type="vim25:VsanClusterConfigInfo" minOccurs="0"/>
+                     <element name="vsanHostConfigSpec" type="vim25:VsanHostConfigInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="groupSpec" type="vim25:ClusterGroupSpec" minOccurs="0" maxOccurs="unbounded"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.ResourcePool.Summary.QuickStats" name="vim.ResourcePool.Summary.QuickStats"></a>
+<h1>Data Object - ResourcePoolQuickStats</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.ResourcePool.Summary.html#field_detail">ResourcePoolSummary</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         A set of statistics that are typically updated with near real-time regularity.
+  These statistics are aggregates of the corresponding statistics of all virtual
+  machines in the given resource pool, and unless otherwise noted, only make sense
+  when at least one virtual machine in the given resource pool is powered on.
+  This data object type does not support notification, for scalability reasons.
+  Therefore, changes in QuickStats do not generate property collector updates. To
+  monitor statistics values, use the statistics and alarms modules instead.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="balloonedMemory" name="balloonedMemory"></a><strong>balloonedMemory</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         The size of the balloon driver in a virtual machine, in MB. The host will
+  inflate the balloon driver to reclaim physical memory from a virtual machine.
+  This is a sign that there is memory pressure on the host.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="compressedMemory" name="compressedMemory"></a><strong>compressedMemory</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         The amount of compressed memory currently consumed by VM, in KB.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="consumedOverheadMemory" name="consumedOverheadMemory"></a><strong>consumedOverheadMemory</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         The amount of overhead memory, in MB, currently being consumed to run a VM.
+  This value is limited by the overhead memory reservation for a VM, stored
+  in <a href="vim.ResourcePool.Summary.QuickStats.html#overheadMemory">overheadMemory</a>.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="distributedCpuEntitlement" name="distributedCpuEntitlement"></a><strong>distributedCpuEntitlement</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         This is the amount of CPU resource, in MHz, that this VM is entitled to, as
+  calculated by DRS. Valid only for a VM managed by DRS.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="distributedMemoryEntitlement" name="distributedMemoryEntitlement"></a><strong>distributedMemoryEntitlement</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         This is the amount of memory, in MB, that this VM is entitled to, as
+  calculated by DRS. Valid only for a VM managed by DRS.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="guestMemoryUsage" name="guestMemoryUsage"></a><strong>guestMemoryUsage</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         Guest memory utilization statistics, in MB. This
+  is also known as active guest memory. The number
+  can be between 0 and the configured memory size of
+  a virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="hostMemoryUsage" name="hostMemoryUsage"></a><strong>hostMemoryUsage</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         Host memory utilization statistics, in MB. This
+  is also known as consummed host memory. This is between 0 and
+  the configured resource limit. Valid while a virtual machine is
+  running. This includes the overhead memory of a virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="overallCpuDemand" name="overallCpuDemand"></a><strong>overallCpuDemand</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         Basic CPU performance statistics, in MHz.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="overallCpuUsage" name="overallCpuUsage"></a><strong>overallCpuUsage</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         Basic CPU performance statistics, in MHz.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="overheadMemory" name="overheadMemory"></a><strong>overheadMemory</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         The amount of memory resource (in MB) that will be used by
+  a virtual machine above its guest memory requirements.
+  This value is set if and only if a virtual machine is registered
+  on a host that supports memory resource allocation features.
+
+  For powered off VMs, this is the minimum overhead required to
+  power on the VM on the registered host.
+
+  For powered on VMs, this is the current overhead reservation, a
+  value which is almost always larger than the minimum overhead, and
+  which grows with time.<br>See <a href="vim.HostSystem.html#queryOverheadEx">QueryMemoryOverheadEx</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="privateMemory" name="privateMemory"></a><strong>privateMemory</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         The portion of memory, in MB, that is granted to a virtual machine from
+  non-shared host memory.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="sharedMemory" name="sharedMemory"></a><strong>sharedMemory</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         The portion of memory, in MB, that is granted to a virtual machine from host
+  memory that is shared between VMs.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="staticCpuEntitlement" name="staticCpuEntitlement"></a><strong>staticCpuEntitlement</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The static CPU resource entitlement for a virtual machine. This value is
+  calculated based on this virtual machine's resource reservations, shares
+  and limit, and doesn't take into account current usage. This is the worst
+  case CPU allocation for this virtual machine, that is, the amount of CPU
+  resource this virtual machine would receive if all virtual machines running
+  in the cluster went to maximum consumption. Units are MHz.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="staticMemoryEntitlement" name="staticMemoryEntitlement"></a><strong>staticMemoryEntitlement</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The static memory resource entitlement for a virtual machine. This value is
+  calculated based on this virtual machine's resource reservations, shares
+  and limit, and doesn't take into account current usage. This is the worst
+  case memory allocation for this virtual machine, that is, the amount of
+  memory this virtual machine would receive if all virtual machines running
+  in the cluster went to maximum consumption. Units are MB.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="swappedMemory" name="swappedMemory"></a><strong>swappedMemory</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         The portion of memory, in MB, that is granted to a virtual machine from the
+  host's swap space. This is a sign that there is memory pressure on the host.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ResourcePoolQuickStats">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="overallCpuUsage" type="xsd:long" minOccurs="0"/>
+                     <element name="overallCpuDemand" type="xsd:long" minOccurs="0"/>
+                     <element name="guestMemoryUsage" type="xsd:long" minOccurs="0"/>
+                     <element name="hostMemoryUsage" type="xsd:long" minOccurs="0"/>
+                     <element name="distributedCpuEntitlement" type="xsd:long" minOccurs="0"/>
+                     <element name="distributedMemoryEntitlement" type="xsd:long" minOccurs="0"/>
+                     <element name="staticCpuEntitlement" type="xsd:int" minOccurs="0"/>
+                     <element name="staticMemoryEntitlement" type="xsd:int" minOccurs="0"/>
+                     <element name="privateMemory" type="xsd:long" minOccurs="0"/>
+                     <element name="sharedMemory" type="xsd:long" minOccurs="0"/>
+                     <element name="swappedMemory" type="xsd:long" minOccurs="0"/>
+                     <element name="balloonedMemory" type="xsd:long" minOccurs="0"/>
+                     <element name="overheadMemory" type="xsd:long" minOccurs="0"/>
+                     <element name="consumedOverheadMemory" type="xsd:long" minOccurs="0"/>
+                     <element name="compressedMemory" type="xsd:long" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

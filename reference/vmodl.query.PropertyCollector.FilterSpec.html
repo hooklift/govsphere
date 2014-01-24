@@ -1,0 +1,142 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vmodl.query.PropertyCollector.FilterSpec" name="vmodl.query.PropertyCollector.FilterSpec"></a>
+<h1>Data Object - PropertyFilterSpec</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vmodl.query.PropertyCollector.Filter.html#field_detail">PropertyFilter</a>
+</dd>
+<dt>Parameter to</dt>
+<dd>
+<a href="vmodl.query.PropertyCollector.html#createFilter">CreateFilter</a>, <a href="vmodl.query.PropertyCollector.html#retrieveContents">RetrieveProperties</a>, <a href="vmodl.query.PropertyCollector.html#retrievePropertiesEx">RetrievePropertiesEx</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vmodl.query.PropertyCollector.ObjectSpec.html">ObjectSpec</a>, <a href="vmodl.query.PropertyCollector.PropertySpec.html">PropertySpec</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         Specify the property data that is included in a filter. A filter can
+  specify part of a single managed object, or parts of multiple related
+  managed objects in an inventory hierarchy - for example, to collect
+  updates from all virtual machines in a given folder.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="objectSet" name="objectSet"></a><strong>objectSet</strong></td><td><a href="vmodl.query.PropertyCollector.ObjectSpec.html">ObjectSpec[]</a></td><td>
+<p></p>
+         Set of specifications that determine the objects to filter.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="propSet" name="propSet"></a><strong>propSet</strong></td><td><a href="vmodl.query.PropertyCollector.PropertySpec.html">PropertySpec[]</a></td><td>
+<p></p>
+         Set of properties to include in the filter, specified for each object
+  type.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="reportMissingObjectsInResults" name="reportMissingObjectsInResults"></a><strong>reportMissingObjectsInResults</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Control how to report missing objects during filter creation.
+
+  <p> If false or unset and <a href="vmodl.query.PropertyCollector.FilterSpec.html#objectSet">objectSet</a> refers to missing objects,
+  filter creation will fail with a <a href="vmodl.fault.ManagedObjectNotFound.html">ManagedObjectNotFound</a> fault.
+
+  <p> If true and <a href="vmodl.query.PropertyCollector.FilterSpec.html#objectSet">objectSet</a> refers
+  to missing objects, filter creation will not fail and missing objects
+  will be reported via filter results. This is the recommended setting
+  when <a href="vmodl.query.PropertyCollector.FilterSpec.html#objectSet">objectSet</a> refers to
+  transient objects.
+
+  <p> In an <a href="vmodl.query.PropertyCollector.UpdateSet.html">UpdateSet</a> missing objects will
+  appear in the <a href="vmodl.query.PropertyCollector.FilterUpdate.html#missingSet">missingSet</a> field.
+
+  <p> In a <a href="vmodl.query.PropertyCollector.RetrieveResult.html">RetrieveResult</a> missing objects will
+  simply be omitted from the objects field.
+
+  <p> For a call to <a href="vmodl.query.PropertyCollector.html#retrieveContents">RetrieveProperties</a> missing objects will simply
+  be omitted from the results.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="PropertyFilterSpec">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="propSet" type="vim25:PropertySpec" maxOccurs="unbounded"/>
+                     <element name="objectSet" type="vim25:ObjectSpec" maxOccurs="unbounded"/>
+                     <element name="reportMissingObjectsInResults" type="xsd:boolean" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

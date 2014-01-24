@@ -1,0 +1,523 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.profile.ComplianceManager" name="vim.profile.ComplianceManager"></a>
+<h1>Managed Object -  
+						ProfileComplianceManager</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.ServiceInstanceContent.html#field_detail">ServiceContent</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.profile.ComplianceResult.html">ComplianceResult</a>, <a href="vim.ManagedEntity.html">ManagedEntity</a>, <a href="vim.profile.Profile.html">Profile</a>, <a href="vim.profile.ExpressionMetadata.html">ProfileExpressionMetadata</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         Interface handling the Compliance aspects of entities.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+</table>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#checkCompliance">CheckCompliance_Task</a>, <a href="#clearComplianceStatus">ClearComplianceStatus</a>, <a href="#queryComplianceStatus">QueryComplianceStatus</a>, <a href="#queryExpressionMetadata">QueryExpressionMetadata</a></td>
+</tr>
+</table>
+<br>
+<a id="checkCompliance" name="checkCompliance"></a>
+<h1>CheckCompliance_Task</h1>
+<p></p>
+         Check compliance of an entity against a Profile.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.ComplianceManager.html">ProfileComplianceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>profile</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.profile.Profile.html">Profile[]</a></td><td>
+<p></p>
+         If specified, check compliance against the specified profiles.
+  If not specified, use the profiles associated with the entities.
+
+  If both Profiles and Entities are specified, Check the compliance of each
+  Entity against each of the profile specified.
+  <br>
+  For more information, look at the KMap below.
+  <br>
+  P represents if Profile is specified.
+  <br>
+  E represents if Entity is specified.
+  <pre>
+            P                        ^P
+  ---------------------------------------------------
+  | Check compliance      |  Profiles associated    |
+ E|  of each entity       |   with the specified    |
+  |  against each of the  |   entity will be used   |
+  |  profiles specified.  |   for checking          |
+  |                       |   compliance.           |
+  |                       |                         |
+  |                       |                         |
+  ---------------------------------------------------
+  | All entities          |   InvalidArgument       |
+  |  associated with the  |   Exception is thrown.  |
+  |  profile are checked. |                         |
+^E|                       |                         |
+  |                       |                         |
+  |                       |                         |
+  |                       |                         |
+  ---------------------------------------------------
+  </pre>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>entity</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity[]</a></td><td>
+<p></p>
+         If specified, the compliance check is done against this entity.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if neither profile nor entity is specified.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="clearComplianceStatus" name="clearComplianceStatus"></a>
+<h1>ClearComplianceStatus</h1>
+<p></p>
+         Clear the saved ComplianceResult based on profile and entity filtering criteria.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Profile.Clear</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.ComplianceManager.html">ProfileComplianceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>profile</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.profile.Profile.html">Profile[]</a></td><td>
+<p></p>
+         If specified, clear the ComplianceResult related to the Profile.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>entity</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity[]</a></td><td>
+<p></p>
+         If specified, clear the ComplianceResult related to the entity.
+
+ If profile and entity are not specified, all the ComplianceResults will be cleared.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ClearComplianceStatus-textarea');expandcontent(this, 'ClearComplianceStatus-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ClearComplianceStatus-div">
+<textarea cols="20" rows="10" name="ClearComplianceStatus-textarea" wrap="off" readonly="1" id="ClearComplianceStatus-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ClearComplianceStatus" type="vim25:ClearComplianceStatusRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ClearComplianceStatusResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryComplianceStatus" name="queryComplianceStatus"></a>
+<h1>QueryComplianceStatus</h1>
+<p></p>
+         Query the compliance status based on Profile and Entity filter.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.ComplianceManager.html">ProfileComplianceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>profile</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.profile.Profile.html">Profile[]</a></td><td>
+<p></p>
+         If specified, compliance result for the specified profiles will be
+  returned. This acts like a filtering criteria for the ComplianceResults based on
+  specified profiles.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>entity</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity[]</a></td><td>
+<p></p>
+         If specified, compliance results for these entities will be returned.
+  This acts like a filtering criteria for the ComplianceResults based on entities.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.profile.ComplianceResult.html">ComplianceResult[]</a></td><td>ComplianceResult. ComplianceResult information may not be available for all the entities. If the ComplianceResult is not available already, a new ComplianceCheck will not be triggered.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if neither profile nor entity is specified.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryComplianceStatus-textarea');expandcontent(this, 'QueryComplianceStatus-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryComplianceStatus-div">
+<textarea cols="20" rows="10" name="QueryComplianceStatus-textarea" wrap="off" readonly="1" id="QueryComplianceStatus-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryComplianceStatus" type="vim25:QueryComplianceStatusRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryComplianceStatusResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ComplianceResult" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryExpressionMetadata" name="queryExpressionMetadata"></a>
+<h1>QueryExpressionMetadata</h1>
+<p></p>
+         Query the metadata for the expressions.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.ComplianceManager.html">ProfileComplianceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>expressionName</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         Names of the Expressions for which metadata is requested.
+ If expressionNames are not specified, metadata for all known expressions is returned
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>profile</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.profile.Profile.html">Profile</a></td><td>
+<p></p>
+         Base profile whose context needs to be used during the operation
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.profile.ExpressionMetadata.html">ProfileExpressionMetadata[]</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if expressionName is invalid.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryExpressionMetadata-textarea');expandcontent(this, 'QueryExpressionMetadata-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryExpressionMetadata-div">
+<textarea cols="20" rows="10" name="QueryExpressionMetadata-textarea" wrap="off" readonly="1" id="QueryExpressionMetadata-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryExpressionMetadata" type="vim25:QueryExpressionMetadataRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryExpressionMetadataResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ProfileExpressionMetadata" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

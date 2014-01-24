@@ -1,0 +1,1679 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.ResourcePool" name="vim.ResourcePool"></a>
+<h1>Managed Object -  
+						ResourcePool</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.cluster.InitialPlacementAction.html#field_detail">ClusterInitialPlacementAction</a>, <a href="vim.ComputeResource.html#field_detail">ComputeResource</a>, <a href="vim.OvfManager.ResourceMap.html#field_detail">OvfResourceMap</a>, <a href="vim.ResourcePool.html#field_detail">ResourcePool</a>, <a href="vim.event.ResourcePoolEventArgument.html#field_detail">ResourcePoolEventArgument</a>, <a href="vim.storageDrs.StoragePlacementSpec.html#field_detail">StoragePlacementSpec</a>, <a href="vim.vApp.CloneSpec.ResourceMap.html#field_detail">VAppCloneSpecResourceMap</a>, <a href="vim.VirtualMachine.html#field_detail">VirtualMachine</a>, <a href="vim.vm.VmImportSpec.html#field_detail">VirtualMachineImportSpec</a>, <a href="vim.vm.RelocateSpec.html#field_detail">VirtualMachineRelocateSpec</a>
+</dd>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.ClusterComputeResource.html#addHost">AddHost_Task</a>, <a href="vim.vm.check.CompatibilityChecker.html#checkCompatibility">CheckCompatibility_Task</a>, <a href="vim.vm.check.ProvisioningChecker.html#checkMigrate">CheckMigrate_Task</a>, <a href="vim.VirtualApp.html#clone">CloneVApp_Task</a>, <a href="vim.OvfManager.html#createImportSpec">CreateImportSpec</a>, <a href="vim.Folder.html#createVm">CreateVM_Task</a>, <a href="vim.VirtualMachine.html#markAsVirtualMachine">MarkAsVirtualMachine</a>, <a href="vim.VirtualMachine.html#migrate">MigrateVM_Task</a>, <a href="vim.ClusterComputeResource.html#moveHostInto">MoveHostInto_Task</a>, <a href="vim.ClusterComputeResource.html#recommendHostsForVm">RecommendHostsForVm</a>, <a href="vim.Folder.html#registerVm">RegisterVM_Task</a>, <a href="vim.ServiceInstance.html#validateMigration">ValidateMigration</a>
+</dd>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.ResourcePool.html#createResourcePool">CreateResourcePool</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.VirtualApp.html">VirtualApp</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.ManagedEntity.html">ManagedEntity</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.ComputeResource.html">ComputeResource</a>, <a href="vim.Folder.html">Folder</a>, <a href="vim.HostSystem.html">HostSystem</a>, <a href="vim.HttpNfcLease.html">HttpNfcLease</a>, <a href="vim.ImportSpec.html">ImportSpec</a>, <a href="vim.ManagedEntity.html">ManagedEntity</a>, <a href="vim.ResourceConfigOption.html">ResourceConfigOption</a>, <a href="vim.ResourceConfigSpec.html">ResourceConfigSpec</a>, <a href="vim.ResourcePool.RuntimeInfo.html">ResourcePoolRuntimeInfo</a>, <a href="vim.ResourcePool.Summary.html">ResourcePoolSummary</a>, <a href="vim.vApp.VAppConfigSpec.html">VAppConfigSpec</a>, <a href="vim.VirtualApp.html">VirtualApp</a>, <a href="vim.VirtualMachine.html">VirtualMachine</a>, <a href="vim.vm.ConfigSpec.html">VirtualMachineConfigSpec</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         Represents a set of physical resources: a single host,
+  a subset of a host's resources, or resources spanning multiple hosts.
+  Resource pools can be subdivided by creating child resource pools. In
+  order to run, a virtual machine must be associated as a child of a resource
+  pool.
+  <p>
+  In a parent/child hierarchy of resource pools and virtual machines, the
+  single resource pool that has no parent pool is known as the <em>root resource
+  pool</em>.
+  <p>
+  <b>Configuration</b>
+  <p>
+  A resource pool is configured with a set of CPU (in MHz) and memory (in MB)
+  resources. These resources are specified in absolute terms with a resource
+  reservation and a resource limit, along with a shares setting. The shares
+  are used during resource contention, to ensure graceful degradation.
+  <p>
+  For the root resource pool, the values of the reservation and
+  the limit are set by the system and are not configurable. The
+  reservation and limit are set to the same value, indicating the total amount
+  of resources the system has available to run virtual machines. This is
+  computed as the aggregated CPU and memory resources provided by the set
+  of current available hosts in the parent compute resource minus the
+  overhead of the virtualization layer.
+  <p>
+  Since the resource pool configuration is absolute (in MHz or MB), the
+  configuration can become invalid when resources are removed.  This can
+  happen if a host is removed from the cluster, if a host becomes
+  unavailable, or if a host is placed in maintenance mode. When this
+  happens, the system flags misconfigured resource pools and displays the
+  reservations and limits that are in effect. Further, in a DRS enabled cluster,
+  the tree can be misconfigured if the user bypasses VirtualCenter and powers on
+  VMs directly on the host.
+  <p>
+  <b>A General Discussion of Resource pool states and admission control</b>
+
+  There are three states that the resource pool tree can be in: undercommited
+  (green), overcommited (yellow), and inconsistent (red). Depending on the
+  state, different resource pool configuration policies are enforced. The
+  states are described in more detail below:
+  <ul>
+  <li> <strong>GREEN (aka undercommitted)</strong>: We have a tree that is
+  in a <em>good</em> state. Every node has a reservation greater than the sum of
+  the reservations for its children. We have enough capacity at the root to
+  satisfy all the resources reserved by the children. All operations
+  performed on the tree, such as powering on virtual machines, creating
+  new resource pools, or reconfiguring resource settings, will ensure
+  that the above constraints are maintained. </li>
+
+  <li> <strong>RED (aka. inconsistent)</strong>: One or more nodes in the
+  tree has children whose reservations are greater than the node is configured to
+  support. For example, i) a resource pool with a fixed reservation has a running
+  virtual machine with a reservation that is higher than the reservation on
+  resource pool itself., or ii) the child reservations are greater than the limit.
+  <p>
+  In this state, the DRS algorithm is disabled until the resource pool tree's
+  configuration has  been brought back into a consistent state. We also restrict
+  the resources that such invalid nodes request from their parents to the
+  configured reservation/limit, in an attempt to isolate the problem to a small
+  subtree. For the rest of the tree, we determine whether the cluster is
+  undercommitted or overcommitted according to the existing rules and perform
+  admission control accordingly.
+  <p>
+  Note that since all changes to the resource settings are validated on the
+  VirtualCenter server, the system cannot be brought into this state by simply
+  manipulating a cluster resource pool tree through  VirtualCenter. It can only
+  happen if a virtual machine gets powered on directly on a host that is part of
+  a DRS cluster.
+  </li>
+
+  <li> <strong>YELLOW (aka overcommitted)</strong>: In this state, the tree is
+  consistent internally, but the root resource pool does not have the capacity at
+  to meet the reservation of its children. We can only go from GREEN -&gt; YELLOW if
+  we lose resources at the root. For example, hosts becomes unavailable or is
+  put into maintenance mode. Note that we will always have enough capacity at the root
+  to run all currently powered on VMs. However, we may not be able to satisfy all
+  resource pool reservations in the tree. In this state, the reservation configured for
+  a resource pool is no longer guaranteed, but the limits are still enforced.
+  This provides additional flexibility for bringing the tree back into a
+  consistent state, without risking bringing the tree into a RED state. In
+  more detail:
+  <ul>
+  <li> <strong>Resource Pool</strong> The root is considered to have unlimited
+  capacity. You can reserve resources without any check except the
+  requirement that the tree remains consistent. This means that
+  nodes whose parents are all configured with expandable reservations and no limit
+  will have unlimited available resources. However, if there is an ancestor with
+  a fixed reservation or an expandable reservation with a limit somewhere, then the
+  node will be limited by the reservation/limit of the ancestor.
+  </li>
+  <li> <strong>Virtual Machine</strong> Virtual machines are limited by ancestors
+  with a fixed reservation and the capacity at the root.
+  </li>
+  </ul>
+  </li>
+  </ul>
+
+  <p>
+  <b>Destroying a ResourcePool</b>
+  <p>
+  When a ResourcePool is destroyed, all the virtual machines are reassigned to its
+  parent pool. The root resource pool cannot be destroyed, and invoking destroy
+  on it will throw an InvalidType fault.
+  <p>
+  Any vApps in the ResourcePool will be moved to the ResourcePool's parent
+  before the pool is destroyed.
+  <p>
+  The Resource.DeletePool privilege must be held on the pool as well as the parent
+  of the resource pool.  Also, the Resource.AssignVMToPool privilege must be held
+  on the resource pool's parent pool and any virtual machines that are reassigned.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="childConfiguration" name="childConfiguration"></a><strong>childConfiguration</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.ResourceConfigSpec.html">ResourceConfigSpec[]</a></td><td>
+<p></p>
+         The resource configuration of all direct children (VirtualMachine and
+  ResourcePool) of this resource group.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="config" name="config"></a><strong>config</strong></td><td><a href="vim.ResourceConfigSpec.html">ResourceConfigSpec</a></td><td>
+<p></p>
+         Configuration of this resource pool.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="owner" name="owner"></a><strong>owner</strong><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ComputeResource.html">ComputeResource</a></td><td>
+<p></p>
+         The ComputeResource to which this set of one or more nested resource pools
+  belong.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="resourcePool" name="resourcePool"></a><strong>resourcePool</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.ResourcePool.html">ResourcePool[]</a></td><td>
+<p></p>
+         The set of child resource pools.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="runtime" name="runtime"></a><strong>runtime</strong></td><td><a href="vim.ResourcePool.RuntimeInfo.html">ResourcePoolRuntimeInfo</a></td><td>
+<p></p>
+         Runtime information about a resource pool.
+  The <a href="vim.ResourcePool.ResourceUsage.html">ResourcePoolResourceUsage</a> information within
+  <a href="vim.ResourcePool.RuntimeInfo.html">ResourcePoolRuntimeInfo</a> can be transiently stale.
+  Use <a href="vim.ResourcePool.html#refreshRuntime">RefreshRuntime</a> method to
+  update the information.
+
+  In releases after vSphere API 5.0, vSphere Servers might not
+  generate property collector update notifications for this property.
+  To obtain the latest value of the property, you can use
+  PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+  If you use the PropertyCollector.WaitForUpdatesEx method, specify
+  an empty string for the version parameter. Any other version value will not
+  produce any property values as no updates are generated.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="summary" name="summary"></a><strong>summary</strong></td><td><a href="vim.ResourcePool.Summary.html">ResourcePoolSummary</a></td><td>
+<p></p>
+         Basic information about a resource pool.
+
+  In releases after vSphere API 5.0, vSphere Servers might not
+  generate property collector update notifications for this property.
+  To obtain the latest value of the property, you can use
+  PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+  If you use the PropertyCollector.WaitForUpdatesEx method, specify
+  an empty string for the version parameter. Any other version value will not
+  produce any property values as no updates are generated.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vm" name="vm"></a><strong>vm</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.VirtualMachine.html">VirtualMachine[]</a></td><td>
+<p></p>
+         The set of virtual machines associated with this resource pool.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.ManagedEntity.html">ManagedEntity</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.ManagedEntity.html#alarmActionsEnabled">alarmActionsEnabled</a>, <a href="vim.ManagedEntity.html#configIssue">configIssue</a>, <a href="vim.ManagedEntity.html#configStatus">configStatus</a>, <a href="vim.ManagedEntity.html#customValue">customValue</a>, <a href="vim.ManagedEntity.html#declaredAlarmState">declaredAlarmState</a>, <a href="vim.ManagedEntity.html#disabledMethod">disabledMethod</a>, <a href="vim.ManagedEntity.html#effectiveRole">effectiveRole</a>, <a href="vim.ManagedEntity.html#name">name</a>, <a href="vim.ManagedEntity.html#overallStatus">overallStatus</a>, <a href="vim.ManagedEntity.html#parent">parent</a>, <a href="vim.ManagedEntity.html#permission">permission</a>, <a href="vim.ManagedEntity.html#recentTask">recentTask</a>, <a href="vim.ManagedEntity.html#tag">tag</a>, <a href="vim.ManagedEntity.html#triggeredAlarmState">triggeredAlarmState</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.ExtensibleManagedObject.html#availableField">availableField</a>, <a href="vim.ExtensibleManagedObject.html#value">value</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  System.View</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#createVm">CreateChildVM_Task</a>, <a href="#createResourcePool">CreateResourcePool</a>, <a href="#createVApp">CreateVApp</a>, <a href="#destroyChildren">DestroyChildren</a>, <a href="#importVApp">ImportVApp</a>, <a href="#moveInto">MoveIntoResourcePool</a>, <a href="#queryResourceConfigOption">QueryResourceConfigOption</a>, <a href="#refreshRuntime">RefreshRuntime</a>, <a href="#registerVm">RegisterChildVM_Task</a>, <a href="#updateChildResourceConfiguration">UpdateChildResourceConfiguration</a>, <a href="#updateConfig">UpdateConfig</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.ManagedEntity.html">ManagedEntity</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.ManagedEntity.html#destroy">Destroy_Task</a>, <a href="vim.ManagedEntity.html#reload">Reload</a>, <a href="vim.ManagedEntity.html#rename">Rename_Task</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.ExtensibleManagedObject.html#setCustomValue">setCustomValue</a></td>
+</tr>
+</table>
+<br>
+<a id="createVm" name="createVm"></a>
+<h1>CreateChildVM_Task</h1>
+<p></p>
+         Creates a new virtual machine in a vApp container.
+  <p>
+  This method supports creating a virtual machine directly in a vApp. A
+  virtual  machine in a vApp is not associated with a VM folder and therefore
+  cannot be created using the method on a <a href="vim.Folder.html#createVm">Folder</a>.
+  <p>
+  This method can only be called directly on a <a href="vim.VirtualApp.html">vApp</a>
+  or on a resource pool that is a child of a vApp.
+  <p>
+  The privilege VirtualMachine.Inventory.Create is required on this entity. Further,
+  if this is a resource pool, the privilege Resource.AssignVMToPool is required. If
+  this is a vApp, the privilege VApp.AssignVM is required.
+  <p>
+  Depending on the properties of the virtual machine bring created, additional
+  privileges may be required. See <a href="vim.Folder.html#createVm">CreateVM_Task</a> for a description of
+  these privileges.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>VirtualMachine.Inventory.Create</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ResourcePool.html">ResourcePool</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>config</strong></td><td><a href="vim.vm.ConfigSpec.html">VirtualMachineConfigSpec</a></td><td>
+<p></p>
+         The configuration of the virtual machine hardware.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         The target host on which the virtual machine will run. This must
+         specify a host that is a member of the ComputeResource indirectly
+         specified by the pool. For a stand-alone host or a cluster with DRS,
+         host can be omitted, and the system selects a default.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation. The <a href="vim.TaskInfo.html#result">info.result</a> property in the <a href="vim.Task.html">Task</a> contains the newly created <a href="vim.VirtualMachine.html">VirtualMachine</a> upon success.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.FileAlreadyExists.html">FileAlreadyExists</a></td><td>Thrown if the requested cfgPath for the virtual machine's configuration file already exists.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.FileFault.html">FileFault</a></td><td>Thrown if there is a problem creating the virtual machine on disk. Typically, a more specific subclass, such as NoDiskSpace, will be thrown.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InsufficientResourcesFault.html">InsufficientResourcesFault</a></td><td>Thrown if this operation would violate a resource usage policy.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidDatastore.html">InvalidDatastore</a></td><td>Thrown if the operation cannot be performed on the target datastores.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td>Thrown if the name is not a valid entity name.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if this resource pool is not a vApp or is a child of a vApp.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.OutOfBounds.html">OutOfBounds</a></td><td>Thrown if Host.capability.maxSupportedVMs is exceeded.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.VmConfigFault.html">VmConfigFault</a></td><td>Thrown if the configSpec has incorrect values. Typically, a more specific subclass is thrown.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.VmWwnConflict.html">VmWwnConflict</a></td><td>Thrown if the WWN of the virtual machine has been used by other virtual machines.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="createResourcePool" name="createResourcePool"></a>
+<h1>CreateResourcePool</h1>
+<p></p>
+         Creates a new resource pool.
+  <p>
+  In the ResourceConfigSpec, all values in ResourceAllocationInfo must be supplied;
+  they are not optional.
+  <p>
+  Any % (percent) character used in this name parameter must be escaped, unless it
+  is used to start an escape sequence. Clients may also escape any other characters
+  in this name parameter.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Resource.CreatePool</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ResourcePool.html">ResourcePool</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>name</strong></td><td>xsd:string</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.ResourceConfigSpec.html">ResourceConfigSpec</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ResourcePool.html">ResourcePool</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if this pool already contains an object with the given name.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InsufficientResourcesFault.html">InsufficientResourcesFault</a></td><td>Thrown if the operation would violate a resource usage policy. Typically, a more specific subclass, such as InsufficientCpuResourcesFault will be thrown.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the pool specification is invalid.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td>Thrown if the name is not a valid entity name.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the ComputeResource does not support nested resource pools.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CreateResourcePool-textarea');expandcontent(this, 'CreateResourcePool-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CreateResourcePool-div">
+<textarea cols="20" rows="10" name="CreateResourcePool-textarea" wrap="off" readonly="1" id="CreateResourcePool-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateResourcePool" type="vim25:CreateResourcePoolRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateResourcePoolResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="createVApp" name="createVApp"></a>
+<h1>CreateVApp</h1>
+<p></p>
+         Creates a new vApp container.
+  <p>
+  Any % (percent) character used in this name parameter must be escaped, unless it
+  is used to start an escape sequence. Clients may also escape any other characters
+  in this name parameter.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>VApp.Create</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ResourcePool.html">ResourcePool</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>name</strong></td><td>xsd:string</td><td>
+<p></p>
+         The name of the vApp container in the inventory
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>resSpec</strong></td><td><a href="vim.ResourceConfigSpec.html">ResourceConfigSpec</a></td><td>
+<p></p>
+         The resource configuration for the vApp container (same as for a
+                 regular resource pool).
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>configSpec</strong></td><td><a href="vim.vApp.VAppConfigSpec.html">VAppConfigSpec</a></td><td>
+<p></p>
+         The specification of the vApp specific meta-data.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>vmFolder</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Folder.html">Folder</a></td><td>
+<p></p>
+         The parent folder for the vApp. This must be null if this is
+  a child vApp.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.VirtualApp.html">VirtualApp</a></td><td>The created vApp object.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if this pool already contains an object with the given name.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InsufficientResourcesFault.html">InsufficientResourcesFault</a></td><td>Thrown if the operation would violate a resource usage policy. Typically, a more specific subclass, such as InsufficientCpuResourcesFault will be thrown.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the pool specification is invalid.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td>Thrown if the name is not a valid entity name.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the resource pool does not support the operation in its current state. This will typically be a subclass such as <a href="vim.fault.NoActiveHostInCluster.html">NoActiveHostInCluster</a>.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the ComputeResource does not support nested resource pools.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.VmConfigFault.html">VmConfigFault</a></td><td>or a more specific subclass, if errors are found in the supplied in VApp configuration.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CreateVApp-textarea');expandcontent(this, 'CreateVApp-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CreateVApp-div">
+<textarea cols="20" rows="10" name="CreateVApp-textarea" wrap="off" readonly="1" id="CreateVApp-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateVApp" type="vim25:CreateVAppRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateVAppResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="destroyChildren" name="destroyChildren"></a>
+<h1>DestroyChildren</h1>
+<p></p>
+         Removes all child resource pools recursively. All virtual machines and vApps
+  associated with the child resource pools get associated with this resource pool.
+
+  <p>
+  Note that resource pools contained in child vApps are not affected.
+
+  <p>
+  The privilege checks performed are the following.
+
+  <ul>
+    <li>Resource.DeletePool privilege must be held on this object and each of it's
+    immediate children to be destroyed.</li>
+    <li>If VMs are being moved, the privilege Resource.AssignVMToPool must be held
+    on this resource pool as well as on any virtual machines being moved.</li>
+    <li>If vApps are being moved, the privilege Resource.AssignVAppToPool
+    must be held on this resource pool as well as on any vApps being
+    moved.</li>
+  </ul>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Dynamic - See discussion above</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ResourcePool.html">ResourcePool</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('DestroyChildren-textarea');expandcontent(this, 'DestroyChildren-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="DestroyChildren-div">
+<textarea cols="20" rows="10" name="DestroyChildren-textarea" wrap="off" readonly="1" id="DestroyChildren-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DestroyChildren" type="vim25:DestroyChildrenRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DestroyChildrenResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="importVApp" name="importVApp"></a>
+<h1>ImportVApp</h1>
+<p></p>
+         Creates a new entity in this resource pool. The import process consists of two
+  steps:
+
+  <ol>
+    <li>Create the VMs and/or vApps that make up the entity.</li>
+    <li>Upload virtual disk contents.</li>
+  </ol>
+  In step 1, the client must wait for the server to create all inventory
+  objects. It does that by monitoring the <a href="vim.HttpNfcLease.html#state">state</a>
+  property on the <a href="vim.HttpNfcLease.html">HttpNfcLease</a> object returned from this call.
+  When the server is done creating objects, the lease will change to the
+  ready state, and step 2 begins. If an error occurs while the server is
+  creating inventory objects, the lease will change to the error state, and
+  the import process is aborted.
+
+  <p>
+  In step 2, the client uploads disk contents using the URLs provided in the
+  <a href="vim.HttpNfcLease.html#info">info</a> property of the lease. The client must call
+  <a href="vim.HttpNfcLease.html#progress">HttpNfcLeaseProgress</a> on the lease periodically to keep the
+  lease alive and report progress to the server. Failure to do so will cause
+  the lease to time out, and the import process will be aborted.
+
+  <p>
+  When the client is done uploading disks, it completes the lease by calling
+  <a href="vim.HttpNfcLease.html#complete">HttpNfcLeaseComplete</a>. The client can also abort the import
+  process by calling <a href="vim.HttpNfcLease.html#abort">HttpNfcLeaseAbort</a>.
+
+  <p>
+  If the import process fails, is aborted, or times out, all created inventory
+  objects are removed, including all virtual disks.
+
+  <p>
+  This operation only works if the folder's childType includes VirtualMachine.
+  <p>
+  Depending on the properties of the virtual machine bring imported, additional
+  privileges may be required. See <a href="vim.Folder.html#createVm">CreateVM_Task</a> for a description of
+  these privileges.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>VApp.Import</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ResourcePool.html">ResourcePool</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.ImportSpec.html">ImportSpec</a></td><td>
+<p></p>
+         An <a href="vim.ImportSpec.html">ImportSpec</a> describing what to import.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>folder</strong><span title="Need not be set" class="footnote-ref">*</span><span title="Required Privilege: VApp.Import" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Folder.html">Folder</a></td><td>
+<p></p>
+         The folder to which the entity will be attached.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         The target host on which the entity will run. This must
+         specify a host that is a member of the ComputeResource indirectly
+         specified by the pool. For a stand-alone host or a cluster with DRS,
+         host can be omitted, and the system selects a default.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  VApp.Import</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HttpNfcLease.html">HttpNfcLease</a></td><td>A <a href="vim.HttpNfcLease.html">HttpNfcLease</a> object which is used to drive the import session.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if another virtual machine in the same folder already has the specified target name.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.FileAlreadyExists.html">FileAlreadyExists</a></td><td>Thrown if the requested cfgPath for the virtual machine's configuration file already exists.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.FileFault.html">FileFault</a></td><td>Thrown if there is a problem creating the virtual machine on disk. Typically, a more specific subclass, such as NoDiskSpace, will be thrown.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InsufficientResourcesFault.html">InsufficientResourcesFault</a></td><td>Thrown if this operation would violate a resource usage policy.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidDatastore.html">InvalidDatastore</a></td><td>Thrown if the operation cannot be performed on the target datastores.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td>Thrown if the name is not a valid entity name.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the virtual machine is being created within a folder whose <a href="vim.Folder.html#childType">childType</a> property is not set to "VirtualMachine", a vApp is being imported into a resource pool that does not support nested resource pools, or a virtual machine is being imported into a resource pool and no folder is given.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.OutOfBounds.html">OutOfBounds</a></td><td>Thrown if Host.capability.maxSupportedVMs is exceeded.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.VmConfigFault.html">VmConfigFault</a></td><td>Thrown if a VM configSpec has incorrect values. Typically, a more specific subclass is thrown.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.VmWwnConflict.html">VmWwnConflict</a></td><td>Thrown if the WWN of the virtual machine has been used by other virtual machines.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ImportVApp-textarea');expandcontent(this, 'ImportVApp-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ImportVApp-div">
+<textarea cols="20" rows="10" name="ImportVApp-textarea" wrap="off" readonly="1" id="ImportVApp-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ImportVApp" type="vim25:ImportVAppRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ImportVAppResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="moveInto" name="moveInto"></a>
+<h1>MoveIntoResourcePool</h1>
+<p></p>
+         Moves a set of resource pools, vApps or virtual machines into this pool.  The
+  pools, vApps and virtual machines must be part of the cluster or standalone
+  host that contains this pool.
+  <p>
+  For each entity being moved, the move is subject to the following privilege
+  checks:
+  <ul>
+    <li>If the object being moved is a ResourcePool, then Resource.MovePool must be
+    held on the pool being moved and it's former parent pool or vApp. If the
+    target is a vApp, the privilege VApp.AssignResourcePool must be held on
+    it. If the target is a ResourcePool, Resource.MovePool must be held on it.</li>
+
+    <li>If the object being moved is a VirtualApp, VApp.Move must be held on
+    the vApp being moved and it's former parent pool or vApp. If the target
+    entity is a resource pool, Resource.AssignVAppToPool must be held on the
+    target. If the target is a vApp, the privilege VApp.AssignVApp must
+    be held on the target vApp.</li>
+
+    <li>If the object being moved is a VirtualMachine, then if the target is a
+    ResourcePool, Resource.AssignVMToPool is required on the VirtualMachine and the
+    target pool.  If the target is a vApp, VApp.AssignVM is required on both
+    the VirtualMachine and the target pool.</li>
+  </ul>
+
+  <p>
+  This operation is typically used by clients when they implement a drag-and-drop
+  interface to move a set of objects into a folder.
+  <p>
+  This operation is only transactional with respect to each individual entity.
+  The set of entities is moved sequentially, as specified in the list,
+  and committed one at a time. If a failure is detected, then the method
+  terminates with an exception.
+  <p>
+  The root resource pool cannot be moved.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Dynamic - See discussion above</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ResourcePool.html">ResourcePool</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>list</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity[]</a></td><td>
+<p></p>
+         A list of ResourcePool and VirtualMachine objects.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if this pool already contains an object with the given name.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InsufficientResourcesFault.html">InsufficientResourcesFault</a></td><td>Thrown if the move would violate the resource usage policy. Typically, a more specific subclass, such as InsufficientMemoryResourcesFault.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if an ancestor of this pool is in the list.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('MoveIntoResourcePool-textarea');expandcontent(this, 'MoveIntoResourcePool-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="MoveIntoResourcePool-div">
+<textarea cols="20" rows="10" name="MoveIntoResourcePool-textarea" wrap="off" readonly="1" id="MoveIntoResourcePool-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="MoveIntoResourcePool" type="vim25:MoveIntoResourcePoolRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="MoveIntoResourcePoolResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryResourceConfigOption" name="queryResourceConfigOption"></a>
+<h1>QueryResourceConfigOption</h1>
+<p></p>
+         Get a value range and default values for <a href="vim.ResourceConfigSpec.html">ResourceConfigSpec</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Resource.EditPool</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ResourcePool.html">ResourcePool</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.ResourceConfigOption.html">ResourceConfigOption</a></td><td><a href="vim.ResourceConfigOption.html">ResourceConfigOption</a> object.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryResourceConfigOption-textarea');expandcontent(this, 'QueryResourceConfigOption-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryResourceConfigOption-div">
+<textarea cols="20" rows="10" name="QueryResourceConfigOption-textarea" wrap="off" readonly="1" id="QueryResourceConfigOption-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryResourceConfigOption" type="vim25:QueryResourceConfigOptionRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryResourceConfigOptionResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ResourceConfigOption"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="refreshRuntime" name="refreshRuntime"></a>
+<h1>RefreshRuntime</h1>
+<p></p>
+         Refreshes the resource usage data that is available in
+ <a href="vim.ResourcePool.RuntimeInfo.html">ResourcePoolRuntimeInfo</a>.
+ The latest runtime resource usage of this resource pool may not be
+ available immediately after operations that alter resource usage,
+ such as powering on a virtual machine. Invoke this method when resource
+ usage may have recently changed, and the most up-to-date value in the
+ <a href="vim.ResourcePool.RuntimeInfo.html">ResourcePoolRuntimeInfo</a> is needed.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ResourcePool.html">ResourcePool</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RefreshRuntime-textarea');expandcontent(this, 'RefreshRuntime-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RefreshRuntime-div">
+<textarea cols="20" rows="10" name="RefreshRuntime-textarea" wrap="off" readonly="1" id="RefreshRuntime-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RefreshRuntime" type="vim25:RefreshRuntimeRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RefreshRuntimeResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="registerVm" name="registerVm"></a>
+<h1>RegisterChildVM_Task</h1>
+<p></p>
+         Adds an existing virtual machine to this resource pool or vApp.
+  <p>
+  This operation only works for vApps or resource pools that are children of
+  vApps. To register a VM in a folder, see <a href="vim.Folder.html#registerVm">RegisterVM_Task</a>.
+  <p>
+  Any % (percent) character used in this name parameter must be escaped, unless it
+  is used to start an escape sequence. Clients may also escape any other characters
+  in this name parameter.
+
+  In addition to the VirtualMachine.Inventory.Register privilege, it
+  requires System.Read privilege on the datastore that the existing virtual
+  machine resides on.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>VirtualMachine.Inventory.Register</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ResourcePool.html">ResourcePool</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>path</strong></td><td>xsd:string</td><td>
+<p></p>
+         A datastore path to the virtual machine. If the path ends with
+         ".vmtx", indicating that it refers to a VM template, an InvalidArgument
+         fault is thrown.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>name</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The name to be assigned to the virtual machine. If this parameter is
+         not set, the displayName configuration parameter of the virtual machine is
+         used. An entity name must be a non-empty string of less than 80
+         characters. The slash (/), backslash (\) and percent (%) will be
+         escaped using the URL syntax. For example, %2F.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         The target host on which the virtual machine will run. This parameter
+         must specify a host that is a member of the ComputeResource to which this
+         resource pool belongs. For a stand-alone host or a cluster with DRS,
+         the parameter can be omitted, and the system selects a default.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation. The <a href="vim.TaskInfo.html#result">info.result</a> property in the <a href="vim.Task.html">Task</a> contains the newly registered <a href="vim.VirtualMachine.html">VirtualMachine</a> upon success.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AlreadyExists.html">AlreadyExists</a></td><td>Thrown if the virtual machine is already registered.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.FileFault.html">FileFault</a></td><td>Thrown if there is an error accessing the files on disk.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InsufficientResourcesFault.html">InsufficientResourcesFault</a></td><td>Thrown if this operation would violate a resource usage policy.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if any of the arguments are invalid and a more specific fault type does not apply.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidDatastore.html">InvalidDatastore</a></td><td>Thrown if the operation cannot be performed on the target datastores.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td>Thrown if the entity name is invalid.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the configuration file is not found on the system.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the operation is not supported. For example, if the operation is invoked on a resource pool that is unrelated to a vApp.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.OutOfBounds.html">OutOfBounds</a></td><td>Thrown if the maximum number of VMs has been exceeded.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.VmConfigFault.html">VmConfigFault</a></td><td>Thrown if the format / configuration of the virtual machine is invalid. Typically, a more specific fault is thrown such as InvalidFormat if the configuration file cannot be read, or InvalidDiskFormat if the disks cannot be read.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="updateChildResourceConfiguration" name="updateChildResourceConfiguration"></a>
+<h1>UpdateChildResourceConfiguration</h1>
+<p></p>
+         Changes resource configuration of a set of children of this resource pool. The
+  method allows bulk modifications of the set of the direct children
+  (virtual machines and resource pools).
+  <p>
+  Bulk modifications are not transactional. Each modification is made individually.
+  If a failure is encountered while applying the changes, then the processing stops,
+  meaning at least one and as many as all of the changes are not applied.
+  <p>
+  A set can include a subset of the resources. Children that are not
+  mentioned in the list are not changed.
+  <p>
+  For each ResourceConfigSpec, the following privilege checks apply:
+  <ul>
+     <li>If the ResourceConfigSpec refers to a child resource pool or a child
+         vApp, the privileges required are the same as would be required for
+         calling <a href="vim.ResourcePool.html#updateConfig">UpdateConfig</a> on that entity.</li>
+     <li>If the ResourceConfigSpec refers to a virtual machine,
+         VirtualMachine.Config.Resource must be held on the virtual machine.</li>
+  </ul>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Dynamic - See discussion above</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ResourcePool.html">ResourcePool</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.ResourceConfigSpec.html">ResourceConfigSpec[]</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InsufficientResourcesFault.html">InsufficientResourcesFault</a></td><td>Thrown if the operation would violate a resource usage policy. Typically, a more specific subclass, such as InsufficientMemoryResourcesFault will be thrown.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if a managed entity that is not a child of this group is included.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateChildResourceConfiguration-textarea');expandcontent(this, 'UpdateChildResourceConfiguration-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateChildResourceConfiguration-div">
+<textarea cols="20" rows="10" name="UpdateChildResourceConfiguration-textarea" wrap="off" readonly="1" id="UpdateChildResourceConfiguration-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateChildResourceConfiguration" type="vim25:UpdateChildResourceConfigurationRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateChildResourceConfigurationResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateConfig" name="updateConfig"></a>
+<h1>UpdateConfig</h1>
+<p></p>
+         Updates the configuration of the resource pool.
+   <p>
+   Any % (percent) character used in this name parameter must be escaped, unless it
+   is used to start an escape sequence. Clients may also escape any other characters
+   in this name parameter.
+   <p>
+   The privilege checks for this operation are as follows:
+   <ul>
+     <li>If this is a resource pool, the privilege Resource.EditPool is required on
+     this and on the parent pool or vApp.</li>
+     <li>If this is a vApp, the privilege VApp.ResourceConfig is required on
+     this and on the parent pool or vApp.</li>
+   </ul>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Dynamic - See discussion above</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ResourcePool.html">ResourcePool</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>name</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         If set, then the new name of the resource pool.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>config</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.ResourceConfigSpec.html">ResourceConfigSpec</a></td><td>
+<p></p>
+         If set, then the new resource allocation for this
+                  resource pool.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.ConcurrentAccess.html">ConcurrentAccess</a></td><td>Thrown if the changeVersion does not match the server's changeVersion for the configuration.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if the name is changed to an already existing name.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InsufficientResourcesFault.html">InsufficientResourcesFault</a></td><td>Thrown if the pool specification cannot be supported by the parent resource pool or vApp.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the parameters are out of range, or if the reservationLimit field is set.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td>Thrown if the name is not a valid entity name.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateConfig-textarea');expandcontent(this, 'UpdateConfig-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateConfig-div">
+<textarea cols="20" rows="10" name="UpdateConfig-textarea" wrap="off" readonly="1" id="UpdateConfig-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateConfig" type="vim25:UpdateConfigRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateConfigResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

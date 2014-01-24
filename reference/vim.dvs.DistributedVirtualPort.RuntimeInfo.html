@@ -1,0 +1,234 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.dvs.DistributedVirtualPort.RuntimeInfo" name="vim.dvs.DistributedVirtualPort.RuntimeInfo"></a>
+<h1>Data Object - DVPortStatus</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.dvs.DistributedVirtualPort.State.html#field_detail">DVPortState</a>, <a href="vim.event.DvsPortBlockedEvent.html#field_detail">DvsPortBlockedEvent</a>, <a href="vim.event.DvsPortEnteredPassthruEvent.html#field_detail">DvsPortEnteredPassthruEvent</a>, <a href="vim.event.DvsPortExitedPassthruEvent.html#field_detail">DvsPortExitedPassthruEvent</a>, <a href="vim.event.DvsPortLinkDownEvent.html#field_detail">DvsPortLinkDownEvent</a>, <a href="vim.event.DvsPortLinkUpEvent.html#field_detail">DvsPortLinkUpEvent</a>, <a href="vim.event.DvsPortRuntimeChangeEvent.html#field_detail">DvsPortRuntimeChangeEvent</a>, <a href="vim.event.DvsPortUnblockedEvent.html#field_detail">DvsPortUnblockedEvent</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.NumericRange.html">NumericRange</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The <a href="vim.dvs.DistributedVirtualPort.RuntimeInfo.html">DVPortStatus</a> data object
+ contains runtime information about a <a href="vim.dvs.DistributedVirtualPort.html">DistributedVirtualPort</a>.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="blocked" name="blocked"></a><strong>blocked</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the port is blocked by switch implementation.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="linkPeer" name="linkPeer"></a><strong>linkPeer</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Name of the connected entity.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="linkUp" name="linkUp"></a><strong>linkUp</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the port is in linkUp status.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="macAddress" name="macAddress"></a><strong>macAddress</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The MAC address that is used at this port.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="mtu" name="mtu"></a><strong>mtu</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Maximum transmission unit (MTU) of the port. You can set the MTU only
+ at the switch level
+ (<a href="vim.dvs.VmwareDistributedVirtualSwitch.ConfigSpec.html">VMwareDVSConfigSpec</a>).
+ If you attempt to change it at the portgroup or port level,
+ the Server throws an exception.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="statusDetail" name="statusDetail"></a><strong>statusDetail</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Additional information regarding the current status of the port.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="trunkingMode" name="trunkingMode"></a><strong>trunkingMode</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         True if the port VLAN tagging/stripping is disabled.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vlanIds" name="vlanIds"></a><strong>vlanIds</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.NumericRange.html">NumericRange[]</a></td><td>
+<p></p>
+         VLAN ID of the port.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vmDirectPathGen2Active" name="vmDirectPathGen2Active"></a><strong>vmDirectPathGen2Active</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether VMDirectPath Gen 2 is active on this port.
+  If false, the reason(s) for inactivity will be provided in one or
+  more of <a href="vim.dvs.DistributedVirtualPort.RuntimeInfo.html#vmDirectPathGen2InactiveReasonNetwork">vmDirectPathGen2InactiveReasonNetwork</a>,
+  <a href="vim.dvs.DistributedVirtualPort.RuntimeInfo.html#vmDirectPathGen2InactiveReasonOther">vmDirectPathGen2InactiveReasonOther</a>,
+  and <a href="vim.dvs.DistributedVirtualPort.RuntimeInfo.html#vmDirectPathGen2InactiveReasonExtended">vmDirectPathGen2InactiveReasonExtended</a>.
+  <p>
+  If the host software is not capable of VMDirectPath Gen 2,
+  this property will be unset. See
+  <a href="vim.host.Capability.html">HostCapability</a>.<a href="vim.host.Capability.html#vmDirectPathGen2Supported">vmDirectPathGen2Supported</a>.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vmDirectPathGen2InactiveReasonExtended" name="vmDirectPathGen2InactiveReasonExtended"></a><strong>vmDirectPathGen2InactiveReasonExtended</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         If <a href="vim.dvs.DistributedVirtualPort.RuntimeInfo.html#vmDirectPathGen2Active">vmDirectPathGen2Active</a> is false, this property may
+  contain an explanation provided by the platform, beyond the reasons
+  (if any) listed in <a href="vim.dvs.DistributedVirtualPort.RuntimeInfo.html#vmDirectPathGen2InactiveReasonNetwork">vmDirectPathGen2InactiveReasonNetwork</a>
+  and/or <a href="vim.dvs.DistributedVirtualPort.RuntimeInfo.html#vmDirectPathGen2InactiveReasonOther">vmDirectPathGen2InactiveReasonOther</a>.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vmDirectPathGen2InactiveReasonNetwork" name="vmDirectPathGen2InactiveReasonNetwork"></a><strong>vmDirectPathGen2InactiveReasonNetwork</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         If <a href="vim.dvs.DistributedVirtualPort.RuntimeInfo.html#vmDirectPathGen2Active">vmDirectPathGen2Active</a> is false, this array will be
+  populated with reasons for the inactivity that are related to network
+  state or configuration. The reasons are chosen from the
+  <a href="vim.dvs.DistributedVirtualPort.RuntimeInfo.VmDirectPathGen2InactiveReasonNetwork.html">DVPortStatusVmDirectPathGen2InactiveReasonNetwork</a>
+  values.
+  <p>
+  Other reasons for inactivity will be provided in
+  <a href="vim.dvs.DistributedVirtualPort.RuntimeInfo.html#vmDirectPathGen2InactiveReasonOther">vmDirectPathGen2InactiveReasonOther</a>. If there is a reason
+  for inactivity that cannot be described by the available constants,
+  <a href="vim.dvs.DistributedVirtualPort.RuntimeInfo.html#vmDirectPathGen2InactiveReasonExtended">vmDirectPathGen2InactiveReasonExtended</a> will be populated
+  with an additional explanation provided by the platform.
+  <p>
+  Note that this list of reasons is not guaranteed to be exhaustive.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vmDirectPathGen2InactiveReasonOther" name="vmDirectPathGen2InactiveReasonOther"></a><strong>vmDirectPathGen2InactiveReasonOther</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         If <a href="vim.dvs.DistributedVirtualPort.RuntimeInfo.html#vmDirectPathGen2Active">vmDirectPathGen2Active</a> is false, this array will be
+  populated with reasons for the inactivity that are not related to
+  network state or configuration. The reasons are chosen from the
+  <a href="vim.dvs.DistributedVirtualPort.RuntimeInfo.VmDirectPathGen2InactiveReasonOther.html">DVPortStatusVmDirectPathGen2InactiveReasonOther</a>
+  values.
+  <p>
+  Network-related reasons for inactivity will be provided in
+  <a href="vim.dvs.DistributedVirtualPort.RuntimeInfo.html#vmDirectPathGen2InactiveReasonNetwork">vmDirectPathGen2InactiveReasonNetwork</a>. If there is a reason
+  for inactivity that cannot be described by the available constants,
+  <a href="vim.dvs.DistributedVirtualPort.RuntimeInfo.html#vmDirectPathGen2InactiveReasonExtended">vmDirectPathGen2InactiveReasonExtended</a> will be populated
+  with an additional explanation provided by the platform.
+  <p>
+  Note that this list of reasons is not guaranteed to be exhaustive.<br>See <a href="vim.host.Capability.html#vmDirectPathGen2Supported">vmDirectPathGen2Supported</a><br>
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DVPortStatus">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="linkUp" type="xsd:boolean"/>
+                     <element name="blocked" type="xsd:boolean"/>
+                     <element name="vlanIds" type="vim25:NumericRange" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="trunkingMode" type="xsd:boolean" minOccurs="0"/>
+                     <element name="mtu" type="xsd:int" minOccurs="0"/>
+                     <element name="linkPeer" type="xsd:string" minOccurs="0"/>
+                     <element name="macAddress" type="xsd:string" minOccurs="0"/>
+                     <element name="statusDetail" type="xsd:string" minOccurs="0"/>
+                     <element name="vmDirectPathGen2Active" type="xsd:boolean" minOccurs="0"/>
+                     <element name="vmDirectPathGen2InactiveReasonNetwork" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="vmDirectPathGen2InactiveReasonOther" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="vmDirectPathGen2InactiveReasonExtended" type="xsd:string" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

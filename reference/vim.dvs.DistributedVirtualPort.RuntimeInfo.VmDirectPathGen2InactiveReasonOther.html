@@ -1,0 +1,86 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.dvs.DistributedVirtualPort.RuntimeInfo.VmDirectPathGen2InactiveReasonOther" name="vim.dvs.DistributedVirtualPort.RuntimeInfo.VmDirectPathGen2InactiveReasonOther"></a>
+<h1>Enum - 
+						DVPortStatusVmDirectPathGen2InactiveReasonOther</h1>
+<dl>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+<p></p>
+</dl>
+<br>
+<h2>Enum Description</h2>
+<p></p>
+         Set of possible values for
+  <a href="vim.dvs.DistributedVirtualPort.RuntimeInfo.html">DVPortStatus</a>.<a href="vim.dvs.DistributedVirtualPort.RuntimeInfo.html#vmDirectPathGen2InactiveReasonOther">vmDirectPathGen2InactiveReasonOther</a>.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Enum Constants</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><a id="portNptIncompatibleConnectee" name="portNptIncompatibleConnectee"></a>portNptIncompatibleConnectee</td><td>
+      Configuration or state of the port's connectee prevents
+  VMDirectPath Gen 2. See
+  <a href="vim.vm.DeviceRuntimeInfo.VirtualEthernetCardRuntimeState.html#vmDirectPathGen2InactiveReasonVm">vmDirectPathGen2InactiveReasonVm</a>
+  and/or
+  <a href="vim.vm.DeviceRuntimeInfo.VirtualEthernetCardRuntimeState.html#vmDirectPathGen2InactiveReasonExtended">vmDirectPathGen2InactiveReasonExtended</a>
+  in the appropriate element of the RuntimeInfo.device array of the
+  virtual machine connected to this port.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="portNptIncompatibleHost" name="portNptIncompatibleHost"></a>portNptIncompatibleHost</td><td>
+      The host for which this port is defined does not support VMDirectPath Gen 2.
+  See <a href="vim.host.Capability.html">HostCapability</a>.<a href="vim.host.Capability.html#vmDirectPathGen2Supported">vmDirectPathGen2Supported</a>
+   <br>
+</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <simpleType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DVPortStatusVmDirectPathGen2InactiveReasonOther">
+            <restriction base="xsd:string">
+               <enumeration value="portNptIncompatibleHost"/>
+               <enumeration value="portNptIncompatibleConnectee"/>
+            </restriction>
+         </simpleType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

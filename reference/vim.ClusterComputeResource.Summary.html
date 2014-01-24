@@ -1,0 +1,168 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.ClusterComputeResource.Summary" name="vim.ClusterComputeResource.Summary"></a>
+<h1>Data Object - ClusterComputeResourceSummary</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.ComputeResource.Summary.html">ComputeResourceSummary</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.cluster.DasAdmissionControlInfo.html">ClusterDasAdmissionControlInfo</a>, <a href="vim.cluster.DasData.html">ClusterDasData</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The <a href="vim.ClusterComputeResource.Summary.html">ClusterComputeResourceSummary</a> data object
+  encapsulates runtime properties of a <a href="vim.ClusterComputeResource.html">ClusterComputeResource</a>.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="admissionControlInfo" name="admissionControlInfo"></a><strong>admissionControlInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.cluster.DasAdmissionControlInfo.html">ClusterDasAdmissionControlInfo</a></td><td>
+<p></p>
+         Information about the current amount of resources available for a vSphere HA
+ cluster. The actual type of admissionControlInfo will depend on what kind of
+ <a href="vim.cluster.DasAdmissionControlPolicy.html">ClusterDasAdmissionControlPolicy</a> was used to configure the cluster.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="currentBalance" name="currentBalance"></a><strong>currentBalance</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The current balance, in terms of standard deviation, for a DRS cluster.
+  Units are thousandths. For example, 12 represents 0.012.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="currentEVCModeKey" name="currentEVCModeKey"></a><strong>currentEVCModeKey</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The Enhanced VMotion Compatibility mode that is currently in effect
+  for all hosts in this cluster; unset if no EVC mode is active.<br>See <a href="vim.Capability.html#supportedEVCMode">supportedEVCMode</a><br>
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="currentFailoverLevel" name="currentFailoverLevel"></a><strong>currentFailoverLevel</strong></td><td>xsd:int</td><td><B>Deprecated.</B><I>
+         As of vSphere API 4.0, use
+ <a href="vim.cluster.FailoverLevelAdmissionControlInfo.html#currentFailoverLevel">currentFailoverLevel</a>
+      </I>
+<p></p>
+         Current failover level. This is the number of physical host failures that can
+  be tolerated without impacting the ability to satisfy the minimums for all
+  running virtual machines. This represents the current value, as opposed to
+  desired value configured by the user.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="dasData" name="dasData"></a><strong>dasData</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.cluster.DasData.html">ClusterDasData</a></td><td>
+<p></p>
+         Data pertaining to DAS.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="numVmotions" name="numVmotions"></a><strong>numVmotions</strong></td><td>xsd:int</td><td>
+<p></p>
+         Total number of migrations with VMotion that have been done internal to this
+  cluster.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="targetBalance" name="targetBalance"></a><strong>targetBalance</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The target balance, in terms of standard deviation, for a DRS cluster.
+  Units are thousandths. For example, 12 represents 0.012.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.ComputeResource.Summary.html">ComputeResourceSummary</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.ComputeResource.Summary.html#effectiveCpu">effectiveCpu</a>, <a href="vim.ComputeResource.Summary.html#effectiveMemory">effectiveMemory</a>, <a href="vim.ComputeResource.Summary.html#numCpuCores">numCpuCores</a>, <a href="vim.ComputeResource.Summary.html#numCpuThreads">numCpuThreads</a>, <a href="vim.ComputeResource.Summary.html#numEffectiveHosts">numEffectiveHosts</a>, <a href="vim.ComputeResource.Summary.html#numHosts">numHosts</a>, <a href="vim.ComputeResource.Summary.html#overallStatus">overallStatus</a>, <a href="vim.ComputeResource.Summary.html#totalCpu">totalCpu</a>, <a href="vim.ComputeResource.Summary.html#totalMemory">totalMemory</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ClusterComputeResourceSummary">
+            <complexContent>
+               <extension base="vim25:ComputeResourceSummary">
+                  <sequence>
+                     <element name="currentFailoverLevel" type="xsd:int"/>
+                     <element name="admissionControlInfo" type="vim25:ClusterDasAdmissionControlInfo" minOccurs="0"/>
+                     <element name="numVmotions" type="xsd:int"/>
+                     <element name="targetBalance" type="xsd:int" minOccurs="0"/>
+                     <element name="currentBalance" type="xsd:int" minOccurs="0"/>
+                     <element name="currentEVCModeKey" type="xsd:string" minOccurs="0"/>
+                     <element name="dasData" type="vim25:ClusterDasData" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

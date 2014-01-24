@@ -1,0 +1,171 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.AuthenticationManager" name="vim.host.AuthenticationManager"></a>
+<h1>Managed Object -  
+						HostAuthenticationManager</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.host.ConfigManager.html#field_detail">HostConfigManager</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.AuthenticationManagerInfo.html">HostAuthenticationManagerInfo</a>, <a href="vim.host.AuthenticationStore.html">HostAuthenticationStore</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         The <a href="vim.host.AuthenticationManager.html">HostAuthenticationManager</a> managed object provides
+  access to Active Directory configuration information for an
+  ESX host. It also provides access to methods for adding a host
+  to or removing a host from an Active Directory domain.
+  <p>
+  The vSphere API supports Microsoft Active Directory management
+  of authentication for ESX hosts. To integrate an ESX host
+  into an Active Directory environment, you use an Active
+  Directory account that has the authority to add
+  a computer to a domain. The ESX Server locates the Active
+  Directory domain controller. When you add a host to a domain,
+  you only need to specify the domain and the account
+  user name and password.
+  <p>
+  There are two approaches that you can use to add an ESX host
+  to or remove a host from an Active Directory domain.
+  <ul>
+  <li><a href="vim.host.ActiveDirectoryAuthentication.html#joinDomain">JoinDomain_Task</a> and
+    <a href="vim.host.ActiveDirectoryAuthentication.html#leaveCurrentDomain">LeaveCurrentDomain_Task</a>
+    methods - Your vSphere client application can call
+    these methods directly to add the host to or remove the host
+    from a domain.
+  </li>
+  <li>Host configuration - Use the <a href="vim.host.ActiveDirectorySpec.html">HostActiveDirectory</a> data object
+    to specify Active Directory configuration, either adding the host to
+    or removing the host from a domain. To apply the Active Directory
+    configuration, use the <a href="vim.profile.host.ProfileManager.html">HostProfileManager</a> method
+    (<a href="vim.profile.host.ProfileManager.html#applyHostConfiguration">ApplyHostConfig_Task</a>)
+    to apply the <a href="vim.host.ConfigSpec.html">HostConfigSpec</a>. When the ESX Server processes
+    the configuration, it will invoke the join or leave method.
+  </li>
+  </ul>
+  <p>
+  To take advantage of ESX host membership in an Active Directory domain,
+  grant permissions on the ESX host to Active Directory users and groups
+  who should have direct access to management of the ESX host.
+  Use the <a href="vim.UserDirectory.html">UserDirectory</a>.<a href="vim.UserDirectory.html#retrieveUserGroups">RetrieveUserGroups</a>
+  method to obtain information about Active Directory users and groups.
+  After retrieving the Active Directory data, you can use the
+  <a href="vim.AuthorizationManager.html">AuthorizationManager</a>.<a href="vim.AuthorizationManager.html#setEntityPermissions">SetEntityPermissions</a>
+  method to set the <a href="vim.AuthorizationManager.Permission.html#principal">principal</a> property
+  to the appropriate user or group.
+  <p>
+  By default, the ESX host assigns the Administrator role to the "ESX Admins" group.
+  If the group does not exist when the host joins the domain, the host will
+  not assign the role. In this case, you must create the "ESX Admins"
+  group in the Active Directory. The host will periodically check the domain controller
+  for the group and will assign the role when the group exists.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="info" name="info"></a><strong>info</strong></td><td><a href="vim.host.AuthenticationManagerInfo.html">HostAuthenticationManagerInfo</a></td><td>
+<p></p>
+         Information about Active Directory membership.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="supportedStore" name="supportedStore"></a><strong>supportedStore</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.host.AuthenticationStore.html">HostAuthenticationStore[]</a></td><td>
+<p></p>
+         An array that can contain managed object references to local and
+ Active Directory authentication managed objects.
+ <p>
+ <code>supportedStore</code> data implies a connection to a system
+ that stores information about accounts.
+ The <code>supportedStore</code> array can include the following objects:
+ <ul>
+   <li> <a href="vim.host.LocalAuthentication.html">HostLocalAuthentication</a> - Local authentication refers
+        to user accounts on the ESX host. Local authentication is always enabled.
+   </li>
+   <li> <a href="vim.host.ActiveDirectoryAuthentication.html">HostActiveDirectoryAuthentication</a> - Active Directory authentication
+        refers to computer accounts and user accounts on the domain controller.
+        This object indicates the domain membership status for the host
+        and defines the join and leave methods for Active Directory
+        membership.
+        <p />
+        If <code>supportedStore</code> references
+        a <a href="vim.host.ActiveDirectoryAuthentication.html">HostActiveDirectoryAuthentication</a> object, the host
+        is capable of joining a domain.
+        However, if you try to add a host to a domain when the
+        <a href="vim.host.AuthenticationStoreInfo.html">HostAuthenticationStoreInfo</a>.<a href="vim.host.AuthenticationStoreInfo.html#enabled">enabled</a>
+        property is <code>True</code> (accessed through the <code>info</code>
+        property), the join method will throw a fault.
+   </li>
+ </ul>
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td>
+							None
+						</td>
+</tr>
+</table>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

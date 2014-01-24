@@ -1,0 +1,355 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.AutoStartManager" name="vim.host.AutoStartManager"></a>
+<h1>Managed Object -  
+						HostAutoStartManager</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.host.ConfigManager.html#field_detail">HostConfigManager</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.AutoStartManager.Config.html">HostAutoStartManagerConfig</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         The AutoStartManager allows clients to invoke and set up the auto-start/auto-stop 
+  order of virtual machines on a single host. Virtual machines configured to use 
+  auto-start are automatically started or stopped when the host is started or shut 
+  down. The AutoStartManager is available when clients connect directly to a host, 
+  such as an ESX Server machine or through VirtualCenter.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="config" name="config"></a><strong>config</strong></td><td><a href="vim.host.AutoStartManager.Config.html">HostAutoStartManagerConfig</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#autoPowerOff">AutoStartPowerOff</a>, <a href="#autoPowerOn">AutoStartPowerOn</a>, <a href="#reconfigure">ReconfigureAutostart</a></td>
+</tr>
+</table>
+<br>
+<a id="autoPowerOff" name="autoPowerOff"></a>
+<h1>AutoStartPowerOff</h1>
+<p></p>
+         Powers-off virtual machines according to the current AutoStart configuration.
+  <p>
+  See the description of the (@link vim.host.AutoStartManager.AutoPowerInfo)
+  data object type for more information on Auto power-off behavior.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.AutoStart</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.AutoStartManager.html">HostAutoStartManager</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('AutoStartPowerOff-textarea');expandcontent(this, 'AutoStartPowerOff-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="AutoStartPowerOff-div">
+<textarea cols="20" rows="10" name="AutoStartPowerOff-textarea" wrap="off" readonly="1" id="AutoStartPowerOff-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AutoStartPowerOff" type="vim25:AutoStartPowerOffRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AutoStartPowerOffResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="autoPowerOn" name="autoPowerOn"></a>
+<h1>AutoStartPowerOn</h1>
+<p></p>
+         Powers-on virtual machines according to the current AutoStart configuration.
+  <p>
+  See the description of the (@link vim.host.AutoStartManager.AutoPowerInfo)
+  data object type for more information on Auto power-on behavior.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.AutoStart</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.AutoStartManager.html">HostAutoStartManager</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('AutoStartPowerOn-textarea');expandcontent(this, 'AutoStartPowerOn-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="AutoStartPowerOn-div">
+<textarea cols="20" rows="10" name="AutoStartPowerOn-textarea" wrap="off" readonly="1" id="AutoStartPowerOn-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AutoStartPowerOn" type="vim25:AutoStartPowerOnRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AutoStartPowerOnResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="reconfigure" name="reconfigure"></a>
+<h1>ReconfigureAutostart</h1>
+<p></p>
+         Changes the power-on or power-off sequence and system defaults. The specification
+  is an incremental change to the current configuration.
+  <p>
+  If systemDefaults are included, only values that are specified in the
+  specification are changed.
+  <p>
+  For the spec.powerInfo array, each element is interpreted as an incremental
+  change and the changes are processed sequentially. It is not an error to remove a
+  non-existing virtual machine. If both startAction and stopAction are set to
+  none, then the virtual machine is removed from the configuration.
+  <p>
+  A virtual machine's position in the order can be changed either by assigning the
+  virtual machine a different position in the order or removing the machine from
+  the order. When a virtual machine's position changes, all other virtual machines'
+  positions may be affected as they move to new positions relative to each other.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.AutoStart</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.AutoStartManager.html">HostAutoStartManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.host.AutoStartManager.Config.html">HostAutoStartManagerConfig</a></td><td>
+<p></p>
+         List of changes to defaults and auto-start/auto-stop order.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ReconfigureAutostart-textarea');expandcontent(this, 'ReconfigureAutostart-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ReconfigureAutostart-div">
+<textarea cols="20" rows="10" name="ReconfigureAutostart-textarea" wrap="off" readonly="1" id="ReconfigureAutostart-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ReconfigureAutostart" type="vim25:ReconfigureAutostartRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ReconfigureAutostartResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

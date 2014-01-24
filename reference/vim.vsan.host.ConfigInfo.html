@@ -1,0 +1,152 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vsan.host.ConfigInfo" name="vim.vsan.host.ConfigInfo"></a>
+<h1>Data Object - VsanHostConfigInfo</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.cluster.ConfigInfoEx.html#field_detail">ClusterConfigInfoEx</a>, <a href="vim.cluster.ConfigSpecEx.html#field_detail">ClusterConfigSpecEx</a>, <a href="vim.host.ConfigInfo.html#field_detail">HostConfigInfo</a>, <a href="vim.host.VsanSystem.html#field_detail">HostVsanSystem</a>
+</dd>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.host.VsanSystem.html#update">UpdateVsan_Task</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.HostSystem.html">HostSystem</a>, <a href="vim.vsan.host.ConfigInfo.ClusterInfo.html">VsanHostConfigInfoClusterInfo</a>, <a href="vim.vsan.host.ConfigInfo.NetworkInfo.html">VsanHostConfigInfoNetworkInfo</a>, <a href="vim.vsan.host.ConfigInfo.StorageInfo.html">VsanHostConfigInfoStorageInfo</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.5</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The <a href="vim.vsan.host.ConfigInfo.html">VsanHostConfigInfo</a> data object contains host-specific settings
+ for the VSAN service.  This data object is used both for specifying
+ settings for updating the VSAN service, and as an output datatype
+ when retrieving current VSAN service settings.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="clusterInfo" name="clusterInfo"></a><strong>clusterInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vsan.host.ConfigInfo.ClusterInfo.html">VsanHostConfigInfoClusterInfo</a></td><td>
+<p></p>
+         The VSAN service cluster configuration for this host.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="enabled" name="enabled"></a><strong>enabled</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Whether the VSAN service is currently enabled on this host.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="hostSystem" name="hostSystem"></a><strong>hostSystem</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         The <a href="vim.HostSystem.html">HostSystem</a> for this host.
+
+ This argument is required when this configuration is specified as
+ an input to VC-level APIs.  When this configuration is specified
+ to a host-level direct API, this argument may be omitted.<br>See <a href="vim.ComputeResource.html#reconfigureEx">ReconfigureComputeResource_Task</a><br>See <a href="vim.host.VsanSystem.html#update">UpdateVsan_Task</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="networkInfo" name="networkInfo"></a><strong>networkInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vsan.host.ConfigInfo.NetworkInfo.html">VsanHostConfigInfoNetworkInfo</a></td><td>
+<p></p>
+         The VSAN network configuration for this host.
+
+ VSAN network configuration settings are independent of the
+ current value of <a href="vim.vsan.host.ConfigInfo.html#enabled">enabled</a>.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="storageInfo" name="storageInfo"></a><strong>storageInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vsan.host.ConfigInfo.StorageInfo.html">VsanHostConfigInfoStorageInfo</a></td><td>
+<p></p>
+         The VSAN storage configuration for this host.
+
+ VSAN storage configuration settings are independent of the
+ current value of <a href="vim.vsan.host.ConfigInfo.html#enabled">enabled</a>.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VsanHostConfigInfo">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="enabled" type="xsd:boolean" minOccurs="0"/>
+                     <element name="hostSystem" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="clusterInfo" type="vim25:VsanHostConfigInfoClusterInfo" minOccurs="0"/>
+                     <element name="storageInfo" type="vim25:VsanHostConfigInfoStorageInfo" minOccurs="0"/>
+                     <element name="networkInfo" type="vim25:VsanHostConfigInfoNetworkInfo" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

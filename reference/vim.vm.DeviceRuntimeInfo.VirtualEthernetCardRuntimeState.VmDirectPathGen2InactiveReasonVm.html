@@ -1,0 +1,179 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.DeviceRuntimeInfo.VirtualEthernetCardRuntimeState.VmDirectPathGen2InactiveReasonVm" name="vim.vm.DeviceRuntimeInfo.VirtualEthernetCardRuntimeState.VmDirectPathGen2InactiveReasonVm"></a>
+<h1>Enum - 
+						VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm</h1>
+<dl>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+<p></p>
+</dl>
+<br>
+<h2>Enum Description</h2>
+<p></p>
+<p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Enum Constants</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><a id="vmNptConflictingIOChainConfigured" name="vmNptConflictingIOChainConfigured"></a>vmNptConflictingIOChainConfigured</td><td>
+      Some networking feature has placed a conflicting IOChain on 
+  the network adapter, which prevents VMDirectPath Gen 2.  Examples 
+  include DVFilter.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="vmNptConflictingOperationInProgress" name="vmNptConflictingOperationInProgress"></a>vmNptConflictingOperationInProgress</td><td>
+      VMDirectPath Gen 2 is temporarily suspended while the virtual
+  machine executes an operation such as suspend.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="vmNptDisabledOrDisconnectedAdapter" name="vmNptDisabledOrDisconnectedAdapter"></a>vmNptDisabledOrDisconnectedAdapter</td><td>
+      The virtual machine's network adapter is disabled or
+  disconnected, and thus is not participating in VMDirectPath Gen 2.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="vmNptFaultToleranceOrRecordReplayConfigured" name="vmNptFaultToleranceOrRecordReplayConfigured"></a>vmNptFaultToleranceOrRecordReplayConfigured</td><td>
+      The virtual machine is configured for Fault Tolerance or
+  Record & Replay, which prevents VMDirectPath Gen 2.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="vmNptIncompatibleAdapterFeatures" name="vmNptIncompatibleAdapterFeatures"></a>vmNptIncompatibleAdapterFeatures</td><td>
+      The virtual machine's network adapter has features enabled
+  which preclude it participating in VMDirectPath Gen 2 such 
+  as INT-x or PXE booting.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="vmNptIncompatibleAdapterType" name="vmNptIncompatibleAdapterType"></a>vmNptIncompatibleAdapterType</td><td>
+      The device type does not support VMDirectPath Gen 2.<br>See <a href="vim.vm.device.VirtualEthernetCardOption.html#vmDirectPathGen2Supported">vmDirectPathGen2Supported</a><br>
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="vmNptIncompatibleBackingType" name="vmNptIncompatibleBackingType"></a>vmNptIncompatibleBackingType</td><td>
+      The device backing is not a DistributedVirtualPortBacking.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="vmNptIncompatibleGuest" name="vmNptIncompatibleGuest"></a>vmNptIncompatibleGuest</td><td>
+      The virtual machine's guest OS does not support
+  VMDirectPath Gen 2.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="vmNptIncompatibleGuestDriver" name="vmNptIncompatibleGuestDriver"></a>vmNptIncompatibleGuestDriver</td><td>
+      The virtual machine's guest network driver does not support
+  VMDirectPath Gen 2.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="vmNptInsufficientMemoryReservation" name="vmNptInsufficientMemoryReservation"></a>vmNptInsufficientMemoryReservation</td><td>
+      The virtual machine does not have full memory reservation 
+  required to activate VMDirectPath Gen 2.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="vmNptMonitorBlocks" name="vmNptMonitorBlocks"></a>vmNptMonitorBlocks</td><td>
+      The virtual machine monitor is exercising functionality which
+  which prevents VMDirectPath Gen 2.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="vmNptOutOfIntrVector" name="vmNptOutOfIntrVector"></a>vmNptOutOfIntrVector</td><td>
+      VMDirectPath Gen 2 is unavailable due to host run out of intr
+  vector in host. Guest can configure the vNIC to use less rx/tx
+  queues or use MSI instead of MSIX.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="vmNptRuntimeError" name="vmNptRuntimeError"></a>vmNptRuntimeError</td><td>
+      VMDirectPath Gen 2 is unavailable due to an unforeseen runtime error
+  in the virtualization platform (typically resource constraints.)
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="vmNptVMCIActive" name="vmNptVMCIActive"></a>vmNptVMCIActive</td><td>
+      VMDirectPath Gen 2 is unavailable due to Incompatibe feature
+  VMCI is active in the current VM. Kill the relevant VMCI
+  application(s) and restart the VM will allow the vNIC(s) to enter
+  passthrough mode.
+   <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <simpleType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm">
+            <restriction base="xsd:string">
+               <enumeration value="vmNptIncompatibleGuest"/>
+               <enumeration value="vmNptIncompatibleGuestDriver"/>
+               <enumeration value="vmNptIncompatibleAdapterType"/>
+               <enumeration value="vmNptDisabledOrDisconnectedAdapter"/>
+               <enumeration value="vmNptIncompatibleAdapterFeatures"/>
+               <enumeration value="vmNptIncompatibleBackingType"/>
+               <enumeration value="vmNptInsufficientMemoryReservation"/>
+               <enumeration value="vmNptFaultToleranceOrRecordReplayConfigured"/>
+               <enumeration value="vmNptConflictingIOChainConfigured"/>
+               <enumeration value="vmNptMonitorBlocks"/>
+               <enumeration value="vmNptConflictingOperationInProgress"/>
+               <enumeration value="vmNptRuntimeError"/>
+               <enumeration value="vmNptOutOfIntrVector"/>
+               <enumeration value="vmNptVMCIActive"/>
+            </restriction>
+         </simpleType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

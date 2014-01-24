@@ -1,0 +1,130 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.guest.FileManager.PosixFileAttributes" name="vim.vm.guest.FileManager.PosixFileAttributes"></a>
+<h1>Data Object - GuestPosixFileAttributes</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.vm.guest.FileManager.FileAttributes.html">GuestFileAttributes</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         Different attributes for Posix guest file.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="groupId" name="groupId"></a><strong>groupId</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The group ID.
+ If this property is not specified when passing a
+ <a href="vim.vm.guest.FileManager.PosixFileAttributes.html">GuestPosixFileAttributes</a> object to
+ <a href="vim.vm.guest.FileManager.html#initiateFileTransferToGuest">InitiateFileTransferToGuest</a>,
+ the default value will be the group Id of the user who invoked
+ the file transfer operation.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="ownerId" name="ownerId"></a><strong>ownerId</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The owner ID.
+ If this property is not specified when passing a
+ <a href="vim.vm.guest.FileManager.PosixFileAttributes.html">GuestPosixFileAttributes</a> object to
+ <a href="vim.vm.guest.FileManager.html#initiateFileTransferToGuest">InitiateFileTransferToGuest</a>,
+ the default value will be the owner Id of the user who invoked
+ the file transfer operation.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="permissions" name="permissions"></a><strong>permissions</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         The file permissions in chmod(2) format.
+ If this property is not specified when passing a
+ <a href="vim.vm.guest.FileManager.PosixFileAttributes.html">GuestPosixFileAttributes</a> object to
+ <a href="vim.vm.guest.FileManager.html#initiateFileTransferToGuest">InitiateFileTransferToGuest</a>,
+ the file will be created with 0644 permissions.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.vm.guest.FileManager.FileAttributes.html">GuestFileAttributes</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.vm.guest.FileManager.FileAttributes.html#accessTime">accessTime</a>, <a href="vim.vm.guest.FileManager.FileAttributes.html#modificationTime">modificationTime</a>, <a href="vim.vm.guest.FileManager.FileAttributes.html#symlinkTarget">symlinkTarget</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="GuestPosixFileAttributes">
+            <complexContent>
+               <extension base="vim25:GuestFileAttributes">
+                  <sequence>
+                     <element name="ownerId" type="xsd:int" minOccurs="0"/>
+                     <element name="groupId" type="xsd:int" minOccurs="0"/>
+                     <element name="permissions" type="xsd:long" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

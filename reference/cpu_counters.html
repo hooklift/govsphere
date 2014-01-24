@@ -1,0 +1,495 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<html>
+<head>
+<title>CPU Counters</title>
+<script language="JavaScript" src="./commonRes.js" type="text/javascript"></script>
+<link rel="StyleSheet" type="text/css" href="doc-style.css"></link>
+
+<style type="text/css">
+.code {
+    font-size: 11px; font-family:
+    "Courier New", Courier, monospace;
+}
+.BoldRedText {
+    FONT-WEIGHT: bold; COLOR: #CC0000; TEXT-DECORATION: none
+}
+
+h2 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #3366AA;
+    margin-top: 25px;
+    padding-bottom: 10px;
+    border-bottom-width: 1px;
+    border-bottom-style: dashed;
+}
+h3 {
+    margin-top: 25px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+table {
+    border-collapse:collapse;
+    border-top: 1px solid #999;
+    border-left: 1px solid #999;
+    width:100%;
+    margin-right: 4px;
+    margin-left: 4px;
+}
+
+table.navcontainer, topnavcontainer {
+    border:0; margin-right: 2px; margin-left: 2px; padding:0;vertical-align:bottom;
+}
+
+table.nested {
+    border-collapse:collapse;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+th {
+    background-color: #555555;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 10px;
+    text-align: center;
+    vertical-align:middle;
+}
+
+th.nested {
+    border:0; padding:0; text-align: center;
+}
+
+td {
+    font-size: 11px;
+    vertical-align: top;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+td.yes {font-size: 18px;}
+td.no {font-size: 12px;}
+
+a.white:link {color: #ffffff}
+a.white:visited {color: #ffffff}
+a.white:hover {color: #ffffff; cursor:hand;}
+a.white:active {color: #ffffff}
+
+a.noline:link {color: #3366AA; text-decoration:none; }
+a.noline:visited {color: #3366AA; text-decoration:none;}
+a.noline:hover {color: #3366AA; cursor:hand; text-decoration:none;}
+a.noline:active {color: #3366AA; text-decoration:none;}
+
+p {font-size:12px; margin: 12px 72px 5px 0px; }
+p.nolead {margin: 3px 72px 5px 0px}
+
+.back {
+    font-size:9px; text-transform: uppercase; FONT-WEIGHT: bold; COLOR: #3366AA;
+}
+.back:link {color: #ffffff; text-decoration: none;}
+.back:visited {color: #ffffff}
+.back:hover {color: #ffffff; cursor:hand;}
+.back:active {color: #ffffff}
+
+.back2 {
+    font-size:11px; text-transform: none; FONT-WEIGHT: bold; COLOR: #3366AA;
+}
+
+.top {
+    font-size:10px; text-transform: uppercase; FONT-WEIGHT: bold; COLOR: #3366AA;
+}
+
+ul {
+    font-size: 12px;
+    vertical-align: top;
+}
+ul.small{font-size: 11px;}
+
+</style>
+</head>
+
+<body>
+<span class="back"><a href="vim.PerformanceManager.html" class="noline">Back to</a></span>
+<span class="back2"><a href="vim.PerformanceManager.html" class="noline">PerformanceManager</a></span><br />
+<p></p>
+<a name="top"></a>
+<h1>CPU Counters</h1>
+
+<table class="topnavcontainer"><tr><td valign="top">
+
+<p class="nolead">Performance counters are modeled using the <a href="vim.PerformanceManager.CounterInfo.html">PerfCounterInfo</a> data object type. Each instance of a <a href="vim.PerformanceManager.CounterInfo.html">PerfCounterInfo</a> data object contains metadata about a specific metric available from the system. The <strong>cpu</strong> group of performance counters supports metrics for CPU utilization  per host, per virtual machine, per resource pool, or per compute resource, as appropriate.
+</p>
+
+</td></tr></table>
+<!-- heading for table -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+
+<tr>
+<th width="10%" valign="middle" title="PerfCounterInfo.nameInfo.key property">Counter</th>
+<!--<th rowspan="2" width="200">Description</th>-->
+<th width="10%"><a href="vim.PerformanceManager.CounterInfo.StatsType.html" class="white" title="StatsType">StatsType</a></th>
+<th width="10%"><a href="vim.PerformanceManager.CounterInfo.Unit.html" class="white">Unit</a></th>
+
+<th width="5%"><a href="vim.HistoricalInterval.html#level" class="white" title="The 'level' property is 'null' for ESX... Statistics are collected by vCenter Server and rolled-up based on the collection-level setting (1 is the default).">Level</a></th>
+<th width="5%"><a href="vim.PerformanceManager.CounterInfo.html" class="white" title="Per Device Level">Per<br />Device<br />Level</a></th>
+
+<th width="10%"><a href="vim.PerformanceManager.CounterInfo.RollupType.html" class="white" title="RollupType">RollupType</a></th>
+<th width="15%"><a href="vim.PerformanceManager.CounterInfo.html" class="white" title="PerfCounterInfo.nameInfo property is used to populate vSphere Client charts...">Label</a>
+</th>
+<th width="10%"><a href="vim.ManagedEntity.html" class="white" title="Entity for which the counter is supported.">Entity</a></th>
+<th width="10%"><a href="vim.PerformanceManager.MetricId.html" class="white"
+    title="Indicates whether collection is from an &#160;individual instance or aggregate">Instance/<br />Aggregate</a></th>
+<th width="10%"><a href="" class="white" title="ESX version(s) for which this counter is supported.">ESX<br />Versions</a></th>
+</tr>
+<!-- close heading for table -->
+<tr><td rowspan="2">capacity.contention</td>
+<td>rate</td><td>percent</td><td>2</td><td>4</td><td>average</td><td>
+CPU Capacity Contention
+</td><td>ResourcePool</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+Percent of time the virtual machine is unable to run because it is contending for access to the physical CPU(s).
+</td></tr>
+
+
+<tr><td rowspan="2">capacity.demand</td>
+<td>rate</td><td>megaHertz</td><td>2</td><td>4</td><td>average</td><td>
+CPU Capacity Demand
+</td><td>ResourcePool</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+The amount of CPU resources a virtual machine would use if there were no CPU contention or CPU limit.
+</td></tr>
+
+
+<tr><td rowspan="2">capacity.entitlement</td>
+<td>absolute</td><td>megaHertz</td><td>1</td><td>4</td><td>average</td><td>
+CPU Capacity Entitlement
+</td><td>ResourcePool</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+CPU resources devoted by the ESX scheduler to the virtual machines and resource pools.
+</td></tr>
+
+
+<tr><td rowspan="2">capacity.provisioned</td>
+<td>absolute</td><td>megaHertz</td><td>3</td><td>4</td><td>average</td><td>
+CPU Capacity Provisioned
+</td><td></td><td></td><td></td></tr>
+<tr><td colspan="9">
+Capacity in megaHertz of the physical CPU cores.
+</td></tr>
+
+
+<tr><td rowspan="2">capacity.usage</td>
+<td>rate</td><td>megaHertz</td><td>3</td><td>4</td><td>average</td><td>
+CPU Capacity Usage
+</td><td>ResourcePool</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+CPU usage in megaHertz during the interval.
+</td></tr>
+
+
+<tr><td rowspan="2">coreUtilization</td>
+<td>rate</td><td>percent</td><td>2&#160;(4)</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Core Utilization
+</td><td>HostSystem</td><td>instance</td><td></td></tr>
+<tr><td colspan="9"></td></tr>
+
+
+<tr><td rowspan="2">corecount.contention</td>
+<td>rate</td><td>percent</td><td>1</td><td>3</td><td>average</td><td>
+CPU Core Count Contention
+</td><td>ResourcePool</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+Time the virtual machine is ready to run, but is unable to due to co-scheduling constraints.
+</td></tr>
+
+
+<tr><td rowspan="2">corecount.provisioned</td>
+<td>absolute</td><td>number</td><td>1</td><td>4</td><td>average</td><td>
+CPU Core Count Provisioned
+</td><td>ResourcePool</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+The number of virtual processors or physical cores provisioned to the entity.
+</td></tr>
+
+
+<tr><td rowspan="2">corecount.usage</td>
+<td>absolute</td><td>number</td><td>2</td><td>4</td><td>average</td><td>
+CPU Core Count Usage
+</td><td></td><td></td><td></td></tr>
+<tr><td colspan="9">
+The number of virtual processors running on the host.
+</td></tr>
+
+
+<tr><td rowspan="2">costop</td>
+<td>delta</td><td>millisecond</td><td>2</td><td>3</td><td>summation</td><td>
+Co-stop
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>5.0.0</td></tr>
+<tr><td colspan="9"></td></tr>
+
+
+<tr><td rowspan="2">cpuentitlement</td>
+<td>absolute</td><td>megaHertz</td><td>1</td><td>3</td><td>latest</td><td>
+Worst case allocation
+</td><td>ResourcePool</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+Amount of CPU resources allocated to the virtual machine or resource
+pool based on the total cluster capacity and the resource configuration
+(reservations, shares, and limits) on the resource hierarchy.
+cpuentitlement is computed based on an ideal scenario in which all
+virtual machines are completely busy and the load is perfectly balanced
+across all hosts.
+<br /><br />
+This counter is for internal use only and is not useful for performance
+monitoring.
+</td>	
+</tr>
+
+
+<tr><td rowspan="2">demand</td>
+<td>rate</td><td>megaHertz</td><td>2</td><td>3</td><td>average</td><td>
+Demand
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>5.0.0</td></tr>
+<tr><td colspan="9"></td></tr>
+
+
+<tr><td rowspan="2">entitlement</td>
+<td>absolute</td><td>megaHertz</td><td>2</td><td>3</td><td>latest</td><td>
+Entitlement
+</td><td>VirtualMachine</td><td>aggregate</td><td>5.0.0</td></tr>
+<tr><td colspan="9"></td></tr>
+
+
+<tr><td rowspan="2">extra</td>
+<td>delta</td><td>millisecond</td><td>4</td><td>4</td><td>summation</td><td>
+Extra
+</td><td>VirtualMachine</td><td>instance</td><td>3.5.0</td></tr>
+<tr><td colspan="9"></td></tr>
+
+
+<tr><td rowspan="2">guaranteed</td>
+<td>absolute</td><td>millisecond</td><td>4</td><td>4</td><td>latest</td><td>
+Guaranteed
+</td><td>VirtualMachine</td><td>instance</td><td>3.5.0</td></tr>
+<tr><td colspan="9">Not supported for ESX 4.x systems, except through vCenter Server. 
+CPU time that is reserved for the entity. For virtual machines, this measures CPU time that is reserved,
+per virtual CPU (VCPU). 
+<br /><br />
+This counter has been deprecated and should not be used to monitor
+performance.</td>	
+</tr>
+
+
+<tr><td rowspan="2">idle</td>
+<td>delta</td><td>millisecond</td><td>2</td><td>3</td><td>summation</td><td>
+Idle
+</td><td>VirtualMachine<br />HostSystem</td><td>instance</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">Total time that the CPU spent in an idle state (meaning that a virtual machine is not runnable).</td>
+</tr>
+
+
+<tr><td rowspan="2">latency</td>
+<td>absolute</td><td>percent</td><td>2</td><td>3</td><td>average</td><td>
+Latency
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>5.0.0</td></tr>
+<tr><td colspan="9"></td></tr>
+
+
+<tr><td rowspan="2">maxlimited</td>
+<td>delta</td><td>millisecond</td><td>2</td><td>3</td><td>summation</td><td>
+Max limited
+</td><td>VirtualMachine</td><td>instance</td><td>5.0.0</td></tr>
+<tr><td colspan="9">
+Time the virtual machine is ready to run, but does not run because it has reached its maximum
+CPU limit setting.
+</td></tr>
+
+
+<tr><td rowspan="2">overlap</td>
+<td>delta</td><td>millisecond</td><td>3</td><td>3</td><td>summation</td><td>
+Overlap
+</td><td>VirtualMachine</td><td>instance</td><td>5.0.0</td></tr>
+<tr><td colspan="9">
+Time the virtual machine was interrupted to perform system services on behalf
+of that virtual machine or other virtual machines.
+</td></tr>
+
+
+<tr><td rowspan="2">ready</td>
+<td>delta</td><td>millisecond</td><td>1</td><td>3</td><td>summation</td><td>
+Ready
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+Percentage of time that the virtual machine was ready, but could not get
+scheduled to run on the physical CPU. CPU ready time is dependent on
+the number of virtual machines on the host and their CPU loads.
+</td>	
+</tr>
+
+
+<tr><td rowspan="2">reservedCapacity</td>
+<td>absolute</td><td>megaHertz</td><td>2</td><td>3</td><td>average</td><td>
+Reserved capacity
+</td><td>HostSystem</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">Total CPU capacity reserved by the virtual machines.</td>
+</tr>
+
+
+<tr><td rowspan="2">run</td>
+<td>delta</td><td>millisecond</td><td>2</td><td>3</td><td>summation</td><td>
+Run
+</td><td>VirtualMachine</td><td>instance</td><td>5.0.0</td></tr>
+<tr><td colspan="9"></td></tr>
+
+
+<tr><td rowspan="2">swapwait</td>
+<td>delta</td><td>millisecond</td><td>3</td><td>3</td><td>summation</td><td>
+Swap wait
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+Time the virtual machine is waiting for swap page-ins. CPU Swap Wait is included in CPU Wait.
+</td></tr>
+
+
+<tr><td rowspan="2">system</td>
+<td>delta</td><td>millisecond</td><td>3</td><td>3</td><td>summation</td><td>
+System
+</td><td>VirtualMachine</td><td>instance</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+Amount of time spent on system processes on each virtual CPU in the
+virtual machine. This is the host view of the CPU usage, not the guest
+operating system view.
+</td>
+</tr>
+
+
+<tr><td rowspan="2">totalCapacity</td>
+<td>absolute</td><td>megaHertz</td><td>2</td><td>3</td><td>average</td><td>
+Total capacity
+</td><td>HostSystem</td><td>aggregate</td><td>4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9"></td></tr>
+
+
+<tr><td rowspan="2">totalmhz</td>
+<td>rate</td><td>megaHertz</td><td>1</td><td>3</td><td>average</td><td>
+Total
+</td><td></td><td></td><td></td></tr>
+<tr><td colspan="9">
+Total amount of CPU resources of all hosts in the cluster. The maximum
+value is equal to the frequency of the processors multiplied by the number
+of cores.
+<br /><br />
+totalmhz = CPU frequency x number of cores 
+<br /><br />
+For example, a cluster has two hosts, each of which has four CPUs that
+are 3GHz each, and one virtual machine that has two virtual CPUs.
+<br /><br />
+VM totalmhz = 2 vCPUs x 3000MHz = 6000MHz <br />
+Host totalmhz = 4 CPUs x 3000MHz = 12000MHz <br />
+Cluster totalmhz = 2 x 4 x 3000MHz = 24000MHz <br />
+</td>
+</tr>
+
+
+<tr><td rowspan="2">usage</td>
+<td>rate</td><td>percent</td><td>1&#160;(4)</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Usage
+</td><td>VirtualMachine<br />HostSystem</td><td>instance</td><td></td></tr>
+<tr><td colspan="9">
+CPU usage as a percentage during the <a href="vim.HistoricalInterval.html">interval</a>.
+<ul class="small">
+<li>VM - Amount of actively used virtual CPU, as a percentage of total available CPU. This is the
+host's view of the CPU usage, not the guest operating system view. It is the average CPU
+utilization over all available virtual CPUs in the virtual machine. For example, if a virtual
+machine with one virtual CPU is running on a host that has four physical CPUs and the CPU
+usage is 100%, the virtual machine is using one physical CPU completely.
+<br /><br />
+virtual CPU usage = usagemhz / (# of virtual CPUs x core frequency)
+<br /><br />
+</li>
+<li>Host - Actively used CPU of the host, as a percentage of the total available CPU. Active CPU is
+approximately equal to the ratio of the used CPU to the available CPU.
+<br /><br />
+available CPU = # of physical CPUs x clock rate
+<br /><br />
+100% represents all CPUs on the host. For example, if a four-CPU host is running a virtual
+machine with two CPUs, and the usage is 50%, the host is using two CPUs completely.
+<br /><br />
+</li>
+<li>Cluster - Sum of actively used CPU of all virtual machines in the cluster, 
+as a percentage of the total available CPU.
+<br /><br />
+CPU Usage = CPU usagemhz / effectivecpu
+<br /><br />
+</li>
+</ul>
+</td>
+</tr>
+
+
+<tr><td rowspan="2">usagemhz</td>
+<td>rate</td><td>megaHertz</td><td>1&#160;(4)</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Usage in MHz
+</td><td>VirtualMachine<br />HostSystem<br />ResourcePool</td><td>aggregate</td><td></td></tr>
+<tr><td colspan="9">CPU usage, as measured in megahertz, during the <a href="vim.HistoricalInterval.html">interval</a>. 
+<ul class="small">
+<li>VM - Amount of actively used virtual CPU. This is the host's view of the CPU usage, not the guest
+operating system view.
+</li>
+<li>Host - Sum of the actively used CPU of all powered on virtual machines on a host. The maximum
+possible value is the frequency of the processors multiplied by the number of processors. For
+example, if you have a host with four 2GHz CPUs running a virtual machine that is using
+4000MHz, the host is using two CPUs completely.
+<p>
+4000 / (4 x 2000) = 0.50
+</p>
+</li>
+</ul>
+</td>
+</tr>
+
+
+<tr><td rowspan="2">used</td>
+<td>delta</td><td>millisecond</td><td>3</td><td>3</td><td>summation</td><td>
+Used
+</td><td>VirtualMachine<br />HostSystem</td><td>instance</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+Time accounted to the virtual machine. If a system service runs on behalf of this virtual machine,
+the time spent by that service (represented by cpu.system) should be charged to this virtual machine.
+If not, the time spent (represented by cpu.overlap) should not be charged against this virtual machine.
+</td></tr>
+
+
+<tr><td rowspan="2">utilization</td>
+<td>rate</td><td>percent</td><td>2&#160;(4)</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Utilization
+</td><td>HostSystem</td><td>instance</td><td></td></tr>
+<tr><td colspan="9"></td></tr>
+
+
+<tr><td rowspan="2">wait</td>
+<td>delta</td><td>millisecond</td><td>3</td><td>3</td><td>summation</td><td>
+Wait
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+CPU time spent in wait state. The wait total includes time spent the CPU Idle,
+CPU Swap Wait, and CPU I/O Wait states.
+</td></tr>
+
+
+</table>
+<p>&#160;</p>
+<span class="back"><a href="#top" class="noline">Back to</a></span> 
+<span class="back2"><a href="#top" class="noline">Top of page</a></span><br />
+<span class="back"><a href="vim.PerformanceManager.html" class="noline">Back to</a></span> 
+<span class="back2"><a href="vim.PerformanceManager.html" class="noline">PerformanceManager</a></span><br />
+<p>&#160;</p>
+<p>&#160;</p>
+<p><script language="javascript" type="text/javascript">document.write(ID_Copyright);</script><br />
+<script language="javascript" type="text/javascript">document.write(ID_VersionInformation);</script></p>
+</body>
+</html>

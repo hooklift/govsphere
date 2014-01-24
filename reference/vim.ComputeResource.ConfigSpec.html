@@ -1,0 +1,131 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.ComputeResource.ConfigSpec" name="vim.ComputeResource.ConfigSpec"></a>
+<h1>Data Object - ComputeResourceConfigSpec</h1>
+<dl>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.Folder.html#addStandaloneHost">AddStandaloneHost_Task</a>, <a href="vim.ComputeResource.html#reconfigureEx">ReconfigureComputeResource_Task</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.cluster.ConfigSpecEx.html">ClusterConfigSpecEx</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         Changes to apply to the compute resource configuration.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="defaultHardwareVersionKey" name="defaultHardwareVersionKey"></a><strong>defaultHardwareVersionKey</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Key for Default Hardware Version to be used on this compute resource
+  in the format of <a href="vim.vm.ConfigOptionDescriptor.html#key">key</a>.
+
+  Setting this field affects
+  <a href="vim.vm.ConfigOptionDescriptor.html#defaultConfigOption">defaultConfigOption</a> returned
+  by <a href="vim.ComputeResource.html#environmentBrowser">environmentBrowser</a> of this object and all its children
+  with this field unset.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="spbmEnabled" name="spbmEnabled"></a><strong>spbmEnabled</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag indicating whether or not the SPBM(Storage Policy Based Management)
+ feature is enabled on this compute resource
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vmSwapPlacement" name="vmSwapPlacement"></a><strong>vmSwapPlacement</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         New setting for the swapfile placement policy. Any change to this
+  policy will affect virtual machines that subsequently power on or
+  resume from a suspended state in this compute resource, or that
+  migrate to a host in this compute resource while powered on; virtual
+  machines that are currently powered on in this compute resource will
+  not yet be affected.<br>See <a href="vim.vm.ConfigInfo.SwapPlacementType.html">VirtualMachineConfigInfoSwapPlacementType</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ComputeResourceConfigSpec">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="vmSwapPlacement" type="xsd:string" minOccurs="0"/>
+                     <element name="spbmEnabled" type="xsd:boolean" minOccurs="0"/>
+                     <element name="defaultHardwareVersionKey" type="xsd:string" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

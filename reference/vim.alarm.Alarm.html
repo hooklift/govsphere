@@ -1,0 +1,297 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.alarm.Alarm" name="vim.alarm.Alarm"></a>
+<h1>Managed Object -  
+						Alarm</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.event.AlarmEventArgument.html#field_detail">AlarmEventArgument</a>, <a href="vim.alarm.AlarmInfo.html#field_detail">AlarmInfo</a>, <a href="vim.alarm.AlarmState.html#field_detail">AlarmState</a>, <a href="vim.event.EventFilterSpec.html#field_detail">EventFilterSpec</a>, <a href="vim.TaskFilterSpec.html#field_detail">TaskFilterSpec</a>, <a href="vim.TaskReasonAlarm.html#field_detail">TaskReasonAlarm</a>
+</dd>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.alarm.AlarmManager.html#acknowledgeAlarm">AcknowledgeAlarm</a>
+</dd>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.alarm.AlarmManager.html#create">CreateAlarm</a>, <a href="vim.alarm.AlarmManager.html#getAlarm">GetAlarm</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.alarm.AlarmInfo.html">AlarmInfo</a>, <a href="vim.alarm.AlarmSpec.html">AlarmSpec</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         This managed object type defines an alarm that is triggered and 
+  an action that occurs due to the triggered alarm when certain conditions 
+  are met on a specific <a href="vim.ManagedEntity.html">ManagedEntity</a> object.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="info" name="info"></a><strong>info</strong><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vim.alarm.AlarmInfo.html">AlarmInfo</a></td><td>
+<p></p>
+         Information about this alarm.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.ExtensibleManagedObject.html#availableField">availableField</a>, <a href="vim.ExtensibleManagedObject.html#value">value</a></td>
+</tr>
+</table>
+<span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  System.View</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#reconfigure">ReconfigureAlarm</a>, <a href="#remove">RemoveAlarm</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.ExtensibleManagedObject.html#setCustomValue">setCustomValue</a></td>
+</tr>
+</table>
+<br>
+<a id="reconfigure" name="reconfigure"></a>
+<h1>ReconfigureAlarm</h1>
+<p></p>
+         Reconfigures the alarm properties. This operation requires access 
+  privileges on the entity with which the alarm is associated.
+  <p>
+  In addition to the Alarm.Edit privilege, may also require the
+  Global.ScriptAction if a RunScriptAction action is specified in
+  the AlarmSpec.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Alarm.Edit</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.alarm.Alarm.html">Alarm</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.alarm.AlarmSpec.html">AlarmSpec</a></td><td>
+<p></p>
+         The new specification for the alarm.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if an alarm with the name already exists.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the specification is invalid.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td>Thrown if the alarm name is empty or too long.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ReconfigureAlarm-textarea');expandcontent(this, 'ReconfigureAlarm-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ReconfigureAlarm-div">
+<textarea cols="20" rows="10" name="ReconfigureAlarm-textarea" wrap="off" readonly="1" id="ReconfigureAlarm-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ReconfigureAlarm" type="vim25:ReconfigureAlarmRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ReconfigureAlarmResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="remove" name="remove"></a>
+<h1>RemoveAlarm</h1>
+<p></p>
+         Removes the alarm.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Alarm.Delete</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.alarm.Alarm.html">Alarm</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RemoveAlarm-textarea');expandcontent(this, 'RemoveAlarm-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RemoveAlarm-div">
+<textarea cols="20" rows="10" name="RemoveAlarm-textarea" wrap="off" readonly="1" id="RemoveAlarm-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveAlarm" type="vim25:RemoveAlarmRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveAlarmResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

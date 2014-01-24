@@ -1,0 +1,152 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.cluster.DasAamHostInfo" name="vim.cluster.DasAamHostInfo"></a>
+<h1>Data Object - ClusterDasAamHostInfo</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.cluster.DasHostInfo.html">ClusterDasHostInfo</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.cluster.DasAamNodeState.html">ClusterDasAamNodeState</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<B>Deprecated.</B><I>
+         As of vSphere API 5.0, this object is no longer returned by
+  vCenter Server. Availability information is now reported using
+  <a href="vim.host.RuntimeInfo.html#dasHostState">dasHostState</a>.
+      </I>
+<p></p>
+         The <a href="vim.cluster.DasAamHostInfo.html">ClusterDasAamHostInfo</a> object contains a list of the ESX hosts
+  in an HA cluster and a list that identifies the <i>primary</i> hosts.
+  (AAM is a component of the HA service.)
+  The primary hosts share the joint responsibility of maintaining all cluster
+  state and one will initiate failover actions should a failure occur.
+  <p>
+  When you add an ESX host to a vSphere HA cluster, the host
+  downloads HA agent components from the vCenter Server.
+  The HA agent maintains communication with the vCenter Server.
+  <p>
+  When the host downloads the HA agent, the host configures the agent
+  to communicate with other agents in the cluster. A host that joins
+  the cluster communicates with an existing primary host to complete
+  its configuration (except when you are adding the first host to the cluster).
+  <ul>
+  <li>The first five hosts added to the cluster are designated
+  as primary hosts. All subsequent hosts are designated as secondary hosts.</li>
+  <li>If a primary host is removed from the cluster,
+  the vCenter Server promotes another host to primary status.</li>
+  <li>There must be at least one functional primary host for vSphere HA
+  to operate correctly. If there is not an available primary host
+  (no response), host configuration for HA will fail.
+  If there is a total cluster failure, HA will begin restarting virtual
+  machines as soon as one host recovers and its HA agent is up and running.</li>
+  </ul>
+  <p>
+  One of the primary hosts assumes the role of the active primary host.
+  The active primary host responsibilities include the following activities:
+  <ul>
+  <li>Decides where to restart virtual machines.</li>
+  <li>Tracks failed restart attempts.</li>
+  <li>Determines when it is appropriate to continue attempts to restart
+  a virtual machine.</li>
+  </ul>
+  <p>
+  If the active primary host fails, another primary host replaces it.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="hostDasState" name="hostDasState"></a><strong>hostDasState</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.cluster.DasAamNodeState.html">ClusterDasAamNodeState[]</a></td><td>
+<p></p>
+         The state of HA on the hosts.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="primaryHosts" name="primaryHosts"></a><strong>primaryHosts</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         The list of primary hosts.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.cluster.DasHostInfo.html">ClusterDasHostInfo</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ClusterDasAamHostInfo">
+            <complexContent>
+               <extension base="vim25:ClusterDasHostInfo">
+                  <sequence>
+                     <element name="hostDasState" type="vim25:ClusterDasAamNodeState" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="primaryHosts" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

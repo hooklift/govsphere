@@ -1,0 +1,1355 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.ClusterComputeResource" name="vim.ClusterComputeResource"></a>
+<h1>Managed Object -  
+						ClusterComputeResource</h1>
+<dl>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.Folder.html#createCluster">CreateCluster</a>, <a href="vim.Folder.html#createClusterEx">CreateClusterEx</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.ComputeResource.html">ComputeResource</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.cluster.ActionHistory.html">ClusterActionHistory</a>, <a href="vim.cluster.ConfigInfo.html">ClusterConfigInfo</a>, <a href="vim.cluster.ConfigSpec.html">ClusterConfigSpec</a>, <a href="vim.cluster.DasAdvancedRuntimeInfo.html">ClusterDasAdvancedRuntimeInfo</a>, <a href="vim.cluster.DrsFaults.html">ClusterDrsFaults</a>, <a href="vim.cluster.DrsMigration.html">ClusterDrsMigration</a>, <a href="vim.cluster.DrsRecommendation.html">ClusterDrsRecommendation</a>, <a href="vim.cluster.EnterMaintenanceResult.html">ClusterEnterMaintenanceResult</a>, <a href="vim.cluster.HostRecommendation.html">ClusterHostRecommendation</a>, <a href="vim.cluster.Recommendation.html">ClusterRecommendation</a>, <a href="vim.host.ConnectSpec.html">HostConnectSpec</a>, <a href="vim.HostSystem.html">HostSystem</a>, <a href="vim.option.OptionValue.html">OptionValue</a>, <a href="vim.ResourcePool.html">ResourcePool</a>, <a href="vim.VirtualMachine.html">VirtualMachine</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         The <a href="vim.ClusterComputeResource.html">ClusterComputeResource</a> data object aggregates the compute
+  resources of associated <a href="vim.HostSystem.html">HostSystem</a> objects into a single
+  compute resource for use by virtual machines. The cluster services
+  such as HA (High Availability), DRS (Distributed Resource Scheduling),
+  and EVC (Enhanced vMotion Compatibility), enhance the utility of this
+  single compute resource.
+  <p>
+  Use the <a href="vim.Folder.html">Folder</a>.<a href="vim.Folder.html#createClusterEx">CreateClusterEx</a> method
+  to create an instance of this object.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="actionHistory" name="actionHistory"></a><strong>actionHistory</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.cluster.ActionHistory.html">ClusterActionHistory[]</a></td><td>
+<p></p>
+         The set of actions that have been performed recently.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="configuration" name="configuration"></a><strong>configuration</strong></td><td><a href="vim.cluster.ConfigInfo.html">ClusterConfigInfo</a></td><td><B>Deprecated.</B><I>
+         As of VI API 2.5, use <a href="vim.ComputeResource.html#configurationEx">configurationEx</a>,
+  which is a <a href="vim.cluster.ConfigInfoEx.html">ClusterConfigInfoEx</a> data object..
+      </I>
+<p></p>
+         Configuration of the cluster.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="drsFault" name="drsFault"></a><strong>drsFault</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.Read" class="privilege-ref"> P</span></td><td><a href="vim.cluster.DrsFaults.html">ClusterDrsFaults[]</a></td><td>
+<p></p>
+         A collection of the DRS faults generated in the last DRS invocation.
+  Each element of the collection is the set of faults generated in one
+  recommendation.
+
+  DRS faults are generated when DRS tries to make recommendations
+  for rule enforcement, power management, etc., and indexed in a tree
+  structure with reason for recommendations and VM to migrate (optional)
+  as the index keys.
+
+  In releases after vSphere API 5.0, vSphere Servers might not
+  generate property collector update notifications for this property.
+  To obtain the latest value of the property, you can use
+  PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+  If you use the PropertyCollector.WaitForUpdatesEx method, specify
+  an empty string for the version parameter. Any other version value will not
+  produce any property values as no updates are generated.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="drsRecommendation" name="drsRecommendation"></a><strong>drsRecommendation</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.cluster.DrsRecommendation.html">ClusterDrsRecommendation[]</a></td><td><B>Deprecated.</B><I>
+         As of VI API 2.5, use
+  <a href="vim.ClusterComputeResource.html#recommendation">recommendation</a>.
+
+  In releases after vSphere API 5.0, vSphere Servers might not
+  generate property collector update notifications for this property.
+  To obtain the latest value of the property, you can use
+  PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+  If you use the PropertyCollector.WaitForUpdatesEx method, specify
+  an empty string for the version parameter. Any other version value will not
+  produce any property values as no updates are generated.
+      </I>
+<p></p>
+         If DRS is enabled, this returns the set of recommended
+  migrations from the DRS module. The current set of
+  recommendations may be empty, since there may be no recommended
+  migrations at this time, or it is possible that DRS is not
+  enabled.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="migrationHistory" name="migrationHistory"></a><strong>migrationHistory</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.cluster.DrsMigration.html">ClusterDrsMigration[]</a></td><td>
+<p></p>
+         The set of migration decisions that have recently been performed.
+  <p>
+  This list is populated only when DRS is in automatic mode.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="recommendation" name="recommendation"></a><strong>recommendation</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.Read" class="privilege-ref"> P</span></td><td><a href="vim.cluster.Recommendation.html">ClusterRecommendation[]</a></td><td>
+<p></p>
+         List of recommended actions for the cluster. It is
+  possible that the current set of recommendations may be empty,
+  either due to not having any running dynamic recommendation
+  generation module, or since there may be no recommended actions
+  at this time.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.ComputeResource.html">ComputeResource</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.ComputeResource.html#configurationEx">configurationEx</a>, <a href="vim.ComputeResource.html#datastore">datastore</a>, <a href="vim.ComputeResource.html#environmentBrowser">environmentBrowser</a>, <a href="vim.ComputeResource.html#host">host</a>, <a href="vim.ComputeResource.html#network">network</a>, <a href="vim.ComputeResource.html#resourcePool">resourcePool</a>, <a href="vim.ComputeResource.html#summary">summary</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.ManagedEntity.html">ManagedEntity</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.ManagedEntity.html#alarmActionsEnabled">alarmActionsEnabled</a>, <a href="vim.ManagedEntity.html#configIssue">configIssue</a>, <a href="vim.ManagedEntity.html#configStatus">configStatus</a>, <a href="vim.ManagedEntity.html#customValue">customValue</a>, <a href="vim.ManagedEntity.html#declaredAlarmState">declaredAlarmState</a>, <a href="vim.ManagedEntity.html#disabledMethod">disabledMethod</a>, <a href="vim.ManagedEntity.html#effectiveRole">effectiveRole</a>, <a href="vim.ManagedEntity.html#name">name</a>, <a href="vim.ManagedEntity.html#overallStatus">overallStatus</a>, <a href="vim.ManagedEntity.html#parent">parent</a>, <a href="vim.ManagedEntity.html#permission">permission</a>, <a href="vim.ManagedEntity.html#recentTask">recentTask</a>, <a href="vim.ManagedEntity.html#tag">tag</a>, <a href="vim.ManagedEntity.html#triggeredAlarmState">triggeredAlarmState</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.ExtensibleManagedObject.html#availableField">availableField</a>, <a href="vim.ExtensibleManagedObject.html#value">value</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  System.Read</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#addHost">AddHost_Task</a>, <a href="#applyRecommendation">ApplyRecommendation</a>, <a href="#cancelRecommendation">CancelRecommendation</a>, <a href="#enterMaintenanceMode">ClusterEnterMaintenanceMode</a>, <a href="#moveHostInto">MoveHostInto_Task</a>, <a href="#moveInto">MoveInto_Task</a>, <a href="#recommendHostsForVm">RecommendHostsForVm</a>, <a href="#reconfigure">ReconfigureCluster_Task</a>, <a href="#refreshRecommendation">RefreshRecommendation</a>, <a href="#retrieveDasAdvancedRuntimeInfo">RetrieveDasAdvancedRuntimeInfo</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.ComputeResource.html">ComputeResource</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.ComputeResource.html#reconfigureEx">ReconfigureComputeResource_Task</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.ManagedEntity.html">ManagedEntity</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.ManagedEntity.html#destroy">Destroy_Task</a>, <a href="vim.ManagedEntity.html#reload">Reload</a>, <a href="vim.ManagedEntity.html#rename">Rename_Task</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.ExtensibleManagedObject.html#setCustomValue">setCustomValue</a></td>
+</tr>
+</table>
+<br>
+<a id="addHost" name="addHost"></a>
+<h1>AddHost_Task</h1>
+<p></p>
+         Adds a host to the cluster. The hostname must be either an IP address, such as
+ 192.168.0.1, or a DNS resolvable name. DNS names may be fully qualified names,
+ such as host1.domain1.com, or a short name such as host1, providing host1 resolves
+ to host1.domain1.com. The system uses DNS to resolve short names to fully qualified
+ names. If the cluster supports nested resource pools and the user specifies the
+ optional ResourcePool argument, then the host's root resource pool becomes the
+ specified resource pool. The stand-alone host resource hierarchy is imported into
+ the new nested resource pool.
+ <p>
+ If the cluster does not support nested resource pools, then the stand-alone host
+ resource hierarchy is discarded and all virtual machines on the host are put
+ under the cluster's root resource pool.
+
+ <p>
+ In addition to the Host.Inventory.AddHostToCluster and
+ Resource.AssignVMToPool privileges, it requires System.View privilege on
+ the VM folder that the VMs of the host will be placed on.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Inventory.AddHostToCluster</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ClusterComputeResource.html">ClusterComputeResource</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.host.ConnectSpec.html">HostConnectSpec</a></td><td>
+<p></p>
+         Specifies the host name, port, and password for the host to be added.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>asConnected</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to specify whether or not the host should be connected
+                     immediately after it is added. The host will not be added if
+                     a connection attempt is made and fails.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>resourcePool</strong><span title="Need not be set" class="footnote-ref">*</span><span title="Required Privilege: Resource.AssignVMToPool" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ResourcePool.html">ResourcePool</a></td><td>
+<p></p>
+         the resource pool for the root resource pool from the host.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>license</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Provide a licenseKey or licenseKeyType. See <a href="vim.LicenseManager.html">LicenseManager</a>
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  Resource.AssignVMToPool</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation. The <a href="vim.TaskInfo.html#result">info.result</a> property in the <a href="vim.Task.html">Task</a> contains the newly added <a href="vim.HostSystem.html">HostSystem</a> upon success.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AgentInstallFailed.html">AgentInstallFailed</a></td><td>Thrown if there is an error installing the VirtualCenter agent on the host.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.AlreadyBeingManaged.html">AlreadyBeingManaged</a></td><td>Thrown if the host is already being managed by a VirtualCenter server.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AlreadyConnected.html">AlreadyConnected</a></td><td>Thrown if asConnected is true and the host is already connected to VirtualCenter.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if another host in the same cluster has the name.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConnectFault.html">HostConnectFault</a></td><td>Thrown if an error occurred when connecting to a host. Typically, a more specific subclass, such as AlreadyBeingManaged, is thrown.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidLogin.html">InvalidLogin</a></td><td>Thrown if "asConnected" is specified but authentication with the new host fails.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NoHost.html">NoHost</a></td><td>Thrown if the host cannot be contacted.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotEnoughLicenses.html">NotEnoughLicenses</a></td><td>Thrown if no licenses are available to add this host.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotSupportedHost.html">NotSupportedHost</a></td><td>Thrown if the host is running a software version that does not support clustering features. It may still be possible to add the host as a stand-alone host.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.SSLVerifyFault.html">SSLVerifyFault</a></td><td>Thrown if the host certificate could not be authenticated</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.TooManyHosts.html">TooManyHosts</a></td><td>Thrown if no additional hosts can be added to the cluster.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="applyRecommendation" name="applyRecommendation"></a>
+<h1>ApplyRecommendation</h1>
+<p></p>
+         Applies a recommendation from the drsRecommendation or the
+  recommendation list. Each recommendation can be applied only
+  once.
+  <p>
+  resource.applyRecommendation privilege is required if the recommendation
+  is DRS migration or power management recommendations.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Dynamic - See discussion above</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ClusterComputeResource.html">ClusterComputeResource</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>key</strong></td><td>xsd:string</td><td>
+<p></p>
+         The key field of the DrsRecommendation or Recommendation.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the specified key refers to a non-existent or an already executed recommendation.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ApplyRecommendation-textarea');expandcontent(this, 'ApplyRecommendation-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ApplyRecommendation-div">
+<textarea cols="20" rows="10" name="ApplyRecommendation-textarea" wrap="off" readonly="1" id="ApplyRecommendation-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ApplyRecommendation" type="vim25:ApplyRecommendationRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ApplyRecommendationResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="cancelRecommendation" name="cancelRecommendation"></a>
+<h1>CancelRecommendation</h1>
+<p></p>
+         Cancels a recommendation. Currently only initial placement
+  recommendations can be cancelled. Migration or power management
+  recommendations cannot.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Read</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ClusterComputeResource.html">ClusterComputeResource</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>key</strong></td><td>xsd:string</td><td>
+<p></p>
+         The key field of the Recommendation.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the specified key refers to a non-existent or an already executed recommendation.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CancelRecommendation-textarea');expandcontent(this, 'CancelRecommendation-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CancelRecommendation-div">
+<textarea cols="20" rows="10" name="CancelRecommendation-textarea" wrap="off" readonly="1" id="CancelRecommendation-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CancelRecommendation" type="vim25:CancelRecommendationRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CancelRecommendationResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="enterMaintenanceMode" name="enterMaintenanceMode"></a>
+<h1>ClusterEnterMaintenanceMode</h1>
+<p></p>
+         The API takes a list of hosts in the cluster as input, and
+  returns a list of hosts in "ClusterMaintenanceResult" that the
+  server can successfully evacuate given the existing
+  constraints in the cluster, such as HA, FT, Vmotion
+  compatibility, reservations, affinity rules, etc.
+
+  The client is allowed to pass all hosts in the cluster to the
+  API, even though all of them cannot enter maintenance mode at
+  the same time. The list returned from the API contains the
+  largest number of hosts that the server can evacuate
+  simultaneously. The client can then request to enter each host
+  in the returned list into maintenance mode.
+
+  The client can specify an integer "DemandCapacityRatioTarget"
+  option in the "option" parameter. The allowed values of the
+  option range from 40 to 200, and the default value is 100. This
+  option controls how much resource overcommitment the server
+  should make in consolidating the VMs onto fewer hosts. A value
+  of 100 means the server will keep the same amount of powered-on
+  capacity as the current VM demands. A value less than 100 means
+  undercommitted resources. A value greater than 100 means
+  overcommitted resources.
+
+  The hosts are recommended based on the inventory at the time of
+  the API invocation. It is not guaranteed that the actual
+  enter-maintenance tasks on the hosts will succeed, if the
+  inventory changes after the API returns, or if vmotions fail
+  due to unexpected conditions.  For possible exceptions thrown
+  by the necessary relocate operations, see
+  <a href="vim.VirtualMachine.html#migrate">MigrateVM_Task</a>.
+
+ <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ClusterComputeResource.html">ClusterComputeResource</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Required Privilege: Host.Config.Maintenance" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem[]</a></td><td>
+<p></p>
+         The array of hosts to put into maintenance mode.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>option</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.option.OptionValue.html">OptionValue[]</a></td><td>
+<p></p>
+         An array of <a href="vim.option.OptionValue.html">OptionValue</a>
+  options for this query. The specified options override the
+  advanced options in <a href="vim.cluster.DrsConfigInfo.html">ClusterDrsConfigInfo</a>.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  Host.Config.Maintenance</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.cluster.EnterMaintenanceResult.html">ClusterEnterMaintenanceResult</a></td><td>A <a href="vim.cluster.EnterMaintenanceResult.html">ClusterEnterMaintenanceResult</a> object, which consists of an array of recommendations for hosts that can be evacuated and an array of faults for hosts that cannot be evacuated.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown for unknown option keys or bad values.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ClusterEnterMaintenanceMode-textarea');expandcontent(this, 'ClusterEnterMaintenanceMode-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ClusterEnterMaintenanceMode-div">
+<textarea cols="20" rows="10" name="ClusterEnterMaintenanceMode-textarea" wrap="off" readonly="1" id="ClusterEnterMaintenanceMode-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ClusterEnterMaintenanceMode" type="vim25:ClusterEnterMaintenanceModeRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ClusterEnterMaintenanceModeResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ClusterEnterMaintenanceResult"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="moveHostInto" name="moveHostInto"></a>
+<h1>MoveHostInto_Task</h1>
+<p></p>
+         Moves an existing host into a cluster. The host must be part of the same
+  datacenter, and if the host is part of a cluster, the host must be in maintenance
+  mode.
+  <p>
+  If the host is a stand-alone host, the stand-alone ComputeResource is removed
+  as part of this operation.
+  <p>
+  All virtual machines associated with the host, regardless of whether or not they
+  are running, are moved with the host into the cluster. If there are virtual
+  machines that should not be moved, then migrate those virtual machines off the
+  host before initiating this operation.
+  <p>
+  If the host is a stand-alone host, the cluster supports nested resource pools,
+  and the user specifies the optional resourcePool argument, then the stand-alone
+  host's root resource pool becomes the specified resource pool and the stand-alone
+  host resource hierarchy is imported into the new nested resource pool. If the
+  cluster does not support nested resource pools or the resourcePool argument is not
+  specified, then the stand-alone host resource hierarchy is ignored.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Inventory.EditCluster</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ClusterComputeResource.html">ClusterComputeResource</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Required Privilege: Host.Inventory.MoveHost" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         The list of hosts to move into the cluster.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>resourcePool</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ResourcePool.html">ResourcePool</a></td><td>
+<p></p>
+         The resource pool to match the root resource pool of
+          stand-alone hosts. This argument has no effect if the host is part of a
+          cluster.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  Host.Inventory.MoveHost</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the host is not a part of the same datacenter as the cluster or if the specified resource pool is not part of the cluster or if the source and destination clusters are the same.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if a host is already part of a cluster and is not in maintenance mode.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.TooManyHosts.html">TooManyHosts</a></td><td>Thrown if no additional hosts can be added to the cluster.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="moveInto" name="moveInto"></a>
+<h1>MoveInto_Task</h1>
+<p></p>
+         Moves an existing host into a cluster. The host must be part of the same
+  datacenter, and if the host is part of a cluster, the host must be in maintenance
+  mode.
+  <p>
+  If the host is part of a stand-alone ComputeResource, then the stand-alone
+  ComputeResource is removed as part of this operation.
+  <p>
+  All virtual machines associated with a host, regardless of whether or not they
+  are running, are moved with the host into the cluster. If there are virtual
+  machines that should not be moved, then migrate those virtual machines off the
+  host before initiating this operation.
+  <p>
+  For stand-alone hosts, the host resource pool hierarchy is discarded in this call.
+  To preserve a host resource pools from a stand-alone host, call moveHostInt,
+  specifying an optional resource pool. This operation is transactional only with
+  respect to each individual host. Hosts in the set are moved sequentially and are
+  committed, one at a time. If a failure is detected, then the method terminates
+  with an exception. Since hosts are moved one at a time, if this operation fails
+  while in the process of moving multiple hosts, some hosts are left unmoved.
+  <p>
+  In addition to the privileges mentioned, the user must also hold
+  Host.Inventory.EditCluster on the host's source ComputeResource object.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Inventory.EditCluster</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ClusterComputeResource.html">ClusterComputeResource</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Required Privilege: Host.Inventory.MoveHost" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem[]</a></td><td>
+<p></p>
+         The list of hosts to move into the cluster.
+      <br>
+</td>
+</tr>
+</table>
+<span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  Host.Inventory.MoveHost</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DisallowedOperationOnFailoverHost.html">DisallowedOperationOnFailoverHost</a></td><td>Thrown if the host is being moved from a cluster and was configured as a failover host in that cluster. See <a href="vim.cluster.FailoverHostAdmissionControlPolicy.html">ClusterFailoverHostAdmissionControlPolicy</a>.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if the host is already in the cluster</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if one of the hosts is not part of the same datacenter as the cluster.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if a host is already part of a cluster and is not in maintenance mode.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.TooManyHosts.html">TooManyHosts</a></td><td>Thrown if no additional hosts can be added to the cluster.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="recommendHostsForVm" name="recommendHostsForVm"></a>
+<h1>RecommendHostsForVm</h1>
+<B>Deprecated.</B><I>
+         As of VI API 2.5, use <a href="vim.Datacenter.html#powerOnVm">PowerOnMultiVM_Task</a>.
+  <a href="vim.ClusterComputeResource.html#recommendHostsForVm">RecommendHostsForVm</a> cannot make  any recommendations if DRS cannot
+  find the specified host in the cluster.
+  With <a href="vim.Datacenter.html#powerOnVm">PowerOnMultiVM_Task</a>, DRS attempts to migrate virtual machines
+  and power on hosts in standby mode, given the same conditions.
+  <p>
+      </I>
+<p></p>
+         Gets a recommendation for where to power on, resume, revert
+  from powered-off state to powered on state, or to migrate a
+  specific virtual machine. If no host is found, an empty list is
+  returned.
+  <p>
+  The type of operation is implied by the state of the virtual machine. Returned
+  hosts are intended for power-on or resume if the virtual machine is powered-off or
+  suspended. However, if the virtual machine is powered-on, the request is assumed
+  to be for migrating a virtual machine into a DRS enabled cluster. In that case,
+  the ResourcePool argument should be specified and the ResourcePool and the virtual
+  machine cannot be in the same cluster.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Read</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ClusterComputeResource.html">ClusterComputeResource</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vm</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.VirtualMachine.html">VirtualMachine</a></td><td>
+<p></p>
+         Specifies the virtual machine for which the user is requesting a
+            recommendations.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>pool</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ResourcePool.html">ResourcePool</a></td><td>
+<p></p>
+         Specifies the ResourcePool into which the virtual machine is to be
+            migrated. If the virtual machine is powered-on, this argument must be
+            specified and it is relevant only when the virtual machine is
+            powered-on. This ResourcePool cannot be in the same cluster as the
+            virtual machine.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.cluster.HostRecommendation.html">ClusterHostRecommendation[]</a></td><td>An array of HostRecommendation ordered by their rating.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the virtual machine is powered on and the optional ResourcePool argument is either not specified or is in the same cluster as the virtual machine.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if DRS is not enabled.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RecommendHostsForVm-textarea');expandcontent(this, 'RecommendHostsForVm-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RecommendHostsForVm-div">
+<textarea cols="20" rows="10" name="RecommendHostsForVm-textarea" wrap="off" readonly="1" id="RecommendHostsForVm-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RecommendHostsForVm" type="vim25:RecommendHostsForVmRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RecommendHostsForVmResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ClusterHostRecommendation" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="reconfigure" name="reconfigure"></a>
+<h1>ReconfigureCluster_Task</h1>
+<B>Deprecated.</B><I>
+         As of VI API 2.5, use <a href="vim.ComputeResource.html#reconfigureEx">ReconfigureComputeResource_Task</a>.
+      </I>
+<p></p>
+         Reconfigures a cluster.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Inventory.EditCluster</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ClusterComputeResource.html">ClusterComputeResource</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.cluster.ConfigSpec.html">ClusterConfigSpec</a></td><td>
+<p></p>
+         A set of configuration changes to apply to the cluster. The
+              specification can be a complete set of changes or a partial set of
+              changes, applied incrementally.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>modify</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to specify whether the specification ("spec") should
+                be applied incrementally. If "modify" is false and the
+                operation succeeds, then the configuration of the cluster
+                matches the specification exactly; in this case any unset
+                portions of the specification will result in unset or
+                default portions of the configuration.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.CannotDisableDrsOnClustersWithVApps.html">CannotDisableDrsOnClustersWithVApps</a></td><td>Thrown if DRS is being disabled and the cluster contains one or more vApps.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="refreshRecommendation" name="refreshRecommendation"></a>
+<h1>RefreshRecommendation</h1>
+<p></p>
+         Make DRS invoke again and return a new list of recommendations.
+  Concurrent "refresh" requests may be combined together and trigger only
+  one DRS invocation.
+
+  <p>
+  The recommendations generated is stored at <a href="vim.ClusterComputeResource.html#recommendation">recommendation</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Inventory.EditCluster</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ClusterComputeResource.html">ClusterComputeResource</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RefreshRecommendation-textarea');expandcontent(this, 'RefreshRecommendation-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RefreshRecommendation-div">
+<textarea cols="20" rows="10" name="RefreshRecommendation-textarea" wrap="off" readonly="1" id="RefreshRecommendation-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RefreshRecommendation" type="vim25:RefreshRecommendationRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RefreshRecommendationResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="retrieveDasAdvancedRuntimeInfo" name="retrieveDasAdvancedRuntimeInfo"></a>
+<h1>RetrieveDasAdvancedRuntimeInfo</h1>
+<p></p>
+         Retrieve DAS advanced runtime info for this cluster.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Read</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ClusterComputeResource.html">ClusterComputeResource</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.cluster.DasAdvancedRuntimeInfo.html">ClusterDasAdvancedRuntimeInfo</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RetrieveDasAdvancedRuntimeInfo-textarea');expandcontent(this, 'RetrieveDasAdvancedRuntimeInfo-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RetrieveDasAdvancedRuntimeInfo-div">
+<textarea cols="20" rows="10" name="RetrieveDasAdvancedRuntimeInfo-textarea" wrap="off" readonly="1" id="RetrieveDasAdvancedRuntimeInfo-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrieveDasAdvancedRuntimeInfo" type="vim25:RetrieveDasAdvancedRuntimeInfoRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrieveDasAdvancedRuntimeInfoResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ClusterDasAdvancedRuntimeInfo" minOccurs="0"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

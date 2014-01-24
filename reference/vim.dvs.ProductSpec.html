@@ -1,0 +1,158 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.dvs.ProductSpec" name="vim.dvs.ProductSpec"></a>
+<h1>Data Object - DistributedVirtualSwitchProductSpec</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.dvs.HostMember.html#field_detail">DistributedVirtualSwitchHostMember</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.DvsProductSpec.html#field_detail">DistributedVirtualSwitchManagerDvsProductSpec</a>, <a href="vim.DistributedVirtualSwitch.ConfigInfo.html#field_detail">DVSConfigInfo</a>, <a href="vim.DistributedVirtualSwitch.CreateSpec.html#field_detail">DVSCreateSpec</a>, <a href="vim.DistributedVirtualSwitch.Summary.html#field_detail">DVSSummary</a>, <a href="vim.event.DvsUpgradeAvailableEvent.html#field_detail">DvsUpgradeAvailableEvent</a>, <a href="vim.event.DvsUpgradedEvent.html#field_detail">DvsUpgradedEvent</a>, <a href="vim.event.DvsUpgradeInProgressEvent.html#field_detail">DvsUpgradeInProgressEvent</a>, <a href="vim.event.DvsUpgradeRejectedEvent.html#field_detail">DvsUpgradeRejectedEvent</a>, <a href="vim.fault.NotSupportedHostInDvs.html#field_detail">NotSupportedHostInDvs</a>
+</dd>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.DistributedVirtualSwitch.html#performProductSpecOperation">PerformDvsProductSpecOperation_Task</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.html#queryCompatibleHostForNewDvs">QueryCompatibleHostForNewDvs</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.html#queryCompatibleHostSpec">QueryDvsCompatibleHostSpec</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.html#queryFeatureCapability">QueryDvsFeatureCapability</a>
+</dd>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.dvs.DistributedVirtualSwitchManager.html#querySupportedSwitchSpec">QueryAvailableDvsSpec</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This data object type is a subset of <a href="vim.AboutInfo.html">AboutInfo</a>. An object of
+  this type can be used to describe the specification for a proxy switch module
+  of a <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a>.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="build" name="build"></a><strong>build</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Build string for the server on which this call is made. For example, x.y.z-num.
+  This string does not apply to the API.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="bundleId" name="bundleId"></a><strong>bundleId</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The ID of the bundle if a host component bundle needs to be installed on
+  the host members to support the functionality of the switch.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="bundleUrl" name="bundleUrl"></a><strong>bundleUrl</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The URL of the bundle that VMware Update Manager will use to install
+  the bundle on the host members, if <a href="vim.dvs.ProductSpec.html#bundleId">bundleId</a> is set.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="forwardingClass" name="forwardingClass"></a><strong>forwardingClass</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Forwarding class of the distributed virtual switch.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="name" name="name"></a><strong>name</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Short form of the product name.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vendor" name="vendor"></a><strong>vendor</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Name of the vendor of this product.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="version" name="version"></a><strong>version</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Dot-separated version string. For example, "1.2".
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DistributedVirtualSwitchProductSpec">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="name" type="xsd:string" minOccurs="0"/>
+                     <element name="vendor" type="xsd:string" minOccurs="0"/>
+                     <element name="version" type="xsd:string" minOccurs="0"/>
+                     <element name="build" type="xsd:string" minOccurs="0"/>
+                     <element name="forwardingClass" type="xsd:string" minOccurs="0"/>
+                     <element name="bundleId" type="xsd:string" minOccurs="0"/>
+                     <element name="bundleUrl" type="xsd:string" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

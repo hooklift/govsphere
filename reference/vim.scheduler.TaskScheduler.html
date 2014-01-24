@@ -1,0 +1,141 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.scheduler.TaskScheduler" name="vim.scheduler.TaskScheduler"></a>
+<h1>Data Object - TaskScheduler</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.scheduler.ScheduledTaskSpec.html#field_detail">ScheduledTaskSpec</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.scheduler.AfterStartupTaskScheduler.html">AfterStartupTaskScheduler</a>, <a href="vim.scheduler.OnceTaskScheduler.html">OnceTaskScheduler</a>, <a href="vim.scheduler.RecurrentTaskScheduler.html">RecurrentTaskScheduler</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The <a href="vim.scheduler.TaskScheduler.html">TaskScheduler</a> data object is the base type for the scheduler objects.
+  The hierarchy of scheduler objects is as follows:
+
+  <pre>
+    TaskScheduler
+        <a href="vim.scheduler.AfterStartupTaskScheduler.html">AfterStartupTaskScheduler</a>
+        <a href="vim.scheduler.OnceTaskScheduler.html">OnceTaskScheduler</a>
+        <a href="vim.scheduler.RecurrentTaskScheduler.html">RecurrentTaskScheduler</a>
+            <a href="vim.scheduler.HourlyTaskScheduler.html">HourlyTaskScheduler</a>
+                <a href="vim.scheduler.DailyTaskScheduler.html">DailyTaskScheduler</a>
+                    <a href="vim.scheduler.WeeklyTaskScheduler.html">WeeklyTaskScheduler</a>
+                    <a href="vim.scheduler.MonthlyTaskScheduler.html">MonthlyTaskScheduler</a>
+                        <a href="vim.scheduler.MonthlyByDayTaskScheduler.html">MonthlyByDayTaskScheduler</a>
+                        <a href="vim.scheduler.MonthlyByWeekdayTaskScheduler.html">MonthlyByWeekdayTaskScheduler</a>
+  </pre>
+  <p>
+  Use a scheduler object to set the time(s) for task execution. 
+  You can use two scheduling modes - single execution or
+  recurring execution:
+  <ul>
+     <li>Use the <a href="vim.scheduler.AfterStartupTaskScheduler.html">AfterStartupTaskScheduler</a> or the <a href="vim.scheduler.OnceTaskScheduler.html">OnceTaskScheduler</a>
+         to schedule a single instance of task execution.
+     <li>Use one of the recurrent task schedulers to schedule
+         hourly, daily, weekly, or monthly task execution.
+  </ul>
+  <p>
+  After you have established the task timing, use the scheduler
+  object for the <a href="vim.scheduler.ScheduledTaskSpec.html">ScheduledTaskSpec</a>
+  <a href="vim.scheduler.ScheduledTaskSpec.html#scheduler">scheduler</a> property value.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="activeTime" name="activeTime"></a><strong>activeTime</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:dateTime</td><td>
+<p></p>
+         The time that the schedule for the task takes effect.
+  Task activation is distinct from task execution.
+  When you activate a task, its schedule starts,
+  and when the next execution time occurs, the task will run.
+  If you do not set activeTime, the activation time defaults to
+  the time that you create the scheduled task.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="expireTime" name="expireTime"></a><strong>expireTime</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:dateTime</td><td>
+<p></p>
+         The time the schedule for the task expires.
+  If you do not set expireTime, the schedule does not expire.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="TaskScheduler">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="activeTime" type="xsd:dateTime" minOccurs="0"/>
+                     <element name="expireTime" type="xsd:dateTime" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

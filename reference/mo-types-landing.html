@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<title>Managed Object Types Overview</title>
+	<meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1"/>
+	<meta name="vs_targetSchema" 
+content="http://schemas.microsoft.com/intellisense/ie5"/>
+        <script language="JavaScript" src="./commonRes.js"> type="text/javascript"></script>
+		
+	<link rel="stylesheet" type="text/css" href="doc-style.css"/>
+
+<style type="text/css">
+
+.Caption {font-size: 10px; FONT-WEIGHT: bold;
+           }
+.Gray
+{
+	 font-size: 9px; FONT-WEIGHT: bold; COLOR: "gray"; TEXT-DECORATION: none
+
+}
+	   
+.Blue {
+	 font-size: 9px; FONT-WEIGHT: bold; COLOR: "blue"; TEXT-DECORATION: none
+
+}
+
+table {
+  border-collapse:collapse;
+  border-top: 0px;
+  border-left: 0px;
+  width:95%;
+}
+
+td, th {
+  font-size: 12px;
+  padding: 5px 10px 5px 10px;
+  border-bottom: 0px;
+  border-right: 0px;
+  vertical-align: top;
+}
+
+</style>
+
+</head>
+<body>
+
+<h1>Managed Object Types Overview</h1>
+
+<p>
+The VMware vSphere management object model is a complex system of data structures designed to provision, manage, monitor, and control the life-cycle of all components that can possibly comprise virtual infrastructure. The VMware vSphere management architecture is patterned after Java&#146;s JMX (Java Management Extensions) infrastructure in which objects are used to instrument other objects, on a remote server. The data structures defined for the object model include both managed object types, as described on this page, and <a href="do-types-landing.html">data object types</a>. 
+</p>
+
+<p>
+A &#147;<strong>managed object type</strong>&#148; is a core data structure of the server-side object model. Instances of various managed object types are referred to generically as &#147;managed objects,&#148; of which there are two broad categories:</p>
+<ul>
+<li>Managed objects that extend the <a href="vim.ManagedEntity.html">ManagedEntity</a> managed object type, and thus, are components that comprise the <strong>inventory</strong> of virtual components. For example, instances of host systems (<a href="vim.HostSystem.html">HostSystem</a>), virtual machines (<a href="vim.VirtualMachine.html">VirtualMachine</a>, and datastores (<a href="vim.Datastore.html">Datastore</a>) are inventoried objects, and are referred to generically as &#147;managed entities.&#148;</li>
+<li>Managed objects that provide services for the entire system. Managed objects in this category enable managing performance (<a href="vim.PerformanceManager.html">PerformanceManager</a>), managing licenses for VMware products (LicenseManager), and managing virtual storage (<a href="vim.VirtualDiskManager.html">VirtualDiskManager</a>). These managed objects are the service interfaces for the virtual infrastructure management components.</li>
+</ul>
+<p>Managed objects can contain both <a href="properties-landing.html">properties</a> and <a href="methods-landing.html">operations</a>. An &#147;operation&#148; is Web-services terminology for what might be called a &#147;method&#148; in other programming languages, such as Java. In fact, the word &#147;method&#148; is used in the API Reference rather than operation, but you may see the two words used, interchangeably. 
+</p>
+
+<p>Regardless of these subtle language differences, working with the server from a client involves a few common steps, starting with connecting to the server, authenticating user-account credentials, and obtaining a session. (See the <a href="../visdkprogrammingguide.pdf">Programming Guide</a> for details).
+</p>
+
+<p>
+After connecting to the server system, the client application must then obtain a <strong>reference</strong> to the <a href="vim.ServiceInstance.html">ServiceInstance</a> managed object. This figure shows the <a href="vim.ServiceInstance.html">ServiceInstance</a> and some of its associated <a href="do-types-landing.html">data objects</a>. (In this figure, the property names are not shown: only the data type of the associated property).
+</p>
+
+<map name="apiref01" id="apiref01">
+<area shape="rect" coords="0, 10, 92, 73" href="vim.ServiceInstance.html" alt="ServiceInstance  page"/>
+<area shape="rect" coords="137, 73, 230, 135" href="vim.ServiceInstanceContent.html" alt="ServiceContent data object"/>
+</map>
+
+<table width="750" cellpadding="0" cellspacing="0" border="0">
+<tr><td width="620">
+
+<img src="ServiceInstance_TopLevel_Figure.gif" usemap="#apiref01" alt="ServiceInstance UML" name="ServiceInstance_figure" id="ServiceInstance_figure" border="0"/>
+</td>
+
+<td vAlign="top" width="100" align="center">
+<strong>LEGEND</strong><br/>
+
+<img src="legend_figures.jpg" alt="Gray box=Managed object type, Blue box=Data object type" name="Legend"/>
+
+
+</td></tr>
+
+</table>
+
+<p>The &#147;<strong>MOR</strong>&#148; in the figure above is an abbreviation for <a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>, a <a href="do-types-landing.html">data object</a> type that provides a reference to server-side objects for use by client applications.  See the <a href="../visdkprogrammingguide.pdf">Programming Guide</a> for more information.
+
+</p>
+<p>
+All managed object types are listed in the frame at the left of this page. Click a name to display the reference documentation for the managed object.
+</p>
+<p>
+To quickly find any entry, start typing its name in the <strong>Quick Index</strong>.
+</p>
+
+
+
+<a href="right-pane.html">Back to Home</a>
+<p><script language="javascript">document.write(ID_Copyright);</script><br/>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</p>
+
+</body>
+</html>

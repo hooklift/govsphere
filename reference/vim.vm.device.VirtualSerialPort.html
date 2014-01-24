@@ -1,0 +1,175 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.device.VirtualSerialPort" name="vim.vm.device.VirtualSerialPort"></a>
+<h1>Data Object - VirtualSerialPort</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.vm.device.VirtualDevice.html">VirtualDevice</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The <code><a href="vim.vm.device.VirtualSerialPort.html">VirtualSerialPort</a></code> data object represents a serial port
+  on a virtual machine.
+  A virtual serial port uses one of the following backing types to specify
+  how the virtual machine performs serial port operations.
+  <ul>
+    <li>Network backing (<code><a href="vim.vm.device.VirtualSerialPort.URIBackingInfo.html">VirtualSerialPortURIBackingInfo</a></code>)
+        supports a connection between the virtual machine and a resource
+        on the network. The virtual machine can initiate a connection with
+        the network resource, or it can listen for connections originating
+        from the network.
+    <li>Pipe backing (<code><a href="vim.vm.device.VirtualSerialPort.PipeBackingInfo.html">VirtualSerialPortPipeBackingInfo</a></code>)
+        supports I/O through a named pipe. The pipe connects the virtual machine
+        to a host application or a virtual machine on the same host.
+    <li>File backing (<code><a href="vim.vm.device.VirtualSerialPort.FileBackingInfo.html">VirtualSerialPortFileBackingInfo</a></code>)
+        supports output through the virtual serial port to a file on the same host.
+    <li>Physical serial port backing
+        (<code><a href="vim.vm.device.VirtualSerialPort.DeviceBackingInfo.html">VirtualSerialPortDeviceBackingInfo</a></code>)
+        supports a connection between the virtual machine and a
+        device that is connected to a physical serial port on the host.
+    <li>ThinPrint backing (<code><a href="vim.vm.device.VirtualSerialPort.ThinPrintBackingInfo.html">VirtualSerialPortThinPrintBackingInfo</a></code>)
+        provides driver-free printing.
+  </ul>
+  <p>
+  When you use network backing, you can also configure a virtual serial port
+  to use a virtual serial port concentrator. The virtual machine initiates
+  a telnet connection with the concentrator, and the concentrator acts
+  as a proxy between the virtual machine and a system on the network.
+  By using a virtual serial port concentrator, you can maintain the connection
+  between the virtual machine and the network resource
+  when a vMotion event moves the virtual machine from one host to another.
+  Without a virtual serial port concentrator, the connection would be lost.
+  For information about using a serial port concentrator,
+  see <i>Using a Proxy with vSphere Virtual Serial Ports</i>.
+  <p>
+  You can configure a virtual serial port when you create or reconfigure
+  a virtual machine. For example, to create a virtual serial port
+  with network backing, use the following sequence of operations.
+  In this procedure, the virtual serial port uses a proxy and will accept
+  a network connection.
+  <ol>
+    <li>Use the <code><a href="vim.EnvironmentBrowser.html#queryConfigOption">QueryConfigOption</a></code> method
+        to determine the backing options that are available on a host.
+        The method returns a <code><a href="vim.vm.ConfigOption.html">VirtualMachineConfigOption</a></code> data object.
+        The virtual machine configuration data includes a list of backing options
+        (<code><a href="vim.vm.device.VirtualDeviceOption.html#backingOption">backingOption</a></code>).
+        The following pseudocode shows the path to the backing options.
+        <br /><br />
+        &nbsp;&nbsp;&nbsp;&nbsp;<code><a href="vim.vm.ConfigOption.html">VirtualMachineConfigOption</a>.hardwareOptions.VirtualDeviceOption[].backingOption[]</code>
+        <br /><br />
+        The array of virtual device options can include a virtual serial port
+        (<code><a href="vim.vm.device.VirtualSerialPortOption.html">VirtualSerialPortOption</a></code>). The array of serial port
+         backing options can include URI, file, pipe, or device backing options.
+    </li>
+    <br />
+    <li>Use the <code><a href="vim.Folder.html#createVm">CreateVM_Task</a></code> method
+        (or the <code><a href="vim.ResourcePool.html#createVm">CreateChildVM_Task</a></code> method)
+         to create the virtual machine and configure the virtual serial port backing.
+        Create a <code><a href="vim.vm.ConfigSpec.html">VirtualMachineConfigSpec</a></code> data object and nested
+        data objects for the method's <code>config</code> parameter.
+       The following pseudocode shows the resulting path to the backing
+       information.
+       <br><br>
+       &nbsp;&nbsp;&nbsp;&nbsp;<code><a href="vim.vm.ConfigSpec.html">VirtualMachineConfigSpec</a>.deviceChange[].device.backing</code>
+       <br><br>
+       Set the direction property to "server" to direct the virtual machine to accept
+       a connection. Set the serviceURI property to the URI for the host on which 
+       the virtual machine runs.
+  </ol>
+  If you use physical device backing
+  (<code><a href="vim.vm.device.VirtualSerialPortOption.DeviceBackingOption.html">VirtualSerialPortDeviceBackingOption</a></code>),
+  you should also use the <code><a href="vim.EnvironmentBrowser.html#queryConfigTarget">QueryConfigTarget</a></code>
+  method to determine if a serial device is available before configuring device backing.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="yieldOnPoll" name="yieldOnPoll"></a><strong>yieldOnPoll</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Enables CPU yield behavior. If you set <code>yieldOnPoll</code> to <code>true</code>,
+  the virtual machine will periodically relinquish the processor if its sole task
+  is polling the virtual serial port. The amount of time it takes to regain
+  the processor will depend on the degree of other virtual machine activity on the host.
+  <p>
+  To use this property, the CPU yield option must be supported. (See the
+  <code><a href="vim.vm.device.VirtualSerialPortOption.html#yieldOnPoll">yieldOnPoll</a></code> property for
+  the virtual serial port option object.)
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.vm.device.VirtualDevice.html">VirtualDevice</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.vm.device.VirtualDevice.html#backing">backing</a>, <a href="vim.vm.device.VirtualDevice.html#connectable">connectable</a>, <a href="vim.vm.device.VirtualDevice.html#controllerKey">controllerKey</a>, <a href="vim.vm.device.VirtualDevice.html#deviceInfo">deviceInfo</a>, <a href="vim.vm.device.VirtualDevice.html#key">key</a>, <a href="vim.vm.device.VirtualDevice.html#slotInfo">slotInfo</a>, <a href="vim.vm.device.VirtualDevice.html#unitNumber">unitNumber</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VirtualSerialPort">
+            <complexContent>
+               <extension base="vim25:VirtualDevice">
+                  <sequence>
+                     <element name="yieldOnPoll" type="xsd:boolean"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

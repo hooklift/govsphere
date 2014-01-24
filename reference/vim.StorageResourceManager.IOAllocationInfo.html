@@ -1,0 +1,150 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.StorageResourceManager.IOAllocationInfo" name="vim.StorageResourceManager.IOAllocationInfo"></a>
+<h1>Data Object - StorageIOAllocationInfo</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.vm.device.VirtualDisk.html#field_detail">VirtualDisk</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.SharesInfo.html">SharesInfo</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The IOAllocationInfo specifies the shares, limit and reservation
+  for storage I/O resource.
+  <p>
+  The storage I/O resource is allocated to virtual machines based on their
+  shares, limit and reservation. The reservation is currently exposed only
+  at the host level for local datastores.
+  And we do not support storage I/O resource management on resource pools.
+  <p>
+  Each virtual machine has one IOAllocationInfo object per virtual
+  disk. For example, we can specify that a virtual machine has 500 shares on
+  the first virtual disk, 1000 shares on the second virtual disk, etc.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="limit" name="limit"></a><strong>limit</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         The utilization of a virtual machine will not exceed this limit, even
+  if there are available resources. This is typically used to ensure a consistent
+  performance of virtual machines independent of available resources.
+  If set to -1, then there is no fixed limit on resource usage (only
+  bounded by available resources and shares). The unit is number of
+  I/O per second.
+  While setting the limit for storage I/O resource, if the property is unset,
+  it is treated as no change and the property is not updated. While reading
+  back the limit information of storage I/O resource, if the property is unset,
+  a default value of -1 will be returned, which indicates that there is no
+  limit on resource usage.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="reservation" name="reservation"></a><strong>reservation</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Reservation control is used to provide guaranteed allocation in terms
+ of IOPS. Large IO sizes are considered as multiple IOs using a chunk
+ size of 32 KB as default. This control is initially supported only
+ at host level for local datastores. It future, it may get supported
+ on shared storage based on integration with Storage IO Control.
+ Also right now we don't do any admission control based on IO
+ reservation values.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="shares" name="shares"></a><strong>shares</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.SharesInfo.html">SharesInfo</a></td><td>
+<p></p>
+         Shares are used in case of resource contention.
+  The value should be within a range of 200 to 4000.
+  While setting shares for storage I/O resource, if the property is unset,
+  it is treated as no change and the property is not updated. While reading
+  back the shares information of storage I/O resource, if the property is unset,
+  a default value of <a href="vim.SharesInfo.html#level">level</a> = normal,
+  <a href="vim.SharesInfo.html#shares">shares</a> = 1000 will be returned.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="StorageIOAllocationInfo">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="limit" type="xsd:long" minOccurs="0"/>
+                     <element name="shares" type="vim25:SharesInfo" minOccurs="0"/>
+                     <element name="reservation" type="xsd:int" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

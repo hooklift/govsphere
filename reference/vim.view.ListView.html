@@ -1,0 +1,416 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.view.ListView" name="vim.view.ListView"></a>
+<h1>Managed Object -  
+						ListView</h1>
+<dl>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.view.ViewManager.html#createListView">CreateListView</a>, <a href="vim.view.ViewManager.html#createListViewFromView">CreateListViewFromView</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.view.ManagedObjectView.html">ManagedObjectView</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.view.View.html">View</a>
+</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         The <a href="vim.view.ListView.html">ListView</a> managed object provides access to updates on a specific set of objects.
+  You can use a <a href="vim.view.ListView.html">ListView</a> with a <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> method
+  to retrieve data or receive notification of changes. For information about using views
+  with the <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>, see the description of <a href="vim.view.ViewManager.html">ViewManager</a>.
+  <p>
+  When you invoke the <a href="vim.view.ViewManager.html#createListView">CreateListView</a> method, you specify
+  a list of objects. The <a href="vim.view.ManagedObjectView.html#view">view</a> list
+  always represents the current configuration of the virtual environment 
+  and reflects any subsequent changes that occur.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.view.ManagedObjectView.html">ManagedObjectView</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.view.ManagedObjectView.html#view">view</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.view.View.html">View</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+</table>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#modify">ModifyListView</a>, <a href="#reset">ResetListView</a>, <a href="#resetFromView">ResetListViewFromView</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.view.ManagedObjectView.html">ManagedObjectView</a></td>
+</tr>
+<tr class="r0">
+<td>None</td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.view.View.html">View</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.view.View.html#destroy">DestroyView</a></td>
+</tr>
+</table>
+<br>
+<a id="modify" name="modify"></a>
+<h1>ModifyListView</h1>
+<p></p>
+         Modify the list by giving a delta of entities to add and
+  entities to remove.
+  <p>
+  May partially succeed if some objects could not be resolved.  The operation
+  will still succeed for all objects which could be resolved, and the
+  list of those which failed is returned as the result.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.view.ListView.html">ListView</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>add</strong><span title="Need not be set" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a></td><td>
+<p></p>
+         Optional list of objects to add to the view.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>remove</strong><span title="Need not be set" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a></td><td>
+<p></p>
+         Optional list of objects to remove from the view.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  System.View</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a></td><td>A list containing any objects in 'add' that could not be resolved.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ModifyListView-textarea');expandcontent(this, 'ModifyListView-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ModifyListView-div">
+<textarea cols="20" rows="10" name="ModifyListView-textarea" wrap="off" readonly="1" id="ModifyListView-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ModifyListView" type="vim25:ModifyListViewRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ModifyListViewResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="reset" name="reset"></a>
+<h1>ResetListView</h1>
+<p></p>
+         Replaces the list with an entirely new set of objects.  If
+  the entire set is changing, this is less data to send than a delta.
+  <p>
+  May partially succeed if some objects could not be resolved.  The operation
+  will still succeed for all objects which could be resolved, and the
+  list of those which failed is as the result.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.view.ListView.html">ListView</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>obj</strong><span title="Need not be set" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a></td><td>
+<p></p>
+         The new list of objects.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  System.View</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a></td><td>A list containing any objects in 'obj' that could not be resolved.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ResetListView-textarea');expandcontent(this, 'ResetListView-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ResetListView-div">
+<textarea cols="20" rows="10" name="ResetListView-textarea" wrap="off" readonly="1" id="ResetListView-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ResetListView" type="vim25:ResetListViewRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ResetListViewResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="resetFromView" name="resetFromView"></a>
+<h1>ResetListViewFromView</h1>
+<p></p>
+         Replaces the list with the set of objects in a given view.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.view.ListView.html">ListView</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>view</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.view.View.html">View</a></td><td>
+<p></p>
+         The view to copy objects from.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ResetListViewFromView-textarea');expandcontent(this, 'ResetListViewFromView-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ResetListViewFromView-div">
+<textarea cols="20" rows="10" name="ResetListViewFromView-textarea" wrap="off" readonly="1" id="ResetListViewFromView-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ResetListViewFromView" type="vim25:ResetListViewFromViewRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ResetListViewFromViewResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

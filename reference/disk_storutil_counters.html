@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<html>
+<head>
+<title>Datastore / Virtual Machine Storage Capacity Counters</title>
+<script language="JavaScript" src="./commonRes.js" type="text/javascript"></script>
+<link rel="StyleSheet" type="text/css" href="doc-style.css"></link>
+
+<style type="text/css">
+.code {
+    font-size: 11px; font-family:
+    "Courier New", Courier, monospace;
+}
+.BoldRedText {
+    FONT-WEIGHT: bold; COLOR: #CC0000; TEXT-DECORATION: none
+}
+
+h2 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #3366AA;
+    margin-top: 25px;
+    padding-bottom: 10px;
+    border-bottom-width: 1px;
+    border-bottom-style: dashed;
+}
+h3 {
+    margin-top: 25px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+table {
+    border-collapse:collapse;
+    border-top: 1px solid #999;
+    border-left: 1px solid #999;
+    width:100%;
+    margin-right: 4px;
+    margin-left: 4px;
+}
+
+table.navcontainer, topnavcontainer {
+    border:0; margin-right: 2px; margin-left: 2px; padding:0;vertical-align:bottom;
+}
+
+table.nested {
+    border-collapse:collapse;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+th {
+    background-color: #555555;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 10px;
+    text-align: center;
+    vertical-align:middle;
+}
+
+th.nested {
+    border:0; padding:0; text-align: center;
+}
+
+td {
+    font-size: 11px;
+    vertical-align: top;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+td.yes {font-size: 18px;}
+td.no {font-size: 12px;}
+
+a.white:link {color: #ffffff}
+a.white:visited {color: #ffffff}
+a.white:hover {color: #ffffff; cursor:hand;}
+a.white:active {color: #ffffff}
+
+a.noline:link {color: #3366AA; text-decoration:none; }
+a.noline:visited {color: #3366AA; text-decoration:none;}
+a.noline:hover {color: #3366AA; cursor:hand; text-decoration:none;}
+a.noline:active {color: #3366AA; text-decoration:none;}
+
+p {font-size:12px; margin: 12px 72px 5px 0px; }
+p.nolead {margin: 3px 72px 5px 0px}
+
+.back {
+    font-size:9px; text-transform: uppercase; FONT-WEIGHT: bold; COLOR: #3366AA;
+}
+.back:link {color: #ffffff; text-decoration: none;}
+.back:visited {color: #ffffff}
+.back:hover {color: #ffffff; cursor:hand;}
+.back:active {color: #ffffff}
+
+.back2 {
+    font-size:11px; text-transform: none; FONT-WEIGHT: bold; COLOR: #3366AA;
+}
+
+.top {
+    font-size:10px; text-transform: uppercase; FONT-WEIGHT: bold; COLOR: #3366AA;
+}
+
+ul {
+    font-size: 12px;
+    vertical-align: top;
+}
+ul.small{font-size: 11px;}
+
+</style>
+</head>
+
+<body>
+<span class="back"><a href="vim.PerformanceManager.html" class="noline">Back to</a></span>
+<span class="back2"><a href="vim.PerformanceManager.html" class="noline">PerformanceManager</a></span><br />
+<p></p>
+<a name="top"></a>
+<h1>Datastore / Virtual Machine Storage Capacity Counters</h1>
+
+<table class="topnavcontainer"><tr><td valign="top" colspan="2">
+
+<p class="nolead">
+Performance counters are modeled using the
+<a href="vim.PerformanceManager.CounterInfo.html">PerfCounterInfo</a> data object type.
+Each instance of a <a href="vim.PerformanceManager.CounterInfo.html">PerfCounterInfo</a> data object
+contains metadata about a specific metric available from the system. The <strong>disk</strong> group of counters
+support metrics for I/O (input/output) performance (such as latency and read- and write-speeds), 
+and utilization metrics for storage as a finite resource. This page includes documentation for storage-utilization
+counters only. See the <a href="disk_counters.html">Disk I/O Counters</a> page for information about disk I/O counters.
+</p>
+<p>A <a href="vim.Datastore.html">datastore</a> is a logical construct, conceptually similar to a &#147;volume&#46;&#148; 
+A datastore provides an abstraction of the underlying LUNs (logical unit numbers), which provide the actual 
+physical storage&#46; The storage-utilization counters measure various aspects of datastore space. </p>
+<p>Some key points about storage utilization:</p>
+<ul>
+<li>A datastore can comprise numerous virtual machines.</li>
+<li>A virtual machine comprises numerous files, including swapfiles, virtual disk files, snapshot files,
+configuration files, log files.</li>
+<li>A virtual machine can span more than one datastore.</li>
+<li>&#147;Aggregate&#148; refers to &#147;datastore or virtual machine as a whole&#46;&#148;</li>
+</ul>
+
+<p>The <a href="vim.PerformanceManager.MetricId.html#instance">instance</a> property of the
+<a href="vim.PerformanceManager.MetricId.html">metric ID</a> identifies the device associated
+with a metric returned from the system. Conversely, device information can be set in the instance property,
+in the <a href="vim.PerformanceManager.QuerySpec.html">PerfQuerySpec</a>&#146;s optional metricId and passed
+to a PerformanceManager query operation to return storage utilization information for specific virtual machines
+or filetypes. The descriptions below include this information.
+</p>
+
+
+<h2>These counters are available from vCenter Server only (not directly from ESX).</h2>
+<p class="nolead">Values are populated every 30 minutes.</p>
+
+</td>
+
+</tr></table>
+<!-- heading for table -->
+
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+
+<tr>
+<th width="10%" valign="middle" title="PerfCounterInfo.nameInfo.key property">Counter</th>
+<!--<th width="300">Description</th>-->
+<th width="10%"><a href="vim.PerformanceManager.CounterInfo.StatsType.html" class="white" title="StatsType">StatsType</a></th>
+<th width="10%"><a href="vim.PerformanceManager.CounterInfo.Unit.html" class="white">Unit</a></th>
+
+<th width="5%"><a href="vim.HistoricalInterval.html#level" class="white" title="The 'level' property is 'null' for ESX... Statistics are collected by vCenter Server and rolled-up based on the collection-level setting (1 is the default).">Level</a></th>
+<th width="5%"><a href="vim.PerformanceManager.CounterInfo.html" class="white" title="Per Device Level">Per Device Level</a></th>
+
+<th width="10%"><a href="vim.PerformanceManager.CounterInfo.RollupType.html" class="white" title="RollupType">RollupType</a></th>
+<th width="15%"><a href="vim.PerformanceManager.CounterInfo.html" class="white" title="PerfCounterInfo.nameInfo property is used to populate vSphere Client charts...">Label</a></th>
+<th width="10%"><a href="vim.PerformanceManager.MetricId.html" class="white" title="Indicates whether collection is from an &#160;
+individual instance or aggregate">Instance/<br />Aggregate</a></th>
+<th width="10%"><a href="" class="white" title="ESX version(s) for which this counter is supported.">ESX<br />Versions</a></th>
+</tr>
+<!-- close heading for table -->
+<tr><td rowspan="2">capacity</td>
+<td>absolute</td><td>kiloBytes</td><td>1</td><td>3</td><td>latest</td><td>
+Capacity
+</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="8">Configured size of the datastore. Available from a <a href="vim.Datastore.html">datastore</a> entity only. </td></tr>
+
+
+<tr><td rowspan="2"><a name="provisioned"></a>provisioned</td>
+<td>absolute</td><td>kiloBytes</td><td>1</td><td>1</td><td>latest</td><td>
+Space potentially used
+</td><td>instance</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="8">Amount of storage set-aside for use by a datastore or virtual machine. Files on the datastore and the virtual machine can expand to this size, but not beyond it. Available from <a href="vim.Datastore.html">datastore</a> and <a href="vim.VirtualMachine">virtual machine</a> target entities.<br /><br />
+<strong>Datastore</strong>:<br />
+<ul class="small">
+<li>To obtain aggregated space set-aside for use for the entire target datastore, set the <a href="vim.PerformanceManager.MetricId.html#instance">instance</a> property of the <a href="vim.PerformanceManager.MetricId.html">metric ID</a> to an empty string ("&#160;").</li>
+<li>To obtain aggregated space provisioned for a specific virtual machine on the target datastore, set the <a href="vim.PerformanceManager.MetricId.html#instance">instance</a> property to the virtual machine identifier.
+</li>
+</ul>
+<strong>Virtual machine</strong>:<br />
+<ul class="small">
+<li>To obtain aggregate space provisioned for the target virtual machine, set the <a href="vim.PerformanceManager.MetricId.html#instance">instance</a> property of the <a href="vim.PerformanceManager.MetricId.html">metric ID</a> to an empty string ("&#160;"). 
+</li>
+</ul>
+</td></tr>
+
+
+<tr><td rowspan="2">unshared</td>
+<td>absolute</td><td>kiloBytes</td><td>1</td><td>1</td><td>latest</td><td>
+Space not shared
+</td><td>instance</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="8">Amount of space associated exclusively with a virtual machine. Available from <a href="vim.Datastore.html">datastore</a> and <a href="vim.VirtualMachine">virtual machine</a> target entities.
+<ul class="small"><li><strong>Datastore</strong>: Values are an aggregate of unshared space on a datastore, per virtual machine. <a href="vim.PerformanceManager.MetricId.html#instance">Instance</a> property of the <a href="vim.PerformanceManager.MetricId.html">PerfMetricId</a> is set to the identifier of the virtual machine.</li>
+
+<li><strong>Virtual machine</strong>: Values are an aggregate of all unshared space for the virtual machine across all datastores. The <a href="vim.PerformanceManager.MetricId.html#instance">instance</a> property of the <a href="vim.PerformanceManager.MetricId.html">metric ID</a> is &#147;Unset.&#148; (Set instance to empty string ("&#160;") to obtain aggregate unshared space for the virtual machine across all datastores.)
+</li>
+</ul>
+</td>
+</tr>
+
+
+<tr><td rowspan="2">used</td>
+<td>absolute</td><td>kiloBytes</td><td>1</td><td>1</td><td>latest</td><td>
+Space actually used
+</td><td>instance</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="8">Amount of space actually used by the virtual machine or the datastore. May be less than the amount <span class="code"><a href="#provisioned">provisioned</a></span> at any given time, depending on whether the virtual machine is powered-off, whether snapshots have been created or not, and other such factors. Available from <a href="vim.Datastore.html">datastore</a> and <a href="vim.VirtualMachine">virtual machine</a> target entities.<br />
+<strong>Datastore</strong>:<br />
+<ul class="small">
+<li>To obtain aggregated space used by the datastore, set the <a href="vim.PerformanceManager.MetricId.html#instance">instance</a> property of the <a href="vim.PerformanceManager.MetricId.html">metric ID</a> to an empty string ("&#160;").</li>
+<li>To obtain aggregated space used by a specific virtual machine on the target datastore, set the <a href="vim.PerformanceManager.MetricId.html#instance">instance</a> property to the virtual machine identifier.</li>
+<li>To obtain aggregated space used by all files of a specific type on the datastore, set the <a href="vim.PerformanceManager.MetricId.html#instance">instance</a> property to a valid filetype, specifically:
+
+<ul class="small"><li>DISKFILE, which comprises the base disk of a virtual machine's disk and delta disks</li>
+<li>DELTAFILE, which comprises virtual machine Snapshot overhead files </li>
+<li>SWAPFILE, for virtual machine swap files </li>
+<li>OTHERFILE, for all other virtual machine files</li>
+</ul>
+</li>
+</ul>
+<strong>Virtual machine</strong>:<br />
+<ul class="small">
+<li>To obtain aggregated datastore space used by the target virtual machine, set the <a href="vim.PerformanceManager.MetricId.html#instance">instance</a> property of the <a href="vim.PerformanceManager.MetricId.html">metric ID</a> to an empty string ("&#160;"). </li>
+<li>To obtain aggregated space used by the virtual machine for files of a specific type, set <a href="vim.PerformanceManager.MetricId.html#instance">instance</a> property of the <a href="vim.PerformanceManager.MetricId.html">metric ID</a> to a valid filetype:
+<ul class="small">
+<li>DISKFILE, which comprises the base disk of a virtual machine's disk and delta disks</li>
+<li>DELTAFILE, which comprises virtual machine Snapshot overhead files </li>
+<li>SWAPFILE, for virtual machine swap files </li>
+<li>OTHERFILE, for all other virtual machine files</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+
+
+</table>
+<p>&#160;</p>
+<span class="back"><a href="#top" class="noline">Back to</a></span> 
+<span class="back2"><a href="#top" class="noline">Top of page</a></span><br />
+<span class="back"><a href="vim.PerformanceManager.html" class="noline">Back to</a></span> 
+<span class="back2"><a href="vim.PerformanceManager.html" class="noline">PerformanceManager</a></span><br />
+<p>&#160;</p>
+<p>&#160;</p>
+<p><script language="javascript" type="text/javascript">document.write(ID_Copyright);</script><br />
+<script language="javascript" type="text/javascript">document.write(ID_VersionInformation);</script></p>
+</body>
+</html>

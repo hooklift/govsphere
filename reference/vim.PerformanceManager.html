@@ -1,0 +1,1479 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.PerformanceManager" name="vim.PerformanceManager"></a>
+<h1>Managed Object -  
+						PerformanceManager</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.ServiceInstanceContent.html#field_detail">ServiceContent</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.PerformanceManager.CompositeEntityMetric.html">PerfCompositeMetric</a>, <a href="vim.PerformanceManager.CounterInfo.html">PerfCounterInfo</a>, <a href="vim.PerformanceManager.EntityMetricBase.html">PerfEntityMetricBase</a>, <a href="vim.HistoricalInterval.html">PerfInterval</a>, <a href="vim.PerformanceManager.MetricId.html">PerfMetricId</a>, <a href="vim.PerformanceDescription.html">PerformanceDescription</a>, <a href="vim.PerformanceManager.CounterLevelMapping.html">PerformanceManagerCounterLevelMapping</a>, <a href="vim.PerformanceManager.ProviderSummary.html">PerfProviderSummary</a>, <a href="vim.PerformanceManager.QuerySpec.html">PerfQuerySpec</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         This managed object type provides the service interface for obtaining
+  statistical data about various aspects of system performance, as generated
+  and maintained by the system's performance providers. A "performance
+  provider" (<a href="vim.PerformanceManager.ProviderSummary.html">PerfProviderSummary</a>) is any managed object
+  that generates utilization or other performance metrics. Performance
+  providers include <a href="vim.ManagedEntity.html">managed entities</a>, such as <a href="vim.HostSystem.html">hosts</a>, <a href="vim.VirtualMachine.html">virtual machines</a>, <a href="vim.ComputeResource.html">compute resources</a>, <a href="vim.ResourcePool.html">resource
+  pools</a>, <a href="vim.Datastore.html">datastores</a>, and <a href="vim.Network.html">networks</a>.
+  Performance providers also include physical or virtual devices associated
+  with these objects, such as virtual host-bus adapters and network-interface
+  controllers (NICs)
+
+  <p> <a name="counterTables"></a><b>Performance Counters</b> <br/> Each
+  performance provider&#151;the instrumented device or entity&#151;has its own
+  set of <a href="vim.PerformanceManager.CounterInfo.html">counters</a> that provides
+  metadata about its available <a href="vim.PerformanceManager.EntityMetric.html">metrics</a>. Each counter has a unique <a href="vim.PerformanceManager.CounterInfo.html#key">key</a>, referred to as the counterId. The
+  actual performance metrics generated at runtime are identified by this
+  <a href="vim.PerformanceManager.MetricId.html#counterId">counterId</a>. Counters are organized by
+  <a href="vim.PerformanceManager.CounterInfo.html#groupInfo">groups</a> of finite system
+  resources, such as <a href="memory_counters.html">memory</a>, <a
+  href="cpu_counters.html">CPU</a>, <a href="disk_counters.html">disk</a>, and
+  so on. The links in this list contain documentation for performance
+  counters, by <a href="vim.PerformanceManager.CounterInfo.html#groupInfo">group</a>. Each
+  page contains a table that includes data extracted from instances of the
+  <a href="vim.PerformanceManager.CounterInfo.html">PerfCounterInfo</a> data object, including the counter
+  name, its Label, Unit, StatsType, RollupType, and Level: <ul>
+
+  <li> <a href="cluster_services_counters.html">Cluster Services</li>
+  <li> <a href="cpu_counters.html">CPU</a></li>
+  <li> <a href="hbr_counters.html">Host-Based Replication</a></li>
+  <li> <a href="mgmt_agent_counters.html">Management Agent</a></li>
+  <li> <a href="memory_counters.html">Memory</a></li>
+  <li> <a href="network_counters.html">Network</a></li>
+  <li> <a href="power_counters.html">Power</a></li>
+  <li> <a href="resource_scheduler_counters.html">Resource Scheduler</a></li>
+  <li> Storage Capacity:<ul>
+     <li> <a href="disk_storutil_counters.html">Datastore / Virtual
+          Machine</a></li>
+     </ul></li>
+  <li> Storage I/O:<ul>
+     <li> <a href="datastore_counters.html">Datastore</a></li>
+     <li> <a href="disk_counters.html">Disk</a></li>
+     <li> <a href="virtual_disk_counters.html">Virtual Disk</a></li>
+     <li> <a href="storage_adapter_counters.html">Storage Adapter</a></li>
+     <li> <a href="storage_path_counters.html">Storage Path</a></li>
+     </ul></li>
+  <li><a href="system_counters.html">System</a></li>
+  <li><a href="vcres_counters.html">vCenter Resource</a></li>
+  <li><a href="vmop_counters.html">Virtual Machine Operations</a></li>
+  </ul>
+
+  <p> Other performance-counter groups, in addition to those listed here,
+  exist on the system. However, only the counter groups listed are considered
+  of possible interest to third-party developers.
+
+  <p> <b>Obtaining Metadata and Metrics</b><br/> This interface provides these
+  query operations: <ul>
+
+  <li> <a href="vim.PerformanceManager.html#queryProviderSummary">QueryPerfProviderSummary</a>, for obtaining metatdata about <a href="vim.PerformanceManager.ProviderSummary.html">performance providers</a></li>
+
+  <li> <a href="vim.PerformanceManager.html#queryCounter">QueryPerfCounter</a> and <a href="vim.PerformanceManager.html#queryCounterByLevel">QueryPerfCounterByLevel</a> for obtaining
+       metadata about supported counters. </li>
+
+  <li> <a href="vim.PerformanceManager.html#queryStats">QueryPerf</a>, <a href="vim.PerformanceManager.html#queryAvailableMetric">QueryAvailablePerfMetric</a>, and <a href="vim.PerformanceManager.html#queryCompositeStats">QueryPerfComposite</a> for obtaining statistics for one or more
+       entities: <ul>
+
+     <li> Use <a href="vim.PerformanceManager.html#queryStats">QueryPerf</a> to obtain metrics for multiple entities in a
+          single call&#46;</li>
+
+     <li> Use <a href="vim.PerformanceManager.html#queryCompositeStats">QueryPerfComposite</a> to obtain statistics for a single
+          entity with its descendent objects&#151;statistics for a <a href="vim.HostSystem.html">host</a> and all its <a href="vim.VirtualMachine.html">virtual
+          machines</a>, for example. </li>
+
+     </ul> </li>
+
+  </ul>
+
+  <p> <b>Product and Version Specifics</b><br/> Some differences between ESX
+  and vCenter Server implementations of this interface include: <ul>
+
+  <li> For ESX systems, this interface provides access to real-time data, and
+       to real-time data that has been rolled up into "PastDay" statistics (if
+       applicable for the specific counter). </li>
+
+  <li> For vCenter Server systems, this interface provides access to real-time
+       and historical data. vCenter Server collects statistics on a regular
+       basis from all ESX systems that it manages, and aggregates the results
+       based on the level settings for the server. </li>
+
+  <li> Default sampling interval is product- and version-specific: <ul>
+
+     <li> ESX 3&#46;x (and subsequent) systems: 20 second interval</li>
+
+     <li> ESX 2&#46;x systems: 60 second interval</li>
+
+     </ul> </li>
+
+  <li> VirtualCenter Server 2&#46;5 (and subsequent vCenter Server) systems
+       initially collect statistics data 10 minutes after system startup, and
+       then hourly thereafter&#46;</li>
+
+  </ul>
+
+  <p> See the Programming Guide for more information about using <a href="vim.PerformanceManager.html">PerformanceManager</a>&#46;
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="description" name="description"></a><strong>description</strong><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vim.PerformanceDescription.html">PerformanceDescription</a></td><td>
+<p></p>
+         The static description strings.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="historicalInterval" name="historicalInterval"></a><strong>historicalInterval</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vim.HistoricalInterval.html">PerfInterval[]</a></td><td>
+<p></p>
+         A list of <a href="vim.HistoricalInterval.html">intervals</a> configured on the
+  system.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="perfCounter" name="perfCounter"></a><strong>perfCounter</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vim.PerformanceManager.CounterInfo.html">PerfCounterInfo[]</a></td><td>
+<p></p>
+         A list of all supported performance counters in the system.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  System.View</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#createHistoricalInterval">CreatePerfInterval</a>, <a href="#queryAvailableMetric">QueryAvailablePerfMetric</a>, <a href="#queryStats">QueryPerf</a>, <a href="#queryCompositeStats">QueryPerfComposite</a>, <a href="#queryCounter">QueryPerfCounter</a>, <a href="#queryCounterByLevel">QueryPerfCounterByLevel</a>, <a href="#queryProviderSummary">QueryPerfProviderSummary</a>, <a href="#removeHistoricalInterval">RemovePerfInterval</a>, <a href="#resetCounterLevelMapping">ResetCounterLevelMapping</a>, <a href="#updateCounterLevelMapping">UpdateCounterLevelMapping</a>, <a href="#updateHistoricalInterval">UpdatePerfInterval</a></td>
+</tr>
+</table>
+<br>
+<a id="createHistoricalInterval" name="createHistoricalInterval"></a>
+<h1>CreatePerfInterval</h1>
+<B>Deprecated.</B><I>
+         As of API 2.5, use <a href="vim.PerformanceManager.html#updateHistoricalInterval">UpdatePerfInterval</a>. The
+  default historical intervals can be modified, but they cannot be created.
+      </I>
+<p></p>
+         Adds a new historical interval. Sampling period for new interval must be
+  a multiple of an existing interval; must comprise a longer period of
+  time; and must be uniquely named.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Performance.ModifyIntervals</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.PerformanceManager.html">PerformanceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>intervalId</strong></td><td><a href="vim.HistoricalInterval.html">PerfInterval</a></td><td>
+<p></p>
+         A custom interval, specified as the number of seconds to hold data in the
+  database, a user-specified unique name, and a sampling period (in
+  seconds).
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the set of arguments passed to the function is not specified correctly.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CreatePerfInterval-textarea');expandcontent(this, 'CreatePerfInterval-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CreatePerfInterval-div">
+<textarea cols="20" rows="10" name="CreatePerfInterval-textarea" wrap="off" readonly="1" id="CreatePerfInterval-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreatePerfInterval" type="vim25:CreatePerfIntervalRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreatePerfIntervalResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryAvailableMetric" name="queryAvailableMetric"></a>
+<h1>QueryAvailablePerfMetric</h1>
+<p></p>
+         Retrieves all performance counters for the specified <a href="vim.ExtensibleManagedObject.html">managed object</a> generated during a specified
+  period of time. The time period can be specified using beginTime,
+  endTime, or by interval ID.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Read</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.PerformanceManager.html">PerformanceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>entity</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+<p></p>
+         The <a href="vim.PerformanceManager.ProviderSummary.html#entity">managed object</a> that
+  provides performance metrics.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>beginTime</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:dateTime</td><td>
+<p></p>
+         Starting time (server time) for a period of time from which to return
+  available metrics. If not specified, defaults to oldest available metric
+  for the specified entity.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>endTime</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:dateTime</td><td>
+<p></p>
+         Ending time (server time) for a period of time from which to return
+  available performance metrics. If not specified, defaults to the most
+  recently generated metric for the specified entity.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>intervalId</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Period of time from which to retrieve metrics, defined by intervalId
+  (rather than beginTime or endTime). Valid intervalIds include: <ul>
+
+  <li> For real-time counters, the <a href="vim.PerformanceManager.ProviderSummary.html#refreshRate">refreshRate</a> of
+       the <a href="vim.PerformanceManager.ProviderSummary.html">performance
+       provider</a>. </li>
+
+  <li> For historical counters, the <a href="vim.HistoricalInterval.html#samplingPeriod">samplingPeriod</a> of the <a href="vim.HistoricalInterval.html">historical interval</a>. </li>
+
+  </ul>
+
+  If this parameter is not specified, the system returns available metrics
+  for historical statistics&#46;
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.PerformanceManager.MetricId.html">PerfMetricId[]</a></td><td>An array of metrics, each of which comprises a <a href="vim.PerformanceManager.MetricId.html#counterId">counterId</a> and an <a href="vim.PerformanceManager.MetricId.html#instance">name</a>.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the set of arguments passed to the function is not specified correctly.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryAvailablePerfMetric-textarea');expandcontent(this, 'QueryAvailablePerfMetric-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryAvailablePerfMetric-div">
+<textarea cols="20" rows="10" name="QueryAvailablePerfMetric-textarea" wrap="off" readonly="1" id="QueryAvailablePerfMetric-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryAvailablePerfMetric" type="vim25:QueryAvailablePerfMetricRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryAvailablePerfMetricResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:PerfMetricId" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryStats" name="queryStats"></a>
+<h1>QueryPerf</h1>
+<p></p>
+         Retrieves the performance metrics for the specified entity (or entities)
+  based on the properties specified in the <a href="vim.PerformanceManager.QuerySpec.html">PerfQuerySpec</a> data object.
+
+  <p> <b>Query Performance for VirtualCenter Server</b><br/>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.PerformanceManager.html">PerformanceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>querySpec</strong></td><td><a href="vim.PerformanceManager.QuerySpec.html">PerfQuerySpec[]</a></td><td>
+<p></p>
+         An array of <a href="vim.PerformanceManager.QuerySpec.html">PerfQuerySpec</a> objects. Each <a href="vim.PerformanceManager.QuerySpec.html">PerfQuerySpec</a> object specifies a managed object reference
+  for an entity, plus optional criteria for filtering results. Only metrics
+  for entities that can be resolved and that are valid <a href="vim.PerformanceManager.ProviderSummary.html">performance providers</a> are returned in
+  any result.
+
+  <p> Each <a href="vim.PerformanceManager.QuerySpec.html">PerfQuerySpec</a> object in the array
+  submitted in this operation can query for different metrics. Or, select
+  all types of statistics for a single managed entity.
+
+  <p> Raw data feed workaround: Normally, QueryPerf will return performance
+  statistics stored in the VirtualCenter database. However this may not be
+  suitable for certain applications. For example, applications that treat
+  VirtualCenter as a raw data source, query for performance statistics
+  regularly (say every 5 minutes) and extract the data for external
+  archival and reporting. Such applications need better query performance.
+  These applications should query statistics using QueryPerf for the base
+  historical interval (5 minutes by default) having a start and end time
+  range within 30 minutes from the current VirtualCenter server system
+  time. These QueryPerf calls will have better performance than other
+  QueryPerf calls.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.PerformanceManager.EntityMetricBase.html">PerfEntityMetricBase[]</a></td><td>The metric values for the specified entity or entities.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the set of arguments passed to the function is not specified correctly.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryPerf-textarea');expandcontent(this, 'QueryPerf-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryPerf-div">
+<textarea cols="20" rows="10" name="QueryPerf-textarea" wrap="off" readonly="1" id="QueryPerf-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryPerf" type="vim25:QueryPerfRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryPerfResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:PerfEntityMetricBase" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryCompositeStats" name="queryCompositeStats"></a>
+<h1>QueryPerfComposite</h1>
+<p></p>
+         Retrieves a <a href="vim.PerformanceManager.CompositeEntityMetric.html">PerfCompositeMetric</a> data object
+  that comprises statistics for the specified entity and its children
+  entities. Only metrics for the first level of descendents are included in
+  the <a href="vim.PerformanceManager.CompositeEntityMetric.html">PerfCompositeMetric</a> object.
+
+  <p> Use this operation to obtain statistics for a <a href="vim.HostSystem.html">host</a> and its associated <a href="vim.VirtualMachine.html">virtual machines</a>, for
+  example.
+
+  <p> Requires <b>system.read</b> privilege for every virtual machine on
+  the target host, or the query fails with the &#147;NoPermission&#148;
+  fault. Suported for <a href="vim.HostSystem.html">HostSystem</a> managed entities only.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.PerformanceManager.html">PerformanceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>querySpec</strong></td><td><a href="vim.PerformanceManager.QuerySpec.html">PerfQuerySpec</a></td><td>
+<p></p>
+         A <a href="vim.PerformanceManager.QuerySpec.html">PerfQuerySpec</a> object specifying the query
+  parameters. This <a href="vim.PerformanceManager.QuerySpec.html">PerfQuerySpec</a> object specifies a
+  managed object for which composite statistics should be retrieved, with
+  specific optional criteria for filtering the results.
+
+  <p> This <a href="vim.PerformanceManager.QuerySpec.html">PerfQuerySpec</a> requires a valid <a href="vim.PerformanceManager.QuerySpec.html#metricId">metricId</a> property that specifies a metric
+  that is available, in common, to the entity and its children. If the
+  specified metricId is not available to the entity and its children, it is
+  ignored.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.PerformanceManager.CompositeEntityMetric.html">PerfCompositeMetric</a></td><td>The metric values for the specified entity and its associated entities for a single interval.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the set of arguments passed to the function is not specified correctly.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryPerfComposite-textarea');expandcontent(this, 'QueryPerfComposite-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryPerfComposite-div">
+<textarea cols="20" rows="10" name="QueryPerfComposite-textarea" wrap="off" readonly="1" id="QueryPerfComposite-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryPerfComposite" type="vim25:QueryPerfCompositeRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryPerfCompositeResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:PerfCompositeMetric"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryCounter" name="queryCounter"></a>
+<h1>QueryPerfCounter</h1>
+<p></p>
+         Retrieves counter information for the specified list of counter IDs.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.PerformanceManager.html">PerformanceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>counterId</strong></td><td>xsd:int[]</td><td>
+<p></p>
+         An array of one or more <a href="vim.PerformanceManager.MetricId.html#counterId">counterIds</a> representing performance counters for which information is
+  being retrieved.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.PerformanceManager.CounterInfo.html">PerfCounterInfo[]</a></td><td>An array consisting of performance counter information for the specified counterIds.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the set of arguments passed to the function is not specified correctly.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryPerfCounter-textarea');expandcontent(this, 'QueryPerfCounter-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryPerfCounter-div">
+<textarea cols="20" rows="10" name="QueryPerfCounter-textarea" wrap="off" readonly="1" id="QueryPerfCounter-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryPerfCounter" type="vim25:QueryPerfCounterRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryPerfCounterResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:PerfCounterInfo" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryCounterByLevel" name="queryCounterByLevel"></a>
+<h1>QueryPerfCounterByLevel</h1>
+<p></p>
+         Retrieves the set of counters that are available at a specified
+  collection <a href="vim.HistoricalInterval.html#level">level</a>. The collection level
+  determines the statistics that get stored in VirtualCenter. See <a href="vim.HistoricalInterval.html">PerfInterval</a> for more information about VirtualCenter Server
+  historical statistics collection.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.PerformanceManager.html">PerformanceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>level</strong></td><td>xsd:int</td><td>
+<p></p>
+         A number between 1 and 4 that specifies the collection level.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.PerformanceManager.CounterInfo.html">PerfCounterInfo[]</a></td><td>An array of <a href="vim.PerformanceManager.CounterInfo.html">PerfCounterInfo</a> objects that define the set of counters having the specified level number available for the entity.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if an invalid level is specified.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryPerfCounterByLevel-textarea');expandcontent(this, 'QueryPerfCounterByLevel-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryPerfCounterByLevel-div">
+<textarea cols="20" rows="10" name="QueryPerfCounterByLevel-textarea" wrap="off" readonly="1" id="QueryPerfCounterByLevel-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryPerfCounterByLevel" type="vim25:QueryPerfCounterByLevelRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryPerfCounterByLevelResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:PerfCounterInfo" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryProviderSummary" name="queryProviderSummary"></a>
+<h1>QueryPerfProviderSummary</h1>
+<p></p>
+         Retrieves the <a href="vim.PerformanceManager.ProviderSummary.html">PerfProviderSummary</a> data object that
+  defines the capabilities of the specified managed object with respect to
+  statistics, such as whether it supports current or summary
+  statistics&#46;
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Read</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.PerformanceManager.html">PerformanceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>entity</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+<p></p>
+         Reference to a managed object that provides performance data. If the
+  entity specified by managed object reference is not a performance
+  provider, an "InvalidArgument" exception is thrown.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.PerformanceManager.ProviderSummary.html">PerfProviderSummary</a></td><td>A data object containing metadata about the entity as a performance provider, such as the type of metrics (real-time, summary, or both) it generates and the <a href="vim.PerformanceManager.ProviderSummary.html#refreshRate">refreshRate</a>.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryPerfProviderSummary-textarea');expandcontent(this, 'QueryPerfProviderSummary-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryPerfProviderSummary-div">
+<textarea cols="20" rows="10" name="QueryPerfProviderSummary-textarea" wrap="off" readonly="1" id="QueryPerfProviderSummary-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryPerfProviderSummary" type="vim25:QueryPerfProviderSummaryRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryPerfProviderSummaryResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:PerfProviderSummary"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="removeHistoricalInterval" name="removeHistoricalInterval"></a>
+<h1>RemovePerfInterval</h1>
+<B>Deprecated.</B><I>
+         As of API 2.5, use <a href="vim.PerformanceManager.html#updateHistoricalInterval">UpdatePerfInterval</a>.
+  Historical intervals cannot be removed.
+      </I>
+<p></p>
+         Removes an interval from the list.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Performance.ModifyIntervals</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.PerformanceManager.html">PerformanceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>samplePeriod</strong></td><td>xsd:int</td><td>
+<p></p>
+         The sampling period, in seconds, for the specified interval being
+  removed.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the set of arguments passed to the function is not specified correctly.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RemovePerfInterval-textarea');expandcontent(this, 'RemovePerfInterval-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RemovePerfInterval-div">
+<textarea cols="20" rows="10" name="RemovePerfInterval-textarea" wrap="off" readonly="1" id="RemovePerfInterval-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemovePerfInterval" type="vim25:RemovePerfIntervalRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemovePerfIntervalResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="resetCounterLevelMapping" name="resetCounterLevelMapping"></a>
+<h1>ResetCounterLevelMapping</h1>
+<p></p>
+         Restores a set of performance counters to the default level of data
+  collection. See the <a href="#counterTables">performance counter
+  tables</a> for the default collection level for individual counters.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Performance.ModifyIntervals</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.PerformanceManager.html">PerformanceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>counters</strong></td><td>xsd:int[]</td><td>
+<p></p>
+         An array of counter ids.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the passed in counterId is invalid.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if called directly on a host.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ResetCounterLevelMapping-textarea');expandcontent(this, 'ResetCounterLevelMapping-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ResetCounterLevelMapping-div">
+<textarea cols="20" rows="10" name="ResetCounterLevelMapping-textarea" wrap="off" readonly="1" id="ResetCounterLevelMapping-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ResetCounterLevelMapping" type="vim25:ResetCounterLevelMappingRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ResetCounterLevelMappingResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateCounterLevelMapping" name="updateCounterLevelMapping"></a>
+<h1>UpdateCounterLevelMapping</h1>
+<p></p>
+         Changes the level of data collection for a set of performance counters.
+  See the <a href="#counterTables">performance counter tables</a>
+  for the default collection level for individual counters.
+
+  <p> <b>Important:</b>
+
+  <p> Consider the performance and storage consequences of using this
+  method. You may cause a significant increase in data collection and
+  storage, along with a corresponding decrease in performance. vCenter
+  Server performance and database storage requirements depend on the
+  collection levels defined for the performance intervals
+  (PerformanceManager.<a href="vim.PerformanceManager.html#historicalInterval">historicalInterval</a>)
+  and the collection levels specified for individual performance counters
+  (<a href="vim.PerformanceManager.CounterInfo.html">PerfCounterInfo</a>.<a href="vim.PerformanceManager.CounterInfo.html#level">level</a>).
+
+  <p> <u>Performance Counter Data Collection</u>
+
+  <p> vSphere defines four levels of data collection for performance
+  counters. Each performance counter specifies a level for collection. The
+  historical performance intervals (PerformanceManager.<a href="vim.PerformanceManager.html#historicalInterval">historicalInterval</a>) define the sampling period
+  and length for a particular collection level.
+
+  <p> The amount of data collected for a performance counter depends
+  on the performance interval and on the type of entity for which
+  the counter is defined. For example, a datastore counter such as
+  datastoreIops (the aggregate number of IO operations on the datastore)
+  will generate a data set that corresponds to the number of datastores
+  on a host. If a vCenter Server manages a large number of hosts
+  with a large number of datastores, the Server will collect
+  a large amount of data.
+
+  <p> There are other counters for which the vCenter Server collects
+  a relatively smaller amount of data. For example, memory counters
+  are collected as a single counter per virtual machine and a single
+  counter per host.
+
+  <p> <u>Performance Counter Data Storage</u>
+
+  <p> The performance interval collection <a href="vim.PerformanceManager.CounterInfo.html#level">level</a> defines the set of counters for
+  which the vCenter Server stores performance data. The Server will store
+  data for counters at the specified level and for counters at all lower
+  levels.
+
+  <p> By default, all the performance intervals specify collection level
+  one. Using these defaults, the vCenter Server stores performance counter
+  data in the vCenter database for all counters that specify collection
+  level one. It does not store data for counters that specify collection
+  levels two through four.
+
+  <p> <u>Performance Manager Method Interaction</u>
+
+  <p> You can use the UpdateCounterLevelMapping method to change the
+  collection level for individual counters. You can also use the <a href="vim.PerformanceManager.html#updateHistoricalInterval">UpdatePerfInterval</a> method to change the
+  collection level for the system-defined performance intervals. These
+  methods can cause a significant increase in the amount of data collected
+  and stored in the vCenter database.
+
+  <p> You may cause a significant increase in data collection and storage
+  along with a corresponding decrease in performance under the following
+  conditions: <ul>
+
+  <li> By default the system-defined performance intervals use collection
+       level one, storing data for all counters that specify collection
+       level one. If you use the UpdateCounterLevelMapping method to change
+       the collection level of performance counters to level one, you will
+       increase the amount of stored performance data. </li>
+
+  <li> If you use the <a href="vim.PerformanceManager.html#updateHistoricalInterval">UpdatePerfInterval</a> method to increase
+       the collection level for the system-defined performance intervals,
+       you will increase the amount of stored performance data. </li>
+
+  </ul>
+
+  <p> To restore counter levels to default settings use the <a href="vim.PerformanceManager.html#resetCounterLevelMapping">ResetCounterLevelMapping</a> method.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Performance.ModifyIntervals</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.PerformanceManager.html">PerformanceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>counterLevelMap</strong></td><td><a href="vim.PerformanceManager.CounterLevelMapping.html">PerformanceManagerCounterLevelMapping[]</a></td><td>
+<p></p>
+         An array of <a href="vim.PerformanceManager.CounterLevelMapping.html">PerformanceManagerCounterLevelMapping</a> objects. The
+  levels for the counters passed in are changed to the passed in values. If
+  the optional aggregateLevel field is left unset then only the
+  perDeviceLevel is configured. If the optional perDeviceLevel is left
+  unset then only the aggregateLevel is configured. If there are multiple
+  entries in the passed in array for the same counterId being updated then
+  the last entry containing the counterId takes effect.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the passed in counterId is invalid or if both the aggregateLevel and perDeviceLevel are unset or if the aggregateLevel field is not between 1-4 (valid values).</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if called directly on a host.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateCounterLevelMapping-textarea');expandcontent(this, 'UpdateCounterLevelMapping-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateCounterLevelMapping-div">
+<textarea cols="20" rows="10" name="UpdateCounterLevelMapping-textarea" wrap="off" readonly="1" id="UpdateCounterLevelMapping-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateCounterLevelMapping" type="vim25:UpdateCounterLevelMappingRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateCounterLevelMappingResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateHistoricalInterval" name="updateHistoricalInterval"></a>
+<h1>UpdatePerfInterval</h1>
+<p></p>
+         Modifies VirtualCenter Server's built-in <a href="vim.HistoricalInterval.html">historical intervals</a>, within certain limits.
+
+  <p> <b>Supported Modifications</b>
+
+  <table border="1" width="100%">
+
+  <tr>
+     <th>key</th>
+     <th>samplingPeriod</th>
+     <th>length</th>
+     <th>name</th>
+     <th>level [1]</th>
+     <th>enabled [2]</th>
+  </tr>
+
+  <tr>
+     <td>1</td>
+     <td>300 [3]</td>
+     <td>86400 [4]</td>
+     <td>Past&nbsp;day</td>
+     <td>1</td>
+     <td>true</td>
+  </tr>
+
+  <tr>
+     <td>2</td>
+     <td>1800</td>
+     <td>604800</td>
+     <td>Past&nbsp;week</td>
+     <td>1</td>
+     <td>true</td>
+  </tr>
+
+  <tr>
+     <td>3</td>
+     <td>7200</td>
+     <td>2592000</td>
+     <td>Past&nbsp;month</td>
+     <td>1</td>
+     <td>true</td>
+  </tr>
+
+  <tr>
+     <td>4</td>
+     <td>66400</td>
+     <td>31536000 [5]</td>
+     <td>Past&nbsp;year</td>
+     <td>1</td>
+     <td>true</td>
+  </tr>
+
+  </table>
+
+  <p>
+
+  <b>[1]</b>&nbsp; The collection level for the <a href="vim.HistoricalInterval.html">historical intervals</a> can be changed. However,
+  the level specified for a lower-numbered interval cannot be smaller
+  than that of a larger interval.<br/>
+
+  <b>[2]</b>&nbsp; An interval can be disabled. By default, all four
+  intervals are enabled. Disabling an interval disables all higher
+  intervals. For example, disabling interval 3 (&#147;Past month&#148;)
+  also disables interval 4 (&#147;Past year&#148;).<br/>
+
+  <b>[3]</b>&nbsp; Can reduce this interval&#146;s <a href="vim.HistoricalInterval.html#samplingPeriod">samplingPeriod</a> from 5 minutes to 1, 2, or 3
+  minutes.<br/>
+
+  <b>[4]</b>&nbsp; Can increase this interval&#146;s <a href="vim.HistoricalInterval.html#length">length</a> from 1 day to 2 or 3 days. <br/>
+
+  <b>[5]</b>&nbsp; Can increase interval&#146;s <a href="vim.HistoricalInterval.html#length">length</a> from 1 year to 2 or 3 years. <br/>
+
+  <p> See <a href="vim.HistoricalInterval.html">PerfInterval</a> for information about the four default
+  intervals for VirtualCenter Server.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Performance.ModifyIntervals</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.PerformanceManager.html">PerformanceManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>interval</strong></td><td><a href="vim.HistoricalInterval.html">PerfInterval</a></td><td>
+<p></p>
+         The <a href="vim.HistoricalInterval.html">historical interval</a> being modified, a
+  complete data object comprising values for <a href="vim.HistoricalInterval.html#enabled">enabled</a>, <a href="vim.HistoricalInterval.html#key">interval ID</a>,
+  <a href="vim.HistoricalInterval.html#length">length</a> of time to maintain statistics for this
+  interval in the database, <a href="vim.HistoricalInterval.html#level">level</a>, <a href="vim.HistoricalInterval.html#name">name</a>, and <a href="vim.HistoricalInterval.html#samplingPeriod">samplingPeriod</a>
+  properties.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the set of arguments passed to the function is not specified correctly or if the update does not conform to the rules mentioned above.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdatePerfInterval-textarea');expandcontent(this, 'UpdatePerfInterval-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdatePerfInterval-div">
+<textarea cols="20" rows="10" name="UpdatePerfInterval-textarea" wrap="off" readonly="1" id="UpdatePerfInterval-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdatePerfInterval" type="vim25:UpdatePerfIntervalRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdatePerfIntervalResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

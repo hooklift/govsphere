@@ -1,0 +1,706 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.ServiceInstance" name="vim.ServiceInstance"></a>
+<h1>Managed Object -  
+						ServiceInstance</h1>
+<dl>
+<dt>See also</dt>
+<dd>
+<a href="vim.Capability.html">Capability</a>, <a href="vim.event.Event.html">Event</a>, <a href="vim.HostSystem.html">HostSystem</a>, <a href="vim.ServiceInstance.HostVMotionCompatibility.html">HostVMotionCompatibility</a>, <a href="vim.ServiceInstance.ProductComponentInfo.html">ProductComponentInfo</a>, <a href="vim.ResourcePool.html">ResourcePool</a>, <a href="vim.ServiceInstanceContent.html">ServiceContent</a>, <a href="vim.VirtualMachine.html">VirtualMachine</a>, <a href="vim.VirtualMachine.PowerState.html">VirtualMachinePowerState</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         The <a href="vim.ServiceInstance.html">ServiceInstance</a> managed object is the singleton root object of the inventory
+  on both vCenter servers and servers running on standalone host agents.
+  The server creates the <a href="vim.ServiceInstance.html">ServiceInstance</a> automatically, and also automatically
+  creates the various manager entities that provide services in the virtual
+  environment. Some examples of manager entities are <a href="vim.LicenseManager.html">LicenseManager</a>,
+  <a href="vim.PerformanceManager.html">PerformanceManager</a>, and <a href="vim.view.ViewManager.html">ViewManager</a>. You can
+  access the manager entities through the <a href="vim.ServiceInstance.html#content">content</a> property.
+  <p>
+  A vSphere API client application begins by connecting to a server
+  and obtaining a reference to the <a href="vim.ServiceInstance.html">ServiceInstance</a>. The client can then use
+  the <a href="vim.ServiceInstance.html#retrieveContent">RetrieveServiceContent</a> method to gain
+  access to the various vSphere manager entities and to the root folder
+  of the inventory.
+
+  <p>
+  When you create managed objects, the server adds them to the inventory.
+  The inventory of managed objects includes instances the following object types:
+
+  <ul>
+    <li><a href="vim.ServiceInstance.html">ServiceInstance</a>  -- Root of the inventory; created by vSphere.
+    <li><a href="vim.Datacenter.html">Datacenter</a>       -- A container that represents a virtual
+                                        data center. It contains hosts, network entities,
+                                        virtual machines and virtual applications,
+                                        and datastores.
+    <li><a href="vim.Folder.html">Folder</a>           -- A container used for hierarchical
+                                        organization of the inventory.
+    <li><a href="vim.VirtualMachine.html">VirtualMachine</a>   -- A virtual machine.
+    <li><a href="vim.VirtualApp.html">VirtualApp</a>       -- A virtual application.
+    <li><a href="vim.ComputeResource.html">ComputeResource</a>  -- A compute resource
+                          (either a cluster or a stand-alone host).
+    <li><a href="vim.ResourcePool.html">ResourcePool</a>     -- A subset of resources provided by a ComputeResource.
+    <li><a href="vim.HostSystem.html">HostSystem</a>       -- A single host (ESX Server or VMware Server).
+    <li><a href="vim.Network.html">Network</a>          -- A network available to either hosts or virtual
+                                        machines.
+    <li><a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a> -- A distributed virtual switch.
+    <li><a href="vim.dvs.DistributedVirtualPortgroup.html">DistributedVirtualPortgroup</a> -- A distributed virtual port group.
+    <li><a href="vim.Datastore.html">Datastore</a>        -- Platform-independent, host-independent storage
+                                        for virtual machine files.
+  </ul>
+  <p>
+  The following figure shows the organization of managed objects in the
+  vCenter hierarchy:
+  <p><img src="vc_si_hierarchy.gif" alt="vCenter ServiceInstance Hierarchy"/>
+  <p>
+  Every Datacenter has the following set of dedicated folders. 
+  These folders are empty until you create entities for the Datacenter.
+  <ul>
+      <li> A folder for any combination of <a href="vim.VirtualMachine.html">VirtualMachine</a>
+           and/or <a href="vim.VirtualApp.html">VirtualApp</a> objects. <a href="vim.VirtualApp.html">VirtualApp</a> objects can be nested, 
+           but only the parent <a href="vim.VirtualApp.html">VirtualApp</a> can be visible in the folder.
+           Virtual machines that are children of virtual applications are not
+           associated with a VirtualMachine/VirtualApp folder.
+      <li> A folder for a <a href="vim.ComputeResource.html">ComputeResource</a> hierarchy.
+      <li> A folder for network entities - any combination
+           of <a href="vim.Network.html">Network</a>, <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a>, and/or
+           <a href="vim.dvs.DistributedVirtualPortgroup.html">DistributedVirtualPortgroup</a> objects.
+      <li> A folder for <a href="vim.Datastore.html">Datastore</a> objects.
+  </ul>
+  <p>
+  The host agent hierarchy has the same general form as the vCenter hierarchy,
+  but most of the objects are limited to one instance:
+
+ <p><img src="ha_si_hierarchy.gif" alt="Host Agent Service Instance Hierarchy"/>
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="capability" name="capability"></a><strong>capability</strong><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vim.Capability.html">Capability</a></td><td>
+<p></p>
+         API-wide capabilities.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="content" name="content"></a><strong>content</strong><span title="Required Privilege: System.Anonymous" class="privilege-ref"> P</span></td><td><a href="vim.ServiceInstanceContent.html">ServiceContent</a></td><td>
+<p></p>
+         The properties of the ServiceInstance managed object. The content property
+  is identical to the return value from the
+  <a href="vim.ServiceInstance.html#retrieveContent">RetrieveServiceContent</a> method.
+  <p>
+  Use the content property with the <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>
+  to perform inventory traversal that includes the ServiceInstance.
+  (In the absence of a content property, a traversal that encounters
+  the <a href="vim.ServiceInstance.html">ServiceInstance</a> would require calling
+  the <a href="vim.ServiceInstance.html#retrieveContent">RetrieveServiceContent</a> method,
+  and then invoking a second traversal to continue.)
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="serverClock" name="serverClock"></a><strong>serverClock</strong><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td>xsd:dateTime</td><td>
+<p></p>
+         Contains the time most recently obtained from the server.
+  The time is not necessarily current. This property is intended for use
+  with the PropertyCollector <a href="vmodl.query.PropertyCollector.html#waitForUpdates">WaitForUpdates</a>
+  method. The PropertyCollector will provide notification if some event occurs
+  that changes the server clock time in a non-linear fashion.
+  <p>
+  You should not rely on the serverClock property to get the current time
+  on the server; instead, use the <a href="vim.ServiceInstance.html#currentTime">CurrentTime</a> method.
+      <br>
+</td>
+</tr>
+</table>
+<span class="privilege-ref">P</span><span class="footnote">Required privilege - see tooltip for details</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#currentTime">CurrentTime</a>, <a href="#queryVMotionCompatibility">QueryVMotionCompatibility</a>, <a href="#retrieveProductComponents">RetrieveProductComponents</a>, <a href="#retrieveContent">RetrieveServiceContent</a>, <a href="#validateMigration">ValidateMigration</a></td>
+</tr>
+</table>
+<br>
+<a id="currentTime" name="currentTime"></a>
+<h1>CurrentTime</h1>
+<p></p>
+         Returns the current time on the server. To monitor non-linear time changes,
+  use the <a href="vim.ServiceInstance.html#serverClock">serverClock</a> property.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ServiceInstance.html">ServiceInstance</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td>xsd:dateTime</td><td>The date and time on the server.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CurrentTime-textarea');expandcontent(this, 'CurrentTime-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CurrentTime-div">
+<textarea cols="20" rows="10" name="CurrentTime-textarea" wrap="off" readonly="1" id="CurrentTime-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CurrentTime" type="vim25:CurrentTimeRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CurrentTimeResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="xsd:dateTime"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryVMotionCompatibility" name="queryVMotionCompatibility"></a>
+<h1>QueryVMotionCompatibility</h1>
+<B>Deprecated.</B><I>
+         As of vSphere API 4.0, use
+  <a href="vim.vm.check.ProvisioningChecker.html#queryVMotionCompatibilityEx">QueryVMotionCompatibilityEx_Task</a> instead.
+      </I>
+<p></p>
+         Investigates the general VMotion compatibility of a virtual machine with
+  a set of hosts. The virtual machine may be in any power state. Hosts
+  may be in any connection state and also may be in maintenance mode.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Resource.QueryVMotion</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ServiceInstance.html">ServiceInstance</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vm</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.VirtualMachine.html">VirtualMachine</a></td><td>
+<p></p>
+         The virtual machine that is the designated VMotion candidate.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>host</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem[]</a></td><td>
+<p></p>
+         The group of hosts to analyze for compatibility.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>compatibility</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         The set of compatibility types to investigate.
+         Each is a string chosen from VMotionCompatibilityType. If this
+         argument is not set, then all compatibility types are
+         investigated.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.ServiceInstance.HostVMotionCompatibility.html">HostVMotionCompatibility[]</a></td><td>An array where each element, associated with one of the input hosts, specifies which of the requested compatibility types applies to that host. If an input host has never been connected and therefore has no information available for determining its compatibility, it is omitted from the return list.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryVMotionCompatibility-textarea');expandcontent(this, 'QueryVMotionCompatibility-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryVMotionCompatibility-div">
+<textarea cols="20" rows="10" name="QueryVMotionCompatibility-textarea" wrap="off" readonly="1" id="QueryVMotionCompatibility-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryVMotionCompatibility" type="vim25:QueryVMotionCompatibilityRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryVMotionCompatibilityResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:HostVMotionCompatibility" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="retrieveProductComponents" name="retrieveProductComponents"></a>
+<h1>RetrieveProductComponents</h1>
+<p></p>
+         Component information for bundled products
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Anonymous</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ServiceInstance.html">ServiceInstance</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.ServiceInstance.ProductComponentInfo.html">ProductComponentInfo[]</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RetrieveProductComponents-textarea');expandcontent(this, 'RetrieveProductComponents-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RetrieveProductComponents-div">
+<textarea cols="20" rows="10" name="RetrieveProductComponents-textarea" wrap="off" readonly="1" id="RetrieveProductComponents-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrieveProductComponents" type="vim25:RetrieveProductComponentsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrieveProductComponentsResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ProductComponentInfo" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="retrieveContent" name="retrieveContent"></a>
+<h1>RetrieveServiceContent</h1>
+<p></p>
+         Retrieves the properties of the service instance.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Anonymous</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ServiceInstance.html">ServiceInstance</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.ServiceInstanceContent.html">ServiceContent</a></td><td>The properties belonging to the service instance, including various object managers.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RetrieveServiceContent-textarea');expandcontent(this, 'RetrieveServiceContent-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RetrieveServiceContent-div">
+<textarea cols="20" rows="10" name="RetrieveServiceContent-textarea" wrap="off" readonly="1" id="RetrieveServiceContent-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrieveServiceContent" type="vim25:RetrieveServiceContentRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrieveServiceContentResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ServiceContent"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="validateMigration" name="validateMigration"></a>
+<h1>ValidateMigration</h1>
+<B>Deprecated.</B><I>
+         As of vSphere API 4.0, use <a href="vim.vm.check.ProvisioningChecker.html">VirtualMachineProvisioningChecker</a>
+ instead.
+      </I>
+<p></p>
+         Checks the validity of a set of proposed migrations. A migration
+  is the act of changing the assigned execution host of a virtual
+  machine, which can result from invoking
+  <a href="vim.VirtualMachine.html#migrate">MigrateVM_Task</a> or
+  <a href="vim.VirtualMachine.html#relocate">RelocateVM_Task</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ServiceInstance.html">ServiceInstance</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vm</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.VirtualMachine.html">VirtualMachine[]</a></td><td>
+<p></p>
+         The set of virtual machines intended for migration.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>state</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.VirtualMachine.PowerState.html">VirtualMachinePowerState</a></td><td>
+<p></p>
+         The power state that the virtual machines must have. If
+        this argument is not set, each virtual machine is evaluated
+        according to its current power state.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>testType</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         The set of tests to run. If this argument is not set, all
+        tests will be run.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>pool</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ResourcePool.html">ResourcePool</a></td><td>
+<p></p>
+         The target resource pool for the virtual machines. If the
+        pool parameter is left unset, the target pool for each particular
+        virtual machine's migration will be that virtual machine's current
+        pool.  If the virtual machine is a template then either this
+        parameter or the host parameter must be set; additionally if
+        resource tests are requested then this parameter is required.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         The target host on which the virtual machines will run. The host
+        parameter may be left unset if the compute resource associated with
+        the target pool represents a stand-alone host or a DRS-enabled
+        cluster. In the former case the stand-alone host is used as the
+        target host. In the latter case, each connected host in the cluster
+        that is not in maintenance mode is tested as a target host.
+        If the virtual machine is a template then either this
+        parameter or the pool parameter must be set.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.event.Event.html">Event[]</a></td><td>A set of events that describe the warnings or errors that would apply if the proposed set of migrations were executed.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the target host(s) and target pool for a migration are not associated with the same compute resource, or if the host parameter is left unset when the target pool is associated with a non-DRS cluster.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidPowerState.html">InvalidPowerState</a></td><td>Thrown if the state argument is set and at least one of the specified virtual machines is not in that power state.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NoActiveHostInCluster.html">NoActiveHostInCluster</a></td><td>Thrown if a target host is not specified and a cluster associated with a target pool does not contain at least one potential target host. A host must be connected and not in maintenance mode in order to be considered as a potential target host.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ValidateMigration-textarea');expandcontent(this, 'ValidateMigration-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ValidateMigration-div">
+<textarea cols="20" rows="10" name="ValidateMigration-textarea" wrap="off" readonly="1" id="ValidateMigration-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ValidateMigration" type="vim25:ValidateMigrationRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ValidateMigrationResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:Event" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

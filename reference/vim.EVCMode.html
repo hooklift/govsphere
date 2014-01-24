@@ -1,0 +1,226 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.EVCMode" name="vim.EVCMode"></a>
+<h1>Data Object - EVCMode</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.Capability.html#field_detail">Capability</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.ElementDescription.html">ElementDescription</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.CpuIdInfo.html">HostCpuIdInfo</a>, <a href="vim.host.FeatureCapability.html">HostFeatureCapability</a>, <a href="vim.host.FeatureMask.html">HostFeatureMask</a>, <a href="vim.vm.FeatureRequirement.html">VirtualMachineFeatureRequirement</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The <a href="vim.EVCMode.html">EVCMode</a> data object describes an Enhanced vMotion Compatibility mode.
+  An EVC mode is associated with a set of CPU features. A vCenter Server defines
+  the available EVC modes. You use them to establish a common set of features
+  for compatibility between hosts in a cluster. An EVC-enabled cluster supports
+  safe vMotion of virtual machines across a range of CPU generations.
+  You must use the vSphere Client to configure EVC.
+  <p>
+  When you add a host to an EVC-enabled cluster, the vCenter Server determines
+  the CPU compatibility to preserve vMotion compatibility within the cluster.
+  If the host CPU is compatible with those already in the cluster, the Server
+  adds the host to the cluster and configures it for compatible operation.
+  Hosts that are not compatible are not allowed to join the cluster.
+  <p>
+  The inherited <a href="vim.ElementDescription.html#key">key</a> property is a string value
+  that uniquely identifies an EVC mode. The vCenter Server assigns
+  the key value; the vSphere API uses the key to identify modes
+  in summary and information objects:
+  <ul>
+    <li><a href="vim.ClusterComputeResource.Summary.html">ClusterComputeResourceSummary</a>.<a href="vim.ClusterComputeResource.Summary.html#currentEVCModeKey">currentEVCModeKey</a></li>
+    <li><a href="vim.host.Summary.html">HostListSummary</a>.<a href="vim.host.Summary.html#currentEVCModeKey">currentEVCModeKey</a></li>
+    <li><a href="vim.host.Summary.html">HostListSummary</a>.<a href="vim.host.Summary.html#maxEVCModeKey">maxEVCModeKey</a></li>
+    <li><a href="vim.vm.RuntimeInfo.html">VirtualMachineRuntimeInfo</a>.<a href="vim.vm.RuntimeInfo.html#minRequiredEVCModeKey">minRequiredEVCModeKey</a></li>
+  </ul>
+  <p>
+  The inherited <a href="vim.Description.html#label">label</a> and <a href="vim.Description.html#summary">summary</a>
+  properties are human-readable strings.
+  <p>
+  You can use the <a href="vim.EVCMode.html#track">track</a> and <a href="vim.EVCMode.html#vendorTier">vendorTier</a> properties to determine
+  feature-superset relationships between modes without examining the
+  individual feature bits in <a href="vim.EVCMode.html#guaranteedCPUFeatures">guaranteedCPUFeatures</a>.
+  The CPU feature baseline of mode A is a superset of mode B's baseline
+  if and only if:
+  <ul>
+  <li>modeA.track is the same as or a superset of modeB.track</li>
+  <li>modeA.vendorTier is equal to or greater than modeB.vendorTier</li>
+  </ul>
+  Use the <a href="vim.EVCMode.html#track">track</a> and <a href="vim.EVCMode.html#vendorTier">vendorTier</a> properties only for the
+  purpose of feature-superset calculations as described above. Do not use
+  them to infer the presence or absence of specific features. The
+  property values for a given mode may change across releases
+  as the set of available EVC modes changes, to better represent mode
+  relationships.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="featureCapability" name="featureCapability"></a><strong>featureCapability</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.FeatureCapability.html">HostFeatureCapability[]</a></td><td>
+<p></p>
+         Describes the feature capability baseline associated with the EVC mode.
+ On the cluster where a particular EVC mode is configured,
+ these features capabilities are guaranteed, either because the host
+ hardware naturally matches those features or because feature masks
+ are used to mask out differences and enforce a match.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="featureMask" name="featureMask"></a><strong>featureMask</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.FeatureMask.html">HostFeatureMask[]</a></td><td>
+<p></p>
+         The masks (modifications to a host's feature capabilities) that limit a
+ host's capabilities to that of the EVC mode baseline.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="featureRequirement" name="featureRequirement"></a><strong>featureRequirement</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.FeatureRequirement.html">VirtualMachineFeatureRequirement[]</a></td><td>
+<p></p>
+         The conditions that must be true of a host's feature capabilities in order
+ for the host to meet the minimum requirements of the EVC mode baseline.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="guaranteedCPUFeatures" name="guaranteedCPUFeatures"></a><strong>guaranteedCPUFeatures</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.CpuIdInfo.html">HostCpuIdInfo[]</a></td><td>
+<p></p>
+         Describes the CPU feature baseline associated with the EVC mode.
+ On the cluster where a particular EVC mode is configured,
+ those CPU features are guaranteed, either because the host
+ hardware naturally matches those features or because CPU feature override
+ is used to mask out differences and enforce a match.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="track" name="track"></a><strong>track</strong></td><td>xsd:string[]</td><td>
+<p></p>
+         Identifiers for feature groups that are at least partially present in
+  the <a href="vim.EVCMode.html#guaranteedCPUFeatures">guaranteedCPUFeatures</a> array for this mode.
+  Use this property to compare track values from two modes.
+  Do not use this property to determine the presence or absence of
+  specific features.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vendor" name="vendor"></a><strong>vendor</strong></td><td>xsd:string</td><td>
+<p></p>
+         CPU hardware vendor required for this mode.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vendorTier" name="vendorTier"></a><strong>vendorTier</strong></td><td>xsd:int</td><td>
+<p></p>
+         Index for ordering the set of modes that apply to a given CPU vendor.
+  Use this property to compare vendor tier values from two modes.
+  Do not use this property to determine the presence or absence
+  of specific features.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.ElementDescription.html">ElementDescription</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.ElementDescription.html#key">key</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.Description.html">Description</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.Description.html#label">label</a>, <a href="vim.Description.html#summary">summary</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="EVCMode">
+            <complexContent>
+               <extension base="vim25:ElementDescription">
+                  <sequence>
+                     <element name="guaranteedCPUFeatures" type="vim25:HostCpuIdInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="featureCapability" type="vim25:HostFeatureCapability" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="featureMask" type="vim25:HostFeatureMask" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="featureRequirement" type="vim25:VirtualMachineFeatureRequirement" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="vendor" type="xsd:string"/>
+                     <element name="track" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="vendorTier" type="xsd:int"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

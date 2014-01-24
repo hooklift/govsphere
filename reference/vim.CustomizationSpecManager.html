@@ -1,0 +1,1038 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.CustomizationSpecManager" name="vim.CustomizationSpecManager"></a>
+<h1>Managed Object -  
+						CustomizationSpecManager</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.ServiceInstanceContent.html#field_detail">ServiceContent</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.CustomizationSpecInfo.html">CustomizationSpecInfo</a>, <a href="vim.CustomizationSpecItem.html">CustomizationSpecItem</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         The CustomizationSpecManager managed object is used to manage
+ customization specifications stored on the VirtualCenter server.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="encryptionKey" name="encryptionKey"></a><strong>encryptionKey</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td>xsd:byte[]</td><td>
+<p></p>
+         Gets a binary public encryption key that can be used to encrypt
+ passwords in stored specifications.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="info" name="info"></a><strong>info</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: VirtualMachine.Provisioning.ReadCustSpecs" class="privilege-ref"> P</span></td><td><a href="vim.CustomizationSpecInfo.html">CustomizationSpecInfo[]</a></td><td>
+<p></p>
+         Gets a list of information on available specifications.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span><span class="privilege-ref">P</span><span class="footnote">Required privilege - see tooltip for details</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#checkResources">CheckCustomizationResources</a>, <a href="#create">CreateCustomizationSpec</a>, <a href="#specItemToXml">CustomizationSpecItemToXml</a>, <a href="#delete">DeleteCustomizationSpec</a>, <a href="#exists">DoesCustomizationSpecExist</a>, <a href="#duplicate">DuplicateCustomizationSpec</a>, <a href="#get">GetCustomizationSpec</a>, <a href="#overwrite">OverwriteCustomizationSpec</a>, <a href="#rename">RenameCustomizationSpec</a>, <a href="#xmlToSpecItem">XmlToCustomizationSpecItem</a></td>
+</tr>
+</table>
+<br>
+<a id="checkResources" name="checkResources"></a>
+<h1>CheckCustomizationResources</h1>
+<p></p>
+         Validate that required resources are available on the server to customize a
+ particular guest operating system. These would include sysprep for Windows
+ and the debugfs and changefs volume editors for Linux guests.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.CustomizationSpecManager.html">CustomizationSpecManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>guestOs</strong></td><td>xsd:string</td><td>
+<p></p>
+         Short name from the guest OS descriptor list describing the OS
+ we intend to customize.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.CustomizationFault.html">CustomizationFault</a></td><td></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.MissingLinuxCustResources.html">MissingLinuxCustResources</a></td><td></td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.MissingWindowsCustResources.html">MissingWindowsCustResources</a></td><td></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.UncustomizableGuest.html">UncustomizableGuest</a></td><td></td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CheckCustomizationResources-textarea');expandcontent(this, 'CheckCustomizationResources-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CheckCustomizationResources-div">
+<textarea cols="20" rows="10" name="CheckCustomizationResources-textarea" wrap="off" readonly="1" id="CheckCustomizationResources-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CheckCustomizationResources" type="vim25:CheckCustomizationResourcesRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CheckCustomizationResourcesResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="create" name="create"></a>
+<h1>CreateCustomizationSpec</h1>
+<p></p>
+         Creates a new specification.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>VirtualMachine.Provisioning.ModifyCustSpecs</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.CustomizationSpecManager.html">CustomizationSpecManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>item</strong></td><td><a href="vim.CustomizationSpecItem.html">CustomizationSpecItem</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AlreadyExists.html">AlreadyExists</a></td><td></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.CannotDecryptPasswords.html">CannotDecryptPasswords</a></td><td></td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.CustomizationFault.html">CustomizationFault</a></td><td></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CreateCustomizationSpec-textarea');expandcontent(this, 'CreateCustomizationSpec-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CreateCustomizationSpec-div">
+<textarea cols="20" rows="10" name="CreateCustomizationSpec-textarea" wrap="off" readonly="1" id="CreateCustomizationSpec-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateCustomizationSpec" type="vim25:CreateCustomizationSpecRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateCustomizationSpecResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="specItemToXml" name="specItemToXml"></a>
+<h1>CustomizationSpecItemToXml</h1>
+<p></p>
+         Converts a specification item to XML text
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.CustomizationSpecManager.html">CustomizationSpecManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>item</strong></td><td><a href="vim.CustomizationSpecItem.html">CustomizationSpecItem</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td>xsd:string</td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CustomizationSpecItemToXml-textarea');expandcontent(this, 'CustomizationSpecItemToXml-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CustomizationSpecItemToXml-div">
+<textarea cols="20" rows="10" name="CustomizationSpecItemToXml-textarea" wrap="off" readonly="1" id="CustomizationSpecItemToXml-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CustomizationSpecItemToXml" type="vim25:CustomizationSpecItemToXmlRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CustomizationSpecItemToXmlResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="xsd:string"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="delete" name="delete"></a>
+<h1>DeleteCustomizationSpec</h1>
+<p></p>
+         Deletes a specification.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>VirtualMachine.Provisioning.ModifyCustSpecs</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.CustomizationSpecManager.html">CustomizationSpecManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>name</strong></td><td>xsd:string</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('DeleteCustomizationSpec-textarea');expandcontent(this, 'DeleteCustomizationSpec-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="DeleteCustomizationSpec-div">
+<textarea cols="20" rows="10" name="DeleteCustomizationSpec-textarea" wrap="off" readonly="1" id="DeleteCustomizationSpec-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DeleteCustomizationSpec" type="vim25:DeleteCustomizationSpecRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DeleteCustomizationSpecResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="exists" name="exists"></a>
+<h1>DoesCustomizationSpecExist</h1>
+<p></p>
+         Whether or not a specification exists.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>VirtualMachine.Provisioning.ReadCustSpecs</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.CustomizationSpecManager.html">CustomizationSpecManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>name</strong></td><td>xsd:string</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td>xsd:boolean</td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('DoesCustomizationSpecExist-textarea');expandcontent(this, 'DoesCustomizationSpecExist-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="DoesCustomizationSpecExist-div">
+<textarea cols="20" rows="10" name="DoesCustomizationSpecExist-textarea" wrap="off" readonly="1" id="DoesCustomizationSpecExist-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DoesCustomizationSpecExist" type="vim25:DoesCustomizationSpecExistRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DoesCustomizationSpecExistResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="xsd:boolean"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="duplicate" name="duplicate"></a>
+<h1>DuplicateCustomizationSpec</h1>
+<p></p>
+         Duplicates a specification.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>VirtualMachine.Provisioning.ModifyCustSpecs</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.CustomizationSpecManager.html">CustomizationSpecManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>name</strong></td><td>xsd:string</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>newName</strong></td><td>xsd:string</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AlreadyExists.html">AlreadyExists</a></td><td></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('DuplicateCustomizationSpec-textarea');expandcontent(this, 'DuplicateCustomizationSpec-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="DuplicateCustomizationSpec-div">
+<textarea cols="20" rows="10" name="DuplicateCustomizationSpec-textarea" wrap="off" readonly="1" id="DuplicateCustomizationSpec-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DuplicateCustomizationSpec" type="vim25:DuplicateCustomizationSpecRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DuplicateCustomizationSpecResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="get" name="get"></a>
+<h1>GetCustomizationSpec</h1>
+<p></p>
+         Obtains a specification for the given name.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>VirtualMachine.Provisioning.ReadCustSpecs</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.CustomizationSpecManager.html">CustomizationSpecManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>name</strong></td><td>xsd:string</td><td>
+<p></p>
+         Unique name identifying the requested customization specification.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.CustomizationSpecItem.html">CustomizationSpecItem</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('GetCustomizationSpec-textarea');expandcontent(this, 'GetCustomizationSpec-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="GetCustomizationSpec-div">
+<textarea cols="20" rows="10" name="GetCustomizationSpec-textarea" wrap="off" readonly="1" id="GetCustomizationSpec-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="GetCustomizationSpec" type="vim25:GetCustomizationSpecRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="GetCustomizationSpecResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:CustomizationSpecItem"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="overwrite" name="overwrite"></a>
+<h1>OverwriteCustomizationSpec</h1>
+<p></p>
+         Overwrites an existing specification, possibly after retrieving
+ (by using 'get') and editing it. If, based on the item's changeVersion
+ value, the overwrite process detects that the specification has changed
+ since its retrieval, then the API uses the SpecModified exception to
+ warn the client that he might overwrite another client's change.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>VirtualMachine.Provisioning.ModifyCustSpecs</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.CustomizationSpecManager.html">CustomizationSpecManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>item</strong></td><td><a href="vim.CustomizationSpecItem.html">CustomizationSpecItem</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.CannotDecryptPasswords.html">CannotDecryptPasswords</a></td><td></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.ConcurrentAccess.html">ConcurrentAccess</a></td><td></td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.CustomizationFault.html">CustomizationFault</a></td><td></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('OverwriteCustomizationSpec-textarea');expandcontent(this, 'OverwriteCustomizationSpec-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="OverwriteCustomizationSpec-div">
+<textarea cols="20" rows="10" name="OverwriteCustomizationSpec-textarea" wrap="off" readonly="1" id="OverwriteCustomizationSpec-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="OverwriteCustomizationSpec" type="vim25:OverwriteCustomizationSpecRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="OverwriteCustomizationSpecResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="rename" name="rename"></a>
+<h1>RenameCustomizationSpec</h1>
+<p></p>
+         Renames a specification.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>VirtualMachine.Provisioning.ModifyCustSpecs</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.CustomizationSpecManager.html">CustomizationSpecManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>name</strong></td><td>xsd:string</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>newName</strong></td><td>xsd:string</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AlreadyExists.html">AlreadyExists</a></td><td></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RenameCustomizationSpec-textarea');expandcontent(this, 'RenameCustomizationSpec-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RenameCustomizationSpec-div">
+<textarea cols="20" rows="10" name="RenameCustomizationSpec-textarea" wrap="off" readonly="1" id="RenameCustomizationSpec-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RenameCustomizationSpec" type="vim25:RenameCustomizationSpecRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RenameCustomizationSpecResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="xmlToSpecItem" name="xmlToSpecItem"></a>
+<h1>XmlToCustomizationSpecItem</h1>
+<p></p>
+         Converts an XML string to a specification item
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.CustomizationSpecManager.html">CustomizationSpecManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>specItemXml</strong></td><td>xsd:string</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.CustomizationSpecItem.html">CustomizationSpecItem</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.CustomizationFault.html">CustomizationFault</a></td><td></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('XmlToCustomizationSpecItem-textarea');expandcontent(this, 'XmlToCustomizationSpecItem-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="XmlToCustomizationSpecItem-div">
+<textarea cols="20" rows="10" name="XmlToCustomizationSpecItem-textarea" wrap="off" readonly="1" id="XmlToCustomizationSpecItem-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="XmlToCustomizationSpecItem" type="vim25:XmlToCustomizationSpecItemRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="XmlToCustomizationSpecItemResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:CustomizationSpecItem"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

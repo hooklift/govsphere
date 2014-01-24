@@ -1,0 +1,147 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.OvfManager.ResourceMap" name="vim.OvfManager.ResourceMap"></a>
+<h1>Data Object - OvfResourceMap</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.OvfManager.CreateImportSpecParams.html#field_detail">OvfCreateImportSpecParams</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.Datastore.html">Datastore</a>, <a href="vim.ResourceConfigSpec.html">ResourceConfigSpec</a>, <a href="vim.ResourcePool.html">ResourcePool</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<B>Deprecated.</B><I>
+         As of vSphere API 5.1.
+      </I>
+<p></p>
+         Maps source child entities to destination resource pools
+  and resource settings. If a mapping is not specified,
+  a child is copied as a direct child of the parent.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="datastore" name="datastore"></a><strong>datastore</strong><span title="Need not be set" class="footnote-ref">*</span><span title="Required Privilege: Datastore.AllocateSpace" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datastore.html">Datastore</a></td><td>
+<p></p>
+         A client can optionally specify a datastore location in the resource map to
+  override the default datastore passed into <a href="vim.OvfManager.html#createImportSpec">CreateImportSpec</a> field. 
+  This enables importing to different compute resources that do not have shared
+  datastores.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="parent" name="parent"></a><strong>parent</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ResourcePool.html">ResourcePool</a></td><td>
+<p></p>
+         The parent resource pool to use for the entity. This must specify a 
+  resource pool that is not part of the vApp. If this is specified, a linked
+  child (as opposed to a direct child) is created for the vApp.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="resourceSpec" name="resourceSpec"></a><strong>resourceSpec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.ResourceConfigSpec.html">ResourceConfigSpec</a></td><td>
+<p></p>
+         An optional resource configuration for the created entity. If 
+  not specified, the resource configuration given in the OVF descriptor 
+  is used.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="source" name="source"></a><strong>source</strong></td><td>xsd:string</td><td>
+<p></p>
+         Identifies a source VirtualSystem or VirtualSystemCollection in an OVF
+  descriptor. The source cannot be the root VirtualSystem or 
+  VirtualSystemCollection of the OVF.
+  This is a path created by concatenating the OVF ids for each entity, e.g., "vm1", 
+  "WebTier/vm2", etc.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  Datastore.AllocateSpace</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="OvfResourceMap">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="source" type="xsd:string"/>
+                     <element name="parent" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="resourceSpec" type="vim25:ResourceConfigSpec" minOccurs="0"/>
+                     <element name="datastore" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

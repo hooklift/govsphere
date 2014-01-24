@@ -1,0 +1,1106 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.SearchIndex" name="vim.SearchIndex"></a>
+<h1>Managed Object -  
+						SearchIndex</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.ServiceInstanceContent.html#field_detail">ServiceContent</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.Datacenter.html">Datacenter</a>, <a href="vim.ManagedEntity.html">ManagedEntity</a>, <a href="vim.VirtualMachine.html">VirtualMachine</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         The SearchIndex service allows a client to efficiently query the
+  inventory for a specific managed entity by attributes such as UUID, IP address, DNS 
+  name, or datastore path. Such searches typically return a VirtualMachine or a 
+  HostSystem. While searching, only objects for which the user has sufficient 
+  privileges are considered. The findByInventoryPath and findChild operations only 
+  search on entities for which the user has view privileges; all other SearchIndex 
+  find operations only search virtual machines and hosts for which the user has 
+  read privileges. If the user does not have sufficient privileges for an object that 
+  matches the search criteria, that object is not returned.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+</table>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#findAllByDnsName">FindAllByDnsName</a>, <a href="#findAllByIp">FindAllByIp</a>, <a href="#findAllByUuid">FindAllByUuid</a>, <a href="#findByDatastorePath">FindByDatastorePath</a>, <a href="#findByDnsName">FindByDnsName</a>, <a href="#findByInventoryPath">FindByInventoryPath</a>, <a href="#findByIp">FindByIp</a>, <a href="#findByUuid">FindByUuid</a>, <a href="#findChild">FindChild</a></td>
+</tr>
+</table>
+<br>
+<a id="findAllByDnsName" name="findAllByDnsName"></a>
+<h1>FindAllByDnsName</h1>
+<p></p>
+         Finds all virtual machines or hosts by DNS name. The DNS name for a virtual
+  machine is the one returned from VMware tools, <a href="vim.vm.GuestInfo.html#hostName">hostName</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SearchIndex.html">SearchIndex</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>datacenter</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datacenter.html">Datacenter</a></td><td>
+<p></p>
+         If specified, restricts the query to entities in
+            a particular datacenter. If not specified, the entire inventory is
+            searched.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>dnsName</strong></td><td>xsd:string</td><td>
+<p></p>
+         The fully qualified domain name to find.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vmSearch</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         If true, search for virtual machines, otherwise search for
+            hosts.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity[]</a></td><td>The list of all virtual machines or hosts that are found. If no managed entities are found, an empty list is returned. If there are multiple matches, all matching entities are returned.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('FindAllByDnsName-textarea');expandcontent(this, 'FindAllByDnsName-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="FindAllByDnsName-div">
+<textarea cols="20" rows="10" name="FindAllByDnsName-textarea" wrap="off" readonly="1" id="FindAllByDnsName-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FindAllByDnsName" type="vim25:FindAllByDnsNameRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FindAllByDnsNameResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="findAllByIp" name="findAllByIp"></a>
+<h1>FindAllByIp</h1>
+<p></p>
+         Finds all virtual machines or hosts by IP address, where the IP address is 
+  in dot-decimal notation. For example, 10.17.12.12. The IP address for a virtual
+  machine is the one returned from VMware tools, <a href="vim.vm.GuestInfo.html#ipAddress">ipAddress</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SearchIndex.html">SearchIndex</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>datacenter</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datacenter.html">Datacenter</a></td><td>
+<p></p>
+         If specified, restricts the query to entities in
+            a particular datacenter. If not specified, the entire inventory is
+            searched.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>ip</strong></td><td>xsd:string</td><td>
+<p></p>
+         The dot-decimal notation formatted IP address to find.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vmSearch</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         If true, search for virtual machines, otherwise search for
+            hosts.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity[]</a></td><td>The list of all virtual machines or hosts that are found. If no managed entities are found, an empty list is returned. If there are multiple matches, all matching entities are returned.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('FindAllByIp-textarea');expandcontent(this, 'FindAllByIp-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="FindAllByIp-div">
+<textarea cols="20" rows="10" name="FindAllByIp-textarea" wrap="off" readonly="1" id="FindAllByIp-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FindAllByIp" type="vim25:FindAllByIpRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FindAllByIpResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="findAllByUuid" name="findAllByUuid"></a>
+<h1>FindAllByUuid</h1>
+<p></p>
+         Finds all virtual machines or hosts by UUID.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SearchIndex.html">SearchIndex</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>datacenter</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datacenter.html">Datacenter</a></td><td>
+<p></p>
+         If specified, restricts the query to entities in
+            a particular datacenter. If not specified, the entire inventory is
+            searched.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>uuid</strong></td><td>xsd:string</td><td>
+<p></p>
+         The UUID to find. If vmSearch is true, the UUID can be either BIOS 
+            or instance UUID.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vmSearch</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         If true, search for virtual machines, otherwise search for
+            hosts.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>instanceUuid</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Should only be set when vmSearch is true. If specified, search 
+            for virtual machines whose instance UUID matches the given uuid. 
+            Otherwise, search for virtual machines whose BIOS UUID matches the given 
+            uuid.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity[]</a></td><td>The list of all virtual machines or hosts that are matching with the given UUID. If no managed entities are found, an empty list is returned. If there are multiple matches, all matching entities are returned.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('FindAllByUuid-textarea');expandcontent(this, 'FindAllByUuid-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="FindAllByUuid-div">
+<textarea cols="20" rows="10" name="FindAllByUuid-textarea" wrap="off" readonly="1" id="FindAllByUuid-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FindAllByUuid" type="vim25:FindAllByUuidRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FindAllByUuidResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="findByDatastorePath" name="findByDatastorePath"></a>
+<h1>FindByDatastorePath</h1>
+<p></p>
+         Finds a virtual machine by its location on a datastore.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SearchIndex.html">SearchIndex</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>datacenter</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datacenter.html">Datacenter</a></td><td>
+<p></p>
+         Specifies the datacenter to which the datastore path belongs.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>path</strong></td><td>xsd:string</td><td>
+<p></p>
+         A datastore path to the .vmx file for the virtual machine.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.VirtualMachine.html">VirtualMachine</a></td><td>The virtual machine that is found. If no virtual machine is found, null is returned. Only a single entity is returned, even if there are multiple matches.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidDatastore.html">InvalidDatastore</a></td><td>Thrown if a datastore has not been specified in the path or if the specified datastore does not exist on the specified datacenter.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('FindByDatastorePath-textarea');expandcontent(this, 'FindByDatastorePath-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="FindByDatastorePath-div">
+<textarea cols="20" rows="10" name="FindByDatastorePath-textarea" wrap="off" readonly="1" id="FindByDatastorePath-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FindByDatastorePath" type="vim25:FindByDatastorePathRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FindByDatastorePathResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference" minOccurs="0"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="findByDnsName" name="findByDnsName"></a>
+<h1>FindByDnsName</h1>
+<p></p>
+         Finds a virtual machine or host by DNS name. The DNS name for a virtual
+  machine is the one returned from VMware tools, <a href="vim.vm.GuestInfo.html#hostName">hostName</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SearchIndex.html">SearchIndex</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>datacenter</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datacenter.html">Datacenter</a></td><td>
+<p></p>
+         If specified, restricts the query to entities in
+            a particular datacenter. If not specified, the entire inventory is
+            searched.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>dnsName</strong></td><td>xsd:string</td><td>
+<p></p>
+         The fully qualified domain name to find.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vmSearch</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         if true, search for virtual machines, otherwise search for
+            hosts.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity</a></td><td>The virtual machine or host managed entity that is found. If no managed entities are found, null is returned. Only a single entity is returned, even if there are multiple matches.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('FindByDnsName-textarea');expandcontent(this, 'FindByDnsName-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="FindByDnsName-div">
+<textarea cols="20" rows="10" name="FindByDnsName-textarea" wrap="off" readonly="1" id="FindByDnsName-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FindByDnsName" type="vim25:FindByDnsNameRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FindByDnsNameResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference" minOccurs="0"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="findByInventoryPath" name="findByInventoryPath"></a>
+<h1>FindByInventoryPath</h1>
+<p></p>
+         Finds a managed entity based on its location in the inventory. The path is
+  separated by slashes ('/'). For example, a path should be of the form
+  "My Folder/My Datacenter/vm/Discovered VM/VM1". A leading slash or trailing
+  slash is ignored. Thus, the following paths all represents the same object:
+  "a/b", "/a/b", "a/b/", and '/a/b/'. Slashes in names must be represented using
+  %2f, following the standard URL syntax. Any object in the inventory can be 
+  retrieved using this method, including resource pools and hosts.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SearchIndex.html">SearchIndex</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>inventoryPath</strong></td><td>xsd:string</td><td>
+<p></p>
+         The path to the entity.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity</a></td><td>The managed entity that is found. If no match is found, null is returned.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('FindByInventoryPath-textarea');expandcontent(this, 'FindByInventoryPath-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="FindByInventoryPath-div">
+<textarea cols="20" rows="10" name="FindByInventoryPath-textarea" wrap="off" readonly="1" id="FindByInventoryPath-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FindByInventoryPath" type="vim25:FindByInventoryPathRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FindByInventoryPathResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference" minOccurs="0"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="findByIp" name="findByIp"></a>
+<h1>FindByIp</h1>
+<p></p>
+         Finds a virtual machine or host by IP address, where the IP address is in
+  dot-decimal notation. For example, 10.17.12.12. The IP address for a virtual
+  machine is the one returned from VMware tools, <a href="vim.vm.GuestInfo.html#ipAddress">ipAddress</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SearchIndex.html">SearchIndex</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>datacenter</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datacenter.html">Datacenter</a></td><td>
+<p></p>
+         If specified, restricts the query to entities in
+            a particular datacenter. If not specified, the entire inventory is
+            searched.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>ip</strong></td><td>xsd:string</td><td>
+<p></p>
+         The dot-decimal notation formatted IP address to find.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vmSearch</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         if true, search for virtual machines, otherwise search for
+            hosts.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity</a></td><td>The virtual machine or host managed entity that is found. If no managed entities are found, null is returned. Only a single entity is returned, even if there are multiple matches. If called directly on an ESX server with vmSearch set to false, returns the host managed entity if the address matches any of the Console OS IP addresses.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('FindByIp-textarea');expandcontent(this, 'FindByIp-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="FindByIp-div">
+<textarea cols="20" rows="10" name="FindByIp-textarea" wrap="off" readonly="1" id="FindByIp-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FindByIp" type="vim25:FindByIpRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FindByIpResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference" minOccurs="0"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="findByUuid" name="findByUuid"></a>
+<h1>FindByUuid</h1>
+<p></p>
+         Finds a virtual machine or host by BIOS or instance UUID.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SearchIndex.html">SearchIndex</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>datacenter</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datacenter.html">Datacenter</a></td><td>
+<p></p>
+         If specified, restricts the query to entities in
+            a particular datacenter. If not specified, the entire inventory is
+            searched.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>uuid</strong></td><td>xsd:string</td><td>
+<p></p>
+         The UUID to find. If vmSearch is true, the uuid can be either BIOS
+              or instance UUID.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vmSearch</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         If true, search for virtual machines, otherwise search for
+            hosts.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>instanceUuid</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Should only be set when vmSearch is true. If specified, search 
+            for virtual machines whose instance UUID matches the given uuid. 
+            Otherwise, search for virtual machines whose BIOS UUID matches the given 
+            uuid.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity</a></td><td>The virtual machine or host managed entity that is found. If no managed entities are found, null is returned. Only a single entity is returned, even if there are multiple matches.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('FindByUuid-textarea');expandcontent(this, 'FindByUuid-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="FindByUuid-div">
+<textarea cols="20" rows="10" name="FindByUuid-textarea" wrap="off" readonly="1" id="FindByUuid-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FindByUuid" type="vim25:FindByUuidRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FindByUuidResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference" minOccurs="0"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="findChild" name="findChild"></a>
+<h1>FindChild</h1>
+<p></p>
+         Finds a particular child based on a managed entity
+  name. This only searches the immediate children of a managed entity.
+  For a <a href="vim.Datacenter.html">Datacenter</a>, the host and vm folders are 
+  considered children. For a <a href="vim.ComputeResource.html">ComputeResource</a>,
+  the hosts and root <a href="vim.ResourcePool.html">ResourcePool</a> are considered
+  children.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.SearchIndex.html">SearchIndex</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>entity</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity</a></td><td>
+<p></p>
+         A reference to a managed entity.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>name</strong></td><td>xsd:string</td><td>
+<p></p>
+         The name of the child object.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity</a></td><td>The managed entity that is found, or null if no match is found.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('FindChild-textarea');expandcontent(this, 'FindChild-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="FindChild-div">
+<textarea cols="20" rows="10" name="FindChild-textarea" wrap="off" readonly="1" id="FindChild-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FindChild" type="vim25:FindChildRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FindChildResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference" minOccurs="0"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

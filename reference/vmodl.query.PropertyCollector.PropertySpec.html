@@ -1,0 +1,458 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vmodl.query.PropertyCollector.PropertySpec" name="vmodl.query.PropertyCollector.PropertySpec"></a>
+<h1>Data Object - PropertySpec</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vmodl.query.PropertyCollector.FilterSpec.html#field_detail">PropertyFilterSpec</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         Within a <a href="vmodl.query.PropertyCollector.FilterSpec.html">PropertyFilterSpec</a>, A <a href="vmodl.query.PropertyCollector.PropertySpec.html">PropertySpec</a> specifies which properties should be
+  reported to the client for objects of the given managed object type that
+  are visited and not skipped.  One more subtle side effect is that if a
+  managed object is visited and not skipped, but there is no <a href="vmodl.query.PropertyCollector.PropertySpec.html">PropertySpec</a> associated with the managed object's
+  type, the managed object will not be reported to the client.
+
+  <p> Also, the set of properties applicable to a given managed object type
+  is the union of the properties implied by the <a href="vmodl.query.PropertyCollector.PropertySpec.html">PropertySpec</a> objects even, in the case of a <a href="vmodl.query.PropertyCollector.RetrieveResult.html">RetrieveResult</a>, where there may be an applicable
+  <a href="vmodl.query.PropertyCollector.PropertySpec.html">PropertySpec</a> in more than one filter.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="all" name="all"></a><strong>all</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Specifies whether or not all properties of the object are read. If
+  this property is set to true, the <a href="vmodl.query.PropertyCollector.PropertySpec.html#pathSet">pathSet</a> property is ignored.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="pathSet" name="pathSet"></a><strong>pathSet</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         Specifies which managed object properties are retrieved. If the <a href="vmodl.query.PropertyCollector.PropertySpec.html#pathSet">pathSet</a> is empty, then the
+  <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> retrieves references to the managed objects
+  and no managed object properties are collected.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="type" name="type"></a><strong>type</strong></td><td>xsd:string</td><td>
+<p></p>
+         Name of the managed object type being collected.
+      <p class="table-title">Allowable values are:</p>
+<table cellspacing="0">
+<tr>
+<td>"Alarm"</td><td> - <a href="vim.alarm.Alarm.html">Alarm</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"AlarmManager"</td><td> - <a href="vim.alarm.AlarmManager.html">AlarmManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"AuthorizationManager"</td><td> - <a href="vim.AuthorizationManager.html">AuthorizationManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"ClusterComputeResource"</td><td> - <a href="vim.ClusterComputeResource.html">ClusterComputeResource</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"ClusterProfile"</td><td> - <a href="vim.profile.cluster.ClusterProfile.html">ClusterProfile</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"ClusterProfileManager"</td><td> - <a href="vim.profile.cluster.ProfileManager.html">ClusterProfileManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"ComputeResource"</td><td> - <a href="vim.ComputeResource.html">ComputeResource</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"ContainerView"</td><td> - <a href="vim.view.ContainerView.html">ContainerView</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"CustomFieldsManager"</td><td> - <a href="vim.CustomFieldsManager.html">CustomFieldsManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"CustomizationSpecManager"</td><td> - <a href="vim.CustomizationSpecManager.html">CustomizationSpecManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"Datacenter"</td><td> - <a href="vim.Datacenter.html">Datacenter</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"Datastore"</td><td> - <a href="vim.Datastore.html">Datastore</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"DatastoreNamespaceManager"</td><td> - <a href="vim.DatastoreNamespaceManager.html">DatastoreNamespaceManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"DiagnosticManager"</td><td> - <a href="vim.DiagnosticManager.html">DiagnosticManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"DistributedVirtualPortgroup"</td><td> - <a href="vim.dvs.DistributedVirtualPortgroup.html">DistributedVirtualPortgroup</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"DistributedVirtualSwitch"</td><td> - <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"DistributedVirtualSwitchManager"</td><td> - <a href="vim.dvs.DistributedVirtualSwitchManager.html">DistributedVirtualSwitchManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"EnvironmentBrowser"</td><td> - <a href="vim.EnvironmentBrowser.html">EnvironmentBrowser</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"EventHistoryCollector"</td><td> - <a href="vim.event.EventHistoryCollector.html">EventHistoryCollector</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"EventManager"</td><td> - <a href="vim.event.EventManager.html">EventManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"ExtensibleManagedObject"</td><td> - <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"ExtensionManager"</td><td> - <a href="vim.ExtensionManager.html">ExtensionManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"FileManager"</td><td> - <a href="vim.FileManager.html">FileManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"Folder"</td><td> - <a href="vim.Folder.html">Folder</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"GuestAuthManager"</td><td> - <a href="vim.vm.guest.AuthManager.html">GuestAuthManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"GuestFileManager"</td><td> - <a href="vim.vm.guest.FileManager.html">GuestFileManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"GuestOperationsManager"</td><td> - <a href="vim.vm.guest.GuestOperationsManager.html">GuestOperationsManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"GuestProcessManager"</td><td> - <a href="vim.vm.guest.ProcessManager.html">GuestProcessManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HistoryCollector"</td><td> - <a href="vim.HistoryCollector.html">HistoryCollector</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostActiveDirectoryAuthentication"</td><td> - <a href="vim.host.ActiveDirectoryAuthentication.html">HostActiveDirectoryAuthentication</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostAuthenticationManager"</td><td> - <a href="vim.host.AuthenticationManager.html">HostAuthenticationManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostAuthenticationStore"</td><td> - <a href="vim.host.AuthenticationStore.html">HostAuthenticationStore</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostAutoStartManager"</td><td> - <a href="vim.host.AutoStartManager.html">HostAutoStartManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostBootDeviceSystem"</td><td> - <a href="vim.host.BootDeviceSystem.html">HostBootDeviceSystem</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostCacheConfigurationManager"</td><td> - <a href="vim.host.CacheConfigurationManager.html">HostCacheConfigurationManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostCpuSchedulerSystem"</td><td> - <a href="vim.host.CpuSchedulerSystem.html">HostCpuSchedulerSystem</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostDatastoreBrowser"</td><td> - <a href="vim.host.DatastoreBrowser.html">HostDatastoreBrowser</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostDatastoreSystem"</td><td> - <a href="vim.host.DatastoreSystem.html">HostDatastoreSystem</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostDateTimeSystem"</td><td> - <a href="vim.host.DateTimeSystem.html">HostDateTimeSystem</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostDiagnosticSystem"</td><td> - <a href="vim.host.DiagnosticSystem.html">HostDiagnosticSystem</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostDirectoryStore"</td><td> - <a href="vim.host.DirectoryStore.html">HostDirectoryStore</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostEsxAgentHostManager"</td><td> - <a href="vim.host.EsxAgentHostManager.html">HostEsxAgentHostManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostFirewallSystem"</td><td> - <a href="vim.host.FirewallSystem.html">HostFirewallSystem</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostFirmwareSystem"</td><td> - <a href="vim.host.FirmwareSystem.html">HostFirmwareSystem</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostGraphicsManager"</td><td> - <a href="vim.host.GraphicsManager.html">HostGraphicsManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostHealthStatusSystem"</td><td> - <a href="vim.host.HealthStatusSystem.html">HostHealthStatusSystem</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostImageConfigManager"</td><td> - <a href="vim.host.ImageConfigManager.html">HostImageConfigManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostKernelModuleSystem"</td><td> - <a href="vim.host.KernelModuleSystem.html">HostKernelModuleSystem</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostLocalAccountManager"</td><td> - <a href="vim.host.LocalAccountManager.html">HostLocalAccountManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostLocalAuthentication"</td><td> - <a href="vim.host.LocalAuthentication.html">HostLocalAuthentication</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostMemorySystem"</td><td> - <a href="vim.host.MemoryManagerSystem.html">HostMemorySystem</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostNetworkSystem"</td><td> - <a href="vim.host.NetworkSystem.html">HostNetworkSystem</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostPatchManager"</td><td> - <a href="vim.host.PatchManager.html">HostPatchManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostPciPassthruSystem"</td><td> - <a href="vim.host.PciPassthruSystem.html">HostPciPassthruSystem</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostPowerSystem"</td><td> - <a href="vim.host.PowerSystem.html">HostPowerSystem</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostProfile"</td><td> - <a href="vim.profile.host.HostProfile.html">HostProfile</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostProfileManager"</td><td> - <a href="vim.profile.host.ProfileManager.html">HostProfileManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostServiceSystem"</td><td> - <a href="vim.host.ServiceSystem.html">HostServiceSystem</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostSnmpSystem"</td><td> - <a href="vim.host.SnmpSystem.html">HostSnmpSystem</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostStorageSystem"</td><td> - <a href="vim.host.StorageSystem.html">HostStorageSystem</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostSystem"</td><td> - <a href="vim.HostSystem.html">HostSystem</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostVFlashManager"</td><td> - <a href="vim.host.VFlashManager.html">HostVFlashManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostVirtualNicManager"</td><td> - <a href="vim.host.VirtualNicManager.html">HostVirtualNicManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostVMotionSystem"</td><td> - <a href="vim.host.VMotionSystem.html">HostVMotionSystem</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostVsanInternalSystem"</td><td> - <a href="vim.host.VsanInternalSystem.html">HostVsanInternalSystem</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HostVsanSystem"</td><td> - <a href="vim.host.VsanSystem.html">HostVsanSystem</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"HttpNfcLease"</td><td> - <a href="vim.HttpNfcLease.html">HttpNfcLease</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"InventoryView"</td><td> - <a href="vim.view.InventoryView.html">InventoryView</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"IpPoolManager"</td><td> - <a href="vim.IpPoolManager.html">IpPoolManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"IscsiManager"</td><td> - <a href="vim.host.IscsiManager.html">IscsiManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"LicenseAssignmentManager"</td><td> - <a href="vim.LicenseAssignmentManager.html">LicenseAssignmentManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"LicenseManager"</td><td> - <a href="vim.LicenseManager.html">LicenseManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"ListView"</td><td> - <a href="vim.view.ListView.html">ListView</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"LocalizationManager"</td><td> - <a href="vim.LocalizationManager.html">LocalizationManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"ManagedEntity"</td><td> - <a href="vim.ManagedEntity.html">ManagedEntity</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"ManagedObjectView"</td><td> - <a href="vim.view.ManagedObjectView.html">ManagedObjectView</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"Network"</td><td> - <a href="vim.Network.html">Network</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"OpaqueNetwork"</td><td> - <a href="vim.OpaqueNetwork.html">OpaqueNetwork</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"OptionManager"</td><td> - <a href="vim.option.OptionManager.html">OptionManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"OvfManager"</td><td> - <a href="vim.OvfManager.html">OvfManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"PerformanceManager"</td><td> - <a href="vim.PerformanceManager.html">PerformanceManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"Profile"</td><td> - <a href="vim.profile.Profile.html">Profile</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"ProfileComplianceManager"</td><td> - <a href="vim.profile.ComplianceManager.html">ProfileComplianceManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"ProfileManager"</td><td> - <a href="vim.profile.ProfileManager.html">ProfileManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"PropertyCollector"</td><td> - <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"PropertyFilter"</td><td> - <a href="vmodl.query.PropertyCollector.Filter.html">PropertyFilter</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"ResourcePlanningManager"</td><td> - <a href="vim.ResourcePlanningManager.html">ResourcePlanningManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"ResourcePool"</td><td> - <a href="vim.ResourcePool.html">ResourcePool</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"ScheduledTask"</td><td> - <a href="vim.scheduler.ScheduledTask.html">ScheduledTask</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"ScheduledTaskManager"</td><td> - <a href="vim.scheduler.ScheduledTaskManager.html">ScheduledTaskManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"SearchIndex"</td><td> - <a href="vim.SearchIndex.html">SearchIndex</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"ServiceInstance"</td><td> - <a href="vim.ServiceInstance.html">ServiceInstance</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"ServiceManager"</td><td> - <a href="vim.ServiceManager.html">ServiceManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"SessionManager"</td><td> - <a href="vim.SessionManager.html">SessionManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"SimpleCommand"</td><td> - <a href="vim.SimpleCommand.html">SimpleCommand</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"StoragePod"</td><td> - <a href="vim.StoragePod.html">StoragePod</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"StorageResourceManager"</td><td> - <a href="vim.StorageResourceManager.html">StorageResourceManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"Task"</td><td> - <a href="vim.Task.html">Task</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"TaskHistoryCollector"</td><td> - <a href="vim.TaskHistoryCollector.html">TaskHistoryCollector</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"TaskManager"</td><td> - <a href="vim.TaskManager.html">TaskManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"UserDirectory"</td><td> - <a href="vim.UserDirectory.html">UserDirectory</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"View"</td><td> - <a href="vim.view.View.html">View</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"ViewManager"</td><td> - <a href="vim.view.ViewManager.html">ViewManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"VirtualApp"</td><td> - <a href="vim.VirtualApp.html">VirtualApp</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"VirtualDiskManager"</td><td> - <a href="vim.VirtualDiskManager.html">VirtualDiskManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"VirtualizationManager"</td><td> - <a href="vim.VirtualizationManager.html">VirtualizationManager</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"VirtualMachine"</td><td> - <a href="vim.VirtualMachine.html">VirtualMachine</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"VirtualMachineCompatibilityChecker"</td><td> - <a href="vim.vm.check.CompatibilityChecker.html">VirtualMachineCompatibilityChecker</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"VirtualMachineProvisioningChecker"</td><td> - <a href="vim.vm.check.ProvisioningChecker.html">VirtualMachineProvisioningChecker</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"VirtualMachineSnapshot"</td><td> - <a href="vim.vm.Snapshot.html">VirtualMachineSnapshot</a> Managed Object.</td>
+</tr>
+<tr>
+<td>"VmwareDistributedVirtualSwitch"</td><td> - <a href="vim.dvs.VmwareDistributedVirtualSwitch.html">VmwareDistributedVirtualSwitch</a> Managed Object.</td>
+</tr>
+</table>
+<br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="PropertySpec">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="type" type="xsd:string"/>
+                     <element name="all" type="xsd:boolean" minOccurs="0"/>
+                     <element name="pathSet" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

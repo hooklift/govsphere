@@ -1,0 +1,257 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.DistributedVirtualSwitch.ConfigSpec" name="vim.DistributedVirtualSwitch.ConfigSpec"></a>
+<h1>Data Object - DVSConfigSpec</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.DistributedVirtualSwitch.CreateSpec.html#field_detail">DVSCreateSpec</a>, <a href="vim.event.DvsReconfiguredEvent.html#field_detail">DvsReconfiguredEvent</a>
+</dd>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.DistributedVirtualSwitch.html#reconfigure">ReconfigureDvs_Task</a>
+</dd>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.DistributedVirtualSwitch.html#rollback">DVSRollback_Task</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.dvs.VmwareDistributedVirtualSwitch.ConfigSpec.html">VMwareDVSConfigSpec</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.dvs.DistributedVirtualPortgroup.html">DistributedVirtualPortgroup</a>, <a href="vim.dvs.HostMember.ConfigSpec.html">DistributedVirtualSwitchHostMemberConfigSpec</a>, <a href="vim.dvs.KeyedOpaqueBlob.html">DistributedVirtualSwitchKeyedOpaqueBlob</a>, <a href="vim.dvs.DistributedVirtualPort.Setting.html">DVPortSetting</a>, <a href="vim.DistributedVirtualSwitch.ContactInfo.html">DVSContactInfo</a>, <a href="vim.DistributedVirtualSwitch.SwitchPolicy.html">DVSPolicy</a>, <a href="vim.DistributedVirtualSwitch.UplinkPortPolicy.html">DVSUplinkPortPolicy</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The <a href="vim.DistributedVirtualSwitch.ConfigSpec.html">DVSConfigSpec</a>
+ data object contains configuration data for a
+ <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a>.
+ Use the <a href="vim.DistributedVirtualSwitch.html#reconfigure">ReconfigureDvs_Task</a>
+ method to apply the configuration to the
+ switch.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="configVersion" name="configVersion"></a><strong>configVersion</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The version string of the configuration that this spec is trying to
+  change. This property is required in reconfiguring a switch
+  and should be set to the same value as
+  <a href="vim.DistributedVirtualSwitch.ConfigInfo.html#configVersion">configVersion</a>.
+  This property is ignored during switch creation.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="contact" name="contact"></a><strong>contact</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.DistributedVirtualSwitch.ContactInfo.html">DVSContactInfo</a></td><td>
+<p></p>
+         Set the human operator contact information.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="defaultPortConfig" name="defaultPortConfig"></a><strong>defaultPortConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.dvs.DistributedVirtualPort.Setting.html">DVPortSetting</a></td><td>
+<p></p>
+         The default configuration for ports.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="defaultProxySwitchMaxNumPorts" name="defaultProxySwitchMaxNumPorts"></a><strong>defaultProxySwitchMaxNumPorts</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The default host proxy switch maximum port number
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="description" name="description"></a><strong>description</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Set the description string of the switch.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="extensionKey" name="extensionKey"></a><strong>extensionKey</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The key of the extension registered by a remote server that
+  controls the switch.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="host" name="host"></a><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.dvs.HostMember.ConfigSpec.html">DistributedVirtualSwitchHostMemberConfigSpec[]</a></td><td>
+<p></p>
+         The host member specification. A particular host should have only one entry
+  in this array. Duplicate entries for the same host will raise a fault.
+  The host version should be compatible with the version of
+  <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a>. Use
+  <a href="vim.dvs.DistributedVirtualSwitchManager.html#checkCompatibility">QueryDvsCheckCompatibility</a>
+  to check for compatibility.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="maxPorts" name="maxPorts"></a><strong>maxPorts</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td><B>Deprecated.</B><I>
+         As of vSphere API 5.0
+  The default value of this propoerty is maxint and there is no reason
+  for users to change it to a lower value
+      </I>
+<p></p>
+         The maximum number of DistributedVirtualPorts allowed in the switch.
+  If specified in a reconfigure operation, this number cannot be smaller
+  than the number of existing DistributedVirtualPorts.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="name" name="name"></a><strong>name</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The name of the switch. Must be unique in the parent folder.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="numStandalonePorts" name="numStandalonePorts"></a><strong>numStandalonePorts</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The number of standalone ports in the switch. Standalone ports are
+  ports that do not belong to any portgroup. If set to a number larger
+  than number of existing standalone ports in the switch, new ports get
+  created to meet the number. If set to a number smaller than the number
+  of existing standalone ports, free ports (uplink ports excluded) are
+  deleted to meet the number. If the set number cannot be met by
+  deleting free standalone ports, a fault is raised.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="policy" name="policy"></a><strong>policy</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.DistributedVirtualSwitch.SwitchPolicy.html">DVSPolicy</a></td><td>
+<p></p>
+         The usage policy of the switch.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="switchIpAddress" name="switchIpAddress"></a><strong>switchIpAddress</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         IP address for the switch, specified using IPv4 dot notation. The
+  utility of this address is defined by other switch features.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="uplinkPortgroup" name="uplinkPortgroup"></a><strong>uplinkPortgroup</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.dvs.DistributedVirtualPortgroup.html">DistributedVirtualPortgroup[]</a></td><td>
+<p></p>
+         The uplink portgroups.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="uplinkPortPolicy" name="uplinkPortPolicy"></a><strong>uplinkPortPolicy</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.DistributedVirtualSwitch.UplinkPortPolicy.html">DVSUplinkPortPolicy</a></td><td>
+<p></p>
+         The uplink port policy.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vendorSpecificConfig" name="vendorSpecificConfig"></a><strong>vendorSpecificConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.dvs.KeyedOpaqueBlob.html">DistributedVirtualSwitchKeyedOpaqueBlob[]</a></td><td>
+<p></p>
+         Set the opaque blob that stores vendor specific configuration.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DVSConfigSpec">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="configVersion" type="xsd:string" minOccurs="0"/>
+                     <element name="name" type="xsd:string" minOccurs="0"/>
+                     <element name="numStandalonePorts" type="xsd:int" minOccurs="0"/>
+                     <element name="maxPorts" type="xsd:int" minOccurs="0"/>
+                     <element name="uplinkPortPolicy" type="vim25:DVSUplinkPortPolicy" minOccurs="0"/>
+                     <element name="uplinkPortgroup" type="vim25:ManagedObjectReference" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="defaultPortConfig" type="vim25:DVPortSetting" minOccurs="0"/>
+                     <element name="host" type="vim25:DistributedVirtualSwitchHostMemberConfigSpec" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="extensionKey" type="xsd:string" minOccurs="0"/>
+                     <element name="description" type="xsd:string" minOccurs="0"/>
+                     <element name="policy" type="vim25:DVSPolicy" minOccurs="0"/>
+                     <element name="vendorSpecificConfig" type="vim25:DistributedVirtualSwitchKeyedOpaqueBlob" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="contact" type="vim25:DVSContactInfo" minOccurs="0"/>
+                     <element name="switchIpAddress" type="xsd:string" minOccurs="0"/>
+                     <element name="defaultProxySwitchMaxNumPorts" type="xsd:int" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

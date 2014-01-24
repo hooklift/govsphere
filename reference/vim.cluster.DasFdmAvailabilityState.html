@@ -1,0 +1,181 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.cluster.DasFdmAvailabilityState" name="vim.cluster.DasFdmAvailabilityState"></a>
+<h1>Enum - 
+						ClusterDasFdmAvailabilityState</h1>
+<dl>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+<p></p>
+</dl>
+<br>
+<h2>Enum Description</h2>
+<p></p>
+         The <a href="vim.cluster.DasFdmAvailabilityState.html">ClusterDasFdmAvailabilityState</a> enumeration describes the
+  availability states of hosts in a vSphere HA cluster. In the HA
+  architecture, a agent called the Fault Domain Manager runs on
+  each active host. These agents elect a master and the others become
+  its slaves. The availability state assigned to a given host is
+  determined from information reported by the Fault Domain Manager
+  running on the host, by a Fault Domain Manager that has been elected
+  master, and by vCenter Server. See <a href="vim.cluster.DasFdmHostState.html">ClusterDasFdmHostState</a>
+  for more information about the vSphere HA architecture.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Enum Constants</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><a id="connectedToMaster" name="connectedToMaster"></a>connectedToMaster</td><td>
+      The normal operating state for a slave host. In this state,
+  the host is exchanging heartbeats with a master over
+  the management network, and is thus connected to it. If
+  there is a management network partition, the slave will be
+  in this state only if it is in the same partition as the master.
+  This state is reported by the master of a slave host.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="election" name="election"></a>election</td><td>
+      The Fault Domain Manager on the host has been initialized and
+  the host is either waiting to join the existing master or
+  is participating in an election for a new master. This state
+  is reported by vCenter Server or by the host itself.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="fdmUnreachable" name="fdmUnreachable"></a>fdmUnreachable</td><td>
+      The Fault Domain Manager (FDM) on the host cannot be reached. This
+  state is reported in two unlikley situations.
+  <ul>
+  <li> First, it is reported by
+  a master if the host responds to ICMP pings sent by the master over the
+  management network but the FDM on the host cannot be reached by the master.
+  This situation will occur if the FDM is unable to run or exit the
+  uninitialized state.
+  <li> Second, it is reported by vCenter Server if it cannot connect to a
+  master nor the FDM for the host. This situation would occur if all hosts
+  in the cluster failed but vCenter Server is still running. It may also
+  occur if all FDMs are unable to run or exit the uninitialized state.
+  </ul>
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="hostDown" name="hostDown"></a>hostDown</td><td>
+      The slave host appears to be down. This state is reported by the
+  master of a slave host.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="initializationError" name="initializationError"></a>initializationError</td><td>
+      An error occurred when initilizating the Fault Domain Manager
+  on a host due to a problem with installing the
+  agent or configuring it. This condition can often be cleared by
+  reconfiguring HA for the host. This state is reported by vCenter
+  Server.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="master" name="master"></a>master</td><td>
+      The Fault Domain Manager on the host has been elected a
+ master. This state is reported by the the host itself.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="networkIsolated" name="networkIsolated"></a>networkIsolated</td><td>
+      A host is alive but is isolated from the management network.
+  See <a href="vim.cluster.DasVmSettings.IsolationResponse.html">ClusterDasVmSettingsIsolationResponse</a> for the criteria
+  used to determine whether a host is isolated.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="networkPartitionedFromMaster" name="networkPartitionedFromMaster"></a>networkPartitionedFromMaster</td><td>
+      A slave host is alive and has management network connectivity, but
+  the management network has been partitioned. This state is reported
+  by masters that are in a partition other than the one containing the
+  slave host; the master in the slave's partition will report the slave state
+  as <a href="vim.cluster.DasFdmAvailabilityState.html#connectedToMaster">connectedToMaster</a>.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="uninitializationError" name="uninitializationError"></a>uninitializationError</td><td>
+      An error occurred when unconfiguring the Fault Domain Manager
+  running on a host. In order to clear this condition the host might
+  need to be reconnected to the cluster and reconfigured first.
+  This state is reported by vCenter
+  Server.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="uninitialized" name="uninitialized"></a>uninitialized</td><td>
+      The Fault Domain Manager for the host has not yet been
+  initialized. Hence the host is not part of a vSphere HA
+  fault domain. This state is reported by vCenter Server or
+  by the host itself.
+   <br>
+</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <simpleType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ClusterDasFdmAvailabilityState">
+            <restriction base="xsd:string">
+               <enumeration value="uninitialized"/>
+               <enumeration value="election"/>
+               <enumeration value="master"/>
+               <enumeration value="connectedToMaster"/>
+               <enumeration value="networkPartitionedFromMaster"/>
+               <enumeration value="networkIsolated"/>
+               <enumeration value="hostDown"/>
+               <enumeration value="initializationError"/>
+               <enumeration value="uninitializationError"/>
+               <enumeration value="fdmUnreachable"/>
+            </restriction>
+         </simpleType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

@@ -1,0 +1,567 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.ActiveDirectoryAuthentication" name="vim.host.ActiveDirectoryAuthentication"></a>
+<h1>Managed Object -  
+						HostActiveDirectoryAuthentication</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.host.DirectoryStore.html">HostDirectoryStore</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         The <a href="vim.host.ActiveDirectoryAuthentication.html">HostActiveDirectoryAuthentication</a> managed object
+  indicates domain membership status and provides methods
+  for adding a host to and removing a host from a domain.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.host.DirectoryStore.html">HostDirectoryStore</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.host.AuthenticationStore.html">HostAuthenticationStore</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.host.AuthenticationStore.html#info">info</a></td>
+</tr>
+</table>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#importCertificateForCAM">ImportCertificateForCAM_Task</a>, <a href="#joinDomain">JoinDomain_Task</a>, <a href="#joinDomainWithCAM">JoinDomainWithCAM_Task</a>, <a href="#leaveCurrentDomain">LeaveCurrentDomain_Task</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.host.DirectoryStore.html">HostDirectoryStore</a></td>
+</tr>
+<tr class="r0">
+<td>None</td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.host.AuthenticationStore.html">HostAuthenticationStore</a></td>
+</tr>
+<tr class="r0">
+<td>None</td>
+</tr>
+</table>
+<br>
+<a id="importCertificateForCAM" name="importCertificateForCAM"></a>
+<h1>ImportCertificateForCAM_Task</h1>
+<p></p>
+         Import the CAM server's certificate to the local store of vmwauth.
+  <p>
+  The certificate should have already been uploaded to ESXi file system.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.AuthenticationStore</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.ActiveDirectoryAuthentication.html">HostActiveDirectoryAuthentication</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>certPath</strong></td><td>xsd:string</td><td>
+<p></p>
+         full path of the certificate on ESXi
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>camServer</strong></td><td>xsd:string</td><td>
+<p></p>
+         IP of server providing the CAM service.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.ActiveDirectoryFault.html">ActiveDirectoryFault</a></td><td>Thrown for any problem that is not handled with a more specific fault.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.FileNotFound.html">FileNotFound</a></td><td>Thrown if the certificate file does not exist</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidCAMServer.html">InvalidCAMServer</a></td><td>Thrown if camServer is not a valid IP address</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="joinDomain" name="joinDomain"></a>
+<h1>JoinDomain_Task</h1>
+<p></p>
+         Adds the host to an Active Directory domain.
+  <p>
+  If the <a href="vim.host.AuthenticationStoreInfo.html">HostAuthenticationStoreInfo</a>.<a href="vim.host.AuthenticationStoreInfo.html#enabled">enabled</a>
+  property is <code>True</code> (accessed through the <code>info</code> property),
+  the host has joined a domain.
+  The vSphere API will throw the <code>InvalidState</code> fault if you try
+  to add a host to a domain when the host has already joined a domain.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.AuthenticationStore</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.ActiveDirectoryAuthentication.html">HostActiveDirectoryAuthentication</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>domainName</strong></td><td>xsd:string</td><td>
+<p></p>
+         Name of the domain to be joined.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>userName</strong></td><td>xsd:string</td><td>
+<p></p>
+         Name for an Active Directory account
+                  that has the authority to add hosts to the domain.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>password</strong></td><td>xsd:string</td><td>
+<p></p>
+         Password for the <code>userName</code> account.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.ActiveDirectoryFault.html">ActiveDirectoryFault</a></td><td>Thrown for any problem that is not handled with a more specific fault.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.BlockedByFirewall.html">BlockedByFirewall</a></td><td>Thrown if ports needed by the join operation are blocked by the firewall.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.ClockSkew.html">ClockSkew</a></td><td>Thrown if the clocks of the host and the domain controller differ by more than the allowed amount of time.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.DomainNotFound.html">DomainNotFound</a></td><td>Thrown if the domain controller for <code>domainName</code> cannot be reached.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if the host configuration prevents the join operation from succeeding.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidHostName.html">InvalidHostName</a></td><td>Thrown if the domain part of the host's FQDN doesn't match the domain being joined.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidLogin.html">InvalidLogin</a></td><td>Thrown if <code>userName</code> and <code>password</code> are not valid user credentials.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the host has already joined a domain.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NoPermissionOnAD.html">NoPermissionOnAD</a></td><td>Thrown if <code>userName</code> has no right to add hosts to the domain.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.TaskInProgress.html">TaskInProgress</a></td><td>Thrown if the <a href="vim.host.ActiveDirectoryAuthentication.html">HostActiveDirectoryAuthentication</a> object is busy.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="joinDomainWithCAM" name="joinDomainWithCAM"></a>
+<h1>JoinDomainWithCAM_Task</h1>
+<p></p>
+         Adds the host to an Active Directory domain through CAM service.
+  <p>
+  If the <a href="vim.host.AuthenticationStoreInfo.html">HostAuthenticationStoreInfo</a>.<a href="vim.host.AuthenticationStoreInfo.html#enabled">enabled</a>
+  property is <code>True</code> (accessed through the <code>info</code> property),
+  the host has joined a domain.
+  The vSphere API will throw the <code>InvalidState</code> fault if you try
+  to add a host to a domain when the host has already joined a domain.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.AuthenticationStore</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.ActiveDirectoryAuthentication.html">HostActiveDirectoryAuthentication</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>domainName</strong></td><td>xsd:string</td><td>
+<p></p>
+         Name of the domain to be joined.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>camServer</strong></td><td>xsd:string</td><td>
+<p></p>
+         Name of server providing the CAM service.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.ActiveDirectoryFault.html">ActiveDirectoryFault</a></td><td>Thrown for any problem that is not handled with a more specific fault.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.BlockedByFirewall.html">BlockedByFirewall</a></td><td>Thrown if ports needed by the join operation are blocked by the firewall.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.CAMServerRefusedConnection.html">CAMServerRefusedConnection</a></td><td>Thrown if the specified CAM server is not reachable, or if the server denied access.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.ClockSkew.html">ClockSkew</a></td><td>Thrown if the clocks of the host and the domain controller differ by more than the allowed amount of time.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DomainNotFound.html">DomainNotFound</a></td><td>Thrown if the domain controller for <code>domainName</code> cannot be reached.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if the host configuration prevents the join operation from succeeding.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidCAMCertificate.html">InvalidCAMCertificate</a></td><td>Thrown if the certificate of the given CAM server cannot be verified.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidCAMServer.html">InvalidCAMServer</a></td><td>Thrown if camServer is not a valid IP address, or if camServer is not accessible.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidHostName.html">InvalidHostName</a></td><td>Thrown if the domain part of the host's FQDN doesn't match the domain being joined.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the host has already joined a domain.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.TaskInProgress.html">TaskInProgress</a></td><td>Thrown if the <a href="vim.host.ActiveDirectoryAuthentication.html">HostActiveDirectoryAuthentication</a> object is busy.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="leaveCurrentDomain" name="leaveCurrentDomain"></a>
+<h1>LeaveCurrentDomain_Task</h1>
+<p></p>
+         Removes the host from the Active Directory domain to which it belongs.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.AuthenticationStore</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.ActiveDirectoryAuthentication.html">HostActiveDirectoryAuthentication</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>force</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         If <code>True</code>, any existing permissions on managed entities for
+               Active Directory users will be deleted. If <code>False</code> and such
+               permissions exist, the operation will fail.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.ActiveDirectoryFault.html">ActiveDirectoryFault</a></td><td>Thrown for any problem that is not handled with a specific fault.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.AuthMinimumAdminPermission.html">AuthMinimumAdminPermission</a></td><td>Thrown if this change would leave the system with no Administrator permission on the root node.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the host is not in a domain or there are active permissions for Active Directory users.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NonADUserRequired.html">NonADUserRequired</a></td><td>only non Active Directory users can initiate the leave domain operation.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.TaskInProgress.html">TaskInProgress</a></td><td>Thrown if the ActiveDirectoryAuthentication object is busy.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

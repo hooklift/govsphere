@@ -1,0 +1,144 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.dvs.VmwareDistributedVirtualSwitch.VMwarePortgroupPolicy" name="vim.dvs.VmwareDistributedVirtualSwitch.VMwarePortgroupPolicy"></a>
+<h1>Data Object - VMwareDVSPortgroupPolicy</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.dvs.DistributedVirtualPortgroup.PortgroupPolicy.html">DVPortgroupPolicy</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This class defines the VMware specific configuration for
+  DistributedVirtualPort.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="ipfixOverrideAllowed" name="ipfixOverrideAllowed"></a><strong>ipfixOverrideAllowed</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Allow the setting of
+  <a href="vim.dvs.VmwareDistributedVirtualSwitch.VmwarePortConfigPolicy.html#ipfixEnabled">ipfixEnabled</a>
+  for an individual port to override the setting in
+  <a href="vim.dvs.DistributedVirtualPortgroup.ConfigInfo.html#defaultPortConfig">defaultPortConfig</a> of
+  a portgroup.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="securityPolicyOverrideAllowed" name="securityPolicyOverrideAllowed"></a><strong>securityPolicyOverrideAllowed</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Allow the setting of
+  <a href="vim.dvs.VmwareDistributedVirtualSwitch.VmwarePortConfigPolicy.html#securityPolicy">securityPolicy</a>
+  for an individual port to override the setting in
+  <a href="vim.dvs.DistributedVirtualPortgroup.ConfigInfo.html#defaultPortConfig">defaultPortConfig</a> of
+  a portgroup.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="uplinkTeamingOverrideAllowed" name="uplinkTeamingOverrideAllowed"></a><strong>uplinkTeamingOverrideAllowed</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Allow the setting of
+  <a href="vim.dvs.VmwareDistributedVirtualSwitch.VmwarePortConfigPolicy.html#uplinkTeamingPolicy">uplinkTeamingPolicy</a>
+  for an individual port to override the setting in
+  <a href="vim.dvs.DistributedVirtualPortgroup.ConfigInfo.html#defaultPortConfig">defaultPortConfig</a> of
+  a portgroup.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vlanOverrideAllowed" name="vlanOverrideAllowed"></a><strong>vlanOverrideAllowed</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Allow the setting of
+  <a href="vim.dvs.VmwareDistributedVirtualSwitch.VlanIdSpec.html#vlanId">vlanId</a>, trunk
+  <a href="vim.dvs.VmwareDistributedVirtualSwitch.TrunkVlanSpec.html#vlanId">vlanId</a>, or
+  <a href="vim.dvs.VmwareDistributedVirtualSwitch.PvlanSpec.html#pvlanId">pvlanId</a>
+  for an individual port to override the setting in
+  <a href="vim.dvs.DistributedVirtualPortgroup.ConfigInfo.html#defaultPortConfig">defaultPortConfig</a> of
+  a portgroup.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.dvs.DistributedVirtualPortgroup.PortgroupPolicy.html">DVPortgroupPolicy</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.dvs.DistributedVirtualPortgroup.PortgroupPolicy.html#blockOverrideAllowed">blockOverrideAllowed</a>, <a href="vim.dvs.DistributedVirtualPortgroup.PortgroupPolicy.html#livePortMovingAllowed">livePortMovingAllowed</a>, <a href="vim.dvs.DistributedVirtualPortgroup.PortgroupPolicy.html#networkResourcePoolOverrideAllowed">networkResourcePoolOverrideAllowed</a>, <a href="vim.dvs.DistributedVirtualPortgroup.PortgroupPolicy.html#portConfigResetAtDisconnect">portConfigResetAtDisconnect</a>, <a href="vim.dvs.DistributedVirtualPortgroup.PortgroupPolicy.html#shapingOverrideAllowed">shapingOverrideAllowed</a>, <a href="vim.dvs.DistributedVirtualPortgroup.PortgroupPolicy.html#trafficFilterOverrideAllowed">trafficFilterOverrideAllowed</a>, <a href="vim.dvs.DistributedVirtualPortgroup.PortgroupPolicy.html#vendorConfigOverrideAllowed">vendorConfigOverrideAllowed</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VMwareDVSPortgroupPolicy">
+            <complexContent>
+               <extension base="vim25:DVPortgroupPolicy">
+                  <sequence>
+                     <element name="vlanOverrideAllowed" type="xsd:boolean"/>
+                     <element name="uplinkTeamingOverrideAllowed" type="xsd:boolean"/>
+                     <element name="securityPolicyOverrideAllowed" type="xsd:boolean"/>
+                     <element name="ipfixOverrideAllowed" type="xsd:boolean" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

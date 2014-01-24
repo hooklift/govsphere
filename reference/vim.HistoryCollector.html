@@ -1,0 +1,460 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.HistoryCollector" name="vim.HistoryCollector"></a>
+<h1>Managed Object -  
+						HistoryCollector</h1>
+<dl>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.event.EventHistoryCollector.html">EventHistoryCollector</a>, <a href="vim.TaskHistoryCollector.html">TaskHistoryCollector</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         This managed object type enables clients to retrieve historical data and 
+ receive updates when the server appends new data to a collection. 
+ This is a base type for item-specific types related to event or task history.  
+ Historical data is inherently append-only,
+ although a server administrator may periodically purge old data.
+ <p>
+ Typically, a client creates a history collector by using a filter on a
+ potentially large set, such as all the events in a datacenter.
+ The collector provides access to the items that match the filter,
+ which could also be a relatively large set.
+ <p>
+ The items in a collector are always ordered by date and time of creation.
+ Item properties normally include this time stamp.
+ <p>
+ The client may set the "viewable latest page" for the collector,
+ which is the contiguous subset of the items that are of
+ immediate interest. These items are available as the "latestPage"
+ property, which the client may retrieve and monitor by using the
+ <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> managed object. 
+ <p>
+ Clients can change the page size of the "latestPage" by using 
+ <a href="vim.HistoryCollector.html#setLatestPageSize">setLatestPageSize()</a>.
+ <p>
+ The client may use the following features of the history collector.
+ <ul>
+ <li><a href="vim.HistoryCollector.html#rewind">RewindCollector</a> - Moves the "scrollable view" to 
+ the oldest item (the default setting).
+ <li>readNext - Retrieves all the items in the collector, from the oldest
+ item to the newest item. Retrieves either 
+ <a href="vim.TaskHistoryCollector.html#readNext">tasks</a> or 
+ <a href="vim.event.EventHistoryCollector.html#readNext">events</a> depending on the operation. 
+ <li>readPrev - Retrieves all items (excluding the "viewable latest page") in
+ the collector, from the newest item to the oldest item. Retrieves either 
+ <a href="vim.TaskHistoryCollector.html#readPrev">tasks</a> or 
+ <a href="vim.event.EventHistoryCollector.html#readPrev">events</a> depending on the operation.
+ <li><a href="vim.HistoryCollector.html#reset">ResetCollector</a> - Moves the "scrollable view" to 
+ the item immediately preceding the "viewable latest page".
+ </ul>
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="filter" name="filter"></a><strong>filter</strong></td><td>xsd:anyType</td><td>
+<p></p>
+         The filter used to create this collector.
+ <p>
+ The type of the returned filter is determined by the managed object
+ for which the collector is created.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#remove">DestroyCollector</a>, <a href="#reset">ResetCollector</a>, <a href="#rewind">RewindCollector</a>, <a href="#setLatestPageSize">SetCollectorPageSize</a></td>
+</tr>
+</table>
+<br>
+<a id="remove" name="remove"></a>
+<h1>DestroyCollector</h1>
+<p></p>
+         Destroys this collector.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.HistoryCollector.html">HistoryCollector</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('DestroyCollector-textarea');expandcontent(this, 'DestroyCollector-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="DestroyCollector-div">
+<textarea cols="20" rows="10" name="DestroyCollector-textarea" wrap="off" readonly="1" id="DestroyCollector-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DestroyCollector" type="vim25:DestroyCollectorRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DestroyCollectorResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="reset" name="reset"></a>
+<h1>ResetCollector</h1>
+<p></p>
+         Moves the "scrollable view" to the item immediately preceding the
+ "viewable latest page". If you use "readPrev", 
+ <a href="vim.TaskHistoryCollector.html#readPrev">ReadPreviousTasks</a> or 
+ <a href="vim.event.EventHistoryCollector.html#readPrev">ReadPreviousEvents</a>,
+ all items
+ are retrieved from the newest item to the oldest item.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.HistoryCollector.html">HistoryCollector</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ResetCollector-textarea');expandcontent(this, 'ResetCollector-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ResetCollector-div">
+<textarea cols="20" rows="10" name="ResetCollector-textarea" wrap="off" readonly="1" id="ResetCollector-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ResetCollector" type="vim25:ResetCollectorRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ResetCollectorResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="rewind" name="rewind"></a>
+<h1>RewindCollector</h1>
+<p></p>
+         Moves the "scrollable view" to the oldest item. If you use 
+ <a href="vim.TaskHistoryCollector.html#readNext">ReadNextTasks</a> or 
+ <a href="vim.event.EventHistoryCollector.html#readNext">ReadNextEvents</a>,
+ all items are retrieved from the oldest item to the newest item. This 
+ is the default setting when the collector is created.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.HistoryCollector.html">HistoryCollector</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RewindCollector-textarea');expandcontent(this, 'RewindCollector-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RewindCollector-div">
+<textarea cols="20" rows="10" name="RewindCollector-textarea" wrap="off" readonly="1" id="RewindCollector-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RewindCollector" type="vim25:RewindCollectorRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RewindCollectorResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="setLatestPageSize" name="setLatestPageSize"></a>
+<h1>SetCollectorPageSize</h1>
+<p></p>
+         Sets the "viewable latest page" size to contain at most the 
+ number of items specified by the maxCount parameter).
+ <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.HistoryCollector.html">HistoryCollector</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>maxCount</strong></td><td>xsd:int</td><td>
+<p></p>
+         The maximum number of items in the page.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if maxCount is out of range.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('SetCollectorPageSize-textarea');expandcontent(this, 'SetCollectorPageSize-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="SetCollectorPageSize-div">
+<textarea cols="20" rows="10" name="SetCollectorPageSize-textarea" wrap="off" readonly="1" id="SetCollectorPageSize-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="SetCollectorPageSize" type="vim25:SetCollectorPageSizeRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="SetCollectorPageSizeResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

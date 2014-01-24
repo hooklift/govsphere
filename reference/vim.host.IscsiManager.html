@@ -1,0 +1,800 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.IscsiManager" name="vim.host.IscsiManager"></a>
+<h1>Managed Object -  
+						IscsiManager</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.host.ConfigManager.html#field_detail">HostConfigManager</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.IscsiManager.IscsiMigrationDependency.html">IscsiMigrationDependency</a>, <a href="vim.host.IscsiManager.IscsiPortInfo.html">IscsiPortInfo</a>, <a href="vim.host.IscsiManager.IscsiStatus.html">IscsiStatus</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         This managed object provides interfaces for mapping VMkernel NIC to
+  iSCSI Host Bus Adapter.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+</table>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#bindVnic">BindVnic</a>, <a href="#queryBoundVnics">QueryBoundVnics</a>, <a href="#queryCandidateNics">QueryCandidateNics</a>, <a href="#queryMigrationDependencies">QueryMigrationDependencies</a>, <a href="#queryPnicStatus">QueryPnicStatus</a>, <a href="#queryVnicStatus">QueryVnicStatus</a>, <a href="#unbindVnic">UnbindVnic</a></td>
+</tr>
+</table>
+<br>
+<a id="bindVnic" name="bindVnic"></a>
+<h1>BindVnic</h1>
+<p></p>
+         Bind a Virtual NIC to be used for an iSCSI adapter
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.IscsiManager.html">IscsiManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>iScsiHbaName</strong></td><td>xsd:string</td><td>
+<p></p>
+         iSCSI adapter name for which the Virtual NIC to
+                      be added.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>vnicDevice</strong></td><td>xsd:string</td><td>
+<p></p>
+         Virtual NIC that is to be bound to the iSCSI HBA
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.IscsiFault.html">IscsiFault</a></td><td>Thrown for any problem that is not handled with a more specific fault.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.IscsiFaultInvalidVnic.html">IscsiFaultInvalidVnic</a></td><td>The given Virtual NIC is not valid for the HBA.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.IscsiFaultVnicAlreadyBound.html">IscsiFaultVnicAlreadyBound</a></td><td>The given Virtual NIC is already bound to the HBA.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.IscsiFaultVnicHasMultipleUplinks.html">IscsiFaultVnicHasMultipleUplinks</a></td><td>The given Virtual NIC has multiple uplinks.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.IscsiFaultVnicHasNoUplinks.html">IscsiFaultVnicHasNoUplinks</a></td><td>The given Virtual NIC has no physical uplinks.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.IscsiFaultVnicHasWrongUplink.html">IscsiFaultVnicHasWrongUplink</a></td><td>The given Virtual NIC has the wrong uplink and it can't be used for iSCSI multi-pathing.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.IscsiFaultVnicNotFound.html">IscsiFaultVnicNotFound</a></td><td>The given Virtual NIC is not present on the system.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the given HBA is not found</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.PlatformConfigFault.html">PlatformConfigFault</a></td><td>Thrown for platform error that occurs during the operation.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('BindVnic-textarea');expandcontent(this, 'BindVnic-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="BindVnic-div">
+<textarea cols="20" rows="10" name="BindVnic-textarea" wrap="off" readonly="1" id="BindVnic-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="BindVnic" type="vim25:BindVnicRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="BindVnicResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryBoundVnics" name="queryBoundVnics"></a>
+<h1>QueryBoundVnics</h1>
+<p></p>
+         Query the list of Virtual NICs that are bound to a given iSCSI HBA.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.IscsiManager.html">IscsiManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>iScsiHbaName</strong></td><td>xsd:string</td><td>
+<p></p>
+         iSCSI adapter name for which the method to be
+                      applied.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.host.IscsiManager.IscsiPortInfo.html">IscsiPortInfo[]</a></td><td>An array of IscsiPortInfo containing detailed information on the list of Virtual NICs bound to the adapter</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.IscsiFault.html">IscsiFault</a></td><td>Thrown for any problem that is not handled with a more specific fault.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the given HBA is not found</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryBoundVnics-textarea');expandcontent(this, 'QueryBoundVnics-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryBoundVnics-div">
+<textarea cols="20" rows="10" name="QueryBoundVnics-textarea" wrap="off" readonly="1" id="QueryBoundVnics-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryBoundVnics" type="vim25:QueryBoundVnicsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryBoundVnicsResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:IscsiPortInfo" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryCandidateNics" name="queryCandidateNics"></a>
+<h1>QueryCandidateNics</h1>
+<p></p>
+         Query the candidate Virtual NICs and Physical NICs that can be used
+  for Port-Binding.
+
+  For dependent offload adapters, the Virtual NIC should be attached
+  to the physical NIC associated with the hardware function.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.IscsiManager.html">IscsiManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>iScsiHbaName</strong></td><td>xsd:string</td><td>
+<p></p>
+         iSCSI Adapter name for which the method to be
+                      applied.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.host.IscsiManager.IscsiPortInfo.html">IscsiPortInfo[]</a></td><td>Array of IscsiPortInfo containing detailed information on list of eligible Virtual NICs that can be bound to the adapter. This list will also include details on the eligible Physical NICs that are not associated with any Virtual NICs.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.IscsiFault.html">IscsiFault</a></td><td>Thrown for any problem that is not handled with a more specific fault.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the given HBA is not found</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryCandidateNics-textarea');expandcontent(this, 'QueryCandidateNics-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryCandidateNics-div">
+<textarea cols="20" rows="10" name="QueryCandidateNics-textarea" wrap="off" readonly="1" id="QueryCandidateNics-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryCandidateNics" type="vim25:QueryCandidateNicsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryCandidateNicsResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:IscsiPortInfo" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryMigrationDependencies" name="queryMigrationDependencies"></a>
+<h1>QueryMigrationDependencies</h1>
+<p></p>
+         Query the dependency table for a migration operation of a given Physical
+  NIC.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.IscsiManager.html">IscsiManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>pnicDevice</strong></td><td>xsd:string[]</td><td>
+<p></p>
+         List of Physical NICs to be migrated
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.host.IscsiManager.IscsiMigrationDependency.html">IscsiMigrationDependency</a></td><td>Dependency table, as described in IscsiMigrationDependency, providing the user of all the Virtual NIC and iSCSI resources affected.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryMigrationDependencies-textarea');expandcontent(this, 'QueryMigrationDependencies-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryMigrationDependencies-div">
+<textarea cols="20" rows="10" name="QueryMigrationDependencies-textarea" wrap="off" readonly="1" id="QueryMigrationDependencies-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryMigrationDependencies" type="vim25:QueryMigrationDependenciesRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryMigrationDependenciesResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:IscsiMigrationDependency"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryPnicStatus" name="queryPnicStatus"></a>
+<h1>QueryPnicStatus</h1>
+<p></p>
+         Query if Physical NIC device is used for iSCSI.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.IscsiManager.html">IscsiManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>pnicDevice</strong></td><td>xsd:string</td><td>
+<p></p>
+         Physical NIC device name to check the status for
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.host.IscsiManager.IscsiStatus.html">IscsiStatus</a></td><td>A status object, IscsiStatus, indicating whether Physical NIC is used by iSCSI or not. <ul> <li> Empty IscsiStatus (i.e reason unset) if Physical NIC device is not used.</li> <li> Fault code IscsiFaultPnicInUse if Physical NIC is being used.</li> </ul></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.IscsiFault.html">IscsiFault</a></td><td>Thrown for any problem that is not handled with a more specific fault.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryPnicStatus-textarea');expandcontent(this, 'QueryPnicStatus-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryPnicStatus-div">
+<textarea cols="20" rows="10" name="QueryPnicStatus-textarea" wrap="off" readonly="1" id="QueryPnicStatus-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryPnicStatus" type="vim25:QueryPnicStatusRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryPnicStatusResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:IscsiStatus"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryVnicStatus" name="queryVnicStatus"></a>
+<h1>QueryVnicStatus</h1>
+<p></p>
+         Query the status of Virtual NIC association with the iSCSI.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.IscsiManager.html">IscsiManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vnicDevice</strong></td><td>xsd:string</td><td>
+<p></p>
+         Virtual NIC device to check the status for
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.host.IscsiManager.IscsiStatus.html">IscsiStatus</a></td><td>A status object IscsiStatus, containing list of the fault codes, providing the user with information as to whether Virtual NIC is used by iSCSI and list of compliance check failure codes if any. The returned IscsiStatus object will have an array of MethodFault objects providing following information: <ul> <li> Empty IscsiStatus (i.e reason unset) if Virtual NIC device is not used.</li> <li> Fault code IscsiFaultVnicInUse if Virtual NIC is being used by iSCSI.</li> <li> This will be followed with list of fault codes corresponding to the compliance check failures.</li> </ul></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.IscsiFault.html">IscsiFault</a></td><td>Thrown for any problem that is not handled with a more specific fault.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryVnicStatus-textarea');expandcontent(this, 'QueryVnicStatus-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryVnicStatus-div">
+<textarea cols="20" rows="10" name="QueryVnicStatus-textarea" wrap="off" readonly="1" id="QueryVnicStatus-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryVnicStatus" type="vim25:QueryVnicStatusRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryVnicStatusResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:IscsiStatus"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="unbindVnic" name="unbindVnic"></a>
+<h1>UnbindVnic</h1>
+<p></p>
+         Unbind Virtual NIC binding from an iSCSI adapter.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.IscsiManager.html">IscsiManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>iScsiHbaName</strong></td><td>xsd:string</td><td>
+<p></p>
+         iSCSI adapter name for which the Virtual NIC to
+                      be removed.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>vnicDevice</strong></td><td>xsd:string</td><td>
+<p></p>
+         Virtual NIC that is to be removed from the iSCSI HBA
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>force</strong></td><td>xsd:boolean</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.IscsiFault.html">IscsiFault</a></td><td>Thrown for any problem that is not handled with a more specific fault.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.IscsiFaultVnicHasActivePaths.html">IscsiFaultVnicHasActivePaths</a></td><td>The given Virtual NIC is associated with "active" paths to the storage.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.IscsiFaultVnicIsLastPath.html">IscsiFaultVnicIsLastPath</a></td><td>The given Virtual NIC is associated with "only" paths to the storage.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.IscsiFaultVnicNotBound.html">IscsiFaultVnicNotBound</a></td><td>The given Virtual NIC is not bound to the adapter</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the given HBA is not found</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.PlatformConfigFault.html">PlatformConfigFault</a></td><td>Thrown for platform error that occurs during the operation.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UnbindVnic-textarea');expandcontent(this, 'UnbindVnic-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UnbindVnic-div">
+<textarea cols="20" rows="10" name="UnbindVnic-textarea" wrap="off" readonly="1" id="UnbindVnic-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UnbindVnic" type="vim25:UnbindVnicRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UnbindVnicResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

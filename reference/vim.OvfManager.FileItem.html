@@ -1,0 +1,170 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.OvfManager.FileItem" name="vim.OvfManager.FileItem"></a>
+<h1>Data Object - OvfFileItem</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.OvfManager.CreateImportSpecResult.html#field_detail">OvfCreateImportSpecResult</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         An FileItem represents a file that must be uploaded by the caller when the
+ inventory objects has been created in VI. These objects are created by <a href="vim.ResourcePool.html#importVApp">ResourcePool.importVApp</a>.
+ <p>
+ Files can either be new files, in which case the "create" flag will be true, or
+ updates to existing files in VI. The latter is used to support the OVF parentRef
+ mechanism for Disks.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="chunkSize" name="chunkSize"></a><strong>chunkSize</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         The chunksize as specified by the OVF specification.
+
+ If this attribute is set, the "path" attribute is a prefix to
+ each chunk of the complete file.
+
+ For example, if chunksize is 2000000000 bytes, the actual files
+ might be:
+
+ myfile.000000000  (2000000000 bytes)
+ myfile.000000001  (2000000000 bytes)
+ myfile.000000002  (1500000000 bytes)
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="cimType" name="cimType"></a><strong>cimType</strong></td><td>xsd:int</td><td>
+<p></p>
+         The CIM type of the device for which this file provides
+ backing.
+ <p>
+ For example, the value 17 means "Disk drive".
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="compressionMethod" name="compressionMethod"></a><strong>compressionMethod</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The compression method as specified by the OVF
+ specification (for example "gzip" or "bzip2").
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="create" name="create"></a><strong>create</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         True if the item is not expected to exist in the infrastructure
+ and should therefore be created by the caller (for example using HTTP PUT).
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="deviceId" name="deviceId"></a><strong>deviceId</strong></td><td>xsd:string</td><td>
+<p></p>
+         Uniquely identifies the device (disk, CD-ROM etc.) within the entity hierarchy.
+ <p>
+ When <a href="vim.ResourcePool.html#importVApp">ResourcePool.importVApp</a> is
+ called to create the <a href="vim.VirtualMachine.html">VirtualMachine</a>s and <a href="vim.VirtualApp.html">VirtualApp</a>s, it returns a map,
+ device ID -> URL, of where to upload the backing files.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="path" name="path"></a><strong>path</strong></td><td>xsd:string</td><td>
+<p></p>
+         The path of the item to upload, relative to the path of the OVF descriptor.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="size" name="size"></a><strong>size</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         The complete size of the file, if it is specified in the
+ OVF descriptor.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="OvfFileItem">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="deviceId" type="xsd:string"/>
+                     <element name="path" type="xsd:string"/>
+                     <element name="compressionMethod" type="xsd:string" minOccurs="0"/>
+                     <element name="chunkSize" type="xsd:long" minOccurs="0"/>
+                     <element name="size" type="xsd:long" minOccurs="0"/>
+                     <element name="cimType" type="xsd:int"/>
+                     <element name="create" type="xsd:boolean"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

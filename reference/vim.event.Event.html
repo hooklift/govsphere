@@ -1,0 +1,214 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.event.Event" name="vim.event.Event"></a>
+<h1>Data Object - Event</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.fault.DasConfigFault.html#field_detail">DasConfigFault</a>, <a href="vim.event.EventHistoryCollector.html#field_detail">EventHistoryCollector</a>, <a href="vim.event.EventManager.html#field_detail">EventManager</a>, <a href="vim.ManagedEntity.html#field_detail">ManagedEntity</a>, <a href="vim.fault.SnapshotRevertIssue.html#field_detail">SnapshotRevertIssue</a>
+</dd>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.event.EventManager.html#postEvent">PostEvent</a>
+</dd>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.event.EventManager.html#QueryEvent">QueryEvents</a>, <a href="vim.event.EventHistoryCollector.html#readNext">ReadNextEvents</a>, <a href="vim.event.EventHistoryCollector.html#readPrev">ReadPreviousEvents</a>, <a href="vim.ServiceInstance.html#validateMigration">ValidateMigration</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.event.AlarmEvent.html">AlarmEvent</a>, <a href="vim.event.AuthorizationEvent.html">AuthorizationEvent</a>, <a href="vim.event.ClusterEvent.html">ClusterEvent</a>, <a href="vim.event.CustomFieldEvent.html">CustomFieldEvent</a>, <a href="vim.event.DatacenterEvent.html">DatacenterEvent</a>, <a href="vim.event.DatastoreEvent.html">DatastoreEvent</a>, <a href="vim.event.DVPortgroupEvent.html">DVPortgroupEvent</a>, <a href="vim.event.DvsEvent.html">DvsEvent</a>, <a href="vim.event.EventEx.html">EventEx</a>, <a href="vim.event.GeneralEvent.html">GeneralEvent</a>, <a href="vim.event.HealthStatusChangedEvent.html">HealthStatusChangedEvent</a>, <a href="vim.event.HostEvent.html">HostEvent</a>, <a href="vim.event.HostInventoryUnreadableEvent.html">HostInventoryUnreadableEvent</a>, <a href="vim.event.LicenseEvent.html">LicenseEvent</a>, <a href="vim.event.LicenseExpiredEvent.html">LicenseExpiredEvent</a>, <a href="vim.event.LockerMisconfiguredEvent.html">LockerMisconfiguredEvent</a>, <a href="vim.event.LockerReconfiguredEvent.html">LockerReconfiguredEvent</a>, <a href="vim.event.NetworkRollbackEvent.html">NetworkRollbackEvent</a>, <a href="vim.event.ProfileEvent.html">ProfileEvent</a>, <a href="vim.event.ResourcePoolEvent.html">ResourcePoolEvent</a>, <a href="vim.event.ScheduledTaskEvent.html">ScheduledTaskEvent</a>, <a href="vim.event.SessionEvent.html">SessionEvent</a>, <a href="vim.event.TaskEvent.html">TaskEvent</a>, <a href="vim.event.TemplateUpgradeEvent.html">TemplateUpgradeEvent</a>, <a href="vim.event.UpgradeEvent.html">UpgradeEvent</a>, <a href="vim.event.VmEvent.html">VmEvent</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.event.ComputeResourceEventArgument.html">ComputeResourceEventArgument</a>, <a href="vim.event.DatacenterEventArgument.html">DatacenterEventArgument</a>, <a href="vim.event.DatastoreEventArgument.html">DatastoreEventArgument</a>, <a href="vim.event.DvsEventArgument.html">DvsEventArgument</a>, <a href="vim.event.HostEventArgument.html">HostEventArgument</a>, <a href="vim.event.NetworkEventArgument.html">NetworkEventArgument</a>, <a href="vim.event.VmEventArgument.html">VmEventArgument</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This event is the base data object type from which all events inherit. All event
+  objects are data structures that describe events. While event data objects are data
+  structures that describe events, event data type documentation may describe what the
+  event records, rather than the data structure, itself.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="chainId" name="chainId"></a><strong>chainId</strong></td><td>xsd:int</td><td>
+<p></p>
+         The parent or group ID.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="changeTag" name="changeTag"></a><strong>changeTag</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The user entered tag to identify the operations and their side effects
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="computeResource" name="computeResource"></a><strong>computeResource</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.event.ComputeResourceEventArgument.html">ComputeResourceEventArgument</a></td><td>
+<p></p>
+         The ComputeResource object of the event.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="createdTime" name="createdTime"></a><strong>createdTime</strong></td><td>xsd:dateTime</td><td>
+<p></p>
+         The time the event was created.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="datacenter" name="datacenter"></a><strong>datacenter</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.event.DatacenterEventArgument.html">DatacenterEventArgument</a></td><td>
+<p></p>
+         The Datacenter object of the event.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="ds" name="ds"></a><strong>ds</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.event.DatastoreEventArgument.html">DatastoreEventArgument</a></td><td>
+<p></p>
+         The Datastore object of the event.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="dvs" name="dvs"></a><strong>dvs</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.event.DvsEventArgument.html">DvsEventArgument</a></td><td>
+<p></p>
+         The DistributedVirtualSwitch object of the event.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="fullFormattedMessage" name="fullFormattedMessage"></a><strong>fullFormattedMessage</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         A formatted text message describing the event. The message may be localized.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="host" name="host"></a><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.event.HostEventArgument.html">HostEventArgument</a></td><td>
+<p></p>
+         The Host object of the event.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="key" name="key"></a><strong>key</strong></td><td>xsd:int</td><td>
+<p></p>
+         The event ID.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="net" name="net"></a><strong>net</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.event.NetworkEventArgument.html">NetworkEventArgument</a></td><td>
+<p></p>
+         The Network object of the event.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="userName" name="userName"></a><strong>userName</strong></td><td>xsd:string</td><td>
+<p></p>
+         The user who caused the event.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vm" name="vm"></a><strong>vm</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.event.VmEventArgument.html">VmEventArgument</a></td><td>
+<p></p>
+         The VirtualMachine object of the event.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="Event">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="key" type="xsd:int"/>
+                     <element name="chainId" type="xsd:int"/>
+                     <element name="createdTime" type="xsd:dateTime"/>
+                     <element name="userName" type="xsd:string"/>
+                     <element name="datacenter" type="vim25:DatacenterEventArgument" minOccurs="0"/>
+                     <element name="computeResource" type="vim25:ComputeResourceEventArgument" minOccurs="0"/>
+                     <element name="host" type="vim25:HostEventArgument" minOccurs="0"/>
+                     <element name="vm" type="vim25:VmEventArgument" minOccurs="0"/>
+                     <element name="ds" type="vim25:DatastoreEventArgument" minOccurs="0"/>
+                     <element name="net" type="vim25:NetworkEventArgument" minOccurs="0"/>
+                     <element name="dvs" type="vim25:DvsEventArgument" minOccurs="0"/>
+                     <element name="fullFormattedMessage" type="xsd:string" minOccurs="0"/>
+                     <element name="changeTag" type="xsd:string" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

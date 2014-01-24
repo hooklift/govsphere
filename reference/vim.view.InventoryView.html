@@ -1,0 +1,365 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.view.InventoryView" name="vim.view.InventoryView"></a>
+<h1>Managed Object -  
+						InventoryView</h1>
+<dl>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.view.ViewManager.html#createInventoryView">CreateInventoryView</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.view.ManagedObjectView.html">ManagedObjectView</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.ManagedEntity.html">ManagedEntity</a>
+</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         The <a href="vim.view.InventoryView.html">InventoryView</a> managed object provides a means of browsing the inventory and tracking
+  changes to open folders. This managed object is particularly useful for UI clients that
+  display a tree-based navigation panel of the inventory.
+  <p>
+  <a href="vim.view.InventoryView.html">InventoryView</a> maintains the <a href="vim.view.ManagedObjectView.html#view">view</a> list
+  of managed object references to inventory objects. When you create an inventory view 
+  (<a href="vim.view.ViewManager.html#createInventoryView">CreateInventoryView</a>), the server initializes the view's object
+  list with a single folder - the root folder.
+  <p>
+  <a href="vim.view.InventoryView.html">InventoryView</a> provides methods to open and close folders in the inventory. Use these
+  methods to add and subtract objects from the <a href="vim.view.ManagedObjectView.html#view">view</a> list.
+  Use the <a href="vim.view.InventoryView.html">InventoryView</a> together with the <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a> 
+  to manage the data resulting from <a href="vim.view.InventoryView.html#openFolder">OpenInventoryViewFolder</a> 
+  and <a href="vim.view.InventoryView.html#closeFolder">CloseInventoryViewFolder</a> methods. By using the <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>,
+  you have access to the modifications to the view, rather than processing the entire view list.
+  <p>
+  For example, you might use the following sequence of operations with 
+  an <a href="vim.view.InventoryView.html">InventoryView</a> and the <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>:
+  <ol>
+     <li>Create an <a href="vim.view.InventoryView.html">InventoryView</a>.
+     <li>Create a filter specification for the <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>.
+     <ul>
+         <li>Use the <a href="vim.view.InventoryView.html">InventoryView</a> as the starting object in the
+             <a href="vmodl.query.PropertyCollector.ObjectSpec.html">ObjectSpec</a> for the filter.
+         <li>Use a set of <a href="vmodl.query.PropertyCollector.TraversalSpec.html">TraversalSpec</a>
+             data objects to identify paths in possible inventory configurations.
+         <li>Use the <a href="vmodl.query.PropertyCollector.PropertySpec.html">PropertySpec</a> 
+             to identify object properties for retrieval.
+     </ul>
+     <li>Use either the <a href="vmodl.query.PropertyCollector.html#checkForUpdates">CheckForUpdates</a> or 
+         <a href="vmodl.query.PropertyCollector.html#waitForUpdates">WaitForUpdates</a> method to obtain 
+         <a href="vim.view.InventoryView.html">InventoryView</a> modifications. Both methods return
+         an <a href="vmodl.query.PropertyCollector.UpdateSet.html">UpdateSet</a> object that describes 
+         the changes returned by the <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>.
+     <li>Call the <a href="vim.view.InventoryView.html#openFolder">OpenInventoryViewFolder</a> or <a href="vim.view.InventoryView.html#closeFolder">method</a>.
+  </ol>
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.view.ManagedObjectView.html">ManagedObjectView</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.view.ManagedObjectView.html#view">view</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.view.View.html">View</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+</table>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#closeFolder">CloseInventoryViewFolder</a>, <a href="#openFolder">OpenInventoryViewFolder</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.view.ManagedObjectView.html">ManagedObjectView</a></td>
+</tr>
+<tr class="r0">
+<td>None</td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.view.View.html">View</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.view.View.html#destroy">DestroyView</a></td>
+</tr>
+</table>
+<br>
+<a id="closeFolder" name="closeFolder"></a>
+<h1>CloseInventoryViewFolder</h1>
+<p></p>
+         Notify the server that folder(s) have been closed, and changes for all
+  its contained objects should no longer be sent.  The associated child
+  objects are removed from the view. The containers themselves
+  will still be retained as open objects until their parent is closed.
+  <p>
+  May partially succeed if some entities could not be resolved.  The operation
+  will still succeed for all entities that could be resolved, and the
+  list of those that failed is returned as the result.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.view.InventoryView.html">InventoryView</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>entity</strong><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity[]</a></td><td>
+<p></p>
+         An array of managed object references. Each array entry is a 
+                reference to an entity to collapse.
+      <br>
+</td>
+</tr>
+</table>
+<span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  System.View</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity[]</a></td><td>A list containing any entities in the argument could not be resolved.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CloseInventoryViewFolder-textarea');expandcontent(this, 'CloseInventoryViewFolder-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CloseInventoryViewFolder-div">
+<textarea cols="20" rows="10" name="CloseInventoryViewFolder-textarea" wrap="off" readonly="1" id="CloseInventoryViewFolder-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CloseInventoryViewFolder" type="vim25:CloseInventoryViewFolderRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CloseInventoryViewFolderResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="openFolder" name="openFolder"></a>
+<h1>OpenInventoryViewFolder</h1>
+<p></p>
+         Adds the child objects of a given managed entity to the view.
+  <p>     
+  If a <a href="vim.Datacenter.html">Datacenter</a> is returned as a child, the implicit virtual machine folder and
+  host folder objects are also returned. If a <a href="vim.ComputeResource.html">ComputeResource</a> is returned,
+  the implicit root <a href="vim.ResourcePool.html">ResourcePool</a> and <a href="vim.HostSystem.html">HostSystem</a> objects are also returned. 
+  <p>
+  May partially succeed if some entities could not be resolved.  The operation
+  will still succeed for all entities which could be resolved, and the
+  list of those which failed is returned as the result.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.view.InventoryView.html">InventoryView</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>entity</strong><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity[]</a></td><td>
+<p></p>
+         An array of managed object references. Each array entry is a reference
+                to an entity to expand.  Expands each entity in the
+                order given.  If an entity is not in the current view,
+                expands the view as needed.
+      <br>
+</td>
+</tr>
+</table>
+<span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  System.View</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity[]</a></td><td>A list containing any entities in the argument could not be resolved.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('OpenInventoryViewFolder-textarea');expandcontent(this, 'OpenInventoryViewFolder-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="OpenInventoryViewFolder-div">
+<textarea cols="20" rows="10" name="OpenInventoryViewFolder-textarea" wrap="off" readonly="1" id="OpenInventoryViewFolder-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="OpenInventoryViewFolder" type="vim25:OpenInventoryViewFolderRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="OpenInventoryViewFolderResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

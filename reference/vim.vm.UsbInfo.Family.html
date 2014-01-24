@@ -1,0 +1,200 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.UsbInfo.Family" name="vim.vm.UsbInfo.Family"></a>
+<h1>Enum - 
+						VirtualMachineUsbInfoFamily</h1>
+<dl>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+<p></p>
+</dl>
+<br>
+<h2>Enum Description</h2>
+<p></p>
+         Device class family.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Enum Constants</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><a id="audio" name="audio"></a>audio</td><td>
+      Audio capable device.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="bluetooth" name="bluetooth"></a>bluetooth</td><td>
+      Standard bluetooth adapter that uses HCI protocol, 
+  this is a subset of wireless controllers.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="communication" name="communication"></a>communication</td><td>
+      Communication device.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="hid" name="hid"></a>hid</td><td>
+      Human interface device.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="hid_bootable" name="hid_bootable"></a>hid_bootable</td><td>
+      Bootable human interface device, this is a subset of HID devices.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="hub" name="hub"></a>hub</td><td>
+      USB hubs.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="imaging" name="imaging"></a>imaging</td><td>
+      Still imaging device.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="other" name="other"></a>other</td><td>
+      Other miscellaneous device.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="pda" name="pda"></a>pda</td><td>
+      Palm PDA, and Micorsoft ActiveSync PDA.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="physical" name="physical"></a>physical</td><td>
+      Physical interface device.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="printer" name="printer"></a>printer</td><td>
+      Printer device.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="security" name="security"></a>security</td><td>
+      Content security device.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="smart_card" name="smart_card"></a>smart_card</td><td>
+      Smart card device.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="storage" name="storage"></a>storage</td><td>
+      Mass storage device.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="unknownFamily" name="unknownFamily"></a>unknownFamily</td><td>
+      There was an error in determining this device's classes
+ accurately.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="vendor_specific" name="vendor_specific"></a>vendor_specific</td><td>
+      Device that has an interface using a vendor-specific protocol.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="video" name="video"></a>video</td><td>
+      Video device.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="wireless" name="wireless"></a>wireless</td><td>
+      Wireless controller.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="wusb" name="wusb"></a>wusb</td><td>
+      Wireless device related to the Wireless USB standard, 
+  this is a subset of wireless controllers,
+   <br>
+</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <simpleType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VirtualMachineUsbInfoFamily">
+            <restriction base="xsd:string">
+               <enumeration value="audio"/>
+               <enumeration value="hid"/>
+               <enumeration value="hid_bootable"/>
+               <enumeration value="physical"/>
+               <enumeration value="communication"/>
+               <enumeration value="imaging"/>
+               <enumeration value="printer"/>
+               <enumeration value="storage"/>
+               <enumeration value="hub"/>
+               <enumeration value="smart_card"/>
+               <enumeration value="security"/>
+               <enumeration value="video"/>
+               <enumeration value="wireless"/>
+               <enumeration value="bluetooth"/>
+               <enumeration value="wusb"/>
+               <enumeration value="pda"/>
+               <enumeration value="vendor_specific"/>
+               <enumeration value="other"/>
+               <enumeration value="unknownFamily"/>
+            </restriction>
+         </simpleType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

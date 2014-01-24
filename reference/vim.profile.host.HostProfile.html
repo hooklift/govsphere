@@ -1,0 +1,524 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.profile.host.HostProfile" name="vim.profile.host.HostProfile"></a>
+<h1>Managed Object -  
+						HostProfile</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.profile.Profile.html">Profile</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.profile.host.HostProfile.ConfigSpec.html">HostProfileConfigSpec</a>, <a href="vim.HostSystem.html">HostSystem</a>, <a href="vim.profile.DeferredPolicyOptionParameter.html">ProfileDeferredPolicyOptionParameter</a>, <a href="vim.profile.host.ExecuteResult.html">ProfileExecuteResult</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         A host profile describes ESX Server configuration.
+  The <a href="vim.profile.host.HostProfile.html">HostProfile</a> managed object provides access to profile data and
+  it defines methods to manipulate the profile.
+  A host profile is a combination of subprofiles, each of which contains
+  configuration data for a specific capability. Some examples of host capabilities are
+  authentication, memory, networking, and security. For access to individual subprofiles,
+  see the <a href="vim.profile.host.HostApplyProfile.html">HostApplyProfile</a> data object
+  (<a href="vim.profile.host.HostProfile.html">HostProfile</a>.<a href="vim.profile.Profile.html#config">config</a>.<a href="vim.profile.host.HostProfile.ConfigInfo.html#applyProfile">applyProfile</a>).
+  <p>
+  Host profiles are part of the stateless configuration architecture.
+  In the stateless environment, a Profile Engine runs on each ESX host,
+  but an ESX host does not store its own configuration state. Instead,
+  host configuration data is stored on vCenter Servers. Every time a host
+  boots or reboots, it obtains its profile from the vCenter Server.
+  <ul>
+  <li>To create a base host profile use the
+  <a href="vim.profile.host.ProfileManager.html">HostProfileManager</a>.<a href="vim.profile.ProfileManager.html#createProfile">CreateProfile</a>
+  method. To create a profile from an ESX host, specify a
+  <a href="vim.profile.host.HostProfile.HostBasedConfigSpec.html">HostProfileHostBasedConfigSpec</a>. To create a profile from a file,
+  specify a <a href="vim.profile.host.HostProfile.SerializedHostProfileSpec.html">HostProfileSerializedHostProfileSpec</a>.<br/><br/>
+  </li>
+  <li>To create a subprofile for a particular host capability, use the
+  <a href="vim.profile.host.ProfileManager.html">HostProfileManager</a>.<a href="vim.profile.host.ProfileManager.html#createDefaultProfile">CreateDefaultProfile</a>
+  method. After you create the default profile you can modify it and save it in the base profile.
+  <br/><br/>
+  </li>
+  <li>To update an existing profile, use the
+  <a href="vim.profile.host.HostProfile.html">HostProfile</a>.<a href="vim.profile.host.HostProfile.html#update">UpdateHostProfile</a> method.<br/><br/>
+  </li>
+  <li>
+  To apply a host profile to an ESX host, use the <a href="vim.profile.host.HostProfile.html#execute">ExecuteHostProfile</a> method
+  to generate configuration changes, then call the
+  <a href="vim.profile.host.ProfileManager.html">HostProfileManager</a>.<a href="vim.profile.host.ProfileManager.html#applyHostConfiguration">ApplyHostConfig_Task</a>
+  method to apply them.
+  </li>
+  </ul>
+  <p>
+  <u>Host-Specific Configuration</u>
+  <p>
+  An individual host or a set of hosts may have some configuration settings
+  that are different from the settings specified in the host profile.
+  For example, the IP configuration for the host's virtual network adapters
+  must be unique.
+  <ul>
+  <li>To verify host-specific data, use the <code>deferredParam</code> parameter
+  to the <a href="vim.profile.host.HostProfile.html#execute">ExecuteHostProfile</a> method.
+  The Profile Engine will determine if you have specified all of the required
+  parameters for the host configuration. If additional data is required,
+  call the <a href="vim.profile.host.HostProfile.html#execute">ExecuteHostProfile</a> method again as many times as necessary
+  to verify a complete set of parameters.
+  <br/><br/>
+  </li>
+  <li>To apply host-specific data, use the <code>userInput</code> parameter to the
+  <a href="vim.profile.host.ProfileManager.html">HostProfileManager</a>.<a href="vim.profile.host.ProfileManager.html#applyHostConfiguration">ApplyHostConfig_Task</a>
+   method.
+  <br/><br/>
+  </li>
+  </ul>
+  The Profile Engine saves host-specific data in an <a href="vim.profile.host.AnswerFile.html">AnswerFile</a>
+  that is stored on the vCenter Server.
+  The <a href="vim.profile.host.ProfileManager.html">HostProfileManager</a> provides several methods to manipulate
+  answer files.
+  <p>
+  <u>Profile Compliance</u>
+  <p>
+  You can create associations between hosts and profiles to support compliance checking.
+  When you perform compliance checking, you can determine if a host configuration
+  conforms to a host profile.
+  <ul>
+  <li>To create an association between a host and a profile, use the
+  <a href="vim.profile.Profile.html#associateEntities">AssociateProfile</a> method.
+  The method adds the host to the
+  <a href="vim.profile.host.HostProfile.html">HostProfile</a>.<a href="vim.profile.Profile.html#entity">entity</a>[] list.
+  <br/><br/></li>
+  <li>To retrieve the list of profiles associated with a host, use the
+  <a href="vim.profile.host.ProfileManager.html">HostProfileManager</a>.<a href="vim.profile.ProfileManager.html#findAssociatedProfile">FindAssociatedProfile</a>
+  method.
+  <br/><br/></li>
+  <li>To check host compliance, use the
+  <a href="vim.profile.Profile.html#checkCompliance">CheckProfileCompliance_Task</a> method.
+  If you do not specify any hosts, the method will check the compliance of all hosts
+  that are associated with the profile.
+  <br/><br/></li>
+  </ul>
+  You can also use the Profile Compliance Manager to check compliance by specifying
+  profiles, entities (hosts), or both. See
+  <a href="vim.profile.ComplianceManager.html">ProfileComplianceManager</a>.<a href="vim.profile.ComplianceManager.html#checkCompliance">CheckCompliance_Task</a>.
+  <p>
+  <u>Profile Plug-Ins</u>
+  <p>
+  The vSphere architecture uses VMware profile plug-ins to define profile extensions.
+  For information about using a plug-in to extend a host profile, see the VMware Technical Note
+  <i>Developing a Host Profile Extension Plug-in</i>.
+  <p>
+  For access to host configuration data that is defined by plug-ins, use the
+  <a href="vim.profile.ApplyProfile.html">ApplyProfile</a>.<a href="vim.profile.ApplyProfile.html#policy">policy</a>[] and
+  <a href="vim.profile.ApplyProfile.html">ApplyProfile</a>.<a href="vim.profile.ApplyProfile.html#property">property</a>[] lists.
+  The <a href="vim.profile.host.HostApplyProfile.html">HostApplyProfile</a> and its subprofiles, which collectively
+  define host configuration data, are derived from the <a href="vim.profile.ApplyProfile.html">ApplyProfile</a>.
+  <ul>
+  <li>Policies store ESX configuration data in <a href="vim.profile.PolicyOption.html">PolicyOption</a> objects.</li>
+  <li>Profile property lists contain subprofiles defined by plug-ins. Subprofiles can be nested.
+  <ul>
+  <li>Subprofile lists are available as an extension to the base host profile
+  (<a href="vim.profile.host.HostProfile.html">HostProfile</a>.<a href="vim.profile.Profile.html#config">config</a>.<a href="vim.profile.host.HostProfile.ConfigInfo.html#applyProfile">applyProfile</a>.<a href="vim.profile.ApplyProfile.html#property">property</a>[]).
+  </li>
+  <li>Subprofile lists are available as extensions to the host subprofiles - for example,
+    the network subprofile
+  (<a href="vim.profile.host.HostApplyProfile.html">HostApplyProfile</a>.<a href="vim.profile.host.HostApplyProfile.html#network">network</a>.<a href="vim.profile.ApplyProfile.html#property">property</a>[]).
+  </li>
+  </ul>
+  </li>
+  </ul>
+  <br/>
+  If you make changes to host profile data, later versions of profile plug-ins may not support
+  the host configuration implied by the changes that you make. When a subsequent vSphere
+  version becomes available, you must verify that the new version supports any previous
+  configuration changes that you have made.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="referenceHost" name="referenceHost"></a><strong>referenceHost</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         Reference host in use for this host profile. To set this property,
+ use the <a href="vim.profile.host.HostProfile.html#updateReferenceHost">UpdateReferenceHost</a>
+ method. If you do not specify a host for validation
+ (<a href="vim.profile.host.HostProfile.CompleteConfigSpec.html">HostProfileCompleteConfigSpec</a>.<a href="vim.profile.host.HostProfile.CompleteConfigSpec.html#validatorHost">validatorHost</a>),
+ the Profile Engine uses the reference host to validate the profile.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.profile.Profile.html">Profile</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.profile.Profile.html#complianceStatus">complianceStatus</a>, <a href="vim.profile.Profile.html#config">config</a>, <a href="vim.profile.Profile.html#createdTime">createdTime</a>, <a href="vim.profile.Profile.html#description">description</a>, <a href="vim.profile.Profile.html#entity">entity</a>, <a href="vim.profile.Profile.html#modifiedTime">modifiedTime</a>, <a href="vim.profile.Profile.html#name">name</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#execute">ExecuteHostProfile</a>, <a href="#update">UpdateHostProfile</a>, <a href="#updateReferenceHost">UpdateReferenceHost</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.profile.Profile.html">Profile</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.profile.Profile.html#associateEntities">AssociateProfile</a>, <a href="vim.profile.Profile.html#checkCompliance">CheckProfileCompliance_Task</a>, <a href="vim.profile.Profile.html#destroy">DestroyProfile</a>, <a href="vim.profile.Profile.html#dissociateEntities">DissociateProfile</a>, <a href="vim.profile.Profile.html#exportProfile">ExportProfile</a>, <a href="vim.profile.Profile.html#retrieveDescription">RetrieveDescription</a></td>
+</tr>
+</table>
+<br>
+<a id="execute" name="execute"></a>
+<h1>ExecuteHostProfile</h1>
+<p></p>
+         Run the Profile Engine to determine the list of configuration changes
+ needed for the specified host. The method generates configuration changes
+ based on the host profile.
+ <p>
+ You can also specify deferred parameters to verify additional host-specific data.
+ The Profile Engine uses the policy options
+ (<a href="vim.profile.host.HostProfile.html">HostProfile</a>.<a href="vim.profile.Profile.html#config">config</a>.<a href="vim.profile.host.HostProfile.ConfigInfo.html#applyProfile">applyProfile</a>.<a href="vim.profile.ApplyProfile.html#policy">policy</a>[])
+ to determine the required parameters
+ (<a href="vim.profile.PolicyOption.html">PolicyOption</a>.<a href="vim.profile.PolicyOption.html#parameter">parameter</a>[])
+ for host configuration. If you do not provide all of the required parameters,
+ you must call the method again to provide the complete list to the Profile Engine.
+ After successful profile execution, when you apply the profile,
+ the Profile Engine will save the host-specific data in an <a href="vim.profile.host.AnswerFile.html">AnswerFile</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.host.HostProfile.html">HostProfile</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         Host on which to execute the profile.
+ The host does not have to be associated with the profile.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>deferredParam</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.profile.DeferredPolicyOptionParameter.html">ProfileDeferredPolicyOptionParameter[]</a></td><td>
+<p></p>
+         Additional configuration data to be applied to the host.
+ This should contain all of the host-specific data, including data from from
+ previous calls to the  method.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.profile.host.ExecuteResult.html">ProfileExecuteResult</a></td><td>Result of the execution. If the operation is successful (<a href="vim.profile.host.ExecuteResult.html">ProfileExecuteResult</a>.<a href="vim.profile.host.ExecuteResult.html#status">status</a><code>=success</code>), the result object includes a valid host configuration specification that you can pass to the <a href="vim.profile.host.ProfileManager.html">HostProfileManager</a>.<a href="vim.profile.host.ProfileManager.html#applyHostConfiguration">ApplyHostConfig_Task</a> method. <p> If the operation is not successful, the object contains error information or information about additional data required for the host configuration. If additional data is required, the required input list (<a href="vim.profile.host.ExecuteResult.html">ProfileExecuteResult</a>.<a href="vim.profile.host.ExecuteResult.html#requireInput">requireInput</a>[]) contains both the <code>deferredParam</code> data and paths to missing parameters. After you fill in the missing parameters, pass the complete required input list via the <code>deferredParam</code> parameter in another call to the execute method to finish input verification. After successful profile execution, you can pass the verified required input list to the <a href="vim.profile.host.ProfileManager.html#applyHostConfiguration">ApplyHostConfig_Task</a> method.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ExecuteHostProfile-textarea');expandcontent(this, 'ExecuteHostProfile-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ExecuteHostProfile-div">
+<textarea cols="20" rows="10" name="ExecuteHostProfile-textarea" wrap="off" readonly="1" id="ExecuteHostProfile-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ExecuteHostProfile" type="vim25:ExecuteHostProfileRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ExecuteHostProfileResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ProfileExecuteResult"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="update" name="update"></a>
+<h1>UpdateHostProfile</h1>
+<p></p>
+         Update the <code>HostProfile</code> with the specified configuration data.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Profile.Edit</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.host.HostProfile.html">HostProfile</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>config</strong></td><td><a href="vim.profile.host.HostProfile.ConfigSpec.html">HostProfileConfigSpec</a></td><td>
+<p></p>
+         Specification containing the new data.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if the profile with the new name already exists.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.ProfileUpdateFailed.html">ProfileUpdateFailed</a></td><td>Thrown if errors were encountered when updating the profile.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateHostProfile-textarea');expandcontent(this, 'UpdateHostProfile-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateHostProfile-div">
+<textarea cols="20" rows="10" name="UpdateHostProfile-textarea" wrap="off" readonly="1" id="UpdateHostProfile-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateHostProfile" type="vim25:UpdateHostProfileRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateHostProfileResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateReferenceHost" name="updateReferenceHost"></a>
+<h1>UpdateReferenceHost</h1>
+<p></p>
+         Sets the <a href="vim.profile.host.HostProfile.html">HostProfile</a>.<a href="vim.profile.host.HostProfile.html#referenceHost">referenceHost</a> property.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Profile.Edit</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.host.HostProfile.html">HostProfile</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         Reference host to use. If unset, the <a href="vim.profile.host.HostProfile.html#referenceHost">referenceHost</a>
+ property is cleared.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateReferenceHost-textarea');expandcontent(this, 'UpdateReferenceHost-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateReferenceHost-div">
+<textarea cols="20" rows="10" name="UpdateReferenceHost-textarea" wrap="off" readonly="1" id="UpdateReferenceHost-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateReferenceHost" type="vim25:UpdateReferenceHostRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateReferenceHostResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

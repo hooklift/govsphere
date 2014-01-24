@@ -1,0 +1,121 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.fault.IncompatibleDefaultDevice" name="vim.fault.IncompatibleDefaultDevice"></a>
+<h1>Fault - IncompatibleDefaultDevice</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.fault.MigrationFault.html">MigrationFault</a>
+</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+<p></p>
+</dl>
+<H2>Fault 
+                  Description</H2>
+<p></p>
+         A default device (see <a href="vim.vm.ConfigOption.html#defaultDevice">defaultDevice</a> for a 
+  definition) which the virtual machine is using is incompatible with 
+  the corresponding default device which will be created on the target host.
+  <p>
+  This is an issue with powered-on or suspended migration under some 
+  circumstances.  The problem is that in cases where the virtual machine
+  must be recreated, it will have the default device created with default 
+  settings that are appropriate for the target host.  If those are not 
+  compatible with the settings for that device that the virtual machine is currently 
+  using, then resuming the virtual machine on the target host might fail.
+  <p>
+  This might happen if the device in question were reconfigured or the default
+  is different between the source and the destination host.  An example of
+  a default device and associated setting which might cause this is 
+  <a href="vim.vm.device.VirtualVideoCard.html#videoRamSizeInKB">videoRamSizeInKB</a>.  
+  This is an error.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="device" name="device"></a><strong>device</strong></td><td>xsd:string</td><td>
+<p></p>
+         The label of the device.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.fault.MigrationFault.html">MigrationFault</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">None</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.fault.VimFault.html">VimFault</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">None</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.MethodFault.html">MethodFault</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.MethodFault.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.MethodFault.html#dynamicType">dynamicType</a>, <a href="vmodl.MethodFault.html#faultCause">faultCause</a>, <a href="vmodl.MethodFault.html#faultMessage">faultMessage</a></td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="IncompatibleDefaultDevice">
+            <complexContent>
+               <extension base="vim25:MigrationFault">
+                  <sequence>
+                     <element name="device" type="xsd:string"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

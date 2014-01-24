@@ -1,0 +1,205 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.Summary" name="vim.host.Summary"></a>
+<h1>Data Object - HostListSummary</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.host.ConnectInfo.html#field_detail">HostConnectInfo</a>, <a href="vim.HostSystem.html#field_detail">HostSystem</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.CustomFieldsManager.Value.html">CustomFieldValue</a>, <a href="vim.host.Summary.ConfigSummary.html">HostConfigSummary</a>, <a href="vim.host.Summary.HardwareSummary.html">HostHardwareSummary</a>, <a href="vim.host.Summary.QuickStats.html">HostListSummaryQuickStats</a>, <a href="vim.host.RuntimeInfo.html">HostRuntimeInfo</a>, <a href="vim.HostSystem.html">HostSystem</a>, <a href="vim.ManagedEntity.Status.html">ManagedEntityStatus</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This data object type encapsulates a typical set of host information that is useful
+  for list views and summary pages.
+  <p>
+  VirtualCenter can retrieve this information very efficiently, even for a large set
+  of hosts.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="config" name="config"></a><strong>config</strong></td><td><a href="vim.host.Summary.ConfigSummary.html">HostConfigSummary</a></td><td>
+<p></p>
+         Basic configuration information, if known.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="currentEVCModeKey" name="currentEVCModeKey"></a><strong>currentEVCModeKey</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The Enhanced VMotion Compatibility mode that is currently in effect
+  for this host. If the host is in a cluster where EVC is active, this
+  will match the cluster's EVC mode; otherwise this will be unset.<br>See <a href="vim.Capability.html#supportedEVCMode">supportedEVCMode</a><br>
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="customValue" name="customValue"></a><strong>customValue</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.CustomFieldsManager.Value.html">CustomFieldValue[]</a></td><td>
+<p></p>
+         The customized field values.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="hardware" name="hardware"></a><strong>hardware</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.Summary.HardwareSummary.html">HostHardwareSummary</a></td><td>
+<p></p>
+         Basic hardware information, if known.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="host" name="host"></a><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         The reference to the host-managed object.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="managementServerIp" name="managementServerIp"></a><strong>managementServerIp</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         IP address of the VirtualCenter server managing this host, if any.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="maxEVCModeKey" name="maxEVCModeKey"></a><strong>maxEVCModeKey</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The most capable Enhanced VMotion Compatibility mode supported by the
+  host hardware and software; unset if this host cannot participate in
+  any EVC mode.<br>See <a href="vim.Capability.html#supportedEVCMode">supportedEVCMode</a><br>
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="overallStatus" name="overallStatus"></a><strong>overallStatus</strong></td><td><a href="vim.ManagedEntity.Status.html">ManagedEntityStatus</a></td><td>
+<p></p>
+         The overall alarm status of the host.
+
+  In releases after vSphere API 5.0, vSphere Servers might not
+  generate property collector update notifications for this property.
+  To obtain the latest value of the property, you can use
+  PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+  If you use the PropertyCollector.WaitForUpdatesEx method, specify
+  an empty string for the version parameter.
+
+  Since this property is on a DataObject, an update returned by WaitForUpdatesEx may
+  contain values for this property when some other property on the DataObject changes.
+  If this update is a result of a call to WaitForUpdatesEx with a non-empty
+  version parameter, the value for this property may not be current.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="quickStats" name="quickStats"></a><strong>quickStats</strong></td><td><a href="vim.host.Summary.QuickStats.html">HostListSummaryQuickStats</a></td><td>
+<p></p>
+         Basic host statistics.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="rebootRequired" name="rebootRequired"></a><strong>rebootRequired</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether or not the host requires a reboot due to a configuration
+  change.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="runtime" name="runtime"></a><strong>runtime</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.RuntimeInfo.html">HostRuntimeInfo</a></td><td>
+<p></p>
+         Basic runtime information, if known.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostListSummary">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="host" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="hardware" type="vim25:HostHardwareSummary" minOccurs="0"/>
+                     <element name="runtime" type="vim25:HostRuntimeInfo" minOccurs="0"/>
+                     <element name="config" type="vim25:HostConfigSummary"/>
+                     <element name="quickStats" type="vim25:HostListSummaryQuickStats"/>
+                     <element name="overallStatus" type="vim25:ManagedEntityStatus"/>
+                     <element name="rebootRequired" type="xsd:boolean"/>
+                     <element name="customValue" type="vim25:CustomFieldValue" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="managementServerIp" type="xsd:string" minOccurs="0"/>
+                     <element name="maxEVCModeKey" type="xsd:string" minOccurs="0"/>
+                     <element name="currentEVCModeKey" type="xsd:string" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

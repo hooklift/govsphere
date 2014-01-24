@@ -1,0 +1,561 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.Snapshot" name="vim.vm.Snapshot"></a>
+<h1>Managed Object -  
+						VirtualMachineSnapshot</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.OvfManager.CreateDescriptorParams.html#field_detail">OvfCreateDescriptorParams</a>, <a href="vim.VirtualMachine.html#field_detail">VirtualMachine</a>, <a href="vim.vm.CloneSpec.html#field_detail">VirtualMachineCloneSpec</a>, <a href="vim.vm.FileLayoutEx.SnapshotLayout.html#field_detail">VirtualMachineFileLayoutExSnapshotLayout</a>, <a href="vim.vm.FileLayout.SnapshotLayout.html#field_detail">VirtualMachineFileLayoutSnapshotLayout</a>, <a href="vim.vm.Snapshot.html#field_detail">VirtualMachineSnapshot</a>, <a href="vim.vm.SnapshotInfo.html#field_detail">VirtualMachineSnapshotInfo</a>, <a href="vim.vm.SnapshotTree.html#field_detail">VirtualMachineSnapshotTree</a>
+</dd>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.VirtualMachine.html#queryChangedDiskAreas">QueryChangedDiskAreas</a>, <a href="vim.VirtualMachine.html#startReplaying">StartReplaying_Task</a>
+</dd>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.VirtualMachine.html#createSnapshot">CreateSnapshot_Task</a>, <a href="vim.VirtualMachine.html#startRecording">StartRecording_Task</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.HostSystem.html">HostSystem</a>, <a href="vim.HttpNfcLease.html">HttpNfcLease</a>, <a href="vim.vm.ConfigInfo.html">VirtualMachineConfigInfo</a>, </dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         The Snapshot managed object type specifies the interface to individual snapshots
+  of a virtual machine. Although these are managed objects, they are subordinate to 
+  their virtual machine.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="childSnapshot" name="childSnapshot"></a><strong>childSnapshot</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.vm.Snapshot.html">VirtualMachineSnapshot[]</a></td><td>
+<p></p>
+         All snapshots for which this snapshot is the parent.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="config" name="config"></a><strong>config</strong></td><td><a href="vim.vm.ConfigInfo.html">VirtualMachineConfigInfo</a></td><td>
+<p></p>
+         Information about the configuration of this virtual machine when this snapshot was 
+  taken.
+  <p>
+  The datastore paths for the virtual machine disks point to the head of the disk 
+  chain that represents the disk at this given snapshot. The fileInfo.fileLayout 
+  field is not set.
+  <p>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.ExtensibleManagedObject.html#availableField">availableField</a>, <a href="vim.ExtensibleManagedObject.html#value">value</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#exportSnapshot">ExportSnapshot</a>, <a href="#remove">RemoveSnapshot_Task</a>, <a href="#rename">RenameSnapshot</a>, <a href="#revert">RevertToSnapshot_Task</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.ExtensibleManagedObject.html#setCustomValue">setCustomValue</a></td>
+</tr>
+</table>
+<br>
+<a id="exportSnapshot" name="exportSnapshot"></a>
+<h1>ExportSnapshot</h1>
+<p></p>
+         Obtains an export lease on this snapshot. The export lease contains
+  a list of URLs for the virtual disks for this snapshot, as well as
+  a ticket giving access to the URLs.
+  <p>
+  See <a href="vim.HttpNfcLease.html">HttpNfcLease</a> for information on how to use the lease.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>VApp.Export</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.vm.Snapshot.html">VirtualMachineSnapshot</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HttpNfcLease.html">HttpNfcLease</a></td><td>The export lease on this <a href="vim.vm.Snapshot.html">VirtualMachineSnapshot</a>. The export task continues running until the lease is completed by the caller.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.FileFault.html">FileFault</a></td><td>Thrown if there is an error accessing the virtual machine files.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the operation cannot be performed because of the virtual machine's current state. For example, if the virtual machine configuration information is not available.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.TaskInProgress.html">TaskInProgress</a></td><td>Thrown if the virtual machine is busy.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ExportSnapshot-textarea');expandcontent(this, 'ExportSnapshot-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ExportSnapshot-div">
+<textarea cols="20" rows="10" name="ExportSnapshot-textarea" wrap="off" readonly="1" id="ExportSnapshot-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ExportSnapshot" type="vim25:ExportSnapshotRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ExportSnapshotResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="remove" name="remove"></a>
+<h1>RemoveSnapshot_Task</h1>
+<p></p>
+         Removes this snapshot and deletes any associated storage.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>VirtualMachine.State.RemoveSnapshot</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.vm.Snapshot.html">VirtualMachineSnapshot</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>removeChildren</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to specify removal of the entire snapshot subtree.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>consolidate</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         (optional) If set to true, the virtual disk associated
+ with this snapshot will be merged with other disk if possible. Defaults to true.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.TaskInProgress.html">TaskInProgress</a></td><td>Thrown if the virtual machine is busy.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="rename" name="rename"></a>
+<h1>RenameSnapshot</h1>
+<p></p>
+         Rename this snapshot with either a new name or a new description or both.
+  At least one of these must be specified when calling the rename method.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>VirtualMachine.State.RenameSnapshot</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.vm.Snapshot.html">VirtualMachineSnapshot</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>name</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         New name for the snapshot.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>description</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         New description for the snapshot.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td>Thrown if the specified snapshot name is not valid.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidPowerState.html">InvalidPowerState</a></td><td>Thrown if the operation cannot be performed in the current power state of the virtual machine.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the operation cannot be performed in the current state of the virtual machine. For example, the virtual machine's configuration is not available.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the host product does not support snapshot rename.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.TaskInProgress.html">TaskInProgress</a></td><td>Thrown if the virtual machine is busy.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RenameSnapshot-textarea');expandcontent(this, 'RenameSnapshot-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RenameSnapshot-div">
+<textarea cols="20" rows="10" name="RenameSnapshot-textarea" wrap="off" readonly="1" id="RenameSnapshot-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RenameSnapshot" type="vim25:RenameSnapshotRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RenameSnapshotResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="revert" name="revert"></a>
+<h1>RevertToSnapshot_Task</h1>
+<p></p>
+         Change the execution state of the virtual machine to the state of this snapshot.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>VirtualMachine.State.RevertToSnapshot</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.vm.Snapshot.html">VirtualMachineSnapshot</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         (optional) Choice of host for the virtual machine, in case this 
+  operation causes the virtual machine to power on.
+  <p>
+  If a snapshot was taken while a virtual machine was powered on, and this operation 
+  is invoked after the virtual machine was powered off, the operation causes the 
+  virtual machine to power on to reach the snapshot state. This parameter can be 
+  used to specify a choice of host where the virtual machine should power on.
+  <p>
+  If this parameter is not set and the vBalance feature is configured for automatic 
+  load balancing, a host is automatically selected. Otherwise, the virtual machine 
+  keeps its existing host affiliation.
+  <p>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>suppressPowerOn</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         (optional) If set to true, the virtual
+  machine will not be powered on regardless of the power state when
+  the snapshot was created. Default to false.
+  <p>
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.FileFault.html">FileFault</a></td><td>Thrown if there is a problem accessing the virtual machine on the filesystem.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InsufficientResourcesFault.html">InsufficientResourcesFault</a></td><td>Thrown if this operation would violate a resource usage policy.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidPowerState.html">InvalidPowerState</a></td><td>Thrown if the operation cannot be performed in the current power state of the virtual machine.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the operation cannot be performed in the current state of the virtual machine. For example, the virtual machine's configuration is not available.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the host product does not support snapshots.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.TaskInProgress.html">TaskInProgress</a></td><td>Thrown if the virtual machine is busy.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.VmConfigFault.html">VmConfigFault</a></td><td>Thrown if a configuration issue prevents the power-on. Typically, a more specific fault, such as UnsupportedVmxLocation, is thrown.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

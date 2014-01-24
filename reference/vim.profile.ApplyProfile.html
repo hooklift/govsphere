@@ -1,0 +1,153 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.profile.ApplyProfile" name="vim.profile.ApplyProfile"></a>
+<h1>Data Object - ApplyProfile</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.profile.ApplyProfileProperty.html#field_detail">ProfileApplyProfileProperty</a>
+</dd>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.profile.host.ProfileManager.html#createDefaultProfile">CreateDefaultProfile</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.profile.host.ActiveDirectoryProfile.html">ActiveDirectoryProfile</a>, <a href="vim.profile.host.AuthenticationProfile.html">AuthenticationProfile</a>, <a href="vim.profile.host.DateTimeProfile.html">DateTimeProfile</a>, <a href="vim.profile.host.DvsProfile.html">DvsProfile</a>, <a href="vim.profile.host.DvsVNicProfile.html">DvsVNicProfile</a>, <a href="vim.profile.host.FirewallProfile.html">FirewallProfile</a>, <a href="vim.profile.host.FirewallProfile.RulesetProfile.html">FirewallProfileRulesetProfile</a>, <a href="vim.profile.host.HostApplyProfile.html">HostApplyProfile</a>, <a href="vim.profile.host.HostMemoryProfile.html">HostMemoryProfile</a>, <a href="vim.profile.host.IpAddressProfile.html">IpAddressProfile</a>, <a href="vim.profile.host.IpRouteProfile.html">IpRouteProfile</a>, <a href="vim.profile.host.VirtualSwitchProfile.LinkProfile.html">LinkProfile</a>, <a href="vim.profile.host.NasStorageProfile.html">NasStorageProfile</a>, <a href="vim.profile.host.NetStackInstanceProfile.html">NetStackInstanceProfile</a>, <a href="vim.profile.host.NetworkPolicyProfile.html">NetworkPolicyProfile</a>, <a href="vim.profile.host.NetworkProfile.html">NetworkProfile</a>, <a href="vim.profile.host.NetworkProfile.DnsConfigProfile.html">NetworkProfileDnsConfigProfile</a>, <a href="vim.profile.host.VirtualSwitchProfile.NumPortsProfile.html">NumPortsProfile</a>, <a href="vim.profile.host.OptionProfile.html">OptionProfile</a>, <a href="vim.profile.host.PermissionProfile.html">PermissionProfile</a>, <a href="vim.profile.host.PhysicalNicProfile.html">PhysicalNicProfile</a>, <a href="vim.profile.host.PnicUplinkProfile.html">PnicUplinkProfile</a>, <a href="vim.profile.host.PortGroupProfile.html">PortGroupProfile</a>, <a href="vim.profile.ApplyProfileElement.html">ProfileApplyProfileElement</a>, <a href="vim.profile.host.SecurityProfile.html">SecurityProfile</a>, <a href="vim.profile.host.ServiceProfile.html">ServiceProfile</a>, <a href="vim.profile.host.StaticRouteProfile.html">StaticRouteProfile</a>, <a href="vim.profile.host.StorageProfile.html">StorageProfile</a>, <a href="vim.profile.host.UserGroupProfile.html">UserGroupProfile</a>, <a href="vim.profile.host.UserProfile.html">UserProfile</a>, <a href="vim.profile.host.VirtualSwitchProfile.html">VirtualSwitchProfile</a>, <a href="vim.profile.host.PortGroupProfile.VirtualSwitchSelectionProfile.html">VirtualSwitchSelectionProfile</a>, <a href="vim.profile.host.PortGroupProfile.VlanProfile.html">VlanProfile</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.profile.ApplyProfileProperty.html">ProfileApplyProfileProperty</a>, <a href="vim.profile.Policy.html">ProfilePolicy</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The <a href="vim.profile.ApplyProfile.html">ApplyProfile</a> data object is the base class for all data objects
+  that define profile configuration data.
+  <code>ApplyProfile</code> defines ESX configuration data storage and it
+  supports recursive profile definition for the profile plug-in architecture.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="enabled" name="enabled"></a><strong>enabled</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the profile is enabled.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="policy" name="policy"></a><strong>policy</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.profile.Policy.html">ProfilePolicy[]</a></td><td>
+<p></p>
+         The list of policies comprising the profile. A <a href="vim.profile.Policy.html">ProfilePolicy</a>
+ stores one or more configuration data values in a <a href="vim.profile.PolicyOption.html">PolicyOption</a>.
+ The policy option is one of the configuration options from the
+ <a href="vim.profile.PolicyMetadata.html">ProfilePolicyMetadata</a>.<a href="vim.profile.PolicyMetadata.html#possibleOption">possibleOption</a>
+ list.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="profileTypeName" name="profileTypeName"></a><strong>profileTypeName</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Identifies the profile type.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="profileVersion" name="profileVersion"></a><strong>profileVersion</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Profile engine version.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="property" name="property"></a><strong>property</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.profile.ApplyProfileProperty.html">ProfileApplyProfileProperty[]</a></td><td>
+<p></p>
+         List of subprofiles for this profile.
+ This list can change depending on which profile plug-ins are available in the system.
+ Subprofiles can be nested to arbitrary depths to represent host capabilities.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ApplyProfile">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="enabled" type="xsd:boolean"/>
+                     <element name="policy" type="vim25:ProfilePolicy" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="profileTypeName" type="xsd:string" minOccurs="0"/>
+                     <element name="profileVersion" type="xsd:string" minOccurs="0"/>
+                     <element name="property" type="vim25:ProfileApplyProfileProperty" minOccurs="0" maxOccurs="unbounded"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

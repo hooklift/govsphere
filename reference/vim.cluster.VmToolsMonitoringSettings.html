@@ -1,0 +1,220 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.cluster.VmToolsMonitoringSettings" name="vim.cluster.VmToolsMonitoringSettings"></a>
+<h1>Data Object - ClusterVmToolsMonitoringSettings</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.cluster.DasVmSettings.html#field_detail">ClusterDasVmSettings</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The <a href="vim.cluster.VmToolsMonitoringSettings.html">ClusterVmToolsMonitoringSettings</a> data object contains
+  virtual machine monitoring settings that are used by the Virtual Machine Health Monitoring Service.
+  The Service checks the VMware Tools heartbeat of a virtual machine.
+  If heartbeats have not been received within a specified time interval, the Service
+  declares the virtual machine as failed and resets the virtual machine.
+  <p>
+  These settings are applied to individual virtual machines during cluster reconfiguration
+  (<a href="vim.cluster.DasVmConfigInfo.html">ClusterDasVmConfigInfo</a>.<a href="vim.cluster.DasVmConfigInfo.html#dasSettings">dasSettings</a>.<a href="vim.cluster.DasVmSettings.html#vmToolsMonitoringSettings">vmToolsMonitoringSettings</a>). You can also specify them as default values
+  (<a href="vim.cluster.DasConfigInfo.html">ClusterDasConfigInfo</a>.<a href="vim.cluster.DasConfigInfo.html#defaultVmSettings">defaultVmSettings</a>).
+  </p>
+  <p>
+  All fields are optional. In case of a reconfiguration, fields left unset are not changed.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="clusterSettings" name="clusterSettings"></a><strong>clusterSettings</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag indicating whether to use the cluster settings or the per VM settings.
+ <p>
+ The default value is true.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="enabled" name="enabled"></a><strong>enabled</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td><B>Deprecated.</B><I>
+         As of vSphere API 4.1, use <a href="vim.cluster.VmToolsMonitoringSettings.html#vmMonitoring">vmMonitoring</a>
+      </I>
+<p></p>
+         Flag indicating whether or not the Virtual Machine Health Monitoring
+ service is enabled.
+ <p>
+ The Server does not use this property.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="failureInterval" name="failureInterval"></a><strong>failureInterval</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         If no heartbeat has been received for at least the specified number of seconds,
+ the virtual machine is declared as failed. 
+ <p>
+ The default value is 30.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="maxFailures" name="maxFailures"></a><strong>maxFailures</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Maximum number of failures and automated resets allowed during the time that
+ <a href="vim.cluster.VmToolsMonitoringSettings.html#maxFailureWindow">maxFailureWindow</a> specifies. If <a href="vim.cluster.VmToolsMonitoringSettings.html#maxFailureWindow">maxFailureWindow</a> is -1
+ (no window), this represents the absolute number of failures after which
+ automated response is stopped.
+ <p>
+ If a virtual machine exceeds this threshold, in-depth problem analysis is
+ usually needed.
+ <p>
+ The default value is 3.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="maxFailureWindow" name="maxFailureWindow"></a><strong>maxFailureWindow</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The number of seconds for the window during which up to <a href="vim.cluster.VmToolsMonitoringSettings.html#maxFailures">maxFailures</a>
+ resets can occur before automated responses stop. 
+ <p>
+ If set to -1, no failure window is specified.
+ <p>
+ The default value is -1.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="minUpTime" name="minUpTime"></a><strong>minUpTime</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The number of seconds for the virtual machine's heartbeats to stabilize 
+ after the virtual machine has been powered on. This time should include
+ the guest operating system boot-up time. The virtual machine monitoring
+ will begin only after this period.
+ <p>
+ The default value is 120.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vmMonitoring" name="vmMonitoring"></a><strong>vmMonitoring</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Indicates the type of virtual machine monitoring.
+ Specify a string value corresponding to one of the
+ following <a href="vim.cluster.DasConfigInfo.VmMonitoringState.html">ClusterDasConfigInfoVmMonitoringState</a> values:
+ <ul>
+ <li><code>vmMonitoringDisabled</code> (the default value)</li>
+ <li><code>vmMonitoringOnly</code></li>
+ <li><code>vmAndAppMonitoring</code></li>
+ </ul>
+ <p>
+ The individual VMware Tools setting for virtual machine monitoring depends on
+ the HA Virtual Machine Health Monitoring Service level that is
+ defined for the cluster
+ (<a href="vim.cluster.DasConfigInfo.html">ClusterDasConfigInfo</a>.<a href="vim.cluster.DasConfigInfo.html#vmMonitoring">vmMonitoring</a>).
+ The following list indicates the supported VMware Tools <code>vmMonitoring</code> values
+ according to the cluster configuration.
+ </p>
+ <ul>
+ <li>If the cluster configuration specifies <code>vmMonitoringDisabled</code>,
+ the Service is disabled and the HA Service ignores the VMware Tools monitoring setting.</li>
+ <li>If the cluster configuration specifies <code>vmMonitoringOnly</code>,
+ the Service supports <code>vmMonitoringOnly</code> or <code>vmMonitoringDisabled</code> only.</li>
+ <li>If the cluster configuration specifies <code>vmAndAppMonitoring</code>,
+ you can use any of the <a href="vim.cluster.DasConfigInfo.VmMonitoringState.html">ClusterDasConfigInfoVmMonitoringState</a> values.
+ </li>
+ </ul>
+ <p>
+ The <a href="vim.cluster.VmToolsMonitoringSettings.html#clusterSettings">clusterSettings</a> value has no
+ effect on the constraint imposed by the HA Virtual Machine Health Monitoring Service
+ level that is defined for the cluster
+ (<a href="vim.cluster.DasConfigInfo.html">ClusterDasConfigInfo</a>.<a href="vim.cluster.DasConfigInfo.html#vmMonitoring">vmMonitoring</a>).
+ <p>
+ Application monitoring events are generated regardless of the
+ currently configured type of virtual machine monitoring.
+ You can use these events even if monitoring is being disabled
+ or set to <code>vmMonitoringOnly</code>.
+ </p>
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ClusterVmToolsMonitoringSettings">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="enabled" type="xsd:boolean" minOccurs="0"/>
+                     <element name="vmMonitoring" type="xsd:string" minOccurs="0"/>
+                     <element name="clusterSettings" type="xsd:boolean" minOccurs="0"/>
+                     <element name="failureInterval" type="xsd:int" minOccurs="0"/>
+                     <element name="minUpTime" type="xsd:int" minOccurs="0"/>
+                     <element name="maxFailures" type="xsd:int" minOccurs="0"/>
+                     <element name="maxFailureWindow" type="xsd:int" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

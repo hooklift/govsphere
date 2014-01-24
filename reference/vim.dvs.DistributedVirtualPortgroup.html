@@ -1,0 +1,408 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.dvs.DistributedVirtualPortgroup" name="vim.dvs.DistributedVirtualPortgroup"></a>
+<h1>Managed Object -  
+						DistributedVirtualPortgroup</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.dvs.DistributedVirtualPortgroupInfo.html#field_detail">DistributedVirtualPortgroupInfo</a>, <a href="vim.DistributedVirtualSwitch.html#field_detail">DistributedVirtualSwitch</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.ImportResult.html#field_detail">DistributedVirtualSwitchManagerImportResult</a>, <a href="vim.DistributedVirtualSwitch.ConfigInfo.html#field_detail">DVSConfigInfo</a>, <a href="vim.DistributedVirtualSwitch.ConfigSpec.html#field_detail">DVSConfigSpec</a>
+</dd>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.DistributedVirtualSwitch.html#addPortgroup">CreateDVPortgroup_Task</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.html#lookupPortgroup">DVSManagerLookupDvPortGroup</a>, <a href="vim.DistributedVirtualSwitch.html#lookupPortgroup">LookupDvPortGroup</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.Network.html">Network</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.dvs.DistributedVirtualPortgroup.ConfigInfo.html">DVPortgroupConfigInfo</a>, <a href="vim.dvs.DistributedVirtualPortgroup.ConfigSpec.html">DVPortgroupConfigSpec</a>, <a href="vim.dvs.EntityBackup.Config.html">EntityBackupConfig</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         The <a href="vim.dvs.DistributedVirtualPortgroup.html">DistributedVirtualPortgroup</a> managed object
+ defines how hosts and virtual machines connect to a network.
+ A distributed virtual portgroup specifies <a href="vim.dvs.DistributedVirtualPort.html">DistributedVirtualPort</a>
+ configuration options for the ports on a <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a>.
+ A portgroup also represents a <a href="vim.Network.html">Network</a> entity in the datacenter.
+ <br /><br />
+ <ul>
+ <li>To configure host access by portgroup, set the portgroup in the host virtual NIC specification
+     (<a href="vim.host.VirtualNic.Specification.html">HostVirtualNicSpec</a>.<a href="vim.host.VirtualNic.Specification.html#portgroup">portgroup</a>).
+ </li><br />
+ <li>To configure virtual machine access by portgroup, set the portgroup
+     in the virtual Ethernet card backing
+  (<a href="vim.vm.device.VirtualEthernetCard.html">VirtualEthernetCard</a>.<a href="vim.vm.device.VirtualDevice.html#backing">backing</a>.<a href="vim.vm.device.VirtualEthernetCard.DistributedVirtualPortBackingInfo.html#port">port</a>.<a href="vim.dvs.PortConnection.html#portgroupKey">portgroupKey</a>).
+ </li>
+ </ul>
+ <p>
+ When you use a portgroup for network access, the Server will create a port according
+ to <a href="vim.dvs.DistributedVirtualPortgroup.html#config">config</a>.<a href="vim.dvs.DistributedVirtualPortgroup.ConfigInfo.html#type">type</a>.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="config" name="config"></a><strong>config</strong></td><td><a href="vim.dvs.DistributedVirtualPortgroup.ConfigInfo.html">DVPortgroupConfigInfo</a></td><td>
+<p></p>
+         Configuration of the portgroup.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="key" name="key"></a><strong>key</strong></td><td>xsd:string</td><td>
+<p></p>
+         Generated UUID of the portgroup.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="portKeys" name="portKeys"></a><strong>portKeys</strong><span title="May not be present" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         Port keys for the set of ports in the portgroup.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.Network.html">Network</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.Network.html#host">host</a>, <a href="vim.Network.html#name">name</a>, <a href="vim.Network.html#summary">summary</a>, <a href="vim.Network.html#vm">vm</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.ManagedEntity.html">ManagedEntity</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.ManagedEntity.html#alarmActionsEnabled">alarmActionsEnabled</a>, <a href="vim.ManagedEntity.html#configIssue">configIssue</a>, <a href="vim.ManagedEntity.html#configStatus">configStatus</a>, <a href="vim.ManagedEntity.html#customValue">customValue</a>, <a href="vim.ManagedEntity.html#declaredAlarmState">declaredAlarmState</a>, <a href="vim.ManagedEntity.html#disabledMethod">disabledMethod</a>, <a href="vim.ManagedEntity.html#effectiveRole">effectiveRole</a>, <a href="vim.ManagedEntity.html#name">name</a>, <a href="vim.ManagedEntity.html#overallStatus">overallStatus</a>, <a href="vim.ManagedEntity.html#parent">parent</a>, <a href="vim.ManagedEntity.html#permission">permission</a>, <a href="vim.ManagedEntity.html#recentTask">recentTask</a>, <a href="vim.ManagedEntity.html#tag">tag</a>, <a href="vim.ManagedEntity.html#triggeredAlarmState">triggeredAlarmState</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.ExtensibleManagedObject.html#availableField">availableField</a>, <a href="vim.ExtensibleManagedObject.html#value">value</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#rollback">DVPortgroupRollback_Task</a>, <a href="#reconfigure">ReconfigureDVPortgroup_Task</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.Network.html">Network</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.Network.html#destroyNetwork">DestroyNetwork</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.ManagedEntity.html">ManagedEntity</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.ManagedEntity.html#destroy">Destroy_Task</a>, <a href="vim.ManagedEntity.html#reload">Reload</a>, <a href="vim.ManagedEntity.html#rename">Rename_Task</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.ExtensibleManagedObject.html#setCustomValue">setCustomValue</a></td>
+</tr>
+</table>
+<br>
+<a id="rollback" name="rollback"></a>
+<h1>DVPortgroupRollback_Task</h1>
+<p></p>
+         This method determines if the portgroup configuration has changed.
+ If it has changed, the method returns a
+ <a href="vim.dvs.DistributedVirtualPortgroup.ConfigSpec.html">DVPortgroupConfigSpec</a>.
+ Use the <a href="vim.dvs.DistributedVirtualPortgroup.html#reconfigure">ReconfigureDVPortgroup_Task</a> method
+ to apply the rollback configuration to the portgroup. You can use the
+ rollback method only on a portgroup that is associated with a
+ <a href="vim.dvs.VmwareDistributedVirtualSwitch.html">VmwareDistributedVirtualSwitch</a>.
+  <p>
+  <ul>
+  <li>If you specify the <code>entityBackup</code> parameter, the returned
+  configuration specification represents the exported portgroup configuration.
+  If the <code>entityBackup</code> matches the current portgroup
+  configuration, the method does not return a configuration specification.
+  </li><br />
+  <li>If <code>entityBackup</code> is not specified, the returned configuration
+  specification represents a previous state of the portgroup, if available.
+  When you use a VMware distributed virtual switch, each time you reconfigure
+  the switch, the Server saves the switch configuration before applying the updates.
+  If the vCenter Server is restarted, the saved configuration is not preserved
+  and the method does not return a configuration specification.
+  </li>
+  </ul>
+  <p>
+  To use the rollback method, you must have the DVPortgroup.Read privilege.
+  </p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Dynamic - See discussion above</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.1</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.dvs.DistributedVirtualPortgroup.html">DistributedVirtualPortgroup</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>entityBackup</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.dvs.EntityBackup.Config.html">EntityBackupConfig</a></td><td>
+<p></p>
+         The backup of Distributed Virtual PortGroup entity.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>Returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation. If the distributed virtual portgroup configuration has changed, the <a href="vim.Task.html">Task</a>.<a href="vim.Task.html#info">info</a>.<a href="vim.TaskInfo.html#result">result</a> property contains the <a href="vim.dvs.DistributedVirtualPortgroup.ConfigSpec.html">DVPortgroupConfigSpec</a> object.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DvsFault.html">DvsFault</a></td><td>Thrown if operation fails.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.RollbackFailure.html">RollbackFailure</a></td><td>Thrown if there is no configuration specified in entityBackup and the previous configuration does not exist either</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="reconfigure" name="reconfigure"></a>
+<h1>ReconfigureDVPortgroup_Task</h1>
+<p></p>
+         Reconfigures one or more distributed virtual portgroups.
+  You can use this method to set portgroup properties or
+  to reset the portgroup to a previous state.
+  <h3>Reconfiguring a Standard Distributed Virtual Portgroup</h3>
+  <p>
+  To reconfigure a <a href="vim.dvs.DistributedVirtualPortgroup.html">DistributedVirtualPortgroup</a>,
+  use a <a href="vim.dvs.DistributedVirtualPortgroup.ConfigSpec.html">DVPortgroupConfigSpec</a>
+  to set the portgroup properties.
+  </p>
+  <h3>Reconfiguring a Portgroup Associated With a VMware Distributed Virtual Switch</h3>
+  <p>
+  If you use a <a href="vim.dvs.VmwareDistributedVirtualSwitch.html">VmwareDistributedVirtualSwitch</a>,
+  you can perform the following portgroup reconfiguration:
+  <ul>
+  <li>Use a <a href="vim.dvs.DistributedVirtualPortgroup.ConfigSpec.html">DVPortgroupConfigSpec</a>
+  to set the portgroup properties.</li><br />
+  <li>Use the <a href="vim.dvs.DistributedVirtualPortgroup.ConfigSpec.html">DVPortgroupConfigSpec</a>
+  returned by <a href="vim.dvs.DistributedVirtualPortgroup.html#rollback">DVPortgroupRollback_Task</a>
+  to reset the portgroup to a previous state.</li>
+  </ul>
+  <p>
+  The following privileges are required to reconfigure a portgroup.
+  <ul>
+    <li>DVPortgroup.PolicyOp if you are changing the policy of the portgroup.</li>
+    <li>DVPortgroup.ScopeOp if you are changing the scope of the portgroup.</li>
+    <li>DVPortgroup.Modify for anything else.</li>
+  </ul>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Dynamic - See discussion above</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.dvs.DistributedVirtualPortgroup.html">DistributedVirtualPortgroup</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.dvs.DistributedVirtualPortgroup.ConfigSpec.html">DVPortgroupConfigSpec</a></td><td>
+<p></p>
+         Configuration data for the portgroup.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.ConcurrentAccess.html">ConcurrentAccess</a></td><td></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td></td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DvsFault.html">DvsFault</a></td><td>Thrown if spec is not valid.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.DvsNotAuthorized.html">DvsNotAuthorized</a></td><td>Thrown if login-session's extension key does not match the switch's configured <a href="vim.DistributedVirtualSwitch.ConfigInfo.html#extensionKey">extensionKey</a>.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the spec includes settings for any VDS feature that is not supported on this switch.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

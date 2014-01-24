@@ -1,0 +1,233 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.NetworkConfig" name="vim.host.NetworkConfig"></a>
+<h1>Data Object - HostNetworkConfig</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.host.ConfigSpec.html#field_detail">HostConfigSpec</a>, <a href="vim.host.NetworkSystem.html#field_detail">HostNetworkSystem</a>
+</dd>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.host.NetworkSystem.html#updateNetworkConfig">UpdateNetworkConfig</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.DhcpService.Config.html">HostDhcpServiceConfig</a>, <a href="vim.host.DnsConfig.html">HostDnsConfig</a>, <a href="vim.host.IpRouteConfig.html">HostIpRouteConfig</a>, <a href="vim.host.IpRouteTableConfig.html">HostIpRouteTableConfig</a>, <a href="vim.host.NatService.Config.html">HostNatServiceConfig</a>, <a href="vim.host.NetworkConfig.NetStackSpec.html">HostNetworkConfigNetStackSpec</a>, <a href="vim.host.PortGroup.Config.html">HostPortGroupConfig</a>, <a href="vim.host.HostProxySwitch.Config.html">HostProxySwitchConfig</a>, <a href="vim.host.VirtualNic.Config.html">HostVirtualNicConfig</a>, <a href="vim.host.VirtualSwitch.Config.html">HostVirtualSwitchConfig</a>, <a href="vim.host.PhysicalNic.Config.html">PhysicalNicConfig</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This data object type describes networking host configuration data objects.
+  These objects contain only the configuration information for networking.  
+  The runtime information is available from the 
+  <a href="vim.host.NetworkInfo.html">NetworkInfo</a> data object type.<br>See <a href="vim.host.NetworkInfo.html">HostNetworkInfo</a><br>
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="consoleIpRouteConfig" name="consoleIpRouteConfig"></a><strong>consoleIpRouteConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.IpRouteConfig.html">HostIpRouteConfig</a></td><td>
+<p></p>
+         IP route configuration of the service console.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="consoleVnic" name="consoleVnic"></a><strong>consoleVnic</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.VirtualNic.Config.html">HostVirtualNicConfig[]</a></td><td>
+<p></p>
+         Virtual network adapters configured for use by the Service 
+  Console.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="dhcp" name="dhcp"></a><strong>dhcp</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.DhcpService.Config.html">HostDhcpServiceConfig[]</a></td><td>
+<p></p>
+         Dynamic Host Control Protocol (DHCP) Service instances configured
+  on the host.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="dnsConfig" name="dnsConfig"></a><strong>dnsConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.DnsConfig.html">HostDnsConfig</a></td><td><B>Deprecated.</B><I>
+         As of vSphere API 5.5, which is moved to 
+  the default NetStackInstance
+      </I>
+<p></p>
+         Client-side DNS configuration for the host.  The DNS configuration is
+  global to the entire host.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="ipRouteConfig" name="ipRouteConfig"></a><strong>ipRouteConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.IpRouteConfig.html">HostIpRouteConfig</a></td><td><B>Deprecated.</B><I>
+         As of vSphere API 5.5, which is moved to
+  the default NetStackInstance
+      </I>
+<p></p>
+         IP route configuration of the host.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="ipV6Enabled" name="ipV6Enabled"></a><strong>ipV6Enabled</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Enable or disable IPv6 protocol on this system. 
+ This property must be set by itself, no other property can accompany
+ this change. Following the successful change, the system should be rebooted to 
+ have the change take effect.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="nat" name="nat"></a><strong>nat</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.NatService.Config.html">HostNatServiceConfig[]</a></td><td>
+<p></p>
+         Network address translation (NAT) Service instances configured 
+  on the host.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="netStackSpec" name="netStackSpec"></a><strong>netStackSpec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.NetworkConfig.NetStackSpec.html">HostNetworkConfigNetStackSpec[]</a></td><td>
+<p></p>
+         The list of network stack instance spec
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="pnic" name="pnic"></a><strong>pnic</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.PhysicalNic.Config.html">PhysicalNicConfig[]</a></td><td>
+<p></p>
+         Physical network adapters as seen by the primary operating system.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="portgroup" name="portgroup"></a><strong>portgroup</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.PortGroup.Config.html">HostPortGroupConfig[]</a></td><td>
+<p></p>
+         Port groups configured on the host.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="proxySwitch" name="proxySwitch"></a><strong>proxySwitch</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.HostProxySwitch.Config.html">HostProxySwitchConfig[]</a></td><td>
+<p></p>
+         Host proxy switches configured on the host.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="routeTableConfig" name="routeTableConfig"></a><strong>routeTableConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.IpRouteTableConfig.html">HostIpRouteTableConfig</a></td><td><B>Deprecated.</B><I>
+         As of vSphere API 5.5, which is moved to
+  the default NetStackInstance
+      </I>
+<p></p>
+         IP routing table configuration of the host.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vnic" name="vnic"></a><strong>vnic</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.VirtualNic.Config.html">HostVirtualNicConfig[]</a></td><td>
+<p></p>
+         Virtual network adapters configured for use by the host 
+  operating system network adapter.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vswitch" name="vswitch"></a><strong>vswitch</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.VirtualSwitch.Config.html">HostVirtualSwitchConfig[]</a></td><td>
+<p></p>
+         Virtual switches configured on the host.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostNetworkConfig">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="vswitch" type="vim25:HostVirtualSwitchConfig" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="proxySwitch" type="vim25:HostProxySwitchConfig" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="portgroup" type="vim25:HostPortGroupConfig" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="pnic" type="vim25:PhysicalNicConfig" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="vnic" type="vim25:HostVirtualNicConfig" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="consoleVnic" type="vim25:HostVirtualNicConfig" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="dnsConfig" type="vim25:HostDnsConfig" minOccurs="0"/>
+                     <element name="ipRouteConfig" type="vim25:HostIpRouteConfig" minOccurs="0"/>
+                     <element name="consoleIpRouteConfig" type="vim25:HostIpRouteConfig" minOccurs="0"/>
+                     <element name="routeTableConfig" type="vim25:HostIpRouteTableConfig" minOccurs="0"/>
+                     <element name="dhcp" type="vim25:HostDhcpServiceConfig" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="nat" type="vim25:HostNatServiceConfig" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="ipV6Enabled" type="xsd:boolean" minOccurs="0"/>
+                     <element name="netStackSpec" type="vim25:HostNetworkConfigNetStackSpec" minOccurs="0" maxOccurs="unbounded"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

@@ -1,0 +1,307 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.GuestInfo" name="vim.vm.GuestInfo"></a>
+<h1>Data Object - GuestInfo</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.VirtualMachine.html#field_detail">VirtualMachine</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.vm.GuestInfo.DiskInfo.html">GuestDiskInfo</a>, <a href="vim.vm.GuestInfo.NamespaceGenerationInfo.html">GuestInfoNamespaceGenerationInfo</a>, <a href="vim.vm.GuestInfo.NicInfo.html">GuestNicInfo</a>, <a href="vim.vm.GuestInfo.ScreenInfo.html">GuestScreenInfo</a>, <a href="vim.vm.GuestInfo.StackInfo.html">GuestStackInfo</a>, <a href="vim.vm.GuestInfo.ToolsStatus.html">VirtualMachineToolsStatus</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         Information about the guest operating system.
+  <p>
+  Most of this information is collected by VMware Tools.
+  In general, be sure you have VMware Tools installed
+  and that the virtual machine is running when you access this information.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="appHeartbeatStatus" name="appHeartbeatStatus"></a><strong>appHeartbeatStatus</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Application heartbeat status.
+ Please see <a href="vim.VirtualMachine.AppHeartbeatStatusType.html">VirtualMachineAppHeartbeatStatusType</a>
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="appState" name="appState"></a><strong>appState</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Application state.
+
+ If vSphere HA is enabled and the vm is configured for Application Monitoring
+ and this field's value is "appStateNeedReset" then HA will attempt immediately reset
+ the vm.
+
+ There are some system conditions which may delay the immediate reset. The immediate
+ reset will be performed as soon as allowed by vSphere HA and ESX. If during these
+ conditions the value is changed to appStateOk the reset will be cancelled.<br>See <a href="vim.vm.GuestInfo.AppStateType.html">GuestInfoAppStateType</a><br>
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="disk" name="disk"></a><strong>disk</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.GuestInfo.DiskInfo.html">GuestDiskInfo[]</a></td><td>
+<p></p>
+         Guest information about disks.
+ <p>
+ You can obtain Linux guest disk information for the following file system
+ types only: Ext2, Ext3, Ext4, ReiserFS, ZFS, NTFS, VFAT, UFS, PCFS, HFS, and MS-DOS.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="generationInfo" name="generationInfo"></a><strong>generationInfo</strong><span title="Need not be set" class="footnote-ref">*</span><span title="Required Privilege: VirtualMachine.Namespace.EventNotify" class="privilege-ref"> P</span></td><td><a href="vim.vm.GuestInfo.NamespaceGenerationInfo.html">GuestInfoNamespaceGenerationInfo[]</a></td><td>
+<p></p>
+         A list of namespaces and their corresponding generation numbers.
+ Only namespaces with non-zero
+ <a href="vim.vm.NamespaceManager.CreateSpec.html#maxSizeEventsFromGuest">maxSizeEventsFromGuest</a>
+ are guaranteed to be present here.
+ Use <a href="vim.vm.NamespaceManager.html#listNamespaces">ListNamespaces</a> to retrieve list of
+ namespaces.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="guestFamily" name="guestFamily"></a><strong>guestFamily</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Guest operating system family, if known.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="guestFullName" name="guestFullName"></a><strong>guestFullName</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Guest operating system full name, if known.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="guestId" name="guestId"></a><strong>guestId</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Guest operating system identifier (short name), if known.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="guestOperationsReady" name="guestOperationsReady"></a><strong>guestOperationsReady</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Guest Operations availability.
+
+ If true, the vitrual machine is ready to process guest operations.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="guestState" name="guestState"></a><strong>guestState</strong></td><td>xsd:string</td><td>
+<p></p>
+         Operation mode of guest operating system. One of:
+  <ul>
+   <li> "running" - Guest is running normally.
+   <li> "shuttingdown" - Guest has a pending shutdown command.
+   <li> "resetting" - Guest has a pending reset command.
+   <li> "standby" - Guest has a pending standby command.
+   <li> "notrunning" - Guest is not running.
+   <li> "unknown" - Guest information is not available.
+  </ul>
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="hostName" name="hostName"></a><strong>hostName</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Hostname of the guest operating system, if known.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="interactiveGuestOperationsReady" name="interactiveGuestOperationsReady"></a><strong>interactiveGuestOperationsReady</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Interactive Guest Operations availability.
+
+ If true, the vitrual machine is ready to process guest operations
+ as the user interacting with the guest desktop.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="ipAddress" name="ipAddress"></a><strong>ipAddress</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Primary IP address assigned to the guest operating system, if known.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="ipStack" name="ipStack"></a><strong>ipStack</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.GuestInfo.StackInfo.html">GuestStackInfo[]</a></td><td>
+<p></p>
+         Guest information about IP networking stack, if known.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="net" name="net"></a><strong>net</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.GuestInfo.NicInfo.html">GuestNicInfo[]</a></td><td>
+<p></p>
+         Guest information about network adapters, if known.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="screen" name="screen"></a><strong>screen</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.GuestInfo.ScreenInfo.html">GuestScreenInfo</a></td><td>
+<p></p>
+         Guest screen resolution info, if known.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="toolsRunningStatus" name="toolsRunningStatus"></a><strong>toolsRunningStatus</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Current running status of VMware Tools in the guest operating system,
+  if known. The set of possible values is described in
+  <a href="vim.vm.GuestInfo.ToolsRunningStatus.html">VirtualMachineToolsRunningStatus</a>
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="toolsStatus" name="toolsStatus"></a><strong>toolsStatus</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.GuestInfo.ToolsStatus.html">VirtualMachineToolsStatus</a></td><td><B>Deprecated.</B><I>
+         As of vSphere API 4.0 use <a href="vim.vm.GuestInfo.html#toolsVersionStatus">toolsVersionStatus</a> and
+  <a href="vim.vm.GuestInfo.html#toolsRunningStatus">toolsRunningStatus</a>.
+      </I>
+<p></p>
+         Current status of VMware Tools in the guest operating system, if known.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="toolsVersion" name="toolsVersion"></a><strong>toolsVersion</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Current version of VMware Tools, if known.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="toolsVersionStatus" name="toolsVersionStatus"></a><strong>toolsVersionStatus</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td><B>Deprecated.</B><I>
+         as of vSphere API 5.1 use <a href="vim.vm.GuestInfo.html#toolsVersionStatus2">toolsVersionStatus2</a>.
+      </I>
+<p></p>
+         Current version status of VMware Tools in the guest operating system,
+  if known. The set of possible values is described in
+  <a href="vim.vm.GuestInfo.ToolsVersionStatus.html">VirtualMachineToolsVersionStatus</a> for vSphere API 5.0.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="toolsVersionStatus2" name="toolsVersionStatus2"></a><strong>toolsVersionStatus2</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Current version status of VMware Tools in the guest operating system,
+  if known. The set of possible values is described in
+  <a href="vim.vm.GuestInfo.ToolsVersionStatus.html">VirtualMachineToolsVersionStatus</a>
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  VirtualMachine.Namespace.EventNotify</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="GuestInfo">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="toolsStatus" type="vim25:VirtualMachineToolsStatus" minOccurs="0"/>
+                     <element name="toolsVersionStatus" type="xsd:string" minOccurs="0"/>
+                     <element name="toolsVersionStatus2" type="xsd:string" minOccurs="0"/>
+                     <element name="toolsRunningStatus" type="xsd:string" minOccurs="0"/>
+                     <element name="toolsVersion" type="xsd:string" minOccurs="0"/>
+                     <element name="guestId" type="xsd:string" minOccurs="0"/>
+                     <element name="guestFamily" type="xsd:string" minOccurs="0"/>
+                     <element name="guestFullName" type="xsd:string" minOccurs="0"/>
+                     <element name="hostName" type="xsd:string" minOccurs="0"/>
+                     <element name="ipAddress" type="xsd:string" minOccurs="0"/>
+                     <element name="net" type="vim25:GuestNicInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="ipStack" type="vim25:GuestStackInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="disk" type="vim25:GuestDiskInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="screen" type="vim25:GuestScreenInfo" minOccurs="0"/>
+                     <element name="guestState" type="xsd:string"/>
+                     <element name="appHeartbeatStatus" type="xsd:string" minOccurs="0"/>
+                     <element name="appState" type="xsd:string" minOccurs="0"/>
+                     <element name="guestOperationsReady" type="xsd:boolean" minOccurs="0"/>
+                     <element name="interactiveGuestOperationsReady" type="xsd:boolean" minOccurs="0"/>
+                     <element name="generationInfo" type="vim25:GuestInfoNamespaceGenerationInfo" minOccurs="0" maxOccurs="unbounded"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

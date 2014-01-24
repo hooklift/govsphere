@@ -1,0 +1,192 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.dvs.EntityBackup.Config" name="vim.dvs.EntityBackup.Config"></a>
+<h1>Data Object - EntityBackupConfig</h1>
+<dl>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.dvs.DistributedVirtualPortgroup.html#rollback">DVPortgroupRollback_Task</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.html#importEntity">DVSManagerImportEntity_Task</a>, <a href="vim.DistributedVirtualSwitch.html#rollback">DVSRollback_Task</a>
+</dd>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.dvs.DistributedVirtualSwitchManager.html#exportEntity">DVSManagerExportEntity_Task</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.ManagedEntity.html">ManagedEntity</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.1</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The <a href="vim.dvs.EntityBackup.Config.html">EntityBackupConfig</a> data object
+ contains <a href="vim.dvs.VmwareDistributedVirtualSwitch.html">VmwareDistributedVirtualSwitch</a>
+ or <a href="vim.dvs.DistributedVirtualPortgroup.html">DistributedVirtualPortgroup</a> backup
+ configuration data produced by the
+ <a href="vim.dvs.DistributedVirtualSwitchManager.html#exportEntity">DVSManagerExportEntity_Task</a>
+ method. It also contains properties that support
+ <a href="vim.dvs.DistributedVirtualSwitchManager.html#importEntity">DVSManagerImportEntity_Task</a>
+ operations.
+ <p>
+ A <a href="vim.dvs.DistributedVirtualSwitchManager.html#exportEntity">DVSManagerExportEntity_Task</a> operation
+ sets properties that identify the entity instance
+ (<a href="vim.dvs.EntityBackup.Config.html#entityType">entityType</a>,
+ <a href="vim.dvs.EntityBackup.Config.html#key">key</a>, and
+ <a href="vim.dvs.EntityBackup.Config.html#name">name</a>) and
+ inventory location (<a href="vim.dvs.EntityBackup.Config.html#container">container</a>).
+ When you import a backup configuration, you can set
+ the <code>key</code>, <code>name</code>, and <code>container</code>
+ properties in accordance with the <code>importType</code>
+ specified in the call to
+ <a href="vim.dvs.DistributedVirtualSwitchManager.html#importEntity">DVSManagerImportEntity_Task</a>.
+ See <a href="vim.dvs.EntityBackup.ImportType.html">EntityImportType</a>.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="configBlob" name="configBlob"></a><strong>configBlob</strong></td><td>xsd:base64Binary</td><td>
+<p></p>
+         Opaque blob that contains the configuration of the entity.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="configVersion" name="configVersion"></a><strong>configVersion</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Configuration version.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="container" name="container"></a><strong>container</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity</a></td><td>
+<p></p>
+         Container for this entity.
+ If <a href="vim.dvs.EntityBackup.Config.html#entityType">entityType</a> is "distributedVirtualSwitch",
+ the container type is <a href="vim.Folder.html">Folder</a>. If <a href="vim.dvs.EntityBackup.Config.html#entityType">entityType</a>
+ is "distributedVirtualPortgroup", the container type is
+ <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a>.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="entityType" name="entityType"></a><strong>entityType</strong></td><td>xsd:string</td><td>
+<p></p>
+         Type of the exported entity
+ (<a href="vim.dvs.DistributedVirtualSwitchManager.html#exportEntity">DVSManagerExportEntity_Task</a>).
+ See <a href="vim.dvs.EntityBackup.EntityType.html">EntityType</a>
+ for valid values.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="key" name="key"></a><strong>key</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Unique identifier of the exported entity or the entity to be restored
+ through an import operation.
+ <ul>
+ <li>If you are importing a virtual distributed switch and the import type is
+ <a href="vim.dvs.EntityBackup.ImportType.html#applyToEntitySpecified">applyToEntitySpecified</a>,
+ set the <code>key</code> to
+ <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a>.<a href="vim.DistributedVirtualSwitch.html#uuid">uuid</a>.
+ </li>
+ <li>If you are importing a virtual distributed portgroup and the import type is
+ <a href="vim.dvs.EntityBackup.ImportType.html#applyToEntitySpecified">applyToEntitySpecified</a>,
+ set the <code>key</code> to
+ <a href="vim.dvs.DistributedVirtualPortgroup.html">DistributedVirtualPortgroup</a>.<a href="vim.dvs.DistributedVirtualPortgroup.html#key">key</a>.
+ </li>
+ </ul>
+ <p>
+ The Server ignores the key value when the import operation creates a new entity.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="name" name="name"></a><strong>name</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Name of the exported entity or the entity to be restored with the backup configuration.
+ If you are importing an entity and the import type is
+ <a href="vim.dvs.EntityBackup.ImportType.html#applyToEntitySpecified">applyToEntitySpecified</a>,
+ the Server will use this value to rename the existing entity.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="EntityBackupConfig">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="entityType" type="xsd:string"/>
+                     <element name="configBlob" type="xsd:base64Binary"/>
+                     <element name="key" type="xsd:string" minOccurs="0"/>
+                     <element name="name" type="xsd:string" minOccurs="0"/>
+                     <element name="container" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="configVersion" type="xsd:string" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

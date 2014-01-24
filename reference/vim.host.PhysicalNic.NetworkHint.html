@@ -1,0 +1,149 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.PhysicalNic.NetworkHint" name="vim.host.PhysicalNic.NetworkHint"></a>
+<h1>Data Object - PhysicalNicHintInfo</h1>
+<dl>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.host.NetworkSystem.html#queryNetworkHint">QueryNetworkHint</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.PhysicalNic.LldpInfo.html">LinkLayerDiscoveryProtocolInfo</a>, <a href="vim.host.PhysicalNic.CdpInfo.html">PhysicalNicCdpInfo</a>, <a href="vim.host.PhysicalNic.NetworkHint.IpNetwork.html">PhysicalNicIpHint</a>, <a href="vim.host.PhysicalNic.NetworkHint.NamedNetwork.html">PhysicalNicNameHint</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The NetworkHint data object type is some information about 
+  the network to which the 
+  physical network adapter is attached.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="connectedSwitchPort" name="connectedSwitchPort"></a><strong>connectedSwitchPort</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.PhysicalNic.CdpInfo.html">PhysicalNicCdpInfo</a></td><td>
+<p></p>
+         If the uplink directly connects to a CDP-awared network device 
+  and the device's CDP broadcast is enabled, this property will be 
+  set to return the CDP information that vmkernel received on this 
+  Physical NIC. CDP data contains the device information and port ID that 
+  the Physical NIC connects to. If the uplink is not connecting to a 
+  CDP-awared device or CDP is not enabled on the device, this 
+  property will be unset.
+  <a href="vim.host.PhysicalNic.CdpInfo.html">PhysicalNicCdpInfo</a>
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="device" name="device"></a><strong>device</strong></td><td>xsd:string</td><td>
+<p></p>
+         The physical network adapter device to which 
+  this hint applies.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="lldpInfo" name="lldpInfo"></a><strong>lldpInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.PhysicalNic.LldpInfo.html">LinkLayerDiscoveryProtocolInfo</a></td><td>
+<p></p>
+         If the uplink directly connects to an LLDP-aware network device and
+  the device's LLDP broadcast is enabled, this property will be set to
+  return the LLDP information that is received on this physical network
+  adapter. If the uplink is not connecting to a LLDP-aware device or
+  LLDP is not enabled on the device, this property will be unset.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="network" name="network"></a><strong>network</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.PhysicalNic.NetworkHint.NamedNetwork.html">PhysicalNicNameHint[]</a></td><td>
+<p></p>
+         The list of network names that were detected on this 
+  physical network adapter.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="subnet" name="subnet"></a><strong>subnet</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.PhysicalNic.NetworkHint.IpNetwork.html">PhysicalNicIpHint[]</a></td><td>
+<p></p>
+         The list of subnets that were detected on this 
+  physical network adapter.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="PhysicalNicHintInfo">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="device" type="xsd:string"/>
+                     <element name="subnet" type="vim25:PhysicalNicIpHint" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="network" type="vim25:PhysicalNicNameHint" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="connectedSwitchPort" type="vim25:PhysicalNicCdpInfo" minOccurs="0"/>
+                     <element name="lldpInfo" type="vim25:LinkLayerDiscoveryProtocolInfo" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

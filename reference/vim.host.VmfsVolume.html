@@ -1,0 +1,220 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.VmfsVolume" name="vim.host.VmfsVolume"></a>
+<h1>Data Object - HostVmfsVolume</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.host.UnresolvedVmfsResolutionResult.html#field_detail">HostUnresolvedVmfsResolutionResult</a>, <a href="vim.host.VmfsDatastoreInfo.html#field_detail">VmfsDatastoreInfo</a>
+</dd>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.host.StorageSystem.html#formatVmfs">FormatVmfs</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.host.FileSystemVolume.html">HostFileSystemVolume</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.ForceMountedInfo.html">HostForceMountedInfo</a>, <a href="vim.host.ScsiDisk.Partition.html">HostScsiDiskPartition</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The VMFS file system.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="blockSizeMb" name="blockSizeMb"></a><strong>blockSizeMb</strong></td><td>xsd:int</td><td>
+<p></p>
+         Block size of VMFS.  Determines maximum file size.  The maximum number
+  of blocks is typically fixed with each specific version of VMFS.  To
+  increase the maximum size of a VMFS file, increase the block size.
+  <p>
+  The minimum block size is 1MB.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="extent" name="extent"></a><strong>extent</strong></td><td><a href="vim.host.ScsiDisk.Partition.html">HostScsiDiskPartition[]</a></td><td>
+<p></p>
+         The list of partition names that comprise this disk's
+  VMFS extents.
+  <p>
+  This property can be accessed via various enclosing objects.
+  In VirtualCenter, where it can be accessed from multiple
+  hosts, the value of this property may differ according to the context
+  in which it is accessed. When accessed from the
+  <a href="vim.host.VmfsDatastoreInfo.html">VmfsDatastoreInfo</a> object, in VirtualCenter, this
+  property reflects the extent information of any one of the hosts visible
+  to the datastore.
+  <p>
+  For a VirtualCenter system which manages ESX Server 2.x and
+  ESX Server 3.x hosts, this extent information is only correlatable
+  across hosts if the extents are exposed on the same adapter on all hosts
+  which can access them. To find the extent names for a specific host,
+  this same property should be accessed via the host's
+  <a href="vim.host.FileSystemVolume.html">HostFileSystemVolume</a> object, by correlating the uuid of
+  the VMFS datastore in the VmfsDatastoreInfo object to the uuid in the
+  FileSystemVolume object.
+  <p>
+  For a Virtual Center system which manages only ESX Server hosts with
+  versions 4.0 onwards , this extent information is correlatable across
+  hosts, irrespective of the adapters the extents are exposed on.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="forceMountedInfo" name="forceMountedInfo"></a><strong>forceMountedInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.ForceMountedInfo.html">HostForceMountedInfo</a></td><td>
+<p></p>
+         Information about 'forceMounted' VmfsVolume.
+  When the system detects a copy of a VmfsVolume, it will not be
+  auto-mounted on the host and it will be detected as
+  'UnresolvedVmfsVolume'. If user decides to 'forceMount' the
+  VmfsVolume on the host, forceMountedInfo will be populated.
+  It will not be set for automounted VMFS volumes.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="local" name="local"></a><strong>local</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the volume is backed by local disk.
+ If unset, the information of the volume is local-disk backed is unknown.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="majorVersion" name="majorVersion"></a><strong>majorVersion</strong></td><td>xsd:int</td><td>
+<p></p>
+         Major version number of VMFS.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="maxBlocks" name="maxBlocks"></a><strong>maxBlocks</strong></td><td>xsd:int</td><td>
+<p></p>
+         Maximum number of blocks.  Determines maximum file size along
+  with blockSize. See information about the blockSize.
+  <p>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="ssd" name="ssd"></a><strong>ssd</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the volume is SSD backed.
+ If unset, the information whether the volume is SSD backed is unknown.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="uuid" name="uuid"></a><strong>uuid</strong></td><td>xsd:string</td><td>
+<p></p>
+         The universally unique identifier assigned to VMFS.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="version" name="version"></a><strong>version</strong></td><td>xsd:string</td><td>
+<p></p>
+         Version string.  Contains major and minor version numbers.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vmfsUpgradable" name="vmfsUpgradable"></a><strong>vmfsUpgradable</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Can the filesystem be upgraded to a newer version.<br>See <a href="vim.host.StorageSystem.html#upgradeVmfs">UpgradeVmfs</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.host.FileSystemVolume.html">HostFileSystemVolume</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.host.FileSystemVolume.html#capacity">capacity</a>, <a href="vim.host.FileSystemVolume.html#name">name</a>, <a href="vim.host.FileSystemVolume.html#type">type</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostVmfsVolume">
+            <complexContent>
+               <extension base="vim25:HostFileSystemVolume">
+                  <sequence>
+                     <element name="blockSizeMb" type="xsd:int"/>
+                     <element name="maxBlocks" type="xsd:int"/>
+                     <element name="majorVersion" type="xsd:int"/>
+                     <element name="version" type="xsd:string"/>
+                     <element name="uuid" type="xsd:string"/>
+                     <element name="extent" type="vim25:HostScsiDiskPartition" maxOccurs="unbounded"/>
+                     <element name="vmfsUpgradable" type="xsd:boolean"/>
+                     <element name="forceMountedInfo" type="vim25:HostForceMountedInfo" minOccurs="0"/>
+                     <element name="ssd" type="xsd:boolean" minOccurs="0"/>
+                     <element name="local" type="xsd:boolean" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

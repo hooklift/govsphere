@@ -1,0 +1,1344 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.profile.host.ProfileManager" name="vim.profile.host.ProfileManager"></a>
+<h1>Managed Object -  
+						HostProfileManager</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.ServiceInstanceContent.html#field_detail">ServiceContent</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.profile.ProfileManager.html">ProfileManager</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.profile.host.AnswerFile.html">AnswerFile</a>, <a href="vim.profile.host.ProfileManager.AnswerFileCreateSpec.html">AnswerFileCreateSpec</a>, <a href="vim.profile.host.AnswerFileStatusResult.html">AnswerFileStatusResult</a>, <a href="vim.profile.ApplyProfile.html">ApplyProfile</a>, <a href="vim.profile.host.HostApplyProfile.html">HostApplyProfile</a>, <a href="vim.host.ConfigSpec.html">HostConfigSpec</a>, <a href="vim.profile.host.ProfileManager.ConfigTaskList.html">HostProfileManagerConfigTaskList</a>, <a href="vim.HostSystem.html">HostSystem</a>, <a href="vim.profile.Profile.html">Profile</a>, <a href="vim.profile.DeferredPolicyOptionParameter.html">ProfileDeferredPolicyOptionParameter</a>, <a href="vim.profile.ProfileMetadata.html">ProfileMetadata</a>, <a href="vim.profile.ProfileStructure.html">ProfileProfileStructure</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         The <a href="vim.profile.host.ProfileManager.html">HostProfileManager</a> provides access to a list of
+ <a href="vim.profile.host.HostProfile.html">HostProfile</a>s and it defines methods to manipulate
+ profiles and <a href="vim.profile.host.AnswerFile.html">AnswerFile</a>s.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.profile.ProfileManager.html">ProfileManager</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.profile.ProfileManager.html#profile">profile</a></td>
+</tr>
+</table>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#applyHostConfiguration">ApplyHostConfig_Task</a>, <a href="#checkAnswerFileStatus">CheckAnswerFileStatus_Task</a>, <a href="#createDefaultProfile">CreateDefaultProfile</a>, <a href="#exportAnswerFile">ExportAnswerFile_Task</a>, <a href="#generateConfigTaskList">GenerateConfigTaskList</a>, <a href="#generateTaskList">GenerateHostProfileTaskList_Task</a>, <a href="#queryAnswerFileStatus">QueryAnswerFileStatus</a>, <a href="#queryProfileMetadata">QueryHostProfileMetadata</a>, <a href="#queryProfileStructure">QueryProfileStructure</a>, <a href="#retrieveAnswerFile">RetrieveAnswerFile</a>, <a href="#retrieveAnswerFileForProfile">RetrieveAnswerFileForProfile</a>, <a href="#updateAnswerFile">UpdateAnswerFile_Task</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.profile.ProfileManager.html">ProfileManager</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.profile.ProfileManager.html#createProfile">CreateProfile</a>, <a href="vim.profile.ProfileManager.html#findAssociatedProfile">FindAssociatedProfile</a>, <a href="vim.profile.ProfileManager.html#queryPolicyMetadata">QueryPolicyMetadata</a></td>
+</tr>
+</table>
+<br>
+<a id="applyHostConfiguration" name="applyHostConfiguration"></a>
+<h1>ApplyHostConfig_Task</h1>
+<p></p>
+         Apply the configuration to the host. If you specify any user input,
+ the configuration will be saved in the <a href="vim.profile.host.AnswerFile.html">AnswerFile</a>
+ associated with the host. If there is no answer file, the Profile Engine
+ will create one.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Dynamic - See discussion above</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.host.ProfileManager.html">HostProfileManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         Host to be updated. User must have sufficient credentials and privileges
+        to satisfy the contents of the <code>configSpec</code>.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>configSpec</strong></td><td><a href="vim.host.ConfigSpec.html">HostConfigSpec</a></td><td>
+<p></p>
+         Set of configuration changes to be applied to the host.
+        The changes are returned by the
+        <a href="vim.profile.host.HostProfile.html">HostProfile</a>.<a href="vim.profile.host.HostProfile.html#execute">ExecuteHostProfile</a>
+        method in the
+        <a href="vim.profile.host.ExecuteResult.html">ProfileExecuteResult</a>.<a href="vim.profile.host.ExecuteResult.html#configSpec">configSpec</a>
+        property.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>userInput</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.profile.DeferredPolicyOptionParameter.html">ProfileDeferredPolicyOptionParameter[]</a></td><td>
+<p></p>
+         Additional host-specific data to be applied to the host.
+        This data is the complete list of deferred parameters verified by the
+        <a href="vim.profile.host.HostProfile.html">HostProfile</a>.<a href="vim.profile.host.HostProfile.html#execute">ExecuteHostProfile</a>
+        method, contained in the <a href="vim.profile.host.ExecuteResult.html">ProfileExecuteResult</a> object
+        returned by the method.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFailed.html">HostConfigFailed</a></td><td>Thrown if the ESX Server cannot apply the configuration changes.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the host is not in maintenance mode and the configuration specification requires it.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="checkAnswerFileStatus" name="checkAnswerFileStatus"></a>
+<h1>CheckAnswerFileStatus_Task</h1>
+<p></p>
+         Check the validity of the answer files for the specified hosts.
+ The Profile Engine uses the profile associated with a host to check
+ the answer file.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.host.ProfileManager.html">HostProfileManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem[]</a></td><td>
+<p></p>
+         Set of hosts for which the answer file status will be checked.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation. If the task is successful, the <a href="vim.Task.html">Task</a>.<a href="vim.Task.html#info">info</a>.<a href="vim.TaskInfo.html#result">result</a> property contains a list of <a href="vim.profile.host.AnswerFileStatusResult.html">AnswerFileStatusResult</a> objects.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidProfileReferenceHost.html">InvalidProfileReferenceHost</a></td><td>Thrown if the reference host associated with the profile is incompatible or there is no reference host for the profile.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="createDefaultProfile" name="createDefaultProfile"></a>
+<h1>CreateDefaultProfile</h1>
+<p></p>
+         Create a default subprofile of a given type (for example, a
+ <a href="vim.profile.host.VirtualSwitchProfile.html">VirtualSwitchProfile</a>). After you create
+ the subprofile, you can add it to a configuration specification
+ and update the host profile: <br/>
+ <ul>
+ <li>Call the <code>CreateDefaultProfile</code> method.</li></br>
+ <li>Create a <a href="vim.profile.host.HostProfile.CompleteConfigSpec.html">HostProfileCompleteConfigSpec</a> object.</li></br>
+ <li>Copy the existing profile from the host configuration information
+     (<a href="vim.profile.host.HostProfile.html">HostProfile</a>.<a href="vim.profile.Profile.html#config">config</a>.<a href="vim.profile.host.HostProfile.ConfigInfo.html#applyProfile">applyProfile</a>) to the configuration specification.</li></br>
+ <li>Add the new subprofile to the configuration specification. For example,
+     if you create a <code>VirtualSwitchProfile</code>, you would add it to the list
+     of virtual switches in the network profile for the configuration specification
+     (<a href="vim.profile.host.NetworkProfile.html">NetworkProfile</a>.<a href="vim.profile.host.NetworkProfile.html#vswitch">vswitch</a>[]).
+ </li><br/>
+ <li>Call <a href="vim.profile.host.HostProfile.html">HostProfile</a>.<a href="vim.profile.host.HostProfile.html#update">UpdateHostProfile</a>
+          to save the new subprofile.</li><br/>
+ </ul>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.host.ProfileManager.html">HostProfileManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>profileType</strong></td><td>xsd:string</td><td>
+<p></p>
+         Type of profile to create. The profile types
+ are system-defined
+ (<a href="vim.profile.ApplyProfile.html">ApplyProfile</a>.<a href="vim.profile.ApplyProfile.html#profileTypeName">profileTypeName</a>).
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>profileTypeName</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         If specified, the method returns a profile object
+    containing data for the named profile. The type name does not have
+    to be system-defined. A user-defined profile can include various
+    dynamically-defined profiles.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>profile</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.profile.Profile.html">Profile</a></td><td>
+<p></p>
+         Base profile used during the operation.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.profile.ApplyProfile.html">ApplyProfile</a></td><td>Derived subprofile of type <code>profileType</code>.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if either the profileType or profileTypeName is incorrect.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidProfileReferenceHost.html">InvalidProfileReferenceHost</a></td><td>Thrown if the reference host associated with the profile is incompatible or there is no reference host for the profile.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CreateDefaultProfile-textarea');expandcontent(this, 'CreateDefaultProfile-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CreateDefaultProfile-div">
+<textarea cols="20" rows="10" name="CreateDefaultProfile-textarea" wrap="off" readonly="1" id="CreateDefaultProfile-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateDefaultProfile" type="vim25:CreateDefaultProfileRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateDefaultProfileResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ApplyProfile"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="exportAnswerFile" name="exportAnswerFile"></a>
+<h1>ExportAnswerFile_Task</h1>
+<p></p>
+         Export a host's answer file into a serialized form. The method returns a string
+ that contains only the list of user input options.
+ See <a href="vim.profile.host.AnswerFile.html">AnswerFile</a>.<a href="vim.profile.host.AnswerFile.html#userInput">userInput</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Profile.Export</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.host.ProfileManager.html">HostProfileManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         Host with which the answer file is associated.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation. If the task is successful, the <a href="vim.Task.html">Task</a>.<a href="vim.Task.html#info">info</a>.<a href="vim.TaskInfo.html#result">result</a> property is a string that contains a serialized form of the answer file.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="generateConfigTaskList" name="generateConfigTaskList"></a>
+<h1>GenerateConfigTaskList</h1>
+<B>Deprecated.</B><I>
+         As of vSphere API 5.5 use
+    <a href="vim.profile.host.ProfileManager.html#generateTaskList">GenerateHostProfileTaskList_Task</a>
+      </I>
+<p></p>
+         Generate a list of configuration tasks that will be performed on the
+ host during HostProfile application.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.host.ProfileManager.html">HostProfileManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>configSpec</strong></td><td><a href="vim.host.ConfigSpec.html">HostConfigSpec</a></td><td>
+<p></p>
+         ConfigSpec which was proposed by
+    <a href="vim.profile.host.HostProfile.html#execute">ExecuteHostProfile</a> method.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>host</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         Host on which the HostProfile application needs to be
+    carried out.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.profile.host.ProfileManager.ConfigTaskList.html">HostProfileManagerConfigTaskList</a></td><td>List of Configuration tasks.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('GenerateConfigTaskList-textarea');expandcontent(this, 'GenerateConfigTaskList-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="GenerateConfigTaskList-div">
+<textarea cols="20" rows="10" name="GenerateConfigTaskList-textarea" wrap="off" readonly="1" id="GenerateConfigTaskList-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="GenerateConfigTaskList" type="vim25:GenerateConfigTaskListRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="GenerateConfigTaskListResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:HostProfileManagerConfigTaskList"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="generateTaskList" name="generateTaskList"></a>
+<h1>GenerateHostProfileTaskList_Task</h1>
+<p></p>
+         Generate a list of configuration tasks that will be performed on the
+ host during HostProfile application. This differs from the
+ <a href="vim.profile.host.ProfileManager.html#generateConfigTaskList">GenerateConfigTaskList</a> method in
+ that it returns a task to monitor the progress of the operation.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.host.ProfileManager.html">HostProfileManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>configSpec</strong></td><td><a href="vim.host.ConfigSpec.html">HostConfigSpec</a></td><td>
+<p></p>
+         ConfigSpec which was proposed by
+    <a href="vim.profile.host.HostProfile.html#execute">ExecuteHostProfile</a> method.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>host</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         Host on which the HostProfile application needs to be
+    carried out.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation. If the task is successful, the <a href="vim.Task.html">Task</a>.<a href="vim.Task.html#info">info</a>.<a href="vim.TaskInfo.html#result">result</a> property is a <a href="vim.profile.host.ProfileManager.ConfigTaskList.html">HostProfileManagerConfigTaskList</a> object.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="queryAnswerFileStatus" name="queryAnswerFileStatus"></a>
+<h1>QueryAnswerFileStatus</h1>
+<p></p>
+         Returns the status of the answer files associated with specified hosts.
+ This method returns the most recent status determined by
+ <a href="vim.profile.host.ProfileManager.html#checkAnswerFileStatus">CheckAnswerFileStatus_Task</a>.
+ See <a href="vim.profile.host.ProfileManager.AnswerFileStatus.html">HostProfileManagerAnswerFileStatus</a> for valid values.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.host.ProfileManager.html">HostProfileManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem[]</a></td><td>
+<p></p>
+         The hosts the answer file is associated with.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.profile.host.AnswerFileStatusResult.html">AnswerFileStatusResult[]</a></td><td>List of answer file status objects.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryAnswerFileStatus-textarea');expandcontent(this, 'QueryAnswerFileStatus-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryAnswerFileStatus-div">
+<textarea cols="20" rows="10" name="QueryAnswerFileStatus-textarea" wrap="off" readonly="1" id="QueryAnswerFileStatus-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryAnswerFileStatus" type="vim25:QueryAnswerFileStatusRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryAnswerFileStatusResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:AnswerFileStatusResult" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryProfileMetadata" name="queryProfileMetadata"></a>
+<h1>QueryHostProfileMetadata</h1>
+<p></p>
+         Retrieve the metadata for a set of profiles.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.host.ProfileManager.html">HostProfileManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>profileName</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         Names of the profiles for which metadata is requested.
+    If not set, the method returns metadata for all the profiles.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>profile</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.profile.Profile.html">Profile</a></td><td>
+<p></p>
+         Base profile whose context needs to be used during the operation
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.profile.ProfileMetadata.html">ProfileMetadata[]</a></td><td>List of profile metadata objects.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if profileName parameter is invalid.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidProfileReferenceHost.html">InvalidProfileReferenceHost</a></td><td>Thrown if the reference host associated with the profile is incompatible or there is no reference host for the profile.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryHostProfileMetadata-textarea');expandcontent(this, 'QueryHostProfileMetadata-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryHostProfileMetadata-div">
+<textarea cols="20" rows="10" name="QueryHostProfileMetadata-textarea" wrap="off" readonly="1" id="QueryHostProfileMetadata-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryHostProfileMetadata" type="vim25:QueryHostProfileMetadataRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryHostProfileMetadataResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ProfileMetadata" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryProfileStructure" name="queryProfileStructure"></a>
+<h1>QueryProfileStructure</h1>
+<p></p>
+         Get information about the structure of the profile.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.host.ProfileManager.html">HostProfileManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>profile</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.profile.Profile.html">Profile</a></td><td>
+<p></p>
+         Base profile whose context needs to be used during the operation
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.profile.ProfileStructure.html">ProfileProfileStructure</a></td><td>The profile structure.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidProfileReferenceHost.html">InvalidProfileReferenceHost</a></td><td>Thrown if the reference host associated with the profile is incompatible or there is no reference host for the profile.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryProfileStructure-textarea');expandcontent(this, 'QueryProfileStructure-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryProfileStructure-div">
+<textarea cols="20" rows="10" name="QueryProfileStructure-textarea" wrap="off" readonly="1" id="QueryProfileStructure-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryProfileStructure" type="vim25:QueryProfileStructureRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryProfileStructureResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ProfileProfileStructure"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="retrieveAnswerFile" name="retrieveAnswerFile"></a>
+<h1>RetrieveAnswerFile</h1>
+<p></p>
+         Returns the answer file associated with a particular host.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.host.ProfileManager.html">HostProfileManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Required Privilege: Profile.Edit" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         Host with which the answer file is associated.
+      <br>
+</td>
+</tr>
+</table>
+<span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  Profile.Edit</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.profile.host.AnswerFile.html">AnswerFile</a></td><td>Answer file object will be returned if it exists.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RetrieveAnswerFile-textarea');expandcontent(this, 'RetrieveAnswerFile-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RetrieveAnswerFile-div">
+<textarea cols="20" rows="10" name="RetrieveAnswerFile-textarea" wrap="off" readonly="1" id="RetrieveAnswerFile-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrieveAnswerFile" type="vim25:RetrieveAnswerFileRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrieveAnswerFileResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:AnswerFile" minOccurs="0"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="retrieveAnswerFileForProfile" name="retrieveAnswerFileForProfile"></a>
+<h1>RetrieveAnswerFileForProfile</h1>
+<p></p>
+         Returns the answer file associated with a particular host, augmented
+ with whatever answer file values are required for the supplied host
+ profile.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.1</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.host.ProfileManager.html">HostProfileManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Required Privilege: Profile.Edit" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         Host with which the answer file is associated.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>applyProfile</strong></td><td><a href="vim.profile.host.HostApplyProfile.html">HostApplyProfile</a></td><td>
+<p></p>
+         Profile configuration used to generate answer file
+      <br>
+</td>
+</tr>
+</table>
+<span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  Profile.Edit</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.profile.host.AnswerFile.html">AnswerFile</a></td><td>Answer file object will be returned.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RetrieveAnswerFileForProfile-textarea');expandcontent(this, 'RetrieveAnswerFileForProfile-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RetrieveAnswerFileForProfile-div">
+<textarea cols="20" rows="10" name="RetrieveAnswerFileForProfile-textarea" wrap="off" readonly="1" id="RetrieveAnswerFileForProfile-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrieveAnswerFileForProfile" type="vim25:RetrieveAnswerFileForProfileRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrieveAnswerFileForProfileResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:AnswerFile" minOccurs="0"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateAnswerFile" name="updateAnswerFile"></a>
+<h1>UpdateAnswerFile_Task</h1>
+<p></p>
+         Update the <a href="vim.profile.host.AnswerFile.html">AnswerFile</a> for the specified host.
+ If there is no answer file associated with the host, the Profile Engine
+ uses the answer file configuration specification to create a new one.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Profile.Edit</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.host.ProfileManager.html">HostProfileManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         Host with which the answer file is associated.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>configSpec</strong></td><td><a href="vim.profile.host.ProfileManager.AnswerFileCreateSpec.html">AnswerFileCreateSpec</a></td><td>
+<p></p>
+         Host-specific configuration data. If the configuration
+       specification does not contain any host-specific user input
+       (<code>configSpec</code>.<a href="vim.profile.host.ProfileManager.AnswerFileOptionsCreateSpec.html#userInput">userInput</a>),
+       the method does not perform any operation on the answer file.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AnswerFileUpdateFailed.html">AnswerFileUpdateFailed</a></td><td>Thrown if the answer file could not be updated.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the input parameteres are incorrect.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

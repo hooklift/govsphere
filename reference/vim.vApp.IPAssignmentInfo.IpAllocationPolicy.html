@@ -1,0 +1,101 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vApp.IPAssignmentInfo.IpAllocationPolicy" name="vim.vApp.IPAssignmentInfo.IpAllocationPolicy"></a>
+<h1>Enum - 
+						VAppIPAssignmentInfoIpAllocationPolicy</h1>
+<dl>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<br>
+<h2>Enum Description</h2>
+<p></p>
+         IP allocation policy for a deployment.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Enum Constants</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><a id="dhcpPolicy" name="dhcpPolicy"></a>dhcpPolicy</td><td>
+      Specifies that DHCP must be used to allocate IP addresses to the vApp
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="fixedAllocatedPolicy" name="fixedAllocatedPolicy"></a>fixedAllocatedPolicy</td><td>
+      Specifies that IP allocation is done through the range managed by the VI
+  platform. The IP addresses are allocated at first power-on, and remain
+  allocated at power-off. This will ensure that a vApp gets a consistent
+ IP for its life-time.
+   <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="fixedPolicy" name="fixedPolicy"></a>fixedPolicy</td><td>
+      Specifies that IP addresses are configured manually when the vApp is deployed
+  and will be kept until reconfigured or the vApp destroyed. This will ensure
+  that a vApp gets a consistent IP for its life-time.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="transientPolicy" name="transientPolicy"></a>transientPolicy</td><td>
+      Specifies that IP allocation is done through the range managed by the
+  vSphere platform. The IP addresses are allocated when needed, typically at
+  power-on, and deallocated during power-off. There is no guarantee that a
+  vApp will get the same IP address when restarted.
+   <br>
+</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <simpleType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VAppIPAssignmentInfoIpAllocationPolicy">
+            <restriction base="xsd:string">
+               <enumeration value="dhcpPolicy"/>
+               <enumeration value="transientPolicy"/>
+               <enumeration value="fixedPolicy"/>
+               <enumeration value="fixedAllocatedPolicy"/>
+            </restriction>
+         </simpleType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

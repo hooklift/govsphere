@@ -1,0 +1,208 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.device.VirtualDeviceOption" name="vim.vm.device.VirtualDeviceOption"></a>
+<h1>Data Object - VirtualDeviceOption</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.vm.VirtualHardwareOption.html#field_detail">VirtualHardwareOption</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.vm.device.VirtualCdromOption.html">VirtualCdromOption</a>, <a href="vim.vm.device.VirtualControllerOption.html">VirtualControllerOption</a>, <a href="vim.vm.device.VirtualDiskOption.html">VirtualDiskOption</a>, <a href="vim.vm.device.VirtualEthernetCardOption.html">VirtualEthernetCardOption</a>, <a href="vim.vm.device.VirtualFloppyOption.html">VirtualFloppyOption</a>, <a href="vim.vm.device.VirtualKeyboardOption.html">VirtualKeyboardOption</a>, <a href="vim.vm.device.VirtualVMCIDeviceOption.html">VirtualMachineVMCIDeviceOption</a>, <a href="vim.vm.device.VirtualParallelPortOption.html">VirtualParallelPortOption</a>, <a href="vim.vm.device.VirtualPCIPassthroughOption.html">VirtualPCIPassthroughOption</a>, <a href="vim.vm.device.VirtualPointingDeviceOption.html">VirtualPointingDeviceOption</a>, <a href="vim.vm.device.VirtualSCSIPassthroughOption.html">VirtualSCSIPassthroughOption</a>, <a href="vim.vm.device.VirtualSerialPortOption.html">VirtualSerialPortOption</a>, <a href="vim.vm.device.VirtualSoundCardOption.html">VirtualSoundCardOption</a>, <a href="vim.vm.device.VirtualUSBOption.html">VirtualUSBOption</a>, <a href="vim.vm.device.VirtualVideoCardOption.html">VirtualVideoCardOption</a>, <a href="vim.vm.device.VirtualVMIROMOption.html">VirtualVMIROMOption</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.option.BoolOption.html">BoolOption</a>, <a href="vim.vm.device.VirtualDeviceOption.BackingOption.html">VirtualDeviceBackingOption</a>, <a href="vim.vm.device.VirtualDeviceOption.BusSlotOption.html">VirtualDeviceBusSlotOption</a>, <a href="vim.vm.device.VirtualDeviceOption.ConnectOption.html">VirtualDeviceConnectOption</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The VirtualDeviceOption data object type contains information about
+  a virtual device type, the options for configuring the virtual device,
+  and the relationship between this virtual device and other devices.
+  The vSphere API groups device configurations that are mutually exclusive
+  into different configuration objects; each of these configuration objects
+  may define subtypes for virtual device backing options
+  that are independent of the virtual device.
+  Backing-dependent options should appear in a subtype of
+  <a href="vim.vm.device.VirtualDeviceOption.BackingOption.html">VirtualDeviceBackingOption</a>.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="autoAssignController" name="autoAssignController"></a><strong>autoAssignController</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.option.BoolOption.html">BoolOption</a></td><td>
+<p></p>
+         Flag to indicate whether or not this device will be auto-assigned a controller
+  if one is required. If this is true, then a client need not explicitly create
+  the controller that this device will plug into.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="backingOption" name="backingOption"></a><strong>backingOption</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.device.VirtualDeviceOption.BackingOption.html">VirtualDeviceBackingOption[]</a></td><td>
+<p></p>
+         A list of backing options that can be used to map the virtual
+  device to the host. The list is optional, since some devices exist only within
+  the virtual machine; for example, a VirtualController.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="busSlotOption" name="busSlotOption"></a><strong>busSlotOption</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.device.VirtualDeviceOption.BusSlotOption.html">VirtualDeviceBusSlotOption</a></td><td>
+<p></p>
+         If the device can use a bus slot configuration, then the busSlotOption
+  describes the bus slot options.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="connectOption" name="connectOption"></a><strong>connectOption</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.device.VirtualDeviceOption.ConnectOption.html">VirtualDeviceConnectOption</a></td><td>
+<p></p>
+         If the device is connectable, then the connectOption
+  describes the connect options and defaults.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="controllerType" name="controllerType"></a><strong>controllerType</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Data object type that denotes the controller option object that is
+  valid for controlling this device.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="defaultBackingOptionIndex" name="defaultBackingOptionIndex"></a><strong>defaultBackingOptionIndex</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Index into the backingOption list, indicating the default backing.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="deprecated" name="deprecated"></a><strong>deprecated</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether this device is deprecated. Hence, if set the device
+  cannot be used when creating a new virtual machine or be added to an existing
+  virtual machine. However, the device is still supported by the platform.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="hotRemoveSupported" name="hotRemoveSupported"></a><strong>hotRemoveSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates if this type of device can be hot-removed from the virtual machine
+ via a reconfigure operation when the virtual machine is powered on.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="licensingLimit" name="licensingLimit"></a><strong>licensingLimit</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         List of property names enforced by a licensing restriction
+  of the underlying product. For example, a limit that is not
+  derived based on the product or hardware features; the
+  property name "numCPU".
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="plugAndPlay" name="plugAndPlay"></a><strong>plugAndPlay</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates if this type of device can be hot-added to the virtual machine
+ via a reconfigure operation when the virtual machine is powered on.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="type" name="type"></a><strong>type</strong></td><td>xsd:string</td><td>
+<p></p>
+         The name of the run-time class the client should instantiate
+  to create a run-time instance of this device.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VirtualDeviceOption">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="type" type="xsd:string"/>
+                     <element name="connectOption" type="vim25:VirtualDeviceConnectOption" minOccurs="0"/>
+                     <element name="busSlotOption" type="vim25:VirtualDeviceBusSlotOption" minOccurs="0"/>
+                     <element name="controllerType" type="xsd:string" minOccurs="0"/>
+                     <element name="autoAssignController" type="vim25:BoolOption" minOccurs="0"/>
+                     <element name="backingOption" type="vim25:VirtualDeviceBackingOption" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="defaultBackingOptionIndex" type="xsd:int" minOccurs="0"/>
+                     <element name="licensingLimit" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="deprecated" type="xsd:boolean"/>
+                     <element name="plugAndPlay" type="xsd:boolean"/>
+                     <element name="hotRemoveSupported" type="xsd:boolean" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

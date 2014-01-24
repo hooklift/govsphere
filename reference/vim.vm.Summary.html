@@ -1,0 +1,194 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.Summary" name="vim.vm.Summary"></a>
+<h1>Data Object - VirtualMachineSummary</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.host.ConnectInfo.html#field_detail">HostConnectInfo</a>, <a href="vim.VirtualMachine.html#field_detail">VirtualMachine</a>, <a href="vim.vm.UsbInfo.html#field_detail">VirtualMachineUsbInfo</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.CustomFieldsManager.Value.html">CustomFieldValue</a>, <a href="vim.ManagedEntity.Status.html">ManagedEntityStatus</a>, <a href="vim.VirtualMachine.html">VirtualMachine</a>, <a href="vim.vm.Summary.ConfigSummary.html">VirtualMachineConfigSummary</a>, <a href="vim.vm.Summary.GuestSummary.html">VirtualMachineGuestSummary</a>, <a href="vim.vm.Summary.QuickStats.html">VirtualMachineQuickStats</a>, <a href="vim.vm.RuntimeInfo.html">VirtualMachineRuntimeInfo</a>, <a href="vim.vm.Summary.StorageSummary.html">VirtualMachineStorageSummary</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The summary data object type encapsulates a typical set of virtual machine
+  information that is useful for list views and summary pages.
+  <p>
+  VirtualCenter can retrieve this information very efficiently,
+  even for large sets of virtual machines.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="config" name="config"></a><strong>config</strong></td><td><a href="vim.vm.Summary.ConfigSummary.html">VirtualMachineConfigSummary</a></td><td>
+<p></p>
+         Basic configuration information about the virtual machine. This information
+ is not available when the virtual machine is unavailable, for instance, when
+ it is being created or deleted.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="customValue" name="customValue"></a><strong>customValue</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.CustomFieldsManager.Value.html">CustomFieldValue[]</a></td><td>
+<p></p>
+         Custom field values.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="guest" name="guest"></a><strong>guest</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.Summary.GuestSummary.html">VirtualMachineGuestSummary</a></td><td>
+<p></p>
+         Guest operating system and VMware Tools information. See <a href="vim.VirtualMachine.html#guest">guest</a> for more information.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="overallStatus" name="overallStatus"></a><strong>overallStatus</strong></td><td><a href="vim.ManagedEntity.Status.html">ManagedEntityStatus</a></td><td>
+<p></p>
+         Overall alarm status on this node.
+
+  In releases after vSphere API 5.0, vSphere Servers might not
+  generate property collector update notifications for this property.
+  To obtain the latest value of the property, you can use
+  PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+  If you use the PropertyCollector.WaitForUpdatesEx method, specify
+  an empty string for the version parameter.
+
+  Since this property is on a DataObject, an update returned by WaitForUpdatesEx may
+  contain values for this property when some other property on the DataObject changes.
+  If this update is a result of a call to WaitForUpdatesEx with a non-empty
+  version parameter, the value for this property may not be current.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="quickStats" name="quickStats"></a><strong>quickStats</strong></td><td><a href="vim.vm.Summary.QuickStats.html">VirtualMachineQuickStats</a></td><td>
+<p></p>
+         A set of statistics that are typically updated with near real-time regularity.
+  This data object type does not support notification, for scalability reasons.
+  Therefore, changes in QuickStats do not generate property collector updates. To
+  monitor statistics values, use the statistics and alarms modules instead.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="runtime" name="runtime"></a><strong>runtime</strong></td><td><a href="vim.vm.RuntimeInfo.html">VirtualMachineRuntimeInfo</a></td><td>
+<p></p>
+         Runtime and state information of a running virtual machine.
+  Most of this information is also available when a virtual machine is powered off.
+  In that case, it contains information from the last run, if available.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="storage" name="storage"></a><strong>storage</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.Summary.StorageSummary.html">VirtualMachineStorageSummary</a></td><td>
+<p></p>
+         Storage information of the virtual machine. It can be explicitly refreshed
+  with the <a href="vim.VirtualMachine.html#refreshStorageInfo">RefreshStorageInfo</a> operation.
+
+  In releases after vSphere API 5.0, vSphere Servers might not
+  generate property collector update notifications for this property.
+  To obtain the latest value of the property, you can use
+  PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+  If you use the PropertyCollector.WaitForUpdatesEx method, specify
+  an empty string for the version parameter.
+
+  Since this property is on a DataObject, an update returned by WaitForUpdatesEx may
+  contain values for this property when some other property on the DataObject changes.
+  If this update is a result of a call to WaitForUpdatesEx with a non-empty
+  version parameter, the value for this property may not be current.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vm" name="vm"></a><strong>vm</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.VirtualMachine.html">VirtualMachine</a></td><td>
+<p></p>
+         Reference to the virtual machine managed object.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VirtualMachineSummary">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="vm" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="runtime" type="vim25:VirtualMachineRuntimeInfo"/>
+                     <element name="guest" type="vim25:VirtualMachineGuestSummary" minOccurs="0"/>
+                     <element name="config" type="vim25:VirtualMachineConfigSummary"/>
+                     <element name="storage" type="vim25:VirtualMachineStorageSummary" minOccurs="0"/>
+                     <element name="quickStats" type="vim25:VirtualMachineQuickStats"/>
+                     <element name="overallStatus" type="vim25:ManagedEntityStatus"/>
+                     <element name="customValue" type="vim25:CustomFieldValue" minOccurs="0" maxOccurs="unbounded"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

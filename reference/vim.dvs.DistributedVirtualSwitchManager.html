@@ -1,0 +1,1350 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.dvs.DistributedVirtualSwitchManager" name="vim.dvs.DistributedVirtualSwitchManager"></a>
+<h1>Managed Object -  
+						DistributedVirtualSwitchManager</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.ServiceInstanceContent.html#field_detail">ServiceContent</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.dvs.DistributedVirtualPortgroup.html">DistributedVirtualPortgroup</a>, <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a>, <a href="vim.dvs.HostProductSpec.html">DistributedVirtualSwitchHostProductSpec</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.CompatibilityResult.html">DistributedVirtualSwitchManagerCompatibilityResult</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.DvsProductSpec.html">DistributedVirtualSwitchManagerDvsProductSpec</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.HostContainer.html">DistributedVirtualSwitchManagerHostContainer</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.HostDvsFilterSpec.html">DistributedVirtualSwitchManagerHostDvsFilterSpec</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.ImportResult.html">DistributedVirtualSwitchManagerImportResult</a>, <a href="vim.dvs.ProductSpec.html">DistributedVirtualSwitchProductSpec</a>, <a href="vim.DistributedVirtualSwitch.FeatureCapability.html">DVSFeatureCapability</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.DvsConfigTarget.html">DVSManagerDvsConfigTarget</a>, <a href="vim.dvs.EntityBackup.Config.html">EntityBackupConfig</a>, <a href="vim.HostSystem.html">HostSystem</a>, <a href="vim.ManagedEntity.html">ManagedEntity</a>, <a href="vim.SelectionSet.html">SelectionSet</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         The <a href="vim.dvs.DistributedVirtualSwitchManager.html">DistributedVirtualSwitchManager</a> provides methods
+ that support the following operations:
+ <ul>
+ <li>Backup and restore operations for <a href="vim.dvs.VmwareDistributedVirtualSwitch.html">VmwareDistributedVirtualSwitch</a>
+ and associated <a href="vim.dvs.DistributedVirtualPortgroup.html">DistributedVirtualPortgroup</a> managed objects.</li>
+ <li>Query operations for information about portgroups and distributed
+ virtual switches.</li>
+ <li>Distributed virtual switch configuration update operations.
+ </ul>
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+</table>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#exportEntity">DVSManagerExportEntity_Task</a>, <a href="#importEntity">DVSManagerImportEntity_Task</a>, <a href="#lookupPortgroup">DVSManagerLookupDvPortGroup</a>, <a href="#querySupportedSwitchSpec">QueryAvailableDvsSpec</a>, <a href="#queryCompatibleHostForExistingDvs">QueryCompatibleHostForExistingDvs</a>, <a href="#queryCompatibleHostForNewDvs">QueryCompatibleHostForNewDvs</a>, <a href="#querySwitchByUuid">QueryDvsByUuid</a>, <a href="#checkCompatibility">QueryDvsCheckCompatibility</a>, <a href="#queryCompatibleHostSpec">QueryDvsCompatibleHostSpec</a>, <a href="#queryDvsConfigTarget">QueryDvsConfigTarget</a>, <a href="#queryFeatureCapability">QueryDvsFeatureCapability</a>, <a href="#rectifyHost">RectifyDvsOnHost_Task</a></td>
+</tr>
+</table>
+<br>
+<a id="exportEntity" name="exportEntity"></a>
+<h1>DVSManagerExportEntity_Task</h1>
+<p></p>
+         Export the configuration for entities specified in the
+ <code>selectionSet</code> parameter. You can use this method only
+ for a <a href="vim.dvs.VmwareDistributedVirtualSwitch.html">VmwareDistributedVirtualSwitch</a> and its
+ associated <a href="vim.dvs.DistributedVirtualPortgroup.html">DistributedVirtualPortgroup</a> objects.
+ <p>
+ Use the <a href="vim.dvs.DistributedVirtualSwitchManager.html#importEntity">DVSManagerImportEntity_Task</a> method to restore the entity
+ to the state represented by the exported configuration.
+ You can also use the exported configuration to create
+ a new switch or portgroup.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Dynamic - See discussion above</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.1</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.dvs.DistributedVirtualSwitchManager.html">DistributedVirtualSwitchManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>selectionSet</strong></td><td><a href="vim.SelectionSet.html">SelectionSet[]</a></td><td>
+<p></p>
+         The selection criteria for a set of
+          entities to export the configuration.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation. After successful completion, the <a href="vim.Task.html">Task</a>.<a href="vim.Task.html#info">info</a>.<a href="vim.TaskInfo.html#result">result</a> property contains the <a href="vim.dvs.EntityBackup.Config.html">EntityBackupConfig</a> object.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.BackupBlobWriteFailure.html">BackupBlobWriteFailure</a></td><td>Thrown if failed to create backup config blob.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if entity in selectionSet doesn't exist.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="importEntity" name="importEntity"></a>
+<h1>DVSManagerImportEntity_Task</h1>
+<p></p>
+         Import the configuration of entities specified in
+  <a href="vim.dvs.EntityBackup.Config.html">EntityBackupConfig</a>. You can restore the
+  existing configuration to the state represented by the
+  backup configuration. You can also use the backup
+  configuration to create a new switch or portgroup.
+  See <a href="vim.dvs.EntityBackup.ImportType.html">EntityImportType</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Dynamic - See discussion above</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.1</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.dvs.DistributedVirtualSwitchManager.html">DistributedVirtualSwitchManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>entityBackup</strong></td><td><a href="vim.dvs.EntityBackup.Config.html">EntityBackupConfig[]</a></td><td>
+<p></p>
+         Configuration of one or more entities to be imported.
+                      The entity backup configuration is returned
+                      by the <a href="vim.dvs.DistributedVirtualSwitchManager.html#exportEntity">DVSManagerExportEntity_Task</a> method.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>importType</strong></td><td>xsd:string</td><td>
+<p></p>
+         Specifies whether to create a new configuration
+                    or restore a previous configuration. See <a href="vim.dvs.EntityBackup.ImportType.html">EntityImportType</a> for valid values.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DvsFault.html">DvsFault</a></td><td>Thrown if operation fails on any host.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if entity in <a href="vim.dvs.EntityBackup.Config.html#key">key</a> doesn't exist.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="lookupPortgroup" name="lookupPortgroup"></a>
+<h1>DVSManagerLookupDvPortGroup</h1>
+<p></p>
+         Returns the portgroup identified by the key within the specified VDS
+ identified by its UUID.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.1</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.dvs.DistributedVirtualSwitchManager.html">DistributedVirtualSwitchManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>switchUuid</strong></td><td>xsd:string</td><td>
+<p></p>
+         The UUID of the <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a>.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>portgroupKey</strong></td><td>xsd:string</td><td>
+<p></p>
+         The key that identifies a
+                    <a href="vim.dvs.DistributedVirtualPortgroup.html">DistributedVirtualPortgroup</a>.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.dvs.DistributedVirtualPortgroup.html">DistributedVirtualPortgroup</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the portgroup for the specified inputs was not found.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the operation is not supported.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('DVSManagerLookupDvPortGroup-textarea');expandcontent(this, 'DVSManagerLookupDvPortGroup-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="DVSManagerLookupDvPortGroup-div">
+<textarea cols="20" rows="10" name="DVSManagerLookupDvPortGroup-textarea" wrap="off" readonly="1" id="DVSManagerLookupDvPortGroup-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DVSManagerLookupDvPortGroup" type="vim25:DVSManagerLookupDvPortGroupRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DVSManagerLookupDvPortGroupResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference" minOccurs="0"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="querySupportedSwitchSpec" name="querySupportedSwitchSpec"></a>
+<h1>QueryAvailableDvsSpec</h1>
+<p></p>
+         This operation returns a list of switch product specifications that
+  are supported by the vCenter Server.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.dvs.DistributedVirtualSwitchManager.html">DistributedVirtualSwitchManager</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.dvs.ProductSpec.html">DistributedVirtualSwitchProductSpec[]</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryAvailableDvsSpec-textarea');expandcontent(this, 'QueryAvailableDvsSpec-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryAvailableDvsSpec-div">
+<textarea cols="20" rows="10" name="QueryAvailableDvsSpec-textarea" wrap="off" readonly="1" id="QueryAvailableDvsSpec-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryAvailableDvsSpec" type="vim25:QueryAvailableDvsSpecRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryAvailableDvsSpecResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:DistributedVirtualSwitchProductSpec" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryCompatibleHostForExistingDvs" name="queryCompatibleHostForExistingDvs"></a>
+<h1>QueryCompatibleHostForExistingDvs</h1>
+<p></p>
+         This operation returns a list of hosts that are compatible with
+  the given DistributedVirtualSwitch product specification.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.dvs.DistributedVirtualSwitchManager.html">DistributedVirtualSwitchManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>container</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity</a></td><td>
+<p></p>
+         Where to look for hosts. Supported types of objects for
+                     this parameter are <a href="vim.Datacenter.html">Datacenter</a>,
+                     <a href="vim.ComputeResource.html">ComputeResource</a> and <a href="vim.Folder.html">Folder</a>.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>recursive</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Whether to search for hosts in the subfolders,
+                     if applicable. In the case when container is a <a href="vim.Datacenter.html">Datacenter</a>,
+                     the recursive flag is applied to its HostFolder.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>dvs</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a></td><td>
+<p></p>
+         Search the host based on the specification published in the
+                     <a href="vim.DistributedVirtualSwitch.Capability.html#compatibleHostComponentProductInfo">compatibleHostComponentProductInfo</a>
+                     of a <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a>. If not
+                     set, it is assumed to be the specification that a
+                     DistributedVirtualSwitch would have if it is created
+                     with the default <a href="vim.dvs.ProductSpec.html">DistributedVirtualSwitchProductSpec</a>.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem[]</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the switch value is not valid or recognized.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryCompatibleHostForExistingDvs-textarea');expandcontent(this, 'QueryCompatibleHostForExistingDvs-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryCompatibleHostForExistingDvs-div">
+<textarea cols="20" rows="10" name="QueryCompatibleHostForExistingDvs-textarea" wrap="off" readonly="1" id="QueryCompatibleHostForExistingDvs-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryCompatibleHostForExistingDvs" type="vim25:QueryCompatibleHostForExistingDvsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryCompatibleHostForExistingDvsResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryCompatibleHostForNewDvs" name="queryCompatibleHostForNewDvs"></a>
+<h1>QueryCompatibleHostForNewDvs</h1>
+<p></p>
+         This operation returns a list of hosts that are compatible with
+  the given DistributedVirtualSwitch product specification.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.dvs.DistributedVirtualSwitchManager.html">DistributedVirtualSwitchManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>container</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity</a></td><td>
+<p></p>
+         Where to look for hosts. Supported types of objects for
+                     this parameter are <a href="vim.Datacenter.html">Datacenter</a>,
+                     <a href="vim.ComputeResource.html">ComputeResource</a> and <a href="vim.Folder.html">Folder</a>.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>recursive</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Whether to search for hosts in the subfolders,
+                     if applicable. In the case when container is a <a href="vim.Datacenter.html">Datacenter</a>,
+                     the recursive flag is applied to its HostFolder.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>switchProductSpec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.dvs.ProductSpec.html">DistributedVirtualSwitchProductSpec</a></td><td>
+<p></p>
+         The productSpec of a <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a>.
+                     If not set, it is assumed to be the default one used for
+                     DistributedVirtualSwitch creation.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem[]</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the productSpec value is not valid or recognized.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryCompatibleHostForNewDvs-textarea');expandcontent(this, 'QueryCompatibleHostForNewDvs-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryCompatibleHostForNewDvs-div">
+<textarea cols="20" rows="10" name="QueryCompatibleHostForNewDvs-textarea" wrap="off" readonly="1" id="QueryCompatibleHostForNewDvs-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryCompatibleHostForNewDvs" type="vim25:QueryCompatibleHostForNewDvsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryCompatibleHostForNewDvsResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="querySwitchByUuid" name="querySwitchByUuid"></a>
+<h1>QueryDvsByUuid</h1>
+<p></p>
+         This operation returns a DistributedVirtualSwitch given a UUID.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.dvs.DistributedVirtualSwitchManager.html">DistributedVirtualSwitchManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>uuid</strong></td><td>xsd:string</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if a switch with the UUID doesn't exist.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryDvsByUuid-textarea');expandcontent(this, 'QueryDvsByUuid-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryDvsByUuid-div">
+<textarea cols="20" rows="10" name="QueryDvsByUuid-textarea" wrap="off" readonly="1" id="QueryDvsByUuid-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryDvsByUuid" type="vim25:QueryDvsByUuidRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryDvsByUuidResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference" minOccurs="0"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="checkCompatibility" name="checkCompatibility"></a>
+<h1>QueryDvsCheckCompatibility</h1>
+<p></p>
+         This operation returns a list of compatibility results. Each compatibility result
+  is an object that has a host property and optionally a fault which would
+  be populated only if that host is not compatible with a given dvsProductSpec.
+  All filters in hostFilerSpecs are ANDed to derive the intersection of hosts against
+  which compatibility is checked. If caller did not have view privileges on the
+  host entity in an element of the CompatibilityResult array, then that entire
+  element would be removed from the CompatibilityResult array.
+  Typical uses:
+  <ul>
+  <li>
+  For the createDVS situation, hostFilterSpec is of type HostDvsFilterSpec and DvsProductSpec
+  will have newSwitchProductSpec set.</li>
+  <li>
+  For the Add-Host-To-DVS situation, you can use either HostDvsFilterSpec or
+  HostDvsMembershipFilter with inclusive being false, and pass the DVS in DvsProductSpec.</li>
+  <li>
+  For the Upgrade-DVS situation, you can use either HostDvsFilterSpec or
+  HostDvsMembershipFilter with inclusive being true, and pass the new desired ProductSpec
+  for DVS in newSwitchProductSpec.</li>
+  </ul>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.dvs.DistributedVirtualSwitchManager.html">DistributedVirtualSwitchManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>hostContainer</strong></td><td><a href="vim.dvs.DistributedVirtualSwitchManager.HostContainer.html">DistributedVirtualSwitchManagerHostContainer</a></td><td>
+<p></p>
+         The container of hosts on which we check the compatibility.
+                     This container can be a datacenter, folder, or computeResource.
+                     We can also include all the hosts in the hierarchy with container
+                     as root of the tree.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>dvsProductSpec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.dvs.DistributedVirtualSwitchManager.DvsProductSpec.html">DistributedVirtualSwitchManagerDvsProductSpec</a></td><td>
+<p></p>
+         The productSpec of a DistributedVirtualSwitch. If not
+                     set, it is assumed to be the default one used for
+                     DistributedVirtualSwitch creation for current version.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>hostFilterSpec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.dvs.DistributedVirtualSwitchManager.HostDvsFilterSpec.html">DistributedVirtualSwitchManagerHostDvsFilterSpec[]</a></td><td>
+<p></p>
+         The hosts against which to check compatibility. This is a
+                     filterSpec and users can use this to specify all hosts in a
+                     container (datacenter, folder, or computeResource), an array
+                     of hosts, or hosts that might or might not be a DVS member.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.dvs.DistributedVirtualSwitchManager.CompatibilityResult.html">DistributedVirtualSwitchManagerCompatibilityResult[]</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the dvsProductSpec value is not valid or recognized.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryDvsCheckCompatibility-textarea');expandcontent(this, 'QueryDvsCheckCompatibility-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryDvsCheckCompatibility-div">
+<textarea cols="20" rows="10" name="QueryDvsCheckCompatibility-textarea" wrap="off" readonly="1" id="QueryDvsCheckCompatibility-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryDvsCheckCompatibility" type="vim25:QueryDvsCheckCompatibilityRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryDvsCheckCompatibilityResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:DistributedVirtualSwitchManagerCompatibilityResult" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryCompatibleHostSpec" name="queryCompatibleHostSpec"></a>
+<h1>QueryDvsCompatibleHostSpec</h1>
+<p></p>
+         This operation returns a list of host product specifications that
+  are compatible with the given DistributedVirtualSwitch product
+  specification.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.dvs.DistributedVirtualSwitchManager.html">DistributedVirtualSwitchManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>switchProductSpec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.dvs.ProductSpec.html">DistributedVirtualSwitchProductSpec</a></td><td>
+<p></p>
+         The productSpec of a <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a>.
+                     If not set, it is assumed to be the default one used for
+                     DistributedVirtualSwitch creation.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.dvs.HostProductSpec.html">DistributedVirtualSwitchHostProductSpec[]</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the switchProductSpec value is not valid or recognized.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryDvsCompatibleHostSpec-textarea');expandcontent(this, 'QueryDvsCompatibleHostSpec-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryDvsCompatibleHostSpec-div">
+<textarea cols="20" rows="10" name="QueryDvsCompatibleHostSpec-textarea" wrap="off" readonly="1" id="QueryDvsCompatibleHostSpec-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryDvsCompatibleHostSpec" type="vim25:QueryDvsCompatibleHostSpecRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryDvsCompatibleHostSpecResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:DistributedVirtualSwitchHostProductSpec" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryDvsConfigTarget" name="queryDvsConfigTarget"></a>
+<h1>QueryDvsConfigTarget</h1>
+<p></p>
+         This operation returns the DistributedVirtualSwitch or
+  DistributedVirtualPortgroup configuration target on a host.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.dvs.DistributedVirtualSwitchManager.html">DistributedVirtualSwitchManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         The host on which the query is to be made. If called
+  directly on the host this parameter need not be specified.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>dvs</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a></td><td>
+<p></p>
+         The distributed virtual switch on which the query is to be
+  made. If unspecified the config target will encompass all the
+  distributed virtual switches available on the host.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.dvs.DistributedVirtualSwitchManager.DvsConfigTarget.html">DVSManagerDvsConfigTarget</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryDvsConfigTarget-textarea');expandcontent(this, 'QueryDvsConfigTarget-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryDvsConfigTarget-div">
+<textarea cols="20" rows="10" name="QueryDvsConfigTarget-textarea" wrap="off" readonly="1" id="QueryDvsConfigTarget-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryDvsConfigTarget" type="vim25:QueryDvsConfigTargetRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryDvsConfigTargetResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:DVSManagerDvsConfigTarget"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryFeatureCapability" name="queryFeatureCapability"></a>
+<h1>QueryDvsFeatureCapability</h1>
+<p></p>
+         This operation indicates which version-specific DVS features are
+  available for the given DistributedVirtualSwitch product specification.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.dvs.DistributedVirtualSwitchManager.html">DistributedVirtualSwitchManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>switchProductSpec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.dvs.ProductSpec.html">DistributedVirtualSwitchProductSpec</a></td><td>
+<p></p>
+         The productSpec of a <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a>.
+                     If not set, it is assumed to be the default one used for
+                     DistributedVirtualSwitch creation.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.DistributedVirtualSwitch.FeatureCapability.html">DVSFeatureCapability</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the switchProductSpec value is not valid or recognized.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryDvsFeatureCapability-textarea');expandcontent(this, 'QueryDvsFeatureCapability-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryDvsFeatureCapability-div">
+<textarea cols="20" rows="10" name="QueryDvsFeatureCapability-textarea" wrap="off" readonly="1" id="QueryDvsFeatureCapability-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryDvsFeatureCapability" type="vim25:QueryDvsFeatureCapabilityRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryDvsFeatureCapabilityResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:DVSFeatureCapability" minOccurs="0"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="rectifyHost" name="rectifyHost"></a>
+<h1>RectifyDvsOnHost_Task</h1>
+<p></p>
+         Update the Distributed Switch configuration on the hosts to bring them in sync with the
+  current configuration in vCenter Server.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Read</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.dvs.DistributedVirtualSwitchManager.html">DistributedVirtualSwitchManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>hosts</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem[]</a></td><td>
+<p></p>
+         The hosts to be rectified.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>Returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DvsFault.html">DvsFault</a></td><td>Thrown if operation fails on any host or if there are other update failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

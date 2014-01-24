@@ -1,0 +1,178 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.alarm.MetricAlarmExpression" name="vim.alarm.MetricAlarmExpression"></a>
+<h1>Data Object - MetricAlarmExpression</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.alarm.AlarmExpression.html">AlarmExpression</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.alarm.MetricAlarmExpression.MetricOperator.html">MetricAlarmOperator</a>, <a href="vim.PerformanceManager.MetricId.html">PerfMetricId</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         An alarm expression that uses a metric as the condition that triggers an
+  alarm. Base type.
+  <p>
+  There are two alarm operands: yellow and red. At least one of them
+  must be set. The value of the alarm expression is determined as follows:
+  <ul>
+  <li>If the host is not connected, the host metric expression is gray.
+  <li>If the vm is not connected, the vm metric expression is gray.
+  <li>If red is set but yellow is not, the expression is red when
+  the metric is over (isAbove operator) or under (isBelow operator)
+  the red value. Otherwise, the expression is green.
+  <li>If yellow is set but red is not, the expression is yellow when
+  the metric is over (isAbove) or under (isBelow)
+  the yellow value. Otherwise, the expression is green.
+  <li>If both yellow and red are set, the value of the expression is red
+  when the metric is over (isAbove) or under (isBelow) the red value.
+  Otherwise, the expression is yellow when the metric is over (isAbove)
+  or under (isBelow) the yellow value. Otherwise, the expression is green.
+  </ul>
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="metric" name="metric"></a><strong>metric</strong></td><td><a href="vim.PerformanceManager.MetricId.html">PerfMetricId</a></td><td>
+<p></p>
+         The instance of the metric.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="operator" name="operator"></a><strong>operator</strong></td><td><a href="vim.alarm.MetricAlarmExpression.MetricOperator.html">MetricAlarmOperator</a></td><td>
+<p></p>
+         The operation to be tested on the metric.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="red" name="red"></a><strong>red</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Whether or not to test for a red condition.
+  If not set, do not calculate red status.
+  If set, it contains the threshold value that triggers red status.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="redInterval" name="redInterval"></a><strong>redInterval</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Time interval in seconds for which the red condition must be true
+ before the red status is triggered. If unset, the red status is
+ triggered immediately when the red condition becomes true.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="type" name="type"></a><strong>type</strong></td><td>xsd:string</td><td>
+<p></p>
+         Name of the object type containing the property.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="yellow" name="yellow"></a><strong>yellow</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Whether or not to test for a yellow condition.
+  If not set, do not calculate yellow status.
+  If set, it contains the threshold value that triggers yellow status.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="yellowInterval" name="yellowInterval"></a><strong>yellowInterval</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Time interval in seconds for which the yellow condition must be true
+ before the yellow status is triggered. If unset, the yellow status is
+ triggered immediately when the yellow condition becomes true.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.alarm.AlarmExpression.html">AlarmExpression</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">None</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="MetricAlarmExpression">
+            <complexContent>
+               <extension base="vim25:AlarmExpression">
+                  <sequence>
+                     <element name="operator" type="vim25:MetricAlarmOperator"/>
+                     <element name="type" type="xsd:string"/>
+                     <element name="metric" type="vim25:PerfMetricId"/>
+                     <element name="yellow" type="xsd:int" minOccurs="0"/>
+                     <element name="yellowInterval" type="xsd:int" minOccurs="0"/>
+                     <element name="red" type="xsd:int" minOccurs="0"/>
+                     <element name="redInterval" type="xsd:int" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

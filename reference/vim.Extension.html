@@ -1,0 +1,288 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.Extension" name="vim.Extension"></a>
+<h1>Data Object - Extension</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.ExtensionManager.html#field_detail">ExtensionManager</a>
+</dd>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.ExtensionManager.html#registerExtension">RegisterExtension</a>, <a href="vim.ExtensionManager.html#updateExtension">UpdateExtension</a>
+</dd>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.ExtensionManager.html#findExtension">FindExtension</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.Description.html">Description</a>, <a href="vim.Extension.ClientInfo.html">ExtensionClientInfo</a>, <a href="vim.Extension.EventTypeInfo.html">ExtensionEventTypeInfo</a>, <a href="vim.Extension.FaultTypeInfo.html">ExtensionFaultTypeInfo</a>, <a href="vim.Extension.HealthInfo.html">ExtensionHealthInfo</a>, <a href="vim.Extension.OvfConsumerInfo.html">ExtensionOvfConsumerInfo</a>, <a href="vim.Extension.PrivilegeInfo.html">ExtensionPrivilegeInfo</a>, <a href="vim.Extension.ResourceInfo.html">ExtensionResourceInfo</a>, <a href="vim.Extension.ServerInfo.html">ExtensionServerInfo</a>, <a href="vim.Extension.TaskTypeInfo.html">ExtensionTaskTypeInfo</a>, <a href="vim.ext.ExtendedProductInfo.html">ExtExtendedProductInfo</a>, <a href="vim.ext.ManagedEntityInfo.html">ExtManagedEntityInfo</a>, <a href="vim.ext.SolutionManagerInfo.html">ExtSolutionManagerInfo</a>
+</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This data object type contains all information about an extension.
+  An extension may contain zero or more server interfaces and zero
+  or more clients.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="client" name="client"></a><strong>client</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.Extension.ClientInfo.html">ExtensionClientInfo[]</a></td><td>
+<p></p>
+         Clients for this extension.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="company" name="company"></a><strong>company</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Company information.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="description" name="description"></a><strong>description</strong></td><td><a href="vim.Description.html">Description</a></td><td>
+<p></p>
+         Description of extension.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="eventList" name="eventList"></a><strong>eventList</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.Extension.EventTypeInfo.html">ExtensionEventTypeInfo[]</a></td><td>
+<p></p>
+         Definitions of events defined by this extension.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="extendedProductInfo" name="extendedProductInfo"></a><strong>extendedProductInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.ext.ExtendedProductInfo.html">ExtExtendedProductInfo</a></td><td>
+<p></p>
+         Extended product information, such as URLs to vendor, product, etc.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="faultList" name="faultList"></a><strong>faultList</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.Extension.FaultTypeInfo.html">ExtensionFaultTypeInfo[]</a></td><td>
+<p></p>
+         Definitions of faults defined by this extension.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="healthInfo" name="healthInfo"></a><strong>healthInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.Extension.HealthInfo.html">ExtensionHealthInfo</a></td><td>
+<p></p>
+         Health specification provided by this extension.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="key" name="key"></a><strong>key</strong></td><td>xsd:string</td><td>
+<p></p>
+         Extension key. Should follow java package naming conventions
+  for uniqueness (e.g. "com.example.management").
+  <p>
+  Extension names can only contain characters belonging to the 
+  lower ASCII character set (UTF-7) with the exception of the 
+  following characters:
+  <ol>
+  <li>All whitespace characters ("space" - ascii character 0x20 is allowed)</li>
+  <li>Control characters</li>
+  <li>Comma (ascii 0x2c), Forward slash (ascii 0x2f), Backward slash (ascii 0x5c), 
+  Hash/Pound (ascii 0x23), Plus (ascii 0x2b), Greater (ascii 0x3e), Lesser (ascii 0x3c), 
+  Equals (ascii 0x3d), Semi-colon (ascii 0x3b) and Double quote (ascii 0x22).</li>
+  </ol>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="lastHeartbeatTime" name="lastHeartbeatTime"></a><strong>lastHeartbeatTime</strong></td><td>xsd:dateTime</td><td>
+<p></p>
+         Last extension heartbeat time.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="managedEntityInfo" name="managedEntityInfo"></a><strong>managedEntityInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.ext.ManagedEntityInfo.html">ExtManagedEntityInfo[]</a></td><td>
+<p></p>
+         Information about entities managed by this extension. An extension can
+ register virtual machines as managed by itself, by setting the
+ <a href="vim.vm.ConfigSpec.html#managedBy">managedBy</a> property of the virtual
+ machine.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="ovfConsumerInfo" name="ovfConsumerInfo"></a><strong>ovfConsumerInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.Extension.OvfConsumerInfo.html">ExtensionOvfConsumerInfo</a></td><td>
+<p></p>
+         OVF consumer specification provided by this extension.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="privilegeList" name="privilegeList"></a><strong>privilegeList</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.Extension.PrivilegeInfo.html">ExtensionPrivilegeInfo[]</a></td><td>
+<p></p>
+         Definitions privileges defined by this extension.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="resourceList" name="resourceList"></a><strong>resourceList</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.Extension.ResourceInfo.html">ExtensionResourceInfo[]</a></td><td>
+<p></p>
+         Resource data for all locales
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="server" name="server"></a><strong>server</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.Extension.ServerInfo.html">ExtensionServerInfo[]</a></td><td>
+<p></p>
+         Servers for this extension.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="shownInSolutionManager" name="shownInSolutionManager"></a><strong>shownInSolutionManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Opt-in to the Solution Manager. If set to true, this extension will be
+ shown in the Solution Manager. If not set, or set to false, this extension
+ is not shown in the Solution Manager.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="solutionManagerInfo" name="solutionManagerInfo"></a><strong>solutionManagerInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.ext.SolutionManagerInfo.html">ExtSolutionManagerInfo</a></td><td>
+<p></p>
+         Solution Manager configuration for this extension.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="subjectName" name="subjectName"></a><strong>subjectName</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Subject name from client certificate.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="taskList" name="taskList"></a><strong>taskList</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.Extension.TaskTypeInfo.html">ExtensionTaskTypeInfo[]</a></td><td>
+<p></p>
+         Definitions of tasks defined by this extension.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="type" name="type"></a><strong>type</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Type of extension (example may include CP-DVS, NUOVA-DVS, etc.).
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="version" name="version"></a><strong>version</strong></td><td>xsd:string</td><td>
+<p></p>
+         Extension version number as a dot-separated string. For example, "1.0.0"
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="Extension">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="description" type="vim25:Description"/>
+                     <element name="key" type="xsd:string"/>
+                     <element name="company" type="xsd:string" minOccurs="0"/>
+                     <element name="type" type="xsd:string" minOccurs="0"/>
+                     <element name="version" type="xsd:string"/>
+                     <element name="subjectName" type="xsd:string" minOccurs="0"/>
+                     <element name="server" type="vim25:ExtensionServerInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="client" type="vim25:ExtensionClientInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="taskList" type="vim25:ExtensionTaskTypeInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="eventList" type="vim25:ExtensionEventTypeInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="faultList" type="vim25:ExtensionFaultTypeInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="privilegeList" type="vim25:ExtensionPrivilegeInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="resourceList" type="vim25:ExtensionResourceInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="lastHeartbeatTime" type="xsd:dateTime"/>
+                     <element name="healthInfo" type="vim25:ExtensionHealthInfo" minOccurs="0"/>
+                     <element name="ovfConsumerInfo" type="vim25:ExtensionOvfConsumerInfo" minOccurs="0"/>
+                     <element name="extendedProductInfo" type="vim25:ExtExtendedProductInfo" minOccurs="0"/>
+                     <element name="managedEntityInfo" type="vim25:ExtManagedEntityInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="shownInSolutionManager" type="xsd:boolean" minOccurs="0"/>
+                     <element name="solutionManagerInfo" type="vim25:ExtSolutionManagerInfo" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>VMware vSphere API Reference</title>
+<script language="JavaScript" src="./commonRes.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="doc-style.css"/>
+</head>
+<body>
+<h1>New and Changed Managed Object Elements in 5.5</h1>
+<p>
+ The following sections list the new managed object API elements:
+<ul>
+<li><a href="#newMObjs">Managed objects</a></li>
+<li><a href="#newMethods">Methods</a></li>
+<li><a href="#newMethodParams">Method parameters</a></li>
+</ul>
+<h2><a name="newMObjs">New Managed Objects</a></h2>
+<table border="1" cellpadding="5" cellspacing="0">
+<tr><th><strong>New Managed Objects</strong></th></tr>
+<tr><td><a href="vim.DatastoreNamespaceManager.html">DatastoreNamespaceManager</a></td></tr>
+<tr><td><a href="vim.host.GraphicsManager.html">HostGraphicsManager</a></td></tr>
+<tr><td><a href="vim.host.VFlashManager.html">HostVFlashManager</a></td></tr>
+<tr><td><a href="vim.host.VsanInternalSystem.html">HostVsanInternalSystem</a></td></tr>
+<tr><td><a href="vim.host.VsanSystem.html">HostVsanSystem</a></td></tr>
+<tr><td><a href="vim.OpaqueNetwork.html">OpaqueNetwork</a></td></tr>
+</table>
+<h2><a name="newMethods">New Methods</a></h2>
+<table border="1" cellpadding="5" cellspacing="0">
+<tr><th><strong>Managed Object</strong></th>
+<th><strong>Method</strong></th></tr>
+<tr><td><a href="vim.AuthorizationManager.html">AuthorizationManager</a></td>
+<td><a href="vim.AuthorizationManager.html#hasPrivilegeOnEntities">HasPrivilegeOnEntities</a></td></tr>
+<tr><td><a href="vim.profile.host.ProfileManager.html">HostProfileManager</a></td>
+<td><a href="vim.profile.host.ProfileManager.html#generateTaskList">GenerateHostProfileTaskList_Task</a></td></tr>
+<tr><td rowspan="9"><a href="vim.host.StorageSystem.html">HostStorageSystem</a></td>
+<td><a href="vim.host.StorageSystem.html#deleteVffsVolumeState">DeleteVffsVolumeState</a></td></tr>
+<td><a href="vim.host.StorageSystem.html#destroyVffs">DestroyVffs</a></td></tr>
+<td><a href="vim.host.StorageSystem.html#extendVffs">ExtendVffs</a></td></tr>
+<td><a href="vim.host.StorageSystem.html#formatVffs">FormatVffs</a></td></tr>
+<td><a href="vim.host.StorageSystem.html#mountVffsVolume">MountVffsVolume</a></td></tr>
+<td><a href="vim.host.StorageSystem.html#queryAvailableSsds">QueryAvailableSsds</a></td></tr>
+<td><a href="vim.host.StorageSystem.html#rescanVffs">RescanVffs</a></td></tr>
+<td><a href="vim.host.StorageSystem.html#resolveMultipleUnresolvedVmfsVolumesEx">ResolveMultipleUnresolvedVmfsVolumesEx_Task</a></td></tr>
+<td><a href="vim.host.StorageSystem.html#unmountVffsVolume">UnmountVffsVolume</a></td></tr>
+<tr><td><a href="vim.vm.Snapshot.html">VirtualMachineSnapshot</a></td>
+<td><a href="vim.vm.Snapshot.html#exportSnapshot">ExportSnapshot</a></td></tr>
+<tr><td><a href="vim.dvs.VmwareDistributedVirtualSwitch.html">VmwareDistributedVirtualSwitch</a></td>
+<td><a href="vim.dvs.VmwareDistributedVirtualSwitch.html#updateLacpGroupConfig">UpdateDVSLacpGroupConfig_Task</a></td></tr>
+</table>
+<h2><a name="newMethodParams">New Method Parameters</a></h2><table border="1" cellpadding="5" cellspacing="0"><tr><th><strong>Managed Object</strong></th><th><strong>Method</strong></th><th><strong>Parameter</strong></th></tr><tr><td><a href="vim.HostSystem.html">HostSystem</a></td>
+<td><a href="vim.HostSystem.html#EnterMaintenanceMode">EnterMaintenanceMode</a></td>
+<td><a href="vim.HostSystem.html#EnterMaintenanceMode">maintenanceSpec</a></td></tr>
+<tr><td><a href="vim.VirtualDiskManager.html">VirtualDiskManager</a></td>
+<td><a href="vim.VirtualDiskManager.html#MoveVirtualDisk">MoveVirtualDisk</a></td>
+<td><a href="vim.VirtualDiskManager.html#MoveVirtualDisk">profile</a></td></tr>
+</table>
+<p>
+<script language="javascript" type="text/javascript">document.write(ID_Copyright);</script>
+<br><script language="javascript" type="text/javascript">document.write(ID_VersionInformation);</script>
+</p>
+</body>
+</html>

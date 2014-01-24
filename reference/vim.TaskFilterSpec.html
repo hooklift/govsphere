@@ -1,0 +1,206 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.TaskFilterSpec" name="vim.TaskFilterSpec"></a>
+<h1>Data Object - TaskFilterSpec</h1>
+<dl>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.TaskManager.html#createCollector">CreateCollectorForTasks</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.alarm.Alarm.html">Alarm</a>, <a href="vim.scheduler.ScheduledTask.html">ScheduledTask</a>, <a href="vim.TaskFilterSpec.ByEntity.html">TaskFilterSpecByEntity</a>, <a href="vim.TaskFilterSpec.ByTime.html">TaskFilterSpecByTime</a>, <a href="vim.TaskFilterSpec.ByUsername.html">TaskFilterSpecByUsername</a>, <a href="vim.TaskInfo.State.html">TaskInfoState</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This data object type defines the specification for the task filter used 
+  to query tasks in the history collector database. The client creates a task 
+  history collector with a filter specification, then retrieves the tasks from 
+  the task history collector.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="alarm" name="alarm"></a><strong>alarm</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.alarm.Alarm.html">Alarm</a></td><td>
+<p></p>
+         This property, if provided, limits the set of collected tasks to those
+  associated with the specified alarm.
+  If not provided, tasks are collected regardless of their association with alarms.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="entity" name="entity"></a><strong>entity</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.TaskFilterSpec.ByEntity.html">TaskFilterSpecByEntity</a></td><td>
+<p></p>
+         The filter specification for retrieving tasks by managed entity.
+  If not provided, then the tasks attached to all managed entities are 
+  collected.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="eventChainId" name="eventChainId"></a><strong>eventChainId</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int[]</td><td>
+<p></p>
+         The filter specification for retrieving tasks by chain ID. If it is set,
+  tasks not with the given <a href="vim.TaskInfo.html#eventChainId">eventChainId</a> will be
+  filtered out. If the property is not set, tasks' chain ID is disregarded
+  for filtering purposes.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="parentTaskKey" name="parentTaskKey"></a><strong>parentTaskKey</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         The filter specification for retrieving tasks by
+  <a href="vim.TaskInfo.html#parentTaskKey">parentTaskKey</a>. If it is set, tasks not with the
+  given parentTaskKey(s) will be filtered out. If the property is not set,
+  tasks' parentTaskKey is disregarded for filtering purposes.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="rootTaskKey" name="rootTaskKey"></a><strong>rootTaskKey</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         The filter specification for retrieving tasks by
+  <a href="vim.TaskInfo.html#rootTaskKey">rootTaskKey</a>. If it is set, tasks not with the
+  given rootTaskKey(s) will be filtered out. If the property is not set,
+  tasks' rootTaskKey is disregarded for filtering purposes.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="scheduledTask" name="scheduledTask"></a><strong>scheduledTask</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.scheduler.ScheduledTask.html">ScheduledTask</a></td><td>
+<p></p>
+         This property, if provided, limits the set of collected tasks to those
+  associated with the specified scheduled task.
+  If not provided, tasks are collected regardless of their association with any
+  scheduled task.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="state" name="state"></a><strong>state</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.TaskInfo.State.html">TaskInfoState[]</a></td><td>
+<p></p>
+         This property, if provided, limits the set of collected tasks by their states.
+  Task states are enumerated in <a href="vim.TaskInfo.html#state">State</a>.
+  If not provided, tasks are collected regardless of their state.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="tag" name="tag"></a><strong>tag</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         The filter specification for retrieving tasks by 
+  <a href="vim.TaskInfo.html#changeTag">tag</a>. If it is set, tasks not with the given tag(s)
+  will be filtered out. If the property is not set, tasks' tag is disregarded for 
+  filtering purposes. If it is set, and includes an empty string, tasks without a 
+  tag will be returned.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="time" name="time"></a><strong>time</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.TaskFilterSpec.ByTime.html">TaskFilterSpecByTime</a></td><td>
+<p></p>
+         The filter specification for retrieving tasks by time.
+  If not provided, then the tasks with any time stamp are collected.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="userName" name="userName"></a><strong>userName</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.TaskFilterSpec.ByUsername.html">TaskFilterSpecByUsername</a></td><td>
+<p></p>
+         The filter specification for retrieving tasks by user name.
+  If not provided, then the tasks belonging to any user are collected.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="TaskFilterSpec">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="entity" type="vim25:TaskFilterSpecByEntity" minOccurs="0"/>
+                     <element name="time" type="vim25:TaskFilterSpecByTime" minOccurs="0"/>
+                     <element name="userName" type="vim25:TaskFilterSpecByUsername" minOccurs="0"/>
+                     <element name="state" type="vim25:TaskInfoState" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="alarm" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="scheduledTask" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="eventChainId" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="tag" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="parentTaskKey" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="rootTaskKey" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

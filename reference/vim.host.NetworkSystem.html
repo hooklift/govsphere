@@ -1,0 +1,2388 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.NetworkSystem" name="vim.host.NetworkSystem"></a>
+<h1>Managed Object -  
+						HostNetworkSystem</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.host.ConfigManager.html#field_detail">HostConfigManager</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.DnsConfig.html">HostDnsConfig</a>, <a href="vim.host.IpRouteConfig.html">HostIpRouteConfig</a>, <a href="vim.host.IpRouteTableConfig.html">HostIpRouteTableConfig</a>, <a href="vim.host.NetCapabilities.html">HostNetCapabilities</a>, <a href="vim.host.NetOffloadCapabilities.html">HostNetOffloadCapabilities</a>, <a href="vim.host.NetworkConfig.html">HostNetworkConfig</a>, <a href="vim.host.NetworkConfig.Result.html">HostNetworkConfigResult</a>, <a href="vim.host.NetworkInfo.html">HostNetworkInfo</a>, <a href="vim.host.PortGroup.Specification.html">HostPortGroupSpec</a>, <a href="vim.host.VirtualNic.Specification.html">HostVirtualNicSpec</a>, <a href="vim.host.VirtualSwitch.Specification.html">HostVirtualSwitchSpec</a>, <a href="vim.host.PhysicalNic.NetworkHint.html">PhysicalNicHintInfo</a>, <a href="vim.host.PhysicalNic.LinkSpeedDuplex.html">PhysicalNicLinkInfo</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         This managed object type describes networking host configuration and
+  serves as the top level container for relevant networking
+  data objects.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="capabilities" name="capabilities"></a><strong>capabilities</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.host.NetCapabilities.html">HostNetCapabilities</a></td><td>
+<p></p>
+         Capability vector indicating the available product features.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="consoleIpRouteConfig" name="consoleIpRouteConfig"></a><strong>consoleIpRouteConfig</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.host.IpRouteConfig.html">HostIpRouteConfig</a></td><td>
+<p></p>
+         IP route configuration for the service console.  The IP route
+  configuration is global to the entire host.  This property is
+  set only if
+  IP routing can be configured for the service console.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="dnsConfig" name="dnsConfig"></a><strong>dnsConfig</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.host.DnsConfig.html">HostDnsConfig</a></td><td><B>Deprecated.</B><I>
+         As of vSphere API 5.5, which is moved to
+  each NetStackInstance. This only works on the default NetStackInstance.
+      </I>
+<p></p>
+         Client-side DNS configuration.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="ipRouteConfig" name="ipRouteConfig"></a><strong>ipRouteConfig</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.host.IpRouteConfig.html">HostIpRouteConfig</a></td><td><B>Deprecated.</B><I>
+         As of vSphere API 5.5, which is moved to
+  each NetStackInstance. This only works on the default NetStackInstance.
+      </I>
+<p></p>
+         The IP route configuration.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="networkConfig" name="networkConfig"></a><strong>networkConfig</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.host.NetworkConfig.html">HostNetworkConfig</a></td><td>
+<p></p>
+         Network configuration information.  This information can be applied
+  using the <a href="vim.host.NetworkSystem.html#updateNetworkConfig">updateNetworkConfig()</a> method.  The
+  information is a strict subset of the information available in NetworkInfo.<br>See <a href="vim.host.NetworkInfo.html">HostNetworkInfo</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="networkInfo" name="networkInfo"></a><strong>networkInfo</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.host.NetworkInfo.html">HostNetworkInfo</a></td><td>
+<p></p>
+         The network configuration and runtime information.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="offloadCapabilities" name="offloadCapabilities"></a><strong>offloadCapabilities</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.host.NetOffloadCapabilities.html">HostNetOffloadCapabilities</a></td><td><B>Deprecated.</B><I>
+         As of VI API 4.0, the system defaults will be used.
+      </I>
+<p></p>
+         The offload capabilities available on this server.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.ExtensibleManagedObject.html#availableField">availableField</a>, <a href="vim.ExtensibleManagedObject.html#value">value</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#addPortGroup">AddPortGroup</a>, <a href="#addServiceConsoleVirtualNic">AddServiceConsoleVirtualNic</a>, <a href="#addVirtualNic">AddVirtualNic</a>, <a href="#addVirtualSwitch">AddVirtualSwitch</a>, <a href="#queryNetworkHint">QueryNetworkHint</a>, <a href="#refresh">RefreshNetworkSystem</a>, <a href="#removePortGroup">RemovePortGroup</a>, <a href="#removeServiceConsoleVirtualNic">RemoveServiceConsoleVirtualNic</a>, <a href="#removeVirtualNic">RemoveVirtualNic</a>, <a href="#removeVirtualSwitch">RemoveVirtualSwitch</a>, <a href="#restartServiceConsoleVirtualNic">RestartServiceConsoleVirtualNic</a>, <a href="#updateConsoleIpRouteConfig">UpdateConsoleIpRouteConfig</a>, <a href="#updateDnsConfig">UpdateDnsConfig</a>, <a href="#updateIpRouteConfig">UpdateIpRouteConfig</a>, <a href="#updateIpRouteTableConfig">UpdateIpRouteTableConfig</a>, <a href="#updateNetworkConfig">UpdateNetworkConfig</a>, <a href="#updatePhysicalNicLinkSpeed">UpdatePhysicalNicLinkSpeed</a>, <a href="#updatePortGroup">UpdatePortGroup</a>, <a href="#updateServiceConsoleVirtualNic">UpdateServiceConsoleVirtualNic</a>, <a href="#updateVirtualNic">UpdateVirtualNic</a>, <a href="#updateVirtualSwitch">UpdateVirtualSwitch</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.ExtensibleManagedObject.html#setCustomValue">setCustomValue</a></td>
+</tr>
+</table>
+<br>
+<a id="addPortGroup" name="addPortGroup"></a>
+<h1>AddPortGroup</h1>
+<p></p>
+         Adds a port group to the virtual switch.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Network</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.NetworkSystem.html">HostNetworkSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>portgrp</strong></td><td><a href="vim.host.PortGroup.Specification.html">HostPortGroupSpec</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AlreadyExists.html">AlreadyExists</a></td><td>Thrown if the port group already exists.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the PortGroup vlanId is invalid. Valid vlanIds range from [0,4095], where 0 means no vlan tagging. Exception is also thrown if network policy is invalid.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the virtual switch does not exist.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('AddPortGroup-textarea');expandcontent(this, 'AddPortGroup-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="AddPortGroup-div">
+<textarea cols="20" rows="10" name="AddPortGroup-textarea" wrap="off" readonly="1" id="AddPortGroup-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AddPortGroup" type="vim25:AddPortGroupRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AddPortGroupResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="addServiceConsoleVirtualNic" name="addServiceConsoleVirtualNic"></a>
+<h1>AddServiceConsoleVirtualNic</h1>
+<p></p>
+         Adds a virtual service console network adapter.  Returns the device of the
+  VirtualNic.
+  <p>
+  IP configuration is required although it does not have to be enabled
+  if the host is an ESX Server system.
+
+  The dynamic privilege check will ensure that users have Host.Config.Network
+  privilege on the host, and Network.Assign privilege on the connecting
+  DVPortGroup, or DVS if connecting to a standalone DVPort.
+  Network.Assign privilege is not required for operations on standard network
+  or for operations performed directly on the host<br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Dynamic - See discussion above</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.NetworkSystem.html">HostNetworkSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>portgroup</strong></td><td>xsd:string</td><td>
+<p></p>
+         <br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>nic</strong></td><td><a href="vim.host.VirtualNic.Specification.html">HostVirtualNicSpec</a></td><td>
+<p></p>
+         <br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br>
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td>xsd:string</td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.<br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the IP address or subnet mask in the IP configuration are invalid or the named PortGroup does not exist.<br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the host is not an ESX Server system.<br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('AddServiceConsoleVirtualNic-textarea');expandcontent(this, 'AddServiceConsoleVirtualNic-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="AddServiceConsoleVirtualNic-div">
+<textarea cols="20" rows="10" name="AddServiceConsoleVirtualNic-textarea" wrap="off" readonly="1" id="AddServiceConsoleVirtualNic-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AddServiceConsoleVirtualNic" type="vim25:AddServiceConsoleVirtualNicRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AddServiceConsoleVirtualNicResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="xsd:string"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="addVirtualNic" name="addVirtualNic"></a>
+<h1>AddVirtualNic</h1>
+<p></p>
+         Adds a virtual host/VMkernel network adapter.  Returns the device of the virtual
+  network adapter.
+  <p>
+  IP configuration is required although it does not have to be enabled
+  if the host is an ESX Server system.
+
+  The dynamic privilege check will ensure that users have Host.Config.Network
+  privilege on the host, and Network.Assign privilege on the connecting
+  DVPortGroup, or DVS if connecting to a standalone DVPort.
+  Network.Assign privilege is not required for operations on standard network
+  or for operations performed directly on the host.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Dynamic - See discussion above</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.NetworkSystem.html">HostNetworkSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>portgroup</strong></td><td>xsd:string</td><td>
+<p></p>
+         Note: Must be the empty string in case nic.distributedVirtualPort
+                   is set.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>nic</strong></td><td><a href="vim.host.VirtualNic.Specification.html">HostVirtualNicSpec</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td>xsd:string</td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AlreadyExists.html">AlreadyExists</a></td><td>Thrown if the portgroup already has a virtual network adapter.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the IP address or subnet mask in the IP configuration are invalid. In the case of an ESX Server system, DHCP is not supported and this exception will be thrown if DHCP is specified. Exception may also be thrown if the named PortGroup does not exist.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the an ipv6 address is specified in an ipv4 only system</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('AddVirtualNic-textarea');expandcontent(this, 'AddVirtualNic-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="AddVirtualNic-div">
+<textarea cols="20" rows="10" name="AddVirtualNic-textarea" wrap="off" readonly="1" id="AddVirtualNic-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AddVirtualNic" type="vim25:AddVirtualNicRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AddVirtualNicResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="xsd:string"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="addVirtualSwitch" name="addVirtualSwitch"></a>
+<h1>AddVirtualSwitch</h1>
+<p></p>
+         Adds a new virtual switch to the system with the given name.  The
+  name must be unique with respect to other virtual switches on the
+  host and is limited to 32 characters.<br>See <a href="vim.host.NetworkSystem.html#updateVirtualSwitch">UpdateVirtualSwitch</a><br>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Network</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.NetworkSystem.html">HostNetworkSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vswitchName</strong></td><td>xsd:string</td><td>
+<p></p>
+         <br>See <a href="vim.host.NetworkSystem.html#updateVirtualSwitch">UpdateVirtualSwitch</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>spec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.VirtualSwitch.Specification.html">HostVirtualSwitchSpec</a></td><td>
+<p></p>
+         <br>See <a href="vim.host.NetworkSystem.html#updateVirtualSwitch">UpdateVirtualSwitch</a><br>
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AlreadyExists.html">AlreadyExists</a></td><td>Thrown if the virtual switch already exists.<br>See <a href="vim.host.NetworkSystem.html#updateVirtualSwitch">UpdateVirtualSwitch</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.<br>See <a href="vim.host.NetworkSystem.html#updateVirtualSwitch">UpdateVirtualSwitch</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if network vswitchName exceeds the maximum allowed length, or the number of ports specified falls out of valid range, or the network policy is invalid, or beacon configuration is invalid.<br>See <a href="vim.host.NetworkSystem.html#updateVirtualSwitch">UpdateVirtualSwitch</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.ResourceInUse.html">ResourceInUse</a></td><td>Thrown if the physical network adapter being bridged is already in use.<br>See <a href="vim.host.NetworkSystem.html#updateVirtualSwitch">UpdateVirtualSwitch</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('AddVirtualSwitch-textarea');expandcontent(this, 'AddVirtualSwitch-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="AddVirtualSwitch-div">
+<textarea cols="20" rows="10" name="AddVirtualSwitch-textarea" wrap="off" readonly="1" id="AddVirtualSwitch-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AddVirtualSwitch" type="vim25:AddVirtualSwitchRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AddVirtualSwitchResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryNetworkHint" name="queryNetworkHint"></a>
+<h1>QueryNetworkHint</h1>
+<p></p>
+         Requests network hint information for a physical network adapter.
+  A network hint is
+  some information about the network to which the physical network
+  adapter is attached.  The method receives in a list of physical
+  network adapter devices and returns an equal number of hints
+  if some devices are provided.  If the list of devices is empty,
+  then the method accesses hints for all physical
+  network adapters.<br>See <a href="vim.host.NetCapabilities.html#supportsNetworkHints">supportsNetworkHints</a><br>See <a href="vim.host.PhysicalNic.html#device">device</a><br>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Read</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.NetworkSystem.html">HostNetworkSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>device</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         <br>See <a href="vim.host.NetCapabilities.html#supportsNetworkHints">supportsNetworkHints</a><br>See <a href="vim.host.PhysicalNic.html#device">device</a><br>
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.host.PhysicalNic.NetworkHint.html">PhysicalNicHintInfo[]</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.<br>See <a href="vim.host.NetCapabilities.html#supportsNetworkHints">supportsNetworkHints</a><br>See <a href="vim.host.PhysicalNic.html#device">device</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the speed and duplexity combination is not valid for the current link driver.<br>See <a href="vim.host.NetCapabilities.html#supportsNetworkHints">supportsNetworkHints</a><br>See <a href="vim.host.PhysicalNic.html#device">device</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if a specified physical network adapter does not exist.<br>See <a href="vim.host.NetCapabilities.html#supportsNetworkHints">supportsNetworkHints</a><br>See <a href="vim.host.PhysicalNic.html#device">device</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the host is not an ESX Server system.<br>See <a href="vim.host.NetCapabilities.html#supportsNetworkHints">supportsNetworkHints</a><br>See <a href="vim.host.PhysicalNic.html#device">device</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryNetworkHint-textarea');expandcontent(this, 'QueryNetworkHint-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryNetworkHint-div">
+<textarea cols="20" rows="10" name="QueryNetworkHint-textarea" wrap="off" readonly="1" id="QueryNetworkHint-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryNetworkHint" type="vim25:QueryNetworkHintRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryNetworkHintResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:PhysicalNicHintInfo" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="refresh" name="refresh"></a>
+<h1>RefreshNetworkSystem</h1>
+<p></p>
+         Refresh the network information and settings to pick up any changes
+  that might have occurred.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Network</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.NetworkSystem.html">HostNetworkSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RefreshNetworkSystem-textarea');expandcontent(this, 'RefreshNetworkSystem-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RefreshNetworkSystem-div">
+<textarea cols="20" rows="10" name="RefreshNetworkSystem-textarea" wrap="off" readonly="1" id="RefreshNetworkSystem-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RefreshNetworkSystem" type="vim25:RefreshNetworkSystemRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RefreshNetworkSystemResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="removePortGroup" name="removePortGroup"></a>
+<h1>RemovePortGroup</h1>
+<p></p>
+         Removes port group from the virtual switch.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Network</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.NetworkSystem.html">HostNetworkSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>pgName</strong></td><td>xsd:string</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the port group or virtual switch does not exist.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.ResourceInUse.html">ResourceInUse</a></td><td>Thrown if the port group can not be removed because there are virtual network adapters associated with it.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RemovePortGroup-textarea');expandcontent(this, 'RemovePortGroup-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RemovePortGroup-div">
+<textarea cols="20" rows="10" name="RemovePortGroup-textarea" wrap="off" readonly="1" id="RemovePortGroup-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemovePortGroup" type="vim25:RemovePortGroupRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemovePortGroupResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="removeServiceConsoleVirtualNic" name="removeServiceConsoleVirtualNic"></a>
+<h1>RemoveServiceConsoleVirtualNic</h1>
+<p></p>
+         Removes a virtual service console network adapter.<br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Network</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.NetworkSystem.html">HostNetworkSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>device</strong></td><td>xsd:string</td><td>
+<p></p>
+         <br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br>
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.<br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the virtual network adapter cannot be found.<br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the host is not an ESX Server system.<br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.ResourceInUse.html">ResourceInUse</a></td><td>Thrown if the network adapter is currently used by DHCP DNS.<br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RemoveServiceConsoleVirtualNic-textarea');expandcontent(this, 'RemoveServiceConsoleVirtualNic-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RemoveServiceConsoleVirtualNic-div">
+<textarea cols="20" rows="10" name="RemoveServiceConsoleVirtualNic-textarea" wrap="off" readonly="1" id="RemoveServiceConsoleVirtualNic-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveServiceConsoleVirtualNic" type="vim25:RemoveServiceConsoleVirtualNicRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveServiceConsoleVirtualNicResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="removeVirtualNic" name="removeVirtualNic"></a>
+<h1>RemoveVirtualNic</h1>
+<p></p>
+         Removes a virtual host/VMkernel network adapter.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Network</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.NetworkSystem.html">HostNetworkSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>device</strong></td><td>xsd:string</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the virtual network adapter cannot be found.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RemoveVirtualNic-textarea');expandcontent(this, 'RemoveVirtualNic-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RemoveVirtualNic-div">
+<textarea cols="20" rows="10" name="RemoveVirtualNic-textarea" wrap="off" readonly="1" id="RemoveVirtualNic-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveVirtualNic" type="vim25:RemoveVirtualNicRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveVirtualNicResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="removeVirtualSwitch" name="removeVirtualSwitch"></a>
+<h1>RemoveVirtualSwitch</h1>
+<p></p>
+         Removes an existing virtual switch from the system.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Network</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.NetworkSystem.html">HostNetworkSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vswitchName</strong></td><td>xsd:string</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the virtual switch does not exist.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.ResourceInUse.html">ResourceInUse</a></td><td>Thrown if there are virtual network adapters associated with the virtual switch.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RemoveVirtualSwitch-textarea');expandcontent(this, 'RemoveVirtualSwitch-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RemoveVirtualSwitch-div">
+<textarea cols="20" rows="10" name="RemoveVirtualSwitch-textarea" wrap="off" readonly="1" id="RemoveVirtualSwitch-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveVirtualSwitch" type="vim25:RemoveVirtualSwitchRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveVirtualSwitchResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="restartServiceConsoleVirtualNic" name="restartServiceConsoleVirtualNic"></a>
+<h1>RestartServiceConsoleVirtualNic</h1>
+<p></p>
+         Restart the service console virtual network adapter interface.
+  If the service console virtual network adapter uses DHCP, restarting
+  the interface may result it with a different IP configuration, or
+  even fail to be brought up depending on the host system network
+  configuration.<br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Network</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.NetworkSystem.html">HostNetworkSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>device</strong></td><td>xsd:string</td><td>
+<p></p>
+         <br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br>
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.<br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the virtual network adapter cannot be found.<br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the host is not an ESX Server system.<br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RestartServiceConsoleVirtualNic-textarea');expandcontent(this, 'RestartServiceConsoleVirtualNic-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RestartServiceConsoleVirtualNic-div">
+<textarea cols="20" rows="10" name="RestartServiceConsoleVirtualNic-textarea" wrap="off" readonly="1" id="RestartServiceConsoleVirtualNic-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RestartServiceConsoleVirtualNic" type="vim25:RestartServiceConsoleVirtualNicRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RestartServiceConsoleVirtualNicResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateConsoleIpRouteConfig" name="updateConsoleIpRouteConfig"></a>
+<h1>UpdateConsoleIpRouteConfig</h1>
+<p></p>
+         Applies the IP route configuration for the service console.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Network</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.NetworkSystem.html">HostNetworkSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>config</strong></td><td><a href="vim.host.IpRouteConfig.html">HostIpRouteConfig</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if any of the IP addresses are invalid.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the host is not an ESX Server system.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateConsoleIpRouteConfig-textarea');expandcontent(this, 'UpdateConsoleIpRouteConfig-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateConsoleIpRouteConfig-div">
+<textarea cols="20" rows="10" name="UpdateConsoleIpRouteConfig-textarea" wrap="off" readonly="1" id="UpdateConsoleIpRouteConfig-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateConsoleIpRouteConfig" type="vim25:UpdateConsoleIpRouteConfigRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateConsoleIpRouteConfigResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateDnsConfig" name="updateDnsConfig"></a>
+<h1>UpdateDnsConfig</h1>
+<B>Deprecated.</B><I>
+         As of vSphere API 5.5, which is moved to
+  each NetStackInstance. This API only works on the default NetStackInstance.
+      </I>
+<p></p>
+         Applies the client-side DNS configuration.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Network</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.NetworkSystem.html">HostNetworkSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>config</strong></td><td><a href="vim.host.DnsConfig.html">HostDnsConfig</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.HostInDomain.html">HostInDomain</a></td><td>Thrown if an attempt is made to change the host or domain name while the host is part of a Windows domain.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if any of the IP addresses are invalid, or for a DHCP DNS, if the DHCP virtual network adapter is not specified or the virtual network adapter specified is not DHCP enabled.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>when the DHCP virtual network adapter specified does not exist.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the host is not an ESX Server system.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateDnsConfig-textarea');expandcontent(this, 'UpdateDnsConfig-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateDnsConfig-div">
+<textarea cols="20" rows="10" name="UpdateDnsConfig-textarea" wrap="off" readonly="1" id="UpdateDnsConfig-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateDnsConfig" type="vim25:UpdateDnsConfigRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateDnsConfigResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateIpRouteConfig" name="updateIpRouteConfig"></a>
+<h1>UpdateIpRouteConfig</h1>
+<B>Deprecated.</B><I>
+         As of vSphere API 5.5, which is moved to
+  each NetStackInstance. This API only works on the default NetStackInstance.
+      </I>
+<p></p>
+         Applies the IP route configuration.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Network</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.NetworkSystem.html">HostNetworkSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>config</strong></td><td><a href="vim.host.IpRouteConfig.html">HostIpRouteConfig</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if any of the IP addresses are invalid.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the an ipv6 address is specified in an ipv4 only system</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the host is not an ESX Server system.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateIpRouteConfig-textarea');expandcontent(this, 'UpdateIpRouteConfig-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateIpRouteConfig-div">
+<textarea cols="20" rows="10" name="UpdateIpRouteConfig-textarea" wrap="off" readonly="1" id="UpdateIpRouteConfig-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateIpRouteConfig" type="vim25:UpdateIpRouteConfigRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateIpRouteConfigResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateIpRouteTableConfig" name="updateIpRouteTableConfig"></a>
+<h1>UpdateIpRouteTableConfig</h1>
+<B>Deprecated.</B><I>
+         As of vSphere API 5.5, which is moved to
+  each NetStackInstance. This API only works on the default NetStackInstance.
+      </I>
+<p></p>
+         Applies the IP route table configuration.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Network</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.NetworkSystem.html">HostNetworkSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>config</strong></td><td><a href="vim.host.IpRouteTableConfig.html">HostIpRouteTableConfig</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if any of the IP addresses are invalid.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the host is not an ESX Server system.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateIpRouteTableConfig-textarea');expandcontent(this, 'UpdateIpRouteTableConfig-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateIpRouteTableConfig-div">
+<textarea cols="20" rows="10" name="UpdateIpRouteTableConfig-textarea" wrap="off" readonly="1" id="UpdateIpRouteTableConfig-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateIpRouteTableConfig" type="vim25:UpdateIpRouteTableConfigRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateIpRouteTableConfigResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateNetworkConfig" name="updateNetworkConfig"></a>
+<h1>UpdateNetworkConfig</h1>
+<p></p>
+         Applies the network configuration.  This method operates primarily
+  in two modes: <b>replace</b> or <b>modify</b> mode.
+  <p>
+  <b>replace</b><br>
+  When called in <b>replace</b> mode, this method applies the fully
+  specified networking configuration to the networking system.
+  <p>
+  Upon successful completion of the call, the state of networking will
+  match the configuration specified in <b>config</b>.  In general, objects
+  are created or destroyed to match the elements in the array of
+  configurations.  The identifier field in each element in an array of
+  configurations is used to match an existing network entity.
+  The state of existing network entities is patched to match that
+  of the configuration.
+  <p>
+  An exception to this approach applies to the array of PhysicalNic.Config
+  objects.  The cardinality of physical network adapters cannot be
+  changed through this
+  operation.  Thus, the identifier of every element in the array must match an
+  existing PhysicalNic.  If there are fewer elements in the array than
+  there are existing PhysicalNics, then no change is made on the
+  unreferenced PhysicalNic objects.
+  <p>
+  If the call fails, the networking error is returned as an exception
+  and the state of networking reverts to the state prior to the start
+  of the call.
+  <p>
+  <b>modify</b>
+  When called in <b>modify</b> mode, only changes that are specified are
+  made.  For singleton entities like DnsConfig, the state is
+  changed only if the data object is set.  For array elements, there is
+  an Operation field that indicates if the element should be added,
+  removed, or edited.  In the case of editing or removal, the entity
+  must exist or an exception is thrown.  In the case of adding, a
+  specification needs to be provided.
+  <p>
+  It returns device names of vmkernel and service console virtual network
+  adapter added to the system.
+  <p>
+  Currently, the only mode that is implemented is incremental mode.
+  Only add operations are supported for instances.  Singleton
+  configuration is not supported.
+  The dynamic privilege check will ensure that users have Host.Config.Network
+  privilege on the host, and Network.Assign privilege on the connecting
+  DVPortGroup, or DVS if connecting to a standalone DVPort.
+  Network.Assign privilege is not required for operations on standard network
+  or for operations performed directly on the host<br>See <a href="vim.host.ConfigChange.Mode.html">HostConfigChangeMode</a><br>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Dynamic - See discussion above</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.NetworkSystem.html">HostNetworkSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>config</strong></td><td><a href="vim.host.NetworkConfig.html">HostNetworkConfig</a></td><td>
+<p></p>
+         <br>See <a href="vim.host.ConfigChange.Mode.html">HostConfigChangeMode</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>changeMode</strong></td><td>xsd:string</td><td>
+<p></p>
+         <br>See <a href="vim.host.ConfigChange.Mode.html">HostConfigChangeMode</a><br>
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.host.NetworkConfig.Result.html">HostNetworkConfigResult</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AlreadyExists.html">AlreadyExists</a></td><td>when a network entity specified in the configuration already exists.<br>See <a href="vim.host.ConfigChange.Mode.html">HostConfigChangeMode</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.<br>See <a href="vim.host.ConfigChange.Mode.html">HostConfigChangeMode</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if an invalid parameter is passed in for one of the networking objects.<br>See <a href="vim.host.ConfigChange.Mode.html">HostConfigChangeMode</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>when a network entity specified in the configuration already exists.<br>See <a href="vim.host.ConfigChange.Mode.html">HostConfigChangeMode</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if modify mode is not used, a remove or set operation is specified for an instance, or a singleton entity is configured.<br>See <a href="vim.host.ConfigChange.Mode.html">HostConfigChangeMode</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.ResourceInUse.html">ResourceInUse</a></td><td><br>See <a href="vim.host.ConfigChange.Mode.html">HostConfigChangeMode</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateNetworkConfig-textarea');expandcontent(this, 'UpdateNetworkConfig-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateNetworkConfig-div">
+<textarea cols="20" rows="10" name="UpdateNetworkConfig-textarea" wrap="off" readonly="1" id="UpdateNetworkConfig-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateNetworkConfig" type="vim25:UpdateNetworkConfigRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateNetworkConfigResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:HostNetworkConfigResult"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updatePhysicalNicLinkSpeed" name="updatePhysicalNicLinkSpeed"></a>
+<h1>UpdatePhysicalNicLinkSpeed</h1>
+<p></p>
+         Configures link speed and duplexity.  If linkSpeed is not specified,
+  physical network adapter will be set to autonegotiate.<br>See <a href="vim.host.NetCapabilities.html#canSetPhysicalNicLinkSpeed">canSetPhysicalNicLinkSpeed</a><br>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Network</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.NetworkSystem.html">HostNetworkSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>device</strong></td><td>xsd:string</td><td>
+<p></p>
+         <br>See <a href="vim.host.NetCapabilities.html#canSetPhysicalNicLinkSpeed">canSetPhysicalNicLinkSpeed</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>linkSpeed</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.PhysicalNic.LinkSpeedDuplex.html">PhysicalNicLinkInfo</a></td><td>
+<p></p>
+         <br>See <a href="vim.host.NetCapabilities.html#canSetPhysicalNicLinkSpeed">canSetPhysicalNicLinkSpeed</a><br>
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.<br>See <a href="vim.host.NetCapabilities.html#canSetPhysicalNicLinkSpeed">canSetPhysicalNicLinkSpeed</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the speed and duplexity is not one of the valid configurations.<br>See <a href="vim.host.NetCapabilities.html#canSetPhysicalNicLinkSpeed">canSetPhysicalNicLinkSpeed</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the physical network adapter does not exist.<br>See <a href="vim.host.NetCapabilities.html#canSetPhysicalNicLinkSpeed">canSetPhysicalNicLinkSpeed</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the host is not an ESX Server system.<br>See <a href="vim.host.NetCapabilities.html#canSetPhysicalNicLinkSpeed">canSetPhysicalNicLinkSpeed</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdatePhysicalNicLinkSpeed-textarea');expandcontent(this, 'UpdatePhysicalNicLinkSpeed-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdatePhysicalNicLinkSpeed-div">
+<textarea cols="20" rows="10" name="UpdatePhysicalNicLinkSpeed-textarea" wrap="off" readonly="1" id="UpdatePhysicalNicLinkSpeed-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdatePhysicalNicLinkSpeed" type="vim25:UpdatePhysicalNicLinkSpeedRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdatePhysicalNicLinkSpeedResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updatePortGroup" name="updatePortGroup"></a>
+<h1>UpdatePortGroup</h1>
+<p></p>
+         Reconfigures a port group on the virtual switch.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Network</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.NetworkSystem.html">HostNetworkSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>pgName</strong></td><td>xsd:string</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>portgrp</strong></td><td><a href="vim.host.PortGroup.Specification.html">HostPortGroupSpec</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AlreadyExists.html">AlreadyExists</a></td><td>Thrown if the update causes the port group to conflict with an existing port group.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the PortGroup vlanId is invalid. Valid vlanIds range from [0,4095], where 0 means no vlan tagging. Exception is also thrown if network policy is invalid.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the port group or virtual switch does not exist.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdatePortGroup-textarea');expandcontent(this, 'UpdatePortGroup-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdatePortGroup-div">
+<textarea cols="20" rows="10" name="UpdatePortGroup-textarea" wrap="off" readonly="1" id="UpdatePortGroup-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdatePortGroup" type="vim25:UpdatePortGroupRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdatePortGroupResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateServiceConsoleVirtualNic" name="updateServiceConsoleVirtualNic"></a>
+<h1>UpdateServiceConsoleVirtualNic</h1>
+<p></p>
+         Configures the IP configuration for a virtual service console network
+  adapter.
+  <p>
+  IP configuration is required although it does not have to be enabled
+  if the host is an ESX Server system.
+
+  The dynamic privilege check will check that the users
+  have Network.Assign privilege on the DVPortGroup
+  or the DVS if the port resides on a DVPortGroup or is a stand-alone DVS port.<br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Dynamic - See discussion above</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.NetworkSystem.html">HostNetworkSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>device</strong></td><td>xsd:string</td><td>
+<p></p>
+         <br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>nic</strong></td><td><a href="vim.host.VirtualNic.Specification.html">HostVirtualNicSpec</a></td><td>
+<p></p>
+         <br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br>
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.<br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the IP address or subnet mask in the IP configuration are invalid or the named PortGroup does not exist.<br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the virtual network adapter cannot be found.<br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the host is not an ESX Server system.<br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.ResourceInUse.html">ResourceInUse</a></td><td>Thrown if tries to turn of DHCP while the network adapter is currently used by DHCP DNS.<br>See <a href="vim.host.NetCapabilities.html#usesServiceConsoleNic">usesServiceConsoleNic</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateServiceConsoleVirtualNic-textarea');expandcontent(this, 'UpdateServiceConsoleVirtualNic-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateServiceConsoleVirtualNic-div">
+<textarea cols="20" rows="10" name="UpdateServiceConsoleVirtualNic-textarea" wrap="off" readonly="1" id="UpdateServiceConsoleVirtualNic-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateServiceConsoleVirtualNic" type="vim25:UpdateServiceConsoleVirtualNicRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateServiceConsoleVirtualNicResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateVirtualNic" name="updateVirtualNic"></a>
+<h1>UpdateVirtualNic</h1>
+<p></p>
+         Configures virtual host/VMkernel network adapter.
+  <p>
+  IP configuration is required although it does not have to be enabled
+  if the host is an ESX Server system.
+
+  The dynamic privilege check will ensure that users have Host.Config.Network
+  privilege on the host, and Network.Assign privilege on the connecting
+  DVPortGroup, or DVS if connecting to a standalone DVPort.
+  Network.Assign privilege is not required for operations on standard network
+  or for operations performed directly on the host.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Dynamic - See discussion above</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.NetworkSystem.html">HostNetworkSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>device</strong></td><td>xsd:string</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>nic</strong></td><td><a href="vim.host.VirtualNic.Specification.html">HostVirtualNicSpec</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the IP address or subnet mask in the IP configuration are invalid. In the case of an ESX Server system, DHCP is not supported and this exception is thrown if DHCP is specified. Exception may also be thrown if the named PortGroup does not exist.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the an ipv6 address is specified in an ipv4 only system</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the virtual network adapter cannot be found.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateVirtualNic-textarea');expandcontent(this, 'UpdateVirtualNic-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateVirtualNic-div">
+<textarea cols="20" rows="10" name="UpdateVirtualNic-textarea" wrap="off" readonly="1" id="UpdateVirtualNic-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateVirtualNic" type="vim25:UpdateVirtualNicRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateVirtualNicResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateVirtualSwitch" name="updateVirtualSwitch"></a>
+<h1>UpdateVirtualSwitch</h1>
+<p></p>
+         Updates the properties of the virtual switch.
+  <p>
+  If the bridge is NULL, the configuration will be unset.
+  <p>
+  If a network adapter is listed in the active or standby list, then
+  changing the set of network adapters to which the physical network
+  adapter is associated may have a side effect of changing the network
+  adapter order policy.  If a network adapter is removed from
+  the bridge configuration, then the network adapter is removed
+  from the network
+  adapter teaming order.
+  <p>
+  The BondBridge configuration is the only valid bridge configuration for
+  an ESX Server system.<br>See <a href="vim.host.NetworkPolicy.NicOrderPolicy.html">HostNicOrderPolicy</a><br>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Network</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.NetworkSystem.html">HostNetworkSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vswitchName</strong></td><td>xsd:string</td><td>
+<p></p>
+         <br>See <a href="vim.host.NetworkPolicy.NicOrderPolicy.html">HostNicOrderPolicy</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.host.VirtualSwitch.Specification.html">HostVirtualSwitchSpec</a></td><td>
+<p></p>
+         <br>See <a href="vim.host.NetworkPolicy.NicOrderPolicy.html">HostNicOrderPolicy</a><br>
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown for all other configuration failures.<br>See <a href="vim.host.NetworkPolicy.NicOrderPolicy.html">HostNicOrderPolicy</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the bridge parameter is bad or the network policy is invalid or does not exist or the number of ports specified falls out of valid range, or the beacon configuration is invalid.<br>See <a href="vim.host.NetworkPolicy.NicOrderPolicy.html">HostNicOrderPolicy</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the virtual switch does not exist.<br>See <a href="vim.host.NetworkPolicy.NicOrderPolicy.html">HostNicOrderPolicy</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if network adapter teaming policy is set but is not supported.<br>See <a href="vim.host.NetworkPolicy.NicOrderPolicy.html">HostNicOrderPolicy</a><br></td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.ResourceInUse.html">ResourceInUse</a></td><td>Thrown if the physical network adapter being bridged is already in use.<br>See <a href="vim.host.NetworkPolicy.NicOrderPolicy.html">HostNicOrderPolicy</a><br></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateVirtualSwitch-textarea');expandcontent(this, 'UpdateVirtualSwitch-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateVirtualSwitch-div">
+<textarea cols="20" rows="10" name="UpdateVirtualSwitch-textarea" wrap="off" readonly="1" id="UpdateVirtualSwitch-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateVirtualSwitch" type="vim25:UpdateVirtualSwitchRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateVirtualSwitchResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.dvs.DistributedVirtualPort.FilterPolicy" name="vim.dvs.DistributedVirtualPort.FilterPolicy"></a>
+<h1>Data Object - DvsFilterPolicy</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.dvs.DistributedVirtualPort.Setting.html#field_detail">DVPortSetting</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.InheritablePolicy.html">InheritablePolicy</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.dvs.DistributedVirtualPort.FilterConfig.html">DvsFilterConfig</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.5</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This class defines Network Filter Policy.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="filterConfig" name="filterConfig"></a><strong>filterConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.dvs.DistributedVirtualPort.FilterConfig.html">DvsFilterConfig[]</a></td><td>
+<p></p>
+         List of Network Filter Configurations.
+  In an update operation, the array can contain all
+  <a href="vim.dvs.DistributedVirtualPort.TrafficFilterConfigSpec.html">DvsTrafficFilterConfigSpec</a> objects
+  or all <a href="vim.dvs.DistributedVirtualPort.FilterConfig.html">DvsFilterConfig</a> and
+  <a href="vim.dvs.DistributedVirtualPort.TrafficFilterConfig.html">DvsTrafficFilterConfig</a>
+  object, but not mixed of Config and Spec objects. If array of
+  FilterConfigSpec and TrafficFilterConfigSpec is used
+  for updating Network Filter then only the Network Filters
+  matching <a href="vim.dvs.DistributedVirtualPort.html#key">key</a> /
+  <a href="vim.dvs.DistributedVirtualPort.html#key">key</a>
+  is updated.
+  If array of <a href="vim.dvs.DistributedVirtualPort.FilterConfig.html">DvsFilterConfig</a> and
+  <a href="vim.dvs.DistributedVirtualPort.TrafficFilterConfig.html">DvsTrafficFilterConfig</a>
+  is used for updating port settings, the Network Filter
+  settings will be overridden with the new array specified. The
+  specified array should only contain FilterConfig and
+  TrafficFilterConfig objects with FilterConfig#inherited /
+  TrafficFilterConfig#inherited set to false.
+  FilterConfig/TrafficFilterConfig  objects with
+  FilterConfig#inherited/TrafficFilterConfig#inherited as
+  true in the specified array will be ignored. The updated result will
+  include FilterConfig/TrafficFilterConfig objects
+  inherited from parent, if any.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.InheritablePolicy.html">InheritablePolicy</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.InheritablePolicy.html#inherited">inherited</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DvsFilterPolicy">
+            <complexContent>
+               <extension base="vim25:InheritablePolicy">
+                  <sequence>
+                     <element name="filterConfig" type="vim25:DvsFilterConfig" minOccurs="0" maxOccurs="unbounded"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

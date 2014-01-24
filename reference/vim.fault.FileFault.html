@@ -1,0 +1,105 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.fault.FileFault" name="vim.fault.FileFault"></a>
+<h1>Fault - FileFault</h1>
+<dl>
+<dt>Thrown by</dt>
+<dd>
+<a href="vim.vm.guest.FileManager.html#changeFileAttributes">ChangeFileAttributesInGuest</a>, <a href="vim.FileManager.html#changeOwner">ChangeOwner</a>, <a href="vim.VirtualApp.html#clone">CloneVApp_Task</a>, <a href="vim.VirtualMachine.html#clone">CloneVM_Task</a>, <a href="vim.VirtualMachine.html#consolidateDisks">ConsolidateVMDisks_Task</a>, <a href="vim.FileManager.html#copyFile">CopyDatastoreFile_Task</a>, <a href="vim.VirtualDiskManager.html#copyVirtualDisk">CopyVirtualDisk_Task</a>, <a href="vim.ResourcePool.html#createVm">CreateChildVM_Task</a>, <a href="vim.OvfManager.html#createDescriptor">CreateDescriptor</a>, <a href="vim.OvfManager.html#createImportSpec">CreateImportSpec</a>, <a href="vim.VirtualMachine.html#createScreenshot">CreateScreenshot_Task</a>, <a href="vim.VirtualMachine.html#createSecondary">CreateSecondaryVM_Task</a>, <a href="vim.VirtualMachine.html#createSnapshot">CreateSnapshot_Task</a>, <a href="vim.vm.guest.FileManager.html#createTemporaryDirectory">CreateTemporaryDirectoryInGuest</a>, <a href="vim.vm.guest.FileManager.html#createTemporaryFile">CreateTemporaryFileInGuest</a>, <a href="vim.VirtualDiskManager.html#createVirtualDisk">CreateVirtualDisk_Task</a>, <a href="vim.Folder.html#createVm">CreateVM_Task</a>, <a href="vim.VirtualMachine.html#defragmentAllDisks">DefragmentAllDisks</a>, <a href="vim.VirtualDiskManager.html#defragmentVirtualDisk">DefragmentVirtualDisk_Task</a>, <a href="vim.FileManager.html#deleteFile">DeleteDatastoreFile_Task</a>, <a href="vim.DatastoreNamespaceManager.html#DeleteDirectory">DeleteDirectory</a>, <a href="vim.vm.guest.FileManager.html#deleteDirectory">DeleteDirectoryInGuest</a>, <a href="vim.host.DatastoreBrowser.html#deleteFile">DeleteFile</a>, <a href="vim.vm.guest.FileManager.html#deleteFile">DeleteFileInGuest</a>, <a href="vim.VirtualDiskManager.html#deleteVirtualDisk">DeleteVirtualDisk_Task</a>, <a href="vim.VirtualDiskManager.html#eagerZeroVirtualDisk">EagerZeroVirtualDisk_Task</a>, <a href="vim.VirtualMachine.html#estimateStorageRequirementForConsolidate">EstimateStorageForConsolidateSnapshots_Task</a>, <a href="vim.vm.Snapshot.html#exportSnapshot">ExportSnapshot</a>, <a href="vim.VirtualApp.html#exportVApp">ExportVApp</a>, <a href="vim.VirtualMachine.html#exportVm">ExportVm</a>, <a href="vim.VirtualDiskManager.html#extendVirtualDisk">ExtendVirtualDisk_Task</a>, <a href="vim.ResourcePool.html#importVApp">ImportVApp</a>, <a href="vim.VirtualDiskManager.html#inflateVirtualDisk">InflateVirtualDisk_Task</a>, <a href="vim.vm.guest.FileManager.html#initiateFileTransferFromGuest">InitiateFileTransferFromGuest</a>, <a href="vim.vm.guest.FileManager.html#initiateFileTransferToGuest">InitiateFileTransferToGuest</a>, <a href="vim.vm.guest.FileManager.html#listFiles">ListFilesInGuest</a>, <a href="vim.FileManager.html#makeDirectory">MakeDirectory</a>, <a href="vim.vm.guest.FileManager.html#makeDirectory">MakeDirectoryInGuest</a>, <a href="vim.VirtualMachine.html#markAsTemplate">MarkAsTemplate</a>, <a href="vim.VirtualMachine.html#markAsVirtualMachine">MarkAsVirtualMachine</a>, <a href="vim.VirtualMachine.html#migrate">MigrateVM_Task</a>, <a href="vim.FileManager.html#moveFile">MoveDatastoreFile_Task</a>, <a href="vim.vm.guest.FileManager.html#moveDirectory">MoveDirectoryInGuest</a>, <a href="vim.vm.guest.FileManager.html#moveFile">MoveFileInGuest</a>, <a href="vim.VirtualDiskManager.html#moveVirtualDisk">MoveVirtualDisk_Task</a>, <a href="vim.OvfManager.html#parseDescriptor">ParseDescriptor</a>, <a href="vim.VirtualApp.html#powerOn">PowerOnVApp_Task</a>, <a href="vim.VirtualMachine.html#powerOn">PowerOnVM_Task</a>, <a href="vim.VirtualMachine.html#queryChangedDiskAreas">QueryChangedDiskAreas</a>, <a href="vim.VirtualDiskManager.html#queryVirtualDiskFragmentation">QueryVirtualDiskFragmentation</a>, <a href="vim.VirtualDiskManager.html#queryVirtualDiskGeometry">QueryVirtualDiskGeometry</a>, <a href="vim.VirtualDiskManager.html#queryVirtualDiskUuid">QueryVirtualDiskUuid</a>, <a href="vim.VirtualMachine.html#reconfigure">ReconfigVM_Task</a>, <a href="vim.ResourcePool.html#registerVm">RegisterChildVM_Task</a>, <a href="vim.Folder.html#registerVm">RegisterVM_Task</a>, <a href="vim.VirtualMachine.html#reloadFromPath">reloadVirtualMachineFromPath_Task</a>, <a href="vim.VirtualMachine.html#relocate">RelocateVM_Task</a>, <a href="vim.host.FirmwareSystem.html#restoreConfiguration">RestoreFirmwareConfiguration</a>, <a href="vim.vm.Snapshot.html#revert">RevertToSnapshot_Task</a>, <a href="vim.host.DatastoreBrowser.html#search">SearchDatastore_Task</a>, <a href="vim.host.DatastoreBrowser.html#searchSubFolders">SearchDatastoreSubFolders_Task</a>, <a href="vim.VirtualDiskManager.html#setVirtualDiskUuid">SetVirtualDiskUuid</a>, <a href="vim.VirtualDiskManager.html#shrinkVirtualDisk">ShrinkVirtualDisk_Task</a>, <a href="vim.vm.guest.ProcessManager.html#startProgram">StartProgramInGuest</a>, <a href="vim.VirtualMachine.html#startRecording">StartRecording_Task</a>, <a href="vim.VirtualMachine.html#startReplaying">StartReplaying_Task</a>, <a href="vim.VirtualMachine.html#stopRecording">StopRecording_Task</a>, <a href="vim.VirtualMachine.html#stopReplaying">StopReplaying_Task</a>, <a href="vim.VirtualApp.html#updateVAppConfig">UpdateVAppConfig</a>, <a href="vim.OvfManager.html#validateHost">ValidateHost</a>, <a href="vim.VirtualDiskManager.html#zeroFillVirtualDisk">ZeroFillVirtualDisk_Task</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.fault.CannotAccessFile.html">CannotAccessFile</a>, <a href="vim.fault.CannotCreateFile.html">CannotCreateFile</a>, <a href="vim.fault.CannotDeleteFile.html">CannotDeleteFile</a>, <a href="vim.fault.DirectoryNotEmpty.html">DirectoryNotEmpty</a>, <a href="vim.fault.FileAlreadyExists.html">FileAlreadyExists</a>, <a href="vim.fault.FileLocked.html">FileLocked</a>, <a href="vim.fault.FileNameTooLong.html">FileNameTooLong</a>, <a href="vim.fault.FileNotFound.html">FileNotFound</a>, <a href="vim.fault.FileNotWritable.html">FileNotWritable</a>, <a href="vim.fault.FileTooLarge.html">FileTooLarge</a>, <a href="vim.fault.IncorrectFileType.html">IncorrectFileType</a>, <a href="vim.fault.NetworkCopyFault.html">NetworkCopyFault</a>, <a href="vim.fault.NoDiskSpace.html">NoDiskSpace</a>, <a href="vim.fault.NotADirectory.html">NotADirectory</a>, <a href="vim.fault.NotAFile.html">NotAFile</a>, <a href="vim.fault.TooManyConcurrentNativeClones.html">TooManyConcurrentNativeClones</a>, <a href="vim.fault.TooManyNativeCloneLevels.html">TooManyNativeCloneLevels</a>, <a href="vim.fault.TooManyNativeClonesOnFile.html">TooManyNativeClonesOnFile</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.fault.VimFault.html">VimFault</a>
+</dd>
+<p></p>
+</dl>
+<H2>Fault 
+                  Description</H2>
+<p></p>
+         The common base type for all file-related exceptions.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="file" name="file"></a><strong>file</strong></td><td>xsd:string</td><td>
+<p></p>
+         The file in question.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.fault.VimFault.html">VimFault</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">None</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.MethodFault.html">MethodFault</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.MethodFault.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.MethodFault.html#dynamicType">dynamicType</a>, <a href="vmodl.MethodFault.html#faultCause">faultCause</a>, <a href="vmodl.MethodFault.html#faultMessage">faultMessage</a></td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="FileFault">
+            <complexContent>
+               <extension base="vim25:VimFault">
+                  <sequence>
+                     <element name="file" type="xsd:string"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

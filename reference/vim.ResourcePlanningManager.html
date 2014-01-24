@@ -1,0 +1,181 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.ResourcePlanningManager" name="vim.ResourcePlanningManager"></a>
+<h1>Managed Object -  
+						ResourcePlanningManager</h1>
+<dl>
+<dt>See also</dt>
+<dd>
+<a href="vim.ResourcePlanningManager.DatabaseSizeEstimate.html">DatabaseSizeEstimate</a>, <a href="vim.ResourcePlanningManager.DatabaseSizeParam.html">DatabaseSizeParam</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+</table>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#estimateDatabaseSize">EstimateDatabaseSize</a></td>
+</tr>
+</table>
+<br>
+<a id="estimateDatabaseSize" name="estimateDatabaseSize"></a>
+<h1>EstimateDatabaseSize</h1>
+<p></p>
+         Estimates the database size required to store VirtualCenter data.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Read</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ResourcePlanningManager.html">ResourcePlanningManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>dbSizeParam</strong></td><td><a href="vim.ResourcePlanningManager.DatabaseSizeParam.html">DatabaseSizeParam</a></td><td>
+<p></p>
+         <a href="vim.ResourcePlanningManager.DatabaseSizeParam.html">DatabaseSizeParam</a>
+  Contains the summary of an inventory for which the database size
+  requirements are to be computed. It also contains
+  the historic interval setting for which the database 
+  computations are to be done. This is an optional parameter and 
+  the current virtual center historical settings are used by default. 
+  There are many other optional fields in the dbSizeParam structure
+  that are appropriately filled up based on some heuristics.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.ResourcePlanningManager.DatabaseSizeEstimate.html">DatabaseSizeEstimate</a></td><td><a href="vim.ResourcePlanningManager.DatabaseSizeEstimate.html">DatabaseSizeEstimate</a> Returns the size required in MB of the database and the number of database rows.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the set of arguments passed to the function is not specified correctly.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('EstimateDatabaseSize-textarea');expandcontent(this, 'EstimateDatabaseSize-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="EstimateDatabaseSize-div">
+<textarea cols="20" rows="10" name="EstimateDatabaseSize-textarea" wrap="off" readonly="1" id="EstimateDatabaseSize-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="EstimateDatabaseSize" type="vim25:EstimateDatabaseSizeRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="EstimateDatabaseSizeResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:DatabaseSizeEstimate"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

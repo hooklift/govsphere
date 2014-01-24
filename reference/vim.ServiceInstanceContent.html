@@ -1,0 +1,509 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.ServiceInstanceContent" name="vim.ServiceInstanceContent"></a>
+<h1>Data Object - ServiceContent</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.ServiceInstance.html#field_detail">ServiceInstance</a>
+</dd>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.ServiceInstance.html#retrieveContent">RetrieveServiceContent</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.AboutInfo.html">AboutInfo</a>, <a href="vim.alarm.AlarmManager.html">AlarmManager</a>, <a href="vim.AuthorizationManager.html">AuthorizationManager</a>, <a href="vim.profile.cluster.ProfileManager.html">ClusterProfileManager</a>, <a href="vim.CustomFieldsManager.html">CustomFieldsManager</a>, <a href="vim.CustomizationSpecManager.html">CustomizationSpecManager</a>, <a href="vim.DatastoreNamespaceManager.html">DatastoreNamespaceManager</a>, <a href="vim.DiagnosticManager.html">DiagnosticManager</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.html">DistributedVirtualSwitchManager</a>, <a href="vim.event.EventManager.html">EventManager</a>, <a href="vim.ExtensionManager.html">ExtensionManager</a>, <a href="vim.FileManager.html">FileManager</a>, <a href="vim.Folder.html">Folder</a>, <a href="vim.vm.guest.GuestOperationsManager.html">GuestOperationsManager</a>, <a href="vim.host.LocalAccountManager.html">HostLocalAccountManager</a>, <a href="vim.profile.host.ProfileManager.html">HostProfileManager</a>, <a href="vim.host.SnmpSystem.html">HostSnmpSystem</a>, <a href="vim.IpPoolManager.html">IpPoolManager</a>, <a href="vim.LicenseManager.html">LicenseManager</a>, <a href="vim.LocalizationManager.html">LocalizationManager</a>, <a href="vim.option.OptionManager.html">OptionManager</a>, <a href="vim.OvfManager.html">OvfManager</a>, <a href="vim.PerformanceManager.html">PerformanceManager</a>, <a href="vim.profile.ComplianceManager.html">ProfileComplianceManager</a>, <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a>, <a href="vim.scheduler.ScheduledTaskManager.html">ScheduledTaskManager</a>, <a href="vim.SearchIndex.html">SearchIndex</a>, <a href="vim.ServiceManager.html">ServiceManager</a>, <a href="vim.SessionManager.html">SessionManager</a>, <a href="vim.StorageResourceManager.html">StorageResourceManager</a>, <a href="vim.TaskManager.html">TaskManager</a>, <a href="vim.UserDirectory.html">UserDirectory</a>, <a href="vim.view.ViewManager.html">ViewManager</a>, <a href="vim.VirtualDiskManager.html">VirtualDiskManager</a>, <a href="vim.VirtualizationManager.html">VirtualizationManager</a>, <a href="vim.vm.check.CompatibilityChecker.html">VirtualMachineCompatibilityChecker</a>, <a href="vim.vm.check.ProvisioningChecker.html">VirtualMachineProvisioningChecker</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The <a href="vim.ServiceInstanceContent.html">ServiceContent</a> data object defines properties for the ServiceInstance
+  managed object. The ServiceInstance itself does not have directly-accessible
+  properties because reading the properties of a managed object requires
+  the use of a property collector, and the property collector itself
+  is a property of the <a href="vim.ServiceInstance.html">ServiceInstance</a>.
+
+  For this reason, use the method <a href="vim.ServiceInstance.html#retrieveContent">RetrieveServiceContent</a>
+  to retrieve the <a href="vim.ServiceInstanceContent.html">ServiceContent</a> object.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="about" name="about"></a><strong>about</strong></td><td><a href="vim.AboutInfo.html">AboutInfo</a></td><td>
+<p></p>
+         Information about the service, such as the software version.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="accountManager" name="accountManager"></a><strong>accountManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.LocalAccountManager.html">HostLocalAccountManager</a></td><td>
+<p></p>
+         A singleton managed object that manages host local user and group accounts.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="alarmManager" name="alarmManager"></a><strong>alarmManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.alarm.AlarmManager.html">AlarmManager</a></td><td>
+<p></p>
+         A singleton managed object that manages alarms.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="authorizationManager" name="authorizationManager"></a><strong>authorizationManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.AuthorizationManager.html">AuthorizationManager</a></td><td>
+<p></p>
+         Manages permissions for managed entities in the service.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="clusterProfileManager" name="clusterProfileManager"></a><strong>clusterProfileManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.profile.cluster.ProfileManager.html">ClusterProfileManager</a></td><td>
+<p></p>
+         A singleton managed object that manages the cluster profiles.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="complianceManager" name="complianceManager"></a><strong>complianceManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.profile.ComplianceManager.html">ProfileComplianceManager</a></td><td>
+<p></p>
+         A singleton managed object that manages compliance aspects of entities.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="customFieldsManager" name="customFieldsManager"></a><strong>customFieldsManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.CustomFieldsManager.html">CustomFieldsManager</a></td><td>
+<p></p>
+         A singleton managed object that managed custom fields.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="customizationSpecManager" name="customizationSpecManager"></a><strong>customizationSpecManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.CustomizationSpecManager.html">CustomizationSpecManager</a></td><td>
+<p></p>
+         A singleton managed object that manages saved guest customization
+  specifications.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="datastoreNamespaceManager" name="datastoreNamespaceManager"></a><strong>datastoreNamespaceManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.DatastoreNamespaceManager.html">DatastoreNamespaceManager</a></td><td>
+<p></p>
+         Datastore Namespace manager.
+
+ A singleton managed object that is used to manage manipulations
+ related to datastores' namespaces.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="diagnosticManager" name="diagnosticManager"></a><strong>diagnosticManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.DiagnosticManager.html">DiagnosticManager</a></td><td>
+<p></p>
+         A singleton managed object that provides access to low-level log files.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="dvSwitchManager" name="dvSwitchManager"></a><strong>dvSwitchManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.dvs.DistributedVirtualSwitchManager.html">DistributedVirtualSwitchManager</a></td><td>
+<p></p>
+         A singleton managed object that provides relevant information of
+  DistributedVirtualSwitch.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="eventManager" name="eventManager"></a><strong>eventManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.event.EventManager.html">EventManager</a></td><td>
+<p></p>
+         A singleton managed object that manages events.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="extensionManager" name="extensionManager"></a><strong>extensionManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ExtensionManager.html">ExtensionManager</a></td><td>
+<p></p>
+         A singleton managed object that manages extensions.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="fileManager" name="fileManager"></a><strong>fileManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.FileManager.html">FileManager</a></td><td>
+<p></p>
+         A singleton managed object that allows management of files present
+  on datastores.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="guestOperationsManager" name="guestOperationsManager"></a><strong>guestOperationsManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.vm.guest.GuestOperationsManager.html">GuestOperationsManager</a></td><td>
+<p></p>
+         A singleton managed object that provides methods for guest operations.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="hostProfileManager" name="hostProfileManager"></a><strong>hostProfileManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.profile.host.ProfileManager.html">HostProfileManager</a></td><td>
+<p></p>
+         A singleton managed object that manages the host profiles.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="ipPoolManager" name="ipPoolManager"></a><strong>ipPoolManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.IpPoolManager.html">IpPoolManager</a></td><td>
+<p></p>
+         A singleton managed object that supports management of IpPool objects. IP pools are
+ used when allocating IPv4 and IPv6 addresses to vApps.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="licenseManager" name="licenseManager"></a><strong>licenseManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.LicenseManager.html">LicenseManager</a></td><td>
+<p></p>
+         A singleton managed object that manages licensing
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="localizationManager" name="localizationManager"></a><strong>localizationManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.LocalizationManager.html">LocalizationManager</a></td><td>
+<p></p>
+         A singleton managed object that provides methods for retrieving message
+ catalogs for client-side localization support.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="ovfManager" name="ovfManager"></a><strong>ovfManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.OvfManager.html">OvfManager</a></td><td>
+<p></p>
+         A singleton managed object that can generate OVF descriptors (export) and create
+ vApps (single-VM or vApp container-based) from OVF descriptors (import).
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="perfManager" name="perfManager"></a><strong>perfManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.PerformanceManager.html">PerformanceManager</a></td><td>
+<p></p>
+         A singleton managed object that manages the collection and reporting
+  of performance statistics.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="propertyCollector" name="propertyCollector"></a><strong>propertyCollector</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vmodl.query.PropertyCollector.html">PropertyCollector</a></td><td>
+<p></p>
+         Reference to a per-session object for retrieving properties and updates.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="rootFolder" name="rootFolder"></a><strong>rootFolder</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Folder.html">Folder</a></td><td>
+<p></p>
+         Reference to the top of the inventory managed by this service.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="scheduledTaskManager" name="scheduledTaskManager"></a><strong>scheduledTaskManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.scheduler.ScheduledTaskManager.html">ScheduledTaskManager</a></td><td>
+<p></p>
+         A singleton managed object that manages scheduled tasks.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="searchIndex" name="searchIndex"></a><strong>searchIndex</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.SearchIndex.html">SearchIndex</a></td><td>
+<p></p>
+         A singleton managed object that allows search of the inventory
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="serviceManager" name="serviceManager"></a><strong>serviceManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ServiceManager.html">ServiceManager</a></td><td>
+<p></p>
+         A singleton managed object that manages local services.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="sessionManager" name="sessionManager"></a><strong>sessionManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.SessionManager.html">SessionManager</a></td><td>
+<p></p>
+         Managed object for logging in and managing sessions.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="setting" name="setting"></a><strong>setting</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.option.OptionManager.html">OptionManager</a></td><td>
+<p></p>
+         Generic configuration for a management server. This is for example by
+  vCenter to store the vCenter Settings. This is not used for a
+  stand-alone host, instead the vim.host.ConfigManager.advancedOption is used.<br>See <a href="vim.host.ConfigManager.html">HostConfigManager</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="snmpSystem" name="snmpSystem"></a><strong>snmpSystem</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.SnmpSystem.html">HostSnmpSystem</a></td><td>
+<p></p>
+         A singleton managed object that allows SNMP configuration.
+  Not set if not supported on a particular platform.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="storageResourceManager" name="storageResourceManager"></a><strong>storageResourceManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.StorageResourceManager.html">StorageResourceManager</a></td><td>
+<p></p>
+         A singleton managed object that provides methods for storage resource
+ management.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="taskManager" name="taskManager"></a><strong>taskManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.TaskManager.html">TaskManager</a></td><td>
+<p></p>
+         A singleton managed object that manages tasks.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="userDirectory" name="userDirectory"></a><strong>userDirectory</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.UserDirectory.html">UserDirectory</a></td><td>
+<p></p>
+         A user directory managed object.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="viewManager" name="viewManager"></a><strong>viewManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.view.ViewManager.html">ViewManager</a></td><td>
+<p></p>
+         A singleton managed object for tracking custom sets of objects.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="virtualDiskManager" name="virtualDiskManager"></a><strong>virtualDiskManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.VirtualDiskManager.html">VirtualDiskManager</a></td><td>
+<p></p>
+         A singleton managed object that allows management of virtual disks
+  on datastores.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="virtualizationManager" name="virtualizationManager"></a><strong>virtualizationManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.VirtualizationManager.html">VirtualizationManager</a></td><td><B>Deprecated.</B><I>
+         As of VI API 2.5, use the VMware vCenter Converter plug-in.
+      </I>
+<p></p>
+         A singleton managed object that manages the discovery, analysis,
+  recommendation and virtualization of physical machines
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vmCompatibilityChecker" name="vmCompatibilityChecker"></a><strong>vmCompatibilityChecker</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.vm.check.CompatibilityChecker.html">VirtualMachineCompatibilityChecker</a></td><td>
+<p></p>
+         A singleton managed object that can answer questions about compatibility
+  of a virtual machine with a host.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vmProvisioningChecker" name="vmProvisioningChecker"></a><strong>vmProvisioningChecker</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.vm.check.ProvisioningChecker.html">VirtualMachineProvisioningChecker</a></td><td>
+<p></p>
+         A singleton managed object that can answer questions about the
+  feasibility of certain provisioning operations.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ServiceContent">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="rootFolder" type="vim25:ManagedObjectReference"/>
+                     <element name="propertyCollector" type="vim25:ManagedObjectReference"/>
+                     <element name="viewManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="about" type="vim25:AboutInfo"/>
+                     <element name="setting" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="userDirectory" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="sessionManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="authorizationManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="serviceManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="perfManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="scheduledTaskManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="alarmManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="eventManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="taskManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="extensionManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="customizationSpecManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="customFieldsManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="accountManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="diagnosticManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="licenseManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="searchIndex" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="fileManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="datastoreNamespaceManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="virtualDiskManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="virtualizationManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="snmpSystem" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="vmProvisioningChecker" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="vmCompatibilityChecker" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="ovfManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="ipPoolManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="dvSwitchManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="hostProfileManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="clusterProfileManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="complianceManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="localizationManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="storageResourceManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="guestOperationsManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

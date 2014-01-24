@@ -1,0 +1,210 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.scheduler.ScheduledTaskInfo" name="vim.scheduler.ScheduledTaskInfo"></a>
+<h1>Data Object - ScheduledTaskInfo</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.scheduler.ScheduledTask.html#field_detail">ScheduledTask</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.scheduler.ScheduledTaskSpec.html">ScheduledTaskSpec</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vmodl.LocalizedMethodFault.html">LocalizedMethodFault</a>, <a href="vim.ManagedEntity.html">ManagedEntity</a>, <a href="vim.scheduler.ScheduledTask.html">ScheduledTask</a>, <a href="vim.Task.html">Task</a>, <a href="vim.TaskInfo.State.html">TaskInfoState</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The scheduled task details.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="activeTask" name="activeTask"></a><strong>activeTask</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>
+<p></p>
+         The running task instance when the scheduled task state is "running".
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="entity" name="entity"></a><strong>entity</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity</a></td><td>
+<p></p>
+         The entity on which related events will be logged.
+ If the task is scheduled on a ManagedEntity, this 
+ field will also reflect the same ManagedEntity.
+ If task is scheduled on a ManagedObject, this field 
+ will have information about the entity on which
+ the events will be logged on behalf of the ManagedObject.
+ ManagedObject itself will be denoted by <a href="vim.scheduler.ScheduledTaskInfo.html#taskObject">taskObject</a>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="error" name="error"></a><strong>error</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.LocalizedMethodFault.html">LocalizedMethodFault</a></td><td>
+<p></p>
+         The fault code when the scheduled task state is "error".
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="lastModifiedTime" name="lastModifiedTime"></a><strong>lastModifiedTime</strong></td><td>xsd:dateTime</td><td>
+<p></p>
+         The time the scheduled task is created or modified.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="lastModifiedUser" name="lastModifiedUser"></a><strong>lastModifiedUser</strong></td><td>xsd:string</td><td>
+<p></p>
+         Last user that modified the scheduled task.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="nextRunTime" name="nextRunTime"></a><strong>nextRunTime</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:dateTime</td><td>
+<p></p>
+         The next time the scheduled task will run.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="prevRunTime" name="prevRunTime"></a><strong>prevRunTime</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:dateTime</td><td>
+<p></p>
+         The last time the scheduled task ran.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="progress" name="progress"></a><strong>progress</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The task progress when the scheduled task state is "running".
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="result" name="result"></a><strong>result</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:anyType</td><td>
+<p></p>
+         The operation result when the scheduled task state is "success".
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="scheduledTask" name="scheduledTask"></a><strong>scheduledTask</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.scheduler.ScheduledTask.html">ScheduledTask</a></td><td>
+<p></p>
+         Scheduled task object.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="state" name="state"></a><strong>state</strong></td><td><a href="vim.TaskInfo.State.html">TaskInfoState</a></td><td>
+<p></p>
+         Scheduled task state.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="taskObject" name="taskObject"></a><strong>taskObject</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+<p></p>
+         The object on which the scheduled task is defined.
+ This field will have information about either the 
+ ManagedEntity or the ManagedObject on which the scheduled
+ task is defined.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.scheduler.ScheduledTaskSpec.html">ScheduledTaskSpec</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.scheduler.ScheduledTaskSpec.html#action">action</a>, <a href="vim.scheduler.ScheduledTaskSpec.html#description">description</a>, <a href="vim.scheduler.ScheduledTaskSpec.html#enabled">enabled</a>, <a href="vim.scheduler.ScheduledTaskSpec.html#name">name</a>, <a href="vim.scheduler.ScheduledTaskSpec.html#notification">notification</a>, <a href="vim.scheduler.ScheduledTaskSpec.html#scheduler">scheduler</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ScheduledTaskInfo">
+            <complexContent>
+               <extension base="vim25:ScheduledTaskSpec">
+                  <sequence>
+                     <element name="scheduledTask" type="vim25:ManagedObjectReference"/>
+                     <element name="entity" type="vim25:ManagedObjectReference"/>
+                     <element name="lastModifiedTime" type="xsd:dateTime"/>
+                     <element name="lastModifiedUser" type="xsd:string"/>
+                     <element name="nextRunTime" type="xsd:dateTime" minOccurs="0"/>
+                     <element name="prevRunTime" type="xsd:dateTime" minOccurs="0"/>
+                     <element name="state" type="vim25:TaskInfoState"/>
+                     <element name="error" type="vim25:LocalizedMethodFault" minOccurs="0"/>
+                     <element name="result" type="xsd:anyType" minOccurs="0"/>
+                     <element name="progress" type="xsd:int" minOccurs="0"/>
+                     <element name="activeTask" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="taskObject" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

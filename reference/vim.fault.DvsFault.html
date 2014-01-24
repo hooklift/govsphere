@@ -1,0 +1,103 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.fault.DvsFault" name="vim.fault.DvsFault"></a>
+<h1>Fault - DvsFault</h1>
+<dl>
+<dt>Thrown by</dt>
+<dd>
+<a href="vim.DistributedVirtualSwitch.html#addPortgroups">AddDVPortgroup_Task</a>, <a href="vim.DistributedVirtualSwitch.html#addNetworkResourcePool">AddNetworkResourcePool</a>, <a href="vim.DistributedVirtualSwitch.html#addPortgroup">CreateDVPortgroup_Task</a>, <a href="vim.Folder.html#createDistributedVirtualSwitch">CreateDVS_Task</a>, <a href="vim.dvs.DistributedVirtualPortgroup.html#rollback">DVPortgroupRollback_Task</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.html#importEntity">DVSManagerImportEntity_Task</a>, <a href="vim.DistributedVirtualSwitch.html#rollback">DVSRollback_Task</a>, <a href="vim.DistributedVirtualSwitch.html#enableNetworkResourceManagement">EnableNetworkResourceManagement</a>, <a href="vim.DistributedVirtualSwitch.html#merge">MergeDvs_Task</a>, <a href="vim.DistributedVirtualSwitch.html#movePort">MoveDVPort_Task</a>, <a href="vim.DistributedVirtualSwitch.html#performProductSpecOperation">PerformDvsProductSpecOperation_Task</a>, <a href="vim.DistributedVirtualSwitch.html#reconfigurePort">ReconfigureDVPort_Task</a>, <a href="vim.dvs.DistributedVirtualPortgroup.html#reconfigure">ReconfigureDVPortgroup_Task</a>, <a href="vim.DistributedVirtualSwitch.html#reconfigure">ReconfigureDvs_Task</a>, <a href="vim.DistributedVirtualSwitch.html#rectifyHost">RectifyDvsHost_Task</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.html#rectifyHost">RectifyDvsOnHost_Task</a>, <a href="vim.DistributedVirtualSwitch.html#refreshPortState">RefreshDVPortState</a>, <a href="vim.DistributedVirtualSwitch.html#removeNetworkResourcePool">RemoveNetworkResourcePool</a>, <a href="vim.DistributedVirtualSwitch.html#updateCapability">UpdateDvsCapability</a>, <a href="vim.DistributedVirtualSwitch.html#updateHealthCheckConfig">UpdateDVSHealthCheckConfig_Task</a>, <a href="vim.dvs.VmwareDistributedVirtualSwitch.html#updateLacpGroupConfig">UpdateDVSLacpGroupConfig_Task</a>, <a href="vim.DistributedVirtualSwitch.html#updateNetworkResourcePool">UpdateNetworkResourcePool</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.fault.BackupBlobReadFailure.html">BackupBlobReadFailure</a>, <a href="vim.fault.BackupBlobWriteFailure.html">BackupBlobWriteFailure</a>, <a href="vim.fault.CollectorAddressUnset.html">CollectorAddressUnset</a>, <a href="vim.fault.ConflictingConfiguration.html">ConflictingConfiguration</a>, <a href="vim.fault.DvsApplyOperationFault.html">DvsApplyOperationFault</a>, <a href="vim.fault.DvsNotAuthorized.html">DvsNotAuthorized</a>, <a href="vim.fault.DvsOperationBulkFault.html">DvsOperationBulkFault</a>, <a href="vim.fault.DvsScopeViolated.html">DvsScopeViolated</a>, <a href="vim.fault.ImportHostAddFailure.html">ImportHostAddFailure</a>, <a href="vim.fault.ImportOperationBulkFault.html">ImportOperationBulkFault</a>, <a href="vim.fault.InvalidIpfixConfig.html">InvalidIpfixConfig</a>, <a href="vim.fault.RollbackFailure.html">RollbackFailure</a>, <a href="vim.fault.SwitchIpUnset.html">SwitchIpUnset</a>, <a href="vim.fault.SwitchNotInUpgradeMode.html">SwitchNotInUpgradeMode</a>, <a href="vim.fault.VspanDestPortConflict.html">VspanDestPortConflict</a>, <a href="vim.fault.VspanPortConflict.html">VspanPortConflict</a>, <a href="vim.fault.VspanPortgroupPromiscChangeFault.html">VspanPortgroupPromiscChangeFault</a>, <a href="vim.fault.VspanPortgroupTypeChangeFault.html">VspanPortgroupTypeChangeFault</a>, <a href="vim.fault.VspanPortMoveFault.html">VspanPortMoveFault</a>, <a href="vim.fault.VspanPortPromiscChangeFault.html">VspanPortPromiscChangeFault</a>, <a href="vim.fault.VspanPromiscuousPortNotSupported.html">VspanPromiscuousPortNotSupported</a>, <a href="vim.fault.VspanSameSessionPortConflict.html">VspanSameSessionPortConflict</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.fault.VimFault.html">VimFault</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<H2>Fault 
+                  Description</H2>
+<p></p>
+         Base class for faults that can be thrown while invoking a distributed virtual switch 
+  operation.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.fault.VimFault.html">VimFault</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.MethodFault.html">MethodFault</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.MethodFault.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.MethodFault.html#dynamicType">dynamicType</a>, <a href="vmodl.MethodFault.html#faultCause">faultCause</a>, <a href="vmodl.MethodFault.html#faultMessage">faultMessage</a></td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DvsFault">
+            <complexContent>
+               <extension base="vim25:VimFault">
+                  <sequence>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

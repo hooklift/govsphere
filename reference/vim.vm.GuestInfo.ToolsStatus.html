@@ -1,0 +1,99 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.GuestInfo.ToolsStatus" name="vim.vm.GuestInfo.ToolsStatus"></a>
+<h1>Enum - 
+						VirtualMachineToolsStatus</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.vm.GuestInfo.html#field_detail">GuestInfo</a>, <a href="vim.vm.Summary.GuestSummary.html#field_detail">VirtualMachineGuestSummary</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Enum Description</h2>
+<B>Deprecated.</B><I>
+         As of vSphere API 4.0 use <a href="vim.vm.GuestInfo.ToolsVersionStatus.html">VirtualMachineToolsVersionStatus</a>
+  and <a href="vim.vm.GuestInfo.ToolsRunningStatus.html">VirtualMachineToolsRunningStatus</a>.
+      </I>
+<p></p>
+         Current status of VMware Tools running in the guest operating system.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Enum Constants</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><a id="toolsNotInstalled" name="toolsNotInstalled"></a>toolsNotInstalled</td><td>
+      VMware Tools has never been installed
+  or has not run in the virtual machine.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="toolsNotRunning" name="toolsNotRunning"></a>toolsNotRunning</td><td>
+      VMware Tools is not running.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="toolsOk" name="toolsOk"></a>toolsOk</td><td>
+      VMware Tools is running and the version is current.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="toolsOld" name="toolsOld"></a>toolsOld</td><td>
+      VMware Tools is running, but the version is not current.
+   <br>
+</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <simpleType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VirtualMachineToolsStatus">
+            <restriction base="xsd:string">
+               <enumeration value="toolsNotInstalled"/>
+               <enumeration value="toolsNotRunning"/>
+               <enumeration value="toolsOld"/>
+               <enumeration value="toolsOk"/>
+            </restriction>
+         </simpleType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

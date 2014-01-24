@@ -1,0 +1,1639 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.Folder" name="vim.Folder"></a>
+<h1>Managed Object -  
+						Folder</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.Datacenter.html#field_detail">Datacenter</a>, <a href="vim.event.FolderEventArgument.html#field_detail">FolderEventArgument</a>, <a href="vim.host.ConnectSpec.html#field_detail">HostConnectSpec</a>, <a href="vim.ServiceInstanceContent.html#field_detail">ServiceContent</a>, <a href="vim.storageDrs.StoragePlacementSpec.html#field_detail">StoragePlacementSpec</a>, <a href="vim.vApp.CloneSpec.html#field_detail">VAppCloneSpec</a>, <a href="vim.VirtualApp.html#field_detail">VirtualApp</a>
+</dd>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.VirtualMachine.html#clone">CloneVM_Task</a>, <a href="vim.ResourcePool.html#createVApp">CreateVApp</a>, <a href="vim.ResourcePool.html#importVApp">ImportVApp</a>
+</dd>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.Folder.html#createFolder">CreateFolder</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.StoragePod.html">StoragePod</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.ManagedEntity.html">ManagedEntity</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.ClusterComputeResource.html">ClusterComputeResource</a>, <a href="vim.cluster.ConfigSpec.html">ClusterConfigSpec</a>, <a href="vim.cluster.ConfigSpecEx.html">ClusterConfigSpecEx</a>, <a href="vim.ComputeResource.html">ComputeResource</a>, <a href="vim.ComputeResource.ConfigSpec.html">ComputeResourceConfigSpec</a>, <a href="vim.Datacenter.html">Datacenter</a>, <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a>, <a href="vim.DistributedVirtualSwitch.CreateSpec.html">DVSCreateSpec</a>, <a href="vim.host.ConnectSpec.html">HostConnectSpec</a>, <a href="vim.HostSystem.html">HostSystem</a>, <a href="vim.ManagedEntity.html">ManagedEntity</a>, <a href="vim.ResourcePool.html">ResourcePool</a>, <a href="vim.StoragePod.html">StoragePod</a>, <a href="vim.VirtualMachine.html">VirtualMachine</a>, <a href="vim.vm.ConfigSpec.html">VirtualMachineConfigSpec</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         The <a href="vim.Folder.html">Folder</a> managed object is a container for storing and organizing
+  inventory objects. Folders can contain folders and other objects.
+  The <a href="vim.Folder.html#childType">childType</a> property identifies a folder's type
+  and determines the types of folders and objects the folder can contain.
+  <ul>
+      <li> A folder can contain a child folder of the same type as the parent folder.
+      <li> All <a href="vim.Datacenter.html">Datacenter</a> objects contain dedicated folders for:
+      <ul type="SQUARE">
+          <li> <a href="vim.VirtualMachine.html">VirtualMachine</a>, templates, and <a href="vim.VirtualApp.html">VirtualApp</a> objects.
+          <li> <a href="vim.ComputeResource.html">ComputeResource</a> hierarchies.
+          <li> <a href="vim.Network.html">Network</a>, <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a>, and 
+               <a href="vim.dvs.DistributedVirtualPortgroup.html">DistributedVirtualPortgroup</a> objects.
+          <li> <a href="vim.Datastore.html">Datastore</a> objects.
+      </ul>
+      <li> A folder can contain child objects of type <a href="vim.Folder.html#childType">childType</a>. 
+           Virtual machine and network entity folders can also contain additional object types.
+      <li> The root folder is a data center folder.
+  </ul>
+  See <a href="vim.ServiceInstance.html">ServiceInstance</a> for a representation of the organization of the inventory.
+  <p>
+  The <a href="vim.Folder.html">Folder</a> managed object also acts as a factory object, meaning it
+  creates new entities in a folder. The object provides methods to create
+  child folders and objects, methods to add existing objects to folders, and
+  methods to remove objects from folders and to delete folders.
+  <p>
+  <a href="vim.Folder.html">Folder</a> inherits the <a href="vim.ManagedEntity.html#destroy">Destroy_Task</a> method.
+  <a href="vim.ManagedEntity.html#destroy">Destroy_Task</a> is a recursive operation that removes all child objects and
+  folders. When you call <a href="vim.ManagedEntity.html#destroy">Destroy_Task</a> to destroy a folder, the system uses
+  the specified folder as a root and traverses its descendant hierarchy, calling 
+  <a href="vim.ManagedEntity.html#destroy">Destroy_Task</a> on each object.
+  <a href="vim.ManagedEntity.html#destroy">Destroy_Task</a> is a single operation that treats each recursive call as a
+  single transaction, committing each call to remove an object individually.
+  If <a href="vim.ManagedEntity.html#destroy">Destroy_Task</a> fails on an object, the method terminates at that point
+  with an exception, leaving some or all of the objects still in the inventory.
+  <p> 
+  Notes on the folder destroy method:
+  <ul>
+      <li>Calling <a href="vim.ManagedEntity.html#destroy">Destroy_Task</a> on a virtual machine folder recursively calls 
+      <a href="vim.ManagedEntity.html#destroy">Destroy_Task</a> on all the child virtual machines and vApps, which are then
+      removed from disk.
+      Use <a href="vim.Folder.html#unregisterAndDestroy">UnregisterAndDestroy_Task</a>
+      to unregister virtual machines or vApps recursively without
+      removing them from the disk.
+      <li>For virtual machine folders, the <a href="vim.ManagedEntity.html#destroy">Destroy_Task</a> method requires the
+      VirtualMachine.Delete privilege on the folder as well as 
+      all virtual machines to be destroyed. It also requires the VirtualApp.Delete
+      privilege on all VirtualApp objects to be destroyed.
+      <li>Destroying a host folder or datacenter folder unregisters all child hosts
+      and virtual machines from vCenter. The hosts are simply removed
+      from the inventory, along with their virtual machines. The virtual machines
+      are not removed from disk nor are their runtime states changed.
+      <li> You can remove network and datastore folders only if they are empty.
+      <li> You cannot destroy, rename, or move the virtual machine, compute resource,
+           network entity, and datastore child folders of a Datacenter.
+  </ul>
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="childEntity" name="childEntity"></a><strong>childEntity</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity[]</a></td><td>
+<p></p>
+         An array of managed object references. Each entry is a reference to a child entity.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="childType" name="childType"></a><strong>childType</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td>xsd:string[]</td><td>
+<p></p>
+         Specifies the object types a folder may contain. 
+  When you create a folder, it inherits its childType from the parent folder
+  in which it is created. childType is an array of strings. Each array entry 
+  identifies a set of object types - Folder and one or more managed object
+  types. The following list shows childType values for the different folders:
+  <ul>
+      <li> { "vim.Folder", "vim.Datacenter" } - Identifies the root folder
+           and its descendant folders. Data center folders can contain
+           child data center folders and Datacenter managed objects.
+           Datacenter objects contain virtual machine, compute resource,
+           network entity, and datastore folders.</li>
+      <li> { "vim.Folder", "vim.Virtualmachine", "vim.VirtualApp" } - Identifies
+           a virtual machine folder. A virtual machine folder may contain child
+           virtual machine folders. It also can contain VirtualMachine managed objects, 
+           templates, and VirtualApp managed objects.</li>
+      <li> { "vim.Folder", "vim.ComputeResource" } - Identifies a 
+           compute resource folder, which contains child compute resource folders
+           and ComputeResource hierarchies.</li>
+      <li> { "vim.Folder", "vim.Network" } - Identifies a network entity folder.
+           Network entity folders on a vCenter Server can contain Network,
+           DistributedVirtualSwitch, and DistributedVirtualPortgroup managed
+           objects. Network entity folders on an ESXi host can contain only
+           Network objects.</li>
+      <li> { "vim.Folder", "vim.Datastore" } - Identifies a datastore folder.
+           Datastore folders can contain child datastore folders and Datastore
+           managed objects.</li>
+  </ul>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.ManagedEntity.html">ManagedEntity</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.ManagedEntity.html#alarmActionsEnabled">alarmActionsEnabled</a>, <a href="vim.ManagedEntity.html#configIssue">configIssue</a>, <a href="vim.ManagedEntity.html#configStatus">configStatus</a>, <a href="vim.ManagedEntity.html#customValue">customValue</a>, <a href="vim.ManagedEntity.html#declaredAlarmState">declaredAlarmState</a>, <a href="vim.ManagedEntity.html#disabledMethod">disabledMethod</a>, <a href="vim.ManagedEntity.html#effectiveRole">effectiveRole</a>, <a href="vim.ManagedEntity.html#name">name</a>, <a href="vim.ManagedEntity.html#overallStatus">overallStatus</a>, <a href="vim.ManagedEntity.html#parent">parent</a>, <a href="vim.ManagedEntity.html#permission">permission</a>, <a href="vim.ManagedEntity.html#recentTask">recentTask</a>, <a href="vim.ManagedEntity.html#tag">tag</a>, <a href="vim.ManagedEntity.html#triggeredAlarmState">triggeredAlarmState</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.ExtensibleManagedObject.html#availableField">availableField</a>, <a href="vim.ExtensibleManagedObject.html#value">value</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  System.View</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#addStandaloneHost">AddStandaloneHost_Task</a>, <a href="#createCluster">CreateCluster</a>, <a href="#createClusterEx">CreateClusterEx</a>, <a href="#createDatacenter">CreateDatacenter</a>, <a href="#createDistributedVirtualSwitch">CreateDVS_Task</a>, <a href="#createFolder">CreateFolder</a>, <a href="#createStoragePod">CreateStoragePod</a>, <a href="#createVm">CreateVM_Task</a>, <a href="#moveInto">MoveIntoFolder_Task</a>, <a href="#registerVm">RegisterVM_Task</a>, <a href="#unregisterAndDestroy">UnregisterAndDestroy_Task</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.ManagedEntity.html">ManagedEntity</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.ManagedEntity.html#destroy">Destroy_Task</a>, <a href="vim.ManagedEntity.html#reload">Reload</a>, <a href="vim.ManagedEntity.html#rename">Rename_Task</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.ExtensibleManagedObject.html#setCustomValue">setCustomValue</a></td>
+</tr>
+</table>
+<br>
+<a id="addStandaloneHost" name="addStandaloneHost"></a>
+<h1>AddStandaloneHost_Task</h1>
+<p></p>
+         Creates a new single-host compute resource. The name provided can be an
+  IP address, such as 192.168.0.120, or a string, such as esx120.
+  If a name is specified, a DNS lookup is used to resolve it to a fully-qualified
+  name, such as esx120.vmware.com. If the DNS lookup fails, the string is
+  stored as specified.
+  <p>
+  Licenses for the host are allocated when making the first connection to
+  the host. This is because the license needed typically depends on the type
+  of host and the number of CPUs.
+
+  <p>
+  In addition to the Host.Inventory.AddStandaloneHost privilege, it
+  requires System.View privilege on the VM folder that the VMs of the
+  host will be placed on.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Inventory.AddStandaloneHost</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.Folder.html">Folder</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.host.ConnectSpec.html">HostConnectSpec</a></td><td>
+<p></p>
+         The host name, port, and passwords for the host to be added.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>compResSpec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.ComputeResource.ConfigSpec.html">ComputeResourceConfigSpec</a></td><td>
+<p></p>
+         Optionally specify the configuration for the compute
+                     resource that will be created to contain the host.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>addConnected</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to specify whether or not the host should be
+                      connected as soon as it is added. The host will not
+                      be added if a connection attempt is made and fails.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>license</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Provide a licenseKey or licenseKeyType. See <a href="vim.LicenseManager.html">LicenseManager</a>
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation. The <a href="vim.TaskInfo.html#result">info.result</a> property in the <a href="vim.Task.html">Task</a> contains the newly added <a href="vim.ComputeResource.html">ComputeResource</a> upon success.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AgentInstallFailed.html">AgentInstallFailed</a></td><td>Thrown if there is an error installing the vCenter agent on the new host.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.AlreadyBeingManaged.html">AlreadyBeingManaged</a></td><td>Thrown if the host is already being managed by a vCenter server. If the host is being managed by a different vCenter server, this can be overridden by the "force" flag in the connection specification.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AlreadyConnected.html">AlreadyConnected</a></td><td>Thrown if addConnected is true and the host is already connected to vCenter.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if another host in the same folder has the name.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConnectFault.html">HostConnectFault</a></td><td>Thrown if an error occurred when attempting to connect to a host. Typically, a more specific subclass, such as AlreadyBeingManaged, is thrown.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if an argument is specified incorrectly.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidLogin.html">InvalidLogin</a></td><td>Thrown if authentication with the host fails.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NoHost.html">NoHost</a></td><td>Thrown if the host cannot be contacted.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotEnoughLicenses.html">NotEnoughLicenses</a></td><td>Thrown if there are not enough licenses to add the host.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the host is being added to a folder whose <a href="vim.Folder.html#childType">childType</a> property does not contain "ComputeResource".</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotSupportedHost.html">NotSupportedHost</a></td><td>Thrown if the host is running a software version that is not supported.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.SSLVerifyFault.html">SSLVerifyFault</a></td><td>Thrown if the host certificate could not be authenticated</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="createCluster" name="createCluster"></a>
+<h1>CreateCluster</h1>
+<B>Deprecated.</B><I>
+         As of VI API 2.5, use <a href="vim.Folder.html#createClusterEx">CreateClusterEx</a>.
+      </I>
+<p></p>
+         Creates a new cluster compute resource in this folder.
+  <p>
+  Any % (percent) character used in this name parameter must be escaped, unless it
+  is used to start an escape sequence. Clients may also escape any other characters
+  in this name parameter.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Inventory.CreateCluster</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.Folder.html">Folder</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>name</strong></td><td>xsd:string</td><td>
+<p></p>
+         Name for the new cluster.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.cluster.ConfigSpec.html">ClusterConfigSpec</a></td><td>
+<p></p>
+         Specification for the cluster.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ClusterComputeResource.html">ClusterComputeResource</a></td><td>A new ClusterComputeResource instance.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if an entity with that name already exists.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the cluster configuration specification parameter is invalid.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td>Thrown if the name is not a valid entity name.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the cluster is being added to a folder whose <a href="vim.Folder.html#childType">childType</a> property value does not contain "ComputeResource" or "ClusterComputeResource".</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CreateCluster-textarea');expandcontent(this, 'CreateCluster-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CreateCluster-div">
+<textarea cols="20" rows="10" name="CreateCluster-textarea" wrap="off" readonly="1" id="CreateCluster-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateCluster" type="vim25:CreateClusterRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateClusterResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="createClusterEx" name="createClusterEx"></a>
+<h1>CreateClusterEx</h1>
+<p></p>
+         Creates a new cluster compute resource in this folder.
+  <p>
+  Any % (percent) character used in this name parameter must be escaped, unless it
+  is used to start an escape sequence. Clients may also escape any other characters
+  in this name parameter.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Inventory.CreateCluster</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.Folder.html">Folder</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>name</strong></td><td>xsd:string</td><td>
+<p></p>
+         Name for the new cluster.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.cluster.ConfigSpecEx.html">ClusterConfigSpecEx</a></td><td>
+<p></p>
+         Specification for the cluster.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ClusterComputeResource.html">ClusterComputeResource</a></td><td>A new ClusterComputeResource instance.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if an entity with that name already exists.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the cluster configuration specification parameter is invalid.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td>Thrown if the name is not a valid entity name.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the cluster is being added to a folder whose <a href="vim.Folder.html#childType">childType</a> property value does not contain "ComputeResource" or "ClusterComputeResource".</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CreateClusterEx-textarea');expandcontent(this, 'CreateClusterEx-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CreateClusterEx-div">
+<textarea cols="20" rows="10" name="CreateClusterEx-textarea" wrap="off" readonly="1" id="CreateClusterEx-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateClusterEx" type="vim25:CreateClusterExRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateClusterExResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="createDatacenter" name="createDatacenter"></a>
+<h1>CreateDatacenter</h1>
+<p></p>
+         Creates a new datacenter with the given name.
+  <p>
+  Any % (percent) character used in this name parameter must be escaped, unless it
+  is used to start an escape sequence. Clients may also escape any other characters
+  in this name parameter.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Datacenter.Create</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.Folder.html">Folder</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>name</strong></td><td>xsd:string</td><td>
+<p></p>
+         Name for the new datacenter. An entity name
+               must be a non-empty string of less than 80 characters.
+               The slash (/), backslash (\) and percent (%) will be escaped
+               using the URL syntax. For example, %2F.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datacenter.html">Datacenter</a></td><td>A new Datacenter instance.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if an entity with that name already exists.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td>Thrown if the new name is not a valid entity name.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the datacenter is being created within a folder whose <a href="vim.Folder.html#childType">childType</a> property value does not contain "Datacenter".</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CreateDatacenter-textarea');expandcontent(this, 'CreateDatacenter-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CreateDatacenter-div">
+<textarea cols="20" rows="10" name="CreateDatacenter-textarea" wrap="off" readonly="1" id="CreateDatacenter-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateDatacenter" type="vim25:CreateDatacenterRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateDatacenterResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="createDistributedVirtualSwitch" name="createDistributedVirtualSwitch"></a>
+<h1>CreateDVS_Task</h1>
+<p></p>
+         Create a <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a> in the folder according to the 
+  specified <a href="vim.DistributedVirtualSwitch.CreateSpec.html">DVSCreateSpec</a>. The specified Folder
+  must be a Network entity folder.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>DVSwitch.Create</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.Folder.html">Folder</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.DistributedVirtualSwitch.CreateSpec.html">DVSCreateSpec</a></td><td>
+<p></p>
+         The <a href="vim.DistributedVirtualSwitch.CreateSpec.html">DVSCreateSpec</a>
+               to create the distributed virtual switch.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation. After successful completion, the <a href="vim.Task.html">Task</a>.<a href="vim.Task.html#info">info</a>.<a href="vim.TaskInfo.html#result">result</a> property contains the newly registered <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a>.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.DvsFault.html">DvsFault</a></td><td></td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DvsNotAuthorized.html">DvsNotAuthorized</a></td><td>Thrown if login-session's extension key does not match (<a href="vim.DistributedVirtualSwitch.ConfigInfo.html#extensionKey">extensionKey</a>).</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td></td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if called directly on a host.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="createFolder" name="createFolder"></a>
+<h1>CreateFolder</h1>
+<p></p>
+         Creates a new sub-folder with the specified name. The <a href="vim.Folder.html#childType">childType</a> property
+ of the new folder is the same as the <a href="vim.Folder.html#childType">childType</a> property of the current folder.
+ <p>
+ Any % (percent) character used in this name parameter must be escaped, unless it
+ is used to start an escape sequence. Clients may also escape any other characters
+ in this name parameter.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Folder.Create</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.Folder.html">Folder</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>name</strong></td><td>xsd:string</td><td>
+<p></p>
+         The name to be given the new folder. An entity name
+               must be a non-empty string of less than 80 characters.
+               The slash (/), backslash (\) and percent (%) will be escaped
+               using the URL syntax. For example, %2F.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Folder.html">Folder</a></td><td>A reference to the new folder.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if another object in the same folder has the target name.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td>Thrown if the name is not a valid entity name.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CreateFolder-textarea');expandcontent(this, 'CreateFolder-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CreateFolder-div">
+<textarea cols="20" rows="10" name="CreateFolder-textarea" wrap="off" readonly="1" id="CreateFolder-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateFolder" type="vim25:CreateFolderRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateFolderResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="createStoragePod" name="createStoragePod"></a>
+<h1>CreateStoragePod</h1>
+<p></p>
+         Creates a new storage pod in this folder.
+  <p>
+  Any % (percent) character used in this name parameter must be escaped, unless it
+  is used to start an escape sequence. Clients may also escape any other characters
+  in this name parameter.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Folder.Create</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.Folder.html">Folder</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>name</strong></td><td>xsd:string</td><td>
+<p></p>
+         Name for the new storage pod.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.StoragePod.html">StoragePod</a></td><td>A new StoragePod instance.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if an entity with that name already exists.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td>Thrown if the name is not a valid entity name.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the storage pod is being added to a folder whose <a href="vim.Folder.html#childType">childType</a> property value does not contain "StoragePod". <p></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CreateStoragePod-textarea');expandcontent(this, 'CreateStoragePod-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CreateStoragePod-div">
+<textarea cols="20" rows="10" name="CreateStoragePod-textarea" wrap="off" readonly="1" id="CreateStoragePod-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateStoragePod" type="vim25:CreateStoragePodRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateStoragePodResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ManagedObjectReference"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="createVm" name="createVm"></a>
+<h1>CreateVM_Task</h1>
+<p></p>
+         Creates a new virtual machine in the current folder and attaches it to the
+  specified resource pool. This operation creates a virtual machine,
+  instead of cloning a virtual machine from an existing one.
+
+  <p>
+  The server does not support creating templates using this method.
+  Instead, you should create templates by marking existing virtual
+  machines as templates, or by cloning an existing virtual machine or
+  template.
+
+  <p>
+  This operation only works if the folder's childType includes VirtualMachine.
+
+  In addition to the VirtualMachine.Inventory.Create privilege, may also require
+  any of the following privileges depending on the properties of the virtual
+  machine bring created:
+  <ul>
+    <li>VirtualMachine.Config.AddExistingDisk if including a virtual disk device
+        that refers to an existing virtual disk file (not RDM)</li>
+    <li>VirtualMachine.Config.AddNewDisk if including a virtual disk device that
+        creates a new virtual disk file (not RDM)</li>
+    <li>VirtualMachine.Config.RawDevice if including a raw device mapping
+        (RDM) or SCSI passthrough device</li>
+    <li>VirtualMachine.Config.HostUSBDevice if including a VirtualUSB device
+        backed by a host USB device</li>
+    <li>VirtualMachine.Config.AdvancedConfig if setting values in
+        ConfigSpec.extraConfig</li>
+    <li>VirtualMachine.Config.SwapPlacement if setting swapPlacement</li>
+    <li>VirtualMachine.Config.ChangeTracking if setting changed
+        block tracking for the virtual machine's disks.</li>
+    <li>Datastore.AllocateSpace required on all datastores where the 
+        virtual machine and its virtual disks will be created</li>
+    <li>Network.Assign required on the network which is assigned to the
+        new virtual machine that is being created</li>
+  </ul>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>VirtualMachine.Inventory.Create</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.Folder.html">Folder</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>config</strong></td><td><a href="vim.vm.ConfigSpec.html">VirtualMachineConfigSpec</a></td><td>
+<p></p>
+         The configuration of the virtual machine hardware.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>pool</strong><span title="Required Privilege: Resource.AssignVMToPool" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ResourcePool.html">ResourcePool</a></td><td>
+<p></p>
+         The resource pool to which the virtual machine will be attached.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         The target host on which the virtual machine will run. This must
+         specify a host that is a member of the ComputeResource indirectly
+         specified by the pool. For a stand-alone host or a cluster with DRS,
+         host can be omitted, and the system selects a default.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  Resource.AssignVMToPool</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation. The <a href="vim.TaskInfo.html#result">info.result</a> property in the <a href="vim.Task.html">Task</a> contains the newly created <a href="vim.VirtualMachine.html">VirtualMachine</a> upon success.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AlreadyExists.html">AlreadyExists</a></td><td>Thrown if the requested cfgPath (or the default cfgPath) for the virtual machine's configuration file is already loaded in the inventory.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if another virtual machine in the same folder already has the specified target name.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.FileAlreadyExists.html">FileAlreadyExists</a></td><td>Thrown if the requested cfgPath for the virtual machine's configuration file already exists.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.FileFault.html">FileFault</a></td><td>Thrown if there is a problem creating the virtual machine on disk. Typically, a more specific subclass, such as NoDiskSpace, will be thrown.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InsufficientResourcesFault.html">InsufficientResourcesFault</a></td><td>Thrown if this operation would violate a resource usage policy.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidDatastore.html">InvalidDatastore</a></td><td>Thrown if the operation cannot be performed on the target datastores.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td>Thrown if the name is not a valid entity name.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the operation is not allowed in current state of the entities involved.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the virtual machine is being created within a folder whose <a href="vim.Folder.html#childType">childType</a> property is not set to "VirtualMachine".</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.OutOfBounds.html">OutOfBounds</a></td><td>Thrown if Host.capability.maxSupportedVMs is exceeded.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.VmConfigFault.html">VmConfigFault</a></td><td>Thrown if the configSpec has incorrect values. Typically, a more specific subclass is thrown.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.VmWwnConflict.html">VmWwnConflict</a></td><td>Thrown if the WWN of the virtual machine has been used by other virtual machines.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="moveInto" name="moveInto"></a>
+<h1>MoveIntoFolder_Task</h1>
+<p></p>
+         Moves a set of managed entities into this folder.
+  <p>
+  This operation is typically used by clients when they implement a drag-and-drop
+  interface to move a set of objects into a folder.
+  <p>
+  This operation is transactional only with respect to each individual entity.
+  The set of entities is moved sequentially as specified in the list, and
+  committed one at a time. If the <a href="vim.Folder.html#moveInto">MoveIntoFolder_Task</a> method fails on an object, the
+  method terminates at that point with an exception, leaving the rest of the
+  managed entities in their original location.
+  <p>
+  The objects that can be moved into a folder depends on the folder's
+  type (as defined by the folder's <a href="vim.Folder.html#childType">childType</a> property).
+  For a datacenter folder, only datacenters and datacenter folders can be
+  moved into the folder. For a virtual machine folder, only virtual machines
+  and virtual machine folders can be moved into the folder.
+  For a host folder, ComputeResource objects, host folder objects, and
+  HostSystem objects can be moved into the folder.
+  <p>
+  Moving a HostSystem into a host folder creates a stand-alone host from a
+  host that is currently part of a ClusterComputeResource. The host must be part
+  of a ClusterComputeResource in the same datacenter and the host must be in
+  maintenance mode. Otherwise, the operation fails.
+  <p>
+  A ComputeResource with a single root resource pool is created for each
+  HostSystem. The name of the ComputeResource is the DNS or IP address of the
+  host. This operation moves the (physical) host resources out of a cluster.
+  It does not move or change the ResourcePool configuration that is part of the
+  ClusterComputeResource with which the host was associated.
+  <p>
+  Note that all virtual machines associated with a host are moved with the host
+  into the folder. If there are virtual machines that should not be moved
+  with the host, then migrate them from the host before initiating this operation.
+  <p>
+  For a HostSystem move, the privileges required are Host.Inventory.EditCluster
+  on the source ClusterComputeResource, Host.Inventory.MoveHost on the HostSystem,
+  and Host.Inventory.AddStandaloneHost on the target Folder.
+  <p>
+  Otherwise, the privilege required for this operation varies depending on this
+  folder's type and is checked against the source container, destination container,
+  and the object:
+  <ul>
+     <li>Folder.Move if the object is a Folder
+     <li>Datacenter.Move if the object is a Datacenter
+     <li>Host.Inventory.MoveCluster if the object is a ComputeResource
+     <li>VirtualMachine.Inventory.Move if the object is a virtual machine
+         or virtual machine template
+     <li>DVSwitch.Move if the object is a DistributedVirtualSwitch
+     <li>Datastore.Move if the object is a datastore
+     <li>Network.Move if the object is a network
+  </ul>
+  If the object is a HostSystem, the privileges required are
+  Host.Inventory.AddStandaloneHost on the folder, Host.Inventory.MoveHost on
+  the HostSystem, and Host.Inventory.EditCluster on the host's original
+  ComputeResource.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Dynamic - See discussion above</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.Folder.html">Folder</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>list</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity[]</a></td><td>
+<p></p>
+         The list of objects to be moved into the folder.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DisallowedOperationOnFailoverHost.html">DisallowedOperationOnFailoverHost</a></td><td>Thrown if the host is being moved out of a cluster and was configured as a failover host in that cluster. See <a href="vim.cluster.FailoverHostAdmissionControlPolicy.html">ClusterFailoverHostAdmissionControlPolicy</a>.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if this folder already contains an object with the specified name.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidFolder.html">InvalidFolder</a></td><td>Thrown if a Folder that is a parent of this Folder is part of the list of objects.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if a HostSystem is not part of the same datacenter, not part of a ClusterComputeResource, or not in maintenance mode.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the entity is being moved into a folder whose <a href="vim.Folder.html#childType">childType</a> property is not set to the appropriate value. For example, a VirtualMachine entity cannot be moved into a folder whose ChildType property value does not contain "VirtualMachine".</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.VmAlreadyExistsInDatacenter.html">VmAlreadyExistsInDatacenter</a></td><td>Thrown if moving a standalone host between datacenters, and one or more of the host's virtual machines is already registered to a host in the destination datacenter.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="registerVm" name="registerVm"></a>
+<h1>RegisterVM_Task</h1>
+<p></p>
+         Adds an existing virtual machine to the folder.
+  <p>
+  Any % (percent) character used in this name parameter must be escaped, unless it
+  is used to start an escape sequence. Clients may also escape any other characters
+  in this name parameter.
+  <p>
+  This operation only works if the folder's type is VirtualMachine.
+
+  In addition to the VirtualMachine.Inventory.Register and
+  Resource.AssignVMToPool privileges, it requires System.Read privilege
+  on the datastore that the existing virtual machine resides on.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>VirtualMachine.Inventory.Register</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.Folder.html">Folder</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>path</strong></td><td>xsd:string</td><td>
+<p></p>
+         A datastore path to the virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>name</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The name to be assigned to the virtual machine. If this parameter is
+         not set, the displayName configuration parameter of the virtual machine is
+         used. An entity name must be a non-empty string of less than 80
+         characters. The slash (/), backslash (\) and percent (%) will be
+         escaped using the URL syntax. For example, %2F.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>asTemplate</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to specify whether or not the virtual machine
+         should be marked as a template.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>pool</strong><span title="Need not be set" class="footnote-ref">*</span><span title="Required Privilege: Resource.AssignVMToPool" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ResourcePool.html">ResourcePool</a></td><td>
+<p></p>
+         The resource pool to which the virtual machine should be attached.
+         If imported as a template, this parameter is not set.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         The target host on which the virtual machine will run. This parameter
+         must specify a host that is a member of the ComputeResource indirectly
+         specified by the pool. For a stand-alone host or a cluster with DRS,
+         the parameter can be omitted, and the system selects a default.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  Resource.AssignVMToPool</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation. The <a href="vim.TaskInfo.html#result">info.result</a> property in the <a href="vim.Task.html">Task</a> contains the newly registered <a href="vim.VirtualMachine.html">VirtualMachine</a> upon success.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AlreadyExists.html">AlreadyExists</a></td><td>Thrown if the virtual machine is already registered.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.DuplicateName.html">DuplicateName</a></td><td>Thrown if another virtual machine in the same folder has the target name.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.FileFault.html">FileFault</a></td><td>Thrown if there is an error accessing the files on disk.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InsufficientResourcesFault.html">InsufficientResourcesFault</a></td><td>Thrown if this operation would violate a resource usage policy.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if any of the arguments such as host or resource pool are not set to valid values.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidDatastore.html">InvalidDatastore</a></td><td>Thrown if the operation cannot be performed on the target datastores.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td>Thrown if the entity name is invalid.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the operation is not allowed in current state of the entities involved.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the configuration file is not found on the system.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the operation is not supported. For example, templates are not supported directly on hosts. Also, if the operation is invoked on a folder whose <a href="vim.Folder.html#childType">childType</a> property is not set to "VirtualMachine".</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.OutOfBounds.html">OutOfBounds</a></td><td>Thrown if the maximum number of VMs for this folder has been exceeded. The maximum number is determined by Host.capability.maxSupportedVMs.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.VmConfigFault.html">VmConfigFault</a></td><td>Thrown if the format / configuration of the virtual machine is invalid. Typically, a more specific fault is thrown such as InvalidFormat if the configuration file cannot be read, or InvalidDiskFormat if the disks cannot be read.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="unregisterAndDestroy" name="unregisterAndDestroy"></a>
+<h1>UnregisterAndDestroy_Task</h1>
+<p></p>
+         Recursively unregisters all virtual machines and vApps, and destroys
+  all child virtual machine folders. This is similar to the Destroy_Task method,
+  but this method calls UnregisterAndDestroy_Task on each virtual machine
+  object instead of calling Destroy_Task.
+  This operation applies only to VirtualMachine folders.
+  <p>
+  UnregisterAndDestroy_Task is a recursive operation that destroys the specified
+  virtual machine folder, unregisters all child virtual machine objects, and destroys
+  all child virtual machine folders. When you call UnregisterAndDestroy_Task
+  to destroy a virtual machine folder, the system uses the specified folder
+  as a root and traverses its descendant hierarchy, calling UnregisterAndDestroy_Task
+  on each virtual machine object and Destroy_Task on each virtual machine folder.
+  UnregisterAndDestroy_Task is a single operation that treats each recursive call
+  as a single transaction, committing each call to remove an object individually.
+  If a failure occurs, the method terminates at that point with an exception, leaving
+  some or all objects unaffected.
+  <p>
+  If you are removing virtual machines, you must hold the VirtualMachine.Delete
+  privilege on all of the virtual machines to be unregistered, and on their parent folders.
+  If you are removing virtual applications, you must hold the VApp.Delete
+  privilege on all of the virtual applications to be unregistered, and on their
+  parent folders.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Folder.Delete</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.Folder.html">Folder</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.ConcurrentAccess.html">ConcurrentAccess</a></td><td>Thrown if another client modifies the folder contents before this operation completes.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if a virtual machine is not powered off or suspended.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the <a href="vim.Folder.html#childType">childType</a> property of the folder is not set to "VirtualMachine".</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

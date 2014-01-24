@@ -1,0 +1,190 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.HardwareInfo" name="vim.host.HardwareInfo"></a>
+<h1>Data Object - HostHardwareInfo</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.HostSystem.html#field_detail">HostSystem</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.BIOSInfo.html">HostBIOSInfo</a>, <a href="vim.host.CpuIdInfo.html">HostCpuIdInfo</a>, <a href="vim.host.CpuInfo.html">HostCpuInfo</a>, <a href="vim.host.CpuPackage.html">HostCpuPackage</a>, <a href="vim.host.CpuPowerManagementInfo.html">HostCpuPowerManagementInfo</a>, <a href="vim.host.NumaInfo.html">HostNumaInfo</a>, <a href="vim.host.PciDevice.html">HostPciDevice</a>, <a href="vim.host.ReliableMemoryInfo.html">HostReliableMemoryInfo</a>, <a href="vim.host.SystemInfo.html">HostSystemInfo</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The HardwareInfo data object type describes the hardware
+  configuration of the host.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="biosInfo" name="biosInfo"></a><strong>biosInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.BIOSInfo.html">HostBIOSInfo</a></td><td>
+<p></p>
+         Information about the system BIOS
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="cpuFeature" name="cpuFeature"></a><strong>cpuFeature</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.CpuIdInfo.html">HostCpuIdInfo[]</a></td><td>
+<p></p>
+         CPU feature set that is supported by the hardware. This is the
+  intersection of the feature sets supported by the individual CPU
+  packages. This feature set is modified by the
+  <a href="vim.host.Capability.html#supportedCpuFeature">supportedCpuFeature</a>
+  array in the host capabilities to obtain the feature set supported by
+  the virtualization platform.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="cpuInfo" name="cpuInfo"></a><strong>cpuInfo</strong></td><td><a href="vim.host.CpuInfo.html">HostCpuInfo</a></td><td>
+<p></p>
+         Overall CPU information.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="cpuPkg" name="cpuPkg"></a><strong>cpuPkg</strong></td><td><a href="vim.host.CpuPackage.html">HostCpuPackage[]</a></td><td>
+<p></p>
+         Information about each of the physical CPU packages on the host.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="cpuPowerManagementInfo" name="cpuPowerManagementInfo"></a><strong>cpuPowerManagementInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.CpuPowerManagementInfo.html">HostCpuPowerManagementInfo</a></td><td>
+<p></p>
+<p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="memorySize" name="memorySize"></a><strong>memorySize</strong></td><td>xsd:long</td><td>
+<p></p>
+         Total amount of physical memory on the host in bytes.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="numaInfo" name="numaInfo"></a><strong>numaInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.NumaInfo.html">HostNumaInfo</a></td><td>
+<p></p>
+         Information about the NUMA (non-uniform memory access).
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="pciDevice" name="pciDevice"></a><strong>pciDevice</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.PciDevice.html">HostPciDevice[]</a></td><td>
+<p></p>
+         The list of Peripheral Component Interconnect (PCI) devices
+  available on this host.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="reliableMemoryInfo" name="reliableMemoryInfo"></a><strong>reliableMemoryInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.ReliableMemoryInfo.html">HostReliableMemoryInfo</a></td><td>
+<p></p>
+         Information about reliable memory.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="smcPresent" name="smcPresent"></a><strong>smcPresent</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Presence of System Management Controller, indicates the host is
+ Apple hardware, and thus capable of running Mac OS guest as VM.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="systemInfo" name="systemInfo"></a><strong>systemInfo</strong></td><td><a href="vim.host.SystemInfo.html">HostSystemInfo</a></td><td>
+<p></p>
+         Information about the system as a whole.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostHardwareInfo">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="systemInfo" type="vim25:HostSystemInfo"/>
+                     <element name="cpuPowerManagementInfo" type="vim25:HostCpuPowerManagementInfo" minOccurs="0"/>
+                     <element name="cpuInfo" type="vim25:HostCpuInfo"/>
+                     <element name="cpuPkg" type="vim25:HostCpuPackage" maxOccurs="unbounded"/>
+                     <element name="memorySize" type="xsd:long"/>
+                     <element name="numaInfo" type="vim25:HostNumaInfo" minOccurs="0"/>
+                     <element name="smcPresent" type="xsd:boolean" minOccurs="0"/>
+                     <element name="pciDevice" type="vim25:HostPciDevice" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="cpuFeature" type="vim25:HostCpuIdInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="biosInfo" type="vim25:HostBIOSInfo" minOccurs="0"/>
+                     <element name="reliableMemoryInfo" type="vim25:HostReliableMemoryInfo" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

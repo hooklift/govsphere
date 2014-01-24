@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<title>Fault Types Overview</title>
+	<meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1"/>
+	<meta name="vs_targetSchema" 
+content="http://schemas.microsoft.com/intellisense/ie5"/>
+        <script language="JavaScript" src="./commonRes.js"> type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="doc-style.css"/>
+</head>
+<body>
+<h1>Fault Types Overview</h1>
+
+<p>
+A <strong>fault</strong> type is a data structure that conveys information about errors, such as processing errors, raised by the server. Information can include the nature of the problem, such as &#147;<a href="vmodl.fault.NotSupported.html">Not Supported</a>&#148; or &#147;<a href="vim.fault.NoPermission.html">NoPermission</a>.&#148; 
+
+<p>
+For example, a <a href="vim.fault.NoPermission.html">NoPermission</a> fault is returned to the client by the server when it denies an operation due to insufficient client
+privileges. Note that the <a href="vim.fault.NoPermission.html">NoPermission</a> fault includes a property (object) comprising the ManagedObjectReference of the target managed object for which the client has insufficient privileges.)
+</p>
+
+
+<p>
+All fault types are listed in the pane to the left of this page. Click a name to display reference documentation for a given fault type. Documentation may include:
+</p>
+<ul>
+<li>Name of the operation that raised the fault.</li>
+<li>The fault type from which the fault extends.</li>
+<li>Descendent fault types.</li>
+<li>Description of purpose and usage.</li>
+<li>Privileges required to generate the fault.</li>
+<li>Parameters this fault type accepts.</li>
+<li>Values this fault type returns.</li>
+</ul>
+
+
+<p>
+To quickly find any entry, start typing its name in the <strong>Quick Index</strong>.
+</p>
+
+<p><script language="javascript">document.write(ID_Copyright);</script><br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

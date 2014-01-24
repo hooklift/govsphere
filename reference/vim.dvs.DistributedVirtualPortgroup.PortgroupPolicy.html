@@ -1,0 +1,172 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.dvs.DistributedVirtualPortgroup.PortgroupPolicy" name="vim.dvs.DistributedVirtualPortgroup.PortgroupPolicy"></a>
+<h1>Data Object - DVPortgroupPolicy</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.dvs.DistributedVirtualPortgroup.ConfigInfo.html#field_detail">DVPortgroupConfigInfo</a>, <a href="vim.dvs.DistributedVirtualPortgroup.ConfigSpec.html#field_detail">DVPortgroupConfigSpec</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.dvs.VmwareDistributedVirtualSwitch.VMwarePortgroupPolicy.html">VMwareDVSPortgroupPolicy</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The DistributedVirtualPortgroup policies. This field is not applicable
+  when queried directly against an ESX host.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="blockOverrideAllowed" name="blockOverrideAllowed"></a><strong>blockOverrideAllowed</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Allow the <a href="vim.dvs.DistributedVirtualPort.Setting.html#blocked">blocked</a> setting
+  of an individual port to override the setting in
+  <a href="vim.dvs.DistributedVirtualPortgroup.ConfigInfo.html#defaultPortConfig">defaultPortConfig</a> of
+  a portgroup.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="livePortMovingAllowed" name="livePortMovingAllowed"></a><strong>livePortMovingAllowed</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Allow a live port to be moved in and out of the portgroup.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="networkResourcePoolOverrideAllowed" name="networkResourcePoolOverrideAllowed"></a><strong>networkResourcePoolOverrideAllowed</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Allow the setting of
+  <a href="vim.dvs.DistributedVirtualPort.Setting.html#networkResourcePoolKey">networkResourcePoolKey</a> of an
+  individual port to override the setting in
+  <a href="vim.dvs.DistributedVirtualPortgroup.ConfigInfo.html#defaultPortConfig">defaultPortConfig</a>
+  of a portgroup.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="portConfigResetAtDisconnect" name="portConfigResetAtDisconnect"></a><strong>portConfigResetAtDisconnect</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         If true, reset the port network setting back to the portgroup setting
+  (thus removing the per-port setting) when the port is disconnected from
+  the connectee.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="shapingOverrideAllowed" name="shapingOverrideAllowed"></a><strong>shapingOverrideAllowed</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Allow the <a href="vim.dvs.DistributedVirtualPort.Setting.html#inShapingPolicy">inShapingPolicy</a> or
+  <a href="vim.dvs.DistributedVirtualPort.Setting.html#outShapingPolicy">outShapingPolicy</a> settings
+  of an individual port to override the setting in
+  <a href="vim.dvs.DistributedVirtualPortgroup.ConfigInfo.html#defaultPortConfig">defaultPortConfig</a> of
+  a portgroup.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="trafficFilterOverrideAllowed" name="trafficFilterOverrideAllowed"></a><strong>trafficFilterOverrideAllowed</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Allow the setting of
+  <a href="vim.dvs.DistributedVirtualPort.Setting.html#filterPolicy">filterPolicy</a>,
+  for an individual port to override the setting in
+  <a href="vim.dvs.DistributedVirtualPortgroup.ConfigInfo.html#defaultPortConfig">defaultPortConfig</a> of
+  a portgroup.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vendorConfigOverrideAllowed" name="vendorConfigOverrideAllowed"></a><strong>vendorConfigOverrideAllowed</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Allow the <a href="vim.dvs.DistributedVirtualPort.Setting.html#vendorSpecificConfig">vendorSpecificConfig</a>
+  setting of an individual port to override the setting in
+  <a href="vim.dvs.DistributedVirtualPortgroup.ConfigInfo.html#defaultPortConfig">defaultPortConfig</a> of
+  a portgroup.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DVPortgroupPolicy">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="blockOverrideAllowed" type="xsd:boolean"/>
+                     <element name="shapingOverrideAllowed" type="xsd:boolean"/>
+                     <element name="vendorConfigOverrideAllowed" type="xsd:boolean"/>
+                     <element name="livePortMovingAllowed" type="xsd:boolean"/>
+                     <element name="portConfigResetAtDisconnect" type="xsd:boolean"/>
+                     <element name="networkResourcePoolOverrideAllowed" type="xsd:boolean" minOccurs="0"/>
+                     <element name="trafficFilterOverrideAllowed" type="xsd:boolean" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

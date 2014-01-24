@@ -1,0 +1,170 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.alarm.AlarmSpec" name="vim.alarm.AlarmSpec"></a>
+<h1>Data Object - AlarmSpec</h1>
+<dl>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.alarm.AlarmManager.html#create">CreateAlarm</a>, <a href="vim.alarm.Alarm.html#reconfigure">ReconfigureAlarm</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.alarm.AlarmInfo.html">AlarmInfo</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.alarm.AlarmAction.html">AlarmAction</a>, <a href="vim.alarm.AlarmExpression.html">AlarmExpression</a>, <a href="vim.alarm.AlarmSetting.html">AlarmSetting</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         Parameters for alarm creation.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="action" name="action"></a><strong>action</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.alarm.AlarmAction.html">AlarmAction</a></td><td>
+<p></p>
+         Action to perform when the alarm is triggered.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="actionFrequency" name="actionFrequency"></a><strong>actionFrequency</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Frequency in seconds, which specifies how often appropriate actions
+ should repeat when an alarm does not change state.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="description" name="description"></a><strong>description</strong></td><td>xsd:string</td><td>
+<p></p>
+         Description of the alarm.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="enabled" name="enabled"></a><strong>enabled</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to indicate whether or not the alarm is enabled or disabled.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="expression" name="expression"></a><strong>expression</strong></td><td><a href="vim.alarm.AlarmExpression.html">AlarmExpression</a></td><td>
+<p></p>
+         Top-level alarm expression that defines trigger conditions.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="name" name="name"></a><strong>name</strong></td><td>xsd:string</td><td>
+<p></p>
+         Name of the alarm.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="setting" name="setting"></a><strong>setting</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.alarm.AlarmSetting.html">AlarmSetting</a></td><td>
+<p></p>
+         Tolerance and maximum frequency settings.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="systemName" name="systemName"></a><strong>systemName</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         System name of the alarm.
+ <p>
+ This is set only for predefined Alarms - i.e. Alarms created by the
+ server automatically. Editing or renaming Alarms from the UI does
+ not affect this value, and user-created Alarms do not have a
+ systemName at all.
+ <p>
+ The purpose of this field is to identify system-created Alarms
+ reliably, even if they are edited by users.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AlarmSpec">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="name" type="xsd:string"/>
+                     <element name="systemName" type="xsd:string" minOccurs="0"/>
+                     <element name="description" type="xsd:string"/>
+                     <element name="enabled" type="xsd:boolean"/>
+                     <element name="expression" type="vim25:AlarmExpression"/>
+                     <element name="action" type="vim25:AlarmAction" minOccurs="0"/>
+                     <element name="actionFrequency" type="xsd:int" minOccurs="0"/>
+                     <element name="setting" type="vim25:AlarmSetting" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

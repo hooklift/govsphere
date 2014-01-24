@@ -1,0 +1,104 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.SharesInfo.Level" name="vim.SharesInfo.Level"></a>
+<h1>Enum - 
+						SharesLevel</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.SharesInfo.html#field_detail">SharesInfo</a>, <a href="vim.SharesOption.html#field_detail">SharesOption</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Enum Description</h2>
+<p></p>
+         Simplified shares notation.
+  These designations have different meanings for different resources.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Enum Constants</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><a id="custom" name="custom"></a>custom</td><td>
+      If you specify <code>custom</code> for the <a href="vim.SharesInfo.html#level">level</a> property, when there is resource contention the Server uses the <a href="vim.SharesInfo.html#shares">shares</a> value to determine resource allocation.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="high" name="high"></a>high</td><td>
+      For CPU:     Shares = 2000 * nmumber of virtual CPUs<br>
+  For Memory:  Shares =   20 * virtual machine memory size in megabytes<br>
+  For Disk:    Shares = 2000<br>
+  For Network: Shares = <a href="vim.DistributedVirtualSwitch.FeatureCapability.html#networkResourcePoolHighShareValue">networkResourcePoolHighShareValue</a>
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="low" name="low"></a>low</td><td>
+      For CPU:     Shares = 500 * number of virtual CPUs<br>
+  For Memory:  Shares =   5 * virtual machine memory size in megabytes<br>
+  For Disk:    Shares = 500<br>
+  For Network: Shares = 0.25 * <a href="vim.DistributedVirtualSwitch.FeatureCapability.html#networkResourcePoolHighShareValue">networkResourcePoolHighShareValue</a>
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="normal" name="normal"></a>normal</td><td>
+      For CPU:     Shares = 1000 * number of virtual CPUs<br>
+  For Memory:  Shares =   10 * virtual machine memory size in megabytes<br>
+  For Disk:    Shares = 1000<br>
+  For Network: Shares = 0.5 * <a href="vim.DistributedVirtualSwitch.FeatureCapability.html#networkResourcePoolHighShareValue">networkResourcePoolHighShareValue</a>
+   <br>
+</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <simpleType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="SharesLevel">
+            <restriction base="xsd:string">
+               <enumeration value="low"/>
+               <enumeration value="normal"/>
+               <enumeration value="high"/>
+               <enumeration value="custom"/>
+            </restriction>
+         </simpleType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

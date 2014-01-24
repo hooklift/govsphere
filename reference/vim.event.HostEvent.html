@@ -1,0 +1,96 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.event.HostEvent" name="vim.event.HostEvent"></a>
+<h1>Data Object - HostEvent</h1>
+<dl>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.event.AccountCreatedEvent.html">AccountCreatedEvent</a>, <a href="vim.event.AccountRemovedEvent.html">AccountRemovedEvent</a>, <a href="vim.event.AccountUpdatedEvent.html">AccountUpdatedEvent</a>, <a href="vim.event.AdminPasswordNotChangedEvent.html">AdminPasswordNotChangedEvent</a>, <a href="vim.event.CanceledHostOperationEvent.html">CanceledHostOperationEvent</a>, <a href="vim.event.DatastoreDiscoveredEvent.html">DatastoreDiscoveredEvent</a>, <a href="vim.event.DatastorePrincipalConfigured.html">DatastorePrincipalConfigured</a>, <a href="vim.event.DatastoreRemovedOnHostEvent.html">DatastoreRemovedOnHostEvent</a>, <a href="vim.event.DatastoreRenamedOnHostEvent.html">DatastoreRenamedOnHostEvent</a>, <a href="vim.event.DrsResourceConfigureFailedEvent.html">DrsResourceConfigureFailedEvent</a>, <a href="vim.event.DrsResourceConfigureSyncedEvent.html">DrsResourceConfigureSyncedEvent</a>, <a href="vim.event.DuplicateIpDetectedEvent.html">DuplicateIpDetectedEvent</a>, <a href="vim.event.DvsHealthStatusChangeEvent.html">DvsHealthStatusChangeEvent</a>, <a href="vim.event.EnteredMaintenanceModeEvent.html">EnteredMaintenanceModeEvent</a>, <a href="vim.event.EnteredStandbyModeEvent.html">EnteredStandbyModeEvent</a>, <a href="vim.event.EnteringMaintenanceModeEvent.html">EnteringMaintenanceModeEvent</a>, <a href="vim.event.EnteringStandbyModeEvent.html">EnteringStandbyModeEvent</a>, <a href="vim.event.ExitedStandbyModeEvent.html">ExitedStandbyModeEvent</a>, <a href="vim.event.ExitingStandbyModeEvent.html">ExitingStandbyModeEvent</a>, <a href="vim.event.ExitMaintenanceModeEvent.html">ExitMaintenanceModeEvent</a>, <a href="vim.event.ExitStandbyModeFailedEvent.html">ExitStandbyModeFailedEvent</a>, <a href="vim.event.GhostDvsProxySwitchDetectedEvent.html">GhostDvsProxySwitchDetectedEvent</a>, <a href="vim.event.GhostDvsProxySwitchRemovedEvent.html">GhostDvsProxySwitchRemovedEvent</a>, <a href="vim.event.HostAddedEvent.html">HostAddedEvent</a>, <a href="vim.event.HostAddFailedEvent.html">HostAddFailedEvent</a>, <a href="vim.event.HostAdminDisableEvent.html">HostAdminDisableEvent</a>, <a href="vim.event.HostAdminEnableEvent.html">HostAdminEnableEvent</a>, <a href="vim.event.HostCnxFailedAccountFailedEvent.html">HostCnxFailedAccountFailedEvent</a>, <a href="vim.event.HostCnxFailedAlreadyManagedEvent.html">HostCnxFailedAlreadyManagedEvent</a>, <a href="vim.event.HostCnxFailedBadCcagentEvent.html">HostCnxFailedBadCcagentEvent</a>, <a href="vim.event.HostCnxFailedBadUsernameEvent.html">HostCnxFailedBadUsernameEvent</a>, <a href="vim.event.HostCnxFailedBadVersionEvent.html">HostCnxFailedBadVersionEvent</a>, <a href="vim.event.HostCnxFailedCcagentUpgradeEvent.html">HostCnxFailedCcagentUpgradeEvent</a>, <a href="vim.event.HostCnxFailedEvent.html">HostCnxFailedEvent</a>, <a href="vim.event.HostCnxFailedNetworkErrorEvent.html">HostCnxFailedNetworkErrorEvent</a>, <a href="vim.event.HostCnxFailedNoAccessEvent.html">HostCnxFailedNoAccessEvent</a>, <a href="vim.event.HostCnxFailedNoConnectionEvent.html">HostCnxFailedNoConnectionEvent</a>, <a href="vim.event.HostCnxFailedNoLicenseEvent.html">HostCnxFailedNoLicenseEvent</a>, <a href="vim.event.HostCnxFailedNotFoundEvent.html">HostCnxFailedNotFoundEvent</a>, <a href="vim.event.HostCnxFailedTimeoutEvent.html">HostCnxFailedTimeoutEvent</a>, <a href="vim.event.HostComplianceCheckedEvent.html">HostComplianceCheckedEvent</a>, <a href="vim.event.HostCompliantEvent.html">HostCompliantEvent</a>, <a href="vim.event.HostConfigAppliedEvent.html">HostConfigAppliedEvent</a>, <a href="vim.event.HostConnectedEvent.html">HostConnectedEvent</a>, <a href="vim.event.HostConnectionLostEvent.html">HostConnectionLostEvent</a>, <a href="vim.event.HostDasDisabledEvent.html">HostDasDisabledEvent</a>, <a href="vim.event.HostDasDisablingEvent.html">HostDasDisablingEvent</a>, <a href="vim.event.HostDasEnabledEvent.html">HostDasEnabledEvent</a>, <a href="vim.event.HostDasEnablingEvent.html">HostDasEnablingEvent</a>, <a href="vim.event.HostDasErrorEvent.html">HostDasErrorEvent</a>, <a href="vim.event.HostDasEvent.html">HostDasEvent</a>, <a href="vim.event.HostDasOkEvent.html">HostDasOkEvent</a>, <a href="vim.event.HostDisconnectedEvent.html">HostDisconnectedEvent</a>, <a href="vim.event.HostEnableAdminFailedEvent.html">HostEnableAdminFailedEvent</a>, <a href="vim.event.HostGetShortNameFailedEvent.html">HostGetShortNameFailedEvent</a>, <a href="vim.event.HostInAuditModeEvent.html">HostInAuditModeEvent</a>, <a href="vim.event.HostIpChangedEvent.html">HostIpChangedEvent</a>, <a href="vim.event.HostIpInconsistentEvent.html">HostIpInconsistentEvent</a>, <a href="vim.event.HostIpToShortNameFailedEvent.html">HostIpToShortNameFailedEvent</a>, <a href="vim.event.HostNonCompliantEvent.html">HostNonCompliantEvent</a>, <a href="vim.event.HostProfileAppliedEvent.html">HostProfileAppliedEvent</a>, <a href="vim.event.HostReconnectionFailedEvent.html">HostReconnectionFailedEvent</a>, <a href="vim.event.HostRemovedEvent.html">HostRemovedEvent</a>, <a href="vim.event.HostShortNameToIpFailedEvent.html">HostShortNameToIpFailedEvent</a>, <a href="vim.event.HostShutdownEvent.html">HostShutdownEvent</a>, <a href="vim.event.HostSyncFailedEvent.html">HostSyncFailedEvent</a>, <a href="vim.event.HostUpgradeFailedEvent.html">HostUpgradeFailedEvent</a>, <a href="vim.event.HostUserWorldSwapNotEnabledEvent.html">HostUserWorldSwapNotEnabledEvent</a>, <a href="vim.event.HostVnicConnectedToCustomizedDVPortEvent.html">HostVnicConnectedToCustomizedDVPortEvent</a>, <a href="vim.event.HostWwnChangedEvent.html">HostWwnChangedEvent</a>, <a href="vim.event.HostWwnConflictEvent.html">HostWwnConflictEvent</a>, <a href="vim.event.iScsiBootFailureEvent.html">IScsiBootFailureEvent</a>, <a href="vim.event.LocalDatastoreCreatedEvent.html">LocalDatastoreCreatedEvent</a>, <a href="vim.event.LocalTSMEnabledEvent.html">LocalTSMEnabledEvent</a>, <a href="vim.event.NASDatastoreCreatedEvent.html">NASDatastoreCreatedEvent</a>, <a href="vim.event.NoDatastoresConfiguredEvent.html">NoDatastoresConfiguredEvent</a>, <a href="vim.event.RemoteTSMEnabledEvent.html">RemoteTSMEnabledEvent</a>, <a href="vim.event.TimedOutHostOperationEvent.html">TimedOutHostOperationEvent</a>, <a href="vim.event.UpdatedAgentBeingRestartedEvent.html">UpdatedAgentBeingRestartedEvent</a>, <a href="vim.event.UserAssignedToGroup.html">UserAssignedToGroup</a>, <a href="vim.event.UserPasswordChanged.html">UserPasswordChanged</a>, <a href="vim.event.UserUnassignedFromGroup.html">UserUnassignedFromGroup</a>, <a href="vim.event.VcAgentUninstalledEvent.html">VcAgentUninstalledEvent</a>, <a href="vim.event.VcAgentUninstallFailedEvent.html">VcAgentUninstallFailedEvent</a>, <a href="vim.event.VcAgentUpgradedEvent.html">VcAgentUpgradedEvent</a>, <a href="vim.event.VcAgentUpgradeFailedEvent.html">VcAgentUpgradeFailedEvent</a>, <a href="vim.event.VimAccountPasswordChangedEvent.html">VimAccountPasswordChangedEvent</a>, <a href="vim.event.VMFSDatastoreCreatedEvent.html">VMFSDatastoreCreatedEvent</a>, <a href="vim.event.VMFSDatastoreExpandedEvent.html">VMFSDatastoreExpandedEvent</a>, <a href="vim.event.VMFSDatastoreExtendedEvent.html">VMFSDatastoreExtendedEvent</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.event.Event.html">Event</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         These are host-related events.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.event.Event.html">Event</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.event.Event.html#chainId">chainId</a>, <a href="vim.event.Event.html#changeTag">changeTag</a>, <a href="vim.event.Event.html#computeResource">computeResource</a>, <a href="vim.event.Event.html#createdTime">createdTime</a>, <a href="vim.event.Event.html#datacenter">datacenter</a>, <a href="vim.event.Event.html#ds">ds</a>, <a href="vim.event.Event.html#dvs">dvs</a>, <a href="vim.event.Event.html#fullFormattedMessage">fullFormattedMessage</a>, <a href="vim.event.Event.html#host">host</a>, <a href="vim.event.Event.html#key">key</a>, <a href="vim.event.Event.html#net">net</a>, <a href="vim.event.Event.html#userName">userName</a>, <a href="vim.event.Event.html#vm">vm</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostEvent">
+            <complexContent>
+               <extension base="vim25:Event">
+                  <sequence>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

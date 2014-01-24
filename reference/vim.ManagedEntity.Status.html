@@ -1,0 +1,94 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.ManagedEntity.Status" name="vim.ManagedEntity.Status"></a>
+<h1>Enum - 
+						ManagedEntityStatus</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.alarm.AlarmState.html#field_detail">AlarmState</a>, <a href="vim.alarm.AlarmTriggeringAction.TransitionSpec.html#field_detail">AlarmTriggeringActionTransitionSpec</a>, <a href="vim.cluster.FailoverHostAdmissionControlInfo.HostStatus.html#field_detail">ClusterFailoverHostAdmissionControlInfoHostStatus</a>, <a href="vim.cluster.RuleInfo.html#field_detail">ClusterRuleInfo</a>, <a href="vim.ComputeResource.Summary.html#field_detail">ComputeResourceSummary</a>, <a href="vim.alarm.EventAlarmExpression.html#field_detail">EventAlarmExpression</a>, <a href="vim.host.Summary.html#field_detail">HostListSummary</a>, <a href="vim.ManagedEntity.html#field_detail">ManagedEntity</a>, <a href="vim.ResourcePool.RuntimeInfo.html#field_detail">ResourcePoolRuntimeInfo</a>, <a href="vim.VirtualMachine.html#field_detail">VirtualMachine</a>, <a href="vim.vm.Summary.QuickStats.html#field_detail">VirtualMachineQuickStats</a>, <a href="vim.vm.Summary.html#field_detail">VirtualMachineSummary</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Enum Description</h2>
+<p></p>
+         The Status enumeration defines a general "health" value for a managed entity.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Enum Constants</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><a id="gray" name="gray"></a>gray</td><td>
+      The status is unknown.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="green" name="green"></a>green</td><td>
+      The entity is OK.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="red" name="red"></a>red</td><td>
+      The entity definitely has a problem.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="yellow" name="yellow"></a>yellow</td><td>
+      The entity might have a problem.
+   <br>
+</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <simpleType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ManagedEntityStatus">
+            <restriction base="xsd:string">
+               <enumeration value="gray"/>
+               <enumeration value="green"/>
+               <enumeration value="yellow"/>
+               <enumeration value="red"/>
+            </restriction>
+         </simpleType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

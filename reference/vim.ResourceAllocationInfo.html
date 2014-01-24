@@ -1,0 +1,169 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.ResourceAllocationInfo" name="vim.ResourceAllocationInfo"></a>
+<h1>Data Object - ResourceAllocationInfo</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.ResourceConfigSpec.html#field_detail">ResourceConfigSpec</a>, <a href="vim.vm.ConfigInfo.html#field_detail">VirtualMachineConfigInfo</a>, <a href="vim.vm.ConfigSpec.html#field_detail">VirtualMachineConfigSpec</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.SharesInfo.html">SharesInfo</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The ResourceAllocationInfo data object specifies the reserved resource
+  requirement as well as the limit (maximum allowed usage) for a given
+  kind of resource. This is specified for both memory
+  allocation (specified in MB) and CPU allocation (specified in MHz).
+  <p>
+  For a <a href="vim.ResourcePool.html">ResourcePool</a>, the ResourceAllocationInfo object describes
+  both the guaranteed amount of the resource (<a href="vim.ResourceAllocationInfo.html#reservation">reservation</a>)
+  and whether or not it is expandable
+  (<a href="vim.ResourceAllocationInfo.html#expandableReservation">expandableReservation</a>).
+  If expandableReservation is true, then the resource pool can grow its reservation
+  dynamically by  borrowing unreserved resources from its parent resource pool.  
+  For the methods <a href="vim.ResourcePool.html#createResourcePool">CreateResourcePool</a>,
+  <a href="vim.ResourcePool.html#createVApp">CreateVApp</a> and <a href="vim.ResourcePool.html#importVApp">ImportVApp</a>,
+  you must provide values for all properties except overheadLimit; they are not optional.
+  (Currently, overheadLimit is for vCenter Server use only.)
+  <p>
+  If the limit is configured, it must be greater than or equal to the 
+  reservation.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="expandableReservation" name="expandableReservation"></a><strong>expandableReservation</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         In a resource pool with an expandable reservation, the reservation on a resource 
+  pool can grow beyond the specified value, if the parent resource pool has 
+  unreserved resources.  A non-expandable reservation is called a fixed 
+  reservation. This property is ignored for virtual machines.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="limit" name="limit"></a><strong>limit</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         The utilization of a virtual machine/resource pool will not exceed this limit, even 
+  if there are available resources. This is typically used to ensure a consistent 
+  performance of virtual machines / resource pools independent of available resources. 
+  If set to -1, then there is no fixed limit on resource usage (only bounded by available 
+  resources and shares). Units are MB for memory, MHz for CPU.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="overheadLimit" name="overheadLimit"></a><strong>overheadLimit</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         The maximum allowed overhead memory. For a powered on virtual
+  machine, the overhead memory reservation cannot be larger than its
+  overheadLimit. This property is only applicable to powered on
+  virtual machines and is not persisted across reboots. This property
+  is not applicable for resource pools.  If set to -1, then there is
+  no limit on reservation. Units are MB.
+  <p>
+  Note: For vCenter Server use only. Not available for other clients
+        at this time.
+        The server will throw an exception if you attempt to set
+        this property.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="reservation" name="reservation"></a><strong>reservation</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         Amount of resource that is guaranteed available to the virtual machine or 
+  resource pool. Reserved resources are not wasted if they are not used. If 
+  the utilization is less than the reservation, the resources can be utilized by 
+  other running virtual machines. Units are MB for memory, MHz for CPU.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="shares" name="shares"></a><strong>shares</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.SharesInfo.html">SharesInfo</a></td><td>
+<p></p>
+         Memory shares are used in case of resource contention.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ResourceAllocationInfo">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="reservation" type="xsd:long" minOccurs="0"/>
+                     <element name="expandableReservation" type="xsd:boolean" minOccurs="0"/>
+                     <element name="limit" type="xsd:long" minOccurs="0"/>
+                     <element name="shares" type="vim25:SharesInfo" minOccurs="0"/>
+                     <element name="overheadLimit" type="xsd:long" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

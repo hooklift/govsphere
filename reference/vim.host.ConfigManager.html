@@ -1,0 +1,428 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.ConfigManager" name="vim.host.ConfigManager"></a>
+<h1>Data Object - HostConfigManager</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.HostSystem.html#field_detail">HostSystem</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.AuthenticationManager.html">HostAuthenticationManager</a>, <a href="vim.host.AutoStartManager.html">HostAutoStartManager</a>, <a href="vim.host.BootDeviceSystem.html">HostBootDeviceSystem</a>, <a href="vim.host.CacheConfigurationManager.html">HostCacheConfigurationManager</a>, <a href="vim.host.CpuSchedulerSystem.html">HostCpuSchedulerSystem</a>, <a href="vim.host.DatastoreSystem.html">HostDatastoreSystem</a>, <a href="vim.host.DateTimeSystem.html">HostDateTimeSystem</a>, <a href="vim.host.DiagnosticSystem.html">HostDiagnosticSystem</a>, <a href="vim.host.EsxAgentHostManager.html">HostEsxAgentHostManager</a>, <a href="vim.host.FirewallSystem.html">HostFirewallSystem</a>, <a href="vim.host.FirmwareSystem.html">HostFirmwareSystem</a>, <a href="vim.host.GraphicsManager.html">HostGraphicsManager</a>, <a href="vim.host.HealthStatusSystem.html">HostHealthStatusSystem</a>, <a href="vim.host.ImageConfigManager.html">HostImageConfigManager</a>, <a href="vim.host.KernelModuleSystem.html">HostKernelModuleSystem</a>, <a href="vim.host.MemoryManagerSystem.html">HostMemorySystem</a>, <a href="vim.host.NetworkSystem.html">HostNetworkSystem</a>, <a href="vim.host.PatchManager.html">HostPatchManager</a>, <a href="vim.host.PciPassthruSystem.html">HostPciPassthruSystem</a>, <a href="vim.host.PowerSystem.html">HostPowerSystem</a>, <a href="vim.host.ServiceSystem.html">HostServiceSystem</a>, <a href="vim.host.SnmpSystem.html">HostSnmpSystem</a>, <a href="vim.host.StorageSystem.html">HostStorageSystem</a>, <a href="vim.host.VFlashManager.html">HostVFlashManager</a>, <a href="vim.host.VirtualNicManager.html">HostVirtualNicManager</a>, <a href="vim.host.VMotionSystem.html">HostVMotionSystem</a>, <a href="vim.host.VsanInternalSystem.html">HostVsanInternalSystem</a>, <a href="vim.host.VsanSystem.html">HostVsanSystem</a>, <a href="vim.host.IscsiManager.html">IscsiManager</a>, <a href="vim.LicenseManager.html">LicenseManager</a>, <a href="vim.option.OptionManager.html">OptionManager</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This data object type describes the configuration of a host
+  across products and versions.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="advancedOption" name="advancedOption"></a><strong>advancedOption</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.option.OptionManager.html">OptionManager</a></td><td>
+<p></p>
+         Advanced options.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="authenticationManager" name="authenticationManager"></a><strong>authenticationManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.AuthenticationManager.html">HostAuthenticationManager</a></td><td>
+<p></p>
+         Authentication method configuration - for example, for Active Directory membership.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="autoStartManager" name="autoStartManager"></a><strong>autoStartManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.AutoStartManager.html">HostAutoStartManager</a></td><td>
+<p></p>
+         Auto-start and auto-stop configuration.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="bootDeviceSystem" name="bootDeviceSystem"></a><strong>bootDeviceSystem</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.BootDeviceSystem.html">HostBootDeviceSystem</a></td><td>
+<p></p>
+         Boot device order management.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="cacheConfigurationManager" name="cacheConfigurationManager"></a><strong>cacheConfigurationManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.CacheConfigurationManager.html">HostCacheConfigurationManager</a></td><td><B>Deprecated.</B><I>
+         As of vSphere API 5.5, use <a href="vim.host.ConfigManager.html#vFlashManager">vFlashManager</a> instead.
+      </I>
+<p></p>
+         Host solid state drive cache configuration manager.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="cpuScheduler" name="cpuScheduler"></a><strong>cpuScheduler</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.CpuSchedulerSystem.html">HostCpuSchedulerSystem</a></td><td>
+<p></p>
+         The CPU scheduler that determines which threads execute on a CPU
+  at any given time.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="datastoreSystem" name="datastoreSystem"></a><strong>datastoreSystem</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.DatastoreSystem.html">HostDatastoreSystem</a></td><td>
+<p></p>
+         The datastore manager.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="dateTimeSystem" name="dateTimeSystem"></a><strong>dateTimeSystem</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.DateTimeSystem.html">HostDateTimeSystem</a></td><td>
+<p></p>
+         DateTime configuration
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="diagnosticSystem" name="diagnosticSystem"></a><strong>diagnosticSystem</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.DiagnosticSystem.html">HostDiagnosticSystem</a></td><td>
+<p></p>
+         The diagnostic for the ESX Server system.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="esxAgentHostManager" name="esxAgentHostManager"></a><strong>esxAgentHostManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.EsxAgentHostManager.html">HostEsxAgentHostManager</a></td><td>
+<p></p>
+         Esx Agent resource configuration manager
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="firewallSystem" name="firewallSystem"></a><strong>firewallSystem</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.FirewallSystem.html">HostFirewallSystem</a></td><td>
+<p></p>
+         The firewall configuration.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="firmwareSystem" name="firmwareSystem"></a><strong>firmwareSystem</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.FirmwareSystem.html">HostFirmwareSystem</a></td><td>
+<p></p>
+         Firmware management.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="graphicsManager" name="graphicsManager"></a><strong>graphicsManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.GraphicsManager.html">HostGraphicsManager</a></td><td>
+<p></p>
+         Host graphics manager.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="healthStatusSystem" name="healthStatusSystem"></a><strong>healthStatusSystem</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.HealthStatusSystem.html">HostHealthStatusSystem</a></td><td>
+<p></p>
+         System health status manager.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="imageConfigManager" name="imageConfigManager"></a><strong>imageConfigManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.ImageConfigManager.html">HostImageConfigManager</a></td><td>
+<p></p>
+         Host image configuration management.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="iscsiManager" name="iscsiManager"></a><strong>iscsiManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.IscsiManager.html">IscsiManager</a></td><td>
+<p></p>
+         Iscsi Management Operations managed entity
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="kernelModuleSystem" name="kernelModuleSystem"></a><strong>kernelModuleSystem</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.KernelModuleSystem.html">HostKernelModuleSystem</a></td><td>
+<p></p>
+         Kernel module configuration management.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="licenseManager" name="licenseManager"></a><strong>licenseManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.LicenseManager.html">LicenseManager</a></td><td>
+<p></p>
+         License manager
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="memoryManager" name="memoryManager"></a><strong>memoryManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.MemoryManagerSystem.html">HostMemorySystem</a></td><td>
+<p></p>
+         The memory manager on the host.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="networkSystem" name="networkSystem"></a><strong>networkSystem</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.NetworkSystem.html">HostNetworkSystem</a></td><td>
+<p></p>
+         The network system configuration.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="patchManager" name="patchManager"></a><strong>patchManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.PatchManager.html">HostPatchManager</a></td><td>
+<p></p>
+         Host patch management.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="pciPassthruSystem" name="pciPassthruSystem"></a><strong>pciPassthruSystem</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.PciPassthruSystem.html">HostPciPassthruSystem</a></td><td>
+<p></p>
+         PciDeviceSystem for passthru.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="powerSystem" name="powerSystem"></a><strong>powerSystem</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.PowerSystem.html">HostPowerSystem</a></td><td>
+<p></p>
+         Power System manager.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="serviceSystem" name="serviceSystem"></a><strong>serviceSystem</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.ServiceSystem.html">HostServiceSystem</a></td><td>
+<p></p>
+         The configuration of the host services (for example,
+  SSH, FTP, and Telnet).
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="snmpSystem" name="snmpSystem"></a><strong>snmpSystem</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.SnmpSystem.html">HostSnmpSystem</a></td><td>
+<p></p>
+         Snmp configuration
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="storageSystem" name="storageSystem"></a><strong>storageSystem</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.StorageSystem.html">HostStorageSystem</a></td><td>
+<p></p>
+         The storage configuration.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vFlashManager" name="vFlashManager"></a><strong>vFlashManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.VFlashManager.html">HostVFlashManager</a></td><td>
+<p></p>
+         vFlash Manager
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="virtualNicManager" name="virtualNicManager"></a><strong>virtualNicManager</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.VirtualNicManager.html">HostVirtualNicManager</a></td><td>
+<p></p>
+         The VirtualNic configuration.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vmotionSystem" name="vmotionSystem"></a><strong>vmotionSystem</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.VMotionSystem.html">HostVMotionSystem</a></td><td><B>Deprecated.</B><I>
+         As of VI API 4.0, use <a href="vim.host.ConfigManager.html#virtualNicManager">virtualNicManager</a>
+   to manage the VMotion configuration of the host.
+      </I>
+<p></p>
+         The VMotion configuration.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vsanInternalSystem" name="vsanInternalSystem"></a><strong>vsanInternalSystem</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.VsanInternalSystem.html">HostVsanInternalSystem</a></td><td>
+<p></p>
+         VsanInternalSystem managed entity.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vsanSystem" name="vsanSystem"></a><strong>vsanSystem</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.VsanSystem.html">HostVsanSystem</a></td><td>
+<p></p>
+         VsanSystem managed entity.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostConfigManager">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="cpuScheduler" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="datastoreSystem" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="memoryManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="storageSystem" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="networkSystem" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="vmotionSystem" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="virtualNicManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="serviceSystem" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="firewallSystem" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="advancedOption" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="diagnosticSystem" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="autoStartManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="snmpSystem" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="dateTimeSystem" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="patchManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="imageConfigManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="bootDeviceSystem" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="firmwareSystem" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="healthStatusSystem" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="pciPassthruSystem" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="licenseManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="kernelModuleSystem" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="authenticationManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="powerSystem" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="cacheConfigurationManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="esxAgentHostManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="iscsiManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="vFlashManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="vsanSystem" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="graphicsManager" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="vsanInternalSystem" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

@@ -1,0 +1,519 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.ConfigInfo" name="vim.host.ConfigInfo"></a>
+<h1>Data Object - HostConfigInfo</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.HostSystem.html#field_detail">HostSystem</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.AboutInfo.html">AboutInfo</a>, <a href="vim.Datastore.html">Datastore</a>, <a href="vim.host.AuthenticationManagerInfo.html">HostAuthenticationManagerInfo</a>, <a href="vim.host.AutoStartManager.Config.html">HostAutoStartManagerConfig</a>, <a href="vim.host.CacheConfigurationManager.CacheConfigurationInfo.html">HostCacheConfigurationInfo</a>, <a href="vim.host.DatastoreSystem.Capabilities.html">HostDatastoreSystemCapabilities</a>, <a href="vim.host.DateTimeInfo.html">HostDateTimeInfo</a>, <a href="vim.host.DiagnosticPartition.html">HostDiagnosticPartition</a>, <a href="vim.host.FeatureCapability.html">HostFeatureCapability</a>, <a href="vim.host.FeatureVersionInfo.html">HostFeatureVersionInfo</a>, <a href="vim.host.FileSystemVolumeInfo.html">HostFileSystemVolumeInfo</a>, <a href="vim.host.FirewallInfo.html">HostFirewallInfo</a>, <a href="vim.host.FlagInfo.html">HostFlagInfo</a>, <a href="vim.host.GraphicsInfo.html">HostGraphicsInfo</a>, <a href="vim.host.CpuSchedulerSystem.HyperThreadScheduleInfo.html">HostHyperThreadScheduleInfo</a>, <a href="vim.host.IpmiInfo.html">HostIpmiInfo</a>, <a href="vim.host.MultipathStateInfo.html">HostMultipathStateInfo</a>, <a href="vim.host.NetCapabilities.html">HostNetCapabilities</a>, <a href="vim.host.NetOffloadCapabilities.html">HostNetOffloadCapabilities</a>, <a href="vim.host.NetworkInfo.html">HostNetworkInfo</a>, <a href="vim.host.PciPassthruInfo.html">HostPciPassthruInfo</a>, <a href="vim.host.ServiceInfo.html">HostServiceInfo</a>, <a href="vim.host.SslThumbprintInfo.html">HostSslThumbprintInfo</a>, <a href="vim.host.StorageDeviceInfo.html">HostStorageDeviceInfo</a>, <a href="vim.HostSystem.html">HostSystem</a>, <a href="vim.host.SystemResourceInfo.html">HostSystemResourceInfo</a>, <a href="vim.host.SystemSwapConfiguration.html">HostSystemSwapConfiguration</a>, <a href="vim.host.VFlashManager.VFlashConfigInfo.html">HostVFlashManagerVFlashConfigInfo</a>, <a href="vim.host.VirtualNicManagerInfo.html">HostVirtualNicManagerInfo</a>, <a href="vim.host.VMotionInfo.html">HostVMotionInfo</a>, <a href="vim.option.OptionDef.html">OptionDef</a>, <a href="vim.option.OptionValue.html">OptionValue</a>, <a href="vim.host.PowerSystem.Capability.html">PowerSystemCapability</a>, <a href="vim.host.PowerSystem.Info.html">PowerSystemInfo</a>, <a href="vim.host.MemoryManagerSystem.ServiceConsoleReservationInfo.html">ServiceConsoleReservationInfo</a>, <a href="vim.host.MemoryManagerSystem.VirtualMachineReservationInfo.html">VirtualMachineMemoryReservationInfo</a>, <a href="vim.vsan.host.ConfigInfo.html">VsanHostConfigInfo</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This data object type encapsulates a typical set of host configuration
+   information that is useful for displaying and configuring a host.
+   <p>
+   VirtualCenter can retrieve this set of information
+   very efficiently even for a large set of hosts.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="activeDiagnosticPartition" name="activeDiagnosticPartition"></a><strong>activeDiagnosticPartition</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.DiagnosticPartition.html">HostDiagnosticPartition</a></td><td>
+<p></p>
+         The diagnostic partition that will be set as the current
+  diagnostic partition on the host.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="adminDisabled" name="adminDisabled"></a><strong>adminDisabled</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         If the flag is true, the permissions on the host have been modified such
+  that it is only accessible through local console or an authorized
+  centralized management application. This flag is affected by the
+  <a href="vim.HostSystem.html#enterLockdownMode">EnterLockdownMode</a> and
+  <a href="vim.HostSystem.html#exitLockdownMode">ExitLockdownMode</a> operations.
+  <p>
+  This flag is supported in VirtualCenter only. The value returned from host
+  should be ignored.<br>See <a href="vim.HostSystem.html#enterLockdownMode">EnterLockdownMode</a><br>See <a href="vim.HostSystem.html#exitLockdownMode">ExitLockdownMode</a><br>
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="authenticationManagerInfo" name="authenticationManagerInfo"></a><strong>authenticationManagerInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.AuthenticationManagerInfo.html">HostAuthenticationManagerInfo</a></td><td>
+<p></p>
+         Current authentication configuration.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="autoStart" name="autoStart"></a><strong>autoStart</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.AutoStartManager.Config.html">HostAutoStartManagerConfig</a></td><td>
+<p></p>
+         AutoStart configuration.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="cacheConfigurationInfo" name="cacheConfigurationInfo"></a><strong>cacheConfigurationInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.CacheConfigurationManager.CacheConfigurationInfo.html">HostCacheConfigurationInfo[]</a></td><td><B>Deprecated.</B><I>
+         As of vSphere API 5.5, use <a href="vim.host.ConfigInfo.html#vFlashConfigInfo">vFlashConfigInfo</a> instead.
+      </I>
+<p></p>
+         Host solid stats drive cache configuration information.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="capabilities" name="capabilities"></a><strong>capabilities</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.NetCapabilities.html">HostNetCapabilities</a></td><td>
+<p></p>
+         Capability vector indicating the available network features.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="certificate" name="certificate"></a><strong>certificate</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:byte[]</td><td>
+<p></p>
+         Full Host Certificate in PEM format, if known
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="consoleReservation" name="consoleReservation"></a><strong>consoleReservation</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.MemoryManagerSystem.ServiceConsoleReservationInfo.html">ServiceConsoleReservationInfo</a></td><td>
+<p></p>
+         Memory configuration.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="datastoreCapabilities" name="datastoreCapabilities"></a><strong>datastoreCapabilities</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.DatastoreSystem.Capabilities.html">HostDatastoreSystemCapabilities</a></td><td>
+<p></p>
+         Capability vector indicating available datastore features.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="datastorePrincipal" name="datastorePrincipal"></a><strong>datastorePrincipal</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Datastore principal user
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="dateTimeInfo" name="dateTimeInfo"></a><strong>dateTimeInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.DateTimeInfo.html">HostDateTimeInfo</a></td><td>
+<p></p>
+         Date/Time related configuration
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="featureCapability" name="featureCapability"></a><strong>featureCapability</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.FeatureCapability.html">HostFeatureCapability[]</a></td><td>
+<p></p>
+         Array of the feature capabilities that the host has. This is not
+  expected to change after the host boots. It may change between reboots
+  in the case BIOS options are changed, or hardware, or firmware is
+  changed or upgraded.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="featureVersion" name="featureVersion"></a><strong>featureVersion</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.FeatureVersionInfo.html">HostFeatureVersionInfo[]</a></td><td>
+<p></p>
+         List of feature-specific version information. Each element refers
+ to the version information for a specific feature.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="fileSystemVolume" name="fileSystemVolume"></a><strong>fileSystemVolume</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.FileSystemVolumeInfo.html">HostFileSystemVolumeInfo</a></td><td>
+<p></p>
+         Storage system file system volume information.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="firewall" name="firewall"></a><strong>firewall</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.FirewallInfo.html">HostFirewallInfo</a></td><td>
+<p></p>
+         Firewall configuration.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="flags" name="flags"></a><strong>flags</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.FlagInfo.html">HostFlagInfo</a></td><td>
+<p></p>
+         Additional flags for a host.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="graphicsInfo" name="graphicsInfo"></a><strong>graphicsInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.GraphicsInfo.html">HostGraphicsInfo[]</a></td><td>
+<p></p>
+         The list of graphics devices available on this host.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="host" name="host"></a><strong>host</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         A reference to a managed object on a host.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="hyperThread" name="hyperThread"></a><strong>hyperThread</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.CpuSchedulerSystem.HyperThreadScheduleInfo.html">HostHyperThreadScheduleInfo</a></td><td>
+<p></p>
+         If hyperthreading is supported, this is the CPU configuration for
+  optimizing hyperthreading.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="ipmi" name="ipmi"></a><strong>ipmi</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.IpmiInfo.html">HostIpmiInfo</a></td><td>
+<p></p>
+         IPMI (Intelligent Platform Management Interface) info for the host.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="localSwapDatastore" name="localSwapDatastore"></a><strong>localSwapDatastore</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Datastore.html">Datastore</a></td><td>
+<p></p>
+         Datastore visible to this host that may be used to store virtual
+  machine swapfiles, for virtual machines executing on this host. The
+  value of this property is set or unset by invoking
+  <a href="vim.host.DatastoreSystem.html#updateLocalSwapDatastore">UpdateLocalSwapDatastore</a>.
+  The policy for using this datastore is determined by the compute
+  resource configuration's
+  <a href="vim.ComputeResource.ConfigInfo.html#vmSwapPlacement">vmSwapPlacement</a>
+  property in concert with each individual virtual machine configuration's
+  <a href="vim.vm.ConfigInfo.html#swapPlacement">swapPlacement</a> property.
+  <p>
+  Note: Using a host-specific swap location may degrade VMotion performance.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="maskedFeatureCapability" name="maskedFeatureCapability"></a><strong>maskedFeatureCapability</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.FeatureCapability.html">HostFeatureCapability[]</a></td><td>
+<p></p>
+         Array of the feature capabilities that the host has after the
+  mask has been applied.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="multipathState" name="multipathState"></a><strong>multipathState</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.MultipathStateInfo.html">HostMultipathStateInfo</a></td><td>
+<p></p>
+         Storage multipath state information.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="network" name="network"></a><strong>network</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.NetworkInfo.html">HostNetworkInfo</a></td><td>
+<p></p>
+         Network system information.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="offloadCapabilities" name="offloadCapabilities"></a><strong>offloadCapabilities</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.NetOffloadCapabilities.html">HostNetOffloadCapabilities</a></td><td><B>Deprecated.</B><I>
+         As of VI API 4.0, the system defaults will be used.
+      </I>
+<p></p>
+         capabilities to offload operations either to the host or to physical
+  hardware when a virtual machine is transmitting on a network
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="option" name="option"></a><strong>option</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.option.OptionValue.html">OptionValue[]</a></td><td>
+<p></p>
+         Host configuration options as defined by the
+  <a href="vim.option.OptionValue.html">OptionValue</a> data object type.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="optionDef" name="optionDef"></a><strong>optionDef</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.option.OptionDef.html">OptionDef[]</a></td><td>
+<p></p>
+         A list of supported options.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="pciPassthruInfo" name="pciPassthruInfo"></a><strong>pciPassthruInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.PciPassthruInfo.html">HostPciPassthruInfo[]</a></td><td>
+<p></p>
+         PCI passthrough information.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="powerSystemCapability" name="powerSystemCapability"></a><strong>powerSystemCapability</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.PowerSystem.Capability.html">PowerSystemCapability</a></td><td>
+<p></p>
+         Host power management capability.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="powerSystemInfo" name="powerSystemInfo"></a><strong>powerSystemInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.PowerSystem.Info.html">PowerSystemInfo</a></td><td>
+<p></p>
+         Host power management information.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="product" name="product"></a><strong>product</strong></td><td><a href="vim.AboutInfo.html">AboutInfo</a></td><td>
+<p></p>
+         Information about a product.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="service" name="service"></a><strong>service</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.ServiceInfo.html">HostServiceInfo</a></td><td>
+<p></p>
+         Host service configuration.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="sslThumbprintData" name="sslThumbprintData"></a><strong>sslThumbprintData</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.SslThumbprintInfo.html">HostSslThumbprintInfo[]</a></td><td>
+<p></p>
+         SSL Thumbprints registered on this host.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="sslThumbprintInfo" name="sslThumbprintInfo"></a><strong>sslThumbprintInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.SslThumbprintInfo.html">HostSslThumbprintInfo</a></td><td><B>Deprecated.</B><I>
+         As of vSphere API 5.0, use <a href="vim.host.ConfigInfo.html#sslThumbprintData">sslThumbprintData</a> instead.
+      </I>
+<p></p>
+         SSL Thumbprint info for hosts registered on this host.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="storageDevice" name="storageDevice"></a><strong>storageDevice</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.StorageDeviceInfo.html">HostStorageDeviceInfo</a></td><td>
+<p></p>
+         Storage system information.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="systemFile" name="systemFile"></a><strong>systemFile</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         Datastore paths of files used by the host system on
+  mounted volumes, for instance, the COS vmdk file of the
+  host. For information on datastore paths, see <a href="vim.Datastore.html">Datastore</a>.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="systemResources" name="systemResources"></a><strong>systemResources</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.SystemResourceInfo.html">HostSystemResourceInfo</a></td><td>
+<p></p>
+         Reference for the system resource hierarchy, used for configuring
+  the set of resources reserved to the system and unavailable to
+  virtual machines.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="systemSwapConfiguration" name="systemSwapConfiguration"></a><strong>systemSwapConfiguration</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.SystemSwapConfiguration.html">HostSystemSwapConfiguration</a></td><td>
+<p></p>
+         The system swap configuration specifies which options are currently
+ enabled.<br/><br>See <a href="vim.host.SystemSwapConfiguration.html">HostSystemSwapConfiguration</a><br>
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vFlashConfigInfo" name="vFlashConfigInfo"></a><strong>vFlashConfigInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.VFlashManager.VFlashConfigInfo.html">HostVFlashManagerVFlashConfigInfo</a></td><td>
+<p></p>
+         Host vFlash configuration information
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="virtualMachineReservation" name="virtualMachineReservation"></a><strong>virtualMachineReservation</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.MemoryManagerSystem.VirtualMachineReservationInfo.html">VirtualMachineMemoryReservationInfo</a></td><td>
+<p></p>
+         Virtual machine memory configuration.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="virtualNicManagerInfo" name="virtualNicManagerInfo"></a><strong>virtualNicManagerInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.VirtualNicManagerInfo.html">HostVirtualNicManagerInfo</a></td><td>
+<p></p>
+         VirtualNic manager information.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vmotion" name="vmotion"></a><strong>vmotion</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.VMotionInfo.html">HostVMotionInfo</a></td><td><B>Deprecated.</B><I>
+         As of VI API 4.0, use <a href="vim.host.ConfigInfo.html#virtualNicManagerInfo">virtualNicManagerInfo</a>
+      </I>
+<p></p>
+         VMotion system information.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vsanHostConfig" name="vsanHostConfig"></a><strong>vsanHostConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vsan.host.ConfigInfo.html">VsanHostConfigInfo</a></td><td>
+<p></p>
+         VSAN configuration for a host.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="wakeOnLanCapable" name="wakeOnLanCapable"></a><strong>wakeOnLanCapable</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates if a host is wake on lan capable.
+  A host is deemed wake on lan capable if there exists at least one
+  physical network card that is both backing the vmotion interface and
+  is itself wake on lan capable.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostConfigInfo">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="host" type="vim25:ManagedObjectReference"/>
+                     <element name="product" type="vim25:AboutInfo"/>
+                     <element name="hyperThread" type="vim25:HostHyperThreadScheduleInfo" minOccurs="0"/>
+                     <element name="consoleReservation" type="vim25:ServiceConsoleReservationInfo" minOccurs="0"/>
+                     <element name="virtualMachineReservation" type="vim25:VirtualMachineMemoryReservationInfo" minOccurs="0"/>
+                     <element name="storageDevice" type="vim25:HostStorageDeviceInfo" minOccurs="0"/>
+                     <element name="multipathState" type="vim25:HostMultipathStateInfo" minOccurs="0"/>
+                     <element name="fileSystemVolume" type="vim25:HostFileSystemVolumeInfo" minOccurs="0"/>
+                     <element name="systemFile" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="network" type="vim25:HostNetworkInfo" minOccurs="0"/>
+                     <element name="vmotion" type="vim25:HostVMotionInfo" minOccurs="0"/>
+                     <element name="virtualNicManagerInfo" type="vim25:HostVirtualNicManagerInfo" minOccurs="0"/>
+                     <element name="capabilities" type="vim25:HostNetCapabilities" minOccurs="0"/>
+                     <element name="datastoreCapabilities" type="vim25:HostDatastoreSystemCapabilities" minOccurs="0"/>
+                     <element name="offloadCapabilities" type="vim25:HostNetOffloadCapabilities" minOccurs="0"/>
+                     <element name="service" type="vim25:HostServiceInfo" minOccurs="0"/>
+                     <element name="firewall" type="vim25:HostFirewallInfo" minOccurs="0"/>
+                     <element name="autoStart" type="vim25:HostAutoStartManagerConfig" minOccurs="0"/>
+                     <element name="activeDiagnosticPartition" type="vim25:HostDiagnosticPartition" minOccurs="0"/>
+                     <element name="option" type="vim25:OptionValue" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="optionDef" type="vim25:OptionDef" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="datastorePrincipal" type="xsd:string" minOccurs="0"/>
+                     <element name="localSwapDatastore" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="systemSwapConfiguration" type="vim25:HostSystemSwapConfiguration" minOccurs="0"/>
+                     <element name="systemResources" type="vim25:HostSystemResourceInfo" minOccurs="0"/>
+                     <element name="dateTimeInfo" type="vim25:HostDateTimeInfo" minOccurs="0"/>
+                     <element name="flags" type="vim25:HostFlagInfo" minOccurs="0"/>
+                     <element name="adminDisabled" type="xsd:boolean" minOccurs="0"/>
+                     <element name="ipmi" type="vim25:HostIpmiInfo" minOccurs="0"/>
+                     <element name="sslThumbprintInfo" type="vim25:HostSslThumbprintInfo" minOccurs="0"/>
+                     <element name="sslThumbprintData" type="vim25:HostSslThumbprintInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="certificate" type="xsd:byte" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="pciPassthruInfo" type="vim25:HostPciPassthruInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="authenticationManagerInfo" type="vim25:HostAuthenticationManagerInfo" minOccurs="0"/>
+                     <element name="featureVersion" type="vim25:HostFeatureVersionInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="powerSystemCapability" type="vim25:PowerSystemCapability" minOccurs="0"/>
+                     <element name="powerSystemInfo" type="vim25:PowerSystemInfo" minOccurs="0"/>
+                     <element name="cacheConfigurationInfo" type="vim25:HostCacheConfigurationInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="wakeOnLanCapable" type="xsd:boolean" minOccurs="0"/>
+                     <element name="featureCapability" type="vim25:HostFeatureCapability" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="maskedFeatureCapability" type="vim25:HostFeatureCapability" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="vFlashConfigInfo" type="vim25:HostVFlashManagerVFlashConfigInfo" minOccurs="0"/>
+                     <element name="vsanHostConfig" type="vim25:VsanHostConfigInfo" minOccurs="0"/>
+                     <element name="graphicsInfo" type="vim25:HostGraphicsInfo" minOccurs="0" maxOccurs="unbounded"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

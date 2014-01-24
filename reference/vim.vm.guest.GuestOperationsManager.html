@@ -1,0 +1,120 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.guest.GuestOperationsManager" name="vim.vm.guest.GuestOperationsManager"></a>
+<h1>Managed Object -  
+						GuestOperationsManager</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.ServiceInstanceContent.html#field_detail">ServiceContent</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.vm.guest.AuthManager.html">GuestAuthManager</a>, <a href="vim.vm.guest.FileManager.html">GuestFileManager</a>, <a href="vim.vm.guest.ProcessManager.html">GuestProcessManager</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         GuestOperationsManager is the managed object that provides APIs
+ to manipulate the guest operating system files and process.
+
+ Each class of APIs is separated into its own manager.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="authManager" name="authManager"></a><strong>authManager</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.Anonymous" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.vm.guest.AuthManager.html">GuestAuthManager</a></td><td>
+<p></p>
+         A singleton managed object that provides methods for guest authentication
+ operations.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="fileManager" name="fileManager"></a><strong>fileManager</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.Anonymous" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.vm.guest.FileManager.html">GuestFileManager</a></td><td>
+<p></p>
+         A singleton managed object that provides methods for guest file
+ operations.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="processManager" name="processManager"></a><strong>processManager</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.Anonymous" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.vm.guest.ProcessManager.html">GuestProcessManager</a></td><td>
+<p></p>
+         A singleton managed object that provides methods for guest process
+ operations.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  System.Anonymous</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td>
+							None
+						</td>
+</tr>
+</table>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

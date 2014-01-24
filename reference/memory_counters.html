@@ -1,0 +1,847 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<html>
+<head>
+<title>Memory Counters</title>
+<script language="JavaScript" src="./commonRes.js" type="text/javascript"></script>
+<link rel="StyleSheet" type="text/css" href="doc-style.css"></link>
+
+<style type="text/css">
+.code {
+    font-size: 11px; font-family:
+    "Courier New", Courier, monospace;
+}
+.BoldRedText {
+    FONT-WEIGHT: bold; COLOR: #CC0000; TEXT-DECORATION: none
+}
+
+h2 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #3366AA;
+    margin-top: 25px;
+    padding-bottom: 10px;
+    border-bottom-width: 1px;
+    border-bottom-style: dashed;
+}
+h3 {
+    margin-top: 25px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+table {
+    border-collapse:collapse;
+    border-top: 1px solid #999;
+    border-left: 1px solid #999;
+    width:100%;
+    margin-right: 4px;
+    margin-left: 4px;
+}
+
+table.navcontainer, topnavcontainer {
+    border:0; margin-right: 2px; margin-left: 2px; padding:0;vertical-align:bottom;
+}
+
+table.nested {
+    border-collapse:collapse;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+th {
+    background-color: #555555;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 10px;
+    text-align: center;
+    vertical-align:middle;
+}
+
+th.nested {
+    border:0; padding:0; text-align: center;
+}
+
+td {
+    font-size: 11px;
+    vertical-align: top;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+td.yes {font-size: 18px;}
+td.no {font-size: 12px;}
+
+a.white:link {color: #ffffff}
+a.white:visited {color: #ffffff}
+a.white:hover {color: #ffffff; cursor:hand;}
+a.white:active {color: #ffffff}
+
+a.noline:link {color: #3366AA; text-decoration:none; }
+a.noline:visited {color: #3366AA; text-decoration:none;}
+a.noline:hover {color: #3366AA; cursor:hand; text-decoration:none;}
+a.noline:active {color: #3366AA; text-decoration:none;}
+
+p {font-size:12px; margin: 12px 72px 5px 0px; }
+p.nolead {margin: 3px 72px 5px 0px}
+
+.back {
+    font-size:9px; text-transform: uppercase; FONT-WEIGHT: bold; COLOR: #3366AA;
+}
+.back:link {color: #ffffff; text-decoration: none;}
+.back:visited {color: #ffffff}
+.back:hover {color: #ffffff; cursor:hand;}
+.back:active {color: #ffffff}
+
+.back2 {
+    font-size:11px; text-transform: none; FONT-WEIGHT: bold; COLOR: #3366AA;
+}
+
+.top {
+    font-size:10px; text-transform: uppercase; FONT-WEIGHT: bold; COLOR: #3366AA;
+}
+
+ul {
+    font-size: 12px;
+    vertical-align: top;
+}
+ul.small{font-size: 11px;}
+
+</style>
+</head>
+
+<body>
+<span class="back"><a href="vim.PerformanceManager.html" class="noline">Back to</a></span>
+<span class="back2"><a href="vim.PerformanceManager.html" class="noline">PerformanceManager</a></span><br />
+<p></p>
+<a name="top"></a>
+<h1>Memory Counters</h1>
+<table class="topnavcontainer"><tr><td>
+
+<p class="nolead">Performance counters are modeled using the
+<a href="vim.PerformanceManager.CounterInfo.html">PerfCounterInfo</a> data object type. 
+Each instance of a <a href="vim.PerformanceManager.CounterInfo.html">PerfCounterInfo</a> data object 
+contains metadata about a specific metric available from the system. The memory group (<strong>mem</strong>) 
+of performance counters documented on this page are available from the 
+<a href="vim.PerformanceManager.html">PerformanceManager</a> service interface. 
+</p>
+
+<h2>Memory Management and the VMkernel</h2>
+<p>The VMkernel maps <strong>guest physical memory</strong> to <strong>machine memory</strong>. 
+However, because of the VMkernel&#146;s unique memory-management techniques, such as ballooning,
+memory-sharing, swapping, and other techniques, guest physical memory-to-machine memory mapping 
+does not have a 1:1 correspondence. Specifically, the VMkernel can:</p>
+<ul><li>Map multiple regions of guest physical memory to a single region of machine memory 
+(which the VMkernel does for memory sharing among virtual machines)</li>
+<li>Leave specific regions of guest physical memory and machine memory unmapped 
+(which the VMkernel does during swapping and ballooning)</li>
+</ul>
+
+<p>Many of the VMkernel&#146;s memory-management techniques require that VMware Tools be installed 
+on the virtual machine. Be sure that the appropriate guest-OS-specific version of VMware Tools 
+is installed on each virtual machine.</p>
+
+<h2>Guest &#147;Physical&#148; Memory Compared to Machine Memory</h2>
+<p class="nolead">Each counter definition in this table should be interpreted in the context of the entity 
+to which it applies:</p>
+<ul><li><strong>Virtual machines</strong>: Memory refers to <strong>guest physical memory</strong>.
+Guest physical memory is the amount of &#147;physical&#148; memory presented as a virtual-hardware 
+component to the virtual machine, at creation time, and made available when the virtual machine is running.</li>
+<li><strong>Hosts</strong>: Memory refers to <strong>machine memory</strong>. Machine memory is the 
+random-access memory (RAM) that&#146;s actually installed in the hardware that comprises the ESX server system.</li></ul>
+
+<h2>Memory Swapping</h2>
+<p>
+The VMkernel uses a "share before swap" optimization to reduce memory paging. Regardless of the page size in memory,
+the kernel uses a 4KB swap page size. The kernel will attempt to share 4KB pages; those pages that cannot be shared
+are swapped.
+</p>
+
+<h2>For More Information</h2>
+<p>For in-depth technical background about VMware memory management architecture, including information about 
+<strong>ballooning</strong>, <strong>swapping</strong>, <strong>page sharing</strong>, <strong>idle memory tax</strong>,
+<strong>memory reclamation</strong>, &#147;touched&#148; pages, and so on, see the USENIX Association publication, 
+&#147;<a href="http://www.vmware.com/pdf/usenix_resource_mgmt.pdf">Memory Resource Management in VMware ESX Server</a>.&#148; 
+</p>
+
+<p>See the <em>Resource Management Guide</em> for more information about configuring and managing resources, including memory. </p>
+
+</td></tr></table>
+<!-- heading for table -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+
+<tr>
+<th width="10%" valign="middle" title="PerfCounterInfo.nameInfo.key property">Counter</th>
+<!--<th rowspan="2" width="300">Description</th>-->
+<th width="10%"><a href="vim.PerformanceManager.CounterInfo.StatsType.html" class="white" title="StatsType">StatsType</a></th>
+<th width="10%"><a href="vim.PerformanceManager.CounterInfo.Unit.html" class="white">Unit</a></th>
+
+<th width="5%"><a href="vim.HistoricalInterval.html#level" class="white" title="The 'level' property is 'null' for ESX... Statistics are collected by vCenter Server and rolled-up based on the collection-level setting (1 is the default).">Levels</a></th>
+
+<th width="5%"><a href="vim.PerformanceManager.CounterInfo.html" class="white" title="Per Device Level">Per<br />Device<br />Level</a></th>
+
+<th width="10%"><a href="vim.PerformanceManager.CounterInfo.RollupType.html" class="white" title="RollupType">RollupTypes</a></th>
+<th width="15%"><a href="vim.PerformanceManager.CounterInfo.html" class="white" title="PerfCounterInfo.nameInfo property is used to populate vSphere Client charts...">Labels</a></th>
+<th width="10%"><a href="vim.ManagedEntity.html" class="white" title="Entity for which the counter is supported.">Entity</a></th>
+<th width="10%"><a href="vim.PerformanceManager.MetricId.html" class="white" title="Indicates whether collection is from an &#160;
+individual instance or aggregate">Instance/<br />Aggregate</a></th>
+<th width="10%"><a href="" class="white" title="ESX version(s) for which this counter is supported.">ESX<br />Versions</a></th>
+</tr>
+<!-- close heading for table -->
+
+<!-- counters -->
+<tr><td rowspan="2"><a name="active"></a>active</td>
+<td>absolute</td><td>kiloBytes</td><td>2&#160;(4)</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Active
+</td><td>VirtualMachine<br />HostSystem<br />ResourcePool</td><td>aggregate</td><td></td></tr>
+<tr><td colspan="9">Amount of memory that is actively used, as estimated by VMkernel based on recently touched memory pages. <ul class="small"><li>Virtual machine:&#160;&#160; Amount of guest &#147;physical&#148; memory actively used. </li><li>Host:&#160; Sum of all <span class="code">active</span> metrics for all powered-on virtual machines plus vSphere services (such as COS, vpxa) on the host.</li></ul></td></tr>
+
+
+<tr><td rowspan="2">activewrite</td>
+<td>absolute</td><td>kiloBytes</td><td>2</td><td>3</td><td>average</td><td>
+Active write
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+Amount of memory actively being written to by the virtual machine.
+</td></tr>
+
+
+<tr><td rowspan="2">capacity.contention</td>
+<td>rate</td><td>percent</td><td>2</td><td>4</td><td>average</td><td>
+Memory Capacity Contention
+</td><td>ResourcePool</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+Percentage of time the VM is waiting to access swapped or compressed memory.
+</td></tr>
+
+
+<tr><td rowspan="2">capacity.entitlement</td>
+<td>absolute</td><td>kiloBytes</td><td>1</td><td>4</td><td>average</td><td>
+Memory Capacity Entitlement
+</td><td>ResourcePool</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+Amount of host physical memory VM is entitled to, as determined by the ESX scheduler.
+</td></tr>
+
+
+<tr><td rowspan="2">capacity.provisioned</td>
+<td>absolute</td><td>kiloBytes</td><td>3</td><td>4</td><td>average</td><td>
+Memory Capacity Provisioned
+</td><td>ResourcePool</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+Total amount of memory available to the entity.
+</td></tr>
+
+
+<tr><td rowspan="2">capacity.usable</td>
+<td>absolute</td><td>kiloBytes</td><td>2</td><td>4</td><td>average</td><td>
+Memory Capacity Usable
+</td><td></td><td></td><td></td></tr>
+<tr><td colspan="9">
+Amount of physical memory available for use by virtual machines.
+</td></tr>
+
+
+<tr><td rowspan="2">capacity.usage</td>
+<td>absolute</td><td>kiloBytes</td><td>1</td><td>4</td><td>average</td><td>
+Memory Capacity Usage
+</td><td>ResourcePool</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+Amount of physical memory actively used.
+</td></tr>
+
+
+<tr><td rowspan="2">capacity.usage.userworld</td>
+<td>absolute</td><td>kiloBytes</td><td>2</td><td>4</td><td>average</td><td>
+<!-- begin labels -->
+
+<!-- end labels -->
+</td><td></td><td></td><td></td></tr>
+<tr><td colspan="9"></td></tr>
+
+
+<tr><td rowspan="2">capacity.usage.vm</td>
+<td>absolute</td><td>kiloBytes</td><td>2</td><td>4</td><td>average</td><td>
+<!-- begin labels -->
+
+<!-- end labels -->
+</td><td></td><td></td><td></td></tr>
+<tr><td colspan="9"></td></tr>
+
+
+<tr><td rowspan="2">capacity.usage.vmOvrhd</td>
+<td>absolute</td><td>kiloBytes</td><td>2</td><td>4</td><td>average</td><td>
+<!-- begin labels -->
+Memory Capacity Usage by VM overhead
+<!-- end labels -->
+</td><td></td><td></td><td></td></tr>
+<tr><td colspan="9">
+Amount of memory used by virtual machine overhead.
+</td></tr>
+
+
+<tr><td rowspan="2">capacity.usage.vmkOvrhd</td>
+<td>absolute</td><td>kiloBytes</td><td>2</td><td>4</td><td>average</td><td>
+<!-- begin labels -->
+Memory Capacity Usage by VMkernel Overhead
+<!-- end labels -->
+</td><td></td><td></td><td></td></tr>
+<tr><td colspan="9">
+Amount of memory used by VMKernel overhead.
+</td></tr>
+
+
+<tr><td rowspan="2">compressed</td>
+<td>absolute</td><td>kiloBytes</td><td>2</td><td>3</td><td>average</td><td>
+Compressed
+</td><td>VirtualMachine<br />HostSystem<br />ResourcePool</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+Amount of memory compressed by ESX.
+</td></tr>
+
+
+<tr><td rowspan="2">compressionRate</td>
+<td>rate</td><td>kiloBytesPerSecond</td><td>2</td><td>3</td><td>average</td><td>
+Compression rate
+</td><td>VirtualMachine<br />HostSystem<br />ResourcePool</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+Rate of memory compression for the VM.
+</td></tr>
+
+
+<tr><td rowspan="2"><a name="consumed"></a>consumed</td>
+<td>absolute</td><td>kiloBytes</td><td>1&#160;(4)</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Consumed
+</td><td>VirtualMachine<br />HostSystem<br />ResourcePool</td><td>aggregate</td><td></td></tr>
+<tr><td colspan="9">
+Amount of memory consumed by a virtual machine, host, or cluster.
+<ul class="small">
+<li>Virtual machine:&#160;&#160;  Amount of guest physical memory consumed by the virtual machine
+for guest memory. Consumed memory does not include  <span class="code"><a href="#overhead">overhead</a></span>
+memory. It includes shared memory and memory that might be reserved, but not actually used. 
+Use this metric for charge-back purposes.
+<br /><br />
+vm consumed memory = memory granted -
+memory saved due to memory sharing
+<br /><br />
+</li>
+<li>Host:&#160;&#160; Amount of machine memory used on the host.
+Consumed memory includes Includes memory used by the Service Console, the VMkernel, 
+vSphere services, plus the total <span class="code">consumed</span> metrics for all running virtual machines.
+<br /><br />
+host consumed memory = total host memory - free host memory
+<br /><br />
+</li>
+<li>Cluster:&#160;&#160; Amount of host machine memory used by all powered on virtual machines in the cluster.
+A cluster's consumed memory consists of virtual machine consumed memory and overhead memory.
+It does not include host-specific overhead memory, such as memory used by the service console or VMkernel.
+</li>
+</ul>
+</td></tr>
+
+
+<tr><td rowspan="2">consumed.userworlds</td>
+<td>absolute</td><td>kiloBytes</td><td>2</td><td>4</td><td>average</td><td>
+Memory Consumed by userworlds
+</td><td></td><td></td><td></td></tr>
+<tr><td colspan="9">
+Amount of physical memory consumed by userworlds on this host.
+</td></tr>
+
+
+<tr><td rowspan="2">consumed.vms</td>
+<td>absolute</td><td>kiloBytes</td><td>2</td><td>4</td><td>average</td><td>
+Memory Consumed by VMs
+</td><td></td><td></td><td></td></tr>
+<tr><td colspan="9">
+Amount of physical memory consumed by virtual machines on this host.
+</td></tr>
+
+
+<tr><td rowspan="2">decompressionRate</td>
+<td>rate</td><td>kiloBytesPerSecond</td><td>2</td><td>3</td><td>average</td><td>
+Decompression rate
+</td><td>VirtualMachine<br />HostSystem<br />ResourcePool</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+Rate of memory decompression for the virtual machine.
+</td></tr>
+
+
+<tr><td rowspan="2">entitlement</td>
+<td>absolute</td><td>kiloBytes</td><td>2</td><td>3</td><td>average</td><td>
+Entitlement
+</td><td>VirtualMachine</td><td>aggregate</td><td>5.0.0</td></tr>
+<tr><td colspan="9">
+</td></tr>
+
+
+<tr><td rowspan="2">granted</td>
+<td>absolute</td><td>kiloBytes</td><td>2&#160;(4)</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Granted
+</td><td>VirtualMachine<br />HostSystem<br />ResourcePool</td><td>aggregate</td><td></td></tr>
+<tr><td colspan="9">
+Amount of machine memory or &#147;physical&#148; memory that is mapped for a virtual
+machine or a host. 
+<ul class="small">
+<li>Virtual machine:&#160;&#160; Guest &#147;physical&#148; memory that is mapped to machine memory. Includes <span class="code"><a href="#shared">shared</a></span> memory amount. Does not include <span class="code"><a href="#overhead">overhead</a></span>. </li>
+<li>Host:&#160;&#160; Sum of all <span class="code">granted</span> metrics for all powered-on virtual machines, plus machine memory for vSphere services on the host. </li></ul>
+</td></tr>
+
+
+<tr><td rowspan="2">heap</td>
+<td>absolute</td><td>kiloBytes</td><td>4</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Heap
+</td><td>HostSystem</td><td>aggregate</td><td></td></tr>
+<tr><td colspan="9">VMkernel virtual address space dedicated to VMkernel main heap and related data. For informational purposes only: not useful for performance monitoring. </td></tr>
+
+
+<tr><td rowspan="2">heapfree</td>
+<td>absolute</td><td>kiloBytes</td><td>4</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Heap free
+</td><td>HostSystem</td><td>aggregate</td><td></td></tr>
+<tr><td colspan="9">Free address space in the VMkernel&#146;s main heap. Varies based on number of physical devices and configuration options. There is no direct way for the user to increase or
+decrease this statistic.  For informational purposes only: not useful for performance monitoring.</td></tr>
+
+
+<tr><td rowspan="2">latency</td>
+<td>absolute</td><td>percent</td><td>2</td><td>3</td><td>average</td><td>
+Latency
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>5.0.0</td></tr>
+<tr><td colspan="9">
+
+</td></tr>
+
+
+<tr><td rowspan="2">llSwapIn</td>
+<td>absolute</td><td>kiloBytes</td><td>4</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Swap in from host cache
+</td><td>HostSystem</td><td>aggregate</td><td></td></tr>
+<tr><td colspan="9">Amount of memory swapped in from host cache.</td></tr>
+
+
+<tr><td rowspan="2">llSwapInRate</td>
+<td>rate</td><td>kiloBytesPerSecond</td><td>2</td><td>3</td><td>average</td><td>
+Swap in rate from host cache
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>5.0.0</td></tr>
+<tr><td colspan="9">Rate at which memory is being swapped from host cache into active memory.</td></tr>
+
+
+<tr><td rowspan="2">llSwapOut</td>
+<td>absolute</td><td>kiloBytes</td><td>4</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Swap out to host cache
+</td><td>HostSystem</td><td>aggregate</td><td></td></tr>
+<tr><td colspan="9">Amount of memory swapped out to host cache.</td></tr>
+
+
+<tr><td rowspan="2">llSwapOutRate</td>
+<td>rate</td><td>kiloBytesPerSecond</td><td>2</td><td>3</td><td>average</td><td>
+Swap out rate to host cache
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>5.0.0</td></tr>
+<tr><td colspan="9">Rate at which memory is being swapped from active memory to host cache.</td></tr>
+
+
+<tr><td rowspan="2">llSwapUsed</td>
+<td>absolute</td><td>kiloBytes</td><td>4</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Host cache used for swapping
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td></td></tr>
+<tr><td colspan="9">Space used for caching swapped pages in the host cache.</td></tr>
+
+
+<tr><td rowspan="2">lowfreethreshold</td>
+<td>absolute</td><td>kiloBytes</td><td>2</td><td>3</td><td>average</td><td>
+Low free threshold
+</td><td>HostSystem</td><td>aggregate</td><td>5.0.0</td></tr>
+<tr><td colspan="9">Threshold of free host physical memory below which ESX will begin reclaiming memory from VMs through ballooning and swapping.</td></tr>
+
+
+<tr><td rowspan="2">mementitlement</td>
+<td>absolute</td><td>megaBytes</td><td>1</td><td>3</td><td>latest</td><td>
+Worst case allocation
+</td><td>ResourcePool</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+Memory allocation as calculated by the VMkernel scheduler based on current estimated demand and reservation, 
+limit, and shares policies set for all virtual machines and resource pools in the host or cluster. This counter is for internal use only and is not useful for performance monitoring.
+</td></tr>
+
+
+<tr><td rowspan="2"><a name="overhead"></a>overhead</td>
+<td>absolute</td><td>kiloBytes</td><td>1&#160;(4)</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Overhead
+</td><td>VirtualMachine<br />HostSystem<br />ResourcePool</td><td>aggregate</td><td></td></tr>
+<tr><td colspan="9">
+Amount of machine memory allocated to a virtual machine beyond its reserved amount.
+<ul class="small">
+<li>Virtual machine:&#160;&#160; Amount of machine memory used by the VMkernel to run the virtual machine. </li>
+<li>Host:&#160;&#160; Total of all <span class="code">overhead</span> metrics for powered-on virtual machines, 
+plus the overhead of running vSphere services on the host.</li>
+</ul>
+</td></tr>
+
+
+<tr><td rowspan="2">overheadMax</td>
+<td>absolute</td><td>kiloBytes</td><td>2</td><td>3</td><td>average</td><td>
+Reserved overhead
+</td><td>VirtualMachine</td><td>aggregate</td><td>4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+Memory (in kilobytes) reserved for use as the virtualization overhead for the virtual machine. 
+</td></tr>
+
+
+<tr><td rowspan="2">overheadTouched</td>
+<td>absolute</td><td>kiloBytes</td><td>4</td><td>4</td><td>average</td><td>
+Overhead touched
+</td><td>VirtualMachine</td><td>aggregate</td><td>5.0.0</td></tr>
+<tr><td colspan="9">Actively touched overhead memory (KB) reserved for use as the virtualization overhead
+for the virtual machine.</td></tr>
+
+
+<tr><td rowspan="2">reservedCapacity</td>
+<td>absolute</td><td>megaBytes</td><td>2</td><td>3</td><td>average</td><td>
+Reserved capacity
+</td><td>HostSystem</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+Total amount of memory reservation used by powered-on virtual machines and vSphere services on the host.
+Includes <span class="code"><a href="#overhead">overhead</a></span> amount. </td></tr>
+
+
+<tr><td rowspan="2">reservedCapacity.userworld</td>
+<td>absolute</td><td>kiloBytes</td><td>2</td><td>4</td><td>average</td><td>
+<!-- begin labels -->
+Memory Reserved capacity by userworlds
+<!-- end labels -->
+</td><td></td><td></td><td></td></tr>
+<tr><td colspan="9">
+Amount of memory reserved by userworlds.
+</td></tr>
+
+
+<tr><td rowspan="2">reservedCapacity.vm</td>
+<td>absolute</td><td>kiloBytes</td><td>2</td><td>4</td><td>average</td><td>
+<!-- begin labels -->
+Memory Reserved capacity by VMs
+<!-- end labels -->
+</td><td></td><td></td><td></td></tr>
+<tr><td colspan="9">
+Amount of memory reserved by virtual machines.
+</td></tr>
+
+
+<tr><td rowspan="2">reservedCapacity.vmOvhd</td>
+<td>absolute</td><td>kiloBytes</td><td>2</td><td>4</td><td>average</td><td>
+<!-- begin labels -->
+Memory Reserved capacity by VM overhead
+<!-- end labels -->
+</td><td></td><td></td><td></td></tr>
+<tr><td colspan="9">
+Amount of memory reserved by virtual machine overhead.
+</td></tr>
+
+
+<tr><td rowspan="2">reservedCapacity.vmkOvrhd</td>
+<td>absolute</td><td>kiloBytes</td><td>2</td><td>4</td><td>average</td><td>
+<!-- begin labels -->
+Memory Reserved capacity by VMkernel Overhead
+<!-- end labels -->
+</td><td></td><td></td><td></td></tr>
+<tr><td colspan="9">
+Amount of memory reserved by VMkernel overhead.
+</td></tr>
+
+
+<tr><td rowspan="2">reservedCapacityPct</td>
+<td>absolute</td><td>percent</td><td>3</td><td>4</td><td>average</td><td>
+Memory Reserved Capacity %
+</td><td></td><td></td><td></td></tr>
+<tr><td colspan="9">
+Percent of memory that has been reserved either through VMkernel use, by userworlds
+or due to virtual machine memory reservations.
+</td></tr>
+
+
+<tr><td rowspan="2"><a name="shared"></a>shared</td>
+<td>absolute</td><td>kiloBytes</td><td>2&#160;(4)</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Shared
+</td><td>VirtualMachine<br />HostSystem<br />ResourcePool</td><td>aggregate</td><td></td></tr>
+<tr><td colspan="9">
+Amount of guest memory that is shared with other virtual machines, 
+relative to a single virtual machine or to all powered-on virtual machines on a host.
+<ul class="small"><li>Virtual machine:&#160;&#160; Amount of guest &#147;physical&#148; memory shared with other virtual machines (through the VMkernel&#146;s transparent page-sharing mechanism, a RAM de-duplication technique). Includes amount of <span class="code"><a href="#zero">zero</a></span> memory area.
+</li>
+<li>Host:&#160;&#160; Sum of all <span class="code">shared</span> metrics for all powered-on virtual machines, 
+plus amount for vSphere services on the host. The host's shared memory may be larger than the amount of machine
+ memory if memory is overcommitted (the aggregate virtual machine configured memory is much greater than
+machine memory). The value of this statistic reflects how effective transparent page
+sharing and memory overcommitment are for saving machine memory.
+</li></ul></td></tr>
+
+
+<tr><td rowspan="2">sharedcommon</td>
+<td>absolute</td><td>kiloBytes</td><td>2&#160;(4)</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Shared common
+</td><td>HostSystem</td><td>aggregate</td><td></td></tr>
+<tr><td colspan="9">
+Amount of machine memory that is shared by all powered-on virtual machines and vSphere services on the host. Subtract this metric from the <span class="code">shared</span> metric to gauge how much machine memory is saved due to sharing:
+<br />
+<span class="code"><a href="#shared">shared</a> - sharedcommon = machine memory (host memory) savings (KB)</span>
+</td></tr>
+
+
+<tr><td rowspan="2">state</td>
+<td>absolute</td><td>number</td><td>2</td><td>3</td><td>latest</td><td>
+State
+</td><td>HostSystem</td><td>aggregate</td><td>3.5.0<br />4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+One of four threshold levels representing the percentage of free memory on the host.
+The counter value determines swapping and ballooning behavior for memory reclamation.
+<ul class="small">
+<li><strong>0</strong>&#160;&#160; (high)&#160; Free memory &#62;&#61; 6% of machine memory minus Service Console memory.</li>
+<li><strong>1</strong>&#160;&#160; (soft)&#160; 4%</li>
+<li><strong>2</strong>&#160;&#160; (hard)&#160; 2%</li>
+<li><strong>3</strong>&#160;&#160; (low)&#160; 1%
+</li></ul>
+0 (high) and 1 (soft):&#160; Swapping is favored over ballooning.<br />
+2 (hard) and 3 (low):&#160; Ballooning is favored over swapping.</td>
+</tr>
+
+
+<tr><td rowspan="2"><a name="swapin"></a>swapin</td>
+<td>absolute</td><td>kiloBytes</td><td>2&#160;(4)</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Swap in
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td></td></tr>
+<tr><td colspan="9">Refers to VMkernel swapping. Amount swapped-in to memory from disk. <ul class="small"><li>Virtual machine:&#160;&#160; Total amount of data that has been read into machine memory from the swap file since the virtual machine was powered on. </li>
+<li>Host:&#160;&#160; Sum of <span class="code">swapin</span> values for all powered-on virtual machines on the host.</li></ul></td>
+</tr>
+
+
+<tr><td rowspan="2">swapinRate</td>
+<td>rate</td><td>kiloBytesPerSecond</td><td>1</td><td>3</td><td>average</td><td>
+Swap in rate
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9"> Rate at which memory is swapped from disk into active memory during
+the <a href="vim.HistoricalInterval.html">interval</a>. This counter applies to
+virtual machines and is generally more useful than the swapin counter to determine
+if the virtual machine is running slow due to swapping, especially when looking at real-time statistics.
+</td></tr>
+
+
+<tr><td rowspan="2"><a name="swapout"></a>swapout</td>
+<td>absolute</td><td>kiloBytes</td><td>2&#160;(4)</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Swap out
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td></td></tr>
+<tr><td colspan="9">
+Amount of memory swapped-out to disk. 
+<ul class="small">
+<li>Virtual machine:&#160;&#160; Total amount of data that the VMkernel has written to the virtual machine&#146;s 
+swap file from machine memory. This statistic refers to VMkernel swapping and not to guest OS swapping.</li>
+<li>Host:&#160;&#160; Sum of <span class="code">swapout</span> metrics from all powered-on virtual machines on the host.</li>
+</ul>
+</td>
+</tr>
+
+
+<tr><td rowspan="2">swapoutRate</td>
+<td>rate</td><td>kiloBytesPerSecond</td><td>1</td><td>3</td><td>average</td><td>
+Swap out rate
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td>4.0.0<br />4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+Rate at which memory is being swapped from active memory to disk during the current interval. 
+This counter applies to virtual machines and is generally more useful than the swapout counter
+to determine if the virtual machine is running slow due to swapping, especially when
+looking at real-time statistics.
+</td></tr>
+
+
+<tr><td rowspan="2"><a name="swapped"></a>swapped</td>
+<td>absolute</td><td>kiloBytes</td><td>2&#160;(4)</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Swapped
+</td><td>VirtualMachine<br />ResourcePool</td><td>aggregate</td><td></td></tr>
+<tr><td colspan="9">
+Current amount of guest physical memory swapped out to the virtual machine's swap file by the VMkernel. 
+Swapped memory stays on disk until the virtual machine needs it. This statistic refers to VMkernel
+swapping and not to guest OS swapping.
+<br /><br />
+<span class="code">swapped = <a href="#swapin">swapin</a> + <a href="#swapout">swapout</a></span>
+</td>
+</tr>
+
+
+<tr><td rowspan="2">swaptarget</td>
+<td>absolute</td><td>kiloBytes</td><td>2&#160;(4)</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Swap target
+</td><td>VirtualMachine</td><td>aggregate</td><td></td></tr>
+<tr><td colspan="9">
+Target size for the virtual machine swap file.
+The VMkernel manages swapping by comparing <span class="code">swaptarget</span>
+against <span class="code"><a href="#swapped">swapped</a></span>.
+<ul class="small"><li>If <span class="code">swaptarget</span> &#62; <span class="code"><a href="#swapped">swapped</a></span>, the VMkernel can start swapping when necessary.</li>
+<li>If <span class="code">swaptarget</span> &#60; <span class="code"><a href="#swapped">swapped</a></span>, the VMkernel stops swapping memory. </li>
+</ul>
+
+Since swapped memory stays swapped until the virtual machine
+accesses it, swapped memory can be greater than the memory swap target,
+possibly for a prolonged period of time. This simply means that the
+swapped memory is not currently needed by the virtual machine and is
+not a cause for concern.
+</td>
+</tr>
+
+
+<tr><td rowspan="2">swapunreserved</td>
+<td>absolute</td><td>kiloBytes</td><td>4</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Swap unreserved
+</td><td></td><td></td><td></td></tr>
+<tr><td colspan="9">Amount of memory that is unreserved by swap</td></tr>
+
+
+<tr><td rowspan="2">swapused</td>
+<td>absolute</td><td>kiloBytes</td><td>2&#160;(4)</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Swap used
+</td><td>HostSystem</td><td>aggregate</td><td></td></tr>
+<tr><td colspan="9">
+Amount of memory that is used by swap. Sum of memory <span class="code"><a href="#swapped">swapped</a></span> of all powered on VMs and vSphere services on the host.</td></tr>
+
+
+<tr><td rowspan="2">sysUsage</td>
+<td>absolute</td><td>kiloBytes</td><td>2&#160;(4)</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Used by VMkernel
+</td><td>HostSystem</td><td>aggregate</td><td></td></tr>
+<tr><td colspan="9">
+Amount of machine memory used by VMkernel for core functionality, such as device drivers and other internal uses.
+Does not include memory used by virtual machines or vSphere services.</td></tr>
+
+
+<tr><td rowspan="2">totalCapacity</td>
+<td>absolute</td><td>megaBytes</td><td>2</td><td>3</td><td>average</td><td>
+Total capacity
+</td><td>HostSystem</td><td>aggregate</td><td>4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">Total amount of memory reservation used by and available for powered-on virtual machines
+and vSphere services on the host.</td></tr>
+
+
+<tr><td rowspan="2">totalmb</td>
+<td>absolute</td><td>megaBytes</td><td>1</td><td>3</td><td>average</td><td>
+Total
+</td><td></td><td></td><td></td></tr>
+<tr><td colspan="9">
+Total amount of machine memory of all hosts in the cluster that is
+available for virtual machine memory (physical memory for use by the
+Guest OS) and virtual machine overhead memory.
+<br /><br />
+Memory Total = Aggregate host machine memory - (VMkernel memory
++ Service Console memory + other service memory)
+</td></tr>
+
+
+<tr><td rowspan="2">unreserved</td>
+<td>absolute</td><td>kiloBytes</td><td>2&#160;(4)</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Unreserved
+</td><td>HostSystem</td><td>aggregate</td><td></td></tr>
+<tr><td colspan="9">
+Amount of memory that is unreserved. Memory reservation not used by the Service Console, VMkernel, vSphere services
+and other powered on VMs&#146; user-specified memory reservations and overhead memory. This statistic is no longer
+relevant to virtual machine admission control, as reservations are now handled through resource pools.</td></tr>
+
+
+<tr><td rowspan="2">usage</td>
+<td>absolute</td><td>percent</td><td>1&#160;(4)</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Usage
+</td><td>VirtualMachine<br />HostSystem</td><td>aggregate</td><td></td></tr>
+<tr><td colspan="9">
+Memory usage as percentage of total configured or available memory,
+expressed as a hundredth of a percent (1 = 0.01%). A value between 0 and 10,000. 
+<ul class="small"><li>Virtual machine:&#160;&#160; Percentage of configured virtual machine &#147;physical&#148; memory:<br />
+<span class="code"><a href="#active">active</a> &#247; virtual machine configured size</span>
+</li>
+<li>Host:&#160;&#160; Percentage of available machine memory:<br />
+<span class="code"><a href="#consumed">consumed</a> &#247; machine-memory-size</span>
+</li>
+<li>Cluster:&#160;&#160;memory usage = memory consumed + memory overhead ÷ effectivemem</li>
+</ul>
+</td>
+</tr>
+
+
+<tr><td rowspan="2"><a name="vmmemctl"></a>vmmemctl</td>
+<td>absolute</td><td>kiloBytes</td><td>1&#160;(4)</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Balloon
+</td><td>VirtualMachine<br />HostSystem<br />ResourcePool</td><td>aggregate</td><td></td></tr>
+<tr><td colspan="9">Amount of memory allocated by the virtual machine memory control driver (vmmemctl), which is installed with VMware Tools. It is a VMware exclusive memory-management driver that controls ballooning. <ul class="small"><li>Virtual machine:&#160;&#160; 
+Amount of guest physical memory that is currently reclaimed from the virtual machine
+through ballooning. This is the amount of guest physical memory that has been allocated
+and pinned by the balloon driver.
+</li><li>Host:&#160;&#160; The sum of all <span class="code">vmmemctl</span> values for all powered-on virtual machines, plus vSphere services on the host. If the balloon target value is greater than the balloon value, the VMkernel inflates the
+balloon, causing more virtual machine memory to be reclaimed. If the balloon target value is less than the balloon value, the
+VMkernel deflates the balloon, which allows the virtual machine to consume additional memory if needed.
+</li></ul>
+Virtual machines initiate memory reallocation. Therefore, it is possible
+to have a balloon target value of 0 and balloon value greater than 0.
+</td>
+</tr>
+
+
+<tr><td rowspan="2">vmmemctltarget</td>
+<td>absolute</td><td>kiloBytes</td><td>2&#160;(4)</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Balloon target
+</td><td>VirtualMachine</td><td>aggregate</td><td></td></tr>
+<tr><td colspan="9">Target value set by VMkernal for the virtual machine&#146;s memory balloon size.
+In conjunction with <span class="code">vmmemctl</span> metric, this metric is used by VMkernel to inflate 
+and deflate the balloon for a virtual machine, as follows:
+
+<ul class="small">
+<li> 
+If <span class="code">vmmemctltarget</span> &#62; <span class="code"><a href="#vmmemctl">vmmemctl</a></span>, VMkernel can inflate the balloon and make machine memory currently consumed by the virtual machine available to other virtual machines on the host. (Size of <span class="code">vmmemctl</span> increases as balloon inflates.)</li>
+
+<li>If <span class="code">vmmemctltarget</span> &#60; <span class="code"><a href="#vmmemctl">vmmemctl</a></span>, VMkernel deflates balloon so that virtual machine can consume more memory, when needed. (Size of <span class="code">vmmemctl</span> decreases as balloon deflates.)
+</li></ul>
+</td></tr>
+
+
+<tr><td rowspan="2"><a name="zero"></a>zero</td>
+<td>absolute</td><td>kiloBytes</td><td>2&#160;(4)</td><td>4</td><td>average<br />(minimum)<br />(maximum)<br />(none)</td><td>
+Zero
+</td><td>VirtualMachine<br />HostSystem<br />ResourcePool</td><td>aggregate</td><td></td></tr>
+<tr><td colspan="9">Memory that is contains 0s only. Included in <span class="code"><a href="#shared">shared</a></span>
+amount. Through transparent page sharing, zero memory pages can be shared among virtual machines that run the same 
+operating system. 
+
+<ul class="small">
+<li>Virtual machine:&#160;&#160; Amount of guest physical memory that contains 0s only and 
+can thus be safely used by other virtual machines for their 0 pages memory requirement. </li>
+<li>Host:&#160;&#160; Sum of <span class="code">zero</span> metrics for all powered-on virtual machines,
+plus vSphere services on the host.</li></ul>
+</td>
+</tr>
+
+
+<tr><td rowspan="2">zipSaved</td>
+<td>absolute</td><td>kiloBytes</td><td>2</td><td>3</td><td>latest</td><td>
+Memory saved by zipping
+</td><td>VirtualMachine</td><td>aggregate</td><td>4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+Memory (in kilobytes) saved due to memory zipping.
+</td></tr>
+
+
+<tr><td rowspan="2">zipped</td>
+<td>absolute</td><td>kiloBytes</td><td>2</td><td>3</td><td>latest</td><td>
+Zipped memory
+</td><td>VirtualMachine</td><td>aggregate</td><td>4.1.0<br />5.0.0</td></tr>
+<tr><td colspan="9">
+Memory zipped (in kilobytes).
+</td></tr>
+
+
+</table>
+<p>&#160;</p>
+<span class="back"><a href="#top" class="noline">Back to</a></span> 
+<span class="back2"><a href="#top" class="noline">Top of page</a></span><br />
+<span class="back"><a href="vim.PerformanceManager.html" class="noline">Back to</a></span> 
+<span class="back2"><a href="vim.PerformanceManager.html" class="noline">PerformanceManager</a></span><br />
+<p>&#160;</p>
+<p>&#160;</p>
+<p><script language="javascript" type="text/javascript">document.write(ID_Copyright);</script><br />
+<script language="javascript" type="text/javascript">document.write(ID_VersionInformation);</script></p>
+</body>
+</html>

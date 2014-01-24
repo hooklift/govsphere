@@ -1,0 +1,315 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.option.OptionManager" name="vim.option.OptionManager"></a>
+<h1>Managed Object -  
+						OptionManager</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.host.ConfigManager.html#field_detail">HostConfigManager</a>, <a href="vim.ServiceInstanceContent.html#field_detail">ServiceContent</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.option.OptionDef.html">OptionDef</a>, <a href="vim.option.OptionValue.html">OptionValue</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         This managed object type is used for managing key/value pair 
+  options.
+  <p>
+  <ul>
+  <li>You can define options on the fly, in a logical tree using a dot notation
+  for keys.  For example, "Ethernet.Connection" describes the Connection
+  option as child of the Ethernet option.
+  <li>You can use the queryMethod to retrieve a single property or 
+  a subset of properties based on the dot notation path.
+  </ul>
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="setting" name="setting"></a><strong>setting</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.option.OptionValue.html">OptionValue[]</a></td><td>
+<p></p>
+         A list of the current settings for the key/value pair options.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="supportedOption" name="supportedOption"></a><strong>supportedOption</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.option.OptionDef.html">OptionDef[]</a></td><td>
+<p></p>
+         A list of supported key/value pair options including their 
+  type information.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#queryView">QueryOptions</a>, <a href="#updateValues">UpdateOptions</a></td>
+</tr>
+</table>
+<br>
+<a id="queryView" name="queryView"></a>
+<h1>QueryOptions</h1>
+<p></p>
+         Returns a specific node or nodes in the option hierarchy.
+  
+  <p>
+  This method might require any of the following privileges depending 
+  on where the property fits in the inventory tree.
+ <ul>
+ <li>System.View on the root folder, if this is used to read settings
+     in the &quot;client&quot; subtree.
+ <li>System.Read on the root folder, if this is used to read all settings
+     or any settings beside those in the &quot;client&quot; subtree.
+ <li>System.Read on the host, if this is used to read the advanced
+     options for a host configuration.
+ </ul>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.option.OptionManager.html">OptionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>name</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.option.OptionValue.html">OptionValue[]</a></td><td>The option with the given name. If the name ends with a dot, all options for that subtree are returned.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td>Thrown if no option or subtree exists with the given name.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryOptions-textarea');expandcontent(this, 'QueryOptions-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryOptions-div">
+<textarea cols="20" rows="10" name="QueryOptions-textarea" wrap="off" readonly="1" id="QueryOptions-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryOptions" type="vim25:QueryOptionsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryOptionsResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:OptionValue" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateValues" name="updateValues"></a>
+<h1>UpdateOptions</h1>
+<p></p>
+         Updates one or more properties. These properties are changed 
+  atomically: either all are applied or none are.
+  <p>
+  A nested option setting can be named using a dot notation; for example,
+  system.cacheSize.
+
+  <p>
+  This method might require any of the following privileges depending 
+  on where the property fits in the inventory tree.
+ <ul>
+ <li>Global.Settings on the root folder, if this is used to modify the
+     settings in the service node.
+ <li>Host.Config.AdvancedConfig on the host, if this is used to set the
+     advanced options in the host configuration.
+ </ul>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Dynamic - See discussion above</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.option.OptionManager.html">OptionManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>changedValue</strong></td><td><a href="vim.option.OptionValue.html">OptionValue[]</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if one or more OptionValue contains an invalid value.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td>Thrown if one or more OptionValue objects refers to a non-existent option.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateOptions-textarea');expandcontent(this, 'UpdateOptions-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateOptions-div">
+<textarea cols="20" rows="10" name="UpdateOptions-textarea" wrap="off" readonly="1" id="UpdateOptions-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateOptions" type="vim25:UpdateOptionsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateOptionsResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

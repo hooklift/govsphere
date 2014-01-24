@@ -1,0 +1,449 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.FirmwareSystem" name="vim.host.FirmwareSystem"></a>
+<h1>Managed Object -  
+						HostFirmwareSystem</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.host.ConfigManager.html#field_detail">HostConfigManager</a>
+</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         The <a href="vim.host.FirmwareSystem.html">HostFirmwareSystem</a> managed object type provides access to the firmware
+  of an embedded ESX host. It provides operations to backup, restore, and reset the
+  configuration of an embedded ESX host.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+</table>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#backupConfiguration">BackupFirmwareConfiguration</a>, <a href="#queryConfigUploadURL">QueryFirmwareConfigUploadURL</a>, <a href="#resetToFactoryDefaults">ResetFirmwareToFactoryDefaults</a>, <a href="#restoreConfiguration">RestoreFirmwareConfiguration</a></td>
+</tr>
+</table>
+<br>
+<a id="backupConfiguration" name="backupConfiguration"></a>
+<h1>BackupFirmwareConfiguration</h1>
+<p></p>
+         Backup the configuration of the host.
+  <p>
+  The method generates a bundle containing the host configuration.
+  You can use an HTTP GET operation to download the bundle from the returned URL.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Firmware</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.FirmwareSystem.html">HostFirmwareSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td>xsd:string</td><td>URL that identifies the location of the backup bundle.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('BackupFirmwareConfiguration-textarea');expandcontent(this, 'BackupFirmwareConfiguration-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="BackupFirmwareConfiguration-div">
+<textarea cols="20" rows="10" name="BackupFirmwareConfiguration-textarea" wrap="off" readonly="1" id="BackupFirmwareConfiguration-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="BackupFirmwareConfiguration" type="vim25:BackupFirmwareConfigurationRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="BackupFirmwareConfigurationResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="xsd:string"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryConfigUploadURL" name="queryConfigUploadURL"></a>
+<h1>QueryFirmwareConfigUploadURL</h1>
+<p></p>
+         Return the URL on the host to which the configuration bundle must be
+ uploaded for a restore operation.
+ See <a href="vim.host.FirmwareSystem.html#restoreConfiguration">RestoreFirmwareConfiguration</a>.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Firmware</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.FirmwareSystem.html">HostFirmwareSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td>xsd:string</td><td>URL that identifies the location for the restore operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryFirmwareConfigUploadURL-textarea');expandcontent(this, 'QueryFirmwareConfigUploadURL-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryFirmwareConfigUploadURL-div">
+<textarea cols="20" rows="10" name="QueryFirmwareConfigUploadURL-textarea" wrap="off" readonly="1" id="QueryFirmwareConfigUploadURL-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryFirmwareConfigUploadURL" type="vim25:QueryFirmwareConfigUploadURLRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryFirmwareConfigUploadURLResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="xsd:string"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="resetToFactoryDefaults" name="resetToFactoryDefaults"></a>
+<h1>ResetFirmwareToFactoryDefaults</h1>
+<p></p>
+         Reset the configuration to factory defaults.
+ <p>
+ This method will reset all configuration options, including the "admin"
+ password, to the factory defaults. The host will be rebooted immediately.
+ The host needs to be in maintenance mode before this operation can be
+ performed.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Firmware</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.FirmwareSystem.html">HostFirmwareSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the host is not in maintenance mode.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ResetFirmwareToFactoryDefaults-textarea');expandcontent(this, 'ResetFirmwareToFactoryDefaults-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ResetFirmwareToFactoryDefaults-div">
+<textarea cols="20" rows="10" name="ResetFirmwareToFactoryDefaults-textarea" wrap="off" readonly="1" id="ResetFirmwareToFactoryDefaults-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ResetFirmwareToFactoryDefaults" type="vim25:ResetFirmwareToFactoryDefaultsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ResetFirmwareToFactoryDefaultsResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="restoreConfiguration" name="restoreConfiguration"></a>
+<h1>RestoreFirmwareConfiguration</h1>
+<p></p>
+         Restore the configuration of the host to that specified in the bundle.
+ <p>
+ Upload the bundle to the URL returned by the
+ <a href="vim.host.FirmwareSystem.html#queryConfigUploadURL">QueryFirmwareConfigUploadURL</a> method.
+ The <a href="vim.host.FirmwareSystem.html#restoreConfiguration">RestoreFirmwareConfiguration</a> method
+ will restore all configuration options,
+ including the "admin" password, to the values in the bundle.
+ The host will be rebooted immediately.
+ The host must be in maintenance mode before this operation can be
+ performed.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Firmware</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.FirmwareSystem.html">HostFirmwareSystem</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>force</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Forces application of the configuration even if the bundle
+        is mismatched.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.FileFault.html">FileFault</a></td><td>Thrown if the file was not accessible.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidBundle.html">InvalidBundle</a></td><td>Thrown if the bundle does not have the expected contents.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the host is not in maintenance mode.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.MismatchedBundle.html">MismatchedBundle</a></td><td>Thrown if the uuid / build number in the bundle does not match the uuid / build number of the host and parameter 'force' is set to false.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RestoreFirmwareConfiguration-textarea');expandcontent(this, 'RestoreFirmwareConfiguration-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RestoreFirmwareConfiguration-div">
+<textarea cols="20" rows="10" name="RestoreFirmwareConfiguration-textarea" wrap="off" readonly="1" id="RestoreFirmwareConfiguration-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RestoreFirmwareConfiguration" type="vim25:RestoreFirmwareConfigurationRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RestoreFirmwareConfigurationResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

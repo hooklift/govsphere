@@ -1,0 +1,532 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.HttpNfcLease" name="vim.HttpNfcLease"></a>
+<h1>Managed Object -  
+						HttpNfcLease</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.HttpNfcLease.Info.html#field_detail">HttpNfcLeaseInfo</a>
+</dd>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.vm.Snapshot.html#exportSnapshot">ExportSnapshot</a>, <a href="vim.VirtualApp.html#exportVApp">ExportVApp</a>, <a href="vim.VirtualMachine.html#exportVm">ExportVm</a>, <a href="vim.ResourcePool.html#importVApp">ImportVApp</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.HttpNfcLease.Info.html">HttpNfcLeaseInfo</a>, <a href="vim.HttpNfcLease.ManifestEntry.html">HttpNfcLeaseManifestEntry</a>, <a href="vim.HttpNfcLease.State.html">HttpNfcLeaseState</a>, <a href="vmodl.LocalizedMethodFault.html">LocalizedMethodFault</a>, <a href="vmodl.MethodFault.html">MethodFault</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         Represents a lease on a <a href="vim.VirtualMachine.html">VirtualMachine</a> or
+  a <a href="vim.VirtualApp.html">VirtualApp</a>, which can be used to import or export
+  disks for the entity. While the lease is held, operations
+  that alter the state of the virtual machines covered by the lease
+  are blocked. Examples of blocked operations are PowerOn, Destroy,
+  Migrate, etc.
+  <p>
+  A lease is in one of four states:
+
+  <dl>
+    <dt>Initializing</dt>
+    <dd>This is the initial state. The lease remains in this state
+        while the corresponding import/export task is preparing the
+        objects. In an import session, this involves creating
+        inventory objects.</dd>
+    <dt>Ready</dt>
+    <dd>The lease changes to this state once the corresponding
+        import/export task is done preparing the lease. The leased
+        objects are now ready, and the client can use the information
+        provided in the <a href="vim.HttpNfcLease.html#info">info</a> property to determine where to
+        up/download disks. The client must call <a href="vim.HttpNfcLease.html#progress">HttpNfcLeaseProgress</a>
+        periodically to keep the lease alive and report progress to
+        the corresponding import/export task. Failure to do so causes
+        the lease to time out and enter the error state.</dd>
+    <dt>Done</dt>
+    <dd>When the client is done transferring disks, it calls
+        <a href="vim.HttpNfcLease.html#complete">HttpNfcLeaseComplete</a> to signal the end of the import/export session.
+        This causes the corresponding import/export task to complete
+        successfully.</dd>
+    <dt>Error</dt>
+    <dd>If an error occurs during initialization or the lease times out,
+        it will change to this state. The client can also abort the lease
+        manually by calling <a href="vim.HttpNfcLease.html#abort">HttpNfcLeaseAbort</a>. In this state, the <a href="vim.HttpNfcLease.html#error">error</a>
+        property can be read to determine the cause.
+        If the lease belongs to an import session, all objects created
+        during the import are removed when the lease enters this state.</dd>
+  </dl>
+
+  The import/export task corresponding to the lease continues running while
+  the lease is held.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="error" name="error"></a><strong>error</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vmodl.LocalizedMethodFault.html">LocalizedMethodFault</a></td><td>
+<p></p>
+         If the lease is in the error state, this property contains the
+  error that caused the lease to be aborted.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="info" name="info"></a><strong>info</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.HttpNfcLease.Info.html">HttpNfcLeaseInfo</a></td><td>
+<p></p>
+         Provides information on the objects contained in this lease. The
+  info property is only valid when the lease is in the ready state.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="initializeProgress" name="initializeProgress"></a><strong>initializeProgress</strong></td><td>xsd:int</td><td>
+<p></p>
+         Provides progress information (0-100 percent) for the initializing state
+  of the lease. Clients can use this to track overall progress.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="state" name="state"></a><strong>state</strong></td><td><a href="vim.HttpNfcLease.State.html">HttpNfcLeaseState</a></td><td>
+<p></p>
+         The current state of the lease.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#abort">HttpNfcLeaseAbort</a>, <a href="#complete">HttpNfcLeaseComplete</a>, <a href="#getManifest">HttpNfcLeaseGetManifest</a>, <a href="#progress">HttpNfcLeaseProgress</a></td>
+</tr>
+</table>
+<br>
+<a id="abort" name="abort"></a>
+<h1>HttpNfcLeaseAbort</h1>
+<p></p>
+         Aborts the import/export and releases this lease. Operations on the
+  objects contained in this lease will no longer be blocked. After
+  calling this method, this lease will no longer be valid.
+  <p>
+  Clients should call this method if an error occurs while accessing
+  the disks, or if the operation is cancelled. The client can report
+  the cause of the abort to other clients listening on the task with
+  the fault parameter.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.HttpNfcLease.html">HttpNfcLease</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>fault</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.MethodFault.html">MethodFault</a></td><td>
+<p></p>
+         [in] The fault that caused the abort, if any.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the lease has already been aborted.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.Timedout.html">Timedout</a></td><td>Thrown if the lease has timed out before this call.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('HttpNfcLeaseAbort-textarea');expandcontent(this, 'HttpNfcLeaseAbort-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="HttpNfcLeaseAbort-div">
+<textarea cols="20" rows="10" name="HttpNfcLeaseAbort-textarea" wrap="off" readonly="1" id="HttpNfcLeaseAbort-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HttpNfcLeaseAbort" type="vim25:HttpNfcLeaseAbortRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HttpNfcLeaseAbortResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="complete" name="complete"></a>
+<h1>HttpNfcLeaseComplete</h1>
+<p></p>
+         Completes the import/export and releases this lease. Operations on
+  the objects contained in this lease will no longer be blocked. After
+  calling this method, this lease will no longer be valid.
+  <p>
+  Clients should call this method when they are done accessing the
+  disks for the <a href="vim.VirtualMachine.html">VirtualMachine</a>s in this lease. The status
+  of the corresponding task will be set to success.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.HttpNfcLease.html">HttpNfcLease</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the lease has already been completed or aborted.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.Timedout.html">Timedout</a></td><td>Thrown if the lease has timed out before this call.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('HttpNfcLeaseComplete-textarea');expandcontent(this, 'HttpNfcLeaseComplete-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="HttpNfcLeaseComplete-div">
+<textarea cols="20" rows="10" name="HttpNfcLeaseComplete-textarea" wrap="off" readonly="1" id="HttpNfcLeaseComplete-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HttpNfcLeaseComplete" type="vim25:HttpNfcLeaseCompleteRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HttpNfcLeaseCompleteResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="getManifest" name="getManifest"></a>
+<h1>HttpNfcLeaseGetManifest</h1>
+<p></p>
+         Gets the download manifest for this lease.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.HttpNfcLease.html">HttpNfcLease</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.HttpNfcLease.ManifestEntry.html">HttpNfcLeaseManifestEntry[]</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.Timedout.html">Timedout</a></td><td></td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('HttpNfcLeaseGetManifest-textarea');expandcontent(this, 'HttpNfcLeaseGetManifest-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="HttpNfcLeaseGetManifest-div">
+<textarea cols="20" rows="10" name="HttpNfcLeaseGetManifest-textarea" wrap="off" readonly="1" id="HttpNfcLeaseGetManifest-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HttpNfcLeaseGetManifest" type="vim25:HttpNfcLeaseGetManifestRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HttpNfcLeaseGetManifestResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:HttpNfcLeaseManifestEntry" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="progress" name="progress"></a>
+<h1>HttpNfcLeaseProgress</h1>
+<p></p>
+         Sets the disk up/download progress, and renews this lease. A lease
+  will time out automatically after a while. If the client wishes to
+  continue using it, for example if it is not done accessing the
+  disks, this method must be called periodically.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.HttpNfcLease.html">HttpNfcLease</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>percent</strong></td><td>xsd:int</td><td>
+<p></p>
+         [in] Completion status represented as an integer
+         in the 0-100 range.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.Timedout.html">Timedout</a></td><td>Thrown if the lease has timed out.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('HttpNfcLeaseProgress-textarea');expandcontent(this, 'HttpNfcLeaseProgress-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="HttpNfcLeaseProgress-div">
+<textarea cols="20" rows="10" name="HttpNfcLeaseProgress-textarea" wrap="off" readonly="1" id="HttpNfcLeaseProgress-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HttpNfcLeaseProgress" type="vim25:HttpNfcLeaseProgressRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HttpNfcLeaseProgressResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

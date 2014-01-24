@@ -1,0 +1,224 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.storageDrs.StoragePlacementSpec" name="vim.storageDrs.StoragePlacementSpec"></a>
+<h1>Data Object - StoragePlacementSpec</h1>
+<dl>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.StorageResourceManager.html#recommendDatastores">RecommendDatastores</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.Folder.html">Folder</a>, <a href="vim.HostSystem.html">HostSystem</a>, <a href="vim.ResourcePool.html">ResourcePool</a>, <a href="vim.storageDrs.PodSelectionSpec.html">StorageDrsPodSelectionSpec</a>, <a href="vim.VirtualMachine.html">VirtualMachine</a>, <a href="vim.vm.CloneSpec.html">VirtualMachineCloneSpec</a>, <a href="vim.vm.ConfigSpec.html">VirtualMachineConfigSpec</a>, <a href="vim.VirtualMachine.MovePriority.html">VirtualMachineMovePriority</a>, <a href="vim.vm.RelocateSpec.html">VirtualMachineRelocateSpec</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         StoragePlacementSpec encapsulates all of the inputs passed to the
+   <a href="vim.StorageResourceManager.html#recommendDatastores">RecommendDatastores</a> method.
+   <p>
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="cloneName" name="cloneName"></a><strong>cloneName</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Name for cloned virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="cloneSpec" name="cloneSpec"></a><strong>cloneSpec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.CloneSpec.html">VirtualMachineCloneSpec</a></td><td>
+<p></p>
+         Specification for a virtual machine cloning operation.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="configSpec" name="configSpec"></a><strong>configSpec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.ConfigSpec.html">VirtualMachineConfigSpec</a></td><td>
+<p></p>
+         Configuration for the virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="disallowPrerequisiteMoves" name="disallowPrerequisiteMoves"></a><strong>disallowPrerequisiteMoves</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Specification for whether to disable pre-requisite storage vmotions
+ for storage placements. If unset, default behavior is to allow such
+ prerequisite moves.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="folder" name="folder"></a><strong>folder</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Folder.html">Folder</a></td><td>
+<p></p>
+         The target virtual machine folder for the virtual machine.
+ Note that this is a different folder than the pod(s) that the virtual
+ machine belongs to. The pod mapping represents the storage view of
+ the virtual machine, while the virtual machine folder mapping
+ represents an inventory view of the virtual machine.
+
+ For manual VM provisioning operations, this is specified implicitly
+ as the object that the <a href="vim.Folder.html#createVm">CreateVM_Task</a> method is invoked on.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="host" name="host"></a><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         The target host for the virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="podSelectionSpec" name="podSelectionSpec"></a><strong>podSelectionSpec</strong></td><td><a href="vim.storageDrs.PodSelectionSpec.html">StorageDrsPodSelectionSpec</a></td><td>
+<p></p>
+         Specification for moving a virtual machine or a set of virtual disks
+  to a different storage pod.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="priority" name="priority"></a><strong>priority</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.VirtualMachine.MovePriority.html">VirtualMachineMovePriority</a></td><td>
+<p></p>
+         Priority of this placement operation.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="relocateSpec" name="relocateSpec"></a><strong>relocateSpec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.RelocateSpec.html">VirtualMachineRelocateSpec</a></td><td>
+<p></p>
+         Specification for relocating a virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="resourceLeaseDurationSec" name="resourceLeaseDurationSec"></a><strong>resourceLeaseDurationSec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Resource lease duration in seconds. If the duration is within bounds,
+ Storage DRS will hold onto resources needed for applying recommendations
+ generated as part of that call.
+ Only initial placement recommendations generated by storage DRS can reserve
+ resources this way.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="resourcePool" name="resourcePool"></a><strong>resourcePool</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ResourcePool.html">ResourcePool</a></td><td>
+<p></p>
+         The resource pool to which this virtual machine should be attached.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="type" name="type"></a><strong>type</strong></td><td>xsd:string</td><td>
+<p></p>
+         The storage placement type. The set of possible values is described in
+ <a href="vim.storageDrs.StoragePlacementSpec.PlacementType.html">StoragePlacementSpecPlacementType</a>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vm" name="vm"></a><strong>vm</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.VirtualMachine.html">VirtualMachine</a></td><td>
+<p></p>
+         The relevant virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="StoragePlacementSpec">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="type" type="xsd:string"/>
+                     <element name="priority" type="vim25:VirtualMachineMovePriority" minOccurs="0"/>
+                     <element name="vm" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="podSelectionSpec" type="vim25:StorageDrsPodSelectionSpec"/>
+                     <element name="cloneSpec" type="vim25:VirtualMachineCloneSpec" minOccurs="0"/>
+                     <element name="cloneName" type="xsd:string" minOccurs="0"/>
+                     <element name="configSpec" type="vim25:VirtualMachineConfigSpec" minOccurs="0"/>
+                     <element name="relocateSpec" type="vim25:VirtualMachineRelocateSpec" minOccurs="0"/>
+                     <element name="resourcePool" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="host" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="folder" type="vim25:ManagedObjectReference" minOccurs="0"/>
+                     <element name="disallowPrerequisiteMoves" type="xsd:boolean" minOccurs="0"/>
+                     <element name="resourceLeaseDurationSec" type="xsd:int" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

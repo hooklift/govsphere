@@ -1,20 +1,15 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"github.com/PuerkitoBio/goquery"
 	"io/ioutil"
 	"log"
 	"regexp"
 	"strings"
+	"sync"
 )
-
-var apiBaseUrl = "http://pubs.vmware.com/vsphere-55/topic/com.vmware.wssdk.apiref.doc"
-
-var mosIndex = apiBaseUrl + "/index-mo_types.html"
-var doIndex = apiBaseUrl + "/index-do_types.html"
-var enumIndex = apiBaseUrl + "/index-e_types.html"
-var faultIndex = apiBaseUrl + "/index-faults.html"
 
 type Property struct {
 	Name               string `json:"name"`
@@ -55,6 +50,7 @@ type Constant struct {
 
 type Object struct {
 	Name        string      `json:"name"`
+	Namespace   string      `json:"namespace"`
 	Extends     string      `json:"extends"`
 	Since       string      `json:"since"`
 	Description string      `json:"description"`
@@ -65,6 +61,14 @@ type Object struct {
 
 var objDescRegex *regexp.Regexp
 
+const (
+	apiBase    = "./reference"
+	moIndex    = apiBase + "/index-mo_types.html"
+	doIndex    = apiBase + "/index-do_types.html"
+	enumIndex  = apiBase + "/index-e_types.html"
+	faultIndex = apiBase + "/index-faults.html"
+)
+
 func init() {
 	/**
 	* HTML is not well formed so we need this regexp to extract
@@ -73,30 +77,47 @@ func init() {
 	objDescRegex = regexp.MustCompile(`</h2>((?s).+?)<p class="table-title">`)
 }
 
+type Counter struct {
+	sync.Mutex
+	x int
+}
+
 func scrape() {
-	channel := make(chan *Object)
-	closeChannelAt := 0
+	channel := make(chan *Object, 1)
+	counter := &Counter{x: 0}
 	totalObjects := 0
 	var objs []*Object
 
 	//ManagedObjects
 	go func() {
-		closeChannelAt += scrapeIndex(mosIndex, channel)
+		total := scrapeIndex(moIndex, "mo", channel)
+		counter.Lock()
+		counter.x += total
+		counter.Unlock()
 	}()
 
 	//DataObjects
 	go func() {
-		closeChannelAt += scrapeIndex(doIndex, channel)
+		total := scrapeIndex(doIndex, "do", channel)
+		counter.Lock()
+		counter.x += total
+		counter.Unlock()
 	}()
 
 	//Enums
 	go func() {
-		closeChannelAt += scrapeIndex(enumIndex, channel)
+		total := scrapeIndex(enumIndex, "enum", channel)
+		counter.Lock()
+		counter.x += total
+		counter.Unlock()
 	}()
 
 	//Faults
 	go func() {
-		closeChannelAt += scrapeIndex(faultIndex, channel)
+		total := scrapeIndex(faultIndex, "fault", channel)
+		counter.Lock()
+		counter.x += total
+		counter.Unlock()
 	}()
 
 	for obj := range channel {
@@ -105,9 +126,11 @@ func scrape() {
 		log.Println("type: " + obj.Name)
 		objs = append(objs, obj)
 
-		if totalObjects == closeChannelAt {
+		counter.Lock()
+		if totalObjects == counter.x {
 			break
 		}
+		counter.Unlock()
 	}
 
 	data, err := json.MarshalIndent(objs, "", "  ")
@@ -121,14 +144,20 @@ func scrape() {
 	}
 
 	log.Println("\n")
-	log.Printf("Close channel at: %d\n", closeChannelAt)
+	log.Printf("Total objects to extract: %d\n", counter.x)
 	log.Printf("Total objects extracted: %d\n", totalObjects)
 	log.Println("vSphere API definition was generated in ./api.json")
 	log.Println("Done 💩")
 }
 
-func scrapeIndex(url string, channel chan *Object) int {
-	d, err := goquery.NewDocument(url)
+func scrapeIndex(refFile, namespace string, channel chan *Object) int {
+	data, err := ioutil.ReadFile(refFile)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	buffer := bytes.NewBuffer(data)
+
+	d, err := goquery.NewDocumentFromReader(buffer)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -137,7 +166,7 @@ func scrapeIndex(url string, channel chan *Object) int {
 		href, _ := sel.Attr("href")
 		name, _ := sel.Attr("title")
 
-		go scrapeObject(href, name, channel)
+		go scrapeObject(apiBase+"/"+href, name, namespace, channel)
 	}
 
 	ae := d.Find("#AE > nobr > a")
@@ -157,13 +186,22 @@ func scrapeIndex(url string, channel chan *Object) int {
 	return closeChannelAt
 }
 
-func scrapeObject(path, name string, channel chan *Object) {
-	d, err := goquery.NewDocument(apiBaseUrl + "/" + path)
+func scrapeObject(refFile, name, namespace string, channel chan *Object) {
+	data, err := ioutil.ReadFile(refFile)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	buffer := bytes.NewBuffer(data)
+
+	d, err := goquery.NewDocumentFromReader(buffer)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	obj := &Object{Name: name}
+	obj := &Object{
+		Name:      name,
+		Namespace: namespace,
+	}
 
 	d.Find("body > dl > dt").Each(func(i int, sel *goquery.Selection) {
 		dtText := strings.TrimSpace(sel.Text())
@@ -207,15 +245,22 @@ func scrapeObject(path, name string, channel chan *Object) {
 					})
 
 					type_ := sel2.Find("td:nth-child(2) > a")
-					if type_.Length() == 2 {
-						//Instead of getting ManagedReferenceObjecte it gets
-						//the real type
-						p.Type = strings.TrimSpace(type_.Last().Text())
-					} else if type_.Length() == 1 {
+					if type_.Length() == 1 {
 						p.Type = strings.TrimSpace(type_.Text())
+					} else if type_.Length() == 2 {
+						//Instead of getting ManagedReferenceObject, it gets
+						//the real type
+						p.Type = "mo." + strings.TrimSpace(type_.Last().Text())
 					} else {
 						//Gets primitive types such as: xsd:string, xsd:long, etc
-						p.Type = strings.TrimSpace(sel2.Find("td:nth-child(2)").Text())
+						text := strings.TrimSpace(sel2.Find("td:nth-child(2)").Text())
+
+						//There is an odd bug in Goquery where it
+						//returns text from the next column too but
+						//only when the next column has a nested table.
+						//Hack to overcome the issue
+						p.Type = strings.Split(text, " -")[0]
+						//p.Type = text
 					}
 
 					p.Description = strings.TrimSpace(sel2.Find("td:nth-child(3)").Text())
@@ -342,10 +387,60 @@ func scrapeObject(path, name string, channel chan *Object) {
 	channel <- obj
 }
 
+//This is required to conform with godoc
+//convention
+func sanitizeDesc(text string) string {
+	if text == "" {
+		return text
+	}
+
+	s := strings.Replace(text, "<br>", "\n", -1)
+	s = strings.Replace(s, "</br>", "\n", -1)
+	s = strings.Replace(s, "<p></p>", "", -1)
+	s = strings.Replace(s, "<p>", "", -1)
+	s = strings.Replace(s, "</p>", "\n", -1)
+	s = strings.Replace(s, "<ul>", "\n", -1)
+	s = strings.Replace(s, "</ul>", "\n", -1)
+	s = strings.Replace(s, "<li>", "• ", -1)
+	s = strings.Replace(s, "</li>", "\n", -1)
+	s = strings.Replace(s, `<a id="field_detail" name="field_detail"></a>`, "", -1)
+
+	// Remove a few common harmless entities, to arrive at something more like plain text
+	// This relies on having removed *all* tags above
+	s = strings.Replace(s, "&nbsp;", " ", -1)
+	s = strings.Replace(s, "&quot;", "\"", -1)
+	s = strings.Replace(s, "&apos;", "'", -1)
+	s = strings.Replace(s, "&#34;", "\"", -1)
+	s = strings.Replace(s, "&#39;", "'", -1)
+	// NB spaces here are significant - we only allow & not part of entity
+	s = strings.Replace(s, "&amp; ", "& ", -1)
+	s = strings.Replace(s, "&amp;amp; ", "& ", -1)
+
+	b := bytes.NewBufferString("")
+
+	//Remove remaining tags
+	inTag := false
+	for _, r := range s {
+		switch r {
+		case '<':
+			inTag = true
+		case '>':
+			inTag = false
+		default:
+			if !inTag {
+				b.WriteRune(r)
+			}
+		}
+	}
+	s = b.String()
+
+	return s
+}
+
 func getObjectDesc(html string) string {
 	matches := objDescRegex.FindStringSubmatch(html)
 	if len(matches) == 2 {
-		return strings.TrimSpace(matches[1])
+		return sanitizeDesc(strings.TrimSpace(matches[1]))
 	}
 
 	return ""
@@ -359,7 +454,7 @@ func getMethodDesc(name, html string) string {
 
 	matches := methodDescRegex.FindStringSubmatch(html)
 	if len(matches) == 2 {
-		return strings.TrimSpace(matches[1])
+		return sanitizeDesc(strings.TrimSpace(matches[1]))
 	}
 	return ""
 }

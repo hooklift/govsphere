@@ -1,0 +1,164 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.HostServiceTicket" name="vim.HostServiceTicket"></a>
+<h1>Data Object - HostServiceTicket</h1>
+<dl>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.HostSystem.html#acquireCimServicesTicket">AcquireCimServicesTicket</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         Return value for ticketable host services. The server has the option to 
+  provide a hostname and port for a future ticket-authenticated connection to
+  a service on a host. If the service provider does not return a host the 
+  client must connect to the same host it used to request the ticket. In case 
+  the service provider does not return a port, except in the case of connecting
+  to CIM interfaces, the client must connect using the same port it used to 
+  request the ticket. In the case of connecting to a CIM interface the 
+  standard well known port number for the particular service will be used for
+  the connection.
+  <p>
+  For example, when a client requests a ticket from an ESX Server, the returned ticket 
+  may omit the optional host and port. In such a case, the client establishes an 
+  out-of-band ticketed connection to the same server host and on the same port on 
+  which it made the connection to request the ticket. If this request is 
+  made to the VirtualCenter server, but the server does not provide the required 
+  service directly, then the server provides a hostname and port for a server that 
+  accepts the ticketed connection and provides the service.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="host" name="host"></a><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The name of the host providing the service for which the ticket applies. If 
+  omitted, then the client uses the host name for the server that issued the ticket.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="port" name="port"></a><strong>port</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Access to some services is made possible by connecting to a port on a 
+  server. If the service for which a ticket is issued is available on a 
+  particular port, that port number is specified with this property. If 
+  omitted, except in the case of connecting to CIM interfaces, the port 
+  number for the service that issued the ticket is used. In the case of 
+  connecting to a CIM interface the standard well known port for the 
+  particular service will be used for the connection.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="service" name="service"></a><strong>service</strong></td><td>xsd:string</td><td>
+<p></p>
+         The name of the service to which to connect.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="serviceVersion" name="serviceVersion"></a><strong>serviceVersion</strong></td><td>xsd:string</td><td>
+<p></p>
+         A dot-separated string identifying the service protocol version. For example, 1.0 
+  is used for NFC hosted by vpxa on ESX 2.5, and 1.1 is used for 
+  NFC hosted by hostd on ESX 3.0.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="sessionId" name="sessionId"></a><strong>sessionId</strong></td><td>xsd:string</td><td>
+<p></p>
+         An identifying string for the session created for the ticketed connection. This 
+  is used by the host service to identify the operations permitted within the
+  session.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="sslThumbprint" name="sslThumbprint"></a><strong>sslThumbprint</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The expected thumbprint of the SSL cert of the host to which
+ we are connecting.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostServiceTicket">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="host" type="xsd:string" minOccurs="0"/>
+                     <element name="port" type="xsd:int" minOccurs="0"/>
+                     <element name="sslThumbprint" type="xsd:string" minOccurs="0"/>
+                     <element name="service" type="xsd:string"/>
+                     <element name="serviceVersion" type="xsd:string"/>
+                     <element name="sessionId" type="xsd:string"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

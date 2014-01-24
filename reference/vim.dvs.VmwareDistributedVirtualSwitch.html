@@ -1,0 +1,233 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.dvs.VmwareDistributedVirtualSwitch" name="vim.dvs.VmwareDistributedVirtualSwitch"></a>
+<h1>Managed Object -  
+						VmwareDistributedVirtualSwitch</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.dvs.VmwareDistributedVirtualSwitch.LacpGroupSpec.html">VMwareDvsLacpGroupSpec</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         The <a href="vim.dvs.VmwareDistributedVirtualSwitch.html">VmwareDistributedVirtualSwitch</a> managed object
+ is the VMware implementation of a distributed virtual switch.
+ The functionality listed here is for a VMware distributed virtual switch only.
+ <p>
+ When you use a VMware distributed virtual switch, you can perform
+ backup and restore operations on the VMware switch. You can also
+ perform rollback operations on the switch and on portgroups
+ associated with the VMware switch. See the description for the
+ following methods:
+ <ul>
+ <li><a href="vim.dvs.DistributedVirtualSwitchManager.html#exportEntity">DVSManagerExportEntity_Task</a></li>
+ <li><a href="vim.dvs.DistributedVirtualSwitchManager.html#importEntity">DVSManagerImportEntity_Task</a></li>
+ <li><a href="vim.DistributedVirtualSwitch.html#rollback">DVSRollback_Task</a></li>
+ <li><a href="vim.dvs.DistributedVirtualPortgroup.html#rollback">DVPortgroupRollback_Task</a></li>
+ </ul>
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.DistributedVirtualSwitch.html#capability">capability</a>, <a href="vim.DistributedVirtualSwitch.html#config">config</a>, <a href="vim.DistributedVirtualSwitch.html#networkResourcePool">networkResourcePool</a>, <a href="vim.DistributedVirtualSwitch.html#portgroup">portgroup</a>, <a href="vim.DistributedVirtualSwitch.html#runtime">runtime</a>, <a href="vim.DistributedVirtualSwitch.html#summary">summary</a>, <a href="vim.DistributedVirtualSwitch.html#uuid">uuid</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.ManagedEntity.html">ManagedEntity</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.ManagedEntity.html#alarmActionsEnabled">alarmActionsEnabled</a>, <a href="vim.ManagedEntity.html#configIssue">configIssue</a>, <a href="vim.ManagedEntity.html#configStatus">configStatus</a>, <a href="vim.ManagedEntity.html#customValue">customValue</a>, <a href="vim.ManagedEntity.html#declaredAlarmState">declaredAlarmState</a>, <a href="vim.ManagedEntity.html#disabledMethod">disabledMethod</a>, <a href="vim.ManagedEntity.html#effectiveRole">effectiveRole</a>, <a href="vim.ManagedEntity.html#name">name</a>, <a href="vim.ManagedEntity.html#overallStatus">overallStatus</a>, <a href="vim.ManagedEntity.html#parent">parent</a>, <a href="vim.ManagedEntity.html#permission">permission</a>, <a href="vim.ManagedEntity.html#recentTask">recentTask</a>, <a href="vim.ManagedEntity.html#tag">tag</a>, <a href="vim.ManagedEntity.html#triggeredAlarmState">triggeredAlarmState</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.ExtensibleManagedObject.html#availableField">availableField</a>, <a href="vim.ExtensibleManagedObject.html#value">value</a></td>
+</tr>
+</table>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#updateLacpGroupConfig">UpdateDVSLacpGroupConfig_Task</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.DistributedVirtualSwitch.html#addPortgroups">AddDVPortgroup_Task</a>, <a href="vim.DistributedVirtualSwitch.html#addNetworkResourcePool">AddNetworkResourcePool</a>, <a href="vim.DistributedVirtualSwitch.html#addPortgroup">CreateDVPortgroup_Task</a>, <a href="vim.DistributedVirtualSwitch.html#rollback">DVSRollback_Task</a>, <a href="vim.DistributedVirtualSwitch.html#enableNetworkResourceManagement">EnableNetworkResourceManagement</a>, <a href="vim.DistributedVirtualSwitch.html#fetchPortKeys">FetchDVPortKeys</a>, <a href="vim.DistributedVirtualSwitch.html#fetchPorts">FetchDVPorts</a>, <a href="vim.DistributedVirtualSwitch.html#lookupPortgroup">LookupDvPortGroup</a>, <a href="vim.DistributedVirtualSwitch.html#merge">MergeDvs_Task</a>, <a href="vim.DistributedVirtualSwitch.html#movePort">MoveDVPort_Task</a>, <a href="vim.DistributedVirtualSwitch.html#performProductSpecOperation">PerformDvsProductSpecOperation_Task</a>, <a href="vim.DistributedVirtualSwitch.html#queryUsedVlanId">QueryUsedVlanIdInDvs</a>, <a href="vim.DistributedVirtualSwitch.html#reconfigurePort">ReconfigureDVPort_Task</a>, <a href="vim.DistributedVirtualSwitch.html#reconfigure">ReconfigureDvs_Task</a>, <a href="vim.DistributedVirtualSwitch.html#rectifyHost">RectifyDvsHost_Task</a>, <a href="vim.DistributedVirtualSwitch.html#refreshPortState">RefreshDVPortState</a>, <a href="vim.DistributedVirtualSwitch.html#removeNetworkResourcePool">RemoveNetworkResourcePool</a>, <a href="vim.DistributedVirtualSwitch.html#updateCapability">UpdateDvsCapability</a>, <a href="vim.DistributedVirtualSwitch.html#updateHealthCheckConfig">UpdateDVSHealthCheckConfig_Task</a>, <a href="vim.DistributedVirtualSwitch.html#updateNetworkResourcePool">UpdateNetworkResourcePool</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.ManagedEntity.html">ManagedEntity</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.ManagedEntity.html#destroy">Destroy_Task</a>, <a href="vim.ManagedEntity.html#reload">Reload</a>, <a href="vim.ManagedEntity.html#rename">Rename_Task</a></td>
+</tr>
+<tr class="r1">
+<td>
+            Methods inherited from <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a></td>
+</tr>
+<tr class="r0">
+<td><a href="vim.ExtensibleManagedObject.html#setCustomValue">setCustomValue</a></td>
+</tr>
+</table>
+<br>
+<a id="updateLacpGroupConfig" name="updateLacpGroupConfig"></a>
+<h1>UpdateDVSLacpGroupConfig_Task</h1>
+<p></p>
+         Update Link Aggregation Control Protocol groups.
+  It can be called if the value of
+  <a href="vim.dvs.VmwareDistributedVirtualSwitch.ConfigInfo.html#lacpApiVersion">lacpApiVersion</a> is
+  LacpApiVersion#multipleLag
+  else an exception ConflictingConfiguration will be thrown.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>DVSwitch.Modify</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.dvs.VmwareDistributedVirtualSwitch.html">VmwareDistributedVirtualSwitch</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>lacpGroupSpec</strong></td><td><a href="vim.dvs.VmwareDistributedVirtualSwitch.LacpGroupSpec.html">VMwareDvsLacpGroupSpec[]</a></td><td>
+<p></p>
+         The Link Aggregation Control Protocol groups to be configured.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.DvsFault.html">DvsFault</a></td><td>Thrown if operation fails on any host or if there are other update failures.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if multiple Link Aggregation Control Protocol is not supported on the switch.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

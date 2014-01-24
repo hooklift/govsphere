@@ -1,0 +1,139 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.FibreChannelOverEthernetHba" name="vim.host.FibreChannelOverEthernetHba"></a>
+<h1>Data Object - HostFibreChannelOverEthernetHba</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.host.FibreChannelHba.html">HostFibreChannelHba</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.FibreChannelOverEthernetHba.LinkInfo.html">HostFibreChannelOverEthernetHbaLinkInfo</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This data object type describes the FCoE host bus adapter
+  interface.
+
+  Terminology is borrowed from T11's working draft of the Fibre Channel
+  Backbone 5 standard (FC-BB-5).  The draft can be found at
+  http://www.t11.org.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="isSoftwareFcoe" name="isSoftwareFcoe"></a><strong>isSoftwareFcoe</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         True if this host bus adapter is a software based FCoE initiator.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="linkInfo" name="linkInfo"></a><strong>linkInfo</strong></td><td><a href="vim.host.FibreChannelOverEthernetHba.LinkInfo.html">HostFibreChannelOverEthernetHbaLinkInfo</a></td><td>
+<p></p>
+         Link information that can be used to uniquely identify this FCoE HBA.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="markedForRemoval" name="markedForRemoval"></a><strong>markedForRemoval</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         True if this host bus adapter has been marked for removal.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="underlyingNic" name="underlyingNic"></a><strong>underlyingNic</strong></td><td>xsd:string</td><td>
+<p></p>
+         The name associated with this FCoE HBA's underlying FcoeNic.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.host.FibreChannelHba.html">HostFibreChannelHba</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.host.FibreChannelHba.html#nodeWorldWideName">nodeWorldWideName</a>, <a href="vim.host.FibreChannelHba.html#portType">portType</a>, <a href="vim.host.FibreChannelHba.html#portWorldWideName">portWorldWideName</a>, <a href="vim.host.FibreChannelHba.html#speed">speed</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.host.HostBusAdapter.html">HostHostBusAdapter</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.host.HostBusAdapter.html#bus">bus</a>, <a href="vim.host.HostBusAdapter.html#device">device</a>, <a href="vim.host.HostBusAdapter.html#driver">driver</a>, <a href="vim.host.HostBusAdapter.html#key">key</a>, <a href="vim.host.HostBusAdapter.html#model">model</a>, <a href="vim.host.HostBusAdapter.html#pci">pci</a>, <a href="vim.host.HostBusAdapter.html#status">status</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostFibreChannelOverEthernetHba">
+            <complexContent>
+               <extension base="vim25:HostFibreChannelHba">
+                  <sequence>
+                     <element name="underlyingNic" type="xsd:string"/>
+                     <element name="linkInfo" type="vim25:HostFibreChannelOverEthernetHbaLinkInfo"/>
+                     <element name="isSoftwareFcoe" type="xsd:boolean"/>
+                     <element name="markedForRemoval" type="xsd:boolean"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.fault.OperationDisabledByGuest" name="vim.fault.OperationDisabledByGuest"></a>
+<h1>Fault - OperationDisabledByGuest</h1>
+<dl>
+<dt>Thrown by</dt>
+<dd>
+<a href="vim.vm.guest.AuthManager.html#acquireCredentials">AcquireCredentialsInGuest</a>, <a href="vim.vm.guest.FileManager.html#changeFileAttributes">ChangeFileAttributesInGuest</a>, <a href="vim.vm.guest.FileManager.html#createTemporaryDirectory">CreateTemporaryDirectoryInGuest</a>, <a href="vim.vm.guest.FileManager.html#createTemporaryFile">CreateTemporaryFileInGuest</a>, <a href="vim.vm.guest.FileManager.html#deleteDirectory">DeleteDirectoryInGuest</a>, <a href="vim.vm.guest.FileManager.html#deleteFile">DeleteFileInGuest</a>, <a href="vim.vm.guest.FileManager.html#initiateFileTransferFromGuest">InitiateFileTransferFromGuest</a>, <a href="vim.vm.guest.FileManager.html#initiateFileTransferToGuest">InitiateFileTransferToGuest</a>, <a href="vim.vm.guest.FileManager.html#listFiles">ListFilesInGuest</a>, <a href="vim.vm.guest.ProcessManager.html#listProcesses">ListProcessesInGuest</a>, <a href="vim.vm.guest.FileManager.html#makeDirectory">MakeDirectoryInGuest</a>, <a href="vim.vm.guest.FileManager.html#moveDirectory">MoveDirectoryInGuest</a>, <a href="vim.vm.guest.FileManager.html#moveFile">MoveFileInGuest</a>, <a href="vim.vm.guest.ProcessManager.html#readEnvironmentVariable">ReadEnvironmentVariableInGuest</a>, <a href="vim.vm.guest.AuthManager.html#releaseCredentials">ReleaseCredentialsInGuest</a>, <a href="vim.vm.guest.ProcessManager.html#startProgram">StartProgramInGuest</a>, <a href="vim.vm.guest.ProcessManager.html#terminateProcess">TerminateProcessInGuest</a>, <a href="vim.vm.guest.AuthManager.html#validateCredentials">ValidateCredentialsInGuest</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.fault.GuestOperationsFault.html">GuestOperationsFault</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+<p></p>
+</dl>
+<H2>Fault 
+                  Description</H2>
+<p></p>
+         An OperationDisabledByGuest exception is thrown when an
+  operation fails because the guest operations agent has been configured to
+  disable the operation.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.fault.GuestOperationsFault.html">GuestOperationsFault</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.fault.VimFault.html">VimFault</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.MethodFault.html">MethodFault</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.MethodFault.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.MethodFault.html#dynamicType">dynamicType</a>, <a href="vmodl.MethodFault.html#faultCause">faultCause</a>, <a href="vmodl.MethodFault.html#faultMessage">faultMessage</a></td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="OperationDisabledByGuest">
+            <complexContent>
+               <extension base="vim25:GuestOperationsFault">
+                  <sequence>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

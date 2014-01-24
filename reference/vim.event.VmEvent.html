@@ -1,0 +1,101 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.event.VmEvent" name="vim.event.VmEvent"></a>
+<h1>Data Object - VmEvent</h1>
+<dl>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.event.CustomizationEvent.html">CustomizationEvent</a>, <a href="vim.event.DrsRuleComplianceEvent.html">DrsRuleComplianceEvent</a>, <a href="vim.event.DrsRuleViolationEvent.html">DrsRuleViolationEvent</a>, <a href="vim.event.MigrationEvent.html">MigrationEvent</a>, <a href="vim.event.NoMaintenanceModeDrsRecommendationForVM.html">NoMaintenanceModeDrsRecommendationForVM</a>, <a href="vim.event.NotEnoughResourcesToStartVmEvent.html">NotEnoughResourcesToStartVmEvent</a>, <a href="vim.event.VmAcquiredMksTicketEvent.html">VmAcquiredMksTicketEvent</a>, <a href="vim.event.VmAcquiredTicketEvent.html">VmAcquiredTicketEvent</a>, <a href="vim.event.VmAutoRenameEvent.html">VmAutoRenameEvent</a>, <a href="vim.event.VmBeingCreatedEvent.html">VmBeingCreatedEvent</a>, <a href="vim.event.VmBeingDeployedEvent.html">VmBeingDeployedEvent</a>, <a href="vim.event.VmBeingHotMigratedEvent.html">VmBeingHotMigratedEvent</a>, <a href="vim.event.VmBeingMigratedEvent.html">VmBeingMigratedEvent</a>, <a href="vim.event.VmCloneEvent.html">VmCloneEvent</a>, <a href="vim.event.VmConfigMissingEvent.html">VmConfigMissingEvent</a>, <a href="vim.event.VmConnectedEvent.html">VmConnectedEvent</a>, <a href="vim.event.VmCreatedEvent.html">VmCreatedEvent</a>, <a href="vim.event.VmDasBeingResetEvent.html">VmDasBeingResetEvent</a>, <a href="vim.event.VmDasResetFailedEvent.html">VmDasResetFailedEvent</a>, <a href="vim.event.VmDasUpdateErrorEvent.html">VmDasUpdateErrorEvent</a>, <a href="vim.event.VmDasUpdateOkEvent.html">VmDasUpdateOkEvent</a>, <a href="vim.event.VmDateRolledBackEvent.html">VmDateRolledBackEvent</a>, <a href="vim.event.VmDeployedEvent.html">VmDeployedEvent</a>, <a href="vim.event.VmDeployFailedEvent.html">VmDeployFailedEvent</a>, <a href="vim.event.VmDisconnectedEvent.html">VmDisconnectedEvent</a>, <a href="vim.event.VmDiscoveredEvent.html">VmDiscoveredEvent</a>, <a href="vim.event.VmDiskFailedEvent.html">VmDiskFailedEvent</a>, <a href="vim.event.VmEmigratingEvent.html">VmEmigratingEvent</a>, <a href="vim.event.VmEndRecordingEvent.html">VmEndRecordingEvent</a>, <a href="vim.event.VmEndReplayingEvent.html">VmEndReplayingEvent</a>, <a href="vim.event.VmFailedMigrateEvent.html">VmFailedMigrateEvent</a>, <a href="vim.event.VmFailedRelayoutEvent.html">VmFailedRelayoutEvent</a>, <a href="vim.event.VmFailedRelayoutOnVmfs2DatastoreEvent.html">VmFailedRelayoutOnVmfs2DatastoreEvent</a>, <a href="vim.event.VmFailedStartingSecondaryEvent.html">VmFailedStartingSecondaryEvent</a>, <a href="vim.event.VmFailedToPowerOffEvent.html">VmFailedToPowerOffEvent</a>, <a href="vim.event.VmFailedToPowerOnEvent.html">VmFailedToPowerOnEvent</a>, <a href="vim.event.VmFailedToRebootGuestEvent.html">VmFailedToRebootGuestEvent</a>, <a href="vim.event.VmFailedToResetEvent.html">VmFailedToResetEvent</a>, <a href="vim.event.VmFailedToShutdownGuestEvent.html">VmFailedToShutdownGuestEvent</a>, <a href="vim.event.VmFailedToStandbyGuestEvent.html">VmFailedToStandbyGuestEvent</a>, <a href="vim.event.VmFailedToSuspendEvent.html">VmFailedToSuspendEvent</a>, <a href="vim.event.VmFailedUpdatingSecondaryConfig.html">VmFailedUpdatingSecondaryConfig</a>, <a href="vim.event.VmFailoverFailed.html">VmFailoverFailed</a>, <a href="vim.event.VmFaultToleranceStateChangedEvent.html">VmFaultToleranceStateChangedEvent</a>, <a href="vim.event.VmFaultToleranceTurnedOffEvent.html">VmFaultToleranceTurnedOffEvent</a>, <a href="vim.event.VmFaultToleranceVmTerminatedEvent.html">VmFaultToleranceVmTerminatedEvent</a>, <a href="vim.event.VmGuestRebootEvent.html">VmGuestRebootEvent</a>, <a href="vim.event.VmGuestShutdownEvent.html">VmGuestShutdownEvent</a>, <a href="vim.event.VmGuestStandbyEvent.html">VmGuestStandbyEvent</a>, <a href="vim.event.VmInstanceUuidAssignedEvent.html">VmInstanceUuidAssignedEvent</a>, <a href="vim.event.VmInstanceUuidChangedEvent.html">VmInstanceUuidChangedEvent</a>, <a href="vim.event.VmInstanceUuidConflictEvent.html">VmInstanceUuidConflictEvent</a>, <a href="vim.event.VmMacAssignedEvent.html">VmMacAssignedEvent</a>, <a href="vim.event.VmMacChangedEvent.html">VmMacChangedEvent</a>, <a href="vim.event.VmMacConflictEvent.html">VmMacConflictEvent</a>, <a href="vim.event.VmMaxFTRestartCountReached.html">VmMaxFTRestartCountReached</a>, <a href="vim.event.VmMaxRestartCountReached.html">VmMaxRestartCountReached</a>, <a href="vim.event.VmMessageErrorEvent.html">VmMessageErrorEvent</a>, <a href="vim.event.VmMessageEvent.html">VmMessageEvent</a>, <a href="vim.event.VmMessageWarningEvent.html">VmMessageWarningEvent</a>, <a href="vim.event.VmMigratedEvent.html">VmMigratedEvent</a>, <a href="vim.event.VmNoCompatibleHostForSecondaryEvent.html">VmNoCompatibleHostForSecondaryEvent</a>, <a href="vim.event.VmNoNetworkAccessEvent.html">VmNoNetworkAccessEvent</a>, <a href="vim.event.VmOrphanedEvent.html">VmOrphanedEvent</a>, <a href="vim.event.VmPoweredOffEvent.html">VmPoweredOffEvent</a>, <a href="vim.event.VmPoweredOnEvent.html">VmPoweredOnEvent</a>, <a href="vim.event.VmPoweringOnWithCustomizedDVPortEvent.html">VmPoweringOnWithCustomizedDVPortEvent</a>, <a href="vim.event.VmPrimaryFailoverEvent.html">VmPrimaryFailoverEvent</a>, <a href="vim.event.VmReconfiguredEvent.html">VmReconfiguredEvent</a>, <a href="vim.event.VmRegisteredEvent.html">VmRegisteredEvent</a>, <a href="vim.event.VmRelayoutSuccessfulEvent.html">VmRelayoutSuccessfulEvent</a>, <a href="vim.event.VmRelayoutUpToDateEvent.html">VmRelayoutUpToDateEvent</a>, <a href="vim.event.VmReloadFromPathEvent.html">VmReloadFromPathEvent</a>, <a href="vim.event.VmReloadFromPathFailedEvent.html">VmReloadFromPathFailedEvent</a>, <a href="vim.event.VmRelocateSpecEvent.html">VmRelocateSpecEvent</a>, <a href="vim.event.VmRemoteConsoleConnectedEvent.html">VmRemoteConsoleConnectedEvent</a>, <a href="vim.event.VmRemoteConsoleDisconnectedEvent.html">VmRemoteConsoleDisconnectedEvent</a>, <a href="vim.event.VmRemovedEvent.html">VmRemovedEvent</a>, <a href="vim.event.VmRenamedEvent.html">VmRenamedEvent</a>, <a href="vim.event.VmRequirementsExceedCurrentEVCModeEvent.html">VmRequirementsExceedCurrentEVCModeEvent</a>, <a href="vim.event.VmResettingEvent.html">VmResettingEvent</a>, <a href="vim.event.VmResourcePoolMovedEvent.html">VmResourcePoolMovedEvent</a>, <a href="vim.event.VmResourceReallocatedEvent.html">VmResourceReallocatedEvent</a>, <a href="vim.event.VmResumingEvent.html">VmResumingEvent</a>, <a href="vim.event.VmSecondaryAddedEvent.html">VmSecondaryAddedEvent</a>, <a href="vim.event.VmSecondaryDisabledBySystemEvent.html">VmSecondaryDisabledBySystemEvent</a>, <a href="vim.event.VmSecondaryDisabledEvent.html">VmSecondaryDisabledEvent</a>, <a href="vim.event.VmSecondaryEnabledEvent.html">VmSecondaryEnabledEvent</a>, <a href="vim.event.VmSecondaryStartedEvent.html">VmSecondaryStartedEvent</a>, <a href="vim.event.VmStartingEvent.html">VmStartingEvent</a>, <a href="vim.event.VmStartingSecondaryEvent.html">VmStartingSecondaryEvent</a>, <a href="vim.event.VmStartRecordingEvent.html">VmStartRecordingEvent</a>, <a href="vim.event.VmStartReplayingEvent.html">VmStartReplayingEvent</a>, <a href="vim.event.VmStaticMacConflictEvent.html">VmStaticMacConflictEvent</a>, <a href="vim.event.VmStoppingEvent.html">VmStoppingEvent</a>, <a href="vim.event.VmSuspendedEvent.html">VmSuspendedEvent</a>, <a href="vim.event.VmSuspendingEvent.html">VmSuspendingEvent</a>, <a href="vim.event.VmTimedoutStartingSecondaryEvent.html">VmTimedoutStartingSecondaryEvent</a>, <a href="vim.event.VmUpgradeCompleteEvent.html">VmUpgradeCompleteEvent</a>, <a href="vim.event.VmUpgradeFailedEvent.html">VmUpgradeFailedEvent</a>, <a href="vim.event.VmUpgradingEvent.html">VmUpgradingEvent</a>, <a href="vim.event.VmUuidAssignedEvent.html">VmUuidAssignedEvent</a>, <a href="vim.event.VmUuidChangedEvent.html">VmUuidChangedEvent</a>, <a href="vim.event.VmUuidConflictEvent.html">VmUuidConflictEvent</a>, <a href="vim.event.VmWwnAssignedEvent.html">VmWwnAssignedEvent</a>, <a href="vim.event.VmWwnChangedEvent.html">VmWwnChangedEvent</a>, <a href="vim.event.VmWwnConflictEvent.html">VmWwnConflictEvent</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.event.Event.html">Event</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         These are virtual machine events.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="template" name="template"></a><strong>template</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether or not the virtual machine is marked as a template.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.event.Event.html">Event</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.event.Event.html#chainId">chainId</a>, <a href="vim.event.Event.html#changeTag">changeTag</a>, <a href="vim.event.Event.html#computeResource">computeResource</a>, <a href="vim.event.Event.html#createdTime">createdTime</a>, <a href="vim.event.Event.html#datacenter">datacenter</a>, <a href="vim.event.Event.html#ds">ds</a>, <a href="vim.event.Event.html#dvs">dvs</a>, <a href="vim.event.Event.html#fullFormattedMessage">fullFormattedMessage</a>, <a href="vim.event.Event.html#host">host</a>, <a href="vim.event.Event.html#key">key</a>, <a href="vim.event.Event.html#net">net</a>, <a href="vim.event.Event.html#userName">userName</a>, <a href="vim.event.Event.html#vm">vm</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VmEvent">
+            <complexContent>
+               <extension base="vim25:Event">
+                  <sequence>
+                     <element name="template" type="xsd:boolean"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

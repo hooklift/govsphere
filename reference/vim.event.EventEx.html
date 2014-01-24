@@ -1,0 +1,180 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.event.EventEx" name="vim.event.EventEx"></a>
+<h1>Data Object - EventEx</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.event.Event.html">Event</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vmodl.KeyAnyValue.html">KeyAnyValue</a>, <a href="vmodl.LocalizedMethodFault.html">LocalizedMethodFault</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         EventEx is a dynamically typed Event class, whose type is indicated by its
+ eventTypeId property.
+ <p>
+ A collection of eventTypeIds is registered by Extensions, which can now
+ pass in optional type information for each eventTypeId which indicates the
+ applicable argument names and types, among other properties.
+ <p>
+ EventEx allows event arguments of any type, though today, the system
+ only supports "string" and "moid" (a string which can be interpreted as an
+ object ID in the system) as argument types.  In the future, the system
+ may optionally strongly check the types of the arguments in the event
+ against the declared type information, based on how the event type is
+ declared.
+ <p>
+ EventEx also allows arbitrary "event object"s - the object which the
+ event refers to. You can put in any object identifier as the objectId,
+ but objectType should be filled in only if the object is actually present
+ in the VC Server's ManagedEntity inventory.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="arguments" name="arguments"></a><strong>arguments</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.KeyAnyValue.html">KeyAnyValue[]</a></td><td>
+<p></p>
+         The event arguments associated with the event
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="eventTypeId" name="eventTypeId"></a><strong>eventTypeId</strong></td><td>xsd:string</td><td>
+<p></p>
+         The type of the event.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="fault" name="fault"></a><strong>fault</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.LocalizedMethodFault.html">LocalizedMethodFault</a></td><td>
+<p></p>
+         The fault that triggered the event, if any
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="message" name="message"></a><strong>message</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         An arbitrary message string, not localized.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="objectId" name="objectId"></a><strong>objectId</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The ID of the object (VM, Host, Folder..) which the event pertains to.
+ Federated or local inventory path.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="objectName" name="objectName"></a><strong>objectName</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The name of the object
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="objectType" name="objectType"></a><strong>objectType</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         the type of the object, if known to the VirtualCenter inventory
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="severity" name="severity"></a><strong>severity</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The severity level of the message: null=>info.<br>See <a href="vim.event.Event.EventSeverity.html">EventEventSeverity</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.event.Event.html">Event</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.event.Event.html#chainId">chainId</a>, <a href="vim.event.Event.html#changeTag">changeTag</a>, <a href="vim.event.Event.html#computeResource">computeResource</a>, <a href="vim.event.Event.html#createdTime">createdTime</a>, <a href="vim.event.Event.html#datacenter">datacenter</a>, <a href="vim.event.Event.html#ds">ds</a>, <a href="vim.event.Event.html#dvs">dvs</a>, <a href="vim.event.Event.html#fullFormattedMessage">fullFormattedMessage</a>, <a href="vim.event.Event.html#host">host</a>, <a href="vim.event.Event.html#key">key</a>, <a href="vim.event.Event.html#net">net</a>, <a href="vim.event.Event.html#userName">userName</a>, <a href="vim.event.Event.html#vm">vm</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="EventEx">
+            <complexContent>
+               <extension base="vim25:Event">
+                  <sequence>
+                     <element name="eventTypeId" type="xsd:string"/>
+                     <element name="severity" type="xsd:string" minOccurs="0"/>
+                     <element name="message" type="xsd:string" minOccurs="0"/>
+                     <element name="arguments" type="vim25:KeyAnyValue" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="objectId" type="xsd:string" minOccurs="0"/>
+                     <element name="objectType" type="xsd:string" minOccurs="0"/>
+                     <element name="objectName" type="xsd:string" minOccurs="0"/>
+                     <element name="fault" type="vim25:LocalizedMethodFault" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

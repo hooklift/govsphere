@@ -1,0 +1,162 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.NumericSensorInfo" name="vim.host.NumericSensorInfo"></a>
+<h1>Data Object - HostNumericSensorInfo</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.host.SystemHealthInfo.html#field_detail">HostSystemHealthInfo</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.ElementDescription.html">ElementDescription</a>
+</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         Base class for numeric sensor information.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="baseUnits" name="baseUnits"></a><strong>baseUnits</strong></td><td>xsd:string</td><td>
+<p></p>
+         The base units in which the sensor reading is specified. If rateUnits              
+  is set the units of the current reading is further qualified by the                
+  rateUnits.<br>See <a href="vim.host.NumericSensorInfo.html#rateUnits">rateUnits</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="currentReading" name="currentReading"></a><strong>currentReading</strong></td><td>xsd:long</td><td>
+<p></p>
+         The current reading of the element indicated by the sensor. The actual
+  sensor reading is obtained by multiplying the current reading by the
+  scale factor.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="healthState" name="healthState"></a><strong>healthState</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.ElementDescription.html">ElementDescription</a></td><td>
+<p></p>
+         The health state of the of the element indicated by the sensor. 
+  This property is populated only for sensors that support threshold 
+  settings.<br>See <a href="vim.host.NumericSensorInfo.HealthState.html">HostNumericSensorHealthState</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="name" name="name"></a><strong>name</strong></td><td>xsd:string</td><td>
+<p></p>
+         The name of the physical element associated with the sensor
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="rateUnits" name="rateUnits"></a><strong>rateUnits</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The rate units in which the sensor reading is specified. For example if            
+  the baseUnits is Volts and the rateUnits is per second the value                   
+  returned by the sensor are in Volts/second.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="sensorType" name="sensorType"></a><strong>sensorType</strong></td><td>xsd:string</td><td>
+<p></p>
+         The type of the sensor. If the sensor type is set to Other the sensor 
+  name can be used to further identify the type of sensor. The sensor
+  units can also be used to further implicitly determine the type of the 
+  sensor.<br>See <a href="vim.host.NumericSensorInfo.SensorType.html">HostNumericSensorType</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="unitModifier" name="unitModifier"></a><strong>unitModifier</strong></td><td>xsd:int</td><td>
+<p></p>
+         The unit multiplier for the values returned by the sensor. All values
+  returned by the sensor are current reading * 10 raised to the power of 
+  the UnitModifier.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostNumericSensorInfo">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="name" type="xsd:string"/>
+                     <element name="healthState" type="vim25:ElementDescription" minOccurs="0"/>
+                     <element name="currentReading" type="xsd:long"/>
+                     <element name="unitModifier" type="xsd:int"/>
+                     <element name="baseUnits" type="xsd:string"/>
+                     <element name="rateUnits" type="xsd:string" minOccurs="0"/>
+                     <element name="sensorType" type="xsd:string"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

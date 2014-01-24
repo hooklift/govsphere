@@ -1,0 +1,673 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.guest.ProcessManager" name="vim.vm.guest.ProcessManager"></a>
+<h1>Managed Object -  
+						GuestProcessManager</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.vm.guest.GuestOperationsManager.html#field_detail">GuestOperationsManager</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.vm.guest.GuestAuthentication.html">GuestAuthentication</a>, <a href="vim.vm.guest.ProcessManager.ProcessInfo.html">GuestProcessInfo</a>, <a href="vim.vm.guest.ProcessManager.ProgramSpec.html">GuestProgramSpec</a>, <a href="vim.VirtualMachine.html">VirtualMachine</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         ProcessManager is the managed object that provides APIs
+ to manipulate the guest operating system processes.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+</table>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#listProcesses">ListProcessesInGuest</a>, <a href="#readEnvironmentVariable">ReadEnvironmentVariableInGuest</a>, <a href="#startProgram">StartProgramInGuest</a>, <a href="#terminateProcess">TerminateProcessInGuest</a></td>
+</tr>
+</table>
+<br>
+<a id="listProcesses" name="listProcesses"></a>
+<h1>ListProcessesInGuest</h1>
+<p></p>
+         List the processes running in the guest operating system,
+ plus those started by <a href="vim.vm.guest.ProcessManager.html#startProgram">StartProgramInGuest</a>
+ that have recently completed.
+ <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.vm.guest.ProcessManager.html">GuestProcessManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vm</strong><span title="Required Privilege: VirtualMachine.GuestOperations.Query" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.VirtualMachine.html">VirtualMachine</a></td><td>
+<p></p>
+         Virtual machine to perform the operation on.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>auth</strong></td><td><a href="vim.vm.guest.GuestAuthentication.html">GuestAuthentication</a></td><td>
+<p></p>
+         The guest authentication data.  See
+    <a href="vim.vm.guest.GuestAuthentication.html">GuestAuthentication</a>.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>pids</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long[]</td><td>
+<p></p>
+         If set, only return information about the specified processes.
+    Otherwise, information about all processes are returned.
+    If a specified processes does not exist, nothing will
+    be returned for that process.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  VirtualMachine.GuestOperations.Query</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.vm.guest.ProcessManager.ProcessInfo.html">GuestProcessInfo[]</a></td><td>The list running processes is returned in an array of <a href="vim.vm.guest.ProcessManager.ProcessInfo.html">GuestProcessInfo</a> structures.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.GuestComponentsOutOfDate.html">GuestComponentsOutOfDate</a></td><td>Thrown if the guest agent is too old to support the operation.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.GuestOperationsFault.html">GuestOperationsFault</a></td><td>Thrown if there is an error processing a guest operation.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.GuestOperationsUnavailable.html">GuestOperationsUnavailable</a></td><td>Thrown if the VM agent for guest operations is not running.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.GuestPermissionDenied.html">GuestPermissionDenied</a></td><td>Thrown if there are insufficient permissions in the guest OS.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidGuestLogin.html">InvalidGuestLogin</a></td><td>Thrown if the the guest authentication information was not accepted.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidPowerState.html">InvalidPowerState</a></td><td>Thrown if the VM is not powered on.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the operation cannot be performed because of the virtual machine's current state.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.OperationDisabledByGuest.html">OperationDisabledByGuest</a></td><td>Thrown if the operation is not enabled due to guest agent configuration.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.OperationNotSupportedByGuest.html">OperationNotSupportedByGuest</a></td><td>Thrown if the operation is not supported by the guest OS.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.TaskInProgress.html">TaskInProgress</a></td><td>Thrown if the virtual machine is busy.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ListProcessesInGuest-textarea');expandcontent(this, 'ListProcessesInGuest-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ListProcessesInGuest-div">
+<textarea cols="20" rows="10" name="ListProcessesInGuest-textarea" wrap="off" readonly="1" id="ListProcessesInGuest-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ListProcessesInGuest" type="vim25:ListProcessesInGuestRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ListProcessesInGuestResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:GuestProcessInfo" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="readEnvironmentVariable" name="readEnvironmentVariable"></a>
+<h1>ReadEnvironmentVariableInGuest</h1>
+<p></p>
+         Reads an environment variable from the guest OS
+ <p>
+ If the authentication uses interactiveSession, then the
+ environment being read will be that of the user logged into the desktop.
+ Otherwise it's the environment of the system user.
+ <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.vm.guest.ProcessManager.html">GuestProcessManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vm</strong><span title="Required Privilege: VirtualMachine.GuestOperations.Query" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.VirtualMachine.html">VirtualMachine</a></td><td>
+<p></p>
+         Virtual machine to perform the operation on.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>auth</strong></td><td><a href="vim.vm.guest.GuestAuthentication.html">GuestAuthentication</a></td><td>
+<p></p>
+         The guest authentication data.  See
+    <a href="vim.vm.guest.GuestAuthentication.html">GuestAuthentication</a>.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>names</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         The names of the variables to be read. If not set, then
+    all the environment variables are returned.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  VirtualMachine.GuestOperations.Query</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td>xsd:string[]</td><td>A string array containing the value of the variables, or all environment variables if nothing is specified. The format of each string is "name=value". If any specified environment variable isn't set, then nothing is returned for that variable.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.GuestComponentsOutOfDate.html">GuestComponentsOutOfDate</a></td><td>Thrown if the guest agent is too old to support the operation.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.GuestOperationsFault.html">GuestOperationsFault</a></td><td>Thrown if there is an error processing a guest operation.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.GuestOperationsUnavailable.html">GuestOperationsUnavailable</a></td><td>Thrown if the VM agent for guest operations is not running.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.GuestPermissionDenied.html">GuestPermissionDenied</a></td><td>Thrown if there are insufficient permissions in the guest OS.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidGuestLogin.html">InvalidGuestLogin</a></td><td>Thrown if the the guest authentication information was not accepted.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidPowerState.html">InvalidPowerState</a></td><td>Thrown if the VM is not powered on.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the operation cannot be performed because of the virtual machine's current state.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.OperationDisabledByGuest.html">OperationDisabledByGuest</a></td><td>Thrown if the operation is not enabled due to guest agent configuration.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.OperationNotSupportedByGuest.html">OperationNotSupportedByGuest</a></td><td>Thrown if the operation is not supported by the guest OS.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.TaskInProgress.html">TaskInProgress</a></td><td>Thrown if the virtual machine is busy. accepted by the guest OS.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ReadEnvironmentVariableInGuest-textarea');expandcontent(this, 'ReadEnvironmentVariableInGuest-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ReadEnvironmentVariableInGuest-div">
+<textarea cols="20" rows="10" name="ReadEnvironmentVariableInGuest-textarea" wrap="off" readonly="1" id="ReadEnvironmentVariableInGuest-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ReadEnvironmentVariableInGuest" type="vim25:ReadEnvironmentVariableInGuestRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ReadEnvironmentVariableInGuestResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="startProgram" name="startProgram"></a>
+<h1>StartProgramInGuest</h1>
+<p></p>
+         Starts a program in the guest operating system.
+ <p>
+ A process started this way can have its status queried with
+ <a href="vim.vm.guest.ProcessManager.html#listProcesses">ListProcessesInGuest</a>.
+ When the process completes, its exit code and end time will be
+ available for 5 minutes after completion.
+ <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.vm.guest.ProcessManager.html">GuestProcessManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vm</strong><span title="Required Privilege: VirtualMachine.GuestOperations.Execute" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.VirtualMachine.html">VirtualMachine</a></td><td>
+<p></p>
+         Virtual machine to perform the operation on.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>auth</strong></td><td><a href="vim.vm.guest.GuestAuthentication.html">GuestAuthentication</a></td><td>
+<p></p>
+         The guest authentication data.  See
+    <a href="vim.vm.guest.GuestAuthentication.html">GuestAuthentication</a>.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.vm.guest.ProcessManager.ProgramSpec.html">GuestProgramSpec</a></td><td>
+<p></p>
+         The arguments describing the program to be started.
+      <br>
+</td>
+</tr>
+</table>
+<span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  VirtualMachine.GuestOperations.Execute</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td>xsd:long</td><td>The pid of the program started.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.CannotAccessFile.html">CannotAccessFile</a></td><td>Thrown if the program path cannot be accessed.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.FileFault.html">FileFault</a></td><td>Thrown if there is a file error in the guest operating system.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.FileNotFound.html">FileNotFound</a></td><td>Thrown if the program path does not exist.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.GuestComponentsOutOfDate.html">GuestComponentsOutOfDate</a></td><td>Thrown if the guest agent is too old to support the operation.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.GuestOperationsFault.html">GuestOperationsFault</a></td><td>Thrown if there is an error processing a guest operation.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.GuestOperationsUnavailable.html">GuestOperationsUnavailable</a></td><td>Thrown if the VM agent for guest operations is not running.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.GuestPermissionDenied.html">GuestPermissionDenied</a></td><td>Thrown if the program path cannot be run because the guest authentication will not allow the operation.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidGuestLogin.html">InvalidGuestLogin</a></td><td>Thrown if the the guest authentication information was not accepted.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidPowerState.html">InvalidPowerState</a></td><td>Thrown if the VM is not powered on.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the operation cannot be performed because of the virtual machine's current state.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.OperationDisabledByGuest.html">OperationDisabledByGuest</a></td><td>Thrown if the operation is not enabled due to guest agent configuration.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.OperationNotSupportedByGuest.html">OperationNotSupportedByGuest</a></td><td>Thrown if the operation is not supported by the guest OS.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.TaskInProgress.html">TaskInProgress</a></td><td>Thrown if the virtual machine is busy.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('StartProgramInGuest-textarea');expandcontent(this, 'StartProgramInGuest-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="StartProgramInGuest-div">
+<textarea cols="20" rows="10" name="StartProgramInGuest-textarea" wrap="off" readonly="1" id="StartProgramInGuest-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="StartProgramInGuest" type="vim25:StartProgramInGuestRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="StartProgramInGuestResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="xsd:long"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="terminateProcess" name="terminateProcess"></a>
+<h1>TerminateProcessInGuest</h1>
+<p></p>
+         Terminates a process in the guest OS.
+ <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.vm.guest.ProcessManager.html">GuestProcessManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vm</strong><span title="Required Privilege: VirtualMachine.GuestOperations.Execute" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.VirtualMachine.html">VirtualMachine</a></td><td>
+<p></p>
+         Virtual machine to perform the operation on.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>auth</strong></td><td><a href="vim.vm.guest.GuestAuthentication.html">GuestAuthentication</a></td><td>
+<p></p>
+         The guest authentication data.  See
+    <a href="vim.vm.guest.GuestAuthentication.html">GuestAuthentication</a>.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>pid</strong></td><td>xsd:long</td><td>
+<p></p>
+         Process ID of the process to be terminated
+      <br>
+</td>
+</tr>
+</table>
+<span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  VirtualMachine.GuestOperations.Execute</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.GuestComponentsOutOfDate.html">GuestComponentsOutOfDate</a></td><td>Thrown if the guest agent is too old to support the operation.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.GuestOperationsFault.html">GuestOperationsFault</a></td><td>Thrown if there is an error processing a guest operation.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.GuestOperationsUnavailable.html">GuestOperationsUnavailable</a></td><td>Thrown if the VM agent for guest operations is not running.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.GuestPermissionDenied.html">GuestPermissionDenied</a></td><td>Thrown if the process cannot be terminated because the guest authentication will not allow the operation.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.GuestProcessNotFound.html">GuestProcessNotFound</a></td><td>Thrown if the pid does not refer to a valid process.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidGuestLogin.html">InvalidGuestLogin</a></td><td>Thrown if the the guest authentication information was not accepted.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidPowerState.html">InvalidPowerState</a></td><td>Thrown if the VM is not powered on.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the operation cannot be performed because of the virtual machine's current state.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.OperationDisabledByGuest.html">OperationDisabledByGuest</a></td><td>Thrown if the operation is not enabled due to guest agent configuration.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.OperationNotSupportedByGuest.html">OperationNotSupportedByGuest</a></td><td>Thrown if the operation is not supported by the guest OS.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.TaskInProgress.html">TaskInProgress</a></td><td>Thrown if the virtual machine is busy.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('TerminateProcessInGuest-textarea');expandcontent(this, 'TerminateProcessInGuest-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="TerminateProcessInGuest-div">
+<textarea cols="20" rows="10" name="TerminateProcessInGuest-textarea" wrap="off" readonly="1" id="TerminateProcessInGuest-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="TerminateProcessInGuest" type="vim25:TerminateProcessInGuestRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="TerminateProcessInGuestResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

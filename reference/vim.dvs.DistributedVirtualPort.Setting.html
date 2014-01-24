@@ -1,0 +1,165 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.dvs.DistributedVirtualPort.Setting" name="vim.dvs.DistributedVirtualPort.Setting"></a>
+<h1>Data Object - DVPortSetting</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.dvs.DistributedVirtualPort.ConfigInfo.html#field_detail">DVPortConfigInfo</a>, <a href="vim.dvs.DistributedVirtualPort.ConfigSpec.html#field_detail">DVPortConfigSpec</a>, <a href="vim.dvs.DistributedVirtualPortgroup.ConfigInfo.html#field_detail">DVPortgroupConfigInfo</a>, <a href="vim.dvs.DistributedVirtualPortgroup.ConfigSpec.html#field_detail">DVPortgroupConfigSpec</a>, <a href="vim.DistributedVirtualSwitch.ConfigInfo.html#field_detail">DVSConfigInfo</a>, <a href="vim.DistributedVirtualSwitch.ConfigSpec.html#field_detail">DVSConfigSpec</a>, <a href="vim.dvs.DistributedVirtualPort.HostLocalPortInfo.html#field_detail">DVSHostLocalPortInfo</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.dvs.VmwareDistributedVirtualSwitch.VmwarePortConfigPolicy.html">VMwareDVSPortSetting</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.BoolPolicy.html">BoolPolicy</a>, <a href="vim.dvs.DistributedVirtualPort.FilterPolicy.html">DvsFilterPolicy</a>, <a href="vim.dvs.DistributedVirtualPort.TrafficShapingPolicy.html">DVSTrafficShapingPolicy</a>, <a href="vim.dvs.DistributedVirtualPort.VendorSpecificConfig.html">DVSVendorSpecificConfig</a>, <a href="vim.StringPolicy.html">StringPolicy</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The <a href="vim.dvs.DistributedVirtualPort.Setting.html">DVPortSetting</a> data object
+ describes the network configuration of a <a href="vim.dvs.DistributedVirtualPort.html">DistributedVirtualPort</a>.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="blocked" name="blocked"></a><strong>blocked</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.BoolPolicy.html">BoolPolicy</a></td><td>
+<p></p>
+         Indicates whether this port is blocked. If a port is blocked,
+ packet forwarding is stopped.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="filterPolicy" name="filterPolicy"></a><strong>filterPolicy</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.dvs.DistributedVirtualPort.FilterPolicy.html">DvsFilterPolicy</a></td><td>
+<p></p>
+         Configuration for Network Filter Policy.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="inShapingPolicy" name="inShapingPolicy"></a><strong>inShapingPolicy</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.dvs.DistributedVirtualPort.TrafficShapingPolicy.html">DVSTrafficShapingPolicy</a></td><td>
+<p></p>
+         Network shaping policy for controlling throughput of inbound traffic.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="networkResourcePoolKey" name="networkResourcePoolKey"></a><strong>networkResourcePoolKey</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.StringPolicy.html">StringPolicy</a></td><td>
+<p></p>
+         The key of user defined network resource pool to be associated with a port.
+ The default value for this property is "-1", indicating that
+ this port is not associated with any network resource pool.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="outShapingPolicy" name="outShapingPolicy"></a><strong>outShapingPolicy</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.dvs.DistributedVirtualPort.TrafficShapingPolicy.html">DVSTrafficShapingPolicy</a></td><td>
+<p></p>
+         Network shaping policy for controlling throughput of outbound traffic.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vendorSpecificConfig" name="vendorSpecificConfig"></a><strong>vendorSpecificConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.dvs.DistributedVirtualPort.VendorSpecificConfig.html">DVSVendorSpecificConfig</a></td><td>
+<p></p>
+         Opaque binary blob that stores vendor specific configuration.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vmDirectPathGen2Allowed" name="vmDirectPathGen2Allowed"></a><strong>vmDirectPathGen2Allowed</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.BoolPolicy.html">BoolPolicy</a></td><td>
+<p></p>
+         Indicates whether this port is allowed to do VMDirectPath Gen2 network passthrough.
+ Direct path capability is defined at host, switch, and device levels.
+ See the <code>vmDirectPathGen2Supported</code> properties on the
+ <a href="vim.DistributedVirtualSwitch.FeatureCapability.html">DVSFeatureCapability</a>,
+ <a href="vim.host.Capability.html">HostCapability</a>, <a href="vim.host.PhysicalNic.html">PhysicalNic</a>,
+ and <a href="vim.vm.device.VirtualEthernetCardOption.html">VirtualEthernetCardOption</a> objects.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DVPortSetting">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="blocked" type="vim25:BoolPolicy" minOccurs="0"/>
+                     <element name="vmDirectPathGen2Allowed" type="vim25:BoolPolicy" minOccurs="0"/>
+                     <element name="inShapingPolicy" type="vim25:DVSTrafficShapingPolicy" minOccurs="0"/>
+                     <element name="outShapingPolicy" type="vim25:DVSTrafficShapingPolicy" minOccurs="0"/>
+                     <element name="vendorSpecificConfig" type="vim25:DVSVendorSpecificConfig" minOccurs="0"/>
+                     <element name="networkResourcePoolKey" type="vim25:StringPolicy" minOccurs="0"/>
+                     <element name="filterPolicy" type="vim25:DvsFilterPolicy" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

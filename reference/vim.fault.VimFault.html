@@ -1,0 +1,94 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.fault.VimFault" name="vim.fault.VimFault"></a>
+<h1>Fault - VimFault</h1>
+<dl>
+<dt>Thrown by</dt>
+<dd>
+<a href="vim.ManagedEntity.html#destroy">Destroy_Task</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.fault.ActiveDirectoryFault.html">ActiveDirectoryFault</a>, <a href="vim.fault.AlreadyExists.html">AlreadyExists</a>, <a href="vim.fault.AlreadyUpgraded.html">AlreadyUpgraded</a>, <a href="vim.fault.AnswerFileUpdateFailed.html">AnswerFileUpdateFailed</a>, <a href="vim.fault.AuthMinimumAdminPermission.html">AuthMinimumAdminPermission</a>, <a href="vim.fault.CannotAccessLocalSource.html">CannotAccessLocalSource</a>, <a href="vim.fault.CannotDisconnectHostWithFaultToleranceVm.html">CannotDisconnectHostWithFaultToleranceVm</a>, <a href="vim.fault.CannotMoveFaultToleranceVm.html">CannotMoveFaultToleranceVm</a>, <a href="vim.fault.CannotMoveHostWithFaultToleranceVm.html">CannotMoveHostWithFaultToleranceVm</a>, <a href="vim.fault.CannotPlaceWithoutPrerequisiteMoves.html">CannotPlaceWithoutPrerequisiteMoves</a>, <a href="vim.fault.ConcurrentAccess.html">ConcurrentAccess</a>, <a href="vim.fault.CustomizationFault.html">CustomizationFault</a>, <a href="vim.fault.DasConfigFault.html">DasConfigFault</a>, <a href="vim.fault.DrsDisabledOnVm.html">DrsDisabledOnVm</a>, <a href="vim.fault.DuplicateName.html">DuplicateName</a>, <a href="vim.fault.DvsFault.html">DvsFault</a>, <a href="vim.fault.ExtendedFault.html">ExtendedFault</a>, <a href="vim.fault.FaultToleranceVmNotDasProtected.html">FaultToleranceVmNotDasProtected</a>, <a href="vim.fault.FcoeFault.html">FcoeFault</a>, <a href="vim.fault.FileFault.html">FileFault</a>, <a href="vim.fault.GenericDrsFault.html">GenericDrsFault</a>, <a href="vim.fault.GuestOperationsFault.html">GuestOperationsFault</a>, <a href="vim.fault.HostConfigFault.html">HostConfigFault</a>, <a href="vim.fault.HostConnectFault.html">HostConnectFault</a>, <a href="vim.fault.HostIncompatibleForRecordReplay.html">HostIncompatibleForRecordReplay</a>, <a href="vim.fault.HostPowerOpFailed.html">HostPowerOpFailed</a>, <a href="vim.fault.InaccessibleVFlashSource.html">InaccessibleVFlashSource</a>, <a href="vim.fault.InsufficientResourcesFault.html">InsufficientResourcesFault</a>, <a href="vim.fault.InvalidAffinitySettingFault.html">InvalidAffinitySettingFault</a>, <a href="vim.fault.InvalidBmcRole.html">InvalidBmcRole</a>, <a href="vim.fault.InvalidDatastore.html">InvalidDatastore</a>, <a href="vim.fault.InvalidEvent.html">InvalidEvent</a>, <a href="vim.fault.InvalidFolder.html">InvalidFolder</a>, <a href="vim.fault.InvalidIpmiLoginInfo.html">InvalidIpmiLoginInfo</a>, <a href="vim.fault.InvalidIpmiMacAddress.html">InvalidIpmiMacAddress</a>, <a href="vim.fault.InvalidLicense.html">InvalidLicense</a>, <a href="vim.fault.InvalidLocale.html">InvalidLocale</a>, <a href="vim.fault.InvalidLogin.html">InvalidLogin</a>, <a href="vim.fault.InvalidName.html">InvalidName</a>, <a href="vim.fault.InvalidPrivilege.html">InvalidPrivilege</a>, <a href="vim.fault.InvalidState.html">InvalidState</a>, <a href="vim.fault.IORMNotSupportedHostOnDatastore.html">IORMNotSupportedHostOnDatastore</a>, <a href="vim.fault.IscsiFault.html">IscsiFault</a>, <a href="vim.fault.LicenseEntityNotFound.html">LicenseEntityNotFound</a>, <a href="vim.fault.LicenseServerUnavailable.html">LicenseServerUnavailable</a>, <a href="vim.fault.LimitExceeded.html">LimitExceeded</a>, <a href="vim.fault.LogBundlingFailed.html">LogBundlingFailed</a>, <a href="vim.fault.MigrationFault.html">MigrationFault</a>, <a href="vim.fault.MismatchedBundle.html">MismatchedBundle</a>, <a href="vim.fault.MissingBmcSupport.html">MissingBmcSupport</a>, <a href="vim.fault.NamespaceFull.html">NamespaceFull</a>, <a href="vim.fault.NamespaceLimitReached.html">NamespaceLimitReached</a>, <a href="vim.fault.NamespaceWriteProtected.html">NamespaceWriteProtected</a>, <a href="vim.fault.NetworkDisruptedAndConfigRolledBack.html">NetworkDisruptedAndConfigRolledBack</a>, <a href="vim.fault.NoClientCertificate.html">NoClientCertificate</a>, <a href="vim.fault.NoCompatibleDatastore.html">NoCompatibleDatastore</a>, <a href="vim.fault.NoCompatibleHost.html">NoCompatibleHost</a>, <a href="vim.fault.NoConnectedDatastore.html">NoConnectedDatastore</a>, <a href="vim.fault.NoDiskFound.html">NoDiskFound</a>, <a href="vim.fault.NoSubjectName.html">NoSubjectName</a>, <a href="vim.fault.NotFound.html">NotFound</a>, <a href="vim.fault.OutOfBounds.html">OutOfBounds</a>, <a href="vim.fault.OvfFault.html">OvfFault</a>, <a href="vim.fault.PatchBinariesNotFound.html">PatchBinariesNotFound</a>, <a href="vim.fault.PatchMetadataInvalid.html">PatchMetadataInvalid</a>, <a href="vim.fault.PatchNotApplicable.html">PatchNotApplicable</a>, <a href="vim.fault.ProfileUpdateFailed.html">ProfileUpdateFailed</a>, <a href="vim.fault.RebootRequired.html">RebootRequired</a>, <a href="vim.fault.RecordReplayDisabled.html">RecordReplayDisabled</a>, <a href="vim.fault.RemoveFailed.html">RemoveFailed</a>, <a href="vim.fault.ReplicationFault.html">ReplicationFault</a>, <a href="vim.fault.ResourceInUse.html">ResourceInUse</a>, <a href="vim.fault.ResourceNotAvailable.html">ResourceNotAvailable</a>, <a href="vim.fault.ShrinkDiskFault.html">ShrinkDiskFault</a>, <a href="vim.fault.SnapshotFault.html">SnapshotFault</a>, <a href="vim.fault.SsdDiskNotAvailable.html">SsdDiskNotAvailable</a>, <a href="vim.fault.SSPIChallenge.html">SSPIChallenge</a>, <a href="vim.fault.StorageDrsCannotMoveDiskInMultiWriterMode.html">StorageDrsCannotMoveDiskInMultiWriterMode</a>, <a href="vim.fault.StorageDrsCannotMoveFTVm.html">StorageDrsCannotMoveFTVm</a>, <a href="vim.fault.StorageDrsCannotMoveIndependentDisk.html">StorageDrsCannotMoveIndependentDisk</a>, <a href="vim.fault.StorageDrsCannotMoveManuallyPlacedSwapFile.html">StorageDrsCannotMoveManuallyPlacedSwapFile</a>, <a href="vim.fault.StorageDrsCannotMoveManuallyPlacedVm.html">StorageDrsCannotMoveManuallyPlacedVm</a>, <a href="vim.fault.StorageDrsCannotMoveSharedDisk.html">StorageDrsCannotMoveSharedDisk</a>, <a href="vim.fault.StorageDrsCannotMoveTemplate.html">StorageDrsCannotMoveTemplate</a>, <a href="vim.fault.StorageDrsCannotMoveVmInUserFolder.html">StorageDrsCannotMoveVmInUserFolder</a>, <a href="vim.fault.StorageDrsCannotMoveVmWithMountedCDROM.html">StorageDrsCannotMoveVmWithMountedCDROM</a>, <a href="vim.fault.StorageDrsCannotMoveVmWithNoFilesInLayout.html">StorageDrsCannotMoveVmWithNoFilesInLayout</a>, <a href="vim.fault.StorageDrsDatacentersCannotShareDatastore.html">StorageDrsDatacentersCannotShareDatastore</a>, <a href="vim.fault.StorageDrsDisabledOnVm.html">StorageDrsDisabledOnVm</a>, <a href="vim.fault.StorageDrsIolbDisabledInternally.html">StorageDrsIolbDisabledInternally</a>, <a href="vim.fault.StorageDrsUnableToMoveFiles.html">StorageDrsUnableToMoveFiles</a>, <a href="vim.fault.SwapDatastoreUnset.html">SwapDatastoreUnset</a>, <a href="vim.fault.TaskInProgress.html">TaskInProgress</a>, <a href="vim.fault.Timedout.html">Timedout</a>, <a href="vim.fault.ToolsUnavailable.html">ToolsUnavailable</a>, <a href="vim.fault.TooManyConsecutiveOverrides.html">TooManyConsecutiveOverrides</a>, <a href="vim.fault.UnrecognizedHost.html">UnrecognizedHost</a>, <a href="vim.fault.UnsupportedVimApiVersion.html">UnsupportedVimApiVersion</a>, <a href="vim.fault.UserNotFound.html">UserNotFound</a>, <a href="vim.fault.VAppConfigFault.html">VAppConfigFault</a>, <a href="vim.fault.VFlashModuleVersionIncompatible.html">VFlashModuleVersionIncompatible</a>, <a href="vim.fault.VmConfigFault.html">VmConfigFault</a>, <a href="vim.fault.VmFaultToleranceIssue.html">VmFaultToleranceIssue</a>, <a href="vim.fault.VmMetadataManagerFault.html">VmMetadataManagerFault</a>, <a href="vim.fault.VmMonitorIncompatibleForFaultTolerance.html">VmMonitorIncompatibleForFaultTolerance</a>, <a href="vim.fault.VmToolsUpgradeFault.html">VmToolsUpgradeFault</a>, <a href="vim.fault.VmValidateMaxDevice.html">VmValidateMaxDevice</a>, <a href="vim.fault.VsanFault.html">VsanFault</a>, <a href="vim.fault.WipeDiskFault.html">WipeDiskFault</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.MethodFault.html">MethodFault</a>
+</dd>
+<p></p>
+</dl>
+<H2>Fault 
+                  Description</H2>
+<p></p>
+         The common base type for all virtual infrastructure management
+   exceptions.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.MethodFault.html">MethodFault</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.MethodFault.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.MethodFault.html#dynamicType">dynamicType</a>, <a href="vmodl.MethodFault.html#faultCause">faultCause</a>, <a href="vmodl.MethodFault.html#faultMessage">faultMessage</a></td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VimFault">
+            <complexContent>
+               <extension base="vim25:MethodFault">
+                  <sequence>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.DistributedVirtualSwitch.ProductSpecOperationType" name="vim.DistributedVirtualSwitch.ProductSpecOperationType"></a>
+<h1>Enum - 
+						DistributedVirtualSwitchProductSpecOperationType</h1>
+<dl>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<br>
+<h2>Enum Description</h2>
+<p></p>
+         The product spec operation types.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Enum Constants</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><a id="notifyAvailableUpgrade" name="notifyAvailableUpgrade"></a>notifyAvailableUpgrade</td><td>
+      Set the product information for an available switch upgrade that
+  would be done by the switch implementation. This operation will post
+  a config issue on the switch to signal the availability of an upgrade.
+  This operation is applicable only in the case when switch policy
+  <a href="vim.DistributedVirtualSwitch.SwitchPolicy.html#autoUpgradeAllowed">autoUpgradeAllowed</a>
+  is set to false.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="preInstall" name="preInstall"></a>preInstall</td><td>
+      Push the switch's host component of the specified product info to the
+  host members of the switch at a fixed location known by the host.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="proceedWithUpgrade" name="proceedWithUpgrade"></a>proceedWithUpgrade</td><td>
+      If productSpec is set to be same as that in the
+  <a href="vim.event.DvsUpgradeAvailableEvent.html">DvsUpgradeAvailableEvent</a> configIssue, the switch
+  implementation will proceed with the upgrade. To reject or stop the
+  upgrade, leave the productSpec unset. If productSpec is set but does not
+  match that in <a href="vim.event.DvsUpgradeAvailableEvent.html">DvsUpgradeAvailableEvent</a> configIssue,
+  a fault will be raised.
+  This operation is applicable only in the case when switch policy
+  <a href="vim.DistributedVirtualSwitch.SwitchPolicy.html#autoUpgradeAllowed">autoUpgradeAllowed</a>
+  is set to false.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="updateBundleInfo" name="updateBundleInfo"></a>updateBundleInfo</td><td>
+      Update the bundle URL and ID information. If other properties in
+  the specified product info differ from the
+  corresponding properties of the switch's product info, a fault will
+  be thrown. Updating the bundle ID will result in installing the new host
+  component identified by the bundle ID.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="upgrade" name="upgrade"></a>upgrade</td><td>
+      Change the switch implementation to use the specified one. If the
+  property values in the specified product info are different from
+  those of the corresponding properties in the switch's product info,
+  a host component preinstall and switch upgrade will be performed.
+   <br>
+</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <simpleType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DistributedVirtualSwitchProductSpecOperationType">
+            <restriction base="xsd:string">
+               <enumeration value="preInstall"/>
+               <enumeration value="upgrade"/>
+               <enumeration value="notifyAvailableUpgrade"/>
+               <enumeration value="proceedWithUpgrade"/>
+               <enumeration value="updateBundleInfo"/>
+            </restriction>
+         </simpleType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

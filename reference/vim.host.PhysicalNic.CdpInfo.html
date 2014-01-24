@@ -1,0 +1,270 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.PhysicalNic.CdpInfo" name="vim.host.PhysicalNic.CdpInfo"></a>
+<h1>Data Object - PhysicalNicCdpInfo</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.host.PhysicalNic.NetworkHint.html#field_detail">PhysicalNicHintInfo</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.PhysicalNic.CdpDeviceCapability.html">PhysicalNicCdpDeviceCapability</a>
+</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         CDP (Cisco Discovery Protocol) is a link level protocol that allows
+   for discovering the CDP-awared network hardware at either end of a
+   DIRECT connection. It's only good for direct connection because CDP
+   doesn't get forwarded through switches.
+
+   It's a simple advertisement protocol which beacons information about
+   the switch or host along with some port information. The CDP information
+   allows ESX Server admins to know which Cisco switch port is connected to
+   any given virtual switch uplink (PNIC).
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="address" name="address"></a><strong>address</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The advertised IP address that is assigned to the interface of the device 
+  on which the CDP message is sent. The device can advertise all addresses for 
+  a given protocol suite and, optionally, can advertise one or more loopback 
+  IP addresses. But this property only show the first address.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="cdpVersion" name="cdpVersion"></a><strong>cdpVersion</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         CDP version. The value is always 1.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="deviceCapability" name="deviceCapability"></a><strong>deviceCapability</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.PhysicalNic.CdpDeviceCapability.html">PhysicalNicCdpDeviceCapability</a></td><td>
+<p></p>
+         Device Capability
+  <a href="vim.host.PhysicalNic.CdpDeviceCapability.html">PhysicalNicCdpDeviceCapability</a>
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="devId" name="devId"></a><strong>devId</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Device ID which identifies the device. By default, the device ID is 
+  either the device's fully-qualified host name (including the domain 
+  name) or the device's hardware serial number in ASCII.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="fullDuplex" name="fullDuplex"></a><strong>fullDuplex</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Half/full duplex setting of the advertising port.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="hardwarePlatform" name="hardwarePlatform"></a><strong>hardwarePlatform</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Hardware platform. An ASCII character string that describes the  
+  hardware platform of the device , e.g. "cisco WS-C2940-8TT-S"
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="ipPrefix" name="ipPrefix"></a><strong>ipPrefix</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         IP prefix. Each IP prefix represents one of the directly connected 
+  IP network segments of the local route.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="ipPrefixLen" name="ipPrefixLen"></a><strong>ipPrefixLen</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         ipPrefix length.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="location" name="location"></a><strong>location</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The configured location of the device.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="mgmtAddr" name="mgmtAddr"></a><strong>mgmtAddr</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The configured IP address of the SNMP management interface for the 
+  device.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="mtu" name="mtu"></a><strong>mtu</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         MTU, the maximum transmission unit for the advertising port. Possible 
+  values are 1500 through 18190.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="portId" name="portId"></a><strong>portId</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Port ID. An ASCII character string that identifies the port on which 
+  the CDP message is sent, e.g. "FastEthernet0/8"
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="samples" name="samples"></a><strong>samples</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The number of CDP messages we have received from the device.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="softwareVersion" name="softwareVersion"></a><strong>softwareVersion</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Software version on the device. A character string that provides 
+  information about the software release version that the device is 
+  running. e.g. "Cisco Internetwork Operating Syscisco WS-C2940-8TT-S"
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="systemName" name="systemName"></a><strong>systemName</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The configured SNMP system name of the device.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="systemOID" name="systemOID"></a><strong>systemOID</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The configured SNMP system OID of the device.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="timeout" name="timeout"></a><strong>timeout</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         This is the periodicity of advertisement, the time between two 
+  successive CDP message transmissions
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="ttl" name="ttl"></a><strong>ttl</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Time-To-Live.  the amount of time, in seconds, that a receiver should 
+  retain the information contained in the CDP packet.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vlan" name="vlan"></a><strong>vlan</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The native VLAN of advertising port. The native VLAN is the VLAN to 
+  which a port returns when it is not trunking. Also, the native VLAN 
+  is the untagged VLAN on an 802.1Q trunk.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="PhysicalNicCdpInfo">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="cdpVersion" type="xsd:int" minOccurs="0"/>
+                     <element name="timeout" type="xsd:int" minOccurs="0"/>
+                     <element name="ttl" type="xsd:int" minOccurs="0"/>
+                     <element name="samples" type="xsd:int" minOccurs="0"/>
+                     <element name="devId" type="xsd:string" minOccurs="0"/>
+                     <element name="address" type="xsd:string" minOccurs="0"/>
+                     <element name="portId" type="xsd:string" minOccurs="0"/>
+                     <element name="deviceCapability" type="vim25:PhysicalNicCdpDeviceCapability" minOccurs="0"/>
+                     <element name="softwareVersion" type="xsd:string" minOccurs="0"/>
+                     <element name="hardwarePlatform" type="xsd:string" minOccurs="0"/>
+                     <element name="ipPrefix" type="xsd:string" minOccurs="0"/>
+                     <element name="ipPrefixLen" type="xsd:int" minOccurs="0"/>
+                     <element name="vlan" type="xsd:int" minOccurs="0"/>
+                     <element name="fullDuplex" type="xsd:boolean" minOccurs="0"/>
+                     <element name="mtu" type="xsd:int" minOccurs="0"/>
+                     <element name="systemName" type="xsd:string" minOccurs="0"/>
+                     <element name="systemOID" type="xsd:string" minOccurs="0"/>
+                     <element name="mgmtAddr" type="xsd:string" minOccurs="0"/>
+                     <element name="location" type="xsd:string" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

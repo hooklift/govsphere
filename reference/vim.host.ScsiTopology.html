@@ -1,0 +1,124 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.ScsiTopology" name="vim.host.ScsiTopology"></a>
+<h1>Data Object - HostScsiTopology</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.host.StorageDeviceInfo.html#field_detail">HostStorageDeviceInfo</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.ScsiTopology.Interface.html">HostScsiTopologyInterface</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This data object type describes the SCSI topology information.  The
+  data objects in this data object type model the
+  SCSI storage objects from a topological point of view.  The SCSI topological
+  view organizes objects by SCSI interface, which contain targets, which in
+  turn contain logical units.
+  <p>
+  SCSI Topology information is not guaranteed to exhaustively enumerate all
+  storage devices on the system.  It only shows storage devices that are
+  actually enumerable form a host bus adapter.  This means that only storage
+  devices that are composed from one or more paths, which are in turn provided
+  by a host bus adapter, will appear in this inventory.
+  <p>
+  Storage devices provided by the native multipathing plugin (NMP) will always
+  be represented in this inventory since NMP uses a simple policy to create
+  devices out of the paths it claims.
+  <p>
+  Examples of storage devices that will not appear in this inventory are
+  logical devices that are not formed from directly claiming paths.  Specific
+  examples of devices that will not appear in this inventory include a device
+  backed by a ramdisk or formed from a software RAID plugin.
+  <p>
+  Legacy note: In hosts where <a href="vim.host.PlugStoreTopology.html">HostPlugStoreTopology</a> is not
+  defined or does not exist on the <a href="vim.host.StorageDeviceInfo.html">HostStorageDeviceInfo</a> object,
+  only native multipathing exists.  That means for these hosts, the
+  ScsiTopology object contains the complete set of LUNs and targets
+  available on the host.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="adapter" name="adapter"></a><strong>adapter</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.ScsiTopology.Interface.html">HostScsiTopologyInterface[]</a></td><td>
+<p></p>
+         The list of SCSI interfaces.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostScsiTopology">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="adapter" type="vim25:HostScsiTopologyInterface" minOccurs="0" maxOccurs="unbounded"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

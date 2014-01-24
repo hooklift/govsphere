@@ -1,0 +1,104 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.fault.NotFound" name="vim.fault.NotFound"></a>
+<h1>Fault - NotFound</h1>
+<dl>
+<dt>Thrown by</dt>
+<dd>
+<a href="vim.host.StorageSystem.html#addInternetScsiSendTargets">AddInternetScsiSendTargets</a>, <a href="vim.host.StorageSystem.html#addInternetScsiStaticTargets">AddInternetScsiStaticTargets</a>, <a href="vim.host.NetworkSystem.html#addPortGroup">AddPortGroup</a>, <a href="vim.host.StorageSystem.html#attachScsiLun">AttachScsiLun</a>, <a href="vim.host.StorageSystem.html#attachVmfsExtent">AttachVmfsExtent</a>, <a href="vim.host.IscsiManager.html#bindVnic">BindVnic</a>, <a href="vim.host.StorageSystem.html#computeDiskPartitionInfo">ComputeDiskPartitionInfo</a>, <a href="vim.host.StorageSystem.html#computeDiskPartitionInfoForResize">ComputeDiskPartitionInfoForResize</a>, <a href="vim.host.DiagnosticSystem.html#createDiagnosticPartition">CreateDiagnosticPartition</a>, <a href="vim.Folder.html#createDistributedVirtualSwitch">CreateDVS_Task</a>, <a href="vim.CustomizationSpecManager.html#delete">DeleteCustomizationSpec</a>, <a href="vim.host.StorageSystem.html#destroyVffs">DestroyVffs</a>, <a href="vim.host.StorageSystem.html#detachScsiLun">DetachScsiLun</a>, <a href="vim.host.StorageSystem.html#disableMultipathPath">DisableMultipathPath</a>, <a href="vim.host.FirewallSystem.html#disableRuleset">DisableRuleset</a>, <a href="vim.host.StorageSystem.html#discoverFcoeHbas">DiscoverFcoeHbas</a>, <a href="vim.CustomizationSpecManager.html#duplicate">DuplicateCustomizationSpec</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.html#exportEntity">DVSManagerExportEntity_Task</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.html#importEntity">DVSManagerImportEntity_Task</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.html#lookupPortgroup">DVSManagerLookupDvPortGroup</a>, <a href="vim.host.StorageSystem.html#enableMultipathPath">EnableMultipathPath</a>, <a href="vim.host.FirewallSystem.html#enableRuleset">EnableRuleset</a>, <a href="vim.host.DatastoreSystem.html#expandVmfsDatastore">ExpandVmfsDatastore</a>, <a href="vim.host.StorageSystem.html#expandVmfsExtent">ExpandVmfsExtent</a>, <a href="vim.host.StorageSystem.html#extendVffs">ExtendVffs</a>, <a href="vim.host.DatastoreSystem.html#extendVmfsDatastore">ExtendVmfsDatastore</a>, <a href="vim.CustomizationSpecManager.html#get">GetCustomizationSpec</a>, <a href="vim.host.VFlashManager.html#getVFlashModuleDefaultConfig">HostGetVFlashModuleDefaultConfig</a>, <a href="vim.host.VFlashManager.html#removeVFlashResource">HostRemoveVFlashResource</a>, <a href="vim.SessionManager.html#loginExtensionBySubjectName">LoginExtensionBySubjectName</a>, <a href="vim.DistributedVirtualSwitch.html#lookupPortgroup">LookupDvPortGroup</a>, <a href="vim.host.StorageSystem.html#markForRemoval">MarkForRemoval</a>, <a href="vim.DistributedVirtualSwitch.html#merge">MergeDvs_Task</a>, <a href="vim.AuthorizationManager.html#mergePermissions">MergePermissions</a>, <a href="vim.host.StorageSystem.html#mountVffsVolume">MountVffsVolume</a>, <a href="vim.host.StorageSystem.html#mountVmfsVolume">MountVmfsVolume</a>, <a href="vim.DistributedVirtualSwitch.html#movePort">MoveDVPort_Task</a>, <a href="vim.CustomizationSpecManager.html#overwrite">OverwriteCustomizationSpec</a>, <a href="vim.host.DatastoreSystem.html#queryAvailableDisksForVmfs">QueryAvailableDisksForVmfs</a>, <a href="vim.host.StorageSystem.html#queryAvailableSsds">QueryAvailableSsds</a>, <a href="vim.host.IscsiManager.html#queryBoundVnics">QueryBoundVnics</a>, <a href="vim.host.IscsiManager.html#queryCandidateNics">QueryCandidateNics</a>, <a href="vim.VirtualMachine.html#queryChangedDiskAreas">QueryChangedDiskAreas</a>, <a href="vim.host.KernelModuleSystem.html#queryConfiguredModuleOptionString">QueryConfiguredModuleOptionString</a>, <a href="vim.StorageResourceManager.html#queryDatastorePerformanceSummary">QueryDatastorePerformanceSummary</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.html#querySwitchByUuid">QueryDvsByUuid</a>, <a href="vim.host.NetworkSystem.html#queryNetworkHint">QueryNetworkHint</a>, <a href="vim.host.DiagnosticSystem.html#queryPartitionCreateDesc">QueryPartitionCreateDesc</a>, <a href="vim.host.DatastoreSystem.html#queryVmfsDatastoreCreateOptions">QueryVmfsDatastoreCreateOptions</a>, <a href="vim.host.DatastoreSystem.html#queryVmfsDatastoreExpandOptions">QueryVmfsDatastoreExpandOptions</a>, <a href="vim.host.DatastoreSystem.html#queryVmfsDatastoreExtendOptions">QueryVmfsDatastoreExtendOptions</a>, <a href="vim.DistributedVirtualSwitch.html#reconfigurePort">ReconfigureDVPort_Task</a>, <a href="vim.DistributedVirtualSwitch.html#reconfigure">ReconfigureDvs_Task</a>, <a href="vim.host.SnmpSystem.html#reconfigureSnmpAgent">ReconfigureSnmpAgent</a>, <a href="vim.DistributedVirtualSwitch.html#rectifyHost">RectifyDvsHost_Task</a>, <a href="vim.Datastore.html#refresh">RefreshDatastore</a>, <a href="vim.DistributedVirtualSwitch.html#refreshPortState">RefreshDVPortState</a>, <a href="vim.ResourcePool.html#registerVm">RegisterChildVM_Task</a>, <a href="vim.Folder.html#registerVm">RegisterVM_Task</a>, <a href="vim.AuthorizationManager.html#removeRole">RemoveAuthorizationRole</a>, <a href="vim.host.DatastoreSystem.html#removeDatastore">RemoveDatastore</a>, <a href="vim.AuthorizationManager.html#removeEntityPermission">RemoveEntityPermission</a>, <a href="vim.host.StorageSystem.html#removeInternetScsiSendTargets">RemoveInternetScsiSendTargets</a>, <a href="vim.host.StorageSystem.html#removeInternetScsiStaticTargets">RemoveInternetScsiStaticTargets</a>, <a href="vim.DistributedVirtualSwitch.html#removeNetworkResourcePool">RemoveNetworkResourcePool</a>, <a href="vim.host.NetworkSystem.html#removePortGroup">RemovePortGroup</a>, <a href="vim.host.NetworkSystem.html#removeServiceConsoleVirtualNic">RemoveServiceConsoleVirtualNic</a>, <a href="vim.host.NetworkSystem.html#removeVirtualNic">RemoveVirtualNic</a>, <a href="vim.host.NetworkSystem.html#removeVirtualSwitch">RemoveVirtualSwitch</a>, <a href="vim.CustomizationSpecManager.html#rename">RenameCustomizationSpec</a>, <a href="vim.host.StorageSystem.html#rescanHba">RescanHba</a>, <a href="vim.AuthorizationManager.html#resetEntityPermissions">ResetEntityPermissions</a>, <a href="vim.host.ServiceSystem.html#restart">RestartService</a>, <a href="vim.host.NetworkSystem.html#restartServiceConsoleVirtualNic">RestartServiceConsoleVirtualNic</a>, <a href="vim.AuthorizationManager.html#retrieveRolePermissions">RetrieveRolePermissions</a>, <a href="vim.UserDirectory.html#retrieveUserGroups">RetrieveUserGroups</a>, <a href="vim.VirtualMachine.html#revertToCurrentSnapshot">RevertToCurrentSnapshot_Task</a>, <a href="vim.host.DiagnosticSystem.html#selectActivePartition">SelectActivePartition</a>, <a href="vim.host.SnmpSystem.html#sendTestNotification">SendTestNotification</a>, <a href="vim.AuthorizationManager.html#setEntityPermissions">SetEntityPermissions</a>, <a href="vim.ExtensionManager.html#setCertificate">SetExtensionCertificate</a>, <a href="vim.host.StorageSystem.html#setMultipathLunPolicy">SetMultipathLunPolicy</a>, <a href="vim.VirtualMachine.html#startReplaying">StartReplaying_Task</a>, <a href="vim.host.ServiceSystem.html#start">StartService</a>, <a href="vim.host.ServiceSystem.html#stop">StopService</a>, <a href="vim.SessionManager.html#terminate">TerminateSession</a>, <a href="vim.host.IscsiManager.html#unbindVnic">UnbindVnic</a>, <a href="vim.host.ServiceSystem.html#uninstall">UninstallService</a>, <a href="vim.host.StorageSystem.html#unmountForceMountedVmfsVolume">UnmountForceMountedVmfsVolume</a>, <a href="vim.host.StorageSystem.html#unmountVffsVolume">UnmountVffsVolume</a>, <a href="vim.host.StorageSystem.html#unmountVmfsVolume">UnmountVmfsVolume</a>, <a href="vim.ExtensionManager.html#unregisterExtension">UnregisterExtension</a>, <a href="vim.AuthorizationManager.html#updateRole">UpdateAuthorizationRole</a>, <a href="vim.host.StorageSystem.html#updateDiskPartitions">UpdateDiskPartitions</a>, <a href="vim.host.NetworkSystem.html#updateDnsConfig">UpdateDnsConfig</a>, <a href="vim.ExtensionManager.html#updateExtension">UpdateExtension</a>, <a href="vim.host.StorageSystem.html#updateInternetScsiAdvancedOptions">UpdateInternetScsiAdvancedOptions</a>, <a href="vim.host.StorageSystem.html#updateInternetScsiAlias">UpdateInternetScsiAlias</a>, <a href="vim.host.StorageSystem.html#updateInternetScsiAuthenticationProperties">UpdateInternetScsiAuthenticationProperties</a>, <a href="vim.host.StorageSystem.html#updateInternetScsiDigestProperties">UpdateInternetScsiDigestProperties</a>, <a href="vim.host.StorageSystem.html#updateInternetScsiDiscoveryProperties">UpdateInternetScsiDiscoveryProperties</a>, <a href="vim.host.StorageSystem.html#updateInternetScsiIPProperties">UpdateInternetScsiIPProperties</a>, <a href="vim.host.StorageSystem.html#updateInternetScsiName">UpdateInternetScsiName</a>, <a href="vim.host.VMotionSystem.html#updateIpConfig">UpdateIpConfig</a>, <a href="vim.host.KernelModuleSystem.html#updateModuleOptionString">UpdateModuleOptionString</a>, <a href="vim.host.NetworkSystem.html#updateNetworkConfig">UpdateNetworkConfig</a>, <a href="vim.DistributedVirtualSwitch.html#updateNetworkResourcePool">UpdateNetworkResourcePool</a>, <a href="vim.host.NetworkSystem.html#updatePhysicalNicLinkSpeed">UpdatePhysicalNicLinkSpeed</a>, <a href="vim.host.NetworkSystem.html#updatePortGroup">UpdatePortGroup</a>, <a href="vim.host.FirewallSystem.html#updateRuleset">UpdateRuleset</a>, <a href="vim.host.StorageSystem.html#updateScsiLunDisplayName">UpdateScsiLunDisplayName</a>, <a href="vim.host.NetworkSystem.html#updateServiceConsoleVirtualNic">UpdateServiceConsoleVirtualNic</a>, <a href="vim.host.ServiceSystem.html#updatePolicy">UpdateServicePolicy</a>, <a href="vim.host.NetworkSystem.html#updateVirtualNic">UpdateVirtualNic</a>, <a href="vim.host.NetworkSystem.html#updateVirtualSwitch">UpdateVirtualSwitch</a>, <a href="vim.host.StorageSystem.html#upgradeVmfs">UpgradeVmfs</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.fault.VimFault.html">VimFault</a>
+</dd>
+<p></p>
+</dl>
+<H2>Fault 
+                  Description</H2>
+<p></p>
+         A NotFound error occurs when a referenced component of a managed
+  object cannot be found.  The referenced component can be a data 
+  object type (such as a role or permission) or a primitive 
+  (such as a string). 
+  <p>
+  For example, if the missing referenced component is a data object, such as 
+  VirtualSwitch, the NotFound error is 
+  thrown.  The NotFound error is also thrown if the data object is found, but the referenced name 
+  (for example, "vswitch0") is not.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.fault.VimFault.html">VimFault</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.MethodFault.html">MethodFault</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.MethodFault.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.MethodFault.html#dynamicType">dynamicType</a>, <a href="vmodl.MethodFault.html#faultCause">faultCause</a>, <a href="vmodl.MethodFault.html#faultMessage">faultMessage</a></td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="NotFound">
+            <complexContent>
+               <extension base="vim25:VimFault">
+                  <sequence>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

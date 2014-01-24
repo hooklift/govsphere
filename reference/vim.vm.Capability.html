@@ -1,0 +1,441 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.Capability" name="vim.vm.Capability"></a>
+<h1>Data Object - VirtualMachineCapability</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.VirtualMachine.html#field_detail">VirtualMachine</a>, <a href="vim.vm.ConfigOption.html#field_detail">VirtualMachineConfigOption</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This data object type contains information about the
+ operation/capabilities of a virtual machine
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="bootOptionsSupported" name="bootOptionsSupported"></a><strong>bootOptionsSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether boot options can be configured
+  for this virtual machine.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="bootRetryOptionsSupported" name="bootRetryOptionsSupported"></a><strong>bootRetryOptionsSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether automatic boot retry can be
+  configured for this virtual machine.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="changeTrackingSupported" name="changeTrackingSupported"></a><strong>changeTrackingSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates that change tracking is supported for virtual disks of this
+ virtual machine. However, even if change tracking is supported, it might
+ not be available for all disks of the virtual machine. For example,
+ passthru raw disk mappings or disks backed by any Ver1BackingInfo cannot
+ be tracked.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="consolePreferencesSupported" name="consolePreferencesSupported"></a><strong>consolePreferencesSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether console preferences can be set for this virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="cpuFeatureMaskSupported" name="cpuFeatureMaskSupported"></a><strong>cpuFeatureMaskSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether CPU feature requirements masks can be set for this
+ virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="disableSnapshotsSupported" name="disableSnapshotsSupported"></a><strong>disableSnapshotsSupported</strong></td><td>xsd:boolean</td><td><B>Deprecated.</B><I>
+         As of vSphere API 4.0. The value returned from the server is
+  always false.
+      </I>
+<p></p>
+         Indicates whether or not snapshots can be disabled.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="diskSharesSupported" name="diskSharesSupported"></a><strong>diskSharesSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether resource settings for disks can be
+  applied to this virtual machine.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="featureRequirementSupported" name="featureRequirementSupported"></a><strong>featureRequirementSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether featureRequirement feature is supported.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="guestAutoLockSupported" name="guestAutoLockSupported"></a><strong>guestAutoLockSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+<p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="hostBasedReplicationSupported" name="hostBasedReplicationSupported"></a><strong>hostBasedReplicationSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates that host based replication is supported on this virtual
+ machine. However, even if host based replication is supported,
+ it might not be available for all disk types. For example, passthru
+ raw disk mappings can not be replicated.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="lockSnapshotsSupported" name="lockSnapshotsSupported"></a><strong>lockSnapshotsSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether or not the snapshot tree can be locked.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="memoryReservationLockSupported" name="memoryReservationLockSupported"></a><strong>memoryReservationLockSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether
+ <a href="vim.vm.ConfigInfo.html#memoryReservationLockedToMax">memoryReservationLockedToMax</a>
+ may be set to true for this virtual machine.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="memorySnapshotsSupported" name="memorySnapshotsSupported"></a><strong>memorySnapshotsSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether or not a virtual machine supports memory snapshots.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="multipleCoresPerSocketSupported" name="multipleCoresPerSocketSupported"></a><strong>multipleCoresPerSocketSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether multiple virtual cores per socket is supported on this VM.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="multipleSnapshotsSupported" name="multipleSnapshotsSupported"></a><strong>multipleSnapshotsSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether or not a virtual machine supports multiple snapshots.
+ This value is not set when the virtual machine is unavailable, for instance,
+ when it is being created or deleted.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="nestedHVSupported" name="nestedHVSupported"></a><strong>nestedHVSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether this virtual machine supports nested hardware-assisted
+  virtualization.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="npivWwnOnNonRdmVmSupported" name="npivWwnOnNonRdmVmSupported"></a><strong>npivWwnOnNonRdmVmSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Supports assigning NPIV WWN to virtual machines that don't have RDM disks.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="poweredOffSnapshotsSupported" name="poweredOffSnapshotsSupported"></a><strong>poweredOffSnapshotsSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether or not a virtual machine supports snapshot operations in
+ poweredOff state. This flag doesn't affect vim.VirtualMachine.GetSnapshot,
+ which is always supported.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="poweredOnMonitorTypeChangeSupported" name="poweredOnMonitorTypeChangeSupported"></a><strong>poweredOnMonitorTypeChangeSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether a monitor type change is supported while this virtual
+ machine is in the poweredOn state.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="quiescedSnapshotsSupported" name="quiescedSnapshotsSupported"></a><strong>quiescedSnapshotsSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether or not a virtual machine supports quiesced snapshots.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="recordReplaySupported" name="recordReplaySupported"></a><strong>recordReplaySupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether record and replay functionality is supported on this
+ virtual machine.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="revertToSnapshotSupported" name="revertToSnapshotSupported"></a><strong>revertToSnapshotSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether or not a virtual machine supports reverting to a snapshot.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="s1AcpiManagementSupported" name="s1AcpiManagementSupported"></a><strong>s1AcpiManagementSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether or not a virtual machine supports ACPI S1 settings management.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="seSparseDiskSupported" name="seSparseDiskSupported"></a><strong>seSparseDiskSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether this virtual machine supports the Flex-SE
+ (space-efficent, sparse) format for virtual disks.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="settingDisplayTopologySupported" name="settingDisplayTopologySupported"></a><strong>settingDisplayTopologySupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether of not this virtual machine supports
+ setting the display topology of the console window.
+ This capability depends on the guest operating system
+ configured for this virtual machine.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="settingScreenResolutionSupported" name="settingScreenResolutionSupported"></a><strong>settingScreenResolutionSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether of not this virtual machine supports
+ setting the screen resolution of the console window.
+ This capability depends on the guest operating system
+ configured for this virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="settingVideoRamSizeSupported" name="settingVideoRamSizeSupported"></a><strong>settingVideoRamSizeSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag indicating whether the video ram size of this virtual machine
+  can be configured.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="snapshotConfigSupported" name="snapshotConfigSupported"></a><strong>snapshotConfigSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether or not a virtual machine supports snapshot config.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="snapshotOperationsSupported" name="snapshotOperationsSupported"></a><strong>snapshotOperationsSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether or not a virtual machine supports snapshot operations.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="swapPlacementSupported" name="swapPlacementSupported"></a><strong>swapPlacementSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag indicating whether the virtual machine has a configurable
+  <a href="vim.vm.ConfigInfo.html#swapPlacement">swapfile placement policy</a>.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="toolsAutoUpdateSupported" name="toolsAutoUpdateSupported"></a><strong>toolsAutoUpdateSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Supports tools auto-update.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="toolsSyncTimeSupported" name="toolsSyncTimeSupported"></a><strong>toolsSyncTimeSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether asking tools to sync time with the host is supported.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="virtualMmuUsageSupported" name="virtualMmuUsageSupported"></a><strong>virtualMmuUsageSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether or not the use of nested page table hardware support
+  can be explicitly set.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vmNpivWwnDisableSupported" name="vmNpivWwnDisableSupported"></a><strong>vmNpivWwnDisableSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the NPIV disabling operation is supported the virtual machine.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vmNpivWwnSupported" name="vmNpivWwnSupported"></a><strong>vmNpivWwnSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Supports virtual machine NPIV WWN.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vmNpivWwnUpdateSupported" name="vmNpivWwnUpdateSupported"></a><strong>vmNpivWwnUpdateSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the update of NPIV WWNs are supported on the virtual machine.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vPMCSupported" name="vPMCSupported"></a><strong>vPMCSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether this virtual machine supports virtualized CPU performance
+ counters.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VirtualMachineCapability">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="snapshotOperationsSupported" type="xsd:boolean"/>
+                     <element name="multipleSnapshotsSupported" type="xsd:boolean"/>
+                     <element name="snapshotConfigSupported" type="xsd:boolean"/>
+                     <element name="poweredOffSnapshotsSupported" type="xsd:boolean"/>
+                     <element name="memorySnapshotsSupported" type="xsd:boolean"/>
+                     <element name="revertToSnapshotSupported" type="xsd:boolean"/>
+                     <element name="quiescedSnapshotsSupported" type="xsd:boolean"/>
+                     <element name="disableSnapshotsSupported" type="xsd:boolean"/>
+                     <element name="lockSnapshotsSupported" type="xsd:boolean"/>
+                     <element name="consolePreferencesSupported" type="xsd:boolean"/>
+                     <element name="cpuFeatureMaskSupported" type="xsd:boolean"/>
+                     <element name="s1AcpiManagementSupported" type="xsd:boolean"/>
+                     <element name="settingScreenResolutionSupported" type="xsd:boolean"/>
+                     <element name="toolsAutoUpdateSupported" type="xsd:boolean"/>
+                     <element name="vmNpivWwnSupported" type="xsd:boolean"/>
+                     <element name="npivWwnOnNonRdmVmSupported" type="xsd:boolean"/>
+                     <element name="vmNpivWwnDisableSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="vmNpivWwnUpdateSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="swapPlacementSupported" type="xsd:boolean"/>
+                     <element name="toolsSyncTimeSupported" type="xsd:boolean"/>
+                     <element name="virtualMmuUsageSupported" type="xsd:boolean"/>
+                     <element name="diskSharesSupported" type="xsd:boolean"/>
+                     <element name="bootOptionsSupported" type="xsd:boolean"/>
+                     <element name="bootRetryOptionsSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="settingVideoRamSizeSupported" type="xsd:boolean"/>
+                     <element name="settingDisplayTopologySupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="recordReplaySupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="changeTrackingSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="multipleCoresPerSocketSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="hostBasedReplicationSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="guestAutoLockSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="memoryReservationLockSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="featureRequirementSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="poweredOnMonitorTypeChangeSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="seSparseDiskSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="nestedHVSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="vPMCSupported" type="xsd:boolean" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

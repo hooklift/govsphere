@@ -1,0 +1,145 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.cluster.VmHostRuleInfo" name="vim.cluster.VmHostRuleInfo"></a>
+<h1>Data Object - ClusterVmHostRuleInfo</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.cluster.RuleInfo.html">ClusterRuleInfo</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         <p>
+ A <a href="vim.cluster.VmHostRuleInfo.html">ClusterVmHostRuleInfo</a> object identifies virtual machines
+ and host groups that determine virtual machine placement. The virtual
+ machines and hosts referenced by a VM-Host rule must be in the same cluster.
+ <p>
+ A VM-Host rule identifies the following groups.
+ <ul>
+ <li>A virtual machine group (<a href="vim.cluster.VmGroup.html">ClusterVmGroup</a>).
+ <li>Two host groups - an affine host group and an anti-affine host group
+     (<a href="vim.cluster.HostGroup.html">ClusterHostGroup</a>).
+     At least one of the groups must contain one or more hosts.
+ </ul>
+ <p>
+ <a href="vim.cluster.VmHostRuleInfo.html">ClusterVmHostRuleInfo</a> stores only the names of the relevant
+ virtual machine and host groups. The group contents are stored in
+ the virtual machine and host group objects.
+ <p>
+ When you modify a VM-Host rule, only the fields that are specified are set.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="affineHostGroupName" name="affineHostGroupName"></a><strong>affineHostGroupName</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Name of the affine host group
+ (<a href="vim.cluster.HostGroup.html">ClusterHostGroup</a>.<a href="vim.cluster.GroupInfo.html#name">name</a>).
+ The affine host group identifies hosts on which
+ <a href="vim.cluster.VmHostRuleInfo.html#vmGroupName">vmGroupName</a> virtual machines can be powered-on.
+ The value of the <a href="vim.cluster.RuleInfo.html#mandatory">mandatory</a> property
+ determines how the Server interprets the rule.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="antiAffineHostGroupName" name="antiAffineHostGroupName"></a><strong>antiAffineHostGroupName</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Name of the anti-affine host group
+ (<a href="vim.cluster.HostGroup.html">ClusterHostGroup</a>.<a href="vim.cluster.GroupInfo.html#name">name</a>).
+ The anti-affine host group identifies hosts on which 
+ <a href="vim.cluster.VmHostRuleInfo.html#vmGroupName">vmGroupName</a> virtual machines should not
+ be powered-on.
+ The value of the <a href="vim.cluster.RuleInfo.html#mandatory">mandatory</a> property
+ determines how the Server interprets the rule.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vmGroupName" name="vmGroupName"></a><strong>vmGroupName</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Virtual group name (<a href="vim.cluster.VmGroup.html">ClusterVmGroup</a>.<a href="vim.cluster.GroupInfo.html#name">name</a>).
+ The virtual group may contain one or more virtual machines.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.cluster.RuleInfo.html">ClusterRuleInfo</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.cluster.RuleInfo.html#enabled">enabled</a>, <a href="vim.cluster.RuleInfo.html#inCompliance">inCompliance</a>, <a href="vim.cluster.RuleInfo.html#key">key</a>, <a href="vim.cluster.RuleInfo.html#mandatory">mandatory</a>, <a href="vim.cluster.RuleInfo.html#name">name</a>, <a href="vim.cluster.RuleInfo.html#status">status</a>, <a href="vim.cluster.RuleInfo.html#userCreated">userCreated</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ClusterVmHostRuleInfo">
+            <complexContent>
+               <extension base="vim25:ClusterRuleInfo">
+                  <sequence>
+                     <element name="vmGroupName" type="xsd:string" minOccurs="0"/>
+                     <element name="affineHostGroupName" type="xsd:string" minOccurs="0"/>
+                     <element name="antiAffineHostGroupName" type="xsd:string" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

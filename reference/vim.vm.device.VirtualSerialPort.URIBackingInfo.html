@@ -1,0 +1,214 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.device.VirtualSerialPort.URIBackingInfo" name="vim.vm.device.VirtualSerialPort.URIBackingInfo"></a>
+<h1>Data Object - VirtualSerialPortURIBackingInfo</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.vm.device.VirtualDevice.URIBackingInfo.html">VirtualDeviceURIBackingInfo</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The <code><a href="vim.vm.device.VirtualSerialPort.URIBackingInfo.html">VirtualSerialPortURIBackingInfo</a></code> data object
+  specifies network backing for a <code><a href="vim.vm.device.VirtualSerialPort.html">VirtualSerialPort</a></code>.
+  You can use URI backing to create a network serial port on the virtual machine,
+  supporting connections between the virtual machine and remote systems.
+  <p>
+  When a virtual machine  establishes a connection with a remote system on the network,
+  the virtual machine can act as a server or a client. When the virtual machine
+  acts as a server, it accepts a connection. When the virtual machine acts as a client,
+  it initiates the connection.
+  <p>
+  You can configure the virtual serial port for communication through a
+  virtual serial port concentrator that acts as a proxy between the virtual
+  machine and the network. When you specify a
+  <code><a href="vim.vm.device.VirtualDevice.URIBackingInfo.html#proxyURI">proxyURI</a></code>,
+  the virtual machine initiates the connection with the concentrator
+  and forwards the <code><a href="vim.vm.device.VirtualDevice.URIBackingInfo.html#direction">direction</a></code>
+  and <code><a href="vim.vm.device.VirtualDevice.URIBackingInfo.html#serviceURI">serviceURI</a></code>
+  to the concentrator.
+  For information about using a virtual serial port concentrator,
+  see <i>Using a Proxy with vSphere Virtual Serial Ports</i>.
+  <p>
+  ESX hosts support different protocols depending on your virtual serial port configuration.
+  <ul>
+    <li>If the virtual machine is handling the network connection
+        directly (no <code><a href="vim.vm.device.VirtualDevice.URIBackingInfo.html#proxyURI">proxyURI</a></code> specified),
+        you can use telnet, TCP, and SSL protocols.
+        The <code><a href="vim.vm.device.VirtualDevice.URIBackingInfo.html#serviceURI">serviceURI</a></code>
+        must use one of the following URI schemes:
+        <ul style="list-style-type:square">
+          <li><code>&lt;host&gt;:&lt;port&gt;</code> - this is the equivalent of
+          <code>tcp://&lt;host&gt;:&lt;port&gt;</code>.
+          <li><code>tcp://&lt;host&gt;:&lt;port&gt;</code> - unencrypted TCP connection
+              (IPv4 or IPv6).
+          <li><code>tcp4://&lt;host&gt;:&lt;port&gt;</code> - unencrypted TCP connection
+              (IPv4 only).
+          <li><code>tcp6://&lt;host&gt;:&lt;port&gt;</code> - unencrypted TCP connection
+              (IPv6 only).
+          <li><code>ssl://&lt;host&gt;:&lt;port&gt;</code> - this is the equivalent of
+              <code>tcp+ssl://&lt;host&gt;:&lt;port&gt;</code>.
+          <li><code>tcp+ssl://&lt;host&gt;:&lt;port&gt;</code> - encrypted SSL over TCP.
+          <li><code>tcp4+ssl://&lt;host&gt;:&lt;port&gt;</code> - SSL over TCP over IPv4.
+          <li><code>tcp6+ssl://&lt;host&gt;:&lt;port&gt;</code> - SSL over TCP over IPv6.
+          <li><code>telnet://&lt;host&gt;:&lt;port&gt;</code> - telnet over TCP.
+              The virtual machine and remote system can negotiate and use SSL if the remote
+              system supports the telnet authentication option; if not, the connection
+              uses unencrypted text (plaintext).
+          <li><code>telnets://&lt;host&gt;:&lt;port&gt;</code> - telnet over SSL over TCP.
+              In this case, SSL negotiation begins immediately and you cannot use
+              the telnet authentication option.
+       </ul>
+
+       As of vSphere 5.1 you can specify authentication parameters to support an encrypted
+       connection with a remote system using SSL over telnet or telnets.
+       The connection will fail if the peer does not support the protocols.
+       You cannot use certificate verification when you specify
+       <code>tcp</code>, <code>tcp4</code>, or <code>tcp6</code> schemas. For information
+       about parameter specification, see <a href="#authparam">Authentication Parameters</a>
+       below.
+       <br /><br />
+    <li>If you are using a <code><a href="vim.vm.device.VirtualDevice.URIBackingInfo.html#proxyURI">proxyURI</a></code>
+        to connect to a virtual serial port concentrator, the URI scheme for
+        the communication between the remote system on the network and the concentrator
+        depends on the concentrator implementation. The connection between
+        the concentrator and the virtual serial port must use telnet or secure telnet
+        (telnets). The proxy URI must use one of the following URI schemes. You cannot
+        specify a username and password in the proxy URI.
+        <ul style="list-style-type:square">
+          <li><code>telnet://&lt;host&gt;:&lt;port&gt;</code>- telnet over TCP.
+              The virtual machine and remote system can negotiate and use SSL if the remote
+              system supports the telnet authentication option; if not, the connection
+              uses unencrypted text (plaintext).
+          <li><code>telnets://&lt;host&gt;:&lt;port&gt;</code> - telnet over SSL over TCP.
+              In this case, SSL negotiation starts immediately and you cannot use
+              the telnet authentication option.
+        </ul>
+       As of vSphere 5.1 you can specify authentication parameters to support an encrypted
+       connection with a concentrator using SSL over telnet or telnets.
+       The connection will fail if the concentrator does not support the protocols.
+       For information about parameter specification,
+       see <a href="#authparam">Authentication Parameters</a> below.
+       <p>
+  </ul>
+  <a name="authparam"></a>
+  <b>Authentication Parameters</b><br /><br />
+  For an encrypted connection, the URI includes a set of authentication
+  parameters. The parameters are specified as key words or key/value pairs.
+  The following syntax description uses <code>telnet</code>; you can also
+  specify authentication parameters for secure telnet (<code>telnets</code>).
+  <p>
+  <code>telnet://&lt;host&gt;:&lt;port&gt;&num;key[=value][&amp;key[=value] ...]</code>
+  <p>
+  The first parameter must have a number sign (&num;) prefix. Additional parameters
+  must have an ampersand (&amp;) prefix. The following list shows the valid parameters.
+  <ul>
+  <li><code>thumbprint=value</code> - Specifies a certificate thumbprint against
+  which the peer certificate thumbprint is compared. When you specify a thumbprint,
+  certificate verification is automatically enabled. See the description of the
+  <code>verify</code> parameter below.</li>
+  <li><code>peerName=value</code> - Specifies the peer name that will be used
+  to validate the peer certificate. When you specify a peer name,
+  certificate verification is automatically enabled. See the description of the
+  <code>verify</code> parameter below.</li>
+  <li><code>verify</code> - Forces certificate verification. The virtual machine
+  will verify that the peer certificate subject matches the specified
+  <code>peerName</code> and that it was signed by a certificate authority
+  known to the ESXi host. Verification is automatically enabled if you specify a
+  <code>thumbprint</code> or <code>peerName</code>.
+  <li><code>cipherList=value</code> - Specifies a list of SSL ciphers.
+  See <a href="http://www.openssl.org/docs/apps/ciphers.html">OpenSSL ciphers</a>.
+  The ciphers are specified as a list separated by colons, spaces, or commas.</li>
+  </ul>
+  <p>
+  For information about URI format, see
+  <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396</a>.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.vm.device.VirtualDevice.URIBackingInfo.html">VirtualDeviceURIBackingInfo</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.vm.device.VirtualDevice.URIBackingInfo.html#direction">direction</a>, <a href="vim.vm.device.VirtualDevice.URIBackingInfo.html#proxyURI">proxyURI</a>, <a href="vim.vm.device.VirtualDevice.URIBackingInfo.html#serviceURI">serviceURI</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.vm.device.VirtualDevice.BackingInfo.html">VirtualDeviceBackingInfo</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VirtualSerialPortURIBackingInfo">
+            <complexContent>
+               <extension base="vim25:VirtualDeviceURIBackingInfo">
+                  <sequence>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

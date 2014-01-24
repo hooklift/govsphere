@@ -1,0 +1,562 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.VFlashManager" name="vim.host.VFlashManager"></a>
+<h1>Managed Object -  
+						HostVFlashManager</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.host.ConfigManager.html#field_detail">HostConfigManager</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.VFlashManager.VFlashCacheConfigSpec.html">HostVFlashManagerVFlashCacheConfigSpec</a>, <a href="vim.host.VFlashManager.VFlashConfigInfo.html">HostVFlashManagerVFlashConfigInfo</a>, <a href="vim.host.VFlashManager.VFlashResourceConfigSpec.html">HostVFlashManagerVFlashResourceConfigSpec</a>, <a href="vim.host.VFlashResourceConfigurationResult.html">HostVFlashResourceConfigurationResult</a>, <a href="vim.vm.device.VirtualDisk.VFlashCacheConfigInfo.html">VirtualDiskVFlashCacheConfigInfo</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.5</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         The VFlash Manager object is used to configure vFlash resource
+
+  and vFlash cache on the ESX host.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vFlashConfigInfo" name="vFlashConfigInfo"></a><strong>vFlashConfigInfo</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.host.VFlashManager.VFlashConfigInfo.html">HostVFlashManagerVFlashConfigInfo</a></td><td>
+<p></p>
+         Host vFlash configuration information.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#configureVFlashResourceEx">ConfigureVFlashResourceEx_Task</a>, <a href="#configureVFlashResource">HostConfigureVFlashResource</a>, <a href="#configureHostVFlashCache">HostConfigVFlashCache</a>, <a href="#getVFlashModuleDefaultConfig">HostGetVFlashModuleDefaultConfig</a>, <a href="#removeVFlashResource">HostRemoveVFlashResource</a></td>
+</tr>
+</table>
+<br>
+<a id="configureVFlashResourceEx" name="configureVFlashResourceEx"></a>
+<h1>ConfigureVFlashResourceEx_Task</h1>
+<p></p>
+         Configure vFlash resource on a list of SSD disks. If the host does not have
+
+  a VFFS volume, host will format the volume first and then extend the volume
+
+  on the rest of the SSDs; otherwise host will extend the existing VFFS volume
+
+  on the passed SSDs. Finally host will configure the vFlash resource on the 
+
+  VFFS volume.
+
+  <p>
+  It will return <a href="vim.host.VFlashResourceConfigurationResult.html">HostVFlashResourceConfigurationResult</a>
+  describing success or failure associated with each device.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.VFlashManager.html">HostVFlashManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>devicePath</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         An array of device path names that identify disks.
+                    See <a href="vim.host.ScsiDisk.html">ScsiDisk</a>.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation. The <a href="vim.TaskInfo.html#result">info.result</a> property in the <a href="vim.Task.html">Task</a> contains <a href="vim.host.VFlashResourceConfigurationResult.html">HostVFlashResourceConfigurationResult</a> describing success or failure associated with each device.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if batch operation fails on the host. Because the returned VFlashResourceConfigurationResult contains the configuration success or fault for each device, as of vSphere API 5.x, we won't throw fault when batch operation fails.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="configureVFlashResource" name="configureVFlashResource"></a>
+<h1>HostConfigureVFlashResource</h1>
+<p></p>
+         Configure vFlash resource on the host by attaching to a backend VFFS volume.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.VFlashManager.html">HostVFlashManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.host.VFlashManager.VFlashResourceConfigSpec.html">HostVFlashManagerVFlashResourceConfigSpec</a></td><td>
+<p></p>
+         the vFlash resource specification.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if vFlash resource cannot be configured on the host</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.ResourceInUse.html">ResourceInUse</a></td><td>The contained VFFS volume is being used.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('HostConfigureVFlashResource-textarea');expandcontent(this, 'HostConfigureVFlashResource-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="HostConfigureVFlashResource-div">
+<textarea cols="20" rows="10" name="HostConfigureVFlashResource-textarea" wrap="off" readonly="1" id="HostConfigureVFlashResource-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostConfigureVFlashResource" type="vim25:HostConfigureVFlashResourceRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostConfigureVFlashResourceResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="configureHostVFlashCache" name="configureHostVFlashCache"></a>
+<h1>HostConfigVFlashCache</h1>
+<p></p>
+         Configurate vFlash cache on the host.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.AdvancedConfig</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.VFlashManager.html">HostVFlashManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>spec</strong></td><td><a href="vim.host.VFlashManager.VFlashCacheConfigSpec.html">HostVFlashManagerVFlashCacheConfigSpec</a></td><td>
+<p></p>
+         Specification for host cache configuration.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if the swap cache cannot be configured on the host.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InaccessibleVFlashSource.html">InaccessibleVFlashSource</a></td><td>vFlash resource is not accessible.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.ResourceInUse.html">ResourceInUse</a></td><td>The contained VFFS volume is being used.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('HostConfigVFlashCache-textarea');expandcontent(this, 'HostConfigVFlashCache-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="HostConfigVFlashCache-div">
+<textarea cols="20" rows="10" name="HostConfigVFlashCache-textarea" wrap="off" readonly="1" id="HostConfigVFlashCache-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostConfigVFlashCache" type="vim25:HostConfigVFlashCacheRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostConfigVFlashCacheResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="getVFlashModuleDefaultConfig" name="getVFlashModuleDefaultConfig"></a>
+<h1>HostGetVFlashModuleDefaultConfig</h1>
+<p></p>
+         Retrieve the default supported configuration
+
+  for a given vFlash module
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.AdvancedConfig</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.VFlashManager.html">HostVFlashManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>vFlashModule</strong></td><td>xsd:string</td><td>
+<p></p>
+         Name of the vFlash module
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.vm.device.VirtualDisk.VFlashCacheConfigInfo.html">VirtualDiskVFlashCacheConfigInfo</a></td><td>The supported default vFlash cache configuration</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if the default vFlash module configuration option cannot be retrieved.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if vFlash resource is not configured or the contained VFFS volume cannot be found on the host.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('HostGetVFlashModuleDefaultConfig-textarea');expandcontent(this, 'HostGetVFlashModuleDefaultConfig-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="HostGetVFlashModuleDefaultConfig-div">
+<textarea cols="20" rows="10" name="HostGetVFlashModuleDefaultConfig-textarea" wrap="off" readonly="1" id="HostGetVFlashModuleDefaultConfig-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostGetVFlashModuleDefaultConfig" type="vim25:HostGetVFlashModuleDefaultConfigRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostGetVFlashModuleDefaultConfigResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:VirtualDiskVFlashCacheConfigInfo"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="removeVFlashResource" name="removeVFlashResource"></a>
+<h1>HostRemoveVFlashResource</h1>
+<p></p>
+         Remove vFlash resource on the host by destroying the contained VFFS volume.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Config.Storage</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.VFlashManager.html">HostVFlashManager</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.HostConfigFault.html">HostConfigFault</a></td><td>Thrown if vFlash resource or the contained VFFS volume cannot be removed from the host.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if vFlash resource is not configured or the contained VFFS volume cannot be found on the host.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.ResourceInUse.html">ResourceInUse</a></td><td>The contained VFFS volume is being used.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('HostRemoveVFlashResource-textarea');expandcontent(this, 'HostRemoveVFlashResource-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="HostRemoveVFlashResource-div">
+<textarea cols="20" rows="10" name="HostRemoveVFlashResource-textarea" wrap="off" readonly="1" id="HostRemoveVFlashResource-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostRemoveVFlashResource" type="vim25:HostRemoveVFlashResourceRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostRemoveVFlashResourceResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

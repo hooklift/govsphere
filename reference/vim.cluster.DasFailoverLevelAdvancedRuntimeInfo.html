@@ -1,0 +1,182 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.cluster.DasFailoverLevelAdvancedRuntimeInfo" name="vim.cluster.DasFailoverLevelAdvancedRuntimeInfo"></a>
+<h1>Data Object - ClusterDasFailoverLevelAdvancedRuntimeInfo</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.cluster.DasAdvancedRuntimeInfo.html">ClusterDasAdvancedRuntimeInfo</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.cluster.DasFailoverLevelAdvancedRuntimeInfo.HostSlots.html">ClusterDasFailoverLevelAdvancedRuntimeInfoHostSlots</a>, <a href="vim.cluster.DasFailoverLevelAdvancedRuntimeInfo.SlotInfo.html">ClusterDasFailoverLevelAdvancedRuntimeInfoSlotInfo</a>, <a href="vim.cluster.DasFailoverLevelAdvancedRuntimeInfo.VmSlots.html">ClusterDasFailoverLevelAdvancedRuntimeInfoVmSlots</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         Advanced runtime information related to the high availability service
+ for a cluster that has been configured with a failover level admission control
+ policy. See <a href="vim.cluster.FailoverLevelAdmissionControlPolicy.html">ClusterFailoverLevelAdmissionControlPolicy</a>.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="hostSlots" name="hostSlots"></a><strong>hostSlots</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.cluster.DasFailoverLevelAdvancedRuntimeInfo.HostSlots.html">ClusterDasFailoverLevelAdvancedRuntimeInfoHostSlots[]</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="slotInfo" name="slotInfo"></a><strong>slotInfo</strong></td><td><a href="vim.cluster.DasFailoverLevelAdvancedRuntimeInfo.SlotInfo.html">ClusterDasFailoverLevelAdvancedRuntimeInfoSlotInfo</a></td><td>
+<p></p>
+         Slot information for this cluster.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="totalGoodHosts" name="totalGoodHosts"></a><strong>totalGoodHosts</strong></td><td>xsd:int</td><td>
+<p></p>
+         The total number of connected hosts that are not in maintance mode and that
+ do not have any DAS-related config issues on them.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="totalHosts" name="totalHosts"></a><strong>totalHosts</strong></td><td>xsd:int</td><td>
+<p></p>
+         The total number of hosts in the cluster.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="totalSlots" name="totalSlots"></a><strong>totalSlots</strong></td><td>xsd:int</td><td>
+<p></p>
+         The total number of slots available in the cluster.<br>See SlotInfo
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="totalVms" name="totalVms"></a><strong>totalVms</strong></td><td>xsd:int</td><td>
+<p></p>
+         The total number of powered on vms in the cluster.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="unreservedSlots" name="unreservedSlots"></a><strong>unreservedSlots</strong></td><td>xsd:int</td><td>
+<p></p>
+         The number of slots that are not used by currently powered on virtual machines
+ and not reserved to satisfy the configured failover level. This number gives
+ an indication of how many additional virtual machines can be powered on in
+ this cluster without violating the failover level (assuming the new virtual
+ machine's reservations are satisfied by the current slot size).
+
+ This value is computed as follows (where m is the configured failover level):
+ Remove the m largest hosts (ie. the ones with the most slots) from the list
+ of "good" hosts (see <a href="vim.cluster.DasFailoverLevelAdvancedRuntimeInfo.html#totalGoodHosts">totalGoodHosts</a>). Sum up the number of slots on
+ the remaining hosts and deduct the number of currently used slots
+ (see <a href="vim.cluster.DasFailoverLevelAdvancedRuntimeInfo.html#usedSlots">usedSlots</a>). If this number is negative, use zero instead.<br>See SlotInfo
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="usedSlots" name="usedSlots"></a><strong>usedSlots</strong></td><td>xsd:int</td><td>
+<p></p>
+         The number of slots currently being used.<br>See SlotInfo
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vmsRequiringMultipleSlots" name="vmsRequiringMultipleSlots"></a><strong>vmsRequiringMultipleSlots</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.cluster.DasFailoverLevelAdvancedRuntimeInfo.VmSlots.html">ClusterDasFailoverLevelAdvancedRuntimeInfoVmSlots[]</a></td><td>
+<p></p>
+         The list of virtual machines whose reservations and memory overhead are not
+ satisfied by a single slot.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.cluster.DasAdvancedRuntimeInfo.html">ClusterDasAdvancedRuntimeInfo</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.cluster.DasAdvancedRuntimeInfo.html#dasHostInfo">dasHostInfo</a>, <a href="vim.cluster.DasAdvancedRuntimeInfo.html#heartbeatDatastoreInfo">heartbeatDatastoreInfo</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ClusterDasFailoverLevelAdvancedRuntimeInfo">
+            <complexContent>
+               <extension base="vim25:ClusterDasAdvancedRuntimeInfo">
+                  <sequence>
+                     <element name="slotInfo" type="vim25:ClusterDasFailoverLevelAdvancedRuntimeInfoSlotInfo"/>
+                     <element name="totalSlots" type="xsd:int"/>
+                     <element name="usedSlots" type="xsd:int"/>
+                     <element name="unreservedSlots" type="xsd:int"/>
+                     <element name="totalVms" type="xsd:int"/>
+                     <element name="totalHosts" type="xsd:int"/>
+                     <element name="totalGoodHosts" type="xsd:int"/>
+                     <element name="hostSlots" type="vim25:ClusterDasFailoverLevelAdvancedRuntimeInfoHostSlots" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="vmsRequiringMultipleSlots" type="vim25:ClusterDasFailoverLevelAdvancedRuntimeInfoVmSlots" minOccurs="0" maxOccurs="unbounded"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

@@ -1,0 +1,693 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.profile.Profile" name="vim.profile.Profile"></a>
+<h1>Managed Object -  
+						Profile</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.profile.ComplianceResult.html#field_detail">ComplianceResult</a>, <a href="vim.fault.InvalidProfileReferenceHost.html#field_detail">InvalidProfileReferenceHost</a>, <a href="vim.event.ProfileEventArgument.html#field_detail">ProfileEventArgument</a>, <a href="vim.profile.ProfileManager.html#field_detail">ProfileManager</a>
+</dd>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.profile.ComplianceManager.html#checkCompliance">CheckCompliance_Task</a>, <a href="vim.profile.ComplianceManager.html#clearComplianceStatus">ClearComplianceStatus</a>, <a href="vim.profile.host.ProfileManager.html#createDefaultProfile">CreateDefaultProfile</a>, <a href="vim.profile.ComplianceManager.html#queryComplianceStatus">QueryComplianceStatus</a>, <a href="vim.profile.ComplianceManager.html#queryExpressionMetadata">QueryExpressionMetadata</a>, <a href="vim.profile.host.ProfileManager.html#queryProfileMetadata">QueryHostProfileMetadata</a>, <a href="vim.profile.ProfileManager.html#queryPolicyMetadata">QueryPolicyMetadata</a>, <a href="vim.profile.host.ProfileManager.html#queryProfileStructure">QueryProfileStructure</a>
+</dd>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.profile.ProfileManager.html#createProfile">CreateProfile</a>, <a href="vim.profile.ProfileManager.html#findAssociatedProfile">FindAssociatedProfile</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.profile.cluster.ClusterProfile.html">ClusterProfile</a>, <a href="vim.profile.host.HostProfile.html">HostProfile</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.profile.ComplianceResult.html">ComplianceResult</a>, <a href="vim.ManagedEntity.html">ManagedEntity</a>, <a href="vim.profile.Profile.ConfigInfo.html">ProfileConfigInfo</a>, <a href="vim.profile.Profile.Description.html">ProfileDescription</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         The <code>Profile</code> managed object is the base class for host and cluster
+ profiles.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="complianceStatus" name="complianceStatus"></a><strong>complianceStatus</strong></td><td>xsd:string</td><td>
+<p></p>
+         Overall compliance of entities associated with this profile.
+ If one of the entities is out of compliance, the profile is <code>nonCompliant</code>.
+ If all entities are in compliance, the profile is <code>compliant</code>.
+ If the compliance status of one of the entities is not known, compliance status
+  of the profile is <code>unknown</code>.
+ See <a href="vim.profile.ComplianceResult.Status.html">ComplianceResultStatus</a>.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="config" name="config"></a><strong>config</strong><span title="Required Privilege: Profile.Edit" class="privilege-ref"> P</span></td><td><a href="vim.profile.Profile.ConfigInfo.html">ProfileConfigInfo</a></td><td>
+<p></p>
+         Configuration data for the profile.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="createdTime" name="createdTime"></a><strong>createdTime</strong></td><td>xsd:dateTime</td><td>
+<p></p>
+         Time at which the profile was created.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="description" name="description"></a><strong>description</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.profile.Profile.Description.html">ProfileDescription</a></td><td><B>Deprecated.</B><I>
+         As of vSphere API 5.0. use <a href="vim.profile.Profile.html#retrieveDescription">RetrieveDescription</a> instead.
+      </I>
+<p></p>
+         Localizable description of the profile
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="entity" name="entity"></a><strong>entity</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity[]</a></td><td>
+<p></p>
+         List of managed entities associated with the profile.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="modifiedTime" name="modifiedTime"></a><strong>modifiedTime</strong></td><td>xsd:dateTime</td><td>
+<p></p>
+         Time at which the profile was last modified.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="name" name="name"></a><strong>name</strong></td><td>xsd:string</td><td>
+<p></p>
+         Name of the profile.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  Profile.Edit</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#associateEntities">AssociateProfile</a>, <a href="#checkCompliance">CheckProfileCompliance_Task</a>, <a href="#destroy">DestroyProfile</a>, <a href="#dissociateEntities">DissociateProfile</a>, <a href="#exportProfile">ExportProfile</a>, <a href="#retrieveDescription">RetrieveDescription</a></td>
+</tr>
+</table>
+<br>
+<a id="associateEntities" name="associateEntities"></a>
+<h1>AssociateProfile</h1>
+<p></p>
+         Associate a profile with a managed entity. You can check the compliance of
+ entities associated with a profile by calling the
+ <a href="vim.profile.Profile.html#checkCompliance">CheckProfileCompliance_Task</a> method.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Profile.Edit</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.Profile.html">Profile</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>entity</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity[]</a></td><td>
+<p></p>
+         The entity(s) to associate with the profile.
+ If an entity is already associated with the profile, the association is
+ maintained and the vCenter Server does not perform any action.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the association conflicts with existing association.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidType.html">InvalidType</a></td><td>Thrown if the entity is of an unexpeted type.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('AssociateProfile-textarea');expandcontent(this, 'AssociateProfile-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="AssociateProfile-div">
+<textarea cols="20" rows="10" name="AssociateProfile-textarea" wrap="off" readonly="1" id="AssociateProfile-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AssociateProfile" type="vim25:AssociateProfileRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AssociateProfileResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="checkCompliance" name="checkCompliance"></a>
+<h1>CheckProfileCompliance_Task</h1>
+<p></p>
+         Check compliance of an entity against a Profile.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.Profile.html">Profile</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>entity</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity[]</a></td><td>
+<p></p>
+         If specified, the compliance check is performed on this entity.
+ If the entity is not specified, the vCenter Server runs a compliance check on all the
+ entities associated with the profile. The entity does not have to be associated with the
+ profile.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>This method returns a <a href="vim.Task.html">Task</a> object with which to monitor the operation.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidProfileReferenceHost.html">InvalidProfileReferenceHost</a></td><td>Thrown if the reference host associated with the profile is incompatible or there is no reference host for the profile.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+<a id="destroy" name="destroy"></a>
+<h1>DestroyProfile</h1>
+<p></p>
+         Destroy the profile.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Profile.Delete</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.Profile.html">Profile</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('DestroyProfile-textarea');expandcontent(this, 'DestroyProfile-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="DestroyProfile-div">
+<textarea cols="20" rows="10" name="DestroyProfile-textarea" wrap="off" readonly="1" id="DestroyProfile-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DestroyProfile" type="vim25:DestroyProfileRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DestroyProfileResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="dissociateEntities" name="dissociateEntities"></a>
+<h1>DissociateProfile</h1>
+<p></p>
+         Remove the association between a profile and a managed entity.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Profile.Edit</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.Profile.html">Profile</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>entity</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity[]</a></td><td>
+<p></p>
+         List of entities. The vCenter Server will remove the associations
+ that the profile has with the entities in the list. If unset,
+ the Server removes all the associations that the profile has with any
+ managed entities in the inventory.
+ If the specified entity is not associated with the profile,
+ the Server does not perform any action.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the dissociation conflicts with existing association.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('DissociateProfile-textarea');expandcontent(this, 'DissociateProfile-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="DissociateProfile-div">
+<textarea cols="20" rows="10" name="DissociateProfile-textarea" wrap="off" readonly="1" id="DissociateProfile-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DissociateProfile" type="vim25:DissociateProfileRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DissociateProfileResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="exportProfile" name="exportProfile"></a>
+<h1>ExportProfile</h1>
+<p></p>
+         Export the profile in a serialized form. To use the serialized string to create a profile,
+ specify a <a href="vim.profile.Profile.SerializedCreateSpec.html">ProfileSerializedCreateSpec</a> when you call the
+ <a href="vim.profile.host.ProfileManager.html">HostProfileManager</a>.<a href="vim.profile.ProfileManager.html#createProfile">CreateProfile</a>
+ method.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Profile.Export</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.Profile.html">Profile</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td>xsd:string</td><td>Serialized form of the profile.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ExportProfile-textarea');expandcontent(this, 'ExportProfile-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ExportProfile-div">
+<textarea cols="20" rows="10" name="ExportProfile-textarea" wrap="off" readonly="1" id="ExportProfile-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ExportProfile" type="vim25:ExportProfileRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ExportProfileResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="xsd:string"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="retrieveDescription" name="retrieveDescription"></a>
+<h1>RetrieveDescription</h1>
+<p></p>
+         Returns the localizable description for the profile.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.profile.Profile.html">Profile</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.profile.Profile.Description.html">ProfileDescription</a></td><td>Profile divided into sections containing element descriptions and messages.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidProfileReferenceHost.html">InvalidProfileReferenceHost</a></td><td>Thrown if the reference host associated with the profile is incompatible or there is no reference host for the profile.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RetrieveDescription-textarea');expandcontent(this, 'RetrieveDescription-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RetrieveDescription-div">
+<textarea cols="20" rows="10" name="RetrieveDescription-textarea" wrap="off" readonly="1" id="RetrieveDescription-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrieveDescription" type="vim25:RetrieveDescriptionRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrieveDescriptionResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ProfileDescription" minOccurs="0"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

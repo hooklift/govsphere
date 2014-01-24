@@ -1,0 +1,1539 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.AuthorizationManager" name="vim.AuthorizationManager"></a>
+<h1>Managed Object -  
+						AuthorizationManager</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.ServiceInstanceContent.html#field_detail">ServiceContent</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.AuthorizationDescription.html">AuthorizationDescription</a>, <a href="vim.AuthorizationManager.Privilege.html">AuthorizationPrivilege</a>, <a href="vim.AuthorizationManager.Role.html">AuthorizationRole</a>, <a href="vim.AuthorizationManager.EntityPrivilege.html">EntityPrivilege</a>, <a href="vim.ManagedEntity.html">ManagedEntity</a>, <a href="vim.AuthorizationManager.Permission.html">Permission</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         This managed object provides operations to query and update
+  roles and permissions.
+  <p>
+  <b>Privileges</b> are the basic individual rights required to 
+  perform operations.  They are statically defined and
+  never change for a single version of a product.  Examples
+  of privileges are &quot;Power on a virtual machine&quot; 
+  or &quot;Configure a host.&quot;
+  <p>
+  <b>Roles</b> are aggregations of privileges, used for convenience.
+  For user-defined roles, the system-defined privileges, "System.Anonymous",
+  "System.View", and "System.Read" are always present.
+  <p>
+  <b>Permissions</b> are the actual access-control rules.  A
+  permission is defined on a ManagedEntity and
+  specifies the user or group (&quot;principal&quot;) to which 
+  the rule applies. The role specifies the
+  privileges to apply, and the propagate flag 
+  specifies whether or not the rule applies to sub-objects 
+  of the managed entity.
+  <p>
+  A ManagedEntity may have multiple permissions,
+  but may have only one permission per user or group. If, when logging
+  in, a user has both a user permission and a group permission 
+  (as a group member) for the same entity, then the
+  user-specific permission takes precedent.  If there is no
+  user-specific permission, but two or more group permissions
+  are present, and the user is a member of the groups, then the 
+  privileges are the union of the specified roles.
+  <p>
+  Managed entities may be collected together into a &quot;complex entity&quot; for
+  the purpose of applying permissions consistently. Complex entities may have a
+  Datacenter, ComputeResource, or ClusterComputeResource as a parent, with other
+  child managed objects as additional parts of the complex entity:
+  <ul>
+    <li>A Datacenter's child objects are the root virtual machine and host Folders.
+    <li>A ComputeResource's child objects are the root ResourcePool and HostSystem.
+    <li>A ClusterComputeResource has only the root ResourcePool as a child object.
+  </ul>
+  Child objects in a complex entity are forced to inherit permissions from the
+  parent object. When query operations are used to discover permissions on child
+  objects of complex entities, different results may be returned for the owner of the
+  permission. In some cases, the child object of the complex entity is returned as
+  the object that defines the permission, and in other cases, the parent from which
+  the permission is propagated is returned as the object that defines the permission.
+  In both cases, the information about the owner of the permission is correct, since
+  the entities within a complex entity are considered equivalent.  Permissions
+  defined on complex entities are always applicable on the child entities, 
+  regardless of the propagation flag, but may only be defined or modified on the
+  parent object.
+  <p>
+  In a group of fault-tolerance (FT) protected VirtualMachines, the secondary 
+  VirtualMachines are forced to inherit permissions from the primary VirtualMachine. 
+  Queries to discover permissions on FT secondary VMs always return the primary VM 
+  as the object that defines the permissions. Permissions defined on an FT primary
+  VM are always applicable on its secondary VMs, but can only be defined or modified
+  on the primary VM.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="description" name="description"></a><strong>description</strong><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vim.AuthorizationDescription.html">AuthorizationDescription</a></td><td>
+<p></p>
+         Static, descriptive strings for system roles and privileges.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="privilegeList" name="privilegeList"></a><strong>privilegeList</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vim.AuthorizationManager.Privilege.html">AuthorizationPrivilege[]</a></td><td>
+<p></p>
+         The list of system-defined privileges.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="roleList" name="roleList"></a><strong>roleList</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vim.AuthorizationManager.Role.html">AuthorizationRole[]</a></td><td>
+<p></p>
+         The currently defined roles in the system, including
+  static system-defined roles.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  System.View</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#addRole">AddAuthorizationRole</a>, <a href="#hasPrivilegeOnEntities">HasPrivilegeOnEntities</a>, <a href="#hasPrivilegeOnEntity">HasPrivilegeOnEntity</a>, <a href="#mergePermissions">MergePermissions</a>, <a href="#removeRole">RemoveAuthorizationRole</a>, <a href="#removeEntityPermission">RemoveEntityPermission</a>, <a href="#resetEntityPermissions">ResetEntityPermissions</a>, <a href="#retrieveAllPermissions">RetrieveAllPermissions</a>, <a href="#retrieveEntityPermissions">RetrieveEntityPermissions</a>, <a href="#retrieveRolePermissions">RetrieveRolePermissions</a>, <a href="#setEntityPermissions">SetEntityPermissions</a>, <a href="#updateRole">UpdateAuthorizationRole</a></td>
+</tr>
+</table>
+<br>
+<a id="addRole" name="addRole"></a>
+<h1>AddAuthorizationRole</h1>
+<p></p>
+         Adds a new role.
+  This method will add a user-defined role with given list of privileges
+  and three system-defined privileges, "System.Anonymous", "System.View",
+  and "System.Read".
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Authorization.ModifyRoles</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.AuthorizationManager.html">AuthorizationManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>name</strong></td><td>xsd:string</td><td>
+<p></p>
+         Name of the new role.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>privIds</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         List of privileges to assign to the role.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td>xsd:int</td><td>The roleId assigned to the new role.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AlreadyExists.html">AlreadyExists</a></td><td>Thrown if a role with the given name already exists.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if privIds contains an unknown privilege.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td>Thrown if the role name is empty.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('AddAuthorizationRole-textarea');expandcontent(this, 'AddAuthorizationRole-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="AddAuthorizationRole-div">
+<textarea cols="20" rows="10" name="AddAuthorizationRole-textarea" wrap="off" readonly="1" id="AddAuthorizationRole-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AddAuthorizationRole" type="vim25:AddAuthorizationRoleRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AddAuthorizationRoleResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="xsd:int"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="hasPrivilegeOnEntities" name="hasPrivilegeOnEntities"></a>
+<h1>HasPrivilegeOnEntities</h1>
+<p></p>
+         Check whether a session holds a set of privileges on a set of managed entities.
+  <p>
+  If the session does not exist, false is returned for all privileges of
+  all the entities.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.AuthorizationManager.html">AuthorizationManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>entity</strong><span title="Required Privilege: System.Read" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity[]</a></td><td>
+<p></p>
+         The set of entities on which the privileges are checked.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>sessionId</strong></td><td>xsd:string</td><td>
+<p></p>
+         The session ID to check privileges for. A sesssion ID can be
+                   obtained from <a href="vim.UserSession.html#key">key</a>.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>privId</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         The array of privilege IDs to check.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  System.Read</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.AuthorizationManager.EntityPrivilege.html">EntityPrivilege[]</a></td><td>The privilege check result.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.ManagedObjectNotFound.html">ManagedObjectNotFound</a></td><td>Thrown if a given entity does not exist.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('HasPrivilegeOnEntities-textarea');expandcontent(this, 'HasPrivilegeOnEntities-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="HasPrivilegeOnEntities-div">
+<textarea cols="20" rows="10" name="HasPrivilegeOnEntities-textarea" wrap="off" readonly="1" id="HasPrivilegeOnEntities-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HasPrivilegeOnEntities" type="vim25:HasPrivilegeOnEntitiesRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HasPrivilegeOnEntitiesResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:EntityPrivilege" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="hasPrivilegeOnEntity" name="hasPrivilegeOnEntity"></a>
+<h1>HasPrivilegeOnEntity</h1>
+<p></p>
+         Check whether a session holds a set of privileges on a managed entity.
+  <p>
+  If the session does not exist, false is returned for all privileges.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.AuthorizationManager.html">AuthorizationManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>entity</strong><span title="Required Privilege: System.Read" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity</a></td><td>
+<p></p>
+         The entity on which the privileges are checked.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>sessionId</strong></td><td>xsd:string</td><td>
+<p></p>
+         The session ID to check privileges for. A sesssion ID can be
+                   obtained from <a href="vim.UserSession.html#key">key</a>.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>privId</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         The array of privilege IDs to check.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  System.Read</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td>xsd:boolean[]</td><td>A boolean value for each privilege indicating whether the session holds the privilege.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.ManagedObjectNotFound.html">ManagedObjectNotFound</a></td><td>Thrown if the given entity does not exist.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('HasPrivilegeOnEntity-textarea');expandcontent(this, 'HasPrivilegeOnEntity-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="HasPrivilegeOnEntity-div">
+<textarea cols="20" rows="10" name="HasPrivilegeOnEntity-textarea" wrap="off" readonly="1" id="HasPrivilegeOnEntity-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HasPrivilegeOnEntity" type="vim25:HasPrivilegeOnEntityRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HasPrivilegeOnEntityResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="xsd:boolean" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="mergePermissions" name="mergePermissions"></a>
+<h1>MergePermissions</h1>
+<p></p>
+         Reassigns all permissions of a role to another role.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Authorization.ReassignRolePermissions</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.AuthorizationManager.html">AuthorizationManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>srcRoleId</strong></td><td>xsd:int</td><td>
+<p></p>
+         The ID of the source role providing the permissions 
+                       which are changing.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>dstRoleId</strong></td><td>xsd:int</td><td>
+<p></p>
+         The ID of the destination role to which the 
+                       permissions are reassigned.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AuthMinimumAdminPermission.html">AuthMinimumAdminPermission</a></td><td>Thrown if srcRoleId is the Administrator role, meaning that applying the change would leave the system with no Administrator permission on the root node.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if dstRoleId is the View or Anonymous role or if both role IDs are the same.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NoPermission.html">NoPermission</a></td><td>Thrown if current session does not have any privilege in the source or destination role or "Authorization.ReassignRolePermissions" privilege on the root folder.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if either the source or destination role does not exist.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('MergePermissions-textarea');expandcontent(this, 'MergePermissions-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="MergePermissions-div">
+<textarea cols="20" rows="10" name="MergePermissions-textarea" wrap="off" readonly="1" id="MergePermissions-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="MergePermissions" type="vim25:MergePermissionsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="MergePermissionsResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="removeRole" name="removeRole"></a>
+<h1>RemoveAuthorizationRole</h1>
+<p></p>
+         Removes a role.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Authorization.ModifyRoles</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.AuthorizationManager.html">AuthorizationManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>roleId</strong></td><td>xsd:int</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>failIfUsed</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         If true, prevents the role from being
+                    removed if any permissions are using it.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the role is a system role, meaning it cannot be changed.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the role does not exist.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.RemoveFailed.html">RemoveFailed</a></td><td>Thrown if failIfUsed is true and the role has permissions.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RemoveAuthorizationRole-textarea');expandcontent(this, 'RemoveAuthorizationRole-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RemoveAuthorizationRole-div">
+<textarea cols="20" rows="10" name="RemoveAuthorizationRole-textarea" wrap="off" readonly="1" id="RemoveAuthorizationRole-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveAuthorizationRole" type="vim25:RemoveAuthorizationRoleRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveAuthorizationRoleResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="removeEntityPermission" name="removeEntityPermission"></a>
+<h1>RemoveEntityPermission</h1>
+<p></p>
+         Removes a permission rule from an entity.
+  <p>
+  This will fail with an InvalidArgument fault if called on:  the direct child 
+  folders of a datacenter managed object, the root resource pool of a 
+  ComputeResource or ClusterComputeResource, or a HostSystem that is part of
+  a ComputeResource (Stand-alone Host). These objects always have the same 
+  permissions as their parent.
+  <p>
+  This will fail with an InvalidArgument fault if called on a fault-tolerance (FT) 
+  secondary VirtualMachine. Such a VirtualMachine always has the same permissions 
+  as its FT primary VirtualMachine.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.AuthorizationManager.html">AuthorizationManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>entity</strong><span title="Required Privilege: Authorization.ModifyPermissions" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity</a></td><td>
+<p></p>
+         Entity on which a permission is removed.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>user</strong></td><td>xsd:string</td><td>
+<p></p>
+         User or group for which the permission is defined.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>isGroup</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         True, if user refers to a group name; false, for a user name.
+      <br>
+</td>
+</tr>
+</table>
+<span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  Authorization.ModifyPermissions</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AuthMinimumAdminPermission.html">AuthMinimumAdminPermission</a></td><td>Thrown if this change would leave the system with no Administrator permission on the root node.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if one of the new role IDs is the View or Anonymous role, or the entity does not support removing permissions.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NoPermission.html">NoPermission</a></td><td>Thrown if current session does not have any privilege in the permission to be removed or "Authorization.ModifyPermissions" privilege on the entity.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if a permission for this entity and user or group does not exist.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RemoveEntityPermission-textarea');expandcontent(this, 'RemoveEntityPermission-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RemoveEntityPermission-div">
+<textarea cols="20" rows="10" name="RemoveEntityPermission-textarea" wrap="off" readonly="1" id="RemoveEntityPermission-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveEntityPermission" type="vim25:RemoveEntityPermissionRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveEntityPermissionResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="resetEntityPermissions" name="resetEntityPermissions"></a>
+<h1>ResetEntityPermissions</h1>
+<p></p>
+         Update the entire set of permissions defined on an entity.  Any
+  existing permissions on the entity are removed and replaced with the
+  provided set.
+  <p>
+  If a permission is specified multiple times for the same user or group, the
+  last permission specified takes effect.
+  <p>
+  The operation is transactional per permission and could partially fail.  The
+  updates are performed in the order of the permission array argument.  The first
+  failed update will abort the operation and throw the appropriate exception. When 
+  the operation aborts, any permissions that have not yet been removed are left in 
+  their original state.
+  <p>
+  After updates are applied, original permissions that are not in the new set
+  are removed.  A failure to remove a permission, such as a violation of
+  the minimum administrator permission rule, will abort the operation and could 
+  leave remaining original permissions still effective on the entity.
+  <p>    
+  This will fail with an InvalidArgument fault if called on: the direct child 
+  folders of a datacenter managed object, the root resource pool of a 
+  ComputeResource or ClusterComputeResource, or a HostSystem that is part of
+  a ComputeResource (Stand-alone Host). These objects always have the same 
+  permissions as their parent.
+  <p>
+  This will fail with an InvalidArgument fault if called on a fault-tolerance (FT) 
+  secondary VirtualMachine. Such a VirtualMachine always has the same permissions 
+  as its FT primary VirtualMachine.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.AuthorizationManager.html">AuthorizationManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>entity</strong><span title="Required Privilege: Authorization.ModifyPermissions" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity</a></td><td>
+<p></p>
+         The entity on which permissions are updated.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>permission</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.AuthorizationManager.Permission.html">Permission[]</a></td><td>
+<p></p>
+         The list of Permission objects that define
+                           the new rules for access to the entity and
+                           potentially entities below it.  If the list
+                           is empty, all permissions on the entity are removed.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  Authorization.ModifyPermissions</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AuthMinimumAdminPermission.html">AuthMinimumAdminPermission</a></td><td>Thrown if this change would leave the system with no Administrator permission on the root node, or it would grant further permission to a user or group who already has Administrator permission on the root node.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if one of the new role IDs is the View or Anonymous role, or the entity does not support assigning permissions.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.ManagedObjectNotFound.html">ManagedObjectNotFound</a></td><td>Thrown if the given entity does not exist.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NoPermission.html">NoPermission</a></td><td>Thrown if current session does not have any privilege in the updated permission or "Authorization.ModifyPermissions" privilege on the entity.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if a permission for this entity and user or group does not exist.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.UserNotFound.html">UserNotFound</a></td><td>Thrown if one of the given users or groups does not exist.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ResetEntityPermissions-textarea');expandcontent(this, 'ResetEntityPermissions-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ResetEntityPermissions-div">
+<textarea cols="20" rows="10" name="ResetEntityPermissions-textarea" wrap="off" readonly="1" id="ResetEntityPermissions-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ResetEntityPermissions" type="vim25:ResetEntityPermissionsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ResetEntityPermissionsResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="retrieveAllPermissions" name="retrieveAllPermissions"></a>
+<h1>RetrieveAllPermissions</h1>
+<p></p>
+         Finds all permissions defined in the system.
+  The result is restricted to the managed entities visible to the
+  user making the call.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.AuthorizationManager.html">AuthorizationManager</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.AuthorizationManager.Permission.html">Permission[]</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RetrieveAllPermissions-textarea');expandcontent(this, 'RetrieveAllPermissions-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RetrieveAllPermissions-div">
+<textarea cols="20" rows="10" name="RetrieveAllPermissions-textarea" wrap="off" readonly="1" id="RetrieveAllPermissions-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrieveAllPermissions" type="vim25:RetrieveAllPermissionsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrieveAllPermissionsResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:Permission" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="retrieveEntityPermissions" name="retrieveEntityPermissions"></a>
+<h1>RetrieveEntityPermissions</h1>
+<p></p>
+         Gets permissions defined on or effective on a managed entity.
+  This returns the actual permission objects defined in the system for all
+  users and groups relative to the managed entity. The inherited
+  flag specifies whether or not to include permissions defined by the
+  parents of this entity that propagate to this entity.
+  <p>
+  For complex entities, the entity reported as defining the permission may
+  be either the parent or a child entity belonging to the complex entity.
+  <p>
+  The purpose of this method is to discover permissions
+  for administration purposes, not to determine the current
+  permissions. The current user's permissions are found on the <a href="vim.ManagedEntity.html#effectiveRole">effectiveRole</a> property of the user's ManagedEntity.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.AuthorizationManager.html">AuthorizationManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>entity</strong><span title="Required Privilege: System.Read" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>inherited</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Whether or not to include propagating permissions
+                   defined by parent entities.
+      <br>
+</td>
+</tr>
+</table>
+<span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  System.Read</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.AuthorizationManager.Permission.html">Permission[]</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.ManagedObjectNotFound.html">ManagedObjectNotFound</a></td><td>Thrown if the entity does not exist.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RetrieveEntityPermissions-textarea');expandcontent(this, 'RetrieveEntityPermissions-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RetrieveEntityPermissions-div">
+<textarea cols="20" rows="10" name="RetrieveEntityPermissions-textarea" wrap="off" readonly="1" id="RetrieveEntityPermissions-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrieveEntityPermissions" type="vim25:RetrieveEntityPermissionsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrieveEntityPermissionsResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:Permission" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="retrieveRolePermissions" name="retrieveRolePermissions"></a>
+<h1>RetrieveRolePermissions</h1>
+<p></p>
+         Finds all the permissions that use a particular role.
+  The result is restricted to managed entities that are visible to the
+  user making the call.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.AuthorizationManager.html">AuthorizationManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>roleId</strong></td><td>xsd:int</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.AuthorizationManager.Permission.html">Permission[]</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the role does not exist.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RetrieveRolePermissions-textarea');expandcontent(this, 'RetrieveRolePermissions-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RetrieveRolePermissions-div">
+<textarea cols="20" rows="10" name="RetrieveRolePermissions-textarea" wrap="off" readonly="1" id="RetrieveRolePermissions-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrieveRolePermissions" type="vim25:RetrieveRolePermissionsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RetrieveRolePermissionsResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:Permission" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="setEntityPermissions" name="setEntityPermissions"></a>
+<h1>SetEntityPermissions</h1>
+<p></p>
+         Defines one or more permission rules on an entity or updates rules if already
+  present for the given user or group on the entity.
+  <p>
+  If a permission is specified multiple times for the same user or group, then the
+  last permission specified takes effect.
+  <p>
+  The operation is applied transactionally per permission and is applied to the 
+  entity following the order of the elements in the permission array argument. This 
+  means that if a failure occurs, the method terminates at that point in the 
+  permission array with an exception, leaving at least one and as many as all 
+  permissions unapplied.
+  <p>
+  This will fail with an InvalidArgument fault if called on: the direct child 
+  folders of a datacenter managed object, the root resource pool of a 
+  ComputeResource or ClusterComputeResource, or a HostSystem that is part of
+  a ComputeResource (Stand-alone Host). These objects always have the same 
+  permissions as their parent. 
+  <p>
+  This will fail with an InvalidArgument fault if called on a fault-tolerance (FT) 
+  secondary VirtualMachine. Such a VirtualMachine always has the same permissions 
+  as its FT primary VirtualMachine.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.AuthorizationManager.html">AuthorizationManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>entity</strong><span title="Required Privilege: Authorization.ModifyPermissions" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ManagedEntity.html">ManagedEntity</a></td><td>
+<p></p>
+         The entity on which to set permissions.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>permission</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.AuthorizationManager.Permission.html">Permission[]</a></td><td>
+<p></p>
+         An array of specifications for permissions on the entity.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  Authorization.ModifyPermissions</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AuthMinimumAdminPermission.html">AuthMinimumAdminPermission</a></td><td>Thrown if this change would leave the system with no Administrator permission on the root node, or it would grant further permission to a user or group who already has Administrator permission on the root node.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if one of the new role IDs is the View or Anonymous role, or the entity does not support assigning permissions.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.ManagedObjectNotFound.html">ManagedObjectNotFound</a></td><td>Thrown if the given entity does not exist.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NoPermission.html">NoPermission</a></td><td>Thrown if current session does not have any privilege in any permission that being set or "Authorization.ModifyPermissions" privilege on the entity.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if a permission's roleId is not valid.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.UserNotFound.html">UserNotFound</a></td><td>Thrown if a given user or group does not exist.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('SetEntityPermissions-textarea');expandcontent(this, 'SetEntityPermissions-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="SetEntityPermissions-div">
+<textarea cols="20" rows="10" name="SetEntityPermissions-textarea" wrap="off" readonly="1" id="SetEntityPermissions-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="SetEntityPermissions" type="vim25:SetEntityPermissionsRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="SetEntityPermissionsResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateRole" name="updateRole"></a>
+<h1>UpdateAuthorizationRole</h1>
+<p></p>
+         Updates a role's name or privileges.
+  If the new set of privileges are assigned to the role, the 
+  system-defined privileges, "System.Anonymous", "System.View",
+  and "System.Read" will be assigned to the role too.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Authorization.ModifyRoles</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.AuthorizationManager.html">AuthorizationManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>roleId</strong></td><td>xsd:int</td><td>
+<p></p>
+         The ID of the role that is updated.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>newName</strong></td><td>xsd:string</td><td>
+<p></p>
+         The new name for the role.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>privIds</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         The new set of privileges to assign to the role.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AlreadyExists.html">AlreadyExists</a></td><td>Thrown if another role with the given name already exists.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the role is a system role, meaning it cannot be changed.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.InvalidName.html">InvalidName</a></td><td>Thrown if the new role name is empty.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NoPermission.html">NoPermission</a></td><td>Thrown if current session does not have any privilege that being updated in the new role or "Authorization.ModifyRoles" privilege on the root folder.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the role does not exist, or if a privilege in the list cannot be found.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateAuthorizationRole-textarea');expandcontent(this, 'UpdateAuthorizationRole-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateAuthorizationRole-div">
+<textarea cols="20" rows="10" name="UpdateAuthorizationRole-textarea" wrap="off" readonly="1" id="UpdateAuthorizationRole-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateAuthorizationRole" type="vim25:UpdateAuthorizationRoleRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateAuthorizationRoleResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

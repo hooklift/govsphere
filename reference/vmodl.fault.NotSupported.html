@@ -1,0 +1,104 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vmodl.fault.NotSupported" name="vmodl.fault.NotSupported"></a>
+<h1>Fault - NotSupported</h1>
+<dl>
+<dt>Thrown by</dt>
+<dd>
+<a href="vim.SessionManager.html#acquireLocalTicket">AcquireLocalTicket</a>, <a href="vim.VirtualMachine.html#acquireMksTicket">AcquireMksTicket</a>, <a href="vim.DistributedVirtualSwitch.html#addPortgroups">AddDVPortgroup_Task</a>, <a href="vim.DistributedVirtualSwitch.html#addNetworkResourcePool">AddNetworkResourcePool</a>, <a href="vim.host.NetworkSystem.html#addServiceConsoleVirtualNic">AddServiceConsoleVirtualNic</a>, <a href="vim.Folder.html#addStandaloneHost">AddStandaloneHost_Task</a>, <a href="vim.Task.html#cancel">CancelTask</a>, <a href="vim.vm.check.ProvisioningChecker.html#checkRelocate">CheckRelocate_Task</a>, <a href="vim.SessionManager.html#cloneSession">CloneSession</a>, <a href="vim.VirtualApp.html#clone">CloneVApp_Task</a>, <a href="vim.VirtualMachine.html#clone">CloneVM_Task</a>, <a href="vim.StorageResourceManager.html#ConfigureDatastoreIORM">ConfigureDatastoreIORM_Task</a>, <a href="vim.host.DatastoreSystem.html#configureDatastorePrincipal">ConfigureDatastorePrincipal</a>, <a href="vim.ResourcePool.html#createVm">CreateChildVM_Task</a>, <a href="vim.Folder.html#createCluster">CreateCluster</a>, <a href="vim.Folder.html#createClusterEx">CreateClusterEx</a>, <a href="vim.Folder.html#createDatacenter">CreateDatacenter</a>, <a href="vim.host.DiagnosticSystem.html#createDiagnosticPartition">CreateDiagnosticPartition</a>, <a href="vim.Folder.html#createDistributedVirtualSwitch">CreateDVS_Task</a>, <a href="vim.ResourcePool.html#createResourcePool">CreateResourcePool</a>, <a href="vim.VirtualMachine.html#createSecondary">CreateSecondaryVM_Task</a>, <a href="vim.VirtualMachine.html#createSnapshot">CreateSnapshot_Task</a>, <a href="vim.Folder.html#createStoragePod">CreateStoragePod</a>, <a href="vim.ResourcePool.html#createVApp">CreateVApp</a>, <a href="vim.Folder.html#createVm">CreateVM_Task</a>, <a href="vim.host.DatastoreSystem.html#createVmfsDatastore">CreateVmfsDatastore</a>, <a href="vmodl.query.PropertyCollector.html#destroy">DestroyPropertyCollector</a>, <a href="vim.host.CpuSchedulerSystem.html#disableHyperThreading">DisableHyperThreading</a>, <a href="vim.HostSystem.html#disconnect">DisconnectHost_Task</a>, <a href="vim.dvs.DistributedVirtualSwitchManager.html#lookupPortgroup">DVSManagerLookupDvPortGroup</a>, <a href="vim.host.CpuSchedulerSystem.html#enableHyperThreading">EnableHyperThreading</a>, <a href="vim.DistributedVirtualSwitch.html#enableNetworkResourceManagement">EnableNetworkResourceManagement</a>, <a href="vim.host.DatastoreSystem.html#expandVmfsDatastore">ExpandVmfsDatastore</a>, <a href="vim.host.DatastoreSystem.html#extendVmfsDatastore">ExtendVmfsDatastore</a>, <a href="vim.ResourcePool.html#importVApp">ImportVApp</a>, <a href="vim.SessionManager.html#loginBySSPI">LoginBySSPI</a>, <a href="vim.DistributedVirtualSwitch.html#lookupPortgroup">LookupDvPortGroup</a>, <a href="vim.VirtualMachine.html#markAsTemplate">MarkAsTemplate</a>, <a href="vim.VirtualMachine.html#markAsVirtualMachine">MarkAsVirtualMachine</a>, <a href="vim.DistributedVirtualSwitch.html#merge">MergeDvs_Task</a>, <a href="vim.VirtualMachine.html#migrate">MigrateVM_Task</a>, <a href="vim.DistributedVirtualSwitch.html#movePort">MoveDVPort_Task</a>, <a href="vim.Folder.html#moveInto">MoveIntoFolder_Task</a>, <a href="vim.DistributedVirtualSwitch.html#performProductSpecOperation">PerformDvsProductSpecOperation_Task</a>, <a href="vim.HostSystem.html#enterStandbyMode">PowerDownHostToStandBy_Task</a>, <a href="vim.VirtualMachine.html#powerOff">PowerOffVM_Task</a>, <a href="vim.VirtualApp.html#powerOn">PowerOnVApp_Task</a>, <a href="vim.VirtualMachine.html#powerOn">PowerOnVM_Task</a>, <a href="vim.HostSystem.html#exitStandbyMode">PowerUpHostFromStandBy_Task</a>, <a href="vim.VirtualMachine.html#promoteDisks">PromoteDisks_Task</a>, <a href="vim.host.DatastoreSystem.html#queryAvailableDisksForVmfs">QueryAvailableDisksForVmfs</a>, <a href="vim.host.DiagnosticSystem.html#queryAvailablePartition">QueryAvailablePartition</a>, <a href="vim.Datacenter.html#queryConnectionInfo">QueryConnectionInfo</a>, <a href="vim.VirtualMachine.html#queryFaultToleranceCompatibility">QueryFaultToleranceCompatibility</a>, <a href="vim.HostSystem.html#queryOverhead">QueryMemoryOverhead</a>, <a href="vim.HostSystem.html#queryOverheadEx">QueryMemoryOverheadEx</a>, <a href="vim.host.NetworkSystem.html#queryNetworkHint">QueryNetworkHint</a>, <a href="vim.host.DiagnosticSystem.html#queryPartitionCreateDesc">QueryPartitionCreateDesc</a>, <a href="vim.host.DiagnosticSystem.html#queryPartitionCreateOptions">QueryPartitionCreateOptions</a>, <a href="vim.host.DatastoreSystem.html#queryVmfsDatastoreCreateOptions">QueryVmfsDatastoreCreateOptions</a>, <a href="vim.host.DatastoreSystem.html#queryVmfsDatastoreExpandOptions">QueryVmfsDatastoreExpandOptions</a>, <a href="vim.host.DatastoreSystem.html#queryVmfsDatastoreExtendOptions">QueryVmfsDatastoreExtendOptions</a>, <a href="vim.HostSystem.html#reboot">RebootHost_Task</a>, <a href="vim.ClusterComputeResource.html#recommendHostsForVm">RecommendHostsForVm</a>, <a href="vim.DistributedVirtualSwitch.html#reconfigurePort">ReconfigureDVPort_Task</a>, <a href="vim.dvs.DistributedVirtualPortgroup.html#reconfigure">ReconfigureDVPortgroup_Task</a>, <a href="vim.DistributedVirtualSwitch.html#reconfigure">ReconfigureDvs_Task</a>, <a href="vim.HostSystem.html#reconfigureDAS">ReconfigureHostForDAS_Task</a>, <a href="vim.host.MemoryManagerSystem.html#reconfigureServiceConsoleReservation">ReconfigureServiceConsoleReservation</a>, <a href="vim.host.MemoryManagerSystem.html#reconfigureVirtualMachineReservation">ReconfigureVirtualMachineReservation</a>, <a href="vim.HostSystem.html#reconnect">ReconnectHost_Task</a>, <a href="vim.ResourcePool.html#registerVm">RegisterChildVM_Task</a>, <a href="vim.Folder.html#registerVm">RegisterVM_Task</a>, <a href="vim.VirtualMachine.html#reloadFromPath">reloadVirtualMachineFromPath_Task</a>, <a href="vim.VirtualMachine.html#relocate">RelocateVM_Task</a>, <a href="vim.VirtualMachine.html#removeAllSnapshots">RemoveAllSnapshots_Task</a>, <a href="vim.DistributedVirtualSwitch.html#removeNetworkResourcePool">RemoveNetworkResourcePool</a>, <a href="vim.host.NetworkSystem.html#removeServiceConsoleVirtualNic">RemoveServiceConsoleVirtualNic</a>, <a href="vim.vm.Snapshot.html#rename">RenameSnapshot</a>, <a href="vim.PerformanceManager.html#resetCounterLevelMapping">ResetCounterLevelMapping</a>, <a href="vim.VirtualMachine.html#resetGuestInformation">ResetGuestInformation</a>, <a href="vim.VirtualMachine.html#reset">ResetVM_Task</a>, <a href="vim.host.NetworkSystem.html#restartServiceConsoleVirtualNic">RestartServiceConsoleVirtualNic</a>, <a href="vim.UserDirectory.html#retrieveUserGroups">RetrieveUserGroups</a>, <a href="vim.VirtualMachine.html#revertToCurrentSnapshot">RevertToCurrentSnapshot_Task</a>, <a href="vim.vm.Snapshot.html#revert">RevertToSnapshot_Task</a>, <a href="vim.host.DiagnosticSystem.html#selectActivePartition">SelectActivePartition</a>, <a href="vim.VirtualMachine.html#setDisplayTopology">SetDisplayTopology</a>, <a href="vim.VirtualMachine.html#setScreenResolution">SetScreenResolution</a>, <a href="vim.HostSystem.html#shutdown">ShutdownHost_Task</a>, <a href="vim.VirtualMachine.html#startRecording">StartRecording_Task</a>, <a href="vim.VirtualMachine.html#startReplaying">StartReplaying_Task</a>, <a href="vim.VirtualMachine.html#stopRecording">StopRecording_Task</a>, <a href="vim.VirtualMachine.html#stopReplaying">StopReplaying_Task</a>, <a href="vim.VirtualMachine.html#suspend">SuspendVM_Task</a>, <a href="vim.VirtualMachine.html#terminate">TerminateVM</a>, <a href="vim.host.ServiceSystem.html#uninstall">UninstallService</a>, <a href="vim.Folder.html#unregisterAndDestroy">UnregisterAndDestroy_Task</a>, <a href="vim.host.BootDeviceSystem.html#updateBootDevice">UpdateBootDevice</a>, <a href="vim.host.NetworkSystem.html#updateConsoleIpRouteConfig">UpdateConsoleIpRouteConfig</a>, <a href="vim.PerformanceManager.html#updateCounterLevelMapping">UpdateCounterLevelMapping</a>, <a href="vim.host.NetworkSystem.html#updateDnsConfig">UpdateDnsConfig</a>, <a href="vim.DistributedVirtualSwitch.html#updateCapability">UpdateDvsCapability</a>, <a href="vim.DistributedVirtualSwitch.html#updateHealthCheckConfig">UpdateDVSHealthCheckConfig_Task</a>, <a href="vim.dvs.VmwareDistributedVirtualSwitch.html#updateLacpGroupConfig">UpdateDVSLacpGroupConfig_Task</a>, <a href="vim.host.NetworkSystem.html#updateIpRouteConfig">UpdateIpRouteConfig</a>, <a href="vim.host.NetworkSystem.html#updateIpRouteTableConfig">UpdateIpRouteTableConfig</a>, <a href="vim.VirtualApp.html#updateLinkedChildren">UpdateLinkedChildren</a>, <a href="vim.host.DatastoreSystem.html#updateLocalSwapDatastore">UpdateLocalSwapDatastore</a>, <a href="vim.host.NetworkSystem.html#updateNetworkConfig">UpdateNetworkConfig</a>, <a href="vim.DistributedVirtualSwitch.html#updateNetworkResourcePool">UpdateNetworkResourcePool</a>, <a href="vim.host.NetworkSystem.html#updatePhysicalNicLinkSpeed">UpdatePhysicalNicLinkSpeed</a>, <a href="vim.host.NetworkSystem.html#updateServiceConsoleVirtualNic">UpdateServiceConsoleVirtualNic</a>, <a href="vim.Datastore.html#updateVirtualMachineFiles">UpdateVirtualMachineFiles_Task</a>, <a href="vim.host.NetworkSystem.html#updateVirtualSwitch">UpdateVirtualSwitch</a>, <a href="vim.VirtualMachine.html#upgradeTools">UpgradeTools_Task</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.fault.HostAccessRestrictedToManagementServer.html">HostAccessRestrictedToManagementServer</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.RuntimeFault.html">RuntimeFault</a>
+</dd>
+<p></p>
+</dl>
+<H2>Fault 
+                  Description</H2>
+<p></p>
+         Thrown if the method is not supported on the
+  server. Not all methods are supported on all servers
+  (for example, an ESX Server host supports less functionality than
+  a VirtualCenter server). A feature might also be disabled
+  due to missing liceneses.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.RuntimeFault.html">RuntimeFault</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.MethodFault.html">MethodFault</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.MethodFault.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.MethodFault.html#dynamicType">dynamicType</a>, <a href="vmodl.MethodFault.html#faultCause">faultCause</a>, <a href="vmodl.MethodFault.html#faultMessage">faultMessage</a></td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="NotSupported">
+            <complexContent>
+               <extension base="vim25:RuntimeFault">
+                  <sequence>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

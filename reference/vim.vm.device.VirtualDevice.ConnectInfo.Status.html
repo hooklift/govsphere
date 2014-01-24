@@ -1,0 +1,97 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.device.VirtualDevice.ConnectInfo.Status" name="vim.vm.device.VirtualDevice.ConnectInfo.Status"></a>
+<h1>Enum - 
+						VirtualDeviceConnectInfoStatus</h1>
+<dl>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<br>
+<h2>Enum Description</h2>
+<p></p>
+         Specifies the connectable virtual device status.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Enum Constants</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><a id="ok" name="ok"></a>ok</td><td>
+      The device is working correctly.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="recoverableError" name="recoverableError"></a>recoverableError</td><td>
+      The device has reported a recoverable error. For example,
+  attempting to connect to floppy device that is being used by
+  another virtual machine or some other program would result in
+  this status.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="unrecoverableError" name="unrecoverableError"></a>unrecoverableError</td><td>
+      The device cannot be used. For example, attempting to connect to
+  a floppy device that does not exist would result in this status.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="untried" name="untried"></a>untried</td><td>
+      The device status is unknown, or it has not been requested to
+  connect when the VM is powered on.
+   <br>
+</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <simpleType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VirtualDeviceConnectInfoStatus">
+            <restriction base="xsd:string">
+               <enumeration value="ok"/>
+               <enumeration value="recoverableError"/>
+               <enumeration value="unrecoverableError"/>
+               <enumeration value="untried"/>
+            </restriction>
+         </simpleType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

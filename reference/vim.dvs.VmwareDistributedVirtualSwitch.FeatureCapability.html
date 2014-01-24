@@ -1,0 +1,148 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.dvs.VmwareDistributedVirtualSwitch.FeatureCapability" name="vim.dvs.VmwareDistributedVirtualSwitch.FeatureCapability"></a>
+<h1>Data Object - VMwareDVSFeatureCapability</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.DistributedVirtualSwitch.FeatureCapability.html">DVSFeatureCapability</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.dvs.VmwareDistributedVirtualSwitch.LacpFeatureCapability.html">VMwareDvsLacpCapability</a>, <a href="vim.dvs.VmwareDistributedVirtualSwitch.VspanFeatureCapability.html">VMwareDVSVspanCapability</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         Indicators of support for version-specific DVS features that are only
+  available on a VMware-class switch.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="ipfixSupported" name="ipfixSupported"></a><strong>ipfixSupported</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to indicate whether IPFIX(NetFlow) is supported on the
+  vSphere Distributed Switch.
+  IPFIX is supported in vSphere Distributed Switch Version 5.0 or later.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="lacpCapability" name="lacpCapability"></a><strong>lacpCapability</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.dvs.VmwareDistributedVirtualSwitch.LacpFeatureCapability.html">VMwareDvsLacpCapability</a></td><td>
+<p></p>
+         The support for version-specific Link Aggregation Control Protocol.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="lldpSupported" name="lldpSupported"></a><strong>lldpSupported</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to indicate whether LLDP(Link Layer Discovery Protocol) is supported on the
+  vSphere Distributed Switch.
+  LLDP is supported in vSphere Distributed Switch Version 5.0 or later.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vspanCapability" name="vspanCapability"></a><strong>vspanCapability</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.dvs.VmwareDistributedVirtualSwitch.VspanFeatureCapability.html">VMwareDVSVspanCapability</a></td><td>
+<p></p>
+         The support for version-specific Distributed Port Mirroring sessions.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vspanSupported" name="vspanSupported"></a><strong>vspanSupported</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to indicate whether vspan(DVMirror) is supported on the
+  vSphere Distributed Switch.
+  Distributed Port Mirroring is supported in vSphere Distributed Switch Version 5.0 or later.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.DistributedVirtualSwitch.FeatureCapability.html">DVSFeatureCapability</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.DistributedVirtualSwitch.FeatureCapability.html#backupRestoreCapability">backupRestoreCapability</a>, <a href="vim.DistributedVirtualSwitch.FeatureCapability.html#healthCheckCapability">healthCheckCapability</a>, <a href="vim.DistributedVirtualSwitch.FeatureCapability.html#networkFilterSupported">networkFilterSupported</a>, <a href="vim.DistributedVirtualSwitch.FeatureCapability.html#networkResourceManagementCapability">networkResourceManagementCapability</a>, <a href="vim.DistributedVirtualSwitch.FeatureCapability.html#networkResourceManagementSupported">networkResourceManagementSupported</a>, <a href="vim.DistributedVirtualSwitch.FeatureCapability.html#networkResourcePoolHighShareValue">networkResourcePoolHighShareValue</a>, <a href="vim.DistributedVirtualSwitch.FeatureCapability.html#nicTeamingPolicy">nicTeamingPolicy</a>, <a href="vim.DistributedVirtualSwitch.FeatureCapability.html#rollbackCapability">rollbackCapability</a>, <a href="vim.DistributedVirtualSwitch.FeatureCapability.html#vmDirectPathGen2Supported">vmDirectPathGen2Supported</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VMwareDVSFeatureCapability">
+            <complexContent>
+               <extension base="vim25:DVSFeatureCapability">
+                  <sequence>
+                     <element name="vspanSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="lldpSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="ipfixSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="vspanCapability" type="vim25:VMwareDVSVspanCapability" minOccurs="0"/>
+                     <element name="lacpCapability" type="vim25:VMwareDvsLacpCapability" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

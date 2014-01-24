@@ -1,0 +1,197 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.cluster.ConfigInfoEx" name="vim.cluster.ConfigInfoEx"></a>
+<h1>Data Object - ClusterConfigInfoEx</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.ComputeResource.ConfigInfo.html">ComputeResourceConfigInfo</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.cluster.DasConfigInfo.html">ClusterDasConfigInfo</a>, <a href="vim.cluster.DasVmConfigInfo.html">ClusterDasVmConfigInfo</a>, <a href="vim.cluster.DpmConfigInfo.html">ClusterDpmConfigInfo</a>, <a href="vim.cluster.DpmHostConfigInfo.html">ClusterDpmHostConfigInfo</a>, <a href="vim.cluster.DrsConfigInfo.html">ClusterDrsConfigInfo</a>, <a href="vim.cluster.DrsVmConfigInfo.html">ClusterDrsVmConfigInfo</a>, <a href="vim.cluster.GroupInfo.html">ClusterGroupInfo</a>, <a href="vim.cluster.RuleInfo.html">ClusterRuleInfo</a>, <a href="vim.vsan.cluster.ConfigInfo.html">VsanClusterConfigInfo</a>, <a href="vim.vsan.host.ConfigInfo.html">VsanHostConfigInfo</a>
+</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The <a href="vim.cluster.ConfigInfoEx.html">ClusterConfigInfoEx</a> data object describes a complete cluster
+  configuration. For information about configuring a cluster, see
+  <a href="vim.cluster.ConfigSpecEx.html">ClusterConfigSpecEx</a>.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="dasConfig" name="dasConfig"></a><strong>dasConfig</strong></td><td><a href="vim.cluster.DasConfigInfo.html">ClusterDasConfigInfo</a></td><td>
+<p></p>
+         Cluster-wide configuration of the vSphere HA service.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="dasVmConfig" name="dasVmConfig"></a><strong>dasVmConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.cluster.DasVmConfigInfo.html">ClusterDasVmConfigInfo[]</a></td><td>
+<p></p>
+         List of virtual machine configurations for the vSphere HA
+  service. Each entry applies to one virtual machine.
+  <p>
+  If a virtual machine is not specified in this array, the service uses
+  the default settings for that virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="dpmConfigInfo" name="dpmConfigInfo"></a><strong>dpmConfigInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.cluster.DpmConfigInfo.html">ClusterDpmConfigInfo</a></td><td>
+<p></p>
+         Cluster-wide configuration of the VMware DPM service.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="dpmHostConfig" name="dpmHostConfig"></a><strong>dpmHostConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.cluster.DpmHostConfigInfo.html">ClusterDpmHostConfigInfo[]</a></td><td>
+<p></p>
+         List of host configurations for the VMware DPM
+  service. Each entry applies to one host.
+  <p>
+  If a host is not specified in this array, the service uses
+  the cluster default settings for that host.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="drsConfig" name="drsConfig"></a><strong>drsConfig</strong></td><td><a href="vim.cluster.DrsConfigInfo.html">ClusterDrsConfigInfo</a></td><td>
+<p></p>
+         Cluster-wide configuration of the VMware DRS service.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="drsVmConfig" name="drsVmConfig"></a><strong>drsVmConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.cluster.DrsVmConfigInfo.html">ClusterDrsVmConfigInfo[]</a></td><td>
+<p></p>
+         List of virtual machine configurations for the VMware DRS
+  service. Each entry applies to one virtual machine.
+  <p>
+  If a virtual machine is not specified in this array, the service uses
+  the default settings for that virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="group" name="group"></a><strong>group</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.cluster.GroupInfo.html">ClusterGroupInfo[]</a></td><td>
+<p></p>
+         Cluster-wide groups.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="rule" name="rule"></a><strong>rule</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.cluster.RuleInfo.html">ClusterRuleInfo[]</a></td><td>
+<p></p>
+         Cluster-wide rules.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vsanConfigInfo" name="vsanConfigInfo"></a><strong>vsanConfigInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vsan.cluster.ConfigInfo.html">VsanClusterConfigInfo</a></td><td>
+<p></p>
+         Cluster-wide configuration of the VMware VSAN service.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vsanHostConfig" name="vsanHostConfig"></a><strong>vsanHostConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vsan.host.ConfigInfo.html">VsanHostConfigInfo[]</a></td><td>
+<p></p>
+         List of host configurations for the VMware VSAN service.
+ Each entry applies to one host.
+ <p>
+ If a host is not specified in this array, the service uses
+ the cluster default settings for that host.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.ComputeResource.ConfigInfo.html">ComputeResourceConfigInfo</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.ComputeResource.ConfigInfo.html#defaultHardwareVersionKey">defaultHardwareVersionKey</a>, <a href="vim.ComputeResource.ConfigInfo.html#spbmEnabled">spbmEnabled</a>, <a href="vim.ComputeResource.ConfigInfo.html#vmSwapPlacement">vmSwapPlacement</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ClusterConfigInfoEx">
+            <complexContent>
+               <extension base="vim25:ComputeResourceConfigInfo">
+                  <sequence>
+                     <element name="dasConfig" type="vim25:ClusterDasConfigInfo"/>
+                     <element name="dasVmConfig" type="vim25:ClusterDasVmConfigInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="drsConfig" type="vim25:ClusterDrsConfigInfo"/>
+                     <element name="drsVmConfig" type="vim25:ClusterDrsVmConfigInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="rule" type="vim25:ClusterRuleInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="dpmConfigInfo" type="vim25:ClusterDpmConfigInfo" minOccurs="0"/>
+                     <element name="dpmHostConfig" type="vim25:ClusterDpmHostConfigInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="vsanConfigInfo" type="vim25:VsanClusterConfigInfo" minOccurs="0"/>
+                     <element name="vsanHostConfig" type="vim25:VsanHostConfigInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="group" type="vim25:ClusterGroupInfo" minOccurs="0" maxOccurs="unbounded"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.dvs.TrafficRule" name="vim.dvs.TrafficRule"></a>
+<h1>Data Object - DvsTrafficRule</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.dvs.TrafficRuleset.html#field_detail">DvsTrafficRuleset</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.dvs.TrafficRule.Action.html">DvsNetworkRuleAction</a>, <a href="vim.dvs.TrafficRule.Qualifier.html">DvsNetworkRuleQualifier</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 5.5</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This class defines a single rule that will be applied to network traffic.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="action" name="action"></a><strong>action</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.dvs.TrafficRule.Action.html">DvsNetworkRuleAction</a></td><td>
+<p></p>
+         Action to be applied for this rule.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="description" name="description"></a><strong>description</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Description of the rule
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="direction" name="direction"></a><strong>direction</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Whether this rule needs to be applied to incoming packets,
+
+  to outgoing packets or both.
+
+  See RuleDirectionType for valid values.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="key" name="key"></a><strong>key</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The key of the rule
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="qualifier" name="qualifier"></a><strong>qualifier</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.dvs.TrafficRule.Qualifier.html">DvsNetworkRuleQualifier[]</a></td><td>
+<p></p>
+         List of Network rule qualifiers. 'AND' of this array of
+
+  network rule qualifiers is applied as one network traffic rule.
+
+  If the TrafficRule belongs to
+
+  <a href="vim.dvs.DistributedVirtualPort.FilterPolicy.html">DvsFilterPolicy</a> :
+
+  There can be a maximum of 1 <a href="vim.dvs.TrafficRule.IpQualifier.html">DvsIpNetworkRuleQualifier</a>,
+
+  1 <a href="vim.dvs.TrafficRule.MacQualifier.html">DvsMacNetworkRuleQualifier</a> and
+
+  1 <a href="vim.dvs.TrafficRule.SystemTrafficQualifier.html">DvsSystemTrafficNetworkRuleQualifier</a> for a total of
+
+  3 <a href="vim.dvs.TrafficRule.html#qualifier">qualifier</a>
+
+  If the TrafficRule belongs to
+
+  <a href="vim.dvs.StatefulFirewallPolicy.html">DvsStatefulFirewallPolicy</a> :
+
+  There can be only 1 <a href="vim.dvs.TrafficRule.Qualifier.html">DvsNetworkRuleQualifier</a> in
+
+  <a href="vim.dvs.TrafficRule.html#qualifier">qualifier</a>
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="sequence" name="sequence"></a><strong>sequence</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Sequence of this rule. i.e, the order in which this rule appears
+
+  in the ruleset.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DvsTrafficRule">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="key" type="xsd:string" minOccurs="0"/>
+                     <element name="description" type="xsd:string" minOccurs="0"/>
+                     <element name="sequence" type="xsd:int" minOccurs="0"/>
+                     <element name="qualifier" type="vim25:DvsNetworkRuleQualifier" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="action" type="vim25:DvsNetworkRuleAction" minOccurs="0"/>
+                     <element name="direction" type="xsd:string" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

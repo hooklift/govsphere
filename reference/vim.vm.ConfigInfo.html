@@ -1,0 +1,663 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.ConfigInfo" name="vim.vm.ConfigInfo"></a>
+<h1>Data Object - VirtualMachineConfigInfo</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.VirtualMachine.html#field_detail">VirtualMachine</a>, <a href="vim.vm.Snapshot.html#field_detail">VirtualMachineSnapshot</a>
+</dd>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.HostSystem.html#queryOverheadEx">QueryMemoryOverheadEx</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.vm.FaultToleranceConfigInfo.html">FaultToleranceConfigInfo</a>, <a href="vim.host.CpuIdInfo.html">HostCpuIdInfo</a>, <a href="vim.LatencySensitivity.html">LatencySensitivity</a>, <a href="vim.ext.ManagedByInfo.html">ManagedByInfo</a>, <a href="vim.option.OptionValue.html">OptionValue</a>, <a href="vim.ResourceAllocationInfo.html">ResourceAllocationInfo</a>, <a href="vim.vm.ScheduledHardwareUpgradeInfo.html">ScheduledHardwareUpgradeInfo</a>, <a href="vim.vm.ToolsConfigInfo.html">ToolsConfigInfo</a>, <a href="vim.vm.VirtualHardware.html">VirtualHardware</a>, <a href="vim.vm.AffinityInfo.html">VirtualMachineAffinityInfo</a>, <a href="vim.vm.BootOptions.html">VirtualMachineBootOptions</a>, <a href="vim.vm.ConfigInfo.DatastoreUrlPair.html">VirtualMachineConfigInfoDatastoreUrlPair</a>, <a href="vim.vm.ConfigInfo.OverheadInfo.html">VirtualMachineConfigInfoOverheadInfo</a>, <a href="vim.vm.ConsolePreferences.html">VirtualMachineConsolePreferences</a>, <a href="vim.vm.DefaultPowerOpInfo.html">VirtualMachineDefaultPowerOpInfo</a>, <a href="vim.vm.FileInfo.html">VirtualMachineFileInfo</a>, <a href="vim.vm.FlagInfo.html">VirtualMachineFlagInfo</a>, <a href="vim.vm.NetworkShaperInfo.html">VirtualMachineNetworkShaperInfo</a>, <a href="vim.vApp.VmConfigInfo.html">VmConfigInfo</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The ConfigInfo data object type encapsulates the configuration settings and
+  virtual hardware for a virtual machine. This type holds all the information
+  that is present in the .vmx configuration file for the virtual machine.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="alternateGuestName" name="alternateGuestName"></a><strong>alternateGuestName</strong></td><td>xsd:string</td><td>
+<p></p>
+         Used as display name for the operating system if guestId is <tt>other</tt>
+  or <tt>other-64</tt>.
+  <p><br>See <a href="vim.vm.ConfigInfo.html#guestFullName">guestFullName</a><br>
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="annotation" name="annotation"></a><strong>annotation</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Description for the virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="bootOptions" name="bootOptions"></a><strong>bootOptions</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.BootOptions.html">VirtualMachineBootOptions</a></td><td>
+<p></p>
+         Configuration options for the boot behavior of the virtual machine.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="changeTrackingEnabled" name="changeTrackingEnabled"></a><strong>changeTrackingEnabled</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether changed block tracking for this VM's disks
+ is active.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="changeVersion" name="changeVersion"></a><strong>changeVersion</strong></td><td>xsd:string</td><td>
+<p></p>
+         The changeVersion is a unique identifier for a given version
+   of the configuration. Each change to the configuration
+   updates this value. This is typically implemented as an ever
+   increasing count or a time-stamp. However, a client should
+   always treat this as an opaque string.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="consolePreferences" name="consolePreferences"></a><strong>consolePreferences</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.ConsolePreferences.html">VirtualMachineConsolePreferences</a></td><td>
+<p></p>
+         Legacy console viewer preferences when doing power operations.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="cpuAffinity" name="cpuAffinity"></a><strong>cpuAffinity</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.AffinityInfo.html">VirtualMachineAffinityInfo</a></td><td>
+<p></p>
+         Affinity settings for CPU.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="cpuAllocation" name="cpuAllocation"></a><strong>cpuAllocation</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.ResourceAllocationInfo.html">ResourceAllocationInfo</a></td><td>
+<p></p>
+         Resource limits for CPU.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="cpuFeatureMask" name="cpuFeatureMask"></a><strong>cpuFeatureMask</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.CpuIdInfo.html">HostCpuIdInfo[]</a></td><td>
+<p></p>
+         Specifies CPU feature compatibility masks that override the
+  defaults from the <a href="vim.vm.GuestOsDescriptor.html">GuestOsDescriptor</a>
+  of the virtual machine's guest OS.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="cpuHotAddEnabled" name="cpuHotAddEnabled"></a><strong>cpuHotAddEnabled</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Whether virtual processors can be added while this
+  virtual machine is running.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="cpuHotRemoveEnabled" name="cpuHotRemoveEnabled"></a><strong>cpuHotRemoveEnabled</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Whether virtual processors can be removed while this
+  virtual machine is running.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="datastoreUrl" name="datastoreUrl"></a><strong>datastoreUrl</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.ConfigInfo.DatastoreUrlPair.html">VirtualMachineConfigInfoDatastoreUrlPair[]</a></td><td>
+<p></p>
+         Enumerates the set of datastores that this virtual machine is
+  stored on, as well as the URL identification for each of these.
+  <p>
+  Changes to datastores do not generate property updates on this
+  property. However, when this property is retrieved it returns the
+  current datastore information.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="defaultPowerOps" name="defaultPowerOps"></a><strong>defaultPowerOps</strong></td><td><a href="vim.vm.DefaultPowerOpInfo.html">VirtualMachineDefaultPowerOpInfo</a></td><td>
+<p></p>
+         Configuration of default power operations.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="extraConfig" name="extraConfig"></a><strong>extraConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.option.OptionValue.html">OptionValue[]</a></td><td>
+<p></p>
+         Additional configuration information for the virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="files" name="files"></a><strong>files</strong></td><td><a href="vim.vm.FileInfo.html">VirtualMachineFileInfo</a></td><td>
+<p></p>
+         Information about the files associated with a virtual machine.
+  This information does not include files for specific virtual disks or
+  snapshots.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="firmware" name="firmware"></a><strong>firmware</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Information about firmware type for this Virtual Machine.
+
+  Possible values are described in
+  <a href="vim.vm.GuestOsDescriptor.FirmwareType.html">GuestOsDescriptorFirmwareType</a>
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="flags" name="flags"></a><strong>flags</strong></td><td><a href="vim.vm.FlagInfo.html">VirtualMachineFlagInfo</a></td><td>
+<p></p>
+         Additional flags for a virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="ftInfo" name="ftInfo"></a><strong>ftInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.FaultToleranceConfigInfo.html">FaultToleranceConfigInfo</a></td><td>
+<p></p>
+         Fault Tolerance settings for this virtual machine.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="guestAutoLockEnabled" name="guestAutoLockEnabled"></a><strong>guestAutoLockEnabled</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the guest operating system will logout any active
+ sessions whenever there are no remote display connections open to
+ the virtual machine.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="guestFullName" name="guestFullName"></a><strong>guestFullName</strong></td><td>xsd:string</td><td>
+<p></p>
+         This is the full name of the guest operating system for the virtual machine.
+  For example: Windows 2000 Professional.
+ <p><br>See <a href="vim.vm.ConfigInfo.html#alternateGuestName">alternateGuestName</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="guestId" name="guestId"></a><strong>guestId</strong></td><td>xsd:string</td><td>
+<p></p>
+         Guest operating system configured on a virtual machine.
+  This is a guest identifier that can be used to access the
+  <a href="vim.vm.GuestOsDescriptor.html">GuestOsDescriptor</a>
+  list for information about default configuration.
+  For more information on possible values, see
+  <a href="vim.vm.GuestOsDescriptor.GuestOsIdentifier.html">VirtualMachineGuestOsIdentifier</a>.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="hardware" name="hardware"></a><strong>hardware</strong></td><td><a href="vim.vm.VirtualHardware.html">VirtualHardware</a></td><td>
+<p></p>
+         Processor, memory, and virtual devices for a virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="hotPlugMemoryIncrementSize" name="hotPlugMemoryIncrementSize"></a><strong>hotPlugMemoryIncrementSize</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         Memory, in MB that can be added to a running virtual machine
+  must be in increments of this value and needs be a
+  multiple of this value.
+
+  This value is determined by the virtual machine and is specified
+  only if <a href="vim.vm.ConfigSpec.html#memoryHotAddEnabled">memoryHotAddEnabled</a>
+  has been set to true.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="hotPlugMemoryLimit" name="hotPlugMemoryLimit"></a><strong>hotPlugMemoryLimit</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         The maximum amount of memory, in MB, than can be added to a
+  running virtual machine. This value is determined by the
+  virtual machine and is specified only if
+  <a href="vim.vm.ConfigInfo.html#memoryHotAddEnabled">memoryHotAddEnabled</a>
+  is set to true.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="initialOverhead" name="initialOverhead"></a><strong>initialOverhead</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.ConfigInfo.OverheadInfo.html">VirtualMachineConfigInfoOverheadInfo</a></td><td>
+<p></p>
+         Set of values to be used only to perform admission control when
+ determining if a host has sufficient resources for the virtual
+ machine to power on.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="instanceUuid" name="instanceUuid"></a><strong>instanceUuid</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         VirtualCenter-specific 128-bit UUID of a virtual machine, represented
+  as a hexademical string. This identifier is used by VirtualCenter to
+  uniquely identify all virtual machine instances, including those that
+  may share the same SMBIOS UUID.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="latencySensitivity" name="latencySensitivity"></a><strong>latencySensitivity</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.LatencySensitivity.html">LatencySensitivity</a></td><td>
+<p></p>
+         The latency-sensitivity of the virtual machine.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="locationId" name="locationId"></a><strong>locationId</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Hash incorporating the virtual machine's config file location
+  and the UUID of the host assigned to run the virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="managedBy" name="managedBy"></a><strong>managedBy</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.ext.ManagedByInfo.html">ManagedByInfo</a></td><td>
+<p></p>
+         Specifies that this VM is managed by a VC Extension. See the
+ <a href="vim.vm.ConfigSpec.html#managedBy">managedBy</a> property in the ConfigSpec
+ for more details.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="maxMksConnections" name="maxMksConnections"></a><strong>maxMksConnections</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Indicates the maximum number of active remote display connections
+ that the virtual machine will support.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="memoryAffinity" name="memoryAffinity"></a><strong>memoryAffinity</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.AffinityInfo.html">VirtualMachineAffinityInfo</a></td><td>
+<p></p>
+         Affinity settings for memory.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="memoryAllocation" name="memoryAllocation"></a><strong>memoryAllocation</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.ResourceAllocationInfo.html">ResourceAllocationInfo</a></td><td>
+<p></p>
+         Resource limits for memory.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="memoryHotAddEnabled" name="memoryHotAddEnabled"></a><strong>memoryHotAddEnabled</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Whether memory can be added while this virtual machine is running.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="memoryReservationLockedToMax" name="memoryReservationLockedToMax"></a><strong>memoryReservationLockedToMax</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         If set true, memory resource reservation for this virtual machine will always be
+ equal to the virtual machine's memory size; increases in memory size will be
+ rejected when a corresponding reservation increase is not possible.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="modified" name="modified"></a><strong>modified</strong></td><td>xsd:dateTime</td><td>
+<p></p>
+         Last time a virtual machine's configuration was modified.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="name" name="name"></a><strong>name</strong></td><td>xsd:string</td><td>
+<p></p>
+         Display name of the virtual machine.
+  <p>
+  Any / (slash), \ (backslash), character used in this
+  name element is escaped. Similarly, any % (percent) character used in
+ this name element is escaped, unless it is used to start an escape
+  sequence. A slash is escaped as %2F or %2f. A backslash is escaped as %5C or
+  %5c, and a percent is escaped as %25.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="nestedHVEnabled" name="nestedHVEnabled"></a><strong>nestedHVEnabled</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether this VM is configured to use nested
+ hardware-assisted virtualization.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="networkShaper" name="networkShaper"></a><strong>networkShaper</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.NetworkShaperInfo.html">VirtualMachineNetworkShaperInfo</a></td><td><B>Deprecated.</B><I>
+         from vSphere 5.5, shaping policy on VM is not supported.
+      </I>
+<p></p>
+         Resource limits for network.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="npivDesiredNodeWwns" name="npivDesiredNodeWwns"></a><strong>npivDesiredNodeWwns</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:short</td><td>
+<p></p>
+         The NPIV node WWNs to be extended from the original list of WWN nummbers. This
+  property should be set to desired number which is an aggregate of existing
+  plus new numbers. Desired Node WWNs should always be greater than the existing
+  number of node WWNs
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="npivDesiredPortWwns" name="npivDesiredPortWwns"></a><strong>npivDesiredPortWwns</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:short</td><td>
+<p></p>
+         The NPIV port WWNs to be extended from the original list of WWN nummbers. This
+  property should be set to desired number which is an aggregate of existing
+  plus new numbers. Desired Node WWNs should always be greater than the existing
+  number of port WWNs
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="npivNodeWorldWideName" name="npivNodeWorldWideName"></a><strong>npivNodeWorldWideName</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long[]</td><td>
+<p></p>
+         A 64-bit node WWN (World Wide Name). These WWNs are paired with the
+  <a href="vim.vm.ConfigInfo.html#npivPortWorldWideName">npivPortWorldWideName</a> to be used by the NPIV VPORTs instantiated for the
+  virtual machine on the physical HBAs of the host. A pair of node and port WWNs
+  serves as a unique identifier in accessing a LUN, so that it can be monitored or
+  controlled by the storage administrator.
+  <p>
+  If this property contains a single node WWN, the same node WWN is used to pair
+  with all port WWNs listed in <a href="vim.vm.ConfigInfo.html#npivPortWorldWideName">npivPortWorldWideName</a>. If this property or
+  <a href="vim.vm.ConfigInfo.html#npivPortWorldWideName">npivPortWorldWideName</a> is empty or unset, NPIV WWN is disabled for the
+  virtual machine.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="npivOnNonRdmDisks" name="npivOnNonRdmDisks"></a><strong>npivOnNonRdmDisks</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         This property is used to check whether the NPIV can be enabled on the Virtual
+  machine with non-rdm disks in the configuration, so this is potentially not
+  enabling npiv on vmfs disks. Also this property is used to check whether RDM
+  is required to generate WWNs for a virtual machine.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="npivPortWorldWideName" name="npivPortWorldWideName"></a><strong>npivPortWorldWideName</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long[]</td><td>
+<p></p>
+         A 64-bit port WWN (World Wide Name). For detail description on WWN, see
+ <a href="vim.vm.ConfigInfo.html#npivNodeWorldWideName">npivNodeWorldWideName</a>.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="npivTemporaryDisabled" name="npivTemporaryDisabled"></a><strong>npivTemporaryDisabled</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         This property is used to enable or disable the NPIV capability on a desired
+  virtual machine on a temporary basis. When this property is set NPIV Vport
+  will not be instantiated by the VMX process of the Virtual Machine. When this
+  property is set port WWNs and node WWNs in the VM configuration are preserved.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="npivWorldWideNameType" name="npivWorldWideNameType"></a><strong>npivWorldWideNameType</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The source that provides/generates the assigned WWNs.
+  <p><br>See <a href="vim.vm.ConfigInfo.NpivWwnType.html">VirtualMachineConfigInfoNpivWwnType</a><br>
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="scheduledHardwareUpgradeInfo" name="scheduledHardwareUpgradeInfo"></a><strong>scheduledHardwareUpgradeInfo</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.ScheduledHardwareUpgradeInfo.html">ScheduledHardwareUpgradeInfo</a></td><td>
+<p></p>
+         Configuration of scheduled hardware upgrades and result from last
+  attempt to run scheduled hardware upgrade.<br>See <a href="vim.vm.ScheduledHardwareUpgradeInfo.html">ScheduledHardwareUpgradeInfo</a><br>
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="swapPlacement" name="swapPlacement"></a><strong>swapPlacement</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Virtual machine swapfile placement policy. This will be unset if the
+  virtual machine's
+  <a href="vim.vm.Capability.html#swapPlacementSupported">swapPlacementSupported</a>
+  capability is false. If swapPlacementSupported is true, the default
+  policy is "inherit".
+  <p><br>See <a href="vim.vm.ConfigInfo.SwapPlacementType.html">VirtualMachineConfigInfoSwapPlacementType</a><br>
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="template" name="template"></a><strong>template</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag indicating whether or not a virtual machine is a template.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="tools" name="tools"></a><strong>tools</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.ToolsConfigInfo.html">ToolsConfigInfo</a></td><td>
+<p></p>
+         Configuration of VMware Tools running in the guest operating system.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="uuid" name="uuid"></a><strong>uuid</strong></td><td>xsd:string</td><td>
+<p></p>
+         128-bit SMBIOS UUID of a virtual machine represented as a hexadecimal string
+  in "12345678-abcd-1234-cdef-123456789abc" format.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vAppConfig" name="vAppConfig"></a><strong>vAppConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vApp.VmConfigInfo.html">VmConfigInfo</a></td><td>
+<p></p>
+         vApp meta-data for the virtual machine
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vAssertsEnabled" name="vAssertsEnabled"></a><strong>vAssertsEnabled</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether user-configured virtual asserts will be
+  triggered during virtual machine replay.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="version" name="version"></a><strong>version</strong></td><td>xsd:string</td><td>
+<p></p>
+         The version string for this virtual machine.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vFlashCacheReservation" name="vFlashCacheReservation"></a><strong>vFlashCacheReservation</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         Specifies the total vFlash resource reservation for the vFlash caches associated
+ with this VM's virtual disks, in bytes. This reservation must be allocated to power on the VM.
+ See <a href="vim.vm.RuntimeInfo.html#vFlashCacheAllocation">vFlashCacheAllocation</a> for allocated
+ reservation when VM is powered on.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vPMCEnabled" name="vPMCEnabled"></a><strong>vPMCEnabled</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether this VM have vurtual CPU performance counters
+  enabled.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VirtualMachineConfigInfo">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="changeVersion" type="xsd:string"/>
+                     <element name="modified" type="xsd:dateTime"/>
+                     <element name="name" type="xsd:string"/>
+                     <element name="guestFullName" type="xsd:string"/>
+                     <element name="version" type="xsd:string"/>
+                     <element name="uuid" type="xsd:string"/>
+                     <element name="instanceUuid" type="xsd:string" minOccurs="0"/>
+                     <element name="npivNodeWorldWideName" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="npivPortWorldWideName" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="npivWorldWideNameType" type="xsd:string" minOccurs="0"/>
+                     <element name="npivDesiredNodeWwns" type="xsd:short" minOccurs="0"/>
+                     <element name="npivDesiredPortWwns" type="xsd:short" minOccurs="0"/>
+                     <element name="npivTemporaryDisabled" type="xsd:boolean" minOccurs="0"/>
+                     <element name="npivOnNonRdmDisks" type="xsd:boolean" minOccurs="0"/>
+                     <element name="locationId" type="xsd:string" minOccurs="0"/>
+                     <element name="template" type="xsd:boolean"/>
+                     <element name="guestId" type="xsd:string"/>
+                     <element name="alternateGuestName" type="xsd:string"/>
+                     <element name="annotation" type="xsd:string" minOccurs="0"/>
+                     <element name="files" type="vim25:VirtualMachineFileInfo"/>
+                     <element name="tools" type="vim25:ToolsConfigInfo" minOccurs="0"/>
+                     <element name="flags" type="vim25:VirtualMachineFlagInfo"/>
+                     <element name="consolePreferences" type="vim25:VirtualMachineConsolePreferences" minOccurs="0"/>
+                     <element name="defaultPowerOps" type="vim25:VirtualMachineDefaultPowerOpInfo"/>
+                     <element name="hardware" type="vim25:VirtualHardware"/>
+                     <element name="cpuAllocation" type="vim25:ResourceAllocationInfo" minOccurs="0"/>
+                     <element name="memoryAllocation" type="vim25:ResourceAllocationInfo" minOccurs="0"/>
+                     <element name="latencySensitivity" type="vim25:LatencySensitivity" minOccurs="0"/>
+                     <element name="memoryHotAddEnabled" type="xsd:boolean" minOccurs="0"/>
+                     <element name="cpuHotAddEnabled" type="xsd:boolean" minOccurs="0"/>
+                     <element name="cpuHotRemoveEnabled" type="xsd:boolean" minOccurs="0"/>
+                     <element name="hotPlugMemoryLimit" type="xsd:long" minOccurs="0"/>
+                     <element name="hotPlugMemoryIncrementSize" type="xsd:long" minOccurs="0"/>
+                     <element name="cpuAffinity" type="vim25:VirtualMachineAffinityInfo" minOccurs="0"/>
+                     <element name="memoryAffinity" type="vim25:VirtualMachineAffinityInfo" minOccurs="0"/>
+                     <element name="networkShaper" type="vim25:VirtualMachineNetworkShaperInfo" minOccurs="0"/>
+                     <element name="extraConfig" type="vim25:OptionValue" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="cpuFeatureMask" type="vim25:HostCpuIdInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="datastoreUrl" type="vim25:VirtualMachineConfigInfoDatastoreUrlPair" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="swapPlacement" type="xsd:string" minOccurs="0"/>
+                     <element name="bootOptions" type="vim25:VirtualMachineBootOptions" minOccurs="0"/>
+                     <element name="ftInfo" type="vim25:FaultToleranceConfigInfo" minOccurs="0"/>
+                     <element name="vAppConfig" type="vim25:VmConfigInfo" minOccurs="0"/>
+                     <element name="vAssertsEnabled" type="xsd:boolean" minOccurs="0"/>
+                     <element name="changeTrackingEnabled" type="xsd:boolean" minOccurs="0"/>
+                     <element name="firmware" type="xsd:string" minOccurs="0"/>
+                     <element name="maxMksConnections" type="xsd:int" minOccurs="0"/>
+                     <element name="guestAutoLockEnabled" type="xsd:boolean" minOccurs="0"/>
+                     <element name="managedBy" type="vim25:ManagedByInfo" minOccurs="0"/>
+                     <element name="memoryReservationLockedToMax" type="xsd:boolean" minOccurs="0"/>
+                     <element name="initialOverhead" type="vim25:VirtualMachineConfigInfoOverheadInfo" minOccurs="0"/>
+                     <element name="nestedHVEnabled" type="xsd:boolean" minOccurs="0"/>
+                     <element name="vPMCEnabled" type="xsd:boolean" minOccurs="0"/>
+                     <element name="scheduledHardwareUpgradeInfo" type="vim25:ScheduledHardwareUpgradeInfo" minOccurs="0"/>
+                     <element name="vFlashCacheReservation" type="xsd:long" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

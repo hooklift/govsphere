@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+   <head>
+      <title>Counter Information for Network Performance </title>
+      <script language="JavaScript" src="./commonRes.js"> type="text/javascript"></script>
+      <link rel="StyleSheet" type="text/css" href="doc-style.css">
+   </head>
+   <body>
+      <h1>
+         Counters for Network Performance
+      </h1>
+      <p>
+         The following table shows the name, collection level, categories, and values
+         for counters that measure network performance.</p>
+      <p>
+         The VirtualCenter statistics level is a setting that controls reporting of metrics.
+         Higher settings increase the amount of data collected and can impact performance.</p>
+      <ul>
+         <li>Level 1 collects resource use averages (but not for devices), uptime, heartbeat,
+         and data for DRS (Distributed Resource Scheduler).
+         <li>Level 2 also includes usage summation and rollup types for the items above.
+         <li>Level 3 also collects device metrics in all the categories above.
+         <li>Level 4 also includes maximum and minimum rollup types.
+      </ul>
+      <p>
+      Counter names <font color="#FF6308">in orange</font> appear in the VI Client or other GUI.
+      </p>
+      <H3>GROUP NAME: <FONT color="#000000">net</FONT></H3>
+      <table cellspacing="0">
+         <tr>
+            <th>
+               Counter Name
+            </th>
+            <th>
+               VC Stats<br>Level
+            </th>
+            <th>
+               Attribute
+            </th>
+            <th>
+               Value
+            </th>
+         </tr>
+         <tr>
+            <td rowspan="5" align="right">
+               <strong>usage</strong>
+               <br><br><font color="#FF6308">Network Usage<font>
+            </td>
+            <td rowspan="5" align="left">
+               avg: 1
+               <br>min: 4
+               <br>max: 4
+            </td>
+            <td>
+               description
+            </td>
+            <td>
+	       Aggregated network performance: the sum of data transmitted and received
+	       for all NIC instances of the host or virtual machine.
+            </td>
+         </tr>
+         <tr>
+            <td>
+               unit
+            </td>
+            <td>
+               KBps
+            </td>
+         </tr>
+         <tr>
+            <td>
+               stat type
+            </td>
+            <td>
+               rate
+            </td>
+         </tr>
+         <tr>
+            <td>
+               rollup type
+            </td>
+            <td>
+               minimum, maximum, average
+            </td>
+         </tr>
+         <tr>
+            <td>
+               entity
+            </td>
+            <td>
+               host and virtual machine (aggregate level only) 
+            </td>
+         </tr>
+         <tr>
+            <td rowspan="5" align="right">
+               <strong>packetsRx</strong>
+               <br><br><font color="#FF6308">Network Packets Received<font>
+            </td>
+            <td rowspan="5" align="left">
+               3
+            </td>
+            <td>
+               description
+            </td>
+            <td>
+               Number of packets received during the performance interval.
+            </td>
+         </tr>
+         <tr>
+            <td>
+               unit
+            </td>
+            <td>
+               number
+            </td>
+         </tr>
+         <tr>
+            <td>
+               stat type
+            </td>
+            <td>
+               delta
+            </td>
+         </tr>
+         <tr>
+            <td>
+               rollup type
+            </td>
+            <td>
+               summation
+            </td>
+         </tr>
+         <tr>
+            <td>
+               entity
+            </td>
+            <td>
+               host and virtual machine (per net instance only)
+            </td>
+         </tr>
+         <tr>
+            <td rowspan="5" align="right">
+               <strong>packetsTx</strong>
+               <br><br><font color="#FF6308">Network Packets Transmitted<font>
+            </td>
+            <td rowspan="5" align="left">
+               3
+            </td>
+            <td>
+               description
+            </td>
+            <td>
+               Number of packets transmitted during the performance interval.
+            </td>
+         </tr>
+         <tr>
+            <td>
+               unit
+            </td>
+            <td>
+               number
+            </td>
+         </tr>
+         <tr>
+            <td>
+               stat type
+            </td>
+            <td>
+               delta
+            </td>
+         </tr>
+         <tr>
+            <td>
+               rollup type
+            </td>
+            <td>
+               summation
+            </td>
+         </tr>
+         <tr>
+            <td>
+               entity
+            </td>
+            <td>
+               host and virtual machine (per net instance only)
+            </td>
+         </tr>
+         <tr>
+            <td rowspan="5" align="right">
+               <strong>received</strong>
+               <br><br><font color="#FF6308">Network Data Receive Rate<font>
+            </td>
+            <td rowspan="5" align="left">
+               3
+            </td>
+            <td>
+               description
+            </td>
+            <td>
+               Rate at which data was received during the performance interval.
+            </td>
+         </tr>
+         <tr>
+            <td>
+               unit
+            </td>
+            <td>
+               KBps
+            </td>
+         </tr>
+         <tr>
+            <td>
+               stat type
+            </td>
+            <td>
+               rate
+            </td>
+         </tr>
+         <tr>
+            <td>
+               rollup type
+            </td>
+            <td>
+               average
+            </td>
+         </tr>
+         <tr>
+            <td>
+               entity
+            </td>
+            <td>
+               host and virtual machine (per NIC instance only)
+            </td>
+         </tr>
+         <tr>
+            <td rowspan="5" align="right">
+               <strong>transmitted</strong>
+               <br><br><font color="#FF6308">Network Data Transmit Rate<font>
+            </td>
+            <td rowspan="5" align="left">
+               3
+            </td>
+            <td>
+               description
+            </td>
+            <td>
+               Rate at which data was transmitted during the performance interval.
+            </td>
+         </tr>
+         <tr>
+            <td>
+               unit
+            </td>
+            <td>
+               KBps
+            </td>
+         </tr>
+         <tr>
+            <td>
+               stat type
+            </td>
+            <td>
+               rate
+            </td>
+         </tr>
+         <tr>
+            <td>
+               rollup type
+            </td>
+            <td>
+               average
+            </td>
+         </tr>
+         <tr>
+            <td>
+               entity
+            </td>
+            <td>
+               host and virtual machine (per NIC instance only)
+            </td>
+         </tr>
+      </table>
+      <br clear="left">
+
+<p><script language="javascript">document.write(ID_Copyright);</script><br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+   </body>
+</html>

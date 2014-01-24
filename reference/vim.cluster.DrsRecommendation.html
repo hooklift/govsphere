@@ -1,0 +1,142 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.cluster.DrsRecommendation" name="vim.cluster.DrsRecommendation"></a>
+<h1>Data Object - ClusterDrsRecommendation</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.ClusterComputeResource.html#field_detail">ClusterComputeResource</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.cluster.DrsMigration.html">ClusterDrsMigration</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<B>Deprecated.</B><I>
+         As of VI API 2.5 use <a href="vim.cluster.Recommendation.html">ClusterRecommendation</a>.
+      </I>
+<p></p>
+         DrsRecommendation describes a recommendation to migrate
+   one or more virtual machines.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="key" name="key"></a><strong>key</strong></td><td>xsd:string</td><td>
+<p></p>
+         Key to identify the recommendation when calling applyRecommendation.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="migrationList" name="migrationList"></a><strong>migrationList</strong></td><td><a href="vim.cluster.DrsMigration.html">ClusterDrsMigration[]</a></td><td><B>Deprecated.</B><I>
+         A more general <a href="vim.cluster.Recommendation.html">recommendation</a> list should be used. This recommendation type
+ and the migrationList is kept for backward compatibility.
+
+ List of migrations in this recommendation and all the parent
+ recommendations on which this recommendation depends. All the
+ migrations in this list can be constructed from <a href="vim.cluster.Recommendation.html#prerequisite">prerequisite</a> and <a href="vim.cluster.Recommendation.html#action">action</a>.
+      </I>
+<p></p>
+<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="rating" name="rating"></a><strong>rating</strong></td><td>xsd:int</td><td>
+<p></p>
+         A rating of the recommendation.
+  Valid values range from 1 (lowest confidence) to 5 (highest confidence).
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="reason" name="reason"></a><strong>reason</strong></td><td>xsd:string</td><td>
+<p></p>
+         A reason code explaining why this set of migrations is being suggested.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="reasonText" name="reasonText"></a><strong>reasonText</strong></td><td>xsd:string</td><td>
+<p></p>
+         Text that provides more information about the reason code for the suggested 
+ set of migrations.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ClusterDrsRecommendation">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="key" type="xsd:string"/>
+                     <element name="rating" type="xsd:int"/>
+                     <element name="reason" type="xsd:string"/>
+                     <element name="reasonText" type="xsd:string"/>
+                     <element name="migrationList" type="vim25:ClusterDrsMigration" maxOccurs="unbounded"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

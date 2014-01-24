@@ -1,0 +1,177 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.dvs.VmwareDistributedVirtualSwitch.ConfigSpec" name="vim.dvs.VmwareDistributedVirtualSwitch.ConfigSpec"></a>
+<h1>Data Object - VMwareDVSConfigSpec</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.DistributedVirtualSwitch.ConfigSpec.html">DVSConfigSpec</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.LinkDiscoveryProtocolConfig.html">LinkDiscoveryProtocolConfig</a>, <a href="vim.dvs.VmwareDistributedVirtualSwitch.PvlanConfigSpec.html">VMwareDVSPvlanConfigSpec</a>, <a href="vim.dvs.VmwareDistributedVirtualSwitch.VspanConfigSpec.html">VMwareDVSVspanConfigSpec</a>, <a href="vim.dvs.VmwareDistributedVirtualSwitch.IpfixConfig.html">VMwareIpfixConfig</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This class defines the VMware specific configuration for
+  DistributedVirtualSwitch.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="ipfixConfig" name="ipfixConfig"></a><strong>ipfixConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.dvs.VmwareDistributedVirtualSwitch.IpfixConfig.html">VMwareIpfixConfig</a></td><td>
+<p></p>
+         Configuration for ipfix monitoring of the switch traffic. This must be
+  set before ipfix monitoring can be enabled for the switch, or for any
+  portgroup or port of the switch.<br>See <a href="vim.dvs.VmwareDistributedVirtualSwitch.VmwarePortConfigPolicy.html#ipfixEnabled">ipfixEnabled</a><br>
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="lacpApiVersion" name="lacpApiVersion"></a><strong>lacpApiVersion</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The Link Aggregation Control Protocol group version in the switch.
+  See LacpApiVersion for valid values.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="linkDiscoveryProtocolConfig" name="linkDiscoveryProtocolConfig"></a><strong>linkDiscoveryProtocolConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.LinkDiscoveryProtocolConfig.html">LinkDiscoveryProtocolConfig</a></td><td>
+<p></p>
+         See <a href="vim.host.LinkDiscoveryProtocolConfig.html">LinkDiscoveryProtocolConfig</a>.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="maxMtu" name="maxMtu"></a><strong>maxMtu</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The maximum MTU in the switch.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="pvlanConfigSpec" name="pvlanConfigSpec"></a><strong>pvlanConfigSpec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.dvs.VmwareDistributedVirtualSwitch.PvlanConfigSpec.html">VMwareDVSPvlanConfigSpec[]</a></td><td>
+<p></p>
+         The PVLAN configuration specification.
+  <p>
+  A <a href="vim.dvs.VmwareDistributedVirtualSwitch.PvlanMapEntry.html">VMwareDVSPvlanMapEntry</a>
+  that has the same value for
+  <a href="vim.dvs.VmwareDistributedVirtualSwitch.PvlanMapEntry.html#primaryVlanId">primaryVlanId</a> and
+  <a href="vim.dvs.VmwareDistributedVirtualSwitch.PvlanMapEntry.html#secondaryVlanId">secondaryVlanId</a>
+  is referred to as a primary PVLAN entry.
+  Otherwise, the <a href="vim.dvs.VmwareDistributedVirtualSwitch.PvlanMapEntry.html">VMwareDVSPvlanMapEntry</a>
+  is referred to as a secondary PVLAN entry.
+  <p>
+  The <a href="vim.dvs.VmwareDistributedVirtualSwitch.PvlanMapEntry.html#pvlanType">pvlanType</a>
+  of a primary PVLAN entry must be
+  <a href="vim.dvs.VmwareDistributedVirtualSwitch.PvlanPortType.html#promiscuous">promiscuous</a>.
+  A secondary PVLAN entry can have a
+  <a href="vim.dvs.VmwareDistributedVirtualSwitch.PvlanMapEntry.html#pvlanType">pvlanType</a>
+  of either
+  <a href="vim.dvs.VmwareDistributedVirtualSwitch.PvlanPortType.html#community">community</a> or
+  <a href="vim.dvs.VmwareDistributedVirtualSwitch.PvlanPortType.html#isolated">isolated</a>.
+  <p>
+  Primary PVLAN entries must be explicitly added.
+  If there is no primary PVLAN entry corresponding to the
+  <a href="vim.dvs.VmwareDistributedVirtualSwitch.PvlanMapEntry.html#primaryVlanId">primaryVlanId</a>
+  of a secondary PVLAN entry, a fault is thrown.
+  <p>
+  While deleting a primary PVLAN entry, any associated secondary PVLAN
+  entries must be explicitly deleted.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vspanConfigSpec" name="vspanConfigSpec"></a><strong>vspanConfigSpec</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.dvs.VmwareDistributedVirtualSwitch.VspanConfigSpec.html">VMwareDVSVspanConfigSpec[]</a></td><td>
+<p></p>
+         The Distributed Port Mirroring configuration specification. The VSPAN
+  sessions in the array cannot be of the same key.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.DistributedVirtualSwitch.ConfigSpec.html">DVSConfigSpec</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.DistributedVirtualSwitch.ConfigSpec.html#configVersion">configVersion</a>, <a href="vim.DistributedVirtualSwitch.ConfigSpec.html#contact">contact</a>, <a href="vim.DistributedVirtualSwitch.ConfigSpec.html#defaultPortConfig">defaultPortConfig</a>, <a href="vim.DistributedVirtualSwitch.ConfigSpec.html#defaultProxySwitchMaxNumPorts">defaultProxySwitchMaxNumPorts</a>, <a href="vim.DistributedVirtualSwitch.ConfigSpec.html#description">description</a>, <a href="vim.DistributedVirtualSwitch.ConfigSpec.html#extensionKey">extensionKey</a>, <a href="vim.DistributedVirtualSwitch.ConfigSpec.html#host">host</a>, <a href="vim.DistributedVirtualSwitch.ConfigSpec.html#maxPorts">maxPorts</a>, <a href="vim.DistributedVirtualSwitch.ConfigSpec.html#name">name</a>, <a href="vim.DistributedVirtualSwitch.ConfigSpec.html#numStandalonePorts">numStandalonePorts</a>, <a href="vim.DistributedVirtualSwitch.ConfigSpec.html#policy">policy</a>, <a href="vim.DistributedVirtualSwitch.ConfigSpec.html#switchIpAddress">switchIpAddress</a>, <a href="vim.DistributedVirtualSwitch.ConfigSpec.html#uplinkPortgroup">uplinkPortgroup</a>, <a href="vim.DistributedVirtualSwitch.ConfigSpec.html#uplinkPortPolicy">uplinkPortPolicy</a>, <a href="vim.DistributedVirtualSwitch.ConfigSpec.html#vendorSpecificConfig">vendorSpecificConfig</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VMwareDVSConfigSpec">
+            <complexContent>
+               <extension base="vim25:DVSConfigSpec">
+                  <sequence>
+                     <element name="pvlanConfigSpec" type="vim25:VMwareDVSPvlanConfigSpec" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="vspanConfigSpec" type="vim25:VMwareDVSVspanConfigSpec" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="maxMtu" type="xsd:int" minOccurs="0"/>
+                     <element name="linkDiscoveryProtocolConfig" type="vim25:LinkDiscoveryProtocolConfig" minOccurs="0"/>
+                     <element name="ipfixConfig" type="vim25:VMwareIpfixConfig" minOccurs="0"/>
+                     <element name="lacpApiVersion" type="xsd:string" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

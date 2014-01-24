@@ -1,0 +1,191 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.dvs.VmwareDistributedVirtualSwitch.FailureCriteria" name="vim.dvs.VmwareDistributedVirtualSwitch.FailureCriteria"></a>
+<h1>Data Object - DVSFailureCriteria</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.dvs.VmwareDistributedVirtualSwitch.UplinkPortTeamingPolicy.html#field_detail">VmwareUplinkPortTeamingPolicy</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.InheritablePolicy.html">InheritablePolicy</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.BoolPolicy.html">BoolPolicy</a>, <a href="vim.IntPolicy.html">IntPolicy</a>, <a href="vim.StringPolicy.html">StringPolicy</a>
+</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This data object type describes the network adapter failover
+  detection algorithm for a network adapter team.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="checkBeacon" name="checkBeacon"></a><strong>checkBeacon</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.BoolPolicy.html">BoolPolicy</a></td><td>
+<p></p>
+         The flag to indicate whether or not to enable this property to
+  enable beacon probing as a method to validate
+  the link status of a physical network adapter.
+  <p>
+  <b>checkBeacon</b> can be enabled only if the VirtualSwitch has been
+  configured to use the beacon.  Attempting to set <b>checkBeacon</b>
+  on a PortGroup or VirtualSwitch that does not have beacon probing
+  configured for the applicable VirtualSwitch results in an error.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="checkDuplex" name="checkDuplex"></a><strong>checkDuplex</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.BoolPolicy.html">BoolPolicy</a></td><td>
+<p></p>
+         The flag to indicate whether or not to use the link duplex reported
+  by the driver as link selection criteria.
+  <p>
+  If <b>checkDuplex</b> is true, then fullDuplex is the configured
+  duplex mode.  The link is considered bad if the link duplex reported
+  by driver is not the same as fullDuplex.
+  </p>
+  <p>
+  If <b>checkDuplex</b> is false, then fullDuplex is unused, and
+  link duplexity is not used as a detection method.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="checkErrorPercent" name="checkErrorPercent"></a><strong>checkErrorPercent</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.BoolPolicy.html">BoolPolicy</a></td><td>
+<p></p>
+         The flag to indicate whether or not to use link error percentage
+  to detect failure.
+  <p>
+  If <b>checkErrorPercent</b> is true, then percentage is the configured
+  error percentage that is tolerated.  The link is considered bad
+  if error rate exceeds percentage.
+  <p>
+  If <b>checkErrorPercent</b> is false, percentage is unused, and
+  error percentage is not used as a detection method.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="checkSpeed" name="checkSpeed"></a><strong>checkSpeed</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.StringPolicy.html">StringPolicy</a></td><td>
+<p></p>
+         To use link speed as the criteria, <em>checkSpeed</em> must be one of
+  the following values:
+  <p>
+  <ul>
+  <li> <b>exact</b>: Use exact speed to detect link failure.
+       <b>speed</b> is the configured exact speed in megabits per second.
+  <li> <b>minimum</b>: Use minimum speed to detect failure.
+       <b>speed</b> is the configured minimum speed in megabits per second.
+  <li> <b>empty string</b>: Do not use link speed to detect failure.
+       <b>speed</b> is unused in this case.
+  </ul>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="fullDuplex" name="fullDuplex"></a><strong>fullDuplex</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.BoolPolicy.html">BoolPolicy</a></td><td>
+<p></p>
+         <br>See <a href="vim.dvs.VmwareDistributedVirtualSwitch.FailureCriteria.html#checkDuplex">checkDuplex</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="percentage" name="percentage"></a><strong>percentage</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.IntPolicy.html">IntPolicy</a></td><td>
+<p></p>
+         <br>See <a href="vim.dvs.VmwareDistributedVirtualSwitch.FailureCriteria.html#checkErrorPercent">checkErrorPercent</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="speed" name="speed"></a><strong>speed</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.IntPolicy.html">IntPolicy</a></td><td>
+<p></p>
+         <br>See <a href="vim.dvs.VmwareDistributedVirtualSwitch.FailureCriteria.html#checkSpeed">checkSpeed</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.InheritablePolicy.html">InheritablePolicy</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.InheritablePolicy.html#inherited">inherited</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DVSFailureCriteria">
+            <complexContent>
+               <extension base="vim25:InheritablePolicy">
+                  <sequence>
+                     <element name="checkSpeed" type="vim25:StringPolicy" minOccurs="0"/>
+                     <element name="speed" type="vim25:IntPolicy" minOccurs="0"/>
+                     <element name="checkDuplex" type="vim25:BoolPolicy" minOccurs="0"/>
+                     <element name="fullDuplex" type="vim25:BoolPolicy" minOccurs="0"/>
+                     <element name="checkErrorPercent" type="vim25:BoolPolicy" minOccurs="0"/>
+                     <element name="percentage" type="vim25:IntPolicy" minOccurs="0"/>
+                     <element name="checkBeacon" type="vim25:BoolPolicy" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

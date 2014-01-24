@@ -1,0 +1,790 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.LocalAccountManager" name="vim.host.LocalAccountManager"></a>
+<h1>Managed Object -  
+						HostLocalAccountManager</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.ServiceInstanceContent.html#field_detail">ServiceContent</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.LocalAccountManager.AccountSpecification.html">HostAccountSpec</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         This managed object type provides an interface
+  through which local accounts on a host are managed.  Note that this
+  managed object applies only to applications that use a local account
+  database on the host to provide authentication (ESX Server, for example).
+  POSIX and win32 hosts may impose different restrictions on the password,
+  ID, and description formats. POSIX host implementation may restrict the
+  user or group name to be lower case letters and less than 16 characters in
+  total.  It may also disallow characters such as
+  ";", "\n", and so on.  In short, all the platform dependent rules and
+  restrictions regarding naming of users/groups and password apply here.
+  An InvalidArgument fault is thrown if any of these rules are not obeyed.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+</table>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#assignUserToGroup">AssignUserToGroup</a>, <a href="#createGroup">CreateGroup</a>, <a href="#createUser">CreateUser</a>, <a href="#removeGroup">RemoveGroup</a>, <a href="#removeUser">RemoveUser</a>, <a href="#unassignUserFromGroup">UnassignUserFromGroup</a>, <a href="#updateUser">UpdateUser</a></td>
+</tr>
+</table>
+<br>
+<a id="assignUserToGroup" name="assignUserToGroup"></a>
+<h1>AssignUserToGroup</h1>
+<B>Deprecated.</B><I>
+         As of vSphere API 5.1, local user groups are not supported
+  and group specific methods will throw NotSupported.
+      </I>
+<p></p>
+         Assigns a user to a group.
+  <p/>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Local.ManageUserGroups</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.LocalAccountManager.html">HostLocalAccountManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>user</strong></td><td>xsd:string</td><td>
+<p></p>
+         User ID of the account whose group membership is
+  being assigned.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>group</strong></td><td>xsd:string</td><td>
+<p></p>
+         Destination group account to which the user is
+  being assigned.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AlreadyExists.html">AlreadyExists</a></td><td>Thrown if the user is already a member of the target group.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.UserNotFound.html">UserNotFound</a></td><td>Thrown if the specified user or group does not exist.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('AssignUserToGroup-textarea');expandcontent(this, 'AssignUserToGroup-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="AssignUserToGroup-div">
+<textarea cols="20" rows="10" name="AssignUserToGroup-textarea" wrap="off" readonly="1" id="AssignUserToGroup-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AssignUserToGroup" type="vim25:AssignUserToGroupRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AssignUserToGroupResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="createGroup" name="createGroup"></a>
+<h1>CreateGroup</h1>
+<B>Deprecated.</B><I>
+         As of vSphere API 5.1, local user groups are not supported
+  and group specific methods will throw NotSupported.
+      </I>
+<p></p>
+         Creates a local group account using the parameters defined in the
+  <a href="vim.host.LocalAccountManager.AccountSpecification.html">HostLocalAccountManagerAccountSpecification</a>
+  data object type.  For POSIX hosts, passing the
+  <a href="vim.host.LocalAccountManager.PosixAccountSpecification.html">HostLocalAccountManagerPosixAccountSpecification</a> data object
+  type allows you to control
+  the group ID format of the group account being created.
+  <p/>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Local.ManageUserGroups</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.LocalAccountManager.html">HostLocalAccountManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>group</strong></td><td><a href="vim.host.LocalAccountManager.AccountSpecification.html">HostAccountSpec</a></td><td>
+<p></p>
+         Specification of group being created.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AlreadyExists.html">AlreadyExists</a></td><td>Thrown if specified local group already exists.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if group name is in invalid format.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CreateGroup-textarea');expandcontent(this, 'CreateGroup-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CreateGroup-div">
+<textarea cols="20" rows="10" name="CreateGroup-textarea" wrap="off" readonly="1" id="CreateGroup-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateGroup" type="vim25:CreateGroupRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateGroupResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="createUser" name="createUser"></a>
+<h1>CreateUser</h1>
+<p></p>
+         Creates a local user account using the parameters defined in the
+  <a href="vim.host.LocalAccountManager.AccountSpecification.html">HostLocalAccountManagerAccountSpecification</a>
+  data object type. For POSIX hosts,
+  passing <a href="vim.host.LocalAccountManager.PosixAccountSpecification.html">HostLocalAccountManagerPosixAccountSpecification</a> data object
+  type allows you to control the
+  format of the user ID of the user account being created.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Local.ManageUserGroups</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.LocalAccountManager.html">HostLocalAccountManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>user</strong></td><td><a href="vim.host.LocalAccountManager.AccountSpecification.html">HostAccountSpec</a></td><td>
+<p></p>
+         Specification of user being created.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AlreadyExists.html">AlreadyExists</a></td><td>Thrown if the specified local user account already exists.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if the user name or password has an invalid format.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CreateUser-textarea');expandcontent(this, 'CreateUser-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CreateUser-div">
+<textarea cols="20" rows="10" name="CreateUser-textarea" wrap="off" readonly="1" id="CreateUser-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateUser" type="vim25:CreateUserRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CreateUserResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="removeGroup" name="removeGroup"></a>
+<h1>RemoveGroup</h1>
+<B>Deprecated.</B><I>
+         As of vSphere API 5.1, local user groups are not supported
+  and group specific methods will throw NotSupported.
+      </I>
+<p></p>
+         Removes a local group account.
+  <p/>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Local.ManageUserGroups</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.LocalAccountManager.html">HostLocalAccountManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>groupName</strong></td><td>xsd:string</td><td>
+<p></p>
+         Group ID of the group account being removed.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.UserNotFound.html">UserNotFound</a></td><td>Thrown if the specified groupName does not exist.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RemoveGroup-textarea');expandcontent(this, 'RemoveGroup-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RemoveGroup-div">
+<textarea cols="20" rows="10" name="RemoveGroup-textarea" wrap="off" readonly="1" id="RemoveGroup-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveGroup" type="vim25:RemoveGroupRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveGroupResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="removeUser" name="removeUser"></a>
+<h1>RemoveUser</h1>
+<p></p>
+         Removes a local user account.
+  <p/>
+  As of vSphere API 5.1, this operation will first try to remove all
+  permissions associated with the specifed account. The permissions of
+  the user are removed one by one, not atomically, and the operation
+  is not rolled back, if the removal of some permission fails.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Local.ManageUserGroups</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.LocalAccountManager.html">HostLocalAccountManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>userName</strong></td><td>xsd:string</td><td>
+<p></p>
+         User ID of the user account being removed.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.SecurityError.html">SecurityError</a></td><td>Thrown if trying to remove the last local user with DCUI access, or if trying to remove the last local user with full administrative privileges, or if the system has encountered an error while trying to remove user's permissions. or if the account cannot be removed due to permission issues.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.UserNotFound.html">UserNotFound</a></td><td>Thrown if the specified userName does not exist.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RemoveUser-textarea');expandcontent(this, 'RemoveUser-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RemoveUser-div">
+<textarea cols="20" rows="10" name="RemoveUser-textarea" wrap="off" readonly="1" id="RemoveUser-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveUser" type="vim25:RemoveUserRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveUserResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="unassignUserFromGroup" name="unassignUserFromGroup"></a>
+<h1>UnassignUserFromGroup</h1>
+<B>Deprecated.</B><I>
+         As of vSphere API 5.1, local user groups are not supported
+  and group specific methods will throw NotSupported.
+      </I>
+<p></p>
+         Unassigns a user from a group.
+  <p/>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Local.ManageUserGroups</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.LocalAccountManager.html">HostLocalAccountManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>user</strong></td><td>xsd:string</td><td>
+<p></p>
+         User being unassigned from group.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>group</strong></td><td>xsd:string</td><td>
+<p></p>
+         Group from which the user is being removed.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.NoPermission.html">NoPermission</a></td><td>Thrown if the group is the only group to which the user belongs.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.UserNotFound.html">UserNotFound</a></td><td>Thrown if the specified user or group does not exist.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UnassignUserFromGroup-textarea');expandcontent(this, 'UnassignUserFromGroup-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UnassignUserFromGroup-div">
+<textarea cols="20" rows="10" name="UnassignUserFromGroup-textarea" wrap="off" readonly="1" id="UnassignUserFromGroup-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UnassignUserFromGroup" type="vim25:UnassignUserFromGroupRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UnassignUserFromGroupResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateUser" name="updateUser"></a>
+<h1>UpdateUser</h1>
+<p></p>
+         Updates a local user account using the parameters defined in the
+  <a href="vim.host.LocalAccountManager.AccountSpecification.html">HostLocalAccountManagerAccountSpecification</a>
+  data object type.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Host.Local.ManageUserGroups</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.host.LocalAccountManager.html">HostLocalAccountManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>user</strong></td><td><a href="vim.host.LocalAccountManager.AccountSpecification.html">HostAccountSpec</a></td><td>
+<p></p>
+         Specification of user being updated.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.AlreadyExists.html">AlreadyExists</a></td><td>Thrown if new account specification specifies an existing user's ID.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if new password or description has an invalid format.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.UserNotFound.html">UserNotFound</a></td><td>Thrown if user is not found.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateUser-textarea');expandcontent(this, 'UpdateUser-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateUser-div">
+<textarea cols="20" rows="10" name="UpdateUser-textarea" wrap="off" readonly="1" id="UpdateUser-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateUser" type="vim25:UpdateUserRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateUserResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

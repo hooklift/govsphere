@@ -1,0 +1,537 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.EnvironmentBrowser" name="vim.EnvironmentBrowser"></a>
+<h1>Managed Object -  
+						EnvironmentBrowser</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.ComputeResource.html#field_detail">ComputeResource</a>, <a href="vim.VirtualMachine.html#field_detail">VirtualMachine</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.vm.ConfigTarget.html">ConfigTarget</a>, <a href="vim.host.Capability.html">HostCapability</a>, <a href="vim.host.DatastoreBrowser.html">HostDatastoreBrowser</a>, <a href="vim.HostSystem.html">HostSystem</a>, <a href="vim.vm.ConfigOption.html">VirtualMachineConfigOption</a>, <a href="vim.vm.ConfigOptionDescriptor.html">VirtualMachineConfigOptionDescriptor</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         This managed object type provides access to the environment that a
+  ComputeResource presents for creating and configuring a virtual machine.
+  <p>
+  The environment consists of three main components:
+  <ul>
+  <li>The virtual machine configuration options. Each vim.vm.ConfigOption
+      describes the execution environment for a virtual machine, the particular 
+      set of virtual hardware that is supported. A
+      ComputeResource might support multiple sets. Access is provided 
+      through the configOptionDescriptor property and the 
+      <a href="vim.EnvironmentBrowser.html#queryConfigOption">QueryConfigOption</a> operation.
+  <li>The supported device targets. Each virtual device specified in the virtual
+      machine needs to be hooked up to a "physical" counterpart. For networks, 
+      this means choosing a network name; for a virtual CD-rom this might be 
+      an ISO image, etc.  The environment browser provides access to the device 
+      targets through the 
+      <a href="vim.EnvironmentBrowser.html#queryConfigTarget">QueryConfigTarget</a> operation.
+  <li>Storage locations and files. A selection of locations where the virtual machine
+      files can be stored, and the possibility to browse for existing virtual disks
+      and ISO images. The datastore browser, provided by the datastoreBrowser 
+      property, provides access to the contents of one or more datastores. The 
+      items in a datastore are files that contain configuration, virtual disk, and 
+      the other data associated with a virtual machine.
+  <li>The capabilities supported by the ComputeResource to which the virtual
+      machine belongs. 
+  </ul>
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="datastoreBrowser" name="datastoreBrowser"></a><strong>datastoreBrowser</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.host.DatastoreBrowser.html">HostDatastoreBrowser</a></td><td>
+<p></p>
+         DatastoreBrowser to browse datastores that are available on this entity.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  System.View</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#queryConfigOption">QueryConfigOption</a>, <a href="#queryConfigOptionDescriptor">QueryConfigOptionDescriptor</a>, <a href="#queryConfigTarget">QueryConfigTarget</a>, <a href="#queryTargetCapabilities">QueryTargetCapabilities</a></td>
+</tr>
+</table>
+<br>
+<a id="queryConfigOption" name="queryConfigOption"></a>
+<h1>QueryConfigOption</h1>
+<p></p>
+         Query for a specific virtual machine configuration option (the ConfigOption). 
+  <p>
+  If the EnvironmentBrowser is from a ComputeResource or ClusterComputeResource, 
+  the key or host, or both arguments can be used to return the required config 
+  options. If a key is specified, then the ConfigOption corresponding to that key 
+  value is  returned. If a host is specified, then the default ConfigOption for 
+  that host is returned. If key and host both are specified, the ConfigOption 
+  corresponding to the given key for that host is returned. If neither is specified,
+  then the default ConfigOption for this environment browser is returned. Typically, 
+  the default contains the options for the most recent virtual hardware
+  supported. 
+  <p>
+  If the EnvironmentBrowser is from a VirtualMachine neither a host nor a 
+  key should be specified.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.EnvironmentBrowser.html">EnvironmentBrowser</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>key</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The key found in the VirtualMachineConfigOptionDescriptor, 
+             obtained by invoking the 
+             <a href="vim.EnvironmentBrowser.html#queryConfigOptionDescriptor">QueryConfigOptionDescriptor</a> operation.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         The host whose ConfigOption is requested.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.vm.ConfigOption.html">VirtualMachineConfigOption</a></td><td>Returns the ConfigOption object. If invoked on a cluster with no hosts, or if the ConfigOption with given key is not found for the given host, null is returned.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if any of the following is true: <ul> <li>An invalid key is passed. <li>An invalid host is passed. <li>A key or host is specified, when the command is invoked from the environment browser of a virtual machine. </ul></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryConfigOption-textarea');expandcontent(this, 'QueryConfigOption-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryConfigOption-div">
+<textarea cols="20" rows="10" name="QueryConfigOption-textarea" wrap="off" readonly="1" id="QueryConfigOption-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryConfigOption" type="vim25:QueryConfigOptionRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryConfigOptionResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:VirtualMachineConfigOption" minOccurs="0"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryConfigOptionDescriptor" name="queryConfigOptionDescriptor"></a>
+<h1>QueryConfigOptionDescriptor</h1>
+<p></p>
+         The list of ConfigOption keys available on this entity.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.EnvironmentBrowser.html">EnvironmentBrowser</a>
+						used to make the method call.
+					</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.vm.ConfigOptionDescriptor.html">VirtualMachineConfigOptionDescriptor[]</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryConfigOptionDescriptor-textarea');expandcontent(this, 'QueryConfigOptionDescriptor-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryConfigOptionDescriptor-div">
+<textarea cols="20" rows="10" name="QueryConfigOptionDescriptor-textarea" wrap="off" readonly="1" id="QueryConfigOptionDescriptor-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryConfigOptionDescriptor" type="vim25:QueryConfigOptionDescriptorRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryConfigOptionDescriptorResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:VirtualMachineConfigOptionDescriptor" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryConfigTarget" name="queryConfigTarget"></a>
+<h1>QueryConfigTarget</h1>
+<p></p>
+         Queries for information about a specific target, a "physical" device that 
+  can be used to back virtual devices. The ConfigTarget that is returned specifies 
+  the set of values that can be used in the device backings to connect the virtual
+  machine to physical (or logical) host devices.
+  <p>
+  If the EnvironmentBrowser is from a ComputeResource or ClusterComputeResource, 
+  the host argument can be used to return the ConfigTarget provided by a particular
+  host in the compute resource or cluster. If host is specified and the 
+  EnvironmentBrowser is from a ComputeResource or ClusterComputeResource, 
+  then the union of all the devices is returned and the 
+  vim.vm.TargetInfo.configurationTag field indicates  how widely the device is 
+  available  across the compute resource or cluster.
+  <p>
+  If the EnvironmentBrowser is from a VirtualMachine a host should not be specified.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.EnvironmentBrowser.html">EnvironmentBrowser</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         If specified, the host whose default BackingInfo is requested.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.vm.ConfigTarget.html">ConfigTarget</a></td><td>Returns the ConfigTarget object. If invoked on a cluster with no hosts, null is returned.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if an invalid host is specified , or a host is given when the EnvironmentBrowser is from a virtual machine.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryConfigTarget-textarea');expandcontent(this, 'QueryConfigTarget-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryConfigTarget-div">
+<textarea cols="20" rows="10" name="QueryConfigTarget-textarea" wrap="off" readonly="1" id="QueryConfigTarget-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryConfigTarget" type="vim25:QueryConfigTargetRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryConfigTargetResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:ConfigTarget" minOccurs="0"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryTargetCapabilities" name="queryTargetCapabilities"></a>
+<h1>QueryTargetCapabilities</h1>
+<p></p>
+         Queries for information on the capabilities supported by the ComputeResource
+  associated with the EnvironmentBrowser. 
+  <p>
+  If the EnvironmentBrowser is from a ComputeResource or ClusterComputeResource, 
+  the host argument can be used to return the capabilities associated with a
+  specific host in the compute resource or cluster. If the host argument is not
+  specified and the EnvironmentBrowser is from a ComputeResource or 
+  ClusterComputeResource, then the intersection of the capabilities supported by
+  all the hosts in the cluster is returned. If the EnvironmentBrowser is from
+  a VirtualMachine, the compute resource associated with the virtual machine
+  will be queried for its capabilities.
+  <p>
+  If the EnvironmentBrowser is from a VirtualMachine a host should not be specified.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.View</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.EnvironmentBrowser.html">EnvironmentBrowser</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         If specified, the host whose capabilities are requested.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.host.Capability.html">HostCapability</a></td><td>Returns the set of capabilities supported by the ComputeResource associated with the EnvironmentBrowser. If invoked on a cluster with no hosts, null is returned.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if an invalid host is specified , or a host is given when the EnvironmentBrowser is from a virtual machine.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryTargetCapabilities-textarea');expandcontent(this, 'QueryTargetCapabilities-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryTargetCapabilities-div">
+<textarea cols="20" rows="10" name="QueryTargetCapabilities-textarea" wrap="off" readonly="1" id="QueryTargetCapabilities-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryTargetCapabilities" type="vim25:QueryTargetCapabilitiesRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryTargetCapabilitiesResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:HostCapability" minOccurs="0"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

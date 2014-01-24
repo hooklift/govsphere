@@ -1,0 +1,871 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.Capability" name="vim.host.Capability"></a>
+<h1>Data Object - HostCapability</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.HostSystem.html#field_detail">HostSystem</a>
+</dd>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.EnvironmentBrowser.html#queryTargetCapabilities">QueryTargetCapabilities</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.CpuIdInfo.html">HostCpuIdInfo</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         Specifies the capabilities of the particular host. This set of
+  capabilities is referenced in other parts of the API specification
+  to indicate under what circumstances an API will throw a
+  <a href="vmodl.fault.NotSupported.html">NotSupported</a> fault.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="accel3dSupported" name="accel3dSupported"></a><strong>accel3dSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates if 3D hardware acceleration for virtual machines is supported.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="backgroundSnapshotsSupported" name="backgroundSnapshotsSupported"></a><strong>backgroundSnapshotsSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag indicating whether background snapshots are supported on this host.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="cloneFromSnapshotSupported" name="cloneFromSnapshotSupported"></a><strong>cloneFromSnapshotSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether or not cloning a virtual machine from a snapshot
+ point is allowed.
+ <p>
+ This property must be true on the host where the virtual machine
+ is currently residing.  This property need not be true on the
+ destination host for the clone.<br>See <a href="vim.vm.CloneSpec.html#snapshot">snapshot</a><br>
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="cpuMemoryResourceConfigurationSupported" name="cpuMemoryResourceConfigurationSupported"></a><strong>cpuMemoryResourceConfigurationSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag indicating whether cpu and memory resource configuration is
+ supported. If this is set to false,
+ <a href="vim.ResourcePool.html#updateConfig">UpdateConfig</a>,
+ <a href="vim.ResourcePool.html#updateChildResourceConfiguration">UpdateChildResourceConfiguration</a>
+ cannot be used for changing the cpu/memory resource configurations.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="datastorePrincipalSupported" name="datastorePrincipalSupported"></a><strong>datastorePrincipalSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag indicating whether datastore principal user
+  is supported on the host.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="deltaDiskBackingsSupported" name="deltaDiskBackingsSupported"></a><strong>deltaDiskBackingsSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag indicating whether explicitly creating arbirary configurations of
+  delta disk backings is supported.
+  <p>
+  A delta disk backing is a way to preserve a virtual disk backing
+  at some point in time.  A delta disk backing is a file backing which in
+  turn points to the original virtual disk backing (the parent).  After a delta
+  disk backing is added, all writes go to the delta disk backing.  All reads
+  first try the delta disk backing and then try the parent backing if needed.
+  <p>
+  If this property is false, then delta disk backings can only be implicitly
+  created through using snapshot operations and two virtual machines cannot
+  safely share a parent disk backing.
+  <p>
+  If this property is true, then delta disk backings can be explicitly created
+  and managed, and two virtual machines may safely share a parent disk backing.
+  <p>
+  In the context above, "safely" means that performing operations on one of the
+  virtual machines will not affect the operation of the other virtual machine.
+  <p><br>See <a href="vim.vm.device.VirtualDisk.SparseVer1BackingInfo.html#parent">parent</a><br>See <a href="vim.vm.device.VirtualDisk.SparseVer2BackingInfo.html#parent">parent</a><br>See <a href="vim.vm.device.VirtualDisk.FlatVer1BackingInfo.html#parent">parent</a><br>See <a href="vim.vm.device.VirtualDisk.FlatVer2BackingInfo.html#parent">parent</a><br>See <a href="vim.vm.device.VirtualDisk.RawDiskMappingVer1BackingInfo.html#parent">parent</a><br>See <a href="vim.VirtualMachine.html#promoteDisks">PromoteDisks_Task</a><br>See <a href="vim.vm.RelocateSpec.html#diskMoveType">diskMoveType</a><br>See <a href="vim.vm.RelocateSpec.DiskLocator.html#diskMoveType">diskMoveType</a><br>
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="eightPlusHostVmfsSharedAccessSupported" name="eightPlusHostVmfsSharedAccessSupported"></a><strong>eightPlusHostVmfsSharedAccessSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the host is capable of accessing a VMFS disk
+  when there are eight or more hosts accessing the disk already.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="featureCapabilitiesSupported" name="featureCapabilitiesSupported"></a><strong>featureCapabilitiesSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicated whether the host supports feature capabilities
+  for EVC mode.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="firewallIpRulesSupported" name="firewallIpRulesSupported"></a><strong>firewallIpRulesSupported</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether this host supports ip address based restrictions in
+  the firewall configuration.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="ftCompatibilityIssues" name="ftCompatibilityIssues"></a><strong>ftCompatibilityIssues</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         For a host which doesn't support Fault Tolerance, indicates all the reasons
+ for the incompatibility. <a href="vim.host.Capability.FtUnsupportedReason.html">HostCapabilityFtUnsupportedReason</a>
+ lists the set of possible values.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="ftSupported" name="ftSupported"></a><strong>ftSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether this host supports Fault Tolerance
+ There can be many reasons why a host does not support Fault
+ Tolerance, which includes CPU compatibility, product
+ compatibility as well as other host configuration settings.
+ For specific reasons, look into
+ <a href="vim.host.Capability.html#replayCompatibilityIssues">replayCompatibilityIssues</a> and
+ <a href="vim.host.Capability.html#ftCompatibilityIssues">ftCompatibilityIssues</a>
+
+ In releases after vSphere API 5.0, vSphere Servers might not
+ generate property collector update notifications for this property.
+ To obtain the latest value of the property, you can use
+ PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+ If you use the PropertyCollector.WaitForUpdatesEx method, specify
+ an empty string for the version parameter.
+
+ Since this property is on a DataObject, an update returned by WaitForUpdatesEx may
+ contain values for this property when some other property on the DataObject changes.
+ If this update is a result of a call to WaitForUpdatesEx with a non-empty
+ version parameter, the value for this property may not be current.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="hbrNicSelectionSupported" name="hbrNicSelectionSupported"></a><strong>hbrNicSelectionSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether a dedicated nic can be selected for vSphere Replication
+ LWD traffic, i.e., from the primary host to the VR server.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="highGuestMemSupported" name="highGuestMemSupported"></a><strong>highGuestMemSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Is high guest memory supported.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="interVMCommunicationThroughVMCISupported" name="interVMCommunicationThroughVMCISupported"></a><strong>interVMCommunicationThroughVMCISupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the host supports VMCI for communication
+  between virtual machines.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="ipmiSupported" name="ipmiSupported"></a><strong>ipmiSupported</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag indicating whether the host supports
+ IPMI (Intelligent Platform Management Interface).
+ XXX - Make ipmiSupported optional until there is a compatible hostagent.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="iscsiSupported" name="iscsiSupported"></a><strong>iscsiSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Is access to iSCSI devices supported.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="latencySensitivitySupported" name="latencySensitivitySupported"></a><strong>latencySensitivitySupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the host supports latency sensitivity for the
+ virtual machines.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="localSwapDatastoreSupported" name="localSwapDatastoreSupported"></a><strong>localSwapDatastoreSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag indicating whether the host supports selecting a datastore that
+  that may be used to store virtual machine swapfiles.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="loginBySSLThumbprintSupported" name="loginBySSLThumbprintSupported"></a><strong>loginBySSLThumbprintSupported</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag indicating whether this host supports SSL thumbprint authentication
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="maintenanceModeSupported" name="maintenanceModeSupported"></a><strong>maintenanceModeSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Is maintenance mode supported
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="maxHostRunningVms" name="maxHostRunningVms"></a><strong>maxHostRunningVms</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The maximum number of virtual machines that can be run on the host.
+ An unset value indicates that the value could not be obtained. In contrast
+ to <a href="vim.host.Capability.html#maxRunningVMs">maxRunningVMs</a>, this value is the minimum of (i) the maximum
+ number supported by the hardware and (ii) the maximum number permitted by
+ the host license.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="maxHostSupportedVcpus" name="maxHostSupportedVcpus"></a><strong>maxHostSupportedVcpus</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The maximum number of virtual CPUs that can be run on the host.  An unset
+ value indicates that the value could not be obtained.  In contrast to
+ <a href="vim.host.Capability.html#maxSupportedVcpus">maxSupportedVcpus</a>, this value is the minimum of (i) the maximum
+ number supported by the hardware and (ii) the maximum number permitted by
+ the host license.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="maxRegisteredVMs" name="maxRegisteredVMs"></a><strong>maxRegisteredVMs</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The maximum number of registered virtual machines supported by
+  the host. If this limit is exceeded, the management agent will be
+  at risk of running out of system resources. <a href="vim.ManagedEntity.html#configIssue">configIssue</a> will be posted on
+  <a href="vim.HostSystem.html">HostSystem</a> in this case.
+  <p>
+  If this capability is not set, the number is unknown.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="maxRunningVMs" name="maxRunningVMs"></a><strong>maxRunningVMs</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The maximum number of virtual machines that can be running
+  simultaneously on this host.
+  If this capability is not set, the number of virtual machines
+  running simultaneously is unlimited.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="maxSupportedVcpus" name="maxSupportedVcpus"></a><strong>maxSupportedVcpus</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The maximum number of virtual CPUs supported per virtual machine.
+  If this capability is not set, the number is unlimited.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="maxSupportedVMs" name="maxSupportedVMs"></a><strong>maxSupportedVMs</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The maximum number of virtual machines that can exist on this host.
+  If this capability is not set, the number of virtual machines is
+  unlimited.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="multipleNetworkStackInstanceSupported" name="multipleNetworkStackInstanceSupported"></a><strong>multipleNetworkStackInstanceSupported</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the host supports Multiple Instance TCP/IP stack
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="nestedHVSupported" name="nestedHVSupported"></a><strong>nestedHVSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the host supports nested hardware-assisted virtualization.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="nfsSupported" name="nfsSupported"></a><strong>nfsSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Is access to NFS devices supported.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="nicTeamingSupported" name="nicTeamingSupported"></a><strong>nicTeamingSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Is NIC teaming supported.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="perVMNetworkTrafficShapingSupported" name="perVMNetworkTrafficShapingSupported"></a><strong>perVMNetworkTrafficShapingSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether network traffic shaping on a
+  per virtual machine basis is supported.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="perVmSwapFiles" name="perVmSwapFiles"></a><strong>perVmSwapFiles</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag indicating whether virtual machine execution on this host involves
+  a swapfile for each virtual machine. If true, the swapfile placement
+  for a powered-on virtual machine is advertised in its FileLayout by
+  the <a href="vim.vm.FileLayout.html#swapFile">swapFile</a> property.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="preAssignedPCIUnitNumbersSupported" name="preAssignedPCIUnitNumbersSupported"></a><strong>preAssignedPCIUnitNumbersSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag to indicate whether the server returns unit numbers in a
+ pre-assigned range for devices on the PCI bus.
+
+ When the server supports this flag, the device unit number namespace is
+ partitioned by device type. Different types of devices will sit in
+ a specific range of unit numbers that may not correspond to physical
+ slots in the pci bus but present a relative ordering of the devices
+ with respect to other devices of the same type.
+
+ Note that this does not mean that the user can set the relative ordering
+ between device types, but only allows stable orderings between devices
+ of the same type. The unit number will now clearly represent an ordering
+ between devices of the same type.
+
+  <a href="vim.vm.device.VirtualDevice.html#unitNumber">unitNumber</a>
+ This property is only available for devices on the pci controller.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="rebootSupported" name="rebootSupported"></a><strong>rebootSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag indicating whether rebooting the host is supported.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="recordReplaySupported" name="recordReplaySupported"></a><strong>recordReplaySupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether this host supports record and replay
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="recursiveResourcePoolsSupported" name="recursiveResourcePoolsSupported"></a><strong>recursiveResourcePoolsSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="reliableMemoryAware" name="reliableMemoryAware"></a><strong>reliableMemoryAware</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates that this host uses a reliable memory aware allocation policy.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="replayCompatibilityIssues" name="replayCompatibilityIssues"></a><strong>replayCompatibilityIssues</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         For a host which doesn't support replay, indicates all the reasons
+ for the incompatibility. <a href="vim.host.Capability.ReplayUnsupportedReason.html">HostReplayUnsupportedReason</a>
+ lists the set of possible values.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="replayUnsupportedReason" name="replayUnsupportedReason"></a><strong>replayUnsupportedReason</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td><B>Deprecated.</B><I>
+         As of vSphere API 4.1, use
+ <a href="vim.host.Capability.html#replayCompatibilityIssues">replayCompatibilityIssues</a>.
+      </I>
+<p></p>
+         For a host whose CPU doesn't support replay, indicates the reason
+ for the incompatibility. <a href="vim.host.Capability.ReplayUnsupportedReason.html">HostReplayUnsupportedReason</a>
+ represents the set of possible values.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="restrictedSnapshotRelocateSupported" name="restrictedSnapshotRelocateSupported"></a><strong>restrictedSnapshotRelocateSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether this host supports relocation of
+ virtual machines with snapshots.  Must be true on the
+ source and destination hosts for the relocation to work.
+ Even if this is true, the following conditions must hold:
+    1) All the the vm's files are in one directory prior
+       to the relocate.
+    2) All of the vm's files will be in one directory
+       after the relocate.
+    3) The source and destination hosts are the same product
+       version.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="sanSupported" name="sanSupported"></a><strong>sanSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag indicating whether access to SAN devices is supported.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="scaledScreenshotSupported" name="scaledScreenshotSupported"></a><strong>scaledScreenshotSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether scaling is supported for screenshots retrieved over https.
+ If true, screenshot retrieval supports the additional optional
+ parameters 'width' and 'height'. After cropping, the returned image will be scaled
+ to these dimensions. If only one of these parameters is specified, default behavior
+ is to return an image roughly proportional to the source image.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="scheduledHardwareUpgradeSupported" name="scheduledHardwareUpgradeSupported"></a><strong>scheduledHardwareUpgradeSupported</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the host supports scheduled hardware upgrades.<br>See <a href="vim.vm.ConfigInfo.html#scheduledHardwareUpgradeInfo">scheduledHardwareUpgradeInfo</a><br>
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="screenshotSupported" name="screenshotSupported"></a><strong>screenshotSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the screenshot retrival over https is supported for this host's
+ virtual machines.
+ If true, a screenshot can be retrieved at the HTTPS relative path
+ <i>/screen?id=&lt;managed object ID of virtual machine or snapshot&gt;</i>.
+ If any of the optional parameters 'top', 'left', 'bottom', and 'right' is
+ specified, the returned image will be cropped from the rectangle with upper left
+ corner (left, top) and bottom right corner (right - 1, bottom - 1). These values
+ default to the top, left, bottom and right edges of the image.
+
+ The client must use an authenticated session with privilege
+ VirtualMachine.Interact.ConsoleInteract on the requested virtual machine or,
+ in the case of a snapshot, the virtual machine associated with that snapshot.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="servicePackageInfoSupported" name="servicePackageInfoSupported"></a><strong>servicePackageInfoSupported</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether this host supports package information in service
+  configuration.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="shutdownSupported" name="shutdownSupported"></a><strong>shutdownSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag indicating whether the host can be powered off
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="snapshotRelayoutSupported" name="snapshotRelayoutSupported"></a><strong>snapshotRelayoutSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether this host supports unrestricted relocation of virtual
+ machines with snapshots. Only needs to be true on the destination host for
+ the unrestricted relocation to work. The full snapshot relocation does not
+ restrict the layout of snapshot files or disks of the virtual machine, nor
+ its power state. If the virtual machine is powered on, a storage vmotion
+ will be performed to relocate its snapshots and disks.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="standbySupported" name="standbySupported"></a><strong>standbySupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag indicating whether you can put the host in a power down
+ state, from which it can be powered up automatically.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="storageIORMSupported" name="storageIORMSupported"></a><strong>storageIORMSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the host supports storage I/O resource
+  management.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="storagePolicySupported" name="storagePolicySupported"></a><strong>storagePolicySupported</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates that host supports Object-based Storage System and
+  Storage-Profile based disk provisioning.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="storageVMotionSupported" name="storageVMotionSupported"></a><strong>storageVMotionSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the storage of a powered-on virtual machine may be
+ relocated.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="supportedCpuFeature" name="supportedCpuFeature"></a><strong>supportedCpuFeature</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.CpuIdInfo.html">HostCpuIdInfo[]</a></td><td>
+<p></p>
+         CPU feature set that is supported by the virtualization platform. This
+  feature set may reflect characteristics of the product capabilities and
+  licensing. For any feature marked '-', reference the
+  <a href="vim.host.HardwareInfo.html#cpuFeature">cpuFeature</a> array of the host's
+  HardwareInfo to determine the correct value.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="supportedVmfsMajorVersion" name="supportedVmfsMajorVersion"></a><strong>supportedVmfsMajorVersion</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int[]</td><td>
+<p></p>
+         List of VMFS major versions supported by the host.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="suspendedRelocateSupported" name="suspendedRelocateSupported"></a><strong>suspendedRelocateSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether this host supports relocation of
+ suspended virtual machines.  Must be true on the source
+ and destination hosts for the relocation to work.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="tpmSupported" name="tpmSupported"></a><strong>tpmSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag indicating whether this host supports the integrity measurement using
+ a TPM device.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="unsharedSwapVMotionSupported" name="unsharedSwapVMotionSupported"></a><strong>unsharedSwapVMotionSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag indicating whether the host supports participating in a VMotion
+  where the virtual machine swapfile is not visible to the destination.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vFlashSupported" name="vFlashSupported"></a><strong>vFlashSupported</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the host supports vFlash.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="virtualExecUsageSupported" name="virtualExecUsageSupported"></a><strong>virtualExecUsageSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the host supports configuring hardware
+  virtualization (HV) support for virtual machines.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vlanTaggingSupported" name="vlanTaggingSupported"></a><strong>vlanTaggingSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Is VLAN Tagging supported.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vmDirectPathGen2Supported" name="vmDirectPathGen2Supported"></a><strong>vmDirectPathGen2Supported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the host supports network passthrough using
+  VMDirectPath Gen 2. Note that this is a general capability for the host
+  and is independent of support by a given physical NIC. If false, the
+  reason(s) for lack of support will be provided in
+  <a href="vim.host.Capability.html#vmDirectPathGen2UnsupportedReason">vmDirectPathGen2UnsupportedReason</a> and/or in
+  <a href="vim.host.Capability.html#vmDirectPathGen2UnsupportedReasonExtended">vmDirectPathGen2UnsupportedReasonExtended</a>.<br>See <a href="vim.host.PhysicalNic.html#vmDirectPathGen2Supported">vmDirectPathGen2Supported</a><br>
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vmDirectPathGen2UnsupportedReason" name="vmDirectPathGen2UnsupportedReason"></a><strong>vmDirectPathGen2UnsupportedReason</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         If <a href="vim.host.Capability.html#vmDirectPathGen2Supported">vmDirectPathGen2Supported</a> is false, this array will be
+  populated with reasons for the lack of support (chosen from
+  VmDirectPathGen2UnsupportedReason). If there is a reason for
+  the lack of support that cannot be described by the available constants,
+  <a href="vim.host.Capability.html#vmDirectPathGen2UnsupportedReasonExtended">vmDirectPathGen2UnsupportedReasonExtended</a> will be populated
+  with an additional explanation provided by the platform.
+  <p>
+  Note that this list of reasons is not guaranteed to be exhaustive.
+  <p>
+  If the reason "hostNptIncompatibleProduct" is provided, then that will
+  be the only provided reason, as the host software is incapable of
+  providing additional information.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vmDirectPathGen2UnsupportedReasonExtended" name="vmDirectPathGen2UnsupportedReasonExtended"></a><strong>vmDirectPathGen2UnsupportedReasonExtended</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         If <a href="vim.host.Capability.html#vmDirectPathGen2Supported">vmDirectPathGen2Supported</a> is false, this property may
+  contain an explanation provided by the platform, beyond the reasons (if
+  any) enumerated in <a href="vim.host.Capability.html#vmDirectPathGen2UnsupportedReason">vmDirectPathGen2UnsupportedReason</a>.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vmfsDatastoreMountCapable" name="vmfsDatastoreMountCapable"></a><strong>vmfsDatastoreMountCapable</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the host is capable of mounting/unmounting
+  VMFS datastores.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vmotionAcrossNetworkSupported" name="vmotionAcrossNetworkSupported"></a><strong>vmotionAcrossNetworkSupported</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the network of a powered-on virtual machine can be
+ changed while simultaneously changing the execution host of the
+ virtual machine.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vmotionSupported" name="vmotionSupported"></a><strong>vmotionSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag indicating whether you can perform VMotion.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vmotionWithStorageVMotionSupported" name="vmotionWithStorageVMotionSupported"></a><strong>vmotionWithStorageVMotionSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the storage of a powered-on virtual machine may be
+ relocated while simultaneously changing the execution host of the
+ virtual machine.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vPMCSupported" name="vPMCSupported"></a><strong>vPMCSupported</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the host supports vurtual CPU performance counters.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="vsanSupported" name="vsanSupported"></a><strong>vsanSupported</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the host supports VSAN functionality.<br>See <a href="vim.host.VsanSystem.html">HostVsanSystem</a><br>
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.5<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vStorageCapable" name="vStorageCapable"></a><strong>vStorageCapable</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether the host supports vStorage Hardware
+ acceleration.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostCapability">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="recursiveResourcePoolsSupported" type="xsd:boolean"/>
+                     <element name="cpuMemoryResourceConfigurationSupported" type="xsd:boolean"/>
+                     <element name="rebootSupported" type="xsd:boolean"/>
+                     <element name="shutdownSupported" type="xsd:boolean"/>
+                     <element name="vmotionSupported" type="xsd:boolean"/>
+                     <element name="standbySupported" type="xsd:boolean"/>
+                     <element name="ipmiSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="maxSupportedVMs" type="xsd:int" minOccurs="0"/>
+                     <element name="maxRunningVMs" type="xsd:int" minOccurs="0"/>
+                     <element name="maxSupportedVcpus" type="xsd:int" minOccurs="0"/>
+                     <element name="maxRegisteredVMs" type="xsd:int" minOccurs="0"/>
+                     <element name="datastorePrincipalSupported" type="xsd:boolean"/>
+                     <element name="sanSupported" type="xsd:boolean"/>
+                     <element name="nfsSupported" type="xsd:boolean"/>
+                     <element name="iscsiSupported" type="xsd:boolean"/>
+                     <element name="vlanTaggingSupported" type="xsd:boolean"/>
+                     <element name="nicTeamingSupported" type="xsd:boolean"/>
+                     <element name="highGuestMemSupported" type="xsd:boolean"/>
+                     <element name="maintenanceModeSupported" type="xsd:boolean"/>
+                     <element name="suspendedRelocateSupported" type="xsd:boolean"/>
+                     <element name="restrictedSnapshotRelocateSupported" type="xsd:boolean"/>
+                     <element name="perVmSwapFiles" type="xsd:boolean"/>
+                     <element name="localSwapDatastoreSupported" type="xsd:boolean"/>
+                     <element name="unsharedSwapVMotionSupported" type="xsd:boolean"/>
+                     <element name="backgroundSnapshotsSupported" type="xsd:boolean"/>
+                     <element name="preAssignedPCIUnitNumbersSupported" type="xsd:boolean"/>
+                     <element name="screenshotSupported" type="xsd:boolean"/>
+                     <element name="scaledScreenshotSupported" type="xsd:boolean"/>
+                     <element name="storageVMotionSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="vmotionWithStorageVMotionSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="vmotionAcrossNetworkSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="hbrNicSelectionSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="recordReplaySupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="ftSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="replayUnsupportedReason" type="xsd:string" minOccurs="0"/>
+                     <element name="replayCompatibilityIssues" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="ftCompatibilityIssues" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="loginBySSLThumbprintSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="cloneFromSnapshotSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="deltaDiskBackingsSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="perVMNetworkTrafficShapingSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="tpmSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="supportedCpuFeature" type="vim25:HostCpuIdInfo" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="virtualExecUsageSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="storageIORMSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="vmDirectPathGen2Supported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="vmDirectPathGen2UnsupportedReason" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="vmDirectPathGen2UnsupportedReasonExtended" type="xsd:string" minOccurs="0"/>
+                     <element name="supportedVmfsMajorVersion" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="vStorageCapable" type="xsd:boolean" minOccurs="0"/>
+                     <element name="snapshotRelayoutSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="firewallIpRulesSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="servicePackageInfoSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="maxHostRunningVms" type="xsd:int" minOccurs="0"/>
+                     <element name="maxHostSupportedVcpus" type="xsd:int" minOccurs="0"/>
+                     <element name="vmfsDatastoreMountCapable" type="xsd:boolean" minOccurs="0"/>
+                     <element name="eightPlusHostVmfsSharedAccessSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="nestedHVSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="vPMCSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="interVMCommunicationThroughVMCISupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="scheduledHardwareUpgradeSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="featureCapabilitiesSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="latencySensitivitySupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="storagePolicySupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="accel3dSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="reliableMemoryAware" type="xsd:boolean" minOccurs="0"/>
+                     <element name="multipleNetworkStackInstanceSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="vsanSupported" type="xsd:boolean" minOccurs="0"/>
+                     <element name="vFlashSupported" type="xsd:boolean" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

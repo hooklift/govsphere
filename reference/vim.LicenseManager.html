@@ -1,0 +1,1679 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.LicenseManager" name="vim.LicenseManager"></a>
+<h1>Managed Object -  
+						LicenseManager</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.host.ConfigManager.html#field_detail">HostConfigManager</a>, <a href="vim.ServiceInstanceContent.html#field_detail">ServiceContent</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.HostSystem.html">HostSystem</a>, <a href="vim.KeyValue.html">KeyValue</a>, <a href="vim.LicenseAssignmentManager.html">LicenseAssignmentManager</a>, <a href="vim.LicenseManager.AvailabilityInfo.html">LicenseAvailabilityInfo</a>, <a href="vim.LicenseManager.DiagnosticInfo.html">LicenseDiagnostics</a>, <a href="vim.LicenseManager.FeatureInfo.html">LicenseFeatureInfo</a>, <a href="vim.LicenseManager.EvaluationInfo.html">LicenseManagerEvaluationInfo</a>, <a href="vim.LicenseManager.LicenseInfo.html">LicenseManagerLicenseInfo</a>, <a href="vim.LicenseManager.LicenseSource.html">LicenseSource</a>, <a href="vim.LicenseManager.LicenseUsageInfo.html">LicenseUsageInfo</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         This managed object type controls entitlements for a given VMware
+  platform. VMware platforms include VirtualCenter, ESX Server, VMware Server,
+  Workstation and Player. Entitlements define what software capabilities
+  this host may use.
+  <p>
+  Entitlements are identified by a short string 'key'. Keys can represent either
+  a particular edition (Full, Starter) or a particular feature/function (featureKey)
+  (backup, nas). An edition implies zero one or more functions which are express,
+  denied or optional. For example a 'Full' edition includes 'iscsi' function but a
+  Starter edition might disallow it.
+  <p>
+  Which edition a given VMware platform uses can be defined at any time. Generally this
+  is done right after first install and boot as installation software may not set it.
+  For editions that are similar in nature, any future changes to edition
+  type will only impact future requests for functionality.
+  Current functionality is left unaffected. The same is true for optional
+  functions enabled/disabled after some period of time. For dissimilar editions,
+  such transitions may require entering maintenance mode first else an exception of
+  InvalidState will be thrown.
+  <p>
+  To specify the edition type and any optional functions, use updateLicense for
+  ESX Server and addLicense follow by LicenseAssingmentManager.updateAssignedLicense
+  for VirtualCenter. 
+  <p>               
+  When an edition is specified for a given host, the cost of that edition
+  (how many licenses are needed) is determined. The cost is computed
+  using the license's CostUnit value multiplied by the number of units activated.
+  For example, when a VMware platform is set to an edition which uses a 'cpuPackage'
+  on a two socket server, two licenses would be needed to successfully
+  install that edition.
+  <p>               
+  Here is a diagram of the unit costs supported by this API and their relationships.
+  <pre>             
+   +------------------------------+   +--------+      +-------+
+   | +-----------+ +-----------+  |   | Server |      |  Host |
+   | |           | |           |  |   +--------+      +-------+
+   | |  cpuCore  | |   cpuCore |  |                   +-------+
+   | +-----------+ +-----------+  |   +--------+      |  Host |
+   |                  cpuPackage  |   |  VM    |      +-------+
+   +------------------------------+   +--------+
+  </pre>
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="diagnostics" name="diagnostics"></a><strong>diagnostics</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.LicenseManager.DiagnosticInfo.html">LicenseDiagnostics</a></td><td><B>Deprecated.</B><I>
+         As of vSphere API 4.0, this property is not used by the system.
+      </I>
+<p></p>
+         Return current diagnostic information.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="evaluation" name="evaluation"></a><strong>evaluation</strong><span title="Required Privilege: System.Read" class="privilege-ref"> P</span></td><td><a href="vim.LicenseManager.EvaluationInfo.html">LicenseManagerEvaluationInfo</a></td><td>
+<p></p>
+<p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="featureInfo" name="featureInfo"></a><strong>featureInfo</strong><span title="May not be present" class="footnote-ref">*</span></td><td><a href="vim.LicenseManager.FeatureInfo.html">LicenseFeatureInfo[]</a></td><td><B>Deprecated.</B><I>
+         As of VI API 2.5, use <a href="vim.LicenseManager.html#querySupportedFeatures">QuerySupportedFeatures</a> 
+  instead.
+      </I>
+<p></p>
+         The list of features that can be licensed.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="licenseAssignmentManager" name="licenseAssignmentManager"></a><strong>licenseAssignmentManager</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.LicenseAssignmentManager.html">LicenseAssignmentManager</a></td><td>
+<p></p>
+         License Assignment Manager
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="licensedEdition" name="licensedEdition"></a><strong>licensedEdition</strong></td><td>xsd:string</td><td><B>Deprecated.</B><I>
+         As of vSphere API 4.0, use 
+  <a href="vim.LicenseAssignmentManager.html#queryAssignedLicenses">QueryAssignedLicenses</a> instead.
+      </I>
+<p></p>
+         The product's license edition. The edition defines which product license
+  the server requires. This, in turn, determines the core set of functionalities
+  provided by the product and the additional features that can be licensed. If 
+  no edition is set the property is set to the empty string ("").
+
+  To set the edition use <a href="vim.LicenseManager.html#setEdition">SetLicenseEdition</a>.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="licenses" name="licenses"></a><strong>licenses</strong><span title="Required Privilege: dynamic" class="privilege-ref"> P</span></td><td><a href="vim.LicenseManager.LicenseInfo.html">LicenseManagerLicenseInfo[]</a></td><td>
+<p></p>
+         Get information about all the licenses avaiable.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="source" name="source"></a><strong>source</strong></td><td><a href="vim.LicenseManager.LicenseSource.html">LicenseSource</a></td><td><B>Deprecated.</B><I>
+         As of vSphere API 4.0, use 
+  <a href="vim.LicenseAssignmentManager.html#queryAssignedLicenses">QueryAssignedLicenses</a> to get evaluation information.
+      </I>
+<p></p>
+         Set or return a data object type of LocalLicense or LicenseServer.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="sourceAvailable" name="sourceAvailable"></a><strong>sourceAvailable</strong></td><td>xsd:boolean</td><td><B>Deprecated.</B><I>
+         As of vSphere API 4.0, this property is not used.
+      </I>
+<p></p>
+         Current state of the license source. License sources that are LocalSource
+  are always available.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span><span class="privilege-ref">P</span><span class="footnote">Required privilege - see tooltip for details</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#addLicense">AddLicense</a>, <a href="#checkFeature">CheckLicenseFeature</a>, <a href="#configureSource">ConfigureLicenseSource</a>, <a href="#decodeLicense">DecodeLicense</a>, <a href="#disable">DisableFeature</a>, <a href="#enable">EnableFeature</a>, <a href="#querySourceAvailability">QueryLicenseSourceAvailability</a>, <a href="#queryUsage">QueryLicenseUsage</a>, <a href="#querySupportedFeatures">QuerySupportedFeatures</a>, <a href="#removeLicense">RemoveLicense</a>, <a href="#removeLabel">RemoveLicenseLabel</a>, <a href="#setEdition">SetLicenseEdition</a>, <a href="#updateLicense">UpdateLicense</a>, <a href="#updateLabel">UpdateLicenseLabel</a></td>
+</tr>
+</table>
+<br>
+<a id="addLicense" name="addLicense"></a>
+<h1>AddLicense</h1>
+<p></p>
+         Adds a license to the inventory of available licenses.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Global.Licenses</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.LicenseManager.html">LicenseManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>licenseKey</strong></td><td>xsd:string</td><td>
+<p></p>
+         A license. E.g. a serial license.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>labels</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.KeyValue.html">KeyValue[]</a></td><td>
+<p></p>
+         array of key-value labels. Ignored by ESX Server.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.LicenseManager.LicenseInfo.html">LicenseManagerLicenseInfo</a></td><td>Returns information about the license specified in licenseKey.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('AddLicense-textarea');expandcontent(this, 'AddLicense-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="AddLicense-div">
+<textarea cols="20" rows="10" name="AddLicense-textarea" wrap="off" readonly="1" id="AddLicense-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AddLicense" type="vim25:AddLicenseRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AddLicenseResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:LicenseManagerLicenseInfo"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="checkFeature" name="checkFeature"></a>
+<h1>CheckLicenseFeature</h1>
+<B>Deprecated.</B><I>
+         As of vSphere API 4.0, use 
+  <a href="vim.LicenseAssignmentManager.html#queryAssignedLicenses">QueryAssignedLicenses</a> instead.
+      </I>
+<p></p>
+         Returns whether or not a given feature is enabled.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Read</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.LicenseManager.html">LicenseManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         Host to act on if LicenseManager is not on a host.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>featureKey</strong></td><td>xsd:string</td><td>
+<p></p>
+         Name of the feature to enable.
+  <p>
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td>xsd:boolean</td><td>Returns true if the feature is enabled and false if it is not.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if a feature name is not found.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the feature cannot be supported on the platform, potentially because the hardware configuration does not support it.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('CheckLicenseFeature-textarea');expandcontent(this, 'CheckLicenseFeature-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="CheckLicenseFeature-div">
+<textarea cols="20" rows="10" name="CheckLicenseFeature-textarea" wrap="off" readonly="1" id="CheckLicenseFeature-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CheckLicenseFeature" type="vim25:CheckLicenseFeatureRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="CheckLicenseFeatureResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="xsd:boolean"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="configureSource" name="configureSource"></a>
+<h1>ConfigureLicenseSource</h1>
+<B>Deprecated.</B><I>
+         As of vSphere API 4.0, use <a href="vim.LicenseManager.html#updateLicense">UpdateLicense</a>
+  instead.
+      </I>
+<p></p>
+         Allows for reconfiguration of the License Manager license source.
+  <p>
+  This changes the licensing source to be either served or local. Before changing
+  the license source location, the API checks the number of licenses available at
+  the new potential source to ensure there are at least as many licenses there as
+  have been issued by the current source. If there are an equal or greater number of
+  licenses at the new source, all licenses on the current source are released and
+  then reacquired from the new source. If there are not enough licenses available on
+  the new source to reissue all licenses, the operation fails.
+  <p>
+  This is used to configure the license source on an individual host.
+  <p>             
+  <b>PLATFORM Specific Notes:</b>
+    VirtualCenter - only supports a served source.
+                    the host parameter is mandatory.
+    ESX Server  -  the host parameter is optional.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Global.Licenses</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.LicenseManager.html">LicenseManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         Host for which the license manager should be reconfigured.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>licenseSource</strong></td><td><a href="vim.LicenseManager.LicenseSource.html">LicenseSource</a></td><td>
+<p></p>
+         ServedSource or LocalSource.
+  <p>
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.CannotAccessLocalSource.html">CannotAccessLocalSource</a></td><td>Thrown if the local source cannot be accessed.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidLicense.html">InvalidLicense</a></td><td>Thrown if the new license source is LocalLicenseSource and the license file is not valid.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.LicenseServerUnavailable.html">LicenseServerUnavailable</a></td><td>Thrown if the license server is unreachable.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotEnoughLicenses.html">NotEnoughLicenses</a></td><td>Thrown if the new license source does not have enough licenses.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('ConfigureLicenseSource-textarea');expandcontent(this, 'ConfigureLicenseSource-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="ConfigureLicenseSource-div">
+<textarea cols="20" rows="10" name="ConfigureLicenseSource-textarea" wrap="off" readonly="1" id="ConfigureLicenseSource-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ConfigureLicenseSource" type="vim25:ConfigureLicenseSourceRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ConfigureLicenseSourceResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="decodeLicense" name="decodeLicense"></a>
+<h1>DecodeLicense</h1>
+<p></p>
+         Decodes licensing information on the license specified.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Global.Licenses</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.LicenseManager.html">LicenseManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>licenseKey</strong></td><td>xsd:string</td><td>
+<p></p>
+         A license. E.g. a serial license.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.LicenseManager.LicenseInfo.html">LicenseManagerLicenseInfo</a></td><td>Returns information about the license specified in licenseKey.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('DecodeLicense-textarea');expandcontent(this, 'DecodeLicense-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="DecodeLicense-div">
+<textarea cols="20" rows="10" name="DecodeLicense-textarea" wrap="off" readonly="1" id="DecodeLicense-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DecodeLicense" type="vim25:DecodeLicenseRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DecodeLicenseResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:LicenseManagerLicenseInfo"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="disable" name="disable"></a>
+<h1>DisableFeature</h1>
+<B>Deprecated.</B><I>
+         As of vSphere API 4.0, use 
+ <a href="vim.LicenseAssignmentManager.html#removeAssignedLicense">RemoveAssignedLicense</a> instead.
+      </I>
+<p></p>
+         Release licenses for an optional feature.
+ <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Global.Licenses</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.LicenseManager.html">LicenseManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         Host to act on if LicenseManager is not on a host.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>featureKey</strong></td><td>xsd:string</td><td>
+<p></p>
+         key of the feature to disable.
+ <p>
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td>xsd:boolean</td><td>Returns true if the feature was disabled and false if not.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if a feature name is not found or it is not optional.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the feature is in use.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.LicenseServerUnavailable.html">LicenseServerUnavailable</a></td><td>Thrown if the license server is unavailable.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('DisableFeature-textarea');expandcontent(this, 'DisableFeature-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="DisableFeature-div">
+<textarea cols="20" rows="10" name="DisableFeature-textarea" wrap="off" readonly="1" id="DisableFeature-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DisableFeature" type="vim25:DisableFeatureRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="DisableFeatureResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="xsd:boolean"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="enable" name="enable"></a>
+<h1>EnableFeature</h1>
+<B>Deprecated.</B><I>
+         As of vSphere API 4.0, use 
+  <a href="vim.LicenseAssignmentManager.html#updateAssignedLicense">UpdateAssignedLicense</a> instead.
+      </I>
+<p></p>
+         Enable a feature that has an optional state.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Global.Licenses</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.LicenseManager.html">LicenseManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         Host to act on if LicenseManager is not on a host.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>featureKey</strong></td><td>xsd:string</td><td>
+<p></p>
+         Name of the feature to enable.
+  <p>
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td>xsd:boolean</td><td>Returns true if enabling the feature was successful, false otherwise.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if a feature name is not found or it is not optional.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the feature cannot be supported on the platform, potentially because the hardware configuration does not support it.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.LicenseServerUnavailable.html">LicenseServerUnavailable</a></td><td>Thrown if the license server is unavailable.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('EnableFeature-textarea');expandcontent(this, 'EnableFeature-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="EnableFeature-div">
+<textarea cols="20" rows="10" name="EnableFeature-textarea" wrap="off" readonly="1" id="EnableFeature-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="EnableFeature" type="vim25:EnableFeatureRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="EnableFeatureResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="xsd:boolean"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="querySourceAvailability" name="querySourceAvailability"></a>
+<h1>QueryLicenseSourceAvailability</h1>
+<B>Deprecated.</B><I>
+         As of vSphere API 4.0, use 
+  <a href="vim.LicenseAssignmentManager.html#queryAssignedLicenses">QueryAssignedLicenses</a> instead.
+      </I>
+<p></p>
+         Queries the current license source for total and available licenses available for
+  each feature known to this system.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Global.Licenses</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.LicenseManager.html">LicenseManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         Use the license source of the specified host.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.LicenseManager.AvailabilityInfo.html">LicenseAvailabilityInfo[]</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryLicenseSourceAvailability-textarea');expandcontent(this, 'QueryLicenseSourceAvailability-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryLicenseSourceAvailability-div">
+<textarea cols="20" rows="10" name="QueryLicenseSourceAvailability-textarea" wrap="off" readonly="1" id="QueryLicenseSourceAvailability-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryLicenseSourceAvailability" type="vim25:QueryLicenseSourceAvailabilityRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryLicenseSourceAvailabilityResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:LicenseAvailabilityInfo" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryUsage" name="queryUsage"></a>
+<h1>QueryLicenseUsage</h1>
+<B>Deprecated.</B><I>
+         As of vSphere API 4.0, use 
+  <a href="vim.LicenseAssignmentManager.html#queryAssignedLicenses">QueryAssignedLicenses</a> instead.
+      </I>
+<p></p>
+         Returns the license usage. The license usage is a list of supported features and
+  the number of licenses that have been reserved.
+  <p>
+  <b>PLATFORM Specific Notes:</b>
+   VirtualCenter - Empty string returns the usage of non-host specific features.
+                   Must specify managed host to query.
+   ESX Server - Host argument ignored.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>System.Read</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.LicenseManager.html">LicenseManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         Host to query for usage. If missing, query the server the 
+  <a href="vim.LicenseManager.html">LicenseManager</a> is on.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.LicenseManager.LicenseUsageInfo.html">LicenseUsageInfo</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryLicenseUsage-textarea');expandcontent(this, 'QueryLicenseUsage-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryLicenseUsage-div">
+<textarea cols="20" rows="10" name="QueryLicenseUsage-textarea" wrap="off" readonly="1" id="QueryLicenseUsage-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryLicenseUsage" type="vim25:QueryLicenseUsageRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QueryLicenseUsageResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:LicenseUsageInfo"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="querySupportedFeatures" name="querySupportedFeatures"></a>
+<h1>QuerySupportedFeatures</h1>
+<B>Deprecated.</B><I>
+         As of vSphere API 4.0, use 
+  <a href="vim.LicenseAssignmentManager.html#queryAssignedLicenses">QueryAssignedLicenses</a> instead.
+      </I>
+<p></p>
+         Queries the current license source for a list of available licenses that can be
+  licensed from this system.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Global.Licenses</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.LicenseManager.html">LicenseManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         Use the license source of the specified host.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.LicenseManager.FeatureInfo.html">LicenseFeatureInfo[]</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QuerySupportedFeatures-textarea');expandcontent(this, 'QuerySupportedFeatures-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QuerySupportedFeatures-div">
+<textarea cols="20" rows="10" name="QuerySupportedFeatures-textarea" wrap="off" readonly="1" id="QuerySupportedFeatures-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QuerySupportedFeatures" type="vim25:QuerySupportedFeaturesRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="QuerySupportedFeaturesResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:LicenseFeatureInfo" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="removeLicense" name="removeLicense"></a>
+<h1>RemoveLicense</h1>
+<p></p>
+         Remove license from the available set.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Global.Licenses</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.LicenseManager.html">LicenseManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>licenseKey</strong></td><td>xsd:string</td><td>
+<p></p>
+         A licenses. E.g. a serial license.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RemoveLicense-textarea');expandcontent(this, 'RemoveLicense-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RemoveLicense-div">
+<textarea cols="20" rows="10" name="RemoveLicense-textarea" wrap="off" readonly="1" id="RemoveLicense-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveLicense" type="vim25:RemoveLicenseRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveLicenseResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="removeLabel" name="removeLabel"></a>
+<h1>RemoveLicenseLabel</h1>
+<p></p>
+         Removed a license's label.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Global.Licenses</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.LicenseManager.html">LicenseManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>licenseKey</strong></td><td>xsd:string</td><td>
+<p></p>
+         A license.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>labelKey</strong></td><td>xsd:string</td><td>
+<p></p>
+         A label key.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RemoveLicenseLabel-textarea');expandcontent(this, 'RemoveLicenseLabel-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RemoveLicenseLabel-div">
+<textarea cols="20" rows="10" name="RemoveLicenseLabel-textarea" wrap="off" readonly="1" id="RemoveLicenseLabel-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveLicenseLabel" type="vim25:RemoveLicenseLabelRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="RemoveLicenseLabelResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="setEdition" name="setEdition"></a>
+<h1>SetLicenseEdition</h1>
+<B>Deprecated.</B><I>
+         As of vSphere API 4.0, use 
+  <a href="vim.LicenseAssignmentManager.html#queryAssignedLicenses">QueryAssignedLicenses</a> instead.
+      </I>
+<p></p>
+         Defines the product's license edition. The edition defines which product license
+  the server requires. This, in turn, determines the core set of functionality
+  provided by the product and the additional features that can be licensed.
+  <p>
+  To determine what featureKey the current platform will accept, use
+  querySourceAvailablity() at runtime, or consult the documentation for the
+  current platform.
+  <p>
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Global.Licenses</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.LicenseManager.html">LicenseManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>host</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem</a></td><td>
+<p></p>
+         Host to act on if LicenseManager is not on a host.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>featureKey</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Name of edition feature to select. If featureKey is not
+  set or set to empty string, the product becomes unlicensed.
+  <p>
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if a feature key is not an edition feature key.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.InvalidState.html">InvalidState</a></td><td>Thrown if the feature cannot be supported on the platform, potentially because the hardware configuration does not support it.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.LicenseServerUnavailable.html">LicenseServerUnavailable</a></td><td>Thrown if the license server is unavailable.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('SetLicenseEdition-textarea');expandcontent(this, 'SetLicenseEdition-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="SetLicenseEdition-div">
+<textarea cols="20" rows="10" name="SetLicenseEdition-textarea" wrap="off" readonly="1" id="SetLicenseEdition-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="SetLicenseEdition" type="vim25:SetLicenseEditionRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="SetLicenseEditionResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateLicense" name="updateLicense"></a>
+<h1>UpdateLicense</h1>
+<p></p>
+         Updates the available licenses to the one provided in licenseKey.
+
+ This is the same as removing all the licenses using 
+ <a href="vim.LicenseManager.html#removeLicense">RemoveLicense</a> and adding licenseKey using
+ <a href="vim.LicenseManager.html#addLicense">AddLicense</a>
+
+ If the optional parameter labels is specify this is the same as calling
+ updateLicense without the optioal parameter and calling updateLabel for each pair
+ in the labels array.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Global.Licenses</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.LicenseManager.html">LicenseManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>licenseKey</strong></td><td>xsd:string</td><td>
+<p></p>
+         A license. E.g. a serial license.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>labels</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.KeyValue.html">KeyValue[]</a></td><td>
+<p></p>
+         array of key-value labels.
+      <br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.LicenseManager.LicenseInfo.html">LicenseManagerLicenseInfo</a></td><td>Returns information about the license specified in licenseKey.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateLicense-textarea');expandcontent(this, 'UpdateLicense-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateLicense-div">
+<textarea cols="20" rows="10" name="UpdateLicense-textarea" wrap="off" readonly="1" id="UpdateLicense-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateLicense" type="vim25:UpdateLicenseRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateLicenseResponse">
+            <complexType>
+               <sequence>
+                  <element name="returnval" type="vim25:LicenseManagerLicenseInfo"/>
+               </sequence>
+            </complexType>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="updateLabel" name="updateLabel"></a>
+<h1>UpdateLicenseLabel</h1>
+<p></p>
+         Update a license's label.
+ It creates a label entry if the labelKey doesn't already exist
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Global.Licenses</dd>
+<dt>Since </dt>
+<dd>vSphere API 4.0</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.LicenseManager.html">LicenseManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>licenseKey</strong></td><td>xsd:string</td><td>
+<p></p>
+         A license.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>labelKey</strong></td><td>xsd:string</td><td>
+<p></p>
+         A label key.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>labelValue</strong></td><td>xsd:string</td><td>
+<p></p>
+         Value for the label.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('UpdateLicenseLabel-textarea');expandcontent(this, 'UpdateLicenseLabel-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="UpdateLicenseLabel-div">
+<textarea cols="20" rows="10" name="UpdateLicenseLabel-textarea" wrap="off" readonly="1" id="UpdateLicenseLabel-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateLicenseLabel" type="vim25:UpdateLicenseLabelRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="UpdateLicenseLabelResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

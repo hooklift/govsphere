@@ -1,0 +1,105 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.net.IpConfigInfo.IpAddressOrigin" name="vim.net.IpConfigInfo.IpAddressOrigin"></a>
+<h1>Enum - 
+						NetIpConfigInfoIpAddressOrigin</h1>
+<dl>
+<dt>Since </dt>
+<dd>vSphere API 4.1</dd>
+<p></p>
+</dl>
+<br>
+<h2>Enum Description</h2>
+<p></p>
+         This specifies how an IP address was obtained for a given interface.
+ See RFC 4293 IpAddressOriginTC.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Enum Constants</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><a id="dhcp" name="dhcp"></a>dhcp</td><td>
+      The address is configured through dhcp.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="linklayer" name="linklayer"></a>linklayer</td><td>
+      The address is obtained through stateless autoconfiguration (autoconf).
+ See RFC 4862, IPv6 Stateless Address Autoconfiguration.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="manual" name="manual"></a>manual</td><td>
+      The address is configured manually. The term 'static' is a synonym.
+   <br>
+</td>
+</tr>
+<tr class="r0">
+<td><a id="other" name="other"></a>other</td><td>
+      Any other type of address configuration other than the below
+  mentioned ones will fall under this category. For e.g., automatic
+  address configuration for the link local address falls under
+  this type.
+   <br>
+</td>
+</tr>
+<tr class="r1">
+<td><a id="random" name="random"></a>random</td><td>
+      The address is chosen by the system at random
+  e.g., an IPv4 address within 169.254/16, or an RFC 3041 privacy address.
+   <br>
+</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <simpleType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="NetIpConfigInfoIpAddressOrigin">
+            <restriction base="xsd:string">
+               <enumeration value="other"/>
+               <enumeration value="manual"/>
+               <enumeration value="dhcp"/>
+               <enumeration value="linklayer"/>
+               <enumeration value="random"/>
+            </restriction>
+         </simpleType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

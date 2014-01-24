@@ -1,0 +1,210 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.ExtensibleManagedObject" name="vim.ExtensibleManagedObject"></a>
+<h1>Managed Object -  
+						ExtensibleManagedObject</h1>
+<dl>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.alarm.Alarm.html">Alarm</a>, <a href="vim.host.CpuSchedulerSystem.html">HostCpuSchedulerSystem</a>, <a href="vim.host.FirewallSystem.html">HostFirewallSystem</a>, <a href="vim.host.GraphicsManager.html">HostGraphicsManager</a>, <a href="vim.host.MemoryManagerSystem.html">HostMemorySystem</a>, <a href="vim.host.NetworkSystem.html">HostNetworkSystem</a>, <a href="vim.host.PciPassthruSystem.html">HostPciPassthruSystem</a>, <a href="vim.host.ServiceSystem.html">HostServiceSystem</a>, <a href="vim.host.StorageSystem.html">HostStorageSystem</a>, <a href="vim.host.VirtualNicManager.html">HostVirtualNicManager</a>, <a href="vim.host.VMotionSystem.html">HostVMotionSystem</a>, <a href="vim.ManagedEntity.html">ManagedEntity</a>, <a href="vim.scheduler.ScheduledTask.html">ScheduledTask</a>, <a href="vim.Task.html">Task</a>, <a href="vim.vm.Snapshot.html">VirtualMachineSnapshot</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.CustomFieldsManager.FieldDef.html">CustomFieldDef</a>, <a href="vim.CustomFieldsManager.Value.html">CustomFieldValue</a>
+</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         <a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a> provides methods and properties that provide
+  access to custom fields that may be associated with a managed object.
+  Use the <a href="vim.CustomFieldsManager.html">CustomFieldsManager</a> to define custom fields.
+  The <a href="vim.CustomFieldsManager.html">CustomFieldsManager</a> handles the entire list of custom fields
+  on a server. You can can specify the object type to which a particular custom 
+  field applies by setting its <a href="vim.CustomFieldsManager.FieldDef.html#managedObjectType">managedObjectType</a>.
+  (If you do not set a managed object type for a custom field definition,
+  the field applies to all managed objects.)
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="availableField" name="availableField"></a><strong>availableField</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vim.CustomFieldsManager.FieldDef.html">CustomFieldDef[]</a></td><td>
+<p></p>
+         List of custom field definitions that are valid for the object's type. 
+  The fields are sorted by <a href="vim.CustomFieldsManager.FieldDef.html#name">name</a>.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="value" name="value"></a><strong>value</strong><span title="May not be present" class="footnote-ref">*</span><span title="Required Privilege: System.View" class="privilege-ref"> P</span></td><td><a href="vim.CustomFieldsManager.Value.html">CustomFieldValue[]</a></td><td>
+<p></p>
+         List of custom field values. Each value uses a key to associate
+  an instance of a <a href="vim.CustomFieldsManager.StringValue.html">CustomFieldStringValue</a> with
+  a custom field definition.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span><span class="privilege-ref">P</span><span class="footnote">
+                  Required privilege:
+                  System.View</span>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#setCustomValue">setCustomValue</a></td>
+</tr>
+</table>
+<br>
+<a id="setCustomValue" name="setCustomValue"></a>
+<h1>setCustomValue</h1>
+<p></p>
+         Assigns a value to a custom field. The setCustomValue method requires 
+  whichever updatePrivilege is defined as one of the 
+  <a href="vim.CustomFieldsManager.FieldDef.html#fieldInstancePrivileges">fieldInstancePrivileges</a> 
+  for the CustomFieldDef whose value is being changed.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>Dynamic - See discussion above</dd>
+<dt>Since </dt>
+<dd>VI API 2.5</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.ExtensibleManagedObject.html">ExtensibleManagedObject</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>key</strong></td><td>xsd:string</td><td>
+<p></p>
+         The name of the field whose value is to be updated.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>value</strong></td><td>xsd:string</td><td>
+<p></p>
+         Value to be assigned to the custom field.
+      <br>
+</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if no custom field with that key exists.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('setCustomValue-textarea');expandcontent(this, 'setCustomValue-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="setCustomValue-div">
+<textarea cols="20" rows="10" name="setCustomValue-textarea" wrap="off" readonly="1" id="setCustomValue-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="setCustomValue" type="vim25:setCustomValueRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="setCustomValueResponse">
+            <complexType/>
+         </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

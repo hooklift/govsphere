@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<html>
+<head>
+<title>Cluster Services Counters</title>
+<script language="JavaScript" src="./commonRes.js" type="text/javascript"></script>
+<link rel="StyleSheet" type="text/css" href="doc-style.css"></link>
+
+<style type="text/css">
+.code {
+    font-size: 11px; font-family:
+    "Courier New", Courier, monospace;
+}
+.BoldRedText {
+    FONT-WEIGHT: bold; COLOR: #CC0000; TEXT-DECORATION: none
+}
+
+h2 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #3366AA;
+    margin-top: 25px;
+    padding-bottom: 10px;
+    border-bottom-width: 1px;
+    border-bottom-style: dashed;
+}
+h3 {
+    margin-top: 25px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+table {
+    border-collapse:collapse;
+    border-top: 1px solid #999;
+    border-left: 1px solid #999;
+    width:100%;
+    margin-right: 4px;
+    margin-left: 4px;
+}
+
+table.navcontainer, topnavcontainer {
+    border:0; margin-right: 2px; margin-left: 2px; padding:0;vertical-align:bottom;
+}
+
+table.nested {
+    border-collapse:collapse;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+th {
+    background-color: #555555;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 10px;
+    text-align: center;
+    vertical-align:middle;
+}
+
+th.nested {
+    border:0; padding:0; text-align: center;
+}
+
+td {
+    font-size: 11px;
+    vertical-align: top;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+td.yes {font-size: 18px;}
+td.no {font-size: 12px;}
+
+a.white:link {color: #ffffff}
+a.white:visited {color: #ffffff}
+a.white:hover {color: #ffffff; cursor:hand;}
+a.white:active {color: #ffffff}
+
+a.noline:link {color: #3366AA; text-decoration:none; }
+a.noline:visited {color: #3366AA; text-decoration:none;}
+a.noline:hover {color: #3366AA; cursor:hand; text-decoration:none;}
+a.noline:active {color: #3366AA; text-decoration:none;}
+
+p {font-size:12px; margin: 12px 72px 5px 0px; }
+p.nolead {margin: 3px 72px 5px 0px}
+
+.back {
+    font-size:9px; text-transform: uppercase; FONT-WEIGHT: bold; COLOR: #3366AA;
+}
+.back:link {color: #ffffff; text-decoration: none;}
+.back:visited {color: #ffffff}
+.back:hover {color: #ffffff; cursor:hand;}
+.back:active {color: #ffffff}
+
+.back2 {
+    font-size:11px; text-transform: none; FONT-WEIGHT: bold; COLOR: #3366AA;
+}
+
+.top {
+    font-size:10px; text-transform: uppercase; FONT-WEIGHT: bold; COLOR: #3366AA;
+}
+
+ul {
+    font-size: 12px;
+    vertical-align: top;
+}
+ul.small{font-size: 11px;}
+
+</style>
+</head>
+
+<body>
+<span class="back"><a href="vim.PerformanceManager.html" class="noline">Back to</a></span>
+<span class="back2"><a href="vim.PerformanceManager.html" class="noline">PerformanceManager</a></span><br />
+<p></p>
+<a name="top"></a>
+<h1>Cluster Services Counters</h1>
+<table class="topnavcontainer"><tr><td valign="top">
+
+<p class="nolead">Performance counters are modeled using the
+<a href="vim.PerformanceManager.CounterInfo.html">PerfCounterInfo</a> data object type. 
+Each instance of a <a href="vim.PerformanceManager.CounterInfo.html">PerfCounterInfo</a> data object contains
+metadata about a specific metric available from the system. The cluster-services group (<strong>clusterServices</strong>)
+of performance counters tracks performance metrics for clusters that have been configured using vSphere DRS
+(Distributed Resource Scheduler), vSphere HA (High Availability), or both. </p>
+
+</td></tr></table>
+<!-- heading for table -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+
+<tr>
+<th width="10%" valign="middle" title="PerfCounterInfo.nameInfo.key property">Counter</th>
+<!--<th rowspan="2" width="200">Description</th>-->
+<th width="10%"><a href="vim.PerformanceManager.CounterInfo.StatsType.html" class="white" title="StatsType">StatsType</a></th>
+<th width="10%"><a href="vim.PerformanceManager.CounterInfo.Unit.html" class="white">Unit</a></th>
+
+<th width="5%"><a href="vim.HistoricalInterval.html#level" class="white" title="The 'level' property is 'null' for ESX... Statistics are collected by vCenter Server and rolled-up based on the collection-level setting (1 is the default).">Level</a></th>
+<th width="5%"><a href="vim.PerformanceManager.CounterInfo.html" class="white" title="Per Device Level">Per<br />Device<br />Level</a></th>
+<th width="10%"><a href="vim.PerformanceManager.CounterInfo.RollupType.html" class="white" title="RollupType">RollupType</a></th>
+<th width="15%"><a href="vim.PerformanceManager.CounterInfo.html" class="white" title="PerfCounterInfo.nameInfo property is used to populate vSphere Client charts...">Label</a></th>
+<th width="10%"><a href="vim.PerformanceManager.MetricId.html" class="white" title="Indicates whether collection is from an &#160;
+individual instance or aggregate">Instance/<br />Aggregate</a></th>
+<th width="10%"><a href="" class="white" title="ESX version(s) for which this counter is supported.">ESX<br />Versions</a></th>
+</tr>
+<!-- close heading for table -->
+<tr><td rowspan="2">cpufairness</td>
+<td>absolute</td><td>number</td><td>1</td><td>3</td><td>latest</td><td>
+CPU fairness
+</td><td></td><td></td></tr>
+<tr><td colspan="8">Fairness of distributed cpu resource allocation</td></tr>
+
+
+<tr><td rowspan="2">effectivecpu</td>
+<td>rate</td><td>megaHertz</td><td>1</td><td>3</td><td>average</td><td>
+Effective CPU resources
+</td><td></td><td></td></tr>
+<tr><td colspan="8">
+Total available CPU resources of all hosts within a cluster.
+Effective CPU = Aggregate host CPU capacity - (VMkernel CPU + Service
+Console CPU + other service CPU)
+</td>
+</tr>
+
+
+<tr><td rowspan="2">effectivemem</td>
+<td>absolute</td><td>megaBytes</td><td>1</td><td>3</td><td>average</td><td>
+Effective memory resources
+</td><td></td><td></td></tr>
+<tr><td colspan="8">
+Total amount of machine memory of all hosts in the cluster that is available for use for virtual machine memory 
+(physical memory for use by the Guest OS) and virtual machine overhead memory.
+Effective Memory = Aggregate host machine memory - (VMkernel
+memory + Service Console memory + other service memory)
+</td>
+</tr>
+
+
+<tr><td rowspan="2">failover</td>
+<td>absolute</td><td>number</td><td>1</td><td>3</td><td>latest</td><td>
+Current failover level
+</td><td></td><td></td></tr>
+<tr><td colspan="8">vSphere HA Number of failures that can be tolerated.</td></tr>
+
+
+<tr><td rowspan="2">memfairness</td>
+<td>absolute</td><td>number</td><td>1</td><td>3</td><td>latest</td><td>
+Memory fairness
+</td><td></td><td></td></tr>
+<tr><td colspan="8">Aggregate available memory resources of all the hosts within a cluster.</td></tr>
+
+
+</table>
+<p>&#160;</p>
+<span class="back"><a href="#top" class="noline">Back to</a></span> 
+<span class="back2"><a href="#top" class="noline">Top of page</a></span><br />
+<span class="back"><a href="vim.PerformanceManager.html" class="noline">Back to</a></span> 
+<span class="back2"><a href="vim.PerformanceManager.html" class="noline">PerformanceManager</a></span><br />
+<p>&#160;</p>
+<p>&#160;</p>
+<p><script language="javascript" type="text/javascript">document.write(ID_Copyright);</script><br />
+<script language="javascript" type="text/javascript">document.write(ID_VersionInformation);</script></p>
+</body>
+</html>

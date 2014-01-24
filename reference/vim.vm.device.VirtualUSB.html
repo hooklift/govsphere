@@ -1,0 +1,204 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vm.device.VirtualUSB" name="vim.vm.device.VirtualUSB"></a>
+<h1>Data Object - VirtualUSB</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.vm.device.VirtualDevice.html">VirtualDevice</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The <a href="vim.vm.device.VirtualUSB.html">VirtualUSB</a> data object describes the USB device configuration
+ for a virtual machine. You can attach a USB device to an ESX host.
+ The device is available to only one virtual machine at a time. When you remove
+ the device from the virtual machine, it becomes available to other virtual machines
+ located on the host. You can add up to 20 USB devices to a virtual machine.
+ Virtual USB support requires virtual machine hardware version 7 or later.
+ <p>
+ The <a href="vim.vm.device.VirtualUSB.html">VirtualUSB</a> object represents either a configuration to be applied to
+ the virtual machine or the current device configuration on the virtual machine.
+ <ul>
+ <li>To configure a USB connection for the virtual machine, add a <a href="vim.vm.device.VirtualUSB.html">VirtualUSB</a>
+ object to the <a href="vim.vm.device.VirtualDeviceSpec.html">VirtualDeviceConfigSpec</a>.
+ Use USB backing (<a href="vim.vm.device.VirtualUSB.USBBackingInfo.html">VirtualUSBUSBBackingInfo</a>) to establish
+ a connection with a virtual machine that will remain on the host to which
+ the USB device is attached.
+ The vSphere Server does not support vMotion for standard USB backing.
+ To configure vMotion support for a virtual machine with a USB connection,
+ use remote host backing for the USB connection
+ (<a href="vim.vm.device.VirtualUSB.RemoteHostBackingInfo.html">VirtualUSBRemoteHostBackingInfo</a>).
+ <p>
+ To configure a USB device for a virtual machine, the virtual machine
+ must have a USB controller. To add a controller, include a
+ <a href="vim.vm.device.VirtualUSBController.html">VirtualUSBController</a> object in the virtual device
+ specification for your virtual machine configuration. You can add only one
+ USB controller to a virtual machine.</li>
+ <li>To determine USB device configuration status for the virtual machine,
+ check the virtual hardware device list
+ (<a href="vim.vm.VirtualHardware.html">VirtualHardware</a>.<a href="vim.vm.VirtualHardware.html#device">device</a>).
+ The presence of the <a href="vim.vm.device.VirtualUSB.html">VirtualUSB</a> object in the hardware device list
+ indicates that the virtual machine is configured to use a USB device.
+ The <a href="vim.vm.device.VirtualUSB.html#connected">connected</a> property indicates
+ whether the virtual machine is connected to the device.</li>
+ </ul>
+ <p>
+ To determine the USB options available on the host, use the
+ <a href="vim.EnvironmentBrowser.html#queryConfigOption">QueryConfigOption</a> method to retrieve the virtual
+ machine configuration. The presence of the <a href="vim.vm.device.VirtualUSBOption.html">VirtualUSBOption</a>
+ object in the retrieved configuration
+ (<a href="vim.vm.ConfigOption.html">VirtualMachineConfigOption</a>.<a href="vim.vm.ConfigOption.html#hardwareOptions">hardwareOptions</a>.<a href="vim.vm.VirtualHardwareOption.html#virtualDeviceOption">virtualDeviceOption</a>)
+ indicates that the host supports USB connections.
+ <p>
+ The following operations will disconnect a USB device, losing data if data transfer
+ is in progress over the USB connection.
+ <ul>
+ <li>Hot add of memory, CPU, or PCI devices. A hot add operation disconnects only
+     USB devices for virtual machines that use a local connection to the device
+     (<a href="vim.vm.device.VirtualUSB.USBBackingInfo.html">VirtualUSBUSBBackingInfo</a>).
+ <li>Suspend and resume on a virtual machine.
+ <li>vMotion of a virtual machine with a USB connection,
+     if you are not using remote host USB backing.
+ </ul>
+ <p>
+ The following services do not support USB connections.
+ <ul>
+ <li>Fault Tolerance virtual machines cannot use USB devices.</li>
+ <li>DPM (Distributed Power Management) will put a host into standby,
+     regardless of any connections to USB devices on the host.
+ <li>DRS (Distributed Resource Scheduling) may power-off hosts that have
+     USB connections to virtual machines.</li>
+ </ul>
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="connected" name="connected"></a><strong>connected</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Flag indicating whether the device is currently connected.
+  The virtual machine is not connected to the device if the autoconnect pattern
+  specified in the USB device backing
+  (<a href="vim.vm.device.VirtualDevice.DeviceBackingInfo.html">VirtualDeviceDeviceBackingInfo</a>.<a href="vim.vm.device.VirtualDevice.DeviceBackingInfo.html#deviceName">deviceName</a>)
+  can not be satisfied, either
+  because there is no such device, or the matching device is not
+  available. Valid only while the virtual machine is running.
+      <p></p>
+<B><I>Since </I></B>VI API 2.5<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="family" name="family"></a><strong>family</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         Device class families.
+  For possible values see
+  <a href="vim.vm.UsbInfo.Family.html">VirtualMachineUsbInfoFamily</a>.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="product" name="product"></a><strong>product</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Product ID of the USB device.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="speed" name="speed"></a><strong>speed</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         Device speeds detected by server.
+  For possible values see
+  <a href="vim.vm.UsbInfo.Speed.html">VirtualMachineUsbInfoSpeed</a>.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vendor" name="vendor"></a><strong>vendor</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         Vendor ID of the USB device.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.1<br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.vm.device.VirtualDevice.html">VirtualDevice</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.vm.device.VirtualDevice.html#backing">backing</a>, <a href="vim.vm.device.VirtualDevice.html#connectable">connectable</a>, <a href="vim.vm.device.VirtualDevice.html#controllerKey">controllerKey</a>, <a href="vim.vm.device.VirtualDevice.html#deviceInfo">deviceInfo</a>, <a href="vim.vm.device.VirtualDevice.html#key">key</a>, <a href="vim.vm.device.VirtualDevice.html#slotInfo">slotInfo</a>, <a href="vim.vm.device.VirtualDevice.html#unitNumber">unitNumber</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="VirtualUSB">
+            <complexContent>
+               <extension base="vim25:VirtualDevice">
+                  <sequence>
+                     <element name="connected" type="xsd:boolean"/>
+                     <element name="vendor" type="xsd:int" minOccurs="0"/>
+                     <element name="product" type="xsd:int" minOccurs="0"/>
+                     <element name="family" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="speed" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

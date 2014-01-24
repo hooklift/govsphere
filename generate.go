@@ -6,7 +6,9 @@ import (
 	"go/format"
 	"io/ioutil"
 	"log"
+	"os"
 	"strings"
+	"sync"
 	"text/template"
 	"unicode"
 )
@@ -72,6 +74,10 @@ var xsd2GoTypes = map[string]string{
 }
 
 func toGoType(xsdType string) string {
+	if xsdType == "" {
+		return ""
+	}
+
 	//Handles name space, ie. xsd:string, xs:long
 	r := strings.Split(xsdType, ":")
 
@@ -87,7 +93,18 @@ func toGoType(xsdType string) string {
 		return value
 	}
 
-	return "*" + type_
+	if strings.HasSuffix(type_, "[]") {
+		type_ = type_[:len(type_)-2]
+		if _, ok := xsd2GoTypes[type_]; ok {
+			type_ = "[]" + type_
+		} else {
+			type_ = "[]*" + type_
+		}
+	} else {
+		type_ = "*" + type_
+	}
+
+	return type_
 }
 
 func stripns(xsdType string) string {
@@ -101,50 +118,145 @@ func stripns(xsdType string) string {
 	return type_
 }
 
-func makePublic(field_ string) string {
+func makePublic(field_ string, public bool) string {
 	field := []rune(field_)
 	if len(field) == 0 {
 		return field_
 	}
 
-	field[0] = unicode.ToUpper(field[0])
+	if public {
+		field[0] = unicode.ToUpper(field[0])
+	} else {
+		field[0] = unicode.ToLower(field[0])
+	}
 	return string(field)
 }
 
-func generate(apiDefFile string) {
-	funcMap := template.FuncMap{
-		"toGoType":             toGoType,
-		"stripns":              stripns,
-		"replaceReservedWords": replaceReservedWords,
-		"makePublic":           makePublic,
+func comment(text string) string {
+	lines := strings.Split(text, "\n")
+
+	var output string
+	if len(lines) == 1 && lines[0] == "" {
+		return ""
 	}
 
+	// Helps to determine if
+	// there is an actual comment
+	// without screwing newlines
+	// in real comments.
+	hasComment := false
+
+	for _, line := range lines {
+		line = strings.TrimLeftFunc(line, unicode.IsSpace)
+		if line != "" {
+			hasComment = true
+		}
+		output += "\n// " + line
+	}
+
+	if hasComment {
+		return output
+	}
+	return ""
+}
+
+var funcMap = template.FuncMap{
+	"toGoType":             toGoType,
+	"stripns":              stripns,
+	"replaceReservedWords": replaceReservedWords,
+	"makePublic":           makePublic,
+	"comment":              comment,
+}
+
+func generate(apiDefFile string) {
 	apiDef, err := ioutil.ReadFile(apiDefFile)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	//objects := make([]Object, 1)
 	var objects []Object
-	err = json.Unmarshal(apiDef, objects)
+	err = json.Unmarshal(apiDef, &objects)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	data := new(bytes.Buffer)
-	tmpl := template.Must(template.New("api").Funcs(funcMap).Parse(apiTmpl))
+	mainPkg := "./vim"
+	os.Mkdir(mainPkg, 0744)
 
-	err = tmpl.Execute(data, objects)
+	var wg sync.WaitGroup
+
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		genCode(objects, mainPkg, moTmpl, "mo")
+	}()
+
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		genCode(objects, mainPkg, doTmpl, "do")
+	}()
+
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		genCode(objects, mainPkg, enumTmpl, "enum")
+	}()
+
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		genCode(objects, mainPkg, faultTmpl, "fault")
+	}()
+
+	wg.Wait()
+}
+
+func genCode(objects []Object, mainPkg, tmpl, namespace string) {
+	var fd *os.File
+	pkg := mainPkg + "/" + namespace
+
+	if ok, err := exists(pkg); !ok && err == nil {
+		os.Mkdir(pkg, 0744)
+	}
+
+	file := pkg + "/" + namespace + ".go"
+	fd, err := os.Create(file)
 	if err != nil {
 		log.Fatalln(err)
+	}
+	defer fd.Close()
+
+	data := new(bytes.Buffer)
+	data.WriteString(headerTmpl)
+	data.WriteString("package " + namespace + "\n")
+	if namespace == "do" {
+		data.WriteString(`
+			import (
+				"github.com/c4milo/govsphere/vim/mo"
+				"time"
+			)
+		`)
+	}
+
+	for _, obj := range objects {
+		if obj.Namespace != namespace {
+			continue
+		}
+
+		tmpl := template.Must(template.New(obj.Namespace).Funcs(funcMap).Parse(tmpl))
+		err = tmpl.Execute(data, obj)
+		if err != nil {
+			log.Fatalln(err)
+		}
+		//obj.Methods[0].ReturnValue.
 	}
 
 	source := data.Bytes()
-	source, err = format.Source(source)
-
+	fsource, err := format.Source(source)
 	if err != nil {
-		log.Fatalln(err)
+		fd.Write(source)
+		log.Fatalf("There are errors in the generated source for %s: %s\n", file, err.Error())
 	}
-
-	log.Println(source)
+	fd.Write(fsource)
 }

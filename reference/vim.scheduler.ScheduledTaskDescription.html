@@ -1,0 +1,130 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.scheduler.ScheduledTaskDescription" name="vim.scheduler.ScheduledTaskDescription"></a>
+<h1>Data Object - ScheduledTaskDescription</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.scheduler.ScheduledTaskManager.html#field_detail">ScheduledTaskManager</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.ElementDescription.html">ElementDescription</a>, <a href="vim.scheduler.ScheduledTaskDescription.SchedulerDetail.html">ScheduledTaskDetail</a>, <a href="vim.TypeDescription.html">TypeDescription</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         Static strings for scheduled tasks.  These strings are locale-specific.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="action" name="action"></a><strong>action</strong></td><td><a href="vim.TypeDescription.html">TypeDescription[]</a></td><td>
+<p></p>
+         Action class descriptions for a scheduled task.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="dayOfWeek" name="dayOfWeek"></a><strong>dayOfWeek</strong></td><td><a href="vim.ElementDescription.html">ElementDescription[]</a></td><td>
+<p></p>
+         <a href="vim.scheduler.MonthlyByWeekdayTaskScheduler.DayOfWeek.html">MonthlyByWeekdayTaskScheduler Days of the week enum description</a>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="schedulerInfo" name="schedulerInfo"></a><strong>schedulerInfo</strong></td><td><a href="vim.scheduler.ScheduledTaskDescription.SchedulerDetail.html">ScheduledTaskDetail[]</a></td><td>
+<p></p>
+         Scheduler class description details.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="state" name="state"></a><strong>state</strong></td><td><a href="vim.ElementDescription.html">ElementDescription[]</a></td><td>
+<p></p>
+         <a href="vim.TaskInfo.State.html">TaskInfo State enum</a>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="weekOfMonth" name="weekOfMonth"></a><strong>weekOfMonth</strong></td><td><a href="vim.ElementDescription.html">ElementDescription[]</a></td><td>
+<p></p>
+         <a href="vim.scheduler.MonthlyByWeekdayTaskScheduler.WeekOfMonth.html">MonthlyByWeekdayTaskScheduler Week of the month enum description</a>
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ScheduledTaskDescription">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="action" type="vim25:TypeDescription" maxOccurs="unbounded"/>
+                     <element name="schedulerInfo" type="vim25:ScheduledTaskDetail" maxOccurs="unbounded"/>
+                     <element name="state" type="vim25:ElementDescription" maxOccurs="unbounded"/>
+                     <element name="dayOfWeek" type="vim25:ElementDescription" maxOccurs="unbounded"/>
+                     <element name="weekOfMonth" type="vim25:ElementDescription" maxOccurs="unbounded"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.option.ChoiceOption" name="vim.option.ChoiceOption"></a>
+<h1>Data Object - ChoiceOption</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.host.VFlashManager.VFlashCacheConfigInfo.VFlashModuleConfigOption.html#field_detail">HostVFlashManagerVFlashCacheConfigInfoVFlashModuleConfigOption</a>, <a href="vim.vm.device.VirtualDeviceOption.FileBackingOption.html#field_detail">VirtualDeviceFileBackingOption</a>, <a href="vim.vm.device.VirtualDeviceOption.URIBackingOption.html#field_detail">VirtualDeviceURIBackingOption</a>, <a href="vim.vm.device.VirtualDiskOption.DeltaDiskFormatsSupported.html#field_detail">VirtualDiskDeltaDiskFormatsSupported</a>, <a href="vim.vm.device.VirtualDiskOption.FlatVer1BackingOption.html#field_detail">VirtualDiskFlatVer1BackingOption</a>, <a href="vim.vm.device.VirtualDiskOption.FlatVer2BackingOption.html#field_detail">VirtualDiskFlatVer2BackingOption</a>, <a href="vim.vm.device.VirtualDiskOption.VFlashCacheConfigOption.html#field_detail">VirtualDiskOptionVFlashCacheConfigOption</a>, <a href="vim.vm.device.VirtualDiskOption.RawDiskMappingVer1BackingOption.html#field_detail">VirtualDiskRawDiskMappingVer1BackingOption</a>, <a href="vim.vm.device.VirtualDiskOption.RawDiskVer2BackingOption.html#field_detail">VirtualDiskRawDiskVer2BackingOption</a>, <a href="vim.vm.device.VirtualDiskOption.SeSparseBackingOption.html#field_detail">VirtualDiskSeSparseBackingOption</a>, <a href="vim.vm.device.VirtualDiskOption.SparseVer1BackingOption.html#field_detail">VirtualDiskSparseVer1BackingOption</a>, <a href="vim.vm.device.VirtualDiskOption.SparseVer2BackingOption.html#field_detail">VirtualDiskSparseVer2BackingOption</a>, <a href="vim.vm.device.VirtualEthernetCardOption.html#field_detail">VirtualEthernetCardOption</a>, <a href="vim.vm.QuestionInfo.html#field_detail">VirtualMachineQuestionInfo</a>, <a href="vim.vm.device.VirtualPointingDeviceOption.DeviceBackingOption.html#field_detail">VirtualPointingDeviceBackingOption</a>, <a href="vim.vm.device.VirtualSerialPortOption.PipeBackingOption.html#field_detail">VirtualSerialPortPipeBackingOption</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vim.option.OptionType.html">OptionType</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.ElementDescription.html">ElementDescription</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The ChoiceOption data object type defines a set of
+  supported string values, a localizable description for each value,
+  and the default value.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="choiceInfo" name="choiceInfo"></a><strong>choiceInfo</strong></td><td><a href="vim.ElementDescription.html">ElementDescription[]</a></td><td>
+<p></p>
+         The set of possible selections and descriptions.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="defaultIndex" name="defaultIndex"></a><strong>defaultIndex</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The index in ChoiceOption.value that serves as the default value.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.option.OptionType.html">OptionType</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.option.OptionType.html#valueIsReadonly">valueIsReadonly</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="ChoiceOption">
+            <complexContent>
+               <extension base="vim25:OptionType">
+                  <sequence>
+                     <element name="choiceInfo" type="vim25:ElementDescription" maxOccurs="unbounded"/>
+                     <element name="defaultIndex" type="xsd:int" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

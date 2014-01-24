@@ -1,0 +1,214 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.AutoStartManager.AutoPowerInfo" name="vim.host.AutoStartManager.AutoPowerInfo"></a>
+<h1>Data Object - AutoStartPowerInfo</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.host.AutoStartManager.Config.html#field_detail">HostAutoStartManagerConfig</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.AutoStartManager.AutoPowerInfo.WaitHeartbeatSetting.html">AutoStartWaitHeartbeatSetting</a>, <a href="vim.VirtualMachine.html">VirtualMachine</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This object type describes the power-on / power-off behavior for a given virtual
+  machine. Virtual machines can be configured to wait for a period of time before
+  starting or to wait to receive a successful heartbeat from a virtual machine
+  before starting the next virtual machine in the sequence.
+   <ul>
+     <li>For a power-on operation, if waitForHeartbeat is true, then the power-on
+         sequence continues after the first heartbeat has been received. If
+         waitForHeartbeat is false, the system waits for the specified delay and
+         then continues the power-on sequence.
+     <li>For a power-off operation, if delay is non-zero, the requested power-off
+         action is invoked (powerOff, suspend, guestShutdown) on the virtual
+         machine and the system waits until the number of seconds specified in the
+         delay have passed.
+   </ul>
+  If startAction and stopAction for a virtual machine are both set to none, that
+  virtual machine is removed from the AutoStart sequence.
+
+  Virtual machines can be configured both to wait for a period of time before
+  starting and to wait for a heartbeat. In such a case, the waiting virtual machine
+  only waits until either of these conditions are met. In other words, a virtual
+  machine starts in either of the following cases:
+   <ul>
+     <li>After receiving a heartbeat but before the start delay has elapsed
+     <li>After the start delay has elapsed but before receiving a heartbeat
+   </ul>
+  This provides a better experience since as soon as one virtual machine begins
+  sending heartbeats, indicating it has successfully started up, the next machine
+  will begin starting up. This happens even if the startDelay has not yet elapsed.
+  Similarly, if one virtual machine fails to begin sending heartbeats, perhaps
+  because it could not start up, other machines are not blocked from starting up
+  since the startDelay eventually elapses.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="key" name="key"></a><strong>key</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.VirtualMachine.html">VirtualMachine</a></td><td>
+<p></p>
+         Virtual machine to power on or power off.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="startAction" name="startAction"></a><strong>startAction</strong></td><td>xsd:string</td><td>
+<p></p>
+         How to start the virtual machine. Valid settings are none or powerOn.
+  If set to none, then the virtual machine does not participate in auto-start.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="startDelay" name="startDelay"></a><strong>startDelay</strong></td><td>xsd:int</td><td>
+<p></p>
+         Delay in seconds before continuing with the next virtual machine in the order
+  of machines to be started. If the delay is specified as -1, then the system
+  default is used.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="startOrder" name="startOrder"></a><strong>startOrder</strong></td><td>xsd:int</td><td>
+<p></p>
+         The autostart priority of this virtual machine. Virtual machines with a lower
+  number are powered on first. On host shutdown, the virtual machines are
+  shut down in reverse order, meaning those with a higher number are powered off
+  first.
+  <p>
+  Positive values indicate a start order and -1 indicates the machine can be
+  powered on at any time. Machines with a -1 value are typically powered on and
+  off after all virtual machines with positive startOrder values. Failure to
+  meet the following requirements results in an InvalidArgument exception:
+  <ul>
+    <li>startOrder must be set to -1 if startAction is set to none
+    <li>startOrder must be -1 or positive integers. Values such as 0 or
+        -2 are not valid.
+    <li>startOrder is relative to other virtual machines in the autostart
+        sequence. Hence specifying a startOrder of 4 when there are only 3
+        virtual machines in the Autostart sequence is not valid.
+  </ul>
+  <p>
+  If a newly established or changed startOrder value for a virtual machine
+  matches an existing startOrder value, the newly applied value takes
+  precedence, and the existing value is incremented by one. The incremented
+  startOrder value is checked for collisions, and the same rule is applied if
+  one is found. This simple system ensures no two virtual machines ever have the
+  same order number.
+  <p>
+  For example, consider the case where there are three virtual machines with
+  different startOrder values. Virtual machine A has not yet established a
+  startOrder, virtual machine B has a startOrder value of 1 and Virtual Machine
+  C has a startOrder value of 2. If virtual machine A's startOrder is set to 1,
+  then virtual machine B's startOrder is incremented to 2. This creates a
+  conflict with virtual machine C's startOrder value, which is also incremented,
+  this time to 3.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="stopAction" name="stopAction"></a><strong>stopAction</strong></td><td>xsd:string</td><td>
+<p></p>
+         Defines the stop action for the virtual machine. Can be set to none,
+  systemDefault, powerOff, or suspend. If set to none, then the virtual machine
+  does not participate in auto-stop.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="stopDelay" name="stopDelay"></a><strong>stopDelay</strong></td><td>xsd:int</td><td>
+<p></p>
+         Delay in seconds before continuing with the next virtual machine in the order
+  sequence. If the delay is -1, then the system default is used.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="waitForHeartbeat" name="waitForHeartbeat"></a><strong>waitForHeartbeat</strong></td><td><a href="vim.host.AutoStartManager.AutoPowerInfo.WaitHeartbeatSetting.html">AutoStartWaitHeartbeatSetting</a></td><td>
+<p></p>
+<br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="AutoStartPowerInfo">
+            <complexContent>
+               <extension base="vim25:DynamicData">
+                  <sequence>
+                     <element name="key" type="vim25:ManagedObjectReference"/>
+                     <element name="startOrder" type="xsd:int"/>
+                     <element name="startDelay" type="xsd:int"/>
+                     <element name="waitForHeartbeat" type="vim25:AutoStartWaitHeartbeatSetting"/>
+                     <element name="startAction" type="xsd:string"/>
+                     <element name="stopDelay" type="xsd:int"/>
+                     <element name="stopAction" type="xsd:string"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="./commonRes.js" language="JavaScript"> type="text/javascript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.host.InternetScsiHba" name="vim.host.InternetScsiHba"></a>
+<h1>Data Object - HostInternetScsiHba</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.host.HostBusAdapter.html">HostHostBusAdapter</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.host.InternetScsiHba.AuthenticationCapabilities.html">HostInternetScsiHbaAuthenticationCapabilities</a>, <a href="vim.host.InternetScsiHba.AuthenticationProperties.html">HostInternetScsiHbaAuthenticationProperties</a>, <a href="vim.host.InternetScsiHba.DigestCapabilities.html">HostInternetScsiHbaDigestCapabilities</a>, <a href="vim.host.InternetScsiHba.DigestProperties.html">HostInternetScsiHbaDigestProperties</a>, <a href="vim.host.InternetScsiHba.DiscoveryCapabilities.html">HostInternetScsiHbaDiscoveryCapabilities</a>, <a href="vim.host.InternetScsiHba.DiscoveryProperties.html">HostInternetScsiHbaDiscoveryProperties</a>, <a href="vim.host.InternetScsiHba.IPCapabilities.html">HostInternetScsiHbaIPCapabilities</a>, <a href="vim.host.InternetScsiHba.IPProperties.html">HostInternetScsiHbaIPProperties</a>, <a href="vim.host.InternetScsiHba.NetworkBindingSupportType.html">HostInternetScsiHbaNetworkBindingSupportType</a>, <a href="vim.host.InternetScsiHba.ParamValue.html">HostInternetScsiHbaParamValue</a>, <a href="vim.host.InternetScsiHba.SendTarget.html">HostInternetScsiHbaSendTarget</a>, <a href="vim.host.InternetScsiHba.StaticTarget.html">HostInternetScsiHbaStaticTarget</a>, <a href="vim.option.OptionDef.html">OptionDef</a>
+</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         This data object type describes the iSCSI host bus adapter 
+  interface.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="advancedOptions" name="advancedOptions"></a><strong>advancedOptions</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.InternetScsiHba.ParamValue.html">HostInternetScsiHbaParamValue[]</a></td><td>
+<p></p>
+         A list of the current options settings for the host bus adapter.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="authenticationCapabilities" name="authenticationCapabilities"></a><strong>authenticationCapabilities</strong></td><td><a href="vim.host.InternetScsiHba.AuthenticationCapabilities.html">HostInternetScsiHbaAuthenticationCapabilities</a></td><td>
+<p></p>
+         The authentication capabilities for this host bus adapter.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="authenticationProperties" name="authenticationProperties"></a><strong>authenticationProperties</strong></td><td><a href="vim.host.InternetScsiHba.AuthenticationProperties.html">HostInternetScsiHbaAuthenticationProperties</a></td><td>
+<p></p>
+         The authentication settings for this host bus adapter. 
+  All static and discovery targets will inherit the use of these
+  settings unless their authentication settings are explicitly set.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="canBeDisabled" name="canBeDisabled"></a><strong>canBeDisabled</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Can this adapter be disabled
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="configuredSendTarget" name="configuredSendTarget"></a><strong>configuredSendTarget</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.InternetScsiHba.SendTarget.html">HostInternetScsiHbaSendTarget[]</a></td><td>
+<p></p>
+         The configured iSCSI send target entries.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="configuredStaticTarget" name="configuredStaticTarget"></a><strong>configuredStaticTarget</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.InternetScsiHba.StaticTarget.html">HostInternetScsiHbaStaticTarget[]</a></td><td>
+<p></p>
+         The configured iSCSI static target entries.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="currentSpeedMb" name="currentSpeedMb"></a><strong>currentSpeedMb</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The Current operating link speed of the port in megabits per second.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="digestCapabilities" name="digestCapabilities"></a><strong>digestCapabilities</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.InternetScsiHba.DigestCapabilities.html">HostInternetScsiHbaDigestCapabilities</a></td><td>
+<p></p>
+         The authentication capabilities for this host bus adapter.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="digestProperties" name="digestProperties"></a><strong>digestProperties</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.InternetScsiHba.DigestProperties.html">HostInternetScsiHbaDigestProperties</a></td><td>
+<p></p>
+         The digest settings for this host bus adapter. 
+  All static and discovery targets will inherit the use of these
+  properties unless their digest settings are explicitly set.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="discoveryCapabilities" name="discoveryCapabilities"></a><strong>discoveryCapabilities</strong></td><td><a href="vim.host.InternetScsiHba.DiscoveryCapabilities.html">HostInternetScsiHbaDiscoveryCapabilities</a></td><td>
+<p></p>
+         The discovery capabilities for this host bus adapter.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="discoveryProperties" name="discoveryProperties"></a><strong>discoveryProperties</strong></td><td><a href="vim.host.InternetScsiHba.DiscoveryProperties.html">HostInternetScsiHbaDiscoveryProperties</a></td><td>
+<p></p>
+         The discovery settings for this host bus adapter.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="ipCapabilities" name="ipCapabilities"></a><strong>ipCapabilities</strong></td><td><a href="vim.host.InternetScsiHba.IPCapabilities.html">HostInternetScsiHbaIPCapabilities</a></td><td>
+<p></p>
+         The IP capabilities for this host bus adapter.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="ipProperties" name="ipProperties"></a><strong>ipProperties</strong></td><td><a href="vim.host.InternetScsiHba.IPProperties.html">HostInternetScsiHbaIPProperties</a></td><td>
+<p></p>
+         The IP settings for this host bus adapter.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="iScsiAlias" name="iScsiAlias"></a><strong>iScsiAlias</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The iSCSI alias of this host bus adapter.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="iScsiName" name="iScsiName"></a><strong>iScsiName</strong></td><td>xsd:string</td><td>
+<p></p>
+         The iSCSI name of this host bus adapter.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="isSoftwareBased" name="isSoftwareBased"></a><strong>isSoftwareBased</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         True if this host bus adapter is a software based initiator 
+ utilizing the hosting system's existing TCP/IP network connection
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="maxSpeedMb" name="maxSpeedMb"></a><strong>maxSpeedMb</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:int</td><td>
+<p></p>
+         The maximum supported link speed of the port in megabits per second.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="networkBindingSupport" name="networkBindingSupport"></a><strong>networkBindingSupport</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.host.InternetScsiHba.NetworkBindingSupportType.html">HostInternetScsiHbaNetworkBindingSupportType</a></td><td>
+<p></p>
+         Specifies if this iSCSI Adapter requires a bound network
+ interface to function.
+      <p></p>
+<B><I>Since </I></B>vSphere API 5.0<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="supportedAdvancedOptions" name="supportedAdvancedOptions"></a><strong>supportedAdvancedOptions</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.option.OptionDef.html">OptionDef[]</a></td><td>
+<p></p>
+         A list of supported key/value pair advanced options for the
+  host bus adapter including their type information.
+      <p></p>
+<B><I>Since </I></B>vSphere API 4.0<br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vim.host.HostBusAdapter.html">HostHostBusAdapter</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vim.host.HostBusAdapter.html#bus">bus</a>, <a href="vim.host.HostBusAdapter.html#device">device</a>, <a href="vim.host.HostBusAdapter.html#driver">driver</a>, <a href="vim.host.HostBusAdapter.html#key">key</a>, <a href="vim.host.HostBusAdapter.html#model">model</a>, <a href="vim.host.HostBusAdapter.html#pci">pci</a>, <a href="vim.host.HostBusAdapter.html#status">status</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.DynamicData.html#dynamicProperty">dynamicProperty</a>, <a href="vmodl.DynamicData.html#dynamicType">dynamicType</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vim25="urn:vim25" name="HostInternetScsiHba">
+            <complexContent>
+               <extension base="vim25:HostHostBusAdapter">
+                  <sequence>
+                     <element name="isSoftwareBased" type="xsd:boolean"/>
+                     <element name="canBeDisabled" type="xsd:boolean" minOccurs="0"/>
+                     <element name="networkBindingSupport" type="vim25:HostInternetScsiHbaNetworkBindingSupportType" minOccurs="0"/>
+                     <element name="discoveryCapabilities" type="vim25:HostInternetScsiHbaDiscoveryCapabilities"/>
+                     <element name="discoveryProperties" type="vim25:HostInternetScsiHbaDiscoveryProperties"/>
+                     <element name="authenticationCapabilities" type="vim25:HostInternetScsiHbaAuthenticationCapabilities"/>
+                     <element name="authenticationProperties" type="vim25:HostInternetScsiHbaAuthenticationProperties"/>
+                     <element name="digestCapabilities" type="vim25:HostInternetScsiHbaDigestCapabilities" minOccurs="0"/>
+                     <element name="digestProperties" type="vim25:HostInternetScsiHbaDigestProperties" minOccurs="0"/>
+                     <element name="ipCapabilities" type="vim25:HostInternetScsiHbaIPCapabilities"/>
+                     <element name="ipProperties" type="vim25:HostInternetScsiHbaIPProperties"/>
+                     <element name="supportedAdvancedOptions" type="vim25:OptionDef" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="advancedOptions" type="vim25:HostInternetScsiHbaParamValue" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="iScsiName" type="xsd:string"/>
+                     <element name="iScsiAlias" type="xsd:string" minOccurs="0"/>
+                     <element name="configuredSendTarget" type="vim25:HostInternetScsiHbaSendTarget" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="configuredStaticTarget" type="vim25:HostInternetScsiHbaStaticTarget" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="maxSpeedMb" type="xsd:int" minOccurs="0"/>
+                     <element name="currentSpeedMb" type="xsd:int" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>
