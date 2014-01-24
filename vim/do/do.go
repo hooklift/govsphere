@@ -5,7 +5,7 @@
 package do
 
 import (
-	"github.com/c4milo/govsphere/vim/mo"
+	//"github.com/c4milo/govsphere/vim/mo"
 	"time"
 )
 

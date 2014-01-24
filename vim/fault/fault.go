@@ -4,6 +4,10 @@
 
 package fault
 
+import (
+	"github.com/c4milo/govsphere/vim/do"
+)
+
 //
 // Base fault for Active Directory related problems.
 //

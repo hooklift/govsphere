@@ -275,7 +275,7 @@ func genCode(objects []Object, mainPkg, tmpl, namespace string) {
 	if namespace == "do" {
 		data.WriteString(`
 			import (
-				"github.com/c4milo/govsphere/vim/mo"
+				//"github.com/c4milo/govsphere/vim/mo"
 				"time"
 			)
 		`)
@@ -284,6 +284,12 @@ func genCode(objects []Object, mainPkg, tmpl, namespace string) {
 			import (
 				"github.com/c4milo/govsphere/vim/do"
 				"time"
+			)
+		`)
+	} else if namespace == "fault" {
+		data.WriteString(`
+			import (
+				"github.com/c4milo/govsphere/vim/do"
 			)
 		`)
 	}
