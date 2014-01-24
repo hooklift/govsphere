@@ -237,6 +237,12 @@ func genCode(objects []Object, mainPkg, tmpl, namespace string) {
 				"time"
 			)
 		`)
+	} else if namespace == "mo" {
+		data.WriteString(`
+			import (
+				"time"
+			)
+		`)
 	}
 
 	for _, obj := range objects {

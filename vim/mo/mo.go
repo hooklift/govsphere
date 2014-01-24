@@ -4,9 +4,9 @@
 
 package mo
 
-type ClusterProfile struct {
-	*Profile
-}
+import (
+	"time"
+)
 
 //
 // The VsanInternalSystem exposes low level access to CMMDS, as well as draft
@@ -15,6 +15,50 @@ type ClusterProfile struct {
 // including their prototype, behavior or result encoding.
 //
 type HostVsanInternalSystem struct {
+}
+
+//
+// Represents a network accessible by either hosts or virtual machines. This can be a
+// physical network or a logical network, such as a VLAN.
+//
+// Networks are created:
+//
+//
+//
+// • explicitly when configuring a host.
+//
+// • automatically when adding a host to VirtualCenter.
+//
+// • automatically when adding a new virtual machine to a host or to
+// VirtualCenter.
+//
+//
+//
+//
+// To configure network access for hosts and virtual machines, use
+// DistributedVirtualSwitch and
+// DistributedVirtualPortgroup managed objects.
+//
+//
+//
+type Network struct {
+	*ManagedEntity
+
+	// Hosts attached to this network.
+	Host []*mo.HostSystem
+
+	// Name of this network.
+	Name string
+
+	// Properties of a network.
+	Summary *NetworkSummary
+
+	// Virtual machines using this network.
+	Vm []*mo.VirtualMachine
+}
+
+type ClusterProfileManager struct {
+	*ProfileManager
 }
 
 //
@@ -70,602 +114,99 @@ type ContainerView struct {
 	Type []string
 }
 
-// Deprecated.
-// As of VI API 2.5, use the VMware vCenter Converter,
-// an optional software plug-in for vCenter Server for
-// migrating physical and virtual machines to VMware vSphere.
+//
+// This managed object type enables clients to retrieve historical data and
+// receive updates when the server appends new data to a collection.
+// This is a base type for item-specific types related to event or task history.
+// Historical data is inherently append-only,
+// although a server administrator may periodically purge old data.
+//
+// Typically, a client creates a history collector by using a filter on a
+// potentially large set, such as all the events in a datacenter.
+// The collector provides access to the items that match the filter,
+// which could also be a relatively large set.
 //
 //
-// The VirtualizationManager is the interface for discover and consolidate
-// host and services from physical environment to virtualization environment.
+// The items in a collector are always ordered by date and time of creation.
+// Item properties normally include this time stamp.
 //
-type VirtualizationManager struct {
-}
-
 //
-// This managed object is the interface for
-// configuration of the ESX software image, including
-// properties such as acceptance level.
-// It is currently designed to be host agent specific.
+// The client may set the "viewable latest page" for the collector,
+// which is the contiguous subset of the items that are of
+// immediate interest. These items are available as the "latestPage"
+// property, which the client may retrieve and monitor by using the
+// PropertyCollector managed object.
 //
-type HostImageConfigManager struct {
-}
-
 //
-// Object manager for scheduled tasks.
+// Clients can change the page size of the "latestPage" by using
+// setLatestPageSize().
 //
-type ScheduledTaskManager struct {
-
-	// Static descriptive strings used in scheduled tasks.
-	Description *ScheduledTaskDescription
-
-	// All available scheduled tasks.
-	ScheduledTask []*mo.ScheduledTask
-}
-
-type LicenseAssignmentManager struct {
-}
-
 //
-// The Profile managed object is the base class for host and cluster
-// profiles.
+// The client may use the following features of the history collector.
 //
-type Profile struct {
+//
+//
+// • RewindCollector - Moves the "scrollable view" to
+// the oldest item (the default setting).
+//
+// • readNext - Retrieves all the items in the collector, from the oldest
+// item to the newest item. Retrieves either
+// tasks or
+// events depending on the operation.
+//
+// • readPrev - Retrieves all items (excluding the "viewable latest page") in
+// the collector, from the newest item to the oldest item. Retrieves either
+// tasks or
+// events depending on the operation.
+//
+// • ResetCollector - Moves the "scrollable view" to
+// the item immediately preceding the "viewable latest page".
+//
+//
+//
+//
+type HistoryCollector struct {
 
-	// Overall compliance of entities associated with this profile.
-	// If one of the entities is out of compliance, the profile is nonCompliant.
-	// If all entities are in compliance, the profile is compliant.
-	// If the compliance status of one of the entities is not known, compliance status
-	// of the profile is unknown.
-	// See ComplianceResultStatus.
-	ComplianceStatus string
-
-	// Configuration data for the profile.
-	Config *ProfileConfigInfo
-
-	// Time at which the profile was created.
-	CreatedTime time.Time
-
-	// Deprecated.
-	// As of vSphere API 5.0. use RetrieveDescription instead.
+	// The filter used to create this collector.
 	//
-	//
-	// Localizable description of the profile
-	Description *ProfileDescription
-
-	// List of managed entities associated with the profile.
-	Entity []*mo.ManagedEntity
-
-	// Time at which the profile was last modified.
-	ModifiedTime time.Time
-
-	// Name of the profile.
-	Name string
+	// The type of the returned filter is determined by the managed object
+	// for which the collector is created.
+	Filter interface{}
 }
 
 //
-// The VsanSystem managed object type exposes VSAN configuration
-// primitives and serves as a host-level access point for relevant
-// VSAN data objects.
+// The alarm manager is a singleton object for managing alarms
+// within a service instance.
 //
-type HostVsanSystem struct {
+type AlarmManager struct {
 
-	// The current VSAN service configuration information for this host.
-	Config *VsanHostConfigInfo
+	// The default setting for each alarm expression, used to populate the
+	// initial client wizard screen.
+	DefaultExpression []*AlarmExpression
+
+	// The static descriptive strings used in alarms.
+	Description *AlarmDescription
 }
 
 //
-// A managed object that wraps the execution of a single arbitrary
-// command. The specific command executed is assumed to be known from
-// the service name by the client invoking this command.  This object
-// presents a generic interface for such services.
+// The CustomFieldsManager object is used to add and remove custom fields
+// to managed entities.
 //
-type SimpleCommand struct {
+// The custom fields values set on managed entities are available through the
+// customValue property and through the summary objects
+// for VirtualMachine and HostSystem. They are not available
+// directly through this managed object.
+//
+//
+// This functionality is only available through VirtualCenter.
+//
+//
+//
+type CustomFieldsManager struct {
 
-	// The encoding type used in the result.
-	EncodingType *SimpleCommandEncoding
-
-	// A description of the service.
-	Entity *ServiceManagerServiceInfo
-}
-
-//
-// The VmwareDistributedVirtualSwitch managed object
-// is the VMware implementation of a distributed virtual switch.
-// The functionality listed here is for a VMware distributed virtual switch only.
-//
-// When you use a VMware distributed virtual switch, you can perform
-// backup and restore operations on the VMware switch. You can also
-// perform rollback operations on the switch and on portgroups
-// associated with the VMware switch. See the description for the
-// following methods:
-//
-//
-//
-// • DVSManagerExportEntity_Task
-//
-// • DVSManagerImportEntity_Task
-//
-// • DVSRollback_Task
-//
-// • DVPortgroupRollback_Task
-//
-//
-//
-//
-type VmwareDistributedVirtualSwitch struct {
-	*DistributedVirtualSwitch
-}
-
-//
-// Represents a network accessible by either hosts or virtual machines. This can be a
-// physical network or a logical network, such as a VLAN.
-//
-// Networks are created:
-//
-//
-//
-// • explicitly when configuring a host.
-//
-// • automatically when adding a host to VirtualCenter.
-//
-// • automatically when adding a new virtual machine to a host or to
-// VirtualCenter.
-//
-//
-//
-//
-// To configure network access for hosts and virtual machines, use
-// DistributedVirtualSwitch and
-// DistributedVirtualPortgroup managed objects.
-//
-//
-//
-type Network struct {
-	*ManagedEntity
-
-	// Hosts attached to this network.
-	Host []*mo.HostSystem
-
-	// Name of this network.
-	Name string
-
-	// Properties of a network.
-	Summary *NetworkSummary
-
-	// Virtual machines using this network.
-	Vm []*mo.VirtualMachine
-}
-
-// Deprecated.
-// As of VI API 4.0, use virtualNicManager
-//
-//
-// The VMotionSystem managed object describes the VMotion configuration
-// of the host.
-//
-type HostVMotionSystem struct {
-	*ExtensibleManagedObject
-
-	// IP configuration of the VMotion VirtualNic.
-	IpConfig *HostIpConfig
-
-	// VMotion network configuration.
-	NetConfig *HostVMotionNetConfig
-}
-
-//
-// Provides an interface to get low-level debugging logs or diagnostic bundles
-// for a server. For VirtualCenter, this includes the log files
-// for the server daemon. For an ESX Server host, this includes detailed
-// log files for the VMkernel.
-//
-type DiagnosticManager struct {
-}
-
-//
-// The UserDirectory managed object provides information about users
-// and groups on a vSphere server and ESX hosts. The method
-// RetrieveUserGroups returns a list
-// of user account data. The method can perform a search operation based on
-// specific criteria - user name, group name, sub-string or string matching,
-// and, on Windows, domain. Use the results as input
-// to the AuthorizationManager methods
-// SetEntityPermissions and
-// ResetEntityPermissions.
-//
-// The content of the returned results depends on the server environment:
-//
-//
-//
-// •  On a Windows host, RetrieveUserGroups can search
-// from the set of trusted domains on the host, including the primary
-// domain of the system. A special domain (specified as an
-// empty string - "") refers to the users and groups local
-// to the host.
-//
-// •  On an ESX Server or a Linux host, the search operates on the
-// users and groups defined in the /etc/passwd file. Always specify
-// an empty string ("") for the domain argument.
-// If the /etc/passwd file contains Sun NIS or NIS+ users and groups,
-// RetrieveUserGroups returns information about these accounts as well.
-//
-//
-//
-//
-type UserDirectory struct {
-
-	// List of Windows domains available for user searches, if the underlying
-	// system supports windows domain membership.
-	DomainList []string
-}
-
-//
-// The ViewManager managed object provides methods to create ContainerView,
-// InventoryView, and ListView managed objects.
-// The ViewManager also maintains a list of managed object references
-// to the views that you have created. Use the viewList
-// property to access the views.
-//
-// A View is a mechanism that supports selection of objects on the server
-// and subsequently, access to those objects. Views can simplify the task of
-// retrieving data from the server. When you use a view, you can use a single
-// invocation of a PropertyCollector method
-// to retrieve data or receive notification of changes instead of multiple invocations
-// involving multiple filter specifications. A view exists until you destroy it
-// or until the end of the session.
-//
-//
-// The ViewManager supports the following views:
-//
-//
-//
-// •  A ContainerView is based on Folder,
-// Datacenter, ComputeResource,
-// ResourcePool, or HostSystem managed objects.
-// Use a container view to monitor the container contents and optionally,
-// its descendants.
-//
-// •  A ListView managed object is based on an arbitrary but
-// specific set of objects. When you create a list view, you provide
-// a list of objects to populate the view
-// (CreateListView),
-// or you provide an existing view from which the new view is created
-// (CreateListViewFromView).
-//
-// •  An InventoryView managed object is based on the entire inventory.
-// Use an inventory view as a general mechanism to monitor the inventory
-// or portions of the inventory.
-//
-//
-//
-//
-//
-// For example, you might use the following sequence of operations to get the
-// names of all the virtual machines on a server:
-//
-//
-// •  Create a ContainerView for the root folder in the server inventory.
-// For the ContainerView, use the type property
-// to include only virtual machines.
-//
-// •  Create a filter specification for the PropertyCollector.
-//
-//
-// •  Use the ContainerView as the starting object in the
-// ObjectSpec for the filter.
-//
-// •  Use the TraversalSpec
-// to select all objects in the view list (all the virtual machines).
-//
-// •  Use the PropertySpec
-// to retrieve the name property from each virtual machine.
-//
-//
-//
-//
-// •  Invoke the PropertyCollector
-// RetrieveProperties method.
-//
-//
-//
-type ViewManager struct {
-
-	// An array of view references. Each array entry is a managed object reference
-	// to a view created by this ViewManager.
-	ViewList []*mo.View
-}
-
-//
-// Singleton Managed Object used to manage IP Pools.
-//
-// IP Pools are used to allocate IPv4 and IPv6 addresses to vApps.
-//
-//
-//
-type IpPoolManager struct {
-}
-
-//
-// The DistributedVirtualSwitchManager provides methods
-// that support the following operations:
-//
-//
-// • Backup and restore operations for VmwareDistributedVirtualSwitch
-// and associated DistributedVirtualPortgroup managed objects.
-//
-// • Query operations for information about portgroups and distributed
-// virtual switches.
-//
-// • Distributed virtual switch configuration update operations.
-//
-//
-//
-//
-type DistributedVirtualSwitchManager struct {
-}
-
-//
-// This managed object provides operations to query and update
-// roles and permissions.
-//
-// Privileges are the basic individual rights required to
-// perform operations.  They are statically defined and
-// never change for a single version of a product.  Examples
-// of privileges are "Power on a virtual machine"
-// or "Configure a host."
-//
-//
-// Roles are aggregations of privileges, used for convenience.
-// For user-defined roles, the system-defined privileges, "System.Anonymous",
-// "System.View", and "System.Read" are always present.
-//
-//
-// Permissions are the actual access-control rules.  A
-// permission is defined on a ManagedEntity and
-// specifies the user or group ("principal") to which
-// the rule applies. The role specifies the
-// privileges to apply, and the propagate flag
-// specifies whether or not the rule applies to sub-objects
-// of the managed entity.
-//
-//
-// A ManagedEntity may have multiple permissions,
-// but may have only one permission per user or group. If, when logging
-// in, a user has both a user permission and a group permission
-// (as a group member) for the same entity, then the
-// user-specific permission takes precedent.  If there is no
-// user-specific permission, but two or more group permissions
-// are present, and the user is a member of the groups, then the
-// privileges are the union of the specified roles.
-//
-//
-// Managed entities may be collected together into a "complex entity" for
-// the purpose of applying permissions consistently. Complex entities may have a
-// Datacenter, ComputeResource, or ClusterComputeResource as a parent, with other
-// child managed objects as additional parts of the complex entity:
-//
-//
-//
-// • A Datacenter's child objects are the root virtual machine and host Folders.
-//
-// • A ComputeResource's child objects are the root ResourcePool and HostSystem.
-//
-// • A ClusterComputeResource has only the root ResourcePool as a child object.
-//
-//
-//
-// Child objects in a complex entity are forced to inherit permissions from the
-// parent object. When query operations are used to discover permissions on child
-// objects of complex entities, different results may be returned for the owner of the
-// permission. In some cases, the child object of the complex entity is returned as
-// the object that defines the permission, and in other cases, the parent from which
-// the permission is propagated is returned as the object that defines the permission.
-// In both cases, the information about the owner of the permission is correct, since
-// the entities within a complex entity are considered equivalent.  Permissions
-// defined on complex entities are always applicable on the child entities,
-// regardless of the propagation flag, but may only be defined or modified on the
-// parent object.
-//
-// In a group of fault-tolerance (FT) protected VirtualMachines, the secondary
-// VirtualMachines are forced to inherit permissions from the primary VirtualMachine.
-// Queries to discover permissions on FT secondary VMs always return the primary VM
-// as the object that defines the permissions. Permissions defined on an FT primary
-// VM are always applicable on its secondary VMs, but can only be defined or modified
-// on the primary VM.
-//
-//
-//
-type AuthorizationManager struct {
-
-	// Static, descriptive strings for system roles and privileges.
-	Description *AuthorizationDescription
-
-	// The list of system-defined privileges.
-	PrivilegeList []*AuthorizationPrivilege
-
-	// The currently defined roles in the system, including
-	// static system-defined roles.
-	RoleList []*AuthorizationRole
-}
-
-//
-// HostDirectoryStore is a base class for
-// directory-based authentication stores.
-//
-type HostDirectoryStore struct {
-	*HostAuthenticationStore
-}
-
-//
-// The ClusterComputeResource data object aggregates the compute
-// resources of associated HostSystem objects into a single
-// compute resource for use by virtual machines. The cluster services
-// such as HA (High Availability), DRS (Distributed Resource Scheduling),
-// and EVC (Enhanced vMotion Compatibility), enhance the utility of this
-// single compute resource.
-//
-// Use the Folder.CreateClusterEx method
-// to create an instance of this object.
-//
-//
-//
-type ClusterComputeResource struct {
-	*ComputeResource
-
-	// The set of actions that have been performed recently.
-	//
-	// Since VI API 2.5
-	ActionHistory []*ClusterActionHistory
-
-	// Deprecated.
-	// As of VI API 2.5, use configurationEx,
-	// which is a ClusterConfigInfoEx data object..
-	//
-	//
-	// Configuration of the cluster.
-	Configuration *ClusterConfigInfo
-
-	// A collection of the DRS faults generated in the last DRS invocation.
-	// Each element of the collection is the set of faults generated in one
-	// recommendation.
-	//
-	// DRS faults are generated when DRS tries to make recommendations
-	// for rule enforcement, power management, etc., and indexed in a tree
-	// structure with reason for recommendations and VM to migrate (optional)
-	// as the index keys.
-	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
-	//
-	// Since vSphere API 4.0
-	DrsFault []*ClusterDrsFaults
-
-	// Deprecated.
-	// As of VI API 2.5, use
-	// recommendation.
-	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
-	//
-	//
-	// If DRS is enabled, this returns the set of recommended
-	// migrations from the DRS module. The current set of
-	// recommendations may be empty, since there may be no recommended
-	// migrations at this time, or it is possible that DRS is not
-	// enabled.
-	DrsRecommendation []*ClusterDrsRecommendation
-
-	// The set of migration decisions that have recently been performed.
-	//
-	// This list is populated only when DRS is in automatic mode.
-	MigrationHistory []*ClusterDrsMigration
-
-	// List of recommended actions for the cluster. It is
-	// possible that the current set of recommendations may be empty,
-	// either due to not having any running dynamic recommendation
-	// generation module, or since there may be no recommended actions
-	// at this time.
-	//
-	// Since VI API 2.5
-	Recommendation []*ClusterRecommendation
-}
-
-//
-// View is the base class for session-specific view objects.
-// A view is a mechanism that supports selection of objects on the server
-// and subsequently, access to those objects.
-// To create a view, use the ViewManager methods.
-// A view exists until you terminate it by calling the DestroyView method,
-// or until the end of the session.
-// Access to a view is limited to the session in which it is created.
-//
-// There are three types of views:
-//
-//
-//
-// •  ContainerView
-//
-// •  ListView
-//
-// •  InventoryView
-//
-//
-//
-//
-// A view maintains a view list that contains
-// managed object references. You can use a view
-// with the PropertyCollector to retrieve data and
-// obtain notification of changes to the virtual environment.
-// For information about using views with the PropertyCollector,
-// see the description of ViewManager.
-//
-//
-//
-type View struct {
-}
-
-//
-// The HostProfileManager provides access to a list of
-// HostProfiles and it defines methods to manipulate
-// profiles and AnswerFiles.
-//
-type HostProfileManager struct {
-	*ProfileManager
-}
-
-//
-// This managed object type provides directory and basic management
-// services for all registered extensions.
-//
-// Clients use the ExtensionManager, available in
-// ServiceInstance,
-// to access extension objects.
-//
-//
-// While several authentication methods are available for extension
-// servers to use (see SessionManager), only one
-// authentication method is valid for an extension at any given
-// time.
-//
-//
-//
-type ExtensionManager struct {
-
-	// The list of currently registered extensions.
-	ExtensionList []*Extension
-}
-
-//
-// The VFlash Manager object is used to configure vFlash resource
-//
-// and vFlash cache on the ESX host.
-//
-type HostVFlashManager struct {
-
-	// Host vFlash configuration information.
-	VFlashConfigInfo *HostVFlashManagerVFlashConfigInfo
-}
-
-//
-// A task is used to monitor and potentially cancel long
-// running operations.
-//
-type Task struct {
-	*ExtensibleManagedObject
-
-	// Detailed information about this task.
-	Info *TaskInfo
+	// List of custom fields defined on this server. The fields are
+	// sorted by name.
+	Field []*CustomFieldDef
 }
 
 //
@@ -730,14 +271,188 @@ type HttpNfcLease struct {
 }
 
 //
-// This managed object type is used to configure agent virtual machine resource
-// configuration, such as what network and datastore to use for agent virtual
-// machines.
+// This managed object type defines an alarm that is triggered and
+// an action that occurs due to the triggered alarm when certain conditions
+// are met on a specific ManagedEntity object.
 //
-type HostEsxAgentHostManager struct {
+type Alarm struct {
+	*ExtensibleManagedObject
 
-	// Configuration of agent virtual machine resources
-	ConfigInfo *HostEsxAgentHostManagerConfigInfo
+	// Information about this alarm.
+	Info *AlarmInfo
+}
+
+//
+// LocalizationManager provides access to descriptions of
+// the message catalogs that are available for client-side message
+// localization.
+//
+// Clients of the VIM API may use
+// SessionManager.SetLocale
+// to cause the server to emit localized messages, or may perform
+// client-side localization based on message catalogs provided by the
+// LocalizationManager.
+//
+//
+// A message catalog is a file that contains a set of key-value pairs.
+//
+//
+//
+// • The key is an ASCII string that identifies the message.
+//
+// • The value is a UTF-8 string that contains the text of the message, sometimes
+// containing substitution variables.
+//
+//
+//
+// The server will localize fields tagged with 'localizable' based on the
+// value of the UserSession.locale
+// and messageLocale properties which are set via
+// SessionManager.SetLocale.
+//
+//
+// The following list shows some of the ways that vSphere uses localized
+// messages.
+//
+//
+//
+// • Current task status (TaskInfo.description)
+//
+// • Events (VirtualMachineMessage.text and
+// Questions (VirtualMachineQuestionInfo.text)
+//
+// • Faults (MethodFault.faultMessage)
+//
+// • HostProfile and
+// ClusterProfile descriptions
+// (Profile.ProfileDescription.
+// description returned by the
+// Profile.RetrieveDescription method)
+//
+//
+//
+//
+type LocalizationManager struct {
+
+	// Fetches the descriptions of all the client-side localization message
+	// catalogs available for the current session locale.
+	Catalog []*LocalizationManagerMessageCatalog
+}
+
+type LicenseAssignmentManager struct {
+}
+
+//
+// The VsanSystem managed object type exposes VSAN configuration
+// primitives and serves as a host-level access point for relevant
+// VSAN data objects.
+//
+type HostVsanSystem struct {
+
+	// The current VSAN service configuration information for this host.
+	Config *VsanHostConfigInfo
+}
+
+// Deprecated.
+// As of VI API 4.0, use virtualNicManager
+//
+//
+// The VMotionSystem managed object describes the VMotion configuration
+// of the host.
+//
+type HostVMotionSystem struct {
+	*ExtensibleManagedObject
+
+	// IP configuration of the VMotion VirtualNic.
+	IpConfig *HostIpConfig
+
+	// VMotion network configuration.
+	NetConfig *HostVMotionNetConfig
+}
+
+//
+// The VirtualNicManager managed object describes the special Virtual NIC
+// configuration of the host.
+//
+type HostVirtualNicManager struct {
+	*ExtensibleManagedObject
+
+	// Network configuration.
+	Info *HostVirtualNicManagerInfo
+}
+
+//
+// This managed object type is used for managing key/value pair
+// options.
+//
+//
+//
+//
+// • You can define options on the fly, in a logical tree using a dot notation
+// for keys.  For example, "Ethernet.Connection" describes the Connection
+// option as child of the Ethernet option.
+//
+// • You can use the queryMethod to retrieve a single property or
+// a subset of properties based on the dot notation path.
+//
+//
+//
+//
+type OptionManager struct {
+
+	// A list of the current settings for the key/value pair options.
+	Setting []*OptionValue
+
+	// A list of supported key/value pair options including their
+	// type information.
+	SupportedOption []*OptionDef
+}
+
+//
+// ManagedObjectView is the base class for view objects that provide access
+// to a set of ManagedEntity objects. ManagedObjectView defines
+// a view list; the list contains references to objects in the view.
+// To create a view use the ViewManager methods.
+//
+type ManagedObjectView struct {
+	*View
+
+	// The list of references to objects mapped by this view.
+	View []*ManagedObjectReference
+}
+
+//
+// Interface handling the Compliance aspects of entities.
+//
+type ProfileComplianceManager struct {
+}
+
+//
+// This managed object is the interface for
+// configuration of the ESX software image, including
+// properties such as acceptance level.
+// It is currently designed to be host agent specific.
+//
+type HostImageConfigManager struct {
+}
+
+//
+// The VFlash Manager object is used to configure vFlash resource
+//
+// and vFlash cache on the ESX host.
+//
+type HostVFlashManager struct {
+
+	// Host vFlash configuration information.
+	VFlashConfigInfo *HostVFlashManagerVFlashConfigInfo
+}
+
+//
+// HostDirectoryStore is a base class for
+// directory-based authentication stores.
+//
+type HostDirectoryStore struct {
+	*HostAuthenticationStore
 }
 
 //
@@ -795,144 +510,27 @@ type InventoryView struct {
 }
 
 //
-// The KernelModuleSystem managed object controls the configuration
-// of kernel modules on the host.
+// This managed object provides for NTP and date/time related
+// configuration on a host.
 //
-type HostKernelModuleSystem struct {
+// Information regarding the running status of the NTP daemon and
+// functionality to start and stop the daemon is provided by the
+// HostServiceSystem object.
+//
+type HostDateTimeSystem struct {
+
+	// The DateTime configuration of the host.
+	DateTimeInfo *HostDateTimeInfo
 }
 
 //
-// The alarm manager is a singleton object for managing alarms
-// within a service instance.
+// Singleton Managed Object used to manage IP Pools.
 //
-type AlarmManager struct {
-
-	// The default setting for each alarm expression, used to populate the
-	// initial client wizard screen.
-	DefaultExpression []*AlarmExpression
-
-	// The static descriptive strings used in alarms.
-	Description *AlarmDescription
-}
-
-//
-// This managed object type is used for managing key/value pair
-// options.
+// IP Pools are used to allocate IPv4 and IPv6 addresses to vApps.
 //
 //
 //
-//
-// • You can define options on the fly, in a logical tree using a dot notation
-// for keys.  For example, "Ethernet.Connection" describes the Connection
-// option as child of the Ethernet option.
-//
-// • You can use the queryMethod to retrieve a single property or
-// a subset of properties based on the dot notation path.
-//
-//
-//
-//
-type OptionManager struct {
-
-	// A list of the current settings for the key/value pair options.
-	Setting []*OptionValue
-
-	// A list of supported key/value pair options including their
-	// type information.
-	SupportedOption []*OptionDef
-}
-
-//
-// The HostBootDeviceSystem managed object provides methods to query and update
-// a host boot device configuration.
-//
-type HostBootDeviceSystem struct {
-}
-
-//
-// The ListView managed object provides access to updates on a specific set of objects.
-// You can use a ListView with a PropertyCollector method
-// to retrieve data or receive notification of changes. For information about using views
-// with the PropertyCollector, see the description of ViewManager.
-//
-// When you invoke the CreateListView method, you specify
-// a list of objects. The view list
-// always represents the current configuration of the virtual environment
-// and reflects any subsequent changes that occur.
-//
-//
-//
-type ListView struct {
-	*ManagedObjectView
-}
-
-//
-// The DatastoreNamespaceManager managed object exposes APIs for
-// manipulating top-level directories of datastores which do not
-// support the traditional top-level directory creation.See topLevelDirectoryCreateSupported
-//
-type DatastoreNamespaceManager struct {
-}
-
-//
-// This Class is responsible for managing Profiles.
-//
-type ProfileManager struct {
-
-	// A list of profiles known to this ProfileManager.
-	Profile []*mo.Profile
-}
-
-//
-// A singleton managed object that can answer questions about compatibility
-// of a virtual machine with a host.
-//
-type VirtualMachineCompatibilityChecker struct {
-}
-
-//
-// The CustomFieldsManager object is used to add and remove custom fields
-// to managed entities.
-//
-// The custom fields values set on managed entities are available through the
-// customValue property and through the summary objects
-// for VirtualMachine and HostSystem. They are not available
-// directly through this managed object.
-//
-//
-// This functionality is only available through VirtualCenter.
-//
-//
-//
-type CustomFieldsManager struct {
-
-	// List of custom fields defined on this server. The fields are
-	// sorted by name.
-	Field []*CustomFieldDef
-}
-
-//
-// Provision the SNMP Version 1,2c agent.
-// This object is accessed through the
-// HostConfigManager object.
-//
-type HostSnmpSystem struct {
-
-	// Since VI API 2.5
-	Configuration *HostSnmpConfigSpec
-
-	// Since VI API 2.5
-	Limits *HostSnmpSystemAgentLimits
-}
-
-//
-// This interface defines an opaque network, in the sense that the detail and configuration
-// of the network is unknown to vShpere and is managed by a management plane outside of
-// vSphere. However, the identifier and name of these networks is made available to
-// vSphere so that host and virtual machine virtual ethernet device can connect to them.
-//
-type OpaqueNetwork struct {
-	*Network
+type IpPoolManager struct {
 }
 
 //
@@ -950,345 +548,295 @@ type HostPowerSystem struct {
 }
 
 //
-// This managed object provides interfaces for mapping VMkernel NIC to
-// iSCSI Host Bus Adapter.
+// The AutoStartManager allows clients to invoke and set up the auto-start/auto-stop
+// order of virtual machines on a single host. Virtual machines configured to use
+// auto-start are automatically started or stopped when the host is started or shut
+// down. The AutoStartManager is available when clients connect directly to a host,
+// such as an ESX Server machine or through VirtualCenter.
 //
-type IscsiManager struct {
+type HostAutoStartManager struct {
+	Config *HostAutoStartManagerConfig
 }
 
 //
-// ManagedObjectView is the base class for view objects that provide access
-// to a set of ManagedEntity objects. ManagedObjectView defines
-// a view list; the list contains references to objects in the view.
-// To create a view use the ViewManager methods.
+// The DistributedVirtualPortgroup managed object
+// defines how hosts and virtual machines connect to a network.
+// A distributed virtual portgroup specifies DistributedVirtualPort
+// configuration options for the ports on a DistributedVirtualSwitch.
+// A portgroup also represents a Network entity in the datacenter.
 //
-type ManagedObjectView struct {
-	*View
+//
+//
+// • To configure host access by portgroup, set the portgroup in the host virtual NIC specification
+// (HostVirtualNicSpec.portgroup).
+//
+//
+// • To configure virtual machine access by portgroup, set the portgroup
+// in the virtual Ethernet card backing
+// (VirtualEthernetCard.backing.port.portgroupKey).
+//
+//
+//
+//
+//
+// When you use a portgroup for network access, the Server will create a port according
+// to config.type.
+//
+//
+//
+type DistributedVirtualPortgroup struct {
+	*Network
 
-	// The list of references to objects mapped by this view.
-	View []*ManagedObjectReference
+	// Configuration of the portgroup.
+	Config *DVPortgroupConfigInfo
+
+	// Generated UUID of the portgroup.
+	Key string
+
+	// Port keys for the set of ports in the portgroup.
+	PortKeys []string
 }
 
 //
-// The HostAuthenticationStore base class represents both local user
-// and host Active Directory authentication for an ESX host.
+// AuthManager is the managed object that provides APIs
+// to manipulate the guest operating authentication.
 //
-//
-// • Local user authentication is always enabled. The vSphere API
-// does not support local user configuration for a host.
-//
-// • Active Directory authentication for ESX hosts relies on
-// an established Active Directory account that
-// has the authority to add the host to a domain.
-//
-//
-//
-//
-type HostAuthenticationStore struct {
-
-	// Information about the authentication store.
-	Info *HostAuthenticationStoreInfo
+type GuestAuthManager struct {
 }
 
 //
-// The Snapshot managed object type specifies the interface to individual snapshots
-// of a virtual machine. Although these are managed objects, they are subordinate to
-// their virtual machine.
+// The HostAuthenticationManager managed object provides
+// access to Active Directory configuration information for an
+// ESX host. It also provides access to methods for adding a host
+// to or removing a host from an Active Directory domain.
 //
-type VirtualMachineSnapshot struct {
-	*ExtensibleManagedObject
+// The vSphere API supports Microsoft Active Directory management
+// of authentication for ESX hosts. To integrate an ESX host
+// into an Active Directory environment, you use an Active
+// Directory account that has the authority to add
+// a computer to a domain. The ESX Server locates the Active
+// Directory domain controller. When you add a host to a domain,
+// you only need to specify the domain and the account
+// user name and password.
+//
+//
+// There are two approaches that you can use to add an ESX host
+// to or remove a host from an Active Directory domain.
+//
+//
+//
+// • JoinDomain_Task and
+// LeaveCurrentDomain_Task
+// methods - Your vSphere client application can call
+// these methods directly to add the host to or remove the host
+// from a domain.
+//
+//
+// • Host configuration - Use the HostActiveDirectory data object
+// to specify Active Directory configuration, either adding the host to
+// or removing the host from a domain. To apply the Active Directory
+// configuration, use the HostProfileManager method
+// (ApplyHostConfig_Task)
+// to apply the HostConfigSpec. When the ESX Server processes
+// the configuration, it will invoke the join or leave method.
+//
+//
+//
+//
+//
+// To take advantage of ESX host membership in an Active Directory domain,
+// grant permissions on the ESX host to Active Directory users and groups
+// who should have direct access to management of the ESX host.
+// Use the UserDirectory.RetrieveUserGroups
+// method to obtain information about Active Directory users and groups.
+// After retrieving the Active Directory data, you can use the
+// AuthorizationManager.SetEntityPermissions
+// method to set the principal property
+// to the appropriate user or group.
+//
+//
+// By default, the ESX host assigns the Administrator role to the "ESX Admins" group.
+// If the group does not exist when the host joins the domain, the host will
+// not assign the role. In this case, you must create the "ESX Admins"
+// group in the Active Directory. The host will periodically check the domain controller
+// for the group and will assign the role when the group exists.
+//
+//
+//
+type HostAuthenticationManager struct {
 
-	// All snapshots for which this snapshot is the parent.
-	//
-	// Since vSphere API 4.1
-	ChildSnapshot []*mo.VirtualMachineSnapshot
+	// Information about Active Directory membership.
+	Info *HostAuthenticationManagerInfo
 
-	// Information about the configuration of this virtual machine when this snapshot was
-	// taken.
+	// An array that can contain managed object references to local and
+	// Active Directory authentication managed objects.
 	//
-	// The datastore paths for the virtual machine disks point to the head of the disk
-	// chain that represents the disk at this given snapshot. The fileInfo.fileLayout
-	// field is not set.
-	Config *VirtualMachineConfigInfo
+	// supportedStore data implies a connection to a system
+	// that stores information about accounts.
+	// The supportedStore array can include the following objects:
+	//
+	// HostLocalAuthentication - Local authentication refers
+	// to user accounts on the ESX host. Local authentication is always enabled.
+	//
+	// HostActiveDirectoryAuthentication - Active Directory authentication
+	// refers to computer accounts and user accounts on the domain controller.
+	// This object indicates the domain membership status for the host
+	// and defines the join and leave methods for Active Directory
+	// membership.
+	//
+	// If supportedStore references
+	// a HostActiveDirectoryAuthentication object, the host
+	// is capable of joining a domain.
+	// However, if you try to add a host to a domain when the
+	// HostAuthenticationStoreInfo.enabled
+	// property is True (accessed through the info
+	// property), the join method will throw a fault.
+	SupportedStore []*mo.HostAuthenticationStore
 }
 
 //
-// This managed object type provides access to the environment that a
-// ComputeResource presents for creating and configuring a virtual machine.
+// The Profile managed object is the base class for host and cluster
+// profiles.
 //
-// The environment consists of three main components:
-//
-//
-//
-// • The virtual machine configuration options. Each vim.vm.ConfigOption
-// describes the execution environment for a virtual machine, the particular
-// set of virtual hardware that is supported. A
-// ComputeResource might support multiple sets. Access is provided
-// through the configOptionDescriptor property and the
-// QueryConfigOption operation.
-//
-// • The supported device targets. Each virtual device specified in the virtual
-// machine needs to be hooked up to a "physical" counterpart. For networks,
-// this means choosing a network name; for a virtual CD-rom this might be
-// an ISO image, etc.  The environment browser provides access to the device
-// targets through the
-// QueryConfigTarget operation.
-//
-// • Storage locations and files. A selection of locations where the virtual machine
-// files can be stored, and the possibility to browse for existing virtual disks
-// and ISO images. The datastore browser, provided by the datastoreBrowser
-// property, provides access to the contents of one or more datastores. The
-// items in a datastore are files that contain configuration, virtual disk, and
-// the other data associated with a virtual machine.
-//
-// • The capabilities supported by the ComputeResource to which the virtual
-// machine belongs.
-//
-//
-//
-//
-type EnvironmentBrowser struct {
+type Profile struct {
 
-	// DatastoreBrowser to browse datastores that are available on this entity.
-	DatastoreBrowser *mo.HostDatastoreBrowser
-}
+	// Overall compliance of entities associated with this profile.
+	// If one of the entities is out of compliance, the profile is nonCompliant.
+	// If all entities are in compliance, the profile is compliant.
+	// If the compliance status of one of the entities is not known, compliance status
+	// of the profile is unknown.
+	// See ComplianceResultStatus.
+	ComplianceStatus string
 
-//
-// The HostActiveDirectoryAuthentication managed object
-// indicates domain membership status and provides methods
-// for adding a host to and removing a host from a domain.
-//
-type HostActiveDirectoryAuthentication struct {
-	*HostDirectoryStore
-}
+	// Configuration data for the profile.
+	Config *ProfileConfigInfo
 
-//
-// ManagedEntity is an abstract base type for all managed objects present in
-// the inventory tree. The base type provides common functionality for traversing the
-// tree structure, as well as health monitoring and other basic functions.
-//
-// Most Virtual Infrastructure managed object types extend this type.
-//
-//
-//
-type ManagedEntity struct {
-	*ExtensibleManagedObject
+	// Time at which the profile was created.
+	CreatedTime time.Time
 
-	// Whether alarm actions are enabled for this entity.
-	// True if enabled; false otherwise.
+	// Deprecated.
+	// As of vSphere API 5.0. use RetrieveDescription instead.
 	//
-	// Since vSphere API 4.0
-	AlarmActionsEnabled bool
+	//
+	// Localizable description of the profile
+	Description *ProfileDescription
 
-	// Current configuration issues that have been detected for this entity. Typically,
-	// these issues have already been logged as events. The entity stores these
-	// events as long as they are still current. The
-	// configStatus property provides an overall status
-	// based on these events.
-	ConfigIssue []*Event
+	// List of managed entities associated with the profile.
+	Entity []*mo.ManagedEntity
 
-	// The configStatus indicates whether or not the system has detected a configuration
-	// issue involving this entity. For example, it might have detected a
-	// duplicate IP address or MAC address, or a host in a cluster
-	// might be out of compliance. The meanings of the configStatus values are:
-	//
-	// red:    A problem has been detected involving the entity.
-	// yellow: A problem is about to occur or a transient condition
-	// has occurred (For example, reconfigure fail-over policy).
-	// green:  No configuration issues have been detected.
-	// gray:   The configuration status of the entity is not being monitored.
-	//
-	// A green status indicates only that a problem has not been detected;
-	// it is not a guarantee that the entity is problem-free.
-	//
-	// The configIssue property contains a list of the
-	// problems that have been detected.
-	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
-	ConfigStatus *ManagedEntityStatus
+	// Time at which the profile was last modified.
+	ModifiedTime time.Time
 
-	// Custom field values.
-	CustomValue []*CustomFieldValue
-
-	// A set of alarm states for alarms that apply to this managed entity.
-	// The set includes alarms defined on this entity
-	// and alarms inherited from the parent entity,
-	// or from any ancestors in the inventory hierarchy.
-	//
-	// Alarms are inherited if they can be triggered by this entity or its descendants.
-	// This set does not include alarms that are defined on descendants of this entity.
-	DeclaredAlarmState []*AlarmState
-
-	// List of operations that are disabled, given the current runtime
-	// state of the entity. For example, a power-on operation always fails if a
-	// virtual machine is already powered on. This list can be used by clients to
-	// enable or disable operations in a graphical user interface.
-	//
-	// Note: This list is determined by the current runtime state of an entity,
-	// not by its permissions.
-	//
-	// This list may include the following operations for a HostSystem:
-	//
-	// EnterMaintenanceMode_Task
-	// ExitMaintenanceMode_Task
-	// RebootHost_Task
-	// ShutdownHost_Task
-	// ReconnectHost_Task
-	// DisconnectHost_Task
-	//
-	//
-	// This list may include the following operations for a VirtualMachine:
-	//
-	// AnswerVM
-	// Rename_Task
-	// CloneVM_Task
-	// PowerOffVM_Task
-	// PowerOnVM_Task
-	// SuspendVM_Task
-	// ResetVM_Task
-	// ReconfigVM_Task
-	// RelocateVM_Task
-	// MigrateVM_Task
-	// CustomizeVM_Task
-	// ShutdownGuest
-	// StandbyGuest
-	// RebootGuest
-	// CreateSnapshot_Task
-	// RemoveAllSnapshots_Task
-	// RevertToCurrentSnapshot_Task
-	// MarkAsTemplate
-	// MarkAsVirtualMachine
-	// ResetGuestInformation
-	// MountToolsInstaller
-	// UnmountToolsInstaller
-	// Destroy_Task
-	// UpgradeVM_Task
-	// ExportVm
-	//
-	//
-	// This list may include the following operations for a ResourcePool:
-	//
-	// ImportVApp
-	// CreateChildVM_Task
-	// UpdateConfig
-	// CreateVM_Task
-	// Destroy_Task
-	// Rename_Task
-	//
-	// This list may include the following operations for a VirtualApp:
-	//
-	// Destroy_Task
-	// CloneVApp_Task
-	// unregisterVApp_Task
-	// ExportVApp
-	// PowerOnVApp_Task
-	// PowerOffVApp_Task
-	// UpdateVAppConfig
-	//
-	//
-	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
-	DisabledMethod []string
-
-	// Access rights the current session has to this entity.
-	EffectiveRole []int
-
-	// Name of this entity, unique relative to its parent.
-	//
-	// Any / (slash), \ (backslash), character used in this
-	// name element will be escaped. Similarly, any % (percent) character used in
-	// this name element will be escaped, unless it is used to start an escape
-	// sequence. A slash is escaped as %2F or %2f. A backslash is escaped as %5C or
-	// %5c, and a percent is escaped as %25.
+	// Name of the profile.
 	Name string
+}
 
-	// General health of this managed entity.
-	// The overall status of the managed entity is computed as the worst status
-	// among its alarms and the configuration issues detected on the entity.
-	// The status is reported as one of the following values:
-	//
-	// red:    The entity has alarms or configuration issues with a red status.
-	// yellow: The entity does not have alarms or configuration issues with a
-	// red status, and has at least one with a yellow status.
-	// green:  The entity does not have alarms or configuration issues with a
-	// red or yellow status, and has at least one with a green status.
-	// gray:   All of the entity's alarms have a gray status and the
-	// configuration status of the entity is not being monitored.
-	//
-	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
-	OverallStatus *ManagedEntityStatus
+//
+// The PropertyFilter managed object type defines a filter
+// that controls the properties for which a PropertyCollector detects
+// incremental changes.  Filters are subordinate objects; they are part of the PropertyCollector and do not have independent lifetimes.  A Filter
+// is automatically destroyed when the session on which it was created is
+// closed or the PropertyCollector on which it was created is
+// destroyed.
+//
+type PropertyFilter struct {
 
-	// Parent of this entity.
-	//
-	// This value is null for the root object and for
-	// VirtualMachine objects that are part of
-	// a VirtualApp.
-	Parent *mo.ManagedEntity
+	// Flag to indicate if a change to a nested property reports only the
+	// nested change or the entire specified property value.  If the value is
+	// true, a change reports only the nested property.  If the value is
+	// false, a change reports the enclosing property named in the filter.
+	PartialUpdates bool
 
-	// List of permissions defined for this entity.
-	Permission []*Permission
+	// Specifications for this filter.
+	Spec *PropertyFilterSpec
+}
 
-	// The set of recent tasks operating on this managed entity. This is a subset
-	// of recentTask belong to this entity. A task in this
-	// list could be in one of the four states: pending, running, success or error.
-	//
-	// This property can be used to deduce intermediate power states for
-	// a virtual machine entity. For example, if the current powerState is "poweredOn"
-	// and there is a running task performing the "suspend" operation, then the virtual
-	// machine's intermediate state might be described as "suspending."
-	//
-	// Most tasks (such as power operations) obtain exclusive access to the virtual
-	// machine, so it is unusual for this list to contain more than one running task.
-	// One exception, however, is the task of cloning a virtual machine.
-	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
-	RecentTask []*mo.Task
+//
+// Service interface to parse and generate OVF descriptors.
+//
+// The purpose of this interface is to make it easier for callers to import VMs and
+// vApps from OVF packages and to export VI packages to OVF. In the following
+// description, the term "client" is used to mean any caller of the interface.
+//
+//
+// This interface only converts between OVF and VI types. To actually import and export
+// entities, use ResourcePool.importVApp,
+// VirtualMachine.exportVm and
+// VirtualApp.exportVApp.
+//
+//
+// Import
+// For the import scenario, the typical sequence of events is as follows:
+//
+// The client calls parseDescriptor to obtain information about the OVF descriptor. This
+// typically includes information (such as a list of networks) that must be mapped to VI
+// infrastructure entities.
+//
+//
+// The OVF descriptor is validated against the OVF Specification, and any errors or
+// warnings are returned as part of the ParseResult. For example, the parser might
+// encounter a section marked required that it does not understand, or the XML descriptor
+// might be malformed.
+//
+//
+// The client decides on network mappings, datastore, properties etc. It then calls
+// createImportSpec to obtain the parameters needed to call
+// ResourcePool.importVApp.
+//
+//
+// If any warnings are present, the client will review these and decide whether to
+// proceed or not. If errors are present, the ImportSpec will be missing, so
+// the client is forced to give up or fix the problems and then try again.
+//
+//
+// The client now calls ResourcePool.importVApp, passing the ImportSpec as a parameter. This will create
+// the virtual machines and VirtualApp objects in VI and return locations
+// to which the files of the entity can be uploaded. It also returns a lease that
+// controls the duration of the lock taken on the newly created inventory objects. When
+// all files have been uploaded, the client must release this lease.
+//
+//
+// Export
+// Creating the OVF descriptor is the last part of exporting an entity to OVF. At this
+// point, the client has already downloaded all files for the entity, optionally
+// compressing and/or chunking them (however, the client may do a "dry run" of creating
+// the descriptor before downloading the files. See OvfManager.createDescriptor).
+//
+// In addition to the entity reference itself, information about the choices made on
+// these files is passed to createDescriptor as a list of OvfFile instances.
+//
+//
+// The client must inspect and act upon warnings and errors as previously described.
+//
+//
+// No matter if the export succeeds or fails, the client is responsible for releasing the
+// shared state lock taken on the entity (by VirtualMaching.exportVm or VirtualApp.exportVApp) during the export.
+//
+//
+// Error handling
+// All result types contain warning and error lists. Warnings do not cause processing to
+// fail, but the caller (typically, the user of a GUI client) may choose to reject the
+// result based on the warnings issued.
+//
+// Errors cause processing to abort by definition.
+//
+//
+//
+type OvfManager struct {
 
-	// The set of tags associated with this managed entity.
-	// Experimental. Subject to change.
+	// Returns an array of OvfOptionInfo object that specifies what options the server
+	// support for exporting an OVF descriptor.
 	//
-	// Since vSphere API 4.0
-	Tag []*Tag
+	//
+	// Since vSphere API 5.1
+	OvfExportOption []*OvfOptionInfo
 
-	// A set of alarm states for alarms triggered by this entity
-	// or by its descendants.
+	// Returns an array of OvfOptionInfo object that specifies what options the server
+	// support for modifing/relaxing the OVF import process.
 	//
-	// Triggered alarms are propagated up the inventory hierarchy
-	// so that a user can readily tell when a descendant has triggered an alarm.
 	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
-	TriggeredAlarmState []*AlarmState
+	// Since vSphere API 5.1
+	OvfImportOption []*OvfOptionInfo
 }
 
 //
@@ -1313,6 +861,174 @@ type GuestOperationsManager struct {
 }
 
 //
+// Provision the SNMP Version 1,2c agent.
+// This object is accessed through the
+// HostConfigManager object.
+//
+type HostSnmpSystem struct {
+
+	// Since VI API 2.5
+	Configuration *HostSnmpConfigSpec
+
+	// Since VI API 2.5
+	Limits *HostSnmpSystemAgentLimits
+}
+
+//
+// The scheduled task object.
+//
+type ScheduledTask struct {
+	*ExtensibleManagedObject
+
+	// Information about the current scheduled task.
+	Info *ScheduledTaskInfo
+}
+
+//
+// EventHistoryCollector provides a mechanism for
+// retrieving historical data and updates when the server appends new
+// events.
+//
+type EventHistoryCollector struct {
+	*HistoryCollector
+
+	// The items in the 'viewable latest page'. As new events that match the
+	// collector's EventFilterSpec are created, they are added to this
+	// page, and the oldest events are removed from the collector to keep the
+	// size of the page to that allowed by
+	// HistoryCollector#setLatestPageSize.
+	//
+	// The "oldest event" is the one with the smallest key (event ID). The
+	// events in the returned page are unordered.
+	LatestPage []*Event
+}
+
+//
+// ExtensibleManagedObject provides methods and properties that provide
+// access to custom fields that may be associated with a managed object.
+// Use the CustomFieldsManager to define custom fields.
+// The CustomFieldsManager handles the entire list of custom fields
+// on a server. You can can specify the object type to which a particular custom
+// field applies by setting its managedObjectType.
+// (If you do not set a managed object type for a custom field definition,
+// the field applies to all managed objects.)
+//
+type ExtensibleManagedObject struct {
+
+	// List of custom field definitions that are valid for the object's type.
+	// The fields are sorted by name.
+	//
+	// Since VI API 2.5
+	AvailableField []*CustomFieldDef
+
+	// List of custom field values. Each value uses a key to associate
+	// an instance of a CustomFieldStringValue with
+	// a custom field definition.
+	//
+	// Since VI API 2.5
+	Value []*CustomFieldValue
+}
+
+//
+// The FirewallSystem managed object describes the firewall configuration
+// of the host.
+//
+// The firewall should be configured first by setting the default policy and
+// then by making exceptions to the policy to get the desired openness.
+//
+//
+//
+type HostFirewallSystem struct {
+	*ExtensibleManagedObject
+
+	// Firewall configuration.
+	FirewallInfo *HostFirewallInfo
+}
+
+//
+// Represents a set of physical compute resources for a set of virtual machines.
+//
+// The base type ComputeResource, when instantiated by calling
+// AddStandaloneHost_Task, represents a single host. The subclass
+// ClusterComputeResource represents a cluster of hosts and adds distributed management
+// features such as availability and resource scheduling.
+//
+//
+// A ComputeResource always has a root ResourcePool associated with it.
+// Certain types of  clusters such as those with VMware DRS enabled and standalone hosts
+// (ESX Server 3) support the creation of ResourcePool hierarchies.
+//
+//
+//
+type ComputeResource struct {
+	*ManagedEntity
+
+	// Configuration of the compute resource; applies to both standalone hosts
+	// and clusters. For a cluster this property will return a
+	// ClusterConfigInfoEx object.
+	//
+	// Since VI API 2.5
+	ConfigurationEx *ComputeResourceConfigInfo
+
+	// The datastore property is the subset of datastore objects in the datacenter
+	// available in this ComputeResource.
+	//
+	// This property is computed as the aggregate set of datastores available from all
+	// the hosts that are part of this compute resource.
+	Datastore []*mo.Datastore
+
+	// The environment browser object that identifies the environments that are supported
+	// on this compute resource.
+	EnvironmentBrowser *mo.EnvironmentBrowser
+
+	// List of hosts that are part of this compute resource. If the compute resource is a
+	// standalone type, then this list contains just one element.
+	Host []*mo.HostSystem
+
+	// The subset of network objects available in the datacenter that is available in
+	// this ComputeResource.
+	//
+	// This property is computed as the aggregate set of networks available from all the
+	// hosts that are part of this compute resource.
+	Network []*mo.Network
+
+	// Reference to root resource pool.
+	ResourcePool *mo.ResourcePool
+
+	// Basic runtime information about a compute resource. This information is used on
+	// summary screens and in list views.
+	Summary *ComputeResourceSummary
+}
+
+//
+// ProcessManager is the managed object that provides APIs
+// to manipulate the guest operating system processes.
+//
+type GuestProcessManager struct {
+}
+
+//
+// This managed object provides interfaces for mapping VMkernel NIC to
+// iSCSI Host Bus Adapter.
+//
+type IscsiManager struct {
+}
+
+//
+// The SearchIndex service allows a client to efficiently query the
+// inventory for a specific managed entity by attributes such as UUID, IP address, DNS
+// name, or datastore path. Such searches typically return a VirtualMachine or a
+// HostSystem. While searching, only objects for which the user has sufficient
+// privileges are considered. The findByInventoryPath and findChild operations only
+// search on entities for which the user has view privileges; all other SearchIndex
+// find operations only search virtual machines and hosts for which the user has
+// read privileges. If the user does not have sufficient privileges for an object that
+// matches the search criteria, that object is not returned.
+//
+type SearchIndex struct {
+}
+
+//
 // This managed object provides an interface
 // through which you can gather and configure the host CPU scheduler
 // policies that affect the performance of running virtual machines.
@@ -1330,216 +1046,6 @@ type HostCpuSchedulerSystem struct {
 	// existence of this data object type indicates if the CPU scheduler
 	// is capable of scheduling hyperthreads as resources.
 	HyperthreadInfo *HostHyperThreadScheduleInfo
-}
-
-//
-// The CustomizationSpecManager managed object is used to manage
-// customization specifications stored on the VirtualCenter server.
-//
-type CustomizationSpecManager struct {
-
-	// Gets a binary public encryption key that can be used to encrypt
-	// passwords in stored specifications.
-	EncryptionKey []byte
-
-	// Gets a list of information on available specifications.
-	Info []*CustomizationSpecInfo
-}
-
-//
-// The HostFirmwareSystem managed object type provides access to the firmware
-// of an embedded ESX host. It provides operations to backup, restore, and reset the
-// configuration of an embedded ESX host.
-//
-type HostFirmwareSystem struct {
-}
-
-//
-// The Datacenter managed object provides the interface to the common container
-// object for hosts, virtual machines, networks, and datastores. These entities
-// must be under a distinct datacenter in the inventory, and datacenters may not
-// be nested under other datacenters.
-//
-// Every Datacenter has the following set of dedicated folders. These folders are empty
-// until you create entities for the Datacenter.
-//
-//
-//
-// •  A folder for VirtualMachine, template, and
-// VirtualApp objects.
-//
-// •  A folder for a ComputeResource hierarchy.
-//
-// •  A folder for Network, DistributedVirtualSwitch,
-// and DistributedVirtualPortgroup objects.
-//
-// •  A folder for Datastore objects.
-//
-//
-//
-//
-// For a visual representation of the organization of objects in a vCenter
-// hierarchy, see the description of the ServiceInstance object.
-//
-//
-//
-type Datacenter struct {
-	*ManagedEntity
-
-	// Configuration of the datacenter.
-	//
-	// Since vSphere API 5.1
-	Configuration *DatacenterConfigInfo
-
-	// A collection of references to the datastore objects
-	// available in this datacenter.
-	Datastore []*mo.Datastore
-
-	// A reference to the folder hierarchy that contains
-	// the datastores for this datacenter.
-	//
-	// This folder is guaranteed to exist.
-	//
-	// Since vSphere API 4.0
-	DatastoreFolder *mo.Folder
-
-	// A reference to the folder hierarchy that contains
-	// the compute resources, including hosts and clusters, for this datacenter.
-	//
-	// This folder is guaranteed to exist.
-	HostFolder *mo.Folder
-
-	// A collection of references to the network objects
-	// available in this datacenter.
-	Network []*mo.Network
-
-	// A reference to the folder hierarchy that contains the network entities
-	// for this datacenter. The folder can include Network,
-	// DistributedVirtualSwitch, and
-	// DistributedVirtualPortgroup objects.
-	//
-	// This folder is guaranteed to exist.
-	//
-	// Since vSphere API 4.0
-	NetworkFolder *mo.Folder
-
-	// A reference to the folder hierarchy that contains VirtualMachine
-	// virtual machine templates (identified by the template
-	// property, and VirtualApp objects for this datacenter.
-	//
-	// Note that a VirtualApp that is a child of a ResourcePool
-	// may also be visible in this folder. VirtualApp objects can be nested,
-	// but only the parent VirtualApp can be visible in the folder.
-	//
-	// This folder is guaranteed to exist.
-	VmFolder *mo.Folder
-}
-
-//
-// Represents a storage location for virtual machine files. A storage location can be a
-// VMFS volume, a directory on Network Attached Storage, or a local file system path.
-//
-// A datastore is platform-independent and host-independent. Therefore, datastores do
-// not change when the virtual machines they contain are moved between hosts. The scope
-// of a datastore is a datacenter; the datastore is uniquely named within the
-// datacenter.
-//
-//
-// Any reference to a virtual machine or file accessed by any host within the
-// datacenter must use a datastore path. A datastore path has the form
-// "[&lt;datastore&gt;] &lt;path&gt;", where &lt;datastore&gt; is the datastore name,
-// and &lt;path&gt; is a slash-delimited path from the root of the datastore. An
-// example datastore path is "[storage] path/to/config.vmx".
-//
-//
-// You may use the following characters in a path, but not in a datastore name:
-// slash (/), backslash (\), and percent (%).
-//
-//
-// All references to files in the VIM API are implicitly done using datastore paths.
-//
-//
-// When a client creates a virtual machine, it may specify the name of
-// the datastore, omitting the path; the system, meaning VirtualCenter or the host,
-// automatically assigns filenames and creates directories on the given datastore. For
-// example, specifying My_Datastore as a location for a virtual machine called MyVm
-// results in a datastore location of My_Datastore\MyVm\MyVm.vmx.
-//
-//
-// Datastores are configured per host. As part of host configuration, a HostSystem can
-// be configured to mount a set of network drives. Multiple hosts
-// may be configured to point to the same storage location. There exists only one
-// Datastore object per Datacenter, for each such shared location. Each Datastore
-// object keeps a reference to the set of hosts that have mounted the datastore. A
-// Datastore object can be removed only if no hosts currently have the datastore
-// mounted.
-//
-//
-// Thus, managing datastores is done both at the host level and the datacenter level.
-// Each host is configured explicitly with the set of datastores it can access. At the
-// datacenter, a view of the datastores across the datacenter is shown.
-//
-//
-//
-type Datastore struct {
-	*ManagedEntity
-
-	// DatastoreBrowser used to browse this datastore.
-	Browser *mo.HostDatastoreBrowser
-
-	// Capabilities of this datastore.
-	Capability *DatastoreCapability
-
-	// Hosts attached to this datastore.
-	Host []*DatastoreHostMount
-
-	// Specific information about the datastore.
-	Info *DatastoreInfo
-
-	// Configuration of storage I/O resource management for the datastore.
-	// Currently we only support storage I/O resource management on VMFS volumes
-	// of a datastore.
-	//
-	// This configuration may not be available if the datastore is not accessible
-	// from any host, or if the datastore does not have VMFS volume.
-	// The configuration can be modified using the method
-	// ConfigureDatastoreIORM_Task
-	//
-	// Since vSphere API 4.1
-	IormConfiguration *StorageIORMInfo
-
-	// Global properties of the datastore.
-	Summary *DatastoreSummary
-
-	// Virtual machines stored on this datastore.
-	Vm []*mo.VirtualMachine
-}
-
-//
-// The PropertyFilter managed object type defines a filter
-// that controls the properties for which a PropertyCollector detects
-// incremental changes.  Filters are subordinate objects; they are part of the PropertyCollector and do not have independent lifetimes.  A Filter
-// is automatically destroyed when the session on which it was created is
-// closed or the PropertyCollector on which it was created is
-// destroyed.
-//
-type PropertyFilter struct {
-
-	// Flag to indicate if a change to a nested property reports only the
-	// nested change or the entire specified property value.  If the value is
-	// true, a change reports only the nested property.  If the value is
-	// false, a change reports the enclosing property named in the filter.
-	PartialUpdates bool
-
-	// Specifications for this filter.
-	Spec *PropertyFilterSpec
-}
-
-//
-// AuthManager is the managed object that provides APIs
-// to manipulate the guest operating authentication.
-//
-type GuestAuthManager struct {
 }
 
 //
@@ -1579,54 +1085,140 @@ type FileManager struct {
 }
 
 //
-// The PropertyCollector managed object retrieves and detects changes
-// to the properties of other managed objects. The RetrievePropertiesEx method provides one-time property retrieval. The
-// WaitForUpdatesEx method provides incremental change detection and
-// supports both polling and notification.
+// The HostServiceSystem managed object describes the configuration
+// of host services.  This managed object operates in conjunction
+// with the HostFirewallSystem
+// managed object.
 //
-// For change detection a client creates one or more filters to specify the
-// subset of managed objects in which the client is interested. Filters keep
-// per-session state to track incremental changes. Because this state is
-// per-session:
-//
-//
-//
-// •  A session cannot share its PropertyCollector filters with other
-// sessions
-//
-//
-// •  two different clients can share the same session, and so can
-// share the same filters, but this is not recommended
-//
-//
-// •  When a session terminates, the associated PropertyCollector filters
-// are automatically destroyed.
-//
-//
-//
-//
-//
-type PropertyCollector struct {
+type HostServiceSystem struct {
+	*ExtensibleManagedObject
 
-	// The filters that this PropertyCollector uses to determine the list of
-	// properties for which it detects incremental changes.
-	Filter []*mo.PropertyFilter
+	// Service configuration.
+	ServiceInfo *HostServiceInfo
 }
 
 //
-// The FirewallSystem managed object describes the firewall configuration
-// of the host.
+// This managed object type is used to configure agent virtual machine resource
+// configuration, such as what network and datastore to use for agent virtual
+// machines.
 //
-// The firewall should be configured first by setting the default policy and
-// then by making exceptions to the policy to get the desired openness.
+type HostEsxAgentHostManager struct {
+
+	// Configuration of agent virtual machine resources
+	ConfigInfo *HostEsxAgentHostManagerConfigInfo
+}
+
 //
+// This managed object type provides properties and methods for
+// event management support.
+// Event objects are used to record significant state changes of
+// managed entities.
 //
+type EventManager struct {
+
+	// Static descriptive strings used in events.
+	Description *EventDescription
+
+	// The latest event that happened on the VirtualCenter server.
+	LatestEvent *Event
+
+	// For each client, the maximum number of event collectors that can exist
+	// simultaneously.
+	MaxCollector int32
+}
+
 //
-type HostFirewallSystem struct {
+// The MemoryManagerSystem managed object provides an interface through which
+// the host memory management policies that affect the performance of running
+// virtual machines can be gathered and configured.
+//
+type HostMemorySystem struct {
 	*ExtensibleManagedObject
 
-	// Firewall configuration.
-	FirewallInfo *HostFirewallInfo
+	// Service console reservation information for the memory manager.  The
+	// existence of this data object indicates if the service console memory
+	// reservation must be configured for this host.
+	ConsoleReservationInfo *ServiceConsoleReservationInfo
+
+	// Virtual machine reservation information for the memory manager.  The
+	// existence of this data object indicates if the virtual machine memory
+	// reservation must be configured for this host.
+	//
+	// Since VI API 2.5
+	VirtualMachineReservationInfo *VirtualMachineMemoryReservationInfo
+}
+
+//
+// The CustomizationSpecManager managed object is used to manage
+// customization specifications stored on the VirtualCenter server.
+//
+type CustomizationSpecManager struct {
+
+	// Gets a binary public encryption key that can be used to encrypt
+	// passwords in stored specifications.
+	EncryptionKey []byte
+
+	// Gets a list of information on available specifications.
+	Info []*CustomizationSpecInfo
+}
+
+//
+// The DatastoreNamespaceManager managed object exposes APIs for
+// manipulating top-level directories of datastores which do not
+// support the traditional top-level directory creation.See topLevelDirectoryCreateSupported
+//
+type DatastoreNamespaceManager struct {
+}
+
+//
+// The Snapshot managed object type specifies the interface to individual snapshots
+// of a virtual machine. Although these are managed objects, they are subordinate to
+// their virtual machine.
+//
+type VirtualMachineSnapshot struct {
+	*ExtensibleManagedObject
+
+	// All snapshots for which this snapshot is the parent.
+	//
+	// Since vSphere API 4.1
+	ChildSnapshot []*mo.VirtualMachineSnapshot
+
+	// Information about the configuration of this virtual machine when this snapshot was
+	// taken.
+	//
+	// The datastore paths for the virtual machine disks point to the head of the disk
+	// chain that represents the disk at this given snapshot. The fileInfo.fileLayout
+	// field is not set.
+	Config *VirtualMachineConfigInfo
+}
+
+//
+// The HostLocalAuthentication managed object represents
+// local authentication for user accounts on an ESX host.
+//
+type HostLocalAuthentication struct {
+	*HostAuthenticationStore
+}
+
+//
+// The HostAuthenticationStore base class represents both local user
+// and host Active Directory authentication for an ESX host.
+//
+//
+// • Local user authentication is always enabled. The vSphere API
+// does not support local user configuration for a host.
+//
+// • Active Directory authentication for ESX hosts relies on
+// an established Active Directory account that
+// has the authority to add the host to a domain.
+//
+//
+//
+//
+type HostAuthenticationStore struct {
+
+	// Information about the authentication store.
+	Info *HostAuthenticationStoreInfo
 }
 
 //
@@ -1792,137 +1384,406 @@ type HostProfile struct {
 }
 
 //
-// This managed object type enables clients to retrieve historical data and
-// receive updates when the server appends new data to a collection.
-// This is a base type for item-specific types related to event or task history.
-// Historical data is inherently append-only,
-// although a server administrator may periodically purge old data.
+// This managed object type provides an interface
+// through which local accounts on a host are managed.  Note that this
+// managed object applies only to applications that use a local account
+// database on the host to provide authentication (ESX Server, for example).
+// POSIX and win32 hosts may impose different restrictions on the password,
+// ID, and description formats. POSIX host implementation may restrict the
+// user or group name to be lower case letters and less than 16 characters in
+// total.  It may also disallow characters such as
+// ";", "\n", and so on.  In short, all the platform dependent rules and
+// restrictions regarding naming of users/groups and password apply here.
+// An InvalidArgument fault is thrown if any of these rules are not obeyed.
 //
-// Typically, a client creates a history collector by using a filter on a
-// potentially large set, such as all the events in a datacenter.
-// The collector provides access to the items that match the filter,
-// which could also be a relatively large set.
-//
-//
-// The items in a collector are always ordered by date and time of creation.
-// Item properties normally include this time stamp.
-//
-//
-// The client may set the "viewable latest page" for the collector,
-// which is the contiguous subset of the items that are of
-// immediate interest. These items are available as the "latestPage"
-// property, which the client may retrieve and monitor by using the
-// PropertyCollector managed object.
-//
-//
-// Clients can change the page size of the "latestPage" by using
-// setLatestPageSize().
-//
-//
-// The client may use the following features of the history collector.
-//
-//
-//
-// • RewindCollector - Moves the "scrollable view" to
-// the oldest item (the default setting).
-//
-// • readNext - Retrieves all the items in the collector, from the oldest
-// item to the newest item. Retrieves either
-// tasks or
-// events depending on the operation.
-//
-// • readPrev - Retrieves all items (excluding the "viewable latest page") in
-// the collector, from the newest item to the oldest item. Retrieves either
-// tasks or
-// events depending on the operation.
-//
-// • ResetCollector - Moves the "scrollable view" to
-// the item immediately preceding the "viewable latest page".
-//
-//
-//
-//
-type HistoryCollector struct {
-
-	// The filter used to create this collector.
-	//
-	// The type of the returned filter is determined by the managed object
-	// for which the collector is created.
-	Filter interface{}
+type HostLocalAccountManager struct {
 }
 
 //
-// The HostSystem managed object type provides access to a virtualization
-// host platform.
+// This managed object type provides directory and basic management
+// services for all registered extensions.
 //
-// Invoking destroy on a HostSystem of standalone type throws a NotSupported fault.
-// A standalone HostSystem can be destroyed only by invoking destroy on its parent
-// ComputeResource.
-// Invoking destroy on a failover host throws a
-// DisallowedOperationOnFailoverHost fault. See
-// ClusterFailoverHostAdmissionControlPolicy.
+// Clients use the ExtensionManager, available in
+// ServiceInstance,
+// to access extension objects.
 //
 //
+// While several authentication methods are available for extension
+// servers to use (see SessionManager), only one
+// authentication method is valid for an extension at any given
+// time.
 //
-type HostSystem struct {
+//
+//
+type ExtensionManager struct {
+
+	// The list of currently registered extensions.
+	ExtensionList []*Extension
+}
+
+//
+// This Class is responsible for managing Profiles.
+//
+type ProfileManager struct {
+
+	// A list of profiles known to this ProfileManager.
+	Profile []*mo.Profile
+}
+
+//
+// The HostFirmwareSystem managed object type provides access to the firmware
+// of an embedded ESX host. It provides operations to backup, restore, and reset the
+// configuration of an embedded ESX host.
+//
+type HostFirmwareSystem struct {
+}
+
+//
+// This managed object type provides a way to configure resource usage for
+// storage resources.
+//
+type StorageResourceManager struct {
+}
+
+//
+// This managed object manages the health state of the host.
+//
+type HostHealthStatusSystem struct {
+	Runtime *HealthSystemRuntime
+}
+
+//
+// Provides an interface to get low-level debugging logs or diagnostic bundles
+// for a server. For VirtualCenter, this includes the log files
+// for the server daemon. For an ESX Server host, this includes detailed
+// log files for the VMkernel.
+//
+type DiagnosticManager struct {
+}
+
+//
+// This managed object is the interface for scanning and patching an ESX
+// server.
+//
+// VMware publishes updates through its external website. A patch update is
+// synonymous with a bulletin. An update may contain many individual patch
+// binaries, but its installation and uninstallation are atomic.
+//
+type HostPatchManager struct {
+}
+
+//
+// Represents a storage location for virtual machine files. A storage location can be a
+// VMFS volume, a directory on Network Attached Storage, or a local file system path.
+//
+// A datastore is platform-independent and host-independent. Therefore, datastores do
+// not change when the virtual machines they contain are moved between hosts. The scope
+// of a datastore is a datacenter; the datastore is uniquely named within the
+// datacenter.
+//
+//
+// Any reference to a virtual machine or file accessed by any host within the
+// datacenter must use a datastore path. A datastore path has the form
+// "[&lt;datastore&gt;] &lt;path&gt;", where &lt;datastore&gt; is the datastore name,
+// and &lt;path&gt; is a slash-delimited path from the root of the datastore. An
+// example datastore path is "[storage] path/to/config.vmx".
+//
+//
+// You may use the following characters in a path, but not in a datastore name:
+// slash (/), backslash (\), and percent (%).
+//
+//
+// All references to files in the VIM API are implicitly done using datastore paths.
+//
+//
+// When a client creates a virtual machine, it may specify the name of
+// the datastore, omitting the path; the system, meaning VirtualCenter or the host,
+// automatically assigns filenames and creates directories on the given datastore. For
+// example, specifying My_Datastore as a location for a virtual machine called MyVm
+// results in a datastore location of My_Datastore\MyVm\MyVm.vmx.
+//
+//
+// Datastores are configured per host. As part of host configuration, a HostSystem can
+// be configured to mount a set of network drives. Multiple hosts
+// may be configured to point to the same storage location. There exists only one
+// Datastore object per Datacenter, for each such shared location. Each Datastore
+// object keeps a reference to the set of hosts that have mounted the datastore. A
+// Datastore object can be removed only if no hosts currently have the datastore
+// mounted.
+//
+//
+// Thus, managing datastores is done both at the host level and the datacenter level.
+// Each host is configured explicitly with the set of datastores it can access. At the
+// datacenter, a view of the datastores across the datacenter is shown.
+//
+//
+//
+type Datastore struct {
 	*ManagedEntity
 
-	// Host capabilities. This might not be available for a
-	// disconnected host.
-	Capability *HostCapability
+	// DatastoreBrowser used to browse this datastore.
+	Browser *mo.HostDatastoreBrowser
 
-	// Host configuration information.  This might not be available for a disconnected
-	// host.
-	Config *HostConfigInfo
+	// Capabilities of this datastore.
+	Capability *DatastoreCapability
 
-	// Host configuration systems.
+	// Hosts attached to this datastore.
+	Host []*DatastoreHostMount
+
+	// Specific information about the datastore.
+	Info *DatastoreInfo
+
+	// Configuration of storage I/O resource management for the datastore.
+	// Currently we only support storage I/O resource management on VMFS volumes
+	// of a datastore.
 	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
-	ConfigManager *HostConfigManager
+	// This configuration may not be available if the datastore is not accessible
+	// from any host, or if the datastore does not have VMFS volume.
+	// The configuration can be modified using the method
+	// ConfigureDatastoreIORM_Task
+	//
+	// Since vSphere API 4.1
+	IormConfiguration *StorageIORMInfo
 
-	// A collection of references to the subset of datastore objects in the datacenter
-	// that are available in this HostSystem.
+	// Global properties of the datastore.
+	Summary *DatastoreSummary
+
+	// Virtual machines stored on this datastore.
+	Vm []*mo.VirtualMachine
+}
+
+// Deprecated.
+// As of VI API 2.5, use the VMware vCenter Converter,
+// an optional software plug-in for vCenter Server for
+// migrating physical and virtual machines to VMware vSphere.
+//
+//
+// The VirtualizationManager is the interface for discover and consolidate
+// host and services from physical environment to virtualization environment.
+//
+type VirtualizationManager struct {
+}
+
+//
+// A singleton managed object that can answer questions about
+// the feasibility of certain provisioning operations.
+//
+type VirtualMachineProvisioningChecker struct {
+}
+
+//
+// FileManager is the managed object that provides APIs
+// to manipulate the guest operating system files.
+//
+type GuestFileManager struct {
+}
+
+//
+// This managed object manages the graphics state of the host.
+//
+type HostGraphicsManager struct {
+	*ExtensibleManagedObject
+
+	// Array of graphics information
+	GraphicsInfo []*HostGraphicsInfo
+}
+
+//
+// Object manager for scheduled tasks.
+//
+type ScheduledTaskManager struct {
+
+	// Static descriptive strings used in scheduled tasks.
+	Description *ScheduledTaskDescription
+
+	// All available scheduled tasks.
+	ScheduledTask []*mo.ScheduledTask
+}
+
+//
+// This interface defines an opaque network, in the sense that the detail and configuration
+// of the network is unknown to vShpere and is managed by a management plane outside of
+// vSphere. However, the identifier and name of these networks is made available to
+// vSphere so that host and virtual machine virtual ethernet device can connect to them.
+//
+type OpaqueNetwork struct {
+	*Network
+}
+
+//
+// The DiagnosticSystem managed object is used to configure the diagnostic
+// mechanisms specific to the host.  The DiagnosticSystem interface supports
+// the following concepts:
+//
+//
+// •  Notion of an active diagnostic partition that is selected from
+// a set of available partitions.
+//
+// •  Ability to create a diagnostic partition that gets added to the
+// list of available partitions and could be made active.
+//
+//
+//
+//
+type HostDiagnosticSystem struct {
+
+	// The currently active diagnostic partition.
+	ActivePartition *HostDiagnosticPartition
+}
+
+//
+// The UserDirectory managed object provides information about users
+// and groups on a vSphere server and ESX hosts. The method
+// RetrieveUserGroups returns a list
+// of user account data. The method can perform a search operation based on
+// specific criteria - user name, group name, sub-string or string matching,
+// and, on Windows, domain. Use the results as input
+// to the AuthorizationManager methods
+// SetEntityPermissions and
+// ResetEntityPermissions.
+//
+// The content of the returned results depends on the server environment:
+//
+//
+//
+// •  On a Windows host, RetrieveUserGroups can search
+// from the set of trusted domains on the host, including the primary
+// domain of the system. A special domain (specified as an
+// empty string - "") refers to the users and groups local
+// to the host.
+//
+// •  On an ESX Server or a Linux host, the search operates on the
+// users and groups defined in the /etc/passwd file. Always specify
+// an empty string ("") for the domain argument.
+// If the /etc/passwd file contains Sun NIS or NIS+ users and groups,
+// RetrieveUserGroups returns information about these accounts as well.
+//
+//
+//
+//
+type UserDirectory struct {
+
+	// List of Windows domains available for user searches, if the underlying
+	// system supports windows domain membership.
+	DomainList []string
+}
+
+//
+// A task is used to monitor and potentially cancel long
+// running operations.
+//
+type Task struct {
+	*ExtensibleManagedObject
+
+	// Detailed information about this task.
+	Info *TaskInfo
+}
+
+//
+// Represents a multi-tiered software solution. A vApp is a collection of
+// virtual machines (and potentially other vApp containers) that are operated and
+// monitored as a unit. From a manage perspective, a multi-tiered vApp acts a
+// lot like a virtual machine object. It has power operations, networks, datastores,
+// and its resource usage can be configured.
+//
+// From a technical perspective, a vApp container is a specialized resource pool that
+// has been extended with the following capabilities:
+//
+// •
+//
+// Product information such as product name, vendor, properties,
+// and licenses.
+//
+//
+// A power-on/power-off sequence specification
+//
+//
+// Support for import/export vApps as OVF packages
+//
+//
+// An OVF environment that allows for application-level customization
+//
+//
+//
+//
+// Destroying a vApp
+//
+//
+// When a vApp is destroyed, all of its virtual machines are destroyed,
+// as well as any child vApps.
+//
+//
+// The VApp.Delete privilege must be held on the vApp as well as the
+// parent folder of the vApp.  Also, the VApp.Delete privilege must
+// be held on any child vApps that would be destroyed by the operation.
+//
+//
+//
+type VirtualApp struct {
+	*ResourcePool
+
+	// Deprecated.
+	// As of vSphere API 5.1.
+	//
+	//
+	// List of linked children.
+	//
+	// Since vSphere API 4.1
+	ChildLink []*VirtualAppLinkInfo
+
+	// A collection of references to the subset of datastore objects used by this
+	// vApp.
 	Datastore []*mo.Datastore
 
-	// DatastoreBrowser to browse datastores for this host.
-	DatastoreBrowser *mo.HostDatastoreBrowser
-
-	// Hardware configuration of the host. This might not be available for a
-	// disconnected host.
-	Hardware *HostHardwareInfo
-
-	// Information about all licensable resources, currently present on this host.
-	// This information is used mostly by the modules, manipulating information
-	// in the LicenseManager. Developers of such modules
-	// should use this property instead of hardware.
-	// NOTE:
-	// The values in this property may not be accurate for pre-5.0 hosts when returned by vCenter 5.0
-	//
-	// Since vSphere API 5.0
-	LicensableResource *HostLicensableResourceInfo
-
-	// A collection of references to the subset of network objects in the datacenter that
-	// are available in this HostSystem.
+	// A collection of references to the subset of network objects that
+	// is used by this virtual machine.
 	Network []*mo.Network
 
-	// Runtime state information about the host such as connection state.
-	Runtime *HostRuntimeInfo
+	// A reference to the parent folder in the VM and Template folder hierarchy. This
+	// is only set for a root vApp. A root vApp is a vApp that is not a child of
+	// another vApp.
+	ParentFolder *mo.Folder
 
-	// Basic information about the host, including connection state.
-	Summary *HostListSummary
+	// Reference to the parent vApp.
+	//
+	// Since vSphere API 4.1
+	ParentVApp *mo.ManagedEntity
 
-	// Reference for the system resource hierarchy, used for configuring the set of
-	// resources reserved to the system and unavailable to virtual machines.
-	SystemResources *HostSystemResourceInfo
+	// Configuration of this package.
+	VAppConfig *VAppConfigInfo
+}
 
-	// List of virtual machines associated with this host.
-	Vm []*mo.VirtualMachine
+//
+// This managed object manages the PciPassthru state of the host.
+//
+type HostPciPassthruSystem struct {
+	*ExtensibleManagedObject
+
+	// Array of PciPassthru information
+	PciPassthruInfo []*HostPciPassthruInfo
+}
+
+//
+// The ServiceManager managed object is a singleton object that is used to present
+// services that are optional and not necessarily formally defined.
+//
+// This directory makes available a list of such services and provides an easy way
+// to locate them. The service being represented can take arbitrary form here and
+// is thus represented by a generic ManagedObject. The expectation is that the
+// client side is knowledgeable of the instance type of the specific service it
+// is interested in using.
+//
+type ServiceManager struct {
+
+	// The full list of services available in this directory.
+	Service []*ServiceManagerServiceInfo
+}
+
+//
+// The KernelModuleSystem managed object controls the configuration
+// of kernel modules on the host.
+//
+type HostKernelModuleSystem struct {
 }
 
 //
@@ -1957,115 +1818,440 @@ type SessionManager struct {
 }
 
 //
-// This managed object type controls entitlements for a given VMware
-// platform. VMware platforms include VirtualCenter, ESX Server, VMware Server,
-// Workstation and Player. Entitlements define what software capabilities
-// this host may use.
+// The HostProfileManager provides access to a list of
+// HostProfiles and it defines methods to manipulate
+// profiles and AnswerFiles.
 //
-// Entitlements are identified by a short string 'key'. Keys can represent either
-// a particular edition (Full, Starter) or a particular feature/function (featureKey)
-// (backup, nas). An edition implies zero one or more functions which are express,
-// denied or optional. For example a 'Full' edition includes 'iscsi' function but a
-// Starter edition might disallow it.
-//
-//
-// Which edition a given VMware platform uses can be defined at any time. Generally this
-// is done right after first install and boot as installation software may not set it.
-// For editions that are similar in nature, any future changes to edition
-// type will only impact future requests for functionality.
-// Current functionality is left unaffected. The same is true for optional
-// functions enabled/disabled after some period of time. For dissimilar editions,
-// such transitions may require entering maintenance mode first else an exception of
-// InvalidState will be thrown.
-//
-//
-// To specify the edition type and any optional functions, use updateLicense for
-// ESX Server and addLicense follow by LicenseAssingmentManager.updateAssignedLicense
-// for VirtualCenter.
-//
-//
-// When an edition is specified for a given host, the cost of that edition
-// (how many licenses are needed) is determined. The cost is computed
-// using the license's CostUnit value multiplied by the number of units activated.
-// For example, when a VMware platform is set to an edition which uses a 'cpuPackage'
-// on a two socket server, two licenses would be needed to successfully
-// install that edition.
-//
-//
-// Here is a diagram of the unit costs supported by this API and their relationships.
-//
-//
-// +------------------------------+   +--------+      +-------+
-// | +-----------+ +-----------+  |   | Server |      |  Host |
-// | |           | |           |  |   +--------+      +-------+
-// | |  cpuCore  | |   cpuCore |  |                   +-------+
-// | +-----------+ +-----------+  |   +--------+      |  Host |
-// |                  cpuPackage  |   |  VM    |      +-------+
-// +------------------------------+   +--------+
-//
-//
-type LicenseManager struct {
+type HostProfileManager struct {
+	*ProfileManager
+}
 
-	// Deprecated.
-	// As of vSphere API 4.0, this property is not used by the system.
-	//
-	//
-	// Return current diagnostic information.
-	//
-	// Since VI API 2.5
-	Diagnostics *LicenseDiagnostics
+type ClusterProfile struct {
+	*Profile
+}
 
-	// Since vSphere API 4.0
-	Evaluation *LicenseManagerEvaluationInfo
+//
+// The ServiceInstance managed object is the singleton root object of the inventory
+// on both vCenter servers and servers running on standalone host agents.
+// The server creates the ServiceInstance automatically, and also automatically
+// creates the various manager entities that provide services in the virtual
+// environment. Some examples of manager entities are LicenseManager,
+// PerformanceManager, and ViewManager. You can
+// access the manager entities through the content property.
+//
+// A vSphere API client application begins by connecting to a server
+// and obtaining a reference to the ServiceInstance. The client can then use
+// the RetrieveServiceContent method to gain
+// access to the various vSphere manager entities and to the root folder
+// of the inventory.
+//
+//
+//
+// When you create managed objects, the server adds them to the inventory.
+// The inventory of managed objects includes instances the following object types:
+//
+//
+//
+//
+// • ServiceInstance  -- Root of the inventory; created by vSphere.
+//
+// • Datacenter       -- A container that represents a virtual
+// data center. It contains hosts, network entities,
+// virtual machines and virtual applications,
+// and datastores.
+//
+// • Folder           -- A container used for hierarchical
+// organization of the inventory.
+//
+// • VirtualMachine   -- A virtual machine.
+//
+// • VirtualApp       -- A virtual application.
+//
+// • ComputeResource  -- A compute resource
+// (either a cluster or a stand-alone host).
+//
+// • ResourcePool     -- A subset of resources provided by a ComputeResource.
+//
+// • HostSystem       -- A single host (ESX Server or VMware Server).
+//
+// • Network          -- A network available to either hosts or virtual
+// machines.
+//
+// • DistributedVirtualSwitch -- A distributed virtual switch.
+//
+// • DistributedVirtualPortgroup -- A distributed virtual port group.
+//
+// • Datastore        -- Platform-independent, host-independent storage
+// for virtual machine files.
+//
+//
+//
+//
+// The following figure shows the organization of managed objects in the
+// vCenter hierarchy:
+//
+//
+//
+//
+// Every Datacenter has the following set of dedicated folders.
+// These folders are empty until you create entities for the Datacenter.
+//
+//
+//
+// •  A folder for any combination of VirtualMachine
+// and/or VirtualApp objects. VirtualApp objects can be nested,
+// but only the parent VirtualApp can be visible in the folder.
+// Virtual machines that are children of virtual applications are not
+// associated with a VirtualMachine/VirtualApp folder.
+//
+// •  A folder for a ComputeResource hierarchy.
+//
+// •  A folder for network entities - any combination
+// of Network, DistributedVirtualSwitch, and/or
+// DistributedVirtualPortgroup objects.
+//
+// •  A folder for Datastore objects.
+//
+//
+//
+//
+// The host agent hierarchy has the same general form as the vCenter hierarchy,
+// but most of the objects are limited to one instance:
+//
+//
+//
+//
+//
+//
+type ServiceInstance struct {
 
-	// Deprecated.
-	// As of VI API 2.5, use QuerySupportedFeatures
-	// instead.
-	//
-	//
-	// The list of features that can be licensed.
-	FeatureInfo []*LicenseFeatureInfo
+	// API-wide capabilities.
+	Capability *Capability
 
-	// License Assignment Manager
+	// The properties of the ServiceInstance managed object. The content property
+	// is identical to the return value from the
+	// RetrieveServiceContent method.
 	//
-	// Since vSphere API 4.0
-	LicenseAssignmentManager *mo.LicenseAssignmentManager
+	// Use the content property with the PropertyCollector
+	// to perform inventory traversal that includes the ServiceInstance.
+	// (In the absence of a content property, a traversal that encounters
+	// the ServiceInstance would require calling
+	// the RetrieveServiceContent method,
+	// and then invoking a second traversal to continue.)
+	Content *ServiceContent
 
-	// Deprecated.
-	// As of vSphere API 4.0, use
-	// QueryAssignedLicenses instead.
+	// Contains the time most recently obtained from the server.
+	// The time is not necessarily current. This property is intended for use
+	// with the PropertyCollector WaitForUpdates
+	// method. The PropertyCollector will provide notification if some event occurs
+	// that changes the server clock time in a non-linear fashion.
 	//
-	//
-	// The product's license edition. The edition defines which product license
-	// the server requires. This, in turn, determines the core set of functionalities
-	// provided by the product and the additional features that can be licensed. If
-	// no edition is set the property is set to the empty string ("").
-	//
-	// To set the edition use SetLicenseEdition.
-	//
-	// Since VI API 2.5
-	LicensedEdition string
+	// You should not rely on the serverClock property to get the current time
+	// on the server; instead, use the CurrentTime method.
+	ServerClock time.Time
+}
 
-	// Get information about all the licenses avaiable.
-	//
-	// Since vSphere API 4.0
-	Licenses []*LicenseManagerLicenseInfo
+//
+// A singleton managed object that can answer questions about compatibility
+// of a virtual machine with a host.
+//
+type VirtualMachineCompatibilityChecker struct {
+}
 
-	// Deprecated.
-	// As of vSphere API 4.0, use
-	// QueryAssignedLicenses to get evaluation information.
-	//
-	//
-	// Set or return a data object type of LocalLicense or LicenseServer.
-	Source *LicenseSource
+//
+// The TaskManager managed object provides an interface for creating and managing
+// Task managed objects. Many operations are non-blocking,
+// returning a Task managed object that can be monitored by a
+// client application. Task managed objects may also be
+// accessed through the TaskManager.
+//
+type TaskManager struct {
 
-	// Deprecated.
-	// As of vSphere API 4.0, this property is not used.
+	// Locale-specific, static strings that describe Task
+	// information to users.
+	Description *TaskDescription
+
+	// Maximum number of TaskHistoryCollector
+	// data objects that can exist concurrently, per client.
+	MaxCollector int32
+
+	// A list of Task managed objects that completed recently,
+	// that are currently running, or that are queued to run.
 	//
 	//
-	// Current state of the license source. License sources that are LocalSource
-	// are always available.
-	SourceAvailable bool
+	// The list contains only Task objects that the client
+	// has permission to access, which is determined by having permission to
+	// access the Task object's managed entity.
+	//
+	// The completed Task objects by default include only
+	// Task objects that completed within the past 10 minutes.
+	// When connected to vCenter Server, there is an additional default limitation
+	// that each of the completed Task objects in this list is one
+	// of the last 200 completed Task objects.
+	//
+	// This property should not be used for tracking Task
+	// completion. Generally, a ListView is a better way to
+	// monitor a specific set of Task objects.
+	//
+	// In releases after vSphere API 5.0, vSphere Servers might not
+	// generate property collector update notifications for this property.
+	// To obtain the latest value of the property, you can use
+	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+	// an empty string for the version parameter. Any other version value will not
+	// produce any property values as no updates are generated.
+	RecentTask []*mo.Task
+}
+
+//
+// The DistributedVirtualSwitchManager provides methods
+// that support the following operations:
+//
+//
+// • Backup and restore operations for VmwareDistributedVirtualSwitch
+// and associated DistributedVirtualPortgroup managed objects.
+//
+// • Query operations for information about portgroups and distributed
+// virtual switches.
+//
+// • Distributed virtual switch configuration update operations.
+//
+//
+//
+//
+type DistributedVirtualSwitchManager struct {
+}
+
+//
+// The DatastoreBrowser managed object type provides access to the contents of one or
+// more datastores. The items in a datastore are files that contain configuration,
+// virtual disk, and the other data associated with a virtual machine.
+//
+// Although datastores may often be implemented using a traditional file system, a full
+// interface to a file system is not provided here. Instead, specialized access for
+// virtual machine files is provided. A datastore implementation may completely hide the
+// file directory structure.
+//
+//
+// The intent is to provide functionality analogous to a file chooser in a user
+// interface.
+//
+//
+// Files on datastores do not have independent permissions through this API. Instead,
+// the permissions for all the files on a datastore derive from the datastore object
+// itself. It is not possible to change individual file permissions as the user browsing
+// the datastore may not necessarily be a recognized user from the point of view of the
+// host changing the permission. This occurs if the user browsing the datastore is doing
+// so through the VirtualCenter management server.
+//
+//
+// The DatastoreBrowser provides many ways to customize a search for files. A search can
+// be customized by specifying the types of files to be searched, search criteria
+// specific to a file type, and the amount of detail about each file. The most basic
+// queries only use file details and are efficient with limited side effects. For these
+// queries, file metadata details can be optionally retrieved, but the files themselves
+// are opened and their contents examined. As a result, these files are not necessarily
+// validated.
+//
+//
+// More complicated queries can be formed by specifying the specific types of files to
+// be searched, the parameters to filter for each type, and the desired level of detail
+// about each file. This method of searching for files is convenient because it allows
+// additional data about the virtual machine component to be retrieved. In addition,
+// certain validation checks can be performed on matched files as an inherent part of
+// the details collection process. However, gathering extra details or the use of type
+// specific filters can sometimes only be implemented by examining the contents of a
+// file. As a result, the use of these conveniences comes with the cost of additional
+// latency in the request and possible side effects on the system as a whole.
+//
+//
+// The DatastoreBrowser is referenced from various objects, including from
+// Datastore, ComputeResource, HostSystem and
+// VirtualMachine.  Depending on which object is used, there are different
+// requirements for the accessibility of the browsed datastore from the host (or hosts)
+// associated with the object:
+//
+//
+//
+// •  When referenced from the target Datastore, it needs to be
+// accessible from at least one host on which the datastore is mounted.
+// See accessible.
+//
+// •  When referenced from a ComputeResource, the target datastore
+// needs to be accessible from at least one host in the ComputeResource.
+// See accessible.
+//
+// •  When referenced from a HostSystem, the target datastore needs
+// to be accessible from that host. See accessible.
+//
+// •  When referenced from a VirtualMachine, the target datastore
+// needs to be accessible from the host on which the virtual machine is
+// registered.  See accessible.
+//
+//
+// See FileInfo
+//
+type HostDatastoreBrowser struct {
+
+	// Set of datastores that can be searched on this DatastoreBrowser.
+	//
+	// The list of datastores available to browse on this DatastoreBrowser is contextual
+	// information that depends on the object being browsed. If the host is being
+	// browsed, the host's datastores are used. If the Datacenter is being browsed, the
+	// Datacenter's list of datastores is used.
+	Datastore []*mo.Datastore
+
+	// The list of supported file types. The supported file types are represented as
+	// items in this list. For each supported file type, there is an object in the list
+	// whose dynamic type is one of the types derived from the
+	// FileQuery data object
+	// type. In general, the properties in this query type are not set.
+	//
+	// Use the Query of the desired file type in the SearchSpec.query to indicate the
+	// desired file types.
+	//
+	// This property is used by clients to determine what kinds of file types are
+	// supported. Clients should consult this list to avoid querying for types of virtual
+	// machine components that are not supported.
+	SupportedType []*FileQuery
+}
+
+//
+// View is the base class for session-specific view objects.
+// A view is a mechanism that supports selection of objects on the server
+// and subsequently, access to those objects.
+// To create a view, use the ViewManager methods.
+// A view exists until you terminate it by calling the DestroyView method,
+// or until the end of the session.
+// Access to a view is limited to the session in which it is created.
+//
+// There are three types of views:
+//
+//
+//
+// •  ContainerView
+//
+// •  ListView
+//
+// •  InventoryView
+//
+//
+//
+//
+// A view maintains a view list that contains
+// managed object references. You can use a view
+// with the PropertyCollector to retrieve data and
+// obtain notification of changes to the virtual environment.
+// For information about using views with the PropertyCollector,
+// see the description of ViewManager.
+//
+//
+//
+type View struct {
+}
+
+//
+// The StoragePod data object aggregates the storage
+// resources of associated Datastore objects into a single
+// storage resource for use by virtual machines. The storage services
+// such as Storage DRS (Distributed Resource Scheduling),
+// enhance the utility of the storage pod.
+//
+// Use the Folder.CreateStoragePod method
+// to create an instance of this object.
+//
+//
+//
+//
+//
+type StoragePod struct {
+	*Folder
+
+	// Storage DRS related attributes of the Storage Pod.
+	PodStorageDrsEntry *PodStorageDrsEntry
+
+	// Storage pod summary.
+	Summary *StoragePodSummary
+}
+
+//
+// The HostActiveDirectoryAuthentication managed object
+// indicates domain membership status and provides methods
+// for adding a host to and removing a host from a domain.
+//
+type HostActiveDirectoryAuthentication struct {
+	*HostDirectoryStore
+}
+
+//
+// TaskHistoryCollector provides a mechanism for
+// retrieving historical data and updates when the server appends new
+// tasks.
+//
+type TaskHistoryCollector struct {
+	*HistoryCollector
+
+	// The items in the 'viewable latest page'. As new tasks that match the
+	// collector's TaskFilterSpec are created, they are added to this
+	// page, and the oldest tasks are removed from the collector to keep the
+	// size of the page to that allowed by
+	// SetCollectorPageSize.
+	//
+	// The "oldest task" is the one with the oldest creation time. The
+	// tasks in the returned page are unordered.
+	LatestPage []*TaskInfo
+}
+
+//
+// A managed object that wraps the execution of a single arbitrary
+// command. The specific command executed is assumed to be known from
+// the service name by the client invoking this command.  This object
+// presents a generic interface for such services.
+//
+type SimpleCommand struct {
+
+	// The encoding type used in the result.
+	EncodingType *SimpleCommandEncoding
+
+	// A description of the service.
+	Entity *ServiceManagerServiceInfo
+}
+
+// Deprecated.
+// As of vSphere API 5.5, use
+// HostVFlashManager
+//
+//
+// Solid state drive Cache Configuration Manager.
+//
+// This is a managed object which provides access to ESX performance tuning
+// features using solid state drive based cache.
+//
+type HostCacheConfigurationManager struct {
+
+	// The swap performance configuration for the ESX host.  This includes
+	// configuration information for each datastore enabled for this purpose.
+	CacheConfigurationInfo []*HostCacheConfigurationInfo
+}
+
+//
+// The ListView managed object provides access to updates on a specific set of objects.
+// You can use a ListView with a PropertyCollector method
+// to retrieve data or receive notification of changes. For information about using views
+// with the PropertyCollector, see the description of ViewManager.
+//
+// When you invoke the CreateListView method, you specify
+// a list of objects. The view list
+// always represents the current configuration of the virtual environment
+// and reflects any subsequent changes that occur.
+//
+//
+//
+type ListView struct {
+	*ManagedObjectView
+}
+
+type ResourcePlanningManager struct {
 }
 
 //
@@ -2236,10 +2422,112 @@ type PerformanceManager struct {
 }
 
 //
-// FileManager is the managed object that provides APIs
-// to manipulate the guest operating system files.
+// The HostSystem managed object type provides access to a virtualization
+// host platform.
 //
-type GuestFileManager struct {
+// Invoking destroy on a HostSystem of standalone type throws a NotSupported fault.
+// A standalone HostSystem can be destroyed only by invoking destroy on its parent
+// ComputeResource.
+// Invoking destroy on a failover host throws a
+// DisallowedOperationOnFailoverHost fault. See
+// ClusterFailoverHostAdmissionControlPolicy.
+//
+//
+//
+type HostSystem struct {
+	*ManagedEntity
+
+	// Host capabilities. This might not be available for a
+	// disconnected host.
+	Capability *HostCapability
+
+	// Host configuration information.  This might not be available for a disconnected
+	// host.
+	Config *HostConfigInfo
+
+	// Host configuration systems.
+	//
+	// In releases after vSphere API 5.0, vSphere Servers might not
+	// generate property collector update notifications for this property.
+	// To obtain the latest value of the property, you can use
+	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+	// an empty string for the version parameter. Any other version value will not
+	// produce any property values as no updates are generated.
+	ConfigManager *HostConfigManager
+
+	// A collection of references to the subset of datastore objects in the datacenter
+	// that are available in this HostSystem.
+	Datastore []*mo.Datastore
+
+	// DatastoreBrowser to browse datastores for this host.
+	DatastoreBrowser *mo.HostDatastoreBrowser
+
+	// Hardware configuration of the host. This might not be available for a
+	// disconnected host.
+	Hardware *HostHardwareInfo
+
+	// Information about all licensable resources, currently present on this host.
+	// This information is used mostly by the modules, manipulating information
+	// in the LicenseManager. Developers of such modules
+	// should use this property instead of hardware.
+	// NOTE:
+	// The values in this property may not be accurate for pre-5.0 hosts when returned by vCenter 5.0
+	//
+	// Since vSphere API 5.0
+	LicensableResource *HostLicensableResourceInfo
+
+	// A collection of references to the subset of network objects in the datacenter that
+	// are available in this HostSystem.
+	Network []*mo.Network
+
+	// Runtime state information about the host such as connection state.
+	Runtime *HostRuntimeInfo
+
+	// Basic information about the host, including connection state.
+	Summary *HostListSummary
+
+	// Reference for the system resource hierarchy, used for configuring the set of
+	// resources reserved to the system and unavailable to virtual machines.
+	SystemResources *HostSystemResourceInfo
+
+	// List of virtual machines associated with this host.
+	Vm []*mo.VirtualMachine
+}
+
+//
+// The PropertyCollector managed object retrieves and detects changes
+// to the properties of other managed objects. The RetrievePropertiesEx method provides one-time property retrieval. The
+// WaitForUpdatesEx method provides incremental change detection and
+// supports both polling and notification.
+//
+// For change detection a client creates one or more filters to specify the
+// subset of managed objects in which the client is interested. Filters keep
+// per-session state to track incremental changes. Because this state is
+// per-session:
+//
+//
+//
+// •  A session cannot share its PropertyCollector filters with other
+// sessions
+//
+//
+// •  two different clients can share the same session, and so can
+// share the same filters, but this is not recommended
+//
+//
+// •  When a session terminates, the associated PropertyCollector filters
+// are automatically destroyed.
+//
+//
+//
+//
+//
+type PropertyCollector struct {
+
+	// The filters that this PropertyCollector uses to determine the list of
+	// properties for which it detects incremental changes.
+	Filter []*mo.PropertyFilter
 }
 
 //
@@ -2356,130 +2644,6 @@ type Folder struct {
 }
 
 //
-// This managed object type provides properties and methods for
-// event management support.
-// Event objects are used to record significant state changes of
-// managed entities.
-//
-type EventManager struct {
-
-	// Static descriptive strings used in events.
-	Description *EventDescription
-
-	// The latest event that happened on the VirtualCenter server.
-	LatestEvent *Event
-
-	// For each client, the maximum number of event collectors that can exist
-	// simultaneously.
-	MaxCollector int32
-}
-
-//
-// This managed object is the interface for scanning and patching an ESX
-// server.
-//
-// VMware publishes updates through its external website. A patch update is
-// synonymous with a bulletin. An update may contain many individual patch
-// binaries, but its installation and uninstallation are atomic.
-//
-type HostPatchManager struct {
-}
-
-//
-// The DatastoreBrowser managed object type provides access to the contents of one or
-// more datastores. The items in a datastore are files that contain configuration,
-// virtual disk, and the other data associated with a virtual machine.
-//
-// Although datastores may often be implemented using a traditional file system, a full
-// interface to a file system is not provided here. Instead, specialized access for
-// virtual machine files is provided. A datastore implementation may completely hide the
-// file directory structure.
-//
-//
-// The intent is to provide functionality analogous to a file chooser in a user
-// interface.
-//
-//
-// Files on datastores do not have independent permissions through this API. Instead,
-// the permissions for all the files on a datastore derive from the datastore object
-// itself. It is not possible to change individual file permissions as the user browsing
-// the datastore may not necessarily be a recognized user from the point of view of the
-// host changing the permission. This occurs if the user browsing the datastore is doing
-// so through the VirtualCenter management server.
-//
-//
-// The DatastoreBrowser provides many ways to customize a search for files. A search can
-// be customized by specifying the types of files to be searched, search criteria
-// specific to a file type, and the amount of detail about each file. The most basic
-// queries only use file details and are efficient with limited side effects. For these
-// queries, file metadata details can be optionally retrieved, but the files themselves
-// are opened and their contents examined. As a result, these files are not necessarily
-// validated.
-//
-//
-// More complicated queries can be formed by specifying the specific types of files to
-// be searched, the parameters to filter for each type, and the desired level of detail
-// about each file. This method of searching for files is convenient because it allows
-// additional data about the virtual machine component to be retrieved. In addition,
-// certain validation checks can be performed on matched files as an inherent part of
-// the details collection process. However, gathering extra details or the use of type
-// specific filters can sometimes only be implemented by examining the contents of a
-// file. As a result, the use of these conveniences comes with the cost of additional
-// latency in the request and possible side effects on the system as a whole.
-//
-//
-// The DatastoreBrowser is referenced from various objects, including from
-// Datastore, ComputeResource, HostSystem and
-// VirtualMachine.  Depending on which object is used, there are different
-// requirements for the accessibility of the browsed datastore from the host (or hosts)
-// associated with the object:
-//
-//
-//
-// •  When referenced from the target Datastore, it needs to be
-// accessible from at least one host on which the datastore is mounted.
-// See accessible.
-//
-// •  When referenced from a ComputeResource, the target datastore
-// needs to be accessible from at least one host in the ComputeResource.
-// See accessible.
-//
-// •  When referenced from a HostSystem, the target datastore needs
-// to be accessible from that host. See accessible.
-//
-// •  When referenced from a VirtualMachine, the target datastore
-// needs to be accessible from the host on which the virtual machine is
-// registered.  See accessible.
-//
-//
-// See FileInfo
-//
-type HostDatastoreBrowser struct {
-
-	// Set of datastores that can be searched on this DatastoreBrowser.
-	//
-	// The list of datastores available to browse on this DatastoreBrowser is contextual
-	// information that depends on the object being browsed. If the host is being
-	// browsed, the host's datastores are used. If the Datacenter is being browsed, the
-	// Datacenter's list of datastores is used.
-	Datastore []*mo.Datastore
-
-	// The list of supported file types. The supported file types are represented as
-	// items in this list. For each supported file type, there is an object in the list
-	// whose dynamic type is one of the types derived from the
-	// FileQuery data object
-	// type. In general, the properties in this query type are not set.
-	//
-	// Use the Query of the desired file type in the SearchSpec.query to indicate the
-	// desired file types.
-	//
-	// This property is used by clients to determine what kinds of file types are
-	// supported. Clients should consult this list to avoid querying for types of virtual
-	// machine components that are not supported.
-	SupportedType []*FileQuery
-}
-
-//
 // This managed object type provides a way to manage and manipulate virtual disks
 // on datastores. The source and the destination names are in the form of
 // a URL or a datastore path.
@@ -2516,161 +2680,42 @@ type VirtualDiskManager struct {
 }
 
 //
-// Represents a set of physical resources: a single host,
-// a subset of a host's resources, or resources spanning multiple hosts.
-// Resource pools can be subdivided by creating child resource pools. In
-// order to run, a virtual machine must be associated as a child of a resource
-// pool.
+// The ClusterComputeResource data object aggregates the compute
+// resources of associated HostSystem objects into a single
+// compute resource for use by virtual machines. The cluster services
+// such as HA (High Availability), DRS (Distributed Resource Scheduling),
+// and EVC (Enhanced vMotion Compatibility), enhance the utility of this
+// single compute resource.
 //
-// In a parent/child hierarchy of resource pools and virtual machines, the
-// single resource pool that has no parent pool is known as the root resource
-// pool.
-//
-//
-// Configuration
-//
-//
-// A resource pool is configured with a set of CPU (in MHz) and memory (in MB)
-// resources. These resources are specified in absolute terms with a resource
-// reservation and a resource limit, along with a shares setting. The shares
-// are used during resource contention, to ensure graceful degradation.
-//
-//
-// For the root resource pool, the values of the reservation and
-// the limit are set by the system and are not configurable. The
-// reservation and limit are set to the same value, indicating the total amount
-// of resources the system has available to run virtual machines. This is
-// computed as the aggregated CPU and memory resources provided by the set
-// of current available hosts in the parent compute resource minus the
-// overhead of the virtualization layer.
-//
-//
-// Since the resource pool configuration is absolute (in MHz or MB), the
-// configuration can become invalid when resources are removed.  This can
-// happen if a host is removed from the cluster, if a host becomes
-// unavailable, or if a host is placed in maintenance mode. When this
-// happens, the system flags misconfigured resource pools and displays the
-// reservations and limits that are in effect. Further, in a DRS enabled cluster,
-// the tree can be misconfigured if the user bypasses VirtualCenter and powers on
-// VMs directly on the host.
-//
-//
-// A General Discussion of Resource pool states and admission control
-//
-// There are three states that the resource pool tree can be in: undercommited
-// (green), overcommited (yellow), and inconsistent (red). Depending on the
-// state, different resource pool configuration policies are enforced. The
-// states are described in more detail below:
+// Use the Folder.CreateClusterEx method
+// to create an instance of this object.
 //
 //
 //
-// •  GREEN (aka undercommitted): We have a tree that is
-// in a good state. Every node has a reservation greater than the sum of
-// the reservations for its children. We have enough capacity at the root to
-// satisfy all the resources reserved by the children. All operations
-// performed on the tree, such as powering on virtual machines, creating
-// new resource pools, or reconfiguring resource settings, will ensure
-// that the above constraints are maintained.
-//
-//
-// •  RED (aka. inconsistent): One or more nodes in the
-// tree has children whose reservations are greater than the node is configured to
-// support. For example, i) a resource pool with a fixed reservation has a running
-// virtual machine with a reservation that is higher than the reservation on
-// resource pool itself., or ii) the child reservations are greater than the limit.
-//
-// In this state, the DRS algorithm is disabled until the resource pool tree's
-// configuration has  been brought back into a consistent state. We also restrict
-// the resources that such invalid nodes request from their parents to the
-// configured reservation/limit, in an attempt to isolate the problem to a small
-// subtree. For the rest of the tree, we determine whether the cluster is
-// undercommitted or overcommitted according to the existing rules and perform
-// admission control accordingly.
-//
-//
-// Note that since all changes to the resource settings are validated on the
-// VirtualCenter server, the system cannot be brought into this state by simply
-// manipulating a cluster resource pool tree through  VirtualCenter. It can only
-// happen if a virtual machine gets powered on directly on a host that is part of
-// a DRS cluster.
-//
-//
-//
-//
-// •  YELLOW (aka overcommitted): In this state, the tree is
-// consistent internally, but the root resource pool does not have the capacity at
-// to meet the reservation of its children. We can only go from GREEN -&gt; YELLOW if
-// we lose resources at the root. For example, hosts becomes unavailable or is
-// put into maintenance mode. Note that we will always have enough capacity at the root
-// to run all currently powered on VMs. However, we may not be able to satisfy all
-// resource pool reservations in the tree. In this state, the reservation configured for
-// a resource pool is no longer guaranteed, but the limits are still enforced.
-// This provides additional flexibility for bringing the tree back into a
-// consistent state, without risking bringing the tree into a RED state. In
-// more detail:
-//
-//
-// •  Resource Pool The root is considered to have unlimited
-// capacity. You can reserve resources without any check except the
-// requirement that the tree remains consistent. This means that
-// nodes whose parents are all configured with expandable reservations and no limit
-// will have unlimited available resources. However, if there is an ancestor with
-// a fixed reservation or an expandable reservation with a limit somewhere, then the
-// node will be limited by the reservation/limit of the ancestor.
-//
-//
-// •  Virtual Machine Virtual machines are limited by ancestors
-// with a fixed reservation and the capacity at the root.
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// Destroying a ResourcePool
-//
-//
-// When a ResourcePool is destroyed, all the virtual machines are reassigned to its
-// parent pool. The root resource pool cannot be destroyed, and invoking destroy
-// on it will throw an InvalidType fault.
-//
-//
-// Any vApps in the ResourcePool will be moved to the ResourcePool's parent
-// before the pool is destroyed.
-//
-//
-// The Resource.DeletePool privilege must be held on the pool as well as the parent
-// of the resource pool.  Also, the Resource.AssignVMToPool privilege must be held
-// on the resource pool's parent pool and any virtual machines that are reassigned.
-//
-//
-//
-type ResourcePool struct {
-	*ManagedEntity
+type ClusterComputeResource struct {
+	*ComputeResource
 
-	// The resource configuration of all direct children (VirtualMachine and
-	// ResourcePool) of this resource group.
-	ChildConfiguration []*ResourceConfigSpec
+	// The set of actions that have been performed recently.
+	//
+	// Since VI API 2.5
+	ActionHistory []*ClusterActionHistory
 
-	// Configuration of this resource pool.
-	Config *ResourceConfigSpec
+	// Deprecated.
+	// As of VI API 2.5, use configurationEx,
+	// which is a ClusterConfigInfoEx data object..
+	//
+	//
+	// Configuration of the cluster.
+	Configuration *ClusterConfigInfo
 
-	// The ComputeResource to which this set of one or more nested resource pools
-	// belong.
-	Owner *mo.ComputeResource
-
-	// The set of child resource pools.
-	ResourcePool []*mo.ResourcePool
-
-	// Runtime information about a resource pool.
-	// The ResourcePoolResourceUsage information within
-	// ResourcePoolRuntimeInfo can be transiently stale.
-	// Use RefreshRuntime method to
-	// update the information.
+	// A collection of the DRS faults generated in the last DRS invocation.
+	// Each element of the collection is the set of faults generated in one
+	// recommendation.
+	//
+	// DRS faults are generated when DRS tries to make recommendations
+	// for rule enforcement, power management, etc., and indexed in a tree
+	// structure with reason for recommendations and VM to migrate (optional)
+	// as the index keys.
 	//
 	// In releases after vSphere API 5.0, vSphere Servers might not
 	// generate property collector update notifications for this property.
@@ -2679,9 +2724,13 @@ type ResourcePool struct {
 	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
 	// an empty string for the version parameter. Any other version value will not
 	// produce any property values as no updates are generated.
-	Runtime *ResourcePoolRuntimeInfo
+	//
+	// Since vSphere API 4.0
+	DrsFault []*ClusterDrsFaults
 
-	// Basic information about a resource pool.
+	// Deprecated.
+	// As of VI API 2.5, use
+	// recommendation.
 	//
 	// In releases after vSphere API 5.0, vSphere Servers might not
 	// generate property collector update notifications for this property.
@@ -2690,10 +2739,28 @@ type ResourcePool struct {
 	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
 	// an empty string for the version parameter. Any other version value will not
 	// produce any property values as no updates are generated.
-	Summary *ResourcePoolSummary
+	//
+	//
+	// If DRS is enabled, this returns the set of recommended
+	// migrations from the DRS module. The current set of
+	// recommendations may be empty, since there may be no recommended
+	// migrations at this time, or it is possible that DRS is not
+	// enabled.
+	DrsRecommendation []*ClusterDrsRecommendation
 
-	// The set of virtual machines associated with this resource pool.
-	Vm []*mo.VirtualMachine
+	// The set of migration decisions that have recently been performed.
+	//
+	// This list is populated only when DRS is in automatic mode.
+	MigrationHistory []*ClusterDrsMigration
+
+	// List of recommended actions for the cluster. It is
+	// possible that the current set of recommendations may be empty,
+	// either due to not having any running dynamic recommendation
+	// generation module, or since there may be no recommended actions
+	// at this time.
+	//
+	// Since VI API 2.5
+	Recommendation []*ClusterRecommendation
 }
 
 //
@@ -2755,475 +2822,184 @@ type HostDatastoreSystem struct {
 }
 
 //
-// A singleton managed object that can answer questions about
-// the feasibility of certain provisioning operations.
+// The HostBootDeviceSystem managed object provides methods to query and update
+// a host boot device configuration.
 //
-type VirtualMachineProvisioningChecker struct {
+type HostBootDeviceSystem struct {
 }
 
 //
-// The VirtualNicManager managed object describes the special Virtual NIC
-// configuration of the host.
+// This managed object type describes networking host configuration and
+// serves as the top level container for relevant networking
+// data objects.
 //
-type HostVirtualNicManager struct {
+type HostNetworkSystem struct {
 	*ExtensibleManagedObject
 
-	// Network configuration.
-	Info *HostVirtualNicManagerInfo
-}
+	// Capability vector indicating the available product features.
+	Capabilities *HostNetCapabilities
 
-//
-// This managed object type defines an alarm that is triggered and
-// an action that occurs due to the triggered alarm when certain conditions
-// are met on a specific ManagedEntity object.
-//
-type Alarm struct {
-	*ExtensibleManagedObject
-
-	// Information about this alarm.
-	Info *AlarmInfo
-}
-
-//
-// This managed object manages the graphics state of the host.
-//
-type HostGraphicsManager struct {
-	*ExtensibleManagedObject
-
-	// Array of graphics information
-	GraphicsInfo []*HostGraphicsInfo
-}
-
-//
-// The StoragePod data object aggregates the storage
-// resources of associated Datastore objects into a single
-// storage resource for use by virtual machines. The storage services
-// such as Storage DRS (Distributed Resource Scheduling),
-// enhance the utility of the storage pod.
-//
-// Use the Folder.CreateStoragePod method
-// to create an instance of this object.
-//
-//
-//
-//
-//
-type StoragePod struct {
-	*Folder
-
-	// Storage DRS related attributes of the Storage Pod.
-	PodStorageDrsEntry *PodStorageDrsEntry
-
-	// Storage pod summary.
-	Summary *StoragePodSummary
-}
-
-//
-// The DiagnosticSystem managed object is used to configure the diagnostic
-// mechanisms specific to the host.  The DiagnosticSystem interface supports
-// the following concepts:
-//
-//
-// •  Notion of an active diagnostic partition that is selected from
-// a set of available partitions.
-//
-// •  Ability to create a diagnostic partition that gets added to the
-// list of available partitions and could be made active.
-//
-//
-//
-//
-type HostDiagnosticSystem struct {
-
-	// The currently active diagnostic partition.
-	ActivePartition *HostDiagnosticPartition
-}
-
-//
-// This managed object type provides a way to configure resource usage for
-// storage resources.
-//
-type StorageResourceManager struct {
-}
-
-//
-// VirtualMachine is the managed object type for manipulating virtual machines,
-// including templates that can be deployed (repeatedly) as new virtual machines.
-// This type provides methods for configuring and controlling a virtual machine.
-//
-// VirtualMachine extends the ManagedEntity type because virtual machines are
-// part of a virtual infrastructure inventory. The parent of a virtual machine
-// must be a folder, and a virtual machine has no children.
-//
-//
-// Destroying a virtual machine disposes of all associated storage, including
-// the virtual disks. To remove a virtual machine while retaining its
-// virtual disk storage, a client must remove the virtual disks
-// from the virtual machine before destroying it.
-//
-//
-//
-type VirtualMachine struct {
-	*ManagedEntity
-
-	// Information about the runtime capabilities of this virtual machine.
-	Capability *VirtualMachineCapability
-
-	// Configuration of this virtual machine, including the name and UUID.
-	//
-	// This property is set when a virtual machine is created or when
-	// the reconfigVM method is called.
-	//
-	// The virtual machine configuration is not guaranteed to be available.
-	// For example, the configuration information would be unavailable
-	// if the server is unable to access the virtual machine files on disk,
-	// and is often also unavailable during the initial phases of
-	// virtual machine creation.
-	Config *VirtualMachineConfigInfo
-
-	// A collection of references to the subset of datastore objects in the datacenter
-	// that is used by this virtual machine.
-	Datastore []*mo.Datastore
-
-	// The current virtual machine's environment browser object. This contains
-	// information on all the configurations that can be used on the
-	// virtual machine. This is identical to the environment browser on
-	// the ComputeResource to which this virtual machine belongs.
-	EnvironmentBrowser *mo.EnvironmentBrowser
-
-	// Information about VMware Tools and about the virtual machine
-	// from the perspective of VMware Tools.
-	// Information about the guest operating system is available in VirtualCenter. Guest
-	// operating system information reflects the last known state of the virtual machine.
-	// For powered on machines, this is current information. For powered off machines,
-	// this is the last recorded state before the virtual machine was powered off.
-	Guest *GuestInfo
-
-	// The guest heartbeat.
-	// The heartbeat status is classified as:
-	//
-	// gray - VMware Tools are not installed or not running.
-	// red - No heartbeat. Guest operating system may have stopped responding.
-	// yellow - Intermittent heartbeat. May be due to guest load.
-	// green - Guest operating system is responding normally.
-	//
-	// The guest heartbeat is a statistics metric. Alarms can be configured on
-	// this metric to trigger emails or other actions.
-	GuestHeartbeatStatus *ManagedEntityStatus
+	// IP route configuration for the service console.  The IP route
+	// configuration is global to the entire host.  This property is
+	// set only if
+	// IP routing can be configured for the service console.
+	ConsoleIpRouteConfig *HostIpRouteConfig
 
 	// Deprecated.
-	// As of vSphere API 4.0, use layoutEx instead.
-	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
+	// As of vSphere API 5.5, which is moved to
+	// each NetStackInstance. This only works on the default NetStackInstance.
 	//
 	//
-	// Detailed information about the files that comprise this virtual machine.
-	Layout *VirtualMachineFileLayout
-
-	// Detailed information about the files that comprise this virtual machine.
-	//
-	// Can be explicitly refreshed by the RefreshStorageInfo operation.
-	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
-	//
-	// Since vSphere API 4.0
-	LayoutEx *VirtualMachineFileLayoutEx
-
-	// A collection of references to the subset of network objects in the datacenter that
-	// is used by this virtual machine.
-	Network []*mo.Network
-
-	// Reference to the parent vApp.
-	//
-	// Since vSphere API 4.1
-	ParentVApp *mo.ManagedEntity
-
-	// The resource configuration for a virtual machine. The shares
-	// in this specification are evaluated relative to the resource pool
-	// to which it is assigned. This will return null if the product
-	// the virtual machine is registered on does not support resource
-	// configuration.
-	//
-	// To retrieve the configuration, you typically use
-	// childConfiguration.
-	//
-	// To change the configuration, use
-	// UpdateChildResourceConfiguration.
-	ResourceConfig *ResourceConfigSpec
-
-	// The current resource pool that specifies resource allocation
-	// for this virtual machine.
-	//
-	// This property is set when a virtual machine is created or associated with
-	// a different resource pool.
-	//
-	// Returns null if the virtual machine is a template or the session has no access
-	// to the resource pool.
-	ResourcePool *mo.ResourcePool
-
-	// The roots of all snapshot trees for the virtual machine.
-	//
-	// Since vSphere API 4.1
-	RootSnapshot []*mo.VirtualMachineSnapshot
-
-	// Execution state and history for this virtual machine.
-	//
-	// The contents of this property change when:
-	//
-	// the virtual machine's power state changes.
-	// an execution message is pending.
-	// an event occurs.
-	Runtime *VirtualMachineRuntimeInfo
-
-	// Current snapshot and tree.
-	// The property is valid if snapshots have been created
-	// for this virtual machine.
-	//
-	// The contents of this property change in response to the methods:
-	//
-	// CreateSnapshot_Task
-	// RevertToCurrentSnapshot_Task
-	// RemoveSnapshot_Task
-	// RevertToSnapshot_Task
-	// RemoveAllSnapshots_Task
-	Snapshot *VirtualMachineSnapshotInfo
-
-	// Storage space used by the virtual machine, split by datastore.
-	// Can be explicitly refreshed by the RefreshStorageInfo operation.
-	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
-	//
-	// Since vSphere API 4.0
-	Storage *VirtualMachineStorageInfo
-
-	// Basic information about this virtual machine. This includes:
-	//
-	// runtimeInfo
-	// guest
-	// basic configuration
-	// alarms
-	// performance information
-	Summary *VirtualMachineSummary
-}
-
-//
-// This managed object manages the health state of the host.
-//
-type HostHealthStatusSystem struct {
-	Runtime *HealthSystemRuntime
-}
-
-//
-// This managed object provides for NTP and date/time related
-// configuration on a host.
-//
-// Information regarding the running status of the NTP daemon and
-// functionality to start and stop the daemon is provided by the
-// HostServiceSystem object.
-//
-type HostDateTimeSystem struct {
-
-	// The DateTime configuration of the host.
-	DateTimeInfo *HostDateTimeInfo
-}
-
-//
-// The scheduled task object.
-//
-type ScheduledTask struct {
-	*ExtensibleManagedObject
-
-	// Information about the current scheduled task.
-	Info *ScheduledTaskInfo
-}
-
-//
-// Service interface to parse and generate OVF descriptors.
-//
-// The purpose of this interface is to make it easier for callers to import VMs and
-// vApps from OVF packages and to export VI packages to OVF. In the following
-// description, the term "client" is used to mean any caller of the interface.
-//
-//
-// This interface only converts between OVF and VI types. To actually import and export
-// entities, use ResourcePool.importVApp,
-// VirtualMachine.exportVm and
-// VirtualApp.exportVApp.
-//
-//
-// Import
-// For the import scenario, the typical sequence of events is as follows:
-//
-// The client calls parseDescriptor to obtain information about the OVF descriptor. This
-// typically includes information (such as a list of networks) that must be mapped to VI
-// infrastructure entities.
-//
-//
-// The OVF descriptor is validated against the OVF Specification, and any errors or
-// warnings are returned as part of the ParseResult. For example, the parser might
-// encounter a section marked required that it does not understand, or the XML descriptor
-// might be malformed.
-//
-//
-// The client decides on network mappings, datastore, properties etc. It then calls
-// createImportSpec to obtain the parameters needed to call
-// ResourcePool.importVApp.
-//
-//
-// If any warnings are present, the client will review these and decide whether to
-// proceed or not. If errors are present, the ImportSpec will be missing, so
-// the client is forced to give up or fix the problems and then try again.
-//
-//
-// The client now calls ResourcePool.importVApp, passing the ImportSpec as a parameter. This will create
-// the virtual machines and VirtualApp objects in VI and return locations
-// to which the files of the entity can be uploaded. It also returns a lease that
-// controls the duration of the lock taken on the newly created inventory objects. When
-// all files have been uploaded, the client must release this lease.
-//
-//
-// Export
-// Creating the OVF descriptor is the last part of exporting an entity to OVF. At this
-// point, the client has already downloaded all files for the entity, optionally
-// compressing and/or chunking them (however, the client may do a "dry run" of creating
-// the descriptor before downloading the files. See OvfManager.createDescriptor).
-//
-// In addition to the entity reference itself, information about the choices made on
-// these files is passed to createDescriptor as a list of OvfFile instances.
-//
-//
-// The client must inspect and act upon warnings and errors as previously described.
-//
-//
-// No matter if the export succeeds or fails, the client is responsible for releasing the
-// shared state lock taken on the entity (by VirtualMaching.exportVm or VirtualApp.exportVApp) during the export.
-//
-//
-// Error handling
-// All result types contain warning and error lists. Warnings do not cause processing to
-// fail, but the caller (typically, the user of a GUI client) may choose to reject the
-// result based on the warnings issued.
-//
-// Errors cause processing to abort by definition.
-//
-//
-//
-type OvfManager struct {
-
-	// Returns an array of OvfOptionInfo object that specifies what options the server
-	// support for exporting an OVF descriptor.
-	//
-	//
-	// Since vSphere API 5.1
-	OvfExportOption []*OvfOptionInfo
-
-	// Returns an array of OvfOptionInfo object that specifies what options the server
-	// support for modifing/relaxing the OVF import process.
-	//
-	//
-	// Since vSphere API 5.1
-	OvfImportOption []*OvfOptionInfo
-}
-
-//
-// Represents a multi-tiered software solution. A vApp is a collection of
-// virtual machines (and potentially other vApp containers) that are operated and
-// monitored as a unit. From a manage perspective, a multi-tiered vApp acts a
-// lot like a virtual machine object. It has power operations, networks, datastores,
-// and its resource usage can be configured.
-//
-// From a technical perspective, a vApp container is a specialized resource pool that
-// has been extended with the following capabilities:
-//
-// •
-//
-// Product information such as product name, vendor, properties,
-// and licenses.
-//
-//
-// A power-on/power-off sequence specification
-//
-//
-// Support for import/export vApps as OVF packages
-//
-//
-// An OVF environment that allows for application-level customization
-//
-//
-//
-//
-// Destroying a vApp
-//
-//
-// When a vApp is destroyed, all of its virtual machines are destroyed,
-// as well as any child vApps.
-//
-//
-// The VApp.Delete privilege must be held on the vApp as well as the
-// parent folder of the vApp.  Also, the VApp.Delete privilege must
-// be held on any child vApps that would be destroyed by the operation.
-//
-//
-//
-type VirtualApp struct {
-	*ResourcePool
+	// Client-side DNS configuration.
+	DnsConfig *HostDnsConfig
 
 	// Deprecated.
-	// As of vSphere API 5.1.
+	// As of vSphere API 5.5, which is moved to
+	// each NetStackInstance. This only works on the default NetStackInstance.
 	//
 	//
-	// List of linked children.
+	// The IP route configuration.
+	IpRouteConfig *HostIpRouteConfig
+
+	// Network configuration information.  This information can be applied
+	// using the updateNetworkConfig() method.  The
+	// information is a strict subset of the information available in NetworkInfo.See HostNetworkInfo
+	NetworkConfig *HostNetworkConfig
+
+	// The network configuration and runtime information.
+	NetworkInfo *HostNetworkInfo
+
+	// Deprecated.
+	// As of VI API 4.0, the system defaults will be used.
 	//
-	// Since vSphere API 4.1
-	ChildLink []*VirtualAppLinkInfo
-
-	// A collection of references to the subset of datastore objects used by this
-	// vApp.
-	Datastore []*mo.Datastore
-
-	// A collection of references to the subset of network objects that
-	// is used by this virtual machine.
-	Network []*mo.Network
-
-	// A reference to the parent folder in the VM and Template folder hierarchy. This
-	// is only set for a root vApp. A root vApp is a vApp that is not a child of
-	// another vApp.
-	ParentFolder *mo.Folder
-
-	// Reference to the parent vApp.
 	//
-	// Since vSphere API 4.1
-	ParentVApp *mo.ManagedEntity
-
-	// Configuration of this package.
-	VAppConfig *VAppConfigInfo
-}
-
-type ResourcePlanningManager struct {
+	// The offload capabilities available on this server.
+	OffloadCapabilities *HostNetOffloadCapabilities
 }
 
 //
-// Interface handling the Compliance aspects of entities.
+// This managed object provides operations to query and update
+// roles and permissions.
 //
-type ProfileComplianceManager struct {
+// Privileges are the basic individual rights required to
+// perform operations.  They are statically defined and
+// never change for a single version of a product.  Examples
+// of privileges are "Power on a virtual machine"
+// or "Configure a host."
+//
+//
+// Roles are aggregations of privileges, used for convenience.
+// For user-defined roles, the system-defined privileges, "System.Anonymous",
+// "System.View", and "System.Read" are always present.
+//
+//
+// Permissions are the actual access-control rules.  A
+// permission is defined on a ManagedEntity and
+// specifies the user or group ("principal") to which
+// the rule applies. The role specifies the
+// privileges to apply, and the propagate flag
+// specifies whether or not the rule applies to sub-objects
+// of the managed entity.
+//
+//
+// A ManagedEntity may have multiple permissions,
+// but may have only one permission per user or group. If, when logging
+// in, a user has both a user permission and a group permission
+// (as a group member) for the same entity, then the
+// user-specific permission takes precedent.  If there is no
+// user-specific permission, but two or more group permissions
+// are present, and the user is a member of the groups, then the
+// privileges are the union of the specified roles.
+//
+//
+// Managed entities may be collected together into a "complex entity" for
+// the purpose of applying permissions consistently. Complex entities may have a
+// Datacenter, ComputeResource, or ClusterComputeResource as a parent, with other
+// child managed objects as additional parts of the complex entity:
+//
+//
+//
+// • A Datacenter's child objects are the root virtual machine and host Folders.
+//
+// • A ComputeResource's child objects are the root ResourcePool and HostSystem.
+//
+// • A ClusterComputeResource has only the root ResourcePool as a child object.
+//
+//
+//
+// Child objects in a complex entity are forced to inherit permissions from the
+// parent object. When query operations are used to discover permissions on child
+// objects of complex entities, different results may be returned for the owner of the
+// permission. In some cases, the child object of the complex entity is returned as
+// the object that defines the permission, and in other cases, the parent from which
+// the permission is propagated is returned as the object that defines the permission.
+// In both cases, the information about the owner of the permission is correct, since
+// the entities within a complex entity are considered equivalent.  Permissions
+// defined on complex entities are always applicable on the child entities,
+// regardless of the propagation flag, but may only be defined or modified on the
+// parent object.
+//
+// In a group of fault-tolerance (FT) protected VirtualMachines, the secondary
+// VirtualMachines are forced to inherit permissions from the primary VirtualMachine.
+// Queries to discover permissions on FT secondary VMs always return the primary VM
+// as the object that defines the permissions. Permissions defined on an FT primary
+// VM are always applicable on its secondary VMs, but can only be defined or modified
+// on the primary VM.
+//
+//
+//
+type AuthorizationManager struct {
+
+	// Static, descriptive strings for system roles and privileges.
+	Description *AuthorizationDescription
+
+	// The list of system-defined privileges.
+	PrivilegeList []*AuthorizationPrivilege
+
+	// The currently defined roles in the system, including
+	// static system-defined roles.
+	RoleList []*AuthorizationRole
+}
+
+//
+// This managed object type provides access to the environment that a
+// ComputeResource presents for creating and configuring a virtual machine.
+//
+// The environment consists of three main components:
+//
+//
+//
+// • The virtual machine configuration options. Each vim.vm.ConfigOption
+// describes the execution environment for a virtual machine, the particular
+// set of virtual hardware that is supported. A
+// ComputeResource might support multiple sets. Access is provided
+// through the configOptionDescriptor property and the
+// QueryConfigOption operation.
+//
+// • The supported device targets. Each virtual device specified in the virtual
+// machine needs to be hooked up to a "physical" counterpart. For networks,
+// this means choosing a network name; for a virtual CD-rom this might be
+// an ISO image, etc.  The environment browser provides access to the device
+// targets through the
+// QueryConfigTarget operation.
+//
+// • Storage locations and files. A selection of locations where the virtual machine
+// files can be stored, and the possibility to browse for existing virtual disks
+// and ISO images. The datastore browser, provided by the datastoreBrowser
+// property, provides access to the contents of one or more datastores. The
+// items in a datastore are files that contain configuration, virtual disk, and
+// the other data associated with a virtual machine.
+//
+// • The capabilities supported by the ComputeResource to which the virtual
+// machine belongs.
+//
+//
+//
+//
+type EnvironmentBrowser struct {
+
+	// DatastoreBrowser to browse datastores that are available on this entity.
+	DatastoreBrowser *mo.HostDatastoreBrowser
 }
 
 //
@@ -3515,369 +3291,306 @@ type DistributedVirtualSwitch struct {
 }
 
 //
-// The HostAuthenticationManager managed object provides
-// access to Active Directory configuration information for an
-// ESX host. It also provides access to methods for adding a host
-// to or removing a host from an Active Directory domain.
+// The VmwareDistributedVirtualSwitch managed object
+// is the VMware implementation of a distributed virtual switch.
+// The functionality listed here is for a VMware distributed virtual switch only.
 //
-// The vSphere API supports Microsoft Active Directory management
-// of authentication for ESX hosts. To integrate an ESX host
-// into an Active Directory environment, you use an Active
-// Directory account that has the authority to add
-// a computer to a domain. The ESX Server locates the Active
-// Directory domain controller. When you add a host to a domain,
-// you only need to specify the domain and the account
-// user name and password.
-//
-//
-// There are two approaches that you can use to add an ESX host
-// to or remove a host from an Active Directory domain.
+// When you use a VMware distributed virtual switch, you can perform
+// backup and restore operations on the VMware switch. You can also
+// perform rollback operations on the switch and on portgroups
+// associated with the VMware switch. See the description for the
+// following methods:
 //
 //
 //
-// • JoinDomain_Task and
-// LeaveCurrentDomain_Task
-// methods - Your vSphere client application can call
-// these methods directly to add the host to or remove the host
-// from a domain.
+// • DVSManagerExportEntity_Task
 //
+// • DVSManagerImportEntity_Task
 //
-// • Host configuration - Use the HostActiveDirectory data object
-// to specify Active Directory configuration, either adding the host to
-// or removing the host from a domain. To apply the Active Directory
-// configuration, use the HostProfileManager method
-// (ApplyHostConfig_Task)
-// to apply the HostConfigSpec. When the ESX Server processes
-// the configuration, it will invoke the join or leave method.
+// • DVSRollback_Task
+//
+// • DVPortgroupRollback_Task
 //
 //
 //
 //
-//
-// To take advantage of ESX host membership in an Active Directory domain,
-// grant permissions on the ESX host to Active Directory users and groups
-// who should have direct access to management of the ESX host.
-// Use the UserDirectory.RetrieveUserGroups
-// method to obtain information about Active Directory users and groups.
-// After retrieving the Active Directory data, you can use the
-// AuthorizationManager.SetEntityPermissions
-// method to set the principal property
-// to the appropriate user or group.
-//
-//
-// By default, the ESX host assigns the Administrator role to the "ESX Admins" group.
-// If the group does not exist when the host joins the domain, the host will
-// not assign the role. In this case, you must create the "ESX Admins"
-// group in the Active Directory. The host will periodically check the domain controller
-// for the group and will assign the role when the group exists.
-//
-//
-//
-type HostAuthenticationManager struct {
-
-	// Information about Active Directory membership.
-	Info *HostAuthenticationManagerInfo
-
-	// An array that can contain managed object references to local and
-	// Active Directory authentication managed objects.
-	//
-	// supportedStore data implies a connection to a system
-	// that stores information about accounts.
-	// The supportedStore array can include the following objects:
-	//
-	// HostLocalAuthentication - Local authentication refers
-	// to user accounts on the ESX host. Local authentication is always enabled.
-	//
-	// HostActiveDirectoryAuthentication - Active Directory authentication
-	// refers to computer accounts and user accounts on the domain controller.
-	// This object indicates the domain membership status for the host
-	// and defines the join and leave methods for Active Directory
-	// membership.
-	//
-	// If supportedStore references
-	// a HostActiveDirectoryAuthentication object, the host
-	// is capable of joining a domain.
-	// However, if you try to add a host to a domain when the
-	// HostAuthenticationStoreInfo.enabled
-	// property is True (accessed through the info
-	// property), the join method will throw a fault.
-	SupportedStore []*mo.HostAuthenticationStore
+type VmwareDistributedVirtualSwitch struct {
+	*DistributedVirtualSwitch
 }
 
 //
-// This managed object type provides an interface
-// through which local accounts on a host are managed.  Note that this
-// managed object applies only to applications that use a local account
-// database on the host to provide authentication (ESX Server, for example).
-// POSIX and win32 hosts may impose different restrictions on the password,
-// ID, and description formats. POSIX host implementation may restrict the
-// user or group name to be lower case letters and less than 16 characters in
-// total.  It may also disallow characters such as
-// ";", "\n", and so on.  In short, all the platform dependent rules and
-// restrictions regarding naming of users/groups and password apply here.
-// An InvalidArgument fault is thrown if any of these rules are not obeyed.
+// The ViewManager managed object provides methods to create ContainerView,
+// InventoryView, and ListView managed objects.
+// The ViewManager also maintains a list of managed object references
+// to the views that you have created. Use the viewList
+// property to access the views.
 //
-type HostLocalAccountManager struct {
+// A View is a mechanism that supports selection of objects on the server
+// and subsequently, access to those objects. Views can simplify the task of
+// retrieving data from the server. When you use a view, you can use a single
+// invocation of a PropertyCollector method
+// to retrieve data or receive notification of changes instead of multiple invocations
+// involving multiple filter specifications. A view exists until you destroy it
+// or until the end of the session.
+//
+//
+// The ViewManager supports the following views:
+//
+//
+//
+// •  A ContainerView is based on Folder,
+// Datacenter, ComputeResource,
+// ResourcePool, or HostSystem managed objects.
+// Use a container view to monitor the container contents and optionally,
+// its descendants.
+//
+// •  A ListView managed object is based on an arbitrary but
+// specific set of objects. When you create a list view, you provide
+// a list of objects to populate the view
+// (CreateListView),
+// or you provide an existing view from which the new view is created
+// (CreateListViewFromView).
+//
+// •  An InventoryView managed object is based on the entire inventory.
+// Use an inventory view as a general mechanism to monitor the inventory
+// or portions of the inventory.
+//
+//
+//
+//
+//
+// For example, you might use the following sequence of operations to get the
+// names of all the virtual machines on a server:
+//
+//
+// •  Create a ContainerView for the root folder in the server inventory.
+// For the ContainerView, use the type property
+// to include only virtual machines.
+//
+// •  Create a filter specification for the PropertyCollector.
+//
+//
+// •  Use the ContainerView as the starting object in the
+// ObjectSpec for the filter.
+//
+// •  Use the TraversalSpec
+// to select all objects in the view list (all the virtual machines).
+//
+// •  Use the PropertySpec
+// to retrieve the name property from each virtual machine.
+//
+//
+//
+//
+// •  Invoke the PropertyCollector
+// RetrieveProperties method.
+//
+//
+//
+type ViewManager struct {
+
+	// An array of view references. Each array entry is a managed object reference
+	// to a view created by this ViewManager.
+	ViewList []*mo.View
 }
 
 //
-// The SearchIndex service allows a client to efficiently query the
-// inventory for a specific managed entity by attributes such as UUID, IP address, DNS
-// name, or datastore path. Such searches typically return a VirtualMachine or a
-// HostSystem. While searching, only objects for which the user has sufficient
-// privileges are considered. The findByInventoryPath and findChild operations only
-// search on entities for which the user has view privileges; all other SearchIndex
-// find operations only search virtual machines and hosts for which the user has
-// read privileges. If the user does not have sufficient privileges for an object that
-// matches the search criteria, that object is not returned.
+// ManagedEntity is an abstract base type for all managed objects present in
+// the inventory tree. The base type provides common functionality for traversing the
+// tree structure, as well as health monitoring and other basic functions.
 //
-type SearchIndex struct {
-}
-
-// Deprecated.
-// As of vSphere API 5.5, use
-// HostVFlashManager
-//
-//
-// Solid state drive Cache Configuration Manager.
-//
-// This is a managed object which provides access to ESX performance tuning
-// features using solid state drive based cache.
-//
-type HostCacheConfigurationManager struct {
-
-	// The swap performance configuration for the ESX host.  This includes
-	// configuration information for each datastore enabled for this purpose.
-	CacheConfigurationInfo []*HostCacheConfigurationInfo
-}
-
-//
-// TaskHistoryCollector provides a mechanism for
-// retrieving historical data and updates when the server appends new
-// tasks.
-//
-type TaskHistoryCollector struct {
-	*HistoryCollector
-
-	// The items in the 'viewable latest page'. As new tasks that match the
-	// collector's TaskFilterSpec are created, they are added to this
-	// page, and the oldest tasks are removed from the collector to keep the
-	// size of the page to that allowed by
-	// SetCollectorPageSize.
-	//
-	// The "oldest task" is the one with the oldest creation time. The
-	// tasks in the returned page are unordered.
-	LatestPage []*TaskInfo
-}
-
-//
-// Represents a set of physical compute resources for a set of virtual machines.
-//
-// The base type ComputeResource, when instantiated by calling
-// AddStandaloneHost_Task, represents a single host. The subclass
-// ClusterComputeResource represents a cluster of hosts and adds distributed management
-// features such as availability and resource scheduling.
-//
-//
-// A ComputeResource always has a root ResourcePool associated with it.
-// Certain types of  clusters such as those with VMware DRS enabled and standalone hosts
-// (ESX Server 3) support the creation of ResourcePool hierarchies.
+// Most Virtual Infrastructure managed object types extend this type.
 //
 //
 //
-type ComputeResource struct {
-	*ManagedEntity
-
-	// Configuration of the compute resource; applies to both standalone hosts
-	// and clusters. For a cluster this property will return a
-	// ClusterConfigInfoEx object.
-	//
-	// Since VI API 2.5
-	ConfigurationEx *ComputeResourceConfigInfo
-
-	// The datastore property is the subset of datastore objects in the datacenter
-	// available in this ComputeResource.
-	//
-	// This property is computed as the aggregate set of datastores available from all
-	// the hosts that are part of this compute resource.
-	Datastore []*mo.Datastore
-
-	// The environment browser object that identifies the environments that are supported
-	// on this compute resource.
-	EnvironmentBrowser *mo.EnvironmentBrowser
-
-	// List of hosts that are part of this compute resource. If the compute resource is a
-	// standalone type, then this list contains just one element.
-	Host []*mo.HostSystem
-
-	// The subset of network objects available in the datacenter that is available in
-	// this ComputeResource.
-	//
-	// This property is computed as the aggregate set of networks available from all the
-	// hosts that are part of this compute resource.
-	Network []*mo.Network
-
-	// Reference to root resource pool.
-	ResourcePool *mo.ResourcePool
-
-	// Basic runtime information about a compute resource. This information is used on
-	// summary screens and in list views.
-	Summary *ComputeResourceSummary
-}
-
-//
-// The MemoryManagerSystem managed object provides an interface through which
-// the host memory management policies that affect the performance of running
-// virtual machines can be gathered and configured.
-//
-type HostMemorySystem struct {
+type ManagedEntity struct {
 	*ExtensibleManagedObject
 
-	// Service console reservation information for the memory manager.  The
-	// existence of this data object indicates if the service console memory
-	// reservation must be configured for this host.
-	ConsoleReservationInfo *ServiceConsoleReservationInfo
-
-	// Virtual machine reservation information for the memory manager.  The
-	// existence of this data object indicates if the virtual machine memory
-	// reservation must be configured for this host.
+	// Whether alarm actions are enabled for this entity.
+	// True if enabled; false otherwise.
 	//
-	// Since VI API 2.5
-	VirtualMachineReservationInfo *VirtualMachineMemoryReservationInfo
-}
+	// Since vSphere API 4.0
+	AlarmActionsEnabled bool
 
-//
-// LocalizationManager provides access to descriptions of
-// the message catalogs that are available for client-side message
-// localization.
-//
-// Clients of the VIM API may use
-// SessionManager.SetLocale
-// to cause the server to emit localized messages, or may perform
-// client-side localization based on message catalogs provided by the
-// LocalizationManager.
-//
-//
-// A message catalog is a file that contains a set of key-value pairs.
-//
-//
-//
-// • The key is an ASCII string that identifies the message.
-//
-// • The value is a UTF-8 string that contains the text of the message, sometimes
-// containing substitution variables.
-//
-//
-//
-// The server will localize fields tagged with 'localizable' based on the
-// value of the UserSession.locale
-// and messageLocale properties which are set via
-// SessionManager.SetLocale.
-//
-//
-// The following list shows some of the ways that vSphere uses localized
-// messages.
-//
-//
-//
-// • Current task status (TaskInfo.description)
-//
-// • Events (VirtualMachineMessage.text and
-// Questions (VirtualMachineQuestionInfo.text)
-//
-// • Faults (MethodFault.faultMessage)
-//
-// • HostProfile and
-// ClusterProfile descriptions
-// (Profile.ProfileDescription.
-// description returned by the
-// Profile.RetrieveDescription method)
-//
-//
-//
-//
-type LocalizationManager struct {
+	// Current configuration issues that have been detected for this entity. Typically,
+	// these issues have already been logged as events. The entity stores these
+	// events as long as they are still current. The
+	// configStatus property provides an overall status
+	// based on these events.
+	ConfigIssue []*Event
 
-	// Fetches the descriptions of all the client-side localization message
-	// catalogs available for the current session locale.
-	Catalog []*LocalizationManagerMessageCatalog
-}
+	// The configStatus indicates whether or not the system has detected a configuration
+	// issue involving this entity. For example, it might have detected a
+	// duplicate IP address or MAC address, or a host in a cluster
+	// might be out of compliance. The meanings of the configStatus values are:
+	//
+	// red:    A problem has been detected involving the entity.
+	// yellow: A problem is about to occur or a transient condition
+	// has occurred (For example, reconfigure fail-over policy).
+	// green:  No configuration issues have been detected.
+	// gray:   The configuration status of the entity is not being monitored.
+	//
+	// A green status indicates only that a problem has not been detected;
+	// it is not a guarantee that the entity is problem-free.
+	//
+	// The configIssue property contains a list of the
+	// problems that have been detected.
+	//
+	// In releases after vSphere API 5.0, vSphere Servers might not
+	// generate property collector update notifications for this property.
+	// To obtain the latest value of the property, you can use
+	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+	// an empty string for the version parameter. Any other version value will not
+	// produce any property values as no updates are generated.
+	ConfigStatus *ManagedEntityStatus
 
-//
-// The HostServiceSystem managed object describes the configuration
-// of host services.  This managed object operates in conjunction
-// with the HostFirewallSystem
-// managed object.
-//
-type HostServiceSystem struct {
-	*ExtensibleManagedObject
+	// Custom field values.
+	CustomValue []*CustomFieldValue
 
-	// Service configuration.
-	ServiceInfo *HostServiceInfo
-}
+	// A set of alarm states for alarms that apply to this managed entity.
+	// The set includes alarms defined on this entity
+	// and alarms inherited from the parent entity,
+	// or from any ancestors in the inventory hierarchy.
+	//
+	// Alarms are inherited if they can be triggered by this entity or its descendants.
+	// This set does not include alarms that are defined on descendants of this entity.
+	DeclaredAlarmState []*AlarmState
 
-//
-// The ServiceManager managed object is a singleton object that is used to present
-// services that are optional and not necessarily formally defined.
-//
-// This directory makes available a list of such services and provides an easy way
-// to locate them. The service being represented can take arbitrary form here and
-// is thus represented by a generic ManagedObject. The expectation is that the
-// client side is knowledgeable of the instance type of the specific service it
-// is interested in using.
-//
-type ServiceManager struct {
-
-	// The full list of services available in this directory.
-	Service []*ServiceManagerServiceInfo
-}
-
-//
-// The HostLocalAuthentication managed object represents
-// local authentication for user accounts on an ESX host.
-//
-type HostLocalAuthentication struct {
-	*HostAuthenticationStore
-}
-
-type ClusterProfileManager struct {
-	*ProfileManager
-}
-
-//
-// The TaskManager managed object provides an interface for creating and managing
-// Task managed objects. Many operations are non-blocking,
-// returning a Task managed object that can be monitored by a
-// client application. Task managed objects may also be
-// accessed through the TaskManager.
-//
-type TaskManager struct {
-
-	// Locale-specific, static strings that describe Task
-	// information to users.
-	Description *TaskDescription
-
-	// Maximum number of TaskHistoryCollector
-	// data objects that can exist concurrently, per client.
-	MaxCollector int32
-
-	// A list of Task managed objects that completed recently,
-	// that are currently running, or that are queued to run.
+	// List of operations that are disabled, given the current runtime
+	// state of the entity. For example, a power-on operation always fails if a
+	// virtual machine is already powered on. This list can be used by clients to
+	// enable or disable operations in a graphical user interface.
+	//
+	// Note: This list is determined by the current runtime state of an entity,
+	// not by its permissions.
+	//
+	// This list may include the following operations for a HostSystem:
+	//
+	// EnterMaintenanceMode_Task
+	// ExitMaintenanceMode_Task
+	// RebootHost_Task
+	// ShutdownHost_Task
+	// ReconnectHost_Task
+	// DisconnectHost_Task
 	//
 	//
-	// The list contains only Task objects that the client
-	// has permission to access, which is determined by having permission to
-	// access the Task object's managed entity.
+	// This list may include the following operations for a VirtualMachine:
 	//
-	// The completed Task objects by default include only
-	// Task objects that completed within the past 10 minutes.
-	// When connected to vCenter Server, there is an additional default limitation
-	// that each of the completed Task objects in this list is one
-	// of the last 200 completed Task objects.
+	// AnswerVM
+	// Rename_Task
+	// CloneVM_Task
+	// PowerOffVM_Task
+	// PowerOnVM_Task
+	// SuspendVM_Task
+	// ResetVM_Task
+	// ReconfigVM_Task
+	// RelocateVM_Task
+	// MigrateVM_Task
+	// CustomizeVM_Task
+	// ShutdownGuest
+	// StandbyGuest
+	// RebootGuest
+	// CreateSnapshot_Task
+	// RemoveAllSnapshots_Task
+	// RevertToCurrentSnapshot_Task
+	// MarkAsTemplate
+	// MarkAsVirtualMachine
+	// ResetGuestInformation
+	// MountToolsInstaller
+	// UnmountToolsInstaller
+	// Destroy_Task
+	// UpgradeVM_Task
+	// ExportVm
 	//
-	// This property should not be used for tracking Task
-	// completion. Generally, a ListView is a better way to
-	// monitor a specific set of Task objects.
+	//
+	// This list may include the following operations for a ResourcePool:
+	//
+	// ImportVApp
+	// CreateChildVM_Task
+	// UpdateConfig
+	// CreateVM_Task
+	// Destroy_Task
+	// Rename_Task
+	//
+	// This list may include the following operations for a VirtualApp:
+	//
+	// Destroy_Task
+	// CloneVApp_Task
+	// unregisterVApp_Task
+	// ExportVApp
+	// PowerOnVApp_Task
+	// PowerOffVApp_Task
+	// UpdateVAppConfig
+	//
+	//
+	//
+	// In releases after vSphere API 5.0, vSphere Servers might not
+	// generate property collector update notifications for this property.
+	// To obtain the latest value of the property, you can use
+	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+	// an empty string for the version parameter. Any other version value will not
+	// produce any property values as no updates are generated.
+	DisabledMethod []string
+
+	// Access rights the current session has to this entity.
+	EffectiveRole []int
+
+	// Name of this entity, unique relative to its parent.
+	//
+	// Any / (slash), \ (backslash), character used in this
+	// name element will be escaped. Similarly, any % (percent) character used in
+	// this name element will be escaped, unless it is used to start an escape
+	// sequence. A slash is escaped as %2F or %2f. A backslash is escaped as %5C or
+	// %5c, and a percent is escaped as %25.
+	Name string
+
+	// General health of this managed entity.
+	// The overall status of the managed entity is computed as the worst status
+	// among its alarms and the configuration issues detected on the entity.
+	// The status is reported as one of the following values:
+	//
+	// red:    The entity has alarms or configuration issues with a red status.
+	// yellow: The entity does not have alarms or configuration issues with a
+	// red status, and has at least one with a yellow status.
+	// green:  The entity does not have alarms or configuration issues with a
+	// red or yellow status, and has at least one with a green status.
+	// gray:   All of the entity's alarms have a gray status and the
+	// configuration status of the entity is not being monitored.
+	//
+	//
+	// In releases after vSphere API 5.0, vSphere Servers might not
+	// generate property collector update notifications for this property.
+	// To obtain the latest value of the property, you can use
+	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+	// an empty string for the version parameter. Any other version value will not
+	// produce any property values as no updates are generated.
+	OverallStatus *ManagedEntityStatus
+
+	// Parent of this entity.
+	//
+	// This value is null for the root object and for
+	// VirtualMachine objects that are part of
+	// a VirtualApp.
+	Parent *mo.ManagedEntity
+
+	// List of permissions defined for this entity.
+	Permission []*Permission
+
+	// The set of recent tasks operating on this managed entity. This is a subset
+	// of recentTask belong to this entity. A task in this
+	// list could be in one of the four states: pending, running, success or error.
+	//
+	// This property can be used to deduce intermediate power states for
+	// a virtual machine entity. For example, if the current powerState is "poweredOn"
+	// and there is a running task performing the "suspend" operation, then the virtual
+	// machine's intermediate state might be described as "suspending."
+	//
+	// Most tasks (such as power operations) obtain exclusive access to the virtual
+	// machine, so it is unusual for this list to contain more than one running task.
+	// One exception, however, is the task of cloning a virtual machine.
 	//
 	// In releases after vSphere API 5.0, vSphere Servers might not
 	// generate property collector update notifications for this property.
@@ -3887,16 +3600,579 @@ type TaskManager struct {
 	// an empty string for the version parameter. Any other version value will not
 	// produce any property values as no updates are generated.
 	RecentTask []*mo.Task
+
+	// The set of tags associated with this managed entity.
+	// Experimental. Subject to change.
+	//
+	// Since vSphere API 4.0
+	Tag []*Tag
+
+	// A set of alarm states for alarms triggered by this entity
+	// or by its descendants.
+	//
+	// Triggered alarms are propagated up the inventory hierarchy
+	// so that a user can readily tell when a descendant has triggered an alarm.
+	//
+	// In releases after vSphere API 5.0, vSphere Servers might not
+	// generate property collector update notifications for this property.
+	// To obtain the latest value of the property, you can use
+	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+	// an empty string for the version parameter. Any other version value will not
+	// produce any property values as no updates are generated.
+	TriggeredAlarmState []*AlarmState
 }
 
 //
-// This managed object manages the PciPassthru state of the host.
+// The Datacenter managed object provides the interface to the common container
+// object for hosts, virtual machines, networks, and datastores. These entities
+// must be under a distinct datacenter in the inventory, and datacenters may not
+// be nested under other datacenters.
 //
-type HostPciPassthruSystem struct {
-	*ExtensibleManagedObject
+// Every Datacenter has the following set of dedicated folders. These folders are empty
+// until you create entities for the Datacenter.
+//
+//
+//
+// •  A folder for VirtualMachine, template, and
+// VirtualApp objects.
+//
+// •  A folder for a ComputeResource hierarchy.
+//
+// •  A folder for Network, DistributedVirtualSwitch,
+// and DistributedVirtualPortgroup objects.
+//
+// •  A folder for Datastore objects.
+//
+//
+//
+//
+// For a visual representation of the organization of objects in a vCenter
+// hierarchy, see the description of the ServiceInstance object.
+//
+//
+//
+type Datacenter struct {
+	*ManagedEntity
 
-	// Array of PciPassthru information
-	PciPassthruInfo []*HostPciPassthruInfo
+	// Configuration of the datacenter.
+	//
+	// Since vSphere API 5.1
+	Configuration *DatacenterConfigInfo
+
+	// A collection of references to the datastore objects
+	// available in this datacenter.
+	Datastore []*mo.Datastore
+
+	// A reference to the folder hierarchy that contains
+	// the datastores for this datacenter.
+	//
+	// This folder is guaranteed to exist.
+	//
+	// Since vSphere API 4.0
+	DatastoreFolder *mo.Folder
+
+	// A reference to the folder hierarchy that contains
+	// the compute resources, including hosts and clusters, for this datacenter.
+	//
+	// This folder is guaranteed to exist.
+	HostFolder *mo.Folder
+
+	// A collection of references to the network objects
+	// available in this datacenter.
+	Network []*mo.Network
+
+	// A reference to the folder hierarchy that contains the network entities
+	// for this datacenter. The folder can include Network,
+	// DistributedVirtualSwitch, and
+	// DistributedVirtualPortgroup objects.
+	//
+	// This folder is guaranteed to exist.
+	//
+	// Since vSphere API 4.0
+	NetworkFolder *mo.Folder
+
+	// A reference to the folder hierarchy that contains VirtualMachine
+	// virtual machine templates (identified by the template
+	// property, and VirtualApp objects for this datacenter.
+	//
+	// Note that a VirtualApp that is a child of a ResourcePool
+	// may also be visible in this folder. VirtualApp objects can be nested,
+	// but only the parent VirtualApp can be visible in the folder.
+	//
+	// This folder is guaranteed to exist.
+	VmFolder *mo.Folder
+}
+
+//
+// This managed object type controls entitlements for a given VMware
+// platform. VMware platforms include VirtualCenter, ESX Server, VMware Server,
+// Workstation and Player. Entitlements define what software capabilities
+// this host may use.
+//
+// Entitlements are identified by a short string 'key'. Keys can represent either
+// a particular edition (Full, Starter) or a particular feature/function (featureKey)
+// (backup, nas). An edition implies zero one or more functions which are express,
+// denied or optional. For example a 'Full' edition includes 'iscsi' function but a
+// Starter edition might disallow it.
+//
+//
+// Which edition a given VMware platform uses can be defined at any time. Generally this
+// is done right after first install and boot as installation software may not set it.
+// For editions that are similar in nature, any future changes to edition
+// type will only impact future requests for functionality.
+// Current functionality is left unaffected. The same is true for optional
+// functions enabled/disabled after some period of time. For dissimilar editions,
+// such transitions may require entering maintenance mode first else an exception of
+// InvalidState will be thrown.
+//
+//
+// To specify the edition type and any optional functions, use updateLicense for
+// ESX Server and addLicense follow by LicenseAssingmentManager.updateAssignedLicense
+// for VirtualCenter.
+//
+//
+// When an edition is specified for a given host, the cost of that edition
+// (how many licenses are needed) is determined. The cost is computed
+// using the license's CostUnit value multiplied by the number of units activated.
+// For example, when a VMware platform is set to an edition which uses a 'cpuPackage'
+// on a two socket server, two licenses would be needed to successfully
+// install that edition.
+//
+//
+// Here is a diagram of the unit costs supported by this API and their relationships.
+//
+//
+// +------------------------------+   +--------+      +-------+
+// | +-----------+ +-----------+  |   | Server |      |  Host |
+// | |           | |           |  |   +--------+      +-------+
+// | |  cpuCore  | |   cpuCore |  |                   +-------+
+// | +-----------+ +-----------+  |   +--------+      |  Host |
+// |                  cpuPackage  |   |  VM    |      +-------+
+// +------------------------------+   +--------+
+//
+//
+type LicenseManager struct {
+
+	// Deprecated.
+	// As of vSphere API 4.0, this property is not used by the system.
+	//
+	//
+	// Return current diagnostic information.
+	//
+	// Since VI API 2.5
+	Diagnostics *LicenseDiagnostics
+
+	// Since vSphere API 4.0
+	Evaluation *LicenseManagerEvaluationInfo
+
+	// Deprecated.
+	// As of VI API 2.5, use QuerySupportedFeatures
+	// instead.
+	//
+	//
+	// The list of features that can be licensed.
+	FeatureInfo []*LicenseFeatureInfo
+
+	// License Assignment Manager
+	//
+	// Since vSphere API 4.0
+	LicenseAssignmentManager *mo.LicenseAssignmentManager
+
+	// Deprecated.
+	// As of vSphere API 4.0, use
+	// QueryAssignedLicenses instead.
+	//
+	//
+	// The product's license edition. The edition defines which product license
+	// the server requires. This, in turn, determines the core set of functionalities
+	// provided by the product and the additional features that can be licensed. If
+	// no edition is set the property is set to the empty string ("").
+	//
+	// To set the edition use SetLicenseEdition.
+	//
+	// Since VI API 2.5
+	LicensedEdition string
+
+	// Get information about all the licenses avaiable.
+	//
+	// Since vSphere API 4.0
+	Licenses []*LicenseManagerLicenseInfo
+
+	// Deprecated.
+	// As of vSphere API 4.0, use
+	// QueryAssignedLicenses to get evaluation information.
+	//
+	//
+	// Set or return a data object type of LocalLicense or LicenseServer.
+	Source *LicenseSource
+
+	// Deprecated.
+	// As of vSphere API 4.0, this property is not used.
+	//
+	//
+	// Current state of the license source. License sources that are LocalSource
+	// are always available.
+	SourceAvailable bool
+}
+
+//
+// VirtualMachine is the managed object type for manipulating virtual machines,
+// including templates that can be deployed (repeatedly) as new virtual machines.
+// This type provides methods for configuring and controlling a virtual machine.
+//
+// VirtualMachine extends the ManagedEntity type because virtual machines are
+// part of a virtual infrastructure inventory. The parent of a virtual machine
+// must be a folder, and a virtual machine has no children.
+//
+//
+// Destroying a virtual machine disposes of all associated storage, including
+// the virtual disks. To remove a virtual machine while retaining its
+// virtual disk storage, a client must remove the virtual disks
+// from the virtual machine before destroying it.
+//
+//
+//
+type VirtualMachine struct {
+	*ManagedEntity
+
+	// Information about the runtime capabilities of this virtual machine.
+	Capability *VirtualMachineCapability
+
+	// Configuration of this virtual machine, including the name and UUID.
+	//
+	// This property is set when a virtual machine is created or when
+	// the reconfigVM method is called.
+	//
+	// The virtual machine configuration is not guaranteed to be available.
+	// For example, the configuration information would be unavailable
+	// if the server is unable to access the virtual machine files on disk,
+	// and is often also unavailable during the initial phases of
+	// virtual machine creation.
+	Config *VirtualMachineConfigInfo
+
+	// A collection of references to the subset of datastore objects in the datacenter
+	// that is used by this virtual machine.
+	Datastore []*mo.Datastore
+
+	// The current virtual machine's environment browser object. This contains
+	// information on all the configurations that can be used on the
+	// virtual machine. This is identical to the environment browser on
+	// the ComputeResource to which this virtual machine belongs.
+	EnvironmentBrowser *mo.EnvironmentBrowser
+
+	// Information about VMware Tools and about the virtual machine
+	// from the perspective of VMware Tools.
+	// Information about the guest operating system is available in VirtualCenter. Guest
+	// operating system information reflects the last known state of the virtual machine.
+	// For powered on machines, this is current information. For powered off machines,
+	// this is the last recorded state before the virtual machine was powered off.
+	Guest *GuestInfo
+
+	// The guest heartbeat.
+	// The heartbeat status is classified as:
+	//
+	// gray - VMware Tools are not installed or not running.
+	// red - No heartbeat. Guest operating system may have stopped responding.
+	// yellow - Intermittent heartbeat. May be due to guest load.
+	// green - Guest operating system is responding normally.
+	//
+	// The guest heartbeat is a statistics metric. Alarms can be configured on
+	// this metric to trigger emails or other actions.
+	GuestHeartbeatStatus *ManagedEntityStatus
+
+	// Deprecated.
+	// As of vSphere API 4.0, use layoutEx instead.
+	//
+	// In releases after vSphere API 5.0, vSphere Servers might not
+	// generate property collector update notifications for this property.
+	// To obtain the latest value of the property, you can use
+	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+	// an empty string for the version parameter. Any other version value will not
+	// produce any property values as no updates are generated.
+	//
+	//
+	// Detailed information about the files that comprise this virtual machine.
+	Layout *VirtualMachineFileLayout
+
+	// Detailed information about the files that comprise this virtual machine.
+	//
+	// Can be explicitly refreshed by the RefreshStorageInfo operation.
+	//
+	// In releases after vSphere API 5.0, vSphere Servers might not
+	// generate property collector update notifications for this property.
+	// To obtain the latest value of the property, you can use
+	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+	// an empty string for the version parameter. Any other version value will not
+	// produce any property values as no updates are generated.
+	//
+	// Since vSphere API 4.0
+	LayoutEx *VirtualMachineFileLayoutEx
+
+	// A collection of references to the subset of network objects in the datacenter that
+	// is used by this virtual machine.
+	Network []*mo.Network
+
+	// Reference to the parent vApp.
+	//
+	// Since vSphere API 4.1
+	ParentVApp *mo.ManagedEntity
+
+	// The resource configuration for a virtual machine. The shares
+	// in this specification are evaluated relative to the resource pool
+	// to which it is assigned. This will return null if the product
+	// the virtual machine is registered on does not support resource
+	// configuration.
+	//
+	// To retrieve the configuration, you typically use
+	// childConfiguration.
+	//
+	// To change the configuration, use
+	// UpdateChildResourceConfiguration.
+	ResourceConfig *ResourceConfigSpec
+
+	// The current resource pool that specifies resource allocation
+	// for this virtual machine.
+	//
+	// This property is set when a virtual machine is created or associated with
+	// a different resource pool.
+	//
+	// Returns null if the virtual machine is a template or the session has no access
+	// to the resource pool.
+	ResourcePool *mo.ResourcePool
+
+	// The roots of all snapshot trees for the virtual machine.
+	//
+	// Since vSphere API 4.1
+	RootSnapshot []*mo.VirtualMachineSnapshot
+
+	// Execution state and history for this virtual machine.
+	//
+	// The contents of this property change when:
+	//
+	// the virtual machine's power state changes.
+	// an execution message is pending.
+	// an event occurs.
+	Runtime *VirtualMachineRuntimeInfo
+
+	// Current snapshot and tree.
+	// The property is valid if snapshots have been created
+	// for this virtual machine.
+	//
+	// The contents of this property change in response to the methods:
+	//
+	// CreateSnapshot_Task
+	// RevertToCurrentSnapshot_Task
+	// RemoveSnapshot_Task
+	// RevertToSnapshot_Task
+	// RemoveAllSnapshots_Task
+	Snapshot *VirtualMachineSnapshotInfo
+
+	// Storage space used by the virtual machine, split by datastore.
+	// Can be explicitly refreshed by the RefreshStorageInfo operation.
+	//
+	// In releases after vSphere API 5.0, vSphere Servers might not
+	// generate property collector update notifications for this property.
+	// To obtain the latest value of the property, you can use
+	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+	// an empty string for the version parameter. Any other version value will not
+	// produce any property values as no updates are generated.
+	//
+	// Since vSphere API 4.0
+	Storage *VirtualMachineStorageInfo
+
+	// Basic information about this virtual machine. This includes:
+	//
+	// runtimeInfo
+	// guest
+	// basic configuration
+	// alarms
+	// performance information
+	Summary *VirtualMachineSummary
+}
+
+//
+// Represents a set of physical resources: a single host,
+// a subset of a host's resources, or resources spanning multiple hosts.
+// Resource pools can be subdivided by creating child resource pools. In
+// order to run, a virtual machine must be associated as a child of a resource
+// pool.
+//
+// In a parent/child hierarchy of resource pools and virtual machines, the
+// single resource pool that has no parent pool is known as the root resource
+// pool.
+//
+//
+// Configuration
+//
+//
+// A resource pool is configured with a set of CPU (in MHz) and memory (in MB)
+// resources. These resources are specified in absolute terms with a resource
+// reservation and a resource limit, along with a shares setting. The shares
+// are used during resource contention, to ensure graceful degradation.
+//
+//
+// For the root resource pool, the values of the reservation and
+// the limit are set by the system and are not configurable. The
+// reservation and limit are set to the same value, indicating the total amount
+// of resources the system has available to run virtual machines. This is
+// computed as the aggregated CPU and memory resources provided by the set
+// of current available hosts in the parent compute resource minus the
+// overhead of the virtualization layer.
+//
+//
+// Since the resource pool configuration is absolute (in MHz or MB), the
+// configuration can become invalid when resources are removed.  This can
+// happen if a host is removed from the cluster, if a host becomes
+// unavailable, or if a host is placed in maintenance mode. When this
+// happens, the system flags misconfigured resource pools and displays the
+// reservations and limits that are in effect. Further, in a DRS enabled cluster,
+// the tree can be misconfigured if the user bypasses VirtualCenter and powers on
+// VMs directly on the host.
+//
+//
+// A General Discussion of Resource pool states and admission control
+//
+// There are three states that the resource pool tree can be in: undercommited
+// (green), overcommited (yellow), and inconsistent (red). Depending on the
+// state, different resource pool configuration policies are enforced. The
+// states are described in more detail below:
+//
+//
+//
+// •  GREEN (aka undercommitted): We have a tree that is
+// in a good state. Every node has a reservation greater than the sum of
+// the reservations for its children. We have enough capacity at the root to
+// satisfy all the resources reserved by the children. All operations
+// performed on the tree, such as powering on virtual machines, creating
+// new resource pools, or reconfiguring resource settings, will ensure
+// that the above constraints are maintained.
+//
+//
+// •  RED (aka. inconsistent): One or more nodes in the
+// tree has children whose reservations are greater than the node is configured to
+// support. For example, i) a resource pool with a fixed reservation has a running
+// virtual machine with a reservation that is higher than the reservation on
+// resource pool itself., or ii) the child reservations are greater than the limit.
+//
+// In this state, the DRS algorithm is disabled until the resource pool tree's
+// configuration has  been brought back into a consistent state. We also restrict
+// the resources that such invalid nodes request from their parents to the
+// configured reservation/limit, in an attempt to isolate the problem to a small
+// subtree. For the rest of the tree, we determine whether the cluster is
+// undercommitted or overcommitted according to the existing rules and perform
+// admission control accordingly.
+//
+//
+// Note that since all changes to the resource settings are validated on the
+// VirtualCenter server, the system cannot be brought into this state by simply
+// manipulating a cluster resource pool tree through  VirtualCenter. It can only
+// happen if a virtual machine gets powered on directly on a host that is part of
+// a DRS cluster.
+//
+//
+//
+//
+// •  YELLOW (aka overcommitted): In this state, the tree is
+// consistent internally, but the root resource pool does not have the capacity at
+// to meet the reservation of its children. We can only go from GREEN -&gt; YELLOW if
+// we lose resources at the root. For example, hosts becomes unavailable or is
+// put into maintenance mode. Note that we will always have enough capacity at the root
+// to run all currently powered on VMs. However, we may not be able to satisfy all
+// resource pool reservations in the tree. In this state, the reservation configured for
+// a resource pool is no longer guaranteed, but the limits are still enforced.
+// This provides additional flexibility for bringing the tree back into a
+// consistent state, without risking bringing the tree into a RED state. In
+// more detail:
+//
+//
+// •  Resource Pool The root is considered to have unlimited
+// capacity. You can reserve resources without any check except the
+// requirement that the tree remains consistent. This means that
+// nodes whose parents are all configured with expandable reservations and no limit
+// will have unlimited available resources. However, if there is an ancestor with
+// a fixed reservation or an expandable reservation with a limit somewhere, then the
+// node will be limited by the reservation/limit of the ancestor.
+//
+//
+// •  Virtual Machine Virtual machines are limited by ancestors
+// with a fixed reservation and the capacity at the root.
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// Destroying a ResourcePool
+//
+//
+// When a ResourcePool is destroyed, all the virtual machines are reassigned to its
+// parent pool. The root resource pool cannot be destroyed, and invoking destroy
+// on it will throw an InvalidType fault.
+//
+//
+// Any vApps in the ResourcePool will be moved to the ResourcePool's parent
+// before the pool is destroyed.
+//
+//
+// The Resource.DeletePool privilege must be held on the pool as well as the parent
+// of the resource pool.  Also, the Resource.AssignVMToPool privilege must be held
+// on the resource pool's parent pool and any virtual machines that are reassigned.
+//
+//
+//
+type ResourcePool struct {
+	*ManagedEntity
+
+	// The resource configuration of all direct children (VirtualMachine and
+	// ResourcePool) of this resource group.
+	ChildConfiguration []*ResourceConfigSpec
+
+	// Configuration of this resource pool.
+	Config *ResourceConfigSpec
+
+	// The ComputeResource to which this set of one or more nested resource pools
+	// belong.
+	Owner *mo.ComputeResource
+
+	// The set of child resource pools.
+	ResourcePool []*mo.ResourcePool
+
+	// Runtime information about a resource pool.
+	// The ResourcePoolResourceUsage information within
+	// ResourcePoolRuntimeInfo can be transiently stale.
+	// Use RefreshRuntime method to
+	// update the information.
+	//
+	// In releases after vSphere API 5.0, vSphere Servers might not
+	// generate property collector update notifications for this property.
+	// To obtain the latest value of the property, you can use
+	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+	// an empty string for the version parameter. Any other version value will not
+	// produce any property values as no updates are generated.
+	Runtime *ResourcePoolRuntimeInfo
+
+	// Basic information about a resource pool.
+	//
+	// In releases after vSphere API 5.0, vSphere Servers might not
+	// generate property collector update notifications for this property.
+	// To obtain the latest value of the property, you can use
+	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+	// an empty string for the version parameter. Any other version value will not
+	// produce any property values as no updates are generated.
+	Summary *ResourcePoolSummary
+
+	// The set of virtual machines associated with this resource pool.
+	Vm []*mo.VirtualMachine
 }
 
 //
@@ -3935,276 +4211,4 @@ type HostStorageSystem struct {
 	//
 	// Since vSphere API 4.1
 	SystemFile []string
-}
-
-//
-// EventHistoryCollector provides a mechanism for
-// retrieving historical data and updates when the server appends new
-// events.
-//
-type EventHistoryCollector struct {
-	*HistoryCollector
-
-	// The items in the 'viewable latest page'. As new events that match the
-	// collector's EventFilterSpec are created, they are added to this
-	// page, and the oldest events are removed from the collector to keep the
-	// size of the page to that allowed by
-	// HistoryCollector#setLatestPageSize.
-	//
-	// The "oldest event" is the one with the smallest key (event ID). The
-	// events in the returned page are unordered.
-	LatestPage []*Event
-}
-
-//
-// ExtensibleManagedObject provides methods and properties that provide
-// access to custom fields that may be associated with a managed object.
-// Use the CustomFieldsManager to define custom fields.
-// The CustomFieldsManager handles the entire list of custom fields
-// on a server. You can can specify the object type to which a particular custom
-// field applies by setting its managedObjectType.
-// (If you do not set a managed object type for a custom field definition,
-// the field applies to all managed objects.)
-//
-type ExtensibleManagedObject struct {
-
-	// List of custom field definitions that are valid for the object's type.
-	// The fields are sorted by name.
-	//
-	// Since VI API 2.5
-	AvailableField []*CustomFieldDef
-
-	// List of custom field values. Each value uses a key to associate
-	// an instance of a CustomFieldStringValue with
-	// a custom field definition.
-	//
-	// Since VI API 2.5
-	Value []*CustomFieldValue
-}
-
-//
-// ProcessManager is the managed object that provides APIs
-// to manipulate the guest operating system processes.
-//
-type GuestProcessManager struct {
-}
-
-//
-// The ServiceInstance managed object is the singleton root object of the inventory
-// on both vCenter servers and servers running on standalone host agents.
-// The server creates the ServiceInstance automatically, and also automatically
-// creates the various manager entities that provide services in the virtual
-// environment. Some examples of manager entities are LicenseManager,
-// PerformanceManager, and ViewManager. You can
-// access the manager entities through the content property.
-//
-// A vSphere API client application begins by connecting to a server
-// and obtaining a reference to the ServiceInstance. The client can then use
-// the RetrieveServiceContent method to gain
-// access to the various vSphere manager entities and to the root folder
-// of the inventory.
-//
-//
-//
-// When you create managed objects, the server adds them to the inventory.
-// The inventory of managed objects includes instances the following object types:
-//
-//
-//
-//
-// • ServiceInstance  -- Root of the inventory; created by vSphere.
-//
-// • Datacenter       -- A container that represents a virtual
-// data center. It contains hosts, network entities,
-// virtual machines and virtual applications,
-// and datastores.
-//
-// • Folder           -- A container used for hierarchical
-// organization of the inventory.
-//
-// • VirtualMachine   -- A virtual machine.
-//
-// • VirtualApp       -- A virtual application.
-//
-// • ComputeResource  -- A compute resource
-// (either a cluster or a stand-alone host).
-//
-// • ResourcePool     -- A subset of resources provided by a ComputeResource.
-//
-// • HostSystem       -- A single host (ESX Server or VMware Server).
-//
-// • Network          -- A network available to either hosts or virtual
-// machines.
-//
-// • DistributedVirtualSwitch -- A distributed virtual switch.
-//
-// • DistributedVirtualPortgroup -- A distributed virtual port group.
-//
-// • Datastore        -- Platform-independent, host-independent storage
-// for virtual machine files.
-//
-//
-//
-//
-// The following figure shows the organization of managed objects in the
-// vCenter hierarchy:
-//
-//
-//
-//
-// Every Datacenter has the following set of dedicated folders.
-// These folders are empty until you create entities for the Datacenter.
-//
-//
-//
-// •  A folder for any combination of VirtualMachine
-// and/or VirtualApp objects. VirtualApp objects can be nested,
-// but only the parent VirtualApp can be visible in the folder.
-// Virtual machines that are children of virtual applications are not
-// associated with a VirtualMachine/VirtualApp folder.
-//
-// •  A folder for a ComputeResource hierarchy.
-//
-// •  A folder for network entities - any combination
-// of Network, DistributedVirtualSwitch, and/or
-// DistributedVirtualPortgroup objects.
-//
-// •  A folder for Datastore objects.
-//
-//
-//
-//
-// The host agent hierarchy has the same general form as the vCenter hierarchy,
-// but most of the objects are limited to one instance:
-//
-//
-//
-//
-//
-//
-type ServiceInstance struct {
-
-	// API-wide capabilities.
-	Capability *Capability
-
-	// The properties of the ServiceInstance managed object. The content property
-	// is identical to the return value from the
-	// RetrieveServiceContent method.
-	//
-	// Use the content property with the PropertyCollector
-	// to perform inventory traversal that includes the ServiceInstance.
-	// (In the absence of a content property, a traversal that encounters
-	// the ServiceInstance would require calling
-	// the RetrieveServiceContent method,
-	// and then invoking a second traversal to continue.)
-	Content *ServiceContent
-
-	// Contains the time most recently obtained from the server.
-	// The time is not necessarily current. This property is intended for use
-	// with the PropertyCollector WaitForUpdates
-	// method. The PropertyCollector will provide notification if some event occurs
-	// that changes the server clock time in a non-linear fashion.
-	//
-	// You should not rely on the serverClock property to get the current time
-	// on the server; instead, use the CurrentTime method.
-	ServerClock time.Time
-}
-
-//
-// The AutoStartManager allows clients to invoke and set up the auto-start/auto-stop
-// order of virtual machines on a single host. Virtual machines configured to use
-// auto-start are automatically started or stopped when the host is started or shut
-// down. The AutoStartManager is available when clients connect directly to a host,
-// such as an ESX Server machine or through VirtualCenter.
-//
-type HostAutoStartManager struct {
-	Config *HostAutoStartManagerConfig
-}
-
-//
-// This managed object type describes networking host configuration and
-// serves as the top level container for relevant networking
-// data objects.
-//
-type HostNetworkSystem struct {
-	*ExtensibleManagedObject
-
-	// Capability vector indicating the available product features.
-	Capabilities *HostNetCapabilities
-
-	// IP route configuration for the service console.  The IP route
-	// configuration is global to the entire host.  This property is
-	// set only if
-	// IP routing can be configured for the service console.
-	ConsoleIpRouteConfig *HostIpRouteConfig
-
-	// Deprecated.
-	// As of vSphere API 5.5, which is moved to
-	// each NetStackInstance. This only works on the default NetStackInstance.
-	//
-	//
-	// Client-side DNS configuration.
-	DnsConfig *HostDnsConfig
-
-	// Deprecated.
-	// As of vSphere API 5.5, which is moved to
-	// each NetStackInstance. This only works on the default NetStackInstance.
-	//
-	//
-	// The IP route configuration.
-	IpRouteConfig *HostIpRouteConfig
-
-	// Network configuration information.  This information can be applied
-	// using the updateNetworkConfig() method.  The
-	// information is a strict subset of the information available in NetworkInfo.See HostNetworkInfo
-	NetworkConfig *HostNetworkConfig
-
-	// The network configuration and runtime information.
-	NetworkInfo *HostNetworkInfo
-
-	// Deprecated.
-	// As of VI API 4.0, the system defaults will be used.
-	//
-	//
-	// The offload capabilities available on this server.
-	OffloadCapabilities *HostNetOffloadCapabilities
-}
-
-//
-// The DistributedVirtualPortgroup managed object
-// defines how hosts and virtual machines connect to a network.
-// A distributed virtual portgroup specifies DistributedVirtualPort
-// configuration options for the ports on a DistributedVirtualSwitch.
-// A portgroup also represents a Network entity in the datacenter.
-//
-//
-//
-// • To configure host access by portgroup, set the portgroup in the host virtual NIC specification
-// (HostVirtualNicSpec.portgroup).
-//
-//
-// • To configure virtual machine access by portgroup, set the portgroup
-// in the virtual Ethernet card backing
-// (VirtualEthernetCard.backing.port.portgroupKey).
-//
-//
-//
-//
-//
-// When you use a portgroup for network access, the Server will create a port according
-// to config.type.
-//
-//
-//
-type DistributedVirtualPortgroup struct {
-	*Network
-
-	// Configuration of the portgroup.
-	Config *DVPortgroupConfigInfo
-
-	// Generated UUID of the portgroup.
-	Key string
-
-	// Port keys for the set of ports in the portgroup.
-	PortKeys []string
 }

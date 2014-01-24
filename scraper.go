@@ -123,7 +123,7 @@ func scrape() {
 	for obj := range channel {
 		totalObjects++
 
-		log.Println("type: " + obj.Name)
+		//log.Println("type: " + obj.Name)
 		objs = append(objs, obj)
 
 		counter.Lock()
@@ -219,57 +219,65 @@ func scrapeObject(refFile, name, namespace string, channel chan *Object) {
 	}
 	obj.Description = getObjectDesc(html)
 
-	//log.Println("type: " + name)
-	//log.Println(obj.Description)
-
 	d.Find(`body > table`).Each(func(i int, sel *goquery.Selection) {
 		prev := strings.TrimSpace(sel.Prev().Text())
 
 		if prev == "Properties" {
-			//obj.Properties = make([]*Property, sel.Find(`tbody > tr`).Length()-1)
 
 			sel.Find("tbody > tr").Each(func(j int, sel2 *goquery.Selection) {
-				if sel2.HasClass("r1") || sel2.HasClass("r0") {
-					p := &Property{}
-					pname := sel2.Find("td:nth-child(1)")
-
-					p.Name = strings.TrimSpace(pname.Find("strong").Text())
-
-					pname.Find("span").Each(func(k int, sel3 *goquery.Selection) {
-						spanValue := strings.TrimSpace(sel3.Text())
-						if spanValue == "*" {
-							p.Optional = true
-						} else if spanValue == "P" {
-							p.RequiredPrivileges, _ = sel3.Attr("title")
-						}
-					})
-
-					type_ := sel2.Find("td:nth-child(2) > a")
-					if type_.Length() == 1 {
-						p.Type = strings.TrimSpace(type_.Text())
-					} else if type_.Length() == 2 {
-						//Instead of getting ManagedReferenceObject, it gets
-						//the real type
-						p.Type = "mo." + strings.TrimSpace(type_.Last().Text())
-					} else {
-						//Gets primitive types such as: xsd:string, xsd:long, etc
-						text := strings.TrimSpace(sel2.Find("td:nth-child(2)").Text())
-
-						//There is an odd bug in Goquery where it
-						//returns text from the next column too but
-						//only when the next column has a nested table.
-						//Hack to overcome the issue
-						p.Type = strings.Split(text, " -")[0]
-						//p.Type = text
-					}
-
-					p.Description = strings.TrimSpace(sel2.Find("td:nth-child(3)").Text())
-
-					if p.Name != "" {
-						obj.Properties = append(obj.Properties, p)
-						//log.Printf("%#v\n", p)
-					}
+				if !sel2.HasClass("r0") && !sel2.HasClass("r1") {
+					return
 				}
+
+				p := &Property{}
+				pname := sel2.Find("td:nth-child(1)")
+
+				pnameSel := pname.Find("strong")
+				if pnameSel.Length() > 1 {
+					p.Name = pnameSel.First().Text()
+				} else {
+					p.Name = pnameSel.Text()
+				}
+
+				p.Name = strings.TrimSpace(p.Name)
+
+				if p.Name == "" {
+					return
+				}
+
+				pname.Find("span").Each(func(k int, sel3 *goquery.Selection) {
+					spanValue := strings.TrimSpace(sel3.Text())
+					if spanValue == "*" {
+						p.Optional = true
+					} else if spanValue == "P" {
+						p.RequiredPrivileges, _ = sel3.Attr("title")
+					}
+				})
+
+				type_ := sel2.Find("td:nth-child(2) > a")
+				if type_.Length() == 1 {
+					p.Type = strings.TrimSpace(type_.Text())
+				} else if type_.Length() == 2 {
+					//Instead of getting ManagedReferenceObject, it gets
+					//the real type
+					p.Type = "mo." + strings.TrimSpace(type_.Last().Text())
+				} else {
+					//Gets primitive types such as: xsd:string, xsd:long, etc
+					typeSel := sel2.Find("td:nth-child(2)")
+
+					if typeSel.Length() > 1 {
+						p.Type = typeSel.First().Text()
+					} else {
+						p.Type = typeSel.Text()
+					}
+
+					p.Type = strings.TrimSpace(p.Type)
+				}
+
+				p.Description = strings.TrimSpace(sel2.Find("td:nth-child(3)").Text())
+
+				obj.Properties = append(obj.Properties, p)
+
 			})
 		} else if prev == "Methods" {
 			methods := sel.Find("tbody > tr:nth-child(2) > td > a")
@@ -294,10 +302,20 @@ func scrapeObject(refFile, name, namespace string, channel chan *Object) {
 					//m.Parameters = make([]*Parameter, sel4.Find(`tbody > tr`).Length()-1)
 
 					sel4.Find("tbody > tr").Each(func(k int, sel5 *goquery.Selection) {
+						if !sel5.HasClass("r0") && !sel5.HasClass("r1") {
+							return
+						}
 						p := &Parameter{}
 						pname := sel5.Find("td:nth-child(1)")
 
-						p.Name = strings.TrimSpace(pname.Find("strong").Text())
+						pnameSel := pname.Find("strong")
+						if pnameSel.Length() > 1 {
+							p.Name = pnameSel.First().Text()
+						} else {
+							p.Name = pnameSel.Text()
+						}
+
+						p.Name = strings.TrimSpace(p.Name)
 
 						pname.Find("span").Each(func(k int, sel6 *goquery.Selection) {
 							spanValue := strings.TrimSpace(sel6.Text())
@@ -308,7 +326,27 @@ func scrapeObject(refFile, name, namespace string, channel chan *Object) {
 							}
 						})
 
-						p.Type = strings.TrimSpace(sel5.Find("td:nth-child(2) > a").Text())
+						type_ := sel5.Find("td:nth-child(2) > a")
+						if type_.Length() == 1 {
+							p.Type = strings.TrimSpace(type_.Text())
+						} else if type_.Length() == 2 {
+							//Instead of getting ManagedReferenceObject, it gets
+							//the real type
+							p.Type = "mo." + strings.TrimSpace(type_.Last().Text())
+						} else {
+							//Gets primitive types such as: xsd:string, xsd:long, etc
+							typeSel := sel5.Find("td:nth-child(2)")
+
+							if typeSel.Length() > 1 {
+								p.Type = typeSel.First().Text()
+							} else {
+								p.Type = typeSel.Text()
+							}
+
+							p.Type = strings.TrimSpace(p.Type)
+
+						}
+
 						p.Description = strings.TrimSpace(sel5.Find("td:nth-child(3)").Text())
 
 						if p.Name != "" {
