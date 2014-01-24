@@ -335,7 +335,7 @@ type AlarmEventArgument struct {
 	*EntityEventArgument
 
 	// The Alarm object.
-	Alarm *Alarm
+	Alarm *mo.Alarm
 }
 
 //
@@ -355,13 +355,13 @@ type AlarmInfo struct {
 	*AlarmSpec
 
 	// The alarm object.
-	Alarm *Alarm
+	Alarm *mo.Alarm
 
 	// The event ID that records the alarm creation.
 	CreationEventId int32
 
 	// The entity on which the alarm is registered.
-	Entity *ManagedEntity
+	Entity *mo.ManagedEntity
 
 	// The unique key.
 	Key string
@@ -562,10 +562,10 @@ type AlarmState struct {
 	AcknowledgedTime time.Time
 
 	// Alarm object from which the AlarmState object is instantiated.
-	Alarm *Alarm
+	Alarm *mo.Alarm
 
 	// Entity on which the alarm is instantiated.
-	Entity *ManagedEntity
+	Entity *mo.ManagedEntity
 
 	// Unique key that identifies the alarm.
 	Key string
@@ -584,7 +584,7 @@ type AlarmState struct {
 	// contain values for this property when some other property on the DataObject changes.
 	// If this update is a result of a call to WaitForUpdatesEx with a non-empty
 	// version parameter, the value for this property may not be current.
-	OverallStatus *ManagedEntityStatus
+	OverallStatus *enum.ManagedEntityStatus
 
 	// Time the alarm triggered.
 	Time time.Time
@@ -687,7 +687,7 @@ type AlarmTriggeringActionTransitionSpec struct {
 
 	// The state to which the alarm must transition for the action to fire.
 	// Valid choices are red, yellow, and green.
-	FinalState *ManagedEntityStatus
+	FinalState *enum.ManagedEntityStatus
 
 	// Whether or not the action repeats, as per the actionFrequency defined
 	// in the enclosing Alarm.
@@ -695,7 +695,7 @@ type AlarmTriggeringActionTransitionSpec struct {
 
 	// The state from which the alarm must transition for the action to
 	// fire.  Valid choices are red, yellow and green.
-	StartState *ManagedEntityStatus
+	StartState *enum.ManagedEntityStatus
 }
 
 //
@@ -842,7 +842,7 @@ type AnswerFileStatusResult struct {
 	Error []*AnswerFileStatusError
 
 	// Host associated with the answer file.
-	Host *HostSystem
+	Host *mo.HostSystem
 
 	// Status of the answer file.
 	// See HostProfileManagerAnswerFileStatus for valid values.
@@ -924,7 +924,7 @@ type ApplyStorageRecommendationResult struct {
 	// The result applying the recommendation, if it was successful.
 	// This is the equivalent of the result key for the
 	// task launched when the recommendation was applied.
-	Vm *VirtualMachine
+	Vm *mo.VirtualMachine
 }
 
 //
@@ -955,7 +955,7 @@ type ArrayUpdateSpec struct {
 	*DynamicData
 
 	// The type of operation being performed on the specified virtual device.
-	Operation *ArrayUpdateOperation
+	Operation *enum.ArrayUpdateOperation
 
 	// Key for the element to be removed. Only used if the operation
 	// is "remove".
@@ -1125,7 +1125,7 @@ type AutoStartPowerInfo struct {
 	*DynamicData
 
 	// Virtual machine to power on or power off.
-	Key *VirtualMachine
+	Key *mo.VirtualMachine
 
 	// How to start the virtual machine. Valid settings are none or powerOn.
 	// If set to none, then the virtual machine does not participate in auto-start.
@@ -1179,7 +1179,7 @@ type AutoStartPowerInfo struct {
 	// sequence. If the delay is -1, then the system default is used.
 	StopDelay int32
 
-	WaitForHeartbeat *AutoStartWaitHeartbeatSetting
+	WaitForHeartbeat *enum.AutoStartWaitHeartbeatSetting
 }
 
 //
@@ -1302,10 +1302,10 @@ type CheckResult struct {
 	Error []*LocalizedMethodFault
 
 	// The host involved in the testing.
-	Host *HostSystem
+	Host *mo.HostSystem
 
 	// The virtual machine involved in the testing.
-	Vm *VirtualMachine
+	Vm *mo.VirtualMachine
 
 	// A list of faults representing problems which may
 	// require attention, but which are not fatal.
@@ -1370,7 +1370,7 @@ type ClusterAffinityRuleSpec struct {
 	*ClusterRuleInfo
 
 	// List of virtual machine references.
-	Vm []*VirtualMachine
+	Vm []*mo.VirtualMachine
 }
 
 //
@@ -1383,7 +1383,7 @@ type ClusterAntiAffinityRuleSpec struct {
 	*ClusterRuleInfo
 
 	// List of virtual machine references.
-	Vm []*VirtualMachine
+	Vm []*mo.VirtualMachine
 }
 
 //
@@ -1394,10 +1394,10 @@ type ClusterAttemptedVmInfo struct {
 	*DynamicData
 
 	// The ID of the task, which monitors powering on.
-	Task *Task
+	Task *mo.Task
 
 	// The virtual machine being powered on.
-	Vm *VirtualMachine
+	Vm *mo.VirtualMachine
 }
 
 //
@@ -1973,7 +1973,7 @@ type ClusterDasAamNodeState struct {
 	ConfigState string
 
 	// Reference to the host.
-	Host *HostSystem
+	Host *mo.HostSystem
 
 	// Name of the host
 	// (HostSystem.name).
@@ -2147,7 +2147,7 @@ type ClusterDasConfigInfo struct {
 	// heartbeatDatastoreInfo.
 	//
 	// Since vSphere API 5.0
-	HeartbeatDatastore []*Datastore
+	HeartbeatDatastore []*mo.Datastore
 
 	// Determines whether HA restarts virtual machines after a host fails.
 	// The default value is
@@ -2270,7 +2270,7 @@ type ClusterDasFailoverLevelAdvancedRuntimeInfoHostSlots struct {
 	*DynamicData
 
 	// The reference to the host.
-	Host *HostSystem
+	Host *mo.HostSystem
 
 	// The number of slots in this host.
 	Slots int32
@@ -2312,7 +2312,7 @@ type ClusterDasFailoverLevelAdvancedRuntimeInfoVmSlots struct {
 	Slots int32
 
 	// The reference to the virtual machine
-	Vm *VirtualMachine
+	Vm *mo.VirtualMachine
 }
 
 //
@@ -2373,7 +2373,7 @@ type ClusterDasFdmHostState struct {
 	// The entity reporting the state of the host. If the reporter is a host,
 	// the property reports which host, whereas if the reporter is vCenter Server,
 	// the property is unset.
-	StateReporter *HostSystem
+	StateReporter *mo.HostSystem
 }
 
 //
@@ -2398,7 +2398,7 @@ type ClusterDasHostRecommendation struct {
 	DrsRating int32
 
 	// The recommended host.
-	Host *HostSystem
+	Host *mo.HostSystem
 }
 
 //
@@ -2427,7 +2427,7 @@ type ClusterDasVmConfigInfo struct {
 	DasSettings *ClusterDasVmSettings
 
 	// Reference to the virtual machine.
-	Key *VirtualMachine
+	Key *mo.VirtualMachine
 
 	// Deprecated.
 	// As of VI API 2.5, use
@@ -2456,7 +2456,7 @@ type ClusterDasVmConfigInfo struct {
 	//
 	// If there is nothing specified here, then the defaults are picked up from
 	// defaultVmSettings.
-	RestartPriority *DasVmPriority
+	RestartPriority *enum.DasVmPriority
 }
 
 //
@@ -2532,7 +2532,7 @@ type ClusterDpmConfigInfo struct {
 	// Specifies the default VMware DPM behavior for
 	// hosts. This default behavior can be overridden on a per host
 	// basis using the ClusterDpmHostConfigInfo object.
-	DefaultDpmBehavior *DpmBehavior
+	DefaultDpmBehavior *enum.DpmBehavior
 
 	// Flag indicating whether or not the service is enabled. This
 	// service can not be enabled, unless DRS is enabled as well.
@@ -2564,7 +2564,7 @@ type ClusterDpmHostConfigInfo struct {
 	*DynamicData
 
 	// Specifies the particular DPM behavior for this host.See ClusterDpmConfigInfo
-	Behavior *DpmBehavior
+	Behavior *enum.DpmBehavior
 
 	// Flag to indicate whether or not VirtualCenter is allowed to perform any
 	// power related operations or recommendations for this host.
@@ -2577,7 +2577,7 @@ type ClusterDpmHostConfigInfo struct {
 	Enabled bool
 
 	// Reference to the host.
-	Key *HostSystem
+	Key *mo.HostSystem
 }
 
 //
@@ -2655,7 +2655,7 @@ type ClusterDrsConfigInfo struct {
 	// Specifies the cluster-wide default DRS behavior for virtual machines.
 	// You can override the default behavior for a virtual machine
 	// by using the ClusterDrsVmConfigInfo object.
-	DefaultVmBehavior *DrsBehavior
+	DefaultVmBehavior *enum.DrsBehavior
 
 	// Flag indicating whether or not the service is enabled.
 	Enabled bool
@@ -2735,7 +2735,7 @@ type ClusterDrsFaultsFaultsByVm struct {
 
 	// The VM that DRS was trying to migrate when it generated the faults.
 	// If this property is NULL, the fault is not associated with a particular VM.
-	Vm *VirtualMachine
+	Vm *mo.VirtualMachine
 }
 
 //
@@ -2750,7 +2750,7 @@ type ClusterDrsMigration struct {
 	CpuLoad int32
 
 	// Destination host.
-	Destination *HostSystem
+	Destination *mo.HostSystem
 
 	// Current CPU load on the destination host, in MHz.
 	DestinationCpuLoad int32
@@ -2768,7 +2768,7 @@ type ClusterDrsMigration struct {
 	MemoryLoad int64
 
 	// Source host.
-	Source *HostSystem
+	Source *mo.HostSystem
 
 	// Current CPU load on the source host, in MHz.
 	SourceCpuLoad int32
@@ -2780,7 +2780,7 @@ type ClusterDrsMigration struct {
 	Time time.Time
 
 	// The virtual machine selected for migration.
-	Vm *VirtualMachine
+	Vm *mo.VirtualMachine
 }
 
 // Deprecated.
@@ -2827,7 +2827,7 @@ type ClusterDrsVmConfigInfo struct {
 	*DynamicData
 
 	// Specifies the particular DRS behavior for this virtual machine.See ClusterDrsConfigInfo
-	Behavior *DrsBehavior
+	Behavior *enum.DrsBehavior
 
 	// Flag to indicate whether or not VirtualCenter is allowed to perform any
 	// DRS migration or initial placement recommendations for this virtual
@@ -2840,7 +2840,7 @@ type ClusterDrsVmConfigInfo struct {
 	Enabled bool
 
 	// Reference to the virtual machine.
-	Key *VirtualMachine
+	Key *mo.VirtualMachine
 }
 
 //
@@ -2932,7 +2932,7 @@ type ClusterFailoverHostAdmissionControlInfoHostStatus struct {
 	*DynamicData
 
 	// The failover host.
-	Host *HostSystem
+	Host *mo.HostSystem
 
 	// The status of the failover host.
 	//
@@ -2942,7 +2942,7 @@ type ClusterFailoverHostAdmissionControlInfoHostStatus struct {
 	// some virtual machines running on it.
 	// The status red for a disconnected or not responding host, a host that
 	// is in maintenance or standby mode or that has a vSphere HA error on it.
-	Status *ManagedEntityStatus
+	Status *enum.ManagedEntityStatus
 }
 
 //
@@ -2971,7 +2971,7 @@ type ClusterFailoverHostAdmissionControlPolicy struct {
 	*ClusterDasAdmissionControlPolicy
 
 	// List of managed object references to failover hosts.
-	FailoverHosts []*HostSystem
+	FailoverHosts []*mo.HostSystem
 }
 
 //
@@ -3179,7 +3179,7 @@ type ClusterHostGroup struct {
 
 	// List of hosts that are part of this group.
 	// A host group can contain zero or more hosts.
-	Host []*HostSystem
+	Host []*mo.HostSystem
 }
 
 //
@@ -3202,7 +3202,7 @@ type ClusterHostPowerAction struct {
 	MemCapacityMB int32
 
 	// Specify whether the action is power on or power off
-	OperationType *HostPowerOperationType
+	OperationType *enum.HostPowerOperationType
 
 	// Estimated power consumption of the host. In case of power-on,
 	// this is the projected increase in the cluster's power
@@ -3221,7 +3221,7 @@ type ClusterHostRecommendation struct {
 	*DynamicData
 
 	// The recommended host.
-	Host *HostSystem
+	Host *mo.HostSystem
 
 	// Rating for the recommendation. Ratings range from 1 to 5, and
 	// the higher the rating, the stronger DRS suggests this host is
@@ -3238,10 +3238,10 @@ type ClusterInitialPlacementAction struct {
 
 	// The resource pool to place the virtual machine into in case this
 	// action is for migrating from outside cluster.
-	Pool *ResourcePool
+	Pool *mo.ResourcePool
 
 	// The host where the virtual machine should be initially placed.
-	TargetHost *HostSystem
+	TargetHost *mo.HostSystem
 }
 
 //
@@ -3266,7 +3266,7 @@ type ClusterNotAttemptedVmInfo struct {
 	Fault *LocalizedMethodFault
 
 	// The virtual machine that can not be powered on.
-	Vm *VirtualMachine
+	Vm *mo.VirtualMachine
 }
 
 //
@@ -3526,7 +3526,7 @@ type ClusterRuleInfo struct {
 	Name string
 
 	// Flag to indicate whether or not the rule is currently satisfied.
-	Status *ManagedEntityStatus
+	Status *enum.ManagedEntityStatus
 
 	// Flag to indicate whether the rule is created by the user or the system.
 	//
@@ -3593,7 +3593,7 @@ type ClusterVmGroup struct {
 
 	// List of virtual machines that are part of this group.
 	// A virtual machine group can contain zero or more virtual machines.
-	Vm []*VirtualMachine
+	Vm []*mo.VirtualMachine
 }
 
 //
@@ -3823,14 +3823,14 @@ type ComplianceResult struct {
 
 	// Entity on which the compliance check was carried out.
 	// Entity can be a Cluster, Host and so on.
-	Entity *ManagedEntity
+	Entity *mo.ManagedEntity
 
 	// If complianceStatus is non-compliant, failure will
 	// contain additional information about the compliance errors.
 	Failure []*ComplianceFailure
 
 	// Profile for which the ComplianceResult applies
-	Profile *Profile
+	Profile *mo.Profile
 }
 
 //
@@ -3940,7 +3940,7 @@ type ComputeResourceEventArgument struct {
 	*EntityEventArgument
 
 	// The ComputeResource object.
-	ComputeResource *ComputeResource
+	ComputeResource *mo.ComputeResource
 }
 
 //
@@ -3952,9 +3952,9 @@ type ComputeResourceEventArgument struct {
 type ComputeResourceHostSPBMLicenseInfo struct {
 	*DynamicData
 
-	Host *HostSystem
+	Host *mo.HostSystem
 
-	LicenseState *ComputeResourceHostSPBMLicenseInfoHostSPBMLicenseState
+	LicenseState *enum.ComputeResourceHostSPBMLicenseInfoHostSPBMLicenseState
 }
 
 //
@@ -4007,7 +4007,7 @@ type ComputeResourceSummary struct {
 	// contain values for this property when some other property on the DataObject changes.
 	// If this update is a result of a call to WaitForUpdatesEx with a non-empty
 	// version parameter, the value for this property may not be current.
-	OverallStatus *ManagedEntityStatus
+	OverallStatus *enum.ManagedEntityStatus
 
 	// Aggregated CPU resources of all hosts, in MHz.
 	TotalCpu int32
@@ -4147,7 +4147,7 @@ type ConflictingConfigurationConfig struct {
 	*DynamicData
 
 	// The entity on which the configuration is in conflict.
-	Entity *ManagedEntity
+	Entity *mo.ManagedEntity
 
 	// The property paths that are in conflict.
 	PropertyPath string
@@ -4543,7 +4543,7 @@ type CustomizationIPSettings struct {
 	IpV6Spec *CustomizationIPSettingsIpV6AddressSpec
 
 	// NetBIOS setting for Windows.
-	NetBIOS *CustomizationNetBIOSMode
+	NetBIOS *enum.CustomizationNetBIOSMode
 
 	// The IP address of the primary WINS server. This property is ignored for Linux
 	// guest operating systems.
@@ -4642,7 +4642,7 @@ type CustomizationLicenseFilePrintData struct {
 	*DynamicData
 
 	// Server licensing mode
-	AutoMode *CustomizationLicenseDataMode
+	AutoMode *enum.CustomizationLicenseDataMode
 
 	// This key is valid only if AutoMode = PerServer. The integer value indicates the
 	// number of client licenses purchased for the VirtualCenter server being
@@ -5033,7 +5033,7 @@ type CustomizationWinOptions struct {
 	// taken after running sysprep. Defaults to "reboot".
 	//
 	// Since VI API 2.5
-	Reboot *CustomizationSysprepRebootOption
+	Reboot *enum.CustomizationSysprepRebootOption
 }
 
 //
@@ -5063,7 +5063,7 @@ type DVPortConfigInfo struct {
 	// and portgroup level, they are taken as an "AND" relationship. If such
 	// a relationship doesn't make sense, the reconfigure operation will
 	// raise an exception.
-	Scope []*ManagedEntity
+	Scope []*mo.ManagedEntity
 
 	// The network configuration of the port.
 	Setting *DVPortSetting
@@ -5101,7 +5101,7 @@ type DVPortConfigSpec struct {
 	//
 	// The eligible entities that can connect to the port, for detail see
 	// scope.
-	Scope []*ManagedEntity
+	Scope []*mo.ManagedEntity
 
 	// The network setting of the port.
 	Setting *DVPortSetting
@@ -5299,7 +5299,7 @@ type DVPortgroupConfigInfo struct {
 	// This property should always be set unless the user's setting
 	// does not have System.Read privilege on the object referred to
 	// by this property.
-	DistributedVirtualSwitch *DistributedVirtualSwitch
+	DistributedVirtualSwitch *mo.DistributedVirtualSwitch
 
 	// Key of the portgroup.
 	Key string
@@ -5347,7 +5347,7 @@ type DVPortgroupConfigInfo struct {
 	// defined at both port and portgroup level, they are taken as an "AND"
 	// relationship. If such a relationship doesn't make sense, the
 	// reconfigure operation will raise an exception.
-	Scope []*ManagedEntity
+	Scope []*mo.ManagedEntity
 
 	// Type of portgroup. See
 	// DistributedVirtualPortgroup.DistributedVirtualPortgroupPortgroupType
@@ -5422,7 +5422,7 @@ type DVPortgroupConfigSpec struct {
 	//
 	// Eligible entities that can connect to the port. See
 	// DVPortgroupConfigInfo.scope.
-	Scope []*ManagedEntity
+	Scope []*mo.ManagedEntity
 
 	// Type of portgroup.
 	// See
@@ -5692,7 +5692,7 @@ type DVSConfigInfo struct {
 	// uplink ports for the host. If portgroups are shown here,
 	// those uplink ports will be added to the portgroups, with uplink ports
 	// evenly spread among the portgroups.
-	UplinkPortgroup []*DistributedVirtualPortgroup
+	UplinkPortgroup []*mo.DistributedVirtualPortgroup
 
 	// Uplink port policy.
 	UplinkPortPolicy *DVSUplinkPortPolicy
@@ -5783,7 +5783,7 @@ type DVSConfigSpec struct {
 	SwitchIpAddress string
 
 	// The uplink portgroups.
-	UplinkPortgroup []*DistributedVirtualPortgroup
+	UplinkPortgroup []*mo.DistributedVirtualPortgroup
 
 	// The uplink port policy.
 	UplinkPortPolicy *DVSUplinkPortPolicy
@@ -6304,10 +6304,10 @@ type DVSSummary struct {
 	Description string
 
 	// The hosts with Virtual NICs that connect to the switch.
-	Host []*HostSystem
+	Host []*mo.HostSystem
 
 	// The names of the hosts that join the switch.
-	HostMember []*HostSystem
+	HostMember []*mo.HostSystem
 
 	// The name of the switch.
 	Name string
@@ -6343,7 +6343,7 @@ type DVSSummary struct {
 	// contain values for this property when some other property on the DataObject changes.
 	// If this update is a result of a call to WaitForUpdatesEx with a non-empty
 	// version parameter, the value for this property may not be current.
-	Vm []*VirtualMachine
+	Vm []*mo.VirtualMachine
 }
 
 //
@@ -6494,9 +6494,9 @@ type DasEnabledEvent struct {
 type DasHeartbeatDatastoreInfo struct {
 	*DynamicData
 
-	Datastore *Datastore
+	Datastore *mo.Datastore
 
-	Hosts []*HostSystem
+	Hosts []*mo.HostSystem
 }
 
 //
@@ -6617,7 +6617,7 @@ type DatacenterEventArgument struct {
 	*EntityEventArgument
 
 	// The Datacenter object.
-	Datacenter *Datacenter
+	Datacenter *mo.Datacenter
 }
 
 //
@@ -6628,10 +6628,10 @@ type DatacenterMismatchArgument struct {
 	*DynamicData
 
 	// The invalid input entity.
-	Entity *ManagedEntity
+	Entity *mo.ManagedEntity
 
 	// The datacenter for this entity.
-	InputDatacenter *Datacenter
+	InputDatacenter *mo.Datacenter
 }
 
 type DatacenterRenamedEvent struct {
@@ -6754,7 +6754,7 @@ type DatastoreEventArgument struct {
 	*EntityEventArgument
 
 	// The Datastore object.
-	Datastore *Datastore
+	Datastore *mo.Datastore
 }
 
 //
@@ -6818,7 +6818,7 @@ type DatastoreHostMount struct {
 	*DynamicData
 
 	// The host associated with this datastore.
-	Key *HostSystem
+	Key *mo.HostSystem
 
 	// Host-specific information about the mount.
 	MountInfo *HostMountInfo
@@ -6880,7 +6880,7 @@ type DatastoreMountPathDatastorePair struct {
 	*DynamicData
 
 	// The resignatured or remounted datastore corresponding to the oldMountPath
-	Datastore *Datastore
+	Datastore *mo.Datastore
 
 	// Old file path where file system volume is mounted, which
 	// should be path value in
@@ -6985,7 +6985,7 @@ type DatastoreSummary struct {
 	Capacity int64
 
 	// The reference to the managed object.
-	Datastore *Datastore
+	Datastore *mo.Datastore
 
 	// Available space of this datastore, in bytes. The server periodically
 	// updates this value. It can be explicitly refreshed with the Refresh operation.
@@ -7068,7 +7068,7 @@ type DiagnosticManagerBundleInfo struct {
 
 	// The host to which this diagnostic bundle belongs. If this is for the default
 	// server, then it is not set.
-	System *HostSystem
+	System *mo.HostSystem
 
 	// The location from which the diagnostic bundle can be downloaded. The host part
 	// of the URL is returned as '*' if the hostname to be used is the name of the
@@ -7247,7 +7247,7 @@ type DistributedVirtualPort struct {
 	PortgroupKey string
 
 	// HostSystem that services this port.
-	ProxyHost *HostSystem
+	ProxyHost *mo.HostSystem
 
 	// Runtime state of the port.
 	State *DVPortState
@@ -7262,7 +7262,7 @@ type DistributedVirtualPortgroupInfo struct {
 	*DynamicData
 
 	// The portgroup.
-	Portgroup *DistributedVirtualPortgroup
+	Portgroup *mo.DistributedVirtualPortgroup
 
 	// The key of the portgroup.
 	PortgroupKey string
@@ -7356,7 +7356,7 @@ type DistributedVirtualSwitchHostMemberConfigInfo struct {
 	// This property should always be set unless the user's setting
 	// does not have System.Read privilege on the object referred to
 	// by this property.
-	Host *HostSystem
+	Host *mo.HostSystem
 
 	// Maximum number of ports than can be created in the proxy switch.
 	//
@@ -7384,7 +7384,7 @@ type DistributedVirtualSwitchHostMemberConfigSpec struct {
 	// Identifies a host member of a DistributedVirtualSwitch
 	// for a CreateDVS_Task or
 	// DistributedVirtualSwitch.ReconfigureDvs_Task operation.
-	Host *HostSystem
+	Host *mo.HostSystem
 
 	// Maximum number of ports allowed in the HostProxySwitch.
 	//
@@ -7482,7 +7482,7 @@ type DistributedVirtualSwitchInfo struct {
 	*DynamicData
 
 	// The switch.
-	DistributedVirtualSwitch *DistributedVirtualSwitch
+	DistributedVirtualSwitch *mo.DistributedVirtualSwitch
 
 	// The name of the switch.
 	SwitchName string
@@ -7525,7 +7525,7 @@ type DistributedVirtualSwitchManagerCompatibilityResult struct {
 	// The host for which results are annotated. The whole object will be
 	// filtered out if the caller did not have view permissions on the
 	// host entity.
-	Host *HostSystem
+	Host *mo.HostSystem
 }
 
 //
@@ -7538,7 +7538,7 @@ type DistributedVirtualSwitchManagerDvsProductSpec struct {
 	*DynamicData
 
 	// Get ProductSpec from the existing DVS
-	DistributedVirtualSwitch *DistributedVirtualSwitch
+	DistributedVirtualSwitch *mo.DistributedVirtualSwitch
 
 	// The ProductSpec for new DVS
 	NewSwitchProductSpec *DistributedVirtualSwitchProductSpec
@@ -7552,7 +7552,7 @@ type DistributedVirtualSwitchManagerHostArrayFilter struct {
 	*DistributedVirtualSwitchManagerHostDvsFilterSpec
 
 	// List of hosts to consider.
-	Host []*HostSystem
+	Host []*mo.HostSystem
 }
 
 //
@@ -7567,7 +7567,7 @@ type DistributedVirtualSwitchManagerHostContainer struct {
 
 	// Check compatibility of hosts in this container. The supported container
 	// types are Datacenter, Folder, and ComputeResource.
-	Container *ManagedEntity
+	Container *mo.ManagedEntity
 
 	// If true, include hosts of all levels in the hierarchy with
 	// container as root of the tree. In case of container being a Datacenter,
@@ -7609,7 +7609,7 @@ type DistributedVirtualSwitchManagerHostDvsFilterSpec struct {
 type DistributedVirtualSwitchManagerHostDvsMembershipFilter struct {
 	*DistributedVirtualSwitchManagerHostDvsFilterSpec
 
-	DistributedVirtualSwitch *DistributedVirtualSwitch
+	DistributedVirtualSwitch *mo.DistributedVirtualSwitch
 }
 
 //
@@ -7625,10 +7625,10 @@ type DistributedVirtualSwitchManagerImportResult struct {
 	*DynamicData
 
 	// List of distributed virtual portgroups.
-	DistributedVirtualPortgroup []*DistributedVirtualPortgroup
+	DistributedVirtualPortgroup []*mo.DistributedVirtualPortgroup
 
 	// List of distributed virtual switches.
-	DistributedVirtualSwitch []*DistributedVirtualSwitch
+	DistributedVirtualSwitch []*mo.DistributedVirtualSwitch
 
 	// Faults that occurred on the entities during the import operation.
 	ImportFault []*ImportOperationBulkFaultFaultOnImport
@@ -7648,7 +7648,7 @@ type DistributedVirtualSwitchPortConnectee struct {
 	// This property should always be set unless the user's setting
 	// does not have System.Read privilege on the object referred to
 	// by this property.
-	ConnectedEntity *ManagedEntity
+	ConnectedEntity *mo.ManagedEntity
 
 	// The key of the virtual NIC that connects to this port.
 	NicKey string
@@ -7742,7 +7742,7 @@ type DistributedVirtualSwitchPortCriteria struct {
 	//
 	// If set, only the ports of which the scope covers the entity are
 	// qualified.
-	Scope *ManagedEntity
+	Scope *mo.ManagedEntity
 
 	// If set to true, only the uplink ports are qualified. If set to false, only
 	// non-uplink ports are qualified.
@@ -8092,7 +8092,7 @@ type DvsEventArgument struct {
 	*EntityEventArgument
 
 	// The distributed virtual switch object.
-	Dvs *DistributedVirtualSwitch
+	Dvs *mo.DistributedVirtualSwitch
 }
 
 //
@@ -8449,7 +8449,7 @@ type DvsOperationBulkFaultFaultOnHost struct {
 	// The fault that occured.
 	Fault *LocalizedMethodFault
 
-	Host *HostSystem
+	Host *mo.HostSystem
 }
 
 //
@@ -9336,7 +9336,7 @@ type EntityBackupConfig struct {
 	// the container type is Folder. If entityType
 	// is "distributedVirtualPortgroup", the container type is
 	// DistributedVirtualSwitch.
-	Container *ManagedEntity
+	Container *mo.ManagedEntity
 
 	// Type of the exported entity
 	// (DVSManagerExportEntity_Task).
@@ -9392,7 +9392,7 @@ type EntityPrivilege struct {
 	*DynamicData
 
 	// The entity on which the privileges are checked.
-	Entity *ManagedEntity
+	Entity *mo.ManagedEntity
 
 	// whether a set of privileges are granted for the managed entity.
 	PrivAvailability []*PrivilegeAvailability
@@ -9561,7 +9561,7 @@ type EventAlarmExpression struct {
 	// actions are fired (rather than those for the transition).
 	//
 	// Since vSphere API 4.0
-	Status *ManagedEntityStatus
+	Status *enum.ManagedEntityStatus
 }
 
 //
@@ -9805,7 +9805,7 @@ type EventFilterSpec struct {
 	// associated with the specified alarm.
 	// If the property is not set, events are collected regardless of their
 	// association with alarms.
-	Alarm *Alarm
+	Alarm *mo.Alarm
 
 	// This property, if set, limits the set of collected events to those
 	// associated with the specified category.
@@ -9855,7 +9855,7 @@ type EventFilterSpec struct {
 	// associated with the specified scheduled task.
 	// If the property is not set, events are collected regardless of their
 	// association with any scheduled task.
-	ScheduledTask *ScheduledTask
+	ScheduledTask *mo.ScheduledTask
 
 	// This property, if set, limits the set of filtered events to those that
 	// have it. If not set, or the size of it 0, the tag of an event is
@@ -9896,10 +9896,10 @@ type EventFilterSpecByEntity struct {
 	*DynamicData
 
 	// The managed entity to which the event pertains.
-	Entity *ManagedEntity
+	Entity *mo.ManagedEntity
 
 	// Specification of related managed entities in the inventory hierarchy.
-	Recursion *EventFilterSpecRecursionOption
+	Recursion *enum.EventFilterSpecRecursionOption
 }
 
 //
@@ -9989,7 +9989,7 @@ type ExtExtendedProductInfo struct {
 	ProductUrl string
 
 	// The VirtualMachine or VirtualApp that is running this extension.
-	Self *ManagedEntity
+	Self *mo.ManagedEntity
 }
 
 //
@@ -10515,7 +10515,7 @@ type FaultToleranceConfigInfo struct {
 type FaultTolerancePrimaryConfigInfo struct {
 	*FaultToleranceConfigInfo
 
-	Secondaries []*VirtualMachine
+	Secondaries []*mo.VirtualMachine
 }
 
 //
@@ -10526,7 +10526,7 @@ type FaultTolerancePrimaryConfigInfo struct {
 type FaultToleranceSecondaryConfigInfo struct {
 	*FaultToleranceConfigInfo
 
-	PrimaryVM *VirtualMachine
+	PrimaryVM *mo.VirtualMachine
 }
 
 //
@@ -10557,7 +10557,7 @@ type FaultToleranceSecondaryOpResult struct {
 	PowerOnResult *ClusterPowerOnVmResult
 
 	// The Secondary VirtualMachine
-	Vm *VirtualMachine
+	Vm *mo.VirtualMachine
 }
 
 //
@@ -10844,7 +10844,7 @@ type FolderEventArgument struct {
 	*EntityEventArgument
 
 	// The Folder object.
-	Folder *Folder
+	Folder *mo.Folder
 }
 
 //
@@ -11190,7 +11190,7 @@ type GuestInfo struct {
 	//
 	//
 	// Current status of VMware Tools in the guest operating system, if known.
-	ToolsStatus *VirtualMachineToolsStatus
+	ToolsStatus *enum.VirtualMachineToolsStatus
 
 	// Current version of VMware Tools, if known.
 	ToolsVersion string
@@ -12094,7 +12094,7 @@ type HostCacheConfigurationInfo struct {
 	*DynamicData
 
 	// Datastore used for swap performance enhancements.
-	Key *Datastore
+	Key *mo.Datastore
 
 	// Space allocated on this datastore to implement swap performance
 	// enhancements, in MB.
@@ -12109,7 +12109,7 @@ type HostCacheConfigurationSpec struct {
 	*DynamicData
 
 	// Datastore used for swap performance enhancement.
-	Datastore *Datastore
+	Datastore *mo.Datastore
 
 	// Space to allocate on this datastore to implement swap performance
 	// enhancements, in MB.  This value should be less or equal to free space
@@ -12867,7 +12867,7 @@ type HostConfigInfo struct {
 	GraphicsInfo []*HostGraphicsInfo
 
 	// A reference to a managed object on a host.
-	Host *HostSystem
+	Host *mo.HostSystem
 
 	// If hyperthreading is supported, this is the CPU configuration for
 	// optimizing hyperthreading.
@@ -12891,7 +12891,7 @@ type HostConfigInfo struct {
 	// Note: Using a host-specific swap location may degrade VMotion performance.
 	//
 	// Since VI API 2.5
-	LocalSwapDatastore *Datastore
+	LocalSwapDatastore *mo.Datastore
 
 	// Array of the feature capabilities that the host has after the
 	// mask has been applied.
@@ -13023,20 +13023,20 @@ type HostConfigManager struct {
 	*DynamicData
 
 	// Advanced options.
-	AdvancedOption *OptionManager
+	AdvancedOption *mo.OptionManager
 
 	// Authentication method configuration - for example, for Active Directory membership.
 	//
 	// Since vSphere API 4.1
-	AuthenticationManager *HostAuthenticationManager
+	AuthenticationManager *mo.HostAuthenticationManager
 
 	// Auto-start and auto-stop configuration.
-	AutoStartManager *HostAutoStartManager
+	AutoStartManager *mo.HostAutoStartManager
 
 	// Boot device order management.
 	//
 	// Since VI API 2.5
-	BootDeviceSystem *HostBootDeviceSystem
+	BootDeviceSystem *mo.HostBootDeviceSystem
 
 	// Deprecated.
 	// As of vSphere API 5.5, use vFlashManager instead.
@@ -13045,106 +13045,106 @@ type HostConfigManager struct {
 	// Host solid state drive cache configuration manager.
 	//
 	// Since vSphere API 5.0
-	CacheConfigurationManager *HostCacheConfigurationManager
+	CacheConfigurationManager *mo.HostCacheConfigurationManager
 
 	// The CPU scheduler that determines which threads execute on a CPU
 	// at any given time.
-	CpuScheduler *HostCpuSchedulerSystem
+	CpuScheduler *mo.HostCpuSchedulerSystem
 
 	// The datastore manager.
-	DatastoreSystem *HostDatastoreSystem
+	DatastoreSystem *mo.HostDatastoreSystem
 
 	// DateTime configuration
 	//
 	// Since VI API 2.5
-	DateTimeSystem *HostDateTimeSystem
+	DateTimeSystem *mo.HostDateTimeSystem
 
 	// The diagnostic for the ESX Server system.
-	DiagnosticSystem *HostDiagnosticSystem
+	DiagnosticSystem *mo.HostDiagnosticSystem
 
 	// Esx Agent resource configuration manager
 	//
 	// Since vSphere API 5.0
-	EsxAgentHostManager *HostEsxAgentHostManager
+	EsxAgentHostManager *mo.HostEsxAgentHostManager
 
 	// The firewall configuration.
-	FirewallSystem *HostFirewallSystem
+	FirewallSystem *mo.HostFirewallSystem
 
 	// Firmware management.
 	//
 	// Since VI API 2.5
-	FirmwareSystem *HostFirmwareSystem
+	FirmwareSystem *mo.HostFirmwareSystem
 
 	// Host graphics manager.
 	//
 	// Since vSphere API 5.5
-	GraphicsManager *HostGraphicsManager
+	GraphicsManager *mo.HostGraphicsManager
 
 	// System health status manager.
 	//
 	// Since VI API 2.5
-	HealthStatusSystem *HostHealthStatusSystem
+	HealthStatusSystem *mo.HostHealthStatusSystem
 
 	// Host image configuration management.
 	//
 	// Since vSphere API 5.0
-	ImageConfigManager *HostImageConfigManager
+	ImageConfigManager *mo.HostImageConfigManager
 
 	// Iscsi Management Operations managed entity
 	//
 	// Since vSphere API 5.0
-	IscsiManager *IscsiManager
+	IscsiManager *mo.IscsiManager
 
 	// Kernel module configuration management.
 	//
 	// Since vSphere API 4.0
-	KernelModuleSystem *HostKernelModuleSystem
+	KernelModuleSystem *mo.HostKernelModuleSystem
 
 	// License manager
 	//
 	// Since vSphere API 4.0
-	LicenseManager *LicenseManager
+	LicenseManager *mo.LicenseManager
 
 	// The memory manager on the host.
-	MemoryManager *HostMemorySystem
+	MemoryManager *mo.HostMemorySystem
 
 	// The network system configuration.
-	NetworkSystem *HostNetworkSystem
+	NetworkSystem *mo.HostNetworkSystem
 
 	// Host patch management.
 	//
 	// Since VI API 2.5
-	PatchManager *HostPatchManager
+	PatchManager *mo.HostPatchManager
 
 	// PciDeviceSystem for passthru.
 	//
 	// Since vSphere API 4.0
-	PciPassthruSystem *HostPciPassthruSystem
+	PciPassthruSystem *mo.HostPciPassthruSystem
 
 	// Power System manager.
 	//
 	// Since vSphere API 4.1
-	PowerSystem *HostPowerSystem
+	PowerSystem *mo.HostPowerSystem
 
 	// The configuration of the host services (for example,
 	// SSH, FTP, and Telnet).
-	ServiceSystem *HostServiceSystem
+	ServiceSystem *mo.HostServiceSystem
 
 	// Snmp configuration
-	SnmpSystem *HostSnmpSystem
+	SnmpSystem *mo.HostSnmpSystem
 
 	// The storage configuration.
-	StorageSystem *HostStorageSystem
+	StorageSystem *mo.HostStorageSystem
 
 	// vFlash Manager
 	//
 	// Since vSphere API 5.5
-	VFlashManager *HostVFlashManager
+	VFlashManager *mo.HostVFlashManager
 
 	// The VirtualNic configuration.
 	//
 	// Since vSphere API 4.0
-	VirtualNicManager *HostVirtualNicManager
+	VirtualNicManager *mo.HostVirtualNicManager
 
 	// Deprecated.
 	// As of VI API 4.0, use virtualNicManager
@@ -13152,17 +13152,17 @@ type HostConfigManager struct {
 	//
 	//
 	// The VMotion configuration.
-	VmotionSystem *HostVMotionSystem
+	VmotionSystem *mo.HostVMotionSystem
 
 	// VsanInternalSystem managed entity.
 	//
 	// Since vSphere API 5.5
-	VsanInternalSystem *HostVsanInternalSystem
+	VsanInternalSystem *mo.HostVsanInternalSystem
 
 	// VsanSystem managed entity.
 	//
 	// Since vSphere API 5.5
-	VsanSystem *HostVsanSystem
+	VsanSystem *mo.HostVsanSystem
 }
 
 //
@@ -13240,12 +13240,12 @@ type HostConfigSummary struct {
 	// Datastore used to deploy Agent VMs on for this host.
 	//
 	// Since vSphere API 5.0
-	AgentVmDatastore *Datastore
+	AgentVmDatastore *mo.Datastore
 
 	// Management network for Agent VMs.
 	//
 	// Since vSphere API 5.0
-	AgentVmNetwork *Network
+	AgentVmNetwork *mo.Network
 
 	// The flag to indicate whether or not Fault Tolerance logging is enabled on this host.
 	//
@@ -13416,7 +13416,7 @@ type HostConnectSpec struct {
 	// (and possibly created) by the VirtualCenter.  This folder exists (or
 	// is possibly created) on the
 	// VirtualCenter server and is called "Discovered VM".
-	VmFolder *Folder
+	VmFolder *mo.Folder
 }
 
 //
@@ -13703,7 +13703,7 @@ type HostDatastoreBrowserSearchResults struct {
 	*DynamicData
 
 	// Datastore contains the results.
-	Datastore *Datastore
+	Datastore *mo.Datastore
 
 	// Set of matching files, if any.
 	File []*FileInfo
@@ -14470,10 +14470,10 @@ type HostEsxAgentHostManagerConfigInfo struct {
 	*DynamicData
 
 	// Datastore used for deploying Agent VMs on this host.
-	AgentVmDatastore *Datastore
+	AgentVmDatastore *mo.Datastore
 
 	// Management Network for Agent VMs on this host.
-	AgentVmNetwork *Network
+	AgentVmNetwork *mo.Network
 }
 
 //
@@ -14492,7 +14492,7 @@ type HostEventArgument struct {
 	*EntityEventArgument
 
 	// The host object.
-	Host *HostSystem
+	Host *mo.HostSystem
 }
 
 // Deprecated.
@@ -14571,7 +14571,7 @@ type HostFibreChannelHba struct {
 	NodeWorldWideName int64
 
 	// The type of the fiber channel port.
-	PortType *FibreChannelPortType
+	PortType *enum.FibreChannelPortType
 
 	// The world wide port name for the adapter.
 	PortWorldWideName int64
@@ -14900,7 +14900,7 @@ type HostFirewallRule struct {
 	*DynamicData
 
 	// The port direction.
-	Direction *HostFirewallRuleDirection
+	Direction *enum.HostFirewallRuleDirection
 
 	// For a port range, the ending port number.
 	EndPort int32
@@ -14911,7 +14911,7 @@ type HostFirewallRule struct {
 	// The port type.
 	//
 	// Since vSphere API 5.0
-	PortType *HostFirewallRulePortType
+	PortType *enum.HostFirewallRulePortType
 
 	// The port protocol.  Valid values are defined by the
 	// HostFirewallRuleProtocol enumeration.
@@ -15071,7 +15071,7 @@ type HostGraphicsInfo struct {
 	VendorName string
 
 	// Virtual machines using this graphics device.
-	Vm []*VirtualMachine
+	Vm []*mo.VirtualMachine
 }
 
 //
@@ -15397,7 +15397,7 @@ type HostInternetScsiHba struct {
 	// interface to function.
 	//
 	// Since vSphere API 5.0
-	NetworkBindingSupport *HostInternetScsiHbaNetworkBindingSupportType
+	NetworkBindingSupport *enum.HostInternetScsiHbaNetworkBindingSupportType
 
 	// A list of supported key/value pair advanced options for the
 	// host bus adapter including their type information.
@@ -16274,7 +16274,7 @@ type HostListSummary struct {
 	Hardware *HostHardwareSummary
 
 	// The reference to the host-managed object.
-	Host *HostSystem
+	Host *mo.HostSystem
 
 	// IP address of the VirtualCenter server managing this host, if any.
 	//
@@ -16301,7 +16301,7 @@ type HostListSummary struct {
 	// contain values for this property when some other property on the DataObject changes.
 	// If this update is a result of a call to WaitForUpdatesEx with a non-empty
 	// version parameter, the value for this property may not be current.
-	OverallStatus *ManagedEntityStatus
+	OverallStatus *enum.ManagedEntityStatus
 
 	// Basic host statistics.
 	QuickStats *HostListSummaryQuickStats
@@ -16556,7 +16556,7 @@ type HostMemberRuntimeInfo struct {
 	HealthCheckResult []*HostMemberHealthCheckResult
 
 	// The host.
-	Host *HostSystem
+	Host *mo.HostSystem
 
 	// Host proxy switch status. See
 	// HostComponentState for valid values.
@@ -18798,7 +18798,7 @@ type HostProfileCompleteConfigSpec struct {
 	// to validate the profile.
 	//
 	// Since vSphere API 5.0
-	ValidatorHost *HostSystem
+	ValidatorHost *mo.HostSystem
 }
 
 //
@@ -18856,7 +18856,7 @@ type HostProfileHostBasedConfigSpec struct {
 	*HostProfileConfigSpec
 
 	// ESX host.
-	Host *HostSystem
+	Host *mo.HostSystem
 
 	// Flag indicating if the Profile Engine should use the profile
 	// plug-ins present on the host to create the profile.
@@ -18896,7 +18896,7 @@ type HostProfileSerializedHostProfileSpec struct {
 
 	// Host for profile validation. This can be a host on which
 	// the profile is intended to be used.
-	ValidatorHost *HostSystem
+	ValidatorHost *mo.HostSystem
 }
 
 //
@@ -19068,7 +19068,7 @@ type HostResignatureRescanResult struct {
 
 	// When an UnresolvedVmfsVolume has been resignatured, we want to return the
 	// newly created VMFS Datastore.
-	Result *Datastore
+	Result *mo.Datastore
 }
 
 //
@@ -19083,7 +19083,7 @@ type HostRuntimeInfo struct {
 
 	// The host connection state. See the description in the enums for the
 	// ConnectionState data object type.
-	ConnectionState *HostSystemConnectionState
+	ConnectionState *enum.HostSystemConnectionState
 
 	// The availability state of an active host in a vSphere HA enabled
 	// cluster. A host is inactive if it is in maintenance or standby mode, or
@@ -19121,7 +19121,7 @@ type HostRuntimeInfo struct {
 	// PowerState data object type.
 	//
 	// Since VI API 2.5
-	PowerState *HostSystemPowerState
+	PowerState *enum.HostSystemPowerState
 
 	// The host's standby mode. For valid values see
 	// HostStandbyMode. The property is only populated by
@@ -19559,7 +19559,7 @@ type HostSnmpSystemAgentLimits struct {
 	// Supported Capability for this agent
 	//
 	// Since vSphere API 4.0
-	Capability *HostSnmpAgentCapability
+	Capability *enum.HostSnmpAgentCapability
 
 	// SNMP input buffer size
 	MaxBufferSize int32
@@ -20518,7 +20518,7 @@ type HostVMotionCompatibility struct {
 	Compatibility []string
 
 	// The prospective host for the virtual machine.
-	Host *HostSystem
+	Host *mo.HostSystem
 }
 
 //
@@ -20996,7 +20996,7 @@ type HostVmciAccessManagerAccessSpec struct {
 
 	Services []string
 
-	Vm *VirtualMachine
+	Vm *mo.VirtualMachine
 }
 
 //
@@ -21013,7 +21013,7 @@ type HostVmfsRescanResult struct {
 	Fault *LocalizedMethodFault
 
 	// Host name on which rescan was performed
-	Host *HostSystem
+	Host *mo.HostSystem
 }
 
 //
@@ -21336,7 +21336,7 @@ type HttpNfcLeaseInfo struct {
 
 	// The VirtualMachine or VirtualApp this
 	// lease covers.
-	Entity *ManagedEntity
+	Entity *mo.ManagedEntity
 
 	// Map of URLs for leased hosts for a given datastore. This is used to
 	// look up multi-POST-capable hosts for a datastore.
@@ -21345,7 +21345,7 @@ type HttpNfcLeaseInfo struct {
 	HostMap []*HttpNfcLeaseDatastoreLeaseInfo
 
 	// The HttpNfcLease object this information belongs to.
-	Lease *HttpNfcLease
+	Lease *mo.HttpNfcLease
 
 	// Number of seconds before the lease times out. The client extends
 	// the lease by calling HttpNfcLeaseProgress before
@@ -21691,7 +21691,7 @@ type IpPoolAssociation struct {
 	*DynamicData
 
 	// The network object
-	Network *Network
+	Network *mo.Network
 
 	// The name of the network or portgroup
 	//
@@ -22083,7 +22083,7 @@ type LatencySensitivity struct {
 	*DynamicData
 
 	// The nominal latency-sensitive level of the application.
-	Level *LatencySensitivitySensitivityLevel
+	Level *enum.LatencySensitivitySensitivityLevel
 
 	// Deprecated.
 	// As of vSphere version 5.5, this field is deprecated.
@@ -22178,7 +22178,7 @@ type LicenseDiagnostics struct {
 	OpFailureMessage string
 
 	// The general state of the license subsystem.
-	OpState *LicenseManagerState
+	OpState *enum.LicenseManagerState
 
 	// A timestamp of when sourceAvailable last changed state, expressed in UTC.
 	SourceLastChanged time.Time
@@ -22260,7 +22260,7 @@ type LicenseFeatureInfo struct {
 
 	// Describes the state of the feature based on the current edition license. This
 	// property is unset for an edition license.
-	State *LicenseFeatureInfoState
+	State *enum.LicenseFeatureInfoState
 }
 
 //
@@ -22341,7 +22341,7 @@ type LicenseReservationInfo struct {
 	Required int32
 
 	// Describes the reservation state of a license.
-	State *LicenseReservationInfoState
+	State *enum.LicenseReservationInfoState
 }
 
 //
@@ -22642,7 +22642,7 @@ type LocalizationManagerMessageCatalog struct {
 type LocalizedMethodFault struct {
 	*DynamicData
 
-	Fault *MethodFault
+	Fault *fault.MethodFault
 
 	// The localized message that would be sent in the faultstring element
 	// of the SOAP Fault.  It is optional so that clients are not required
@@ -22764,7 +22764,7 @@ type ManagedEntityEventArgument struct {
 	*EntityEventArgument
 
 	// The managed entity.
-	Entity *ManagedEntity
+	Entity *mo.ManagedEntity
 }
 
 //
@@ -23188,7 +23188,7 @@ type MetricAlarmExpression struct {
 	Metric *PerfMetricId
 
 	// The operation to be tested on the metric.
-	Operator *MetricAlarmOperator
+	Operator *enum.MetricAlarmOperator
 
 	// Whether or not to test for a red condition.
 	// If not set, do not calculate red status.
@@ -23413,10 +23413,10 @@ type MonthlyByWeekdayTaskScheduler struct {
 	*MonthlyTaskScheduler
 
 	// The week in the month during which the scheduled task is to run.
-	Offset *WeekOfMonth
+	Offset *enum.WeekOfMonth
 
 	// The day in the week when the scheduled task is to run.
-	Weekday *DayOfWeek
+	Weekday *enum.DayOfWeek
 }
 
 //
@@ -24023,7 +24023,7 @@ type NetworkEventArgument struct {
 	*EntityEventArgument
 
 	// The Network object.
-	Network *Network
+	Network *mo.Network
 }
 
 //
@@ -24154,7 +24154,7 @@ type NetworkSummary struct {
 	Name string
 
 	// Reference to the associated managed object.
-	Network *Network
+	Network *mo.Network
 }
 
 //
@@ -24328,7 +24328,7 @@ type ObjectUpdate struct {
 	ChangeSet []*PropertyChange
 
 	// Kind of update that caused the filter to report a change.
-	Kind *ObjectUpdateKind
+	Kind *enum.ObjectUpdateKind
 
 	// Properties whose value could not be retrieved and their associated
 	// faults.  Present only if the "kind" is either "modify" or "enter".
@@ -24505,7 +24505,7 @@ type OvfConsumerOstNode struct {
 	// This field is set when this OstNode represents an existing managed entity.
 	//
 	// The entity is unset on nodes of type OstNodeType.envelope.
-	Entity *ManagedEntity
+	Entity *mo.ManagedEntity
 
 	// The OVF id of the Content (VirtualSystem or VirtualSystemCollection)
 	// element. Empty on the envelope node.
@@ -24592,7 +24592,7 @@ type OvfCreateDescriptorParams struct {
 	// createDescriptor call.
 	//
 	// Since vSphere API 5.5
-	Snapshot *VirtualMachineSnapshot
+	Snapshot *mo.VirtualMachineSnapshot
 }
 
 //
@@ -24659,7 +24659,7 @@ type OvfCreateImportSpecParams struct {
 	// the resource pool.
 	//
 	// The privilege System.Read is required on the host.
-	HostSystem *HostSystem
+	HostSystem *mo.HostSystem
 
 	// The instantiation OST to configure OVF consumers. This is created by the client
 	// from the annotated OST. See OvfConsumer for details.
@@ -24933,7 +24933,7 @@ type OvfNetworkMapping struct {
 
 	Name string
 
-	Network *Network
+	Network *mo.Network
 }
 
 //
@@ -25064,12 +25064,12 @@ type OvfResourceMap struct {
 	// override the default datastore passed into CreateImportSpec field.
 	// This enables importing to different compute resources that do not have shared
 	// datastores.
-	Datastore *Datastore
+	Datastore *mo.Datastore
 
 	// The parent resource pool to use for the entity. This must specify a
 	// resource pool that is not part of the vApp. If this is specified, a linked
 	// child (as opposed to a direct child) is created for the vApp.
-	Parent *ResourcePool
+	Parent *mo.ResourcePool
 
 	// An optional resource configuration for the created entity. If
 	// not specified, the resource configuration given in the OVF descriptor
@@ -25231,11 +25231,11 @@ type PerfCounterInfo struct {
 	// latest, summation, or none. This determines the type of statistical
 	// values that are returned for the counter. None means that the counter
 	// is never rolled up.
-	RollupType *PerfSummaryType
+	RollupType *enum.PerfSummaryType
 
 	// Statistics type for the counter. Valid values include absolute, delta,
 	// or rate.
-	StatsType *PerfStatsType
+	StatsType *enum.PerfStatsType
 
 	// The unit for the values of the performance counter with its label and
 	// summary details. See PerformanceManagerUnit for a
@@ -25784,7 +25784,7 @@ type Permission struct {
 	// Managed entity the permission is defined on.  Left unset
 	// when calling setPermissions or resetPermissions, but present
 	// for the results of permission queries.
-	Entity *ManagedEntity
+	Entity *mo.ManagedEntity
 
 	// Whether principal refers to a user or a group.  True for
 	// a group and false for a user.
@@ -26694,7 +26694,7 @@ type ProfileEventArgument struct {
 
 	Name string
 
-	Profile *Profile
+	Profile *mo.Profile
 }
 
 //
@@ -27017,7 +27017,7 @@ type ProfileReferenceHostChangedEvent struct {
 	*ProfileEvent
 
 	// The newly associated reference host with this profile
-	ReferenceHost *HostSystem
+	ReferenceHost *mo.HostSystem
 }
 
 //
@@ -27089,7 +27089,7 @@ type PropertyChange struct {
 	// into the collection.removeThe property is a collection and the change deletes an element
 	// from the collection.assignThe change is a new value for the property.indirectRemoveThe property was removed because a containing property was removed
 	// or unset
-	Op *PropertyChangeOp
+	Op *enum.PropertyChangeOp
 
 	// New value for the property when "op" is either "add" or "assign".
 	Val interface{}
@@ -27147,7 +27147,7 @@ type PropertyFilterUpdate struct {
 	*DynamicData
 
 	// Filter that was updated.
-	Filter *PropertyFilter
+	Filter *mo.PropertyFilter
 
 	// Objects that could not be found on the server, but were specified in a
 	// objectSet.
@@ -27746,7 +27746,7 @@ type ResourceConfigSpec struct {
 
 	// Reference to the entity with this resource specification:
 	// either a VirtualMachine or a ResourcePool.
-	Entity *ManagedEntity
+	Entity *mo.ManagedEntity
 
 	// Timestamp when the resources were last modified. This is ignored when
 	// the object is used to update a configuration.
@@ -27793,7 +27793,7 @@ type ResourcePoolEventArgument struct {
 	*EntityEventArgument
 
 	// The ResourcePool object.
-	ResourcePool *ResourcePool
+	ResourcePool *mo.ResourcePool
 }
 
 //
@@ -27987,7 +27987,7 @@ type ResourcePoolRuntimeInfo struct {
 
 	// Overall health of the tree. See header for description of various
 	// statuses and when they are set
-	OverallStatus *ManagedEntityStatus
+	OverallStatus *enum.ManagedEntityStatus
 }
 
 //
@@ -28328,7 +28328,7 @@ type ScheduledTaskEventArgument struct {
 	*EntityEventArgument
 
 	// The scheduled task object.
-	ScheduledTask *ScheduledTask
+	ScheduledTask *mo.ScheduledTask
 }
 
 //
@@ -28350,7 +28350,7 @@ type ScheduledTaskInfo struct {
 	*ScheduledTaskSpec
 
 	// The running task instance when the scheduled task state is "running".
-	ActiveTask *Task
+	ActiveTask *mo.Task
 
 	// The entity on which related events will be logged.
 	// If the task is scheduled on a ManagedEntity, this
@@ -28359,7 +28359,7 @@ type ScheduledTaskInfo struct {
 	// will have information about the entity on which
 	// the events will be logged on behalf of the ManagedObject.
 	// ManagedObject itself will be denoted by taskObject
-	Entity *ManagedEntity
+	Entity *mo.ManagedEntity
 
 	// The fault code when the scheduled task state is "error".
 	Error *LocalizedMethodFault
@@ -28383,10 +28383,10 @@ type ScheduledTaskInfo struct {
 	Result interface{}
 
 	// Scheduled task object.
-	ScheduledTask *ScheduledTask
+	ScheduledTask *mo.ScheduledTask
 
 	// Scheduled task state.
-	State *TaskInfoState
+	State *enum.TaskInfoState
 
 	// The object on which the scheduled task is defined.
 	// This field will have information about either the
@@ -28856,30 +28856,30 @@ type ServiceContent struct {
 	About *AboutInfo
 
 	// A singleton managed object that manages host local user and group accounts.
-	AccountManager *HostLocalAccountManager
+	AccountManager *mo.HostLocalAccountManager
 
 	// A singleton managed object that manages alarms.
-	AlarmManager *AlarmManager
+	AlarmManager *mo.AlarmManager
 
 	// Manages permissions for managed entities in the service.
-	AuthorizationManager *AuthorizationManager
+	AuthorizationManager *mo.AuthorizationManager
 
 	// A singleton managed object that manages the cluster profiles.
 	//
 	// Since vSphere API 4.0
-	ClusterProfileManager *ClusterProfileManager
+	ClusterProfileManager *mo.ClusterProfileManager
 
 	// A singleton managed object that manages compliance aspects of entities.
 	//
 	// Since vSphere API 4.0
-	ComplianceManager *ProfileComplianceManager
+	ComplianceManager *mo.ProfileComplianceManager
 
 	// A singleton managed object that managed custom fields.
-	CustomFieldsManager *CustomFieldsManager
+	CustomFieldsManager *mo.CustomFieldsManager
 
 	// A singleton managed object that manages saved guest customization
 	// specifications.
-	CustomizationSpecManager *CustomizationSpecManager
+	CustomizationSpecManager *mo.CustomizationSpecManager
 
 	// Datastore Namespace manager.
 	//
@@ -28887,119 +28887,119 @@ type ServiceContent struct {
 	// related to datastores' namespaces.
 	//
 	// Since vSphere API 5.5
-	DatastoreNamespaceManager *DatastoreNamespaceManager
+	DatastoreNamespaceManager *mo.DatastoreNamespaceManager
 
 	// A singleton managed object that provides access to low-level log files.
-	DiagnosticManager *DiagnosticManager
+	DiagnosticManager *mo.DiagnosticManager
 
 	// A singleton managed object that provides relevant information of
 	// DistributedVirtualSwitch.
 	//
 	// Since vSphere API 4.0
-	DvSwitchManager *DistributedVirtualSwitchManager
+	DvSwitchManager *mo.DistributedVirtualSwitchManager
 
 	// A singleton managed object that manages events.
-	EventManager *EventManager
+	EventManager *mo.EventManager
 
 	// A singleton managed object that manages extensions.
 	//
 	// Since VI API 2.5
-	ExtensionManager *ExtensionManager
+	ExtensionManager *mo.ExtensionManager
 
 	// A singleton managed object that allows management of files present
 	// on datastores.
 	//
 	// Since VI API 2.5
-	FileManager *FileManager
+	FileManager *mo.FileManager
 
 	// A singleton managed object that provides methods for guest operations.
 	//
 	// Since vSphere API 5.0
-	GuestOperationsManager *GuestOperationsManager
+	GuestOperationsManager *mo.GuestOperationsManager
 
 	// A singleton managed object that manages the host profiles.
 	//
 	// Since vSphere API 4.0
-	HostProfileManager *HostProfileManager
+	HostProfileManager *mo.HostProfileManager
 
 	// A singleton managed object that supports management of IpPool objects. IP pools are
 	// used when allocating IPv4 and IPv6 addresses to vApps.
 	//
 	// Since vSphere API 4.0
-	IpPoolManager *IpPoolManager
+	IpPoolManager *mo.IpPoolManager
 
 	// A singleton managed object that manages licensing
-	LicenseManager *LicenseManager
+	LicenseManager *mo.LicenseManager
 
 	// A singleton managed object that provides methods for retrieving message
 	// catalogs for client-side localization support.
 	//
 	// Since vSphere API 4.0
-	LocalizationManager *LocalizationManager
+	LocalizationManager *mo.LocalizationManager
 
 	// A singleton managed object that can generate OVF descriptors (export) and create
 	// vApps (single-VM or vApp container-based) from OVF descriptors (import).
 	//
 	// Since vSphere API 4.0
-	OvfManager *OvfManager
+	OvfManager *mo.OvfManager
 
 	// A singleton managed object that manages the collection and reporting
 	// of performance statistics.
-	PerfManager *PerformanceManager
+	PerfManager *mo.PerformanceManager
 
 	// Reference to a per-session object for retrieving properties and updates.
-	PropertyCollector *PropertyCollector
+	PropertyCollector *mo.PropertyCollector
 
 	// Reference to the top of the inventory managed by this service.
-	RootFolder *Folder
+	RootFolder *mo.Folder
 
 	// A singleton managed object that manages scheduled tasks.
-	ScheduledTaskManager *ScheduledTaskManager
+	ScheduledTaskManager *mo.ScheduledTaskManager
 
 	// A singleton managed object that allows search of the inventory
-	SearchIndex *SearchIndex
+	SearchIndex *mo.SearchIndex
 
 	// A singleton managed object that manages local services.
 	//
 	// Since vSphere API 5.1
-	ServiceManager *ServiceManager
+	ServiceManager *mo.ServiceManager
 
 	// Managed object for logging in and managing sessions.
-	SessionManager *SessionManager
+	SessionManager *mo.SessionManager
 
 	// Generic configuration for a management server. This is for example by
 	// vCenter to store the vCenter Settings. This is not used for a
 	// stand-alone host, instead the vim.host.ConfigManager.advancedOption is used.See HostConfigManager
-	Setting *OptionManager
+	Setting *mo.OptionManager
 
 	// A singleton managed object that allows SNMP configuration.
 	// Not set if not supported on a particular platform.
 	//
 	// Since vSphere API 4.0
-	SnmpSystem *HostSnmpSystem
+	SnmpSystem *mo.HostSnmpSystem
 
 	// A singleton managed object that provides methods for storage resource
 	// management.
 	//
 	// Since vSphere API 4.1
-	StorageResourceManager *StorageResourceManager
+	StorageResourceManager *mo.StorageResourceManager
 
 	// A singleton managed object that manages tasks.
-	TaskManager *TaskManager
+	TaskManager *mo.TaskManager
 
 	// A user directory managed object.
-	UserDirectory *UserDirectory
+	UserDirectory *mo.UserDirectory
 
 	// A singleton managed object for tracking custom sets of objects.
 	//
 	// Since VI API 2.5
-	ViewManager *ViewManager
+	ViewManager *mo.ViewManager
 
 	// A singleton managed object that allows management of virtual disks
 	// on datastores.
 	//
 	// Since VI API 2.5
-	VirtualDiskManager *VirtualDiskManager
+	VirtualDiskManager *mo.VirtualDiskManager
 
 	// Deprecated.
 	// As of VI API 2.5, use the VMware vCenter Converter plug-in.
@@ -29009,19 +29009,19 @@ type ServiceContent struct {
 	// recommendation and virtualization of physical machines
 	//
 	// Since VI API 2.5
-	VirtualizationManager *VirtualizationManager
+	VirtualizationManager *mo.VirtualizationManager
 
 	// A singleton managed object that can answer questions about compatibility
 	// of a virtual machine with a host.
 	//
 	// Since vSphere API 4.0
-	VmCompatibilityChecker *VirtualMachineCompatibilityChecker
+	VmCompatibilityChecker *mo.VirtualMachineCompatibilityChecker
 
 	// A singleton managed object that can answer questions about the
 	// feasibility of certain provisioning operations.
 	//
 	// Since vSphere API 4.0
-	VmProvisioningChecker *VirtualMachineProvisioningChecker
+	VmProvisioningChecker *mo.VirtualMachineProvisioningChecker
 }
 
 //
@@ -29209,7 +29209,7 @@ type SharesInfo struct {
 	// Levels map to a pre-determined set of numeric values for shares.
 	// If the shares value does not map to a predefined size, then
 	// the level is set as custom.
-	Level *SharesLevel
+	Level *enum.SharesLevel
 
 	// The number of shares allocated. Used to determine resource allocation in case of
 	// resource contention. This value is only set if level is set to custom. If level is
@@ -29233,7 +29233,7 @@ type SharesOption struct {
 	*DynamicData
 
 	// Default value for level
-	DefaultLevel *SharesLevel
+	DefaultLevel *enum.SharesLevel
 
 	// Value range which can be used for share definition
 	// in shares
@@ -29296,7 +29296,7 @@ type StateAlarmExpression struct {
 	*AlarmExpression
 
 	// The operation to be tested on the target state.
-	Operator *StateAlarmOperator
+	Operator *enum.StateAlarmOperator
 
 	// Whether or not to test for a red condition.
 	// If this property is not set, do not calculate red status.
@@ -29528,7 +29528,7 @@ type StorageDrsPodSelectionSpec struct {
 	InitialVmConfig []*VmPodConfigForPlacement
 
 	// The storage pod where the virtual machine should be located.
-	StoragePod *StoragePod
+	StoragePod *mo.StoragePod
 }
 
 //
@@ -29595,7 +29595,7 @@ type StorageDrsVmConfigInfo struct {
 	IntraVmAntiAffinity *VirtualDiskAntiAffinityRuleSpec
 
 	// Reference to the virtual machine. Can be NULL during initial placement.
-	Vm *VirtualMachine
+	Vm *mo.VirtualMachine
 }
 
 //
@@ -29806,7 +29806,7 @@ type StorageMigrationAction struct {
 	*ClusterAction
 
 	// Destination datastore.
-	Destination *Datastore
+	Destination *mo.Datastore
 
 	// I/O latency on the destination datastore before storage migration.
 	// Unit: millisecond.
@@ -29827,7 +29827,7 @@ type StorageMigrationAction struct {
 	SizeTransferred int64
 
 	// Source datastore.
-	Source *Datastore
+	Source *mo.Datastore
 
 	// Expected space utilization on the destination datastore after storage migration.
 	// Unit: percentage. For example, if set to 70.0, space utilization is 70%.
@@ -29850,7 +29850,7 @@ type StorageMigrationAction struct {
 	SpaceUtilSrcBefore float32
 
 	// Virtual machine reference.
-	Vm *VirtualMachine
+	Vm *mo.VirtualMachine
 }
 
 //
@@ -29912,7 +29912,7 @@ type StoragePlacementAction struct {
 	*ClusterAction
 
 	// Target datastore.
-	Destination *Datastore
+	Destination *mo.Datastore
 
 	// Current I/O latency on the target datastore.
 	// Unit: millisecond.
@@ -29936,7 +29936,7 @@ type StoragePlacementAction struct {
 	// Virtual machine reference.
 	// It is possible that the VM has not been created, in which case,
 	// this property is left unset.
-	Vm *VirtualMachine
+	Vm *mo.VirtualMachine
 }
 
 //
@@ -29960,7 +29960,7 @@ type StoragePlacementResult struct {
 
 	// The ID of the task, which monitors the storage placement or datastore entering
 	// maintennace mode operation.
-	Task *Task
+	Task *mo.Task
 }
 
 //
@@ -29997,17 +29997,17 @@ type StoragePlacementSpec struct {
 	//
 	// For manual VM provisioning operations, this is specified implicitly
 	// as the object that the CreateVM_Task method is invoked on.
-	Folder *Folder
+	Folder *mo.Folder
 
 	// The target host for the virtual machine.
-	Host *HostSystem
+	Host *mo.HostSystem
 
 	// Specification for moving a virtual machine or a set of virtual disks
 	// to a different storage pod.
 	PodSelectionSpec *StorageDrsPodSelectionSpec
 
 	// Priority of this placement operation.
-	Priority *VirtualMachineMovePriority
+	Priority *enum.VirtualMachineMovePriority
 
 	// Specification for relocating a virtual machine.
 	RelocateSpec *VirtualMachineRelocateSpec
@@ -30022,14 +30022,14 @@ type StoragePlacementSpec struct {
 	ResourceLeaseDurationSec int32
 
 	// The resource pool to which this virtual machine should be attached.
-	ResourcePool *ResourcePool
+	ResourcePool *mo.ResourcePool
 
 	// The storage placement type. The set of possible values is described in
 	// StoragePlacementSpecPlacementType
 	Type string
 
 	// The relevant virtual machine.
-	Vm *VirtualMachine
+	Vm *mo.VirtualMachine
 }
 
 //
@@ -30080,7 +30080,7 @@ type StorageRequirement struct {
 	*DynamicData
 
 	// The datastore.
-	Datastore *Datastore
+	Datastore *mo.Datastore
 
 	// Space required.
 	FreeSpaceRequiredInKb int64
@@ -30184,7 +30184,7 @@ type TaskFilterSpec struct {
 	// This property, if provided, limits the set of collected tasks to those
 	// associated with the specified alarm.
 	// If not provided, tasks are collected regardless of their association with alarms.
-	Alarm *Alarm
+	Alarm *mo.Alarm
 
 	// The filter specification for retrieving tasks by managed entity.
 	// If not provided, then the tasks attached to all managed entities are
@@ -30219,12 +30219,12 @@ type TaskFilterSpec struct {
 	// associated with the specified scheduled task.
 	// If not provided, tasks are collected regardless of their association with any
 	// scheduled task.
-	ScheduledTask *ScheduledTask
+	ScheduledTask *mo.ScheduledTask
 
 	// This property, if provided, limits the set of collected tasks by their states.
 	// Task states are enumerated in State.
 	// If not provided, tasks are collected regardless of their state.
-	State []*TaskInfoState
+	State []*enum.TaskInfoState
 
 	// The filter specification for retrieving tasks by
 	// tag. If it is set, tasks not with the given tag(s)
@@ -30253,10 +30253,10 @@ type TaskFilterSpecByEntity struct {
 	*DynamicData
 
 	// The managed entity to which the task pertains.
-	Entity *ManagedEntity
+	Entity *mo.ManagedEntity
 
 	// Specification of related managed entities in the inventory hierarchy.
-	Recursion *TaskFilterSpecRecursionOption
+	Recursion *enum.TaskFilterSpecRecursionOption
 }
 
 //
@@ -30281,7 +30281,7 @@ type TaskFilterSpecByTime struct {
 	EndTime time.Time
 
 	// The time stamp to filter: queued, started, or completed time.
-	TimeType *TaskFilterSpecTimeOption
+	TimeType *enum.TaskFilterSpecTimeOption
 }
 
 //
@@ -30339,7 +30339,7 @@ type TaskInfo struct {
 	DescriptionId string
 
 	// Managed entity to which the operation applies.
-	Entity *ManagedEntity
+	Entity *mo.ManagedEntity
 
 	// The name of the managed entity, locale-specific, retained for the
 	// history collector database.
@@ -30356,7 +30356,7 @@ type TaskInfo struct {
 
 	// If the state of the task is "running", then this property is a list of
 	// managed entities that the operation has locked, with a shared lock.
-	Locked []*ManagedEntity
+	Locked []*mo.ManagedEntity
 
 	// The name of the operation that created the task. This is not set
 	// for internal tasks.
@@ -30395,10 +30395,10 @@ type TaskInfo struct {
 	StartTime time.Time
 
 	// Runtime status of the task.
-	State *TaskInfoState
+	State *enum.TaskInfoState
 
 	// The managed object that represents this task.
-	Task *Task
+	Task *mo.Task
 }
 
 //
@@ -30418,14 +30418,14 @@ type TaskReasonAlarm struct {
 	*TaskReason
 
 	// The alarm object that queued the task.
-	Alarm *Alarm
+	Alarm *mo.Alarm
 
 	// The name of the alarm that queued the task, retained in the history
 	// collector database.
 	AlarmName string
 
 	// The managed entity object on which the alarm is triggered.
-	Entity *ManagedEntity
+	Entity *mo.ManagedEntity
 
 	// The name of the managed entity on which the alarm is triggered,
 	// retained in the history collector database.
@@ -30443,7 +30443,7 @@ type TaskReasonSchedule struct {
 	Name string
 
 	// The scheduledTask object that queued this task.
-	ScheduledTask *ScheduledTask
+	ScheduledTask *mo.ScheduledTask
 }
 
 //
@@ -31460,10 +31460,10 @@ type VAppCloneSpec struct {
 	// If the target pool represents a cluster without DRS enabled or a
 	// DRS-enabled cluster in manual mode, an InvalidArgument exception is
 	// thrown.
-	Host *HostSystem
+	Host *mo.HostSystem
 
 	// Location where the destination vApp must be stored
-	Location *Datastore
+	Location *mo.Datastore
 
 	// Network mappings. See NetworkMappingPair.
 	NetworkMapping []*VAppCloneSpecNetworkMappingPair
@@ -31485,7 +31485,7 @@ type VAppCloneSpec struct {
 	ResourceSpec *ResourceConfigSpec
 
 	// The VM Folder to associate the vApp with
-	VmFolder *Folder
+	VmFolder *mo.Folder
 }
 
 //
@@ -31499,10 +31499,10 @@ type VAppCloneSpecNetworkMappingPair struct {
 	*DynamicData
 
 	// The destination network
-	Destination *Network
+	Destination *mo.Network
 
 	// The source network
-	Source *Network
+	Source *mo.Network
 }
 
 //
@@ -31518,19 +31518,19 @@ type VAppCloneSpecResourceMap struct {
 	// override the default datastore location set in location field. This
 	// enables cloning to different compute resources that do not have shared
 	// datastores.
-	Location *Datastore
+	Location *mo.Datastore
 
 	// Resource pool to use for the cloned entity of source. This must specify a
 	// resource pool that is not part of the vApp. If this is specified, a linked
 	// child (as opposed to a direct child) is created for the vApp.
-	Parent *ResourcePool
+	Parent *mo.ResourcePool
 
 	// An optional resource configuration for the cloned entity of the source. If
 	// not specified, the same resource configuration as the source is used.
 	ResourceSpec *ResourceConfigSpec
 
 	// Source entity
-	Source *ManagedEntity
+	Source *mo.ManagedEntity
 }
 
 //
@@ -31657,7 +31657,7 @@ type VAppEntityConfigInfo struct {
 	DestroyWithParent bool
 
 	// Entity to power on or power off. This can be a virtual machine or a vApp.
-	Key *ManagedEntity
+	Key *mo.ManagedEntity
 
 	// How to start the entity. Valid settings are none or powerOn.  If set to none, then
 	// the entity does not participate in auto-start.
@@ -33057,7 +33057,7 @@ type VirtualAppLinkInfo struct {
 	DestroyWithParent bool
 
 	// The key contains a reference to the entity that is linked to this vApp
-	Key *ManagedEntity
+	Key *mo.ManagedEntity
 }
 
 //
@@ -33101,7 +33101,7 @@ type VirtualAppSummary struct {
 	Suspended bool
 
 	// Whether the vApp is running
-	VAppState *VirtualAppVAppState
+	VAppState *enum.VirtualAppVAppState
 }
 
 //
@@ -33429,11 +33429,11 @@ type VirtualDeviceConfigSpec struct {
 	// must refer to files that already exist.
 	// The "replace" and "delete" values for this property are only
 	// applicable to virtual disk backing files.
-	FileOperation *VirtualDeviceConfigSpecFileOperation
+	FileOperation *enum.VirtualDeviceConfigSpecFileOperation
 
 	// Type of operation being performed on the specified virtual device.
 	// If no operation is specified, the spec. is ignored.
-	Operation *VirtualDeviceConfigSpecOperation
+	Operation *enum.VirtualDeviceConfigSpecOperation
 
 	// Virtual Device Profile requirement.
 	//
@@ -33547,7 +33547,7 @@ type VirtualDeviceFileBackingInfo struct {
 	// Reference to the datastore managed object where this file is stored.
 	// If the file is not located on a datastore, then this reference is null.
 	// This is not used for configuration.
-	Datastore *Datastore
+	Datastore *mo.Datastore
 
 	// Filename for the host file used in this backing.
 	FileName string
@@ -34296,7 +34296,7 @@ type VirtualDiskId struct {
 	DiskId int32
 
 	// Virtual machine reference.
-	Vm *VirtualMachine
+	Vm *mo.VirtualMachine
 }
 
 //
@@ -35178,7 +35178,7 @@ type VirtualEthernetCardNetworkBackingInfo struct {
 
 	// Reference to the network managed object to which this backing applies.
 	// This is not used during configuration.
-	Network *Network
+	Network *mo.Network
 }
 
 //
@@ -35951,7 +35951,7 @@ type VirtualMachineCloneSpec struct {
 	// exist on the destination host for the clone.
 	//
 	// Since vSphere API 4.0
-	Snapshot *VirtualMachineSnapshot
+	Snapshot *mo.VirtualMachineSnapshot
 
 	// Specifies whether or not the new virtual machine should be marked as a template.
 	Template bool
@@ -36429,7 +36429,7 @@ type VirtualMachineConfigOptionDescriptor struct {
 	// List of hosts to which this descriptor applies.
 	// List of hosts is not set when descriptor is returned
 	// from queryDatacenterConfigOptionDescriptor.
-	Host []*HostSystem
+	Host []*mo.HostSystem
 
 	// A unique key used to identify a configOption object in this
 	// EnvironmentBrowser.
@@ -37298,7 +37298,7 @@ type VirtualMachineDiskDeviceInfo struct {
 	Capacity int64
 
 	// List of known virtual machines using this physical disk as a backing
-	Vm []*VirtualMachine
+	Vm []*mo.VirtualMachine
 }
 
 //
@@ -37605,7 +37605,7 @@ type VirtualMachineFileLayoutExSnapshotLayout struct {
 	Disk []*VirtualMachineFileLayoutExDiskLayout
 
 	// Reference to the snapshot.
-	Key *VirtualMachineSnapshot
+	Key *mo.VirtualMachineSnapshot
 }
 
 //
@@ -37616,7 +37616,7 @@ type VirtualMachineFileLayoutSnapshotLayout struct {
 	*DynamicData
 
 	// Identification of the snapshot
-	Key *VirtualMachineSnapshot
+	Key *mo.VirtualMachineSnapshot
 
 	// A list of files that make up the snapshot state. These are relative
 	// paths from the snapshotDirectory. A slash is always used as a
@@ -37808,7 +37808,7 @@ type VirtualMachineGuestSummary struct {
 	//
 	//
 	// Current status of VMware Tools in the guest operating system, if known.
-	ToolsStatus *VirtualMachineToolsStatus
+	ToolsStatus *enum.VirtualMachineToolsStatus
 
 	// Deprecated.
 	// As of vSphere API 5.0 use toolsVersionStatus2.
@@ -37884,7 +37884,7 @@ type VirtualMachineImportSpec struct {
 	// for the root node in an ImportSpec tree.
 	//
 	// Since vSphere API 4.1
-	ResPoolEntity *ResourcePool
+	ResPoolEntity *mo.ResourcePool
 }
 
 //
@@ -38294,7 +38294,7 @@ type VirtualMachineQuickStats struct {
 	// gray,   if ftSecondaryLatency is unknown.
 	//
 	// Since vSphere API 4.0
-	FtLatencyStatus *ManagedEntityStatus
+	FtLatencyStatus *enum.ManagedEntityStatus
 
 	// The network bandwidth used for logging between the
 	// primary and secondary fault tolerance VMs.
@@ -38312,7 +38312,7 @@ type VirtualMachineQuickStats struct {
 
 	// Guest operating system heartbeat metric.
 	// See guestHeartbeatStatus for a description.
-	GuestHeartbeatStatus *ManagedEntityStatus
+	GuestHeartbeatStatus *enum.ManagedEntityStatus
 
 	// Guest memory utilization statistics, in MB. This
 	// is also known as active guest memory. The number
@@ -38397,7 +38397,7 @@ type VirtualMachineRelocateSpec struct {
 
 	// The datastore where the virtual machine should be located. If
 	// not specified, the current datastore is used.
-	Datastore *Datastore
+	Datastore *mo.Datastore
 
 	// An optional list of virtual device specs that allow specifying the
 	// migrate options for the relocate operation. The supported device type
@@ -38440,7 +38440,7 @@ type VirtualMachineRelocateSpec struct {
 	// if resource pool is specified and the target pool represents
 	// a cluster without DRS enabled, an InvalidArgument exception
 	// be thrown.
-	Host *HostSystem
+	Host *mo.HostSystem
 
 	// The resource pool to which this virtual machine should be attached.
 	// For a relocate or clone operation to a virtual machine, if the argument
@@ -38448,7 +38448,7 @@ type VirtualMachineRelocateSpec struct {
 	// For a clone operation to a template, this argument is ignored.
 	// For a clone operation from a template to a virtual machine,
 	// this argument is required.
-	Pool *ResourcePool
+	Pool *mo.ResourcePool
 
 	// Storage profile requirement for Virtual Machine's home directory.
 	//
@@ -38474,7 +38474,7 @@ type VirtualMachineRelocateSpec struct {
 	// Transformation to perform on the disks. The backend is free to ignore
 	// this hint if it is not valid for the current operation.  This can be
 	// used by clients, for example, to create sparse disks for templates.See VirtualMachineRelocateTransformation
-	Transform *VirtualMachineRelocateTransformation
+	Transform *enum.VirtualMachineRelocateTransformation
 }
 
 //
@@ -38486,7 +38486,7 @@ type VirtualMachineRelocateSpecDiskLocator struct {
 	*DynamicData
 
 	// Target datastore.
-	Datastore *Datastore
+	Datastore *mo.Datastore
 
 	// Backing information for the virtual disk at the destination.
 	// This can be used, for instance, to change the format of the
@@ -38563,7 +38563,7 @@ type VirtualMachineRuntimeInfo struct {
 	CleanPowerOff bool
 
 	// Indicates whether or not the virtual machine is available for management.
-	ConnectionState *VirtualMachineConnectionState
+	ConnectionState *enum.VirtualMachineConnectionState
 
 	// Whether any disk of the virtual machine requires consolidation.
 	// This can happen for example when a snapshot is deleted but its
@@ -38603,7 +38603,7 @@ type VirtualMachineRuntimeInfo struct {
 	// The fault tolerance state of the virtual machine.
 	//
 	// Since vSphere API 4.0
-	FaultToleranceState *VirtualMachineFaultToleranceState
+	FaultToleranceState *enum.VirtualMachineFaultToleranceState
 
 	// The masks applied to an individual virtual machine as a result of its
 	// configuration.
@@ -38621,7 +38621,7 @@ type VirtualMachineRuntimeInfo struct {
 	// The host that is responsible for running a virtual machine.
 	// This property is null if the virtual machine is not running and is
 	// not assigned to run on a particular host.
-	Host *HostSystem
+	Host *mo.HostSystem
 
 	// Current upper-bound on CPU usage. The upper-bound is based on the host
 	// the virtual machine is current running on, as well as limits configured
@@ -38719,7 +38719,7 @@ type VirtualMachineRuntimeInfo struct {
 	OnlineStandby bool
 
 	// The current power state of the virtual machine.
-	PowerState *VirtualMachinePowerState
+	PowerState *enum.VirtualMachinePowerState
 
 	// The current question, if any, that is blocking the virtual machine's execution.
 	Question *VirtualMachineQuestionInfo
@@ -38727,7 +38727,7 @@ type VirtualMachineRuntimeInfo struct {
 	// Record / replay state of this virtual machine.
 	//
 	// Since vSphere API 4.0
-	RecordReplayState *VirtualMachineRecordReplayState
+	RecordReplayState *enum.VirtualMachineRecordReplayState
 
 	// The total time the virtual machine has been suspended
 	// since it was initially powered on. This time excludes the current period,
@@ -38844,7 +38844,7 @@ type VirtualMachineSnapshotInfo struct {
 	// VirtualMachine.createSnapshot.
 	// This property will be empty when the working snapshot is at the root
 	// of the snapshot tree.
-	CurrentSnapshot *VirtualMachineSnapshot
+	CurrentSnapshot *mo.VirtualMachineSnapshot
 
 	// Data for the entire set of snapshots for one virtual machine.
 	RootSnapshotList []*VirtualMachineSnapshotTree
@@ -38892,13 +38892,13 @@ type VirtualMachineSnapshotTree struct {
 	ReplaySupported bool
 
 	// The managed object for this snapshot.
-	Snapshot *VirtualMachineSnapshot
+	Snapshot *mo.VirtualMachineSnapshot
 
 	// The power state of the virtual machine when this snapshot was taken.
-	State *VirtualMachinePowerState
+	State *enum.VirtualMachinePowerState
 
 	// The virtual machine for which the snapshot was taken.
-	Vm *VirtualMachine
+	Vm *mo.VirtualMachine
 }
 
 //
@@ -39016,7 +39016,7 @@ type VirtualMachineSummary struct {
 	// contain values for this property when some other property on the DataObject changes.
 	// If this update is a result of a call to WaitForUpdatesEx with a non-empty
 	// version parameter, the value for this property may not be current.
-	OverallStatus *ManagedEntityStatus
+	OverallStatus *enum.ManagedEntityStatus
 
 	// A set of statistics that are typically updated with near real-time regularity.
 	// This data object type does not support notification, for scalability reasons.
@@ -39048,7 +39048,7 @@ type VirtualMachineSummary struct {
 	Storage *VirtualMachineStorageSummary
 
 	// Reference to the virtual machine managed object.
-	Vm *VirtualMachine
+	Vm *mo.VirtualMachine
 }
 
 //
@@ -39118,7 +39118,7 @@ type VirtualMachineUsageOnDatastore struct {
 	Committed int64
 
 	// Reference to datastore for which information is being provided.
-	Datastore *Datastore
+	Datastore *mo.Datastore
 
 	// Additional storage space, in bytes, potentially used by the virtual machine
 	// on this datastore.
@@ -39776,7 +39776,7 @@ type VirtualSCSIController struct {
 	// virtualSharing, and noSharing. See the
 	// Sharing
 	// data object type for an explanation of these modes.
-	SharedBus *VirtualSCSISharing
+	SharedBus *enum.VirtualSCSISharing
 }
 
 //
@@ -39825,7 +39825,7 @@ type VirtualSCSIControllerOption struct {
 	ScsiCtlrUnitNumber int32
 
 	// Supported shared bus modes.
-	Sharing []*VirtualSCSISharing
+	Sharing []*enum.VirtualSCSISharing
 }
 
 //
@@ -41691,7 +41691,7 @@ type VmEventArgument struct {
 	*EntityEventArgument
 
 	// The VirtualMachine object.
-	Vm *VirtualMachine
+	Vm *mo.VirtualMachine
 }
 
 //
@@ -41864,10 +41864,10 @@ type VmFaultToleranceStateChangedEvent struct {
 	*VmEvent
 
 	// The new fault tolerance state.
-	NewState *VirtualMachineFaultToleranceState
+	NewState *enum.VirtualMachineFaultToleranceState
 
 	// The old fault toleeance state.
-	OldState *VirtualMachineFaultToleranceState
+	OldState *enum.VirtualMachineFaultToleranceState
 }
 
 //
@@ -42192,7 +42192,7 @@ type VmPodConfigForPlacement struct {
 	// Since there could be multiple pods in a single placement request,
 	// we may need to specify multiple initial VM configurations, one per
 	// pod.
-	StoragePod *StoragePod
+	StoragePod *mo.StoragePod
 
 	// The VM configuration for the VM that is being placed.
 	VmConfig *StorageDrsVmConfigInfo
@@ -43185,7 +43185,7 @@ type VsanHostConfigInfo struct {
 	// This argument is required when this configuration is specified as
 	// an input to VC-level APIs.  When this configuration is specified
 	// to a host-level direct API, this argument may be omitted.See ReconfigureComputeResource_TaskSee UpdateVsan_Task
-	HostSystem *HostSystem
+	HostSystem *mo.HostSystem
 
 	// The VSAN network configuration for this host.
 	//

@@ -5,6 +5,7 @@
 package mo
 
 import (
+	"github.com/c4milo/govsphere/vim/do"
 	"time"
 )
 
@@ -17,7 +18,41 @@ type Alarm struct {
 	*ExtensibleManagedObject
 
 	// Information about this alarm.
-	Info *AlarmInfo
+	Info *do.AlarmInfo
+}
+
+//
+// Reconfigures the alarm properties. This operation requires access
+// privileges on the entity with which the alarm is associated.
+//
+// In addition to the Alarm.Edit privilege, may also require the
+// Global.ScriptAction if a RunScriptAction action is specified in
+// the AlarmSpec.
+//
+//
+// Required Privileges
+// Alarm.Edit
+//
+func (mo *Alarm) ReconfigureAlarm(
+	_this *do.ManagedObjectReference, spec *do.AlarmSpec,
+) error {
+
+	return nil
+
+}
+
+//
+// Removes the alarm.
+//
+// Required Privileges
+// Alarm.Delete
+//
+func (mo *Alarm) RemoveAlarm(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
 }
 
 //
@@ -28,10 +63,115 @@ type AlarmManager struct {
 
 	// The default setting for each alarm expression, used to populate the
 	// initial client wizard screen.
-	DefaultExpression []*AlarmExpression
+	DefaultExpression []*do.AlarmExpression
 
 	// The static descriptive strings used in alarms.
-	Description *AlarmDescription
+	Description *do.AlarmDescription
+}
+
+//
+// Acknowledge the alarm on a managed entity.  The actions associated
+// with the alarm will not fire until the alarm's next distinct
+// occurrence; that is, until after the alarm has entered the green
+// or gray states at least once.  Calling this method on an acknowledged
+// or non-triggered alarm.
+//
+// Required Privileges
+// None
+// Since
+// vSphere API 4.0
+//
+func (mo *AlarmManager) AcknowledgeAlarm(
+	_this *do.ManagedObjectReference, alarm *mo.Alarm, entity *mo.ManagedEntity,
+) error {
+
+	return nil
+
+}
+
+//
+// Returns true if alarm actions are enabled on the specified managed entity.
+//
+// Required Privileges
+// None
+// Since
+// vSphere API 4.0
+//
+func (mo *AlarmManager) AreAlarmActionsEnabled(
+	_this *do.ManagedObjectReference, entity *mo.ManagedEntity,
+) (bool, error) {
+
+	return nil, nil
+
+}
+
+//
+// Creates an alarm.
+//
+// In addition to the Alarm.Create privilege, may also require the
+// Global.ScriptAction if a RunScriptAction action is specified in
+// the AlarmSpec.
+//
+//
+// Required Privileges
+// None
+//
+func (mo *AlarmManager) CreateAlarm(
+	_this *do.ManagedObjectReference, entity *mo.ManagedEntity, spec *do.AlarmSpec,
+) (*Alarm, error) {
+
+	return nil, nil
+
+}
+
+//
+// Enables or disables alarms on the specified managed entity.
+//
+// Required Privileges
+// None
+// Since
+// vSphere API 4.0
+//
+func (mo *AlarmManager) EnableAlarmActions(
+	_this *do.ManagedObjectReference, entity *mo.ManagedEntity, enabled bool,
+) error {
+
+	return nil
+
+}
+
+//
+// Available alarms defined on the entity.
+// These alarms do not include any inherited alarms; that is,
+// alarms associated with parent entities.
+//
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *AlarmManager) GetAlarm(
+	_this *do.ManagedObjectReference, entity *mo.ManagedEntity,
+) ([]*Alarm, error) {
+
+	return nil, nil
+
+}
+
+//
+// The state of instantiated alarms on the entity.
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *AlarmManager) GetAlarmState(
+	_this *do.ManagedObjectReference, entity *mo.ManagedEntity,
+) ([]*AlarmState, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -108,14 +248,287 @@ type AlarmManager struct {
 type AuthorizationManager struct {
 
 	// Static, descriptive strings for system roles and privileges.
-	Description *AuthorizationDescription
+	Description *do.AuthorizationDescription
 
 	// The list of system-defined privileges.
-	PrivilegeList []*AuthorizationPrivilege
+	PrivilegeList []*do.AuthorizationPrivilege
 
 	// The currently defined roles in the system, including
 	// static system-defined roles.
-	RoleList []*AuthorizationRole
+	RoleList []*do.AuthorizationRole
+}
+
+//
+// Adds a new role.
+// This method will add a user-defined role with given list of privileges
+// and three system-defined privileges, "System.Anonymous", "System.View",
+// and "System.Read".
+//
+// Required Privileges
+// Authorization.ModifyRoles
+//
+func (mo *AuthorizationManager) AddAuthorizationRole(
+	_this *do.ManagedObjectReference, name string, privIds []string,
+) (int32, error) {
+
+	return nil, nil
+
+}
+
+//
+// Check whether a session holds a set of privileges on a set of managed entities.
+//
+// If the session does not exist, false is returned for all privileges of
+// all the entities.
+//
+//
+//
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 5.5
+//
+func (mo *AuthorizationManager) HasPrivilegeOnEntities(
+	_this *do.ManagedObjectReference, entity []*mo.ManagedEntity, sessionId string, privId []string,
+) ([]*EntityPrivilege, error) {
+
+	return nil, nil
+
+}
+
+//
+// Check whether a session holds a set of privileges on a managed entity.
+//
+// If the session does not exist, false is returned for all privileges.
+//
+//
+//
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 5.0
+//
+func (mo *AuthorizationManager) HasPrivilegeOnEntity(
+	_this *do.ManagedObjectReference, entity *mo.ManagedEntity, sessionId string, privId []string,
+) ([]boolean, error) {
+
+	return nil, nil
+
+}
+
+//
+// Reassigns all permissions of a role to another role.
+//
+// Required Privileges
+// Authorization.ReassignRolePermissions
+//
+func (mo *AuthorizationManager) MergePermissions(
+	_this *do.ManagedObjectReference, srcRoleId int32, dstRoleId int32,
+) error {
+
+	return nil
+
+}
+
+//
+// Removes a role.
+//
+// Required Privileges
+// Authorization.ModifyRoles
+//
+func (mo *AuthorizationManager) RemoveAuthorizationRole(
+	_this *do.ManagedObjectReference, roleId int32, failIfUsed bool,
+) error {
+
+	return nil
+
+}
+
+//
+// Removes a permission rule from an entity.
+//
+// This will fail with an InvalidArgument fault if called on:  the direct child
+// folders of a datacenter managed object, the root resource pool of a
+// ComputeResource or ClusterComputeResource, or a HostSystem that is part of
+// a ComputeResource (Stand-alone Host). These objects always have the same
+// permissions as their parent.
+//
+//
+// This will fail with an InvalidArgument fault if called on a fault-tolerance (FT)
+// secondary VirtualMachine. Such a VirtualMachine always has the same permissions
+// as its FT primary VirtualMachine.
+//
+//
+// Required Privileges
+// None
+//
+func (mo *AuthorizationManager) RemoveEntityPermission(
+	_this *do.ManagedObjectReference, entity *mo.ManagedEntity, user string, isGroup bool,
+) error {
+
+	return nil
+
+}
+
+//
+// Update the entire set of permissions defined on an entity.  Any
+// existing permissions on the entity are removed and replaced with the
+// provided set.
+//
+// If a permission is specified multiple times for the same user or group, the
+// last permission specified takes effect.
+//
+//
+// The operation is transactional per permission and could partially fail.  The
+// updates are performed in the order of the permission array argument.  The first
+// failed update will abort the operation and throw the appropriate exception. When
+// the operation aborts, any permissions that have not yet been removed are left in
+// their original state.
+//
+//
+// After updates are applied, original permissions that are not in the new set
+// are removed.  A failure to remove a permission, such as a violation of
+// the minimum administrator permission rule, will abort the operation and could
+// leave remaining original permissions still effective on the entity.
+//
+//
+// This will fail with an InvalidArgument fault if called on: the direct child
+// folders of a datacenter managed object, the root resource pool of a
+// ComputeResource or ClusterComputeResource, or a HostSystem that is part of
+// a ComputeResource (Stand-alone Host). These objects always have the same
+// permissions as their parent.
+//
+//
+// This will fail with an InvalidArgument fault if called on a fault-tolerance (FT)
+// secondary VirtualMachine. Such a VirtualMachine always has the same permissions
+// as its FT primary VirtualMachine.
+//
+//
+// Required Privileges
+// None
+//
+func (mo *AuthorizationManager) ResetEntityPermissions(
+	_this *do.ManagedObjectReference, entity *mo.ManagedEntity, permission []*do.Permission,
+) error {
+
+	return nil
+
+}
+
+//
+// Finds all permissions defined in the system.
+// The result is restricted to the managed entities visible to the
+// user making the call.
+//
+// Required Privileges
+// System.View
+//
+func (mo *AuthorizationManager) RetrieveAllPermissions(
+	_this *do.ManagedObjectReference,
+) ([]*Permission, error) {
+
+	return nil, nil
+
+}
+
+//
+// Gets permissions defined on or effective on a managed entity.
+// This returns the actual permission objects defined in the system for all
+// users and groups relative to the managed entity. The inherited
+// flag specifies whether or not to include permissions defined by the
+// parents of this entity that propagate to this entity.
+//
+// For complex entities, the entity reported as defining the permission may
+// be either the parent or a child entity belonging to the complex entity.
+//
+//
+// The purpose of this method is to discover permissions
+// for administration purposes, not to determine the current
+// permissions. The current user's permissions are found on the effectiveRole property of the user's ManagedEntity.
+//
+//
+// Required Privileges
+// None
+//
+func (mo *AuthorizationManager) RetrieveEntityPermissions(
+	_this *do.ManagedObjectReference, entity *mo.ManagedEntity, inherited bool,
+) ([]*Permission, error) {
+
+	return nil, nil
+
+}
+
+//
+// Finds all the permissions that use a particular role.
+// The result is restricted to managed entities that are visible to the
+// user making the call.
+//
+// Required Privileges
+// System.View
+//
+func (mo *AuthorizationManager) RetrieveRolePermissions(
+	_this *do.ManagedObjectReference, roleId int32,
+) ([]*Permission, error) {
+
+	return nil, nil
+
+}
+
+//
+// Defines one or more permission rules on an entity or updates rules if already
+// present for the given user or group on the entity.
+//
+// If a permission is specified multiple times for the same user or group, then the
+// last permission specified takes effect.
+//
+//
+// The operation is applied transactionally per permission and is applied to the
+// entity following the order of the elements in the permission array argument. This
+// means that if a failure occurs, the method terminates at that point in the
+// permission array with an exception, leaving at least one and as many as all
+// permissions unapplied.
+//
+//
+// This will fail with an InvalidArgument fault if called on: the direct child
+// folders of a datacenter managed object, the root resource pool of a
+// ComputeResource or ClusterComputeResource, or a HostSystem that is part of
+// a ComputeResource (Stand-alone Host). These objects always have the same
+// permissions as their parent.
+//
+//
+// This will fail with an InvalidArgument fault if called on a fault-tolerance (FT)
+// secondary VirtualMachine. Such a VirtualMachine always has the same permissions
+// as its FT primary VirtualMachine.
+//
+//
+// Required Privileges
+// None
+//
+func (mo *AuthorizationManager) SetEntityPermissions(
+	_this *do.ManagedObjectReference, entity *mo.ManagedEntity, permission []*do.Permission,
+) error {
+
+	return nil
+
+}
+
+//
+// Updates a role's name or privileges.
+// If the new set of privileges are assigned to the role, the
+// system-defined privileges, "System.Anonymous", "System.View",
+// and "System.Read" will be assigned to the role too.
+//
+// Required Privileges
+// Authorization.ModifyRoles
+//
+func (mo *AuthorizationManager) UpdateAuthorizationRole(
+	_this *do.ManagedObjectReference, roleId int32, newName string, privIds []string,
+) error {
+
+	return nil
+
 }
 
 //
@@ -137,7 +550,7 @@ type ClusterComputeResource struct {
 	// The set of actions that have been performed recently.
 	//
 	// Since VI API 2.5
-	ActionHistory []*ClusterActionHistory
+	ActionHistory []*do.ClusterActionHistory
 
 	// Deprecated.
 	// As of VI API 2.5, use configurationEx,
@@ -145,7 +558,7 @@ type ClusterComputeResource struct {
 	//
 	//
 	// Configuration of the cluster.
-	Configuration *ClusterConfigInfo
+	Configuration *do.ClusterConfigInfo
 
 	// A collection of the DRS faults generated in the last DRS invocation.
 	// Each element of the collection is the set of faults generated in one
@@ -165,7 +578,7 @@ type ClusterComputeResource struct {
 	// produce any property values as no updates are generated.
 	//
 	// Since vSphere API 4.0
-	DrsFault []*ClusterDrsFaults
+	DrsFault []*do.ClusterDrsFaults
 
 	// Deprecated.
 	// As of VI API 2.5, use
@@ -185,12 +598,12 @@ type ClusterComputeResource struct {
 	// recommendations may be empty, since there may be no recommended
 	// migrations at this time, or it is possible that DRS is not
 	// enabled.
-	DrsRecommendation []*ClusterDrsRecommendation
+	DrsRecommendation []*do.ClusterDrsRecommendation
 
 	// The set of migration decisions that have recently been performed.
 	//
 	// This list is populated only when DRS is in automatic mode.
-	MigrationHistory []*ClusterDrsMigration
+	MigrationHistory []*do.ClusterDrsMigration
 
 	// List of recommended actions for the cluster. It is
 	// possible that the current set of recommendations may be empty,
@@ -199,11 +612,313 @@ type ClusterComputeResource struct {
 	// at this time.
 	//
 	// Since VI API 2.5
-	Recommendation []*ClusterRecommendation
+	Recommendation []*do.ClusterRecommendation
+}
+
+//
+// Adds a host to the cluster. The hostname must be either an IP address, such as
+// 192.168.0.1, or a DNS resolvable name. DNS names may be fully qualified names,
+// such as host1.domain1.com, or a short name such as host1, providing host1 resolves
+// to host1.domain1.com. The system uses DNS to resolve short names to fully qualified
+// names. If the cluster supports nested resource pools and the user specifies the
+// optional ResourcePool argument, then the host's root resource pool becomes the
+// specified resource pool. The stand-alone host resource hierarchy is imported into
+// the new nested resource pool.
+//
+// If the cluster does not support nested resource pools, then the stand-alone host
+// resource hierarchy is discarded and all virtual machines on the host are put
+// under the cluster's root resource pool.
+//
+//
+//
+// In addition to the Host.Inventory.AddHostToCluster and
+// Resource.AssignVMToPool privileges, it requires System.View privilege on
+// the VM folder that the VMs of the host will be placed on.
+//
+//
+// Required Privileges
+// Host.Inventory.AddHostToCluster
+//
+func (mo *ClusterComputeResource) AddHost_Task(
+	_this *do.ManagedObjectReference, spec *do.HostConnectSpec, asConnected bool, resourcePool *mo.ResourcePool, license string,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Applies a recommendation from the drsRecommendation or the
+// recommendation list. Each recommendation can be applied only
+// once.
+//
+// resource.applyRecommendation privilege is required if the recommendation
+// is DRS migration or power management recommendations.
+//
+//
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *ClusterComputeResource) ApplyRecommendation(
+	_this *do.ManagedObjectReference, key string,
+) error {
+
+	return nil
+
+}
+
+//
+// Cancels a recommendation. Currently only initial placement
+// recommendations can be cancelled. Migration or power management
+// recommendations cannot.
+//
+//
+//
+// Required Privileges
+// System.Read
+// Since
+// vSphere API 4.1
+//
+func (mo *ClusterComputeResource) CancelRecommendation(
+	_this *do.ManagedObjectReference, key string,
+) error {
+
+	return nil
+
+}
+
+//
+// The API takes a list of hosts in the cluster as input, and
+// returns a list of hosts in "ClusterMaintenanceResult" that the
+// server can successfully evacuate given the existing
+// constraints in the cluster, such as HA, FT, Vmotion
+// compatibility, reservations, affinity rules, etc.
+//
+// The client is allowed to pass all hosts in the cluster to the
+// API, even though all of them cannot enter maintenance mode at
+// the same time. The list returned from the API contains the
+// largest number of hosts that the server can evacuate
+// simultaneously. The client can then request to enter each host
+// in the returned list into maintenance mode.
+//
+// The client can specify an integer "DemandCapacityRatioTarget"
+// option in the "option" parameter. The allowed values of the
+// option range from 40 to 200, and the default value is 100. This
+// option controls how much resource overcommitment the server
+// should make in consolidating the VMs onto fewer hosts. A value
+// of 100 means the server will keep the same amount of powered-on
+// capacity as the current VM demands. A value less than 100 means
+// undercommitted resources. A value greater than 100 means
+// overcommitted resources.
+//
+// The hosts are recommended based on the inventory at the time of
+// the API invocation. It is not guaranteed that the actual
+// enter-maintenance tasks on the hosts will succeed, if the
+// inventory changes after the API returns, or if vmotions fail
+// due to unexpected conditions.  For possible exceptions thrown
+// by the necessary relocate operations, see
+// MigrateVM_Task.
+//
+//
+//
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 5.0
+//
+func (mo *ClusterComputeResource) ClusterEnterMaintenanceMode(
+	_this *do.ManagedObjectReference, host []*mo.HostSystem, option []*do.OptionValue,
+) (*ClusterEnterMaintenanceResult, error) {
+
+	return nil, nil
+
+}
+
+//
+// Moves an existing host into a cluster. The host must be part of the same
+// datacenter, and if the host is part of a cluster, the host must be in maintenance
+// mode.
+//
+// If the host is a stand-alone host, the stand-alone ComputeResource is removed
+// as part of this operation.
+//
+//
+// All virtual machines associated with the host, regardless of whether or not they
+// are running, are moved with the host into the cluster. If there are virtual
+// machines that should not be moved, then migrate those virtual machines off the
+// host before initiating this operation.
+//
+//
+// If the host is a stand-alone host, the cluster supports nested resource pools,
+// and the user specifies the optional resourcePool argument, then the stand-alone
+// host's root resource pool becomes the specified resource pool and the stand-alone
+// host resource hierarchy is imported into the new nested resource pool. If the
+// cluster does not support nested resource pools or the resourcePool argument is not
+// specified, then the stand-alone host resource hierarchy is ignored.
+//
+//
+//
+//
+// Required Privileges
+// Host.Inventory.EditCluster
+//
+func (mo *ClusterComputeResource) MoveHostInto_Task(
+	_this *do.ManagedObjectReference, host *mo.HostSystem, resourcePool *mo.ResourcePool,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Moves an existing host into a cluster. The host must be part of the same
+// datacenter, and if the host is part of a cluster, the host must be in maintenance
+// mode.
+//
+// If the host is part of a stand-alone ComputeResource, then the stand-alone
+// ComputeResource is removed as part of this operation.
+//
+//
+// All virtual machines associated with a host, regardless of whether or not they
+// are running, are moved with the host into the cluster. If there are virtual
+// machines that should not be moved, then migrate those virtual machines off the
+// host before initiating this operation.
+//
+//
+// For stand-alone hosts, the host resource pool hierarchy is discarded in this call.
+// To preserve a host resource pools from a stand-alone host, call moveHostInt,
+// specifying an optional resource pool. This operation is transactional only with
+// respect to each individual host. Hosts in the set are moved sequentially and are
+// committed, one at a time. If a failure is detected, then the method terminates
+// with an exception. Since hosts are moved one at a time, if this operation fails
+// while in the process of moving multiple hosts, some hosts are left unmoved.
+//
+//
+// In addition to the privileges mentioned, the user must also hold
+// Host.Inventory.EditCluster on the host's source ComputeResource object.
+//
+//
+// Required Privileges
+// Host.Inventory.EditCluster
+//
+func (mo *ClusterComputeResource) MoveInto_Task(
+	_this *do.ManagedObjectReference, host []*mo.HostSystem,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of VI API 2.5, use PowerOnMultiVM_Task.
+// RecommendHostsForVm cannot make  any recommendations if DRS cannot
+// find the specified host in the cluster.
+// With PowerOnMultiVM_Task, DRS attempts to migrate virtual machines
+// and power on hosts in standby mode, given the same conditions.
+//
+//
+//
+//
+// Gets a recommendation for where to power on, resume, revert
+// from powered-off state to powered on state, or to migrate a
+// specific virtual machine. If no host is found, an empty list is
+// returned.
+//
+// The type of operation is implied by the state of the virtual machine. Returned
+// hosts are intended for power-on or resume if the virtual machine is powered-off or
+// suspended. However, if the virtual machine is powered-on, the request is assumed
+// to be for migrating a virtual machine into a DRS enabled cluster. In that case,
+// the ResourcePool argument should be specified and the ResourcePool and the virtual
+// machine cannot be in the same cluster.
+//
+//
+//
+//
+// Required Privileges
+// System.Read
+//
+func (mo *ClusterComputeResource) RecommendHostsForVm(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, pool *mo.ResourcePool,
+) ([]*ClusterHostRecommendation, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of VI API 2.5, use ReconfigureComputeResource_Task.
+//
+//
+// Reconfigures a cluster.
+//
+// Required Privileges
+// Host.Inventory.EditCluster
+//
+func (mo *ClusterComputeResource) ReconfigureCluster_Task(
+	_this *do.ManagedObjectReference, spec *do.ClusterConfigSpec, modify bool,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Make DRS invoke again and return a new list of recommendations.
+// Concurrent "refresh" requests may be combined together and trigger only
+// one DRS invocation.
+//
+//
+// The recommendations generated is stored at recommendation.
+//
+//
+// Required Privileges
+// Host.Inventory.EditCluster
+// Since
+// VI API 2.5
+//
+func (mo *ClusterComputeResource) RefreshRecommendation(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Retrieve DAS advanced runtime info for this cluster.
+//
+// Required Privileges
+// System.Read
+// Since
+// vSphere API 4.0
+//
+func (mo *ClusterComputeResource) RetrieveDasAdvancedRuntimeInfo(
+	_this *do.ManagedObjectReference,
+) (*ClusterDasAdvancedRuntimeInfo, error) {
+
+	return nil, nil
+
 }
 
 type ClusterProfile struct {
 	*Profile
+}
+
+//
+// Update the ClusterProfile with the specified config.
+//
+// Required Privileges
+// Profile.Edit
+//
+func (mo *ClusterProfile) UpdateClusterProfile(
+	_this *do.ManagedObjectReference, config *do.ClusterProfileConfigSpec,
+) error {
+
+	return nil
+
 }
 
 type ClusterProfileManager struct {
@@ -233,7 +948,7 @@ type ComputeResource struct {
 	// ClusterConfigInfoEx object.
 	//
 	// Since VI API 2.5
-	ConfigurationEx *ComputeResourceConfigInfo
+	ConfigurationEx *do.ComputeResourceConfigInfo
 
 	// The datastore property is the subset of datastore objects in the datacenter
 	// available in this ComputeResource.
@@ -262,7 +977,23 @@ type ComputeResource struct {
 
 	// Basic runtime information about a compute resource. This information is used on
 	// summary screens and in list views.
-	Summary *ComputeResourceSummary
+	Summary *do.ComputeResourceSummary
+}
+
+//
+// Change the compute resource configuration.
+//
+// Required Privileges
+// Host.Inventory.EditCluster
+// Since
+// VI API 2.5
+//
+func (mo *ComputeResource) ReconfigureComputeResource_Task(
+	_this *do.ManagedObjectReference, spec *do.ComputeResourceConfigSpec, modify bool,
+) (*Task, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -336,7 +1067,65 @@ type CustomFieldsManager struct {
 
 	// List of custom fields defined on this server. The fields are
 	// sorted by name.
-	Field []*CustomFieldDef
+	Field []*do.CustomFieldDef
+}
+
+//
+// Creates a new custom field. If the moType is specified, the
+// field will only be available for that type of managed object.
+//
+// Required Privileges
+// Global.ManageCustomFields
+//
+func (mo *CustomFieldsManager) AddCustomFieldDef(
+	_this *do.ManagedObjectReference, name string, moType string, fieldDefPolicy *do.PrivilegePolicyDef, fieldPolicy *do.PrivilegePolicyDef,
+) (*CustomFieldDef, error) {
+
+	return nil, nil
+
+}
+
+//
+// Removes a custom field. This also removes all values assigned
+// to this custom field.
+//
+// Required Privileges
+// Global.ManageCustomFields
+//
+func (mo *CustomFieldsManager) RemoveCustomFieldDef(
+	_this *do.ManagedObjectReference, key int32,
+) error {
+
+	return nil
+
+}
+
+//
+// Renames a custom field.
+//
+// Required Privileges
+// Global.ManageCustomFields
+//
+func (mo *CustomFieldsManager) RenameCustomFieldDef(
+	_this *do.ManagedObjectReference, key int32, name string,
+) error {
+
+	return nil
+
+}
+
+//
+// Assigns a value to a custom field on an entity.
+//
+// Required Privileges
+// None
+//
+func (mo *CustomFieldsManager) SetField(
+	_this *do.ManagedObjectReference, entity *mo.ManagedEntity, key int32, value string,
+) error {
+
+	return nil
+
 }
 
 //
@@ -350,7 +1139,153 @@ type CustomizationSpecManager struct {
 	EncryptionKey []byte
 
 	// Gets a list of information on available specifications.
-	Info []*CustomizationSpecInfo
+	Info []*do.CustomizationSpecInfo
+}
+
+//
+// Validate that required resources are available on the server to customize a
+// particular guest operating system. These would include sysprep for Windows
+// and the debugfs and changefs volume editors for Linux guests.
+//
+// Required Privileges
+// System.View
+//
+func (mo *CustomizationSpecManager) CheckCustomizationResources(
+	_this *do.ManagedObjectReference, guestOs string,
+) error {
+
+	return nil
+
+}
+
+//
+// Creates a new specification.
+//
+// Required Privileges
+// VirtualMachine.Provisioning.ModifyCustSpecs
+//
+func (mo *CustomizationSpecManager) CreateCustomizationSpec(
+	_this *do.ManagedObjectReference, item *do.CustomizationSpecItem,
+) error {
+
+	return nil
+
+}
+
+//
+// Converts a specification item to XML text
+//
+// Required Privileges
+// System.View
+//
+func (mo *CustomizationSpecManager) CustomizationSpecItemToXml(
+	_this *do.ManagedObjectReference, item *do.CustomizationSpecItem,
+) (string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Deletes a specification.
+//
+// Required Privileges
+// VirtualMachine.Provisioning.ModifyCustSpecs
+//
+func (mo *CustomizationSpecManager) DeleteCustomizationSpec(
+	_this *do.ManagedObjectReference, name string,
+) error {
+
+	return nil
+
+}
+
+//
+// Whether or not a specification exists.
+//
+// Required Privileges
+// VirtualMachine.Provisioning.ReadCustSpecs
+//
+func (mo *CustomizationSpecManager) DoesCustomizationSpecExist(
+	_this *do.ManagedObjectReference, name string,
+) (bool, error) {
+
+	return nil, nil
+
+}
+
+//
+// Duplicates a specification.
+//
+// Required Privileges
+// VirtualMachine.Provisioning.ModifyCustSpecs
+//
+func (mo *CustomizationSpecManager) DuplicateCustomizationSpec(
+	_this *do.ManagedObjectReference, name string, newName string,
+) error {
+
+	return nil
+
+}
+
+//
+// Obtains a specification for the given name.
+//
+// Required Privileges
+// VirtualMachine.Provisioning.ReadCustSpecs
+//
+func (mo *CustomizationSpecManager) GetCustomizationSpec(
+	_this *do.ManagedObjectReference, name string,
+) (*CustomizationSpecItem, error) {
+
+	return nil, nil
+
+}
+
+//
+// Overwrites an existing specification, possibly after retrieving
+// (by using 'get') and editing it. If, based on the item's changeVersion
+// value, the overwrite process detects that the specification has changed
+// since its retrieval, then the API uses the SpecModified exception to
+// warn the client that he might overwrite another client's change.
+//
+// Required Privileges
+// VirtualMachine.Provisioning.ModifyCustSpecs
+//
+func (mo *CustomizationSpecManager) OverwriteCustomizationSpec(
+	_this *do.ManagedObjectReference, item *do.CustomizationSpecItem,
+) error {
+
+	return nil
+
+}
+
+//
+// Renames a specification.
+//
+// Required Privileges
+// VirtualMachine.Provisioning.ModifyCustSpecs
+//
+func (mo *CustomizationSpecManager) RenameCustomizationSpec(
+	_this *do.ManagedObjectReference, name string, newName string,
+) error {
+
+	return nil
+
+}
+
+//
+// Converts an XML string to a specification item
+//
+// Required Privileges
+// System.View
+//
+func (mo *CustomizationSpecManager) XmlToCustomizationSpecItem(
+	_this *do.ManagedObjectReference, specItemXml string,
+) (*CustomizationSpecItem, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -388,7 +1323,7 @@ type Datacenter struct {
 	// Configuration of the datacenter.
 	//
 	// Since vSphere API 5.1
-	Configuration *DatacenterConfigInfo
+	Configuration *do.DatacenterConfigInfo
 
 	// A collection of references to the datastore objects
 	// available in this datacenter.
@@ -432,6 +1367,100 @@ type Datacenter struct {
 	//
 	// This folder is guaranteed to exist.
 	VmFolder *Folder
+}
+
+//
+// Powers on multiple virtual machines in a data center. If the virtual
+// machines are suspended, this method resumes execution from the suspend
+// point.
+//
+// The virtual machines can belong to different clusters in the data center.
+//
+//
+// If any virtual machine in the list is manually managed by DRS, or DRS
+// has to migrate any manually managed virtual machine or power on any manually
+// managed host in order to power on these virtual machines, a DRS recommendation
+// will be generated, and the users need to manually apply the recommendation
+// for actually powering on these virtual machines.
+//
+// Otherwise, all the virtual machine will be automatically powered on. The
+// virtual machines on stand alone hosts or DRS disabled will be powered-on
+// on the current host. The DRS automatically managed virtual machines will
+// be powered-on on the recommended hosts.
+//
+//
+//
+// When powering on a virtual machine in a cluster, the system
+// might do an implicit relocation of the virtual machine to
+// another host.
+//
+//
+//
+//
+//
+// Required Privileges
+// System.View
+// Since
+// VI API 2.5
+//
+func (mo *Datacenter) PowerOnMultiVM_Task(
+	_this *do.ManagedObjectReference, vm []*mo.VirtualMachine, option []*do.OptionValue,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// This method provides a way of getting basic information about a host without
+// adding it to a datacenter. Connection wizards typically use this method to show
+// information about a host so a user can confirm a set of changes before applying
+// them.
+//
+// Required Privileges
+// System.View
+//
+func (mo *Datacenter) QueryConnectionInfo(
+	_this *do.ManagedObjectReference, hostname string, port int32, username string, password string, sslThumbprint string,
+) (*HostConnectInfo, error) {
+
+	return nil, nil
+
+}
+
+//
+// The list of possible choices for
+// defaultHardwareVersionKey.
+// Descriptors returned by the vCenter implementation do not have
+// host field populated.
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 5.1
+//
+func (mo *Datacenter) QueryDatacenterConfigOptionDescriptor(
+	_this *do.ManagedObjectReference,
+) ([]*VirtualMachineConfigOptionDescriptor, error) {
+
+	return nil, nil
+
+}
+
+//
+// Change the datacenter configuration.
+//
+// Required Privileges
+// Datacenter.Reconfigure
+// Since
+// vSphere API 5.1
+//
+func (mo *Datacenter) ReconfigureDatacenter_Task(
+	_this *do.ManagedObjectReference, spec *do.DatacenterConfigSpec, modify bool,
+) (*Task, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -487,13 +1516,13 @@ type Datastore struct {
 	Browser *HostDatastoreBrowser
 
 	// Capabilities of this datastore.
-	Capability *DatastoreCapability
+	Capability *do.DatastoreCapability
 
 	// Hosts attached to this datastore.
-	Host []*DatastoreHostMount
+	Host []*do.DatastoreHostMount
 
 	// Specific information about the datastore.
-	Info *DatastoreInfo
+	Info *do.DatastoreInfo
 
 	// Configuration of storage I/O resource management for the datastore.
 	// Currently we only support storage I/O resource management on VMFS volumes
@@ -505,13 +1534,181 @@ type Datastore struct {
 	// ConfigureDatastoreIORM_Task
 	//
 	// Since vSphere API 4.1
-	IormConfiguration *StorageIORMInfo
+	IormConfiguration *do.StorageIORMInfo
 
 	// Global properties of the datastore.
-	Summary *DatastoreSummary
+	Summary *do.DatastoreSummary
 
 	// Virtual machines stored on this datastore.
 	Vm []*VirtualMachine
+}
+
+//
+// Puts the datastore in maintenance mode. While this task is running and when the
+// datastore is in maintenance mode, no virtual machines can be powered on and no
+// provisioning operations can be performed on the datastore. Once the call
+// completes, it is safe to remove datastore without disrupting any virtual machines.
+//
+// The task completes once there are no virtual machines on the datastore
+// and no provisioning operations in progress on the datastore. The operation does not
+// directly initiate any operations to evacuate or power-down powered-on virtual machines.
+// However, if the datastore is part of a storage pod with VMware Storage DRS enabled,
+// Storage DRS provides migration recommendations to evacuate the virtual
+// machines. If Storage DRS is in fully-automatic mode, these are automatically scheduled.
+//
+// The task is cancellable.
+//
+// This method returns a StoragePlacementResult object, which includes
+// a Task object with which to monitor the operation, and a list of recommendations
+// and faults generated by Storage DRS when it tries to evacuate the virtual machines
+// on the datastore. The recommendations and faults fields are set only if the datastore is
+// a part of a storage pod with Storage DRS enabled.
+//
+//
+// Required Privileges
+// Datastore.Config
+// Since
+// vSphere API 5.0
+//
+func (mo *Datastore) DatastoreEnterMaintenanceMode(
+	_this *do.ManagedObjectReference,
+) (*StoragePlacementResult, error) {
+
+	return nil, nil
+
+}
+
+//
+// Takes the datastore out of maintenance mode.
+//
+// The task is cancellable.
+//
+//
+//
+//
+// Required Privileges
+// Datastore.Config
+// Since
+// vSphere API 5.0
+//
+func (mo *Datastore) DatastoreExitMaintenanceMode_Task(
+	_this *do.ManagedObjectReference,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of VI API 2.5 do not use this method. This method throws
+// ResourceInUse.  Datastores are automatically
+// removed when no longer in use, so this method is unnecessary.
+//
+//
+// Removes a datastore. A datastore can be removed only if it is not currently used
+// by any host or virtual machine.
+//
+// Required Privileges
+// Datastore.Delete
+//
+func (mo *Datastore) DestroyDatastore(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Explicitly refreshes free-space and capacity values in summary
+// and info.
+//
+// Required Privileges
+// System.Read
+//
+func (mo *Datastore) RefreshDatastore(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Refreshes all storage related information including free-space, capacity,
+// and detailed usage of virtual machines. Updated values are available
+// in summary and info.
+//
+// Required Privileges
+// System.Read
+// Since
+// vSphere API 4.0
+//
+func (mo *Datastore) RefreshDatastoreStorageInfo(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+// Deprecated.
+// As of vSphere API 4.0, use Rename_Task.
+//
+//
+// Renames a datastore.
+//
+// Required Privileges
+// Datastore.Rename
+//
+func (mo *Datastore) RenameDatastore(
+	_this *do.ManagedObjectReference, newName string,
+) error {
+
+	return nil
+
+}
+
+//
+// Update file paths embedded in virtual machine files on the datastore.
+// This can be called after the file system corresponding to the datastore
+// has been resignatured or remounted.  Any MountPathDatastorePairs
+// where the new path is the same as the original file path will be ignored.
+//
+// This method is only supported by vCenter server.  Also, this method requires
+// that the datastore is accessible from
+// at least one host (ESX version 4.1 or above) in vCenter server.
+//
+//
+// While this operation is in progress, it is important that users do not
+// initiate any operations that might read or write to any files on the
+// datastore, such as registering a virtual machine with files residing
+// on the datastore, or performing any virtual disk operations on any files
+// in the datastore. These operations can potentially cause spurious file
+// update failures, while at the same time they can prevent virtual machine
+// files from being updated correctly.
+//
+//
+// If users intend to update multiple datastores using this method, it is
+// strongly advised that the users do not initiate any operations that
+// might read or write to files on any of the datastores, until all of
+// them have been updated. The files of a single virtual machine can
+// reside on multiple datastores, and thus all the involved datastores
+// should be updated, before the virtual machine is considered updated
+// completely.
+//
+//
+// Required Privileges
+// Datastore.UpdateVirtualMachineFiles
+// Since
+// vSphere API 4.1
+//
+func (mo *Datastore) UpdateVirtualMachineFiles_Task(
+	_this *do.ManagedObjectReference, mountPathDatastoreMapping []*do.DatastoreMountPathDatastorePair,
+) (*Task, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -523,12 +1720,105 @@ type DatastoreNamespaceManager struct {
 }
 
 //
+// Creates a top-level directory on the given datastore, using the given
+// user display name hint and opaque storage policy.
+//
+// The optional given display name hint may be used by the underlying
+// storage system for user display purposes, but it may not be relied
+// upon for future directory references.
+//
+//
+// Clients must use the returned stable path for future directory
+// references.See DeleteDirectory
+//
+//
+// Required Privileges
+// Datastore.Config
+//
+func (mo *DatastoreNamespaceManager) CreateDirectory(
+	_this *do.ManagedObjectReference, datastore *mo.Datastore, displayName string, policy string,
+) (string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Deletes the given top-level directory from a datastore.
+//
+// The top-level directory must be a full path of the form
+//
+//
+// /vmfs/volumes/[datastore-uuid]/[directory-uuid]
+// as returned by
+// CreateDirectory.See CreateDirectory
+//
+// Required Privileges
+// Datastore.Config
+//
+func (mo *DatastoreNamespaceManager) DeleteDirectory(
+	_this *do.ManagedObjectReference, datacenter *mo.Datacenter, datastorePath string,
+) error {
+
+	return nil
+
+}
+
+//
 // Provides an interface to get low-level debugging logs or diagnostic bundles
 // for a server. For VirtualCenter, this includes the log files
 // for the server daemon. For an ESX Server host, this includes detailed
 // log files for the VMkernel.
 //
 type DiagnosticManager struct {
+}
+
+//
+// Returns part of a log file. Log entries are always returned
+// chronologically, typically with the newest event last.
+//
+// Required Privileges
+// Global.Diagnostics
+//
+func (mo *DiagnosticManager) BrowseDiagnosticLog(
+	_this *do.ManagedObjectReference, host *mo.HostSystem, key string, start int32, lines int32,
+) (*DiagnosticManagerLogHeader, error) {
+
+	return nil, nil
+
+}
+
+//
+// Instructs the server to generate diagnostic bundles. A diagnostic bundle
+// includes log files and other configuration information that can be used
+// to investigate potential server issues. Virtual machine and guest
+// operation system state is excluded from diagnostic bundles.
+//
+//
+//
+// Required Privileges
+// Global.Diagnostics
+//
+func (mo *DiagnosticManager) GenerateLogBundles_Task(
+	_this *do.ManagedObjectReference, includeDefault bool, host []*mo.HostSystem,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Returns a list of diagnostic files for a given system.
+//
+// Required Privileges
+// Global.Diagnostics
+//
+func (mo *DiagnosticManager) QueryDescriptions(
+	_this *do.ManagedObjectReference, host *mo.HostSystem,
+) ([]*DiagnosticManagerLogDescriptor, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -561,13 +1851,111 @@ type DistributedVirtualPortgroup struct {
 	*Network
 
 	// Configuration of the portgroup.
-	Config *DVPortgroupConfigInfo
+	Config *do.DVPortgroupConfigInfo
 
 	// Generated UUID of the portgroup.
 	Key string
 
 	// Port keys for the set of ports in the portgroup.
 	PortKeys []string
+}
+
+//
+// This method determines if the portgroup configuration has changed.
+// If it has changed, the method returns a
+// DVPortgroupConfigSpec.
+// Use the ReconfigureDVPortgroup_Task method
+// to apply the rollback configuration to the portgroup. You can use the
+// rollback method only on a portgroup that is associated with a
+// VmwareDistributedVirtualSwitch.
+//
+//
+//
+//
+// • If you specify the entityBackup parameter, the returned
+// configuration specification represents the exported portgroup configuration.
+// If the entityBackup matches the current portgroup
+// configuration, the method does not return a configuration specification.
+//
+//
+// • If entityBackup is not specified, the returned configuration
+// specification represents a previous state of the portgroup, if available.
+// When you use a VMware distributed virtual switch, each time you reconfigure
+// the switch, the Server saves the switch configuration before applying the updates.
+// If the vCenter Server is restarted, the saved configuration is not preserved
+// and the method does not return a configuration specification.
+//
+//
+//
+//
+//
+// To use the rollback method, you must have the DVPortgroup.Read privilege.
+//
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+// Since
+// vSphere API 5.1
+//
+func (mo *DistributedVirtualPortgroup) DVPortgroupRollback_Task(
+	_this *do.ManagedObjectReference, entityBackup *do.EntityBackupConfig,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Reconfigures one or more distributed virtual portgroups.
+// You can use this method to set portgroup properties or
+// to reset the portgroup to a previous state.
+// Reconfiguring a Standard Distributed Virtual Portgroup
+//
+// To reconfigure a DistributedVirtualPortgroup,
+// use a DVPortgroupConfigSpec
+// to set the portgroup properties.
+//
+//
+// Reconfiguring a Portgroup Associated With a VMware Distributed Virtual Switch
+//
+// If you use a VmwareDistributedVirtualSwitch,
+// you can perform the following portgroup reconfiguration:
+//
+//
+//
+// • Use a DVPortgroupConfigSpec
+// to set the portgroup properties.
+//
+// • Use the DVPortgroupConfigSpec
+// returned by DVPortgroupRollback_Task
+// to reset the portgroup to a previous state.
+//
+//
+//
+//
+// The following privileges are required to reconfigure a portgroup.
+//
+//
+//
+// • DVPortgroup.PolicyOp if you are changing the policy of the portgroup.
+//
+// • DVPortgroup.ScopeOp if you are changing the scope of the portgroup.
+//
+// • DVPortgroup.Modify for anything else.
+//
+//
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *DistributedVirtualPortgroup) ReconfigureDVPortgroup_Task(
+	_this *do.ManagedObjectReference, spec *do.DVPortgroupConfigSpec,
+) (*Task, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -832,15 +2220,15 @@ type DistributedVirtualSwitch struct {
 	// When you retrieve this property from an ESXi host,
 	// capability.dvsOperationSupported
 	// should always be set to false.
-	Capability *DVSCapability
+	Capability *do.DVSCapability
 
 	// Switch configuration data.
-	Config *DVSConfigInfo
+	Config *do.DVSConfigInfo
 
 	// Network resource pool information for the switch.
 	//
 	// Since vSphere API 4.1
-	NetworkResourcePool []*DVSNetworkResourcePool
+	NetworkResourcePool []*do.DVSNetworkResourcePool
 
 	// Portgroups that are defined on the switch.
 	Portgroup []*DistributedVirtualPortgroup
@@ -848,14 +2236,456 @@ type DistributedVirtualSwitch struct {
 	// Runtime information of the distributed virtual switch.
 	//
 	// Since vSphere API 5.1
-	Runtime *DVSRuntimeInfo
+	Runtime *do.DVSRuntimeInfo
 
 	// Summary of the switch.
-	Summary *DVSSummary
+	Summary *do.DVSSummary
 
 	// Generated UUID of the switch. Unique across vCenter Server
 	// inventory and instances.
 	Uuid string
+}
+
+//
+// Creates one or more DistributedVirtualPortgroups and adds them to
+// the distributed virtual switch.
+//
+// Required Privileges
+// DVPortgroup.Create
+//
+func (mo *DistributedVirtualSwitch) AddDVPortgroup_Task(
+	_this *do.ManagedObjectReference, spec []*do.DVPortgroupConfigSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Add a network resource pool.
+//
+// Required Privileges
+// DVSwitch.ResourceManagement
+// Since
+// vSphere API 5.0
+//
+func (mo *DistributedVirtualSwitch) AddNetworkResourcePool(
+	_this *do.ManagedObjectReference, configSpec []*do.DVSNetworkResourcePoolConfigSpec,
+) error {
+
+	return nil
+
+}
+
+//
+// Creates a single DistributedVirtualPortgroup and adds it
+// to the distributed virtual switch.
+//
+// Required Privileges
+// DVPortgroup.Create
+// Since
+// vSphere API 5.1
+//
+func (mo *DistributedVirtualSwitch) CreateDVPortgroup_Task(
+	_this *do.ManagedObjectReference, spec *do.DVPortgroupConfigSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// This method determines if the distributed virtual switch configuration
+// has changed. If it has changed, the method returns a
+// VMwareDVSConfigSpec.
+// Use the ReconfigureDvs_Task method to apply
+// the rollback configuration to the switch.
+// You can use the rollback method only on a VmwareDistributedVirtualSwitch.
+//
+//
+//
+//
+// • If you specify the entityBackup parameter, the returned
+// configuration specification represents the exported switch configuration.
+// If the entityBackup matches the current switch
+// configuration, the method does not return a configuration specification.
+//
+//
+// • If entityBackup is not specified, the returned configuration
+// specification represents a previous state of the switch, if available.
+// When you use a VMware distributed virtual switch, each time you reconfigure
+// the switch, the Server saves the switch configuration before applying the updates.
+// If the vCenter Server is restarted, the saved configuration is not preserved
+// and the method does not return a configuration specification.
+//
+//
+//
+//
+//
+// To use the rollback method, you must have the DVSwitch.Read privilege.
+//
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+// Since
+// vSphere API 5.1
+//
+func (mo *DistributedVirtualSwitch) DVSRollback_Task(
+	_this *do.ManagedObjectReference, entityBackup *do.EntityBackupConfig,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Enable/Disable network I/O control on the vSphere Distributed Switch.
+//
+// Required Privileges
+// DVSwitch.ResourceManagement
+// Since
+// vSphere API 4.1
+//
+func (mo *DistributedVirtualSwitch) EnableNetworkResourceManagement(
+	_this *do.ManagedObjectReference, enable bool,
+) error {
+
+	return nil
+
+}
+
+//
+// Return the keys of ports that meet the criteria. On an ESXi host,
+// the property shows only the connected ports currently on the host.
+//
+// Required Privileges
+// System.Read
+//
+func (mo *DistributedVirtualSwitch) FetchDVPortKeys(
+	_this *do.ManagedObjectReference, criteria *do.DistributedVirtualSwitchPortCriteria,
+) ([]string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Return the ports that meet the criteria.
+//
+// Required Privileges
+// System.Read
+//
+func (mo *DistributedVirtualSwitch) FetchDVPorts(
+	_this *do.ManagedObjectReference, criteria *do.DistributedVirtualSwitchPortCriteria,
+) ([]*DistributedVirtualPort, error) {
+
+	return nil, nil
+
+}
+
+//
+// Returns the portgroup identified by the key within this VDS.
+//
+// Required Privileges
+// System.Read
+// Since
+// vSphere API 5.1
+//
+func (mo *DistributedVirtualSwitch) LookupDvPortGroup(
+	_this *do.ManagedObjectReference, portgroupKey string,
+) (*DistributedVirtualPortgroup, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// as of vSphere API 5.5
+//
+//
+// Merge an existing DistributedVirtualSwitch (source) to this switch
+// (destination). The host members and the connected entity of the source
+// switch will be transferred to the destination switch. This operation
+// disconnects the entities from the source switch, tears down its host
+// proxy switches, creates new proxies for the destination switch,
+// and reconnects the entities to the destination switch.
+//
+// In summary, this operation does the following:
+//
+//
+//
+// • Adds the
+// config.maxPorts
+// of the source switch to the maxPorts of the
+// destination switch.
+//
+// • The host members of the source switch leave the source switch
+// and join the destination switch with the same Physical NIC and
+// VirtualSwitch (if applicable). A set of new uplink ports,
+// compliant with the
+// uplinkPortPolicy,
+// is created as the hosts join the destination switch.
+//
+// • The portgroups on the source switch are copied over to destination
+// switch, by calculating the effective default port config and
+// creating a portgroup of the same name in the destination switch. If
+// the name already exists, the copied portgroup uses names following a
+// "Copy of switch-portgroup-name" scheme to avoid conflict. The same
+// number of ports are created inside each copied portgroup.
+//
+// • The standalone distributed virtual ports are not copied,
+// unless there is a virtual
+// machine or host virtual NIC connecting to it. In that case, the
+// operation calculates the effective port config and creates a port
+// in the destination switch with the same name. Name conflict is
+// resolved using numbers like "original-port-name(1)". The uplink ports
+// are not copied over.
+//
+// • The virtual machine and host virtual NICs are disconnected from the source
+// switch and reconnected with the destination switch, to the
+// copied standalone port or portgroup.
+//
+// • If you are using a VmwareDistributedVirtualSwitch -
+// Unless the PVLAN map contains exactly the same entries between
+// the source and destination VMware distributed virtual switches,
+// the method raises a fault if
+// pvlanId
+// is set in any port, portgroup, or switch that will be copied.
+//
+//
+//
+//
+//
+// Required Privileges
+// DVSwitch.Modify
+//
+func (mo *DistributedVirtualSwitch) MergeDvs_Task(
+	_this *do.ManagedObjectReference, dvs *mo.DistributedVirtualSwitch,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Move the ports out of their current portgroup into the specified portgroup.
+// If the moving of any of the ports results in a violation of the portgroup
+// policy, or type of the source or destination portgroup, the operation
+// raises a fault. A conflict port cannot be moved.
+//
+// Required Privileges
+// DVSwitch.Modify
+//
+func (mo *DistributedVirtualSwitch) MoveDVPort_Task(
+	_this *do.ManagedObjectReference, portKey []string, destinationPortgroupKey string,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// This method updates the DistributedVirtualSwitch product specifications.
+//
+// Required Privileges
+// DVSwitch.Modify
+//
+func (mo *DistributedVirtualSwitch) PerformDvsProductSpecOperation_Task(
+	_this *do.ManagedObjectReference, operation string, productSpec *do.DistributedVirtualSwitchProductSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Return the used VLAN ID (PVLAN excluded) in the switch.
+//
+// Required Privileges
+// System.Read
+//
+func (mo *DistributedVirtualSwitch) QueryUsedVlanIdInDvs(
+	_this *do.ManagedObjectReference,
+) ([]int, error) {
+
+	return nil, nil
+
+}
+
+//
+// Reconfigure individual ports.
+//
+// Required Privileges
+// DVSwitch.PortConfig
+//
+func (mo *DistributedVirtualSwitch) ReconfigureDVPort_Task(
+	_this *do.ManagedObjectReference, port []*do.DVPortConfigSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Reconfigures a distributed virtual switch. You can use this method
+// to set switch properties or to reset the switch to a previous state.
+//
+//
+// Reconfiguring a Standard Distributed Virtual Switch
+//
+// To reconfigure a DistributedVirtualSwitch,
+// use a DVSConfigSpec
+// to set the switch properties.
+//
+//
+//
+// Reconfiguring a VMware Distributed Virtual Switch
+//
+// If you use a VmwareDistributedVirtualSwitch,
+// you can perform the following switch reconfiguration:
+//
+//
+//
+// • Use a VMwareDVSConfigSpec
+// to set the switch properties.
+//
+// • Use the VMwareDVSConfigSpec
+// returned by DVSRollback_Task
+// to reset the switch to a previous state.
+//
+//
+//
+//
+// Reconfiguring the switch may require any of the following privileges,
+// depending on what is being changed:
+//
+//
+//
+// • DVSwitch.PolicyOp if policy
+// is set.
+//
+// • DVSwitch.PortSetting if defaultPortConfig
+// is set.
+//
+// • DVSwitch.HostOp if policy
+// is set. The
+// user will also need the Host.Config.Network
+// privilege on the host.
+//
+// • DVSwitch.Vspan if vspanConfigSpec
+// is set.
+//
+// • DVSwitch.Modify for anything else.
+//
+//
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *DistributedVirtualSwitch) ReconfigureDvs_Task(
+	_this *do.ManagedObjectReference, spec *do.DVSConfigSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// as of vSphere API 5.0.
+// Use
+// DistributedVirtualSwitchManager.RectifyDvsOnHost_Task instead.
+//
+//
+// Update the switch configuration on the host to bring them in sync with the
+// current configuration in vCenter Server.
+//
+// Required Privileges
+// System.Read
+//
+func (mo *DistributedVirtualSwitch) RectifyDvsHost_Task(
+	_this *do.ManagedObjectReference, hosts []*mo.HostSystem,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Refresh port states.
+//
+// Required Privileges
+// System.Read
+//
+func (mo *DistributedVirtualSwitch) RefreshDVPortState(
+	_this *do.ManagedObjectReference, portKeys []string,
+) error {
+
+	return nil
+
+}
+
+//
+// Remove a network resource pool.
+//
+// Required Privileges
+// DVSwitch.ResourceManagement
+// Since
+// vSphere API 5.0
+//
+func (mo *DistributedVirtualSwitch) RemoveNetworkResourcePool(
+	_this *do.ManagedObjectReference, key []string,
+) error {
+
+	return nil
+
+}
+
+//
+// Set the capability of the switch.
+//
+// Required Privileges
+// DVSwitch.Modify
+//
+func (mo *DistributedVirtualSwitch) UpdateDvsCapability(
+	_this *do.ManagedObjectReference, capability *do.DVSCapability,
+) error {
+
+	return nil
+
+}
+
+//
+// Update health check configuration.
+//
+// Required Privileges
+// DVSwitch.Modify
+// Since
+// vSphere API 5.1
+//
+func (mo *DistributedVirtualSwitch) UpdateDVSHealthCheckConfig_Task(
+	_this *do.ManagedObjectReference, healthCheckConfig []*do.DVSHealthCheckConfig,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Update the network resource pool configuration.
+//
+// Required Privileges
+// DVSwitch.ResourceManagement
+// Since
+// vSphere API 4.1
+//
+func (mo *DistributedVirtualSwitch) UpdateNetworkResourcePool(
+	_this *do.ManagedObjectReference, configSpec []*do.DVSNetworkResourcePoolConfigSpec,
+) error {
+
+	return nil
+
 }
 
 //
@@ -875,6 +2705,233 @@ type DistributedVirtualSwitch struct {
 //
 //
 type DistributedVirtualSwitchManager struct {
+}
+
+//
+// Export the configuration for entities specified in the
+// selectionSet parameter. You can use this method only
+// for a VmwareDistributedVirtualSwitch and its
+// associated DistributedVirtualPortgroup objects.
+//
+// Use the DVSManagerImportEntity_Task method to restore the entity
+// to the state represented by the exported configuration.
+// You can also use the exported configuration to create
+// a new switch or portgroup.
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+// Since
+// vSphere API 5.1
+//
+func (mo *DistributedVirtualSwitchManager) DVSManagerExportEntity_Task(
+	_this *do.ManagedObjectReference, selectionSet []*do.SelectionSet,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Import the configuration of entities specified in
+// EntityBackupConfig. You can restore the
+// existing configuration to the state represented by the
+// backup configuration. You can also use the backup
+// configuration to create a new switch or portgroup.
+// See EntityImportType.
+//
+// Required Privileges
+// Dynamic - See discussion above
+// Since
+// vSphere API 5.1
+//
+func (mo *DistributedVirtualSwitchManager) DVSManagerImportEntity_Task(
+	_this *do.ManagedObjectReference, entityBackup []*do.EntityBackupConfig, importType string,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Returns the portgroup identified by the key within the specified VDS
+// identified by its UUID.
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 5.1
+//
+func (mo *DistributedVirtualSwitchManager) DVSManagerLookupDvPortGroup(
+	_this *do.ManagedObjectReference, switchUuid string, portgroupKey string,
+) (*DistributedVirtualPortgroup, error) {
+
+	return nil, nil
+
+}
+
+//
+// This operation returns a list of switch product specifications that
+// are supported by the vCenter Server.
+//
+// Required Privileges
+// System.View
+//
+func (mo *DistributedVirtualSwitchManager) QueryAvailableDvsSpec(
+	_this *do.ManagedObjectReference,
+) ([]*DistributedVirtualSwitchProductSpec, error) {
+
+	return nil, nil
+
+}
+
+//
+// This operation returns a list of hosts that are compatible with
+// the given DistributedVirtualSwitch product specification.
+//
+// Required Privileges
+// System.View
+//
+func (mo *DistributedVirtualSwitchManager) QueryCompatibleHostForExistingDvs(
+	_this *do.ManagedObjectReference, container *mo.ManagedEntity, recursive bool, dvs *mo.DistributedVirtualSwitch,
+) ([]*HostSystem, error) {
+
+	return nil, nil
+
+}
+
+//
+// This operation returns a list of hosts that are compatible with
+// the given DistributedVirtualSwitch product specification.
+//
+// Required Privileges
+// System.View
+//
+func (mo *DistributedVirtualSwitchManager) QueryCompatibleHostForNewDvs(
+	_this *do.ManagedObjectReference, container *mo.ManagedEntity, recursive bool, switchProductSpec *do.DistributedVirtualSwitchProductSpec,
+) ([]*HostSystem, error) {
+
+	return nil, nil
+
+}
+
+//
+// This operation returns a DistributedVirtualSwitch given a UUID.
+//
+// Required Privileges
+// System.View
+//
+func (mo *DistributedVirtualSwitchManager) QueryDvsByUuid(
+	_this *do.ManagedObjectReference, uuid string,
+) (*DistributedVirtualSwitch, error) {
+
+	return nil, nil
+
+}
+
+//
+// This operation returns a list of compatibility results. Each compatibility result
+// is an object that has a host property and optionally a fault which would
+// be populated only if that host is not compatible with a given dvsProductSpec.
+// All filters in hostFilerSpecs are ANDed to derive the intersection of hosts against
+// which compatibility is checked. If caller did not have view privileges on the
+// host entity in an element of the CompatibilityResult array, then that entire
+// element would be removed from the CompatibilityResult array.
+// Typical uses:
+//
+//
+// •
+// For the createDVS situation, hostFilterSpec is of type HostDvsFilterSpec and DvsProductSpec
+// will have newSwitchProductSpec set.
+//
+// •
+// For the Add-Host-To-DVS situation, you can use either HostDvsFilterSpec or
+// HostDvsMembershipFilter with inclusive being false, and pass the DVS in DvsProductSpec.
+//
+// •
+// For the Upgrade-DVS situation, you can use either HostDvsFilterSpec or
+// HostDvsMembershipFilter with inclusive being true, and pass the new desired ProductSpec
+// for DVS in newSwitchProductSpec.
+//
+//
+//
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 4.1
+//
+func (mo *DistributedVirtualSwitchManager) QueryDvsCheckCompatibility(
+	_this *do.ManagedObjectReference, hostContainer *do.DistributedVirtualSwitchManagerHostContainer, dvsProductSpec *do.DistributedVirtualSwitchManagerDvsProductSpec, hostFilterSpec []*do.DistributedVirtualSwitchManagerHostDvsFilterSpec,
+) ([]*DistributedVirtualSwitchManagerCompatibilityResult, error) {
+
+	return nil, nil
+
+}
+
+//
+// This operation returns a list of host product specifications that
+// are compatible with the given DistributedVirtualSwitch product
+// specification.
+//
+// Required Privileges
+// System.View
+//
+func (mo *DistributedVirtualSwitchManager) QueryDvsCompatibleHostSpec(
+	_this *do.ManagedObjectReference, switchProductSpec *do.DistributedVirtualSwitchProductSpec,
+) ([]*DistributedVirtualSwitchHostProductSpec, error) {
+
+	return nil, nil
+
+}
+
+//
+// This operation returns the DistributedVirtualSwitch or
+// DistributedVirtualPortgroup configuration target on a host.
+//
+// Required Privileges
+// System.View
+//
+func (mo *DistributedVirtualSwitchManager) QueryDvsConfigTarget(
+	_this *do.ManagedObjectReference, host *mo.HostSystem, dvs *mo.DistributedVirtualSwitch,
+) (*DVSManagerDvsConfigTarget, error) {
+
+	return nil, nil
+
+}
+
+//
+// This operation indicates which version-specific DVS features are
+// available for the given DistributedVirtualSwitch product specification.
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 4.1
+//
+func (mo *DistributedVirtualSwitchManager) QueryDvsFeatureCapability(
+	_this *do.ManagedObjectReference, switchProductSpec *do.DistributedVirtualSwitchProductSpec,
+) (*DVSFeatureCapability, error) {
+
+	return nil, nil
+
+}
+
+//
+// Update the Distributed Switch configuration on the hosts to bring them in sync with the
+// current configuration in vCenter Server.
+//
+// Required Privileges
+// System.Read
+// Since
+// vSphere API 5.0
+//
+func (mo *DistributedVirtualSwitchManager) RectifyDvsOnHost_Task(
+	_this *do.ManagedObjectReference, hosts []*mo.HostSystem,
+) (*Task, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -919,6 +2976,108 @@ type EnvironmentBrowser struct {
 }
 
 //
+// Query for a specific virtual machine configuration option (the ConfigOption).
+//
+// If the EnvironmentBrowser is from a ComputeResource or ClusterComputeResource,
+// the key or host, or both arguments can be used to return the required config
+// options. If a key is specified, then the ConfigOption corresponding to that key
+// value is  returned. If a host is specified, then the default ConfigOption for
+// that host is returned. If key and host both are specified, the ConfigOption
+// corresponding to the given key for that host is returned. If neither is specified,
+// then the default ConfigOption for this environment browser is returned. Typically,
+// the default contains the options for the most recent virtual hardware
+// supported.
+//
+//
+// If the EnvironmentBrowser is from a VirtualMachine neither a host nor a
+// key should be specified.
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *EnvironmentBrowser) QueryConfigOption(
+	_this *do.ManagedObjectReference, key string, host *mo.HostSystem,
+) (*VirtualMachineConfigOption, error) {
+
+	return nil, nil
+
+}
+
+//
+// The list of ConfigOption keys available on this entity.
+//
+// Required Privileges
+// System.View
+//
+func (mo *EnvironmentBrowser) QueryConfigOptionDescriptor(
+	_this *do.ManagedObjectReference,
+) ([]*VirtualMachineConfigOptionDescriptor, error) {
+
+	return nil, nil
+
+}
+
+//
+// Queries for information about a specific target, a "physical" device that
+// can be used to back virtual devices. The ConfigTarget that is returned specifies
+// the set of values that can be used in the device backings to connect the virtual
+// machine to physical (or logical) host devices.
+//
+// If the EnvironmentBrowser is from a ComputeResource or ClusterComputeResource,
+// the host argument can be used to return the ConfigTarget provided by a particular
+// host in the compute resource or cluster. If host is specified and the
+// EnvironmentBrowser is from a ComputeResource or ClusterComputeResource,
+// then the union of all the devices is returned and the
+// vim.vm.TargetInfo.configurationTag field indicates  how widely the device is
+// available  across the compute resource or cluster.
+//
+//
+// If the EnvironmentBrowser is from a VirtualMachine a host should not be specified.
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *EnvironmentBrowser) QueryConfigTarget(
+	_this *do.ManagedObjectReference, host *mo.HostSystem,
+) (*ConfigTarget, error) {
+
+	return nil, nil
+
+}
+
+//
+// Queries for information on the capabilities supported by the ComputeResource
+// associated with the EnvironmentBrowser.
+//
+// If the EnvironmentBrowser is from a ComputeResource or ClusterComputeResource,
+// the host argument can be used to return the capabilities associated with a
+// specific host in the compute resource or cluster. If the host argument is not
+// specified and the EnvironmentBrowser is from a ComputeResource or
+// ClusterComputeResource, then the intersection of the capabilities supported by
+// all the hosts in the cluster is returned. If the EnvironmentBrowser is from
+// a VirtualMachine, the compute resource associated with the virtual machine
+// will be queried for its capabilities.
+//
+//
+// If the EnvironmentBrowser is from a VirtualMachine a host should not be specified.
+//
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 4.0
+//
+func (mo *EnvironmentBrowser) QueryTargetCapabilities(
+	_this *do.ManagedObjectReference, host *mo.HostSystem,
+) (*HostCapability, error) {
+
+	return nil, nil
+
+}
+
+//
 // EventHistoryCollector provides a mechanism for
 // retrieving historical data and updates when the server appends new
 // events.
@@ -934,7 +3093,43 @@ type EventHistoryCollector struct {
 	//
 	// The "oldest event" is the one with the smallest key (event ID). The
 	// events in the returned page are unordered.
-	LatestPage []*Event
+	LatestPage []*do.Event
+}
+
+//
+// Reads the 'scrollable view' from the current position. The scrollable
+// position is moved to the next newer page after the read. No item is
+// returned when the end of the collector is reached.
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *EventHistoryCollector) ReadNextEvents(
+	_this *do.ManagedObjectReference, maxCount int32,
+) ([]*Event, error) {
+
+	return nil, nil
+
+}
+
+//
+// Reads the 'scrollable view' from the current position. The scrollable
+// position is moved to the next older page after the read. No item is
+// returned when the head of the collector is reached.
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *EventHistoryCollector) ReadPreviousEvents(
+	_this *do.ManagedObjectReference, maxCount int32,
+) ([]*Event, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -946,14 +3141,117 @@ type EventHistoryCollector struct {
 type EventManager struct {
 
 	// Static descriptive strings used in events.
-	Description *EventDescription
+	Description *do.EventDescription
 
 	// The latest event that happened on the VirtualCenter server.
-	LatestEvent *Event
+	LatestEvent *do.Event
 
 	// For each client, the maximum number of event collectors that can exist
 	// simultaneously.
 	MaxCollector int32
+}
+
+//
+// Creates an event history collector, which is a specialized history collector
+// that provides Event objects.
+//
+// Event collectors do not persist beyond the current client session.
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *EventManager) CreateCollectorForEvents(
+	_this *do.ManagedObjectReference, filter *do.EventFilterSpec,
+) (*EventHistoryCollector, error) {
+
+	return nil, nil
+
+}
+
+//
+// Logs a user defined event against a particular managed entity.
+//
+// Required Privileges
+// None
+//
+func (mo *EventManager) LogUserEvent(
+	_this *do.ManagedObjectReference, entity *mo.ManagedEntity, msg string,
+) error {
+
+	return nil
+
+}
+
+//
+// Posts the specified event, optionally associating it with
+// a task.
+//
+// The event being posted should have the following info in it:
+//
+//
+//
+// • The ManagedEntity on which the event is being posted should
+// be set in the appropriate EntityEventArgument field of the base
+// Event class. It is OK to not set any entity, in which case the
+// event is treated as an event about the system.
+//
+// • Some Event fields (key, chainId,
+// createdTime) are mandatory because of the nature of
+// the structure, but any caller-supplied values will be overwritten by
+// the system.
+//
+//
+//
+//
+// If the event being posted is to be associated with an existing
+// Task, the appropriate TaskInfo needs to be passed in.
+// This task can either be one returned from a vSphere API operation or
+// an extension task created by calling TaskManager#createTask.
+//
+//
+// Required Privileges
+// Global.LogEvent
+// Since
+// VI API 2.5
+//
+func (mo *EventManager) PostEvent(
+	_this *do.ManagedObjectReference, eventToPost *do.Event, taskInfo *do.TaskInfo,
+) error {
+
+	return nil
+
+}
+
+//
+// Returns the events in specified filter.
+// Returns empty array when there are not any events qualified.
+//
+// Required Privileges
+// System.View
+//
+func (mo *EventManager) QueryEvents(
+	_this *do.ManagedObjectReference, filter *do.EventFilterSpec,
+) ([]*Event, error) {
+
+	return nil, nil
+
+}
+
+//
+// Retrieves the argument meta-data for a given Event type
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 4.0
+//
+func (mo *EventManager) RetrieveArgumentDescription(
+	_this *do.ManagedObjectReference, eventTypeId string,
+) ([]*EventArgDesc, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -972,14 +3270,33 @@ type ExtensibleManagedObject struct {
 	// The fields are sorted by name.
 	//
 	// Since VI API 2.5
-	AvailableField []*CustomFieldDef
+	AvailableField []*do.CustomFieldDef
 
 	// List of custom field values. Each value uses a key to associate
 	// an instance of a CustomFieldStringValue with
 	// a custom field definition.
 	//
 	// Since VI API 2.5
-	Value []*CustomFieldValue
+	Value []*do.CustomFieldValue
+}
+
+//
+// Assigns a value to a custom field. The setCustomValue method requires
+// whichever updatePrivilege is defined as one of the
+// fieldInstancePrivileges
+// for the CustomFieldDef whose value is being changed.
+//
+// Required Privileges
+// Dynamic - See discussion above
+// Since
+// VI API 2.5
+//
+func (mo *ExtensibleManagedObject) SetCustomValue(
+	_this *do.ManagedObjectReference, key string, value string,
+) error {
+
+	return nil
+
 }
 
 //
@@ -1001,7 +3318,181 @@ type ExtensibleManagedObject struct {
 type ExtensionManager struct {
 
 	// The list of currently registered extensions.
-	ExtensionList []*Extension
+	ExtensionList []*do.Extension
+}
+
+//
+// Returns extension with the given key, if any.
+//
+// Required Privileges
+// System.View
+//
+func (mo *ExtensionManager) FindExtension(
+	_this *do.ManagedObjectReference, extensionKey string,
+) (*Extension, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of VI 4.0, use trusted certificates and
+// LoginExtensionBySubjectName or
+// SetExtensionCertificate and
+// LoginExtensionByCertificate.
+//
+//
+// Returns VirtualCenter Server public key.
+//
+// Required Privileges
+// System.View
+//
+func (mo *ExtensionManager) GetPublicKey(
+	_this *do.ManagedObjectReference,
+) (string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Query statistics about IP allocation usage, either system wide or for
+// specified extensions.
+//
+// Refer to IpPoolManager for details.
+//
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 5.1
+//
+func (mo *ExtensionManager) QueryExtensionIpAllocationUsage(
+	_this *do.ManagedObjectReference, extensionKeys []string,
+) ([]*ExtensionManagerIpAllocationUsage, error) {
+
+	return nil, nil
+
+}
+
+//
+// Find entities managed by an extension. These can be either virtual machines
+// or vApps.
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 5.0
+//
+func (mo *ExtensionManager) QueryManagedBy(
+	_this *do.ManagedObjectReference, extensionKey string,
+) ([]*ManagedEntity, error) {
+
+	return nil, nil
+
+}
+
+//
+// Registers extension.
+//
+// Required Privileges
+// Extension.Register
+//
+func (mo *ExtensionManager) RegisterExtension(
+	_this *do.ManagedObjectReference, extension *do.Extension,
+) error {
+
+	return nil
+
+}
+
+//
+// Update the stored authentication certificate for a specified extension.
+//
+// Updates the registration of the specified extension with the
+// thumbprint of the X.509 client certificate provided over SSL handshake,
+// or by the "certificatePem"argument.  The thumbprint
+// will be used to authenticate the extension during invocations of
+// LoginExtensionByCertificate.
+//
+// NOTE: No verification is performed on the received certificate, such as
+// expiry or revocation.
+//
+//
+// This method will unset any public key or subject name
+// associated with the extension.
+//
+//
+// Required Privileges
+// Extension.Update
+// Since
+// vSphere API 4.0
+//
+func (mo *ExtensionManager) SetExtensionCertificate(
+	_this *do.ManagedObjectReference, extensionKey string, certificatePem string,
+) error {
+
+	return nil
+
+}
+
+// Deprecated.
+// As of VI 4.0, use trusted certificates and
+// LoginExtensionBySubjectName or
+// SetExtensionCertificate and
+// LoginExtensionByCertificate.
+//
+//
+// Sets extension's public key.
+//
+// This method will unset any subject name or
+// certificate associated with the extension.
+//
+//
+// Required Privileges
+// Extension.Update
+//
+func (mo *ExtensionManager) SetPublicKey(
+	_this *do.ManagedObjectReference, extensionKey string, publicKey string,
+) error {
+
+	return nil
+
+}
+
+//
+// Unregisters the specified extension if it exists.
+//
+// Required Privileges
+// Extension.Unregister
+//
+func (mo *ExtensionManager) UnregisterExtension(
+	_this *do.ManagedObjectReference, extensionKey string,
+) error {
+
+	return nil
+
+}
+
+//
+// If the key specified in the extension exists,
+// the existing record is updated.
+//
+// If the "subjectName" property of the Extension
+// object has a value, and it is different from the existing
+// value, this method will unset any public key or
+// certificate associated with the extension.
+//
+//
+// Required Privileges
+// Extension.Update
+//
+func (mo *ExtensionManager) UpdateExtension(
+	_this *do.ManagedObjectReference, extension *do.Extension,
+) error {
+
+	return nil
+
 }
 
 //
@@ -1038,6 +3529,201 @@ type ExtensionManager struct {
 // a datastore can be obtained from the datastore browser.See HostDatastoreBrowser
 //
 type FileManager struct {
+}
+
+//
+// Change the owner for a file.
+//
+//
+// This method is currently not supported.
+//
+//
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+// Since
+// vSphere API 4.0
+//
+func (mo *FileManager) ChangeOwner(
+	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter, owner string,
+) error {
+
+	return nil
+
+}
+
+//
+// Copies the source file or folder to the destination.
+//
+// If the destination file does not exist, it is created.
+// If the destination file exists, the force parameter determines whether
+// to overwrite it with the source or not.
+// Folders can be copied recursively. In this case, the
+// destination, if it exists, must be a folder, else one will be created. Existing
+// files on the destination that conflict with source files can be overwritten using
+// the force parameter. Files and disks are always copied in binary format during
+// recursive copy.
+//
+//
+// If source (or destination) name is specified as a URL, then the
+// corresponding datacenter parameter may be omitted.
+//
+//
+// If any intermediate level folder specified by the source and destination
+// does not exist, a FileNotFound fault is thrown.
+//
+//
+// If a file of a virtual machine is overwritten on the destination datastore
+// as a result of the force parameter, it may corrupt that virtual machine.
+//
+//
+// If the source is an extent of a virtual disk, this operation treats the extent
+// as a file.
+//
+//
+// If source and destination resolve to the same file system location,
+// the call has no effect.
+//
+//
+// It is important to note that this operation will provide transactional guarantees
+// only for a file. No guarantees are provided when copying a folder.
+// If the intent is to clone a virtual machine registered in the inventory,
+// with transactional guarantees, please refer to CloneVM_Task.
+//
+//
+// Datastore.FileManagement privilege is required on both source and
+// destination datastores.
+//
+//
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *FileManager) CopyDatastoreFile_Task(
+	_this *do.ManagedObjectReference, sourceName string, sourceDatacenter *mo.Datacenter, destinationName string, destinationDatacenter *mo.Datacenter, force bool,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Deletes the specified file or folder from the datastore.
+// If a file of a virtual machine is deleted, it may corrupt that
+// virtual machine. Folder deletes are always recursive.
+// The datacenter parameter may be omitted if a URL is used to name
+// the file or folder.
+//
+// If the source is an extent of a virtual disk, this operation treats the extent
+// as a file.
+//
+//
+// It is important to note that this operation will provide transactional guarantees
+// only for a file. No guarantees are provided when deleting folders.
+// If the intent is to delete a virtual machine registered in the inventory,
+// please refer to Destroy_Task.
+//
+//
+//
+// Requires Datastore.FileManagement privilege on the datastore.
+//
+//
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *FileManager) DeleteDatastoreFile_Task(
+	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Create a folder using the specified name. If the parent
+// or intermediate level folders do not exist, and the parameter
+// createParentDirectories is false, a FileNotFound fault
+// is thrown.
+// If the intermediate level folders do not exist, and the parameter
+// createParentDirectories is true, all the non-existent folders
+// are created.
+//
+//
+// Requires Datastore.FileManagement privilege on the datastore.
+//
+//
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *FileManager) MakeDirectory(
+	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter, createParentDirectories bool,
+) error {
+
+	return nil
+
+}
+
+//
+// Moves the source file or folder to the destination.
+//
+// If the destination file does not exist, it is created.
+// If the destination file exists, the force parameter determines whether
+// to overwrite it with the source or not.
+// If the source path is a folder, then the destination path must not exist; the
+// destination cannot be overwritten even with a force flag in that case. Folder
+// moves are recursive, treating all files and disks to move as binary.
+//
+//
+// If source (or destination) name is specified as a URL, then the
+// corresponding datacenter parameter may be omitted.
+//
+//
+// If any intermediate level folder specified by the source and destination
+// does not exist, a FileNotFound fault is thrown.
+//
+//
+// If a file of a virtual machine is moved, it may corrupt that virtual machine.
+// If a file of a virtual machine is overwritten on the destination datastore
+// as a result of the force parameter, it may corrupt that virtual machine.
+//
+//
+// If the source is an extent of a virtual disk, this operation treats the extent
+// as a file.
+//
+//
+// If source and destination resolve to the same file system location,
+// the call has no effect.
+//
+//
+// It is important to note that this operation will provide transactional guarantees
+// only for a file. No guarantees are provided for folder moves. If the intent is
+// to move a virtual machine registered in the inventory, with transactional
+// guarantees, please refer to RelocateVM_Task.
+// If the intent is to rename a virtual machine registered in the inventory, please
+// refer to Rename_Task.
+//
+//
+// Datastore.FileManagement privilege is required on both source and
+// destination datastores.
+//
+//
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *FileManager) MoveDatastoreFile_Task(
+	_this *do.ManagedObjectReference, sourceName string, sourceDatacenter *mo.Datacenter, destinationName string, destinationDatacenter *mo.Datacenter, force bool,
+) (*Task, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -1154,6 +3840,365 @@ type Folder struct {
 }
 
 //
+// Creates a new single-host compute resource. The name provided can be an
+// IP address, such as 192.168.0.120, or a string, such as esx120.
+// If a name is specified, a DNS lookup is used to resolve it to a fully-qualified
+// name, such as esx120.vmware.com. If the DNS lookup fails, the string is
+// stored as specified.
+//
+// Licenses for the host are allocated when making the first connection to
+// the host. This is because the license needed typically depends on the type
+// of host and the number of CPUs.
+//
+//
+//
+// In addition to the Host.Inventory.AddStandaloneHost privilege, it
+// requires System.View privilege on the VM folder that the VMs of the
+// host will be placed on.
+//
+//
+// Required Privileges
+// Host.Inventory.AddStandaloneHost
+//
+func (mo *Folder) AddStandaloneHost_Task(
+	_this *do.ManagedObjectReference, spec *do.HostConnectSpec, compResSpec *do.ComputeResourceConfigSpec, addConnected bool, license string,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of VI API 2.5, use CreateClusterEx.
+//
+//
+// Creates a new cluster compute resource in this folder.
+//
+// Any % (percent) character used in this name parameter must be escaped, unless it
+// is used to start an escape sequence. Clients may also escape any other characters
+// in this name parameter.
+//
+//
+// Required Privileges
+// Host.Inventory.CreateCluster
+//
+func (mo *Folder) CreateCluster(
+	_this *do.ManagedObjectReference, name string, spec *do.ClusterConfigSpec,
+) (*ClusterComputeResource, error) {
+
+	return nil, nil
+
+}
+
+//
+// Creates a new cluster compute resource in this folder.
+//
+// Any % (percent) character used in this name parameter must be escaped, unless it
+// is used to start an escape sequence. Clients may also escape any other characters
+// in this name parameter.
+//
+//
+// Required Privileges
+// Host.Inventory.CreateCluster
+// Since
+// VI API 2.5
+//
+func (mo *Folder) CreateClusterEx(
+	_this *do.ManagedObjectReference, name string, spec *do.ClusterConfigSpecEx,
+) (*ClusterComputeResource, error) {
+
+	return nil, nil
+
+}
+
+//
+// Creates a new datacenter with the given name.
+//
+// Any % (percent) character used in this name parameter must be escaped, unless it
+// is used to start an escape sequence. Clients may also escape any other characters
+// in this name parameter.
+//
+//
+// Required Privileges
+// Datacenter.Create
+//
+func (mo *Folder) CreateDatacenter(
+	_this *do.ManagedObjectReference, name string,
+) (*Datacenter, error) {
+
+	return nil, nil
+
+}
+
+//
+// Create a DistributedVirtualSwitch in the folder according to the
+// specified DVSCreateSpec. The specified Folder
+// must be a Network entity folder.
+//
+// Required Privileges
+// DVSwitch.Create
+// Since
+// vSphere API 4.0
+//
+func (mo *Folder) CreateDVS_Task(
+	_this *do.ManagedObjectReference, spec *do.DVSCreateSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Creates a new sub-folder with the specified name. The childType property
+// of the new folder is the same as the childType property of the current folder.
+//
+// Any % (percent) character used in this name parameter must be escaped, unless it
+// is used to start an escape sequence. Clients may also escape any other characters
+// in this name parameter.
+//
+//
+// Required Privileges
+// Folder.Create
+//
+func (mo *Folder) CreateFolder(
+	_this *do.ManagedObjectReference, name string,
+) (*Folder, error) {
+
+	return nil, nil
+
+}
+
+//
+// Creates a new storage pod in this folder.
+//
+// Any % (percent) character used in this name parameter must be escaped, unless it
+// is used to start an escape sequence. Clients may also escape any other characters
+// in this name parameter.
+//
+//
+// Required Privileges
+// Folder.Create
+// Since
+// vSphere API 5.0
+//
+func (mo *Folder) CreateStoragePod(
+	_this *do.ManagedObjectReference, name string,
+) (*StoragePod, error) {
+
+	return nil, nil
+
+}
+
+//
+// Creates a new virtual machine in the current folder and attaches it to the
+// specified resource pool. This operation creates a virtual machine,
+// instead of cloning a virtual machine from an existing one.
+//
+//
+// The server does not support creating templates using this method.
+// Instead, you should create templates by marking existing virtual
+// machines as templates, or by cloning an existing virtual machine or
+// template.
+//
+//
+//
+// This operation only works if the folder's childType includes VirtualMachine.
+//
+// In addition to the VirtualMachine.Inventory.Create privilege, may also require
+// any of the following privileges depending on the properties of the virtual
+// machine bring created:
+//
+//
+//
+// • VirtualMachine.Config.AddExistingDisk if including a virtual disk device
+// that refers to an existing virtual disk file (not RDM)
+//
+// • VirtualMachine.Config.AddNewDisk if including a virtual disk device that
+// creates a new virtual disk file (not RDM)
+//
+// • VirtualMachine.Config.RawDevice if including a raw device mapping
+// (RDM) or SCSI passthrough device
+//
+// • VirtualMachine.Config.HostUSBDevice if including a VirtualUSB device
+// backed by a host USB device
+//
+// • VirtualMachine.Config.AdvancedConfig if setting values in
+// ConfigSpec.extraConfig
+//
+// • VirtualMachine.Config.SwapPlacement if setting swapPlacement
+//
+// • VirtualMachine.Config.ChangeTracking if setting changed
+// block tracking for the virtual machine's disks.
+//
+// • Datastore.AllocateSpace required on all datastores where the
+// virtual machine and its virtual disks will be created
+//
+// • Network.Assign required on the network which is assigned to the
+// new virtual machine that is being created
+//
+//
+//
+//
+// Required Privileges
+// VirtualMachine.Inventory.Create
+//
+func (mo *Folder) CreateVM_Task(
+	_this *do.ManagedObjectReference, config *do.VirtualMachineConfigSpec, pool *mo.ResourcePool, host *mo.HostSystem,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Moves a set of managed entities into this folder.
+//
+// This operation is typically used by clients when they implement a drag-and-drop
+// interface to move a set of objects into a folder.
+//
+//
+// This operation is transactional only with respect to each individual entity.
+// The set of entities is moved sequentially as specified in the list, and
+// committed one at a time. If the MoveIntoFolder_Task method fails on an object, the
+// method terminates at that point with an exception, leaving the rest of the
+// managed entities in their original location.
+//
+//
+// The objects that can be moved into a folder depends on the folder's
+// type (as defined by the folder's childType property).
+// For a datacenter folder, only datacenters and datacenter folders can be
+// moved into the folder. For a virtual machine folder, only virtual machines
+// and virtual machine folders can be moved into the folder.
+// For a host folder, ComputeResource objects, host folder objects, and
+// HostSystem objects can be moved into the folder.
+//
+//
+// Moving a HostSystem into a host folder creates a stand-alone host from a
+// host that is currently part of a ClusterComputeResource. The host must be part
+// of a ClusterComputeResource in the same datacenter and the host must be in
+// maintenance mode. Otherwise, the operation fails.
+//
+//
+// A ComputeResource with a single root resource pool is created for each
+// HostSystem. The name of the ComputeResource is the DNS or IP address of the
+// host. This operation moves the (physical) host resources out of a cluster.
+// It does not move or change the ResourcePool configuration that is part of the
+// ClusterComputeResource with which the host was associated.
+//
+//
+// Note that all virtual machines associated with a host are moved with the host
+// into the folder. If there are virtual machines that should not be moved
+// with the host, then migrate them from the host before initiating this operation.
+//
+//
+// For a HostSystem move, the privileges required are Host.Inventory.EditCluster
+// on the source ClusterComputeResource, Host.Inventory.MoveHost on the HostSystem,
+// and Host.Inventory.AddStandaloneHost on the target Folder.
+//
+//
+// Otherwise, the privilege required for this operation varies depending on this
+// folder's type and is checked against the source container, destination container,
+// and the object:
+//
+//
+//
+// • Folder.Move if the object is a Folder
+//
+// • Datacenter.Move if the object is a Datacenter
+//
+// • Host.Inventory.MoveCluster if the object is a ComputeResource
+//
+// • VirtualMachine.Inventory.Move if the object is a virtual machine
+// or virtual machine template
+//
+// • DVSwitch.Move if the object is a DistributedVirtualSwitch
+//
+// • Datastore.Move if the object is a datastore
+//
+// • Network.Move if the object is a network
+//
+//
+//
+// If the object is a HostSystem, the privileges required are
+// Host.Inventory.AddStandaloneHost on the folder, Host.Inventory.MoveHost on
+// the HostSystem, and Host.Inventory.EditCluster on the host's original
+// ComputeResource.
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *Folder) MoveIntoFolder_Task(
+	_this *do.ManagedObjectReference, list []*mo.ManagedEntity,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Adds an existing virtual machine to the folder.
+//
+// Any % (percent) character used in this name parameter must be escaped, unless it
+// is used to start an escape sequence. Clients may also escape any other characters
+// in this name parameter.
+//
+//
+// This operation only works if the folder's type is VirtualMachine.
+//
+// In addition to the VirtualMachine.Inventory.Register and
+// Resource.AssignVMToPool privileges, it requires System.Read privilege
+// on the datastore that the existing virtual machine resides on.
+//
+//
+// Required Privileges
+// VirtualMachine.Inventory.Register
+//
+func (mo *Folder) RegisterVM_Task(
+	_this *do.ManagedObjectReference, path string, name string, asTemplate bool, pool *mo.ResourcePool, host *mo.HostSystem,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Recursively unregisters all virtual machines and vApps, and destroys
+// all child virtual machine folders. This is similar to the Destroy_Task method,
+// but this method calls UnregisterAndDestroy_Task on each virtual machine
+// object instead of calling Destroy_Task.
+// This operation applies only to VirtualMachine folders.
+//
+// UnregisterAndDestroy_Task is a recursive operation that destroys the specified
+// virtual machine folder, unregisters all child virtual machine objects, and destroys
+// all child virtual machine folders. When you call UnregisterAndDestroy_Task
+// to destroy a virtual machine folder, the system uses the specified folder
+// as a root and traverses its descendant hierarchy, calling UnregisterAndDestroy_Task
+// on each virtual machine object and Destroy_Task on each virtual machine folder.
+// UnregisterAndDestroy_Task is a single operation that treats each recursive call
+// as a single transaction, committing each call to remove an object individually.
+// If a failure occurs, the method terminates at that point with an exception, leaving
+// some or all objects unaffected.
+//
+//
+// If you are removing virtual machines, you must hold the VirtualMachine.Delete
+// privilege on all of the virtual machines to be unregistered, and on their parent folders.
+// If you are removing virtual applications, you must hold the VApp.Delete
+// privilege on all of the virtual applications to be unregistered, and on their
+// parent folders.
+//
+//
+// Required Privileges
+// Folder.Delete
+//
+func (mo *Folder) UnregisterAndDestroy_Task(
+	_this *do.ManagedObjectReference,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
 // AuthManager is the managed object that provides APIs
 // to manipulate the guest operating authentication.
 //
@@ -1161,10 +4206,317 @@ type GuestAuthManager struct {
 }
 
 //
+// Authenticates in the guest and returns a GuestAuthentication object
+// with the acquired credentials for use in subsequent guest operation calls.
+//
+// This can be used to authenticate inside the guest and obtain a
+// GuestAuthentication object for supported authentication types.
+//
+// This operation is not needed for Name and Password Authentication. To use
+// Name and Password Authentication, see NamePasswordAuthentication.
+//
+// For SSPI authentication, requestAuth should be of the type SSPIAuthentication.
+//
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *GuestAuthManager) AcquireCredentialsInGuest(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, requestedAuth *do.GuestAuthentication, sessionID int64,
+) (*GuestAuthentication, error) {
+
+	return nil, nil
+
+}
+
+//
+// Releases session data and resources associated with
+// a GuestAuthentication object returned by AcquireCredentialsInGuest.
+//
+// This frees any resources and session data associated with a
+// GuestAuthentication object returned by AcquireCredentialsInGuest.
+// The GuestAuthentication object can no longer be used to
+// authenticate in the guest once released. Currently this operation is only
+// valid for TicketedSessionAuthentication objects.
+//
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *GuestAuthManager) ReleaseCredentialsInGuest(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication,
+) error {
+
+	return nil
+
+}
+
+//
+// Validates the GuestAuthentication credentials.
+//
+// This can be used to check the authentication data, or
+// validate any authetication that has a timeout is still valid.
+// If the authentication is not valid, GuestPermissionDenied
+// will be thrown.
+//
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *GuestAuthManager) ValidateCredentialsInGuest(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication,
+) error {
+
+	return nil
+
+}
+
+//
 // FileManager is the managed object that provides APIs
 // to manipulate the guest operating system files.
 //
 type GuestFileManager struct {
+}
+
+//
+// Changes the file attributes of a specified file inside the guest.
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *GuestFileManager) ChangeFileAttributesInGuest(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, guestFilePath string, fileAttributes *do.GuestFileAttributes,
+) error {
+
+	return nil
+
+}
+
+//
+// Creates a temporary directory.
+//
+// Creates a new unique temporary directory for the user to use as needed.
+// The user is responsible for removing it when it is no longer needed.
+//
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *GuestFileManager) CreateTemporaryDirectoryInGuest(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, prefix string, suffix string, directoryPath string,
+) (string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Creates a temporary file.
+//
+// Creates a new unique temporary file for the user to use as needed.
+// The user is responsible for removing it when it is no longer needed.
+//
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *GuestFileManager) CreateTemporaryFileInGuest(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, prefix string, suffix string, directoryPath string,
+) (string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Deletes a directory in the guest OS.
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *GuestFileManager) DeleteDirectoryInGuest(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, directoryPath string, recursive bool,
+) error {
+
+	return nil
+
+}
+
+//
+// Deletes a file in the guest OS
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *GuestFileManager) DeleteFileInGuest(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, filePath string,
+) error {
+
+	return nil
+
+}
+
+//
+// Initiates an operation to transfer a file from the guest.
+//
+// Obtains a reference to
+// FileTransferInformation object
+// for the file transfer operation. The information object contains a URL
+// to the file inside the guest to be transferred to the client.
+//
+// See FileTransferInformation for
+// information on how to use the information object. If the power state
+// of the Virtual Machine is changed when the file transfer is in progress,
+// or the Virtual Machine is migrated,
+// then the transfer operation is aborted.
+//
+//
+// In order to ensure a secure connection to the host when transferring
+// a file using HTTPS, the X.509 certificate for the host must be used
+// to authenticate the remote end of the connection. The certificate of
+// the host that the virtual machine is running on can be retrieved using
+// the following fields:
+// vm (VirtualMachine) -&gt; runtime (VirtualMachineRuntimeInfo)
+// -&gt; host (HostSystem) -&gt; config (HostConfigInfo)
+// -&gt; certificate.
+//
+//
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *GuestFileManager) InitiateFileTransferFromGuest(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, guestFilePath string,
+) (*FileTransferInformation, error) {
+
+	return nil, nil
+
+}
+
+//
+// Initiates an operation to transfer a file to the guest.
+//
+// Obtains a URL to the file inside the guest to be transferred from the
+// client. The user should send a HTTP PUT request specifying the file
+// content in the body of the request. Multiple PUT request cannot be
+// sent to the URL simultaneously. URL will be invalidated after a
+// successful PUT request is sent. If the power state of the Virtual
+// Machine is changed when the file transfer is in progress, or
+// the Virtual Machine is migrated, then the
+// transfer operation is aborted.
+//
+//
+// In order to ensure a secure connection to the host when transferring
+// a file using HTTPS, the X.509 certificate for the host must be used
+// to authenticate the remote end of the connection. The certificate of
+// the host that the virtual machine is running on can be retrieved using
+// the following fields:
+// vm (VirtualMachine) -&gt; runtime (VirtualMachineRuntimeInfo)
+// -&gt; host (HostSystem) -&gt; config (HostConfigInfo)
+// -&gt; certificate.
+//
+//
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *GuestFileManager) InitiateFileTransferToGuest(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, guestFilePath string, fileAttributes *do.GuestFileAttributes, fileSize int64, overwrite bool,
+) (string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Returns information about files or directories in the guest.
+//
+// The results could be extermely large, so to minimize the size
+// of the return value for cases where a UI only needs to show
+// the first N results, the answer is batched.  Files are returned in
+// OS-specific (inode) order.  If the directory is modified between
+// queries, missing or duplicate results can occur.
+//
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *GuestFileManager) ListFilesInGuest(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, filePath string, index int32, maxResults int32, matchPattern string,
+) (*GuestListFileInfo, error) {
+
+	return nil, nil
+
+}
+
+//
+// Creates a directory in the guest OS
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *GuestFileManager) MakeDirectoryInGuest(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, directoryPath string, createParentDirectories bool,
+) error {
+
+	return nil
+
+}
+
+//
+// Moves or renames a directory in the guest.
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *GuestFileManager) MoveDirectoryInGuest(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, srcDirectoryPath string, dstDirectoryPath string,
+) error {
+
+	return nil
+
+}
+
+//
+// Renames a file in the guest.
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *GuestFileManager) MoveFileInGuest(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, srcFilePath string, dstFilePath string, overwrite bool,
+) error {
+
+	return nil
+
 }
 
 //
@@ -1193,6 +4545,83 @@ type GuestOperationsManager struct {
 // to manipulate the guest operating system processes.
 //
 type GuestProcessManager struct {
+}
+
+//
+// List the processes running in the guest operating system,
+// plus those started by StartProgramInGuest
+// that have recently completed.
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *GuestProcessManager) ListProcessesInGuest(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, pids []long,
+) ([]*GuestProcessInfo, error) {
+
+	return nil, nil
+
+}
+
+//
+// Reads an environment variable from the guest OS
+//
+// If the authentication uses interactiveSession, then the
+// environment being read will be that of the user logged into the desktop.
+// Otherwise it's the environment of the system user.
+//
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *GuestProcessManager) ReadEnvironmentVariableInGuest(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, names []string,
+) ([]string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Starts a program in the guest operating system.
+//
+// A process started this way can have its status queried with
+// ListProcessesInGuest.
+// When the process completes, its exit code and end time will be
+// available for 5 minutes after completion.
+//
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *GuestProcessManager) StartProgramInGuest(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, spec *do.GuestProgramSpec,
+) (int64, error) {
+
+	return nil, nil
+
+}
+
+//
+// Terminates a process in the guest OS.
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *GuestProcessManager) TerminateProcessInGuest(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, pid int64,
+) error {
+
+	return nil
+
 }
 
 //
@@ -1256,12 +4685,157 @@ type HistoryCollector struct {
 }
 
 //
+// Destroys this collector.
+//
+// Required Privileges
+// None
+//
+func (mo *HistoryCollector) DestroyCollector(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Moves the "scrollable view" to the item immediately preceding the
+// "viewable latest page". If you use "readPrev",
+// ReadPreviousTasks or
+// ReadPreviousEvents,
+// all items
+// are retrieved from the newest item to the oldest item.
+//
+// Required Privileges
+// None
+//
+func (mo *HistoryCollector) ResetCollector(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Moves the "scrollable view" to the oldest item. If you use
+// ReadNextTasks or
+// ReadNextEvents,
+// all items are retrieved from the oldest item to the newest item. This
+// is the default setting when the collector is created.
+//
+// Required Privileges
+// None
+//
+func (mo *HistoryCollector) RewindCollector(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Sets the "viewable latest page" size to contain at most the
+// number of items specified by the maxCount parameter).
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *HistoryCollector) SetCollectorPageSize(
+	_this *do.ManagedObjectReference, maxCount int32,
+) error {
+
+	return nil
+
+}
+
+//
 // The HostActiveDirectoryAuthentication managed object
 // indicates domain membership status and provides methods
 // for adding a host to and removing a host from a domain.
 //
 type HostActiveDirectoryAuthentication struct {
 	*HostDirectoryStore
+}
+
+//
+// Import the CAM server's certificate to the local store of vmwauth.
+//
+// The certificate should have already been uploaded to ESXi file system.
+//
+//
+// Required Privileges
+// Host.Config.AuthenticationStore
+// Since
+// vSphere API 5.0
+//
+func (mo *HostActiveDirectoryAuthentication) ImportCertificateForCAM_Task(
+	_this *do.ManagedObjectReference, certPath string, camServer string,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Adds the host to an Active Directory domain.
+//
+// If the HostAuthenticationStoreInfo.enabled
+// property is True (accessed through the info property),
+// the host has joined a domain.
+// The vSphere API will throw the InvalidState fault if you try
+// to add a host to a domain when the host has already joined a domain.
+//
+//
+// Required Privileges
+// Host.Config.AuthenticationStore
+//
+func (mo *HostActiveDirectoryAuthentication) JoinDomain_Task(
+	_this *do.ManagedObjectReference, domainName string, userName string, password string,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Adds the host to an Active Directory domain through CAM service.
+//
+// If the HostAuthenticationStoreInfo.enabled
+// property is True (accessed through the info property),
+// the host has joined a domain.
+// The vSphere API will throw the InvalidState fault if you try
+// to add a host to a domain when the host has already joined a domain.
+//
+//
+// Required Privileges
+// Host.Config.AuthenticationStore
+// Since
+// vSphere API 5.0
+//
+func (mo *HostActiveDirectoryAuthentication) JoinDomainWithCAM_Task(
+	_this *do.ManagedObjectReference, domainName string, camServer string,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Removes the host from the Active Directory domain to which it belongs.
+//
+// Required Privileges
+// Host.Config.AuthenticationStore
+//
+func (mo *HostActiveDirectoryAuthentication) LeaveCurrentDomain_Task(
+	_this *do.ManagedObjectReference, force bool,
+) (*Task, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -1326,7 +4900,7 @@ type HostActiveDirectoryAuthentication struct {
 type HostAuthenticationManager struct {
 
 	// Information about Active Directory membership.
-	Info *HostAuthenticationManagerInfo
+	Info *do.HostAuthenticationManagerInfo
 
 	// An array that can contain managed object references to local and
 	// Active Directory authentication managed objects.
@@ -1372,7 +4946,7 @@ type HostAuthenticationManager struct {
 type HostAuthenticationStore struct {
 
 	// Information about the authentication store.
-	Info *HostAuthenticationStoreInfo
+	Info *do.HostAuthenticationStoreInfo
 }
 
 //
@@ -1383,7 +4957,76 @@ type HostAuthenticationStore struct {
 // such as an ESX Server machine or through VirtualCenter.
 //
 type HostAutoStartManager struct {
-	Config *HostAutoStartManagerConfig
+	Config *do.HostAutoStartManagerConfig
+}
+
+//
+// Powers-off virtual machines according to the current AutoStart configuration.
+//
+// See the description of the (@link vim.host.AutoStartManager.AutoPowerInfo)
+// data object type for more information on Auto power-off behavior.
+//
+//
+// Required Privileges
+// Host.Config.AutoStart
+//
+func (mo *HostAutoStartManager) AutoStartPowerOff(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Powers-on virtual machines according to the current AutoStart configuration.
+//
+// See the description of the (@link vim.host.AutoStartManager.AutoPowerInfo)
+// data object type for more information on Auto power-on behavior.
+//
+//
+// Required Privileges
+// Host.Config.AutoStart
+//
+func (mo *HostAutoStartManager) AutoStartPowerOn(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Changes the power-on or power-off sequence and system defaults. The specification
+// is an incremental change to the current configuration.
+//
+// If systemDefaults are included, only values that are specified in the
+// specification are changed.
+//
+//
+// For the spec.powerInfo array, each element is interpreted as an incremental
+// change and the changes are processed sequentially. It is not an error to remove a
+// non-existing virtual machine. If both startAction and stopAction are set to
+// none, then the virtual machine is removed from the configuration.
+//
+//
+// A virtual machine's position in the order can be changed either by assigning the
+// virtual machine a different position in the order or removing the machine from
+// the order. When a virtual machine's position changes, all other virtual machines'
+// positions may be affected as they move to new positions relative to each other.
+//
+//
+//
+//
+// Required Privileges
+// Host.Config.AutoStart
+//
+func (mo *HostAutoStartManager) ReconfigureAutostart(
+	_this *do.ManagedObjectReference, spec *do.HostAutoStartManagerConfig,
+) error {
+
+	return nil
+
 }
 
 //
@@ -1391,6 +5034,34 @@ type HostAutoStartManager struct {
 // a host boot device configuration.
 //
 type HostBootDeviceSystem struct {
+}
+
+//
+// Retrieves a list of the available boot devices for the host system.
+//
+// Required Privileges
+// System.Read
+//
+func (mo *HostBootDeviceSystem) QueryBootDevices(
+	_this *do.ManagedObjectReference,
+) (*HostBootDeviceInfo, error) {
+
+	return nil, nil
+
+}
+
+//
+// Sets the current boot device for the host system.
+//
+// Required Privileges
+// Host.Config.Maintenance
+//
+func (mo *HostBootDeviceSystem) UpdateBootDevice(
+	_this *do.ManagedObjectReference, key string,
+) error {
+
+	return nil
+
 }
 
 // Deprecated.
@@ -1407,7 +5078,21 @@ type HostCacheConfigurationManager struct {
 
 	// The swap performance configuration for the ESX host.  This includes
 	// configuration information for each datastore enabled for this purpose.
-	CacheConfigurationInfo []*HostCacheConfigurationInfo
+	CacheConfigurationInfo []*do.HostCacheConfigurationInfo
+}
+
+//
+// Configure host cache/swap performance enhancement.
+//
+// Required Privileges
+// Host.Config.AdvancedConfig
+//
+func (mo *HostCacheConfigurationManager) ConfigureHostCache_Task(
+	_this *do.ManagedObjectReference, spec *do.HostCacheConfigurationSpec,
+) (*Task, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -1427,7 +5112,40 @@ type HostCpuSchedulerSystem struct {
 	// The hyperthread configuration for the CpuSchedulerSystem.  The
 	// existence of this data object type indicates if the CPU scheduler
 	// is capable of scheduling hyperthreads as resources.
-	HyperthreadInfo *HostHyperThreadScheduleInfo
+	HyperthreadInfo *do.HostHyperThreadScheduleInfo
+}
+
+//
+// Don't treat hyperthreads as schedulable resources the next time the CPU
+// scheduler starts.  If successful, this operation will change the
+// configured setting.
+//
+// Required Privileges
+// Host.Config.HyperThreading
+//
+func (mo *HostCpuSchedulerSystem) DisableHyperThreading(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Treat hyperthreads as schedulable resources the next time the CPU
+// scheduler starts.  If successful, this operation will set the
+// config
+// property to "true".
+//
+// Required Privileges
+// Host.Config.HyperThreading
+//
+func (mo *HostCpuSchedulerSystem) EnableHyperThreading(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
 }
 
 //
@@ -1521,7 +5239,59 @@ type HostDatastoreBrowser struct {
 	// This property is used by clients to determine what kinds of file types are
 	// supported. Clients should consult this list to avoid querying for types of virtual
 	// machine components that are not supported.
-	SupportedType []*FileQuery
+	SupportedType []*do.FileQuery
+}
+
+// Deprecated.
+// As of VI API 2.5, use DeleteDatastoreFile_Task.
+//
+//
+// Deletes the specified files from the datastore. If a valid virtual disk file is
+// specified, then all the components of the virtual disk are deleted.
+//
+// Required Privileges
+// Datastore.DeleteFile
+//
+func (mo *HostDatastoreBrowser) DeleteFile(
+	_this *do.ManagedObjectReference, datastorePath string,
+) error {
+
+	return nil
+
+}
+
+//
+// Returns the information for the files that match the given search criteria as a
+// SearchResults object. Searches only the folder specified by the datastore path.
+// The Datastore.Browse privilege must be held on the datastore identified
+// by the datastore path.
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *HostDatastoreBrowser) SearchDatastore_Task(
+	_this *do.ManagedObjectReference, datastorePath string, searchSpec *do.HostDatastoreBrowserSearchSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Returns the information for the files that match the given search criteria as a
+// SearchResults[] object. Searches the folder specified by the datastore path and
+// all subfolders. The Datastore.Browse privilege must be held on the
+// datastore identified by the datastore path.
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *HostDatastoreBrowser) SearchDatastoreSubFolders_Task(
+	_this *do.ManagedObjectReference, datastorePath string, searchSpec *do.HostDatastoreBrowserSearchSpec,
+) (*Task, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -1576,10 +5346,282 @@ type HostDatastoreSystem struct {
 	// Capability vector indicating the available product features.
 	//
 	// Since VI API 2.5
-	Capabilities *HostDatastoreSystemCapabilities
+	Capabilities *do.HostDatastoreSystemCapabilities
 
 	// List of datastores on this host.
 	Datastore []*Datastore
+}
+
+//
+// Configures datastore principal user for the host.
+//
+// All virtual machine-related file I/O is performed under
+// this user. Configuring datastore principal user
+// will result in all virtual machine files (configuration, disk,
+// and so on) being checked for proper access. If necessary, ownership
+// and permissions are modified.  Note that in some environments,
+// file ownership and permissions modification may not be possible.
+// For example, virtual machine files stored on NFS cannot be
+// modified for ownership and permissions if root squashing is
+// enabled.  Ownership and permissions for these files must be
+// manually changed by a system administrator.  In general, if
+// server process does not have rights to change ownership
+// and file permissions of virtual machine files, they must
+// be modified manually.  If a virtual machine files are not
+// read/writeable by this user, virtual machine related operations such as
+// power on/off, configuration, and so on will fail.  This operation
+// must be performed while in maintenance mode and requires host
+// reboot.
+//
+//
+// Required Privileges
+// Host.Config.Maintenance
+//
+func (mo *HostDatastoreSystem) ConfigureDatastorePrincipal(
+	_this *do.ManagedObjectReference, userName string, password string,
+) error {
+
+	return nil
+
+}
+
+//
+// Creates a new local datastore.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostDatastoreSystem) CreateLocalDatastore(
+	_this *do.ManagedObjectReference, name string, path string,
+) (*Datastore, error) {
+
+	return nil, nil
+
+}
+
+//
+// Creates a new network-attached storage datastore.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostDatastoreSystem) CreateNasDatastore(
+	_this *do.ManagedObjectReference, spec *do.HostNasVolumeSpec,
+) (*Datastore, error) {
+
+	return nil, nil
+
+}
+
+//
+// Creates a new VMFS datastore.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostDatastoreSystem) CreateVmfsDatastore(
+	_this *do.ManagedObjectReference, spec *do.VmfsDatastoreCreateSpec,
+) (*Datastore, error) {
+
+	return nil, nil
+
+}
+
+//
+// Increases the capacity of an existing VMFS datastore by expanding
+// (increasing the size of) an existing extent of the datastore.
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 4.0
+//
+func (mo *HostDatastoreSystem) ExpandVmfsDatastore(
+	_this *do.ManagedObjectReference, datastore *mo.Datastore, spec *do.VmfsDatastoreExpandSpec,
+) (*Datastore, error) {
+
+	return nil, nil
+
+}
+
+//
+// Increases the capacity of an existing VMFS datastore by adding new
+// extents to the datastore.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostDatastoreSystem) ExtendVmfsDatastore(
+	_this *do.ManagedObjectReference, datastore *mo.Datastore, spec *do.VmfsDatastoreExtendSpec,
+) (*Datastore, error) {
+
+	return nil, nil
+
+}
+
+//
+// Query to list disks that can be used to contain VMFS datastore extents.
+// If the optional parameter name is supplied, queries for disks that can be
+// used to contain extents for a VMFS datastore identified by the supplied
+// name.  Otherwise, the method retrieves disks that can be used to contain
+// new VMFS datastores.
+//
+// This operation will filter out disks that are currently in use by an
+// existing VMFS unless the VMFS using the disk is one being extended.
+// It will also filter out management LUNs and disks that are referenced by
+// RDMs.  These disk LUNs are also unsuited for use by a VMFS.
+//
+//
+// Disk LUNs referenced by RDMs are found by examining all virtual machines
+// known to the system and visiting their virtual disk backends.  If a
+// virtual disk backend uses an RDM that is referencing a disk LUN, the disk
+// LUN becomes ineligible for use by a VMFS datastore.
+//
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostDatastoreSystem) QueryAvailableDisksForVmfs(
+	_this *do.ManagedObjectReference, datastore *mo.Datastore,
+) ([]*HostScsiDisk, error) {
+
+	return nil, nil
+
+}
+
+//
+// Get the list of unbound VMFS volumes.
+// For sharing a volume across hosts, a VMFS volume is bound to its
+// underlying block device storage. When a low level block copy is
+// performed to copy or move the VMFS volume, the copied volume will
+// be unbound.
+//
+// Required Privileges
+// System.Read
+// Since
+// vSphere API 4.0
+//
+func (mo *HostDatastoreSystem) QueryUnresolvedVmfsVolumes(
+	_this *do.ManagedObjectReference,
+) ([]*HostUnresolvedVmfsVolume, error) {
+
+	return nil, nil
+
+}
+
+//
+// Queries options for creating a new VMFS datastore for a disk.See devicePath
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostDatastoreSystem) QueryVmfsDatastoreCreateOptions(
+	_this *do.ManagedObjectReference, devicePath string, vmfsMajorVersion int32,
+) ([]*VmfsDatastoreOption, error) {
+
+	return nil, nil
+
+}
+
+//
+// Queries for options for increasing the capacity of an existing VMFS
+// datastore by expanding (increasing the size of) an existing extent of
+// the datastore.
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 4.0
+//
+func (mo *HostDatastoreSystem) QueryVmfsDatastoreExpandOptions(
+	_this *do.ManagedObjectReference, datastore *mo.Datastore,
+) ([]*VmfsDatastoreOption, error) {
+
+	return nil, nil
+
+}
+
+//
+// Queries for options for increasing the capacity of an existing VMFS
+// datastore by adding new extents using space from the specified disk.See devicePath
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostDatastoreSystem) QueryVmfsDatastoreExtendOptions(
+	_this *do.ManagedObjectReference, datastore *mo.Datastore, devicePath string, suppressExpandCandidates bool,
+) ([]*VmfsDatastoreOption, error) {
+
+	return nil, nil
+
+}
+
+//
+// Removes a datastore from a host.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostDatastoreSystem) RemoveDatastore(
+	_this *do.ManagedObjectReference, datastore *mo.Datastore,
+) error {
+
+	return nil
+
+}
+
+//
+// Resignature an unbound VMFS volume.
+//
+// To safely enable sharing of the volume across hosts, a VMFS volume
+// is bound to its underlying block device storage.  When a low level
+// block copy is performed to copy or move the VMFS volume, the copied
+// volume will be unbound.  In order for the VMFS volume to be usable,
+// a resolution operation is needed to determine whether the VMFS volume
+// should be treated as a new volume or not and what extents compose
+// that volume in the event there is more than one unbound volume.
+//
+// With 'Resignature' operation, a new Vmfs Uuid is assigned to the
+// volume but its contents are kept intact. Resignature results in a
+// new Vmfs volume on the host. Users can specify a list of hosts on which
+// the volume will be auto-mounted.
+//
+//
+//
+//
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 4.0
+//
+func (mo *HostDatastoreSystem) ResignatureUnresolvedVmfsVolume_Task(
+	_this *do.ManagedObjectReference, resolutionSpec *do.HostUnresolvedVmfsResignatureSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Choose the
+// localSwapDatastore
+// for this host. Any change to this setting will affect virtual machines
+// that subsequently power on or resume from a suspended state at this host,
+// or that migrate to this host while powered on; virtual machines that are
+// currently powered on at this host will not yet be affected.
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// VI API 2.5
+//
+func (mo *HostDatastoreSystem) UpdateLocalSwapDatastore(
+	_this *do.ManagedObjectReference, datastore *mo.Datastore,
+) error {
+
+	return nil
+
 }
 
 //
@@ -1593,7 +5635,81 @@ type HostDatastoreSystem struct {
 type HostDateTimeSystem struct {
 
 	// The DateTime configuration of the host.
-	DateTimeInfo *HostDateTimeInfo
+	DateTimeInfo *do.HostDateTimeInfo
+}
+
+//
+// Retrieves the list of available timezones on the host.
+// The API works off the public domain 'tz' timezone database.
+//
+// Required Privileges
+// System.Read
+//
+func (mo *HostDateTimeSystem) QueryAvailableTimeZones(
+	_this *do.ManagedObjectReference,
+) ([]*HostDateTimeSystemTimeZone, error) {
+
+	return nil, nil
+
+}
+
+//
+// Get the current DateTime on the host.
+//
+// Required Privileges
+// System.Read
+//
+func (mo *HostDateTimeSystem) QueryDateTime(
+	_this *do.ManagedObjectReference,
+) (time.Time, error) {
+
+	return nil, nil
+
+}
+
+//
+// Refresh the DateTime related settings to pick up any changes that might have
+// occurred.
+//
+// Required Privileges
+// Host.Config.DateTime
+//
+func (mo *HostDateTimeSystem) RefreshDateTimeSystem(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Update the date/time on the host.
+// This method should be used with caution since network delays, execution
+// delays can result in time skews.
+//
+// Required Privileges
+// Host.Config.DateTime
+//
+func (mo *HostDateTimeSystem) UpdateDateTime(
+	_this *do.ManagedObjectReference, dateTime time.Time,
+) error {
+
+	return nil
+
+}
+
+//
+// Update the DateTime configuration of the host.
+//
+// Required Privileges
+// Host.Config.DateTime
+//
+func (mo *HostDateTimeSystem) UpdateDateTimeConfig(
+	_this *do.ManagedObjectReference, config *do.HostDateTimeConfig,
+) error {
+
+	return nil
+
 }
 
 //
@@ -1614,7 +5730,96 @@ type HostDateTimeSystem struct {
 type HostDiagnosticSystem struct {
 
 	// The currently active diagnostic partition.
-	ActivePartition *HostDiagnosticPartition
+	ActivePartition *do.HostDiagnosticPartition
+}
+
+//
+// Creates a diagnostic partition according to the provided create
+// specification.  On success, this method will create the partition
+// and make the partition the active diagnostic partition if specified.
+// On failure, the diagnostic partition may exist but may not be active
+// if the partition was supposed to be made active.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostDiagnosticSystem) CreateDiagnosticPartition(
+	_this *do.ManagedObjectReference, spec *do.HostDiagnosticPartitionCreateSpec,
+) error {
+
+	return nil
+
+}
+
+//
+// Retrieves a list of available diagnostic partitions.  The server will
+// provide the list in order of preference.  In general, local diagnostic
+// partitions are better than shared diagnostic partitions because of
+// the impossibility of multiple servers sharing the same partition.  The
+// most preferred diagnostic partition will be first in the array.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostDiagnosticSystem) QueryAvailablePartition(
+	_this *do.ManagedObjectReference,
+) ([]*HostDiagnosticPartition, error) {
+
+	return nil, nil
+
+}
+
+//
+// For a disk, query for the diagnostic partition creation description.
+// The description details how the diagnostic partition will be created
+// on the disk and provides a creation specification that is needed to
+// invoke the create operation.See HostScsiDiskSee uuid
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostDiagnosticSystem) QueryPartitionCreateDesc(
+	_this *do.ManagedObjectReference, diskUuid string, diagnosticType string,
+) (*HostDiagnosticPartitionCreateDescription, error) {
+
+	return nil, nil
+
+}
+
+//
+// Retrieves a list of disks that can be used to contain a diagnostic
+// partition.  This list will contain disks that have sufficient space
+// to contain a diagnostic partition of the specific type.
+//
+// The choices will be returned in the order that is most preferable
+// as determined by the system.
+//
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostDiagnosticSystem) QueryPartitionCreateOptions(
+	_this *do.ManagedObjectReference, storageType string, diagnosticType string,
+) ([]*HostDiagnosticPartitionCreateOption, error) {
+
+	return nil, nil
+
+}
+
+//
+// Changes the active diagnostic partition to a different partition.
+// Setting a NULL partition will result in unsetting the diagnostic
+// partition.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostDiagnosticSystem) SelectActivePartition(
+	_this *do.ManagedObjectReference, partition *do.HostScsiDiskPartition,
+) error {
+
+	return nil
+
 }
 
 //
@@ -1633,7 +5838,24 @@ type HostDirectoryStore struct {
 type HostEsxAgentHostManager struct {
 
 	// Configuration of agent virtual machine resources
-	ConfigInfo *HostEsxAgentHostManagerConfigInfo
+	ConfigInfo *do.HostEsxAgentHostManagerConfigInfo
+}
+
+//
+// Update the host's ESX agent configuration.
+//
+// The entire configuration must be set each time since all values are
+// overwritten. E.g. a field set to null clears the value on the host.
+//
+// Required Privileges
+// Host.Config.Settings
+//
+func (mo *HostEsxAgentHostManager) EsxAgentHostManagerUpdateConfig(
+	_this *do.ManagedObjectReference, configInfo *do.HostEsxAgentHostManagerConfigInfo,
+) error {
+
+	return nil
+
 }
 
 //
@@ -1649,7 +5871,85 @@ type HostFirewallSystem struct {
 	*ExtensibleManagedObject
 
 	// Firewall configuration.
-	FirewallInfo *HostFirewallInfo
+	FirewallInfo *do.HostFirewallInfo
+}
+
+//
+// Blocks the firewall ports belonging to the specified ruleset.
+// If the ruleset has a managed service with a policy of 'auto'
+// and all other rulesets used by the service are blocked, stops
+// the service.
+//
+// Required Privileges
+// Host.Config.NetService
+//
+func (mo *HostFirewallSystem) DisableRuleset(
+	_this *do.ManagedObjectReference, id string,
+) error {
+
+	return nil
+
+}
+
+//
+// Opens the firewall ports belonging to the specified ruleset.
+// If the ruleset has a managed service with a policy of 'auto'
+// that is not running, starts the service.
+//
+// Required Privileges
+// Host.Config.NetService
+//
+func (mo *HostFirewallSystem) EnableRuleset(
+	_this *do.ManagedObjectReference, id string,
+) error {
+
+	return nil
+
+}
+
+//
+// Refresh the firewall information and settings to pick up any changes
+// made directly on the host.
+//
+// Required Privileges
+// Host.Config.NetService
+//
+func (mo *HostFirewallSystem) RefreshFirewall(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Updates the default firewall policy; unset fields are left unchanged.
+//
+// Required Privileges
+// Host.Config.NetService
+//
+func (mo *HostFirewallSystem) UpdateDefaultPolicy(
+	_this *do.ManagedObjectReference, defaultPolicy *do.HostFirewallDefaultPolicy,
+) error {
+
+	return nil
+
+}
+
+//
+// Update the firewall ruleset specification.
+//
+// Required Privileges
+// Host.Config.NetService
+// Since
+// vSphere API 5.0
+//
+func (mo *HostFirewallSystem) UpdateRuleset(
+	_this *do.ManagedObjectReference, id string, spec *do.HostFirewallRulesetRulesetSpec,
+) error {
+
+	return nil
+
 }
 
 //
@@ -1661,20 +5961,157 @@ type HostFirmwareSystem struct {
 }
 
 //
+// Backup the configuration of the host.
+//
+// The method generates a bundle containing the host configuration.
+// You can use an HTTP GET operation to download the bundle from the returned URL.
+//
+//
+// Required Privileges
+// Host.Config.Firmware
+//
+func (mo *HostFirmwareSystem) BackupFirmwareConfiguration(
+	_this *do.ManagedObjectReference,
+) (string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Return the URL on the host to which the configuration bundle must be
+// uploaded for a restore operation.
+// See RestoreFirmwareConfiguration.
+//
+// Required Privileges
+// Host.Config.Firmware
+//
+func (mo *HostFirmwareSystem) QueryFirmwareConfigUploadURL(
+	_this *do.ManagedObjectReference,
+) (string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Reset the configuration to factory defaults.
+//
+// This method will reset all configuration options, including the "admin"
+// password, to the factory defaults. The host will be rebooted immediately.
+// The host needs to be in maintenance mode before this operation can be
+// performed.
+//
+//
+// Required Privileges
+// Host.Config.Firmware
+//
+func (mo *HostFirmwareSystem) ResetFirmwareToFactoryDefaults(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Restore the configuration of the host to that specified in the bundle.
+//
+// Upload the bundle to the URL returned by the
+// QueryFirmwareConfigUploadURL method.
+// The RestoreFirmwareConfiguration method
+// will restore all configuration options,
+// including the "admin" password, to the values in the bundle.
+// The host will be rebooted immediately.
+// The host must be in maintenance mode before this operation can be
+// performed.
+//
+//
+// Required Privileges
+// Host.Config.Firmware
+//
+func (mo *HostFirmwareSystem) RestoreFirmwareConfiguration(
+	_this *do.ManagedObjectReference, force bool,
+) error {
+
+	return nil
+
+}
+
+//
 // This managed object manages the graphics state of the host.
 //
 type HostGraphicsManager struct {
 	*ExtensibleManagedObject
 
 	// Array of graphics information
-	GraphicsInfo []*HostGraphicsInfo
+	GraphicsInfo []*do.HostGraphicsInfo
+}
+
+//
+// Indicate if shared graphics device is active on the host.
+//
+// Required Privileges
+// System.Read
+//
+func (mo *HostGraphicsManager) IsSharedGraphicsActive(
+	_this *do.ManagedObjectReference,
+) (bool, error) {
+
+	return nil, nil
+
+}
+
+//
+// Refresh the available graphics information.
+//
+// Required Privileges
+// Host.Config.Settings
+//
+func (mo *HostGraphicsManager) RefreshGraphicsManager(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
 }
 
 //
 // This managed object manages the health state of the host.
 //
 type HostHealthStatusSystem struct {
-	Runtime *HealthSystemRuntime
+	Runtime *do.HealthSystemRuntime
+}
+
+//
+// Refresh the available runtime hardware health information.
+//
+// Required Privileges
+// System.Read
+//
+func (mo *HostHealthStatusSystem) RefreshHealthStatusSystem(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Resets the state of the sensors of the IPMI subsystem. On certain types
+// of hardware IPMI sensor states latch onto unhealthy states and will stay
+// in an unhealth state until the sensor state is reset. This method will
+// explicitly reset the sensors state.
+//
+// Required Privileges
+// Host.Config.Settings
+//
+func (mo *HostHealthStatusSystem) ResetSystemHealthInfo(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
 }
 
 //
@@ -1687,10 +6124,98 @@ type HostImageConfigManager struct {
 }
 
 //
+// Queries the current host acceptance level setting.See HostImageAcceptanceLevel
+//
+// Required Privileges
+// System.Read
+//
+func (mo *HostImageConfigManager) HostImageConfigGetAcceptance(
+	_this *do.ManagedObjectReference,
+) (string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Queries the current host image profile information.See HostImageProfileSummary
+//
+// Required Privileges
+// System.Read
+//
+func (mo *HostImageConfigManager) HostImageConfigGetProfile(
+	_this *do.ManagedObjectReference,
+) (*HostImageProfileSummary, error) {
+
+	return nil, nil
+
+}
+
+//
+// Sets the acceptance level of the host image profile.See HostImageAcceptanceLevel
+//
+// Required Privileges
+// Host.Config.Image
+//
+func (mo *HostImageConfigManager) UpdateHostImageAcceptanceLevel(
+	_this *do.ManagedObjectReference, newAcceptanceLevel string,
+) error {
+
+	return nil
+
+}
+
+//
 // The KernelModuleSystem managed object controls the configuration
 // of kernel modules on the host.
 //
 type HostKernelModuleSystem struct {
+}
+
+//
+// Query the options configured to be passed to the kernel module when loaded.
+// Note that this is not necessarily the option string currently in use by
+// the kernel module.
+//
+// Required Privileges
+// Host.Config.Settings
+//
+func (mo *HostKernelModuleSystem) QueryConfiguredModuleOptionString(
+	_this *do.ManagedObjectReference, name string,
+) (string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Query the set of modules on the host.
+//
+// Required Privileges
+// Host.Config.Settings
+// Since
+// vSphere API 4.0
+//
+func (mo *HostKernelModuleSystem) QueryModules(
+	_this *do.ManagedObjectReference,
+) ([]*KernelModuleInfo, error) {
+
+	return nil, nil
+
+}
+
+//
+// Specifies the options to be passed to the kernel module when loaded.
+//
+// Required Privileges
+// Host.Config.Settings
+//
+func (mo *HostKernelModuleSystem) UpdateModuleOptionString(
+	_this *do.ManagedObjectReference, name string, options string,
+) error {
+
+	return nil
+
 }
 
 //
@@ -1707,6 +6232,146 @@ type HostKernelModuleSystem struct {
 // An InvalidArgument fault is thrown if any of these rules are not obeyed.
 //
 type HostLocalAccountManager struct {
+}
+
+// Deprecated.
+// As of vSphere API 5.1, local user groups are not supported
+// and group specific methods will throw NotSupported.
+//
+//
+// Assigns a user to a group.
+//
+//
+//
+// Required Privileges
+// Host.Local.ManageUserGroups
+//
+func (mo *HostLocalAccountManager) AssignUserToGroup(
+	_this *do.ManagedObjectReference, user string, group string,
+) error {
+
+	return nil
+
+}
+
+// Deprecated.
+// As of vSphere API 5.1, local user groups are not supported
+// and group specific methods will throw NotSupported.
+//
+//
+// Creates a local group account using the parameters defined in the
+// HostLocalAccountManagerAccountSpecification
+// data object type.  For POSIX hosts, passing the
+// HostLocalAccountManagerPosixAccountSpecification data object
+// type allows you to control
+// the group ID format of the group account being created.
+//
+//
+//
+// Required Privileges
+// Host.Local.ManageUserGroups
+//
+func (mo *HostLocalAccountManager) CreateGroup(
+	_this *do.ManagedObjectReference, group *do.HostAccountSpec,
+) error {
+
+	return nil
+
+}
+
+//
+// Creates a local user account using the parameters defined in the
+// HostLocalAccountManagerAccountSpecification
+// data object type. For POSIX hosts,
+// passing HostLocalAccountManagerPosixAccountSpecification data object
+// type allows you to control the
+// format of the user ID of the user account being created.
+//
+// Required Privileges
+// Host.Local.ManageUserGroups
+//
+func (mo *HostLocalAccountManager) CreateUser(
+	_this *do.ManagedObjectReference, user *do.HostAccountSpec,
+) error {
+
+	return nil
+
+}
+
+// Deprecated.
+// As of vSphere API 5.1, local user groups are not supported
+// and group specific methods will throw NotSupported.
+//
+//
+// Removes a local group account.
+//
+//
+//
+// Required Privileges
+// Host.Local.ManageUserGroups
+//
+func (mo *HostLocalAccountManager) RemoveGroup(
+	_this *do.ManagedObjectReference, groupName string,
+) error {
+
+	return nil
+
+}
+
+//
+// Removes a local user account.
+//
+// As of vSphere API 5.1, this operation will first try to remove all
+// permissions associated with the specifed account. The permissions of
+// the user are removed one by one, not atomically, and the operation
+// is not rolled back, if the removal of some permission fails.
+//
+//
+// Required Privileges
+// Host.Local.ManageUserGroups
+//
+func (mo *HostLocalAccountManager) RemoveUser(
+	_this *do.ManagedObjectReference, userName string,
+) error {
+
+	return nil
+
+}
+
+// Deprecated.
+// As of vSphere API 5.1, local user groups are not supported
+// and group specific methods will throw NotSupported.
+//
+//
+// Unassigns a user from a group.
+//
+//
+//
+// Required Privileges
+// Host.Local.ManageUserGroups
+//
+func (mo *HostLocalAccountManager) UnassignUserFromGroup(
+	_this *do.ManagedObjectReference, user string, group string,
+) error {
+
+	return nil
+
+}
+
+//
+// Updates a local user account using the parameters defined in the
+// HostLocalAccountManagerAccountSpecification
+// data object type.
+//
+// Required Privileges
+// Host.Local.ManageUserGroups
+//
+func (mo *HostLocalAccountManager) UpdateUser(
+	_this *do.ManagedObjectReference, user *do.HostAccountSpec,
+) error {
+
+	return nil
+
 }
 
 //
@@ -1728,14 +6393,47 @@ type HostMemorySystem struct {
 	// Service console reservation information for the memory manager.  The
 	// existence of this data object indicates if the service console memory
 	// reservation must be configured for this host.
-	ConsoleReservationInfo *ServiceConsoleReservationInfo
+	ConsoleReservationInfo *do.ServiceConsoleReservationInfo
 
 	// Virtual machine reservation information for the memory manager.  The
 	// existence of this data object indicates if the virtual machine memory
 	// reservation must be configured for this host.
 	//
 	// Since VI API 2.5
-	VirtualMachineReservationInfo *VirtualMachineMemoryReservationInfo
+	VirtualMachineReservationInfo *do.VirtualMachineMemoryReservationInfo
+}
+
+//
+// Sets the configured service console memory reservation.  This change
+// affects only the serviceConsoleReservedCfg property.  The
+// configuration change
+// propagates to the other properties after the next boot.
+//
+// Required Privileges
+// Host.Config.Memory
+//
+func (mo *HostMemorySystem) ReconfigureServiceConsoleReservation(
+	_this *do.ManagedObjectReference, cfgBytes int64,
+) error {
+
+	return nil
+
+}
+
+//
+// Updates the virtual machine reservation information.
+//
+// Required Privileges
+// Host.Config.Memory
+// Since
+// VI API 2.5
+//
+func (mo *HostMemorySystem) ReconfigureVirtualMachineReservation(
+	_this *do.ManagedObjectReference, spec *do.VirtualMachineMemoryReservationSpec,
+) error {
+
+	return nil
+
 }
 
 //
@@ -1747,13 +6445,13 @@ type HostNetworkSystem struct {
 	*ExtensibleManagedObject
 
 	// Capability vector indicating the available product features.
-	Capabilities *HostNetCapabilities
+	Capabilities *do.HostNetCapabilities
 
 	// IP route configuration for the service console.  The IP route
 	// configuration is global to the entire host.  This property is
 	// set only if
 	// IP routing can be configured for the service console.
-	ConsoleIpRouteConfig *HostIpRouteConfig
+	ConsoleIpRouteConfig *do.HostIpRouteConfig
 
 	// Deprecated.
 	// As of vSphere API 5.5, which is moved to
@@ -1761,7 +6459,7 @@ type HostNetworkSystem struct {
 	//
 	//
 	// Client-side DNS configuration.
-	DnsConfig *HostDnsConfig
+	DnsConfig *do.HostDnsConfig
 
 	// Deprecated.
 	// As of vSphere API 5.5, which is moved to
@@ -1769,22 +6467,455 @@ type HostNetworkSystem struct {
 	//
 	//
 	// The IP route configuration.
-	IpRouteConfig *HostIpRouteConfig
+	IpRouteConfig *do.HostIpRouteConfig
 
 	// Network configuration information.  This information can be applied
 	// using the updateNetworkConfig() method.  The
 	// information is a strict subset of the information available in NetworkInfo.See HostNetworkInfo
-	NetworkConfig *HostNetworkConfig
+	NetworkConfig *do.HostNetworkConfig
 
 	// The network configuration and runtime information.
-	NetworkInfo *HostNetworkInfo
+	NetworkInfo *do.HostNetworkInfo
 
 	// Deprecated.
 	// As of VI API 4.0, the system defaults will be used.
 	//
 	//
 	// The offload capabilities available on this server.
-	OffloadCapabilities *HostNetOffloadCapabilities
+	OffloadCapabilities *do.HostNetOffloadCapabilities
+}
+
+//
+// Adds a port group to the virtual switch.
+//
+// Required Privileges
+// Host.Config.Network
+//
+func (mo *HostNetworkSystem) AddPortGroup(
+	_this *do.ManagedObjectReference, portgrp *do.HostPortGroupSpec,
+) error {
+
+	return nil
+
+}
+
+//
+// Adds a virtual service console network adapter.  Returns the device of the
+// VirtualNic.
+//
+// IP configuration is required although it does not have to be enabled
+// if the host is an ESX Server system.
+//
+// The dynamic privilege check will ensure that users have Host.Config.Network
+// privilege on the host, and Network.Assign privilege on the connecting
+// DVPortGroup, or DVS if connecting to a standalone DVPort.
+// Network.Assign privilege is not required for operations on standard network
+// or for operations performed directly on the hostSee usesServiceConsoleNic
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *HostNetworkSystem) AddServiceConsoleVirtualNic(
+	_this *do.ManagedObjectReference, portgroup string, nic *do.HostVirtualNicSpec,
+) (string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Adds a virtual host/VMkernel network adapter.  Returns the device of the virtual
+// network adapter.
+//
+// IP configuration is required although it does not have to be enabled
+// if the host is an ESX Server system.
+//
+// The dynamic privilege check will ensure that users have Host.Config.Network
+// privilege on the host, and Network.Assign privilege on the connecting
+// DVPortGroup, or DVS if connecting to a standalone DVPort.
+// Network.Assign privilege is not required for operations on standard network
+// or for operations performed directly on the host.
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *HostNetworkSystem) AddVirtualNic(
+	_this *do.ManagedObjectReference, portgroup string, nic *do.HostVirtualNicSpec,
+) (string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Adds a new virtual switch to the system with the given name.  The
+// name must be unique with respect to other virtual switches on the
+// host and is limited to 32 characters.See UpdateVirtualSwitch
+//
+// Required Privileges
+// Host.Config.Network
+//
+func (mo *HostNetworkSystem) AddVirtualSwitch(
+	_this *do.ManagedObjectReference, vswitchName string, spec *do.HostVirtualSwitchSpec,
+) error {
+
+	return nil
+
+}
+
+//
+// Requests network hint information for a physical network adapter.
+// A network hint is
+// some information about the network to which the physical network
+// adapter is attached.  The method receives in a list of physical
+// network adapter devices and returns an equal number of hints
+// if some devices are provided.  If the list of devices is empty,
+// then the method accesses hints for all physical
+// network adapters.See supportsNetworkHintsSee device
+//
+// Required Privileges
+// System.Read
+//
+func (mo *HostNetworkSystem) QueryNetworkHint(
+	_this *do.ManagedObjectReference, device []string,
+) ([]*PhysicalNicHintInfo, error) {
+
+	return nil, nil
+
+}
+
+//
+// Refresh the network information and settings to pick up any changes
+// that might have occurred.
+//
+// Required Privileges
+// Host.Config.Network
+//
+func (mo *HostNetworkSystem) RefreshNetworkSystem(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Removes port group from the virtual switch.
+//
+// Required Privileges
+// Host.Config.Network
+//
+func (mo *HostNetworkSystem) RemovePortGroup(
+	_this *do.ManagedObjectReference, pgName string,
+) error {
+
+	return nil
+
+}
+
+//
+// Removes a virtual service console network adapter.See usesServiceConsoleNic
+//
+// Required Privileges
+// Host.Config.Network
+//
+func (mo *HostNetworkSystem) RemoveServiceConsoleVirtualNic(
+	_this *do.ManagedObjectReference, device string,
+) error {
+
+	return nil
+
+}
+
+//
+// Removes a virtual host/VMkernel network adapter.
+//
+// Required Privileges
+// Host.Config.Network
+//
+func (mo *HostNetworkSystem) RemoveVirtualNic(
+	_this *do.ManagedObjectReference, device string,
+) error {
+
+	return nil
+
+}
+
+//
+// Removes an existing virtual switch from the system.
+//
+// Required Privileges
+// Host.Config.Network
+//
+func (mo *HostNetworkSystem) RemoveVirtualSwitch(
+	_this *do.ManagedObjectReference, vswitchName string,
+) error {
+
+	return nil
+
+}
+
+//
+// Restart the service console virtual network adapter interface.
+// If the service console virtual network adapter uses DHCP, restarting
+// the interface may result it with a different IP configuration, or
+// even fail to be brought up depending on the host system network
+// configuration.See usesServiceConsoleNic
+//
+// Required Privileges
+// Host.Config.Network
+//
+func (mo *HostNetworkSystem) RestartServiceConsoleVirtualNic(
+	_this *do.ManagedObjectReference, device string,
+) error {
+
+	return nil
+
+}
+
+//
+// Applies the IP route configuration for the service console.
+//
+// Required Privileges
+// Host.Config.Network
+//
+func (mo *HostNetworkSystem) UpdateConsoleIpRouteConfig(
+	_this *do.ManagedObjectReference, config *do.HostIpRouteConfig,
+) error {
+
+	return nil
+
+}
+
+// Deprecated.
+// As of vSphere API 5.5, which is moved to
+// each NetStackInstance. This API only works on the default NetStackInstance.
+//
+//
+// Applies the client-side DNS configuration.
+//
+// Required Privileges
+// Host.Config.Network
+//
+func (mo *HostNetworkSystem) UpdateDnsConfig(
+	_this *do.ManagedObjectReference, config *do.HostDnsConfig,
+) error {
+
+	return nil
+
+}
+
+// Deprecated.
+// As of vSphere API 5.5, which is moved to
+// each NetStackInstance. This API only works on the default NetStackInstance.
+//
+//
+// Applies the IP route configuration.
+//
+// Required Privileges
+// Host.Config.Network
+//
+func (mo *HostNetworkSystem) UpdateIpRouteConfig(
+	_this *do.ManagedObjectReference, config *do.HostIpRouteConfig,
+) error {
+
+	return nil
+
+}
+
+// Deprecated.
+// As of vSphere API 5.5, which is moved to
+// each NetStackInstance. This API only works on the default NetStackInstance.
+//
+//
+// Applies the IP route table configuration.
+//
+// Required Privileges
+// Host.Config.Network
+// Since
+// vSphere API 4.0
+//
+func (mo *HostNetworkSystem) UpdateIpRouteTableConfig(
+	_this *do.ManagedObjectReference, config *do.HostIpRouteTableConfig,
+) error {
+
+	return nil
+
+}
+
+//
+// Applies the network configuration.  This method operates primarily
+// in two modes: replace or modify mode.
+//
+// replace
+// When called in replace mode, this method applies the fully
+// specified networking configuration to the networking system.
+//
+//
+// Upon successful completion of the call, the state of networking will
+// match the configuration specified in config.  In general, objects
+// are created or destroyed to match the elements in the array of
+// configurations.  The identifier field in each element in an array of
+// configurations is used to match an existing network entity.
+// The state of existing network entities is patched to match that
+// of the configuration.
+//
+//
+// An exception to this approach applies to the array of PhysicalNic.Config
+// objects.  The cardinality of physical network adapters cannot be
+// changed through this
+// operation.  Thus, the identifier of every element in the array must match an
+// existing PhysicalNic.  If there are fewer elements in the array than
+// there are existing PhysicalNics, then no change is made on the
+// unreferenced PhysicalNic objects.
+//
+//
+// If the call fails, the networking error is returned as an exception
+// and the state of networking reverts to the state prior to the start
+// of the call.
+//
+//
+// modify
+// When called in modify mode, only changes that are specified are
+// made.  For singleton entities like DnsConfig, the state is
+// changed only if the data object is set.  For array elements, there is
+// an Operation field that indicates if the element should be added,
+// removed, or edited.  In the case of editing or removal, the entity
+// must exist or an exception is thrown.  In the case of adding, a
+// specification needs to be provided.
+//
+//
+// It returns device names of vmkernel and service console virtual network
+// adapter added to the system.
+//
+//
+// Currently, the only mode that is implemented is incremental mode.
+// Only add operations are supported for instances.  Singleton
+// configuration is not supported.
+// The dynamic privilege check will ensure that users have Host.Config.Network
+// privilege on the host, and Network.Assign privilege on the connecting
+// DVPortGroup, or DVS if connecting to a standalone DVPort.
+// Network.Assign privilege is not required for operations on standard network
+// or for operations performed directly on the hostSee HostConfigChangeMode
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *HostNetworkSystem) UpdateNetworkConfig(
+	_this *do.ManagedObjectReference, config *do.HostNetworkConfig, changeMode string,
+) (*HostNetworkConfigResult, error) {
+
+	return nil, nil
+
+}
+
+//
+// Configures link speed and duplexity.  If linkSpeed is not specified,
+// physical network adapter will be set to autonegotiate.See canSetPhysicalNicLinkSpeed
+//
+// Required Privileges
+// Host.Config.Network
+//
+func (mo *HostNetworkSystem) UpdatePhysicalNicLinkSpeed(
+	_this *do.ManagedObjectReference, device string, linkSpeed *do.PhysicalNicLinkInfo,
+) error {
+
+	return nil
+
+}
+
+//
+// Reconfigures a port group on the virtual switch.
+//
+// Required Privileges
+// Host.Config.Network
+//
+func (mo *HostNetworkSystem) UpdatePortGroup(
+	_this *do.ManagedObjectReference, pgName string, portgrp *do.HostPortGroupSpec,
+) error {
+
+	return nil
+
+}
+
+//
+// Configures the IP configuration for a virtual service console network
+// adapter.
+//
+// IP configuration is required although it does not have to be enabled
+// if the host is an ESX Server system.
+//
+// The dynamic privilege check will check that the users
+// have Network.Assign privilege on the DVPortGroup
+// or the DVS if the port resides on a DVPortGroup or is a stand-alone DVS port.See usesServiceConsoleNic
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *HostNetworkSystem) UpdateServiceConsoleVirtualNic(
+	_this *do.ManagedObjectReference, device string, nic *do.HostVirtualNicSpec,
+) error {
+
+	return nil
+
+}
+
+//
+// Configures virtual host/VMkernel network adapter.
+//
+// IP configuration is required although it does not have to be enabled
+// if the host is an ESX Server system.
+//
+// The dynamic privilege check will ensure that users have Host.Config.Network
+// privilege on the host, and Network.Assign privilege on the connecting
+// DVPortGroup, or DVS if connecting to a standalone DVPort.
+// Network.Assign privilege is not required for operations on standard network
+// or for operations performed directly on the host.
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *HostNetworkSystem) UpdateVirtualNic(
+	_this *do.ManagedObjectReference, device string, nic *do.HostVirtualNicSpec,
+) error {
+
+	return nil
+
+}
+
+//
+// Updates the properties of the virtual switch.
+//
+// If the bridge is NULL, the configuration will be unset.
+//
+//
+// If a network adapter is listed in the active or standby list, then
+// changing the set of network adapters to which the physical network
+// adapter is associated may have a side effect of changing the network
+// adapter order policy.  If a network adapter is removed from
+// the bridge configuration, then the network adapter is removed
+// from the network
+// adapter teaming order.
+//
+//
+// The BondBridge configuration is the only valid bridge configuration for
+// an ESX Server system.See HostNicOrderPolicy
+//
+//
+// Required Privileges
+// Host.Config.Network
+//
+func (mo *HostNetworkSystem) UpdateVirtualSwitch(
+	_this *do.ManagedObjectReference, vswitchName string, spec *do.HostVirtualSwitchSpec,
+) error {
+
+	return nil
+
 }
 
 //
@@ -1799,13 +6930,185 @@ type HostPatchManager struct {
 }
 
 //
+// Check the list of metadata and returns the dependency, obsolete and conflict information
+// The operation is cancelable through the returned Task object. No integrity checks
+// are performed on the metadata.
+//
+// Required Privileges
+// System.Read
+// Since
+// vSphere API 4.0
+//
+func (mo *HostPatchManager) CheckHostPatch_Task(
+	_this *do.ManagedObjectReference, metaUrls []string, bundleUrls []string, spec *do.HostPatchManagerPatchManagerOperationSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// Method is deprecated, use InstallHostPatchV2_Task instead.
+//
+//
+// Patch the host. The operation is not cancelable. If the
+// patch installation failed, an atomic rollback of the installation will
+// be attempted. Manual rollback is required if the atomic rollback
+// failed, see PatchInstallFailed for details.
+//
+// Required Privileges
+// Host.Config.Patch
+//
+func (mo *HostPatchManager) InstallHostPatch_Task(
+	_this *do.ManagedObjectReference, repository *do.HostPatchManagerLocator, updateID string, force bool,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Patch the host. The operation is not cancelable. If the
+// patch installation failed, an atomic rollback of the installation will
+// be attempted. Manual rollback is required if the atomic rollback
+// failed, see PatchInstallFailed for details.
+//
+// Required Privileges
+// Host.Config.Patch
+// Since
+// vSphere API 4.0
+//
+func (mo *HostPatchManager) InstallHostPatchV2_Task(
+	_this *do.ManagedObjectReference, metaUrls []string, bundleUrls []string, vibUrls []string, spec *do.HostPatchManagerPatchManagerOperationSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Query the host for installed bulletins.
+//
+// Required Privileges
+// System.Read
+// Since
+// vSphere API 4.0
+//
+func (mo *HostPatchManager) QueryHostPatch_Task(
+	_this *do.ManagedObjectReference, spec *do.HostPatchManagerPatchManagerOperationSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of VI API 4.0, use ScanHostPatchV2_Task.
+//
+//
+// Scan the host for the patch status. The operation is cancelable
+// through the returned Task object. Integrity checks are
+// performed on the metadata only during the scan operation.
+//
+// Required Privileges
+// System.Read
+//
+func (mo *HostPatchManager) ScanHostPatch_Task(
+	_this *do.ManagedObjectReference, repository *do.HostPatchManagerLocator, updateID []string,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Scan the host for the patch status. The operation is cancelable
+// through the returned Task object. Integrity checks are
+// performed on the metadata only during the scan operation.
+//
+// Required Privileges
+// System.Read
+// Since
+// vSphere API 4.0
+//
+func (mo *HostPatchManager) ScanHostPatchV2_Task(
+	_this *do.ManagedObjectReference, metaUrls []string, bundleUrls []string, spec *do.HostPatchManagerPatchManagerOperationSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Stage the vib files to esx local location and possibly do some run time check.
+//
+// Required Privileges
+// Host.Config.Patch
+// Since
+// vSphere API 4.0
+//
+func (mo *HostPatchManager) StageHostPatch_Task(
+	_this *do.ManagedObjectReference, metaUrls []string, bundleUrls []string, vibUrls []string, spec *do.HostPatchManagerPatchManagerOperationSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Uninstall patch from the host. The operation is not cancelable.
+//
+// Required Privileges
+// Host.Config.Patch
+// Since
+// vSphere API 4.0
+//
+func (mo *HostPatchManager) UninstallHostPatch_Task(
+	_this *do.ManagedObjectReference, bulletinIds []string, spec *do.HostPatchManagerPatchManagerOperationSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
 // This managed object manages the PciPassthru state of the host.
 //
 type HostPciPassthruSystem struct {
 	*ExtensibleManagedObject
 
 	// Array of PciPassthru information
-	PciPassthruInfo []*HostPciPassthruInfo
+	PciPassthruInfo []*do.HostPciPassthruInfo
+}
+
+//
+// Refresh the available PciPassthru information.
+//
+// Required Privileges
+// Host.Config.Settings
+//
+func (mo *HostPciPassthruSystem) Refresh(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Updates the PciPassthru configuration, this will
+// get called for the dependent device with the enabled
+// bool set
+//
+// Required Privileges
+// Host.Config.PciPassthru
+//
+func (mo *HostPciPassthruSystem) UpdatePassthruConfig(
+	_this *do.ManagedObjectReference, config []*do.HostPciPassthruConfig,
+) error {
+
+	return nil
+
 }
 
 //
@@ -1816,10 +7119,24 @@ type HostPciPassthruSystem struct {
 type HostPowerSystem struct {
 
 	// Power system capabilities object.
-	Capability *PowerSystemCapability
+	Capability *do.PowerSystemCapability
 
 	// Power system state info object.
-	Info *PowerSystemInfo
+	Info *do.PowerSystemInfo
+}
+
+//
+// Configure host power policy.
+//
+// Required Privileges
+// Host.Config.Power
+//
+func (mo *HostPowerSystem) ConfigurePowerPolicy(
+	_this *do.ManagedObjectReference, key int32,
+) error {
+
+	return nil
+
 }
 
 //
@@ -1985,12 +7302,296 @@ type HostProfile struct {
 }
 
 //
+// Run the Profile Engine to determine the list of configuration changes
+// needed for the specified host. The method generates configuration changes
+// based on the host profile.
+//
+// You can also specify deferred parameters to verify additional host-specific data.
+// The Profile Engine uses the policy options
+// (HostProfile.config.applyProfile.policy[])
+// to determine the required parameters
+// (PolicyOption.parameter[])
+// for host configuration. If you do not provide all of the required parameters,
+// you must call the method again to provide the complete list to the Profile Engine.
+// After successful profile execution, when you apply the profile,
+// the Profile Engine will save the host-specific data in an AnswerFile.
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *HostProfile) ExecuteHostProfile(
+	_this *do.ManagedObjectReference, host *mo.HostSystem, deferredParam []*do.ProfileDeferredPolicyOptionParameter,
+) (*ProfileExecuteResult, error) {
+
+	return nil, nil
+
+}
+
+//
+// Update the HostProfile with the specified configuration data.
+//
+// Required Privileges
+// Profile.Edit
+//
+func (mo *HostProfile) UpdateHostProfile(
+	_this *do.ManagedObjectReference, config *do.HostProfileConfigSpec,
+) error {
+
+	return nil
+
+}
+
+//
+// Sets the HostProfile.referenceHost property.
+//
+// Required Privileges
+// Profile.Edit
+//
+func (mo *HostProfile) UpdateReferenceHost(
+	_this *do.ManagedObjectReference, host *mo.HostSystem,
+) error {
+
+	return nil
+
+}
+
+//
 // The HostProfileManager provides access to a list of
 // HostProfiles and it defines methods to manipulate
 // profiles and AnswerFiles.
 //
 type HostProfileManager struct {
 	*ProfileManager
+}
+
+//
+// Apply the configuration to the host. If you specify any user input,
+// the configuration will be saved in the AnswerFile
+// associated with the host. If there is no answer file, the Profile Engine
+// will create one.
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *HostProfileManager) ApplyHostConfig_Task(
+	_this *do.ManagedObjectReference, host *mo.HostSystem, configSpec *do.HostConfigSpec, userInput []*do.ProfileDeferredPolicyOptionParameter,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Check the validity of the answer files for the specified hosts.
+// The Profile Engine uses the profile associated with a host to check
+// the answer file.
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 5.0
+//
+func (mo *HostProfileManager) CheckAnswerFileStatus_Task(
+	_this *do.ManagedObjectReference, host []*mo.HostSystem,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Create a default subprofile of a given type (for example, a
+// VirtualSwitchProfile). After you create
+// the subprofile, you can add it to a configuration specification
+// and update the host profile:
+//
+//
+// • Call the CreateDefaultProfile method.
+//
+// • Create a HostProfileCompleteConfigSpec object.
+//
+// • Copy the existing profile from the host configuration information
+// (HostProfile.config.applyProfile) to the configuration specification.
+//
+// • Add the new subprofile to the configuration specification. For example,
+// if you create a VirtualSwitchProfile, you would add it to the list
+// of virtual switches in the network profile for the configuration specification
+// (NetworkProfile.vswitch[]).
+//
+//
+// • Call HostProfile.UpdateHostProfile
+// to save the new subprofile.
+//
+//
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *HostProfileManager) CreateDefaultProfile(
+	_this *do.ManagedObjectReference, profileType string, profileTypeName string, profile *mo.Profile,
+) (*ApplyProfile, error) {
+
+	return nil, nil
+
+}
+
+//
+// Export a host's answer file into a serialized form. The method returns a string
+// that contains only the list of user input options.
+// See AnswerFile.userInput.
+//
+// Required Privileges
+// Profile.Export
+// Since
+// vSphere API 5.0
+//
+func (mo *HostProfileManager) ExportAnswerFile_Task(
+	_this *do.ManagedObjectReference, host *mo.HostSystem,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of vSphere API 5.5 use
+// GenerateHostProfileTaskList_Task
+//
+//
+// Generate a list of configuration tasks that will be performed on the
+// host during HostProfile application.
+//
+// Required Privileges
+// System.View
+//
+func (mo *HostProfileManager) GenerateConfigTaskList(
+	_this *do.ManagedObjectReference, configSpec *do.HostConfigSpec, host *mo.HostSystem,
+) (*HostProfileManagerConfigTaskList, error) {
+
+	return nil, nil
+
+}
+
+//
+// Generate a list of configuration tasks that will be performed on the
+// host during HostProfile application. This differs from the
+// GenerateConfigTaskList method in
+// that it returns a task to monitor the progress of the operation.
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 5.5
+//
+func (mo *HostProfileManager) GenerateHostProfileTaskList_Task(
+	_this *do.ManagedObjectReference, configSpec *do.HostConfigSpec, host *mo.HostSystem,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Returns the status of the answer files associated with specified hosts.
+// This method returns the most recent status determined by
+// CheckAnswerFileStatus_Task.
+// See HostProfileManagerAnswerFileStatus for valid values.
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 5.0
+//
+func (mo *HostProfileManager) QueryAnswerFileStatus(
+	_this *do.ManagedObjectReference, host []*mo.HostSystem,
+) ([]*AnswerFileStatusResult, error) {
+
+	return nil, nil
+
+}
+
+//
+// Retrieve the metadata for a set of profiles.
+//
+// Required Privileges
+// System.View
+//
+func (mo *HostProfileManager) QueryHostProfileMetadata(
+	_this *do.ManagedObjectReference, profileName []string, profile *mo.Profile,
+) ([]*ProfileMetadata, error) {
+
+	return nil, nil
+
+}
+
+//
+// Get information about the structure of the profile.
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 5.0
+//
+func (mo *HostProfileManager) QueryProfileStructure(
+	_this *do.ManagedObjectReference, profile *mo.Profile,
+) (*ProfileProfileStructure, error) {
+
+	return nil, nil
+
+}
+
+//
+// Returns the answer file associated with a particular host.
+//
+// Required Privileges
+// None
+// Since
+// vSphere API 5.0
+//
+func (mo *HostProfileManager) RetrieveAnswerFile(
+	_this *do.ManagedObjectReference, host *mo.HostSystem,
+) (*AnswerFile, error) {
+
+	return nil, nil
+
+}
+
+//
+// Returns the answer file associated with a particular host, augmented
+// with whatever answer file values are required for the supplied host
+// profile.
+//
+// Required Privileges
+// None
+// Since
+// vSphere API 5.1
+//
+func (mo *HostProfileManager) RetrieveAnswerFileForProfile(
+	_this *do.ManagedObjectReference, host *mo.HostSystem, applyProfile *do.HostApplyProfile,
+) (*AnswerFile, error) {
+
+	return nil, nil
+
+}
+
+//
+// Update the AnswerFile for the specified host.
+// If there is no answer file associated with the host, the Profile Engine
+// uses the answer file configuration specification to create a new one.
+//
+// Required Privileges
+// Profile.Edit
+// Since
+// vSphere API 5.0
+//
+func (mo *HostProfileManager) UpdateAnswerFile_Task(
+	_this *do.ManagedObjectReference, host *mo.HostSystem, configSpec *do.AnswerFileCreateSpec,
+) (*Task, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -2003,7 +7604,93 @@ type HostServiceSystem struct {
 	*ExtensibleManagedObject
 
 	// Service configuration.
-	ServiceInfo *HostServiceInfo
+	ServiceInfo *do.HostServiceInfo
+}
+
+//
+// Refresh the service information and settings to pick up any changes
+// made directly on the host.
+//
+// Required Privileges
+// Host.Config.NetService
+//
+func (mo *HostServiceSystem) RefreshServices(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Restarts the service.
+//
+// Required Privileges
+// Host.Config.NetService
+//
+func (mo *HostServiceSystem) RestartService(
+	_this *do.ManagedObjectReference, id string,
+) error {
+
+	return nil
+
+}
+
+//
+// Starts the service.
+//
+// Required Privileges
+// Host.Config.NetService
+//
+func (mo *HostServiceSystem) StartService(
+	_this *do.ManagedObjectReference, id string,
+) error {
+
+	return nil
+
+}
+
+//
+// Stops the service.
+//
+// Required Privileges
+// Host.Config.NetService
+//
+func (mo *HostServiceSystem) StopService(
+	_this *do.ManagedObjectReference, id string,
+) error {
+
+	return nil
+
+}
+
+//
+// Uninstalls the service.  If the service is running, it is
+// stopped before being uninstalled.
+//
+// Required Privileges
+// Host.Config.NetService
+//
+func (mo *HostServiceSystem) UninstallService(
+	_this *do.ManagedObjectReference, id string,
+) error {
+
+	return nil
+
+}
+
+//
+// Updates the activation policy of the service.
+//
+// Required Privileges
+// Host.Config.NetService
+//
+func (mo *HostServiceSystem) UpdateServicePolicy(
+	_this *do.ManagedObjectReference, id string, policy string,
+) error {
+
+	return nil
+
 }
 
 //
@@ -2014,10 +7701,40 @@ type HostServiceSystem struct {
 type HostSnmpSystem struct {
 
 	// Since VI API 2.5
-	Configuration *HostSnmpConfigSpec
+	Configuration *do.HostSnmpConfigSpec
 
 	// Since VI API 2.5
-	Limits *HostSnmpSystemAgentLimits
+	Limits *do.HostSnmpSystemAgentLimits
+}
+
+//
+//
+// Required Privileges
+// Global.Settings
+// Since
+// VI API 2.5
+//
+func (mo *HostSnmpSystem) ReconfigureSnmpAgent(
+	_this *do.ManagedObjectReference, spec *do.HostSnmpConfigSpec,
+) error {
+
+	return nil
+
+}
+
+//
+//
+// Required Privileges
+// Global.Settings
+// Since
+// VI API 2.5
+//
+func (mo *HostSnmpSystem) SendTestNotification(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
 }
 
 //
@@ -2034,7 +7751,7 @@ type HostStorageSystem struct {
 	// File system volume information for the host.  See the
 	// FileSystemVolumeInfo data
 	// object type for more information.
-	FileSystemVolumeInfo *HostFileSystemVolumeInfo
+	FileSystemVolumeInfo *do.HostFileSystemVolumeInfo
 
 	// Runtime information about the state of a multipath path.
 	// A null value will be returned if path state information is not available
@@ -2045,10 +7762,10 @@ type HostStorageSystem struct {
 	// of the storageDeviceInfo property.
 	//
 	// Since vSphere API 4.0
-	MultipathStateInfo *HostMultipathStateInfo
+	MultipathStateInfo *do.HostMultipathStateInfo
 
 	// Host storage information up to the device level.
-	StorageDeviceInfo *HostStorageDeviceInfo
+	StorageDeviceInfo *do.HostStorageDeviceInfo
 
 	// Datastore paths of files used by the host system on
 	// mounted volumes, for instance, the COS vmdk file of the
@@ -2056,6 +7773,1107 @@ type HostStorageSystem struct {
 	//
 	// Since vSphere API 4.1
 	SystemFile []string
+}
+
+//
+// Adds Send Target entries to the host bus adapter discovery list.
+// The DiscoveryProperties.sendTargetsDiscoveryEnabled flag
+// must be set to true.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostStorageSystem) AddInternetScsiSendTargets(
+	_this *do.ManagedObjectReference, iScsiHbaDevice string, targets []*do.HostInternetScsiHbaSendTarget,
+) error {
+
+	return nil
+
+}
+
+//
+// Adds Static Target entries to the host bus adapter discovery list.
+// The DiscoveryProperty.staticTargetDiscoveryEnabled must be set to true.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostStorageSystem) AddInternetScsiStaticTargets(
+	_this *do.ManagedObjectReference, iScsiHbaDevice string, targets []*do.HostInternetScsiHbaStaticTarget,
+) error {
+
+	return nil
+
+}
+
+//
+// Allow I/O issue to the specified detached ScsiLun. The ScsiLun is
+// administratively configured on, if the attach operation is successful.
+// See DetachScsiLun.
+//
+// attachScsiLun is part of the Unmount, Detach workflow used
+// when a device will be permanently removed.
+// See also UnmountVmfsVolume.
+//
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 5.0
+//
+func (mo *HostStorageSystem) AttachScsiLun(
+	_this *do.ManagedObjectReference, lunUuid string,
+) error {
+
+	return nil
+
+}
+
+//
+// Extends a VMFS by attaching a disk partition as an extent.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostStorageSystem) AttachVmfsExtent(
+	_this *do.ManagedObjectReference, vmfsPath string, extent *do.HostScsiDiskPartition,
+) error {
+
+	return nil
+
+}
+
+//
+// Computes the disk partition information given the desired disk layout.
+// The server computes a new partition information object for a specific
+// disk representing the desired layout.See HostDiskPartitionInfoPartitionFormat
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostStorageSystem) ComputeDiskPartitionInfo(
+	_this *do.ManagedObjectReference, devicePath string, layout *do.HostDiskPartitionLayout, partitionFormat string,
+) (*HostDiskPartitionInfo, error) {
+
+	return nil, nil
+
+}
+
+//
+// Computes the disk partition information for the purpose of resizing
+// a given partition.See HostDiskPartitionInfoPartitionFormat
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 4.0
+//
+func (mo *HostStorageSystem) ComputeDiskPartitionInfoForResize(
+	_this *do.ManagedObjectReference, partition *do.HostScsiDiskPartition, blockRange *do.HostDiskPartitionBlockRange, partitionFormat string,
+) (*HostDiskPartitionInfo, error) {
+
+	return nil, nil
+
+}
+
+//
+// For previously detached SCSI Lun, remove the state information from
+// host.
+//
+// Detach SCSI Lun marks the device where I/Os are not allowed.
+// Host still maintains the entry of this device and its state.
+// If a LUN is detached using detachScsiLun, ESX will not automatically
+// attach this LUN durng a rescan or after a reboot.
+// See DetachScsiLun.
+//
+// Please note: The API takes 'canonicalName' of the ScsiLun object
+// instead of the ScsiLun.uuid.See canonicalName
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 5.1
+//
+func (mo *HostStorageSystem) DeleteScsiLunState(
+	_this *do.ManagedObjectReference, lunCanonicalName string,
+) error {
+
+	return nil
+
+}
+
+//
+// For previously unmounted VFFS volume, remove the state information from
+// host.
+//
+// VFFS volumes mount state is maintained by host.
+//
+// deleteVffsVolumeState is part of the Unmount/Detach workflow used
+// when the device will be permanently removed.
+// See also UnmountVffsVolume.
+//
+// If the VFFS volume is unmounted using unmountVffsVolume, ESX maintains
+// the state of VFFS volume. This API will remove the state from the host.
+//
+// If the underlying storage device is going to be un-provisioned on the
+// array side, please detach the storage device.
+// See also DetachScsiLun.
+//
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 5.5
+//
+func (mo *HostStorageSystem) DeleteVffsVolumeState(
+	_this *do.ManagedObjectReference, vffsUuid string,
+) error {
+
+	return nil
+
+}
+
+//
+// For previously unmounted VMFS volume, remove the state information from
+// host.
+//
+// VMFS volumes mount state is maintained by host.
+//
+//
+// deleteVmfsVolumeState is part of the Unmount/Detach workflow used
+// when the device will be permanently removed.
+// See also UnmountVmfsVolume.
+//
+// If the VMFS volume is unmounted using unmountVmfsVolume, ESX maintains
+// the state of VMFS volume. This API will remove the state from the host.
+//
+// If the underlying storage device is going to be un-provisioned on the
+// array side, please detach the storage device.
+// See also DetachScsiLun.
+//
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 5.1
+//
+func (mo *HostStorageSystem) DeleteVmfsVolumeState(
+	_this *do.ManagedObjectReference, vmfsUuid string,
+) error {
+
+	return nil
+
+}
+
+//
+// Destroy a VFFS volume.
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 5.5
+//
+func (mo *HostStorageSystem) DestroyVffs(
+	_this *do.ManagedObjectReference, vffsPath string,
+) error {
+
+	return nil
+
+}
+
+//
+// Disallow I/O issue to the specified ScsiLun. The ScsiLun is
+// detached, i.e. administratively configured off until a subsequent
+// attachScsiLun is performed, if the operation is successful.
+// See AttachScsiLun.
+//
+// detachScsiLun is part of the Unmount / Detach workflow used
+// when a device will be permanently removed.
+// See also UnmountVmfsVolume.
+//
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 5.0
+//
+func (mo *HostStorageSystem) DetachScsiLun(
+	_this *do.ManagedObjectReference, lunUuid string,
+) error {
+
+	return nil
+
+}
+
+//
+// Disables an enabled path for a Logical Unit.
+// Use the path name from HostMultipathStateInfoPath
+// or HostMultipathInfoPath.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostStorageSystem) DisableMultipathPath(
+	_this *do.ManagedObjectReference, pathName string,
+) error {
+
+	return nil
+
+}
+
+//
+// Initiates FCoE discovery using the given FcoeSpecification.
+//
+// Upon success, discovered VNPorts will have registered with the
+// system as FCoE HBAs.
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 5.0
+//
+func (mo *HostStorageSystem) DiscoverFcoeHbas(
+	_this *do.ManagedObjectReference, fcoeSpec *do.FcoeConfigFcoeSpecification,
+) error {
+
+	return nil
+
+}
+
+//
+// Enables a disabled path for a Logical Unit.
+// Use the path name from HostMultipathStateInfoPath
+// or HostMultipathInfoPath.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostStorageSystem) EnableMultipathPath(
+	_this *do.ManagedObjectReference, pathName string,
+) error {
+
+	return nil
+
+}
+
+//
+// Expands a VMFS extent as specified by the Disk partition specification.
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 4.0
+//
+func (mo *HostStorageSystem) ExpandVmfsExtent(
+	_this *do.ManagedObjectReference, vmfsPath string, extent *do.HostScsiDiskPartition,
+) error {
+
+	return nil
+
+}
+
+//
+// Extends a VFFS by attaching a SSD.See devicePath
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 5.5
+//
+func (mo *HostStorageSystem) ExtendVffs(
+	_this *do.ManagedObjectReference, vffsPath string, devicePath string, spec *do.HostDiskPartitionSpec,
+) error {
+
+	return nil
+
+}
+
+//
+// Format a new VFFS on a SSD disk
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 5.5
+//
+func (mo *HostStorageSystem) FormatVffs(
+	_this *do.ManagedObjectReference, createSpec *do.HostVffsSpec,
+) (*HostVffsVolume, error) {
+
+	return nil, nil
+
+}
+
+//
+// Formats a new VMFS on a disk partition.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostStorageSystem) FormatVmfs(
+	_this *do.ManagedObjectReference, createSpec *do.HostVmfsSpec,
+) (*HostVmfsVolume, error) {
+
+	return nil, nil
+
+}
+
+//
+// Mark or unmark the given FCoE HBA for removal from the host system.
+//
+// Marking an FCoE HBA for removal will result in the HBA
+// not being discovered upon host reboot.  Until reboot,
+// the HBA remains visible in the storage topology.
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 5.0
+//
+func (mo *HostStorageSystem) MarkForRemoval(
+	_this *do.ManagedObjectReference, hbaName string, remove bool,
+) error {
+
+	return nil
+
+}
+
+//
+// Mount the unmounted VFFS volume.  See UnmountVffsVolume.
+//
+// mountVffsVolume is part of the Unmount / Detach workflow used
+// when a device will be permanently removed.
+// See also DetachScsiLun.
+//
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 5.5
+//
+func (mo *HostStorageSystem) MountVffsVolume(
+	_this *do.ManagedObjectReference, vffsUuid string,
+) error {
+
+	return nil
+
+}
+
+//
+// Mount the unmounted Vmfs volume. A newly discovered vmfs volume will be
+// mounted unless, it has been explicitly unmounted. The default mount
+// behavior of Vmfs volumes is auto-mount. See UnmountVmfsVolume.
+//
+// mountVmfsVolume is part of the Unmount / Detach workflow used
+// when a device will be permanently removed.
+// See also DetachScsiLun.
+//
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 5.0
+//
+func (mo *HostStorageSystem) MountVmfsVolume(
+	_this *do.ManagedObjectReference, vmfsUuid string,
+) error {
+
+	return nil
+
+}
+
+//
+// Query the list SSD disks that can be used to contain a VFFS volume.
+// If the optional parameter name is supplied, queries for the SSD
+// disks that can be used to contain extents of the specified VFFS volume. Otherwise,
+// the method retrieves the SSD disks that can be used to contain the new VFFS volume.
+//
+// This operation will filter out SSD disks that are currently in use by an existing VFFS volume.
+//
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 5.5
+//
+func (mo *HostStorageSystem) QueryAvailableSsds(
+	_this *do.ManagedObjectReference, vffsPath string,
+) ([]*HostScsiDisk, error) {
+
+	return nil, nil
+
+}
+
+//
+// Queries the set of path selection policy options.  The set of policy
+// options indicates what path selection policies can be used by a
+// device managed by native multipathing.  Devices managed through native
+// multipathing are described in the HostMultipathInfo data
+// object.
+//
+// Filtering capabilities are not currently present but may be added in
+// the future.
+//
+//
+// Required Privileges
+// System.Read
+// Since
+// vSphere API 4.0
+//
+func (mo *HostStorageSystem) QueryPathSelectionPolicyOptions(
+	_this *do.ManagedObjectReference,
+) ([]*HostPathSelectionPolicyOption, error) {
+
+	return nil, nil
+
+}
+
+//
+// Queries the set of storage array type policy options.  The set of policy
+// options indicates what storage array type policies can be used by a
+// device managed by native multipathing.  Devices managed through native
+// multipathing are described in the HostMultipathInfo data
+// object.
+//
+// Filtering capabilities are not currently present but may be added in
+// the future.
+//
+//
+// Required Privileges
+// System.Read
+// Since
+// vSphere API 4.0
+//
+func (mo *HostStorageSystem) QueryStorageArrayTypePolicyOptions(
+	_this *do.ManagedObjectReference,
+) ([]*HostStorageArrayTypePolicyOption, error) {
+
+	return nil, nil
+
+}
+
+//
+// Get the list of unbound VMFS volumes.
+// For sharing a volume across hosts, a VMFS volume is bound to its
+// underlying block device storage. When a low level block copy is
+// performed to copy or move the VMFS volume, the copied volume will
+// be unbound.
+//
+// Required Privileges
+// System.Read
+// Since
+// vSphere API 4.0
+//
+func (mo *HostStorageSystem) QueryUnresolvedVmfsVolume(
+	_this *do.ManagedObjectReference,
+) ([]*HostUnresolvedVmfsVolume, error) {
+
+	return nil, nil
+
+}
+
+//
+// Obtains the latest host storage information related to storage devices, topology,
+// and file systems. The ESX host updates its storage information asynchronously.
+// The RefreshStorageSystem method obtains information from
+// the host platform and it performs a rescan of VMFS volumes. It does not look for new devices.
+//
+// This method may update the following inventory elements:
+//
+//
+//
+// • Devices and storage topology
+// (HostSystem.config.storageDevice).
+//
+// • VMFS and NFS datastores (HostSystem.datastore).
+//
+// • File system volumes
+// (HostSystem.config.fileSystemVolume).
+//
+//
+//
+//
+// The Server performs asynchronous updates to the inventory. Use the
+// PropertyCollector.WaitForUpdatesEx
+// method to obtain the property changes.
+//
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostStorageSystem) RefreshStorageSystem(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Removes Send Target entries from the host bus adapter discovery list.
+// The DiscoveryProperty.sendTargetsDiscoveryEnabled must be set to true.
+// If any of the targets provided as parameters are not found in
+// the existing list, the other targets are removed and an exception
+// is thrown.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostStorageSystem) RemoveInternetScsiSendTargets(
+	_this *do.ManagedObjectReference, iScsiHbaDevice string, targets []*do.HostInternetScsiHbaSendTarget,
+) error {
+
+	return nil
+
+}
+
+//
+// Removes static target entries from the host bus adapter discovery list.
+// The DiscoveryProperty.staticTargetDiscoveryEnabled must be set to true.
+// If any of the targets provided as parameters are not found in
+// the existing list, the other targets are removed and an exception
+// is thrown.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostStorageSystem) RemoveInternetScsiStaticTargets(
+	_this *do.ManagedObjectReference, iScsiHbaDevice string, targets []*do.HostInternetScsiHbaStaticTarget,
+) error {
+
+	return nil
+
+}
+
+//
+// Scans all host bus adapters to obtain the current list of devices and device topology.
+// The RescanAllHba method looks for new devices,
+// removed devices, and path changes.
+//
+// This method may update the following inventory elements:
+//
+//
+//
+// • Devices and storage topology
+// (HostSystem.config.storageDevice).
+//
+// • VMFS and NFS datastores (HostSystem.datastore).
+//
+// • File system volumes (HostSystem.config.fileSystemVolume).
+//
+//
+//
+//
+// The Server performs asynchronous updates to the inventory. Use the
+// PropertyCollector.WaitForUpdatesEx
+// method to obtain the property changes.
+//
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostStorageSystem) RescanAllHba(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Issues a request to rescan a specific host bus adapter
+// for new storage devices.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostStorageSystem) RescanHba(
+	_this *do.ManagedObjectReference, hbaDevice string,
+) error {
+
+	return nil
+
+}
+
+//
+// Rescans for new VFFS.
+// The RefreshStorageSystem method also performs a VFFS rescan.
+//
+// RescanVffs may update the
+// HostSystem.config.fileSystemVolume property.
+// The Server performs asynchronous updates to the inventory. Use the
+// PropertyCollector.WaitForUpdatesEx
+// method to obtain the property changes.
+//
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 5.5
+//
+func (mo *HostStorageSystem) RescanVffs(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Rescans for new Virtual Machine File Systems (VMFS).
+// The RefreshStorageSystem method also performs a VMFS rescan.
+//
+// RescanVmfs may update the
+// HostSystem.config.fileSystemVolume property.
+// The Server performs asynchronous updates to the inventory. Use the
+// PropertyCollector.WaitForUpdatesEx
+// method to obtain the property changes.
+//
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostStorageSystem) RescanVmfs(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Resignature or 'Force Mount' list of unbound VMFS volumes.
+//
+// To safely enable sharing of the volume across hosts, a VMFS volume
+// is bound to its underlying block device storage.  When a low level
+// block copy is performed to copy or move the VMFS volume, the copied
+// volume will be unbound.  In order for the VMFS volume to be usable,
+// a resolution operation is needed to determine whether the VMFS volume
+// should be treated as a new volume or not and what extents compose
+// that volume in the event there is more than one unbound volume.
+//
+// Resignature results in a new VMFS volume on the host.
+// Operations performed at the StorageSystem interface apply only to a
+// specific host.  Hence, callers of this method are responsible for
+// issuing rescan operations to detect the new VMFS volume on other hosts.
+// Alternatively, callers that want VirtualCenter to handle rescanning
+// the necessary hosts should use the DatastoreSystem interface.
+//
+//
+// When user wants to keep the original Vmfs Uuid and  mount it
+// on the host, set the 'resolutionSpec.uuidResolution' to 'forceMounted'
+// This is per-host operation.
+//
+// It will return an array of ResolutionResult describing success or failure
+// associated with each specification.
+//
+//
+//
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 4.0
+//
+func (mo *HostStorageSystem) ResolveMultipleUnresolvedVmfsVolumes(
+	_this *do.ManagedObjectReference, resolutionSpec []*do.HostUnresolvedVmfsResolutionSpec,
+) ([]*HostUnresolvedVmfsResolutionResult, error) {
+
+	return nil, nil
+
+}
+
+//
+// Resignature or 'Force Mount' list of unbound VMFS volumes.
+//
+// To safely enable sharing of the volume across hosts, a VMFS volume
+// is bound to its underlying block device storage.  When a low level
+// block copy is performed to copy or move the VMFS volume, the copied
+// volume will be unbound.  In order for the VMFS volume to be usable,
+// a resolution operation is needed to determine whether the VMFS volume
+// should be treated as a new volume or not and what extents compose
+// that volume in the event there is more than one unbound volume.
+//
+//
+// Resignature results in a new VMFS volume on the host.
+// Operations performed at the HostStorageSystem interface apply only to a
+// specific host.  Hence, callers of this method are responsible for
+// issuing rescan operations to detect the new VMFS volume on other hosts.
+// Alternatively, callers that want VirtualCenter to handle rescanning
+// the necessary hosts should use the HostDatastoreSystem interface.
+//
+//
+// When user wants to keep the original VMFS UUID and mount it
+// on the host, set the resolutionSpec.uuidResolution
+// (uuidResolution)
+// to forceMount.
+// This is per-host operation.
+//
+//
+// It will return an array of HostUnresolvedVmfsResolutionResult
+// describing success or failure associated with each specification.
+//
+//
+// This method behaves the same as ResolveMultipleUnresolvedVmfsVolumes
+// except that it returns a task to support monitoring the operation.
+// This is important for operations with large number of
+// unresolved volumes which may take potentially dozens of minutes to complete.
+//
+//
+//
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 5.5
+//
+func (mo *HostStorageSystem) ResolveMultipleUnresolvedVmfsVolumesEx_Task(
+	_this *do.ManagedObjectReference, resolutionSpec []*do.HostUnresolvedVmfsResolutionSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Gets the partition information for the disks named by the device names.
+//
+// Required Privileges
+// System.Read
+//
+func (mo *HostStorageSystem) RetrieveDiskPartitionInfo(
+	_this *do.ManagedObjectReference, devicePath []string,
+) ([]*HostDiskPartitionInfo, error) {
+
+	return nil, nil
+
+}
+
+//
+// Updates the path selection policy for a Logical Unit.
+// Use the LUN uuid from HostMultipathInfoLogicalUnit.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostStorageSystem) SetMultipathLunPolicy(
+	_this *do.ManagedObjectReference, lunId string, policy *do.HostMultipathInfoLogicalUnitPolicy,
+) error {
+
+	return nil
+
+}
+
+//
+// Unmount the 'forceMounted' Vmfs volume.
+//
+// When a low level block copy is performed to copy or move the
+// VMFS volume, the copied volume is unresolved. For the VMFS
+// volume to be usable, a resolution operation is applied. As
+// part of resolution operation, user may decide to keep the
+// original VMFS Uuid. Once the resolution is applied, the VMFS
+// volume is mounted on the host for its use. User can unmount
+// the VMFS volume if it is not being used by any registered
+// VMs.
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 4.0
+//
+func (mo *HostStorageSystem) UnmountForceMountedVmfsVolume(
+	_this *do.ManagedObjectReference, vmfsUuid string,
+) error {
+
+	return nil
+
+}
+
+//
+// Unmount the VFFS volume. An unmounted volume cannot be used for any
+// filesystem operation requiring I/O. In contrast to removal, this
+// operation does not destroy or alter partitions on which VFFS volumes
+// reside. The mountState will be persisted across filesystem rescans and
+// host reboots. See MountVffsVolume.
+//
+// unmountVffsVolume is part of the Unmount / Detach workflow used
+// when a device will be permanently removed.
+// See also DetachScsiLun.
+//
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 5.5
+//
+func (mo *HostStorageSystem) UnmountVffsVolume(
+	_this *do.ManagedObjectReference, vffsUuid string,
+) error {
+
+	return nil
+
+}
+
+//
+// Unmount the Vmfs volume. An unmounted volume cannot be used for any
+// filesystem operation requiring I/O. In contrast to removal, this
+// operation does not destroy or alter partitions on which vmfs volumes
+// reside. The mountState will be persisted across filesystem rescans and
+// host reboots. See MountVmfsVolume.
+//
+// unmountVmfsVolume is part of the Unmount / Detach workflow used
+// when a device will be permanently removed.
+//
+//
+// Mounted Vmfs Volume
+// unmountVmfsVolume  |  ^ mountVmfsVolume
+// V  |
+// Unmounted Vmfs Volume
+//
+// Attached Scsi Device (honors I/O)
+// detachScsiLun      |  ^ attachScsiLun
+// V  |
+// Detached Scsi Device (does not honor I/O)
+//
+//
+// It is safe to unprovision a Lun from the Storage array *only*
+// after a Scsi device is detached.
+//
+//
+// The best practice for decommisioning a Lun would be to find
+// out the set of subsystems that a Lun is being used for.
+// Many of the systems are listed as exceptions in the
+// function documentation.
+//
+//
+// One typical workflow could be:
+//
+//
+//
+//
+//
+// • Find out if the device is used as a Vmfs Extent. (See VmfsVolume.Extent API)
+//
+// • Unmount the Vmfs Volume.
+//
+// • Find out if device is used by the Diagnostic system (See Diagnostic System API).
+//
+// • Deactivate the diagnostic system, if it is being used.
+//
+// • Find out if this device is used to back a VM's RDM (See VirtualMachine API).
+//
+// • Remove this device from the VM.
+//
+// • Detach the Scsi device.
+//
+// • On success, it is safe to decommision the Lun at this point.
+//
+//
+//
+// See also DetachScsiLun.
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 5.0
+//
+func (mo *HostStorageSystem) UnmountVmfsVolume(
+	_this *do.ManagedObjectReference, vmfsUuid string,
+) error {
+
+	return nil
+
+}
+
+//
+// Changes the partitions on the disk by supplying a partition specification
+// and the device name.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostStorageSystem) UpdateDiskPartitions(
+	_this *do.ManagedObjectReference, devicePath string, spec *do.HostDiskPartitionSpec,
+) error {
+
+	return nil
+
+}
+
+//
+// Updates the advanced options the iSCSI host bus adapter or the
+// discovery addresses and targets associated with it.
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 4.0
+//
+func (mo *HostStorageSystem) UpdateInternetScsiAdvancedOptions(
+	_this *do.ManagedObjectReference, iScsiHbaDevice string, targetSet *do.HostInternetScsiHbaTargetSet, options []*do.HostInternetScsiHbaParamValue,
+) error {
+
+	return nil
+
+}
+
+//
+// Updates the alias of an iSCSI host bus adapter.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostStorageSystem) UpdateInternetScsiAlias(
+	_this *do.ManagedObjectReference, iScsiHbaDevice string, iScsiAlias string,
+) error {
+
+	return nil
+
+}
+
+//
+// Updates the authentication properties for one or more targets or
+// discovery addresses associated with an iSCSI host bus adapter.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostStorageSystem) UpdateInternetScsiAuthenticationProperties(
+	_this *do.ManagedObjectReference, iScsiHbaDevice string, authenticationProperties *do.HostInternetScsiHbaAuthenticationProperties, targetSet *do.HostInternetScsiHbaTargetSet,
+) error {
+
+	return nil
+
+}
+
+//
+// Updates the digest properties for the iSCSI host bus adapter or the
+// discovery addresses and targets associated with it.
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 4.0
+//
+func (mo *HostStorageSystem) UpdateInternetScsiDigestProperties(
+	_this *do.ManagedObjectReference, iScsiHbaDevice string, targetSet *do.HostInternetScsiHbaTargetSet, digestProperties *do.HostInternetScsiHbaDigestProperties,
+) error {
+
+	return nil
+
+}
+
+//
+// Updates the Discovery properties for an iSCSI host bus adapter.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostStorageSystem) UpdateInternetScsiDiscoveryProperties(
+	_this *do.ManagedObjectReference, iScsiHbaDevice string, discoveryProperties *do.HostInternetScsiHbaDiscoveryProperties,
+) error {
+
+	return nil
+
+}
+
+//
+// Updates the IP properties for an iSCSI host bus adapter.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostStorageSystem) UpdateInternetScsiIPProperties(
+	_this *do.ManagedObjectReference, iScsiHbaDevice string, ipProperties *do.HostInternetScsiHbaIPProperties,
+) error {
+
+	return nil
+
+}
+
+//
+// Updates the name of an iSCSI host bus adapter.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostStorageSystem) UpdateInternetScsiName(
+	_this *do.ManagedObjectReference, iScsiHbaDevice string, iScsiName string,
+) error {
+
+	return nil
+
+}
+
+//
+// Update the mutable display name associated with a ScsiLun.  The ScsiLun
+// to be updated is identified using the specified uuid.
+//
+// Required Privileges
+// Host.Config.Storage
+// Since
+// vSphere API 4.0
+//
+func (mo *HostStorageSystem) UpdateScsiLunDisplayName(
+	_this *do.ManagedObjectReference, lunUuid string, displayName string,
+) error {
+
+	return nil
+
+}
+
+//
+// Enables or disables Software iSCSI.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostStorageSystem) UpdateSoftwareInternetScsiEnabled(
+	_this *do.ManagedObjectReference, enabled bool,
+) error {
+
+	return nil
+
+}
+
+//
+// Upgrades the VMFS to the latest
+// supported VMFS version.
+// Prerequisite:
+// All hosts that have mounted the volume must support the VMFS
+// version to which the volume will be upgraded.
+//
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostStorageSystem) UpgradeVmfs(
+	_this *do.ManagedObjectReference, vmfsPath string,
+) error {
+
+	return nil
+
+}
+
+//
+// Iterates over all registered virtual machines. For each VM which .vmx file
+// is located on the service console and all disks are available on VMFS3 or NAS,
+// it will relocate the disks into directories if stored in the ROOT, and
+// relocate the VMX file into the directory too. Events are logged for each
+// virtual machine that is relocated.
+//
+// On ESXi systems, this operation has no effect.
+//
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostStorageSystem) UpgradeVmLayout(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
 }
 
 //
@@ -2076,11 +8894,11 @@ type HostSystem struct {
 
 	// Host capabilities. This might not be available for a
 	// disconnected host.
-	Capability *HostCapability
+	Capability *do.HostCapability
 
 	// Host configuration information.  This might not be available for a disconnected
 	// host.
-	Config *HostConfigInfo
+	Config *do.HostConfigInfo
 
 	// Host configuration systems.
 	//
@@ -2091,7 +8909,7 @@ type HostSystem struct {
 	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
 	// an empty string for the version parameter. Any other version value will not
 	// produce any property values as no updates are generated.
-	ConfigManager *HostConfigManager
+	ConfigManager *do.HostConfigManager
 
 	// A collection of references to the subset of datastore objects in the datacenter
 	// that are available in this HostSystem.
@@ -2102,7 +8920,7 @@ type HostSystem struct {
 
 	// Hardware configuration of the host. This might not be available for a
 	// disconnected host.
-	Hardware *HostHardwareInfo
+	Hardware *do.HostHardwareInfo
 
 	// Information about all licensable resources, currently present on this host.
 	// This information is used mostly by the modules, manipulating information
@@ -2112,24 +8930,478 @@ type HostSystem struct {
 	// The values in this property may not be accurate for pre-5.0 hosts when returned by vCenter 5.0
 	//
 	// Since vSphere API 5.0
-	LicensableResource *HostLicensableResourceInfo
+	LicensableResource *do.HostLicensableResourceInfo
 
 	// A collection of references to the subset of network objects in the datacenter that
 	// are available in this HostSystem.
 	Network []*Network
 
 	// Runtime state information about the host such as connection state.
-	Runtime *HostRuntimeInfo
+	Runtime *do.HostRuntimeInfo
 
 	// Basic information about the host, including connection state.
-	Summary *HostListSummary
+	Summary *do.HostListSummary
 
 	// Reference for the system resource hierarchy, used for configuring the set of
 	// resources reserved to the system and unavailable to virtual machines.
-	SystemResources *HostSystemResourceInfo
+	SystemResources *do.HostSystemResourceInfo
 
 	// List of virtual machines associated with this host.
 	Vm []*VirtualMachine
+}
+
+//
+// Creates and returns a one-time credential used to establish a remote
+// connection to a CIM interface. The port to connect to is the standard
+// well known port for the service.
+//
+// Required Privileges
+// Host.Cim.CimInteraction
+// Since
+// VI API 2.5
+//
+func (mo *HostSystem) AcquireCimServicesTicket(
+	_this *do.ManagedObjectReference,
+) (*HostServiceTicket, error) {
+
+	return nil, nil
+
+}
+
+//
+// Disconnects from a host and instructs the server to stop sending heartbeats.
+//
+// Required Privileges
+// Host.Config.Connection
+//
+func (mo *HostSystem) DisconnectHost_Task(
+	_this *do.ManagedObjectReference,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Modifies the permissions on the host, so that it will only be accessible
+// through local console or an authorized centralized management application.
+// Any user defined permissions found on the host are lost.
+//
+// Access via a VI client connected to the host is blocked.
+// Access though other services running on the host is also blocked.
+//
+//
+// If the operation is successful, adminDisabled
+// will be set to true. This API is not supported on the host, If invoked
+// directly on a host, a NotSupported fault will be thrown.See AuthorizationManager
+//
+//
+// Required Privileges
+// Host.Config.Settings
+// Since
+// vSphere API 4.1
+//
+func (mo *HostSystem) EnterLockdownMode(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Puts the host in maintenance mode. While this task is running and when the host is
+// in maintenance mode, no virtual machines can be powered on and no provisioning
+// operations can be performed on the host. Once the call completes, it is safe to
+// turn off a host without disrupting any virtual machines.
+//
+// The task completes once there are no powered-on virtual machines on the host and
+// no provisioning operations in progress on the host. The operation does not
+// directly initiate any operations to evacuate or power-down powered-on virtual machines.
+// However, if the host is part of a cluster with VMware DRS enabled, DRS provides
+// migration recommendations to evacuate the powered-on virtual machines. If DRS is in
+// fully-automatic mode, these are automatically scheduled.
+//
+//
+// If the host is part of a cluster and the task is issued through VirtualCenter with
+// evacuatePoweredOffVms set to true, the task will not succeed unless all the
+// powered-off virtual machines are reregistered to other hosts. If VMware DRS is
+// enabled, vCenter Server will automatically evacuate powered-off virtual machines.
+//
+// The task is cancellable.
+//
+//
+// Required Privileges
+// Host.Config.Maintenance
+//
+func (mo *HostSystem) EnterMaintenanceMode_Task(
+	_this *do.ManagedObjectReference, timeout int32, evacuatePoweredOffVms bool, maintenanceSpec *do.HostMaintenanceSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Restores Administrator permission for the local administrative account
+// for the host that was removed by prior call to EnterLockdownMode.
+// If the operation is successful,
+// adminDisabled will be set to false. This API
+// is not supported on the host. If invoked directly on a host, a
+// NotSupported fault will be thrown.See AuthorizationManager
+//
+// Required Privileges
+// Host.Config.Settings
+// Since
+// vSphere API 4.1
+//
+func (mo *HostSystem) ExitLockdownMode(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Takes the host out of maintenance mode. This blocks if any concurrent
+// running maintenance-only host configurations operations are being performed.
+// For example, if VMFS volumes are being upgraded.
+//
+// The task is cancellable.
+//
+//
+// Required Privileges
+// Host.Config.Maintenance
+//
+func (mo *HostSystem) ExitMaintenanceMode_Task(
+	_this *do.ManagedObjectReference, timeout int32,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Puts the host in standby mode, a mode in which the host is in a
+// standby state from which it can be powered up remotely. While
+// this task is running, no virtual machines can be powered on and
+// no provisioning operations can be performed on the host.
+//
+// The task completes only if there are no powered-on virtual
+// machines on the host, no provisioning operations in progress on
+// the host, and the host stopped responding. The operation does
+// not directly initiate any operations to evacuate or power-down
+// powered-on virtual machines. However, if a dynamic recommendation
+// generation module is running, if possible, it will provide, and
+// depending on the automation level, it will execute migrations
+// of powered-on virtual machine. Furthermore, VMware power
+// management module may evacute and put a host in standby mode to
+// save power.
+//
+// If the host is part of a cluster and the task is issued through VirtualCenter with
+// evacuatePoweredOffVms set to true, the task will not succeed unless all the
+// powered-off virtual machines are reregistered to other hosts. If VMware DRS is
+// enabled, vCenter Server will automatically evacuate powered-off virtual machines.
+//
+//
+// The task is cancellable.
+//
+//
+// This command is not supported on all hosts. Check the host capability
+// standbySupported.
+//
+//
+// Required Privileges
+// Host.Config.Maintenance
+// Since
+// VI API 2.5
+//
+func (mo *HostSystem) PowerDownHostToStandBy_Task(
+	_this *do.ManagedObjectReference, timeoutSec int32, evacuatePoweredOffVms bool,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Takes the host out of standby mode. If the command is
+// successful, the host wakes up and starts sending
+// heartbeats. This method may be called automatically by a
+// dynamic recommendation generation module to add capacity to a
+// cluster, if the host is not in maintenance mode.
+//
+// Note that, depending on the implementation of the wakeup
+// method, the client may never receive an indicator of success in
+// the returned task. In some cases, it is not even possible to
+// ensure that the wakeup request has made it to the host.
+//
+//
+// The task is cancellable.
+//
+//
+//
+//
+// Required Privileges
+// Host.Config.Maintenance
+// Since
+// VI API 2.5
+//
+func (mo *HostSystem) PowerUpHostFromStandBy_Task(
+	_this *do.ManagedObjectReference, timeoutSec int32,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Connection-oriented information about a host.
+//
+// Required Privileges
+// System.Read
+//
+func (mo *HostSystem) QueryHostConnectionInfo(
+	_this *do.ManagedObjectReference,
+) (*HostConnectInfo, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of VI API 2.5, use QueryMemoryOverheadEx.
+//
+//
+// Determines the amount of memory overhead necessary to power on a virtual
+// machine with the specified characteristics.
+//
+// Required Privileges
+// System.Read
+//
+func (mo *HostSystem) QueryMemoryOverhead(
+	_this *do.ManagedObjectReference, memorySize int64, videoRamSize int32, numVcpus int32,
+) (int64, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of VI API 5.5, use
+// initialOverhead.
+//
+//
+// Determines the amount of memory overhead necessary to power on a virtual
+// machine with the specified characteristics.
+//
+// Required Privileges
+// System.Read
+// Since
+// VI API 2.5
+//
+func (mo *HostSystem) QueryMemoryOverheadEx(
+	_this *do.ManagedObjectReference, vmConfigInfo *do.VirtualMachineConfigInfo,
+) (int64, error) {
+
+	return nil, nil
+
+}
+
+//
+// Basic information about TPM attestation state of the host.
+//
+// Required Privileges
+// System.Read
+// Since
+// vSphere API 5.1
+//
+func (mo *HostSystem) QueryTpmAttestationReport(
+	_this *do.ManagedObjectReference,
+) (*HostTpmAttestationReport, error) {
+
+	return nil, nil
+
+}
+
+//
+// Reboots a host. If the command is successful, then the host has been rebooted. If
+// connected directly to the host, the client never receives an indicator of success
+// in the returned task but simply loses connection to the host, upon success.
+//
+// This command is not supported on all hosts. Check the host capability
+// vim.host.Capability.rebootSupported.
+//
+//
+// Required Privileges
+// Host.Config.Maintenance
+//
+func (mo *HostSystem) RebootHost_Task(
+	_this *do.ManagedObjectReference, force bool,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Reconfigures the host for vSphere HA.
+//
+// If the host is part of a HA cluster, this operation reconfigures the host for HA.
+// For example, this operation may be used if a host is added to a HA enabled cluster
+// and the automatic HA configuration system task fails. Automatic HA configuration
+// may fail for a variety of reasons. For example, the host is configured
+// incorrectly.
+//
+//
+// Required Privileges
+// Host.Config.Connection
+//
+func (mo *HostSystem) ReconfigureHostForDAS_Task(
+	_this *do.ManagedObjectReference,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Reconnects to a host. This process reinstalls agents and reconfigures the host, if
+// it has gotten out of date with VirtualCenter. The reconnection process goes
+// through many of the same steps as addHost: ensuring the correct set of licenses
+// for the number of CPUs on the host, ensuring the correct set of agents is
+// installed, and ensuring that networks and datastores are discovered and registered
+// with VirtualCenter.
+//
+// The client can change the IP address and port of the host when doing a reconnect
+// operation. This can be useful if the client wants to preserve existing metadata,
+// even though the host is changing its IP address. For example, clients could
+// preserve existing statistics, alarms, and privileges.
+//
+//
+// This method can also be used to change the SSL thumbprint of a connected host
+// without disconnecting it.
+//
+//
+// Any changes made to the resource hierarchy on the host when the host
+// was disconnected are overriden by VirtualCenter settings on
+// reconnect.
+//
+//
+// This method is only supported through VirtualCenter.
+//
+//
+// Required Privileges
+// Host.Config.Connection
+//
+func (mo *HostSystem) ReconnectHost_Task(
+	_this *do.ManagedObjectReference, cnxSpec *do.HostConnectSpec, reconnectSpec *do.HostSystemReconnectSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Return the hardware uptime of the host in seconds.
+// The harware uptime of a host is not affected by NTP and changes to its
+// wall clock time and can be used by clients to provide a common time
+// reference for all hosts.
+//
+// Required Privileges
+// System.Read
+// Since
+// vSphere API 4.1
+//
+func (mo *HostSystem) RetrieveHardwareUptime(
+	_this *do.ManagedObjectReference,
+) (int64, error) {
+
+	return nil, nil
+
+}
+
+//
+// Shuts down a host. If the command is successful, then the host has been shut down.
+// Thus, the client never receives an indicator of success in the returned task if
+// connected directly to the host.
+//
+// This command is not supported on all hosts. Check the host capability
+// shutdownSupported.
+//
+//
+// Required Privileges
+// Host.Config.Maintenance
+//
+func (mo *HostSystem) ShutdownHost_Task(
+	_this *do.ManagedObjectReference, force bool,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Update flags that are part of the HostFlagInfo object.
+//
+// Required Privileges
+// Host.Config.Settings
+// Since
+// VI API 2.5
+//
+func (mo *HostSystem) UpdateFlags(
+	_this *do.ManagedObjectReference, flagInfo *do.HostFlagInfo,
+) error {
+
+	return nil
+
+}
+
+//
+// Update fields that are part of the HostIpmiInfo object.
+//
+// Required Privileges
+// Host.Config.Settings
+// Since
+// vSphere API 4.0
+//
+func (mo *HostSystem) UpdateIpmi(
+	_this *do.ManagedObjectReference, ipmiInfo *do.HostIpmiInfo,
+) error {
+
+	return nil
+
+}
+
+//
+// Update the configuration of the system resource hierarchy.
+//
+// Required Privileges
+// Host.Config.Resources
+//
+func (mo *HostSystem) UpdateSystemResources(
+	_this *do.ManagedObjectReference, resourceInfo *do.HostSystemResourceInfo,
+) error {
+
+	return nil
+
+}
+
+//
+// Update the System Swap Configuration.See HostSystemSwapConfiguration
+//
+// Required Privileges
+// Host.Config.Settings
+// Since
+// vSphere API 5.1
+//
+func (mo *HostSystem) UpdateSystemSwapConfiguration(
+	_this *do.ManagedObjectReference, sysSwapConfig *do.HostSystemSwapConfiguration,
+) error {
+
+	return nil
+
 }
 
 //
@@ -2140,7 +9412,92 @@ type HostSystem struct {
 type HostVFlashManager struct {
 
 	// Host vFlash configuration information.
-	VFlashConfigInfo *HostVFlashManagerVFlashConfigInfo
+	VFlashConfigInfo *do.HostVFlashManagerVFlashConfigInfo
+}
+
+//
+// Configure vFlash resource on a list of SSD disks. If the host does not have
+//
+// a VFFS volume, host will format the volume first and then extend the volume
+//
+// on the rest of the SSDs; otherwise host will extend the existing VFFS volume
+//
+// on the passed SSDs. Finally host will configure the vFlash resource on the
+//
+// VFFS volume.
+//
+//
+// It will return HostVFlashResourceConfigurationResult
+// describing success or failure associated with each device.
+//
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostVFlashManager) ConfigureVFlashResourceEx_Task(
+	_this *do.ManagedObjectReference, devicePath []string,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Configure vFlash resource on the host by attaching to a backend VFFS volume.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostVFlashManager) HostConfigureVFlashResource(
+	_this *do.ManagedObjectReference, spec *do.HostVFlashManagerVFlashResourceConfigSpec,
+) error {
+
+	return nil
+
+}
+
+//
+// Configurate vFlash cache on the host.
+//
+// Required Privileges
+// Host.Config.AdvancedConfig
+//
+func (mo *HostVFlashManager) HostConfigVFlashCache(
+	_this *do.ManagedObjectReference, spec *do.HostVFlashManagerVFlashCacheConfigSpec,
+) error {
+
+	return nil
+
+}
+
+//
+// Retrieve the default supported configuration
+//
+// for a given vFlash module
+//
+// Required Privileges
+// Host.Config.AdvancedConfig
+//
+func (mo *HostVFlashManager) HostGetVFlashModuleDefaultConfig(
+	_this *do.ManagedObjectReference, vFlashModule string,
+) (*VirtualDiskVFlashCacheConfigInfo, error) {
+
+	return nil, nil
+
+}
+
+//
+// Remove vFlash resource on the host by destroying the contained VFFS volume.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostVFlashManager) HostRemoveVFlashResource(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
 }
 
 // Deprecated.
@@ -2154,10 +9511,52 @@ type HostVMotionSystem struct {
 	*ExtensibleManagedObject
 
 	// IP configuration of the VMotion VirtualNic.
-	IpConfig *HostIpConfig
+	IpConfig *do.HostIpConfig
 
 	// VMotion network configuration.
-	NetConfig *HostVMotionNetConfig
+	NetConfig *do.HostVMotionNetConfig
+}
+
+//
+// Indicate that no VirtualNic should be used for VMotion.
+//
+// Required Privileges
+// Host.Config.Network
+//
+func (mo *HostVMotionSystem) DeselectVnic(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Select the VirtualNic to be used for VMotion.
+//
+// Required Privileges
+// Host.Config.Network
+//
+func (mo *HostVMotionSystem) SelectVnic(
+	_this *do.ManagedObjectReference, device string,
+) error {
+
+	return nil
+
+}
+
+//
+// Update the IP configuration of VMotion VirtualNic.
+//
+// Required Privileges
+// Host.Config.Network
+//
+func (mo *HostVMotionSystem) UpdateIpConfig(
+	_this *do.ManagedObjectReference, ipConfig *do.HostIpConfig,
+) error {
+
+	return nil
+
 }
 
 //
@@ -2168,7 +9567,52 @@ type HostVirtualNicManager struct {
 	*ExtensibleManagedObject
 
 	// Network configuration.
-	Info *HostVirtualNicManagerInfo
+	Info *do.HostVirtualNicManagerInfo
+}
+
+//
+// Deselect the VirtualNic to be a special type.
+//
+// Required Privileges
+// Host.Config.Network
+//
+func (mo *HostVirtualNicManager) DeselectVnicForNicType(
+	_this *do.ManagedObjectReference, nicType string, device string,
+) error {
+
+	return nil
+
+}
+
+//
+// Get the NetConfig for the specified nicType
+//
+// Required Privileges
+// Host.Config.Network
+//
+func (mo *HostVirtualNicManager) QueryNetConfig(
+	_this *do.ManagedObjectReference, nicType string,
+) (*VirtualNicManagerNetConfig, error) {
+
+	return nil, nil
+
+}
+
+//
+// Select the NicType of the VirtualNic. Selecting a device automatically
+// deselects the previous selection if NetConfig#multiSelectAllowed
+// is false for the specified nicType.
+// Else, the device is added to the list of selected nics.
+//
+// Required Privileges
+// Host.Config.Network
+//
+func (mo *HostVirtualNicManager) SelectVnicForNicType(
+	_this *do.ManagedObjectReference, nicType string, device string,
+) error {
+
+	return nil
+
 }
 
 //
@@ -2181,6 +9625,73 @@ type HostVsanInternalSystem struct {
 }
 
 //
+// Query CMMDS directly. The list of given queries is executed and all
+// results are returned in a flat list. No attempt is made to de-dupe
+// results in the case of overlapping query results.
+//
+// Required Privileges
+// System.Read
+//
+func (mo *HostVsanInternalSystem) QueryCmmds(
+	_this *do.ManagedObjectReference, queries []*do.HostVsanInternalSystemCmmdsQuery,
+) (string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Query DOM objects on a given set of physical disks. Finds all DOM objects
+// that have at least one component on the given physical disks. In order to
+// make this API efficient, the output of this API contains the found
+// DOM_OBJECT, and referenced LSOM_OBJECT and DISK entries.
+//
+// Required Privileges
+// System.Read
+//
+func (mo *HostVsanInternalSystem) QueryObjectsOnPhysicalVsanDisk(
+	_this *do.ManagedObjectReference, disks []string,
+) (string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Query statistics about physical VSAN disks. Using the props parameter the
+// caller can control which properties are returned. Requesting only the
+// required properties is encouraged to reduce server load, response time
+// and client load.
+//
+// Required Privileges
+// System.Read
+//
+func (mo *HostVsanInternalSystem) QueryPhysicalVsanDisks(
+	_this *do.ManagedObjectReference, props []string,
+) (string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Query information about VSAN DOM objects. Retrieves information about the
+// given set of DOM object UUIDs. In order to make this API efficient, the
+// output of this API contains the found DOM_OBJECT, and referenced
+// LSOM_OBJECT and DISK entries.
+//
+// Required Privileges
+// System.Read
+//
+func (mo *HostVsanInternalSystem) QueryVsanObjects(
+	_this *do.ManagedObjectReference, uuids []string,
+) (string, error) {
+
+	return nil, nil
+
+}
+
+//
 // The VsanSystem managed object type exposes VSAN configuration
 // primitives and serves as a host-level access point for relevant
 // VSAN data objects.
@@ -2188,7 +9699,174 @@ type HostVsanInternalSystem struct {
 type HostVsanSystem struct {
 
 	// The current VSAN service configuration information for this host.
-	Config *VsanHostConfigInfo
+	Config *do.VsanHostConfigInfo
+}
+
+//
+// Add the set of given disks for use by the VSAN service on this host.
+// Users may use this API to manually add disks for use by VSAN, without
+// specifying an explicit DiskMapping, when the VSAN service not
+// configured to automatically claim storage. Any ineligible disk in
+// the set of given disks and disks which would have exceeded
+// the capacity will be ignored and will not be published in
+// returned result.
+//
+// Upon successful completion of the returned Task, its
+// result field will be populated with a
+// VsanHostDiskMapResult[] and caller must inspect
+// VsanHostDiskMapResult[] to check result for individual
+// DiskMapping.See QueryDisksForVsanSee autoClaimStorage
+//
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostVsanSystem) AddDisks_Task(
+	_this *do.ManagedObjectReference, disk []*do.HostScsiDisk,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Initialize and use the sets of disks in the given DiskMapping list
+// for the VSAN service on this host.  Users may use this API to specify or
+// change disk mappings when the VSAN service is not configured to
+// automatically claim storage. For appending new non-SSDs to an existing
+// DiskMapping, users need to specify only the new non-SSDs with its
+// DiskMapping#ssd.
+//
+// Upon successful completion of the returned Task, its
+// result field will be populated with a
+// VsanHostDiskMapResult[] and caller must inspect
+// VsanHostDiskMapResult[] to check result for individual
+// DiskMapping.See QueryDisksForVsanSee autoClaimStorage
+//
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostVsanSystem) InitializeDisks_Task(
+	_this *do.ManagedObjectReference, mapping []*do.VsanHostDiskMapping,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Queries disks on this host for suitability to use with the VSAN service,
+// and returns the result.See vim.host.ScsiDisk#canonicalName
+//
+// Required Privileges
+// System.Read
+//
+func (mo *HostVsanSystem) QueryDisksForVsan(
+	_this *do.ManagedObjectReference, canonicalName []string,
+) ([]*VsanHostDiskResult, error) {
+
+	return nil, nil
+
+}
+
+//
+// Queries this host's current runtime status for the VSAN service.
+//
+// Required Privileges
+// System.Read
+//
+func (mo *HostVsanSystem) QueryHostStatus(
+	_this *do.ManagedObjectReference,
+) (*VsanHostClusterStatus, error) {
+
+	return nil, nil
+
+}
+
+//
+// Remove the set of given disks from use by the VSAN service on this host.
+// Users may use this API to manually remove a DiskMapping#nonSsd
+// from a DiskMapping. This operation is only permitted if the VSAN
+// service on this host is not configured to automatically claim storage.
+//
+// This method may not be used to remove the last DiskMapping#nonSsd
+// from any given DiskMapping. Removal of the last
+// DiskMapping#nonSsd can be accomplished by using
+// RemoveDiskMapping_Task.
+//
+//
+// Upon successful completion of the returned Task, its
+// result field will be populated with a
+// VsanHostDiskResult[]. Sets DiskIsLastRemainingNonSSD fault
+// in returned task if specified disk is the last DiskMapping#nonSsd
+// member of DiskMapping.See RemoveDiskMapping_TaskSee UpdateVsan_TaskSee autoClaimStorage
+//
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostVsanSystem) RemoveDisk_Task(
+	_this *do.ManagedObjectReference, disk []*do.HostScsiDisk,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Delete given set of disk mappings from use by the VSAN service on this host.
+// This API may be used to remove all disks in a given mapping,
+// including its DiskMapping#ssd. This operation is only permitted
+// if the VSAN service on this host is not configured to automatically
+// claim storage.
+//
+// Upon successful completion of the returned Task, its
+// result field will be populated with an empty
+// VsanHostDiskMapResult[]. If any errors are encountered,
+// the returned field will instead contain populated error information.See RemoveDisk_TaskSee UpdateVsan_TaskSee autoClaimStorage
+//
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostVsanSystem) RemoveDiskMapping_Task(
+	_this *do.ManagedObjectReference, mapping []*do.VsanHostDiskMapping,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Update the VSAN service on this host according to the given host
+// configuration specification.
+//
+// Enabling and disabling the VSAN service can be achieved by using
+// the enabled flag.
+//
+// Host storage settings can be specified through use of
+// storageInfo.  If this value is omitted,
+// changes will not be made to the existing storage configuration.
+//
+// Host cluster settings can be specified through use of
+// clusterInfo.  If this value is omitted,
+// changes will not be made to the existing cluster configuration.
+//
+// Host network settings can be specified through use of
+// networkInfo.  If this value is omitted,
+// changes will not be made to the existing network configuration.See VsanHostConfigInfoSee storageInfoSee clusterInfoSee networkInfoSee QueryDisksForVsan
+//
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *HostVsanSystem) UpdateVsan_Task(
+	_this *do.ManagedObjectReference, config *do.VsanHostConfigInfo,
+) (*Task, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -2238,18 +9916,94 @@ type HttpNfcLease struct {
 
 	// If the lease is in the error state, this property contains the
 	// error that caused the lease to be aborted.
-	Error *LocalizedMethodFault
+	Error *do.LocalizedMethodFault
 
 	// Provides information on the objects contained in this lease. The
 	// info property is only valid when the lease is in the ready state.
-	Info *HttpNfcLeaseInfo
+	Info *do.HttpNfcLeaseInfo
 
 	// Provides progress information (0-100 percent) for the initializing state
 	// of the lease. Clients can use this to track overall progress.
 	InitializeProgress int32
 
 	// The current state of the lease.
-	State *HttpNfcLeaseState
+	State *enum.HttpNfcLeaseState
+}
+
+//
+// Aborts the import/export and releases this lease. Operations on the
+// objects contained in this lease will no longer be blocked. After
+// calling this method, this lease will no longer be valid.
+//
+// Clients should call this method if an error occurs while accessing
+// the disks, or if the operation is cancelled. The client can report
+// the cause of the abort to other clients listening on the task with
+// the fault parameter.
+//
+//
+// Required Privileges
+// None
+//
+func (mo *HttpNfcLease) HttpNfcLeaseAbort(
+	_this *do.ManagedObjectReference, fault *fault.MethodFault,
+) error {
+
+	return nil
+
+}
+
+//
+// Completes the import/export and releases this lease. Operations on
+// the objects contained in this lease will no longer be blocked. After
+// calling this method, this lease will no longer be valid.
+//
+// Clients should call this method when they are done accessing the
+// disks for the VirtualMachines in this lease. The status
+// of the corresponding task will be set to success.
+//
+//
+// Required Privileges
+// None
+//
+func (mo *HttpNfcLease) HttpNfcLeaseComplete(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Gets the download manifest for this lease.
+//
+// Required Privileges
+// None
+// Since
+// vSphere API 4.1
+//
+func (mo *HttpNfcLease) HttpNfcLeaseGetManifest(
+	_this *do.ManagedObjectReference,
+) ([]*HttpNfcLeaseManifestEntry, error) {
+
+	return nil, nil
+
+}
+
+//
+// Sets the disk up/download progress, and renews this lease. A lease
+// will time out automatically after a while. If the client wishes to
+// continue using it, for example if it is not done accessing the
+// disks, this method must be called periodically.
+//
+// Required Privileges
+// None
+//
+func (mo *HttpNfcLease) HttpNfcLeaseProgress(
+	_this *do.ManagedObjectReference, percent int32,
+) error {
+
+	return nil
+
 }
 
 //
@@ -2307,6 +10061,52 @@ type InventoryView struct {
 }
 
 //
+// Notify the server that folder(s) have been closed, and changes for all
+// its contained objects should no longer be sent.  The associated child
+// objects are removed from the view. The containers themselves
+// will still be retained as open objects until their parent is closed.
+//
+// May partially succeed if some entities could not be resolved.  The operation
+// will still succeed for all entities that could be resolved, and the
+// list of those that failed is returned as the result.
+//
+//
+// Required Privileges
+// None
+//
+func (mo *InventoryView) CloseInventoryViewFolder(
+	_this *do.ManagedObjectReference, entity []*mo.ManagedEntity,
+) ([]*ManagedEntity, error) {
+
+	return nil, nil
+
+}
+
+//
+// Adds the child objects of a given managed entity to the view.
+//
+// If a Datacenter is returned as a child, the implicit virtual machine folder and
+// host folder objects are also returned. If a ComputeResource is returned,
+// the implicit root ResourcePool and HostSystem objects are also returned.
+//
+//
+// May partially succeed if some entities could not be resolved.  The operation
+// will still succeed for all entities which could be resolved, and the
+// list of those which failed is returned as the result.
+//
+//
+// Required Privileges
+// None
+//
+func (mo *InventoryView) OpenInventoryViewFolder(
+	_this *do.ManagedObjectReference, entity []*mo.ManagedEntity,
+) ([]*ManagedEntity, error) {
+
+	return nil, nil
+
+}
+
+//
 // Singleton Managed Object used to manage IP Pools.
 //
 // IP Pools are used to allocate IPv4 and IPv6 addresses to vApps.
@@ -2317,13 +10117,336 @@ type IpPoolManager struct {
 }
 
 //
+// Allocates an IPv4 address from an IP pool.
+//
+// Allocated IP addresses are reserved in the IP pool until released by
+// calling ReleaseIpAllocation, or until the IP pool is configured to
+// have an IP range that does not contain the IP address, or until the IP
+// pool is destroyed.
+//
+//
+// The caller must be a vCenter extension. Refer to ExtensionManager
+// for details on vCenter extensions.
+//
+//
+// The caller specifies a per extension unique allocation ID. Calling this
+// function twice with the same allocation ID for the same pool yields the
+// same IP address. This makes it possible to do idempotent allocations.
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+// Since
+// vSphere API 5.1
+//
+func (mo *IpPoolManager) AllocateIpv4Address(
+	_this *do.ManagedObjectReference, dc *mo.Datacenter, poolId int32, allocationId string,
+) (string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Allocates an IPv6 address from an IP pool.
+//
+// Allocated IP addresses are reserved in the IP pool until released by
+// calling ReleaseIpAllocation, or until the IP pool is configured to
+// have an IP range that does not contain the IP address, or until the IP
+// pool is destroyed.
+//
+//
+// The caller must be a vCenter extension. Refer to ExtensionManager
+// for details on vCenter extensions.
+//
+//
+// The caller specifies a per extension unique allocation ID. Calling this
+// function twice with the same allocation ID for the same pool yields the
+// same IP address. This makes it possible to do idempotent allocations.
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+// Since
+// vSphere API 5.1
+//
+func (mo *IpPoolManager) AllocateIpv6Address(
+	_this *do.ManagedObjectReference, dc *mo.Datacenter, poolId int32, allocationId string,
+) (string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Create a new IP pool.
+//
+// The name field must be defined, all other fields are optional. If unset,
+// they will be given default values.
+//
+//
+// The ID for the pool is generated by the server and should not be defined on the
+// pool object passed to this method.
+//
+//
+// Required Privileges
+// None
+//
+func (mo *IpPoolManager) CreateIpPool(
+	_this *do.ManagedObjectReference, dc *mo.Datacenter, pool *do.IpPool,
+) (int32, error) {
+
+	return nil, nil
+
+}
+
+//
+// Destroys an IP pool on the given datacenter.
+//
+// Looks up the pool on the datacenter by ID and deletes it. If the pool is in use,
+// the method throws InvalidState unless the force flag is true.
+//
+//
+// Required Privileges
+// None
+//
+func (mo *IpPoolManager) DestroyIpPool(
+	_this *do.ManagedObjectReference, dc *mo.Datacenter, id int32, force bool,
+) error {
+
+	return nil
+
+}
+
+//
+// Query IP allocations by IP pool and extension key.
+//
+// Required Privileges
+// None
+// Since
+// vSphere API 5.1
+//
+func (mo *IpPoolManager) QueryIPAllocations(
+	_this *do.ManagedObjectReference, dc *mo.Datacenter, poolId int32, extensionKey string,
+) ([]*IpPoolManagerIpAllocation, error) {
+
+	return nil, nil
+
+}
+
+//
+// Return the list of IP pools for a datacenter.
+//
+// Required Privileges
+// None
+//
+func (mo *IpPoolManager) QueryIpPools(
+	_this *do.ManagedObjectReference, dc *mo.Datacenter,
+) ([]*IpPool, error) {
+
+	return nil, nil
+
+}
+
+//
+// Releases an IP allocation back to it's IP pool.
+//
+// Attempting to release an IP allocation that is not allocated from the
+// specified IP pool with the specified allocation ID silently fails. This
+// makes it possible to release IP allocations idempotently.
+//
+//
+// All IP addresses allocated by an extension are automatically released
+// if the extension is unregistered from vCenter.
+//
+//
+// Required Privileges
+// None
+// Since
+// vSphere API 5.1
+//
+func (mo *IpPoolManager) ReleaseIpAllocation(
+	_this *do.ManagedObjectReference, dc *mo.Datacenter, poolId int32, allocationId string,
+) error {
+
+	return nil
+
+}
+
+//
+// Update an IP pool on a datacenter.
+//
+// The pool to update is looked up from the value of the id field.
+//
+//
+// All fields in the pool except the id are optional. Only defined values are stored
+// on the server.
+//
+//
+// Required Privileges
+// None
+//
+func (mo *IpPoolManager) UpdateIpPool(
+	_this *do.ManagedObjectReference, dc *mo.Datacenter, pool *do.IpPool,
+) error {
+
+	return nil
+
+}
+
+//
 // This managed object provides interfaces for mapping VMkernel NIC to
 // iSCSI Host Bus Adapter.
 //
 type IscsiManager struct {
 }
 
+//
+// Bind a Virtual NIC to be used for an iSCSI adapter
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *IscsiManager) BindVnic(
+	_this *do.ManagedObjectReference, iScsiHbaName string, vnicDevice string,
+) error {
+
+	return nil
+
+}
+
+//
+// Query the list of Virtual NICs that are bound to a given iSCSI HBA.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *IscsiManager) QueryBoundVnics(
+	_this *do.ManagedObjectReference, iScsiHbaName string,
+) ([]*IscsiPortInfo, error) {
+
+	return nil, nil
+
+}
+
+//
+// Query the candidate Virtual NICs and Physical NICs that can be used
+// for Port-Binding.
+//
+// For dependent offload adapters, the Virtual NIC should be attached
+// to the physical NIC associated with the hardware function.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *IscsiManager) QueryCandidateNics(
+	_this *do.ManagedObjectReference, iScsiHbaName string,
+) ([]*IscsiPortInfo, error) {
+
+	return nil, nil
+
+}
+
+//
+// Query the dependency table for a migration operation of a given Physical
+// NIC.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *IscsiManager) QueryMigrationDependencies(
+	_this *do.ManagedObjectReference, pnicDevice []string,
+) (*IscsiMigrationDependency, error) {
+
+	return nil, nil
+
+}
+
+//
+// Query if Physical NIC device is used for iSCSI.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *IscsiManager) QueryPnicStatus(
+	_this *do.ManagedObjectReference, pnicDevice string,
+) (*IscsiStatus, error) {
+
+	return nil, nil
+
+}
+
+//
+// Query the status of Virtual NIC association with the iSCSI.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *IscsiManager) QueryVnicStatus(
+	_this *do.ManagedObjectReference, vnicDevice string,
+) (*IscsiStatus, error) {
+
+	return nil, nil
+
+}
+
+//
+// Unbind Virtual NIC binding from an iSCSI adapter.
+//
+// Required Privileges
+// Host.Config.Storage
+//
+func (mo *IscsiManager) UnbindVnic(
+	_this *do.ManagedObjectReference, iScsiHbaName string, vnicDevice string, force bool,
+) error {
+
+	return nil
+
+}
+
 type LicenseAssignmentManager struct {
+}
+
+//
+// Get information about all the licenses associated with an entity
+//
+// Required Privileges
+// System.View
+//
+func (mo *LicenseAssignmentManager) QueryAssignedLicenses(
+	_this *do.ManagedObjectReference, entityId string,
+) ([]*LicenseAssignmentManagerLicenseAssignment, error) {
+
+	return nil, nil
+
+}
+
+//
+// Remove licenses associated with an entity
+//
+// Required Privileges
+// Global.Licenses
+//
+func (mo *LicenseAssignmentManager) RemoveAssignedLicense(
+	_this *do.ManagedObjectReference, entityId string,
+) error {
+
+	return nil
+
+}
+
+//
+// Update the license associated with an entity
+//
+// Required Privileges
+// Global.Licenses
+//
+func (mo *LicenseAssignmentManager) UpdateAssignedLicense(
+	_this *do.ManagedObjectReference, entity string, licenseKey string, entityDisplayName string,
+) (*LicenseManagerLicenseInfo, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -2383,10 +10506,10 @@ type LicenseManager struct {
 	// Return current diagnostic information.
 	//
 	// Since VI API 2.5
-	Diagnostics *LicenseDiagnostics
+	Diagnostics *do.LicenseDiagnostics
 
 	// Since vSphere API 4.0
-	Evaluation *LicenseManagerEvaluationInfo
+	Evaluation *do.LicenseManagerEvaluationInfo
 
 	// Deprecated.
 	// As of VI API 2.5, use QuerySupportedFeatures
@@ -2394,7 +10517,7 @@ type LicenseManager struct {
 	//
 	//
 	// The list of features that can be licensed.
-	FeatureInfo []*LicenseFeatureInfo
+	FeatureInfo []*do.LicenseFeatureInfo
 
 	// License Assignment Manager
 	//
@@ -2419,7 +10542,7 @@ type LicenseManager struct {
 	// Get information about all the licenses avaiable.
 	//
 	// Since vSphere API 4.0
-	Licenses []*LicenseManagerLicenseInfo
+	Licenses []*do.LicenseManagerLicenseInfo
 
 	// Deprecated.
 	// As of vSphere API 4.0, use
@@ -2427,7 +10550,7 @@ type LicenseManager struct {
 	//
 	//
 	// Set or return a data object type of LocalLicense or LicenseServer.
-	Source *LicenseSource
+	Source *do.LicenseSource
 
 	// Deprecated.
 	// As of vSphere API 4.0, this property is not used.
@@ -2436,6 +10559,301 @@ type LicenseManager struct {
 	// Current state of the license source. License sources that are LocalSource
 	// are always available.
 	SourceAvailable bool
+}
+
+//
+// Adds a license to the inventory of available licenses.
+//
+// Required Privileges
+// Global.Licenses
+// Since
+// vSphere API 4.0
+//
+func (mo *LicenseManager) AddLicense(
+	_this *do.ManagedObjectReference, licenseKey string, labels []*do.KeyValue,
+) (*LicenseManagerLicenseInfo, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of vSphere API 4.0, use
+// QueryAssignedLicenses instead.
+//
+//
+// Returns whether or not a given feature is enabled.
+//
+//
+//
+// Required Privileges
+// System.Read
+//
+func (mo *LicenseManager) CheckLicenseFeature(
+	_this *do.ManagedObjectReference, host *mo.HostSystem, featureKey string,
+) (bool, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of vSphere API 4.0, use UpdateLicense
+// instead.
+//
+//
+// Allows for reconfiguration of the License Manager license source.
+//
+// This changes the licensing source to be either served or local. Before changing
+// the license source location, the API checks the number of licenses available at
+// the new potential source to ensure there are at least as many licenses there as
+// have been issued by the current source. If there are an equal or greater number of
+// licenses at the new source, all licenses on the current source are released and
+// then reacquired from the new source. If there are not enough licenses available on
+// the new source to reissue all licenses, the operation fails.
+//
+//
+// This is used to configure the license source on an individual host.
+//
+//
+// PLATFORM Specific Notes:
+// VirtualCenter - only supports a served source.
+// the host parameter is mandatory.
+// ESX Server  -  the host parameter is optional.
+//
+//
+//
+//
+// Required Privileges
+// Global.Licenses
+//
+func (mo *LicenseManager) ConfigureLicenseSource(
+	_this *do.ManagedObjectReference, host *mo.HostSystem, licenseSource *do.LicenseSource,
+) error {
+
+	return nil
+
+}
+
+//
+// Decodes licensing information on the license specified.
+//
+// Required Privileges
+// Global.Licenses
+// Since
+// vSphere API 4.0
+//
+func (mo *LicenseManager) DecodeLicense(
+	_this *do.ManagedObjectReference, licenseKey string,
+) (*LicenseManagerLicenseInfo, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of vSphere API 4.0, use
+// RemoveAssignedLicense instead.
+//
+//
+// Release licenses for an optional feature.
+//
+//
+//
+// Required Privileges
+// Global.Licenses
+//
+func (mo *LicenseManager) DisableFeature(
+	_this *do.ManagedObjectReference, host *mo.HostSystem, featureKey string,
+) (bool, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of vSphere API 4.0, use
+// UpdateAssignedLicense instead.
+//
+//
+// Enable a feature that has an optional state.
+//
+//
+//
+// Required Privileges
+// Global.Licenses
+//
+func (mo *LicenseManager) EnableFeature(
+	_this *do.ManagedObjectReference, host *mo.HostSystem, featureKey string,
+) (bool, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of vSphere API 4.0, use
+// QueryAssignedLicenses instead.
+//
+//
+// Queries the current license source for total and available licenses available for
+// each feature known to this system.
+//
+// Required Privileges
+// Global.Licenses
+//
+func (mo *LicenseManager) QueryLicenseSourceAvailability(
+	_this *do.ManagedObjectReference, host *mo.HostSystem,
+) ([]*LicenseAvailabilityInfo, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of vSphere API 4.0, use
+// QueryAssignedLicenses instead.
+//
+//
+// Returns the license usage. The license usage is a list of supported features and
+// the number of licenses that have been reserved.
+//
+// PLATFORM Specific Notes:
+// VirtualCenter - Empty string returns the usage of non-host specific features.
+// Must specify managed host to query.
+// ESX Server - Host argument ignored.
+//
+//
+// Required Privileges
+// System.Read
+//
+func (mo *LicenseManager) QueryLicenseUsage(
+	_this *do.ManagedObjectReference, host *mo.HostSystem,
+) (*LicenseUsageInfo, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of vSphere API 4.0, use
+// QueryAssignedLicenses instead.
+//
+//
+// Queries the current license source for a list of available licenses that can be
+// licensed from this system.
+//
+// Required Privileges
+// Global.Licenses
+// Since
+// VI API 2.5
+//
+func (mo *LicenseManager) QuerySupportedFeatures(
+	_this *do.ManagedObjectReference, host *mo.HostSystem,
+) ([]*LicenseFeatureInfo, error) {
+
+	return nil, nil
+
+}
+
+//
+// Remove license from the available set.
+//
+// Required Privileges
+// Global.Licenses
+// Since
+// vSphere API 4.0
+//
+func (mo *LicenseManager) RemoveLicense(
+	_this *do.ManagedObjectReference, licenseKey string,
+) error {
+
+	return nil
+
+}
+
+//
+// Removed a license's label.
+//
+// Required Privileges
+// Global.Licenses
+// Since
+// vSphere API 4.0
+//
+func (mo *LicenseManager) RemoveLicenseLabel(
+	_this *do.ManagedObjectReference, licenseKey string, labelKey string,
+) error {
+
+	return nil
+
+}
+
+// Deprecated.
+// As of vSphere API 4.0, use
+// QueryAssignedLicenses instead.
+//
+//
+// Defines the product's license edition. The edition defines which product license
+// the server requires. This, in turn, determines the core set of functionality
+// provided by the product and the additional features that can be licensed.
+//
+// To determine what featureKey the current platform will accept, use
+// querySourceAvailablity() at runtime, or consult the documentation for the
+// current platform.
+//
+//
+//
+//
+// Required Privileges
+// Global.Licenses
+//
+func (mo *LicenseManager) SetLicenseEdition(
+	_this *do.ManagedObjectReference, host *mo.HostSystem, featureKey string,
+) error {
+
+	return nil
+
+}
+
+//
+// Updates the available licenses to the one provided in licenseKey.
+//
+// This is the same as removing all the licenses using
+// RemoveLicense and adding licenseKey using
+// AddLicense
+//
+// If the optional parameter labels is specify this is the same as calling
+// updateLicense without the optioal parameter and calling updateLabel for each pair
+// in the labels array.
+//
+// Required Privileges
+// Global.Licenses
+// Since
+// vSphere API 4.0
+//
+func (mo *LicenseManager) UpdateLicense(
+	_this *do.ManagedObjectReference, licenseKey string, labels []*do.KeyValue,
+) (*LicenseManagerLicenseInfo, error) {
+
+	return nil, nil
+
+}
+
+//
+// Update a license's label.
+// It creates a label entry if the labelKey doesn't already exist
+//
+// Required Privileges
+// Global.Licenses
+// Since
+// vSphere API 4.0
+//
+func (mo *LicenseManager) UpdateLicenseLabel(
+	_this *do.ManagedObjectReference, licenseKey string, labelKey string, labelValue string,
+) error {
+
+	return nil
+
 }
 
 //
@@ -2453,6 +10871,60 @@ type LicenseManager struct {
 //
 type ListView struct {
 	*ManagedObjectView
+}
+
+//
+// Modify the list by giving a delta of entities to add and
+// entities to remove.
+//
+// May partially succeed if some objects could not be resolved.  The operation
+// will still succeed for all objects which could be resolved, and the
+// list of those which failed is returned as the result.
+//
+//
+// Required Privileges
+// None
+//
+func (mo *ListView) ModifyListView(
+	_this *do.ManagedObjectReference, add []*do.ManagedObjectReference, remove []*do.ManagedObjectReference,
+) ([]*ManagedObjectReference, error) {
+
+	return nil, nil
+
+}
+
+//
+// Replaces the list with an entirely new set of objects.  If
+// the entire set is changing, this is less data to send than a delta.
+//
+// May partially succeed if some objects could not be resolved.  The operation
+// will still succeed for all objects which could be resolved, and the
+// list of those which failed is as the result.
+//
+//
+// Required Privileges
+// None
+//
+func (mo *ListView) ResetListView(
+	_this *do.ManagedObjectReference, obj []*do.ManagedObjectReference,
+) ([]*ManagedObjectReference, error) {
+
+	return nil, nil
+
+}
+
+//
+// Replaces the list with the set of objects in a given view.
+//
+// Required Privileges
+// None
+//
+func (mo *ListView) ResetListViewFromView(
+	_this *do.ManagedObjectReference, view *mo.View,
+) error {
+
+	return nil
+
 }
 
 //
@@ -2509,7 +10981,7 @@ type LocalizationManager struct {
 
 	// Fetches the descriptions of all the client-side localization message
 	// catalogs available for the current session locale.
-	Catalog []*LocalizationManagerMessageCatalog
+	Catalog []*do.LocalizationManagerMessageCatalog
 }
 
 //
@@ -2535,7 +11007,7 @@ type ManagedEntity struct {
 	// events as long as they are still current. The
 	// configStatus property provides an overall status
 	// based on these events.
-	ConfigIssue []*Event
+	ConfigIssue []*do.Event
 
 	// The configStatus indicates whether or not the system has detected a configuration
 	// issue involving this entity. For example, it might have detected a
@@ -2561,10 +11033,10 @@ type ManagedEntity struct {
 	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
 	// an empty string for the version parameter. Any other version value will not
 	// produce any property values as no updates are generated.
-	ConfigStatus *ManagedEntityStatus
+	ConfigStatus *enum.ManagedEntityStatus
 
 	// Custom field values.
-	CustomValue []*CustomFieldValue
+	CustomValue []*do.CustomFieldValue
 
 	// A set of alarm states for alarms that apply to this managed entity.
 	// The set includes alarms defined on this entity
@@ -2573,7 +11045,7 @@ type ManagedEntity struct {
 	//
 	// Alarms are inherited if they can be triggered by this entity or its descendants.
 	// This set does not include alarms that are defined on descendants of this entity.
-	DeclaredAlarmState []*AlarmState
+	DeclaredAlarmState []*do.AlarmState
 
 	// List of operations that are disabled, given the current runtime
 	// state of the entity. For example, a power-on operation always fails if a
@@ -2685,7 +11157,7 @@ type ManagedEntity struct {
 	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
 	// an empty string for the version parameter. Any other version value will not
 	// produce any property values as no updates are generated.
-	OverallStatus *ManagedEntityStatus
+	OverallStatus *enum.ManagedEntityStatus
 
 	// Parent of this entity.
 	//
@@ -2695,7 +11167,7 @@ type ManagedEntity struct {
 	Parent *ManagedEntity
 
 	// List of permissions defined for this entity.
-	Permission []*Permission
+	Permission []*do.Permission
 
 	// The set of recent tasks operating on this managed entity. This is a subset
 	// of recentTask belong to this entity. A task in this
@@ -2723,7 +11195,7 @@ type ManagedEntity struct {
 	// Experimental. Subject to change.
 	//
 	// Since vSphere API 4.0
-	Tag []*Tag
+	Tag []*do.Tag
 
 	// A set of alarm states for alarms triggered by this entity
 	// or by its descendants.
@@ -2738,7 +11210,77 @@ type ManagedEntity struct {
 	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
 	// an empty string for the version parameter. Any other version value will not
 	// produce any property values as no updates are generated.
-	TriggeredAlarmState []*AlarmState
+	TriggeredAlarmState []*do.AlarmState
+}
+
+//
+// Destroys this object, deleting its contents and removing it from its parent
+// folder (if any).
+//
+// NOTE: The appropriate privilege must be held on the parent of the destroyed
+// entity as well as the entity itself.
+//
+//
+// This method can throw one of several exceptions. The exact set of exceptions
+// depends on the kind of entity that is being removed.  See comments for
+// each entity for more information on destroy behavior.
+//
+// Required Privileges
+// When object is VirtualMachine - VirtualMachine.Inventory.DeleteWhen object is Datacenter - Datacenter.DeleteWhen object is Folder - Folder.DeleteWhen object is HostSystem - Host.Inventory.RemoveHostFromClusterWhen object is VirtualApp - VApp.DeleteWhen object is ResourcePool - Resource.DeletePoolWhen object is ComputeResource - Host.Inventory.RemoveHostFromClusterWhen object is ClusterComputeResource - Host.Inventory.DeleteClusterWhen object is DistributedVirtualSwitch - DVSwitch.DeleteWhen object is DistributedVirtualPortgroup - DVPortgroup.DeleteWhen object is Datastore - System.ReadWhen object is Network - System.Read
+//
+//
+func (mo *ManagedEntity) Destroy_Task(
+	_this *do.ManagedObjectReference,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Reload the entity state. Clients only need to call this method
+// if they changed some external state that affects the service
+// without using the Web service interface to perform the change.
+// For example, hand-editing a virtual machine configuration file
+// affects the configuration of the associated virtual machine but
+// the service managing the virtual machine might not monitor the
+// file for changes. In this case, after such an edit, a client
+// would call "reload" on the associated virtual machine to ensure
+// the service and its clients have current data for the
+// virtual machine.
+//
+// Required Privileges
+// System.Read
+//
+func (mo *ManagedEntity) Reload(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Renames this managed entity.
+//
+// Any % (percent) character used in this name parameter
+// must be escaped, unless it is used to start an escape
+// sequence. Clients may also escape any other characters in
+// this name parameter.
+//
+// See name
+//
+//
+// Required Privileges
+// When object is VirtualMachine - VirtualMachine.Config.RenameWhen object is Datacenter - Datacenter.RenameWhen object is Folder - Folder.RenameWhen object is VirtualApp - VApp.RenameWhen object is ResourcePool - Resource.RenamePoolWhen object is ClusterComputeResource - Host.Inventory.RenameClusterWhen object is DistributedVirtualSwitch - DVSwitch.ModifyWhen object is DistributedVirtualPortgroup - DVPortgroup.ModifyWhen object is Datastore - Datastore.RenameWhen object is Network - System.Read
+//
+//
+func (mo *ManagedEntity) Rename_Task(
+	_this *do.ManagedObjectReference, newName string,
+) (*Task, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -2751,7 +11293,7 @@ type ManagedObjectView struct {
 	*View
 
 	// The list of references to objects mapped by this view.
-	View []*ManagedObjectReference
+	View []*do.ManagedObjectReference
 }
 
 //
@@ -2788,10 +11330,30 @@ type Network struct {
 	Name string
 
 	// Properties of a network.
-	Summary *NetworkSummary
+	Summary *do.NetworkSummary
 
 	// Virtual machines using this network.
 	Vm []*VirtualMachine
+}
+
+// Deprecated.
+// As of VI API 2.5 do not use this method. This method throws
+// ResourceInUse.  Networks are automatically
+// removed when no longer in use, so this method is unnecessary.
+//
+//
+// Removes a network. A network can be removed only if it is not used by any host or
+// virtual machine.
+//
+// Required Privileges
+// Network.Delete
+//
+func (mo *Network) DestroyNetwork(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
 }
 
 //
@@ -2824,11 +11386,77 @@ type OpaqueNetwork struct {
 type OptionManager struct {
 
 	// A list of the current settings for the key/value pair options.
-	Setting []*OptionValue
+	Setting []*do.OptionValue
 
 	// A list of supported key/value pair options including their
 	// type information.
-	SupportedOption []*OptionDef
+	SupportedOption []*do.OptionDef
+}
+
+//
+// Returns a specific node or nodes in the option hierarchy.
+//
+//
+// This method might require any of the following privileges depending
+// on where the property fits in the inventory tree.
+//
+//
+//
+// • System.View on the root folder, if this is used to read settings
+// in the "client" subtree.
+//
+// • System.Read on the root folder, if this is used to read all settings
+// or any settings beside those in the "client" subtree.
+//
+// • System.Read on the host, if this is used to read the advanced
+// options for a host configuration.
+//
+//
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *OptionManager) QueryOptions(
+	_this *do.ManagedObjectReference, name string,
+) ([]*OptionValue, error) {
+
+	return nil, nil
+
+}
+
+//
+// Updates one or more properties. These properties are changed
+// atomically: either all are applied or none are.
+//
+// A nested option setting can be named using a dot notation; for example,
+// system.cacheSize.
+//
+//
+//
+// This method might require any of the following privileges depending
+// on where the property fits in the inventory tree.
+//
+//
+//
+// • Global.Settings on the root folder, if this is used to modify the
+// settings in the service node.
+//
+// • Host.Config.AdvancedConfig on the host, if this is used to set the
+// advanced options in the host configuration.
+//
+//
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *OptionManager) UpdateOptions(
+	_this *do.ManagedObjectReference, changedValue []*do.OptionValue,
+) error {
+
+	return nil
+
 }
 
 //
@@ -2909,14 +11537,110 @@ type OvfManager struct {
 	//
 	//
 	// Since vSphere API 5.1
-	OvfExportOption []*OvfOptionInfo
+	OvfExportOption []*do.OvfOptionInfo
 
 	// Returns an array of OvfOptionInfo object that specifies what options the server
 	// support for modifing/relaxing the OVF import process.
 	//
 	//
 	// Since vSphere API 5.1
-	OvfImportOption []*OvfOptionInfo
+	OvfImportOption []*do.OvfOptionInfo
+}
+
+//
+// Create an OVF descriptor for the specified ManagedEntity, which may be a
+// VirtualMachine or a VirtualApp.
+//
+// To create the complete OVF descriptor, the client must already have downloaded the
+// files that are part of the entity, because information about these files
+// (compression, chunking, filename etc.) is part of the descriptor.
+//
+//
+// However, these downloads can be quite time-consuming, so if the descriptor for some
+// reason cannot be generated, the client will want to know this before downloading
+// the files.
+//
+//
+// For this reason, the client may do an initial "dry run" with the ovfFiles
+// parameter unset. Default filenames will then be used in the descriptor, and the
+// client can examine any warnings and/or errors before downloading the files.
+//
+//
+// After the final call to this method, client must release the lock on the entity
+// given to it by VirtualMachine.exportVm or VirtualApp.exportVApp.
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *OvfManager) CreateDescriptor(
+	_this *do.ManagedObjectReference, obj *mo.ManagedEntity, cdp *do.OvfCreateDescriptorParams,
+) (*OvfCreateDescriptorResult, error) {
+
+	return nil, nil
+
+}
+
+//
+// Validate the OVF descriptor against the hardware supported by the
+// host system. If the validation succeeds, return a result containing:
+//
+//
+// • An ImportSpec to use when importing the entity.
+//
+// • A list of items to upload (for example disk backing files, ISO images etc.)
+//
+//
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *OvfManager) CreateImportSpec(
+	_this *do.ManagedObjectReference, ovfDescriptor string, resourcePool *mo.ResourcePool, datastore *mo.Datastore, cisp *do.OvfCreateImportSpecParams,
+) (*OvfCreateImportSpecResult, error) {
+
+	return nil, nil
+
+}
+
+//
+// Parse the OVF descriptor and return as much information about it as possible
+// without knowing the host on which it will be imported.
+//
+// Typically, this method is called once without a deploymentOption parameter to
+// obtain the values for the default deployment option. Part of the result is the list
+// of possible deployment options. To obtain the values for a particular deployment
+// option, call this method again, specifying that option.
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *OvfManager) ParseDescriptor(
+	_this *do.ManagedObjectReference, ovfDescriptor string, pdp *do.OvfParseDescriptorParams,
+) (*OvfParseDescriptorResult, error) {
+
+	return nil, nil
+
+}
+
+//
+// Validate that the given OVF can be imported on the host.
+//
+// More specifically, this means whether or not the host supports the virtual hardware
+// required by the OVF descriptor.
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *OvfManager) ValidateHost(
+	_this *do.ManagedObjectReference, ovfDescriptor string, host *mo.HostSystem, vhp *do.OvfValidateHostParams,
+) (*OvfValidateHostResult, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -3076,14 +11800,375 @@ type OvfManager struct {
 type PerformanceManager struct {
 
 	// The static description strings.
-	Description *PerformanceDescription
+	Description *do.PerformanceDescription
 
 	// A list of intervals configured on the
 	// system.
-	HistoricalInterval []*PerfInterval
+	HistoricalInterval []*do.PerfInterval
 
 	// A list of all supported performance counters in the system.
-	PerfCounter []*PerfCounterInfo
+	PerfCounter []*do.PerfCounterInfo
+}
+
+// Deprecated.
+// As of API 2.5, use UpdatePerfInterval. The
+// default historical intervals can be modified, but they cannot be created.
+//
+//
+// Adds a new historical interval. Sampling period for new interval must be
+// a multiple of an existing interval; must comprise a longer period of
+// time; and must be uniquely named.
+//
+// Required Privileges
+// Performance.ModifyIntervals
+//
+func (mo *PerformanceManager) CreatePerfInterval(
+	_this *do.ManagedObjectReference, intervalId *do.PerfInterval,
+) error {
+
+	return nil
+
+}
+
+//
+// Retrieves all performance counters for the specified managed object generated during a specified
+// period of time. The time period can be specified using beginTime,
+// endTime, or by interval ID.
+//
+// Required Privileges
+// System.Read
+//
+func (mo *PerformanceManager) QueryAvailablePerfMetric(
+	_this *do.ManagedObjectReference, entity *do.ManagedObjectReference, beginTime time.Time, endTime time.Time, intervalId int32,
+) ([]*PerfMetricId, error) {
+
+	return nil, nil
+
+}
+
+//
+// Retrieves the performance metrics for the specified entity (or entities)
+// based on the properties specified in the PerfQuerySpec data object.
+//
+// Query Performance for VirtualCenter Server
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *PerformanceManager) QueryPerf(
+	_this *do.ManagedObjectReference, querySpec []*do.PerfQuerySpec,
+) ([]*PerfEntityMetricBase, error) {
+
+	return nil, nil
+
+}
+
+//
+// Retrieves a PerfCompositeMetric data object
+// that comprises statistics for the specified entity and its children
+// entities. Only metrics for the first level of descendents are included in
+// the PerfCompositeMetric object.
+//
+// Use this operation to obtain statistics for a host and its associated virtual machines, for
+// example.
+//
+//
+// Requires system.read privilege for every virtual machine on
+// the target host, or the query fails with the “NoPermission”
+// fault. Suported for HostSystem managed entities only.
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *PerformanceManager) QueryPerfComposite(
+	_this *do.ManagedObjectReference, querySpec *do.PerfQuerySpec,
+) (*PerfCompositeMetric, error) {
+
+	return nil, nil
+
+}
+
+//
+// Retrieves counter information for the specified list of counter IDs.
+//
+// Required Privileges
+// System.View
+//
+func (mo *PerformanceManager) QueryPerfCounter(
+	_this *do.ManagedObjectReference, counterId []int,
+) ([]*PerfCounterInfo, error) {
+
+	return nil, nil
+
+}
+
+//
+// Retrieves the set of counters that are available at a specified
+// collection level. The collection level
+// determines the statistics that get stored in VirtualCenter. See PerfInterval for more information about VirtualCenter Server
+// historical statistics collection.
+//
+// Required Privileges
+// System.View
+// Since
+// VI API 2.5
+//
+func (mo *PerformanceManager) QueryPerfCounterByLevel(
+	_this *do.ManagedObjectReference, level int32,
+) ([]*PerfCounterInfo, error) {
+
+	return nil, nil
+
+}
+
+//
+// Retrieves the PerfProviderSummary data object that
+// defines the capabilities of the specified managed object with respect to
+// statistics, such as whether it supports current or summary
+// statistics.
+//
+// Required Privileges
+// System.Read
+//
+func (mo *PerformanceManager) QueryPerfProviderSummary(
+	_this *do.ManagedObjectReference, entity *do.ManagedObjectReference,
+) (*PerfProviderSummary, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of API 2.5, use UpdatePerfInterval.
+// Historical intervals cannot be removed.
+//
+//
+// Removes an interval from the list.
+//
+// Required Privileges
+// Performance.ModifyIntervals
+//
+func (mo *PerformanceManager) RemovePerfInterval(
+	_this *do.ManagedObjectReference, samplePeriod int32,
+) error {
+
+	return nil
+
+}
+
+//
+// Restores a set of performance counters to the default level of data
+// collection. See the performance counter
+// tables for the default collection level for individual counters.
+//
+// Required Privileges
+// Performance.ModifyIntervals
+// Since
+// vSphere API 5.0
+//
+func (mo *PerformanceManager) ResetCounterLevelMapping(
+	_this *do.ManagedObjectReference, counters []int,
+) error {
+
+	return nil
+
+}
+
+//
+// Changes the level of data collection for a set of performance counters.
+// See the performance counter tables
+// for the default collection level for individual counters.
+//
+// Important:
+//
+//
+// Consider the performance and storage consequences of using this
+// method. You may cause a significant increase in data collection and
+// storage, along with a corresponding decrease in performance. vCenter
+// Server performance and database storage requirements depend on the
+// collection levels defined for the performance intervals
+// (PerformanceManager.historicalInterval)
+// and the collection levels specified for individual performance counters
+// (PerfCounterInfo.level).
+//
+//
+// Performance Counter Data Collection
+//
+//
+// vSphere defines four levels of data collection for performance
+// counters. Each performance counter specifies a level for collection. The
+// historical performance intervals (PerformanceManager.historicalInterval) define the sampling period
+// and length for a particular collection level.
+//
+//
+// The amount of data collected for a performance counter depends
+// on the performance interval and on the type of entity for which
+// the counter is defined. For example, a datastore counter such as
+// datastoreIops (the aggregate number of IO operations on the datastore)
+// will generate a data set that corresponds to the number of datastores
+// on a host. If a vCenter Server manages a large number of hosts
+// with a large number of datastores, the Server will collect
+// a large amount of data.
+//
+//
+// There are other counters for which the vCenter Server collects
+// a relatively smaller amount of data. For example, memory counters
+// are collected as a single counter per virtual machine and a single
+// counter per host.
+//
+//
+// Performance Counter Data Storage
+//
+//
+// The performance interval collection level defines the set of counters for
+// which the vCenter Server stores performance data. The Server will store
+// data for counters at the specified level and for counters at all lower
+// levels.
+//
+//
+// By default, all the performance intervals specify collection level
+// one. Using these defaults, the vCenter Server stores performance counter
+// data in the vCenter database for all counters that specify collection
+// level one. It does not store data for counters that specify collection
+// levels two through four.
+//
+//
+// Performance Manager Method Interaction
+//
+//
+// You can use the UpdateCounterLevelMapping method to change the
+// collection level for individual counters. You can also use the UpdatePerfInterval method to change the
+// collection level for the system-defined performance intervals. These
+// methods can cause a significant increase in the amount of data collected
+// and stored in the vCenter database.
+//
+//
+// You may cause a significant increase in data collection and storage
+// along with a corresponding decrease in performance under the following
+// conditions:
+//
+//
+//
+// •  By default the system-defined performance intervals use collection
+// level one, storing data for all counters that specify collection
+// level one. If you use the UpdateCounterLevelMapping method to change
+// the collection level of performance counters to level one, you will
+// increase the amount of stored performance data.
+//
+//
+// •  If you use the UpdatePerfInterval method to increase
+// the collection level for the system-defined performance intervals,
+// you will increase the amount of stored performance data.
+//
+//
+//
+//
+//
+// To restore counter levels to default settings use the ResetCounterLevelMapping method.
+//
+//
+// Required Privileges
+// Performance.ModifyIntervals
+// Since
+// vSphere API 5.0
+//
+func (mo *PerformanceManager) UpdateCounterLevelMapping(
+	_this *do.ManagedObjectReference, counterLevelMap []*do.PerformanceManagerCounterLevelMapping,
+) error {
+
+	return nil
+
+}
+
+//
+// Modifies VirtualCenter Server's built-in historical intervals, within certain limits.
+//
+// Supported Modifications
+//
+//
+//
+//
+// key
+// samplingPeriod
+// length
+// name
+// level [1]
+// enabled [2]
+//
+//
+//
+// 1
+// 300 [3]
+// 86400 [4]
+// Past day
+// 1
+// true
+//
+//
+//
+// 2
+// 1800
+// 604800
+// Past week
+// 1
+// true
+//
+//
+//
+// 3
+// 7200
+// 2592000
+// Past month
+// 1
+// true
+//
+//
+//
+// 4
+// 66400
+// 31536000 [5]
+// Past year
+// 1
+// true
+//
+//
+//
+//
+//
+//
+//
+// [1]  The collection level for the historical intervals can be changed. However,
+// the level specified for a lower-numbered interval cannot be smaller
+// than that of a larger interval.
+//
+// [2]  An interval can be disabled. By default, all four
+// intervals are enabled. Disabling an interval disables all higher
+// intervals. For example, disabling interval 3 (“Past month”)
+// also disables interval 4 (“Past year”).
+//
+// [3]  Can reduce this interval’s samplingPeriod from 5 minutes to 1, 2, or 3
+// minutes.
+//
+// [4]  Can increase this interval’s length from 1 day to 2 or 3 days.
+//
+// [5]  Can increase interval’s length from 1 year to 2 or 3 years.
+//
+//
+// See PerfInterval for information about the four default
+// intervals for VirtualCenter Server.
+//
+//
+// Required Privileges
+// Performance.ModifyIntervals
+//
+func (mo *PerformanceManager) UpdatePerfInterval(
+	_this *do.ManagedObjectReference, interval *do.PerfInterval,
+) error {
+
+	return nil
+
 }
 
 //
@@ -3101,7 +12186,7 @@ type Profile struct {
 	ComplianceStatus string
 
 	// Configuration data for the profile.
-	Config *ProfileConfigInfo
+	Config *do.ProfileConfigInfo
 
 	// Time at which the profile was created.
 	CreatedTime time.Time
@@ -3111,7 +12196,7 @@ type Profile struct {
 	//
 	//
 	// Localizable description of the profile
-	Description *ProfileDescription
+	Description *do.ProfileDescription
 
 	// List of managed entities associated with the profile.
 	Entity []*ManagedEntity
@@ -3124,9 +12209,156 @@ type Profile struct {
 }
 
 //
+// Associate a profile with a managed entity. You can check the compliance of
+// entities associated with a profile by calling the
+// CheckProfileCompliance_Task method.
+//
+// Required Privileges
+// Profile.Edit
+//
+func (mo *Profile) AssociateProfile(
+	_this *do.ManagedObjectReference, entity []*mo.ManagedEntity,
+) error {
+
+	return nil
+
+}
+
+//
+// Check compliance of an entity against a Profile.
+//
+// Required Privileges
+// System.View
+//
+func (mo *Profile) CheckProfileCompliance_Task(
+	_this *do.ManagedObjectReference, entity []*mo.ManagedEntity,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Destroy the profile.
+//
+// Required Privileges
+// Profile.Delete
+//
+func (mo *Profile) DestroyProfile(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Remove the association between a profile and a managed entity.
+//
+// Required Privileges
+// Profile.Edit
+//
+func (mo *Profile) DissociateProfile(
+	_this *do.ManagedObjectReference, entity []*mo.ManagedEntity,
+) error {
+
+	return nil
+
+}
+
+//
+// Export the profile in a serialized form. To use the serialized string to create a profile,
+// specify a ProfileSerializedCreateSpec when you call the
+// HostProfileManager.CreateProfile
+// method.
+//
+// Required Privileges
+// Profile.Export
+//
+func (mo *Profile) ExportProfile(
+	_this *do.ManagedObjectReference,
+) (string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Returns the localizable description for the profile.
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 5.0
+//
+func (mo *Profile) RetrieveDescription(
+	_this *do.ManagedObjectReference,
+) (*ProfileDescription, error) {
+
+	return nil, nil
+
+}
+
+//
 // Interface handling the Compliance aspects of entities.
 //
 type ProfileComplianceManager struct {
+}
+
+//
+// Check compliance of an entity against a Profile.
+//
+// Required Privileges
+// System.View
+//
+func (mo *ProfileComplianceManager) CheckCompliance_Task(
+	_this *do.ManagedObjectReference, profile []*mo.Profile, entity []*mo.ManagedEntity,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Clear the saved ComplianceResult based on profile and entity filtering criteria.
+//
+// Required Privileges
+// Profile.Clear
+//
+func (mo *ProfileComplianceManager) ClearComplianceStatus(
+	_this *do.ManagedObjectReference, profile []*mo.Profile, entity []*mo.ManagedEntity,
+) error {
+
+	return nil
+
+}
+
+//
+// Query the compliance status based on Profile and Entity filter.
+//
+// Required Privileges
+// System.View
+//
+func (mo *ProfileComplianceManager) QueryComplianceStatus(
+	_this *do.ManagedObjectReference, profile []*mo.Profile, entity []*mo.ManagedEntity,
+) ([]*ComplianceResult, error) {
+
+	return nil, nil
+
+}
+
+//
+// Query the metadata for the expressions.
+//
+// Required Privileges
+// System.View
+//
+func (mo *ProfileComplianceManager) QueryExpressionMetadata(
+	_this *do.ManagedObjectReference, expressionName []string, profile *mo.Profile,
+) ([]*ProfileExpressionMetadata, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -3136,6 +12368,52 @@ type ProfileManager struct {
 
 	// A list of profiles known to this ProfileManager.
 	Profile []*Profile
+}
+
+//
+// Create a profile from the specified CreateSpec.
+//
+// Required Privileges
+// Profile.Create
+//
+func (mo *ProfileManager) CreateProfile(
+	_this *do.ManagedObjectReference, createSpec *do.ProfileCreateSpec,
+) (*Profile, error) {
+
+	return nil, nil
+
+}
+
+//
+// Get the profile(s) to which this entity is associated.
+// The list of profiles will only include profiles known to this
+// profileManager.
+//
+// Required Privileges
+// System.View
+//
+func (mo *ProfileManager) FindAssociatedProfile(
+	_this *do.ManagedObjectReference, entity *mo.ManagedEntity,
+) ([]*Profile, error) {
+
+	return nil, nil
+
+}
+
+//
+// Get the Metadata information for the policyNames.
+// PolicyNames are available with the defaultProfile obtained by invoking the
+// method createDefaultProfile.
+//
+// Required Privileges
+// System.View
+//
+func (mo *ProfileManager) QueryPolicyMetadata(
+	_this *do.ManagedObjectReference, policyName []string, profile *mo.Profile,
+) ([]*ProfilePolicyMetadata, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -3174,6 +12452,268 @@ type PropertyCollector struct {
 }
 
 //
+// Discards remaining results from a retrieval started by RetrievePropertiesEx on the same session on the same PropertyCollector.
+//
+// Required Privileges
+// System.Anonymous
+// Since
+// vSphere API 4.1
+//
+func (mo *PropertyCollector) CancelRetrievePropertiesEx(
+	_this *do.ManagedObjectReference, token string,
+) error {
+
+	return nil
+
+}
+
+//
+// Attempts to cancel outstanding calls to WaitForUpdates or WaitForUpdatesEx in the current session.  If an update calculation is
+// in process this method has no effect. If an update calculation is not in
+// process any waiting calls complete quickly and report a RequestCanceled fault.
+//
+// Required Privileges
+// System.View
+//
+func (mo *PropertyCollector) CancelWaitForUpdates(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+// Deprecated.
+// As of vSphere API 4.1, use
+// WaitForUpdatesEx with a
+// maxWaitSeconds of 0.
+//
+//
+// Checks for updates on properties specified by the union of all current
+// filters. If no updates are pending, this method returns null.
+//
+// Required Privileges
+// System.View
+//
+func (mo *PropertyCollector) CheckForUpdates(
+	_this *do.ManagedObjectReference, version string,
+) (*UpdateSet, error) {
+
+	return nil, nil
+
+}
+
+//
+// Retrieves additional results from a retrieval started by RetrievePropertiesEx on the same session on the same PropertyCollector.
+//
+// Required Privileges
+// System.Anonymous
+// Since
+// vSphere API 4.1
+//
+func (mo *PropertyCollector) ContinueRetrievePropertiesEx(
+	_this *do.ManagedObjectReference, token string,
+) (*RetrieveResult, error) {
+
+	return nil, nil
+
+}
+
+//
+// Creates a new filter for the given set of managed objects.
+//
+// Required Privileges
+// System.View
+//
+func (mo *PropertyCollector) CreateFilter(
+	_this *do.ManagedObjectReference, spec *do.PropertyFilterSpec, partialUpdates bool,
+) (*PropertyFilter, error) {
+
+	return nil, nil
+
+}
+
+//
+// Creates a new session-specific PropertyCollector that can
+// be used to retrieve property updates independent of any other
+// PropertyCollector.  The newly created PropertyCollector
+// is not tied to the creating PropertyCollector in any way and
+// exists until it is destroyed
+// by a call to DestroyPropertyCollector or until the session
+// on which the PropertyCollector was created is closed.  This is in contrast
+// to the default PropertyCollector, which always exists, but still has
+// session-specific data such as filters and unfinished update calculations
+// that are discarded when the associated session is closed.
+//
+// A new PropertyCollector can be useful when multiple modules or even
+// multiple clients that share the
+// same session need to create their own PropertyFilter
+// objects and process updates independently.  They may also be useful
+// to allow important updates to be seen on one PropertyCollector while
+// a large update is being calculated on another.  The underlying
+// issue that this addresses is that any call to WaitForUpdates,
+// CheckForUpdates, or WaitForUpdatesEx does updates on all the
+// filters created on a given PropertyCollector on a given session.
+//
+//
+// A more subtle use of multiple PropertyCollector objects is implied
+// by the fact that the returned version value for the various updates
+// calculations is strongly ordered.  The only way this can make sense is that
+// two different versions calculated on the same PropertyCollector on
+// the same session cannot ever be created in parallel.  This means that multiple
+// calls to WaitForUpdates, CheckForUpdates, or
+// WaitForUpdatesEx made to the same PropertyCollector on the
+// same session on different threads of the same client, or even on different
+// clients that share the same session are still handled on the server serially.
+// Use of different PropertyCollector instances allows the server to
+// handle these calculations in parallel.
+//
+//
+// Typically a service that supports the PropertyCollector managed
+// object type will automatically create a default PropertyCollector
+// and provide some way to obtain a reference to this
+// PropertyCollector.  If not, it will have to provide some
+// service-specific way to create the a PropertyCollector.
+//
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 4.1
+//
+func (mo *PropertyCollector) CreatePropertyCollector(
+	_this *do.ManagedObjectReference,
+) (*PropertyCollector, error) {
+
+	return nil, nil
+
+}
+
+//
+// Destroys this PropertyCollector.
+//
+// A PropertyCollector that was created by
+// CreatePropertyCollector is automatically destroyed when the
+// session on which it was created is closed. This method can be used to
+// destroy them explicitly.
+//
+//
+// An automatically created PropertyCollector provided by a service
+// is not session specific and may not be destroyed.
+//
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 4.1
+//
+func (mo *PropertyCollector) DestroyPropertyCollector(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+// Deprecated.
+// As of vSphere API 4.1, use RetrievePropertiesEx.
+//
+//
+// Retrieves the specified properties of the specified managed objects.
+//
+// This method is similar to creating the filters, receiving the
+// property values, and destroying the filters. The main difference is that
+// the output blends the results from all the filters and reports a given
+// managed object at most once no matter how many filters apply.
+//
+//
+// The filter creation step can throw all of the same faults as CreateFilter.
+//
+//
+// Required Privileges
+// System.Anonymous
+//
+func (mo *PropertyCollector) RetrieveProperties(
+	_this *do.ManagedObjectReference, specSet []*do.PropertyFilterSpec,
+) ([]*ObjectContent, error) {
+
+	return nil, nil
+
+}
+
+//
+// Retrieves the specified properties of the specified managed objects.
+//
+// This method is similar to creating the filters, receiving the
+// property values, and destroying the filters. The main difference is that
+// the output blends the results from all the filters and reports a given
+// managed object at most once no matter how many filters apply.
+//
+//
+// The filter creation step can throw all of the same faults as CreateFilter.
+//
+//
+// Required Privileges
+// System.Anonymous
+// Since
+// vSphere API 4.1
+//
+func (mo *PropertyCollector) RetrievePropertiesEx(
+	_this *do.ManagedObjectReference, specSet []*do.PropertyFilterSpec, options *do.RetrieveOptions,
+) (*RetrieveResult, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of vSphere API 4.1, use WaitForUpdatesEx.
+//
+//
+// Calculate the set of updates for each existing filter in the session,
+// returning when at least one filter has updates.
+//
+// Required Privileges
+// System.View
+//
+func (mo *PropertyCollector) WaitForUpdates(
+	_this *do.ManagedObjectReference, version string,
+) (*UpdateSet, error) {
+
+	return nil, nil
+
+}
+
+//
+// Calculate the set of updates for each existing filter in the session.
+//
+// WaitForUpdatesEx may return only partial update
+// calculations. See truncated for a
+// more detailed explanation. WaitForUpdatesEx may also return null
+// after a timeout, either as requested by maxWaitSeconds or due to PropertyCollector
+// policy.
+//
+//
+// If an application uses waitForUpdatesEx it is strongly recommended
+// that it not make concurrent calls to WaitForUpdates, CheckForUpdates, or WaitForUpdatesEx in the same
+// session. Concurrent calls may cause suspended change calculations to be
+// discarded.
+//
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 4.1
+//
+func (mo *PropertyCollector) WaitForUpdatesEx(
+	_this *do.ManagedObjectReference, version string, options *do.WaitOptions,
+) (*UpdateSet, error) {
+
+	return nil, nil
+
+}
+
+//
 // The PropertyFilter managed object type defines a filter
 // that controls the properties for which a PropertyCollector detects
 // incremental changes.  Filters are subordinate objects; they are part of the PropertyCollector and do not have independent lifetimes.  A Filter
@@ -3190,10 +12730,44 @@ type PropertyFilter struct {
 	PartialUpdates bool
 
 	// Specifications for this filter.
-	Spec *PropertyFilterSpec
+	Spec *do.PropertyFilterSpec
+}
+
+//
+// Destroys this filter.
+//
+// This operation can be called explicitly, or it can take place
+// implicitly when the session that created the filter is closed.
+//
+//
+// Required Privileges
+// None
+//
+func (mo *PropertyFilter) DestroyPropertyFilter(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
 }
 
 type ResourcePlanningManager struct {
+}
+
+//
+// Estimates the database size required to store VirtualCenter data.
+//
+//
+//
+// Required Privileges
+// System.Read
+//
+func (mo *ResourcePlanningManager) EstimateDatabaseSize(
+	_this *do.ManagedObjectReference, dbSizeParam *do.DatabaseSizeParam,
+) (*DatabaseSizeEstimate, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -3335,10 +12909,10 @@ type ResourcePool struct {
 
 	// The resource configuration of all direct children (VirtualMachine and
 	// ResourcePool) of this resource group.
-	ChildConfiguration []*ResourceConfigSpec
+	ChildConfiguration []*do.ResourceConfigSpec
 
 	// Configuration of this resource pool.
-	Config *ResourceConfigSpec
+	Config *do.ResourceConfigSpec
 
 	// The ComputeResource to which this set of one or more nested resource pools
 	// belong.
@@ -3360,7 +12934,7 @@ type ResourcePool struct {
 	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
 	// an empty string for the version parameter. Any other version value will not
 	// produce any property values as no updates are generated.
-	Runtime *ResourcePoolRuntimeInfo
+	Runtime *do.ResourcePoolRuntimeInfo
 
 	// Basic information about a resource pool.
 	//
@@ -3371,10 +12945,380 @@ type ResourcePool struct {
 	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
 	// an empty string for the version parameter. Any other version value will not
 	// produce any property values as no updates are generated.
-	Summary *ResourcePoolSummary
+	Summary *do.ResourcePoolSummary
 
 	// The set of virtual machines associated with this resource pool.
 	Vm []*VirtualMachine
+}
+
+//
+// Creates a new virtual machine in a vApp container.
+//
+// This method supports creating a virtual machine directly in a vApp. A
+// virtual  machine in a vApp is not associated with a VM folder and therefore
+// cannot be created using the method on a Folder.
+//
+//
+// This method can only be called directly on a vApp
+// or on a resource pool that is a child of a vApp.
+//
+//
+// The privilege VirtualMachine.Inventory.Create is required on this entity. Further,
+// if this is a resource pool, the privilege Resource.AssignVMToPool is required. If
+// this is a vApp, the privilege VApp.AssignVM is required.
+//
+//
+// Depending on the properties of the virtual machine bring created, additional
+// privileges may be required. See CreateVM_Task for a description of
+// these privileges.
+//
+//
+// Required Privileges
+// VirtualMachine.Inventory.Create
+// Since
+// vSphere API 4.0
+//
+func (mo *ResourcePool) CreateChildVM_Task(
+	_this *do.ManagedObjectReference, config *do.VirtualMachineConfigSpec, host *mo.HostSystem,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Creates a new resource pool.
+//
+// In the ResourceConfigSpec, all values in ResourceAllocationInfo must be supplied;
+// they are not optional.
+//
+//
+// Any % (percent) character used in this name parameter must be escaped, unless it
+// is used to start an escape sequence. Clients may also escape any other characters
+// in this name parameter.
+//
+//
+// Required Privileges
+// Resource.CreatePool
+//
+func (mo *ResourcePool) CreateResourcePool(
+	_this *do.ManagedObjectReference, name string, spec *do.ResourceConfigSpec,
+) (*ResourcePool, error) {
+
+	return nil, nil
+
+}
+
+//
+// Creates a new vApp container.
+//
+// Any % (percent) character used in this name parameter must be escaped, unless it
+// is used to start an escape sequence. Clients may also escape any other characters
+// in this name parameter.
+//
+//
+// Required Privileges
+// VApp.Create
+// Since
+// vSphere API 4.0
+//
+func (mo *ResourcePool) CreateVApp(
+	_this *do.ManagedObjectReference, name string, resSpec *do.ResourceConfigSpec, configSpec *do.VAppConfigSpec, vmFolder *mo.Folder,
+) (*VirtualApp, error) {
+
+	return nil, nil
+
+}
+
+//
+// Removes all child resource pools recursively. All virtual machines and vApps
+// associated with the child resource pools get associated with this resource pool.
+//
+//
+// Note that resource pools contained in child vApps are not affected.
+//
+//
+//
+// The privilege checks performed are the following.
+//
+//
+//
+//
+// • Resource.DeletePool privilege must be held on this object and each of it's
+// immediate children to be destroyed.
+//
+// • If VMs are being moved, the privilege Resource.AssignVMToPool must be held
+// on this resource pool as well as on any virtual machines being moved.
+//
+// • If vApps are being moved, the privilege Resource.AssignVAppToPool
+// must be held on this resource pool as well as on any vApps being
+// moved.
+//
+//
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *ResourcePool) DestroyChildren(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Creates a new entity in this resource pool. The import process consists of two
+// steps:
+//
+//
+// • Create the VMs and/or vApps that make up the entity.
+//
+// • Upload virtual disk contents.
+//
+//
+// In step 1, the client must wait for the server to create all inventory
+// objects. It does that by monitoring the state
+// property on the HttpNfcLease object returned from this call.
+// When the server is done creating objects, the lease will change to the
+// ready state, and step 2 begins. If an error occurs while the server is
+// creating inventory objects, the lease will change to the error state, and
+// the import process is aborted.
+//
+//
+// In step 2, the client uploads disk contents using the URLs provided in the
+// info property of the lease. The client must call
+// HttpNfcLeaseProgress on the lease periodically to keep the
+// lease alive and report progress to the server. Failure to do so will cause
+// the lease to time out, and the import process will be aborted.
+//
+//
+//
+// When the client is done uploading disks, it completes the lease by calling
+// HttpNfcLeaseComplete. The client can also abort the import
+// process by calling HttpNfcLeaseAbort.
+//
+//
+//
+// If the import process fails, is aborted, or times out, all created inventory
+// objects are removed, including all virtual disks.
+//
+//
+//
+// This operation only works if the folder's childType includes VirtualMachine.
+//
+//
+// Depending on the properties of the virtual machine bring imported, additional
+// privileges may be required. See CreateVM_Task for a description of
+// these privileges.
+//
+//
+// Required Privileges
+// VApp.Import
+// Since
+// vSphere API 4.0
+//
+func (mo *ResourcePool) ImportVApp(
+	_this *do.ManagedObjectReference, spec *do.ImportSpec, folder *mo.Folder, host *mo.HostSystem,
+) (*HttpNfcLease, error) {
+
+	return nil, nil
+
+}
+
+//
+// Moves a set of resource pools, vApps or virtual machines into this pool.  The
+// pools, vApps and virtual machines must be part of the cluster or standalone
+// host that contains this pool.
+//
+// For each entity being moved, the move is subject to the following privilege
+// checks:
+//
+//
+//
+// • If the object being moved is a ResourcePool, then Resource.MovePool must be
+// held on the pool being moved and it's former parent pool or vApp. If the
+// target is a vApp, the privilege VApp.AssignResourcePool must be held on
+// it. If the target is a ResourcePool, Resource.MovePool must be held on it.
+//
+//
+// • If the object being moved is a VirtualApp, VApp.Move must be held on
+// the vApp being moved and it's former parent pool or vApp. If the target
+// entity is a resource pool, Resource.AssignVAppToPool must be held on the
+// target. If the target is a vApp, the privilege VApp.AssignVApp must
+// be held on the target vApp.
+//
+//
+// • If the object being moved is a VirtualMachine, then if the target is a
+// ResourcePool, Resource.AssignVMToPool is required on the VirtualMachine and the
+// target pool.  If the target is a vApp, VApp.AssignVM is required on both
+// the VirtualMachine and the target pool.
+//
+//
+//
+//
+//
+// This operation is typically used by clients when they implement a drag-and-drop
+// interface to move a set of objects into a folder.
+//
+//
+// This operation is only transactional with respect to each individual entity.
+// The set of entities is moved sequentially, as specified in the list,
+// and committed one at a time. If a failure is detected, then the method
+// terminates with an exception.
+//
+//
+// The root resource pool cannot be moved.
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *ResourcePool) MoveIntoResourcePool(
+	_this *do.ManagedObjectReference, list []*mo.ManagedEntity,
+) error {
+
+	return nil
+
+}
+
+//
+// Get a value range and default values for ResourceConfigSpec.
+//
+// Required Privileges
+// Resource.EditPool
+// Since
+// vSphere API 4.1
+//
+func (mo *ResourcePool) QueryResourceConfigOption(
+	_this *do.ManagedObjectReference,
+) (*ResourceConfigOption, error) {
+
+	return nil, nil
+
+}
+
+//
+// Refreshes the resource usage data that is available in
+// ResourcePoolRuntimeInfo.
+// The latest runtime resource usage of this resource pool may not be
+// available immediately after operations that alter resource usage,
+// such as powering on a virtual machine. Invoke this method when resource
+// usage may have recently changed, and the most up-to-date value in the
+// ResourcePoolRuntimeInfo is needed.
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 4.1
+//
+func (mo *ResourcePool) RefreshRuntime(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Adds an existing virtual machine to this resource pool or vApp.
+//
+// This operation only works for vApps or resource pools that are children of
+// vApps. To register a VM in a folder, see RegisterVM_Task.
+//
+//
+// Any % (percent) character used in this name parameter must be escaped, unless it
+// is used to start an escape sequence. Clients may also escape any other characters
+// in this name parameter.
+//
+// In addition to the VirtualMachine.Inventory.Register privilege, it
+// requires System.Read privilege on the datastore that the existing virtual
+// machine resides on.
+//
+//
+// Required Privileges
+// VirtualMachine.Inventory.Register
+// Since
+// vSphere API 4.0
+//
+func (mo *ResourcePool) RegisterChildVM_Task(
+	_this *do.ManagedObjectReference, path string, name string, host *mo.HostSystem,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Changes resource configuration of a set of children of this resource pool. The
+// method allows bulk modifications of the set of the direct children
+// (virtual machines and resource pools).
+//
+// Bulk modifications are not transactional. Each modification is made individually.
+// If a failure is encountered while applying the changes, then the processing stops,
+// meaning at least one and as many as all of the changes are not applied.
+//
+//
+// A set can include a subset of the resources. Children that are not
+// mentioned in the list are not changed.
+//
+//
+// For each ResourceConfigSpec, the following privilege checks apply:
+//
+//
+//
+// • If the ResourceConfigSpec refers to a child resource pool or a child
+// vApp, the privileges required are the same as would be required for
+// calling UpdateConfig on that entity.
+//
+// • If the ResourceConfigSpec refers to a virtual machine,
+// VirtualMachine.Config.Resource must be held on the virtual machine.
+//
+//
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *ResourcePool) UpdateChildResourceConfiguration(
+	_this *do.ManagedObjectReference, spec []*do.ResourceConfigSpec,
+) error {
+
+	return nil
+
+}
+
+//
+// Updates the configuration of the resource pool.
+//
+// Any % (percent) character used in this name parameter must be escaped, unless it
+// is used to start an escape sequence. Clients may also escape any other characters
+// in this name parameter.
+//
+//
+// The privilege checks for this operation are as follows:
+//
+//
+//
+// • If this is a resource pool, the privilege Resource.EditPool is required on
+// this and on the parent pool or vApp.
+//
+// • If this is a vApp, the privilege VApp.ResourceConfig is required on
+// this and on the parent pool or vApp.
+//
+//
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *ResourcePool) UpdateConfig(
+	_this *do.ManagedObjectReference, name string, config *do.ResourceConfigSpec,
+) error {
+
+	return nil
+
 }
 
 //
@@ -3384,7 +13328,50 @@ type ScheduledTask struct {
 	*ExtensibleManagedObject
 
 	// Information about the current scheduled task.
-	Info *ScheduledTaskInfo
+	Info *do.ScheduledTaskInfo
+}
+
+//
+// Reconfigures the scheduled task properties.
+//
+// Required Privileges
+// ScheduledTask.Edit
+//
+func (mo *ScheduledTask) ReconfigureScheduledTask(
+	_this *do.ManagedObjectReference, spec *do.ScheduledTaskSpec,
+) error {
+
+	return nil
+
+}
+
+//
+// Removes the scheduled task.
+//
+// Required Privileges
+// ScheduledTask.Delete
+//
+func (mo *ScheduledTask) RemoveScheduledTask(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Runs the scheduled task immediately.
+// The schedule for future runs remains in effect.
+//
+// Required Privileges
+// ScheduledTask.Run
+//
+func (mo *ScheduledTask) RunScheduledTask(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
 }
 
 //
@@ -3393,10 +13380,74 @@ type ScheduledTask struct {
 type ScheduledTaskManager struct {
 
 	// Static descriptive strings used in scheduled tasks.
-	Description *ScheduledTaskDescription
+	Description *do.ScheduledTaskDescription
 
 	// All available scheduled tasks.
 	ScheduledTask []*ScheduledTask
+}
+
+//
+// Creates a scheduled task.
+//
+// Required Privileges
+// None
+// Since
+// vSphere API 4.0
+//
+func (mo *ScheduledTaskManager) CreateObjectScheduledTask(
+	_this *do.ManagedObjectReference, obj *do.ManagedObjectReference, spec *do.ScheduledTaskSpec,
+) (*ScheduledTask, error) {
+
+	return nil, nil
+
+}
+
+//
+// Creates a scheduled task.
+//
+// Required Privileges
+// None
+//
+func (mo *ScheduledTaskManager) CreateScheduledTask(
+	_this *do.ManagedObjectReference, entity *mo.ManagedEntity, spec *do.ScheduledTaskSpec,
+) (*ScheduledTask, error) {
+
+	return nil, nil
+
+}
+
+//
+// Available scheduled tasks defined on the entity.
+//
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *ScheduledTaskManager) RetrieveEntityScheduledTask(
+	_this *do.ManagedObjectReference, entity *mo.ManagedEntity,
+) ([]*ScheduledTask, error) {
+
+	return nil, nil
+
+}
+
+//
+// Available scheduled tasks defined on the object.
+//
+//
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 4.0
+//
+func (mo *ScheduledTaskManager) RetrieveObjectScheduledTask(
+	_this *do.ManagedObjectReference, obj *do.ManagedObjectReference,
+) ([]*ScheduledTask, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -3411,6 +13462,155 @@ type ScheduledTaskManager struct {
 // matches the search criteria, that object is not returned.
 //
 type SearchIndex struct {
+}
+
+//
+// Finds all virtual machines or hosts by DNS name. The DNS name for a virtual
+// machine is the one returned from VMware tools, hostName.
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 4.0
+//
+func (mo *SearchIndex) FindAllByDnsName(
+	_this *do.ManagedObjectReference, datacenter *mo.Datacenter, dnsName string, vmSearch bool,
+) ([]*ManagedEntity, error) {
+
+	return nil, nil
+
+}
+
+//
+// Finds all virtual machines or hosts by IP address, where the IP address is
+// in dot-decimal notation. For example, 10.17.12.12. The IP address for a virtual
+// machine is the one returned from VMware tools, ipAddress.
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 4.0
+//
+func (mo *SearchIndex) FindAllByIp(
+	_this *do.ManagedObjectReference, datacenter *mo.Datacenter, ip string, vmSearch bool,
+) ([]*ManagedEntity, error) {
+
+	return nil, nil
+
+}
+
+//
+// Finds all virtual machines or hosts by UUID.
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 4.0
+//
+func (mo *SearchIndex) FindAllByUuid(
+	_this *do.ManagedObjectReference, datacenter *mo.Datacenter, uuid string, vmSearch bool, instanceUuid bool,
+) ([]*ManagedEntity, error) {
+
+	return nil, nil
+
+}
+
+//
+// Finds a virtual machine by its location on a datastore.
+//
+// Required Privileges
+// System.View
+//
+func (mo *SearchIndex) FindByDatastorePath(
+	_this *do.ManagedObjectReference, datacenter *mo.Datacenter, path string,
+) (*VirtualMachine, error) {
+
+	return nil, nil
+
+}
+
+//
+// Finds a virtual machine or host by DNS name. The DNS name for a virtual
+// machine is the one returned from VMware tools, hostName.
+//
+// Required Privileges
+// System.View
+//
+func (mo *SearchIndex) FindByDnsName(
+	_this *do.ManagedObjectReference, datacenter *mo.Datacenter, dnsName string, vmSearch bool,
+) (*ManagedEntity, error) {
+
+	return nil, nil
+
+}
+
+//
+// Finds a managed entity based on its location in the inventory. The path is
+// separated by slashes ('/'). For example, a path should be of the form
+// "My Folder/My Datacenter/vm/Discovered VM/VM1". A leading slash or trailing
+// slash is ignored. Thus, the following paths all represents the same object:
+// "a/b", "/a/b", "a/b/", and '/a/b/'. Slashes in names must be represented using
+// %2f, following the standard URL syntax. Any object in the inventory can be
+// retrieved using this method, including resource pools and hosts.
+//
+// Required Privileges
+// System.View
+//
+func (mo *SearchIndex) FindByInventoryPath(
+	_this *do.ManagedObjectReference, inventoryPath string,
+) (*ManagedEntity, error) {
+
+	return nil, nil
+
+}
+
+//
+// Finds a virtual machine or host by IP address, where the IP address is in
+// dot-decimal notation. For example, 10.17.12.12. The IP address for a virtual
+// machine is the one returned from VMware tools, ipAddress.
+//
+// Required Privileges
+// System.View
+//
+func (mo *SearchIndex) FindByIp(
+	_this *do.ManagedObjectReference, datacenter *mo.Datacenter, ip string, vmSearch bool,
+) (*ManagedEntity, error) {
+
+	return nil, nil
+
+}
+
+//
+// Finds a virtual machine or host by BIOS or instance UUID.
+//
+// Required Privileges
+// System.View
+//
+func (mo *SearchIndex) FindByUuid(
+	_this *do.ManagedObjectReference, datacenter *mo.Datacenter, uuid string, vmSearch bool, instanceUuid bool,
+) (*ManagedEntity, error) {
+
+	return nil, nil
+
+}
+
+//
+// Finds a particular child based on a managed entity
+// name. This only searches the immediate children of a managed entity.
+// For a Datacenter, the host and vm folders are
+// considered children. For a ComputeResource,
+// the hosts and root ResourcePool are considered
+// children.
+//
+// Required Privileges
+// System.View
+//
+func (mo *SearchIndex) FindChild(
+	_this *do.ManagedObjectReference, entity *mo.ManagedEntity, name string,
+) (*ManagedEntity, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -3509,7 +13709,7 @@ type SearchIndex struct {
 type ServiceInstance struct {
 
 	// API-wide capabilities.
-	Capability *Capability
+	Capability *do.Capability
 
 	// The properties of the ServiceInstance managed object. The content property
 	// is identical to the return value from the
@@ -3521,7 +13721,7 @@ type ServiceInstance struct {
 	// the ServiceInstance would require calling
 	// the RetrieveServiceContent method,
 	// and then invoking a second traversal to continue.)
-	Content *ServiceContent
+	Content *do.ServiceContent
 
 	// Contains the time most recently obtained from the server.
 	// The time is not necessarily current. This property is intended for use
@@ -3532,6 +13732,93 @@ type ServiceInstance struct {
 	// You should not rely on the serverClock property to get the current time
 	// on the server; instead, use the CurrentTime method.
 	ServerClock time.Time
+}
+
+//
+// Returns the current time on the server. To monitor non-linear time changes,
+// use the serverClock property.
+//
+// Required Privileges
+// System.View
+//
+func (mo *ServiceInstance) CurrentTime(
+	_this *do.ManagedObjectReference,
+) (time.Time, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of vSphere API 4.0, use
+// QueryVMotionCompatibilityEx_Task instead.
+//
+//
+// Investigates the general VMotion compatibility of a virtual machine with
+// a set of hosts. The virtual machine may be in any power state. Hosts
+// may be in any connection state and also may be in maintenance mode.
+//
+// Required Privileges
+// Resource.QueryVMotion
+//
+func (mo *ServiceInstance) QueryVMotionCompatibility(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, host []*mo.HostSystem, compatibility []string,
+) ([]*HostVMotionCompatibility, error) {
+
+	return nil, nil
+
+}
+
+//
+// Component information for bundled products
+//
+// Required Privileges
+// System.Anonymous
+// Since
+// VI API 2.5
+//
+func (mo *ServiceInstance) RetrieveProductComponents(
+	_this *do.ManagedObjectReference,
+) ([]*ProductComponentInfo, error) {
+
+	return nil, nil
+
+}
+
+//
+// Retrieves the properties of the service instance.
+//
+// Required Privileges
+// System.Anonymous
+//
+func (mo *ServiceInstance) RetrieveServiceContent(
+	_this *do.ManagedObjectReference,
+) (*ServiceContent, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of vSphere API 4.0, use VirtualMachineProvisioningChecker
+// instead.
+//
+//
+// Checks the validity of a set of proposed migrations. A migration
+// is the act of changing the assigned execution host of a virtual
+// machine, which can result from invoking
+// MigrateVM_Task or
+// RelocateVM_Task.
+//
+// Required Privileges
+// System.View
+//
+func (mo *ServiceInstance) ValidateMigration(
+	_this *do.ManagedObjectReference, vm []*mo.VirtualMachine, state *enum.VirtualMachinePowerState, testType []string, pool *mo.ResourcePool, host *mo.HostSystem,
+) ([]*Event, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -3547,7 +13834,26 @@ type ServiceInstance struct {
 type ServiceManager struct {
 
 	// The full list of services available in this directory.
-	Service []*ServiceManagerServiceInfo
+	Service []*do.ServiceManagerServiceInfo
+}
+
+//
+// A query interface that returns a list of services that match certain criteria.
+// Besides a basic service name entry, an arbitrary list of matching locations
+// can also be specified. The location array is assumed to be a list of AND expressions,
+// ie, all locations must match for an entry to be considered a match.
+//
+// Regular expressions are not allowed in the query service.
+//
+// Required Privileges
+// Global.ServiceManagers
+//
+func (mo *ServiceManager) QueryServiceList(
+	_this *do.ManagedObjectReference, serviceName string, location []string,
+) ([]*ServiceManagerServiceInfo, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -3559,7 +13865,7 @@ type SessionManager struct {
 
 	// This property contains information about the client's current session.
 	// If the client is not logged on, the value is null.
-	CurrentSession *UserSession
+	CurrentSession *do.UserSession
 
 	// This is the default server locale.
 	DefaultLocale string
@@ -3571,7 +13877,7 @@ type SessionManager struct {
 	MessageLocaleList []string
 
 	// The list of currently active sessions.
-	SessionList []*UserSession
+	SessionList []*do.UserSession
 
 	// Provides the list of locales that the server supports.
 	// Listing a locale ensures that some standardized information such as dates appear
@@ -3579,6 +13885,363 @@ type SessionManager struct {
 	// are displayed, if available. If localized information is not available, the
 	// message is returned using the system locale.
 	SupportedLocaleList []string
+}
+
+//
+// Acquire a session-specific ticket string which can be used to clone
+// the current session. The caller of this operation can pass the ticket
+// value to another entity on the client. The recipient can then call
+// CloneSession with the ticket string on an unauthenticated
+// session and avoid having to re-enter credentials.
+//
+// The ticket may only be used once and becomes invalid after use. The
+// ticket is also invalidated when the corresponding session is closed or
+// expires.  The ticket is only valid on the server which issued it.
+//
+//
+// This sequence of operations is conceptually similar to the
+// functionality provided by AcquireLocalTicket, however the
+// methods can be used by remote clients and do not require a shared
+// filesystem for transport.See CloneSession
+//
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 4.0
+//
+func (mo *SessionManager) AcquireCloneTicket(
+	_this *do.ManagedObjectReference,
+) (string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Creates and returns a one-time credential that may be used to make the
+// specified request.
+//
+// Required Privileges
+// System.Anonymous
+// Since
+// vSphere API 5.0
+//
+func (mo *SessionManager) AcquireGenericServiceTicket(
+	_this *do.ManagedObjectReference, spec *do.SessionManagerServiceRequestSpec,
+) (*SessionManagerGenericServiceTicket, error) {
+
+	return nil, nil
+
+}
+
+//
+// Acquires a one-time ticket for mutual authentication between a server and client.
+//
+// The caller of this operation can use the user name and file content of
+// the returned object as the userName and password arguments for login
+// operation.  The local ticket that is returned becomes invalid either
+// after it is used or after a server-determined ticket expiration time
+// passes. This operation can be used by servers and clients to avoid
+// re-entering user credentials after authentication by the operating
+// system has already happened.
+//
+//
+// For example, service console utilities that connect to a host agent
+// should not require users to re-enter their passwords every time the
+// utilities run. Since the one-time password file is readable only by
+// the given user, the identity of the one-time password user is protected
+// by the operating system file permission.
+//
+//
+// Only local clients are allowed to call this operation. Remote clients
+// receive an InvalidRequest fault upon calling this operation.
+//
+//
+// Required Privileges
+// System.Anonymous
+//
+func (mo *SessionManager) AcquireLocalTicket(
+	_this *do.ManagedObjectReference, userName string,
+) (*SessionManagerLocalTicket, error) {
+
+	return nil, nil
+
+}
+
+//
+// Clone the session specified by the clone ticket and associate it with
+// the current connection. The current session will take on the identity
+// and authorization level of the UserSession associated with the
+// specified cloning ticket.See AcquireCloneTicketSee AcquireGenericServiceTicket
+//
+// Required Privileges
+// System.Anonymous
+// Since
+// vSphere API 4.0
+//
+func (mo *SessionManager) CloneSession(
+	_this *do.ManagedObjectReference, cloneTicket string,
+) (*UserSession, error) {
+
+	return nil, nil
+
+}
+
+//
+// Converts current session to impersonate the specified user.
+// The current session will take on the identity and authorization level of
+// the user. That user must have a currently-active session.
+// If the given userName is an extension key and this key does
+// not overlap with a user name of any currently-active session, it will
+// take on the identity and  authorization level of that extension provided
+// the current session has the same authorization level of that extension.
+//
+// Required Privileges
+// Sessions.ImpersonateUser
+// Since
+// VI API 2.5
+//
+func (mo *SessionManager) ImpersonateUser(
+	_this *do.ManagedObjectReference, userName string, locale string,
+) (*UserSession, error) {
+
+	return nil, nil
+
+}
+
+//
+// Log on to the server.  This method fails if the user name and password are
+// incorrect, or if the user is valid but has no permissions granted.
+//
+// Required Privileges
+// System.Anonymous
+//
+func (mo *SessionManager) Login(
+	_this *do.ManagedObjectReference, userName string, password string, locale string,
+) (*UserSession, error) {
+
+	return nil, nil
+
+}
+
+//
+// Log on to the server using SSPI pass-through authentication.
+//
+// This method provides support for passing credentials of the calling
+// process to the server without using a password, by leveraging the
+// Windows Security Support Provider Interface (SSPI) library.
+//
+//
+// If the function is not supported, this throws a NotSupported fault.
+//
+//
+// The client first calls AcquireCredentialsHandle().  If Kerberos is
+// used, this should include the desired credential to pass.  The client then
+// calls InitializeSecurityContext().  The resulting partially-formed
+// context is passed in Base-64 encoded form to this method.
+//
+//
+// If the context has been successfully formed, the server proceeds with
+// login and behaves like Login.  If further
+// negotiation is needed, the server throws an SSPIChallenge fault with
+// a challenge token, which the client should again pass to
+// InitializeSecurityContext(), followed by calling this method again.
+//
+//
+// For more information, see the MSDN documentation on SSPI.
+//
+//
+// Required Privileges
+// System.Anonymous
+// Since
+// VI API 2.5
+//
+func (mo *SessionManager) LoginBySSPI(
+	_this *do.ManagedObjectReference, base64Token string, locale string,
+) (*UserSession, error) {
+
+	return nil, nil
+
+}
+
+//
+// Log on to the server through token representing principal identity.
+// The token is obtained from SSO (single sign-on) service. This method
+// fails if the token is not valid, or the principal has no permissions
+// granted. Two type of sso tokens are supported by this method: Bearer
+// and Holder-of-Key (HoK). If the token type obliges the method caller
+// to prove his rights to present this token (HoK), then a signature is
+// supplied as well. The token and the security signature if available
+// are provided in a transport specific way.
+//
+//
+// If the communication with the VirtualCenter is SOAP based read the
+// WS-Security specification (SAML Token profile) to understand how
+// to transport the SSO token and signature.
+//
+//
+//
+// Usual login scenario:
+//
+//
+// • Acquire HoK token from the SSO service. Different authentication
+// mechanisms are available for acquiring token (user/password,
+// certificate, SSPI and so on). For more details consult the SSO
+// documentation. To find the location of your SSO service consult the
+// Virtual Infrastructure documentation.
+//
+//
+//
+// • Once SSO token is acquired successfully LoginByToken could be
+// invoked.
+//
+//
+//
+//
+// Required Privileges
+// System.Anonymous
+// Since
+// vSphere API 5.1
+//
+func (mo *SessionManager) LoginByToken(
+	_this *do.ManagedObjectReference, locale string,
+) (*UserSession, error) {
+
+	return nil, nil
+
+}
+
+//
+// Creates a special privileged session that includes
+// the Sessions.ImpersonateUser privilege. Requires that the client connect
+// over SSL and provide an X.509 certificate for which they hold the private key.
+// The certificate must match the certificate used in an earlier call to
+// SetExtensionCertificate.
+//
+// NOTE: Verification of the received certificate (such as expiry, revocation,
+// and trust chain) is not required for successful authentication using
+// this method.  If certificate verification is desired, use the
+// LoginExtensionBySubjectName method instead.
+//
+//
+// Required Privileges
+// System.Anonymous
+// Since
+// vSphere API 4.0
+//
+func (mo *SessionManager) LoginExtensionByCertificate(
+	_this *do.ManagedObjectReference, extensionKey string, locale string,
+) (*UserSession, error) {
+
+	return nil, nil
+
+}
+
+//
+// Creates a special privileged session that includes
+// the Sessions.ImpersonateUser privilege. Requires that the extension connected
+// using SSL, with a certificate that has a subject name that matches the subject
+// name registered for the extension.
+//
+// As of vSphere API 4.0, the NotFound fault is no longer thrown.  Instead, InvalidLogin
+// is thrown if the specified extension is not registered.
+//
+//
+// Required Privileges
+// System.Anonymous
+// Since
+// vSphere API 4.0
+//
+func (mo *SessionManager) LoginExtensionBySubjectName(
+	_this *do.ManagedObjectReference, extensionKey string, locale string,
+) (*UserSession, error) {
+
+	return nil, nil
+
+}
+
+//
+// Log out and terminate the current session.
+//
+// Required Privileges
+// System.View
+//
+func (mo *SessionManager) Logout(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Validates that a currently-active session exists with the specified
+// sessionID and userName associated with it. Returns true
+// if session exists.
+//
+// Required Privileges
+// Sessions.ValidateSession
+// Since
+// VI API 2.5
+//
+func (mo *SessionManager) SessionIsActive(
+	_this *do.ManagedObjectReference, sessionID string, userName string,
+) (bool, error) {
+
+	return nil, nil
+
+}
+
+//
+// Sets the session locale.
+//
+// Required Privileges
+// System.View
+//
+func (mo *SessionManager) SetLocale(
+	_this *do.ManagedObjectReference, locale string,
+) error {
+
+	return nil
+
+}
+
+//
+// Log off and terminate the provided list of sessions.
+//
+// This method is only transactional for each session ID. The set of sessions
+// are terminated sequentially, as specified in the list. If a failure
+// occurs, for example, because of an unknown sessionID, the method aborts with
+// an exception. When the method aborts, any sessions that have not yet been
+// terminated are left in their unterminated state.
+//
+//
+// Required Privileges
+// Sessions.TerminateSession
+//
+func (mo *SessionManager) TerminateSession(
+	_this *do.ManagedObjectReference, sessionId []string,
+) error {
+
+	return nil
+
+}
+
+//
+// Updates the system global message. If not blank, the message is immediately
+// displayed to currently logged-on users. When set, the message is shown by new
+// clients upon logging in.
+//
+// Required Privileges
+// Sessions.GlobalMessage
+//
+func (mo *SessionManager) UpdateServiceMessage(
+	_this *do.ManagedObjectReference, message string,
+) error {
+
+	return nil
+
 }
 
 //
@@ -3590,10 +14253,25 @@ type SessionManager struct {
 type SimpleCommand struct {
 
 	// The encoding type used in the result.
-	EncodingType *SimpleCommandEncoding
+	EncodingType *enum.SimpleCommandEncoding
 
 	// A description of the service.
-	Entity *ServiceManagerServiceInfo
+	Entity *do.ServiceManagerServiceInfo
+}
+
+//
+// The single function execution point for this simple command. The actual effects of
+// this command depend upon the service handler registered for this instance.
+//
+// Required Privileges
+// Global.ServiceManagers
+//
+func (mo *SimpleCommand) ExecuteSimpleCommand(
+	_this *do.ManagedObjectReference, arguments []string,
+) (string, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -3614,10 +14292,10 @@ type StoragePod struct {
 	*Folder
 
 	// Storage DRS related attributes of the Storage Pod.
-	PodStorageDrsEntry *PodStorageDrsEntry
+	PodStorageDrsEntry *do.PodStorageDrsEntry
 
 	// Storage pod summary.
-	Summary *StoragePodSummary
+	Summary *do.StoragePodSummary
 }
 
 //
@@ -3628,6 +14306,284 @@ type StorageResourceManager struct {
 }
 
 //
+// Applies a recommendation from the recommendation list. Each recommendation can be
+// applied only once. In the case of CreateVm and CloneVm a VirtualMachine is returned.
+// Other workflows don't have a return value.
+//
+// Requires Resource.ApplyRecommendation privilege on the storage pod.
+// Additionally, depending on the workflow where this API is called from, it may require
+// the privileges of invoking one of following APIs:
+//
+//
+//
+// • CreateVm CreateVM_Task
+//
+// • AddDisk ReconfigVM_Task
+//
+// • RelocateVm RelocateVM_Task
+//
+// • CloneVm CloneVM_Task
+//
+//
+//
+//
+//
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 5.0
+//
+func (mo *StorageResourceManager) ApplyStorageDrsRecommendation_Task(
+	_this *do.ManagedObjectReference, key []string,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Applies a recommendation from the recommendation list. Each recommendation can be
+// applied only once.
+//
+// Requires Resource.ApplyRecommendation privilege on the storage pod. And requires
+// Resource.ColdMigrate privilege on the virtual machine(s) that are relocated.
+// Additionally requires Resource.HotMigrate privilege if the virtual machine is
+// powered on (for Storage VMotion). Also requires Datastore.AllocateSpace on any
+// datastore the virtual machine or its disks are relocated to.
+//
+//
+//
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 5.0
+//
+func (mo *StorageResourceManager) ApplyStorageDrsRecommendationToPod_Task(
+	_this *do.ManagedObjectReference, pod *mo.StoragePod, key string,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Cancels a recommendation. Currently only initial placement
+// recommendations can be cancelled. Migration recommendations cannot.
+//
+//
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 5.0
+//
+func (mo *StorageResourceManager) CancelStorageDrsRecommendation(
+	_this *do.ManagedObjectReference, key []string,
+) error {
+
+	return nil
+
+}
+
+//
+// Changes configuration of storage I/O resource management for a given datastore.
+// The changes are applied to all the backing storage devices for the datastore.
+// Currently we only support storage I/O resource management on VMFS volumes.
+// In order to enable storage I/O resource management on a datstore, we require
+// that all the hosts that are attached to the datastore support this feature.
+//
+// This method is only supported by vCenter server.
+//
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *StorageResourceManager) ConfigureDatastoreIORM_Task(
+	_this *do.ManagedObjectReference, datastore *mo.Datastore, spec *do.StorageIORMConfigSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Change the storage DRS configuration for a pod StoragePod.
+//
+//
+//
+// Required Privileges
+// None
+// Since
+// vSphere API 5.0
+//
+func (mo *StorageResourceManager) ConfigureStorageDrsForPod_Task(
+	_this *do.ManagedObjectReference, pod *mo.StoragePod, spec *do.StorageDrsConfigSpec, modify bool,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Returns datastore summary performance statistics.
+//
+// This is an experimental interface that is not intended for
+// use in production code.
+//
+//
+//
+//
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 5.1
+//
+func (mo *StorageResourceManager) QueryDatastorePerformanceSummary(
+	_this *do.ManagedObjectReference, datastore *mo.Datastore,
+) ([]*StoragePerformanceSummary, error) {
+
+	return nil, nil
+
+}
+
+//
+// Query configuration options for storage I/O resource management.
+//
+//
+//
+// Required Privileges
+// Datastore.Config
+//
+func (mo *StorageResourceManager) QueryIORMConfigOption(
+	_this *do.ManagedObjectReference, host *mo.HostSystem,
+) (*StorageIORMConfigOption, error) {
+
+	return nil, nil
+
+}
+
+//
+//
+// This method returns a StoragePlacementResult object.
+//
+// This API is intended to replace the following existing APIs for
+// SDRS-enabled pods:
+//
+// CreateVm: StoragePlacementSpec::type == create =
+// CreateVM_Task
+//
+// AddDisk: StoragePlacementSpec::type == reconfigure =
+// ReconfigVM_Task
+//
+// RelocateVm: StoragePlacementSpec::type == relocate =
+// RelocateVM_Task
+//
+// CloneVm: StoragePlacementSpec::type == clone =
+// CloneVM_Task
+//
+// The PodSelectionSpec parameter in StoragePlacementSpec is required
+// for all workflows. It specifies which SDRS-enabled pod the user
+// has selected for the VM and/or for each disk.
+//
+// For CreateVm, RelocateVm and CloneVm, PodSelectionSpec.storagePod is
+// the user selected SDRS pod for the VM, i.e., its system files.
+//
+// For all workflows, PodSelectionSpec.disk.storagePod is the
+// user selected SDRS pod for the given disk. Note that a
+// DiskLocator must be specified for each disk that the user
+// requests to create, migrate or clone into an SDRS pod, even if it's
+// the same pod as the VM or the user has manually selected a datastore
+// within the pod. If the user has manually selected a datastore, the
+// datastore must be specified in the workflow specific fields as described below.
+//
+// For CreateVm and AddDisk, the manually selected datastore must be specified in
+// ConfigSpec.files or ConfigSpec.deviceChange.device.backing.datastore, the fields
+// should will be unset if the user wants SDRS to recommend the datastore.
+// For RelocateVm, the manually selected datastore must be specified in
+// RelocateSpec.datastore or RelocateSpec.disk.datastore; the fields should be
+// unset iff the user wants SDRS recommendations. For CloneVm, the manually selected
+// datastore must be specified in CloneSpec.location.datastore or
+// CloneSpec.location.disk[].datastore; the fields should be unset
+// iff the user wants SDRS recommendations.
+//
+// The remaining expected input parameters in StoragePlacementSpec
+// will be the same as those for the existing API as determined by
+// StoragePlacementSpec::type. If a parameter is optional in the
+// existing API, it will also be optional in the new API.
+//
+//
+//
+//
+// •
+// For CreateVm, the Folder, ConfigSpec, ResourcePool and HostSystem
+// parameters will be expected in StoragePlacementSpec. The disks
+// to be created can be determined by ConfigSpec -&gt;
+// VirtualDeviceSpec[] (deviceChange) -&gt; VirtualDevice (device) -&gt;
+// VirtualDisk (subclass).
+//
+// •
+// For AddDisk, the VirtualMachine and ConfigSpec parameters will
+// be expected. The use of the ConfigSpec for determining the disks
+// to add will be the same as that in CreateVm.
+//
+// •
+// For RelocateVm, the VirtualMachine, RelocateSpec and
+// MovePriority parameters will be expected.
+//
+// •
+// For CloneVm, the VirtualMachine, CloneSpec, Folder and cloneName
+// parameters will be expected.
+//
+//
+//
+//
+// SDRS takes into account constraints such as space usages,
+// (anti-) affinity rules, datastore maintenance mode, etc. when
+// making placement recommendations. Given that the constraints are
+// satisfied, SDRS tries to balance space usages and I/O loads in
+// the placement.
+//
+//
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 5.0
+//
+func (mo *StorageResourceManager) RecommendDatastores(
+	_this *do.ManagedObjectReference, storageSpec *do.StoragePlacementSpec,
+) (*StoragePlacementResult, error) {
+
+	return nil, nil
+
+}
+
+//
+// Make Storage DRS invoke again on the specified pod StoragePod
+// and return a new list of recommendations. Concurrent "refresh" requests may be combined
+// together and trigger only one Storage DRS invocation.
+//
+//
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 5.0
+//
+func (mo *StorageResourceManager) RefreshStorageDrsRecommendation(
+	_this *do.ManagedObjectReference, pod *mo.StoragePod,
+) error {
+
+	return nil
+
+}
+
+//
 // A task is used to monitor and potentially cancel long
 // running operations.
 //
@@ -3635,7 +14591,90 @@ type Task struct {
 	*ExtensibleManagedObject
 
 	// Detailed information about this task.
-	Info *TaskInfo
+	Info *do.TaskInfo
+}
+
+//
+// Cancels a running or queued task.  A task may only be canceled if it is
+// cancelable.  Multiple cancel requests will be treated as a single
+// cancelation request.  Canceling a completed or already canceled task
+// will throw an InvalidState exception.
+//
+// If a task is canceled, its runtime state will be set to error and its
+// error state will be set to RequestCanceled.
+//
+//
+// A cancel operation is asynchronous.  The operation may return before
+// the task is canceled.
+//
+//
+// Required Privileges
+// Global.CancelTask
+//
+func (mo *Task) CancelTask(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Updates task description to describe the current phase of the task.
+//
+//
+//
+// Required Privileges
+// Task.Update
+// Since
+// vSphere API 4.0
+//
+func (mo *Task) SetTaskDescription(
+	_this *do.ManagedObjectReference, description *do.LocalizableMessage,
+) error {
+
+	return nil
+
+}
+
+//
+// Sets task state and optionally sets results or fault,
+// as appropriate for state
+//
+//
+//
+// Required Privileges
+// Task.Update
+// Since
+// VI API 2.5
+//
+func (mo *Task) SetTaskState(
+	_this *do.ManagedObjectReference, state *enum.TaskInfoState, result interface{}, fault *fault.MethodFault,
+) error {
+
+	return nil
+
+}
+
+//
+// Sets percentage done for this task and recalculates overall
+// percentage done. If a percentDone value of less than zero or
+// greater than 100 is specified, a value of zero or 100
+// respectively is used.
+//
+//
+//
+// Required Privileges
+// Task.Update
+// Since
+// VI API 2.5
+//
+func (mo *Task) UpdateProgress(
+	_this *do.ManagedObjectReference, percentDone int32,
+) error {
+
+	return nil
+
 }
 
 //
@@ -3654,7 +14693,43 @@ type TaskHistoryCollector struct {
 	//
 	// The "oldest task" is the one with the oldest creation time. The
 	// tasks in the returned page are unordered.
-	LatestPage []*TaskInfo
+	LatestPage []*do.TaskInfo
+}
+
+//
+// Reads the 'scrollable view' from the current position. The scrollable
+// position is moved to the next newer page after the read. No item is
+// returned when the end of the collector is reached.
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *TaskHistoryCollector) ReadNextTasks(
+	_this *do.ManagedObjectReference, maxCount int32,
+) ([]*TaskInfo, error) {
+
+	return nil, nil
+
+}
+
+//
+// Reads the 'scrollable view' from the current position. The scrollable
+// position is then moved to the next older page after the read. No item is
+// returned when the head of the collector is reached.
+//
+//
+//
+// Required Privileges
+// None
+//
+func (mo *TaskHistoryCollector) ReadPreviousTasks(
+	_this *do.ManagedObjectReference, maxCount int32,
+) ([]*TaskInfo, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -3668,7 +14743,7 @@ type TaskManager struct {
 
 	// Locale-specific, static strings that describe Task
 	// information to users.
-	Description *TaskDescription
+	Description *do.TaskDescription
 
 	// Maximum number of TaskHistoryCollector
 	// data objects that can exist concurrently, per client.
@@ -3700,6 +14775,47 @@ type TaskManager struct {
 	// an empty string for the version parameter. Any other version value will not
 	// produce any property values as no updates are generated.
 	RecentTask []*Task
+}
+
+//
+// Creates a TaskHistoryCollector, a
+// specialized HistoryCollector that gathers
+// TaskInfo data objects.
+//
+// A TaskHistoryCollector does not persist
+// beyond the current client session.
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *TaskManager) CreateCollectorForTasks(
+	_this *do.ManagedObjectReference, filter *do.TaskFilterSpec,
+) (*TaskHistoryCollector, error) {
+
+	return nil, nil
+
+}
+
+//
+// Creates a new Task, specifying the object with which
+// the Task is associated, the type of task,
+// and whether the task is cancelable. Use this operation in conjunction
+// with the ExtensionManager.
+//
+//
+//
+// Required Privileges
+// Task.Create
+// Since
+// VI API 2.5
+//
+func (mo *TaskManager) CreateTask(
+	_this *do.ManagedObjectReference, obj *do.ManagedObjectReference, taskTypeId string, initiatedBy string, cancelable bool, parentTaskKey string,
+) (*TaskInfo, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -3740,6 +14856,53 @@ type UserDirectory struct {
 }
 
 //
+// Returns a list of UserSearchResult objects describing the
+// users and groups defined for the server.
+//
+//
+// • On Windows, the search for users and groups is restricted to
+// the given domain. If you omit the domain argument, then
+// the search is performed on local users and groups.
+//
+// • On ESX Server (or Linux systems), the method returns the list
+// of users and groups that are specified in the /etc/passwd file.
+// If the password file contains Sun NIS or NIS+ users and groups,
+// the returned list includes information about those as well.
+//
+//
+//
+//
+// You must hold the Authorization.ModifyPermissions privilege to invoke this
+// method. If you hold the privilege on any ManagedEntity, you will
+// have access to user and group information for the server.
+//
+//
+//
+//
+//
+// As of vSphere API 5.1:
+// •  Local user groups on ESXi are not supported and this method will
+// not return information about local groups on the ESXi host.
+// Information about Active Directory groups is not affected.
+//
+// •  Some special system users on ESXi like 'nfsnobody' and 'daemon'
+// will be filtered out by this method.
+//
+//
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *UserDirectory) RetrieveUserGroups(
+	_this *do.ManagedObjectReference, domain string, searchStr string, belongsToGroup string, belongsToUser string, exactMatch bool, findUsers bool, findGroups bool,
+) ([]*UserSearchResult, error) {
+
+	return nil, nil
+
+}
+
+//
 // View is the base class for session-specific view objects.
 // A view is a mechanism that supports selection of objects on the server
 // and subsequently, access to those objects.
@@ -3771,6 +14934,20 @@ type UserDirectory struct {
 //
 //
 type View struct {
+}
+
+//
+// Destroy this view.
+//
+// Required Privileges
+// System.View
+//
+func (mo *View) DestroyView(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
 }
 
 //
@@ -3850,6 +15027,72 @@ type ViewManager struct {
 }
 
 //
+// Create a ContainerView managed object for this session.  The method returns
+// a reference to a ContainerView object that has a list of managed object references.
+// The list references objects in the container and may include references to objects from
+// additional containers. You can configure the resulting list of objects by specifying
+// a type list and recursion. Once you have created the view, the object list always
+// represents the current configuration of the virtual environment and reflects any
+// subsequent changes that occur.
+//
+// Required Privileges
+// System.View
+//
+func (mo *ViewManager) CreateContainerView(
+	_this *do.ManagedObjectReference, container *mo.ManagedEntity, type_ []string, recursive bool,
+) (*ContainerView, error) {
+
+	return nil, nil
+
+}
+
+//
+// Create a new InventoryView managed object for this session.
+//
+// Required Privileges
+// System.View
+//
+func (mo *ViewManager) CreateInventoryView(
+	_this *do.ManagedObjectReference,
+) (*InventoryView, error) {
+
+	return nil, nil
+
+}
+
+//
+// Create a ListView object for this session.  The method returns
+// a session object that has a list of managed object references. The list
+// of references corresponds to the input object list.
+// You can modify the resulting list after you have created the object.
+//
+// Required Privileges
+// System.View
+//
+func (mo *ViewManager) CreateListView(
+	_this *do.ManagedObjectReference, obj []*do.ManagedObjectReference,
+) (*ListView, error) {
+
+	return nil, nil
+
+}
+
+//
+// Create a ListView object for this session. This method uses an existing
+// view to construct the object list for the new view.
+//
+// Required Privileges
+// System.View
+//
+func (mo *ViewManager) CreateListViewFromView(
+	_this *do.ManagedObjectReference, view *mo.View,
+) (*ListView, error) {
+
+	return nil, nil
+
+}
+
+//
 // Represents a multi-tiered software solution. A vApp is a collection of
 // virtual machines (and potentially other vApp containers) that are operated and
 // monitored as a unit. From a manage perspective, a multi-tiered vApp acts a
@@ -3899,7 +15142,7 @@ type VirtualApp struct {
 	// List of linked children.
 	//
 	// Since vSphere API 4.1
-	ChildLink []*VirtualAppLinkInfo
+	ChildLink []*do.VirtualAppLinkInfo
 
 	// A collection of references to the subset of datastore objects used by this
 	// vApp.
@@ -3920,7 +15163,241 @@ type VirtualApp struct {
 	ParentVApp *ManagedEntity
 
 	// Configuration of this package.
-	VAppConfig *VAppConfigInfo
+	VAppConfig *do.VAppConfigInfo
+}
+
+//
+// Creates a clone of this vApp.
+//
+// Any % (percent) character used in this name parameter must be escaped, unless it
+// is used to start an escape sequence. Clients may also escape any other characters
+// in this name parameter.
+//
+//
+// When invoking this method, the following privilege checks occur:
+//
+//
+//
+// • The privilege VApp.Clone is required on this vApp.
+//
+// • If the target is a resource pool, the privilege
+// Resource.AssignVAppToPool is required on it.
+//
+// • If the target is a vApp, the privileges VApp.Clone and
+// VApp.AssignVApp are required on it.
+//
+//
+//
+// Additional privileges are required by the clone spec provided. See VAppCloneSpec for details.
+//
+// Required Privileges
+// VApp.Clone
+//
+func (mo *VirtualApp) CloneVApp_Task(
+	_this *do.ManagedObjectReference, name string, target *mo.ResourcePool, spec *do.VAppCloneSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Obtains an export lease on this vApp. The export lease contains a list
+// of URLs for the disks of the virtual machines in this vApp, as well as
+// a ticket that gives access to these URLs.
+//
+// See HttpNfcLease for information on how to use the lease.
+//
+//
+// Required Privileges
+// VApp.Export
+//
+func (mo *VirtualApp) ExportVApp(
+	_this *do.ManagedObjectReference,
+) (*HttpNfcLease, error) {
+
+	return nil, nil
+
+}
+
+//
+// Stops this vApp.
+//
+// The virtual machines (or child vApps) will be stopped in the order
+// specified in the vApp configuration, if force is false. If force is set
+// to true, all virtual machines are powered-off (in no specific order and
+// possibly in parallel) regardless of the vApp auto-start configuration.
+//
+//
+// While a vApp is stopping, all power operations performed on sub entities are
+// disabled through the VIM API. They will throw TaskInProgress.
+//
+//
+// Required Privileges
+// VApp.PowerOff
+//
+func (mo *VirtualApp) PowerOffVApp_Task(
+	_this *do.ManagedObjectReference, force bool,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Starts this vApp.
+//
+// The virtual machines (or sub vApps) will be started in the order
+// specified in the vApp configuration. If the vApp is suspended
+// (@see vim.VirtualApp.Summary.suspended), all suspended virtual machines
+// will be powered-on based on the defined start-up order.
+//
+//
+// While a vApp is starting, all power operations performed on sub entities are
+// disabled through the VIM API. They will throw TaskInProgress.
+//
+//
+// In case of a failure to power-on a virtual machine, the exception from the virtual
+// machine power on is returned, and the power-on sequence will be terminated. In
+// case of a failure, virtual machines that are already started will remain
+// powered-on.
+//
+//
+//
+//
+// Required Privileges
+// VApp.PowerOn
+//
+func (mo *VirtualApp) PowerOnVApp_Task(
+	_this *do.ManagedObjectReference,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Suspends this vApp.
+//
+// Suspends all powered-on virtual machines in a vApp, including virtual machines
+// in child vApps. The virtual machines are suspended in the same order as
+// used for a power-off operation (reverse power-on sequence).
+//
+//
+// While a vApp is being suspended, all power operations performed on sub entities
+// are disabled through the VIM API. They will throw TaskInProgress.
+//
+//
+// Required Privileges
+// VApp.Suspend
+// Since
+// vSphere API 4.1
+//
+func (mo *VirtualApp) SuspendVApp_Task(
+	_this *do.ManagedObjectReference,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Removes this vApp from the inventory without removing
+// any of the virtual machine's files on disk. All high-level information
+// stored with the management server (ESX Server or VirtualCenter) is
+// removed, including information such as vApp configuration, statistics,
+// permissions, and alarms.
+//
+//
+//
+// Required Privileges
+// VApp.Unregister
+//
+func (mo *VirtualApp) UnregisterVApp_Task(
+	_this *do.ManagedObjectReference,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of vSphere API 5.1.
+//
+//
+// Reconfigure the set of linked children.
+//
+// A VirtualMachine and vApp can be added as a linked child as long as it
+// is not a direct child of another vApp. In case it is a linked child, the
+// existing link is removed and replaced with the new link specified in this
+// call.
+//
+//
+// An InvalidArgument fault is thrown if a link target is a direct child
+// of another vApp, or if the addition of the link will result in a vApp
+// with a cycle. For example, a vApp cannot be linked to itself.
+//
+//
+// The removeSet must refer to managed entities that are currently linked
+// children. Otherwise, an InvalidArgument exception is thrown.
+//
+//
+// For each entity being linked, the operation is subject to the following privilege
+// checks:
+//
+//
+//
+// • If the object being linked is a vApp, VApp.Move must be held on
+// the vApp being linked and its former parent vApp (if any). The privilege
+// VApp.AssignVApp must be held on this vApp.
+//
+//
+// • If the object being linked is a VirtualMachine, VApp.AssignVM is required on
+// both the target vApp, the VirtualMachine, and its former parent vApp (if any).
+//
+//
+//
+//
+//
+// Privilege checks for each entity in the removeSet are similar to the entities
+// in the addChangeSet, except that there is no target vApp.
+//
+//
+// This operation is only transactional with respect to each individual link change.
+// The changes are processed sequentially and committed one at a time. The
+// addChangeSet is processed first, followed by the removeSet. If a failure is
+// detected, then the method terminates with an exception.
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+// Since
+// vSphere API 4.1
+//
+func (mo *VirtualApp) UpdateLinkedChildren(
+	_this *do.ManagedObjectReference, addChangeSet []*do.VirtualAppLinkInfo, removeSet []*mo.ManagedEntity,
+) error {
+
+	return nil
+
+}
+
+//
+// Updates the vApp configuration.
+//
+// Updates in different areas require different privileges. See
+// VAppConfigSpec for a full description.
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *VirtualApp) UpdateVAppConfig(
+	_this *do.ManagedObjectReference, spec *do.VAppConfigSpec,
+) error {
+
+	return nil
+
 }
 
 //
@@ -3960,6 +15437,376 @@ type VirtualDiskManager struct {
 }
 
 //
+// Copy a virtual disk, performing conversions as specified in the spec.
+//
+// If source (or destination) name is specified as a URL, then the
+// corresponding datacenter parameter may be omitted.
+//
+//
+// If source and destination resolve to the same file system location,
+// the call has no effect, regardless of destSpec content.
+//
+//
+// Requires Datastore.FileManagement privilege on both source and destination
+// datastores.
+//
+//
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *VirtualDiskManager) CopyVirtualDisk_Task(
+	_this *do.ManagedObjectReference, sourceName string, sourceDatacenter *mo.Datacenter, destName string, destDatacenter *mo.Datacenter, destSpec *do.VirtualDiskSpec, force bool,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Create a virtual disk.
+//
+// The datacenter parameter may be omitted if a URL is used to name the disk.
+//
+//
+// Requires Datastore.FileManagement privilege on the datastore where the
+// virtual disk is created.
+//
+//
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *VirtualDiskManager) CreateVirtualDisk_Task(
+	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter, spec *do.VirtualDiskSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Defragment a sparse virtual disk.
+// This is defragmentation of the virtual disk file(s) in the host operating
+// system, not defragmentation of the guest operating system filesystem inside
+// the virtual disk.
+//
+// The datacenter parameter may be omitted if a URL is used to name the disk.
+//
+//
+// Requires Datastore.FileManagement privilege on the datastore where the
+// virtual disk resides.
+//
+//
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *VirtualDiskManager) DefragmentVirtualDisk_Task(
+	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Delete a virtual disk.  All files relating to the disk
+// will be deleted.
+//
+// The datacenter parameter may be omitted if a URL is used to name the disk.
+//
+//
+// Requires Datastore.FileManagement privilege on the datastore where the
+// virtual disk is removed.
+//
+//
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *VirtualDiskManager) DeleteVirtualDisk_Task(
+	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Explicitly zero out unaccessed parts zeroedthick disk.
+// Effectively a no-op if the disk is already eagerZeroedThick.
+// Unlike zeroFillVirtualDisk, which wipes the entire disk, this
+// operation only affects previously unaccessed parts of the disk.
+//
+// The datacenter parameter may be omitted if a URL is used to name the disk.
+//
+//
+// Requires Datastore.FileManagement privilege on the datastore where the
+// virtual disk resides.
+//
+//
+//
+//
+// Required Privileges
+// System.View
+// Since
+// vSphere API 4.0
+//
+func (mo *VirtualDiskManager) EagerZeroVirtualDisk_Task(
+	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Expand the capacity of a virtual disk to the new capacity.
+//
+// If the eagerZero flag is not specified,
+// - the extended disk region of a zerothick disk will be zeroedthick
+// - the extended disk region of a eagerzerothick disk will be eagerzeroedthick
+// - a thin-provisioned disk will always be extended as a thin-provisioned disk.
+//
+// If the eagerZero flag TRUE, the extended region of the disk will
+// always be eagerly zeroed.
+//
+// If the eagerZero flag FALSE, the extended region of a zeroedthick or
+// eagerzeroedthick the disk will not be eagerly zeroed. This condition has
+// no effect on a thin source disk.
+//
+//
+// The datacenter parameter may be omitted if a URL is used to name the disk.
+//
+//
+// Requires Datastore.FileManagement privilege on the datastore where the
+// virtual disk resides.
+//
+//
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *VirtualDiskManager) ExtendVirtualDisk_Task(
+	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter, newCapacityKb int64, eagerZero bool,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Inflate a sparse or thin-provisioned virtual disk up to the full size.
+// Additional space allocated to the disk as a result of this operation
+// will be filled with zeroes.
+//
+// The datacenter parameter may be omitted if a URL is used to name the disk.
+//
+//
+// Requires Datastore.FileManagement privilege on the datastore where the
+// virtual disk resides.
+//
+//
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *VirtualDiskManager) InflateVirtualDisk_Task(
+	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Move a virtual disk and all related files from the source location specified
+// by sourceName and sourceDatacenter to the destination
+// location specified by destName and destDatacenter.
+//
+// If source (or destination) name is specified as a URL, then the
+// corresponding datacenter parameter may be omitted.
+//
+//
+// If source and destination resolve to the same file system location,
+// the call has no effect.
+//
+//
+// Requires Datastore.FileManagement privilege on both source and destination
+// datastores.
+//
+//
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *VirtualDiskManager) MoveVirtualDisk_Task(
+	_this *do.ManagedObjectReference, sourceName string, sourceDatacenter *mo.Datacenter, destName string, destDatacenter *mo.Datacenter, force bool, profile []*do.VirtualMachineProfileSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Return the percentage of fragmentation of the sparse virtual disk.
+// This is the fragmentation of virtual disk file(s) in the host operating
+// system, not the fragmentation of the guest operating systemS filesystem
+// inside the virtual disk.
+//
+// The datacenter parameter may be omitted if a URL is used to name the disk.
+//
+//
+// Requires Datastore.FileManagement privilege on the datastore where the
+// virtual disk resides.
+//
+//
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *VirtualDiskManager) QueryVirtualDiskFragmentation(
+	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter,
+) (int32, error) {
+
+	return nil, nil
+
+}
+
+//
+// Get the disk geometry information for the virtual disk.
+//
+// The datacenter parameter may be omitted if a URL is used to name the disk.
+//
+//
+// Requires Datastore.FileManagement privilege on the datastore where the
+// virtual disk resides.
+//
+//
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *VirtualDiskManager) QueryVirtualDiskGeometry(
+	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter,
+) (*HostDiskDimensionsChs, error) {
+
+	return nil, nil
+
+}
+
+//
+// Get the virtual disk SCSI inquiry page 0x83 data.
+//
+// The datacenter parameter may be omitted if a URL is used to name the disk.
+//
+//
+// Requires Datastore.FileManagement privilege on the datastore where the
+// virtual disk resides.
+//
+//
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *VirtualDiskManager) QueryVirtualDiskUuid(
+	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter,
+) (string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Set the virtual disk SCSI inquiry page 0x83 data.
+//
+// The datacenter parameter may be omitted if a URL is used to name the disk.
+//
+//
+// Requires Datastore.FileManagement privilege on the datastore where the
+// virtual disk resides.
+//
+//
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *VirtualDiskManager) SetVirtualDiskUuid(
+	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter, uuid string,
+) error {
+
+	return nil
+
+}
+
+//
+// Shrink a sparse virtual disk.
+//
+// The datacenter parameter may be omitted if a URL is used to name the disk.
+//
+//
+// The optional parameter copy specifies whether to shrink the
+// disk in copy-shrink mode or in-place mode. In copy-shrink mode,
+// additional space is required, but will result in a shrunk disk that is
+// also defragmented. In-place shrink does not require additional space,
+// but will increase fragmentation. The default behavior is to perform
+// copy-shrink if the parameter is not specified.
+//
+//
+// Requires Datastore.FileManagement privilege on the datastore where the
+// virtual disk resides.
+//
+//
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *VirtualDiskManager) ShrinkVirtualDisk_Task(
+	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter, copy bool,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Overwrite all blocks of the virtual disk with zeros.
+// All data will be lost.
+//
+// The datacenter parameter may be omitted if a URL is used to name the disk.
+//
+//
+// Requires Datastore.FileManagement privilege on the datastore where the
+// virtual disk resides.
+//
+//
+//
+//
+// Required Privileges
+// System.View
+//
+func (mo *VirtualDiskManager) ZeroFillVirtualDisk_Task(
+	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
 // VirtualMachine is the managed object type for manipulating virtual machines,
 // including templates that can be deployed (repeatedly) as new virtual machines.
 // This type provides methods for configuring and controlling a virtual machine.
@@ -3980,7 +15827,7 @@ type VirtualMachine struct {
 	*ManagedEntity
 
 	// Information about the runtime capabilities of this virtual machine.
-	Capability *VirtualMachineCapability
+	Capability *do.VirtualMachineCapability
 
 	// Configuration of this virtual machine, including the name and UUID.
 	//
@@ -3992,7 +15839,7 @@ type VirtualMachine struct {
 	// if the server is unable to access the virtual machine files on disk,
 	// and is often also unavailable during the initial phases of
 	// virtual machine creation.
-	Config *VirtualMachineConfigInfo
+	Config *do.VirtualMachineConfigInfo
 
 	// A collection of references to the subset of datastore objects in the datacenter
 	// that is used by this virtual machine.
@@ -4010,7 +15857,7 @@ type VirtualMachine struct {
 	// operating system information reflects the last known state of the virtual machine.
 	// For powered on machines, this is current information. For powered off machines,
 	// this is the last recorded state before the virtual machine was powered off.
-	Guest *GuestInfo
+	Guest *do.GuestInfo
 
 	// The guest heartbeat.
 	// The heartbeat status is classified as:
@@ -4022,7 +15869,7 @@ type VirtualMachine struct {
 	//
 	// The guest heartbeat is a statistics metric. Alarms can be configured on
 	// this metric to trigger emails or other actions.
-	GuestHeartbeatStatus *ManagedEntityStatus
+	GuestHeartbeatStatus *enum.ManagedEntityStatus
 
 	// Deprecated.
 	// As of vSphere API 4.0, use layoutEx instead.
@@ -4037,7 +15884,7 @@ type VirtualMachine struct {
 	//
 	//
 	// Detailed information about the files that comprise this virtual machine.
-	Layout *VirtualMachineFileLayout
+	Layout *do.VirtualMachineFileLayout
 
 	// Detailed information about the files that comprise this virtual machine.
 	//
@@ -4052,7 +15899,7 @@ type VirtualMachine struct {
 	// produce any property values as no updates are generated.
 	//
 	// Since vSphere API 4.0
-	LayoutEx *VirtualMachineFileLayoutEx
+	LayoutEx *do.VirtualMachineFileLayoutEx
 
 	// A collection of references to the subset of network objects in the datacenter that
 	// is used by this virtual machine.
@@ -4074,7 +15921,7 @@ type VirtualMachine struct {
 	//
 	// To change the configuration, use
 	// UpdateChildResourceConfiguration.
-	ResourceConfig *ResourceConfigSpec
+	ResourceConfig *do.ResourceConfigSpec
 
 	// The current resource pool that specifies resource allocation
 	// for this virtual machine.
@@ -4098,7 +15945,7 @@ type VirtualMachine struct {
 	// the virtual machine's power state changes.
 	// an execution message is pending.
 	// an event occurs.
-	Runtime *VirtualMachineRuntimeInfo
+	Runtime *do.VirtualMachineRuntimeInfo
 
 	// Current snapshot and tree.
 	// The property is valid if snapshots have been created
@@ -4111,7 +15958,7 @@ type VirtualMachine struct {
 	// RemoveSnapshot_Task
 	// RevertToSnapshot_Task
 	// RemoveAllSnapshots_Task
-	Snapshot *VirtualMachineSnapshotInfo
+	Snapshot *do.VirtualMachineSnapshotInfo
 
 	// Storage space used by the virtual machine, split by datastore.
 	// Can be explicitly refreshed by the RefreshStorageInfo operation.
@@ -4125,7 +15972,7 @@ type VirtualMachine struct {
 	// produce any property values as no updates are generated.
 	//
 	// Since vSphere API 4.0
-	Storage *VirtualMachineStorageInfo
+	Storage *do.VirtualMachineStorageInfo
 
 	// Basic information about this virtual machine. This includes:
 	//
@@ -4134,7 +15981,1267 @@ type VirtualMachine struct {
 	// basic configuration
 	// alarms
 	// performance information
-	Summary *VirtualMachineSummary
+	Summary *do.VirtualMachineSummary
+}
+
+// Deprecated.
+// As of vSphere API 4.1, use AcquireTicket instead.
+//
+//
+// Creates and returns a one-time credential used in establishing a
+// remote mouse-keyboard-screen connection to this virtual
+// machine.
+//
+// The correct function of this method depends on being able to
+// retrieve TCP binding information about the server end of the
+// client connection that is requesting the ticket. If such
+// information is not available, the NotSupported fault is thrown.
+// This method is appropriate for SOAP and authenticated connections,
+// which are both TCP-based connections.
+//
+// Required Privileges
+// VirtualMachine.Interact.ConsoleInteract
+//
+func (mo *VirtualMachine) AcquireMksTicket(
+	_this *do.ManagedObjectReference,
+) (*VirtualMachineMksTicket, error) {
+
+	return nil, nil
+
+}
+
+//
+// Creates and returns a one-time credential used in establishing a
+// specific connection to this virtual machine, for example, a ticket
+// type of mks can be used to establish a remote mouse-keyboard-screen
+// connection.
+//
+// A client using this ticketing mechanism must have network
+// connectivity to the ESX server where the virtual machine is running,
+// and the ESX server must be reachable to the management client from
+// the address made available to the client via the ticket.
+//
+//
+// Acquiring a virtual machine ticket requires different privileges
+// depending on the types of ticket:
+//
+//
+//
+// • VirtualMachine.Interact.DeviceConnection if requesting a device
+// ticket.
+//
+// • VirtualMachine.Interact.GuestControl if requesting a guestControl
+// ticket.
+//
+// • VirtualMachine.Interact.ConsoleInteract if requesting an mks
+// ticket.
+//
+//
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+// Since
+// vSphere API 4.1
+//
+func (mo *VirtualMachine) AcquireTicket(
+	_this *do.ManagedObjectReference, ticketType string,
+) (*VirtualMachineTicket, error) {
+
+	return nil, nil
+
+}
+
+//
+// Responds to a question that is blocking this virtual machine.
+//
+// Required Privileges
+// VirtualMachine.Interact.AnswerQuestion
+//
+func (mo *VirtualMachine) AnswerVM(
+	_this *do.ManagedObjectReference, questionId string, answerChoice string,
+) error {
+
+	return nil
+
+}
+
+//
+// Checks the customization specification against the virtual machine configuration.
+// For example, this is used on a source virtual machine before a clone operation to
+// catch customization failure before the disk copy. This checks the specification's
+// internal consistency as well as for compatibility with this virtual machine's
+// configuration.
+//
+// Required Privileges
+// VirtualMachine.Provisioning.Customize
+//
+func (mo *VirtualMachine) CheckCustomizationSpec(
+	_this *do.ManagedObjectReference, spec *do.CustomizationSpec,
+) error {
+
+	return nil
+
+}
+
+//
+// Creates a clone of this virtual machine. If the virtual machine
+// is used as a template, this method corresponds to the deploy command.
+//
+// Any % (percent) character used in this name parameter must be escaped, unless it
+// is used to start an escape sequence. Clients may also escape any other characters
+// in this name parameter.
+//
+//
+// The privilege required on the source virtual machine depends on the source
+// and destination types:
+//
+//
+//
+// •  source is virtual machine, destination is virtual machine -
+// VirtualMachine.Provisioning.Clone
+//
+// •  source is virtual machine, destination is template -
+// VirtualMachine.Provisioning.CreateTemplateFromVM
+//
+// •  source is template, destination is virtual machine -
+// VirtualMachine.Provisioning.DeployTemplate
+//
+// •  source is template, destination is template -
+// VirtualMachine.Provisioning.CloneTemplate
+//
+//
+//
+// If customization is requested in the CloneSpec, then the
+// VirtualMachine.Provisioning.Customize privilege must also be
+// held on the source virtual machine.
+//
+// The Resource.AssignVMToPool privilege is also required for the
+// resource pool specified in the CloneSpec, if the destination is not a
+// template.
+// The Datastore.AllocateSpace privilege is required on all datastores
+// where the clone is created.
+//
+//
+// Required Privileges
+// None
+//
+func (mo *VirtualMachine) CloneVM_Task(
+	_this *do.ManagedObjectReference, folder *mo.Folder, name string, spec *do.VirtualMachineCloneSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Consolidate the virtual disk files of the virtual machine by finding hierarchies
+// of redo logs that can be combined without violating data dependency. The
+// redundant redo logs after merging are then deleted.
+//
+// Consolidation improves I/O performance since less number of virtual disk
+// files need to be traversed; it also reduces the storage usage. However
+// additional space is temporarily required to perform the operation. Use EstimateStorageForConsolidateSnapshots_Task to estimate the
+// temporary space required.
+//
+// Consolidation can be I/O intensive, it is advisable to invoke this operation
+// when guest is not under heavy I/O usage.
+//
+// Required Privileges
+// VirtualMachine.State.RemoveSnapshot
+// Since
+// vSphere API 5.0
+//
+func (mo *VirtualMachine) ConsolidateVMDisks_Task(
+	_this *do.ManagedObjectReference,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Create a screen shot of a virtual machine.
+//
+// Required Privileges
+// VirtualMachine.Interact.CreateScreenshot
+// Since
+// vSphere API 4.0
+//
+func (mo *VirtualMachine) CreateScreenshot_Task(
+	_this *do.ManagedObjectReference,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Creates a secondary virtual machine to be part of this fault tolerant group.
+//
+// If a host is specified, the secondary virtual machine will be created on it.
+// Otherwise, a host will be selected by the system.
+//
+//
+// If a FaultToleranceConfigSpec is specified, the virtual machine's
+// configuration files and disks will be created in the specified datastores.
+//
+//
+// If the primary virtual machine (i.e., this virtual machine) is powered on when
+// the secondary is created, an attempt will be made to power on the secondary on
+// a system selected host. If the cluster is a DRS cluster, DRS will be
+// invoked to obtain a placement for the new secondary virtual machine. If the DRS
+// recommendation (see ClusterRecommendation)
+// is automatic, it will be automatically executed. Otherwise, the recommendation will
+// be returned to the caller of this method and the secondary will remain powered off
+// until the recommendation is approved using ApplyRecommendation.
+// Failure to power on the secondary virtual machine will not fail the creation of the secondary.
+//
+//
+// Required Privileges
+// VirtualMachine.Interact.CreateSecondary
+// Since
+// vSphere API 4.0
+//
+func (mo *VirtualMachine) CreateSecondaryVM_Task(
+	_this *do.ManagedObjectReference, host *mo.HostSystem,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Creates a new snapshot of this virtual machine. As a side effect,
+// this updates the current snapshot.
+//
+// Snapshots are not supported for Fault Tolerance primary and secondary
+// virtual machines.
+//
+//
+// Any % (percent) character used in this name parameter must be escaped, unless it
+// is used to start an escape sequence. Clients may also escape any other characters
+// in this name parameter.
+//
+//
+//
+//
+// Required Privileges
+// VirtualMachine.State.CreateSnapshot
+//
+func (mo *VirtualMachine) CreateSnapshot_Task(
+	_this *do.ManagedObjectReference, name string, description string, memory bool, quiesce bool,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Customizes a virtual machine's guest operating system.
+//
+// Required Privileges
+// VirtualMachine.Provisioning.Customize
+//
+func (mo *VirtualMachine) CustomizeVM_Task(
+	_this *do.ManagedObjectReference, spec *do.CustomizationSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Defragment all virtual disks attached to this virtual machine.
+//
+// Required Privileges
+// VirtualMachine.Interact.DefragmentAllDisks
+// Since
+// VI API 2.5
+//
+func (mo *VirtualMachine) DefragmentAllDisks(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Disables the specified secondary virtual machine in this fault tolerant group.
+// The specified secondary will not be automatically started on a subsequent
+// power-on of the primary virtual machine.
+//
+// This operation could leave the primary virtual machine in a non-fault
+// tolerant state.
+//
+// Required Privileges
+// VirtualMachine.Interact.DisableSecondary
+// Since
+// vSphere API 4.0
+//
+func (mo *VirtualMachine) DisableSecondaryVM_Task(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Enables the specified secondary virtual machine in this fault tolerant group.
+//
+// This operation is used to enable a secondary virtual machine that was
+// previously disabled by the DisableSecondaryVM_Task
+// call. The specified secondary will be automatically started whenever the
+// primary is powered on.
+//
+//
+// If the primary virtual machine (i.e., this virtual machine) is powered on when
+// the secondary is enabled, an attempt will be made to power on the secondary. If
+// a host was specified in the method call, this host will be used. If a host is
+// not specified, one will be selected by the system. In the latter case, if the cluster
+// is a DRS cluster, DRS will be invoked to obtain a placement for the new secondary
+// virtual machine. If the DRS recommendation (see ClusterRecommendation)
+// is automatic, it will be executed. Otherwise, the recommendation will be
+// returned to the caller of this method and the secondary will remain powered off
+// until the recommendation is approved using ApplyRecommendation.
+//
+//
+// Required Privileges
+// VirtualMachine.Interact.EnableSecondary
+// Since
+// vSphere API 4.0
+//
+func (mo *VirtualMachine) EnableSecondaryVM_Task(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, host *mo.HostSystem,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Estimate the temporary space required to consolidation disk
+// files. The estimation is a lower bound if the childmost writable disk
+// file will be consolidated for an online virtual machine, it is
+// accurate for all other situations. This is because the space
+// requirement depending on the size of the childmost disk file and how
+// write intensive the guest is.
+//
+// This method can be used prior to invoke consolidation via
+// ConsolidateVMDisks_Task.
+//
+//
+// Required Privileges
+// VirtualMachine.State.RemoveSnapshot
+// Since
+// vSphere API 5.0
+//
+func (mo *VirtualMachine) EstimateStorageForConsolidateSnapshots_Task(
+	_this *do.ManagedObjectReference,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Obtains an export lease on this virtual machine. The export lease contains
+// a list of URLs for the virtual disks for this virtual machine, as well as
+// a ticket giving access to the URLs.
+//
+// See HttpNfcLease for information on how to use the lease.
+//
+//
+// Required Privileges
+// VApp.Export
+// Since
+// vSphere API 4.0
+//
+func (mo *VirtualMachine) ExportVm(
+	_this *do.ManagedObjectReference,
+) (*HttpNfcLease, error) {
+
+	return nil, nil
+
+}
+
+//
+// Returns the OVF environment for a virtual machine. If the virtual machine has no
+// vApp configuration, an empty string is returned. Also, sensitive information
+// is omitted, so this method is not guaranteed to return the complete OVF
+// environment.
+//
+// Required Privileges
+// VApp.ExtractOvfEnvironment
+// Since
+// vSphere API 4.0
+//
+func (mo *VirtualMachine) ExtractOvfEnvironment(
+	_this *do.ManagedObjectReference,
+) (string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Makes the specified secondary virtual machine from this fault tolerant group as
+// the primary virtual machine.
+//
+// Required Privileges
+// VirtualMachine.Interact.MakePrimary
+// Since
+// vSphere API 4.0
+//
+func (mo *VirtualMachine) MakePrimaryVM_Task(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Marks a VirtualMachine object as being used as a template.
+// Note: A VirtualMachine marked as a template cannot be powered on.
+//
+// Required Privileges
+// VirtualMachine.Provisioning.MarkAsTemplate
+//
+func (mo *VirtualMachine) MarkAsTemplate(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Clears the 'isTemplate' flag and reassociates the virtual machine with
+// a resource pool and host.
+//
+// Required Privileges
+// VirtualMachine.Provisioning.MarkAsVM
+//
+func (mo *VirtualMachine) MarkAsVirtualMachine(
+	_this *do.ManagedObjectReference, pool *mo.ResourcePool, host *mo.HostSystem,
+) error {
+
+	return nil
+
+}
+
+//
+// Migrates a virtual machine's execution to a specific resource pool or host.
+//
+// Requires Resource.HotMigrate privilege if the virtual machine is powered on or
+// Resource.ColdMigrate privilege if the virtual machine is powered off or
+// suspended.
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *VirtualMachine) MigrateVM_Task(
+	_this *do.ManagedObjectReference, pool *mo.ResourcePool, host *mo.HostSystem, priority *enum.VirtualMachineMovePriority, state *enum.VirtualMachinePowerState,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Mounts the VMware Tools CD installer as a CD-ROM for the guest operating system.
+// To monitor the status of the tools install, clients should check the tools status,
+// toolsVersionStatus and
+// toolsRunningStatus
+//
+// Required Privileges
+// VirtualMachine.Interact.ToolsInstall
+//
+func (mo *VirtualMachine) MountToolsInstaller(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Powers off this virtual machine.
+//
+//
+// If this virtual machine is a fault tolerant primary virtual machine, this
+// will result in the secondary virtual machine(s) getting powered off as well.
+//
+// Required Privileges
+// VirtualMachine.Interact.PowerOff
+//
+func (mo *VirtualMachine) PowerOffVM_Task(
+	_this *do.ManagedObjectReference,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Powers on this virtual machine. If the virtual machine is suspended,
+// this method resumes execution from the suspend point.
+//
+// When powering on a virtual machine in a cluster, the system might implicitly
+// or due to the host argument, do an implicit relocation of the virtual machine
+// to another host. Hence, errors related to this relocation can be thrown. If the
+// cluster is a DRS cluster, DRS will be invoked if the virtual machine can be
+// automatically placed by DRS (see DrsBehavior).
+// Because this method does not return a DRS ClusterRecommendation, no
+// vmotion nor host power operations will be done as part of a DRS-facilitated power
+// on. To have DRS consider such operations use PowerOnMultiVM_Task.
+// As of vSphere API 5.1, use of this method with vCenter Server is deprecated;
+// use PowerOnMultiVM_Task instead.
+//
+//
+// If this virtual machine is a fault tolerant primary virtual machine, its
+// secondary virtual machines will be started on system-selected
+// hosts. If the virtual machines are in a VMware DRS enabled cluster,
+// then DRS will be invoked to obtain placements for the secondaries but
+// no vmotion nor host power operations will be considered for these power ons.
+//
+//
+// Required Privileges
+// VirtualMachine.Interact.PowerOn
+//
+func (mo *VirtualMachine) PowerOnVM_Task(
+	_this *do.ManagedObjectReference, host *mo.HostSystem,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Promotes disks on this virtual machine that have delta disk backings.
+//
+// A delta disk backing is a way to preserve a virtual disk backing
+// at some point in time.  A delta disk backing is a file backing which in
+// turn points to the original virtual disk backing (the parent).  After a delta
+// disk backing is added, all writes go to the delta disk backing.  All reads
+// first try the delta disk backing and then try the parent backing if needed.
+//
+//
+// Promoting does two things
+//
+//
+// •
+// If the unlink parameter is true, any disk backing which is shared
+// shared by multiple virtual machines is copied so that this virtual machine
+// has its own unshared version.  Copied files always end up in the virtual
+// machine's home directory.
+//
+//
+// •
+// Any disk backing which is not shared between multiple virtual
+// machines and is not associated with a snapshot is consolidated
+// with its child backing.
+//
+//
+//
+//
+// If the unlink parameter is true, the net effect of this operation is improved
+// read performance, at the cost of disk space.  If the unlink parameter is
+// false the net effect is improved read performance at the cost of inhibiting
+// future sharing.
+//
+//
+// This operation is only supported if
+// deltaDiskBackingsSupported is true.
+//
+//
+// This operation is only supported on VirtualCenter.
+//
+//
+// Required Privileges
+// VirtualMachine.Provisioning.PromoteDisks
+// Since
+// vSphere API 4.0
+//
+func (mo *VirtualMachine) PromoteDisks_Task(
+	_this *do.ManagedObjectReference, unlink bool, disks []*do.VirtualDisk,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Get a list of areas of a virtual disk belonging to this VM that have
+// been modified since a well-defined point in the past. The beginning of
+// the change interval is identified by "changeId", while the end of the
+// change interval is implied by the snapshot ID passed in.
+//
+// Note that the result of this function may contain "false positives"
+// (i.e: flag areas of the disk as modified that are not). However, it is
+// guaranteed that no changes will be missed.
+//
+//
+// Required Privileges
+// VirtualMachine.Provisioning.DiskRandomRead
+// Since
+// vSphere API 4.0
+//
+func (mo *VirtualMachine) QueryChangedDiskAreas(
+	_this *do.ManagedObjectReference, snapshot *mo.VirtualMachineSnapshot, deviceKey int32, startOffset int64, changeId string,
+) (*DiskChangeInfo, error) {
+
+	return nil, nil
+
+}
+
+//
+// This API can be invoked to determine whether a virtual machine is
+// compatible for Fault Tolerance. The API only checks for VM-specific
+// factors that impact compatibility for Fault Tolerance. Other
+// requirements for Fault Tolerance such as host processor compatibility,
+// logging nic configuration and licensing are not covered by this API.
+//
+// The query returns a list of faults, each fault corresponding to a
+// specific incompatibility. If a given virtual machine is
+// compatible for Fault Tolerance, then the fault list returned will be
+// empty.
+//
+// Required Privileges
+// VirtualMachine.Config.QueryFTCompatibility
+// Since
+// vSphere API 4.1
+//
+func (mo *VirtualMachine) QueryFaultToleranceCompatibility(
+	_this *do.ManagedObjectReference,
+) ([]*MethodFault, error) {
+
+	return nil, nil
+
+}
+
+//
+// For all files that belong to the vm, check that the file owner
+// is set to the current datastore principal user, as set by
+// HostDatastoreSystem.ConfigureDatastorePrincipal
+//
+// Required Privileges
+// VirtualMachine.Config.QueryUnownedFiles
+// Since
+// vSphere API 4.0
+//
+func (mo *VirtualMachine) QueryUnownedFiles(
+	_this *do.ManagedObjectReference,
+) ([]string, error) {
+
+	return nil, nil
+
+}
+
+//
+// Issues a command to the guest operating system asking it to perform
+// a reboot.
+// Returns immediately and does not wait for the guest operating system
+// to complete the operation.
+//
+// Required Privileges
+// VirtualMachine.Interact.Reset
+//
+func (mo *VirtualMachine) RebootGuest(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Reconfigures this virtual machine. All the changes in the given configuration
+// are applied to the virtual machine as an atomic operation.
+//
+// Reconfiguring the virtual machine may require any of the following privileges
+// depending on what is being changed:
+//
+//
+//
+// • VirtualMachine.Interact.DeviceConnection if changing the runtime connection
+// state of a device as embodied by the Connectable property.
+//
+// • VirtualMachine.Interact.SetCDMedia if changing the backing of a CD-ROM
+// device
+//
+// • VirtualMachine.Interact.SetFloppyMedia if changing the backing of a
+// floppy device
+//
+// • VirtualMachine.Config.Rename if renaming the virtual machine
+//
+// • VirtualMachine.Config.Annotation if setting annotation a value
+//
+// • VirtualMachine.Config.AddExistingDisk if adding a virtual disk device
+// that is backed by an existing virtual disk file
+//
+// • VirtualMachine.Config.AddNewDisk if adding a virtual disk device for which
+// the backing virtual disk file is to be created
+//
+// • VirtualMachine.Config.RemoveDisk if removing a virtual disk device that
+// refers to a virtual disk file
+//
+// • VirtualMachine.Config.CPUCount if changing the number of CPUs
+//
+// • VirtualMachine.Config.Memory if changing the amount of memory
+//
+// • VirtualMachine.Config.RawDevice if adding, removing or editing a raw
+// device mapping (RDM) or SCSI passthrough device
+//
+// • VirtualMachine.Config.AddRemoveDevice if adding or removing any
+// device other than disk, raw, or USB device
+//
+// • VirtualMachine.Config.EditDevice if changing the settings of any
+// device
+//
+// • VirtualMachine.Config.Settings if changing any basic settings such as
+// those in ToolsConfigInfo, FlagInfo, or DefaultPowerOpInfo
+//
+// • VirtualMachine.Config.Resource if changing resource allocations,
+// affinities, or setting network traffic shaping or virtual disk shares
+//
+// • VirtualMachine.Config.AdvancedConfig if changing values in
+// extraConfig
+//
+// • VirtualMachine.Config.SwapPlacement if changing swapPlacement
+//
+// • VirtualMachine.Config.HostUSBDevice if adding, removing or editing a
+// VirtualUSB device backed by the host USB device.
+//
+// • VirtualMachine.Config.DiskExtend if extending an existing VirtualDisk
+// device.
+//
+// • VirtualMachine.Config.ChangeTracking if enabling/disabling changed
+// block tracking for the virtual machine's disks.
+//
+// • VirtualMachine.Config.MksControl if toggling display connection
+// limits or the guest auto-lock feature.
+//
+// • DVSwitch.CanUse if connecting a VirtualEthernetAdapter to a port
+// in a DistributedVirtualSwitch.
+//
+// • DVPortgroup.CanUse if connecting a VirtualEthernetAdapter to a
+// DistributedVirtualPortgroup.
+//
+//
+//
+// Creating a virtual machine may require the following privileges:
+//
+//
+// • VirtualMachine.Config.RawDevice if adding a raw device
+//
+// • VirtualMachine.Config.AddExistingDisk if adding a VirtualDisk and
+// the fileOperation is unset
+//
+// • VirtualMachine.Config.AddNewDisk if adding a VirtualDisk and
+// the fileOperation is set
+//
+// • VirtualMachine.Config.HostUSBDevice if adding a VirtualUSB device
+// backed by the host USB device.
+//
+//
+//
+// In addition, this operation may require the following privileges:
+//
+//
+// • Datastore.AllocateSpace on any datastore where virtual disks will
+// be created or extended.
+//
+// • Network.Assign on any network the virtual machine will be
+// connected to.
+//
+//
+//
+//
+// Required Privileges
+// Dynamic - See discussion above
+//
+func (mo *VirtualMachine) ReconfigVM_Task(
+	_this *do.ManagedObjectReference, spec *do.VirtualMachineConfigSpec,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Explicitly refreshes the storage information of this virtual machine,
+// updating properties storage, layoutEx
+// and storage.
+//
+// Required Privileges
+// System.Read
+// Since
+// vSphere API 4.0
+//
+func (mo *VirtualMachine) RefreshStorageInfo(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Reloads the configuration for this virtual machine from a given
+// datastore path. This is equivalent to unregistering and registering the
+// virtual machine from a different path. The virtual machine's hardware
+// configuration, snapshots, guestinfo variables etc. will be
+// replaced based on the new configuration file. Other information
+// associated with the virtual machine object, such as events and
+// permissions, will be preserved.
+//
+// This method is only supported on vCenter Server. It can be invoked on
+// inaccessible or orphaned virtual machines, but it cannot be invoked on
+// powered on, connected virtual machines. Both the source virtual machine
+// object and the destination path should be of the same type i.e. virtual
+// machine or template. Reloading a virtual machine with a template or
+// vice-versa is not supported.
+//
+//
+// Note: Since the API replaces the source configuration with that
+// of the destination, if the destination configuration does not refer to a
+// valid virtual machine, it will create an invalid virtual machine object.
+// This API should not be invoked on fault tolerant virtual machines since
+// doing so will leave the original virtual machine's configuration in an
+// invalid state. It is recommended that you turn off fault tolerance before
+// invoking this API.
+//
+//
+//
+//
+// Required Privileges
+// VirtualMachine.Config.ReloadFromPath
+// Since
+// vSphere API 4.1
+//
+func (mo *VirtualMachine) ReloadVirtualMachineFromPath_Task(
+	_this *do.ManagedObjectReference, configurationPath string,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Relocates a virtual machine's virtual disks to a specific location; optionally
+// moves the virtual machine to a different host as well.
+// Starting from VCenter 5.1, this API also supports relocating a template
+// to a new host should the current host becomes inactive.
+// If spec.host is specified, this API attempts to relocate the template
+// to the specified host; otherwise, this API will select a suitable host.
+//
+// Additionally requires the Resource.HotMigrate privilege if the virtual machine
+// is powered on (for Storage VMotion), and Datastore.AllocateSpace on any
+// datastore the virtual machine or its disks are relocated to.
+//
+//
+// If the "pool" field of the RelocateSpec is set, additionally requires the
+// Resource.AssignVMToPool privilege held on the specified pool.
+//
+//
+// Required Privileges
+// Resource.ColdMigrate
+//
+func (mo *VirtualMachine) RelocateVM_Task(
+	_this *do.ManagedObjectReference, spec *do.VirtualMachineRelocateSpec, priority *enum.VirtualMachineMovePriority,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Remove all the snapshots associated with this virtual machine. If the virtual
+// machine
+// does not have any snapshots, then this operation simply returns successfully.
+//
+// Required Privileges
+// VirtualMachine.State.RemoveSnapshot
+//
+func (mo *VirtualMachine) RemoveAllSnapshots_Task(
+	_this *do.ManagedObjectReference, consolidate bool,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Clears cached guest information. Guest information can be cleared
+// only if the virtual machine is powered off.
+//
+// This method can be useful if stale information is cached,
+// preventing an IP address or MAC address from being reused.
+//
+//
+// Required Privileges
+// VirtualMachine.Config.ResetGuestInfo
+//
+func (mo *VirtualMachine) ResetGuestInformation(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Resets power on this virtual machine. If the current state is poweredOn,
+// then this method first performs powerOff(hard). Once the power state
+// is poweredOff, then this method performs powerOn(option).
+//
+// Although this method functions as a powerOff followed by a powerOn, the
+// two operations are atomic with respect to other clients, meaning that
+// other power operations cannot be performed until the reset method completes.
+//
+//
+// Required Privileges
+// VirtualMachine.Interact.Reset
+//
+func (mo *VirtualMachine) ResetVM_Task(
+	_this *do.ManagedObjectReference,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Reverts the virtual machine to the current snapshot. This is equivalent to
+// doing snapshot.currentSnapshot.revert.
+//
+// If no snapshot exists, then the operation does nothing,
+// and the virtual machine state remains unchanged.
+//
+//
+// Required Privileges
+// VirtualMachine.State.RevertToSnapshot
+//
+func (mo *VirtualMachine) RevertToCurrentSnapshot_Task(
+	_this *do.ManagedObjectReference, host *mo.HostSystem, suppressPowerOn bool,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Sets the console window's display topology as specified.
+//
+// Required Privileges
+// VirtualMachine.Interact.ConsoleInteract
+// Since
+// vSphere API 4.0
+//
+func (mo *VirtualMachine) SetDisplayTopology(
+	_this *do.ManagedObjectReference, displays []*do.VirtualMachineDisplayTopology,
+) error {
+
+	return nil
+
+}
+
+//
+// Sets the console window's resolution as specified.
+//
+// Required Privileges
+// VirtualMachine.Interact.ConsoleInteract
+//
+func (mo *VirtualMachine) SetScreenResolution(
+	_this *do.ManagedObjectReference, width int32, height int32,
+) error {
+
+	return nil
+
+}
+
+//
+// Issues a command to the guest operating system asking it to perform
+// a clean shutdown of all services.
+// Returns immediately and does not wait for the guest operating system
+// to complete the operation.
+//
+// Required Privileges
+// VirtualMachine.Interact.PowerOff
+//
+func (mo *VirtualMachine) ShutdownGuest(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Issues a command to the guest operating system asking it to prepare for
+// a suspend operation.
+// Returns immediately and does not wait for the guest operating system
+// to complete the operation.
+//
+// Required Privileges
+// VirtualMachine.Interact.Suspend
+//
+func (mo *VirtualMachine) StandbyGuest(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+// Deprecated.
+// As of vsphere API 5.1
+//
+//
+// Initiates a recording session on this virtual machine. As a side effect,
+// this operation creates a snapshot on the virtual machine, which in turn
+// becomes the current snapshot.
+//
+// This is an experimental interface that is not intended for use in production code.
+//
+//
+//
+//
+// Required Privileges
+// VirtualMachine.Interact.Record
+// Since
+// vSphere API 4.0
+//
+func (mo *VirtualMachine) StartRecording_Task(
+	_this *do.ManagedObjectReference, name string, description string,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of vsphere API 5.1
+//
+//
+// Starts a replay session on this virtual machine. As a side effect,
+// this operation updates the current snapshot of the virtual machine.
+//
+// This is an experimental interface that is not intended for use in production code.
+//
+//
+//
+//
+// Required Privileges
+// VirtualMachine.Interact.Replay
+// Since
+// vSphere API 4.0
+//
+func (mo *VirtualMachine) StartReplaying_Task(
+	_this *do.ManagedObjectReference, replaySnapshot *mo.VirtualMachineSnapshot,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of vsphere API 5.1
+//
+//
+// Stops a currently active recording session on this virtual machine.
+//
+// This is an experimental interface that is not intended for use in production code.
+//
+//
+//
+//
+// Required Privileges
+// VirtualMachine.Interact.Record
+// Since
+// vSphere API 4.0
+//
+func (mo *VirtualMachine) StopRecording_Task(
+	_this *do.ManagedObjectReference,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+// Deprecated.
+// As of vsphere API 5.1
+//
+//
+// Stops a replay session on this virtual machine.
+//
+// This is an experimental interface that is not intended for use in production code.
+//
+//
+//
+//
+// Required Privileges
+// VirtualMachine.Interact.Replay
+// Since
+// vSphere API 4.0
+//
+func (mo *VirtualMachine) StopReplaying_Task(
+	_this *do.ManagedObjectReference,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Suspends execution in this virtual machine.
+//
+// Required Privileges
+// VirtualMachine.Interact.Suspend
+//
+func (mo *VirtualMachine) SuspendVM_Task(
+	_this *do.ManagedObjectReference,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Terminates the specified secondary virtual machine in a fault tolerant group. This
+// can be used to test fault tolerance on a given virtual machine, and should
+// be used with care.
+//
+// Required Privileges
+// VirtualMachine.Interact.TerminateFaultTolerantVM
+// Since
+// vSphere API 4.0
+//
+func (mo *VirtualMachine) TerminateFaultTolerantVM_Task(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Do an immediate power off of a VM.
+//
+// This API issues a SIGKILL to the vmx process of the VM.
+// Pending synchronous I/Os may not be written out before the vmx
+// process dies depending on accessibility of the datastore.
+//
+//
+//
+//
+// Required Privileges
+// VirtualMachine.Interact.PowerOff
+// Since
+// vSphere API 5.1
+//
+func (mo *VirtualMachine) TerminateVM(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Removes all secondary virtual machines associated with the fault tolerant
+// group and turns off protection for this virtual machine.
+//
+// This operation can only be invoked from the primary virtual machine in
+// the group.
+//
+// Required Privileges
+// VirtualMachine.Interact.TurnOffFaultTolerance
+// Since
+// vSphere API 4.0
+//
+func (mo *VirtualMachine) TurnOffFaultToleranceForVM_Task(
+	_this *do.ManagedObjectReference,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Unmounts VMware Tools installer CD.
+//
+// Required Privileges
+// VirtualMachine.Interact.ToolsInstall
+//
+func (mo *VirtualMachine) UnmountToolsInstaller(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Removes this virtual machine from the inventory without removing
+// any of the virtual machine's files on disk. All high-level information
+// stored with the management server (ESX Server or VirtualCenter) is
+// removed, including information such as statistics, resource pool association,
+// permissions, and alarms.
+//
+// Use the Folder.RegisterVM method to recreate a
+// VirtualMachine object from the set of virtual machine files by passing in
+// the path to the configuration file. However, the VirtualMachine managed object
+// that results typically has different objects ID and may inherit a different
+// set of permissions.
+//
+//
+// Required Privileges
+// VirtualMachine.Inventory.Unregister
+//
+func (mo *VirtualMachine) UnregisterVM(
+	_this *do.ManagedObjectReference,
+) error {
+
+	return nil
+
+}
+
+//
+// Begins the tools upgrade process.
+// To monitor the status of the tools install, clients should check the tools status,
+// toolsVersionStatus and
+// toolsRunningStatus.
+//
+// Required Privileges
+// VirtualMachine.Interact.ToolsInstall
+//
+func (mo *VirtualMachine) UpgradeTools_Task(
+	_this *do.ManagedObjectReference, installerOptions string,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Upgrades this virtual machine's virtual hardware to the latest revision
+// that is supported by the virtual machine's current host.
+//
+// Required Privileges
+// VirtualMachine.Config.UpgradeVirtualHardware
+//
+func (mo *VirtualMachine) UpgradeVM_Task(
+	_this *do.ManagedObjectReference, version string,
+) (*Task, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -4145,10 +17252,71 @@ type VirtualMachineCompatibilityChecker struct {
 }
 
 //
+// Tests whether or not a virtual machine could be placed on
+// the given host in the given resource pool.
+//
+// Required Privileges
+// System.View
+//
+func (mo *VirtualMachineCompatibilityChecker) CheckCompatibility_Task(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, host *mo.HostSystem, pool *mo.ResourcePool, testType []string,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
 // A singleton managed object that can answer questions about
 // the feasibility of certain provisioning operations.
 //
 type VirtualMachineProvisioningChecker struct {
+}
+
+//
+// Tests the feasibility of a proposed
+// MigrateVM_Task operation.
+//
+// Required Privileges
+// System.View
+//
+func (mo *VirtualMachineProvisioningChecker) CheckMigrate_Task(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, host *mo.HostSystem, pool *mo.ResourcePool, state *enum.VirtualMachinePowerState, testType []string,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Tests the feasibility of a proposed
+// RelocateVM_Task operation.
+//
+// Required Privileges
+// System.View
+//
+func (mo *VirtualMachineProvisioningChecker) CheckRelocate_Task(
+	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, spec *do.VirtualMachineRelocateSpec, testType []string,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Investigates the general VMotion compatibility of a set of virtual machines
+// with a set of hosts. The virtual machine may be in any power state. Hosts
+// may be in any connection state and also may be in maintenance mode.
+//
+// Required Privileges
+// System.View
+//
+func (mo *VirtualMachineProvisioningChecker) QueryVMotionCompatibilityEx_Task(
+	_this *do.ManagedObjectReference, vm []*mo.VirtualMachine, host []*mo.HostSystem,
+) (*Task, error) {
+
+	return nil, nil
+
 }
 
 //
@@ -4170,7 +17338,73 @@ type VirtualMachineSnapshot struct {
 	// The datastore paths for the virtual machine disks point to the head of the disk
 	// chain that represents the disk at this given snapshot. The fileInfo.fileLayout
 	// field is not set.
-	Config *VirtualMachineConfigInfo
+	Config *do.VirtualMachineConfigInfo
+}
+
+//
+// Obtains an export lease on this snapshot. The export lease contains
+// a list of URLs for the virtual disks for this snapshot, as well as
+// a ticket giving access to the URLs.
+//
+// See HttpNfcLease for information on how to use the lease.
+//
+//
+// Required Privileges
+// VApp.Export
+// Since
+// vSphere API 5.5
+//
+func (mo *VirtualMachineSnapshot) ExportSnapshot(
+	_this *do.ManagedObjectReference,
+) (*HttpNfcLease, error) {
+
+	return nil, nil
+
+}
+
+//
+// Removes this snapshot and deletes any associated storage.
+//
+// Required Privileges
+// VirtualMachine.State.RemoveSnapshot
+//
+func (mo *VirtualMachineSnapshot) RemoveSnapshot_Task(
+	_this *do.ManagedObjectReference, removeChildren bool, consolidate bool,
+) (*Task, error) {
+
+	return nil, nil
+
+}
+
+//
+// Rename this snapshot with either a new name or a new description or both.
+// At least one of these must be specified when calling the rename method.
+//
+//
+//
+// Required Privileges
+// VirtualMachine.State.RenameSnapshot
+//
+func (mo *VirtualMachineSnapshot) RenameSnapshot(
+	_this *do.ManagedObjectReference, name string, description string,
+) error {
+
+	return nil
+
+}
+
+//
+// Change the execution state of the virtual machine to the state of this snapshot.
+//
+// Required Privileges
+// VirtualMachine.State.RevertToSnapshot
+//
+func (mo *VirtualMachineSnapshot) RevertToSnapshot_Task(
+	_this *do.ManagedObjectReference, host *mo.HostSystem, suppressPowerOn bool,
+) (*Task, error) {
+
+	return nil, nil
+
 }
 
 // Deprecated.
@@ -4211,4 +17445,24 @@ type VirtualizationManager struct {
 //
 type VmwareDistributedVirtualSwitch struct {
 	*DistributedVirtualSwitch
+}
+
+//
+// Update Link Aggregation Control Protocol groups.
+// It can be called if the value of
+// lacpApiVersion is
+// LacpApiVersion#multipleLag
+// else an exception ConflictingConfiguration will be thrown.
+//
+// Required Privileges
+// DVSwitch.Modify
+// Since
+// vSphere API 5.5
+//
+func (mo *VmwareDistributedVirtualSwitch) UpdateDVSLacpGroupConfig_Task(
+	_this *do.ManagedObjectReference, lacpGroupSpec []*do.VMwareDvsLacpGroupSpec,
+) (*Task, error) {
+
+	return nil, nil
+
 }
