@@ -16,7 +16,7 @@ func (by By) Sort(objects []*Object) {
 	sort.Sort(os)
 }
 
-// objectSorter joins a By function and a slice of Planets to be sorted.
+// objectSorter joins a By function and a slice of Objects to be sorted.
 type objectSorter struct {
 	objects []*Object
 	by      func(o1, o2 *Object) bool // Closure used in the Less method.
