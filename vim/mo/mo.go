@@ -172,7 +172,7 @@ func (mo *AlarmManager) GetAlarm(
 //
 func (mo *AlarmManager) GetAlarmState(
 	_this *do.ManagedObjectReference, entity *ManagedEntity,
-) ([]*AlarmState, error) {
+) ([]*do.AlarmState, error) {
 
 	return nil, nil
 
@@ -298,7 +298,7 @@ func (mo *AuthorizationManager) AddAuthorizationRole(
 //
 func (mo *AuthorizationManager) HasPrivilegeOnEntities(
 	_this *do.ManagedObjectReference, entity []*ManagedEntity, sessionId string, privId []string,
-) ([]*EntityPrivilege, error) {
+) ([]*do.EntityPrivilege, error) {
 
 	return nil, nil
 
@@ -434,7 +434,7 @@ func (mo *AuthorizationManager) ResetEntityPermissions(
 //
 func (mo *AuthorizationManager) RetrieveAllPermissions(
 	_this *do.ManagedObjectReference,
-) ([]*Permission, error) {
+) ([]*do.Permission, error) {
 
 	return nil, nil
 
@@ -461,7 +461,7 @@ func (mo *AuthorizationManager) RetrieveAllPermissions(
 //
 func (mo *AuthorizationManager) RetrieveEntityPermissions(
 	_this *do.ManagedObjectReference, entity *ManagedEntity, inherited bool,
-) ([]*Permission, error) {
+) ([]*do.Permission, error) {
 
 	return nil, nil
 
@@ -477,7 +477,7 @@ func (mo *AuthorizationManager) RetrieveEntityPermissions(
 //
 func (mo *AuthorizationManager) RetrieveRolePermissions(
 	_this *do.ManagedObjectReference, roleId int32,
-) ([]*Permission, error) {
+) ([]*do.Permission, error) {
 
 	return nil, nil
 
@@ -740,7 +740,7 @@ func (mo *ClusterComputeResource) CancelRecommendation(
 //
 func (mo *ClusterComputeResource) ClusterEnterMaintenanceMode(
 	_this *do.ManagedObjectReference, host []*HostSystem, option []*do.OptionValue,
-) (*ClusterEnterMaintenanceResult, error) {
+) (*do.ClusterEnterMaintenanceResult, error) {
 
 	return nil, nil
 
@@ -851,7 +851,7 @@ func (mo *ClusterComputeResource) MoveInto_Task(
 //
 func (mo *ClusterComputeResource) RecommendHostsForVm(
 	_this *do.ManagedObjectReference, vm *VirtualMachine, pool *ResourcePool,
-) ([]*ClusterHostRecommendation, error) {
+) ([]*do.ClusterHostRecommendation, error) {
 
 	return nil, nil
 
@@ -906,7 +906,7 @@ func (mo *ClusterComputeResource) RefreshRecommendation(
 //
 func (mo *ClusterComputeResource) RetrieveDasAdvancedRuntimeInfo(
 	_this *do.ManagedObjectReference,
-) (*ClusterDasAdvancedRuntimeInfo, error) {
+) (*do.ClusterDasAdvancedRuntimeInfo, error) {
 
 	return nil, nil
 
@@ -1094,7 +1094,7 @@ type CustomFieldsManager struct {
 //
 func (mo *CustomFieldsManager) AddCustomFieldDef(
 	_this *do.ManagedObjectReference, name string, moType string, fieldDefPolicy *do.PrivilegePolicyDef, fieldPolicy *do.PrivilegePolicyDef,
-) (*CustomFieldDef, error) {
+) (*do.CustomFieldDef, error) {
 
 	return nil, nil
 
@@ -1253,7 +1253,7 @@ func (mo *CustomizationSpecManager) DuplicateCustomizationSpec(
 //
 func (mo *CustomizationSpecManager) GetCustomizationSpec(
 	_this *do.ManagedObjectReference, name string,
-) (*CustomizationSpecItem, error) {
+) (*do.CustomizationSpecItem, error) {
 
 	return nil, nil
 
@@ -1299,7 +1299,7 @@ func (mo *CustomizationSpecManager) RenameCustomizationSpec(
 //
 func (mo *CustomizationSpecManager) XmlToCustomizationSpecItem(
 	_this *do.ManagedObjectReference, specItemXml string,
-) (*CustomizationSpecItem, error) {
+) (*do.CustomizationSpecItem, error) {
 
 	return nil, nil
 
@@ -1444,7 +1444,7 @@ func (mo *Datacenter) PowerOnMultiVM_Task(
 //
 func (mo *Datacenter) QueryConnectionInfo(
 	_this *do.ManagedObjectReference, hostname string, port int32, username string, password string, sslThumbprint string,
-) (*HostConnectInfo, error) {
+) (*do.HostConnectInfo, error) {
 
 	return nil, nil
 
@@ -1463,7 +1463,7 @@ func (mo *Datacenter) QueryConnectionInfo(
 //
 func (mo *Datacenter) QueryDatacenterConfigOptionDescriptor(
 	_this *do.ManagedObjectReference,
-) ([]*VirtualMachineConfigOptionDescriptor, error) {
+) ([]*do.VirtualMachineConfigOptionDescriptor, error) {
 
 	return nil, nil
 
@@ -1594,7 +1594,7 @@ type Datastore struct {
 //
 func (mo *Datastore) DatastoreEnterMaintenanceMode(
 	_this *do.ManagedObjectReference,
-) (*StoragePlacementResult, error) {
+) (*do.StoragePlacementResult, error) {
 
 	return nil, nil
 
@@ -1804,7 +1804,7 @@ type DiagnosticManager struct {
 //
 func (mo *DiagnosticManager) BrowseDiagnosticLog(
 	_this *do.ManagedObjectReference, host *HostSystem, key string, start int32, lines int32,
-) (*DiagnosticManagerLogHeader, error) {
+) (*do.DiagnosticManagerLogHeader, error) {
 
 	return nil, nil
 
@@ -1837,7 +1837,7 @@ func (mo *DiagnosticManager) GenerateLogBundles_Task(
 //
 func (mo *DiagnosticManager) QueryDescriptions(
 	_this *do.ManagedObjectReference, host *HostSystem,
-) ([]*DiagnosticManagerLogDescriptor, error) {
+) ([]*do.DiagnosticManagerLogDescriptor, error) {
 
 	return nil, nil
 
@@ -2400,7 +2400,7 @@ func (mo *DistributedVirtualSwitch) FetchDVPortKeys(
 //
 func (mo *DistributedVirtualSwitch) FetchDVPorts(
 	_this *do.ManagedObjectReference, criteria *do.DistributedVirtualSwitchPortCriteria,
-) ([]*DistributedVirtualPort, error) {
+) ([]*do.DistributedVirtualPort, error) {
 
 	return nil, nil
 
@@ -2801,7 +2801,7 @@ func (mo *DistributedVirtualSwitchManager) DVSManagerLookupDvPortGroup(
 //
 func (mo *DistributedVirtualSwitchManager) QueryAvailableDvsSpec(
 	_this *do.ManagedObjectReference,
-) ([]*DistributedVirtualSwitchProductSpec, error) {
+) ([]*do.DistributedVirtualSwitchProductSpec, error) {
 
 	return nil, nil
 
@@ -2885,7 +2885,7 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsByUuid(
 //
 func (mo *DistributedVirtualSwitchManager) QueryDvsCheckCompatibility(
 	_this *do.ManagedObjectReference, hostContainer *do.DistributedVirtualSwitchManagerHostContainer, dvsProductSpec *do.DistributedVirtualSwitchManagerDvsProductSpec, hostFilterSpec []*do.DistributedVirtualSwitchManagerHostDvsFilterSpec,
-) ([]*DistributedVirtualSwitchManagerCompatibilityResult, error) {
+) ([]*do.DistributedVirtualSwitchManagerCompatibilityResult, error) {
 
 	return nil, nil
 
@@ -2901,7 +2901,7 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsCheckCompatibility(
 //
 func (mo *DistributedVirtualSwitchManager) QueryDvsCompatibleHostSpec(
 	_this *do.ManagedObjectReference, switchProductSpec *do.DistributedVirtualSwitchProductSpec,
-) ([]*DistributedVirtualSwitchHostProductSpec, error) {
+) ([]*do.DistributedVirtualSwitchHostProductSpec, error) {
 
 	return nil, nil
 
@@ -2916,7 +2916,7 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsCompatibleHostSpec(
 //
 func (mo *DistributedVirtualSwitchManager) QueryDvsConfigTarget(
 	_this *do.ManagedObjectReference, host *HostSystem, dvs *DistributedVirtualSwitch,
-) (*DVSManagerDvsConfigTarget, error) {
+) (*do.DVSManagerDvsConfigTarget, error) {
 
 	return nil, nil
 
@@ -2933,7 +2933,7 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsConfigTarget(
 //
 func (mo *DistributedVirtualSwitchManager) QueryDvsFeatureCapability(
 	_this *do.ManagedObjectReference, switchProductSpec *do.DistributedVirtualSwitchProductSpec,
-) (*DVSFeatureCapability, error) {
+) (*do.DVSFeatureCapability, error) {
 
 	return nil, nil
 
@@ -3021,7 +3021,7 @@ type EnvironmentBrowser struct {
 //
 func (mo *EnvironmentBrowser) QueryConfigOption(
 	_this *do.ManagedObjectReference, key string, host *HostSystem,
-) (*VirtualMachineConfigOption, error) {
+) (*do.VirtualMachineConfigOption, error) {
 
 	return nil, nil
 
@@ -3035,7 +3035,7 @@ func (mo *EnvironmentBrowser) QueryConfigOption(
 //
 func (mo *EnvironmentBrowser) QueryConfigOptionDescriptor(
 	_this *do.ManagedObjectReference,
-) ([]*VirtualMachineConfigOptionDescriptor, error) {
+) ([]*do.VirtualMachineConfigOptionDescriptor, error) {
 
 	return nil, nil
 
@@ -3064,7 +3064,7 @@ func (mo *EnvironmentBrowser) QueryConfigOptionDescriptor(
 //
 func (mo *EnvironmentBrowser) QueryConfigTarget(
 	_this *do.ManagedObjectReference, host *HostSystem,
-) (*ConfigTarget, error) {
+) (*do.ConfigTarget, error) {
 
 	return nil, nil
 
@@ -3094,7 +3094,7 @@ func (mo *EnvironmentBrowser) QueryConfigTarget(
 //
 func (mo *EnvironmentBrowser) QueryTargetCapabilities(
 	_this *do.ManagedObjectReference, host *HostSystem,
-) (*HostCapability, error) {
+) (*do.HostCapability, error) {
 
 	return nil, nil
 
@@ -3131,7 +3131,7 @@ type EventHistoryCollector struct {
 //
 func (mo *EventHistoryCollector) ReadNextEvents(
 	_this *do.ManagedObjectReference, maxCount int32,
-) ([]*Event, error) {
+) ([]*do.Event, error) {
 
 	return nil, nil
 
@@ -3149,7 +3149,7 @@ func (mo *EventHistoryCollector) ReadNextEvents(
 //
 func (mo *EventHistoryCollector) ReadPreviousEvents(
 	_this *do.ManagedObjectReference, maxCount int32,
-) ([]*Event, error) {
+) ([]*do.Event, error) {
 
 	return nil, nil
 
@@ -3258,7 +3258,7 @@ func (mo *EventManager) PostEvent(
 //
 func (mo *EventManager) QueryEvents(
 	_this *do.ManagedObjectReference, filter *do.EventFilterSpec,
-) ([]*Event, error) {
+) ([]*do.Event, error) {
 
 	return nil, nil
 
@@ -3274,7 +3274,7 @@ func (mo *EventManager) QueryEvents(
 //
 func (mo *EventManager) RetrieveArgumentDescription(
 	_this *do.ManagedObjectReference, eventTypeId string,
-) ([]*EventArgDesc, error) {
+) ([]*do.EventArgDesc, error) {
 
 	return nil, nil
 
@@ -3358,7 +3358,7 @@ type ExtensionManager struct {
 //
 func (mo *ExtensionManager) FindExtension(
 	_this *do.ManagedObjectReference, extensionKey string,
-) (*Extension, error) {
+) (*do.Extension, error) {
 
 	return nil, nil
 
@@ -3398,7 +3398,7 @@ func (mo *ExtensionManager) GetPublicKey(
 //
 func (mo *ExtensionManager) QueryExtensionIpAllocationUsage(
 	_this *do.ManagedObjectReference, extensionKeys []string,
-) ([]*ExtensionManagerIpAllocationUsage, error) {
+) ([]*do.ExtensionManagerIpAllocationUsage, error) {
 
 	return nil, nil
 
@@ -4256,7 +4256,7 @@ type GuestAuthManager struct {
 //
 func (mo *GuestAuthManager) AcquireCredentialsInGuest(
 	_this *do.ManagedObjectReference, vm *VirtualMachine, requestedAuth *do.GuestAuthentication, sessionID int64,
-) (*GuestAuthentication, error) {
+) (*do.GuestAuthentication, error) {
 
 	return nil, nil
 
@@ -4436,7 +4436,7 @@ func (mo *GuestFileManager) DeleteFileInGuest(
 //
 func (mo *GuestFileManager) InitiateFileTransferFromGuest(
 	_this *do.ManagedObjectReference, vm *VirtualMachine, auth *do.GuestAuthentication, guestFilePath string,
-) (*FileTransferInformation, error) {
+) (*do.FileTransferInformation, error) {
 
 	return nil, nil
 
@@ -4496,7 +4496,7 @@ func (mo *GuestFileManager) InitiateFileTransferToGuest(
 //
 func (mo *GuestFileManager) ListFilesInGuest(
 	_this *do.ManagedObjectReference, vm *VirtualMachine, auth *do.GuestAuthentication, filePath string, index int32, maxResults int32, matchPattern string,
-) (*GuestListFileInfo, error) {
+) (*do.GuestListFileInfo, error) {
 
 	return nil, nil
 
@@ -4593,7 +4593,7 @@ type GuestProcessManager struct {
 //
 func (mo *GuestProcessManager) ListProcessesInGuest(
 	_this *do.ManagedObjectReference, vm *VirtualMachine, auth *do.GuestAuthentication, pids []long,
-) ([]*GuestProcessInfo, error) {
+) ([]*do.GuestProcessInfo, error) {
 
 	return nil, nil
 
@@ -5078,7 +5078,7 @@ type HostBootDeviceSystem struct {
 //
 func (mo *HostBootDeviceSystem) QueryBootDevices(
 	_this *do.ManagedObjectReference,
-) (*HostBootDeviceInfo, error) {
+) (*do.HostBootDeviceInfo, error) {
 
 	return nil, nil
 
@@ -5520,7 +5520,7 @@ func (mo *HostDatastoreSystem) ExtendVmfsDatastore(
 //
 func (mo *HostDatastoreSystem) QueryAvailableDisksForVmfs(
 	_this *do.ManagedObjectReference, datastore *Datastore,
-) ([]*HostScsiDisk, error) {
+) ([]*do.HostScsiDisk, error) {
 
 	return nil, nil
 
@@ -5540,7 +5540,7 @@ func (mo *HostDatastoreSystem) QueryAvailableDisksForVmfs(
 //
 func (mo *HostDatastoreSystem) QueryUnresolvedVmfsVolumes(
 	_this *do.ManagedObjectReference,
-) ([]*HostUnresolvedVmfsVolume, error) {
+) ([]*do.HostUnresolvedVmfsVolume, error) {
 
 	return nil, nil
 
@@ -5554,7 +5554,7 @@ func (mo *HostDatastoreSystem) QueryUnresolvedVmfsVolumes(
 //
 func (mo *HostDatastoreSystem) QueryVmfsDatastoreCreateOptions(
 	_this *do.ManagedObjectReference, devicePath string, vmfsMajorVersion int32,
-) ([]*VmfsDatastoreOption, error) {
+) ([]*do.VmfsDatastoreOption, error) {
 
 	return nil, nil
 
@@ -5572,7 +5572,7 @@ func (mo *HostDatastoreSystem) QueryVmfsDatastoreCreateOptions(
 //
 func (mo *HostDatastoreSystem) QueryVmfsDatastoreExpandOptions(
 	_this *do.ManagedObjectReference, datastore *Datastore,
-) ([]*VmfsDatastoreOption, error) {
+) ([]*do.VmfsDatastoreOption, error) {
 
 	return nil, nil
 
@@ -5587,7 +5587,7 @@ func (mo *HostDatastoreSystem) QueryVmfsDatastoreExpandOptions(
 //
 func (mo *HostDatastoreSystem) QueryVmfsDatastoreExtendOptions(
 	_this *do.ManagedObjectReference, datastore *Datastore, devicePath string, suppressExpandCandidates bool,
-) ([]*VmfsDatastoreOption, error) {
+) ([]*do.VmfsDatastoreOption, error) {
 
 	return nil, nil
 
@@ -5685,7 +5685,7 @@ type HostDateTimeSystem struct {
 //
 func (mo *HostDateTimeSystem) QueryAvailableTimeZones(
 	_this *do.ManagedObjectReference,
-) ([]*HostDateTimeSystemTimeZone, error) {
+) ([]*do.HostDateTimeSystemTimeZone, error) {
 
 	return nil, nil
 
@@ -5801,7 +5801,7 @@ func (mo *HostDiagnosticSystem) CreateDiagnosticPartition(
 //
 func (mo *HostDiagnosticSystem) QueryAvailablePartition(
 	_this *do.ManagedObjectReference,
-) ([]*HostDiagnosticPartition, error) {
+) ([]*do.HostDiagnosticPartition, error) {
 
 	return nil, nil
 
@@ -5818,7 +5818,7 @@ func (mo *HostDiagnosticSystem) QueryAvailablePartition(
 //
 func (mo *HostDiagnosticSystem) QueryPartitionCreateDesc(
 	_this *do.ManagedObjectReference, diskUuid string, diagnosticType string,
-) (*HostDiagnosticPartitionCreateDescription, error) {
+) (*do.HostDiagnosticPartitionCreateDescription, error) {
 
 	return nil, nil
 
@@ -5838,7 +5838,7 @@ func (mo *HostDiagnosticSystem) QueryPartitionCreateDesc(
 //
 func (mo *HostDiagnosticSystem) QueryPartitionCreateOptions(
 	_this *do.ManagedObjectReference, storageType string, diagnosticType string,
-) ([]*HostDiagnosticPartitionCreateOption, error) {
+) ([]*do.HostDiagnosticPartitionCreateOption, error) {
 
 	return nil, nil
 
@@ -6185,7 +6185,7 @@ func (mo *HostImageConfigManager) HostImageConfigGetAcceptance(
 //
 func (mo *HostImageConfigManager) HostImageConfigGetProfile(
 	_this *do.ManagedObjectReference,
-) (*HostImageProfileSummary, error) {
+) (*do.HostImageProfileSummary, error) {
 
 	return nil, nil
 
@@ -6238,7 +6238,7 @@ func (mo *HostKernelModuleSystem) QueryConfiguredModuleOptionString(
 //
 func (mo *HostKernelModuleSystem) QueryModules(
 	_this *do.ManagedObjectReference,
-) ([]*KernelModuleInfo, error) {
+) ([]*do.KernelModuleInfo, error) {
 
 	return nil, nil
 
@@ -6620,7 +6620,7 @@ func (mo *HostNetworkSystem) AddVirtualSwitch(
 //
 func (mo *HostNetworkSystem) QueryNetworkHint(
 	_this *do.ManagedObjectReference, device []string,
-) ([]*PhysicalNicHintInfo, error) {
+) ([]*do.PhysicalNicHintInfo, error) {
 
 	return nil, nil
 
@@ -6846,7 +6846,7 @@ func (mo *HostNetworkSystem) UpdateIpRouteTableConfig(
 //
 func (mo *HostNetworkSystem) UpdateNetworkConfig(
 	_this *do.ManagedObjectReference, config *do.HostNetworkConfig, changeMode string,
-) (*HostNetworkConfigResult, error) {
+) (*do.HostNetworkConfigResult, error) {
 
 	return nil, nil
 
@@ -7365,7 +7365,7 @@ type HostProfile struct {
 //
 func (mo *HostProfile) ExecuteHostProfile(
 	_this *do.ManagedObjectReference, host *HostSystem, deferredParam []*do.ProfileDeferredPolicyOptionParameter,
-) (*ProfileExecuteResult, error) {
+) (*do.ProfileExecuteResult, error) {
 
 	return nil, nil
 
@@ -7474,7 +7474,7 @@ func (mo *HostProfileManager) CheckAnswerFileStatus_Task(
 //
 func (mo *HostProfileManager) CreateDefaultProfile(
 	_this *do.ManagedObjectReference, profileType string, profileTypeName string, profile *Profile,
-) (*ApplyProfile, error) {
+) (*do.ApplyProfile, error) {
 
 	return nil, nil
 
@@ -7511,7 +7511,7 @@ func (mo *HostProfileManager) ExportAnswerFile_Task(
 //
 func (mo *HostProfileManager) GenerateConfigTaskList(
 	_this *do.ManagedObjectReference, configSpec *do.HostConfigSpec, host *HostSystem,
-) (*HostProfileManagerConfigTaskList, error) {
+) (*do.HostProfileManagerConfigTaskList, error) {
 
 	return nil, nil
 
@@ -7549,7 +7549,7 @@ func (mo *HostProfileManager) GenerateHostProfileTaskList_Task(
 //
 func (mo *HostProfileManager) QueryAnswerFileStatus(
 	_this *do.ManagedObjectReference, host []*HostSystem,
-) ([]*AnswerFileStatusResult, error) {
+) ([]*do.AnswerFileStatusResult, error) {
 
 	return nil, nil
 
@@ -7563,7 +7563,7 @@ func (mo *HostProfileManager) QueryAnswerFileStatus(
 //
 func (mo *HostProfileManager) QueryHostProfileMetadata(
 	_this *do.ManagedObjectReference, profileName []string, profile *Profile,
-) ([]*ProfileMetadata, error) {
+) ([]*do.ProfileMetadata, error) {
 
 	return nil, nil
 
@@ -7579,7 +7579,7 @@ func (mo *HostProfileManager) QueryHostProfileMetadata(
 //
 func (mo *HostProfileManager) QueryProfileStructure(
 	_this *do.ManagedObjectReference, profile *Profile,
-) (*ProfileProfileStructure, error) {
+) (*do.ProfileProfileStructure, error) {
 
 	return nil, nil
 
@@ -7595,7 +7595,7 @@ func (mo *HostProfileManager) QueryProfileStructure(
 //
 func (mo *HostProfileManager) RetrieveAnswerFile(
 	_this *do.ManagedObjectReference, host *HostSystem,
-) (*AnswerFile, error) {
+) (*do.AnswerFile, error) {
 
 	return nil, nil
 
@@ -7613,7 +7613,7 @@ func (mo *HostProfileManager) RetrieveAnswerFile(
 //
 func (mo *HostProfileManager) RetrieveAnswerFileForProfile(
 	_this *do.ManagedObjectReference, host *HostSystem, applyProfile *do.HostApplyProfile,
-) (*AnswerFile, error) {
+) (*do.AnswerFile, error) {
 
 	return nil, nil
 
@@ -7898,7 +7898,7 @@ func (mo *HostStorageSystem) AttachVmfsExtent(
 //
 func (mo *HostStorageSystem) ComputeDiskPartitionInfo(
 	_this *do.ManagedObjectReference, devicePath string, layout *do.HostDiskPartitionLayout, partitionFormat string,
-) (*HostDiskPartitionInfo, error) {
+) (*do.HostDiskPartitionInfo, error) {
 
 	return nil, nil
 
@@ -7915,7 +7915,7 @@ func (mo *HostStorageSystem) ComputeDiskPartitionInfo(
 //
 func (mo *HostStorageSystem) ComputeDiskPartitionInfoForResize(
 	_this *do.ManagedObjectReference, partition *do.HostScsiDiskPartition, blockRange *do.HostDiskPartitionBlockRange, partitionFormat string,
-) (*HostDiskPartitionInfo, error) {
+) (*do.HostDiskPartitionInfo, error) {
 
 	return nil, nil
 
@@ -8143,7 +8143,7 @@ func (mo *HostStorageSystem) ExtendVffs(
 //
 func (mo *HostStorageSystem) FormatVffs(
 	_this *do.ManagedObjectReference, createSpec *do.HostVffsSpec,
-) (*HostVffsVolume, error) {
+) (*do.HostVffsVolume, error) {
 
 	return nil, nil
 
@@ -8157,7 +8157,7 @@ func (mo *HostStorageSystem) FormatVffs(
 //
 func (mo *HostStorageSystem) FormatVmfs(
 	_this *do.ManagedObjectReference, createSpec *do.HostVmfsSpec,
-) (*HostVmfsVolume, error) {
+) (*do.HostVmfsVolume, error) {
 
 	return nil, nil
 
@@ -8243,7 +8243,7 @@ func (mo *HostStorageSystem) MountVmfsVolume(
 //
 func (mo *HostStorageSystem) QueryAvailableSsds(
 	_this *do.ManagedObjectReference, vffsPath string,
-) ([]*HostScsiDisk, error) {
+) ([]*do.HostScsiDisk, error) {
 
 	return nil, nil
 
@@ -8267,7 +8267,7 @@ func (mo *HostStorageSystem) QueryAvailableSsds(
 //
 func (mo *HostStorageSystem) QueryPathSelectionPolicyOptions(
 	_this *do.ManagedObjectReference,
-) ([]*HostPathSelectionPolicyOption, error) {
+) ([]*do.HostPathSelectionPolicyOption, error) {
 
 	return nil, nil
 
@@ -8291,7 +8291,7 @@ func (mo *HostStorageSystem) QueryPathSelectionPolicyOptions(
 //
 func (mo *HostStorageSystem) QueryStorageArrayTypePolicyOptions(
 	_this *do.ManagedObjectReference,
-) ([]*HostStorageArrayTypePolicyOption, error) {
+) ([]*do.HostStorageArrayTypePolicyOption, error) {
 
 	return nil, nil
 
@@ -8311,7 +8311,7 @@ func (mo *HostStorageSystem) QueryStorageArrayTypePolicyOptions(
 //
 func (mo *HostStorageSystem) QueryUnresolvedVmfsVolume(
 	_this *do.ManagedObjectReference,
-) ([]*HostUnresolvedVmfsVolume, error) {
+) ([]*do.HostUnresolvedVmfsVolume, error) {
 
 	return nil, nil
 
@@ -8522,7 +8522,7 @@ func (mo *HostStorageSystem) RescanVmfs(
 //
 func (mo *HostStorageSystem) ResolveMultipleUnresolvedVmfsVolumes(
 	_this *do.ManagedObjectReference, resolutionSpec []*do.HostUnresolvedVmfsResolutionSpec,
-) ([]*HostUnresolvedVmfsResolutionResult, error) {
+) ([]*do.HostUnresolvedVmfsResolutionResult, error) {
 
 	return nil, nil
 
@@ -8588,7 +8588,7 @@ func (mo *HostStorageSystem) ResolveMultipleUnresolvedVmfsVolumesEx_Task(
 //
 func (mo *HostStorageSystem) RetrieveDiskPartitionInfo(
 	_this *do.ManagedObjectReference, devicePath []string,
-) ([]*HostDiskPartitionInfo, error) {
+) ([]*do.HostDiskPartitionInfo, error) {
 
 	return nil, nil
 
@@ -9010,7 +9010,7 @@ type HostSystem struct {
 //
 func (mo *HostSystem) AcquireCimServicesTicket(
 	_this *do.ManagedObjectReference,
-) (*HostServiceTicket, error) {
+) (*do.HostServiceTicket, error) {
 
 	return nil, nil
 
@@ -9212,7 +9212,7 @@ func (mo *HostSystem) PowerUpHostFromStandBy_Task(
 //
 func (mo *HostSystem) QueryHostConnectionInfo(
 	_this *do.ManagedObjectReference,
-) (*HostConnectInfo, error) {
+) (*do.HostConnectInfo, error) {
 
 	return nil, nil
 
@@ -9267,7 +9267,7 @@ func (mo *HostSystem) QueryMemoryOverheadEx(
 //
 func (mo *HostSystem) QueryTpmAttestationReport(
 	_this *do.ManagedObjectReference,
-) (*HostTpmAttestationReport, error) {
+) (*do.HostTpmAttestationReport, error) {
 
 	return nil, nil
 
@@ -9528,7 +9528,7 @@ func (mo *HostVFlashManager) HostConfigVFlashCache(
 //
 func (mo *HostVFlashManager) HostGetVFlashModuleDefaultConfig(
 	_this *do.ManagedObjectReference, vFlashModule string,
-) (*VirtualDiskVFlashCacheConfigInfo, error) {
+) (*do.VirtualDiskVFlashCacheConfigInfo, error) {
 
 	return nil, nil
 
@@ -9640,7 +9640,7 @@ func (mo *HostVirtualNicManager) DeselectVnicForNicType(
 //
 func (mo *HostVirtualNicManager) QueryNetConfig(
 	_this *do.ManagedObjectReference, nicType string,
-) (*VirtualNicManagerNetConfig, error) {
+) (*do.VirtualNicManagerNetConfig, error) {
 
 	return nil, nil
 
@@ -9813,7 +9813,7 @@ func (mo *HostVsanSystem) InitializeDisks_Task(
 //
 func (mo *HostVsanSystem) QueryDisksForVsan(
 	_this *do.ManagedObjectReference, canonicalName []string,
-) ([]*VsanHostDiskResult, error) {
+) ([]*do.VsanHostDiskResult, error) {
 
 	return nil, nil
 
@@ -9827,7 +9827,7 @@ func (mo *HostVsanSystem) QueryDisksForVsan(
 //
 func (mo *HostVsanSystem) QueryHostStatus(
 	_this *do.ManagedObjectReference,
-) (*VsanHostClusterStatus, error) {
+) (*do.VsanHostClusterStatus, error) {
 
 	return nil, nil
 
@@ -10032,7 +10032,7 @@ func (mo *HttpNfcLease) HttpNfcLeaseComplete(
 //
 func (mo *HttpNfcLease) HttpNfcLeaseGetManifest(
 	_this *do.ManagedObjectReference,
-) ([]*HttpNfcLeaseManifestEntry, error) {
+) ([]*do.HttpNfcLeaseManifestEntry, error) {
 
 	return nil, nil
 
@@ -10277,7 +10277,7 @@ func (mo *IpPoolManager) DestroyIpPool(
 //
 func (mo *IpPoolManager) QueryIPAllocations(
 	_this *do.ManagedObjectReference, dc *Datacenter, poolId int32, extensionKey string,
-) ([]*IpPoolManagerIpAllocation, error) {
+) ([]*do.IpPoolManagerIpAllocation, error) {
 
 	return nil, nil
 
@@ -10291,7 +10291,7 @@ func (mo *IpPoolManager) QueryIPAllocations(
 //
 func (mo *IpPoolManager) QueryIpPools(
 	_this *do.ManagedObjectReference, dc *Datacenter,
-) ([]*IpPool, error) {
+) ([]*do.IpPool, error) {
 
 	return nil, nil
 
@@ -10372,7 +10372,7 @@ func (mo *IscsiManager) BindVnic(
 //
 func (mo *IscsiManager) QueryBoundVnics(
 	_this *do.ManagedObjectReference, iScsiHbaName string,
-) ([]*IscsiPortInfo, error) {
+) ([]*do.IscsiPortInfo, error) {
 
 	return nil, nil
 
@@ -10390,7 +10390,7 @@ func (mo *IscsiManager) QueryBoundVnics(
 //
 func (mo *IscsiManager) QueryCandidateNics(
 	_this *do.ManagedObjectReference, iScsiHbaName string,
-) ([]*IscsiPortInfo, error) {
+) ([]*do.IscsiPortInfo, error) {
 
 	return nil, nil
 
@@ -10405,7 +10405,7 @@ func (mo *IscsiManager) QueryCandidateNics(
 //
 func (mo *IscsiManager) QueryMigrationDependencies(
 	_this *do.ManagedObjectReference, pnicDevice []string,
-) (*IscsiMigrationDependency, error) {
+) (*do.IscsiMigrationDependency, error) {
 
 	return nil, nil
 
@@ -10419,7 +10419,7 @@ func (mo *IscsiManager) QueryMigrationDependencies(
 //
 func (mo *IscsiManager) QueryPnicStatus(
 	_this *do.ManagedObjectReference, pnicDevice string,
-) (*IscsiStatus, error) {
+) (*do.IscsiStatus, error) {
 
 	return nil, nil
 
@@ -10433,7 +10433,7 @@ func (mo *IscsiManager) QueryPnicStatus(
 //
 func (mo *IscsiManager) QueryVnicStatus(
 	_this *do.ManagedObjectReference, vnicDevice string,
-) (*IscsiStatus, error) {
+) (*do.IscsiStatus, error) {
 
 	return nil, nil
 
@@ -10464,7 +10464,7 @@ type LicenseAssignmentManager struct {
 //
 func (mo *LicenseAssignmentManager) QueryAssignedLicenses(
 	_this *do.ManagedObjectReference, entityId string,
-) ([]*LicenseAssignmentManagerLicenseAssignment, error) {
+) ([]*do.LicenseAssignmentManagerLicenseAssignment, error) {
 
 	return nil, nil
 
@@ -10492,7 +10492,7 @@ func (mo *LicenseAssignmentManager) RemoveAssignedLicense(
 //
 func (mo *LicenseAssignmentManager) UpdateAssignedLicense(
 	_this *do.ManagedObjectReference, entity string, licenseKey string, entityDisplayName string,
-) (*LicenseManagerLicenseInfo, error) {
+) (*do.LicenseManagerLicenseInfo, error) {
 
 	return nil, nil
 
@@ -10623,7 +10623,7 @@ type LicenseManager struct {
 //
 func (mo *LicenseManager) AddLicense(
 	_this *do.ManagedObjectReference, licenseKey string, labels []*do.KeyValue,
-) (*LicenseManagerLicenseInfo, error) {
+) (*do.LicenseManagerLicenseInfo, error) {
 
 	return nil, nil
 
@@ -10697,7 +10697,7 @@ func (mo *LicenseManager) ConfigureLicenseSource(
 //
 func (mo *LicenseManager) DecodeLicense(
 	_this *do.ManagedObjectReference, licenseKey string,
-) (*LicenseManagerLicenseInfo, error) {
+) (*do.LicenseManagerLicenseInfo, error) {
 
 	return nil, nil
 
@@ -10756,7 +10756,7 @@ func (mo *LicenseManager) EnableFeature(
 //
 func (mo *LicenseManager) QueryLicenseSourceAvailability(
 	_this *do.ManagedObjectReference, host *HostSystem,
-) ([]*LicenseAvailabilityInfo, error) {
+) ([]*do.LicenseAvailabilityInfo, error) {
 
 	return nil, nil
 
@@ -10781,7 +10781,7 @@ func (mo *LicenseManager) QueryLicenseSourceAvailability(
 //
 func (mo *LicenseManager) QueryLicenseUsage(
 	_this *do.ManagedObjectReference, host *HostSystem,
-) (*LicenseUsageInfo, error) {
+) (*do.LicenseUsageInfo, error) {
 
 	return nil, nil
 
@@ -10802,7 +10802,7 @@ func (mo *LicenseManager) QueryLicenseUsage(
 //
 func (mo *LicenseManager) QuerySupportedFeatures(
 	_this *do.ManagedObjectReference, host *HostSystem,
-) ([]*LicenseFeatureInfo, error) {
+) ([]*do.LicenseFeatureInfo, error) {
 
 	return nil, nil
 
@@ -10885,7 +10885,7 @@ func (mo *LicenseManager) SetLicenseEdition(
 //
 func (mo *LicenseManager) UpdateLicense(
 	_this *do.ManagedObjectReference, licenseKey string, labels []*do.KeyValue,
-) (*LicenseManagerLicenseInfo, error) {
+) (*do.LicenseManagerLicenseInfo, error) {
 
 	return nil, nil
 
@@ -10939,7 +10939,7 @@ type ListView struct {
 //
 func (mo *ListView) ModifyListView(
 	_this *do.ManagedObjectReference, add []*do.ManagedObjectReference, remove []*do.ManagedObjectReference,
-) ([]*ManagedObjectReference, error) {
+) ([]*do.ManagedObjectReference, error) {
 
 	return nil, nil
 
@@ -10959,7 +10959,7 @@ func (mo *ListView) ModifyListView(
 //
 func (mo *ListView) ResetListView(
 	_this *do.ManagedObjectReference, obj []*do.ManagedObjectReference,
-) ([]*ManagedObjectReference, error) {
+) ([]*do.ManagedObjectReference, error) {
 
 	return nil, nil
 
@@ -11480,7 +11480,7 @@ type OptionManager struct {
 //
 func (mo *OptionManager) QueryOptions(
 	_this *do.ManagedObjectReference, name string,
-) ([]*OptionValue, error) {
+) ([]*do.OptionValue, error) {
 
 	return nil, nil
 
@@ -11638,7 +11638,7 @@ type OvfManager struct {
 //
 func (mo *OvfManager) CreateDescriptor(
 	_this *do.ManagedObjectReference, obj *ManagedEntity, cdp *do.OvfCreateDescriptorParams,
-) (*OvfCreateDescriptorResult, error) {
+) (*do.OvfCreateDescriptorResult, error) {
 
 	return nil, nil
 
@@ -11661,7 +11661,7 @@ func (mo *OvfManager) CreateDescriptor(
 //
 func (mo *OvfManager) CreateImportSpec(
 	_this *do.ManagedObjectReference, ovfDescriptor string, resourcePool *ResourcePool, datastore *Datastore, cisp *do.OvfCreateImportSpecParams,
-) (*OvfCreateImportSpecResult, error) {
+) (*do.OvfCreateImportSpecResult, error) {
 
 	return nil, nil
 
@@ -11682,7 +11682,7 @@ func (mo *OvfManager) CreateImportSpec(
 //
 func (mo *OvfManager) ParseDescriptor(
 	_this *do.ManagedObjectReference, ovfDescriptor string, pdp *do.OvfParseDescriptorParams,
-) (*OvfParseDescriptorResult, error) {
+) (*do.OvfParseDescriptorResult, error) {
 
 	return nil, nil
 
@@ -11700,7 +11700,7 @@ func (mo *OvfManager) ParseDescriptor(
 //
 func (mo *OvfManager) ValidateHost(
 	_this *do.ManagedObjectReference, ovfDescriptor string, host *HostSystem, vhp *do.OvfValidateHostParams,
-) (*OvfValidateHostResult, error) {
+) (*do.OvfValidateHostResult, error) {
 
 	return nil, nil
 
@@ -11906,7 +11906,7 @@ func (mo *PerformanceManager) CreatePerfInterval(
 //
 func (mo *PerformanceManager) QueryAvailablePerfMetric(
 	_this *do.ManagedObjectReference, entity *do.ManagedObjectReference, beginTime time.Time, endTime time.Time, intervalId int32,
-) ([]*PerfMetricId, error) {
+) ([]*do.PerfMetricId, error) {
 
 	return nil, nil
 
@@ -11924,7 +11924,7 @@ func (mo *PerformanceManager) QueryAvailablePerfMetric(
 //
 func (mo *PerformanceManager) QueryPerf(
 	_this *do.ManagedObjectReference, querySpec []*do.PerfQuerySpec,
-) ([]*PerfEntityMetricBase, error) {
+) ([]*do.PerfEntityMetricBase, error) {
 
 	return nil, nil
 
@@ -11950,7 +11950,7 @@ func (mo *PerformanceManager) QueryPerf(
 //
 func (mo *PerformanceManager) QueryPerfComposite(
 	_this *do.ManagedObjectReference, querySpec *do.PerfQuerySpec,
-) (*PerfCompositeMetric, error) {
+) (*do.PerfCompositeMetric, error) {
 
 	return nil, nil
 
@@ -11964,7 +11964,7 @@ func (mo *PerformanceManager) QueryPerfComposite(
 //
 func (mo *PerformanceManager) QueryPerfCounter(
 	_this *do.ManagedObjectReference, counterId []int,
-) ([]*PerfCounterInfo, error) {
+) ([]*do.PerfCounterInfo, error) {
 
 	return nil, nil
 
@@ -11983,7 +11983,7 @@ func (mo *PerformanceManager) QueryPerfCounter(
 //
 func (mo *PerformanceManager) QueryPerfCounterByLevel(
 	_this *do.ManagedObjectReference, level int32,
-) ([]*PerfCounterInfo, error) {
+) ([]*do.PerfCounterInfo, error) {
 
 	return nil, nil
 
@@ -12000,7 +12000,7 @@ func (mo *PerformanceManager) QueryPerfCounterByLevel(
 //
 func (mo *PerformanceManager) QueryPerfProviderSummary(
 	_this *do.ManagedObjectReference, entity *do.ManagedObjectReference,
-) (*PerfProviderSummary, error) {
+) (*do.PerfProviderSummary, error) {
 
 	return nil, nil
 
@@ -12360,7 +12360,7 @@ func (mo *Profile) ExportProfile(
 //
 func (mo *Profile) RetrieveDescription(
 	_this *do.ManagedObjectReference,
-) (*ProfileDescription, error) {
+) (*do.ProfileDescription, error) {
 
 	return nil, nil
 
@@ -12408,7 +12408,7 @@ func (mo *ProfileComplianceManager) ClearComplianceStatus(
 //
 func (mo *ProfileComplianceManager) QueryComplianceStatus(
 	_this *do.ManagedObjectReference, profile []*Profile, entity []*ManagedEntity,
-) ([]*ComplianceResult, error) {
+) ([]*do.ComplianceResult, error) {
 
 	return nil, nil
 
@@ -12422,7 +12422,7 @@ func (mo *ProfileComplianceManager) QueryComplianceStatus(
 //
 func (mo *ProfileComplianceManager) QueryExpressionMetadata(
 	_this *do.ManagedObjectReference, expressionName []string, profile *Profile,
-) ([]*ProfileExpressionMetadata, error) {
+) ([]*do.ProfileExpressionMetadata, error) {
 
 	return nil, nil
 
@@ -12478,7 +12478,7 @@ func (mo *ProfileManager) FindAssociatedProfile(
 //
 func (mo *ProfileManager) QueryPolicyMetadata(
 	_this *do.ManagedObjectReference, policyName []string, profile *Profile,
-) ([]*ProfilePolicyMetadata, error) {
+) ([]*do.ProfilePolicyMetadata, error) {
 
 	return nil, nil
 
@@ -12566,7 +12566,7 @@ func (mo *PropertyCollector) CancelWaitForUpdates(
 //
 func (mo *PropertyCollector) CheckForUpdates(
 	_this *do.ManagedObjectReference, version string,
-) (*UpdateSet, error) {
+) (*do.UpdateSet, error) {
 
 	return nil, nil
 
@@ -12582,7 +12582,7 @@ func (mo *PropertyCollector) CheckForUpdates(
 //
 func (mo *PropertyCollector) ContinueRetrievePropertiesEx(
 	_this *do.ManagedObjectReference, token string,
-) (*RetrieveResult, error) {
+) (*do.RetrieveResult, error) {
 
 	return nil, nil
 
@@ -12704,7 +12704,7 @@ func (mo *PropertyCollector) DestroyPropertyCollector(
 //
 func (mo *PropertyCollector) RetrieveProperties(
 	_this *do.ManagedObjectReference, specSet []*do.PropertyFilterSpec,
-) ([]*ObjectContent, error) {
+) ([]*do.ObjectContent, error) {
 
 	return nil, nil
 
@@ -12729,7 +12729,7 @@ func (mo *PropertyCollector) RetrieveProperties(
 //
 func (mo *PropertyCollector) RetrievePropertiesEx(
 	_this *do.ManagedObjectReference, specSet []*do.PropertyFilterSpec, options *do.RetrieveOptions,
-) (*RetrieveResult, error) {
+) (*do.RetrieveResult, error) {
 
 	return nil, nil
 
@@ -12747,7 +12747,7 @@ func (mo *PropertyCollector) RetrievePropertiesEx(
 //
 func (mo *PropertyCollector) WaitForUpdates(
 	_this *do.ManagedObjectReference, version string,
-) (*UpdateSet, error) {
+) (*do.UpdateSet, error) {
 
 	return nil, nil
 
@@ -12776,7 +12776,7 @@ func (mo *PropertyCollector) WaitForUpdates(
 //
 func (mo *PropertyCollector) WaitForUpdatesEx(
 	_this *do.ManagedObjectReference, version string, options *do.WaitOptions,
-) (*UpdateSet, error) {
+) (*do.UpdateSet, error) {
 
 	return nil, nil
 
@@ -12833,7 +12833,7 @@ type ResourcePlanningManager struct {
 //
 func (mo *ResourcePlanningManager) EstimateDatabaseSize(
 	_this *do.ManagedObjectReference, dbSizeParam *do.DatabaseSizeParam,
-) (*DatabaseSizeEstimate, error) {
+) (*do.DatabaseSizeEstimate, error) {
 
 	return nil, nil
 
@@ -13265,7 +13265,7 @@ func (mo *ResourcePool) MoveIntoResourcePool(
 //
 func (mo *ResourcePool) QueryResourceConfigOption(
 	_this *do.ManagedObjectReference,
-) (*ResourceConfigOption, error) {
+) (*do.ResourceConfigOption, error) {
 
 	return nil, nil
 
@@ -13840,7 +13840,7 @@ func (mo *ServiceInstance) CurrentTime(
 //
 func (mo *ServiceInstance) QueryVMotionCompatibility(
 	_this *do.ManagedObjectReference, vm *VirtualMachine, host []*HostSystem, compatibility []string,
-) ([]*HostVMotionCompatibility, error) {
+) ([]*do.HostVMotionCompatibility, error) {
 
 	return nil, nil
 
@@ -13856,7 +13856,7 @@ func (mo *ServiceInstance) QueryVMotionCompatibility(
 //
 func (mo *ServiceInstance) RetrieveProductComponents(
 	_this *do.ManagedObjectReference,
-) ([]*ProductComponentInfo, error) {
+) ([]*do.ProductComponentInfo, error) {
 
 	return nil, nil
 
@@ -13870,7 +13870,7 @@ func (mo *ServiceInstance) RetrieveProductComponents(
 //
 func (mo *ServiceInstance) RetrieveServiceContent(
 	_this *do.ManagedObjectReference,
-) (*ServiceContent, error) {
+) (*do.ServiceContent, error) {
 
 	return nil, nil
 
@@ -13892,7 +13892,7 @@ func (mo *ServiceInstance) RetrieveServiceContent(
 //
 func (mo *ServiceInstance) ValidateMigration(
 	_this *do.ManagedObjectReference, vm []*VirtualMachine, state *enum.VirtualMachinePowerState, testType []string, pool *ResourcePool, host *HostSystem,
-) ([]*Event, error) {
+) ([]*do.Event, error) {
 
 	return nil, nil
 
@@ -13928,7 +13928,7 @@ type ServiceManager struct {
 //
 func (mo *ServiceManager) QueryServiceList(
 	_this *do.ManagedObjectReference, serviceName string, location []string,
-) ([]*ServiceManagerServiceInfo, error) {
+) ([]*do.ServiceManagerServiceInfo, error) {
 
 	return nil, nil
 
@@ -14013,7 +14013,7 @@ func (mo *SessionManager) AcquireCloneTicket(
 //
 func (mo *SessionManager) AcquireGenericServiceTicket(
 	_this *do.ManagedObjectReference, spec *do.SessionManagerServiceRequestSpec,
-) (*SessionManagerGenericServiceTicket, error) {
+) (*do.SessionManagerGenericServiceTicket, error) {
 
 	return nil, nil
 
@@ -14047,7 +14047,7 @@ func (mo *SessionManager) AcquireGenericServiceTicket(
 //
 func (mo *SessionManager) AcquireLocalTicket(
 	_this *do.ManagedObjectReference, userName string,
-) (*SessionManagerLocalTicket, error) {
+) (*do.SessionManagerLocalTicket, error) {
 
 	return nil, nil
 
@@ -14066,7 +14066,7 @@ func (mo *SessionManager) AcquireLocalTicket(
 //
 func (mo *SessionManager) CloneSession(
 	_this *do.ManagedObjectReference, cloneTicket string,
-) (*UserSession, error) {
+) (*do.UserSession, error) {
 
 	return nil, nil
 
@@ -14088,7 +14088,7 @@ func (mo *SessionManager) CloneSession(
 //
 func (mo *SessionManager) ImpersonateUser(
 	_this *do.ManagedObjectReference, userName string, locale string,
-) (*UserSession, error) {
+) (*do.UserSession, error) {
 
 	return nil, nil
 
@@ -14103,7 +14103,7 @@ func (mo *SessionManager) ImpersonateUser(
 //
 func (mo *SessionManager) Login(
 	_this *do.ManagedObjectReference, userName string, password string, locale string,
-) (*UserSession, error) {
+) (*do.UserSession, error) {
 
 	return nil, nil
 
@@ -14143,7 +14143,7 @@ func (mo *SessionManager) Login(
 //
 func (mo *SessionManager) LoginBySSPI(
 	_this *do.ManagedObjectReference, base64Token string, locale string,
-) (*UserSession, error) {
+) (*do.UserSession, error) {
 
 	return nil, nil
 
@@ -14190,7 +14190,7 @@ func (mo *SessionManager) LoginBySSPI(
 //
 func (mo *SessionManager) LoginByToken(
 	_this *do.ManagedObjectReference, locale string,
-) (*UserSession, error) {
+) (*do.UserSession, error) {
 
 	return nil, nil
 
@@ -14216,7 +14216,7 @@ func (mo *SessionManager) LoginByToken(
 //
 func (mo *SessionManager) LoginExtensionByCertificate(
 	_this *do.ManagedObjectReference, extensionKey string, locale string,
-) (*UserSession, error) {
+) (*do.UserSession, error) {
 
 	return nil, nil
 
@@ -14239,7 +14239,7 @@ func (mo *SessionManager) LoginExtensionByCertificate(
 //
 func (mo *SessionManager) LoginExtensionBySubjectName(
 	_this *do.ManagedObjectReference, extensionKey string, locale string,
-) (*UserSession, error) {
+) (*do.UserSession, error) {
 
 	return nil, nil
 
@@ -14531,7 +14531,7 @@ func (mo *StorageResourceManager) ConfigureStorageDrsForPod_Task(
 //
 func (mo *StorageResourceManager) QueryDatastorePerformanceSummary(
 	_this *do.ManagedObjectReference, datastore *Datastore,
-) ([]*StoragePerformanceSummary, error) {
+) ([]*do.StoragePerformanceSummary, error) {
 
 	return nil, nil
 
@@ -14547,7 +14547,7 @@ func (mo *StorageResourceManager) QueryDatastorePerformanceSummary(
 //
 func (mo *StorageResourceManager) QueryIORMConfigOption(
 	_this *do.ManagedObjectReference, host *HostSystem,
-) (*StorageIORMConfigOption, error) {
+) (*do.StorageIORMConfigOption, error) {
 
 	return nil, nil
 
@@ -14643,7 +14643,7 @@ func (mo *StorageResourceManager) QueryIORMConfigOption(
 //
 func (mo *StorageResourceManager) RecommendDatastores(
 	_this *do.ManagedObjectReference, storageSpec *do.StoragePlacementSpec,
-) (*StoragePlacementResult, error) {
+) (*do.StoragePlacementResult, error) {
 
 	return nil, nil
 
@@ -14794,7 +14794,7 @@ type TaskHistoryCollector struct {
 //
 func (mo *TaskHistoryCollector) ReadNextTasks(
 	_this *do.ManagedObjectReference, maxCount int32,
-) ([]*TaskInfo, error) {
+) ([]*do.TaskInfo, error) {
 
 	return nil, nil
 
@@ -14812,7 +14812,7 @@ func (mo *TaskHistoryCollector) ReadNextTasks(
 //
 func (mo *TaskHistoryCollector) ReadPreviousTasks(
 	_this *do.ManagedObjectReference, maxCount int32,
-) ([]*TaskInfo, error) {
+) ([]*do.TaskInfo, error) {
 
 	return nil, nil
 
@@ -14901,7 +14901,7 @@ func (mo *TaskManager) CreateCollectorForTasks(
 //
 func (mo *TaskManager) CreateTask(
 	_this *do.ManagedObjectReference, obj *do.ManagedObjectReference, taskTypeId string, initiatedBy string, cancelable bool, parentTaskKey string,
-) (*TaskInfo, error) {
+) (*do.TaskInfo, error) {
 
 	return nil, nil
 
@@ -14986,7 +14986,7 @@ type UserDirectory struct {
 //
 func (mo *UserDirectory) RetrieveUserGroups(
 	_this *do.ManagedObjectReference, domain string, searchStr string, belongsToGroup string, belongsToUser string, exactMatch bool, findUsers bool, findGroups bool,
-) ([]*UserSearchResult, error) {
+) ([]*do.UserSearchResult, error) {
 
 	return nil, nil
 
@@ -15794,7 +15794,7 @@ func (mo *VirtualDiskManager) QueryVirtualDiskFragmentation(
 //
 func (mo *VirtualDiskManager) QueryVirtualDiskGeometry(
 	_this *do.ManagedObjectReference, name string, datacenter *Datacenter,
-) (*HostDiskDimensionsChs, error) {
+) (*do.HostDiskDimensionsChs, error) {
 
 	return nil, nil
 
@@ -16101,7 +16101,7 @@ type VirtualMachine struct {
 //
 func (mo *VirtualMachine) AcquireMksTicket(
 	_this *do.ManagedObjectReference,
-) (*VirtualMachineMksTicket, error) {
+) (*do.VirtualMachineMksTicket, error) {
 
 	return nil, nil
 
@@ -16143,7 +16143,7 @@ func (mo *VirtualMachine) AcquireMksTicket(
 //
 func (mo *VirtualMachine) AcquireTicket(
 	_this *do.ManagedObjectReference, ticketType string,
-) (*VirtualMachineTicket, error) {
+) (*do.VirtualMachineTicket, error) {
 
 	return nil, nil
 
@@ -16690,7 +16690,7 @@ func (mo *VirtualMachine) PromoteDisks_Task(
 //
 func (mo *VirtualMachine) QueryChangedDiskAreas(
 	_this *do.ManagedObjectReference, snapshot *VirtualMachineSnapshot, deviceKey int32, startOffset int64, changeId string,
-) (*DiskChangeInfo, error) {
+) (*do.DiskChangeInfo, error) {
 
 	return nil, nil
 
@@ -16715,7 +16715,7 @@ func (mo *VirtualMachine) QueryChangedDiskAreas(
 //
 func (mo *VirtualMachine) QueryFaultToleranceCompatibility(
 	_this *do.ManagedObjectReference,
-) ([]*MethodFault, error) {
+) ([]*fault.MethodFault, error) {
 
 	return nil, nil
 

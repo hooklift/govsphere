@@ -34,11 +34,12 @@ type {{$type}} struct {
 
 {{range .Methods}}
 {{$mcomment := comment .Description}}
+{{$returnType := toGoType .ReturnValue.Type}}
 {{if $mcomment}} {{$mcomment}} {{end}}
 func ({{$namespace}} *{{$type}}) {{makePublic .Name true}}(
 {{range .Parameters}} {{$ptype := toGoType .Type}} {{replaceReservedWords .Name}} {{lookUpNamespace $ptype $namespace}}, {{end}}
-) ({{if .ReturnValue.Type}}{{toGoType .ReturnValue.Type}},{{end}} error) {
-	{{if .ReturnValue.Type}}
+) ({{if $returnType}}{{lookUpNamespace $returnType $namespace}},{{end}} error) {
+	{{if $returnType}}
 		return nil, nil
 	{{else}}
 		return nil
