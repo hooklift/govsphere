@@ -25,8 +25,9 @@ type {{$type}} struct {
 	{{lookUpNamespace $extends $namespace}}
 	{{range .Properties}}
 		{{$fieldComment := comment .Description}}
+		{{$privileges := comment .RequiredPrivileges}}
 		{{$fieldType := toGoType .Type}}
-		{{if $fieldComment}} {{$fieldComment}} {{end}}
+		{{if $fieldComment}} {{$fieldComment}} {{end}}{{if $privileges}} {{$privileges}} {{end}}
 		{{makePublic .Name true}} {{lookUpNamespace $fieldType $namespace}}
 	{{end}}
 }

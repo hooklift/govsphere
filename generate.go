@@ -187,6 +187,7 @@ func lookUpNamespace(type_, currentNs string) string {
 		prefix = "[]"
 		type_ = type_[2:]
 	}
+
 	targetNs := objnsmap[type_]
 	if targetNs == "" || targetNs == currentNs {
 		return prefix + type_
@@ -275,7 +276,7 @@ func genCode(objects []Object, mainPkg, tmpl, namespace string) {
 	if namespace == "do" {
 		data.WriteString(`
 			import (
-				//"github.com/c4milo/govsphere/vim/mo"
+				"github.com/c4milo/govsphere/vim/mo"
 				"time"
 			)
 		`)

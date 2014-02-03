@@ -5,7 +5,7 @@
 package do
 
 import (
-	//"github.com/c4milo/govsphere/vim/mo"
+	"github.com/c4milo/govsphere/vim/mo"
 	"time"
 )
 
@@ -9896,6 +9896,7 @@ type EventFilterSpecByEntity struct {
 	*DynamicData
 
 	// The managed entity to which the event pertains.
+	// Required Privilege: System.View
 	Entity *mo.ManagedEntity
 
 	// Specification of related managed entities in the inventory hierarchy.
@@ -11124,6 +11125,7 @@ type GuestInfo struct {
 	// namespaces.
 	//
 	// Since vSphere API 5.1
+	// Required Privilege: VirtualMachine.Namespace.EventNotify
 	GenerationInfo []*GuestInfoNamespaceGenerationInfo
 
 	// Guest operating system family, if known.
@@ -21691,6 +21693,7 @@ type IpPoolAssociation struct {
 	*DynamicData
 
 	// The network object
+	// Required Privilege: System.Read
 	Network *mo.Network
 
 	// The name of the network or portgroup
@@ -24301,6 +24304,7 @@ type ObjectSpec struct {
 	*DynamicData
 
 	// Starting object.
+	// Required Privilege: System.View
 	Obj *ManagedObjectReference
 
 	// Set of selections to specify additional objects to filter.
@@ -25064,6 +25068,7 @@ type OvfResourceMap struct {
 	// override the default datastore passed into CreateImportSpec field.
 	// This enables importing to different compute resources that do not have shared
 	// datastores.
+	// Required Privilege: Datastore.AllocateSpace
 	Datastore *mo.Datastore
 
 	// The parent resource pool to use for the entity. This must specify a
@@ -30253,6 +30258,7 @@ type TaskFilterSpecByEntity struct {
 	*DynamicData
 
 	// The managed entity to which the task pertains.
+	// Required Privilege: System.View
 	Entity *mo.ManagedEntity
 
 	// Specification of related managed entities in the inventory hierarchy.
@@ -31460,9 +31466,11 @@ type VAppCloneSpec struct {
 	// If the target pool represents a cluster without DRS enabled or a
 	// DRS-enabled cluster in manual mode, an InvalidArgument exception is
 	// thrown.
+	// Required Privilege: VApp.Create
 	Host *mo.HostSystem
 
 	// Location where the destination vApp must be stored
+	// Required Privilege: Datastore.AllocateSpace
 	Location *mo.Datastore
 
 	// Network mappings. See NetworkMappingPair.
@@ -31485,6 +31493,7 @@ type VAppCloneSpec struct {
 	ResourceSpec *ResourceConfigSpec
 
 	// The VM Folder to associate the vApp with
+	// Required Privilege: VApp.Create
 	VmFolder *mo.Folder
 }
 
@@ -31499,6 +31508,7 @@ type VAppCloneSpecNetworkMappingPair struct {
 	*DynamicData
 
 	// The destination network
+	// Required Privilege: Network.Assign
 	Destination *mo.Network
 
 	// The source network
@@ -31518,11 +31528,13 @@ type VAppCloneSpecResourceMap struct {
 	// override the default datastore location set in location field. This
 	// enables cloning to different compute resources that do not have shared
 	// datastores.
+	// Required Privilege: Datastore.AllocateSpace
 	Location *mo.Datastore
 
 	// Resource pool to use for the cloned entity of source. This must specify a
 	// resource pool that is not part of the vApp. If this is specified, a linked
 	// child (as opposed to a direct child) is created for the vApp.
+	// Required Privilege: Resource.AssignVAppToPool
 	Parent *mo.ResourcePool
 
 	// An optional resource configuration for the cloned entity of the source. If
