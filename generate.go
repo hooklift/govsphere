@@ -188,6 +188,12 @@ func lookUpNamespace(type_, currentNs string) string {
 		type_ = type_[2:]
 	}
 
+	//strips out package name if it has it
+	type_ = strings.TrimPrefix(type_, "mo.")
+	type_ = strings.TrimPrefix(type_, "do.")
+	type_ = strings.TrimPrefix(type_, "fault.")
+	type_ = strings.TrimPrefix(type_, "enum.")
+
 	targetNs := objnsmap[type_]
 	if targetNs == "" || targetNs == currentNs {
 		return prefix + type_

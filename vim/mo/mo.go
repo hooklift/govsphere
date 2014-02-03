@@ -86,7 +86,7 @@ type AlarmManager struct {
 // vSphere API 4.0
 //
 func (mo *AlarmManager) AcknowledgeAlarm(
-	_this *do.ManagedObjectReference, alarm *mo.Alarm, entity *mo.ManagedEntity,
+	_this *do.ManagedObjectReference, alarm *Alarm, entity *ManagedEntity,
 ) error {
 
 	return nil
@@ -102,7 +102,7 @@ func (mo *AlarmManager) AcknowledgeAlarm(
 // vSphere API 4.0
 //
 func (mo *AlarmManager) AreAlarmActionsEnabled(
-	_this *do.ManagedObjectReference, entity *mo.ManagedEntity,
+	_this *do.ManagedObjectReference, entity *ManagedEntity,
 ) (bool, error) {
 
 	return nil, nil
@@ -121,7 +121,7 @@ func (mo *AlarmManager) AreAlarmActionsEnabled(
 // None
 //
 func (mo *AlarmManager) CreateAlarm(
-	_this *do.ManagedObjectReference, entity *mo.ManagedEntity, spec *do.AlarmSpec,
+	_this *do.ManagedObjectReference, entity *ManagedEntity, spec *do.AlarmSpec,
 ) (*Alarm, error) {
 
 	return nil, nil
@@ -137,7 +137,7 @@ func (mo *AlarmManager) CreateAlarm(
 // vSphere API 4.0
 //
 func (mo *AlarmManager) EnableAlarmActions(
-	_this *do.ManagedObjectReference, entity *mo.ManagedEntity, enabled bool,
+	_this *do.ManagedObjectReference, entity *ManagedEntity, enabled bool,
 ) error {
 
 	return nil
@@ -155,7 +155,7 @@ func (mo *AlarmManager) EnableAlarmActions(
 // System.View
 //
 func (mo *AlarmManager) GetAlarm(
-	_this *do.ManagedObjectReference, entity *mo.ManagedEntity,
+	_this *do.ManagedObjectReference, entity *ManagedEntity,
 ) ([]*Alarm, error) {
 
 	return nil, nil
@@ -171,7 +171,7 @@ func (mo *AlarmManager) GetAlarm(
 // None
 //
 func (mo *AlarmManager) GetAlarmState(
-	_this *do.ManagedObjectReference, entity *mo.ManagedEntity,
+	_this *do.ManagedObjectReference, entity *ManagedEntity,
 ) ([]*AlarmState, error) {
 
 	return nil, nil
@@ -297,7 +297,7 @@ func (mo *AuthorizationManager) AddAuthorizationRole(
 // vSphere API 5.5
 //
 func (mo *AuthorizationManager) HasPrivilegeOnEntities(
-	_this *do.ManagedObjectReference, entity []*mo.ManagedEntity, sessionId string, privId []string,
+	_this *do.ManagedObjectReference, entity []*ManagedEntity, sessionId string, privId []string,
 ) ([]*EntityPrivilege, error) {
 
 	return nil, nil
@@ -318,7 +318,7 @@ func (mo *AuthorizationManager) HasPrivilegeOnEntities(
 // vSphere API 5.0
 //
 func (mo *AuthorizationManager) HasPrivilegeOnEntity(
-	_this *do.ManagedObjectReference, entity *mo.ManagedEntity, sessionId string, privId []string,
+	_this *do.ManagedObjectReference, entity *ManagedEntity, sessionId string, privId []string,
 ) ([]boolean, error) {
 
 	return nil, nil
@@ -372,7 +372,7 @@ func (mo *AuthorizationManager) RemoveAuthorizationRole(
 // None
 //
 func (mo *AuthorizationManager) RemoveEntityPermission(
-	_this *do.ManagedObjectReference, entity *mo.ManagedEntity, user string, isGroup bool,
+	_this *do.ManagedObjectReference, entity *ManagedEntity, user string, isGroup bool,
 ) error {
 
 	return nil
@@ -417,7 +417,7 @@ func (mo *AuthorizationManager) RemoveEntityPermission(
 // None
 //
 func (mo *AuthorizationManager) ResetEntityPermissions(
-	_this *do.ManagedObjectReference, entity *mo.ManagedEntity, permission []*do.Permission,
+	_this *do.ManagedObjectReference, entity *ManagedEntity, permission []*do.Permission,
 ) error {
 
 	return nil
@@ -460,7 +460,7 @@ func (mo *AuthorizationManager) RetrieveAllPermissions(
 // None
 //
 func (mo *AuthorizationManager) RetrieveEntityPermissions(
-	_this *do.ManagedObjectReference, entity *mo.ManagedEntity, inherited bool,
+	_this *do.ManagedObjectReference, entity *ManagedEntity, inherited bool,
 ) ([]*Permission, error) {
 
 	return nil, nil
@@ -514,7 +514,7 @@ func (mo *AuthorizationManager) RetrieveRolePermissions(
 // None
 //
 func (mo *AuthorizationManager) SetEntityPermissions(
-	_this *do.ManagedObjectReference, entity *mo.ManagedEntity, permission []*do.Permission,
+	_this *do.ManagedObjectReference, entity *ManagedEntity, permission []*do.Permission,
 ) error {
 
 	return nil
@@ -649,7 +649,7 @@ type ClusterComputeResource struct {
 // Host.Inventory.AddHostToCluster
 //
 func (mo *ClusterComputeResource) AddHost_Task(
-	_this *do.ManagedObjectReference, spec *do.HostConnectSpec, asConnected bool, resourcePool *mo.ResourcePool, license string,
+	_this *do.ManagedObjectReference, spec *do.HostConnectSpec, asConnected bool, resourcePool *ResourcePool, license string,
 ) (*Task, error) {
 
 	return nil, nil
@@ -739,7 +739,7 @@ func (mo *ClusterComputeResource) CancelRecommendation(
 // vSphere API 5.0
 //
 func (mo *ClusterComputeResource) ClusterEnterMaintenanceMode(
-	_this *do.ManagedObjectReference, host []*mo.HostSystem, option []*do.OptionValue,
+	_this *do.ManagedObjectReference, host []*HostSystem, option []*do.OptionValue,
 ) (*ClusterEnterMaintenanceResult, error) {
 
 	return nil, nil
@@ -775,7 +775,7 @@ func (mo *ClusterComputeResource) ClusterEnterMaintenanceMode(
 // Host.Inventory.EditCluster
 //
 func (mo *ClusterComputeResource) MoveHostInto_Task(
-	_this *do.ManagedObjectReference, host *mo.HostSystem, resourcePool *mo.ResourcePool,
+	_this *do.ManagedObjectReference, host *HostSystem, resourcePool *ResourcePool,
 ) (*Task, error) {
 
 	return nil, nil
@@ -814,7 +814,7 @@ func (mo *ClusterComputeResource) MoveHostInto_Task(
 // Host.Inventory.EditCluster
 //
 func (mo *ClusterComputeResource) MoveInto_Task(
-	_this *do.ManagedObjectReference, host []*mo.HostSystem,
+	_this *do.ManagedObjectReference, host []*HostSystem,
 ) (*Task, error) {
 
 	return nil, nil
@@ -850,7 +850,7 @@ func (mo *ClusterComputeResource) MoveInto_Task(
 // System.Read
 //
 func (mo *ClusterComputeResource) RecommendHostsForVm(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, pool *mo.ResourcePool,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, pool *ResourcePool,
 ) ([]*ClusterHostRecommendation, error) {
 
 	return nil, nil
@@ -1136,7 +1136,7 @@ func (mo *CustomFieldsManager) RenameCustomFieldDef(
 // None
 //
 func (mo *CustomFieldsManager) SetField(
-	_this *do.ManagedObjectReference, entity *mo.ManagedEntity, key int32, value string,
+	_this *do.ManagedObjectReference, entity *ManagedEntity, key int32, value string,
 ) error {
 
 	return nil
@@ -1426,7 +1426,7 @@ type Datacenter struct {
 // VI API 2.5
 //
 func (mo *Datacenter) PowerOnMultiVM_Task(
-	_this *do.ManagedObjectReference, vm []*mo.VirtualMachine, option []*do.OptionValue,
+	_this *do.ManagedObjectReference, vm []*VirtualMachine, option []*do.OptionValue,
 ) (*Task, error) {
 
 	return nil, nil
@@ -1758,7 +1758,7 @@ type DatastoreNamespaceManager struct {
 // Datastore.Config
 //
 func (mo *DatastoreNamespaceManager) CreateDirectory(
-	_this *do.ManagedObjectReference, datastore *mo.Datastore, displayName string, policy string,
+	_this *do.ManagedObjectReference, datastore *Datastore, displayName string, policy string,
 ) (string, error) {
 
 	return nil, nil
@@ -1779,7 +1779,7 @@ func (mo *DatastoreNamespaceManager) CreateDirectory(
 // Datastore.Config
 //
 func (mo *DatastoreNamespaceManager) DeleteDirectory(
-	_this *do.ManagedObjectReference, datacenter *mo.Datacenter, datastorePath string,
+	_this *do.ManagedObjectReference, datacenter *Datacenter, datastorePath string,
 ) error {
 
 	return nil
@@ -1803,7 +1803,7 @@ type DiagnosticManager struct {
 // Global.Diagnostics
 //
 func (mo *DiagnosticManager) BrowseDiagnosticLog(
-	_this *do.ManagedObjectReference, host *mo.HostSystem, key string, start int32, lines int32,
+	_this *do.ManagedObjectReference, host *HostSystem, key string, start int32, lines int32,
 ) (*DiagnosticManagerLogHeader, error) {
 
 	return nil, nil
@@ -1822,7 +1822,7 @@ func (mo *DiagnosticManager) BrowseDiagnosticLog(
 // Global.Diagnostics
 //
 func (mo *DiagnosticManager) GenerateLogBundles_Task(
-	_this *do.ManagedObjectReference, includeDefault bool, host []*mo.HostSystem,
+	_this *do.ManagedObjectReference, includeDefault bool, host []*HostSystem,
 ) (*Task, error) {
 
 	return nil, nil
@@ -1836,7 +1836,7 @@ func (mo *DiagnosticManager) GenerateLogBundles_Task(
 // Global.Diagnostics
 //
 func (mo *DiagnosticManager) QueryDescriptions(
-	_this *do.ManagedObjectReference, host *mo.HostSystem,
+	_this *do.ManagedObjectReference, host *HostSystem,
 ) ([]*DiagnosticManagerLogDescriptor, error) {
 
 	return nil, nil
@@ -2483,7 +2483,7 @@ func (mo *DistributedVirtualSwitch) LookupDvPortGroup(
 // DVSwitch.Modify
 //
 func (mo *DistributedVirtualSwitch) MergeDvs_Task(
-	_this *do.ManagedObjectReference, dvs *mo.DistributedVirtualSwitch,
+	_this *do.ManagedObjectReference, dvs *DistributedVirtualSwitch,
 ) (*Task, error) {
 
 	return nil, nil
@@ -2627,7 +2627,7 @@ func (mo *DistributedVirtualSwitch) ReconfigureDvs_Task(
 // System.Read
 //
 func (mo *DistributedVirtualSwitch) RectifyDvsHost_Task(
-	_this *do.ManagedObjectReference, hosts []*mo.HostSystem,
+	_this *do.ManagedObjectReference, hosts []*HostSystem,
 ) (*Task, error) {
 
 	return nil, nil
@@ -2815,7 +2815,7 @@ func (mo *DistributedVirtualSwitchManager) QueryAvailableDvsSpec(
 // System.View
 //
 func (mo *DistributedVirtualSwitchManager) QueryCompatibleHostForExistingDvs(
-	_this *do.ManagedObjectReference, container *mo.ManagedEntity, recursive bool, dvs *mo.DistributedVirtualSwitch,
+	_this *do.ManagedObjectReference, container *ManagedEntity, recursive bool, dvs *DistributedVirtualSwitch,
 ) ([]*HostSystem, error) {
 
 	return nil, nil
@@ -2830,7 +2830,7 @@ func (mo *DistributedVirtualSwitchManager) QueryCompatibleHostForExistingDvs(
 // System.View
 //
 func (mo *DistributedVirtualSwitchManager) QueryCompatibleHostForNewDvs(
-	_this *do.ManagedObjectReference, container *mo.ManagedEntity, recursive bool, switchProductSpec *do.DistributedVirtualSwitchProductSpec,
+	_this *do.ManagedObjectReference, container *ManagedEntity, recursive bool, switchProductSpec *do.DistributedVirtualSwitchProductSpec,
 ) ([]*HostSystem, error) {
 
 	return nil, nil
@@ -2915,7 +2915,7 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsCompatibleHostSpec(
 // System.View
 //
 func (mo *DistributedVirtualSwitchManager) QueryDvsConfigTarget(
-	_this *do.ManagedObjectReference, host *mo.HostSystem, dvs *mo.DistributedVirtualSwitch,
+	_this *do.ManagedObjectReference, host *HostSystem, dvs *DistributedVirtualSwitch,
 ) (*DVSManagerDvsConfigTarget, error) {
 
 	return nil, nil
@@ -2949,7 +2949,7 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsFeatureCapability(
 // vSphere API 5.0
 //
 func (mo *DistributedVirtualSwitchManager) RectifyDvsOnHost_Task(
-	_this *do.ManagedObjectReference, hosts []*mo.HostSystem,
+	_this *do.ManagedObjectReference, hosts []*HostSystem,
 ) (*Task, error) {
 
 	return nil, nil
@@ -3020,7 +3020,7 @@ type EnvironmentBrowser struct {
 // System.View
 //
 func (mo *EnvironmentBrowser) QueryConfigOption(
-	_this *do.ManagedObjectReference, key string, host *mo.HostSystem,
+	_this *do.ManagedObjectReference, key string, host *HostSystem,
 ) (*VirtualMachineConfigOption, error) {
 
 	return nil, nil
@@ -3063,7 +3063,7 @@ func (mo *EnvironmentBrowser) QueryConfigOptionDescriptor(
 // System.View
 //
 func (mo *EnvironmentBrowser) QueryConfigTarget(
-	_this *do.ManagedObjectReference, host *mo.HostSystem,
+	_this *do.ManagedObjectReference, host *HostSystem,
 ) (*ConfigTarget, error) {
 
 	return nil, nil
@@ -3093,7 +3093,7 @@ func (mo *EnvironmentBrowser) QueryConfigTarget(
 // vSphere API 4.0
 //
 func (mo *EnvironmentBrowser) QueryTargetCapabilities(
-	_this *do.ManagedObjectReference, host *mo.HostSystem,
+	_this *do.ManagedObjectReference, host *HostSystem,
 ) (*HostCapability, error) {
 
 	return nil, nil
@@ -3202,7 +3202,7 @@ func (mo *EventManager) CreateCollectorForEvents(
 // None
 //
 func (mo *EventManager) LogUserEvent(
-	_this *do.ManagedObjectReference, entity *mo.ManagedEntity, msg string,
+	_this *do.ManagedObjectReference, entity *ManagedEntity, msg string,
 ) error {
 
 	return nil
@@ -3575,7 +3575,7 @@ type FileManager struct {
 // vSphere API 4.0
 //
 func (mo *FileManager) ChangeOwner(
-	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter, owner string,
+	_this *do.ManagedObjectReference, name string, datacenter *Datacenter, owner string,
 ) error {
 
 	return nil
@@ -3631,7 +3631,7 @@ func (mo *FileManager) ChangeOwner(
 // Dynamic - See discussion above
 //
 func (mo *FileManager) CopyDatastoreFile_Task(
-	_this *do.ManagedObjectReference, sourceName string, sourceDatacenter *mo.Datacenter, destinationName string, destinationDatacenter *mo.Datacenter, force bool,
+	_this *do.ManagedObjectReference, sourceName string, sourceDatacenter *Datacenter, destinationName string, destinationDatacenter *Datacenter, force bool,
 ) (*Task, error) {
 
 	return nil, nil
@@ -3665,7 +3665,7 @@ func (mo *FileManager) CopyDatastoreFile_Task(
 // Dynamic - See discussion above
 //
 func (mo *FileManager) DeleteDatastoreFile_Task(
-	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter,
+	_this *do.ManagedObjectReference, name string, datacenter *Datacenter,
 ) (*Task, error) {
 
 	return nil, nil
@@ -3691,7 +3691,7 @@ func (mo *FileManager) DeleteDatastoreFile_Task(
 // Dynamic - See discussion above
 //
 func (mo *FileManager) MakeDirectory(
-	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter, createParentDirectories bool,
+	_this *do.ManagedObjectReference, name string, datacenter *Datacenter, createParentDirectories bool,
 ) error {
 
 	return nil
@@ -3748,7 +3748,7 @@ func (mo *FileManager) MakeDirectory(
 // Dynamic - See discussion above
 //
 func (mo *FileManager) MoveDatastoreFile_Task(
-	_this *do.ManagedObjectReference, sourceName string, sourceDatacenter *mo.Datacenter, destinationName string, destinationDatacenter *mo.Datacenter, force bool,
+	_this *do.ManagedObjectReference, sourceName string, sourceDatacenter *Datacenter, destinationName string, destinationDatacenter *Datacenter, force bool,
 ) (*Task, error) {
 
 	return nil, nil
@@ -4074,7 +4074,7 @@ func (mo *Folder) CreateStoragePod(
 // VirtualMachine.Inventory.Create
 //
 func (mo *Folder) CreateVM_Task(
-	_this *do.ManagedObjectReference, config *do.VirtualMachineConfigSpec, pool *mo.ResourcePool, host *mo.HostSystem,
+	_this *do.ManagedObjectReference, config *do.VirtualMachineConfigSpec, pool *ResourcePool, host *HostSystem,
 ) (*Task, error) {
 
 	return nil, nil
@@ -4159,7 +4159,7 @@ func (mo *Folder) CreateVM_Task(
 // Dynamic - See discussion above
 //
 func (mo *Folder) MoveIntoFolder_Task(
-	_this *do.ManagedObjectReference, list []*mo.ManagedEntity,
+	_this *do.ManagedObjectReference, list []*ManagedEntity,
 ) (*Task, error) {
 
 	return nil, nil
@@ -4185,7 +4185,7 @@ func (mo *Folder) MoveIntoFolder_Task(
 // VirtualMachine.Inventory.Register
 //
 func (mo *Folder) RegisterVM_Task(
-	_this *do.ManagedObjectReference, path string, name string, asTemplate bool, pool *mo.ResourcePool, host *mo.HostSystem,
+	_this *do.ManagedObjectReference, path string, name string, asTemplate bool, pool *ResourcePool, host *HostSystem,
 ) (*Task, error) {
 
 	return nil, nil
@@ -4255,7 +4255,7 @@ type GuestAuthManager struct {
 // None
 //
 func (mo *GuestAuthManager) AcquireCredentialsInGuest(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, requestedAuth *do.GuestAuthentication, sessionID int64,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, requestedAuth *do.GuestAuthentication, sessionID int64,
 ) (*GuestAuthentication, error) {
 
 	return nil, nil
@@ -4279,7 +4279,7 @@ func (mo *GuestAuthManager) AcquireCredentialsInGuest(
 // None
 //
 func (mo *GuestAuthManager) ReleaseCredentialsInGuest(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, auth *do.GuestAuthentication,
 ) error {
 
 	return nil
@@ -4301,7 +4301,7 @@ func (mo *GuestAuthManager) ReleaseCredentialsInGuest(
 // None
 //
 func (mo *GuestAuthManager) ValidateCredentialsInGuest(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, auth *do.GuestAuthentication,
 ) error {
 
 	return nil
@@ -4324,7 +4324,7 @@ type GuestFileManager struct {
 // None
 //
 func (mo *GuestFileManager) ChangeFileAttributesInGuest(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, guestFilePath string, fileAttributes *do.GuestFileAttributes,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, auth *do.GuestAuthentication, guestFilePath string, fileAttributes *do.GuestFileAttributes,
 ) error {
 
 	return nil
@@ -4344,7 +4344,7 @@ func (mo *GuestFileManager) ChangeFileAttributesInGuest(
 // None
 //
 func (mo *GuestFileManager) CreateTemporaryDirectoryInGuest(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, prefix string, suffix string, directoryPath string,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, auth *do.GuestAuthentication, prefix string, suffix string, directoryPath string,
 ) (string, error) {
 
 	return nil, nil
@@ -4364,7 +4364,7 @@ func (mo *GuestFileManager) CreateTemporaryDirectoryInGuest(
 // None
 //
 func (mo *GuestFileManager) CreateTemporaryFileInGuest(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, prefix string, suffix string, directoryPath string,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, auth *do.GuestAuthentication, prefix string, suffix string, directoryPath string,
 ) (string, error) {
 
 	return nil, nil
@@ -4380,7 +4380,7 @@ func (mo *GuestFileManager) CreateTemporaryFileInGuest(
 // None
 //
 func (mo *GuestFileManager) DeleteDirectoryInGuest(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, directoryPath string, recursive bool,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, auth *do.GuestAuthentication, directoryPath string, recursive bool,
 ) error {
 
 	return nil
@@ -4396,7 +4396,7 @@ func (mo *GuestFileManager) DeleteDirectoryInGuest(
 // None
 //
 func (mo *GuestFileManager) DeleteFileInGuest(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, filePath string,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, auth *do.GuestAuthentication, filePath string,
 ) error {
 
 	return nil
@@ -4435,7 +4435,7 @@ func (mo *GuestFileManager) DeleteFileInGuest(
 // None
 //
 func (mo *GuestFileManager) InitiateFileTransferFromGuest(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, guestFilePath string,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, auth *do.GuestAuthentication, guestFilePath string,
 ) (*FileTransferInformation, error) {
 
 	return nil, nil
@@ -4472,7 +4472,7 @@ func (mo *GuestFileManager) InitiateFileTransferFromGuest(
 // None
 //
 func (mo *GuestFileManager) InitiateFileTransferToGuest(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, guestFilePath string, fileAttributes *do.GuestFileAttributes, fileSize int64, overwrite bool,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, auth *do.GuestAuthentication, guestFilePath string, fileAttributes *do.GuestFileAttributes, fileSize int64, overwrite bool,
 ) (string, error) {
 
 	return nil, nil
@@ -4495,7 +4495,7 @@ func (mo *GuestFileManager) InitiateFileTransferToGuest(
 // None
 //
 func (mo *GuestFileManager) ListFilesInGuest(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, filePath string, index int32, maxResults int32, matchPattern string,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, auth *do.GuestAuthentication, filePath string, index int32, maxResults int32, matchPattern string,
 ) (*GuestListFileInfo, error) {
 
 	return nil, nil
@@ -4511,7 +4511,7 @@ func (mo *GuestFileManager) ListFilesInGuest(
 // None
 //
 func (mo *GuestFileManager) MakeDirectoryInGuest(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, directoryPath string, createParentDirectories bool,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, auth *do.GuestAuthentication, directoryPath string, createParentDirectories bool,
 ) error {
 
 	return nil
@@ -4527,7 +4527,7 @@ func (mo *GuestFileManager) MakeDirectoryInGuest(
 // None
 //
 func (mo *GuestFileManager) MoveDirectoryInGuest(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, srcDirectoryPath string, dstDirectoryPath string,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, auth *do.GuestAuthentication, srcDirectoryPath string, dstDirectoryPath string,
 ) error {
 
 	return nil
@@ -4543,7 +4543,7 @@ func (mo *GuestFileManager) MoveDirectoryInGuest(
 // None
 //
 func (mo *GuestFileManager) MoveFileInGuest(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, srcFilePath string, dstFilePath string, overwrite bool,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, auth *do.GuestAuthentication, srcFilePath string, dstFilePath string, overwrite bool,
 ) error {
 
 	return nil
@@ -4592,7 +4592,7 @@ type GuestProcessManager struct {
 // None
 //
 func (mo *GuestProcessManager) ListProcessesInGuest(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, pids []long,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, auth *do.GuestAuthentication, pids []long,
 ) ([]*GuestProcessInfo, error) {
 
 	return nil, nil
@@ -4613,7 +4613,7 @@ func (mo *GuestProcessManager) ListProcessesInGuest(
 // None
 //
 func (mo *GuestProcessManager) ReadEnvironmentVariableInGuest(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, names []string,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, auth *do.GuestAuthentication, names []string,
 ) ([]string, error) {
 
 	return nil, nil
@@ -4635,7 +4635,7 @@ func (mo *GuestProcessManager) ReadEnvironmentVariableInGuest(
 // None
 //
 func (mo *GuestProcessManager) StartProgramInGuest(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, spec *do.GuestProgramSpec,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, auth *do.GuestAuthentication, spec *do.GuestProgramSpec,
 ) (int64, error) {
 
 	return nil, nil
@@ -4651,7 +4651,7 @@ func (mo *GuestProcessManager) StartProgramInGuest(
 // None
 //
 func (mo *GuestProcessManager) TerminateProcessInGuest(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, auth *do.GuestAuthentication, pid int64,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, auth *do.GuestAuthentication, pid int64,
 ) error {
 
 	return nil
@@ -5474,7 +5474,7 @@ func (mo *HostDatastoreSystem) CreateVmfsDatastore(
 // vSphere API 4.0
 //
 func (mo *HostDatastoreSystem) ExpandVmfsDatastore(
-	_this *do.ManagedObjectReference, datastore *mo.Datastore, spec *do.VmfsDatastoreExpandSpec,
+	_this *do.ManagedObjectReference, datastore *Datastore, spec *do.VmfsDatastoreExpandSpec,
 ) (*Datastore, error) {
 
 	return nil, nil
@@ -5489,7 +5489,7 @@ func (mo *HostDatastoreSystem) ExpandVmfsDatastore(
 // Host.Config.Storage
 //
 func (mo *HostDatastoreSystem) ExtendVmfsDatastore(
-	_this *do.ManagedObjectReference, datastore *mo.Datastore, spec *do.VmfsDatastoreExtendSpec,
+	_this *do.ManagedObjectReference, datastore *Datastore, spec *do.VmfsDatastoreExtendSpec,
 ) (*Datastore, error) {
 
 	return nil, nil
@@ -5519,7 +5519,7 @@ func (mo *HostDatastoreSystem) ExtendVmfsDatastore(
 // Host.Config.Storage
 //
 func (mo *HostDatastoreSystem) QueryAvailableDisksForVmfs(
-	_this *do.ManagedObjectReference, datastore *mo.Datastore,
+	_this *do.ManagedObjectReference, datastore *Datastore,
 ) ([]*HostScsiDisk, error) {
 
 	return nil, nil
@@ -5571,7 +5571,7 @@ func (mo *HostDatastoreSystem) QueryVmfsDatastoreCreateOptions(
 // vSphere API 4.0
 //
 func (mo *HostDatastoreSystem) QueryVmfsDatastoreExpandOptions(
-	_this *do.ManagedObjectReference, datastore *mo.Datastore,
+	_this *do.ManagedObjectReference, datastore *Datastore,
 ) ([]*VmfsDatastoreOption, error) {
 
 	return nil, nil
@@ -5586,7 +5586,7 @@ func (mo *HostDatastoreSystem) QueryVmfsDatastoreExpandOptions(
 // Host.Config.Storage
 //
 func (mo *HostDatastoreSystem) QueryVmfsDatastoreExtendOptions(
-	_this *do.ManagedObjectReference, datastore *mo.Datastore, devicePath string, suppressExpandCandidates bool,
+	_this *do.ManagedObjectReference, datastore *Datastore, devicePath string, suppressExpandCandidates bool,
 ) ([]*VmfsDatastoreOption, error) {
 
 	return nil, nil
@@ -5600,7 +5600,7 @@ func (mo *HostDatastoreSystem) QueryVmfsDatastoreExtendOptions(
 // Host.Config.Storage
 //
 func (mo *HostDatastoreSystem) RemoveDatastore(
-	_this *do.ManagedObjectReference, datastore *mo.Datastore,
+	_this *do.ManagedObjectReference, datastore *Datastore,
 ) error {
 
 	return nil
@@ -5654,7 +5654,7 @@ func (mo *HostDatastoreSystem) ResignatureUnresolvedVmfsVolume_Task(
 // VI API 2.5
 //
 func (mo *HostDatastoreSystem) UpdateLocalSwapDatastore(
-	_this *do.ManagedObjectReference, datastore *mo.Datastore,
+	_this *do.ManagedObjectReference, datastore *Datastore,
 ) error {
 
 	return nil
@@ -7364,7 +7364,7 @@ type HostProfile struct {
 // System.View
 //
 func (mo *HostProfile) ExecuteHostProfile(
-	_this *do.ManagedObjectReference, host *mo.HostSystem, deferredParam []*do.ProfileDeferredPolicyOptionParameter,
+	_this *do.ManagedObjectReference, host *HostSystem, deferredParam []*do.ProfileDeferredPolicyOptionParameter,
 ) (*ProfileExecuteResult, error) {
 
 	return nil, nil
@@ -7392,7 +7392,7 @@ func (mo *HostProfile) UpdateHostProfile(
 // Profile.Edit
 //
 func (mo *HostProfile) UpdateReferenceHost(
-	_this *do.ManagedObjectReference, host *mo.HostSystem,
+	_this *do.ManagedObjectReference, host *HostSystem,
 ) error {
 
 	return nil
@@ -7418,7 +7418,7 @@ type HostProfileManager struct {
 // Dynamic - See discussion above
 //
 func (mo *HostProfileManager) ApplyHostConfig_Task(
-	_this *do.ManagedObjectReference, host *mo.HostSystem, configSpec *do.HostConfigSpec, userInput []*do.ProfileDeferredPolicyOptionParameter,
+	_this *do.ManagedObjectReference, host *HostSystem, configSpec *do.HostConfigSpec, userInput []*do.ProfileDeferredPolicyOptionParameter,
 ) (*Task, error) {
 
 	return nil, nil
@@ -7436,7 +7436,7 @@ func (mo *HostProfileManager) ApplyHostConfig_Task(
 // vSphere API 5.0
 //
 func (mo *HostProfileManager) CheckAnswerFileStatus_Task(
-	_this *do.ManagedObjectReference, host []*mo.HostSystem,
+	_this *do.ManagedObjectReference, host []*HostSystem,
 ) (*Task, error) {
 
 	return nil, nil
@@ -7473,7 +7473,7 @@ func (mo *HostProfileManager) CheckAnswerFileStatus_Task(
 // System.View
 //
 func (mo *HostProfileManager) CreateDefaultProfile(
-	_this *do.ManagedObjectReference, profileType string, profileTypeName string, profile *mo.Profile,
+	_this *do.ManagedObjectReference, profileType string, profileTypeName string, profile *Profile,
 ) (*ApplyProfile, error) {
 
 	return nil, nil
@@ -7491,7 +7491,7 @@ func (mo *HostProfileManager) CreateDefaultProfile(
 // vSphere API 5.0
 //
 func (mo *HostProfileManager) ExportAnswerFile_Task(
-	_this *do.ManagedObjectReference, host *mo.HostSystem,
+	_this *do.ManagedObjectReference, host *HostSystem,
 ) (*Task, error) {
 
 	return nil, nil
@@ -7510,7 +7510,7 @@ func (mo *HostProfileManager) ExportAnswerFile_Task(
 // System.View
 //
 func (mo *HostProfileManager) GenerateConfigTaskList(
-	_this *do.ManagedObjectReference, configSpec *do.HostConfigSpec, host *mo.HostSystem,
+	_this *do.ManagedObjectReference, configSpec *do.HostConfigSpec, host *HostSystem,
 ) (*HostProfileManagerConfigTaskList, error) {
 
 	return nil, nil
@@ -7529,7 +7529,7 @@ func (mo *HostProfileManager) GenerateConfigTaskList(
 // vSphere API 5.5
 //
 func (mo *HostProfileManager) GenerateHostProfileTaskList_Task(
-	_this *do.ManagedObjectReference, configSpec *do.HostConfigSpec, host *mo.HostSystem,
+	_this *do.ManagedObjectReference, configSpec *do.HostConfigSpec, host *HostSystem,
 ) (*Task, error) {
 
 	return nil, nil
@@ -7548,7 +7548,7 @@ func (mo *HostProfileManager) GenerateHostProfileTaskList_Task(
 // vSphere API 5.0
 //
 func (mo *HostProfileManager) QueryAnswerFileStatus(
-	_this *do.ManagedObjectReference, host []*mo.HostSystem,
+	_this *do.ManagedObjectReference, host []*HostSystem,
 ) ([]*AnswerFileStatusResult, error) {
 
 	return nil, nil
@@ -7562,7 +7562,7 @@ func (mo *HostProfileManager) QueryAnswerFileStatus(
 // System.View
 //
 func (mo *HostProfileManager) QueryHostProfileMetadata(
-	_this *do.ManagedObjectReference, profileName []string, profile *mo.Profile,
+	_this *do.ManagedObjectReference, profileName []string, profile *Profile,
 ) ([]*ProfileMetadata, error) {
 
 	return nil, nil
@@ -7578,7 +7578,7 @@ func (mo *HostProfileManager) QueryHostProfileMetadata(
 // vSphere API 5.0
 //
 func (mo *HostProfileManager) QueryProfileStructure(
-	_this *do.ManagedObjectReference, profile *mo.Profile,
+	_this *do.ManagedObjectReference, profile *Profile,
 ) (*ProfileProfileStructure, error) {
 
 	return nil, nil
@@ -7594,7 +7594,7 @@ func (mo *HostProfileManager) QueryProfileStructure(
 // vSphere API 5.0
 //
 func (mo *HostProfileManager) RetrieveAnswerFile(
-	_this *do.ManagedObjectReference, host *mo.HostSystem,
+	_this *do.ManagedObjectReference, host *HostSystem,
 ) (*AnswerFile, error) {
 
 	return nil, nil
@@ -7612,7 +7612,7 @@ func (mo *HostProfileManager) RetrieveAnswerFile(
 // vSphere API 5.1
 //
 func (mo *HostProfileManager) RetrieveAnswerFileForProfile(
-	_this *do.ManagedObjectReference, host *mo.HostSystem, applyProfile *do.HostApplyProfile,
+	_this *do.ManagedObjectReference, host *HostSystem, applyProfile *do.HostApplyProfile,
 ) (*AnswerFile, error) {
 
 	return nil, nil
@@ -7630,7 +7630,7 @@ func (mo *HostProfileManager) RetrieveAnswerFileForProfile(
 // vSphere API 5.0
 //
 func (mo *HostProfileManager) UpdateAnswerFile_Task(
-	_this *do.ManagedObjectReference, host *mo.HostSystem, configSpec *do.AnswerFileCreateSpec,
+	_this *do.ManagedObjectReference, host *HostSystem, configSpec *do.AnswerFileCreateSpec,
 ) (*Task, error) {
 
 	return nil, nil
@@ -10124,7 +10124,7 @@ type InventoryView struct {
 // None
 //
 func (mo *InventoryView) CloseInventoryViewFolder(
-	_this *do.ManagedObjectReference, entity []*mo.ManagedEntity,
+	_this *do.ManagedObjectReference, entity []*ManagedEntity,
 ) ([]*ManagedEntity, error) {
 
 	return nil, nil
@@ -10148,7 +10148,7 @@ func (mo *InventoryView) CloseInventoryViewFolder(
 // None
 //
 func (mo *InventoryView) OpenInventoryViewFolder(
-	_this *do.ManagedObjectReference, entity []*mo.ManagedEntity,
+	_this *do.ManagedObjectReference, entity []*ManagedEntity,
 ) ([]*ManagedEntity, error) {
 
 	return nil, nil
@@ -10189,7 +10189,7 @@ type IpPoolManager struct {
 // vSphere API 5.1
 //
 func (mo *IpPoolManager) AllocateIpv4Address(
-	_this *do.ManagedObjectReference, dc *mo.Datacenter, poolId int32, allocationId string,
+	_this *do.ManagedObjectReference, dc *Datacenter, poolId int32, allocationId string,
 ) (string, error) {
 
 	return nil, nil
@@ -10220,7 +10220,7 @@ func (mo *IpPoolManager) AllocateIpv4Address(
 // vSphere API 5.1
 //
 func (mo *IpPoolManager) AllocateIpv6Address(
-	_this *do.ManagedObjectReference, dc *mo.Datacenter, poolId int32, allocationId string,
+	_this *do.ManagedObjectReference, dc *Datacenter, poolId int32, allocationId string,
 ) (string, error) {
 
 	return nil, nil
@@ -10242,7 +10242,7 @@ func (mo *IpPoolManager) AllocateIpv6Address(
 // None
 //
 func (mo *IpPoolManager) CreateIpPool(
-	_this *do.ManagedObjectReference, dc *mo.Datacenter, pool *do.IpPool,
+	_this *do.ManagedObjectReference, dc *Datacenter, pool *do.IpPool,
 ) (int32, error) {
 
 	return nil, nil
@@ -10260,7 +10260,7 @@ func (mo *IpPoolManager) CreateIpPool(
 // None
 //
 func (mo *IpPoolManager) DestroyIpPool(
-	_this *do.ManagedObjectReference, dc *mo.Datacenter, id int32, force bool,
+	_this *do.ManagedObjectReference, dc *Datacenter, id int32, force bool,
 ) error {
 
 	return nil
@@ -10276,7 +10276,7 @@ func (mo *IpPoolManager) DestroyIpPool(
 // vSphere API 5.1
 //
 func (mo *IpPoolManager) QueryIPAllocations(
-	_this *do.ManagedObjectReference, dc *mo.Datacenter, poolId int32, extensionKey string,
+	_this *do.ManagedObjectReference, dc *Datacenter, poolId int32, extensionKey string,
 ) ([]*IpPoolManagerIpAllocation, error) {
 
 	return nil, nil
@@ -10290,7 +10290,7 @@ func (mo *IpPoolManager) QueryIPAllocations(
 // None
 //
 func (mo *IpPoolManager) QueryIpPools(
-	_this *do.ManagedObjectReference, dc *mo.Datacenter,
+	_this *do.ManagedObjectReference, dc *Datacenter,
 ) ([]*IpPool, error) {
 
 	return nil, nil
@@ -10315,7 +10315,7 @@ func (mo *IpPoolManager) QueryIpPools(
 // vSphere API 5.1
 //
 func (mo *IpPoolManager) ReleaseIpAllocation(
-	_this *do.ManagedObjectReference, dc *mo.Datacenter, poolId int32, allocationId string,
+	_this *do.ManagedObjectReference, dc *Datacenter, poolId int32, allocationId string,
 ) error {
 
 	return nil
@@ -10336,7 +10336,7 @@ func (mo *IpPoolManager) ReleaseIpAllocation(
 // None
 //
 func (mo *IpPoolManager) UpdateIpPool(
-	_this *do.ManagedObjectReference, dc *mo.Datacenter, pool *do.IpPool,
+	_this *do.ManagedObjectReference, dc *Datacenter, pool *do.IpPool,
 ) error {
 
 	return nil
@@ -10642,7 +10642,7 @@ func (mo *LicenseManager) AddLicense(
 // System.Read
 //
 func (mo *LicenseManager) CheckLicenseFeature(
-	_this *do.ManagedObjectReference, host *mo.HostSystem, featureKey string,
+	_this *do.ManagedObjectReference, host *HostSystem, featureKey string,
 ) (bool, error) {
 
 	return nil, nil
@@ -10680,7 +10680,7 @@ func (mo *LicenseManager) CheckLicenseFeature(
 // Global.Licenses
 //
 func (mo *LicenseManager) ConfigureLicenseSource(
-	_this *do.ManagedObjectReference, host *mo.HostSystem, licenseSource *do.LicenseSource,
+	_this *do.ManagedObjectReference, host *HostSystem, licenseSource *do.LicenseSource,
 ) error {
 
 	return nil
@@ -10716,7 +10716,7 @@ func (mo *LicenseManager) DecodeLicense(
 // Global.Licenses
 //
 func (mo *LicenseManager) DisableFeature(
-	_this *do.ManagedObjectReference, host *mo.HostSystem, featureKey string,
+	_this *do.ManagedObjectReference, host *HostSystem, featureKey string,
 ) (bool, error) {
 
 	return nil, nil
@@ -10736,7 +10736,7 @@ func (mo *LicenseManager) DisableFeature(
 // Global.Licenses
 //
 func (mo *LicenseManager) EnableFeature(
-	_this *do.ManagedObjectReference, host *mo.HostSystem, featureKey string,
+	_this *do.ManagedObjectReference, host *HostSystem, featureKey string,
 ) (bool, error) {
 
 	return nil, nil
@@ -10755,7 +10755,7 @@ func (mo *LicenseManager) EnableFeature(
 // Global.Licenses
 //
 func (mo *LicenseManager) QueryLicenseSourceAvailability(
-	_this *do.ManagedObjectReference, host *mo.HostSystem,
+	_this *do.ManagedObjectReference, host *HostSystem,
 ) ([]*LicenseAvailabilityInfo, error) {
 
 	return nil, nil
@@ -10780,7 +10780,7 @@ func (mo *LicenseManager) QueryLicenseSourceAvailability(
 // System.Read
 //
 func (mo *LicenseManager) QueryLicenseUsage(
-	_this *do.ManagedObjectReference, host *mo.HostSystem,
+	_this *do.ManagedObjectReference, host *HostSystem,
 ) (*LicenseUsageInfo, error) {
 
 	return nil, nil
@@ -10801,7 +10801,7 @@ func (mo *LicenseManager) QueryLicenseUsage(
 // VI API 2.5
 //
 func (mo *LicenseManager) QuerySupportedFeatures(
-	_this *do.ManagedObjectReference, host *mo.HostSystem,
+	_this *do.ManagedObjectReference, host *HostSystem,
 ) ([]*LicenseFeatureInfo, error) {
 
 	return nil, nil
@@ -10860,7 +10860,7 @@ func (mo *LicenseManager) RemoveLicenseLabel(
 // Global.Licenses
 //
 func (mo *LicenseManager) SetLicenseEdition(
-	_this *do.ManagedObjectReference, host *mo.HostSystem, featureKey string,
+	_this *do.ManagedObjectReference, host *HostSystem, featureKey string,
 ) error {
 
 	return nil
@@ -10972,7 +10972,7 @@ func (mo *ListView) ResetListView(
 // None
 //
 func (mo *ListView) ResetListViewFromView(
-	_this *do.ManagedObjectReference, view *mo.View,
+	_this *do.ManagedObjectReference, view *View,
 ) error {
 
 	return nil
@@ -11637,7 +11637,7 @@ type OvfManager struct {
 // System.View
 //
 func (mo *OvfManager) CreateDescriptor(
-	_this *do.ManagedObjectReference, obj *mo.ManagedEntity, cdp *do.OvfCreateDescriptorParams,
+	_this *do.ManagedObjectReference, obj *ManagedEntity, cdp *do.OvfCreateDescriptorParams,
 ) (*OvfCreateDescriptorResult, error) {
 
 	return nil, nil
@@ -11660,7 +11660,7 @@ func (mo *OvfManager) CreateDescriptor(
 // System.View
 //
 func (mo *OvfManager) CreateImportSpec(
-	_this *do.ManagedObjectReference, ovfDescriptor string, resourcePool *mo.ResourcePool, datastore *mo.Datastore, cisp *do.OvfCreateImportSpecParams,
+	_this *do.ManagedObjectReference, ovfDescriptor string, resourcePool *ResourcePool, datastore *Datastore, cisp *do.OvfCreateImportSpecParams,
 ) (*OvfCreateImportSpecResult, error) {
 
 	return nil, nil
@@ -11699,7 +11699,7 @@ func (mo *OvfManager) ParseDescriptor(
 // System.View
 //
 func (mo *OvfManager) ValidateHost(
-	_this *do.ManagedObjectReference, ovfDescriptor string, host *mo.HostSystem, vhp *do.OvfValidateHostParams,
+	_this *do.ManagedObjectReference, ovfDescriptor string, host *HostSystem, vhp *do.OvfValidateHostParams,
 ) (*OvfValidateHostResult, error) {
 
 	return nil, nil
@@ -12284,7 +12284,7 @@ type Profile struct {
 // Profile.Edit
 //
 func (mo *Profile) AssociateProfile(
-	_this *do.ManagedObjectReference, entity []*mo.ManagedEntity,
+	_this *do.ManagedObjectReference, entity []*ManagedEntity,
 ) error {
 
 	return nil
@@ -12298,7 +12298,7 @@ func (mo *Profile) AssociateProfile(
 // System.View
 //
 func (mo *Profile) CheckProfileCompliance_Task(
-	_this *do.ManagedObjectReference, entity []*mo.ManagedEntity,
+	_this *do.ManagedObjectReference, entity []*ManagedEntity,
 ) (*Task, error) {
 
 	return nil, nil
@@ -12326,7 +12326,7 @@ func (mo *Profile) DestroyProfile(
 // Profile.Edit
 //
 func (mo *Profile) DissociateProfile(
-	_this *do.ManagedObjectReference, entity []*mo.ManagedEntity,
+	_this *do.ManagedObjectReference, entity []*ManagedEntity,
 ) error {
 
 	return nil
@@ -12379,7 +12379,7 @@ type ProfileComplianceManager struct {
 // System.View
 //
 func (mo *ProfileComplianceManager) CheckCompliance_Task(
-	_this *do.ManagedObjectReference, profile []*mo.Profile, entity []*mo.ManagedEntity,
+	_this *do.ManagedObjectReference, profile []*Profile, entity []*ManagedEntity,
 ) (*Task, error) {
 
 	return nil, nil
@@ -12393,7 +12393,7 @@ func (mo *ProfileComplianceManager) CheckCompliance_Task(
 // Profile.Clear
 //
 func (mo *ProfileComplianceManager) ClearComplianceStatus(
-	_this *do.ManagedObjectReference, profile []*mo.Profile, entity []*mo.ManagedEntity,
+	_this *do.ManagedObjectReference, profile []*Profile, entity []*ManagedEntity,
 ) error {
 
 	return nil
@@ -12407,7 +12407,7 @@ func (mo *ProfileComplianceManager) ClearComplianceStatus(
 // System.View
 //
 func (mo *ProfileComplianceManager) QueryComplianceStatus(
-	_this *do.ManagedObjectReference, profile []*mo.Profile, entity []*mo.ManagedEntity,
+	_this *do.ManagedObjectReference, profile []*Profile, entity []*ManagedEntity,
 ) ([]*ComplianceResult, error) {
 
 	return nil, nil
@@ -12421,7 +12421,7 @@ func (mo *ProfileComplianceManager) QueryComplianceStatus(
 // System.View
 //
 func (mo *ProfileComplianceManager) QueryExpressionMetadata(
-	_this *do.ManagedObjectReference, expressionName []string, profile *mo.Profile,
+	_this *do.ManagedObjectReference, expressionName []string, profile *Profile,
 ) ([]*ProfileExpressionMetadata, error) {
 
 	return nil, nil
@@ -12461,7 +12461,7 @@ func (mo *ProfileManager) CreateProfile(
 // System.View
 //
 func (mo *ProfileManager) FindAssociatedProfile(
-	_this *do.ManagedObjectReference, entity *mo.ManagedEntity,
+	_this *do.ManagedObjectReference, entity *ManagedEntity,
 ) ([]*Profile, error) {
 
 	return nil, nil
@@ -12477,7 +12477,7 @@ func (mo *ProfileManager) FindAssociatedProfile(
 // System.View
 //
 func (mo *ProfileManager) QueryPolicyMetadata(
-	_this *do.ManagedObjectReference, policyName []string, profile *mo.Profile,
+	_this *do.ManagedObjectReference, policyName []string, profile *Profile,
 ) ([]*ProfilePolicyMetadata, error) {
 
 	return nil, nil
@@ -13051,7 +13051,7 @@ type ResourcePool struct {
 // vSphere API 4.0
 //
 func (mo *ResourcePool) CreateChildVM_Task(
-	_this *do.ManagedObjectReference, config *do.VirtualMachineConfigSpec, host *mo.HostSystem,
+	_this *do.ManagedObjectReference, config *do.VirtualMachineConfigSpec, host *HostSystem,
 ) (*Task, error) {
 
 	return nil, nil
@@ -13095,7 +13095,7 @@ func (mo *ResourcePool) CreateResourcePool(
 // vSphere API 4.0
 //
 func (mo *ResourcePool) CreateVApp(
-	_this *do.ManagedObjectReference, name string, resSpec *do.ResourceConfigSpec, configSpec *do.VAppConfigSpec, vmFolder *mo.Folder,
+	_this *do.ManagedObjectReference, name string, resSpec *do.ResourceConfigSpec, configSpec *do.VAppConfigSpec, vmFolder *Folder,
 ) (*VirtualApp, error) {
 
 	return nil, nil
@@ -13192,7 +13192,7 @@ func (mo *ResourcePool) DestroyChildren(
 // vSphere API 4.0
 //
 func (mo *ResourcePool) ImportVApp(
-	_this *do.ManagedObjectReference, spec *do.ImportSpec, folder *mo.Folder, host *mo.HostSystem,
+	_this *do.ManagedObjectReference, spec *do.ImportSpec, folder *Folder, host *HostSystem,
 ) (*HttpNfcLease, error) {
 
 	return nil, nil
@@ -13248,7 +13248,7 @@ func (mo *ResourcePool) ImportVApp(
 // Dynamic - See discussion above
 //
 func (mo *ResourcePool) MoveIntoResourcePool(
-	_this *do.ManagedObjectReference, list []*mo.ManagedEntity,
+	_this *do.ManagedObjectReference, list []*ManagedEntity,
 ) error {
 
 	return nil
@@ -13315,7 +13315,7 @@ func (mo *ResourcePool) RefreshRuntime(
 // vSphere API 4.0
 //
 func (mo *ResourcePool) RegisterChildVM_Task(
-	_this *do.ManagedObjectReference, path string, name string, host *mo.HostSystem,
+	_this *do.ManagedObjectReference, path string, name string, host *HostSystem,
 ) (*Task, error) {
 
 	return nil, nil
@@ -13483,7 +13483,7 @@ func (mo *ScheduledTaskManager) CreateObjectScheduledTask(
 // None
 //
 func (mo *ScheduledTaskManager) CreateScheduledTask(
-	_this *do.ManagedObjectReference, entity *mo.ManagedEntity, spec *do.ScheduledTaskSpec,
+	_this *do.ManagedObjectReference, entity *ManagedEntity, spec *do.ScheduledTaskSpec,
 ) (*ScheduledTask, error) {
 
 	return nil, nil
@@ -13499,7 +13499,7 @@ func (mo *ScheduledTaskManager) CreateScheduledTask(
 // System.View
 //
 func (mo *ScheduledTaskManager) RetrieveEntityScheduledTask(
-	_this *do.ManagedObjectReference, entity *mo.ManagedEntity,
+	_this *do.ManagedObjectReference, entity *ManagedEntity,
 ) ([]*ScheduledTask, error) {
 
 	return nil, nil
@@ -13548,7 +13548,7 @@ type SearchIndex struct {
 // vSphere API 4.0
 //
 func (mo *SearchIndex) FindAllByDnsName(
-	_this *do.ManagedObjectReference, datacenter *mo.Datacenter, dnsName string, vmSearch bool,
+	_this *do.ManagedObjectReference, datacenter *Datacenter, dnsName string, vmSearch bool,
 ) ([]*ManagedEntity, error) {
 
 	return nil, nil
@@ -13566,7 +13566,7 @@ func (mo *SearchIndex) FindAllByDnsName(
 // vSphere API 4.0
 //
 func (mo *SearchIndex) FindAllByIp(
-	_this *do.ManagedObjectReference, datacenter *mo.Datacenter, ip string, vmSearch bool,
+	_this *do.ManagedObjectReference, datacenter *Datacenter, ip string, vmSearch bool,
 ) ([]*ManagedEntity, error) {
 
 	return nil, nil
@@ -13582,7 +13582,7 @@ func (mo *SearchIndex) FindAllByIp(
 // vSphere API 4.0
 //
 func (mo *SearchIndex) FindAllByUuid(
-	_this *do.ManagedObjectReference, datacenter *mo.Datacenter, uuid string, vmSearch bool, instanceUuid bool,
+	_this *do.ManagedObjectReference, datacenter *Datacenter, uuid string, vmSearch bool, instanceUuid bool,
 ) ([]*ManagedEntity, error) {
 
 	return nil, nil
@@ -13596,7 +13596,7 @@ func (mo *SearchIndex) FindAllByUuid(
 // System.View
 //
 func (mo *SearchIndex) FindByDatastorePath(
-	_this *do.ManagedObjectReference, datacenter *mo.Datacenter, path string,
+	_this *do.ManagedObjectReference, datacenter *Datacenter, path string,
 ) (*VirtualMachine, error) {
 
 	return nil, nil
@@ -13611,7 +13611,7 @@ func (mo *SearchIndex) FindByDatastorePath(
 // System.View
 //
 func (mo *SearchIndex) FindByDnsName(
-	_this *do.ManagedObjectReference, datacenter *mo.Datacenter, dnsName string, vmSearch bool,
+	_this *do.ManagedObjectReference, datacenter *Datacenter, dnsName string, vmSearch bool,
 ) (*ManagedEntity, error) {
 
 	return nil, nil
@@ -13647,7 +13647,7 @@ func (mo *SearchIndex) FindByInventoryPath(
 // System.View
 //
 func (mo *SearchIndex) FindByIp(
-	_this *do.ManagedObjectReference, datacenter *mo.Datacenter, ip string, vmSearch bool,
+	_this *do.ManagedObjectReference, datacenter *Datacenter, ip string, vmSearch bool,
 ) (*ManagedEntity, error) {
 
 	return nil, nil
@@ -13661,7 +13661,7 @@ func (mo *SearchIndex) FindByIp(
 // System.View
 //
 func (mo *SearchIndex) FindByUuid(
-	_this *do.ManagedObjectReference, datacenter *mo.Datacenter, uuid string, vmSearch bool, instanceUuid bool,
+	_this *do.ManagedObjectReference, datacenter *Datacenter, uuid string, vmSearch bool, instanceUuid bool,
 ) (*ManagedEntity, error) {
 
 	return nil, nil
@@ -13680,7 +13680,7 @@ func (mo *SearchIndex) FindByUuid(
 // System.View
 //
 func (mo *SearchIndex) FindChild(
-	_this *do.ManagedObjectReference, entity *mo.ManagedEntity, name string,
+	_this *do.ManagedObjectReference, entity *ManagedEntity, name string,
 ) (*ManagedEntity, error) {
 
 	return nil, nil
@@ -13839,7 +13839,7 @@ func (mo *ServiceInstance) CurrentTime(
 // Resource.QueryVMotion
 //
 func (mo *ServiceInstance) QueryVMotionCompatibility(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, host []*mo.HostSystem, compatibility []string,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, host []*HostSystem, compatibility []string,
 ) ([]*HostVMotionCompatibility, error) {
 
 	return nil, nil
@@ -13891,7 +13891,7 @@ func (mo *ServiceInstance) RetrieveServiceContent(
 // System.View
 //
 func (mo *ServiceInstance) ValidateMigration(
-	_this *do.ManagedObjectReference, vm []*mo.VirtualMachine, state *enum.VirtualMachinePowerState, testType []string, pool *mo.ResourcePool, host *mo.HostSystem,
+	_this *do.ManagedObjectReference, vm []*VirtualMachine, state *enum.VirtualMachinePowerState, testType []string, pool *ResourcePool, host *HostSystem,
 ) ([]*Event, error) {
 
 	return nil, nil
@@ -14447,7 +14447,7 @@ func (mo *StorageResourceManager) ApplyStorageDrsRecommendation_Task(
 // vSphere API 5.0
 //
 func (mo *StorageResourceManager) ApplyStorageDrsRecommendationToPod_Task(
-	_this *do.ManagedObjectReference, pod *mo.StoragePod, key string,
+	_this *do.ManagedObjectReference, pod *StoragePod, key string,
 ) (*Task, error) {
 
 	return nil, nil
@@ -14489,7 +14489,7 @@ func (mo *StorageResourceManager) CancelStorageDrsRecommendation(
 // None
 //
 func (mo *StorageResourceManager) ConfigureDatastoreIORM_Task(
-	_this *do.ManagedObjectReference, datastore *mo.Datastore, spec *do.StorageIORMConfigSpec,
+	_this *do.ManagedObjectReference, datastore *Datastore, spec *do.StorageIORMConfigSpec,
 ) (*Task, error) {
 
 	return nil, nil
@@ -14507,7 +14507,7 @@ func (mo *StorageResourceManager) ConfigureDatastoreIORM_Task(
 // vSphere API 5.0
 //
 func (mo *StorageResourceManager) ConfigureStorageDrsForPod_Task(
-	_this *do.ManagedObjectReference, pod *mo.StoragePod, spec *do.StorageDrsConfigSpec, modify bool,
+	_this *do.ManagedObjectReference, pod *StoragePod, spec *do.StorageDrsConfigSpec, modify bool,
 ) (*Task, error) {
 
 	return nil, nil
@@ -14530,7 +14530,7 @@ func (mo *StorageResourceManager) ConfigureStorageDrsForPod_Task(
 // vSphere API 5.1
 //
 func (mo *StorageResourceManager) QueryDatastorePerformanceSummary(
-	_this *do.ManagedObjectReference, datastore *mo.Datastore,
+	_this *do.ManagedObjectReference, datastore *Datastore,
 ) ([]*StoragePerformanceSummary, error) {
 
 	return nil, nil
@@ -14546,7 +14546,7 @@ func (mo *StorageResourceManager) QueryDatastorePerformanceSummary(
 // Datastore.Config
 //
 func (mo *StorageResourceManager) QueryIORMConfigOption(
-	_this *do.ManagedObjectReference, host *mo.HostSystem,
+	_this *do.ManagedObjectReference, host *HostSystem,
 ) (*StorageIORMConfigOption, error) {
 
 	return nil, nil
@@ -14662,7 +14662,7 @@ func (mo *StorageResourceManager) RecommendDatastores(
 // vSphere API 5.0
 //
 func (mo *StorageResourceManager) RefreshStorageDrsRecommendation(
-	_this *do.ManagedObjectReference, pod *mo.StoragePod,
+	_this *do.ManagedObjectReference, pod *StoragePod,
 ) error {
 
 	return nil
@@ -15130,7 +15130,7 @@ type ViewManager struct {
 // System.View
 //
 func (mo *ViewManager) CreateContainerView(
-	_this *do.ManagedObjectReference, container *mo.ManagedEntity, type_ []string, recursive bool,
+	_this *do.ManagedObjectReference, container *ManagedEntity, type_ []string, recursive bool,
 ) (*ContainerView, error) {
 
 	return nil, nil
@@ -15176,7 +15176,7 @@ func (mo *ViewManager) CreateListView(
 // System.View
 //
 func (mo *ViewManager) CreateListViewFromView(
-	_this *do.ManagedObjectReference, view *mo.View,
+	_this *do.ManagedObjectReference, view *View,
 ) (*ListView, error) {
 
 	return nil, nil
@@ -15289,7 +15289,7 @@ type VirtualApp struct {
 // VApp.Clone
 //
 func (mo *VirtualApp) CloneVApp_Task(
-	_this *do.ManagedObjectReference, name string, target *mo.ResourcePool, spec *do.VAppCloneSpec,
+	_this *do.ManagedObjectReference, name string, target *ResourcePool, spec *do.VAppCloneSpec,
 ) (*Task, error) {
 
 	return nil, nil
@@ -15470,7 +15470,7 @@ func (mo *VirtualApp) UnregisterVApp_Task(
 // vSphere API 4.1
 //
 func (mo *VirtualApp) UpdateLinkedChildren(
-	_this *do.ManagedObjectReference, addChangeSet []*do.VirtualAppLinkInfo, removeSet []*mo.ManagedEntity,
+	_this *do.ManagedObjectReference, addChangeSet []*do.VirtualAppLinkInfo, removeSet []*ManagedEntity,
 ) error {
 
 	return nil
@@ -15552,7 +15552,7 @@ type VirtualDiskManager struct {
 // System.View
 //
 func (mo *VirtualDiskManager) CopyVirtualDisk_Task(
-	_this *do.ManagedObjectReference, sourceName string, sourceDatacenter *mo.Datacenter, destName string, destDatacenter *mo.Datacenter, destSpec *do.VirtualDiskSpec, force bool,
+	_this *do.ManagedObjectReference, sourceName string, sourceDatacenter *Datacenter, destName string, destDatacenter *Datacenter, destSpec *do.VirtualDiskSpec, force bool,
 ) (*Task, error) {
 
 	return nil, nil
@@ -15575,7 +15575,7 @@ func (mo *VirtualDiskManager) CopyVirtualDisk_Task(
 // System.View
 //
 func (mo *VirtualDiskManager) CreateVirtualDisk_Task(
-	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter, spec *do.VirtualDiskSpec,
+	_this *do.ManagedObjectReference, name string, datacenter *Datacenter, spec *do.VirtualDiskSpec,
 ) (*Task, error) {
 
 	return nil, nil
@@ -15601,7 +15601,7 @@ func (mo *VirtualDiskManager) CreateVirtualDisk_Task(
 // System.View
 //
 func (mo *VirtualDiskManager) DefragmentVirtualDisk_Task(
-	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter,
+	_this *do.ManagedObjectReference, name string, datacenter *Datacenter,
 ) (*Task, error) {
 
 	return nil, nil
@@ -15625,7 +15625,7 @@ func (mo *VirtualDiskManager) DefragmentVirtualDisk_Task(
 // System.View
 //
 func (mo *VirtualDiskManager) DeleteVirtualDisk_Task(
-	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter,
+	_this *do.ManagedObjectReference, name string, datacenter *Datacenter,
 ) (*Task, error) {
 
 	return nil, nil
@@ -15653,7 +15653,7 @@ func (mo *VirtualDiskManager) DeleteVirtualDisk_Task(
 // vSphere API 4.0
 //
 func (mo *VirtualDiskManager) EagerZeroVirtualDisk_Task(
-	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter,
+	_this *do.ManagedObjectReference, name string, datacenter *Datacenter,
 ) (*Task, error) {
 
 	return nil, nil
@@ -15689,7 +15689,7 @@ func (mo *VirtualDiskManager) EagerZeroVirtualDisk_Task(
 // System.View
 //
 func (mo *VirtualDiskManager) ExtendVirtualDisk_Task(
-	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter, newCapacityKb int64, eagerZero bool,
+	_this *do.ManagedObjectReference, name string, datacenter *Datacenter, newCapacityKb int64, eagerZero bool,
 ) (*Task, error) {
 
 	return nil, nil
@@ -15714,7 +15714,7 @@ func (mo *VirtualDiskManager) ExtendVirtualDisk_Task(
 // System.View
 //
 func (mo *VirtualDiskManager) InflateVirtualDisk_Task(
-	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter,
+	_this *do.ManagedObjectReference, name string, datacenter *Datacenter,
 ) (*Task, error) {
 
 	return nil, nil
@@ -15744,7 +15744,7 @@ func (mo *VirtualDiskManager) InflateVirtualDisk_Task(
 // System.View
 //
 func (mo *VirtualDiskManager) MoveVirtualDisk_Task(
-	_this *do.ManagedObjectReference, sourceName string, sourceDatacenter *mo.Datacenter, destName string, destDatacenter *mo.Datacenter, force bool, profile []*do.VirtualMachineProfileSpec,
+	_this *do.ManagedObjectReference, sourceName string, sourceDatacenter *Datacenter, destName string, destDatacenter *Datacenter, force bool, profile []*do.VirtualMachineProfileSpec,
 ) (*Task, error) {
 
 	return nil, nil
@@ -15770,7 +15770,7 @@ func (mo *VirtualDiskManager) MoveVirtualDisk_Task(
 // System.View
 //
 func (mo *VirtualDiskManager) QueryVirtualDiskFragmentation(
-	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter,
+	_this *do.ManagedObjectReference, name string, datacenter *Datacenter,
 ) (int32, error) {
 
 	return nil, nil
@@ -15793,7 +15793,7 @@ func (mo *VirtualDiskManager) QueryVirtualDiskFragmentation(
 // System.View
 //
 func (mo *VirtualDiskManager) QueryVirtualDiskGeometry(
-	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter,
+	_this *do.ManagedObjectReference, name string, datacenter *Datacenter,
 ) (*HostDiskDimensionsChs, error) {
 
 	return nil, nil
@@ -15816,7 +15816,7 @@ func (mo *VirtualDiskManager) QueryVirtualDiskGeometry(
 // System.View
 //
 func (mo *VirtualDiskManager) QueryVirtualDiskUuid(
-	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter,
+	_this *do.ManagedObjectReference, name string, datacenter *Datacenter,
 ) (string, error) {
 
 	return nil, nil
@@ -15839,7 +15839,7 @@ func (mo *VirtualDiskManager) QueryVirtualDiskUuid(
 // System.View
 //
 func (mo *VirtualDiskManager) SetVirtualDiskUuid(
-	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter, uuid string,
+	_this *do.ManagedObjectReference, name string, datacenter *Datacenter, uuid string,
 ) error {
 
 	return nil
@@ -15870,7 +15870,7 @@ func (mo *VirtualDiskManager) SetVirtualDiskUuid(
 // System.View
 //
 func (mo *VirtualDiskManager) ShrinkVirtualDisk_Task(
-	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter, copy bool,
+	_this *do.ManagedObjectReference, name string, datacenter *Datacenter, copy bool,
 ) (*Task, error) {
 
 	return nil, nil
@@ -15894,7 +15894,7 @@ func (mo *VirtualDiskManager) ShrinkVirtualDisk_Task(
 // System.View
 //
 func (mo *VirtualDiskManager) ZeroFillVirtualDisk_Task(
-	_this *do.ManagedObjectReference, name string, datacenter *mo.Datacenter,
+	_this *do.ManagedObjectReference, name string, datacenter *Datacenter,
 ) (*Task, error) {
 
 	return nil, nil
@@ -16224,7 +16224,7 @@ func (mo *VirtualMachine) CheckCustomizationSpec(
 // None
 //
 func (mo *VirtualMachine) CloneVM_Task(
-	_this *do.ManagedObjectReference, folder *mo.Folder, name string, spec *do.VirtualMachineCloneSpec,
+	_this *do.ManagedObjectReference, folder *Folder, name string, spec *do.VirtualMachineCloneSpec,
 ) (*Task, error) {
 
 	return nil, nil
@@ -16301,7 +16301,7 @@ func (mo *VirtualMachine) CreateScreenshot_Task(
 // vSphere API 4.0
 //
 func (mo *VirtualMachine) CreateSecondaryVM_Task(
-	_this *do.ManagedObjectReference, host *mo.HostSystem,
+	_this *do.ManagedObjectReference, host *HostSystem,
 ) (*Task, error) {
 
 	return nil, nil
@@ -16378,7 +16378,7 @@ func (mo *VirtualMachine) DefragmentAllDisks(
 // vSphere API 4.0
 //
 func (mo *VirtualMachine) DisableSecondaryVM_Task(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine,
+	_this *do.ManagedObjectReference, vm *VirtualMachine,
 ) (*Task, error) {
 
 	return nil, nil
@@ -16411,7 +16411,7 @@ func (mo *VirtualMachine) DisableSecondaryVM_Task(
 // vSphere API 4.0
 //
 func (mo *VirtualMachine) EnableSecondaryVM_Task(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, host *mo.HostSystem,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, host *HostSystem,
 ) (*Task, error) {
 
 	return nil, nil
@@ -16493,7 +16493,7 @@ func (mo *VirtualMachine) ExtractOvfEnvironment(
 // vSphere API 4.0
 //
 func (mo *VirtualMachine) MakePrimaryVM_Task(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine,
+	_this *do.ManagedObjectReference, vm *VirtualMachine,
 ) (*Task, error) {
 
 	return nil, nil
@@ -16523,7 +16523,7 @@ func (mo *VirtualMachine) MarkAsTemplate(
 // VirtualMachine.Provisioning.MarkAsVM
 //
 func (mo *VirtualMachine) MarkAsVirtualMachine(
-	_this *do.ManagedObjectReference, pool *mo.ResourcePool, host *mo.HostSystem,
+	_this *do.ManagedObjectReference, pool *ResourcePool, host *HostSystem,
 ) error {
 
 	return nil
@@ -16542,7 +16542,7 @@ func (mo *VirtualMachine) MarkAsVirtualMachine(
 // Dynamic - See discussion above
 //
 func (mo *VirtualMachine) MigrateVM_Task(
-	_this *do.ManagedObjectReference, pool *mo.ResourcePool, host *mo.HostSystem, priority *enum.VirtualMachineMovePriority, state *enum.VirtualMachinePowerState,
+	_this *do.ManagedObjectReference, pool *ResourcePool, host *HostSystem, priority *enum.VirtualMachineMovePriority, state *enum.VirtualMachinePowerState,
 ) (*Task, error) {
 
 	return nil, nil
@@ -16611,7 +16611,7 @@ func (mo *VirtualMachine) PowerOffVM_Task(
 // VirtualMachine.Interact.PowerOn
 //
 func (mo *VirtualMachine) PowerOnVM_Task(
-	_this *do.ManagedObjectReference, host *mo.HostSystem,
+	_this *do.ManagedObjectReference, host *HostSystem,
 ) (*Task, error) {
 
 	return nil, nil
@@ -16689,7 +16689,7 @@ func (mo *VirtualMachine) PromoteDisks_Task(
 // vSphere API 4.0
 //
 func (mo *VirtualMachine) QueryChangedDiskAreas(
-	_this *do.ManagedObjectReference, snapshot *mo.VirtualMachineSnapshot, deviceKey int32, startOffset int64, changeId string,
+	_this *do.ManagedObjectReference, snapshot *VirtualMachineSnapshot, deviceKey int32, startOffset int64, changeId string,
 ) (*DiskChangeInfo, error) {
 
 	return nil, nil
@@ -17025,7 +17025,7 @@ func (mo *VirtualMachine) ResetVM_Task(
 // VirtualMachine.State.RevertToSnapshot
 //
 func (mo *VirtualMachine) RevertToCurrentSnapshot_Task(
-	_this *do.ManagedObjectReference, host *mo.HostSystem, suppressPowerOn bool,
+	_this *do.ManagedObjectReference, host *HostSystem, suppressPowerOn bool,
 ) (*Task, error) {
 
 	return nil, nil
@@ -17140,7 +17140,7 @@ func (mo *VirtualMachine) StartRecording_Task(
 // vSphere API 4.0
 //
 func (mo *VirtualMachine) StartReplaying_Task(
-	_this *do.ManagedObjectReference, replaySnapshot *mo.VirtualMachineSnapshot,
+	_this *do.ManagedObjectReference, replaySnapshot *VirtualMachineSnapshot,
 ) (*Task, error) {
 
 	return nil, nil
@@ -17220,7 +17220,7 @@ func (mo *VirtualMachine) SuspendVM_Task(
 // vSphere API 4.0
 //
 func (mo *VirtualMachine) TerminateFaultTolerantVM_Task(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine,
+	_this *do.ManagedObjectReference, vm *VirtualMachine,
 ) (*Task, error) {
 
 	return nil, nil
@@ -17356,7 +17356,7 @@ type VirtualMachineCompatibilityChecker struct {
 // System.View
 //
 func (mo *VirtualMachineCompatibilityChecker) CheckCompatibility_Task(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, host *mo.HostSystem, pool *mo.ResourcePool, testType []string,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, host *HostSystem, pool *ResourcePool, testType []string,
 ) (*Task, error) {
 
 	return nil, nil
@@ -17378,7 +17378,7 @@ type VirtualMachineProvisioningChecker struct {
 // System.View
 //
 func (mo *VirtualMachineProvisioningChecker) CheckMigrate_Task(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, host *mo.HostSystem, pool *mo.ResourcePool, state *enum.VirtualMachinePowerState, testType []string,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, host *HostSystem, pool *ResourcePool, state *enum.VirtualMachinePowerState, testType []string,
 ) (*Task, error) {
 
 	return nil, nil
@@ -17393,7 +17393,7 @@ func (mo *VirtualMachineProvisioningChecker) CheckMigrate_Task(
 // System.View
 //
 func (mo *VirtualMachineProvisioningChecker) CheckRelocate_Task(
-	_this *do.ManagedObjectReference, vm *mo.VirtualMachine, spec *do.VirtualMachineRelocateSpec, testType []string,
+	_this *do.ManagedObjectReference, vm *VirtualMachine, spec *do.VirtualMachineRelocateSpec, testType []string,
 ) (*Task, error) {
 
 	return nil, nil
@@ -17409,7 +17409,7 @@ func (mo *VirtualMachineProvisioningChecker) CheckRelocate_Task(
 // System.View
 //
 func (mo *VirtualMachineProvisioningChecker) QueryVMotionCompatibilityEx_Task(
-	_this *do.ManagedObjectReference, vm []*mo.VirtualMachine, host []*mo.HostSystem,
+	_this *do.ManagedObjectReference, vm []*VirtualMachine, host []*HostSystem,
 ) (*Task, error) {
 
 	return nil, nil
@@ -17497,7 +17497,7 @@ func (mo *VirtualMachineSnapshot) RenameSnapshot(
 // VirtualMachine.State.RevertToSnapshot
 //
 func (mo *VirtualMachineSnapshot) RevertToSnapshot_Task(
-	_this *do.ManagedObjectReference, host *mo.HostSystem, suppressPowerOn bool,
+	_this *do.ManagedObjectReference, host *HostSystem, suppressPowerOn bool,
 ) (*Task, error) {
 
 	return nil, nil
