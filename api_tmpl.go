@@ -18,10 +18,10 @@ var moTmpl = doTmpl
 var doTmpl = `
 {{$comment := comment .Description}}
 {{$type := makePublic .Name true}}
+{{$namespace := .Namespace}}
 {{if $comment}} {{$comment}} {{end}}
 type {{$type}} struct {
 	{{$extends := toGoType .Extends}}
-	{{$namespace := .Namespace}}
 	{{lookUpNamespace $extends $namespace}}
 	{{range .Properties}}
 		{{$fieldComment := comment .Description}}
