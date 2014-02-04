@@ -30,6 +30,7 @@ Example output:
 TODO
 
 ## TODO
+* Due to import cyclic dependency problem in Go, we need to merge faults, dos and mos.
 * Create ServiceInstance class
 	* Use best API version supported by the server
 * LoginByToken
