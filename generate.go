@@ -195,7 +195,7 @@ func lookUpNamespace(type_, currentNs string) string {
 	type_ = strings.TrimPrefix(type_, "enum.")
 
 	targetNs := objnsmap[type_]
-	if targetNs == "" || targetNs == currentNs {
+	if targetNs == "" || targetNs != "enum" || targetNs == currentNs {
 		return prefix + type_
 	}
 
@@ -237,13 +237,13 @@ func generate(apiDefFile string) {
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		genCode(objects, mainPkg, moTmpl, "mo")
+		genCode(objects, mainPkg, moTmpl, "")
 	}()
 
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		genCode(objects, mainPkg, doTmpl, "do")
+		genCode(objects, mainPkg, doTmpl, "")
 	}()
 
 	wg.Add(1)
@@ -255,7 +255,7 @@ func generate(apiDefFile string) {
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		genCode(objects, mainPkg, faultTmpl, "fault")
+		genCode(objects, mainPkg, faultTmpl, "")
 	}()
 
 	wg.Wait()
@@ -263,7 +263,13 @@ func generate(apiDefFile string) {
 
 func genCode(objects []Object, mainPkg, tmpl, namespace string) {
 	var fd *os.File
-	pkg := mainPkg + "/" + namespace
+	pkg := mainPkg
+
+	if namespace != "" {
+		pkg += "/" + namespace
+	} else {
+		namespace = "api"
+	}
 
 	if ok, err := exists(pkg); !ok && err == nil {
 		os.Mkdir(pkg, 0744)
@@ -279,30 +285,21 @@ func genCode(objects []Object, mainPkg, tmpl, namespace string) {
 	data := new(bytes.Buffer)
 	data.WriteString(headerTmpl)
 	data.WriteString("package " + namespace + "\n")
-	if namespace == "do" {
+
+	if namespace == "api" {
 		data.WriteString(`
 			import (
-				"github.com/c4milo/govsphere/vim/mo"
 				"time"
-			)
-		`)
-	} else if namespace == "mo" {
-		data.WriteString(`
-			import (
-				"github.com/c4milo/govsphere/vim/do"
-				"github.com/c4milo/govsphere/vim/fault"
-				"time"
-			)
-		`)
-	} else if namespace == "fault" {
-		data.WriteString(`
-			import (
-				"github.com/c4milo/govsphere/vim/do"
+				"github.com/c4milo/govsphere/vim/enum"
 			)
 		`)
 	}
 
 	for _, obj := range objects {
+		if obj.Namespace != "enum" {
+			obj.Namespace = "api"
+		}
+
 		if obj.Namespace != namespace {
 			continue
 		}
