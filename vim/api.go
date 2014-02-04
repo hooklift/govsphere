@@ -1462,7 +1462,7 @@ func (api *AuthorizationManager) HasPrivilegeOnEntities(
 //
 func (api *AuthorizationManager) HasPrivilegeOnEntity(
 	_this *ManagedObjectReference, entity *ManagedEntity, sessionId string, privId []string,
-) ([]boolean, error) {
+) ([]bool, error) {
 
 	return nil, nil
 
@@ -6739,7 +6739,7 @@ type CustomizationSpec struct {
 	// specification. Both the client and the server can use this to determine if
 	// stored passwords can be decrypted by the server or if the passwords need to be
 	// re-entered and re-encrypted before the specification can be used.
-	EncryptionKey []byte
+	EncryptionKey []int8
 
 	// Global IP settings constitute the IP settings that are not specific to a
 	// particular virtual network adapter.
@@ -6816,7 +6816,7 @@ type CustomizationSpecManager struct {
 	// Gets a binary public encryption key that can be used to encrypt
 	// passwords in stored specifications.
 	// Required Privilege: System.View
-	EncryptionKey []byte
+	EncryptionKey []int8
 
 	// Gets a list of information on available specifications.
 	// Required Privilege: VirtualMachine.Provisioning.ReadCustSpecs
@@ -11027,7 +11027,7 @@ func (api *DistributedVirtualSwitch) PerformDvsProductSpecOperation_Task(
 //
 func (api *DistributedVirtualSwitch) QueryUsedVlanIdInDvs(
 	_this *ManagedObjectReference,
-) ([]int, error) {
+) ([]int32, error) {
 
 	return nil, nil
 
@@ -13340,7 +13340,7 @@ type DynamicArray struct {
 	DynamicType string
 
 	// Array of dynamic values.
-	Val []anyType
+	Val []interface{}
 }
 
 //
@@ -18055,7 +18055,7 @@ type GuestProcessManager struct {
 // None
 //
 func (api *GuestProcessManager) ListProcessesInGuest(
-	_this *ManagedObjectReference, vm *VirtualMachine, auth *GuestAuthentication, pids []long,
+	_this *ManagedObjectReference, vm *VirtualMachine, auth *GuestAuthentication, pids []int64,
 ) ([]*GuestProcessInfo, error) {
 
 	return nil, nil
@@ -19618,7 +19618,7 @@ type HostCapability struct {
 	// List of VMFS major versions supported by the host.
 	//
 	// Since vSphere API 5.0
-	SupportedVmfsMajorVersion []int
+	SupportedVmfsMajorVersion []int32
 
 	// Indicates whether this host supports relocation of
 	// suspended virtual machines.  Must be true on the source
@@ -19962,7 +19962,7 @@ type HostConfigInfo struct {
 	// Full Host Certificate in PEM format, if known
 	//
 	// Since vSphere API 5.0
-	Certificate []byte
+	Certificate []int8
 
 	// Memory configuration.
 	ConsoleReservation *ServiceConsoleReservationInfo
@@ -20751,7 +20751,7 @@ type HostCpuPackage struct {
 	Index int16
 
 	// The logical CPU threads on this package.
-	ThreadId []short
+	ThreadId []int16
 
 	// CPU vendor name, possible names currently are "Intel", "AMD",
 	// or "unknown".
@@ -21956,7 +21956,7 @@ type HostDigestInfo struct {
 
 	// The variable length byte array containing the digest value calculated by
 	// the specified digestMethod.
-	DigestValue []byte
+	DigestValue []int8
 
 	// The name of the object from which this digest value is calcaulated.
 	ObjectName string
@@ -26998,7 +26998,7 @@ type HostNumaNode struct {
 	*DynamicData
 
 	// Information about each of the CPUs associated with the node.
-	CpuID []short
+	CpuID []int16
 
 	// Beginning memory range for this NUMA node.
 	MemoryRangeBegin int64
@@ -31581,7 +31581,7 @@ type HostTpmEventDetails struct {
 	*DynamicData
 
 	// Value of the Platform Configuration Register (PCR) for this event.
-	DataHash []byte
+	DataHash []int8
 }
 
 //
@@ -31626,7 +31626,7 @@ type HostTpmOptionEventDetails struct {
 	// This array exposes the raw contents of the settings file (or files) that were
 	// passed to kernel during the boot up process, and, therefore, should be treated
 	// accordingly.
-	BootOptions []byte
+	BootOptions []int8
 
 	// Name of the file containing the boot options.
 	OptionsFileName string
@@ -33187,16 +33187,16 @@ type HostWwnChangedEvent struct {
 	*HostEvent
 
 	// The new node WWN.
-	NewNodeWwns []long
+	NewNodeWwns []int64
 
 	// The new port WWN.
-	NewPortWwns []long
+	NewPortWwns []int64
 
 	// The old node WWN.
-	OldNodeWwns []long
+	OldNodeWwns []int64
 
 	// The old port WWN.
-	OldPortWwns []long
+	OldPortWwns []int64
 }
 
 //
@@ -37345,7 +37345,7 @@ type ManagedEntity struct {
 
 	// Access rights the current session has to this entity.
 	// Required Privilege: System.View
-	EffectiveRole []int
+	EffectiveRole []int32
 
 	// Name of this entity, unique relative to its parent.
 	//
@@ -42766,7 +42766,7 @@ type PerfCounterInfo struct {
 	// the same device type. For example, the rollup types for CPU Usage for
 	// a host are average, minimum, and maximum. Therefore, their counter
 	// IDs are associated.
-	AssociatedCounterId []int
+	AssociatedCounterId []int32
 
 	// The group of the performance counter with its label and summary
 	// details. Counter groups include "cpu," "mem," "net," "disk," "system,"
@@ -43136,7 +43136,7 @@ type PerfMetricIntSeries struct {
 	// size as the PerfSampleInfo, because the values
 	// can only be interpreted in the context of the sample that generated
 	// the value.
-	Value []long
+	Value []int64
 }
 
 //
@@ -43561,7 +43561,7 @@ func (api *PerformanceManager) QueryPerfComposite(
 // System.View
 //
 func (api *PerformanceManager) QueryPerfCounter(
-	_this *ManagedObjectReference, counterId []int,
+	_this *ManagedObjectReference, counterId []int32,
 ) ([]*PerfCounterInfo, error) {
 
 	return nil, nil
@@ -43633,7 +43633,7 @@ func (api *PerformanceManager) RemovePerfInterval(
 // vSphere API 5.0
 //
 func (api *PerformanceManager) ResetCounterLevelMapping(
-	_this *ManagedObjectReference, counters []int,
+	_this *ManagedObjectReference, counters []int32,
 ) error {
 
 	return nil
@@ -48517,7 +48517,7 @@ type ScsiLun struct {
 	// property is not defined.
 	//
 	// Since VI API 2.5
-	StandardInquiry []byte
+	StandardInquiry []int8
 
 	// Universally unique identifier for the LUN used to identify ScsiLun across
 	// multiple servers.
@@ -48591,7 +48591,7 @@ type ScsiLunDurableName struct {
 	// along with the payload for data obtained from page 83h, and is the
 	// payload for data obtained from page 80h of the Vital Product Data
 	// (VPD).
-	Data []byte
+	Data []int8
 
 	// The string describing the namespace used for the durable name.
 	Namespace string
@@ -51001,20 +51001,20 @@ type StoragePerformanceSummary struct {
 	*DynamicData
 
 	// Aggregated datastore Read IO rate (Reads/second)
-	DatastoreReadIops []double
+	DatastoreReadIops []float64
 
 	// Aggregated datastore latency in milliseconds for read operations
-	DatastoreReadLatency []double
+	DatastoreReadLatency []float64
 
 	// Aggregated datastore latency as observed by Vms using the datastore
 	// The reported latency is in milliseconds.
-	DatastoreVmLatency []double
+	DatastoreVmLatency []float64
 
 	// Aggregated datastore Write IO rate (Writes/second)
-	DatastoreWriteIops []double
+	DatastoreWriteIops []float64
 
 	// Aggregated datastore latency in milliseconds for write operations
-	DatastoreWriteLatency []double
+	DatastoreWriteLatency []float64
 
 	// Time period over which statistics are aggregated
 	// The reported time unit is in seconds
@@ -51027,7 +51027,7 @@ type StoragePerformanceSummary struct {
 	// P, and the value of the datastoreReadLatency[0] is L, then
 	// P% of all the read IOs performed during observation interval
 	// is less than L milliseconds.
-	Percentile []int
+	Percentile []int32
 
 	// Cumulative SIOC activity to satisfy SIOC latency threshold
 	// setting.  This metric indicates the total time that SIOC is
@@ -51842,7 +51842,7 @@ type TaskFilterSpec struct {
 	// for filtering purposes.
 	//
 	// Since vSphere API 4.0
-	EventChainId []int
+	EventChainId []int32
 
 	// The filter specification for retrieving tasks by
 	// parentTaskKey. If it is set, tasks not with the
@@ -55314,7 +55314,7 @@ type VMwareVspanPort struct {
 	// session.
 	//
 	// Since vSphere API 5.1
-	Vlans []int
+	Vlans []int32
 
 	// Wild card specification for source ports participating in the Distributed Port Mirroring session.
 	// See DistributedVirtualSwitchPortConnecteeConnecteeType for valid values.
@@ -56298,7 +56298,7 @@ type VirtualController struct {
 	//
 	// Each entry contains the key property of the
 	// corresponding device object.
-	Device []int
+	Device []int32
 }
 
 //
@@ -56891,7 +56891,7 @@ type VirtualDiskAntiAffinityRuleSpec struct {
 	*ClusterRuleInfo
 
 	// The list of virtual disks.
-	DiskId []int
+	DiskId []int32
 }
 
 //
@@ -57822,7 +57822,7 @@ type VirtualDiskPartitionedRawDiskVer2BackingInfo struct {
 
 	// Array of partition indexes. This array identifies the
 	// partitions that are used on the physical disk drive.
-	Partition []int
+	Partition []int32
 }
 
 //
@@ -58870,7 +58870,7 @@ type VirtualHardwareOption struct {
 	// The guest operating system descriptor describes a maximum CPU
 	// count, but the acceptable values are still constrained to the
 	// set specified here. The default value is stored at index 0 in the list.
-	NumCPU []int
+	NumCPU []int32
 
 	// Can the number of virtual CPUs be changed
 	NumCpuReadonly bool
@@ -60496,7 +60496,7 @@ type VirtualMachineAffinityInfo struct {
 	// List of nodes (processors for CPU, NUMA nodes for memory) that
 	// may be used by the virtual machine.  If the array is empty when
 	// modifying the affinity setting, then any existing affinity is removed.
-	AffinitySet []int
+	AffinitySet []int32
 }
 
 //
@@ -61170,7 +61170,7 @@ type VirtualMachineConfigInfo struct {
 	// virtual machine.
 	//
 	// Since VI API 2.5
-	NpivNodeWorldWideName []long
+	NpivNodeWorldWideName []int64
 
 	// This property is used to check whether the NPIV can be enabled on the Virtual
 	// machine with non-rdm disks in the configuration, so this is potentially not
@@ -61184,7 +61184,7 @@ type VirtualMachineConfigInfo struct {
 	// npivNodeWorldWideName.
 	//
 	// Since VI API 2.5
-	NpivPortWorldWideName []long
+	NpivPortWorldWideName []int64
 
 	// This property is used to enable or disable the NPIV capability on a desired
 	// virtual machine on a temporary basis. When this property is set NPIV Vport
@@ -61749,7 +61749,7 @@ type VirtualMachineConfigSpec struct {
 	// Reconfigure privilege: VirtualMachine.Config.Settings.
 	//
 	// Since VI API 2.5
-	NpivNodeWorldWideName []long
+	NpivNodeWorldWideName []int64
 
 	// This property is used to check whether the NPIV can be enabled on the Virtual
 	// machine with non-rdm disks in the configuration, so this is potentially not
@@ -61770,7 +61770,7 @@ type VirtualMachineConfigSpec struct {
 	// Reconfigure privilege: VirtualMachine.Config.Settings.
 	//
 	// Since VI API 2.5
-	NpivPortWorldWideName []long
+	NpivPortWorldWideName []int64
 
 	// This property is used to enable or disable the NPIV capability on a desired
 	// virtual machine on a temporary basis. When this property is set NPIV Vport
@@ -62512,7 +62512,7 @@ type VirtualMachineFileLayoutExDiskUnit struct {
 	// At least one entry always exists in this array. Property
 	// type of the referenced file
 	// can be used to distinguish the disk descriptor (type diskDescriptor) from the extents.
-	FileKey []int
+	FileKey []int32
 }
 
 //
@@ -62976,7 +62976,7 @@ type VirtualMachineMessage struct {
 	// Substitution variables in the format string identified by id
 	// are 1-based indexes into this array. Substitution variable {1}
 	// corresponds to argument[0], etc.
-	Argument []anyType
+	Argument []interface{}
 
 	// A unique identifier for this particular message.
 	//
@@ -66380,7 +66380,7 @@ type VmConfigFileQueryFilter struct {
 	// If this property is set, only the virtual machine configuration files that
 	// match one of the specified configuration versions are selected. If no
 	// versions are specified, this search criteria is ignored.
-	MatchConfigVersion []int
+	MatchConfigVersion []int32
 }
 
 type VmConfigFileQueryFlags struct {
@@ -66765,7 +66765,7 @@ type VmDiskFileQueryFilter struct {
 	// If this optional property is set, only virtual disk primary files that match
 	// one of the specified hardware versions are selected.  If no versions are
 	// specified, this search criteria is ignored.
-	MatchHardwareVersion []int
+	MatchHardwareVersion []int32
 
 	// This optional property can be used to filter disks based on whether
 	// they are thin-provsioned or not: if set to true, only thin-provisioned
@@ -68074,10 +68074,10 @@ type VmWwnAssignedEvent struct {
 	*VmEvent
 
 	// The new node WWN.
-	NodeWwns []long
+	NodeWwns []int64
 
 	// The new port WWN.
-	PortWwns []long
+	PortWwns []int64
 }
 
 //
@@ -68088,16 +68088,16 @@ type VmWwnChangedEvent struct {
 	*VmEvent
 
 	// The new node WWN.
-	NewNodeWwns []long
+	NewNodeWwns []int64
 
 	// The new port WWN.
-	NewPortWwns []long
+	NewPortWwns []int64
 
 	// The old node WWN.
-	OldNodeWwns []long
+	OldNodeWwns []int64
 
 	// The old port WWN.
-	OldPortWwns []long
+	OldPortWwns []int64
 }
 
 //

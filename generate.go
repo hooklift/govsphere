@@ -95,8 +95,8 @@ func toGoType(xsdType string) string {
 
 	if strings.HasSuffix(type_, "[]") {
 		type_ = type_[:len(type_)-2]
-		if _, ok := xsd2GoTypes[type_]; ok {
-			type_ = "[]" + type_
+		if value, ok := xsd2GoTypes[type_]; ok {
+			type_ = "[]" + value
 		} else {
 			type_ = "[]*" + type_
 		}
