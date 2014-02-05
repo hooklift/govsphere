@@ -229,7 +229,7 @@ func generate(apiDefFile string) {
 		objnsmap[obj.Name] = obj.Namespace
 	}
 
-	mainPkg := "./vim"
+	mainPkg := "vim"
 	os.Mkdir(mainPkg, 0744)
 
 	var wg sync.WaitGroup
@@ -237,14 +237,16 @@ func generate(apiDefFile string) {
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		genCode(objects, mainPkg, moTmpl, "")
+		genCode(objects, mainPkg, doTmpl, "do")
+		genCode(objects, mainPkg, moTmpl, "mo")
+		genCode(objects, mainPkg, faultTmpl, "fault")
 	}()
 
-	wg.Add(1)
-	go func() {
-		defer wg.Done()
-		genCode(objects, mainPkg, doTmpl, "")
-	}()
+	// wg.Add(1)
+	// go func() {
+	// 	defer wg.Done()
+	// 	genCode(objects, mainPkg, doTmpl, "do")
+	// }()
 
 	wg.Add(1)
 	go func() {
@@ -252,11 +254,11 @@ func generate(apiDefFile string) {
 		genCode(objects, mainPkg, enumTmpl, "enum")
 	}()
 
-	wg.Add(1)
-	go func() {
-		defer wg.Done()
-		genCode(objects, mainPkg, faultTmpl, "")
-	}()
+	// wg.Add(1)
+	// go func() {
+	// 	defer wg.Done()
+	// 	genCode(objects, mainPkg, faultTmpl, "fault")
+	// }()
 
 	wg.Wait()
 }
@@ -265,17 +267,19 @@ func genCode(objects []Object, mainPkg, tmpl, namespace string) {
 	var fd *os.File
 	pkg := mainPkg
 
-	if namespace != "" {
-		pkg += "/" + namespace
+	fileName := namespace
+	if namespace != "enum" {
+		fileName = pkg
 	} else {
-		namespace = "api"
+		pkg += "/" + namespace
 	}
 
 	if ok, err := exists(pkg); !ok && err == nil {
 		os.Mkdir(pkg, 0744)
 	}
 
-	file := pkg + "/" + namespace + ".go"
+	file := pkg + "/" + fileName + ".go"
+
 	fd, err := os.Create(file)
 	if err != nil {
 		log.Fatalln(err)
@@ -284,24 +288,24 @@ func genCode(objects []Object, mainPkg, tmpl, namespace string) {
 
 	data := new(bytes.Buffer)
 	data.WriteString(headerTmpl)
-	data.WriteString("package " + namespace + "\n")
 
-	if namespace == "api" {
+	if namespace != "enum" {
+		data.WriteString("package " + mainPkg + "\n")
 		data.WriteString(`
 			import (
 				"time"
 				"github.com/c4milo/govsphere/vim/enum"
 			)
 		`)
+	} else {
+		data.WriteString("package " + namespace + "\n")
 	}
 
 	for _, obj := range objects {
-		if obj.Namespace != "enum" {
-			obj.Namespace = "api"
-		}
-
-		if obj.Namespace != namespace {
-			continue
+		if namespace == "enum" {
+			if obj.Namespace != namespace {
+				continue
+			}
 		}
 
 		tmpl := template.Must(template.New(obj.Namespace).Funcs(funcMap).Parse(tmpl))
@@ -309,7 +313,6 @@ func genCode(objects []Object, mainPkg, tmpl, namespace string) {
 		if err != nil {
 			log.Fatalln(err)
 		}
-		//obj.Methods[0].ReturnValue.
 	}
 
 	source := data.Bytes()

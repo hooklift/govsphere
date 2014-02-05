@@ -22,6 +22,11 @@ var doTmpl = `
 {{if $comment}} {{$comment}} {{end}}
 type {{$type}} struct {
 	{{$extends := toGoType .Extends}}
+	{{if ne $extends "*ManagedEntity"}}
+		{{if ne $extends "*ExtensibleManagedObject"}}
+			{{if eq $namespace "mo"}}*ManagedObject{{end}}
+		{{end}}
+	{{end}}
 	{{lookUpNamespace $extends $namespace}}
 	{{range .Properties}}
 		{{$fieldComment := comment .Description}}

@@ -27,13 +27,16 @@ Example output:
 ![](https://i.cloudup.com/sEiUVA9a8L.png)
 
 ## Documentation
-TODO
+Start the godoc server and open up your browser: `godoc -http=:6060`
 
 ## TODO
-* Create ServiceInstance class
+1. Create ManagedObject type with a private currentProperty method.
+2. Extend every MO with ManagedObject.
+3. Set all the fields in MO types as private since vSphere doesn't not allow direct manipulation of the MO's fields but only through the MO's methods.
+4. Generate getters for MOs which will invoke PropertyCollector in order to get the current object's property value.
+5. Create ServiceInstance class
 	* Use best API version supported by the server
-* LoginByToken
-* Add support for JSON Schema in api.json generation
+7. Add support for JSON Schema in api.json generation
 
 ## License
 Copyright 2014 Cloudescape. All rights reserved.

@@ -2,7 +2,7 @@
 //Do not modify
 //Copyright (c) 2014, Cloudescape. All rights reserved.
 
-package api
+package vim
 
 import (
 	"github.com/c4milo/govsphere/vim/enum"
@@ -142,6 +142,27 @@ type Action struct {
 }
 
 //
+// These constant strings can be used as parameters in user-specified
+// email subject and body templates as well as in scripts. The action processor
+// in VirtualCenter substitutes the run-time values for the parameters.
+//
+// For example, an email subject provided by the client could be the string:
+// "Alarm - {alarmName} Description:\n{eventDescription}".
+// Or a script action provided could be: "myScript {alarmName}"
+//
+//
+type ActionParameter struct {
+}
+
+//
+// Pre-defined constants for possible action types. Virtual Center
+// uses this information to coordinate with the clients.
+//
+//
+type ActionType struct {
+}
+
+//
 // Base fault for Active Directory related problems.
 //
 //
@@ -203,6 +224,13 @@ type AffinityConfigured struct {
 }
 
 //
+// Types of affinities.
+//
+//
+type AffinityType struct {
+}
+
+//
 // The AfterStartupTaskScheduler data object establishes the time
 // that a scheduled task will run after the vCenter server restarts.
 //
@@ -242,6 +270,9 @@ type AgentInstallFailed struct {
 	StatusCode int32
 }
 
+type AgentInstallFailedReason struct {
+}
+
 //
 // This managed object type defines an alarm that is triggered and
 // an action that occurs due to the triggered alarm when certain conditions
@@ -267,7 +298,7 @@ type Alarm struct {
 // Required Privileges
 // Alarm.Edit
 //
-func (api *Alarm) ReconfigureAlarm(
+func (mo *Alarm) ReconfigureAlarm(
 	_this *ManagedObjectReference, spec *AlarmSpec,
 ) error {
 
@@ -281,7 +312,7 @@ func (api *Alarm) ReconfigureAlarm(
 // Required Privileges
 // Alarm.Delete
 //
-func (api *Alarm) RemoveAlarm(
+func (mo *Alarm) RemoveAlarm(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -494,6 +525,7 @@ type AlarmInfo struct {
 // within a service instance.
 //
 type AlarmManager struct {
+	*ManagedObject
 
 	// The default setting for each alarm expression, used to populate the
 	// initial client wizard screen.
@@ -517,7 +549,7 @@ type AlarmManager struct {
 // Since
 // vSphere API 4.0
 //
-func (api *AlarmManager) AcknowledgeAlarm(
+func (mo *AlarmManager) AcknowledgeAlarm(
 	_this *ManagedObjectReference, alarm *Alarm, entity *ManagedEntity,
 ) error {
 
@@ -533,7 +565,7 @@ func (api *AlarmManager) AcknowledgeAlarm(
 // Since
 // vSphere API 4.0
 //
-func (api *AlarmManager) AreAlarmActionsEnabled(
+func (mo *AlarmManager) AreAlarmActionsEnabled(
 	_this *ManagedObjectReference, entity *ManagedEntity,
 ) (bool, error) {
 
@@ -552,7 +584,7 @@ func (api *AlarmManager) AreAlarmActionsEnabled(
 // Required Privileges
 // None
 //
-func (api *AlarmManager) CreateAlarm(
+func (mo *AlarmManager) CreateAlarm(
 	_this *ManagedObjectReference, entity *ManagedEntity, spec *AlarmSpec,
 ) (*Alarm, error) {
 
@@ -568,7 +600,7 @@ func (api *AlarmManager) CreateAlarm(
 // Since
 // vSphere API 4.0
 //
-func (api *AlarmManager) EnableAlarmActions(
+func (mo *AlarmManager) EnableAlarmActions(
 	_this *ManagedObjectReference, entity *ManagedEntity, enabled bool,
 ) error {
 
@@ -586,7 +618,7 @@ func (api *AlarmManager) EnableAlarmActions(
 // Required Privileges
 // System.View
 //
-func (api *AlarmManager) GetAlarm(
+func (mo *AlarmManager) GetAlarm(
 	_this *ManagedObjectReference, entity *ManagedEntity,
 ) ([]*Alarm, error) {
 
@@ -602,7 +634,7 @@ func (api *AlarmManager) GetAlarm(
 // Required Privileges
 // None
 //
-func (api *AlarmManager) GetAlarmState(
+func (mo *AlarmManager) GetAlarmState(
 	_this *ManagedObjectReference, entity *ManagedEntity,
 ) ([]*AlarmState, error) {
 
@@ -1240,6 +1272,13 @@ type ApplyStorageRecommendationResult struct {
 }
 
 //
+// This list specifies the type of operation being performed on the array.
+//
+//
+type ArrayUpdateOperation struct {
+}
+
+//
 // An ArrayUpdateSpec data object type is a common superclass
 // for supporting incremental updates to arrays.
 //
@@ -1393,6 +1432,7 @@ type AuthorizationEvent struct {
 //
 //
 type AuthorizationManager struct {
+	*ManagedObject
 
 	// Static, descriptive strings for system roles and privileges.
 	// Required Privilege: System.View
@@ -1417,7 +1457,7 @@ type AuthorizationManager struct {
 // Required Privileges
 // Authorization.ModifyRoles
 //
-func (api *AuthorizationManager) AddAuthorizationRole(
+func (mo *AuthorizationManager) AddAuthorizationRole(
 	_this *ManagedObjectReference, name string, privIds []string,
 ) (int32, error) {
 
@@ -1439,7 +1479,7 @@ func (api *AuthorizationManager) AddAuthorizationRole(
 // Since
 // vSphere API 5.5
 //
-func (api *AuthorizationManager) HasPrivilegeOnEntities(
+func (mo *AuthorizationManager) HasPrivilegeOnEntities(
 	_this *ManagedObjectReference, entity []*ManagedEntity, sessionId string, privId []string,
 ) ([]*EntityPrivilege, error) {
 
@@ -1460,7 +1500,7 @@ func (api *AuthorizationManager) HasPrivilegeOnEntities(
 // Since
 // vSphere API 5.0
 //
-func (api *AuthorizationManager) HasPrivilegeOnEntity(
+func (mo *AuthorizationManager) HasPrivilegeOnEntity(
 	_this *ManagedObjectReference, entity *ManagedEntity, sessionId string, privId []string,
 ) ([]bool, error) {
 
@@ -1474,7 +1514,7 @@ func (api *AuthorizationManager) HasPrivilegeOnEntity(
 // Required Privileges
 // Authorization.ReassignRolePermissions
 //
-func (api *AuthorizationManager) MergePermissions(
+func (mo *AuthorizationManager) MergePermissions(
 	_this *ManagedObjectReference, srcRoleId int32, dstRoleId int32,
 ) error {
 
@@ -1488,7 +1528,7 @@ func (api *AuthorizationManager) MergePermissions(
 // Required Privileges
 // Authorization.ModifyRoles
 //
-func (api *AuthorizationManager) RemoveAuthorizationRole(
+func (mo *AuthorizationManager) RemoveAuthorizationRole(
 	_this *ManagedObjectReference, roleId int32, failIfUsed bool,
 ) error {
 
@@ -1514,7 +1554,7 @@ func (api *AuthorizationManager) RemoveAuthorizationRole(
 // Required Privileges
 // None
 //
-func (api *AuthorizationManager) RemoveEntityPermission(
+func (mo *AuthorizationManager) RemoveEntityPermission(
 	_this *ManagedObjectReference, entity *ManagedEntity, user string, isGroup bool,
 ) error {
 
@@ -1559,7 +1599,7 @@ func (api *AuthorizationManager) RemoveEntityPermission(
 // Required Privileges
 // None
 //
-func (api *AuthorizationManager) ResetEntityPermissions(
+func (mo *AuthorizationManager) ResetEntityPermissions(
 	_this *ManagedObjectReference, entity *ManagedEntity, permission []*Permission,
 ) error {
 
@@ -1575,7 +1615,7 @@ func (api *AuthorizationManager) ResetEntityPermissions(
 // Required Privileges
 // System.View
 //
-func (api *AuthorizationManager) RetrieveAllPermissions(
+func (mo *AuthorizationManager) RetrieveAllPermissions(
 	_this *ManagedObjectReference,
 ) ([]*Permission, error) {
 
@@ -1602,7 +1642,7 @@ func (api *AuthorizationManager) RetrieveAllPermissions(
 // Required Privileges
 // None
 //
-func (api *AuthorizationManager) RetrieveEntityPermissions(
+func (mo *AuthorizationManager) RetrieveEntityPermissions(
 	_this *ManagedObjectReference, entity *ManagedEntity, inherited bool,
 ) ([]*Permission, error) {
 
@@ -1618,7 +1658,7 @@ func (api *AuthorizationManager) RetrieveEntityPermissions(
 // Required Privileges
 // System.View
 //
-func (api *AuthorizationManager) RetrieveRolePermissions(
+func (mo *AuthorizationManager) RetrieveRolePermissions(
 	_this *ManagedObjectReference, roleId int32,
 ) ([]*Permission, error) {
 
@@ -1656,7 +1696,7 @@ func (api *AuthorizationManager) RetrieveRolePermissions(
 // Required Privileges
 // None
 //
-func (api *AuthorizationManager) SetEntityPermissions(
+func (mo *AuthorizationManager) SetEntityPermissions(
 	_this *ManagedObjectReference, entity *ManagedEntity, permission []*Permission,
 ) error {
 
@@ -1673,7 +1713,7 @@ func (api *AuthorizationManager) SetEntityPermissions(
 // Required Privileges
 // Authorization.ModifyRoles
 //
-func (api *AuthorizationManager) UpdateAuthorizationRole(
+func (mo *AuthorizationManager) UpdateAuthorizationRole(
 	_this *ManagedObjectReference, roleId int32, newName string, privIds []string,
 ) error {
 
@@ -1733,6 +1773,9 @@ type AuthorizationRole struct {
 	// Whether or not the role is system-defined. System-defined roles cannot be
 	// changed.
 	System bool
+}
+
+type AutoStartAction struct {
 }
 
 //
@@ -1862,6 +1905,18 @@ type AutoStartPowerInfo struct {
 	StopDelay int32
 
 	WaitForHeartbeat *enum.AutoStartWaitHeartbeatSetting
+}
+
+//
+// Determines if the virtual machine should start after receiving a heartbeat,
+// ignore heartbeats and start after the startDelay has elapsed, or follow the
+// system default before powering on. When a virtual machine is next in the start
+// order, the system either waits a specified period of time for a virtual
+// machine to power on or it waits until it receives a successful heartbeat from a
+// powered on virtual machine. By default, this is set to no.
+//
+//
+type AutoStartWaitHeartbeatSetting struct {
 }
 
 //
@@ -2264,6 +2319,9 @@ type CannotMoveFaultToleranceVm struct {
 	VmName string
 }
 
+type CannotMoveFaultToleranceVmMoveType struct {
+}
+
 //
 // This fault is thrown when an attempt is made to move a host which has
 // one or more fault tolerance vms out of the current cluster.
@@ -2336,6 +2394,9 @@ type CannotPowerOffVmInCluster struct {
 	VmName string
 }
 
+type CannotPowerOffVmInClusterOperation struct {
+}
+
 //
 // Fault thrown for the case that an attempt is made to reconfigure VSAN
 // when HA is currently enabled for a given ClusterComputeResource.See ReconfigureComputeResource_Task
@@ -2364,6 +2425,9 @@ type CannotUseNetwork struct {
 
 	// Reason describing why the network cannot be used.
 	Reason string
+}
+
+type CannotUseNetworkReason struct {
 }
 
 //
@@ -2440,6 +2504,14 @@ type CheckResult struct {
 	// A list of faults representing problems which may
 	// require attention, but which are not fatal.
 	Warning []*LocalizedMethodFault
+}
+
+//
+// The types of tests which can requested by any of the methods in either
+// VirtualMachineCompatibilityChecker or VirtualMachineProvisioningChecker.
+//
+//
+type CheckTestType struct {
 }
 
 //
@@ -2574,6 +2646,8 @@ type ClusterComplianceCheckedEvent struct {
 //
 //
 type ClusterComputeResource struct {
+	*ManagedObject
+
 	*ComputeResource
 
 	// The set of actions that have been performed recently.
@@ -2670,7 +2744,7 @@ type ClusterComputeResource struct {
 // Required Privileges
 // Host.Inventory.AddHostToCluster
 //
-func (api *ClusterComputeResource) AddHost_Task(
+func (mo *ClusterComputeResource) AddHost_Task(
 	_this *ManagedObjectReference, spec *HostConnectSpec, asConnected bool, resourcePool *ResourcePool, license string,
 ) (*Task, error) {
 
@@ -2692,7 +2766,7 @@ func (api *ClusterComputeResource) AddHost_Task(
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *ClusterComputeResource) ApplyRecommendation(
+func (mo *ClusterComputeResource) ApplyRecommendation(
 	_this *ManagedObjectReference, key string,
 ) error {
 
@@ -2712,7 +2786,7 @@ func (api *ClusterComputeResource) ApplyRecommendation(
 // Since
 // vSphere API 4.1
 //
-func (api *ClusterComputeResource) CancelRecommendation(
+func (mo *ClusterComputeResource) CancelRecommendation(
 	_this *ManagedObjectReference, key string,
 ) error {
 
@@ -2760,7 +2834,7 @@ func (api *ClusterComputeResource) CancelRecommendation(
 // Since
 // vSphere API 5.0
 //
-func (api *ClusterComputeResource) ClusterEnterMaintenanceMode(
+func (mo *ClusterComputeResource) ClusterEnterMaintenanceMode(
 	_this *ManagedObjectReference, host []*HostSystem, option []*OptionValue,
 ) (*ClusterEnterMaintenanceResult, error) {
 
@@ -2796,7 +2870,7 @@ func (api *ClusterComputeResource) ClusterEnterMaintenanceMode(
 // Required Privileges
 // Host.Inventory.EditCluster
 //
-func (api *ClusterComputeResource) MoveHostInto_Task(
+func (mo *ClusterComputeResource) MoveHostInto_Task(
 	_this *ManagedObjectReference, host *HostSystem, resourcePool *ResourcePool,
 ) (*Task, error) {
 
@@ -2835,7 +2909,7 @@ func (api *ClusterComputeResource) MoveHostInto_Task(
 // Required Privileges
 // Host.Inventory.EditCluster
 //
-func (api *ClusterComputeResource) MoveInto_Task(
+func (mo *ClusterComputeResource) MoveInto_Task(
 	_this *ManagedObjectReference, host []*HostSystem,
 ) (*Task, error) {
 
@@ -2871,7 +2945,7 @@ func (api *ClusterComputeResource) MoveInto_Task(
 // Required Privileges
 // System.Read
 //
-func (api *ClusterComputeResource) RecommendHostsForVm(
+func (mo *ClusterComputeResource) RecommendHostsForVm(
 	_this *ManagedObjectReference, vm *VirtualMachine, pool *ResourcePool,
 ) ([]*ClusterHostRecommendation, error) {
 
@@ -2888,7 +2962,7 @@ func (api *ClusterComputeResource) RecommendHostsForVm(
 // Required Privileges
 // Host.Inventory.EditCluster
 //
-func (api *ClusterComputeResource) ReconfigureCluster_Task(
+func (mo *ClusterComputeResource) ReconfigureCluster_Task(
 	_this *ManagedObjectReference, spec *ClusterConfigSpec, modify bool,
 ) (*Task, error) {
 
@@ -2910,7 +2984,7 @@ func (api *ClusterComputeResource) ReconfigureCluster_Task(
 // Since
 // VI API 2.5
 //
-func (api *ClusterComputeResource) RefreshRecommendation(
+func (mo *ClusterComputeResource) RefreshRecommendation(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -2926,7 +3000,7 @@ func (api *ClusterComputeResource) RefreshRecommendation(
 // Since
 // vSphere API 4.0
 //
-func (api *ClusterComputeResource) RetrieveDasAdvancedRuntimeInfo(
+func (mo *ClusterComputeResource) RetrieveDasAdvancedRuntimeInfo(
 	_this *ManagedObjectReference,
 ) (*ClusterDasAdvancedRuntimeInfo, error) {
 
@@ -3517,6 +3591,16 @@ type ClusterDasAamNodeState struct {
 }
 
 //
+// The ClusterDasAamNodeStateDasState enumerated type defines
+// values for host HA configuration and runtime state properties
+// (configState and
+// runtimeState).
+//
+//
+type ClusterDasAamNodeStateDasState struct {
+}
+
+//
 // Base class for admission control related information of a vSphere HA cluster.
 //
 //
@@ -3711,6 +3795,59 @@ type ClusterDasConfigInfo struct {
 }
 
 //
+// The policy to determine the candidates from which vCenter Server can
+// choose heartbeat datastores.
+//
+//
+type ClusterDasConfigInfoHBDatastoreCandidate struct {
+}
+
+//
+// Possible states of an HA service. All services support the
+// disabled and enabled states.
+//
+//
+type ClusterDasConfigInfoServiceState struct {
+}
+
+//
+// The ClusterDasConfigInfoVmMonitoringState enum defines values that indicate
+// the state of Virtual Machine Health Monitoring. Health Monitoring
+// uses the vmTools (guest) and application agent heartbeat modules.
+// You can configure HA to respond to heartbeat failures of either one
+// or both modules. You can also disable the HA response to heartbeat failures.
+//
+//
+// •
+// To set the cluster default for health monitoring, use the
+// ClusterConfigSpecEx.dasConfig.vmMonitoring property.
+//
+//
+// •
+// To set health monitoring for a virtual machine, use the
+// ClusterConfigSpecEx.dasVmConfigSpec.info.dasSettings.vmToolsMonitoringSettings property.
+//
+//
+// •
+// To retrieve the current state of health monitoring (cluster setting), use the
+// ClusterConfigInfoEx.dasConfig.vmMonitoring
+// property.
+//
+//
+// •
+// To retrieve the current state of health monitoring for a virtual machine, use the
+// ClusterConfigInfoEx.dasVmConfig[].dasSettings.vmToolsMonitoringSettings.vmMonitoring
+// property.
+//
+//
+//
+//
+//
+//
+type ClusterDasConfigInfoVmMonitoringState struct {
+}
+
+//
 // Base class for DAS data for high availability service for a cluster.
 //
 //
@@ -3836,6 +3973,21 @@ type ClusterDasFailoverLevelAdvancedRuntimeInfoVmSlots struct {
 
 	// The reference to the virtual machine
 	Vm *VirtualMachine
+}
+
+//
+// The ClusterDasFdmAvailabilityState enumeration describes the
+// availability states of hosts in a vSphere HA cluster. In the HA
+// architecture, a agent called the Fault Domain Manager runs on
+// each active host. These agents elect a master and the others become
+// its slaves. The availability state assigned to a given host is
+// determined from information reported by the Fault Domain Manager
+// running on the host, by a Fault Domain Manager that has been elected
+// master, and by vCenter Server. See ClusterDasFdmHostState
+// for more information about the vSphere HA architecture.
+//
+//
+type ClusterDasFdmAvailabilityState struct {
 }
 
 //
@@ -4031,6 +4183,83 @@ type ClusterDasVmSettings struct {
 	//
 	// Since vSphere API 4.0
 	VmToolsMonitoringSettings *ClusterVmToolsMonitoringSettings
+}
+
+//
+// The ClusterDasVmSettingsIsolationResponse enum defines
+// values that indicate whether or not the virtual machine should be
+// powered off if a host determines that it is isolated from
+// the rest of the cluster.
+//
+// Host network isolation occurs when a host is still running
+// but it can no longer communicate with other hosts in the cluster
+// and it cannot ping the configured isolation address(es).
+// When the HA agent on a host loses contact with the other hosts,
+// it will ping the isolation addresses. If the pings fail, the host
+// will declare itself isolated.
+//
+//
+// Once the HA agent declares the host isolated, it will
+// initiate the isolation response workflow after a 30 second delay. You can use
+// the FDM advanced option fdm.isolationPolicyDelaySec to increase the delay.
+// For each virtual machine, the HA agent attempts to determine if a master is
+// responsible for restarting the virtual machine. If it cannot make the determination,
+// or there is a master that is responsible, the agent will apply the configured
+// isolation response. This workflow will continue until the configuration policy,
+// has been applied to all virtual machines, the agent reconnects to another HA agent
+// in the cluster, or the isolation address pings start succeeding. If there is a
+// master agent in the cluster, it will attempt to restart the virtual machines
+// that were powered off during isolation.
+//
+//
+// By default, the isolated host leaves its virtual machines powered on.
+// You can override the isolation response default with a cluster-wide setting
+// (defaultVmSettings)
+// or a virtual machine setting
+// (isolationResponse).
+//
+//
+//
+// • All isolation response values are valid for the
+// isolationResponse
+// property specified in a single virtual machine HA configuration.
+//
+// • All values except for clusterIsolationResponse are valid
+// for the cluster-wide default HA configuration for virtual machines
+// (defaultVmSettings).
+//
+//
+//
+//
+// If you ensure that your network infrastructure is sufficiently redundant
+// and that at least one network path is available at all times, host network
+// isolation should be a rare occurrence.
+//
+//
+//
+type ClusterDasVmSettingsIsolationResponse struct {
+}
+
+//
+// The ClusterDasVmSettingsRestartPriority enum
+// defines virtual machine restart priority values to resolve
+// resource contention.
+// The priority determines the preference that HA gives
+// to a virtual machine if sufficient capacity is not available
+// to power on all failed virtual machines. For example, high priority
+// virtual machines on a host get preference over low priority
+// virtual machines.
+//
+// All priority values are valid for the restart priority
+// specified in a single virtual machine HA configuration
+// (dasSettings).
+// All values except for clusterRestartPriority
+// are valid for the cluster-wide default HA configuration
+// for virtual machines (defaultVmSettings).
+//
+//
+//
+type ClusterDasVmSettingsRestartPriority struct {
 }
 
 //
@@ -4802,6 +5031,13 @@ type ClusterOvercommittedEvent struct {
 }
 
 //
+// Defines the options for a Datacenter::powerOnVm() invocation.
+//
+//
+type ClusterPowerOnVmOption struct {
+}
+
+//
 // PowerOnVmResult is the base class of the result returned to the
 // PowerOnMultiVM_Task method.
 //
@@ -4822,6 +5058,8 @@ type ClusterPowerOnVmResult struct {
 }
 
 type ClusterProfile struct {
+	*ManagedObject
+
 	*Profile
 }
 
@@ -4831,7 +5069,7 @@ type ClusterProfile struct {
 // Required Privileges
 // Profile.Edit
 //
-func (api *ClusterProfile) UpdateClusterProfile(
+func (mo *ClusterProfile) UpdateClusterProfile(
 	_this *ManagedObjectReference, config *ClusterProfileConfigSpec,
 ) error {
 
@@ -4894,7 +5132,16 @@ type ClusterProfileCreateSpec struct {
 }
 
 type ClusterProfileManager struct {
+	*ManagedObject
+
 	*ProfileManager
+}
+
+//
+// Type of services for which Profile can be requested for
+//
+//
+type ClusterProfileServiceType struct {
 }
 
 //
@@ -5388,6 +5635,9 @@ type ComplianceResult struct {
 	Profile *Profile
 }
 
+type ComplianceResultStatus struct {
+}
+
 //
 // DataObject represents a composite Policy that is created by the user
 // using different PolicyOptions. The options set in the CompositePolicyOption
@@ -5482,7 +5732,7 @@ type ComputeResource struct {
 // Since
 // VI API 2.5
 //
-func (api *ComputeResource) ReconfigureComputeResource_Task(
+func (mo *ComputeResource) ReconfigureComputeResource_Task(
 	_this *ManagedObjectReference, spec *ComputeResourceConfigSpec, modify bool,
 ) (*Task, error) {
 
@@ -5589,6 +5839,13 @@ type ComputeResourceHostSPBMLicenseInfo struct {
 }
 
 //
+// The SPBM(Storage Policy Based Management) license state for a host
+//
+//
+type ComputeResourceHostSPBMLicenseInfoHostSPBMLicenseState struct {
+}
+
+//
 // This data object type encapsulates a typical set of ComputeResource information
 // that is useful for list views and summary pages.
 //
@@ -5661,6 +5918,13 @@ type ComputeResourceSummary struct {
 //
 type ConcurrentAccess struct {
 	*VimFault
+}
+
+//
+// Config spec operation type.
+//
+//
+type ConfigSpecOperation struct {
 }
 
 //
@@ -5870,6 +6134,8 @@ type ConnectedIso struct {
 //
 //
 type ContainerView struct {
+	*ManagedObject
+
 	*ManagedObjectView
 
 	// The Folder, Datacenter, ComputeResource, ResourcePool, or HostSystem instance
@@ -6177,6 +6443,7 @@ type CustomFieldValueChangedEvent struct {
 //
 //
 type CustomFieldsManager struct {
+	*ManagedObject
 
 	// List of custom fields defined on this server. The fields are
 	// sorted by name.
@@ -6191,7 +6458,7 @@ type CustomFieldsManager struct {
 // Required Privileges
 // Global.ManageCustomFields
 //
-func (api *CustomFieldsManager) AddCustomFieldDef(
+func (mo *CustomFieldsManager) AddCustomFieldDef(
 	_this *ManagedObjectReference, name string, moType string, fieldDefPolicy *PrivilegePolicyDef, fieldPolicy *PrivilegePolicyDef,
 ) (*CustomFieldDef, error) {
 
@@ -6206,7 +6473,7 @@ func (api *CustomFieldsManager) AddCustomFieldDef(
 // Required Privileges
 // Global.ManageCustomFields
 //
-func (api *CustomFieldsManager) RemoveCustomFieldDef(
+func (mo *CustomFieldsManager) RemoveCustomFieldDef(
 	_this *ManagedObjectReference, key int32,
 ) error {
 
@@ -6220,7 +6487,7 @@ func (api *CustomFieldsManager) RemoveCustomFieldDef(
 // Required Privileges
 // Global.ManageCustomFields
 //
-func (api *CustomFieldsManager) RenameCustomFieldDef(
+func (mo *CustomFieldsManager) RenameCustomFieldDef(
 	_this *ManagedObjectReference, key int32, name string,
 ) error {
 
@@ -6234,7 +6501,7 @@ func (api *CustomFieldsManager) RenameCustomFieldDef(
 // Required Privileges
 // None
 //
-func (api *CustomFieldsManager) SetField(
+func (mo *CustomFieldsManager) SetField(
 	_this *ManagedObjectReference, entity *ManagedEntity, key int32, value string,
 ) error {
 
@@ -6585,6 +6852,13 @@ type CustomizationIpV6Generator struct {
 }
 
 //
+// Enumeration of AutoMode values.
+//
+//
+type CustomizationLicenseDataMode struct {
+}
+
+//
 // The LicenseFilePrintData type maps directly to the LicenseFilePrintData key in the
 // sysprep.inf answer file. These values are transferred into the
 // sysprep.inf file that VirtualCenter stores on the target virtual disk. For
@@ -6666,6 +6940,13 @@ type CustomizationLinuxPrep struct {
 //
 type CustomizationName struct {
 	*DynamicData
+}
+
+//
+// NetBIOS setting for Windows.
+//
+//
+type CustomizationNetBIOSMode struct {
 }
 
 //
@@ -6812,6 +7093,7 @@ type CustomizationSpecItem struct {
 // customization specifications stored on the VirtualCenter server.
 //
 type CustomizationSpecManager struct {
+	*ManagedObject
 
 	// Gets a binary public encryption key that can be used to encrypt
 	// passwords in stored specifications.
@@ -6831,7 +7113,7 @@ type CustomizationSpecManager struct {
 // Required Privileges
 // System.View
 //
-func (api *CustomizationSpecManager) CheckCustomizationResources(
+func (mo *CustomizationSpecManager) CheckCustomizationResources(
 	_this *ManagedObjectReference, guestOs string,
 ) error {
 
@@ -6845,7 +7127,7 @@ func (api *CustomizationSpecManager) CheckCustomizationResources(
 // Required Privileges
 // VirtualMachine.Provisioning.ModifyCustSpecs
 //
-func (api *CustomizationSpecManager) CreateCustomizationSpec(
+func (mo *CustomizationSpecManager) CreateCustomizationSpec(
 	_this *ManagedObjectReference, item *CustomizationSpecItem,
 ) error {
 
@@ -6859,7 +7141,7 @@ func (api *CustomizationSpecManager) CreateCustomizationSpec(
 // Required Privileges
 // System.View
 //
-func (api *CustomizationSpecManager) CustomizationSpecItemToXml(
+func (mo *CustomizationSpecManager) CustomizationSpecItemToXml(
 	_this *ManagedObjectReference, item *CustomizationSpecItem,
 ) (string, error) {
 
@@ -6873,7 +7155,7 @@ func (api *CustomizationSpecManager) CustomizationSpecItemToXml(
 // Required Privileges
 // VirtualMachine.Provisioning.ModifyCustSpecs
 //
-func (api *CustomizationSpecManager) DeleteCustomizationSpec(
+func (mo *CustomizationSpecManager) DeleteCustomizationSpec(
 	_this *ManagedObjectReference, name string,
 ) error {
 
@@ -6887,7 +7169,7 @@ func (api *CustomizationSpecManager) DeleteCustomizationSpec(
 // Required Privileges
 // VirtualMachine.Provisioning.ReadCustSpecs
 //
-func (api *CustomizationSpecManager) DoesCustomizationSpecExist(
+func (mo *CustomizationSpecManager) DoesCustomizationSpecExist(
 	_this *ManagedObjectReference, name string,
 ) (bool, error) {
 
@@ -6901,7 +7183,7 @@ func (api *CustomizationSpecManager) DoesCustomizationSpecExist(
 // Required Privileges
 // VirtualMachine.Provisioning.ModifyCustSpecs
 //
-func (api *CustomizationSpecManager) DuplicateCustomizationSpec(
+func (mo *CustomizationSpecManager) DuplicateCustomizationSpec(
 	_this *ManagedObjectReference, name string, newName string,
 ) error {
 
@@ -6915,7 +7197,7 @@ func (api *CustomizationSpecManager) DuplicateCustomizationSpec(
 // Required Privileges
 // VirtualMachine.Provisioning.ReadCustSpecs
 //
-func (api *CustomizationSpecManager) GetCustomizationSpec(
+func (mo *CustomizationSpecManager) GetCustomizationSpec(
 	_this *ManagedObjectReference, name string,
 ) (*CustomizationSpecItem, error) {
 
@@ -6933,7 +7215,7 @@ func (api *CustomizationSpecManager) GetCustomizationSpec(
 // Required Privileges
 // VirtualMachine.Provisioning.ModifyCustSpecs
 //
-func (api *CustomizationSpecManager) OverwriteCustomizationSpec(
+func (mo *CustomizationSpecManager) OverwriteCustomizationSpec(
 	_this *ManagedObjectReference, item *CustomizationSpecItem,
 ) error {
 
@@ -6947,7 +7229,7 @@ func (api *CustomizationSpecManager) OverwriteCustomizationSpec(
 // Required Privileges
 // VirtualMachine.Provisioning.ModifyCustSpecs
 //
-func (api *CustomizationSpecManager) RenameCustomizationSpec(
+func (mo *CustomizationSpecManager) RenameCustomizationSpec(
 	_this *ManagedObjectReference, name string, newName string,
 ) error {
 
@@ -6961,7 +7243,7 @@ func (api *CustomizationSpecManager) RenameCustomizationSpec(
 // Required Privileges
 // System.View
 //
-func (api *CustomizationSpecManager) XmlToCustomizationSpecItem(
+func (mo *CustomizationSpecManager) XmlToCustomizationSpecItem(
 	_this *ManagedObjectReference, specItemXml string,
 ) (*CustomizationSpecItem, error) {
 
@@ -7034,6 +7316,14 @@ type CustomizationSysprepFailed struct {
 
 	// The version string for the system
 	SystemVersion string
+}
+
+//
+// A enum constant specifying what should be done to the guest vm after running
+// sysprep.
+//
+//
+type CustomizationSysprepRebootOption struct {
 }
 
 //
@@ -7399,6 +7689,22 @@ type DVPortStatus struct {
 	//
 	// Since vSphere API 4.1
 	VmDirectPathGen2InactiveReasonOther []string
+}
+
+//
+// Set of possible values for
+// DVPortStatus.vmDirectPathGen2InactiveReasonNetwork.
+//
+//
+type DVPortStatusVmDirectPathGen2InactiveReasonNetwork struct {
+}
+
+//
+// Set of possible values for
+// DVPortStatus.vmDirectPathGen2InactiveReasonOther.
+//
+//
+type DVPortStatusVmDirectPathGen2InactiveReasonOther struct {
 }
 
 //
@@ -8634,6 +8940,9 @@ type DasConfigFault struct {
 	Reason string
 }
 
+type DasConfigFaultDasConfigFaultReason struct {
+}
+
 //
 // This event records when a cluster has been disabled for HA.
 //
@@ -8685,6 +8994,20 @@ type DasHostIsolatedEvent struct {
 
 	// The host that was isolated.
 	IsolatedHost *HostEventArgument
+}
+
+// Deprecated.
+// As of VI API 2.5, use ClusterDasVmSettingsRestartPriority.
+//
+//
+// The priority of the virtual machine determines the preference
+// given to it if sufficient capacity is not available to power
+// on all failed virtual machines. For example, high priority
+// virtual machines on a host get preference over low priority
+// virtual machines.
+//
+//
+type DasVmPriority struct {
 }
 
 //
@@ -8855,7 +9178,7 @@ type Datacenter struct {
 // Since
 // VI API 2.5
 //
-func (api *Datacenter) PowerOnMultiVM_Task(
+func (mo *Datacenter) PowerOnMultiVM_Task(
 	_this *ManagedObjectReference, vm []*VirtualMachine, option []*OptionValue,
 ) (*Task, error) {
 
@@ -8872,7 +9195,7 @@ func (api *Datacenter) PowerOnMultiVM_Task(
 // Required Privileges
 // System.View
 //
-func (api *Datacenter) QueryConnectionInfo(
+func (mo *Datacenter) QueryConnectionInfo(
 	_this *ManagedObjectReference, hostname string, port int32, username string, password string, sslThumbprint string,
 ) (*HostConnectInfo, error) {
 
@@ -8891,7 +9214,7 @@ func (api *Datacenter) QueryConnectionInfo(
 // Since
 // vSphere API 5.1
 //
-func (api *Datacenter) QueryDatacenterConfigOptionDescriptor(
+func (mo *Datacenter) QueryDatacenterConfigOptionDescriptor(
 	_this *ManagedObjectReference,
 ) ([]*VirtualMachineConfigOptionDescriptor, error) {
 
@@ -8907,7 +9230,7 @@ func (api *Datacenter) QueryDatacenterConfigOptionDescriptor(
 // Since
 // vSphere API 5.1
 //
-func (api *Datacenter) ReconfigureDatacenter_Task(
+func (mo *Datacenter) ReconfigureDatacenter_Task(
 	_this *ManagedObjectReference, spec *DatacenterConfigSpec, modify bool,
 ) (*Task, error) {
 
@@ -9121,7 +9444,7 @@ type Datastore struct {
 // Since
 // vSphere API 5.0
 //
-func (api *Datastore) DatastoreEnterMaintenanceMode(
+func (mo *Datastore) DatastoreEnterMaintenanceMode(
 	_this *ManagedObjectReference,
 ) (*StoragePlacementResult, error) {
 
@@ -9142,7 +9465,7 @@ func (api *Datastore) DatastoreEnterMaintenanceMode(
 // Since
 // vSphere API 5.0
 //
-func (api *Datastore) DatastoreExitMaintenanceMode_Task(
+func (mo *Datastore) DatastoreExitMaintenanceMode_Task(
 	_this *ManagedObjectReference,
 ) (*Task, error) {
 
@@ -9162,7 +9485,7 @@ func (api *Datastore) DatastoreExitMaintenanceMode_Task(
 // Required Privileges
 // Datastore.Delete
 //
-func (api *Datastore) DestroyDatastore(
+func (mo *Datastore) DestroyDatastore(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -9177,7 +9500,7 @@ func (api *Datastore) DestroyDatastore(
 // Required Privileges
 // System.Read
 //
-func (api *Datastore) RefreshDatastore(
+func (mo *Datastore) RefreshDatastore(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -9195,7 +9518,7 @@ func (api *Datastore) RefreshDatastore(
 // Since
 // vSphere API 4.0
 //
-func (api *Datastore) RefreshDatastoreStorageInfo(
+func (mo *Datastore) RefreshDatastoreStorageInfo(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -9212,7 +9535,7 @@ func (api *Datastore) RefreshDatastoreStorageInfo(
 // Required Privileges
 // Datastore.Rename
 //
-func (api *Datastore) RenameDatastore(
+func (mo *Datastore) RenameDatastore(
 	_this *ManagedObjectReference, newName string,
 ) error {
 
@@ -9254,12 +9577,15 @@ func (api *Datastore) RenameDatastore(
 // Since
 // vSphere API 4.1
 //
-func (api *Datastore) UpdateVirtualMachineFiles_Task(
+func (mo *Datastore) UpdateVirtualMachineFiles_Task(
 	_this *ManagedObjectReference, mountPathDatastoreMapping []*DatastoreMountPathDatastorePair,
 ) (*Task, error) {
 
 	return nil, nil
 
+}
+
+type DatastoreAccessible struct {
 }
 
 //
@@ -9512,6 +9838,7 @@ type DatastoreMountPathDatastorePair struct {
 // support the traditional top-level directory creation.See topLevelDirectoryCreateSupported
 //
 type DatastoreNamespaceManager struct {
+	*ManagedObject
 }
 
 //
@@ -9530,7 +9857,7 @@ type DatastoreNamespaceManager struct {
 // Required Privileges
 // Datastore.Config
 //
-func (api *DatastoreNamespaceManager) CreateDirectory(
+func (mo *DatastoreNamespaceManager) CreateDirectory(
 	_this *ManagedObjectReference, datastore *Datastore, displayName string, policy string,
 ) (string, error) {
 
@@ -9551,7 +9878,7 @@ func (api *DatastoreNamespaceManager) CreateDirectory(
 // Required Privileges
 // Datastore.Config
 //
-func (api *DatastoreNamespaceManager) DeleteDirectory(
+func (mo *DatastoreNamespaceManager) DeleteDirectory(
 	_this *ManagedObjectReference, datacenter *Datacenter, datastorePath string,
 ) error {
 
@@ -9706,6 +10033,13 @@ type DatastoreSummary struct {
 }
 
 //
+// Defines the current maintenance mode state of the datastore.
+//
+//
+type DatastoreSummaryMaintenanceModeState struct {
+}
+
+//
 // The DateTimeProfile data object represents host date and time configuration.
 // Use the policy list for access to configuration data
 // for the date and time profile. Use the property list
@@ -9714,6 +10048,9 @@ type DatastoreSummary struct {
 //
 type DateTimeProfile struct {
 	*ApplyProfile
+}
+
+type DayOfWeek struct {
 }
 
 //
@@ -9882,6 +10219,13 @@ type DeviceNotSupported struct {
 }
 
 //
+// Reasons why a virtual device would not be supported on a host.
+//
+//
+type DeviceNotSupportedReason struct {
+}
+
+//
 // A DeviceUnsupportedForVmPlatform exception is thrown if the specified device
 // is not supported on the platform on which the virtual machine is being
 // created/configured. For example, this exception might be thrown if a client
@@ -9916,6 +10260,7 @@ type DeviceUnsupportedForVmVersion struct {
 // log files for the VMkernel.
 //
 type DiagnosticManager struct {
+	*ManagedObject
 }
 
 //
@@ -9925,7 +10270,7 @@ type DiagnosticManager struct {
 // Required Privileges
 // Global.Diagnostics
 //
-func (api *DiagnosticManager) BrowseDiagnosticLog(
+func (mo *DiagnosticManager) BrowseDiagnosticLog(
 	_this *ManagedObjectReference, host *HostSystem, key string, start int32, lines int32,
 ) (*DiagnosticManagerLogHeader, error) {
 
@@ -9944,7 +10289,7 @@ func (api *DiagnosticManager) BrowseDiagnosticLog(
 // Required Privileges
 // Global.Diagnostics
 //
-func (api *DiagnosticManager) GenerateLogBundles_Task(
+func (mo *DiagnosticManager) GenerateLogBundles_Task(
 	_this *ManagedObjectReference, includeDefault bool, host []*HostSystem,
 ) (*Task, error) {
 
@@ -9958,7 +10303,7 @@ func (api *DiagnosticManager) GenerateLogBundles_Task(
 // Required Privileges
 // Global.Diagnostics
 //
-func (api *DiagnosticManager) QueryDescriptions(
+func (mo *DiagnosticManager) QueryDescriptions(
 	_this *ManagedObjectReference, host *HostSystem,
 ) ([]*DiagnosticManagerLogDescriptor, error) {
 
@@ -9986,6 +10331,13 @@ type DiagnosticManagerBundleInfo struct {
 	// http:// * /diagnostics/bundle.zip. The client replaces the asterisk with the
 	// server name on which it invoked the call.
 	Url string
+}
+
+//
+// Pre-defined constants for possible creators of log files.
+//
+//
+type DiagnosticManagerLogCreator struct {
 }
 
 //
@@ -10020,6 +10372,14 @@ type DiagnosticManagerLogDescriptor struct {
 }
 
 //
+// Constants for defined formats. For more information, see the comment for the
+// format property.
+//
+//
+type DiagnosticManagerLogFormat struct {
+}
+
+//
 // A header that is returned with a set of log entries. This header
 // describes where entries are located in the log file. Log files typically
 // grow dynamically, so indexes based on line numbers may become inaccurate.
@@ -10036,6 +10396,25 @@ type DiagnosticManagerLogHeader struct {
 
 	// Log entries, listed by line, for this log segment.
 	LineText []string
+}
+
+//
+// Type of partition indicating the type of storage on which the partition
+// resides.  If the diagnostic partition is local only, it will only need
+// one slot.  If the diagnostic partition is on shared storage, it could
+// be used by multiple hosts.  As a result, it will need multiple slots.
+//
+//
+type DiagnosticPartitionStorageType struct {
+}
+
+//
+// The type of diagnostic partition. Private diagnostic partition has one
+// slot, so can only be used by one host. Shared diagnostic parititon
+// needs multiple slots so to be usable by multiple hosts.
+//
+//
+type DiagnosticPartitionType struct {
 }
 
 //
@@ -10075,6 +10454,13 @@ type DisallowedChangeByService struct {
 
 	// The service that has disallowed the change.
 	ServiceName string
+}
+
+//
+// The disallowed change type.
+//
+//
+type DisallowedChangeByServiceDisallowedChange struct {
 }
 
 //
@@ -10337,6 +10723,8 @@ type DistributedVirtualPort struct {
 //
 //
 type DistributedVirtualPortgroup struct {
+	*ManagedObject
+
 	*Network
 
 	// Configuration of the portgroup.
@@ -10387,7 +10775,7 @@ type DistributedVirtualPortgroup struct {
 // Since
 // vSphere API 5.1
 //
-func (api *DistributedVirtualPortgroup) DVPortgroupRollback_Task(
+func (mo *DistributedVirtualPortgroup) DVPortgroupRollback_Task(
 	_this *ManagedObjectReference, entityBackup *EntityBackupConfig,
 ) (*Task, error) {
 
@@ -10439,7 +10827,7 @@ func (api *DistributedVirtualPortgroup) DVPortgroupRollback_Task(
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *DistributedVirtualPortgroup) ReconfigureDVPortgroup_Task(
+func (mo *DistributedVirtualPortgroup) ReconfigureDVPortgroup_Task(
 	_this *ManagedObjectReference, spec *DVPortgroupConfigSpec,
 ) (*Task, error) {
 
@@ -10476,6 +10864,25 @@ type DistributedVirtualPortgroupInfo struct {
 
 	// Whether this portgroup is an uplink portgroup.
 	UplinkPortgroup bool
+}
+
+//
+// The meta tag names recognizable in the
+// portNameFormat string.
+//
+//
+type DistributedVirtualPortgroupMetaTagName struct {
+}
+
+//
+// The DistributedVirtualPortgroupPortgroupType enum defines
+// the distributed virtual portgroup types
+// (DistributedVirtualPortgroup.config.type). Early binding specifies a static set of ports that are created
+// when you create the distributed virtual portgroup. An ephemeral portgroup uses dynamic
+// ports that are created when you power on a virtual machine.
+//
+//
+type DistributedVirtualPortgroupPortgroupType struct {
 }
 
 //
@@ -10773,7 +11180,7 @@ type DistributedVirtualSwitch struct {
 // Required Privileges
 // DVPortgroup.Create
 //
-func (api *DistributedVirtualSwitch) AddDVPortgroup_Task(
+func (mo *DistributedVirtualSwitch) AddDVPortgroup_Task(
 	_this *ManagedObjectReference, spec []*DVPortgroupConfigSpec,
 ) (*Task, error) {
 
@@ -10789,7 +11196,7 @@ func (api *DistributedVirtualSwitch) AddDVPortgroup_Task(
 // Since
 // vSphere API 5.0
 //
-func (api *DistributedVirtualSwitch) AddNetworkResourcePool(
+func (mo *DistributedVirtualSwitch) AddNetworkResourcePool(
 	_this *ManagedObjectReference, configSpec []*DVSNetworkResourcePoolConfigSpec,
 ) error {
 
@@ -10806,7 +11213,7 @@ func (api *DistributedVirtualSwitch) AddNetworkResourcePool(
 // Since
 // vSphere API 5.1
 //
-func (api *DistributedVirtualSwitch) CreateDVPortgroup_Task(
+func (mo *DistributedVirtualSwitch) CreateDVPortgroup_Task(
 	_this *ManagedObjectReference, spec *DVPortgroupConfigSpec,
 ) (*Task, error) {
 
@@ -10851,7 +11258,7 @@ func (api *DistributedVirtualSwitch) CreateDVPortgroup_Task(
 // Since
 // vSphere API 5.1
 //
-func (api *DistributedVirtualSwitch) DVSRollback_Task(
+func (mo *DistributedVirtualSwitch) DVSRollback_Task(
 	_this *ManagedObjectReference, entityBackup *EntityBackupConfig,
 ) (*Task, error) {
 
@@ -10867,7 +11274,7 @@ func (api *DistributedVirtualSwitch) DVSRollback_Task(
 // Since
 // vSphere API 4.1
 //
-func (api *DistributedVirtualSwitch) EnableNetworkResourceManagement(
+func (mo *DistributedVirtualSwitch) EnableNetworkResourceManagement(
 	_this *ManagedObjectReference, enable bool,
 ) error {
 
@@ -10882,7 +11289,7 @@ func (api *DistributedVirtualSwitch) EnableNetworkResourceManagement(
 // Required Privileges
 // System.Read
 //
-func (api *DistributedVirtualSwitch) FetchDVPortKeys(
+func (mo *DistributedVirtualSwitch) FetchDVPortKeys(
 	_this *ManagedObjectReference, criteria *DistributedVirtualSwitchPortCriteria,
 ) ([]string, error) {
 
@@ -10896,7 +11303,7 @@ func (api *DistributedVirtualSwitch) FetchDVPortKeys(
 // Required Privileges
 // System.Read
 //
-func (api *DistributedVirtualSwitch) FetchDVPorts(
+func (mo *DistributedVirtualSwitch) FetchDVPorts(
 	_this *ManagedObjectReference, criteria *DistributedVirtualSwitchPortCriteria,
 ) ([]*DistributedVirtualPort, error) {
 
@@ -10912,7 +11319,7 @@ func (api *DistributedVirtualSwitch) FetchDVPorts(
 // Since
 // vSphere API 5.1
 //
-func (api *DistributedVirtualSwitch) LookupDvPortGroup(
+func (mo *DistributedVirtualSwitch) LookupDvPortGroup(
 	_this *ManagedObjectReference, portgroupKey string,
 ) (*DistributedVirtualPortgroup, error) {
 
@@ -10980,7 +11387,7 @@ func (api *DistributedVirtualSwitch) LookupDvPortGroup(
 // Required Privileges
 // DVSwitch.Modify
 //
-func (api *DistributedVirtualSwitch) MergeDvs_Task(
+func (mo *DistributedVirtualSwitch) MergeDvs_Task(
 	_this *ManagedObjectReference, dvs *DistributedVirtualSwitch,
 ) (*Task, error) {
 
@@ -10997,7 +11404,7 @@ func (api *DistributedVirtualSwitch) MergeDvs_Task(
 // Required Privileges
 // DVSwitch.Modify
 //
-func (api *DistributedVirtualSwitch) MoveDVPort_Task(
+func (mo *DistributedVirtualSwitch) MoveDVPort_Task(
 	_this *ManagedObjectReference, portKey []string, destinationPortgroupKey string,
 ) (*Task, error) {
 
@@ -11011,7 +11418,7 @@ func (api *DistributedVirtualSwitch) MoveDVPort_Task(
 // Required Privileges
 // DVSwitch.Modify
 //
-func (api *DistributedVirtualSwitch) PerformDvsProductSpecOperation_Task(
+func (mo *DistributedVirtualSwitch) PerformDvsProductSpecOperation_Task(
 	_this *ManagedObjectReference, operation string, productSpec *DistributedVirtualSwitchProductSpec,
 ) (*Task, error) {
 
@@ -11025,7 +11432,7 @@ func (api *DistributedVirtualSwitch) PerformDvsProductSpecOperation_Task(
 // Required Privileges
 // System.Read
 //
-func (api *DistributedVirtualSwitch) QueryUsedVlanIdInDvs(
+func (mo *DistributedVirtualSwitch) QueryUsedVlanIdInDvs(
 	_this *ManagedObjectReference,
 ) ([]int32, error) {
 
@@ -11039,7 +11446,7 @@ func (api *DistributedVirtualSwitch) QueryUsedVlanIdInDvs(
 // Required Privileges
 // DVSwitch.PortConfig
 //
-func (api *DistributedVirtualSwitch) ReconfigureDVPort_Task(
+func (mo *DistributedVirtualSwitch) ReconfigureDVPort_Task(
 	_this *ManagedObjectReference, port []*DVPortConfigSpec,
 ) (*Task, error) {
 
@@ -11104,7 +11511,7 @@ func (api *DistributedVirtualSwitch) ReconfigureDVPort_Task(
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *DistributedVirtualSwitch) ReconfigureDvs_Task(
+func (mo *DistributedVirtualSwitch) ReconfigureDvs_Task(
 	_this *ManagedObjectReference, spec *DVSConfigSpec,
 ) (*Task, error) {
 
@@ -11124,7 +11531,7 @@ func (api *DistributedVirtualSwitch) ReconfigureDvs_Task(
 // Required Privileges
 // System.Read
 //
-func (api *DistributedVirtualSwitch) RectifyDvsHost_Task(
+func (mo *DistributedVirtualSwitch) RectifyDvsHost_Task(
 	_this *ManagedObjectReference, hosts []*HostSystem,
 ) (*Task, error) {
 
@@ -11138,7 +11545,7 @@ func (api *DistributedVirtualSwitch) RectifyDvsHost_Task(
 // Required Privileges
 // System.Read
 //
-func (api *DistributedVirtualSwitch) RefreshDVPortState(
+func (mo *DistributedVirtualSwitch) RefreshDVPortState(
 	_this *ManagedObjectReference, portKeys []string,
 ) error {
 
@@ -11154,7 +11561,7 @@ func (api *DistributedVirtualSwitch) RefreshDVPortState(
 // Since
 // vSphere API 5.0
 //
-func (api *DistributedVirtualSwitch) RemoveNetworkResourcePool(
+func (mo *DistributedVirtualSwitch) RemoveNetworkResourcePool(
 	_this *ManagedObjectReference, key []string,
 ) error {
 
@@ -11168,7 +11575,7 @@ func (api *DistributedVirtualSwitch) RemoveNetworkResourcePool(
 // Required Privileges
 // DVSwitch.Modify
 //
-func (api *DistributedVirtualSwitch) UpdateDvsCapability(
+func (mo *DistributedVirtualSwitch) UpdateDvsCapability(
 	_this *ManagedObjectReference, capability *DVSCapability,
 ) error {
 
@@ -11184,7 +11591,7 @@ func (api *DistributedVirtualSwitch) UpdateDvsCapability(
 // Since
 // vSphere API 5.1
 //
-func (api *DistributedVirtualSwitch) UpdateDVSHealthCheckConfig_Task(
+func (mo *DistributedVirtualSwitch) UpdateDVSHealthCheckConfig_Task(
 	_this *ManagedObjectReference, healthCheckConfig []*DVSHealthCheckConfig,
 ) (*Task, error) {
 
@@ -11200,12 +11607,19 @@ func (api *DistributedVirtualSwitch) UpdateDVSHealthCheckConfig_Task(
 // Since
 // vSphere API 4.1
 //
-func (api *DistributedVirtualSwitch) UpdateNetworkResourcePool(
+func (mo *DistributedVirtualSwitch) UpdateNetworkResourcePool(
 	_this *ManagedObjectReference, configSpec []*DVSNetworkResourcePoolConfigSpec,
 ) error {
 
 	return nil
 
+}
+
+//
+// List of possible host infrastructure traffic classes
+//
+//
+type DistributedVirtualSwitchHostInfrastructureTrafficClass struct {
 }
 
 //
@@ -11323,6 +11737,13 @@ type DistributedVirtualSwitchHostMemberConfigSpec struct {
 
 	// Opaque binary blob that stores vendor specific configuration.
 	VendorSpecificConfig []*DistributedVirtualSwitchKeyedOpaqueBlob
+}
+
+//
+// Describes the state of the host proxy switch.
+//
+//
+type DistributedVirtualSwitchHostMemberHostComponentState struct {
 }
 
 //
@@ -11448,6 +11869,7 @@ type DistributedVirtualSwitchKeyedOpaqueBlob struct {
 //
 //
 type DistributedVirtualSwitchManager struct {
+	*ManagedObject
 }
 
 //
@@ -11467,7 +11889,7 @@ type DistributedVirtualSwitchManager struct {
 // Since
 // vSphere API 5.1
 //
-func (api *DistributedVirtualSwitchManager) DVSManagerExportEntity_Task(
+func (mo *DistributedVirtualSwitchManager) DVSManagerExportEntity_Task(
 	_this *ManagedObjectReference, selectionSet []*SelectionSet,
 ) (*Task, error) {
 
@@ -11488,7 +11910,7 @@ func (api *DistributedVirtualSwitchManager) DVSManagerExportEntity_Task(
 // Since
 // vSphere API 5.1
 //
-func (api *DistributedVirtualSwitchManager) DVSManagerImportEntity_Task(
+func (mo *DistributedVirtualSwitchManager) DVSManagerImportEntity_Task(
 	_this *ManagedObjectReference, entityBackup []*EntityBackupConfig, importType string,
 ) (*Task, error) {
 
@@ -11505,7 +11927,7 @@ func (api *DistributedVirtualSwitchManager) DVSManagerImportEntity_Task(
 // Since
 // vSphere API 5.1
 //
-func (api *DistributedVirtualSwitchManager) DVSManagerLookupDvPortGroup(
+func (mo *DistributedVirtualSwitchManager) DVSManagerLookupDvPortGroup(
 	_this *ManagedObjectReference, switchUuid string, portgroupKey string,
 ) (*DistributedVirtualPortgroup, error) {
 
@@ -11520,7 +11942,7 @@ func (api *DistributedVirtualSwitchManager) DVSManagerLookupDvPortGroup(
 // Required Privileges
 // System.View
 //
-func (api *DistributedVirtualSwitchManager) QueryAvailableDvsSpec(
+func (mo *DistributedVirtualSwitchManager) QueryAvailableDvsSpec(
 	_this *ManagedObjectReference,
 ) ([]*DistributedVirtualSwitchProductSpec, error) {
 
@@ -11535,7 +11957,7 @@ func (api *DistributedVirtualSwitchManager) QueryAvailableDvsSpec(
 // Required Privileges
 // System.View
 //
-func (api *DistributedVirtualSwitchManager) QueryCompatibleHostForExistingDvs(
+func (mo *DistributedVirtualSwitchManager) QueryCompatibleHostForExistingDvs(
 	_this *ManagedObjectReference, container *ManagedEntity, recursive bool, dvs *DistributedVirtualSwitch,
 ) ([]*HostSystem, error) {
 
@@ -11550,7 +11972,7 @@ func (api *DistributedVirtualSwitchManager) QueryCompatibleHostForExistingDvs(
 // Required Privileges
 // System.View
 //
-func (api *DistributedVirtualSwitchManager) QueryCompatibleHostForNewDvs(
+func (mo *DistributedVirtualSwitchManager) QueryCompatibleHostForNewDvs(
 	_this *ManagedObjectReference, container *ManagedEntity, recursive bool, switchProductSpec *DistributedVirtualSwitchProductSpec,
 ) ([]*HostSystem, error) {
 
@@ -11564,7 +11986,7 @@ func (api *DistributedVirtualSwitchManager) QueryCompatibleHostForNewDvs(
 // Required Privileges
 // System.View
 //
-func (api *DistributedVirtualSwitchManager) QueryDvsByUuid(
+func (mo *DistributedVirtualSwitchManager) QueryDvsByUuid(
 	_this *ManagedObjectReference, uuid string,
 ) (*DistributedVirtualSwitch, error) {
 
@@ -11604,7 +12026,7 @@ func (api *DistributedVirtualSwitchManager) QueryDvsByUuid(
 // Since
 // vSphere API 4.1
 //
-func (api *DistributedVirtualSwitchManager) QueryDvsCheckCompatibility(
+func (mo *DistributedVirtualSwitchManager) QueryDvsCheckCompatibility(
 	_this *ManagedObjectReference, hostContainer *DistributedVirtualSwitchManagerHostContainer, dvsProductSpec *DistributedVirtualSwitchManagerDvsProductSpec, hostFilterSpec []*DistributedVirtualSwitchManagerHostDvsFilterSpec,
 ) ([]*DistributedVirtualSwitchManagerCompatibilityResult, error) {
 
@@ -11620,7 +12042,7 @@ func (api *DistributedVirtualSwitchManager) QueryDvsCheckCompatibility(
 // Required Privileges
 // System.View
 //
-func (api *DistributedVirtualSwitchManager) QueryDvsCompatibleHostSpec(
+func (mo *DistributedVirtualSwitchManager) QueryDvsCompatibleHostSpec(
 	_this *ManagedObjectReference, switchProductSpec *DistributedVirtualSwitchProductSpec,
 ) ([]*DistributedVirtualSwitchHostProductSpec, error) {
 
@@ -11635,7 +12057,7 @@ func (api *DistributedVirtualSwitchManager) QueryDvsCompatibleHostSpec(
 // Required Privileges
 // System.View
 //
-func (api *DistributedVirtualSwitchManager) QueryDvsConfigTarget(
+func (mo *DistributedVirtualSwitchManager) QueryDvsConfigTarget(
 	_this *ManagedObjectReference, host *HostSystem, dvs *DistributedVirtualSwitch,
 ) (*DVSManagerDvsConfigTarget, error) {
 
@@ -11652,7 +12074,7 @@ func (api *DistributedVirtualSwitchManager) QueryDvsConfigTarget(
 // Since
 // vSphere API 4.1
 //
-func (api *DistributedVirtualSwitchManager) QueryDvsFeatureCapability(
+func (mo *DistributedVirtualSwitchManager) QueryDvsFeatureCapability(
 	_this *ManagedObjectReference, switchProductSpec *DistributedVirtualSwitchProductSpec,
 ) (*DVSFeatureCapability, error) {
 
@@ -11669,7 +12091,7 @@ func (api *DistributedVirtualSwitchManager) QueryDvsFeatureCapability(
 // Since
 // vSphere API 5.0
 //
-func (api *DistributedVirtualSwitchManager) RectifyDvsOnHost_Task(
+func (mo *DistributedVirtualSwitchManager) RectifyDvsOnHost_Task(
 	_this *ManagedObjectReference, hosts []*HostSystem,
 ) (*Task, error) {
 
@@ -11805,6 +12227,15 @@ type DistributedVirtualSwitchManagerImportResult struct {
 }
 
 //
+// List of possible teaming modes supported by the vNetwork Distributed
+// Switch. The different policy modes define the way traffic is routed
+// through the different uplink ports in a team.
+//
+//
+type DistributedVirtualSwitchNicTeamingPolicyMode struct {
+}
+
+//
 // Information about the entity that connects to a DistributedVirtualPort.
 //
 //
@@ -11826,6 +12257,13 @@ type DistributedVirtualSwitchPortConnectee struct {
 	// The type of the connectee.
 	// See ConnecteeType for valid values.
 	Type string
+}
+
+//
+// The connectee types.
+//
+//
+type DistributedVirtualSwitchPortConnecteeConnecteeType struct {
 }
 
 //
@@ -12010,6 +12448,13 @@ type DistributedVirtualSwitchProductSpec struct {
 }
 
 //
+// The product spec operation types.
+//
+//
+type DistributedVirtualSwitchProductSpecOperationType struct {
+}
+
+//
 // Fault indicating that the domain controller
 // for domainName cannot be reached.
 //
@@ -12019,6 +12464,12 @@ type DomainNotFound struct {
 
 	// The domain that cannot be accessed.
 	DomainName string
+}
+
+type DpmBehavior struct {
+}
+
+type DrsBehavior struct {
 }
 
 //
@@ -12096,11 +12547,29 @@ type DrsExitingStandbyModeEvent struct {
 }
 
 //
+// Correlation state as computed by storageRM
+// module on host.
+//
+//
+type DrsInjectorWorkloadCorrelationState struct {
+}
+
+//
 // This event records DRS invocation failure.
 //
 //
 type DrsInvocationFailedEvent struct {
 	*ClusterEvent
+}
+
+// Deprecated.
+// As of VI API 2.5 use RecommendationReasonCode.
+//
+//
+// List of defined migration reason codes:
+//
+//
+type DrsRecommendationReasonCode struct {
 }
 
 //
@@ -12391,6 +12860,15 @@ type DvsFilterConfigSpec struct {
 
 	// Operation type. See ConfigSpecOperation for valid values.
 	Operation string
+}
+
+//
+// Network Filter on Failure Type. It specifies whether all the
+// packets will be allowed or all the packets will be denied when
+// Filter fails to configure.
+//
+//
+type DvsFilterOnFailure struct {
 }
 
 //
@@ -12686,6 +13164,15 @@ type DvsMergedEvent struct {
 //
 type DvsNetworkRuleAction struct {
 	*DynamicData
+}
+
+//
+// Network Traffic Rule direction types. It specifies whether rule
+//
+// needs to be applied for packets which are incoming/outgoing or both.
+//
+//
+type DvsNetworkRuleDirectionType struct {
 }
 
 //
@@ -13839,6 +14326,15 @@ type EntityEventArgument struct {
 }
 
 //
+// The EntityImportType enum defines the import type for a
+// DistributedVirtualSwitchManager.DVSManagerImportEntity_Task
+// operation.
+//
+//
+type EntityImportType struct {
+}
+
+//
 // This class defines whether a set of privileges are granted for a managed entity.
 //
 //
@@ -13850,6 +14346,15 @@ type EntityPrivilege struct {
 
 	// whether a set of privileges are granted for the managed entity.
 	PrivAvailability []*PrivilegeAvailability
+}
+
+//
+// The EntityType enum identifies
+// the type of entity that was exported
+// (DVSManagerExportEntity_Task).
+//
+//
+type EntityType struct {
 }
 
 //
@@ -13902,6 +14407,7 @@ type EnumDescription struct {
 //
 //
 type EnvironmentBrowser struct {
+	*ManagedObject
 
 	// DatastoreBrowser to browse datastores that are available on this entity.
 	// Required Privilege: System.View
@@ -13929,7 +14435,7 @@ type EnvironmentBrowser struct {
 // Required Privileges
 // System.View
 //
-func (api *EnvironmentBrowser) QueryConfigOption(
+func (mo *EnvironmentBrowser) QueryConfigOption(
 	_this *ManagedObjectReference, key string, host *HostSystem,
 ) (*VirtualMachineConfigOption, error) {
 
@@ -13943,7 +14449,7 @@ func (api *EnvironmentBrowser) QueryConfigOption(
 // Required Privileges
 // System.View
 //
-func (api *EnvironmentBrowser) QueryConfigOptionDescriptor(
+func (mo *EnvironmentBrowser) QueryConfigOptionDescriptor(
 	_this *ManagedObjectReference,
 ) ([]*VirtualMachineConfigOptionDescriptor, error) {
 
@@ -13972,7 +14478,7 @@ func (api *EnvironmentBrowser) QueryConfigOptionDescriptor(
 // Required Privileges
 // System.View
 //
-func (api *EnvironmentBrowser) QueryConfigTarget(
+func (mo *EnvironmentBrowser) QueryConfigTarget(
 	_this *ManagedObjectReference, host *HostSystem,
 ) (*ConfigTarget, error) {
 
@@ -14002,7 +14508,7 @@ func (api *EnvironmentBrowser) QueryConfigTarget(
 // Since
 // vSphere API 4.0
 //
-func (api *EnvironmentBrowser) QueryTargetCapabilities(
+func (mo *EnvironmentBrowser) QueryTargetCapabilities(
 	_this *ManagedObjectReference, host *HostSystem,
 ) (*HostCapability, error) {
 
@@ -14180,6 +14686,13 @@ type EventAlarmExpressionComparison struct {
 }
 
 //
+// Basic Comparison operators
+//
+//
+type EventAlarmExpressionComparisonOperator struct {
+}
+
+//
 // Describes an available event argument name for an Event type, which
 // can be used in EventAlarmExpression.
 //
@@ -14211,6 +14724,9 @@ type EventArgDesc struct {
 //
 type EventArgument struct {
 	*DynamicData
+}
+
+type EventCategory struct {
 }
 
 //
@@ -14331,6 +14847,13 @@ type EventDescriptionEventDetail struct {
 	//
 	// Since vSphere API 4.1
 	LongDescription string
+}
+
+//
+// Severity level constants.
+//
+//
+type EventEventSeverity struct {
 }
 
 //
@@ -14537,11 +15060,22 @@ type EventFilterSpecByUsername struct {
 }
 
 //
+// This option specifies how to select events based on child relationships
+// in the inventory hierarchy. If a managed entity has children, their events
+// can be retrieved with this filter option.
+//
+//
+type EventFilterSpecRecursionOption struct {
+}
+
+//
 // EventHistoryCollector provides a mechanism for
 // retrieving historical data and updates when the server appends new
 // events.
 //
 type EventHistoryCollector struct {
+	*ManagedObject
+
 	*HistoryCollector
 
 	// The items in the 'viewable latest page'. As new events that match the
@@ -14565,7 +15099,7 @@ type EventHistoryCollector struct {
 // Required Privileges
 // None
 //
-func (api *EventHistoryCollector) ReadNextEvents(
+func (mo *EventHistoryCollector) ReadNextEvents(
 	_this *ManagedObjectReference, maxCount int32,
 ) ([]*Event, error) {
 
@@ -14583,7 +15117,7 @@ func (api *EventHistoryCollector) ReadNextEvents(
 // Required Privileges
 // None
 //
-func (api *EventHistoryCollector) ReadPreviousEvents(
+func (mo *EventHistoryCollector) ReadPreviousEvents(
 	_this *ManagedObjectReference, maxCount int32,
 ) ([]*Event, error) {
 
@@ -14598,6 +15132,7 @@ func (api *EventHistoryCollector) ReadPreviousEvents(
 // managed entities.
 //
 type EventManager struct {
+	*ManagedObject
 
 	// Static descriptive strings used in events.
 	// Required Privilege: System.View
@@ -14623,7 +15158,7 @@ type EventManager struct {
 // Required Privileges
 // System.View
 //
-func (api *EventManager) CreateCollectorForEvents(
+func (mo *EventManager) CreateCollectorForEvents(
 	_this *ManagedObjectReference, filter *EventFilterSpec,
 ) (*EventHistoryCollector, error) {
 
@@ -14637,7 +15172,7 @@ func (api *EventManager) CreateCollectorForEvents(
 // Required Privileges
 // None
 //
-func (api *EventManager) LogUserEvent(
+func (mo *EventManager) LogUserEvent(
 	_this *ManagedObjectReference, entity *ManagedEntity, msg string,
 ) error {
 
@@ -14677,7 +15212,7 @@ func (api *EventManager) LogUserEvent(
 // Since
 // VI API 2.5
 //
-func (api *EventManager) PostEvent(
+func (mo *EventManager) PostEvent(
 	_this *ManagedObjectReference, eventToPost *Event, taskInfo *TaskInfo,
 ) error {
 
@@ -14692,7 +15227,7 @@ func (api *EventManager) PostEvent(
 // Required Privileges
 // System.View
 //
-func (api *EventManager) QueryEvents(
+func (mo *EventManager) QueryEvents(
 	_this *ManagedObjectReference, filter *EventFilterSpec,
 ) ([]*Event, error) {
 
@@ -14708,7 +15243,7 @@ func (api *EventManager) QueryEvents(
 // Since
 // vSphere API 4.0
 //
-func (api *EventManager) RetrieveArgumentDescription(
+func (mo *EventManager) RetrieveArgumentDescription(
 	_this *ManagedObjectReference, eventTypeId string,
 ) ([]*EventArgDesc, error) {
 
@@ -14989,6 +15524,7 @@ type ExtendedFault struct {
 // the field applies to all managed objects.)
 //
 type ExtensibleManagedObject struct {
+	*ManagedObject
 
 	// List of custom field definitions that are valid for the object's type.
 	// The fields are sorted by name.
@@ -15017,7 +15553,7 @@ type ExtensibleManagedObject struct {
 // Since
 // VI API 2.5
 //
-func (api *ExtensibleManagedObject) SetCustomValue(
+func (mo *ExtensibleManagedObject) SetCustomValue(
 	_this *ManagedObjectReference, key string, value string,
 ) error {
 
@@ -15236,6 +15772,7 @@ type ExtensionHealthInfo struct {
 //
 //
 type ExtensionManager struct {
+	*ManagedObject
 
 	// The list of currently registered extensions.
 	// Required Privilege: System.View
@@ -15248,7 +15785,7 @@ type ExtensionManager struct {
 // Required Privileges
 // System.View
 //
-func (api *ExtensionManager) FindExtension(
+func (mo *ExtensionManager) FindExtension(
 	_this *ManagedObjectReference, extensionKey string,
 ) (*Extension, error) {
 
@@ -15268,7 +15805,7 @@ func (api *ExtensionManager) FindExtension(
 // Required Privileges
 // System.View
 //
-func (api *ExtensionManager) GetPublicKey(
+func (mo *ExtensionManager) GetPublicKey(
 	_this *ManagedObjectReference,
 ) (string, error) {
 
@@ -15288,7 +15825,7 @@ func (api *ExtensionManager) GetPublicKey(
 // Since
 // vSphere API 5.1
 //
-func (api *ExtensionManager) QueryExtensionIpAllocationUsage(
+func (mo *ExtensionManager) QueryExtensionIpAllocationUsage(
 	_this *ManagedObjectReference, extensionKeys []string,
 ) ([]*ExtensionManagerIpAllocationUsage, error) {
 
@@ -15305,7 +15842,7 @@ func (api *ExtensionManager) QueryExtensionIpAllocationUsage(
 // Since
 // vSphere API 5.0
 //
-func (api *ExtensionManager) QueryManagedBy(
+func (mo *ExtensionManager) QueryManagedBy(
 	_this *ManagedObjectReference, extensionKey string,
 ) ([]*ManagedEntity, error) {
 
@@ -15319,7 +15856,7 @@ func (api *ExtensionManager) QueryManagedBy(
 // Required Privileges
 // Extension.Register
 //
-func (api *ExtensionManager) RegisterExtension(
+func (mo *ExtensionManager) RegisterExtension(
 	_this *ManagedObjectReference, extension *Extension,
 ) error {
 
@@ -15349,7 +15886,7 @@ func (api *ExtensionManager) RegisterExtension(
 // Since
 // vSphere API 4.0
 //
-func (api *ExtensionManager) SetExtensionCertificate(
+func (mo *ExtensionManager) SetExtensionCertificate(
 	_this *ManagedObjectReference, extensionKey string, certificatePem string,
 ) error {
 
@@ -15373,7 +15910,7 @@ func (api *ExtensionManager) SetExtensionCertificate(
 // Required Privileges
 // Extension.Update
 //
-func (api *ExtensionManager) SetPublicKey(
+func (mo *ExtensionManager) SetPublicKey(
 	_this *ManagedObjectReference, extensionKey string, publicKey string,
 ) error {
 
@@ -15387,7 +15924,7 @@ func (api *ExtensionManager) SetPublicKey(
 // Required Privileges
 // Extension.Unregister
 //
-func (api *ExtensionManager) UnregisterExtension(
+func (mo *ExtensionManager) UnregisterExtension(
 	_this *ManagedObjectReference, extensionKey string,
 ) error {
 
@@ -15408,7 +15945,7 @@ func (api *ExtensionManager) UnregisterExtension(
 // Required Privileges
 // Extension.Update
 //
-func (api *ExtensionManager) UpdateExtension(
+func (mo *ExtensionManager) UpdateExtension(
 	_this *ManagedObjectReference, extension *Extension,
 ) error {
 
@@ -15912,6 +16449,13 @@ type FeatureRequirementsNotMet struct {
 }
 
 //
+// The operating mode of the adapter.
+//
+//
+type FibreChannelPortType struct {
+}
+
+//
 // This fault is thrown when an operation attempts to create a file using the name of
 // an existing file.
 //
@@ -16034,6 +16578,7 @@ type FileLocked struct {
 // a datastore can be obtained from the datastore browser.See HostDatastoreBrowser
 //
 type FileManager struct {
+	*ManagedObject
 }
 
 //
@@ -16050,7 +16595,7 @@ type FileManager struct {
 // Since
 // vSphere API 4.0
 //
-func (api *FileManager) ChangeOwner(
+func (mo *FileManager) ChangeOwner(
 	_this *ManagedObjectReference, name string, datacenter *Datacenter, owner string,
 ) error {
 
@@ -16106,7 +16651,7 @@ func (api *FileManager) ChangeOwner(
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *FileManager) CopyDatastoreFile_Task(
+func (mo *FileManager) CopyDatastoreFile_Task(
 	_this *ManagedObjectReference, sourceName string, sourceDatacenter *Datacenter, destinationName string, destinationDatacenter *Datacenter, force bool,
 ) (*Task, error) {
 
@@ -16140,7 +16685,7 @@ func (api *FileManager) CopyDatastoreFile_Task(
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *FileManager) DeleteDatastoreFile_Task(
+func (mo *FileManager) DeleteDatastoreFile_Task(
 	_this *ManagedObjectReference, name string, datacenter *Datacenter,
 ) (*Task, error) {
 
@@ -16166,7 +16711,7 @@ func (api *FileManager) DeleteDatastoreFile_Task(
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *FileManager) MakeDirectory(
+func (mo *FileManager) MakeDirectory(
 	_this *ManagedObjectReference, name string, datacenter *Datacenter, createParentDirectories bool,
 ) error {
 
@@ -16223,7 +16768,7 @@ func (api *FileManager) MakeDirectory(
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *FileManager) MoveDatastoreFile_Task(
+func (mo *FileManager) MoveDatastoreFile_Task(
 	_this *ManagedObjectReference, sourceName string, sourceDatacenter *Datacenter, destinationName string, destinationDatacenter *Datacenter, force bool,
 ) (*Task, error) {
 
@@ -16294,6 +16839,20 @@ type FileQueryFlags struct {
 	// The flag to indicate whether or not to return the date and time the file was
 	// last modified.
 	Modification bool
+}
+
+//
+// Status of volume's support for vStorage hardware acceleration.
+// The ESX Server determines the status based on the capabilities
+// of the devices that support the file system volume.
+// When a host boots, the support status is unknown.
+// As the ESX host attempts hardware-accelerated operations,
+// it determines whether the storage device supports hardware
+// acceleration and sets the vStorageSupport
+// property accordingly.
+//
+//
+type FileSystemMountInfoVStorageSupportStatus struct {
 }
 
 //
@@ -16558,7 +17117,7 @@ type Folder struct {
 // Required Privileges
 // Host.Inventory.AddStandaloneHost
 //
-func (api *Folder) AddStandaloneHost_Task(
+func (mo *Folder) AddStandaloneHost_Task(
 	_this *ManagedObjectReference, spec *HostConnectSpec, compResSpec *ComputeResourceConfigSpec, addConnected bool, license string,
 ) (*Task, error) {
 
@@ -16580,7 +17139,7 @@ func (api *Folder) AddStandaloneHost_Task(
 // Required Privileges
 // Host.Inventory.CreateCluster
 //
-func (api *Folder) CreateCluster(
+func (mo *Folder) CreateCluster(
 	_this *ManagedObjectReference, name string, spec *ClusterConfigSpec,
 ) (*ClusterComputeResource, error) {
 
@@ -16601,7 +17160,7 @@ func (api *Folder) CreateCluster(
 // Since
 // VI API 2.5
 //
-func (api *Folder) CreateClusterEx(
+func (mo *Folder) CreateClusterEx(
 	_this *ManagedObjectReference, name string, spec *ClusterConfigSpecEx,
 ) (*ClusterComputeResource, error) {
 
@@ -16620,7 +17179,7 @@ func (api *Folder) CreateClusterEx(
 // Required Privileges
 // Datacenter.Create
 //
-func (api *Folder) CreateDatacenter(
+func (mo *Folder) CreateDatacenter(
 	_this *ManagedObjectReference, name string,
 ) (*Datacenter, error) {
 
@@ -16638,7 +17197,7 @@ func (api *Folder) CreateDatacenter(
 // Since
 // vSphere API 4.0
 //
-func (api *Folder) CreateDVS_Task(
+func (mo *Folder) CreateDVS_Task(
 	_this *ManagedObjectReference, spec *DVSCreateSpec,
 ) (*Task, error) {
 
@@ -16658,7 +17217,7 @@ func (api *Folder) CreateDVS_Task(
 // Required Privileges
 // Folder.Create
 //
-func (api *Folder) CreateFolder(
+func (mo *Folder) CreateFolder(
 	_this *ManagedObjectReference, name string,
 ) (*Folder, error) {
 
@@ -16679,7 +17238,7 @@ func (api *Folder) CreateFolder(
 // Since
 // vSphere API 5.0
 //
-func (api *Folder) CreateStoragePod(
+func (mo *Folder) CreateStoragePod(
 	_this *ManagedObjectReference, name string,
 ) (*StoragePod, error) {
 
@@ -16740,7 +17299,7 @@ func (api *Folder) CreateStoragePod(
 // Required Privileges
 // VirtualMachine.Inventory.Create
 //
-func (api *Folder) CreateVM_Task(
+func (mo *Folder) CreateVM_Task(
 	_this *ManagedObjectReference, config *VirtualMachineConfigSpec, pool *ResourcePool, host *HostSystem,
 ) (*Task, error) {
 
@@ -16825,7 +17384,7 @@ func (api *Folder) CreateVM_Task(
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *Folder) MoveIntoFolder_Task(
+func (mo *Folder) MoveIntoFolder_Task(
 	_this *ManagedObjectReference, list []*ManagedEntity,
 ) (*Task, error) {
 
@@ -16851,7 +17410,7 @@ func (api *Folder) MoveIntoFolder_Task(
 // Required Privileges
 // VirtualMachine.Inventory.Register
 //
-func (api *Folder) RegisterVM_Task(
+func (mo *Folder) RegisterVM_Task(
 	_this *ManagedObjectReference, path string, name string, asTemplate bool, pool *ResourcePool, host *HostSystem,
 ) (*Task, error) {
 
@@ -16888,7 +17447,7 @@ func (api *Folder) RegisterVM_Task(
 // Required Privileges
 // Folder.Delete
 //
-func (api *Folder) UnregisterAndDestroy_Task(
+func (mo *Folder) UnregisterAndDestroy_Task(
 	_this *ManagedObjectReference,
 ) (*Task, error) {
 
@@ -16940,6 +17499,13 @@ type FtIssuesOnHost struct {
 
 	// Name for the host which has Fault Tolerance issues.
 	HostName string
+}
+
+//
+// HostSelectionType defines how the host was selected
+//
+//
+type FtIssuesOnHostHostSelectionType struct {
 }
 
 //
@@ -17101,6 +17667,7 @@ type GroupAlarmAction struct {
 // to manipulate the guest operating authentication.
 //
 type GuestAuthManager struct {
+	*ManagedObject
 }
 
 //
@@ -17121,7 +17688,7 @@ type GuestAuthManager struct {
 // Required Privileges
 // None
 //
-func (api *GuestAuthManager) AcquireCredentialsInGuest(
+func (mo *GuestAuthManager) AcquireCredentialsInGuest(
 	_this *ManagedObjectReference, vm *VirtualMachine, requestedAuth *GuestAuthentication, sessionID int64,
 ) (*GuestAuthentication, error) {
 
@@ -17145,7 +17712,7 @@ func (api *GuestAuthManager) AcquireCredentialsInGuest(
 // Required Privileges
 // None
 //
-func (api *GuestAuthManager) ReleaseCredentialsInGuest(
+func (mo *GuestAuthManager) ReleaseCredentialsInGuest(
 	_this *ManagedObjectReference, vm *VirtualMachine, auth *GuestAuthentication,
 ) error {
 
@@ -17167,7 +17734,7 @@ func (api *GuestAuthManager) ReleaseCredentialsInGuest(
 // Required Privileges
 // None
 //
-func (api *GuestAuthManager) ValidateCredentialsInGuest(
+func (mo *GuestAuthManager) ValidateCredentialsInGuest(
 	_this *ManagedObjectReference, vm *VirtualMachine, auth *GuestAuthentication,
 ) error {
 
@@ -17304,6 +17871,7 @@ type GuestFileInfo struct {
 // to manipulate the guest operating system files.
 //
 type GuestFileManager struct {
+	*ManagedObject
 }
 
 //
@@ -17314,7 +17882,7 @@ type GuestFileManager struct {
 // Required Privileges
 // None
 //
-func (api *GuestFileManager) ChangeFileAttributesInGuest(
+func (mo *GuestFileManager) ChangeFileAttributesInGuest(
 	_this *ManagedObjectReference, vm *VirtualMachine, auth *GuestAuthentication, guestFilePath string, fileAttributes *GuestFileAttributes,
 ) error {
 
@@ -17334,7 +17902,7 @@ func (api *GuestFileManager) ChangeFileAttributesInGuest(
 // Required Privileges
 // None
 //
-func (api *GuestFileManager) CreateTemporaryDirectoryInGuest(
+func (mo *GuestFileManager) CreateTemporaryDirectoryInGuest(
 	_this *ManagedObjectReference, vm *VirtualMachine, auth *GuestAuthentication, prefix string, suffix string, directoryPath string,
 ) (string, error) {
 
@@ -17354,7 +17922,7 @@ func (api *GuestFileManager) CreateTemporaryDirectoryInGuest(
 // Required Privileges
 // None
 //
-func (api *GuestFileManager) CreateTemporaryFileInGuest(
+func (mo *GuestFileManager) CreateTemporaryFileInGuest(
 	_this *ManagedObjectReference, vm *VirtualMachine, auth *GuestAuthentication, prefix string, suffix string, directoryPath string,
 ) (string, error) {
 
@@ -17370,7 +17938,7 @@ func (api *GuestFileManager) CreateTemporaryFileInGuest(
 // Required Privileges
 // None
 //
-func (api *GuestFileManager) DeleteDirectoryInGuest(
+func (mo *GuestFileManager) DeleteDirectoryInGuest(
 	_this *ManagedObjectReference, vm *VirtualMachine, auth *GuestAuthentication, directoryPath string, recursive bool,
 ) error {
 
@@ -17386,7 +17954,7 @@ func (api *GuestFileManager) DeleteDirectoryInGuest(
 // Required Privileges
 // None
 //
-func (api *GuestFileManager) DeleteFileInGuest(
+func (mo *GuestFileManager) DeleteFileInGuest(
 	_this *ManagedObjectReference, vm *VirtualMachine, auth *GuestAuthentication, filePath string,
 ) error {
 
@@ -17425,7 +17993,7 @@ func (api *GuestFileManager) DeleteFileInGuest(
 // Required Privileges
 // None
 //
-func (api *GuestFileManager) InitiateFileTransferFromGuest(
+func (mo *GuestFileManager) InitiateFileTransferFromGuest(
 	_this *ManagedObjectReference, vm *VirtualMachine, auth *GuestAuthentication, guestFilePath string,
 ) (*FileTransferInformation, error) {
 
@@ -17462,7 +18030,7 @@ func (api *GuestFileManager) InitiateFileTransferFromGuest(
 // Required Privileges
 // None
 //
-func (api *GuestFileManager) InitiateFileTransferToGuest(
+func (mo *GuestFileManager) InitiateFileTransferToGuest(
 	_this *ManagedObjectReference, vm *VirtualMachine, auth *GuestAuthentication, guestFilePath string, fileAttributes *GuestFileAttributes, fileSize int64, overwrite bool,
 ) (string, error) {
 
@@ -17485,7 +18053,7 @@ func (api *GuestFileManager) InitiateFileTransferToGuest(
 // Required Privileges
 // None
 //
-func (api *GuestFileManager) ListFilesInGuest(
+func (mo *GuestFileManager) ListFilesInGuest(
 	_this *ManagedObjectReference, vm *VirtualMachine, auth *GuestAuthentication, filePath string, index int32, maxResults int32, matchPattern string,
 ) (*GuestListFileInfo, error) {
 
@@ -17501,7 +18069,7 @@ func (api *GuestFileManager) ListFilesInGuest(
 // Required Privileges
 // None
 //
-func (api *GuestFileManager) MakeDirectoryInGuest(
+func (mo *GuestFileManager) MakeDirectoryInGuest(
 	_this *ManagedObjectReference, vm *VirtualMachine, auth *GuestAuthentication, directoryPath string, createParentDirectories bool,
 ) error {
 
@@ -17517,7 +18085,7 @@ func (api *GuestFileManager) MakeDirectoryInGuest(
 // Required Privileges
 // None
 //
-func (api *GuestFileManager) MoveDirectoryInGuest(
+func (mo *GuestFileManager) MoveDirectoryInGuest(
 	_this *ManagedObjectReference, vm *VirtualMachine, auth *GuestAuthentication, srcDirectoryPath string, dstDirectoryPath string,
 ) error {
 
@@ -17533,12 +18101,15 @@ func (api *GuestFileManager) MoveDirectoryInGuest(
 // Required Privileges
 // None
 //
-func (api *GuestFileManager) MoveFileInGuest(
+func (mo *GuestFileManager) MoveFileInGuest(
 	_this *ManagedObjectReference, vm *VirtualMachine, auth *GuestAuthentication, srcFilePath string, dstFilePath string, overwrite bool,
 ) error {
 
 	return nil
 
+}
+
+type GuestFileType struct {
 }
 
 //
@@ -17677,6 +18248,13 @@ type GuestInfo struct {
 	ToolsVersionStatus2 string
 }
 
+//
+// Application state type.
+//
+//
+type GuestInfoAppStateType struct {
+}
+
 type GuestInfoNamespaceGenerationInfo struct {
 	*DynamicData
 
@@ -17757,6 +18335,7 @@ type GuestOperationsFault struct {
 // Each class of APIs is separated into its own manager.
 //
 type GuestOperationsManager struct {
+	*ManagedObject
 
 	// A singleton managed object that provides methods for guest authentication
 	// operations.
@@ -17966,6 +18545,20 @@ type GuestOsDescriptor struct {
 }
 
 //
+// Firmware types
+//
+//
+type GuestOsDescriptorFirmwareType struct {
+}
+
+//
+// Guest OS support level
+//
+//
+type GuestOsDescriptorSupportLevel struct {
+}
+
+//
 // A GuestPermissionDenied exception is thrown when an
 // operation fails because the authentication used
 // is insufficient to perform the operation.
@@ -18042,6 +18635,7 @@ type GuestProcessInfo struct {
 // to manipulate the guest operating system processes.
 //
 type GuestProcessManager struct {
+	*ManagedObject
 }
 
 //
@@ -18054,7 +18648,7 @@ type GuestProcessManager struct {
 // Required Privileges
 // None
 //
-func (api *GuestProcessManager) ListProcessesInGuest(
+func (mo *GuestProcessManager) ListProcessesInGuest(
 	_this *ManagedObjectReference, vm *VirtualMachine, auth *GuestAuthentication, pids []int64,
 ) ([]*GuestProcessInfo, error) {
 
@@ -18075,7 +18669,7 @@ func (api *GuestProcessManager) ListProcessesInGuest(
 // Required Privileges
 // None
 //
-func (api *GuestProcessManager) ReadEnvironmentVariableInGuest(
+func (mo *GuestProcessManager) ReadEnvironmentVariableInGuest(
 	_this *ManagedObjectReference, vm *VirtualMachine, auth *GuestAuthentication, names []string,
 ) ([]string, error) {
 
@@ -18097,7 +18691,7 @@ func (api *GuestProcessManager) ReadEnvironmentVariableInGuest(
 // Required Privileges
 // None
 //
-func (api *GuestProcessManager) StartProgramInGuest(
+func (mo *GuestProcessManager) StartProgramInGuest(
 	_this *ManagedObjectReference, vm *VirtualMachine, auth *GuestAuthentication, spec *GuestProgramSpec,
 ) (int64, error) {
 
@@ -18113,7 +18707,7 @@ func (api *GuestProcessManager) StartProgramInGuest(
 // Required Privileges
 // None
 //
-func (api *GuestProcessManager) TerminateProcessInGuest(
+func (mo *GuestProcessManager) TerminateProcessInGuest(
 	_this *ManagedObjectReference, vm *VirtualMachine, auth *GuestAuthentication, pid int64,
 ) error {
 
@@ -18405,6 +18999,7 @@ type HealthSystemRuntime struct {
 //
 //
 type HistoryCollector struct {
+	*ManagedObject
 
 	// The filter used to create this collector.
 	//
@@ -18419,7 +19014,7 @@ type HistoryCollector struct {
 // Required Privileges
 // None
 //
-func (api *HistoryCollector) DestroyCollector(
+func (mo *HistoryCollector) DestroyCollector(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -18438,7 +19033,7 @@ func (api *HistoryCollector) DestroyCollector(
 // Required Privileges
 // None
 //
-func (api *HistoryCollector) ResetCollector(
+func (mo *HistoryCollector) ResetCollector(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -18456,7 +19051,7 @@ func (api *HistoryCollector) ResetCollector(
 // Required Privileges
 // None
 //
-func (api *HistoryCollector) RewindCollector(
+func (mo *HistoryCollector) RewindCollector(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -18473,7 +19068,7 @@ func (api *HistoryCollector) RewindCollector(
 // Required Privileges
 // None
 //
-func (api *HistoryCollector) SetCollectorPageSize(
+func (mo *HistoryCollector) SetCollectorPageSize(
 	_this *ManagedObjectReference, maxCount int32,
 ) error {
 
@@ -18606,6 +19201,8 @@ type HostActiveDirectory struct {
 // for adding a host to and removing a host from a domain.
 //
 type HostActiveDirectoryAuthentication struct {
+	*ManagedObject
+
 	*HostDirectoryStore
 }
 
@@ -18620,7 +19217,7 @@ type HostActiveDirectoryAuthentication struct {
 // Since
 // vSphere API 5.0
 //
-func (api *HostActiveDirectoryAuthentication) ImportCertificateForCAM_Task(
+func (mo *HostActiveDirectoryAuthentication) ImportCertificateForCAM_Task(
 	_this *ManagedObjectReference, certPath string, camServer string,
 ) (*Task, error) {
 
@@ -18641,7 +19238,7 @@ func (api *HostActiveDirectoryAuthentication) ImportCertificateForCAM_Task(
 // Required Privileges
 // Host.Config.AuthenticationStore
 //
-func (api *HostActiveDirectoryAuthentication) JoinDomain_Task(
+func (mo *HostActiveDirectoryAuthentication) JoinDomain_Task(
 	_this *ManagedObjectReference, domainName string, userName string, password string,
 ) (*Task, error) {
 
@@ -18664,7 +19261,7 @@ func (api *HostActiveDirectoryAuthentication) JoinDomain_Task(
 // Since
 // vSphere API 5.0
 //
-func (api *HostActiveDirectoryAuthentication) JoinDomainWithCAM_Task(
+func (mo *HostActiveDirectoryAuthentication) JoinDomainWithCAM_Task(
 	_this *ManagedObjectReference, domainName string, camServer string,
 ) (*Task, error) {
 
@@ -18678,7 +19275,7 @@ func (api *HostActiveDirectoryAuthentication) JoinDomainWithCAM_Task(
 // Required Privileges
 // Host.Config.AuthenticationStore
 //
-func (api *HostActiveDirectoryAuthentication) LeaveCurrentDomain_Task(
+func (mo *HostActiveDirectoryAuthentication) LeaveCurrentDomain_Task(
 	_this *ManagedObjectReference, force bool,
 ) (*Task, error) {
 
@@ -18708,6 +19305,9 @@ type HostActiveDirectoryInfo struct {
 	// The joinedDomain is not included in the
 	// trustedDomain list.
 	TrustedDomain []string
+}
+
+type HostActiveDirectoryInfoDomainMembershipStatus struct {
 }
 
 //
@@ -18894,6 +19494,7 @@ type HostApplyProfile struct {
 //
 //
 type HostAuthenticationManager struct {
+	*ManagedObject
 
 	// Information about Active Directory membership.
 	Info *HostAuthenticationManagerInfo
@@ -18958,6 +19559,7 @@ type HostAuthenticationManagerInfo struct {
 //
 //
 type HostAuthenticationStore struct {
+	*ManagedObject
 
 	// Information about the authentication store.
 	Info *HostAuthenticationStoreInfo
@@ -18988,6 +19590,8 @@ type HostAuthenticationStoreInfo struct {
 // such as an ESX Server machine or through VirtualCenter.
 //
 type HostAutoStartManager struct {
+	*ManagedObject
+
 	Config *HostAutoStartManagerConfig
 }
 
@@ -19001,7 +19605,7 @@ type HostAutoStartManager struct {
 // Required Privileges
 // Host.Config.AutoStart
 //
-func (api *HostAutoStartManager) AutoStartPowerOff(
+func (mo *HostAutoStartManager) AutoStartPowerOff(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -19019,7 +19623,7 @@ func (api *HostAutoStartManager) AutoStartPowerOff(
 // Required Privileges
 // Host.Config.AutoStart
 //
-func (api *HostAutoStartManager) AutoStartPowerOn(
+func (mo *HostAutoStartManager) AutoStartPowerOn(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -19052,7 +19656,7 @@ func (api *HostAutoStartManager) AutoStartPowerOn(
 // Required Privileges
 // Host.Config.AutoStart
 //
-func (api *HostAutoStartManager) ReconfigureAutostart(
+func (mo *HostAutoStartManager) ReconfigureAutostart(
 	_this *ManagedObjectReference, spec *HostAutoStartManagerConfig,
 ) error {
 
@@ -19137,6 +19741,7 @@ type HostBootDeviceInfo struct {
 // a host boot device configuration.
 //
 type HostBootDeviceSystem struct {
+	*ManagedObject
 }
 
 //
@@ -19145,7 +19750,7 @@ type HostBootDeviceSystem struct {
 // Required Privileges
 // System.Read
 //
-func (api *HostBootDeviceSystem) QueryBootDevices(
+func (mo *HostBootDeviceSystem) QueryBootDevices(
 	_this *ManagedObjectReference,
 ) (*HostBootDeviceInfo, error) {
 
@@ -19159,7 +19764,7 @@ func (api *HostBootDeviceSystem) QueryBootDevices(
 // Required Privileges
 // Host.Config.Maintenance
 //
-func (api *HostBootDeviceSystem) UpdateBootDevice(
+func (mo *HostBootDeviceSystem) UpdateBootDevice(
 	_this *ManagedObjectReference, key string,
 ) error {
 
@@ -19193,6 +19798,7 @@ type HostCacheConfigurationInfo struct {
 // features using solid state drive based cache.
 //
 type HostCacheConfigurationManager struct {
+	*ManagedObject
 
 	// The swap performance configuration for the ESX host.  This includes
 	// configuration information for each datastore enabled for this purpose.
@@ -19206,7 +19812,7 @@ type HostCacheConfigurationManager struct {
 // Required Privileges
 // Host.Config.AdvancedConfig
 //
-func (api *HostCacheConfigurationManager) ConfigureHostCache_Task(
+func (mo *HostCacheConfigurationManager) ConfigureHostCache_Task(
 	_this *ManagedObjectReference, spec *HostCacheConfigurationSpec,
 ) (*Task, error) {
 
@@ -19725,6 +20331,21 @@ type HostCapability struct {
 }
 
 //
+// Set of possible values for
+// ftCompatibilityIssues
+//
+//
+type HostCapabilityFtUnsupportedReason struct {
+}
+
+//
+// Set of possible values for vmDirectPathGen2UnsupportedReason.
+//
+//
+type HostCapabilityVmDirectPathGen2UnsupportedReason struct {
+}
+
+//
 // This event records a failure to connect to a host
 // due to a failure to set up a management account.
 //
@@ -19888,6 +20509,27 @@ type HostConfigAppliedEvent struct {
 //
 type HostConfigChange struct {
 	*DynamicData
+}
+
+//
+// This is a global mode on a configuration specification indicating
+// whether the structure represents the desired state or the set of
+// operations to apply on the managed object.
+//
+//
+//
+//
+type HostConfigChangeMode struct {
+}
+
+//
+// This list indicates the operation that should be performed for a
+// network entity.
+//
+//
+//
+//
+type HostConfigChangeOperation struct {
 }
 
 //
@@ -20758,6 +21400,9 @@ type HostCpuPackage struct {
 	Vendor string
 }
 
+type HostCpuPackageVendor struct {
+}
+
 //
 // The CpuPowerManagementInfo data object type describes supported
 // power management and current policy.
@@ -20771,6 +21416,13 @@ type HostCpuPowerManagementInfo struct {
 
 	// Information about supported CPU power management.
 	HardwareSupport string
+}
+
+//
+// Possible values for Current CPU power management policy
+//
+//
+type HostCpuPowerManagementInfoPolicyType struct {
 }
 
 //
@@ -20801,7 +21453,7 @@ type HostCpuSchedulerSystem struct {
 // Required Privileges
 // Host.Config.HyperThreading
 //
-func (api *HostCpuSchedulerSystem) DisableHyperThreading(
+func (mo *HostCpuSchedulerSystem) DisableHyperThreading(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -20818,7 +21470,7 @@ func (api *HostCpuSchedulerSystem) DisableHyperThreading(
 // Required Privileges
 // Host.Config.HyperThreading
 //
-func (api *HostCpuSchedulerSystem) EnableHyperThreading(
+func (mo *HostCpuSchedulerSystem) EnableHyperThreading(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -20879,6 +21531,9 @@ type HostDasErrorEvent struct {
 	//
 	// Since vSphere API 4.0
 	Reason string
+}
+
+type HostDasErrorEventHostDasErrorReason struct {
 }
 
 //
@@ -20970,6 +21625,7 @@ type HostDasOkEvent struct {
 // See FileInfo
 //
 type HostDatastoreBrowser struct {
+	*ManagedObject
 
 	// Set of datastores that can be searched on this DatastoreBrowser.
 	//
@@ -21005,7 +21661,7 @@ type HostDatastoreBrowser struct {
 // Required Privileges
 // Datastore.DeleteFile
 //
-func (api *HostDatastoreBrowser) DeleteFile(
+func (mo *HostDatastoreBrowser) DeleteFile(
 	_this *ManagedObjectReference, datastorePath string,
 ) error {
 
@@ -21022,7 +21678,7 @@ func (api *HostDatastoreBrowser) DeleteFile(
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *HostDatastoreBrowser) SearchDatastore_Task(
+func (mo *HostDatastoreBrowser) SearchDatastore_Task(
 	_this *ManagedObjectReference, datastorePath string, searchSpec *HostDatastoreBrowserSearchSpec,
 ) (*Task, error) {
 
@@ -21039,7 +21695,7 @@ func (api *HostDatastoreBrowser) SearchDatastore_Task(
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *HostDatastoreBrowser) SearchDatastoreSubFolders_Task(
+func (mo *HostDatastoreBrowser) SearchDatastoreSubFolders_Task(
 	_this *ManagedObjectReference, datastorePath string, searchSpec *HostDatastoreBrowserSearchSpec,
 ) (*Task, error) {
 
@@ -21204,6 +21860,7 @@ type HostDatastoreNameConflictConnectInfo struct {
 // this interface.See Datastore
 //
 type HostDatastoreSystem struct {
+	*ManagedObject
 
 	// Capability vector indicating the available product features.
 	//
@@ -21240,7 +21897,7 @@ type HostDatastoreSystem struct {
 // Required Privileges
 // Host.Config.Maintenance
 //
-func (api *HostDatastoreSystem) ConfigureDatastorePrincipal(
+func (mo *HostDatastoreSystem) ConfigureDatastorePrincipal(
 	_this *ManagedObjectReference, userName string, password string,
 ) error {
 
@@ -21254,7 +21911,7 @@ func (api *HostDatastoreSystem) ConfigureDatastorePrincipal(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostDatastoreSystem) CreateLocalDatastore(
+func (mo *HostDatastoreSystem) CreateLocalDatastore(
 	_this *ManagedObjectReference, name string, path string,
 ) (*Datastore, error) {
 
@@ -21268,7 +21925,7 @@ func (api *HostDatastoreSystem) CreateLocalDatastore(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostDatastoreSystem) CreateNasDatastore(
+func (mo *HostDatastoreSystem) CreateNasDatastore(
 	_this *ManagedObjectReference, spec *HostNasVolumeSpec,
 ) (*Datastore, error) {
 
@@ -21282,7 +21939,7 @@ func (api *HostDatastoreSystem) CreateNasDatastore(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostDatastoreSystem) CreateVmfsDatastore(
+func (mo *HostDatastoreSystem) CreateVmfsDatastore(
 	_this *ManagedObjectReference, spec *VmfsDatastoreCreateSpec,
 ) (*Datastore, error) {
 
@@ -21299,7 +21956,7 @@ func (api *HostDatastoreSystem) CreateVmfsDatastore(
 // Since
 // vSphere API 4.0
 //
-func (api *HostDatastoreSystem) ExpandVmfsDatastore(
+func (mo *HostDatastoreSystem) ExpandVmfsDatastore(
 	_this *ManagedObjectReference, datastore *Datastore, spec *VmfsDatastoreExpandSpec,
 ) (*Datastore, error) {
 
@@ -21314,7 +21971,7 @@ func (api *HostDatastoreSystem) ExpandVmfsDatastore(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostDatastoreSystem) ExtendVmfsDatastore(
+func (mo *HostDatastoreSystem) ExtendVmfsDatastore(
 	_this *ManagedObjectReference, datastore *Datastore, spec *VmfsDatastoreExtendSpec,
 ) (*Datastore, error) {
 
@@ -21344,7 +22001,7 @@ func (api *HostDatastoreSystem) ExtendVmfsDatastore(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostDatastoreSystem) QueryAvailableDisksForVmfs(
+func (mo *HostDatastoreSystem) QueryAvailableDisksForVmfs(
 	_this *ManagedObjectReference, datastore *Datastore,
 ) ([]*HostScsiDisk, error) {
 
@@ -21364,7 +22021,7 @@ func (api *HostDatastoreSystem) QueryAvailableDisksForVmfs(
 // Since
 // vSphere API 4.0
 //
-func (api *HostDatastoreSystem) QueryUnresolvedVmfsVolumes(
+func (mo *HostDatastoreSystem) QueryUnresolvedVmfsVolumes(
 	_this *ManagedObjectReference,
 ) ([]*HostUnresolvedVmfsVolume, error) {
 
@@ -21378,7 +22035,7 @@ func (api *HostDatastoreSystem) QueryUnresolvedVmfsVolumes(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostDatastoreSystem) QueryVmfsDatastoreCreateOptions(
+func (mo *HostDatastoreSystem) QueryVmfsDatastoreCreateOptions(
 	_this *ManagedObjectReference, devicePath string, vmfsMajorVersion int32,
 ) ([]*VmfsDatastoreOption, error) {
 
@@ -21396,7 +22053,7 @@ func (api *HostDatastoreSystem) QueryVmfsDatastoreCreateOptions(
 // Since
 // vSphere API 4.0
 //
-func (api *HostDatastoreSystem) QueryVmfsDatastoreExpandOptions(
+func (mo *HostDatastoreSystem) QueryVmfsDatastoreExpandOptions(
 	_this *ManagedObjectReference, datastore *Datastore,
 ) ([]*VmfsDatastoreOption, error) {
 
@@ -21411,7 +22068,7 @@ func (api *HostDatastoreSystem) QueryVmfsDatastoreExpandOptions(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostDatastoreSystem) QueryVmfsDatastoreExtendOptions(
+func (mo *HostDatastoreSystem) QueryVmfsDatastoreExtendOptions(
 	_this *ManagedObjectReference, datastore *Datastore, devicePath string, suppressExpandCandidates bool,
 ) ([]*VmfsDatastoreOption, error) {
 
@@ -21425,7 +22082,7 @@ func (api *HostDatastoreSystem) QueryVmfsDatastoreExtendOptions(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostDatastoreSystem) RemoveDatastore(
+func (mo *HostDatastoreSystem) RemoveDatastore(
 	_this *ManagedObjectReference, datastore *Datastore,
 ) error {
 
@@ -21458,7 +22115,7 @@ func (api *HostDatastoreSystem) RemoveDatastore(
 // Since
 // vSphere API 4.0
 //
-func (api *HostDatastoreSystem) ResignatureUnresolvedVmfsVolume_Task(
+func (mo *HostDatastoreSystem) ResignatureUnresolvedVmfsVolume_Task(
 	_this *ManagedObjectReference, resolutionSpec *HostUnresolvedVmfsResignatureSpec,
 ) (*Task, error) {
 
@@ -21479,7 +22136,7 @@ func (api *HostDatastoreSystem) ResignatureUnresolvedVmfsVolume_Task(
 // Since
 // VI API 2.5
 //
-func (api *HostDatastoreSystem) UpdateLocalSwapDatastore(
+func (mo *HostDatastoreSystem) UpdateLocalSwapDatastore(
 	_this *ManagedObjectReference, datastore *Datastore,
 ) error {
 
@@ -21553,6 +22210,7 @@ type HostDateTimeInfo struct {
 // HostServiceSystem object.
 //
 type HostDateTimeSystem struct {
+	*ManagedObject
 
 	// The DateTime configuration of the host.
 	// Required Privilege: System.Read
@@ -21566,7 +22224,7 @@ type HostDateTimeSystem struct {
 // Required Privileges
 // System.Read
 //
-func (api *HostDateTimeSystem) QueryAvailableTimeZones(
+func (mo *HostDateTimeSystem) QueryAvailableTimeZones(
 	_this *ManagedObjectReference,
 ) ([]*HostDateTimeSystemTimeZone, error) {
 
@@ -21580,7 +22238,7 @@ func (api *HostDateTimeSystem) QueryAvailableTimeZones(
 // Required Privileges
 // System.Read
 //
-func (api *HostDateTimeSystem) QueryDateTime(
+func (mo *HostDateTimeSystem) QueryDateTime(
 	_this *ManagedObjectReference,
 ) (time.Time, error) {
 
@@ -21595,7 +22253,7 @@ func (api *HostDateTimeSystem) QueryDateTime(
 // Required Privileges
 // Host.Config.DateTime
 //
-func (api *HostDateTimeSystem) RefreshDateTimeSystem(
+func (mo *HostDateTimeSystem) RefreshDateTimeSystem(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -21611,7 +22269,7 @@ func (api *HostDateTimeSystem) RefreshDateTimeSystem(
 // Required Privileges
 // Host.Config.DateTime
 //
-func (api *HostDateTimeSystem) UpdateDateTime(
+func (mo *HostDateTimeSystem) UpdateDateTime(
 	_this *ManagedObjectReference, dateTime time.Time,
 ) error {
 
@@ -21625,7 +22283,7 @@ func (api *HostDateTimeSystem) UpdateDateTime(
 // Required Privileges
 // Host.Config.DateTime
 //
-func (api *HostDateTimeSystem) UpdateDateTimeConfig(
+func (mo *HostDateTimeSystem) UpdateDateTimeConfig(
 	_this *ManagedObjectReference, config *HostDateTimeConfig,
 ) error {
 
@@ -21849,6 +22507,7 @@ type HostDiagnosticPartitionCreateSpec struct {
 //
 //
 type HostDiagnosticSystem struct {
+	*ManagedObject
 
 	// The currently active diagnostic partition.
 	ActivePartition *HostDiagnosticPartition
@@ -21864,7 +22523,7 @@ type HostDiagnosticSystem struct {
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostDiagnosticSystem) CreateDiagnosticPartition(
+func (mo *HostDiagnosticSystem) CreateDiagnosticPartition(
 	_this *ManagedObjectReference, spec *HostDiagnosticPartitionCreateSpec,
 ) error {
 
@@ -21882,7 +22541,7 @@ func (api *HostDiagnosticSystem) CreateDiagnosticPartition(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostDiagnosticSystem) QueryAvailablePartition(
+func (mo *HostDiagnosticSystem) QueryAvailablePartition(
 	_this *ManagedObjectReference,
 ) ([]*HostDiagnosticPartition, error) {
 
@@ -21899,7 +22558,7 @@ func (api *HostDiagnosticSystem) QueryAvailablePartition(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostDiagnosticSystem) QueryPartitionCreateDesc(
+func (mo *HostDiagnosticSystem) QueryPartitionCreateDesc(
 	_this *ManagedObjectReference, diskUuid string, diagnosticType string,
 ) (*HostDiagnosticPartitionCreateDescription, error) {
 
@@ -21919,7 +22578,7 @@ func (api *HostDiagnosticSystem) QueryPartitionCreateDesc(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostDiagnosticSystem) QueryPartitionCreateOptions(
+func (mo *HostDiagnosticSystem) QueryPartitionCreateOptions(
 	_this *ManagedObjectReference, storageType string, diagnosticType string,
 ) ([]*HostDiagnosticPartitionCreateOption, error) {
 
@@ -21935,7 +22594,7 @@ func (api *HostDiagnosticSystem) QueryPartitionCreateOptions(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostDiagnosticSystem) SelectActivePartition(
+func (mo *HostDiagnosticSystem) SelectActivePartition(
 	_this *ManagedObjectReference, partition *HostScsiDiskPartition,
 ) error {
 
@@ -21963,10 +22622,20 @@ type HostDigestInfo struct {
 }
 
 //
+// The set of digest methods that can be used by TPM to calculate the PCR
+// values.
+//
+//
+type HostDigestInfoDigestMethodType struct {
+}
+
+//
 // HostDirectoryStore is a base class for
 // directory-based authentication stores.
 //
 type HostDirectoryStore struct {
+	*ManagedObject
+
 	*HostAuthenticationStore
 }
 
@@ -21990,6 +22659,9 @@ type HostDisconnectedEvent struct {
 	//
 	// Since vSphere API 4.0
 	Reason string
+}
+
+type HostDisconnectedEventReasonCode struct {
 }
 
 //
@@ -22238,6 +22910,20 @@ type HostDiskPartitionInfo struct {
 }
 
 //
+// List of partition format types. This denotes the partition table layout.
+//
+//
+type HostDiskPartitionInfoPartitionFormat struct {
+}
+
+//
+// List of symbol partition types
+//
+//
+type HostDiskPartitionInfoType struct {
+}
+
+//
 // This data object type describes the disk partition layout
 // specified as a list of ordered BlockRanges.  This
 // view of the disk partitions shows the data on the disk as a contiguous
@@ -22363,6 +23049,7 @@ type HostEnableAdminFailedEvent struct {
 // machines.
 //
 type HostEsxAgentHostManager struct {
+	*ManagedObject
 
 	// Configuration of agent virtual machine resources
 	// Required Privilege: Host.Config.Settings
@@ -22378,7 +23065,7 @@ type HostEsxAgentHostManager struct {
 // Required Privileges
 // Host.Config.Settings
 //
-func (api *HostEsxAgentHostManager) EsxAgentHostManagerUpdateConfig(
+func (mo *HostEsxAgentHostManager) EsxAgentHostManagerUpdateConfig(
 	_this *ManagedObjectReference, configInfo *HostEsxAgentHostManagerConfigInfo,
 ) error {
 
@@ -22478,6 +23165,15 @@ type HostFeatureVersionInfo struct {
 
 	// The version string of this feature
 	Value string
+}
+
+//
+// Set of possible values for
+// key, which
+// is a unique key that identifies a feature.
+//
+//
+type HostFeatureVersionKey struct {
 }
 
 //
@@ -22839,6 +23535,27 @@ type HostFirewallRule struct {
 }
 
 //
+// Enumeration of port directions.
+//
+//
+type HostFirewallRuleDirection struct {
+}
+
+//
+// Enumeration of port types.
+//
+//
+type HostFirewallRulePortType struct {
+}
+
+//
+// Set of valid port protocols.
+//
+//
+type HostFirewallRuleProtocol struct {
+}
+
+//
 // Data object that describes a single network ruleset that can be
 // allowed or blocked by the firewall using the HostFirewallSystem object.
 //
@@ -22947,7 +23664,7 @@ type HostFirewallSystem struct {
 // Required Privileges
 // Host.Config.NetService
 //
-func (api *HostFirewallSystem) DisableRuleset(
+func (mo *HostFirewallSystem) DisableRuleset(
 	_this *ManagedObjectReference, id string,
 ) error {
 
@@ -22963,7 +23680,7 @@ func (api *HostFirewallSystem) DisableRuleset(
 // Required Privileges
 // Host.Config.NetService
 //
-func (api *HostFirewallSystem) EnableRuleset(
+func (mo *HostFirewallSystem) EnableRuleset(
 	_this *ManagedObjectReference, id string,
 ) error {
 
@@ -22978,7 +23695,7 @@ func (api *HostFirewallSystem) EnableRuleset(
 // Required Privileges
 // Host.Config.NetService
 //
-func (api *HostFirewallSystem) RefreshFirewall(
+func (mo *HostFirewallSystem) RefreshFirewall(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -22992,7 +23709,7 @@ func (api *HostFirewallSystem) RefreshFirewall(
 // Required Privileges
 // Host.Config.NetService
 //
-func (api *HostFirewallSystem) UpdateDefaultPolicy(
+func (mo *HostFirewallSystem) UpdateDefaultPolicy(
 	_this *ManagedObjectReference, defaultPolicy *HostFirewallDefaultPolicy,
 ) error {
 
@@ -23008,7 +23725,7 @@ func (api *HostFirewallSystem) UpdateDefaultPolicy(
 // Since
 // vSphere API 5.0
 //
-func (api *HostFirewallSystem) UpdateRuleset(
+func (mo *HostFirewallSystem) UpdateRuleset(
 	_this *ManagedObjectReference, id string, spec *HostFirewallRulesetRulesetSpec,
 ) error {
 
@@ -23022,6 +23739,7 @@ func (api *HostFirewallSystem) UpdateRuleset(
 // configuration of an embedded ESX host.
 //
 type HostFirmwareSystem struct {
+	*ManagedObject
 }
 
 //
@@ -23034,7 +23752,7 @@ type HostFirmwareSystem struct {
 // Required Privileges
 // Host.Config.Firmware
 //
-func (api *HostFirmwareSystem) BackupFirmwareConfiguration(
+func (mo *HostFirmwareSystem) BackupFirmwareConfiguration(
 	_this *ManagedObjectReference,
 ) (string, error) {
 
@@ -23050,7 +23768,7 @@ func (api *HostFirmwareSystem) BackupFirmwareConfiguration(
 // Required Privileges
 // Host.Config.Firmware
 //
-func (api *HostFirmwareSystem) QueryFirmwareConfigUploadURL(
+func (mo *HostFirmwareSystem) QueryFirmwareConfigUploadURL(
 	_this *ManagedObjectReference,
 ) (string, error) {
 
@@ -23070,7 +23788,7 @@ func (api *HostFirmwareSystem) QueryFirmwareConfigUploadURL(
 // Required Privileges
 // Host.Config.Firmware
 //
-func (api *HostFirmwareSystem) ResetFirmwareToFactoryDefaults(
+func (mo *HostFirmwareSystem) ResetFirmwareToFactoryDefaults(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -23094,7 +23812,7 @@ func (api *HostFirmwareSystem) ResetFirmwareToFactoryDefaults(
 // Required Privileges
 // Host.Config.Firmware
 //
-func (api *HostFirmwareSystem) RestoreFirmwareConfiguration(
+func (mo *HostFirmwareSystem) RestoreFirmwareConfiguration(
 	_this *ManagedObjectReference, force bool,
 ) error {
 
@@ -23175,6 +23893,13 @@ type HostGraphicsInfo struct {
 }
 
 //
+// Possible values for graphics type.
+//
+//
+type HostGraphicsInfoGraphicsType struct {
+}
+
+//
 // This managed object manages the graphics state of the host.
 //
 type HostGraphicsManager struct {
@@ -23191,7 +23916,7 @@ type HostGraphicsManager struct {
 // Required Privileges
 // System.Read
 //
-func (api *HostGraphicsManager) IsSharedGraphicsActive(
+func (mo *HostGraphicsManager) IsSharedGraphicsActive(
 	_this *ManagedObjectReference,
 ) (bool, error) {
 
@@ -23205,7 +23930,7 @@ func (api *HostGraphicsManager) IsSharedGraphicsActive(
 // Required Privileges
 // Host.Config.Settings
 //
-func (api *HostGraphicsManager) RefreshGraphicsManager(
+func (mo *HostGraphicsManager) RefreshGraphicsManager(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -23227,6 +23952,13 @@ type HostHardwareElementInfo struct {
 	// The operational status of the physical element. The status is one of
 	// the values specified in HostHardwareElementStatus.See HostHardwareElementStatus
 	Status *ElementDescription
+}
+
+//
+// The current status of the hardware
+//
+//
+type HostHardwareElementStatus struct {
 }
 
 //
@@ -23359,6 +24091,8 @@ type HostHardwareSummary struct {
 // This managed object manages the health state of the host.
 //
 type HostHealthStatusSystem struct {
+	*ManagedObject
+
 	Runtime *HealthSystemRuntime
 }
 
@@ -23368,7 +24102,7 @@ type HostHealthStatusSystem struct {
 // Required Privileges
 // System.Read
 //
-func (api *HostHealthStatusSystem) RefreshHealthStatusSystem(
+func (mo *HostHealthStatusSystem) RefreshHealthStatusSystem(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -23385,7 +24119,7 @@ func (api *HostHealthStatusSystem) RefreshHealthStatusSystem(
 // Required Privileges
 // Host.Config.Settings
 //
-func (api *HostHealthStatusSystem) ResetSystemHealthInfo(
+func (mo *HostHealthStatusSystem) ResetSystemHealthInfo(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -23477,12 +24211,20 @@ type HostHyperThreadScheduleInfo struct {
 }
 
 //
+// Acceptance level definitions
+//
+//
+type HostImageAcceptanceLevel struct {
+}
+
+//
 // This managed object is the interface for
 // configuration of the ESX software image, including
 // properties such as acceptance level.
 // It is currently designed to be host agent specific.
 //
 type HostImageConfigManager struct {
+	*ManagedObject
 }
 
 //
@@ -23491,7 +24233,7 @@ type HostImageConfigManager struct {
 // Required Privileges
 // System.Read
 //
-func (api *HostImageConfigManager) HostImageConfigGetAcceptance(
+func (mo *HostImageConfigManager) HostImageConfigGetAcceptance(
 	_this *ManagedObjectReference,
 ) (string, error) {
 
@@ -23505,7 +24247,7 @@ func (api *HostImageConfigManager) HostImageConfigGetAcceptance(
 // Required Privileges
 // System.Read
 //
-func (api *HostImageConfigManager) HostImageConfigGetProfile(
+func (mo *HostImageConfigManager) HostImageConfigGetProfile(
 	_this *ManagedObjectReference,
 ) (*HostImageProfileSummary, error) {
 
@@ -23519,7 +24261,7 @@ func (api *HostImageConfigManager) HostImageConfigGetProfile(
 // Required Privileges
 // Host.Config.Image
 //
-func (api *HostImageConfigManager) UpdateHostImageAcceptanceLevel(
+func (mo *HostImageConfigManager) UpdateHostImageAcceptanceLevel(
 	_this *ManagedObjectReference, newAcceptanceLevel string,
 ) error {
 
@@ -23574,6 +24316,13 @@ type HostIncompatibleForFaultTolerance struct {
 }
 
 //
+// Reasons why fault tolerance is not supported on the host.
+//
+//
+type HostIncompatibleForFaultToleranceReason struct {
+}
+
+//
 // This fault is thrown when an attempt is made record or replay
 // a virtual machine on a host that is incompatible.
 //
@@ -23586,6 +24335,13 @@ type HostIncompatibleForRecordReplay struct {
 	// The specific reason why the host does not support record/replay.
 	// Values should come from HostIncompatibleForRecordReplayReason.
 	Reason string
+}
+
+//
+// Reasons why record/replay is not supported on a host.
+//
+//
+type HostIncompatibleForRecordReplayReason struct {
 }
 
 //
@@ -23765,6 +24521,21 @@ type HostInternetScsiHbaAuthenticationProperties struct {
 }
 
 //
+// The type of CHAP authentication setting to use.
+// prohibited  : do not use CHAP.
+// preferred   : use CHAP if successfully negotiated,
+// but allow non-CHAP connections as fallback
+// discouraged : use non-CHAP, but allow CHAP connectsion as fallback
+// required    : use CHAP for connection strictly, and fail if CHAP
+// negotiation fails.
+//
+// Defaults to preferred on first configuration if unspecified.
+//
+//
+type HostInternetScsiHbaChapAuthenticationType struct {
+}
+
+//
 // The digest capabilities for this host bus adapter.
 //
 //
@@ -23810,6 +24581,22 @@ type HostInternetScsiHbaDigestProperties struct {
 
 	// The header digest preference if header digest is enabled
 	HeaderDigestType string
+}
+
+//
+// The type of integrity checks to use. The digest setting for header
+// and data traffic can be separately configured.
+// prohibited  : do not use digest.
+// preferred   : use digest if successfully negotiated, but skip the use
+// of digest otherwise.
+// discouraged : do not use digest if target allows, otherwise use digest.
+// required    : use digest strictly, and fail if target does not support
+// digest.
+//
+// Defaults to preferred on first configuration if unspecified.
+//
+//
+type HostInternetScsiHbaDigestType struct {
 }
 
 //
@@ -23989,6 +24776,13 @@ type HostInternetScsiHbaIPProperties struct {
 }
 
 //
+// The binding mode of the adapter.
+//
+//
+type HostInternetScsiHbaNetworkBindingSupportType struct {
+}
+
+//
 // Describes the the value of an iSCSI parameter, and whether
 // the value is being inherited.
 //
@@ -24106,6 +24900,18 @@ type HostInternetScsiHbaStaticTarget struct {
 	//
 	// Since vSphere API 4.0
 	SupportedAdvancedOptions []*OptionDef
+}
+
+//
+// The method of discovery of an iScsi target.
+// staticMethod: static discovery
+// sendTargetsMethod: sendtarget discovery
+// slpMethod: Service Location Protocol discovery
+// isnsMethod: Internet Storage Name Service discovery
+// unknownMethod: discovery method not identified by iscsi stack
+//
+//
+type HostInternetScsiHbaStaticTargetTargetDiscoveryMethod struct {
 }
 
 //
@@ -24253,6 +25059,14 @@ type HostIpConfigIpV6Address struct {
 }
 
 //
+// This specifies how the ipv6 address is configured for the interface.
+// We follow rfc4293 in defining the values for the configType.
+//
+//
+type HostIpConfigIpV6AddressConfigType struct {
+}
+
+//
 // The ipv6 address configuration
 //
 //
@@ -24273,6 +25087,9 @@ type HostIpConfigIpV6AddressConfiguration struct {
 	// only configured with the origin set to
 	// other.
 	IpV6Address []*HostIpConfigIpV6Address
+}
+
+type HostIpConfigIpV6AddressStatus struct {
 }
 
 // Deprecated.
@@ -24465,6 +25282,7 @@ type HostIsolationIpPingFailedEvent struct {
 // of kernel modules on the host.
 //
 type HostKernelModuleSystem struct {
+	*ManagedObject
 }
 
 //
@@ -24475,7 +25293,7 @@ type HostKernelModuleSystem struct {
 // Required Privileges
 // Host.Config.Settings
 //
-func (api *HostKernelModuleSystem) QueryConfiguredModuleOptionString(
+func (mo *HostKernelModuleSystem) QueryConfiguredModuleOptionString(
 	_this *ManagedObjectReference, name string,
 ) (string, error) {
 
@@ -24491,7 +25309,7 @@ func (api *HostKernelModuleSystem) QueryConfiguredModuleOptionString(
 // Since
 // vSphere API 4.0
 //
-func (api *HostKernelModuleSystem) QueryModules(
+func (mo *HostKernelModuleSystem) QueryModules(
 	_this *ManagedObjectReference,
 ) ([]*KernelModuleInfo, error) {
 
@@ -24505,7 +25323,7 @@ func (api *HostKernelModuleSystem) QueryModules(
 // Required Privileges
 // Host.Config.Settings
 //
-func (api *HostKernelModuleSystem) UpdateModuleOptionString(
+func (mo *HostKernelModuleSystem) UpdateModuleOptionString(
 	_this *ManagedObjectReference, name string, options string,
 ) error {
 
@@ -24526,6 +25344,13 @@ type HostLicensableResourceInfo struct {
 	// NOTE:
 	// The values in this property may not be accurate for pre-5.0 hosts when returned by vCenter 5.0
 	Resource []*KeyAnyValue
+}
+
+//
+// Identifiers of currently supported resources.
+//
+//
+type HostLicensableResourceKey struct {
 }
 
 //
@@ -24695,6 +25520,7 @@ type HostListSummaryQuickStats struct {
 // An InvalidArgument fault is thrown if any of these rules are not obeyed.
 //
 type HostLocalAccountManager struct {
+	*ManagedObject
 }
 
 // Deprecated.
@@ -24709,7 +25535,7 @@ type HostLocalAccountManager struct {
 // Required Privileges
 // Host.Local.ManageUserGroups
 //
-func (api *HostLocalAccountManager) AssignUserToGroup(
+func (mo *HostLocalAccountManager) AssignUserToGroup(
 	_this *ManagedObjectReference, user string, group string,
 ) error {
 
@@ -24734,7 +25560,7 @@ func (api *HostLocalAccountManager) AssignUserToGroup(
 // Required Privileges
 // Host.Local.ManageUserGroups
 //
-func (api *HostLocalAccountManager) CreateGroup(
+func (mo *HostLocalAccountManager) CreateGroup(
 	_this *ManagedObjectReference, group *HostAccountSpec,
 ) error {
 
@@ -24753,7 +25579,7 @@ func (api *HostLocalAccountManager) CreateGroup(
 // Required Privileges
 // Host.Local.ManageUserGroups
 //
-func (api *HostLocalAccountManager) CreateUser(
+func (mo *HostLocalAccountManager) CreateUser(
 	_this *ManagedObjectReference, user *HostAccountSpec,
 ) error {
 
@@ -24773,7 +25599,7 @@ func (api *HostLocalAccountManager) CreateUser(
 // Required Privileges
 // Host.Local.ManageUserGroups
 //
-func (api *HostLocalAccountManager) RemoveGroup(
+func (mo *HostLocalAccountManager) RemoveGroup(
 	_this *ManagedObjectReference, groupName string,
 ) error {
 
@@ -24793,7 +25619,7 @@ func (api *HostLocalAccountManager) RemoveGroup(
 // Required Privileges
 // Host.Local.ManageUserGroups
 //
-func (api *HostLocalAccountManager) RemoveUser(
+func (mo *HostLocalAccountManager) RemoveUser(
 	_this *ManagedObjectReference, userName string,
 ) error {
 
@@ -24813,7 +25639,7 @@ func (api *HostLocalAccountManager) RemoveUser(
 // Required Privileges
 // Host.Local.ManageUserGroups
 //
-func (api *HostLocalAccountManager) UnassignUserFromGroup(
+func (mo *HostLocalAccountManager) UnassignUserFromGroup(
 	_this *ManagedObjectReference, user string, group string,
 ) error {
 
@@ -24829,7 +25655,7 @@ func (api *HostLocalAccountManager) UnassignUserFromGroup(
 // Required Privileges
 // Host.Local.ManageUserGroups
 //
-func (api *HostLocalAccountManager) UpdateUser(
+func (mo *HostLocalAccountManager) UpdateUser(
 	_this *ManagedObjectReference, user *HostAccountSpec,
 ) error {
 
@@ -24842,6 +25668,8 @@ func (api *HostLocalAccountManager) UpdateUser(
 // local authentication for user accounts on an ESX host.
 //
 type HostLocalAuthentication struct {
+	*ManagedObject
+
 	*HostAuthenticationStore
 }
 
@@ -24915,6 +25743,13 @@ type HostLowLevelProvisioningManagerDiskLayoutSpec struct {
 
 	// Unit number of this disk on its controller.
 	UnitNumber int32
+}
+
+//
+// The target of the disk reload.
+//
+//
+type HostLowLevelProvisioningManagerReloadTarget struct {
 }
 
 //
@@ -25132,7 +25967,7 @@ type HostMemorySystem struct {
 // Required Privileges
 // Host.Config.Memory
 //
-func (api *HostMemorySystem) ReconfigureServiceConsoleReservation(
+func (mo *HostMemorySystem) ReconfigureServiceConsoleReservation(
 	_this *ManagedObjectReference, cfgBytes int64,
 ) error {
 
@@ -25148,7 +25983,7 @@ func (api *HostMemorySystem) ReconfigureServiceConsoleReservation(
 // Since
 // VI API 2.5
 //
-func (api *HostMemorySystem) ReconfigureVirtualMachineReservation(
+func (mo *HostMemorySystem) ReconfigureVirtualMachineReservation(
 	_this *ManagedObjectReference, spec *VirtualMachineMemoryReservationSpec,
 ) error {
 
@@ -25232,6 +26067,41 @@ type HostMountInfo struct {
 	// This path identifies the file system volume from the point of view
 	// of the host.
 	Path string
+}
+
+//
+// A datastore can become inaccessible due to a number of reasons as
+// defined in this enum InaccessibleReason.
+// The reason for a datastore being inaccessibile is reported in
+// inaccessibleReason.
+//
+// APD ("All Paths Down") is a condition where a SAN or NFS storage has
+// become inaccessible for unknown reasons. It only indicates loss of
+// connectivity and does not indicate storage device failure or
+// LUN removal (Permanent Device Loss or PDL)
+//
+// A difference between APD and PDL is that APD may recover
+// in which case all use cases will start to work as before. In case of PDL
+// the failed datastore/device is unlikely to recover and hence the device
+// path information and data cache will be emptied. If the PDL condition
+// recovers, the failed datastores have to be added back to the host. Once
+// in PDL a datastore cannot be added back until there are no longer any
+// open files on the datastore.
+//
+// PDL is not linked to the APD and can happen at any time with or without APD
+// preceding. If APD and PDL occur at the same time, APD  will be reported first.
+// Once (and if) the APD condition clears, PermanentDataLoss will be reported if
+// PDL condition still exists.
+//
+//
+type HostMountInfoInaccessibleReason struct {
+}
+
+//
+// Defines the access mode of the datastore.
+//
+//
+type HostMountMode struct {
 }
 
 //
@@ -25890,6 +26760,20 @@ type HostNetStackInstance struct {
 }
 
 //
+// Define TCP congestion control algorithm used by an instance
+//
+//
+type HostNetStackInstanceCongestionControlAlgorithmType struct {
+}
+
+//
+// Define the instance identifier for different traffic type
+//
+//
+type HostNetStackInstanceSystemStackKey struct {
+}
+
+//
 // This data object type describes networking host configuration data objects.
 // These objects contain only the configuration information for networking.
 // The runtime information is available from the
@@ -26249,7 +27133,7 @@ type HostNetworkSystem struct {
 // Required Privileges
 // Host.Config.Network
 //
-func (api *HostNetworkSystem) AddPortGroup(
+func (mo *HostNetworkSystem) AddPortGroup(
 	_this *ManagedObjectReference, portgrp *HostPortGroupSpec,
 ) error {
 
@@ -26274,7 +27158,7 @@ func (api *HostNetworkSystem) AddPortGroup(
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *HostNetworkSystem) AddServiceConsoleVirtualNic(
+func (mo *HostNetworkSystem) AddServiceConsoleVirtualNic(
 	_this *ManagedObjectReference, portgroup string, nic *HostVirtualNicSpec,
 ) (string, error) {
 
@@ -26299,7 +27183,7 @@ func (api *HostNetworkSystem) AddServiceConsoleVirtualNic(
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *HostNetworkSystem) AddVirtualNic(
+func (mo *HostNetworkSystem) AddVirtualNic(
 	_this *ManagedObjectReference, portgroup string, nic *HostVirtualNicSpec,
 ) (string, error) {
 
@@ -26315,7 +27199,7 @@ func (api *HostNetworkSystem) AddVirtualNic(
 // Required Privileges
 // Host.Config.Network
 //
-func (api *HostNetworkSystem) AddVirtualSwitch(
+func (mo *HostNetworkSystem) AddVirtualSwitch(
 	_this *ManagedObjectReference, vswitchName string, spec *HostVirtualSwitchSpec,
 ) error {
 
@@ -26336,7 +27220,7 @@ func (api *HostNetworkSystem) AddVirtualSwitch(
 // Required Privileges
 // System.Read
 //
-func (api *HostNetworkSystem) QueryNetworkHint(
+func (mo *HostNetworkSystem) QueryNetworkHint(
 	_this *ManagedObjectReference, device []string,
 ) ([]*PhysicalNicHintInfo, error) {
 
@@ -26351,7 +27235,7 @@ func (api *HostNetworkSystem) QueryNetworkHint(
 // Required Privileges
 // Host.Config.Network
 //
-func (api *HostNetworkSystem) RefreshNetworkSystem(
+func (mo *HostNetworkSystem) RefreshNetworkSystem(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -26365,7 +27249,7 @@ func (api *HostNetworkSystem) RefreshNetworkSystem(
 // Required Privileges
 // Host.Config.Network
 //
-func (api *HostNetworkSystem) RemovePortGroup(
+func (mo *HostNetworkSystem) RemovePortGroup(
 	_this *ManagedObjectReference, pgName string,
 ) error {
 
@@ -26379,7 +27263,7 @@ func (api *HostNetworkSystem) RemovePortGroup(
 // Required Privileges
 // Host.Config.Network
 //
-func (api *HostNetworkSystem) RemoveServiceConsoleVirtualNic(
+func (mo *HostNetworkSystem) RemoveServiceConsoleVirtualNic(
 	_this *ManagedObjectReference, device string,
 ) error {
 
@@ -26393,7 +27277,7 @@ func (api *HostNetworkSystem) RemoveServiceConsoleVirtualNic(
 // Required Privileges
 // Host.Config.Network
 //
-func (api *HostNetworkSystem) RemoveVirtualNic(
+func (mo *HostNetworkSystem) RemoveVirtualNic(
 	_this *ManagedObjectReference, device string,
 ) error {
 
@@ -26407,7 +27291,7 @@ func (api *HostNetworkSystem) RemoveVirtualNic(
 // Required Privileges
 // Host.Config.Network
 //
-func (api *HostNetworkSystem) RemoveVirtualSwitch(
+func (mo *HostNetworkSystem) RemoveVirtualSwitch(
 	_this *ManagedObjectReference, vswitchName string,
 ) error {
 
@@ -26425,7 +27309,7 @@ func (api *HostNetworkSystem) RemoveVirtualSwitch(
 // Required Privileges
 // Host.Config.Network
 //
-func (api *HostNetworkSystem) RestartServiceConsoleVirtualNic(
+func (mo *HostNetworkSystem) RestartServiceConsoleVirtualNic(
 	_this *ManagedObjectReference, device string,
 ) error {
 
@@ -26439,7 +27323,7 @@ func (api *HostNetworkSystem) RestartServiceConsoleVirtualNic(
 // Required Privileges
 // Host.Config.Network
 //
-func (api *HostNetworkSystem) UpdateConsoleIpRouteConfig(
+func (mo *HostNetworkSystem) UpdateConsoleIpRouteConfig(
 	_this *ManagedObjectReference, config *HostIpRouteConfig,
 ) error {
 
@@ -26457,7 +27341,7 @@ func (api *HostNetworkSystem) UpdateConsoleIpRouteConfig(
 // Required Privileges
 // Host.Config.Network
 //
-func (api *HostNetworkSystem) UpdateDnsConfig(
+func (mo *HostNetworkSystem) UpdateDnsConfig(
 	_this *ManagedObjectReference, config *HostDnsConfig,
 ) error {
 
@@ -26475,7 +27359,7 @@ func (api *HostNetworkSystem) UpdateDnsConfig(
 // Required Privileges
 // Host.Config.Network
 //
-func (api *HostNetworkSystem) UpdateIpRouteConfig(
+func (mo *HostNetworkSystem) UpdateIpRouteConfig(
 	_this *ManagedObjectReference, config *HostIpRouteConfig,
 ) error {
 
@@ -26495,7 +27379,7 @@ func (api *HostNetworkSystem) UpdateIpRouteConfig(
 // Since
 // vSphere API 4.0
 //
-func (api *HostNetworkSystem) UpdateIpRouteTableConfig(
+func (mo *HostNetworkSystem) UpdateIpRouteTableConfig(
 	_this *ManagedObjectReference, config *HostIpRouteTableConfig,
 ) error {
 
@@ -26562,7 +27446,7 @@ func (api *HostNetworkSystem) UpdateIpRouteTableConfig(
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *HostNetworkSystem) UpdateNetworkConfig(
+func (mo *HostNetworkSystem) UpdateNetworkConfig(
 	_this *ManagedObjectReference, config *HostNetworkConfig, changeMode string,
 ) (*HostNetworkConfigResult, error) {
 
@@ -26577,7 +27461,7 @@ func (api *HostNetworkSystem) UpdateNetworkConfig(
 // Required Privileges
 // Host.Config.Network
 //
-func (api *HostNetworkSystem) UpdatePhysicalNicLinkSpeed(
+func (mo *HostNetworkSystem) UpdatePhysicalNicLinkSpeed(
 	_this *ManagedObjectReference, device string, linkSpeed *PhysicalNicLinkInfo,
 ) error {
 
@@ -26591,7 +27475,7 @@ func (api *HostNetworkSystem) UpdatePhysicalNicLinkSpeed(
 // Required Privileges
 // Host.Config.Network
 //
-func (api *HostNetworkSystem) UpdatePortGroup(
+func (mo *HostNetworkSystem) UpdatePortGroup(
 	_this *ManagedObjectReference, pgName string, portgrp *HostPortGroupSpec,
 ) error {
 
@@ -26614,7 +27498,7 @@ func (api *HostNetworkSystem) UpdatePortGroup(
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *HostNetworkSystem) UpdateServiceConsoleVirtualNic(
+func (mo *HostNetworkSystem) UpdateServiceConsoleVirtualNic(
 	_this *ManagedObjectReference, device string, nic *HostVirtualNicSpec,
 ) error {
 
@@ -26638,7 +27522,7 @@ func (api *HostNetworkSystem) UpdateServiceConsoleVirtualNic(
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *HostNetworkSystem) UpdateVirtualNic(
+func (mo *HostNetworkSystem) UpdateVirtualNic(
 	_this *ManagedObjectReference, device string, nic *HostVirtualNicSpec,
 ) error {
 
@@ -26668,7 +27552,7 @@ func (api *HostNetworkSystem) UpdateVirtualNic(
 // Required Privileges
 // Host.Config.Network
 //
-func (api *HostNetworkSystem) UpdateVirtualSwitch(
+func (mo *HostNetworkSystem) UpdateVirtualSwitch(
 	_this *ManagedObjectReference, vswitchName string, spec *HostVirtualSwitchSpec,
 ) error {
 
@@ -27012,6 +27896,13 @@ type HostNumaNode struct {
 }
 
 //
+// Health state of the numeric sensor as reported by the sensor probes.
+//
+//
+type HostNumericSensorHealthState struct {
+}
+
+//
 // Base class for numeric sensor information.
 //
 //
@@ -27051,6 +27942,9 @@ type HostNumericSensorInfo struct {
 	// returned by the sensor are current reading * 10 raised to the power of
 	// the UnitModifier.
 	UnitModifier int32
+}
+
+type HostNumericSensorType struct {
 }
 
 //
@@ -27123,6 +28017,7 @@ type HostParallelScsiTargetTransport struct {
 // binaries, but its installation and uninstallation are atomic.
 //
 type HostPatchManager struct {
+	*ManagedObject
 }
 
 //
@@ -27135,7 +28030,7 @@ type HostPatchManager struct {
 // Since
 // vSphere API 4.0
 //
-func (api *HostPatchManager) CheckHostPatch_Task(
+func (mo *HostPatchManager) CheckHostPatch_Task(
 	_this *ManagedObjectReference, metaUrls []string, bundleUrls []string, spec *HostPatchManagerPatchManagerOperationSpec,
 ) (*Task, error) {
 
@@ -27155,7 +28050,7 @@ func (api *HostPatchManager) CheckHostPatch_Task(
 // Required Privileges
 // Host.Config.Patch
 //
-func (api *HostPatchManager) InstallHostPatch_Task(
+func (mo *HostPatchManager) InstallHostPatch_Task(
 	_this *ManagedObjectReference, repository *HostPatchManagerLocator, updateID string, force bool,
 ) (*Task, error) {
 
@@ -27174,7 +28069,7 @@ func (api *HostPatchManager) InstallHostPatch_Task(
 // Since
 // vSphere API 4.0
 //
-func (api *HostPatchManager) InstallHostPatchV2_Task(
+func (mo *HostPatchManager) InstallHostPatchV2_Task(
 	_this *ManagedObjectReference, metaUrls []string, bundleUrls []string, vibUrls []string, spec *HostPatchManagerPatchManagerOperationSpec,
 ) (*Task, error) {
 
@@ -27190,7 +28085,7 @@ func (api *HostPatchManager) InstallHostPatchV2_Task(
 // Since
 // vSphere API 4.0
 //
-func (api *HostPatchManager) QueryHostPatch_Task(
+func (mo *HostPatchManager) QueryHostPatch_Task(
 	_this *ManagedObjectReference, spec *HostPatchManagerPatchManagerOperationSpec,
 ) (*Task, error) {
 
@@ -27209,7 +28104,7 @@ func (api *HostPatchManager) QueryHostPatch_Task(
 // Required Privileges
 // System.Read
 //
-func (api *HostPatchManager) ScanHostPatch_Task(
+func (mo *HostPatchManager) ScanHostPatch_Task(
 	_this *ManagedObjectReference, repository *HostPatchManagerLocator, updateID []string,
 ) (*Task, error) {
 
@@ -27227,7 +28122,7 @@ func (api *HostPatchManager) ScanHostPatch_Task(
 // Since
 // vSphere API 4.0
 //
-func (api *HostPatchManager) ScanHostPatchV2_Task(
+func (mo *HostPatchManager) ScanHostPatchV2_Task(
 	_this *ManagedObjectReference, metaUrls []string, bundleUrls []string, spec *HostPatchManagerPatchManagerOperationSpec,
 ) (*Task, error) {
 
@@ -27243,7 +28138,7 @@ func (api *HostPatchManager) ScanHostPatchV2_Task(
 // Since
 // vSphere API 4.0
 //
-func (api *HostPatchManager) StageHostPatch_Task(
+func (mo *HostPatchManager) StageHostPatch_Task(
 	_this *ManagedObjectReference, metaUrls []string, bundleUrls []string, vibUrls []string, spec *HostPatchManagerPatchManagerOperationSpec,
 ) (*Task, error) {
 
@@ -27259,12 +28154,26 @@ func (api *HostPatchManager) StageHostPatch_Task(
 // Since
 // vSphere API 4.0
 //
-func (api *HostPatchManager) UninstallHostPatch_Task(
+func (mo *HostPatchManager) UninstallHostPatch_Task(
 	_this *ManagedObjectReference, bulletinIds []string, spec *HostPatchManagerPatchManagerOperationSpec,
 ) (*Task, error) {
 
 	return nil, nil
 
+}
+
+//
+// The installation state if the update is installed on the server.
+//
+//
+type HostPatchManagerInstallState struct {
+}
+
+//
+// The integrity validation status.
+//
+//
+type HostPatchManagerIntegrityStatus struct {
 }
 
 type HostPatchManagerLocator struct {
@@ -27302,6 +28211,13 @@ type HostPatchManagerPatchManagerOperationSpec struct {
 
 	// The user name used for the proxy server.
 	UserName string
+}
+
+//
+// Reasons why an update is not applicable to the ESX host.
+//
+//
+type HostPatchManagerReason struct {
 }
 
 //
@@ -27544,7 +28460,7 @@ type HostPciPassthruSystem struct {
 // Required Privileges
 // Host.Config.Settings
 //
-func (api *HostPciPassthruSystem) Refresh(
+func (mo *HostPciPassthruSystem) Refresh(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -27560,7 +28476,7 @@ func (api *HostPciPassthruSystem) Refresh(
 // Required Privileges
 // Host.Config.PciPassthru
 //
-func (api *HostPciPassthruSystem) UpdatePassthruConfig(
+func (mo *HostPciPassthruSystem) UpdatePassthruConfig(
 	_this *ManagedObjectReference, config []*HostPciPassthruConfig,
 ) error {
 
@@ -27943,6 +28859,9 @@ type HostPowerOpFailed struct {
 	*VimFault
 }
 
+type HostPowerOperationType struct {
+}
+
 //
 // Power Management Policy data object.
 //
@@ -27987,6 +28906,7 @@ type HostPowerPolicy struct {
 // power management policies.
 //
 type HostPowerSystem struct {
+	*ManagedObject
 
 	// Power system capabilities object.
 	// Required Privilege: Host.Config.Power
@@ -28003,7 +28923,7 @@ type HostPowerSystem struct {
 // Required Privileges
 // Host.Config.Power
 //
-func (api *HostPowerSystem) ConfigurePowerPolicy(
+func (mo *HostPowerSystem) ConfigurePowerPolicy(
 	_this *ManagedObjectReference, key int32,
 ) error {
 
@@ -28179,6 +29099,8 @@ type HostPrimaryAgentNotShortNameEvent struct {
 // configuration changes that you have made.
 //
 type HostProfile struct {
+	*ManagedObject
+
 	*Profile
 
 	// Reference host in use for this host profile. To set this property,
@@ -28208,7 +29130,7 @@ type HostProfile struct {
 // Required Privileges
 // System.View
 //
-func (api *HostProfile) ExecuteHostProfile(
+func (mo *HostProfile) ExecuteHostProfile(
 	_this *ManagedObjectReference, host *HostSystem, deferredParam []*ProfileDeferredPolicyOptionParameter,
 ) (*ProfileExecuteResult, error) {
 
@@ -28222,7 +29144,7 @@ func (api *HostProfile) ExecuteHostProfile(
 // Required Privileges
 // Profile.Edit
 //
-func (api *HostProfile) UpdateHostProfile(
+func (mo *HostProfile) UpdateHostProfile(
 	_this *ManagedObjectReference, config *HostProfileConfigSpec,
 ) error {
 
@@ -28236,7 +29158,7 @@ func (api *HostProfile) UpdateHostProfile(
 // Required Privileges
 // Profile.Edit
 //
-func (api *HostProfile) UpdateReferenceHost(
+func (mo *HostProfile) UpdateReferenceHost(
 	_this *ManagedObjectReference, host *HostSystem,
 ) error {
 
@@ -28373,6 +29295,8 @@ type HostProfileHostBasedConfigSpec struct {
 // profiles and AnswerFiles.
 //
 type HostProfileManager struct {
+	*ManagedObject
+
 	*ProfileManager
 }
 
@@ -28385,7 +29309,7 @@ type HostProfileManager struct {
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *HostProfileManager) ApplyHostConfig_Task(
+func (mo *HostProfileManager) ApplyHostConfig_Task(
 	_this *ManagedObjectReference, host *HostSystem, configSpec *HostConfigSpec, userInput []*ProfileDeferredPolicyOptionParameter,
 ) (*Task, error) {
 
@@ -28403,7 +29327,7 @@ func (api *HostProfileManager) ApplyHostConfig_Task(
 // Since
 // vSphere API 5.0
 //
-func (api *HostProfileManager) CheckAnswerFileStatus_Task(
+func (mo *HostProfileManager) CheckAnswerFileStatus_Task(
 	_this *ManagedObjectReference, host []*HostSystem,
 ) (*Task, error) {
 
@@ -28440,7 +29364,7 @@ func (api *HostProfileManager) CheckAnswerFileStatus_Task(
 // Required Privileges
 // System.View
 //
-func (api *HostProfileManager) CreateDefaultProfile(
+func (mo *HostProfileManager) CreateDefaultProfile(
 	_this *ManagedObjectReference, profileType string, profileTypeName string, profile *Profile,
 ) (*ApplyProfile, error) {
 
@@ -28458,7 +29382,7 @@ func (api *HostProfileManager) CreateDefaultProfile(
 // Since
 // vSphere API 5.0
 //
-func (api *HostProfileManager) ExportAnswerFile_Task(
+func (mo *HostProfileManager) ExportAnswerFile_Task(
 	_this *ManagedObjectReference, host *HostSystem,
 ) (*Task, error) {
 
@@ -28477,7 +29401,7 @@ func (api *HostProfileManager) ExportAnswerFile_Task(
 // Required Privileges
 // System.View
 //
-func (api *HostProfileManager) GenerateConfigTaskList(
+func (mo *HostProfileManager) GenerateConfigTaskList(
 	_this *ManagedObjectReference, configSpec *HostConfigSpec, host *HostSystem,
 ) (*HostProfileManagerConfigTaskList, error) {
 
@@ -28496,7 +29420,7 @@ func (api *HostProfileManager) GenerateConfigTaskList(
 // Since
 // vSphere API 5.5
 //
-func (api *HostProfileManager) GenerateHostProfileTaskList_Task(
+func (mo *HostProfileManager) GenerateHostProfileTaskList_Task(
 	_this *ManagedObjectReference, configSpec *HostConfigSpec, host *HostSystem,
 ) (*Task, error) {
 
@@ -28515,7 +29439,7 @@ func (api *HostProfileManager) GenerateHostProfileTaskList_Task(
 // Since
 // vSphere API 5.0
 //
-func (api *HostProfileManager) QueryAnswerFileStatus(
+func (mo *HostProfileManager) QueryAnswerFileStatus(
 	_this *ManagedObjectReference, host []*HostSystem,
 ) ([]*AnswerFileStatusResult, error) {
 
@@ -28529,7 +29453,7 @@ func (api *HostProfileManager) QueryAnswerFileStatus(
 // Required Privileges
 // System.View
 //
-func (api *HostProfileManager) QueryHostProfileMetadata(
+func (mo *HostProfileManager) QueryHostProfileMetadata(
 	_this *ManagedObjectReference, profileName []string, profile *Profile,
 ) ([]*ProfileMetadata, error) {
 
@@ -28545,7 +29469,7 @@ func (api *HostProfileManager) QueryHostProfileMetadata(
 // Since
 // vSphere API 5.0
 //
-func (api *HostProfileManager) QueryProfileStructure(
+func (mo *HostProfileManager) QueryProfileStructure(
 	_this *ManagedObjectReference, profile *Profile,
 ) (*ProfileProfileStructure, error) {
 
@@ -28561,7 +29485,7 @@ func (api *HostProfileManager) QueryProfileStructure(
 // Since
 // vSphere API 5.0
 //
-func (api *HostProfileManager) RetrieveAnswerFile(
+func (mo *HostProfileManager) RetrieveAnswerFile(
 	_this *ManagedObjectReference, host *HostSystem,
 ) (*AnswerFile, error) {
 
@@ -28579,7 +29503,7 @@ func (api *HostProfileManager) RetrieveAnswerFile(
 // Since
 // vSphere API 5.1
 //
-func (api *HostProfileManager) RetrieveAnswerFileForProfile(
+func (mo *HostProfileManager) RetrieveAnswerFileForProfile(
 	_this *ManagedObjectReference, host *HostSystem, applyProfile *HostApplyProfile,
 ) (*AnswerFile, error) {
 
@@ -28597,12 +29521,20 @@ func (api *HostProfileManager) RetrieveAnswerFileForProfile(
 // Since
 // vSphere API 5.0
 //
-func (api *HostProfileManager) UpdateAnswerFile_Task(
+func (mo *HostProfileManager) UpdateAnswerFile_Task(
 	_this *ManagedObjectReference, host *HostSystem, configSpec *AnswerFileCreateSpec,
 ) (*Task, error) {
 
 	return nil, nil
 
+}
+
+//
+// The HostProfileManagerAnswerFileStatus enum
+// defines possible values for answer file status.
+//
+//
+type HostProfileManagerAnswerFileStatus struct {
 }
 
 //
@@ -28776,6 +29708,15 @@ type HostRemovedEvent struct {
 }
 
 //
+// Set of possible values for
+// replayUnsupportedReason and
+// replayCompatibilityIssues.
+//
+//
+type HostReplayUnsupportedReason struct {
+}
+
+//
 // The HostResignatureRescanResult data object
 // identifies the newly created volume that is the result of a
 // resignature operation. This data object is contained in the
@@ -28913,6 +29854,13 @@ type HostRuntimeInfoNetStackInstanceRuntimeInfo struct {
 
 	// The keys of vmknics that are using this stack
 	VmknicKeys []string
+}
+
+//
+// Define the instance state type
+//
+//
+type HostRuntimeInfoNetStackInstanceRuntimeInfoState struct {
 }
 
 //
@@ -29148,6 +30096,13 @@ type HostServiceInfo struct {
 	Service []*HostService
 }
 
+//
+// Set of valid service policy strings.
+//
+//
+type HostServicePolicy struct {
+}
+
 type HostServiceSourcePackage struct {
 	*DynamicData
 
@@ -29178,7 +30133,7 @@ type HostServiceSystem struct {
 // Required Privileges
 // Host.Config.NetService
 //
-func (api *HostServiceSystem) RefreshServices(
+func (mo *HostServiceSystem) RefreshServices(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -29192,7 +30147,7 @@ func (api *HostServiceSystem) RefreshServices(
 // Required Privileges
 // Host.Config.NetService
 //
-func (api *HostServiceSystem) RestartService(
+func (mo *HostServiceSystem) RestartService(
 	_this *ManagedObjectReference, id string,
 ) error {
 
@@ -29206,7 +30161,7 @@ func (api *HostServiceSystem) RestartService(
 // Required Privileges
 // Host.Config.NetService
 //
-func (api *HostServiceSystem) StartService(
+func (mo *HostServiceSystem) StartService(
 	_this *ManagedObjectReference, id string,
 ) error {
 
@@ -29220,7 +30175,7 @@ func (api *HostServiceSystem) StartService(
 // Required Privileges
 // Host.Config.NetService
 //
-func (api *HostServiceSystem) StopService(
+func (mo *HostServiceSystem) StopService(
 	_this *ManagedObjectReference, id string,
 ) error {
 
@@ -29235,7 +30190,7 @@ func (api *HostServiceSystem) StopService(
 // Required Privileges
 // Host.Config.NetService
 //
-func (api *HostServiceSystem) UninstallService(
+func (mo *HostServiceSystem) UninstallService(
 	_this *ManagedObjectReference, id string,
 ) error {
 
@@ -29249,7 +30204,7 @@ func (api *HostServiceSystem) UninstallService(
 // Required Privileges
 // Host.Config.NetService
 //
-func (api *HostServiceSystem) UpdateServicePolicy(
+func (mo *HostServiceSystem) UpdateServicePolicy(
 	_this *ManagedObjectReference, id string, policy string,
 ) error {
 
@@ -29355,6 +30310,13 @@ type HostShutdownEvent struct {
 	Reason string
 }
 
+//
+// SNMP Agent supported capabilities enum
+//
+//
+type HostSnmpAgentCapability struct {
+}
+
 type HostSnmpConfigSpec struct {
 	*DynamicData
 
@@ -29394,6 +30356,7 @@ type HostSnmpDestination struct {
 // HostConfigManager object.
 //
 type HostSnmpSystem struct {
+	*ManagedObject
 
 	// Since VI API 2.5
 	// Required Privilege: Global.Settings
@@ -29411,7 +30374,7 @@ type HostSnmpSystem struct {
 // Since
 // VI API 2.5
 //
-func (api *HostSnmpSystem) ReconfigureSnmpAgent(
+func (mo *HostSnmpSystem) ReconfigureSnmpAgent(
 	_this *ManagedObjectReference, spec *HostSnmpConfigSpec,
 ) error {
 
@@ -29426,7 +30389,7 @@ func (api *HostSnmpSystem) ReconfigureSnmpAgent(
 // Since
 // VI API 2.5
 //
-func (api *HostSnmpSystem) SendTestNotification(
+func (mo *HostSnmpSystem) SendTestNotification(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -29519,6 +30482,13 @@ type HostSslThumbprintInfo struct {
 
 	// Specify the SSL thumbprints to register on the host.
 	SslThumbprints []string
+}
+
+//
+// Defines a host's standby mode.
+//
+//
+type HostStandbyMode struct {
 }
 
 //
@@ -29649,7 +30619,7 @@ type HostStorageSystem struct {
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostStorageSystem) AddInternetScsiSendTargets(
+func (mo *HostStorageSystem) AddInternetScsiSendTargets(
 	_this *ManagedObjectReference, iScsiHbaDevice string, targets []*HostInternetScsiHbaSendTarget,
 ) error {
 
@@ -29664,7 +30634,7 @@ func (api *HostStorageSystem) AddInternetScsiSendTargets(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostStorageSystem) AddInternetScsiStaticTargets(
+func (mo *HostStorageSystem) AddInternetScsiStaticTargets(
 	_this *ManagedObjectReference, iScsiHbaDevice string, targets []*HostInternetScsiHbaStaticTarget,
 ) error {
 
@@ -29687,7 +30657,7 @@ func (api *HostStorageSystem) AddInternetScsiStaticTargets(
 // Since
 // vSphere API 5.0
 //
-func (api *HostStorageSystem) AttachScsiLun(
+func (mo *HostStorageSystem) AttachScsiLun(
 	_this *ManagedObjectReference, lunUuid string,
 ) error {
 
@@ -29701,7 +30671,7 @@ func (api *HostStorageSystem) AttachScsiLun(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostStorageSystem) AttachVmfsExtent(
+func (mo *HostStorageSystem) AttachVmfsExtent(
 	_this *ManagedObjectReference, vmfsPath string, extent *HostScsiDiskPartition,
 ) error {
 
@@ -29717,7 +30687,7 @@ func (api *HostStorageSystem) AttachVmfsExtent(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostStorageSystem) ComputeDiskPartitionInfo(
+func (mo *HostStorageSystem) ComputeDiskPartitionInfo(
 	_this *ManagedObjectReference, devicePath string, layout *HostDiskPartitionLayout, partitionFormat string,
 ) (*HostDiskPartitionInfo, error) {
 
@@ -29734,7 +30704,7 @@ func (api *HostStorageSystem) ComputeDiskPartitionInfo(
 // Since
 // vSphere API 4.0
 //
-func (api *HostStorageSystem) ComputeDiskPartitionInfoForResize(
+func (mo *HostStorageSystem) ComputeDiskPartitionInfoForResize(
 	_this *ManagedObjectReference, partition *HostScsiDiskPartition, blockRange *HostDiskPartitionBlockRange, partitionFormat string,
 ) (*HostDiskPartitionInfo, error) {
 
@@ -29760,7 +30730,7 @@ func (api *HostStorageSystem) ComputeDiskPartitionInfoForResize(
 // Since
 // vSphere API 5.1
 //
-func (api *HostStorageSystem) DeleteScsiLunState(
+func (mo *HostStorageSystem) DeleteScsiLunState(
 	_this *ManagedObjectReference, lunCanonicalName string,
 ) error {
 
@@ -29791,7 +30761,7 @@ func (api *HostStorageSystem) DeleteScsiLunState(
 // Since
 // vSphere API 5.5
 //
-func (api *HostStorageSystem) DeleteVffsVolumeState(
+func (mo *HostStorageSystem) DeleteVffsVolumeState(
 	_this *ManagedObjectReference, vffsUuid string,
 ) error {
 
@@ -29823,7 +30793,7 @@ func (api *HostStorageSystem) DeleteVffsVolumeState(
 // Since
 // vSphere API 5.1
 //
-func (api *HostStorageSystem) DeleteVmfsVolumeState(
+func (mo *HostStorageSystem) DeleteVmfsVolumeState(
 	_this *ManagedObjectReference, vmfsUuid string,
 ) error {
 
@@ -29839,7 +30809,7 @@ func (api *HostStorageSystem) DeleteVmfsVolumeState(
 // Since
 // vSphere API 5.5
 //
-func (api *HostStorageSystem) DestroyVffs(
+func (mo *HostStorageSystem) DestroyVffs(
 	_this *ManagedObjectReference, vffsPath string,
 ) error {
 
@@ -29863,7 +30833,7 @@ func (api *HostStorageSystem) DestroyVffs(
 // Since
 // vSphere API 5.0
 //
-func (api *HostStorageSystem) DetachScsiLun(
+func (mo *HostStorageSystem) DetachScsiLun(
 	_this *ManagedObjectReference, lunUuid string,
 ) error {
 
@@ -29879,7 +30849,7 @@ func (api *HostStorageSystem) DetachScsiLun(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostStorageSystem) DisableMultipathPath(
+func (mo *HostStorageSystem) DisableMultipathPath(
 	_this *ManagedObjectReference, pathName string,
 ) error {
 
@@ -29898,7 +30868,7 @@ func (api *HostStorageSystem) DisableMultipathPath(
 // Since
 // vSphere API 5.0
 //
-func (api *HostStorageSystem) DiscoverFcoeHbas(
+func (mo *HostStorageSystem) DiscoverFcoeHbas(
 	_this *ManagedObjectReference, fcoeSpec *FcoeConfigFcoeSpecification,
 ) error {
 
@@ -29914,7 +30884,7 @@ func (api *HostStorageSystem) DiscoverFcoeHbas(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostStorageSystem) EnableMultipathPath(
+func (mo *HostStorageSystem) EnableMultipathPath(
 	_this *ManagedObjectReference, pathName string,
 ) error {
 
@@ -29930,7 +30900,7 @@ func (api *HostStorageSystem) EnableMultipathPath(
 // Since
 // vSphere API 4.0
 //
-func (api *HostStorageSystem) ExpandVmfsExtent(
+func (mo *HostStorageSystem) ExpandVmfsExtent(
 	_this *ManagedObjectReference, vmfsPath string, extent *HostScsiDiskPartition,
 ) error {
 
@@ -29946,7 +30916,7 @@ func (api *HostStorageSystem) ExpandVmfsExtent(
 // Since
 // vSphere API 5.5
 //
-func (api *HostStorageSystem) ExtendVffs(
+func (mo *HostStorageSystem) ExtendVffs(
 	_this *ManagedObjectReference, vffsPath string, devicePath string, spec *HostDiskPartitionSpec,
 ) error {
 
@@ -29962,7 +30932,7 @@ func (api *HostStorageSystem) ExtendVffs(
 // Since
 // vSphere API 5.5
 //
-func (api *HostStorageSystem) FormatVffs(
+func (mo *HostStorageSystem) FormatVffs(
 	_this *ManagedObjectReference, createSpec *HostVffsSpec,
 ) (*HostVffsVolume, error) {
 
@@ -29976,7 +30946,7 @@ func (api *HostStorageSystem) FormatVffs(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostStorageSystem) FormatVmfs(
+func (mo *HostStorageSystem) FormatVmfs(
 	_this *ManagedObjectReference, createSpec *HostVmfsSpec,
 ) (*HostVmfsVolume, error) {
 
@@ -29996,7 +30966,7 @@ func (api *HostStorageSystem) FormatVmfs(
 // Since
 // vSphere API 5.0
 //
-func (api *HostStorageSystem) MarkForRemoval(
+func (mo *HostStorageSystem) MarkForRemoval(
 	_this *ManagedObjectReference, hbaName string, remove bool,
 ) error {
 
@@ -30017,7 +30987,7 @@ func (api *HostStorageSystem) MarkForRemoval(
 // Since
 // vSphere API 5.5
 //
-func (api *HostStorageSystem) MountVffsVolume(
+func (mo *HostStorageSystem) MountVffsVolume(
 	_this *ManagedObjectReference, vffsUuid string,
 ) error {
 
@@ -30040,7 +31010,7 @@ func (api *HostStorageSystem) MountVffsVolume(
 // Since
 // vSphere API 5.0
 //
-func (api *HostStorageSystem) MountVmfsVolume(
+func (mo *HostStorageSystem) MountVmfsVolume(
 	_this *ManagedObjectReference, vmfsUuid string,
 ) error {
 
@@ -30062,7 +31032,7 @@ func (api *HostStorageSystem) MountVmfsVolume(
 // Since
 // vSphere API 5.5
 //
-func (api *HostStorageSystem) QueryAvailableSsds(
+func (mo *HostStorageSystem) QueryAvailableSsds(
 	_this *ManagedObjectReference, vffsPath string,
 ) ([]*HostScsiDisk, error) {
 
@@ -30086,7 +31056,7 @@ func (api *HostStorageSystem) QueryAvailableSsds(
 // Since
 // vSphere API 4.0
 //
-func (api *HostStorageSystem) QueryPathSelectionPolicyOptions(
+func (mo *HostStorageSystem) QueryPathSelectionPolicyOptions(
 	_this *ManagedObjectReference,
 ) ([]*HostPathSelectionPolicyOption, error) {
 
@@ -30110,7 +31080,7 @@ func (api *HostStorageSystem) QueryPathSelectionPolicyOptions(
 // Since
 // vSphere API 4.0
 //
-func (api *HostStorageSystem) QueryStorageArrayTypePolicyOptions(
+func (mo *HostStorageSystem) QueryStorageArrayTypePolicyOptions(
 	_this *ManagedObjectReference,
 ) ([]*HostStorageArrayTypePolicyOption, error) {
 
@@ -30130,7 +31100,7 @@ func (api *HostStorageSystem) QueryStorageArrayTypePolicyOptions(
 // Since
 // vSphere API 4.0
 //
-func (api *HostStorageSystem) QueryUnresolvedVmfsVolume(
+func (mo *HostStorageSystem) QueryUnresolvedVmfsVolume(
 	_this *ManagedObjectReference,
 ) ([]*HostUnresolvedVmfsVolume, error) {
 
@@ -30167,7 +31137,7 @@ func (api *HostStorageSystem) QueryUnresolvedVmfsVolume(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostStorageSystem) RefreshStorageSystem(
+func (mo *HostStorageSystem) RefreshStorageSystem(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -30185,7 +31155,7 @@ func (api *HostStorageSystem) RefreshStorageSystem(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostStorageSystem) RemoveInternetScsiSendTargets(
+func (mo *HostStorageSystem) RemoveInternetScsiSendTargets(
 	_this *ManagedObjectReference, iScsiHbaDevice string, targets []*HostInternetScsiHbaSendTarget,
 ) error {
 
@@ -30203,7 +31173,7 @@ func (api *HostStorageSystem) RemoveInternetScsiSendTargets(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostStorageSystem) RemoveInternetScsiStaticTargets(
+func (mo *HostStorageSystem) RemoveInternetScsiStaticTargets(
 	_this *ManagedObjectReference, iScsiHbaDevice string, targets []*HostInternetScsiHbaStaticTarget,
 ) error {
 
@@ -30238,7 +31208,7 @@ func (api *HostStorageSystem) RemoveInternetScsiStaticTargets(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostStorageSystem) RescanAllHba(
+func (mo *HostStorageSystem) RescanAllHba(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -30253,7 +31223,7 @@ func (api *HostStorageSystem) RescanAllHba(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostStorageSystem) RescanHba(
+func (mo *HostStorageSystem) RescanHba(
 	_this *ManagedObjectReference, hbaDevice string,
 ) error {
 
@@ -30277,7 +31247,7 @@ func (api *HostStorageSystem) RescanHba(
 // Since
 // vSphere API 5.5
 //
-func (api *HostStorageSystem) RescanVffs(
+func (mo *HostStorageSystem) RescanVffs(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -30299,7 +31269,7 @@ func (api *HostStorageSystem) RescanVffs(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostStorageSystem) RescanVmfs(
+func (mo *HostStorageSystem) RescanVmfs(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -30341,7 +31311,7 @@ func (api *HostStorageSystem) RescanVmfs(
 // Since
 // vSphere API 4.0
 //
-func (api *HostStorageSystem) ResolveMultipleUnresolvedVmfsVolumes(
+func (mo *HostStorageSystem) ResolveMultipleUnresolvedVmfsVolumes(
 	_this *ManagedObjectReference, resolutionSpec []*HostUnresolvedVmfsResolutionSpec,
 ) ([]*HostUnresolvedVmfsResolutionResult, error) {
 
@@ -30393,7 +31363,7 @@ func (api *HostStorageSystem) ResolveMultipleUnresolvedVmfsVolumes(
 // Since
 // vSphere API 5.5
 //
-func (api *HostStorageSystem) ResolveMultipleUnresolvedVmfsVolumesEx_Task(
+func (mo *HostStorageSystem) ResolveMultipleUnresolvedVmfsVolumesEx_Task(
 	_this *ManagedObjectReference, resolutionSpec []*HostUnresolvedVmfsResolutionSpec,
 ) (*Task, error) {
 
@@ -30407,7 +31377,7 @@ func (api *HostStorageSystem) ResolveMultipleUnresolvedVmfsVolumesEx_Task(
 // Required Privileges
 // System.Read
 //
-func (api *HostStorageSystem) RetrieveDiskPartitionInfo(
+func (mo *HostStorageSystem) RetrieveDiskPartitionInfo(
 	_this *ManagedObjectReference, devicePath []string,
 ) ([]*HostDiskPartitionInfo, error) {
 
@@ -30422,7 +31392,7 @@ func (api *HostStorageSystem) RetrieveDiskPartitionInfo(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostStorageSystem) SetMultipathLunPolicy(
+func (mo *HostStorageSystem) SetMultipathLunPolicy(
 	_this *ManagedObjectReference, lunId string, policy *HostMultipathInfoLogicalUnitPolicy,
 ) error {
 
@@ -30447,7 +31417,7 @@ func (api *HostStorageSystem) SetMultipathLunPolicy(
 // Since
 // vSphere API 4.0
 //
-func (api *HostStorageSystem) UnmountForceMountedVmfsVolume(
+func (mo *HostStorageSystem) UnmountForceMountedVmfsVolume(
 	_this *ManagedObjectReference, vmfsUuid string,
 ) error {
 
@@ -30472,7 +31442,7 @@ func (api *HostStorageSystem) UnmountForceMountedVmfsVolume(
 // Since
 // vSphere API 5.5
 //
-func (api *HostStorageSystem) UnmountVffsVolume(
+func (mo *HostStorageSystem) UnmountVffsVolume(
 	_this *ManagedObjectReference, vffsUuid string,
 ) error {
 
@@ -30543,7 +31513,7 @@ func (api *HostStorageSystem) UnmountVffsVolume(
 // Since
 // vSphere API 5.0
 //
-func (api *HostStorageSystem) UnmountVmfsVolume(
+func (mo *HostStorageSystem) UnmountVmfsVolume(
 	_this *ManagedObjectReference, vmfsUuid string,
 ) error {
 
@@ -30558,7 +31528,7 @@ func (api *HostStorageSystem) UnmountVmfsVolume(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostStorageSystem) UpdateDiskPartitions(
+func (mo *HostStorageSystem) UpdateDiskPartitions(
 	_this *ManagedObjectReference, devicePath string, spec *HostDiskPartitionSpec,
 ) error {
 
@@ -30575,7 +31545,7 @@ func (api *HostStorageSystem) UpdateDiskPartitions(
 // Since
 // vSphere API 4.0
 //
-func (api *HostStorageSystem) UpdateInternetScsiAdvancedOptions(
+func (mo *HostStorageSystem) UpdateInternetScsiAdvancedOptions(
 	_this *ManagedObjectReference, iScsiHbaDevice string, targetSet *HostInternetScsiHbaTargetSet, options []*HostInternetScsiHbaParamValue,
 ) error {
 
@@ -30589,7 +31559,7 @@ func (api *HostStorageSystem) UpdateInternetScsiAdvancedOptions(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostStorageSystem) UpdateInternetScsiAlias(
+func (mo *HostStorageSystem) UpdateInternetScsiAlias(
 	_this *ManagedObjectReference, iScsiHbaDevice string, iScsiAlias string,
 ) error {
 
@@ -30604,7 +31574,7 @@ func (api *HostStorageSystem) UpdateInternetScsiAlias(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostStorageSystem) UpdateInternetScsiAuthenticationProperties(
+func (mo *HostStorageSystem) UpdateInternetScsiAuthenticationProperties(
 	_this *ManagedObjectReference, iScsiHbaDevice string, authenticationProperties *HostInternetScsiHbaAuthenticationProperties, targetSet *HostInternetScsiHbaTargetSet,
 ) error {
 
@@ -30621,7 +31591,7 @@ func (api *HostStorageSystem) UpdateInternetScsiAuthenticationProperties(
 // Since
 // vSphere API 4.0
 //
-func (api *HostStorageSystem) UpdateInternetScsiDigestProperties(
+func (mo *HostStorageSystem) UpdateInternetScsiDigestProperties(
 	_this *ManagedObjectReference, iScsiHbaDevice string, targetSet *HostInternetScsiHbaTargetSet, digestProperties *HostInternetScsiHbaDigestProperties,
 ) error {
 
@@ -30635,7 +31605,7 @@ func (api *HostStorageSystem) UpdateInternetScsiDigestProperties(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostStorageSystem) UpdateInternetScsiDiscoveryProperties(
+func (mo *HostStorageSystem) UpdateInternetScsiDiscoveryProperties(
 	_this *ManagedObjectReference, iScsiHbaDevice string, discoveryProperties *HostInternetScsiHbaDiscoveryProperties,
 ) error {
 
@@ -30649,7 +31619,7 @@ func (api *HostStorageSystem) UpdateInternetScsiDiscoveryProperties(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostStorageSystem) UpdateInternetScsiIPProperties(
+func (mo *HostStorageSystem) UpdateInternetScsiIPProperties(
 	_this *ManagedObjectReference, iScsiHbaDevice string, ipProperties *HostInternetScsiHbaIPProperties,
 ) error {
 
@@ -30663,7 +31633,7 @@ func (api *HostStorageSystem) UpdateInternetScsiIPProperties(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostStorageSystem) UpdateInternetScsiName(
+func (mo *HostStorageSystem) UpdateInternetScsiName(
 	_this *ManagedObjectReference, iScsiHbaDevice string, iScsiName string,
 ) error {
 
@@ -30680,7 +31650,7 @@ func (api *HostStorageSystem) UpdateInternetScsiName(
 // Since
 // vSphere API 4.0
 //
-func (api *HostStorageSystem) UpdateScsiLunDisplayName(
+func (mo *HostStorageSystem) UpdateScsiLunDisplayName(
 	_this *ManagedObjectReference, lunUuid string, displayName string,
 ) error {
 
@@ -30694,7 +31664,7 @@ func (api *HostStorageSystem) UpdateScsiLunDisplayName(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostStorageSystem) UpdateSoftwareInternetScsiEnabled(
+func (mo *HostStorageSystem) UpdateSoftwareInternetScsiEnabled(
 	_this *ManagedObjectReference, enabled bool,
 ) error {
 
@@ -30713,7 +31683,7 @@ func (api *HostStorageSystem) UpdateSoftwareInternetScsiEnabled(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostStorageSystem) UpgradeVmfs(
+func (mo *HostStorageSystem) UpgradeVmfs(
 	_this *ManagedObjectReference, vmfsPath string,
 ) error {
 
@@ -30734,7 +31704,7 @@ func (api *HostStorageSystem) UpgradeVmfs(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostStorageSystem) UpgradeVmLayout(
+func (mo *HostStorageSystem) UpgradeVmLayout(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -30840,7 +31810,7 @@ type HostSystem struct {
 // Since
 // VI API 2.5
 //
-func (api *HostSystem) AcquireCimServicesTicket(
+func (mo *HostSystem) AcquireCimServicesTicket(
 	_this *ManagedObjectReference,
 ) (*HostServiceTicket, error) {
 
@@ -30854,7 +31824,7 @@ func (api *HostSystem) AcquireCimServicesTicket(
 // Required Privileges
 // Host.Config.Connection
 //
-func (api *HostSystem) DisconnectHost_Task(
+func (mo *HostSystem) DisconnectHost_Task(
 	_this *ManagedObjectReference,
 ) (*Task, error) {
 
@@ -30881,7 +31851,7 @@ func (api *HostSystem) DisconnectHost_Task(
 // Since
 // vSphere API 4.1
 //
-func (api *HostSystem) EnterLockdownMode(
+func (mo *HostSystem) EnterLockdownMode(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -30914,7 +31884,7 @@ func (api *HostSystem) EnterLockdownMode(
 // Required Privileges
 // Host.Config.Maintenance
 //
-func (api *HostSystem) EnterMaintenanceMode_Task(
+func (mo *HostSystem) EnterMaintenanceMode_Task(
 	_this *ManagedObjectReference, timeout int32, evacuatePoweredOffVms bool, maintenanceSpec *HostMaintenanceSpec,
 ) (*Task, error) {
 
@@ -30935,7 +31905,7 @@ func (api *HostSystem) EnterMaintenanceMode_Task(
 // Since
 // vSphere API 4.1
 //
-func (api *HostSystem) ExitLockdownMode(
+func (mo *HostSystem) ExitLockdownMode(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -30954,7 +31924,7 @@ func (api *HostSystem) ExitLockdownMode(
 // Required Privileges
 // Host.Config.Maintenance
 //
-func (api *HostSystem) ExitMaintenanceMode_Task(
+func (mo *HostSystem) ExitMaintenanceMode_Task(
 	_this *ManagedObjectReference, timeout int32,
 ) (*Task, error) {
 
@@ -30997,7 +31967,7 @@ func (api *HostSystem) ExitMaintenanceMode_Task(
 // Since
 // VI API 2.5
 //
-func (api *HostSystem) PowerDownHostToStandBy_Task(
+func (mo *HostSystem) PowerDownHostToStandBy_Task(
 	_this *ManagedObjectReference, timeoutSec int32, evacuatePoweredOffVms bool,
 ) (*Task, error) {
 
@@ -31028,7 +31998,7 @@ func (api *HostSystem) PowerDownHostToStandBy_Task(
 // Since
 // VI API 2.5
 //
-func (api *HostSystem) PowerUpHostFromStandBy_Task(
+func (mo *HostSystem) PowerUpHostFromStandBy_Task(
 	_this *ManagedObjectReference, timeoutSec int32,
 ) (*Task, error) {
 
@@ -31042,7 +32012,7 @@ func (api *HostSystem) PowerUpHostFromStandBy_Task(
 // Required Privileges
 // System.Read
 //
-func (api *HostSystem) QueryHostConnectionInfo(
+func (mo *HostSystem) QueryHostConnectionInfo(
 	_this *ManagedObjectReference,
 ) (*HostConnectInfo, error) {
 
@@ -31060,7 +32030,7 @@ func (api *HostSystem) QueryHostConnectionInfo(
 // Required Privileges
 // System.Read
 //
-func (api *HostSystem) QueryMemoryOverhead(
+func (mo *HostSystem) QueryMemoryOverhead(
 	_this *ManagedObjectReference, memorySize int64, videoRamSize int32, numVcpus int32,
 ) (int64, error) {
 
@@ -31081,7 +32051,7 @@ func (api *HostSystem) QueryMemoryOverhead(
 // Since
 // VI API 2.5
 //
-func (api *HostSystem) QueryMemoryOverheadEx(
+func (mo *HostSystem) QueryMemoryOverheadEx(
 	_this *ManagedObjectReference, vmConfigInfo *VirtualMachineConfigInfo,
 ) (int64, error) {
 
@@ -31097,7 +32067,7 @@ func (api *HostSystem) QueryMemoryOverheadEx(
 // Since
 // vSphere API 5.1
 //
-func (api *HostSystem) QueryTpmAttestationReport(
+func (mo *HostSystem) QueryTpmAttestationReport(
 	_this *ManagedObjectReference,
 ) (*HostTpmAttestationReport, error) {
 
@@ -31117,7 +32087,7 @@ func (api *HostSystem) QueryTpmAttestationReport(
 // Required Privileges
 // Host.Config.Maintenance
 //
-func (api *HostSystem) RebootHost_Task(
+func (mo *HostSystem) RebootHost_Task(
 	_this *ManagedObjectReference, force bool,
 ) (*Task, error) {
 
@@ -31138,7 +32108,7 @@ func (api *HostSystem) RebootHost_Task(
 // Required Privileges
 // Host.Config.Connection
 //
-func (api *HostSystem) ReconfigureHostForDAS_Task(
+func (mo *HostSystem) ReconfigureHostForDAS_Task(
 	_this *ManagedObjectReference,
 ) (*Task, error) {
 
@@ -31175,7 +32145,7 @@ func (api *HostSystem) ReconfigureHostForDAS_Task(
 // Required Privileges
 // Host.Config.Connection
 //
-func (api *HostSystem) ReconnectHost_Task(
+func (mo *HostSystem) ReconnectHost_Task(
 	_this *ManagedObjectReference, cnxSpec *HostConnectSpec, reconnectSpec *HostSystemReconnectSpec,
 ) (*Task, error) {
 
@@ -31194,7 +32164,7 @@ func (api *HostSystem) ReconnectHost_Task(
 // Since
 // vSphere API 4.1
 //
-func (api *HostSystem) RetrieveHardwareUptime(
+func (mo *HostSystem) RetrieveHardwareUptime(
 	_this *ManagedObjectReference,
 ) (int64, error) {
 
@@ -31214,7 +32184,7 @@ func (api *HostSystem) RetrieveHardwareUptime(
 // Required Privileges
 // Host.Config.Maintenance
 //
-func (api *HostSystem) ShutdownHost_Task(
+func (mo *HostSystem) ShutdownHost_Task(
 	_this *ManagedObjectReference, force bool,
 ) (*Task, error) {
 
@@ -31230,7 +32200,7 @@ func (api *HostSystem) ShutdownHost_Task(
 // Since
 // VI API 2.5
 //
-func (api *HostSystem) UpdateFlags(
+func (mo *HostSystem) UpdateFlags(
 	_this *ManagedObjectReference, flagInfo *HostFlagInfo,
 ) error {
 
@@ -31246,7 +32216,7 @@ func (api *HostSystem) UpdateFlags(
 // Since
 // vSphere API 4.0
 //
-func (api *HostSystem) UpdateIpmi(
+func (mo *HostSystem) UpdateIpmi(
 	_this *ManagedObjectReference, ipmiInfo *HostIpmiInfo,
 ) error {
 
@@ -31260,7 +32230,7 @@ func (api *HostSystem) UpdateIpmi(
 // Required Privileges
 // Host.Config.Resources
 //
-func (api *HostSystem) UpdateSystemResources(
+func (mo *HostSystem) UpdateSystemResources(
 	_this *ManagedObjectReference, resourceInfo *HostSystemResourceInfo,
 ) error {
 
@@ -31276,12 +32246,19 @@ func (api *HostSystem) UpdateSystemResources(
 // Since
 // vSphere API 5.1
 //
-func (api *HostSystem) UpdateSystemSwapConfiguration(
+func (mo *HostSystem) UpdateSystemSwapConfiguration(
 	_this *ManagedObjectReference, sysSwapConfig *HostSystemSwapConfiguration,
 ) error {
 
 	return nil
 
+}
+
+//
+// Defines a host's connection state.
+//
+//
+type HostSystemConnectionState struct {
 }
 
 //
@@ -31311,6 +32288,9 @@ type HostSystemIdentificationInfo struct {
 	IdentifierValue string
 }
 
+type HostSystemIdentificationInfoIdentifier struct {
+}
+
 //
 // Information about the system as a whole.
 //
@@ -31332,6 +32312,13 @@ type HostSystemInfo struct {
 
 	// Hardware vendor identification.
 	Vendor string
+}
+
+//
+// Defines a host's power state.
+//
+//
+type HostSystemPowerState struct {
 }
 
 //
@@ -31726,6 +32713,14 @@ type HostUnresolvedVmfsExtent struct {
 }
 
 //
+// Reasons for identifying the disk extent
+// as copy of VMFS volume extent.
+//
+//
+type HostUnresolvedVmfsExtentUnresolvedReason struct {
+}
+
+//
 // Specification to resignature an Unresolved VMFS volume.
 //
 //
@@ -31779,6 +32774,9 @@ type HostUnresolvedVmfsResolutionSpec struct {
 	// volume. When set to 'forceMount', existing uuid is assigned
 	// to the Vmfs volume and Vmfs volumes metadata doesn't change.See VmfsUuidResolution
 	UuidResolution string
+}
+
+type HostUnresolvedVmfsResolutionSpecVmfsUuidResolution struct {
 }
 
 //
@@ -31892,6 +32890,7 @@ type HostUserWorldSwapNotEnabledEvent struct {
 // and vFlash cache on the ESX host.
 //
 type HostVFlashManager struct {
+	*ManagedObject
 
 	// Host vFlash configuration information.
 	VFlashConfigInfo *HostVFlashManagerVFlashConfigInfo
@@ -31916,7 +32915,7 @@ type HostVFlashManager struct {
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostVFlashManager) ConfigureVFlashResourceEx_Task(
+func (mo *HostVFlashManager) ConfigureVFlashResourceEx_Task(
 	_this *ManagedObjectReference, devicePath []string,
 ) (*Task, error) {
 
@@ -31930,7 +32929,7 @@ func (api *HostVFlashManager) ConfigureVFlashResourceEx_Task(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostVFlashManager) HostConfigureVFlashResource(
+func (mo *HostVFlashManager) HostConfigureVFlashResource(
 	_this *ManagedObjectReference, spec *HostVFlashManagerVFlashResourceConfigSpec,
 ) error {
 
@@ -31944,7 +32943,7 @@ func (api *HostVFlashManager) HostConfigureVFlashResource(
 // Required Privileges
 // Host.Config.AdvancedConfig
 //
-func (api *HostVFlashManager) HostConfigVFlashCache(
+func (mo *HostVFlashManager) HostConfigVFlashCache(
 	_this *ManagedObjectReference, spec *HostVFlashManagerVFlashCacheConfigSpec,
 ) error {
 
@@ -31960,7 +32959,7 @@ func (api *HostVFlashManager) HostConfigVFlashCache(
 // Required Privileges
 // Host.Config.AdvancedConfig
 //
-func (api *HostVFlashManager) HostGetVFlashModuleDefaultConfig(
+func (mo *HostVFlashManager) HostGetVFlashModuleDefaultConfig(
 	_this *ManagedObjectReference, vFlashModule string,
 ) (*VirtualDiskVFlashCacheConfigInfo, error) {
 
@@ -31974,7 +32973,7 @@ func (api *HostVFlashManager) HostGetVFlashModuleDefaultConfig(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostVFlashManager) HostRemoveVFlashResource(
+func (mo *HostVFlashManager) HostRemoveVFlashResource(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -32242,7 +33241,7 @@ type HostVMotionSystem struct {
 // Required Privileges
 // Host.Config.Network
 //
-func (api *HostVMotionSystem) DeselectVnic(
+func (mo *HostVMotionSystem) DeselectVnic(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -32256,7 +33255,7 @@ func (api *HostVMotionSystem) DeselectVnic(
 // Required Privileges
 // Host.Config.Network
 //
-func (api *HostVMotionSystem) SelectVnic(
+func (mo *HostVMotionSystem) SelectVnic(
 	_this *ManagedObjectReference, device string,
 ) error {
 
@@ -32270,7 +33269,7 @@ func (api *HostVMotionSystem) SelectVnic(
 // Required Privileges
 // Host.Config.Network
 //
-func (api *HostVMotionSystem) UpdateIpConfig(
+func (mo *HostVMotionSystem) UpdateIpConfig(
 	_this *ManagedObjectReference, ipConfig *HostIpConfig,
 ) error {
 
@@ -32441,7 +33440,7 @@ type HostVirtualNicManager struct {
 // Required Privileges
 // Host.Config.Network
 //
-func (api *HostVirtualNicManager) DeselectVnicForNicType(
+func (mo *HostVirtualNicManager) DeselectVnicForNicType(
 	_this *ManagedObjectReference, nicType string, device string,
 ) error {
 
@@ -32455,7 +33454,7 @@ func (api *HostVirtualNicManager) DeselectVnicForNicType(
 // Required Privileges
 // Host.Config.Network
 //
-func (api *HostVirtualNicManager) QueryNetConfig(
+func (mo *HostVirtualNicManager) QueryNetConfig(
 	_this *ManagedObjectReference, nicType string,
 ) (*VirtualNicManagerNetConfig, error) {
 
@@ -32472,7 +33471,7 @@ func (api *HostVirtualNicManager) QueryNetConfig(
 // Required Privileges
 // Host.Config.Network
 //
-func (api *HostVirtualNicManager) SelectVnicForNicType(
+func (mo *HostVirtualNicManager) SelectVnicForNicType(
 	_this *ManagedObjectReference, nicType string, device string,
 ) error {
 
@@ -32490,6 +33489,9 @@ type HostVirtualNicManagerInfo struct {
 
 	// List of VirtualNicManager network configuration.See VirtualNicManagerNetConfig
 	NetConfig []*VirtualNicManagerNetConfig
+}
+
+type HostVirtualNicManagerNicType struct {
 }
 
 //
@@ -32762,6 +33764,13 @@ type HostVmciAccessManagerAccessSpec struct {
 }
 
 //
+// Set of possible values for mode field in AccessSpec.
+//
+//
+type HostVmciAccessManagerMode struct {
+}
+
+//
 // When a user resignatures an UnresolvedVmfsVolume through DatastoreSystem API,
 // we resignature and auto-mount on the other hosts which share the
 // same underlying storage luns. As part of the operation, we rescan host.
@@ -32913,6 +33922,7 @@ type HostVnicConnectedToCustomizedDVPortEvent struct {
 // including their prototype, behavior or result encoding.
 //
 type HostVsanInternalSystem struct {
+	*ManagedObject
 }
 
 //
@@ -32923,7 +33933,7 @@ type HostVsanInternalSystem struct {
 // Required Privileges
 // System.Read
 //
-func (api *HostVsanInternalSystem) QueryCmmds(
+func (mo *HostVsanInternalSystem) QueryCmmds(
 	_this *ManagedObjectReference, queries []*HostVsanInternalSystemCmmdsQuery,
 ) (string, error) {
 
@@ -32940,7 +33950,7 @@ func (api *HostVsanInternalSystem) QueryCmmds(
 // Required Privileges
 // System.Read
 //
-func (api *HostVsanInternalSystem) QueryObjectsOnPhysicalVsanDisk(
+func (mo *HostVsanInternalSystem) QueryObjectsOnPhysicalVsanDisk(
 	_this *ManagedObjectReference, disks []string,
 ) (string, error) {
 
@@ -32957,7 +33967,7 @@ func (api *HostVsanInternalSystem) QueryObjectsOnPhysicalVsanDisk(
 // Required Privileges
 // System.Read
 //
-func (api *HostVsanInternalSystem) QueryPhysicalVsanDisks(
+func (mo *HostVsanInternalSystem) QueryPhysicalVsanDisks(
 	_this *ManagedObjectReference, props []string,
 ) (string, error) {
 
@@ -32974,7 +33984,7 @@ func (api *HostVsanInternalSystem) QueryPhysicalVsanDisks(
 // Required Privileges
 // System.Read
 //
-func (api *HostVsanInternalSystem) QueryVsanObjects(
+func (mo *HostVsanInternalSystem) QueryVsanObjects(
 	_this *ManagedObjectReference, uuids []string,
 ) (string, error) {
 
@@ -33006,6 +34016,7 @@ type HostVsanInternalSystemCmmdsQuery struct {
 // VSAN data objects.
 //
 type HostVsanSystem struct {
+	*ManagedObject
 
 	// The current VSAN service configuration information for this host.
 	// Required Privilege: System.Read
@@ -33031,7 +34042,7 @@ type HostVsanSystem struct {
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostVsanSystem) AddDisks_Task(
+func (mo *HostVsanSystem) AddDisks_Task(
 	_this *ManagedObjectReference, disk []*HostScsiDisk,
 ) (*Task, error) {
 
@@ -33057,7 +34068,7 @@ func (api *HostVsanSystem) AddDisks_Task(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostVsanSystem) InitializeDisks_Task(
+func (mo *HostVsanSystem) InitializeDisks_Task(
 	_this *ManagedObjectReference, mapping []*VsanHostDiskMapping,
 ) (*Task, error) {
 
@@ -33072,7 +34083,7 @@ func (api *HostVsanSystem) InitializeDisks_Task(
 // Required Privileges
 // System.Read
 //
-func (api *HostVsanSystem) QueryDisksForVsan(
+func (mo *HostVsanSystem) QueryDisksForVsan(
 	_this *ManagedObjectReference, canonicalName []string,
 ) ([]*VsanHostDiskResult, error) {
 
@@ -33086,7 +34097,7 @@ func (api *HostVsanSystem) QueryDisksForVsan(
 // Required Privileges
 // System.Read
 //
-func (api *HostVsanSystem) QueryHostStatus(
+func (mo *HostVsanSystem) QueryHostStatus(
 	_this *ManagedObjectReference,
 ) (*VsanHostClusterStatus, error) {
 
@@ -33116,7 +34127,7 @@ func (api *HostVsanSystem) QueryHostStatus(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostVsanSystem) RemoveDisk_Task(
+func (mo *HostVsanSystem) RemoveDisk_Task(
 	_this *ManagedObjectReference, disk []*HostScsiDisk,
 ) (*Task, error) {
 
@@ -33140,7 +34151,7 @@ func (api *HostVsanSystem) RemoveDisk_Task(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostVsanSystem) RemoveDiskMapping_Task(
+func (mo *HostVsanSystem) RemoveDiskMapping_Task(
 	_this *ManagedObjectReference, mapping []*VsanHostDiskMapping,
 ) (*Task, error) {
 
@@ -33171,7 +34182,7 @@ func (api *HostVsanSystem) RemoveDiskMapping_Task(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *HostVsanSystem) UpdateVsan_Task(
+func (mo *HostVsanSystem) UpdateVsan_Task(
 	_this *ManagedObjectReference, config *VsanHostConfigInfo,
 ) (*Task, error) {
 
@@ -33296,6 +34307,7 @@ type HourlyTaskScheduler struct {
 // the lease is held.
 //
 type HttpNfcLease struct {
+	*ManagedObject
 
 	// If the lease is in the error state, this property contains the
 	// error that caused the lease to be aborted.
@@ -33327,7 +34339,7 @@ type HttpNfcLease struct {
 // Required Privileges
 // None
 //
-func (api *HttpNfcLease) HttpNfcLeaseAbort(
+func (mo *HttpNfcLease) HttpNfcLeaseAbort(
 	_this *ManagedObjectReference, fault *MethodFault,
 ) error {
 
@@ -33348,7 +34360,7 @@ func (api *HttpNfcLease) HttpNfcLeaseAbort(
 // Required Privileges
 // None
 //
-func (api *HttpNfcLease) HttpNfcLeaseComplete(
+func (mo *HttpNfcLease) HttpNfcLeaseComplete(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -33364,7 +34376,7 @@ func (api *HttpNfcLease) HttpNfcLeaseComplete(
 // Since
 // vSphere API 4.1
 //
-func (api *HttpNfcLease) HttpNfcLeaseGetManifest(
+func (mo *HttpNfcLease) HttpNfcLeaseGetManifest(
 	_this *ManagedObjectReference,
 ) ([]*HttpNfcLeaseManifestEntry, error) {
 
@@ -33381,7 +34393,7 @@ func (api *HttpNfcLease) HttpNfcLeaseGetManifest(
 // Required Privileges
 // None
 //
-func (api *HttpNfcLease) HttpNfcLeaseProgress(
+func (mo *HttpNfcLease) HttpNfcLeaseProgress(
 	_this *ManagedObjectReference, percent int32,
 ) error {
 
@@ -33549,6 +34561,13 @@ type HttpNfcLeaseManifestEntry struct {
 
 	// Size of the downloaded file.
 	Size int64
+}
+
+//
+// List of possible states of a lease.
+//
+//
+type HttpNfcLeaseState struct {
 }
 
 // Deprecated.
@@ -34077,6 +35096,13 @@ type IntPolicy struct {
 }
 
 //
+// The available iSNS discovery methods.
+//
+//
+type InternetScsiSnsDiscoveryMethod struct {
+}
+
+//
 // An InvalidAffinitySettingsFault is thrown if an invalid affinity setting is
 // specified for a virtual machine.
 //
@@ -34185,6 +35211,9 @@ type InvalidDasConfigArgument struct {
 
 	// The entry for the invalid argument
 	Entry string
+}
+
+type InvalidDasConfigArgumentEntryForInvalidArgument struct {
 }
 
 //
@@ -34589,6 +35618,9 @@ type InvalidProfileReferenceHost struct {
 	Reason string
 }
 
+type InvalidProfileReferenceHostReason struct {
+}
+
 //
 // Thrown when an invalid property path has been referenced.
 //
@@ -34789,6 +35821,8 @@ type InventoryHasStandardAloneHosts struct {
 //
 //
 type InventoryView struct {
+	*ManagedObject
+
 	*ManagedObjectView
 }
 
@@ -34806,7 +35840,7 @@ type InventoryView struct {
 // Required Privileges
 // None
 //
-func (api *InventoryView) CloseInventoryViewFolder(
+func (mo *InventoryView) CloseInventoryViewFolder(
 	_this *ManagedObjectReference, entity []*ManagedEntity,
 ) ([]*ManagedEntity, error) {
 
@@ -34830,7 +35864,7 @@ func (api *InventoryView) CloseInventoryViewFolder(
 // Required Privileges
 // None
 //
-func (api *InventoryView) OpenInventoryViewFolder(
+func (mo *InventoryView) OpenInventoryViewFolder(
 	_this *ManagedObjectReference, entity []*ManagedEntity,
 ) ([]*ManagedEntity, error) {
 
@@ -35032,6 +36066,7 @@ type IpPoolIpPoolConfigInfo struct {
 //
 //
 type IpPoolManager struct {
+	*ManagedObject
 }
 
 //
@@ -35057,7 +36092,7 @@ type IpPoolManager struct {
 // Since
 // vSphere API 5.1
 //
-func (api *IpPoolManager) AllocateIpv4Address(
+func (mo *IpPoolManager) AllocateIpv4Address(
 	_this *ManagedObjectReference, dc *Datacenter, poolId int32, allocationId string,
 ) (string, error) {
 
@@ -35088,7 +36123,7 @@ func (api *IpPoolManager) AllocateIpv4Address(
 // Since
 // vSphere API 5.1
 //
-func (api *IpPoolManager) AllocateIpv6Address(
+func (mo *IpPoolManager) AllocateIpv6Address(
 	_this *ManagedObjectReference, dc *Datacenter, poolId int32, allocationId string,
 ) (string, error) {
 
@@ -35110,7 +36145,7 @@ func (api *IpPoolManager) AllocateIpv6Address(
 // Required Privileges
 // None
 //
-func (api *IpPoolManager) CreateIpPool(
+func (mo *IpPoolManager) CreateIpPool(
 	_this *ManagedObjectReference, dc *Datacenter, pool *IpPool,
 ) (int32, error) {
 
@@ -35128,7 +36163,7 @@ func (api *IpPoolManager) CreateIpPool(
 // Required Privileges
 // None
 //
-func (api *IpPoolManager) DestroyIpPool(
+func (mo *IpPoolManager) DestroyIpPool(
 	_this *ManagedObjectReference, dc *Datacenter, id int32, force bool,
 ) error {
 
@@ -35144,7 +36179,7 @@ func (api *IpPoolManager) DestroyIpPool(
 // Since
 // vSphere API 5.1
 //
-func (api *IpPoolManager) QueryIPAllocations(
+func (mo *IpPoolManager) QueryIPAllocations(
 	_this *ManagedObjectReference, dc *Datacenter, poolId int32, extensionKey string,
 ) ([]*IpPoolManagerIpAllocation, error) {
 
@@ -35158,7 +36193,7 @@ func (api *IpPoolManager) QueryIPAllocations(
 // Required Privileges
 // None
 //
-func (api *IpPoolManager) QueryIpPools(
+func (mo *IpPoolManager) QueryIpPools(
 	_this *ManagedObjectReference, dc *Datacenter,
 ) ([]*IpPool, error) {
 
@@ -35183,7 +36218,7 @@ func (api *IpPoolManager) QueryIpPools(
 // Since
 // vSphere API 5.1
 //
-func (api *IpPoolManager) ReleaseIpAllocation(
+func (mo *IpPoolManager) ReleaseIpAllocation(
 	_this *ManagedObjectReference, dc *Datacenter, poolId int32, allocationId string,
 ) error {
 
@@ -35204,7 +36239,7 @@ func (api *IpPoolManager) ReleaseIpAllocation(
 // Required Privileges
 // None
 //
-func (api *IpPoolManager) UpdateIpPool(
+func (mo *IpPoolManager) UpdateIpPool(
 	_this *ManagedObjectReference, dc *Datacenter, pool *IpPool,
 ) error {
 
@@ -35410,6 +36445,7 @@ type IscsiFaultVnicNotFound struct {
 // iSCSI Host Bus Adapter.
 //
 type IscsiManager struct {
+	*ManagedObject
 }
 
 //
@@ -35418,7 +36454,7 @@ type IscsiManager struct {
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *IscsiManager) BindVnic(
+func (mo *IscsiManager) BindVnic(
 	_this *ManagedObjectReference, iScsiHbaName string, vnicDevice string,
 ) error {
 
@@ -35432,7 +36468,7 @@ func (api *IscsiManager) BindVnic(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *IscsiManager) QueryBoundVnics(
+func (mo *IscsiManager) QueryBoundVnics(
 	_this *ManagedObjectReference, iScsiHbaName string,
 ) ([]*IscsiPortInfo, error) {
 
@@ -35450,7 +36486,7 @@ func (api *IscsiManager) QueryBoundVnics(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *IscsiManager) QueryCandidateNics(
+func (mo *IscsiManager) QueryCandidateNics(
 	_this *ManagedObjectReference, iScsiHbaName string,
 ) ([]*IscsiPortInfo, error) {
 
@@ -35465,7 +36501,7 @@ func (api *IscsiManager) QueryCandidateNics(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *IscsiManager) QueryMigrationDependencies(
+func (mo *IscsiManager) QueryMigrationDependencies(
 	_this *ManagedObjectReference, pnicDevice []string,
 ) (*IscsiMigrationDependency, error) {
 
@@ -35479,7 +36515,7 @@ func (api *IscsiManager) QueryMigrationDependencies(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *IscsiManager) QueryPnicStatus(
+func (mo *IscsiManager) QueryPnicStatus(
 	_this *ManagedObjectReference, pnicDevice string,
 ) (*IscsiStatus, error) {
 
@@ -35493,7 +36529,7 @@ func (api *IscsiManager) QueryPnicStatus(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *IscsiManager) QueryVnicStatus(
+func (mo *IscsiManager) QueryVnicStatus(
 	_this *ManagedObjectReference, vnicDevice string,
 ) (*IscsiStatus, error) {
 
@@ -35507,7 +36543,7 @@ func (api *IscsiManager) QueryVnicStatus(
 // Required Privileges
 // Host.Config.Storage
 //
-func (api *IscsiManager) UnbindVnic(
+func (mo *IscsiManager) UnbindVnic(
 	_this *ManagedObjectReference, iScsiHbaName string, vnicDevice string, force bool,
 ) error {
 
@@ -35616,6 +36652,9 @@ type IscsiPortInfo struct {
 	// unset in case where the bound Virtual NIC doesn't have the system object or
 	// where a candidate Physical NIC isn't associated with any Virtual NIC.
 	VnicDevice string
+}
+
+type IscsiPortInfoPathStatus struct {
 }
 
 //
@@ -35815,6 +36854,18 @@ type LatencySensitivity struct {
 }
 
 //
+// Enumeration of the nominal latency-sensitive values which can be
+// used to specify the latency-sensitivity level of the application.
+//
+// In terms of latency-sensitivity the values relate:
+// high&gt;medium&gt;normal&gt;low.
+//
+//
+//
+type LatencySensitivitySensitivityLevel struct {
+}
+
+//
 // A virtual machine's network connectivity cannot be determined
 // because it uses a legacy network interface. If returned as part of migration checks,
 // this is an error if the virtual  machine is currently connected to the legacy
@@ -35837,7 +36888,11 @@ type LicenseAssignmentFailed struct {
 	Reason string
 }
 
+type LicenseAssignmentFailedReason struct {
+}
+
 type LicenseAssignmentManager struct {
+	*ManagedObject
 }
 
 //
@@ -35846,7 +36901,7 @@ type LicenseAssignmentManager struct {
 // Required Privileges
 // System.View
 //
-func (api *LicenseAssignmentManager) QueryAssignedLicenses(
+func (mo *LicenseAssignmentManager) QueryAssignedLicenses(
 	_this *ManagedObjectReference, entityId string,
 ) ([]*LicenseAssignmentManagerLicenseAssignment, error) {
 
@@ -35860,7 +36915,7 @@ func (api *LicenseAssignmentManager) QueryAssignedLicenses(
 // Required Privileges
 // Global.Licenses
 //
-func (api *LicenseAssignmentManager) RemoveAssignedLicense(
+func (mo *LicenseAssignmentManager) RemoveAssignedLicense(
 	_this *ManagedObjectReference, entityId string,
 ) error {
 
@@ -35874,7 +36929,7 @@ func (api *LicenseAssignmentManager) RemoveAssignedLicense(
 // Required Privileges
 // Global.Licenses
 //
-func (api *LicenseAssignmentManager) UpdateAssignedLicense(
+func (mo *LicenseAssignmentManager) UpdateAssignedLicense(
 	_this *ManagedObjectReference, entity string, licenseKey string, entityDisplayName string,
 ) (*LicenseManagerLicenseInfo, error) {
 
@@ -36083,6 +37138,29 @@ type LicenseFeatureInfo struct {
 }
 
 //
+// Some licenses may only be allowed to load from a specified source.
+// This enum indicates what restrictions exist for this license if any.
+//
+//
+type LicenseFeatureInfoSourceRestriction struct {
+}
+
+//
+// Describes the state of the feature.
+//
+//
+type LicenseFeatureInfoState struct {
+}
+
+//
+// Cost units apply to licenses for the purpose of determining
+// how many licenses are needed.
+//
+//
+type LicenseFeatureInfoUnit struct {
+}
+
+//
 // A LicenseKeyEntityMismatch fault is thrown if an assignment operation tries to assign a license that does not apply to an entity. For example assigning a host license to VirtualCenter.
 //
 //
@@ -36139,6 +37217,7 @@ type LicenseKeyEntityMismatch struct {
 //
 //
 type LicenseManager struct {
+	*ManagedObject
 
 	// Deprecated.
 	// As of vSphere API 4.0, this property is not used by the system.
@@ -36213,7 +37292,7 @@ type LicenseManager struct {
 // Since
 // vSphere API 4.0
 //
-func (api *LicenseManager) AddLicense(
+func (mo *LicenseManager) AddLicense(
 	_this *ManagedObjectReference, licenseKey string, labels []*KeyValue,
 ) (*LicenseManagerLicenseInfo, error) {
 
@@ -36233,7 +37312,7 @@ func (api *LicenseManager) AddLicense(
 // Required Privileges
 // System.Read
 //
-func (api *LicenseManager) CheckLicenseFeature(
+func (mo *LicenseManager) CheckLicenseFeature(
 	_this *ManagedObjectReference, host *HostSystem, featureKey string,
 ) (bool, error) {
 
@@ -36271,7 +37350,7 @@ func (api *LicenseManager) CheckLicenseFeature(
 // Required Privileges
 // Global.Licenses
 //
-func (api *LicenseManager) ConfigureLicenseSource(
+func (mo *LicenseManager) ConfigureLicenseSource(
 	_this *ManagedObjectReference, host *HostSystem, licenseSource *LicenseSource,
 ) error {
 
@@ -36287,7 +37366,7 @@ func (api *LicenseManager) ConfigureLicenseSource(
 // Since
 // vSphere API 4.0
 //
-func (api *LicenseManager) DecodeLicense(
+func (mo *LicenseManager) DecodeLicense(
 	_this *ManagedObjectReference, licenseKey string,
 ) (*LicenseManagerLicenseInfo, error) {
 
@@ -36307,7 +37386,7 @@ func (api *LicenseManager) DecodeLicense(
 // Required Privileges
 // Global.Licenses
 //
-func (api *LicenseManager) DisableFeature(
+func (mo *LicenseManager) DisableFeature(
 	_this *ManagedObjectReference, host *HostSystem, featureKey string,
 ) (bool, error) {
 
@@ -36327,7 +37406,7 @@ func (api *LicenseManager) DisableFeature(
 // Required Privileges
 // Global.Licenses
 //
-func (api *LicenseManager) EnableFeature(
+func (mo *LicenseManager) EnableFeature(
 	_this *ManagedObjectReference, host *HostSystem, featureKey string,
 ) (bool, error) {
 
@@ -36346,7 +37425,7 @@ func (api *LicenseManager) EnableFeature(
 // Required Privileges
 // Global.Licenses
 //
-func (api *LicenseManager) QueryLicenseSourceAvailability(
+func (mo *LicenseManager) QueryLicenseSourceAvailability(
 	_this *ManagedObjectReference, host *HostSystem,
 ) ([]*LicenseAvailabilityInfo, error) {
 
@@ -36371,7 +37450,7 @@ func (api *LicenseManager) QueryLicenseSourceAvailability(
 // Required Privileges
 // System.Read
 //
-func (api *LicenseManager) QueryLicenseUsage(
+func (mo *LicenseManager) QueryLicenseUsage(
 	_this *ManagedObjectReference, host *HostSystem,
 ) (*LicenseUsageInfo, error) {
 
@@ -36392,7 +37471,7 @@ func (api *LicenseManager) QueryLicenseUsage(
 // Since
 // VI API 2.5
 //
-func (api *LicenseManager) QuerySupportedFeatures(
+func (mo *LicenseManager) QuerySupportedFeatures(
 	_this *ManagedObjectReference, host *HostSystem,
 ) ([]*LicenseFeatureInfo, error) {
 
@@ -36408,7 +37487,7 @@ func (api *LicenseManager) QuerySupportedFeatures(
 // Since
 // vSphere API 4.0
 //
-func (api *LicenseManager) RemoveLicense(
+func (mo *LicenseManager) RemoveLicense(
 	_this *ManagedObjectReference, licenseKey string,
 ) error {
 
@@ -36424,7 +37503,7 @@ func (api *LicenseManager) RemoveLicense(
 // Since
 // vSphere API 4.0
 //
-func (api *LicenseManager) RemoveLicenseLabel(
+func (mo *LicenseManager) RemoveLicenseLabel(
 	_this *ManagedObjectReference, licenseKey string, labelKey string,
 ) error {
 
@@ -36451,7 +37530,7 @@ func (api *LicenseManager) RemoveLicenseLabel(
 // Required Privileges
 // Global.Licenses
 //
-func (api *LicenseManager) SetLicenseEdition(
+func (mo *LicenseManager) SetLicenseEdition(
 	_this *ManagedObjectReference, host *HostSystem, featureKey string,
 ) error {
 
@@ -36475,7 +37554,7 @@ func (api *LicenseManager) SetLicenseEdition(
 // Since
 // vSphere API 4.0
 //
-func (api *LicenseManager) UpdateLicense(
+func (mo *LicenseManager) UpdateLicense(
 	_this *ManagedObjectReference, licenseKey string, labels []*KeyValue,
 ) (*LicenseManagerLicenseInfo, error) {
 
@@ -36492,7 +37571,7 @@ func (api *LicenseManager) UpdateLicense(
 // Since
 // vSphere API 4.0
 //
-func (api *LicenseManager) UpdateLicenseLabel(
+func (mo *LicenseManager) UpdateLicenseLabel(
 	_this *ManagedObjectReference, licenseKey string, labelKey string, labelValue string,
 ) error {
 
@@ -36543,6 +37622,25 @@ type LicenseManagerLicenseInfo struct {
 	Used int32
 }
 
+// Deprecated.
+// As of VI API 2.5, use QueryLicenseSourceAvailability
+// to obtain an array of LicenseAvailabilityInfo data
+// objects.
+//
+//
+// Licensed features have unique keys to identify them.
+//
+//
+type LicenseManagerLicenseKey struct {
+}
+
+//
+// State of licensing subsystem.
+//
+//
+type LicenseManagerState struct {
+}
+
 //
 // This event records that the inventory is not license compliant.
 //
@@ -36579,6 +37677,13 @@ type LicenseReservationInfo struct {
 
 	// Describes the reservation state of a license.
 	State *enum.LicenseReservationInfoState
+}
+
+//
+// Describes the reservation state of a license.
+//
+//
+type LicenseReservationInfoState struct {
 }
 
 //
@@ -36723,6 +37828,20 @@ type LinkDiscoveryProtocolConfig struct {
 }
 
 //
+// The Discovery Protocol operation.
+//
+//
+type LinkDiscoveryProtocolConfigOperationType struct {
+}
+
+//
+// The Discovery Protocol types.
+//
+//
+type LinkDiscoveryProtocolConfigProtocolType struct {
+}
+
+//
 // The Link Layer Discovery Protocol information.
 //
 //
@@ -36779,6 +37898,8 @@ type LinuxVolumeNotClean struct {
 //
 //
 type ListView struct {
+	*ManagedObject
+
 	*ManagedObjectView
 }
 
@@ -36794,7 +37915,7 @@ type ListView struct {
 // Required Privileges
 // None
 //
-func (api *ListView) ModifyListView(
+func (mo *ListView) ModifyListView(
 	_this *ManagedObjectReference, add []*ManagedObjectReference, remove []*ManagedObjectReference,
 ) ([]*ManagedObjectReference, error) {
 
@@ -36814,7 +37935,7 @@ func (api *ListView) ModifyListView(
 // Required Privileges
 // None
 //
-func (api *ListView) ResetListView(
+func (mo *ListView) ResetListView(
 	_this *ManagedObjectReference, obj []*ManagedObjectReference,
 ) ([]*ManagedObjectReference, error) {
 
@@ -36828,7 +37949,7 @@ func (api *ListView) ResetListView(
 // Required Privileges
 // None
 //
-func (api *ListView) ResetListViewFromView(
+func (mo *ListView) ResetListViewFromView(
 	_this *ManagedObjectReference, view *View,
 ) error {
 
@@ -37012,6 +38133,7 @@ type LocalizableMessage struct {
 //
 //
 type LocalizationManager struct {
+	*ManagedObject
 
 	// Fetches the descriptions of all the client-side localization message
 	// catalogs available for the current session locale.
@@ -37453,7 +38575,7 @@ type ManagedEntity struct {
 // When object is VirtualMachine - VirtualMachine.Inventory.DeleteWhen object is Datacenter - Datacenter.DeleteWhen object is Folder - Folder.DeleteWhen object is HostSystem - Host.Inventory.RemoveHostFromClusterWhen object is VirtualApp - VApp.DeleteWhen object is ResourcePool - Resource.DeletePoolWhen object is ComputeResource - Host.Inventory.RemoveHostFromClusterWhen object is ClusterComputeResource - Host.Inventory.DeleteClusterWhen object is DistributedVirtualSwitch - DVSwitch.DeleteWhen object is DistributedVirtualPortgroup - DVPortgroup.DeleteWhen object is Datastore - System.ReadWhen object is Network - System.Read
 //
 //
-func (api *ManagedEntity) Destroy_Task(
+func (mo *ManagedEntity) Destroy_Task(
 	_this *ManagedObjectReference,
 ) (*Task, error) {
 
@@ -37476,7 +38598,7 @@ func (api *ManagedEntity) Destroy_Task(
 // Required Privileges
 // System.Read
 //
-func (api *ManagedEntity) Reload(
+func (mo *ManagedEntity) Reload(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -37499,7 +38621,7 @@ func (api *ManagedEntity) Reload(
 // When object is VirtualMachine - VirtualMachine.Config.RenameWhen object is Datacenter - Datacenter.RenameWhen object is Folder - Folder.RenameWhen object is VirtualApp - VApp.RenameWhen object is ResourcePool - Resource.RenamePoolWhen object is ClusterComputeResource - Host.Inventory.RenameClusterWhen object is DistributedVirtualSwitch - DVSwitch.ModifyWhen object is DistributedVirtualPortgroup - DVPortgroup.ModifyWhen object is Datastore - Datastore.RenameWhen object is Network - System.Read
 //
 //
-func (api *ManagedEntity) Rename_Task(
+func (mo *ManagedEntity) Rename_Task(
 	_this *ManagedObjectReference, newName string,
 ) (*Task, error) {
 
@@ -37516,6 +38638,13 @@ type ManagedEntityEventArgument struct {
 
 	// The managed entity.
 	Entity *ManagedEntity
+}
+
+//
+// The Status enumeration defines a general "health" value for a managed entity.
+//
+//
+type ManagedEntityStatus struct {
 }
 
 //
@@ -37884,6 +39013,8 @@ type ManagedObjectReference struct {
 // To create a view use the ViewManager methods.
 //
 type ManagedObjectView struct {
+	*ManagedObject
+
 	*View
 
 	// The list of references to objects mapped by this view.
@@ -38131,6 +39262,13 @@ type MetricAlarmExpression struct {
 	//
 	// Since vSphere API 4.0
 	YellowInterval int32
+}
+
+//
+// The operation on the target metric item.
+//
+//
+type MetricAlarmOperator struct {
 }
 
 //
@@ -38610,6 +39748,13 @@ type MtuMismatchEvent struct {
 }
 
 //
+// Set of constants defining the possible states of a multipath path.
+//
+//
+type MultipathState struct {
+}
+
+//
 // MultipleCertificatesVerifyFault is thrown by the host connect method
 // ReconnectHost_Task as well as the methods to add a host to
 // VirtualCenter (AddStandaloneHost_Task and
@@ -38844,6 +39989,13 @@ type NetBIOSConfigInfo struct {
 }
 
 //
+// NetBIOS configuration mode.
+//
+//
+type NetBIOSConfigInfoMode struct {
+}
+
+//
 // Dynamic Host Configuration Protocol reporting for IP version 4 and version 6.
 //
 //
@@ -39063,6 +40215,17 @@ type NetIpConfigInfoIpAddress struct {
 }
 
 //
+// This specifies how an IP address was obtained for a given interface.
+// See RFC 4293 IpAddressOriginTC.
+//
+//
+type NetIpConfigInfoIpAddressOrigin struct {
+}
+
+type NetIpConfigInfoIpAddressStatus struct {
+}
+
+//
 // Internet Protocol Address Configuration for version 4 and version 6.
 //
 //
@@ -39258,6 +40421,15 @@ type NetIpStackInfoDefaultRouter struct {
 }
 
 //
+// IP Stack keeps state on entries in IpNetToMedia table to perform
+// physical address lookups for IP addresses. Here are the standard
+// states perSee RFC
+//
+//
+type NetIpStackInfoEntryType struct {
+}
+
+//
 // Information from an IP stack about known mappings betwwen an IP address
 // and the underlying physical address it maps to as learned by:
 // IPv4: Address Resolution Protocol (ARP) RFC 826
@@ -39290,6 +40462,14 @@ type NetIpStackInfoNetToMedia struct {
 	// The type/state of this entry as reported by the IP stack.
 	// See EntryType for values.
 	Type string
+}
+
+//
+// The set of values used to determine ordering of default routers.
+// See RFC 4293 ipDefaultRouterPreference.
+//
+//
+type NetIpStackInfoPreference struct {
 }
 
 //
@@ -39362,7 +40542,7 @@ type Network struct {
 // Required Privileges
 // Network.Delete
 //
-func (api *Network) DestroyNetwork(
+func (mo *Network) DestroyNetwork(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -40134,6 +41314,9 @@ type NotSupportedDeviceForFT struct {
 	VmName string
 }
 
+type NotSupportedDeviceForFTDeviceType struct {
+}
+
 //
 // A NotSupportedHostFault occurs when the host is of a type
 // that is not supported.
@@ -40267,6 +41450,13 @@ type NumVirtualCpusIncompatible struct {
 }
 
 //
+// Reasons why the number of virtual CPUs is incompatible.
+//
+//
+type NumVirtualCpusIncompatibleReason struct {
+}
+
+//
 // The host's software does not support enough virtual CPUs to
 // accomodate the virtual machine. This is always an error.
 //
@@ -40372,6 +41562,13 @@ type ObjectUpdate struct {
 }
 
 //
+// Enumeration of different kinds of updates.
+//
+//
+type ObjectUpdateKind struct {
+}
+
+//
 // The OnceTaskScheduler data object establishes the time for running
 // a scheduled task only once.
 //
@@ -40391,6 +41588,8 @@ type OnceTaskScheduler struct {
 // vSphere so that host and virtual machine virtual ethernet device can connect to them.
 //
 type OpaqueNetwork struct {
+	*ManagedObject
+
 	*Network
 }
 
@@ -40492,6 +41691,7 @@ type OptionDef struct {
 //
 //
 type OptionManager struct {
+	*ManagedObject
 
 	// A list of the current settings for the key/value pair options.
 	Setting []*OptionValue
@@ -40525,7 +41725,7 @@ type OptionManager struct {
 // Required Privileges
 // System.View
 //
-func (api *OptionManager) QueryOptions(
+func (mo *OptionManager) QueryOptions(
 	_this *ManagedObjectReference, name string,
 ) ([]*OptionValue, error) {
 
@@ -40559,7 +41759,7 @@ func (api *OptionManager) QueryOptions(
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *OptionManager) UpdateOptions(
+func (mo *OptionManager) UpdateOptions(
 	_this *ManagedObjectReference, changedValue []*OptionValue,
 ) error {
 
@@ -40805,6 +42005,17 @@ type OvfConsumerOstNode struct {
 	// Since the OstNode tree structure mirrors the structure of the OVF descriptor,
 	// only one Envelope node is defined, and it is always the root of the tree.
 	Type string
+}
+
+//
+// The type of an OST node.
+//
+// Each OST node corresponds to an element in the OVF descriptor. See OstNode
+// for a description of the different node types.
+//
+//
+//
+type OvfConsumerOstNodeType struct {
 }
 
 //
@@ -41063,6 +42274,14 @@ type OvfCreateImportSpecParams struct {
 	//
 	// Since vSphere API 4.1
 	ResourceMapping []*OvfResourceMap
+}
+
+//
+// Types of disk provisioning that can be set for the disk in the deployed OVF
+// package.
+//
+//
+type OvfCreateImportSpecParamsDiskProvisioningType struct {
 }
 
 //
@@ -41783,6 +43002,7 @@ type OvfInvalidVmName struct {
 //
 //
 type OvfManager struct {
+	*ManagedObject
 
 	// Returns an array of OvfOptionInfo object that specifies what options the server
 	// support for exporting an OVF descriptor.
@@ -41827,7 +43047,7 @@ type OvfManager struct {
 // Required Privileges
 // System.View
 //
-func (api *OvfManager) CreateDescriptor(
+func (mo *OvfManager) CreateDescriptor(
 	_this *ManagedObjectReference, obj *ManagedEntity, cdp *OvfCreateDescriptorParams,
 ) (*OvfCreateDescriptorResult, error) {
 
@@ -41850,7 +43070,7 @@ func (api *OvfManager) CreateDescriptor(
 // Required Privileges
 // System.View
 //
-func (api *OvfManager) CreateImportSpec(
+func (mo *OvfManager) CreateImportSpec(
 	_this *ManagedObjectReference, ovfDescriptor string, resourcePool *ResourcePool, datastore *Datastore, cisp *OvfCreateImportSpecParams,
 ) (*OvfCreateImportSpecResult, error) {
 
@@ -41871,7 +43091,7 @@ func (api *OvfManager) CreateImportSpec(
 // Required Privileges
 // System.View
 //
-func (api *OvfManager) ParseDescriptor(
+func (mo *OvfManager) ParseDescriptor(
 	_this *ManagedObjectReference, ovfDescriptor string, pdp *OvfParseDescriptorParams,
 ) (*OvfParseDescriptorResult, error) {
 
@@ -41889,7 +43109,7 @@ func (api *OvfManager) ParseDescriptor(
 // Required Privileges
 // System.View
 //
-func (api *OvfManager) ValidateHost(
+func (mo *OvfManager) ValidateHost(
 	_this *ManagedObjectReference, ovfDescriptor string, host *HostSystem, vhp *OvfValidateHostParams,
 ) (*OvfValidateHostResult, error) {
 
@@ -42866,6 +44086,13 @@ type PerfEntityMetricCSV struct {
 }
 
 //
+// The format in which performance counter data is returned.
+//
+//
+type PerfFormat struct {
+}
+
+//
 // This data object type contains metadata about a performance interval.
 //
 //
@@ -43289,6 +44516,23 @@ type PerfSampleInfo struct {
 }
 
 //
+// Indicates the type of statistical measurement that a counter’s
+// value represents. Valid types are “absolute”,
+// “delta”, or “rate”.
+//
+//
+type PerfStatsType struct {
+}
+
+//
+// Indicates how multiple samples of a specific counter type are
+// transformed into a single statistical value.
+//
+//
+type PerfSummaryType struct {
+}
+
+//
 // Static strings for performance metrics.
 //
 //
@@ -43459,6 +44703,7 @@ type PerformanceDescription struct {
 //
 //
 type PerformanceManager struct {
+	*ManagedObject
 
 	// The static description strings.
 	// Required Privilege: System.View
@@ -43486,7 +44731,7 @@ type PerformanceManager struct {
 // Required Privileges
 // Performance.ModifyIntervals
 //
-func (api *PerformanceManager) CreatePerfInterval(
+func (mo *PerformanceManager) CreatePerfInterval(
 	_this *ManagedObjectReference, intervalId *PerfInterval,
 ) error {
 
@@ -43502,7 +44747,7 @@ func (api *PerformanceManager) CreatePerfInterval(
 // Required Privileges
 // System.Read
 //
-func (api *PerformanceManager) QueryAvailablePerfMetric(
+func (mo *PerformanceManager) QueryAvailablePerfMetric(
 	_this *ManagedObjectReference, entity *ManagedObjectReference, beginTime time.Time, endTime time.Time, intervalId int32,
 ) ([]*PerfMetricId, error) {
 
@@ -43520,7 +44765,7 @@ func (api *PerformanceManager) QueryAvailablePerfMetric(
 // Required Privileges
 // System.View
 //
-func (api *PerformanceManager) QueryPerf(
+func (mo *PerformanceManager) QueryPerf(
 	_this *ManagedObjectReference, querySpec []*PerfQuerySpec,
 ) ([]*PerfEntityMetricBase, error) {
 
@@ -43546,7 +44791,7 @@ func (api *PerformanceManager) QueryPerf(
 // Required Privileges
 // System.View
 //
-func (api *PerformanceManager) QueryPerfComposite(
+func (mo *PerformanceManager) QueryPerfComposite(
 	_this *ManagedObjectReference, querySpec *PerfQuerySpec,
 ) (*PerfCompositeMetric, error) {
 
@@ -43560,7 +44805,7 @@ func (api *PerformanceManager) QueryPerfComposite(
 // Required Privileges
 // System.View
 //
-func (api *PerformanceManager) QueryPerfCounter(
+func (mo *PerformanceManager) QueryPerfCounter(
 	_this *ManagedObjectReference, counterId []int32,
 ) ([]*PerfCounterInfo, error) {
 
@@ -43579,7 +44824,7 @@ func (api *PerformanceManager) QueryPerfCounter(
 // Since
 // VI API 2.5
 //
-func (api *PerformanceManager) QueryPerfCounterByLevel(
+func (mo *PerformanceManager) QueryPerfCounterByLevel(
 	_this *ManagedObjectReference, level int32,
 ) ([]*PerfCounterInfo, error) {
 
@@ -43596,7 +44841,7 @@ func (api *PerformanceManager) QueryPerfCounterByLevel(
 // Required Privileges
 // System.Read
 //
-func (api *PerformanceManager) QueryPerfProviderSummary(
+func (mo *PerformanceManager) QueryPerfProviderSummary(
 	_this *ManagedObjectReference, entity *ManagedObjectReference,
 ) (*PerfProviderSummary, error) {
 
@@ -43614,7 +44859,7 @@ func (api *PerformanceManager) QueryPerfProviderSummary(
 // Required Privileges
 // Performance.ModifyIntervals
 //
-func (api *PerformanceManager) RemovePerfInterval(
+func (mo *PerformanceManager) RemovePerfInterval(
 	_this *ManagedObjectReference, samplePeriod int32,
 ) error {
 
@@ -43632,7 +44877,7 @@ func (api *PerformanceManager) RemovePerfInterval(
 // Since
 // vSphere API 5.0
 //
-func (api *PerformanceManager) ResetCounterLevelMapping(
+func (mo *PerformanceManager) ResetCounterLevelMapping(
 	_this *ManagedObjectReference, counters []int32,
 ) error {
 
@@ -43738,7 +44983,7 @@ func (api *PerformanceManager) ResetCounterLevelMapping(
 // Since
 // vSphere API 5.0
 //
-func (api *PerformanceManager) UpdateCounterLevelMapping(
+func (mo *PerformanceManager) UpdateCounterLevelMapping(
 	_this *ManagedObjectReference, counterLevelMap []*PerformanceManagerCounterLevelMapping,
 ) error {
 
@@ -43827,7 +45072,7 @@ func (api *PerformanceManager) UpdateCounterLevelMapping(
 // Required Privileges
 // Performance.ModifyIntervals
 //
-func (api *PerformanceManager) UpdatePerfInterval(
+func (mo *PerformanceManager) UpdatePerfInterval(
 	_this *ManagedObjectReference, interval *PerfInterval,
 ) error {
 
@@ -43864,6 +45109,14 @@ type PerformanceManagerCounterLevelMapping struct {
 	// Level for the per device counter. If not set then the value is not
 	// changed when updateCounterLevelMapping is called.
 	PerDeviceLevel int32
+}
+
+//
+// Indicates the unit of measure represented by a counter or statistical
+// value.
+//
+//
+type PerformanceManagerUnit struct {
 }
 
 //
@@ -44338,6 +45591,9 @@ type PhysicalNicProfile struct {
 	Key string
 }
 
+type PhysicalNicResourcePoolSchedulerDisallowedReason struct {
+}
+
 //
 // This data object type describes the physical network adapter specification
 // representing the properties on a physical network adapter that
@@ -44357,6 +45613,13 @@ type PhysicalNicSpec struct {
 	// configured to use.  If this property is not set, the physical
 	// network adapter autonegotiates its proper settings.
 	LinkSpeed *PhysicalNicLinkInfo
+}
+
+//
+// Set of possible values for vmDirectPathGen2SupportedMode.
+//
+//
+type PhysicalNicVmDirectPathGen2SupportedMode struct {
 }
 
 //
@@ -44472,6 +45735,13 @@ type PolicyOption struct {
 	// in the policy option metadata parameter list
 	// (ProfilePolicyMetadata.possibleOption[].parameter[].optional).
 	Parameter []*KeyAnyValue
+}
+
+//
+// The type of component connected to a port group.
+//
+//
+type PortGroupConnecteeType struct {
 }
 
 //
@@ -44666,6 +45936,7 @@ type ProductComponentInfo struct {
 // profiles.
 //
 type Profile struct {
+	*ManagedObject
 
 	// Overall compliance of entities associated with this profile.
 	// If one of the entities is out of compliance, the profile is nonCompliant.
@@ -44707,7 +45978,7 @@ type Profile struct {
 // Required Privileges
 // Profile.Edit
 //
-func (api *Profile) AssociateProfile(
+func (mo *Profile) AssociateProfile(
 	_this *ManagedObjectReference, entity []*ManagedEntity,
 ) error {
 
@@ -44721,7 +45992,7 @@ func (api *Profile) AssociateProfile(
 // Required Privileges
 // System.View
 //
-func (api *Profile) CheckProfileCompliance_Task(
+func (mo *Profile) CheckProfileCompliance_Task(
 	_this *ManagedObjectReference, entity []*ManagedEntity,
 ) (*Task, error) {
 
@@ -44735,7 +46006,7 @@ func (api *Profile) CheckProfileCompliance_Task(
 // Required Privileges
 // Profile.Delete
 //
-func (api *Profile) DestroyProfile(
+func (mo *Profile) DestroyProfile(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -44749,7 +46020,7 @@ func (api *Profile) DestroyProfile(
 // Required Privileges
 // Profile.Edit
 //
-func (api *Profile) DissociateProfile(
+func (mo *Profile) DissociateProfile(
 	_this *ManagedObjectReference, entity []*ManagedEntity,
 ) error {
 
@@ -44766,7 +46037,7 @@ func (api *Profile) DissociateProfile(
 // Required Privileges
 // Profile.Export
 //
-func (api *Profile) ExportProfile(
+func (mo *Profile) ExportProfile(
 	_this *ManagedObjectReference,
 ) (string, error) {
 
@@ -44782,7 +46053,7 @@ func (api *Profile) ExportProfile(
 // Since
 // vSphere API 5.0
 //
-func (api *Profile) RetrieveDescription(
+func (mo *Profile) RetrieveDescription(
 	_this *ManagedObjectReference,
 ) (*ProfileDescription, error) {
 
@@ -44842,6 +46113,7 @@ type ProfileChangedEvent struct {
 // Interface handling the Compliance aspects of entities.
 //
 type ProfileComplianceManager struct {
+	*ManagedObject
 }
 
 //
@@ -44850,7 +46122,7 @@ type ProfileComplianceManager struct {
 // Required Privileges
 // System.View
 //
-func (api *ProfileComplianceManager) CheckCompliance_Task(
+func (mo *ProfileComplianceManager) CheckCompliance_Task(
 	_this *ManagedObjectReference, profile []*Profile, entity []*ManagedEntity,
 ) (*Task, error) {
 
@@ -44864,7 +46136,7 @@ func (api *ProfileComplianceManager) CheckCompliance_Task(
 // Required Privileges
 // Profile.Clear
 //
-func (api *ProfileComplianceManager) ClearComplianceStatus(
+func (mo *ProfileComplianceManager) ClearComplianceStatus(
 	_this *ManagedObjectReference, profile []*Profile, entity []*ManagedEntity,
 ) error {
 
@@ -44878,7 +46150,7 @@ func (api *ProfileComplianceManager) ClearComplianceStatus(
 // Required Privileges
 // System.View
 //
-func (api *ProfileComplianceManager) QueryComplianceStatus(
+func (mo *ProfileComplianceManager) QueryComplianceStatus(
 	_this *ManagedObjectReference, profile []*Profile, entity []*ManagedEntity,
 ) ([]*ComplianceResult, error) {
 
@@ -44892,7 +46164,7 @@ func (api *ProfileComplianceManager) QueryComplianceStatus(
 // Required Privileges
 // System.View
 //
-func (api *ProfileComplianceManager) QueryExpressionMetadata(
+func (mo *ProfileComplianceManager) QueryExpressionMetadata(
 	_this *ManagedObjectReference, expressionName []string, profile *Profile,
 ) ([]*ProfileExpressionMetadata, error) {
 
@@ -45164,6 +46436,16 @@ type ProfileExecuteResult struct {
 	Status string
 }
 
+//
+// Defines the result status values for a
+// HostProfile.ExecuteHostProfile
+// operation. The result data is contained in the
+// ProfileExecuteResult data object.
+//
+//
+type ProfileExecuteResultStatus struct {
+}
+
 type ProfileExpression struct {
 	*DynamicData
 
@@ -45198,6 +46480,7 @@ type ProfileExpressionMetadata struct {
 // This Class is responsible for managing Profiles.
 //
 type ProfileManager struct {
+	*ManagedObject
 
 	// A list of profiles known to this ProfileManager.
 	// Required Privilege: Profile.View
@@ -45210,7 +46493,7 @@ type ProfileManager struct {
 // Required Privileges
 // Profile.Create
 //
-func (api *ProfileManager) CreateProfile(
+func (mo *ProfileManager) CreateProfile(
 	_this *ManagedObjectReference, createSpec *ProfileCreateSpec,
 ) (*Profile, error) {
 
@@ -45226,7 +46509,7 @@ func (api *ProfileManager) CreateProfile(
 // Required Privileges
 // System.View
 //
-func (api *ProfileManager) FindAssociatedProfile(
+func (mo *ProfileManager) FindAssociatedProfile(
 	_this *ManagedObjectReference, entity *ManagedEntity,
 ) ([]*Profile, error) {
 
@@ -45242,7 +46525,7 @@ func (api *ProfileManager) FindAssociatedProfile(
 // Required Privileges
 // System.View
 //
-func (api *ProfileManager) QueryPolicyMetadata(
+func (mo *ProfileManager) QueryPolicyMetadata(
 	_this *ManagedObjectReference, policyName []string, profile *Profile,
 ) ([]*ProfilePolicyMetadata, error) {
 
@@ -45310,6 +46593,14 @@ type ProfileMetadataProfileSortSpec struct {
 
 	// The id of the policy used to sort instances of the profile
 	PolicyId string
+}
+
+//
+// Enumerates different operations supported for comparing
+// numerical values.
+//
+//
+type ProfileNumericComparator struct {
 }
 
 //
@@ -45541,6 +46832,13 @@ type PropertyChange struct {
 }
 
 //
+// Enumeration of possible changes to a property.
+//
+//
+type PropertyChangeOp struct {
+}
+
+//
 // The PropertyCollector managed object retrieves and detects changes
 // to the properties of other managed objects. The RetrievePropertiesEx method provides one-time property retrieval. The
 // WaitForUpdatesEx method provides incremental change detection and
@@ -45569,6 +46867,7 @@ type PropertyChange struct {
 //
 //
 type PropertyCollector struct {
+	*ManagedObject
 
 	// The filters that this PropertyCollector uses to determine the list of
 	// properties for which it detects incremental changes.
@@ -45584,7 +46883,7 @@ type PropertyCollector struct {
 // Since
 // vSphere API 4.1
 //
-func (api *PropertyCollector) CancelRetrievePropertiesEx(
+func (mo *PropertyCollector) CancelRetrievePropertiesEx(
 	_this *ManagedObjectReference, token string,
 ) error {
 
@@ -45600,7 +46899,7 @@ func (api *PropertyCollector) CancelRetrievePropertiesEx(
 // Required Privileges
 // System.View
 //
-func (api *PropertyCollector) CancelWaitForUpdates(
+func (mo *PropertyCollector) CancelWaitForUpdates(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -45620,7 +46919,7 @@ func (api *PropertyCollector) CancelWaitForUpdates(
 // Required Privileges
 // System.View
 //
-func (api *PropertyCollector) CheckForUpdates(
+func (mo *PropertyCollector) CheckForUpdates(
 	_this *ManagedObjectReference, version string,
 ) (*UpdateSet, error) {
 
@@ -45636,7 +46935,7 @@ func (api *PropertyCollector) CheckForUpdates(
 // Since
 // vSphere API 4.1
 //
-func (api *PropertyCollector) ContinueRetrievePropertiesEx(
+func (mo *PropertyCollector) ContinueRetrievePropertiesEx(
 	_this *ManagedObjectReference, token string,
 ) (*RetrieveResult, error) {
 
@@ -45650,7 +46949,7 @@ func (api *PropertyCollector) ContinueRetrievePropertiesEx(
 // Required Privileges
 // System.View
 //
-func (api *PropertyCollector) CreateFilter(
+func (mo *PropertyCollector) CreateFilter(
 	_this *ManagedObjectReference, spec *PropertyFilterSpec, partialUpdates bool,
 ) (*PropertyFilter, error) {
 
@@ -45706,7 +47005,7 @@ func (api *PropertyCollector) CreateFilter(
 // Since
 // vSphere API 4.1
 //
-func (api *PropertyCollector) CreatePropertyCollector(
+func (mo *PropertyCollector) CreatePropertyCollector(
 	_this *ManagedObjectReference,
 ) (*PropertyCollector, error) {
 
@@ -45732,7 +47031,7 @@ func (api *PropertyCollector) CreatePropertyCollector(
 // Since
 // vSphere API 4.1
 //
-func (api *PropertyCollector) DestroyPropertyCollector(
+func (mo *PropertyCollector) DestroyPropertyCollector(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -45758,7 +47057,7 @@ func (api *PropertyCollector) DestroyPropertyCollector(
 // Required Privileges
 // System.Anonymous
 //
-func (api *PropertyCollector) RetrieveProperties(
+func (mo *PropertyCollector) RetrieveProperties(
 	_this *ManagedObjectReference, specSet []*PropertyFilterSpec,
 ) ([]*ObjectContent, error) {
 
@@ -45783,7 +47082,7 @@ func (api *PropertyCollector) RetrieveProperties(
 // Since
 // vSphere API 4.1
 //
-func (api *PropertyCollector) RetrievePropertiesEx(
+func (mo *PropertyCollector) RetrievePropertiesEx(
 	_this *ManagedObjectReference, specSet []*PropertyFilterSpec, options *RetrieveOptions,
 ) (*RetrieveResult, error) {
 
@@ -45801,7 +47100,7 @@ func (api *PropertyCollector) RetrievePropertiesEx(
 // Required Privileges
 // System.View
 //
-func (api *PropertyCollector) WaitForUpdates(
+func (mo *PropertyCollector) WaitForUpdates(
 	_this *ManagedObjectReference, version string,
 ) (*UpdateSet, error) {
 
@@ -45830,7 +47129,7 @@ func (api *PropertyCollector) WaitForUpdates(
 // Since
 // vSphere API 4.1
 //
-func (api *PropertyCollector) WaitForUpdatesEx(
+func (mo *PropertyCollector) WaitForUpdatesEx(
 	_this *ManagedObjectReference, version string, options *WaitOptions,
 ) (*UpdateSet, error) {
 
@@ -45847,6 +47146,7 @@ func (api *PropertyCollector) WaitForUpdatesEx(
 // destroyed.
 //
 type PropertyFilter struct {
+	*ManagedObject
 
 	// Flag to indicate if a change to a nested property reports only the
 	// nested change or the entire specified property value.  If the value is
@@ -45868,7 +47168,7 @@ type PropertyFilter struct {
 // Required Privileges
 // None
 //
-func (api *PropertyFilter) DestroyPropertyFilter(
+func (mo *PropertyFilter) DestroyPropertyFilter(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -46464,6 +47764,21 @@ type RebootRequired struct {
 }
 
 //
+// List of defined migration reason codes:
+//
+//
+type RecommendationReasonCode struct {
+}
+
+//
+// Pre-defined constants for possible recommendation types. Virtual Center
+// uses this information to coordinate with the clients.
+//
+//
+type RecommendationType struct {
+}
+
+//
 // Fault thrown if a record or replay operation cannot be performed
 // because these capabilities have been disabled on the virtual machine.
 //
@@ -46563,6 +47878,9 @@ type ReplicationDiskConfigFault struct {
 	VmRef *VirtualMachine
 }
 
+type ReplicationDiskConfigFaultReasonForFault struct {
+}
+
 //
 // Base type for Replication-related errors.
 //
@@ -46637,6 +47955,9 @@ type ReplicationVmConfigFault struct {
 	VmRef *VirtualMachine
 }
 
+type ReplicationVmConfigFaultReasonForFault struct {
+}
+
 //
 // A ReplicationVmFault is thrown when there is an issue with
 // an operation performed on a replicated VirtualMachine
@@ -46657,6 +47978,9 @@ type ReplicationVmFault struct {
 
 	// The virtual machine, for identification purposes.
 	Vm *VirtualMachine
+}
+
+type ReplicationVmFaultReasonForFault struct {
 }
 
 //
@@ -46699,6 +48023,13 @@ type ReplicationVmProgressInfo struct {
 	// An estimation of the operation progress as a percentage completed,
 	// from 0 to 100.
 	Progress int32
+}
+
+//
+// Describes the current state of a replicated VirtualMachine
+//
+//
+type ReplicationVmState struct {
 }
 
 //
@@ -46871,6 +48202,7 @@ type ResourceNotAvailable struct {
 }
 
 type ResourcePlanningManager struct {
+	*ManagedObject
 }
 
 //
@@ -46881,7 +48213,7 @@ type ResourcePlanningManager struct {
 // Required Privileges
 // System.Read
 //
-func (api *ResourcePlanningManager) EstimateDatabaseSize(
+func (mo *ResourcePlanningManager) EstimateDatabaseSize(
 	_this *ManagedObjectReference, dbSizeParam *DatabaseSizeParam,
 ) (*DatabaseSizeEstimate, error) {
 
@@ -47100,7 +48432,7 @@ type ResourcePool struct {
 // Since
 // vSphere API 4.0
 //
-func (api *ResourcePool) CreateChildVM_Task(
+func (mo *ResourcePool) CreateChildVM_Task(
 	_this *ManagedObjectReference, config *VirtualMachineConfigSpec, host *HostSystem,
 ) (*Task, error) {
 
@@ -47123,7 +48455,7 @@ func (api *ResourcePool) CreateChildVM_Task(
 // Required Privileges
 // Resource.CreatePool
 //
-func (api *ResourcePool) CreateResourcePool(
+func (mo *ResourcePool) CreateResourcePool(
 	_this *ManagedObjectReference, name string, spec *ResourceConfigSpec,
 ) (*ResourcePool, error) {
 
@@ -47144,7 +48476,7 @@ func (api *ResourcePool) CreateResourcePool(
 // Since
 // vSphere API 4.0
 //
-func (api *ResourcePool) CreateVApp(
+func (mo *ResourcePool) CreateVApp(
 	_this *ManagedObjectReference, name string, resSpec *ResourceConfigSpec, configSpec *VAppConfigSpec, vmFolder *Folder,
 ) (*VirtualApp, error) {
 
@@ -47182,7 +48514,7 @@ func (api *ResourcePool) CreateVApp(
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *ResourcePool) DestroyChildren(
+func (mo *ResourcePool) DestroyChildren(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -47241,7 +48573,7 @@ func (api *ResourcePool) DestroyChildren(
 // Since
 // vSphere API 4.0
 //
-func (api *ResourcePool) ImportVApp(
+func (mo *ResourcePool) ImportVApp(
 	_this *ManagedObjectReference, spec *ImportSpec, folder *Folder, host *HostSystem,
 ) (*HttpNfcLease, error) {
 
@@ -47297,7 +48629,7 @@ func (api *ResourcePool) ImportVApp(
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *ResourcePool) MoveIntoResourcePool(
+func (mo *ResourcePool) MoveIntoResourcePool(
 	_this *ManagedObjectReference, list []*ManagedEntity,
 ) error {
 
@@ -47313,7 +48645,7 @@ func (api *ResourcePool) MoveIntoResourcePool(
 // Since
 // vSphere API 4.1
 //
-func (api *ResourcePool) QueryResourceConfigOption(
+func (mo *ResourcePool) QueryResourceConfigOption(
 	_this *ManagedObjectReference,
 ) (*ResourceConfigOption, error) {
 
@@ -47335,7 +48667,7 @@ func (api *ResourcePool) QueryResourceConfigOption(
 // Since
 // vSphere API 4.1
 //
-func (api *ResourcePool) RefreshRuntime(
+func (mo *ResourcePool) RefreshRuntime(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -47364,7 +48696,7 @@ func (api *ResourcePool) RefreshRuntime(
 // Since
 // vSphere API 4.0
 //
-func (api *ResourcePool) RegisterChildVM_Task(
+func (mo *ResourcePool) RegisterChildVM_Task(
 	_this *ManagedObjectReference, path string, name string, host *HostSystem,
 ) (*Task, error) {
 
@@ -47403,7 +48735,7 @@ func (api *ResourcePool) RegisterChildVM_Task(
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *ResourcePool) UpdateChildResourceConfiguration(
+func (mo *ResourcePool) UpdateChildResourceConfiguration(
 	_this *ManagedObjectReference, spec []*ResourceConfigSpec,
 ) error {
 
@@ -47435,7 +48767,7 @@ func (api *ResourcePool) UpdateChildResourceConfiguration(
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *ResourcePool) UpdateConfig(
+func (mo *ResourcePool) UpdateConfig(
 	_this *ManagedObjectReference, name string, config *ResourceConfigSpec,
 ) error {
 
@@ -48020,6 +49352,21 @@ type ScheduledHardwareUpgradeInfo struct {
 }
 
 //
+// The policy setting used to determine when to perform scheduled
+// upgrades for a virtual machine.
+//
+//
+type ScheduledHardwareUpgradeInfoHardwareUpgradePolicy struct {
+}
+
+//
+// Status for last attempt to run scheduled hardware upgrade.
+//
+//
+type ScheduledHardwareUpgradeInfoHardwareUpgradeStatus struct {
+}
+
+//
 // The scheduled task object.
 //
 type ScheduledTask struct {
@@ -48035,7 +49382,7 @@ type ScheduledTask struct {
 // Required Privileges
 // ScheduledTask.Edit
 //
-func (api *ScheduledTask) ReconfigureScheduledTask(
+func (mo *ScheduledTask) ReconfigureScheduledTask(
 	_this *ManagedObjectReference, spec *ScheduledTaskSpec,
 ) error {
 
@@ -48049,7 +49396,7 @@ func (api *ScheduledTask) ReconfigureScheduledTask(
 // Required Privileges
 // ScheduledTask.Delete
 //
-func (api *ScheduledTask) RemoveScheduledTask(
+func (mo *ScheduledTask) RemoveScheduledTask(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -48064,7 +49411,7 @@ func (api *ScheduledTask) RemoveScheduledTask(
 // Required Privileges
 // ScheduledTask.Run
 //
-func (api *ScheduledTask) RunScheduledTask(
+func (mo *ScheduledTask) RunScheduledTask(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -48243,6 +49590,7 @@ type ScheduledTaskInfo struct {
 // Object manager for scheduled tasks.
 //
 type ScheduledTaskManager struct {
+	*ManagedObject
 
 	// Static descriptive strings used in scheduled tasks.
 	// Required Privilege: System.View
@@ -48261,7 +49609,7 @@ type ScheduledTaskManager struct {
 // Since
 // vSphere API 4.0
 //
-func (api *ScheduledTaskManager) CreateObjectScheduledTask(
+func (mo *ScheduledTaskManager) CreateObjectScheduledTask(
 	_this *ManagedObjectReference, obj *ManagedObjectReference, spec *ScheduledTaskSpec,
 ) (*ScheduledTask, error) {
 
@@ -48275,7 +49623,7 @@ func (api *ScheduledTaskManager) CreateObjectScheduledTask(
 // Required Privileges
 // None
 //
-func (api *ScheduledTaskManager) CreateScheduledTask(
+func (mo *ScheduledTaskManager) CreateScheduledTask(
 	_this *ManagedObjectReference, entity *ManagedEntity, spec *ScheduledTaskSpec,
 ) (*ScheduledTask, error) {
 
@@ -48291,7 +49639,7 @@ func (api *ScheduledTaskManager) CreateScheduledTask(
 // Required Privileges
 // System.View
 //
-func (api *ScheduledTaskManager) RetrieveEntityScheduledTask(
+func (mo *ScheduledTaskManager) RetrieveEntityScheduledTask(
 	_this *ManagedObjectReference, entity *ManagedEntity,
 ) ([]*ScheduledTask, error) {
 
@@ -48309,7 +49657,7 @@ func (api *ScheduledTaskManager) RetrieveEntityScheduledTask(
 // Since
 // vSphere API 4.0
 //
-func (api *ScheduledTaskManager) RetrieveObjectScheduledTask(
+func (mo *ScheduledTaskManager) RetrieveObjectScheduledTask(
 	_this *ManagedObjectReference, obj *ManagedObjectReference,
 ) ([]*ScheduledTask, error) {
 
@@ -48574,6 +49922,14 @@ type ScsiLunDescriptor struct {
 }
 
 //
+// An indicator of the utility of Descriptor in being used as an
+// identifier that is stable, unique, and correlatable.
+//
+//
+type ScsiLunDescriptorQuality struct {
+}
+
+//
 // This data object type represents an SMI-S "Correlatable and
 // Durable Name" which is an
 // identifier for a logical unit number (LUN) that is generated using
@@ -48601,6 +49957,32 @@ type ScsiLunDurableName struct {
 }
 
 //
+// The Operational state of the LUN
+//
+//
+type ScsiLunState struct {
+}
+
+//
+// The list of SCSI device types.  These values correspond to values
+// published in the SCSI specification.
+//
+//
+type ScsiLunType struct {
+}
+
+//
+// Storage array hardware acceleration support status.
+// When a host boots, the support status is unknown.
+// As a host attempts hardware-accelerated operations,
+// it determines whether the storage device supports hardware acceleration
+// and sets the vStorageSupport property accordingly.
+//
+//
+type ScsiLunVStorageSupportStatus struct {
+}
+
+//
 // Specification used to create an Flex-SE based virtual disk
 //
 //
@@ -48624,6 +50006,7 @@ type SeSparseVirtualDiskSpec struct {
 // matches the search criteria, that object is not returned.
 //
 type SearchIndex struct {
+	*ManagedObject
 }
 
 //
@@ -48635,7 +50018,7 @@ type SearchIndex struct {
 // Since
 // vSphere API 4.0
 //
-func (api *SearchIndex) FindAllByDnsName(
+func (mo *SearchIndex) FindAllByDnsName(
 	_this *ManagedObjectReference, datacenter *Datacenter, dnsName string, vmSearch bool,
 ) ([]*ManagedEntity, error) {
 
@@ -48653,7 +50036,7 @@ func (api *SearchIndex) FindAllByDnsName(
 // Since
 // vSphere API 4.0
 //
-func (api *SearchIndex) FindAllByIp(
+func (mo *SearchIndex) FindAllByIp(
 	_this *ManagedObjectReference, datacenter *Datacenter, ip string, vmSearch bool,
 ) ([]*ManagedEntity, error) {
 
@@ -48669,7 +50052,7 @@ func (api *SearchIndex) FindAllByIp(
 // Since
 // vSphere API 4.0
 //
-func (api *SearchIndex) FindAllByUuid(
+func (mo *SearchIndex) FindAllByUuid(
 	_this *ManagedObjectReference, datacenter *Datacenter, uuid string, vmSearch bool, instanceUuid bool,
 ) ([]*ManagedEntity, error) {
 
@@ -48683,7 +50066,7 @@ func (api *SearchIndex) FindAllByUuid(
 // Required Privileges
 // System.View
 //
-func (api *SearchIndex) FindByDatastorePath(
+func (mo *SearchIndex) FindByDatastorePath(
 	_this *ManagedObjectReference, datacenter *Datacenter, path string,
 ) (*VirtualMachine, error) {
 
@@ -48698,7 +50081,7 @@ func (api *SearchIndex) FindByDatastorePath(
 // Required Privileges
 // System.View
 //
-func (api *SearchIndex) FindByDnsName(
+func (mo *SearchIndex) FindByDnsName(
 	_this *ManagedObjectReference, datacenter *Datacenter, dnsName string, vmSearch bool,
 ) (*ManagedEntity, error) {
 
@@ -48718,7 +50101,7 @@ func (api *SearchIndex) FindByDnsName(
 // Required Privileges
 // System.View
 //
-func (api *SearchIndex) FindByInventoryPath(
+func (mo *SearchIndex) FindByInventoryPath(
 	_this *ManagedObjectReference, inventoryPath string,
 ) (*ManagedEntity, error) {
 
@@ -48734,7 +50117,7 @@ func (api *SearchIndex) FindByInventoryPath(
 // Required Privileges
 // System.View
 //
-func (api *SearchIndex) FindByIp(
+func (mo *SearchIndex) FindByIp(
 	_this *ManagedObjectReference, datacenter *Datacenter, ip string, vmSearch bool,
 ) (*ManagedEntity, error) {
 
@@ -48748,7 +50131,7 @@ func (api *SearchIndex) FindByIp(
 // Required Privileges
 // System.View
 //
-func (api *SearchIndex) FindByUuid(
+func (mo *SearchIndex) FindByUuid(
 	_this *ManagedObjectReference, datacenter *Datacenter, uuid string, vmSearch bool, instanceUuid bool,
 ) (*ManagedEntity, error) {
 
@@ -48767,7 +50150,7 @@ func (api *SearchIndex) FindByUuid(
 // Required Privileges
 // System.View
 //
-func (api *SearchIndex) FindChild(
+func (mo *SearchIndex) FindChild(
 	_this *ManagedObjectReference, entity *ManagedEntity, name string,
 ) (*ManagedEntity, error) {
 
@@ -49259,6 +50642,7 @@ type ServiceContent struct {
 //
 //
 type ServiceInstance struct {
+	*ManagedObject
 
 	// API-wide capabilities.
 	// Required Privilege: System.View
@@ -49296,7 +50680,7 @@ type ServiceInstance struct {
 // Required Privileges
 // System.View
 //
-func (api *ServiceInstance) CurrentTime(
+func (mo *ServiceInstance) CurrentTime(
 	_this *ManagedObjectReference,
 ) (time.Time, error) {
 
@@ -49316,7 +50700,7 @@ func (api *ServiceInstance) CurrentTime(
 // Required Privileges
 // Resource.QueryVMotion
 //
-func (api *ServiceInstance) QueryVMotionCompatibility(
+func (mo *ServiceInstance) QueryVMotionCompatibility(
 	_this *ManagedObjectReference, vm *VirtualMachine, host []*HostSystem, compatibility []string,
 ) ([]*HostVMotionCompatibility, error) {
 
@@ -49332,7 +50716,7 @@ func (api *ServiceInstance) QueryVMotionCompatibility(
 // Since
 // VI API 2.5
 //
-func (api *ServiceInstance) RetrieveProductComponents(
+func (mo *ServiceInstance) RetrieveProductComponents(
 	_this *ManagedObjectReference,
 ) ([]*ProductComponentInfo, error) {
 
@@ -49346,7 +50730,7 @@ func (api *ServiceInstance) RetrieveProductComponents(
 // Required Privileges
 // System.Anonymous
 //
-func (api *ServiceInstance) RetrieveServiceContent(
+func (mo *ServiceInstance) RetrieveServiceContent(
 	_this *ManagedObjectReference,
 ) (*ServiceContent, error) {
 
@@ -49368,7 +50752,7 @@ func (api *ServiceInstance) RetrieveServiceContent(
 // Required Privileges
 // System.View
 //
-func (api *ServiceInstance) ValidateMigration(
+func (mo *ServiceInstance) ValidateMigration(
 	_this *ManagedObjectReference, vm []*VirtualMachine, state *enum.VirtualMachinePowerState, testType []string, pool *ResourcePool, host *HostSystem,
 ) ([]*Event, error) {
 
@@ -49387,6 +50771,7 @@ func (api *ServiceInstance) ValidateMigration(
 // is interested in using.
 //
 type ServiceManager struct {
+	*ManagedObject
 
 	// The full list of services available in this directory.
 	// Required Privilege: Global.ServiceManagers
@@ -49404,7 +50789,7 @@ type ServiceManager struct {
 // Required Privileges
 // Global.ServiceManagers
 //
-func (api *ServiceManager) QueryServiceList(
+func (mo *ServiceManager) QueryServiceList(
 	_this *ManagedObjectReference, serviceName string, location []string,
 ) ([]*ServiceManagerServiceInfo, error) {
 
@@ -49472,6 +50857,7 @@ type SessionEvent struct {
 // logged on, and forcing clients to log off.
 //
 type SessionManager struct {
+	*ManagedObject
 
 	// This property contains information about the client's current session.
 	// If the client is not logged on, the value is null.
@@ -49526,7 +50912,7 @@ type SessionManager struct {
 // Since
 // vSphere API 4.0
 //
-func (api *SessionManager) AcquireCloneTicket(
+func (mo *SessionManager) AcquireCloneTicket(
 	_this *ManagedObjectReference,
 ) (string, error) {
 
@@ -49543,7 +50929,7 @@ func (api *SessionManager) AcquireCloneTicket(
 // Since
 // vSphere API 5.0
 //
-func (api *SessionManager) AcquireGenericServiceTicket(
+func (mo *SessionManager) AcquireGenericServiceTicket(
 	_this *ManagedObjectReference, spec *SessionManagerServiceRequestSpec,
 ) (*SessionManagerGenericServiceTicket, error) {
 
@@ -49577,7 +50963,7 @@ func (api *SessionManager) AcquireGenericServiceTicket(
 // Required Privileges
 // System.Anonymous
 //
-func (api *SessionManager) AcquireLocalTicket(
+func (mo *SessionManager) AcquireLocalTicket(
 	_this *ManagedObjectReference, userName string,
 ) (*SessionManagerLocalTicket, error) {
 
@@ -49596,7 +50982,7 @@ func (api *SessionManager) AcquireLocalTicket(
 // Since
 // vSphere API 4.0
 //
-func (api *SessionManager) CloneSession(
+func (mo *SessionManager) CloneSession(
 	_this *ManagedObjectReference, cloneTicket string,
 ) (*UserSession, error) {
 
@@ -49618,7 +51004,7 @@ func (api *SessionManager) CloneSession(
 // Since
 // VI API 2.5
 //
-func (api *SessionManager) ImpersonateUser(
+func (mo *SessionManager) ImpersonateUser(
 	_this *ManagedObjectReference, userName string, locale string,
 ) (*UserSession, error) {
 
@@ -49633,7 +51019,7 @@ func (api *SessionManager) ImpersonateUser(
 // Required Privileges
 // System.Anonymous
 //
-func (api *SessionManager) Login(
+func (mo *SessionManager) Login(
 	_this *ManagedObjectReference, userName string, password string, locale string,
 ) (*UserSession, error) {
 
@@ -49673,7 +51059,7 @@ func (api *SessionManager) Login(
 // Since
 // VI API 2.5
 //
-func (api *SessionManager) LoginBySSPI(
+func (mo *SessionManager) LoginBySSPI(
 	_this *ManagedObjectReference, base64Token string, locale string,
 ) (*UserSession, error) {
 
@@ -49720,7 +51106,7 @@ func (api *SessionManager) LoginBySSPI(
 // Since
 // vSphere API 5.1
 //
-func (api *SessionManager) LoginByToken(
+func (mo *SessionManager) LoginByToken(
 	_this *ManagedObjectReference, locale string,
 ) (*UserSession, error) {
 
@@ -49746,7 +51132,7 @@ func (api *SessionManager) LoginByToken(
 // Since
 // vSphere API 4.0
 //
-func (api *SessionManager) LoginExtensionByCertificate(
+func (mo *SessionManager) LoginExtensionByCertificate(
 	_this *ManagedObjectReference, extensionKey string, locale string,
 ) (*UserSession, error) {
 
@@ -49769,7 +51155,7 @@ func (api *SessionManager) LoginExtensionByCertificate(
 // Since
 // vSphere API 4.0
 //
-func (api *SessionManager) LoginExtensionBySubjectName(
+func (mo *SessionManager) LoginExtensionBySubjectName(
 	_this *ManagedObjectReference, extensionKey string, locale string,
 ) (*UserSession, error) {
 
@@ -49783,7 +51169,7 @@ func (api *SessionManager) LoginExtensionBySubjectName(
 // Required Privileges
 // System.View
 //
-func (api *SessionManager) Logout(
+func (mo *SessionManager) Logout(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -49801,7 +51187,7 @@ func (api *SessionManager) Logout(
 // Since
 // VI API 2.5
 //
-func (api *SessionManager) SessionIsActive(
+func (mo *SessionManager) SessionIsActive(
 	_this *ManagedObjectReference, sessionID string, userName string,
 ) (bool, error) {
 
@@ -49815,7 +51201,7 @@ func (api *SessionManager) SessionIsActive(
 // Required Privileges
 // System.View
 //
-func (api *SessionManager) SetLocale(
+func (mo *SessionManager) SetLocale(
 	_this *ManagedObjectReference, locale string,
 ) error {
 
@@ -49836,7 +51222,7 @@ func (api *SessionManager) SetLocale(
 // Required Privileges
 // Sessions.TerminateSession
 //
-func (api *SessionManager) TerminateSession(
+func (mo *SessionManager) TerminateSession(
 	_this *ManagedObjectReference, sessionId []string,
 ) error {
 
@@ -49852,7 +51238,7 @@ func (api *SessionManager) TerminateSession(
 // Required Privileges
 // Sessions.GlobalMessage
 //
-func (api *SessionManager) UpdateServiceMessage(
+func (mo *SessionManager) UpdateServiceMessage(
 	_this *ManagedObjectReference, message string,
 ) error {
 
@@ -49913,6 +51299,13 @@ type SessionManagerHttpServiceRequestSpec struct {
 	// This is so because the scheme is not known to the CGI service,
 	// and the port may not be the same if using a proxy.
 	Url string
+}
+
+//
+// HTTP request methods.
+//
+//
+type SessionManagerHttpServiceRequestSpecMethod struct {
 }
 
 //
@@ -50014,6 +51407,14 @@ type SharesInfo struct {
 }
 
 //
+// Simplified shares notation.
+// These designations have different meanings for different resources.
+//
+//
+type SharesLevel struct {
+}
+
+//
 // Specification of shares.
 //
 // Object of this class specifies value ranges for object of
@@ -50051,6 +51452,7 @@ type ShrinkDiskFault struct {
 // presents a generic interface for such services.
 //
 type SimpleCommand struct {
+	*ManagedObject
 
 	// The encoding type used in the result.
 	EncodingType *enum.SimpleCommandEncoding
@@ -50066,12 +51468,20 @@ type SimpleCommand struct {
 // Required Privileges
 // Global.ServiceManagers
 //
-func (api *SimpleCommand) ExecuteSimpleCommand(
+func (mo *SimpleCommand) ExecuteSimpleCommand(
 	_this *ManagedObjectReference, arguments []string,
 ) (string, error) {
 
 	return nil, nil
 
+}
+
+//
+// The encoding of the resultant return data. This is a hint to the client side
+// to indicate the format of the information being returned.
+//
+//
+type SimpleCommandEncoding struct {
 }
 
 //
@@ -50097,6 +51507,13 @@ type SingleMac struct {
 	// The MAC address. The value for this property should be in the form
 	// like "00:50:56:bc:ef:ab".
 	Address string
+}
+
+//
+// The available SLP discovery methods.
+//
+//
+type SlpDiscoveryMethod struct {
 }
 
 //
@@ -50324,6 +51741,13 @@ type StateAlarmExpression struct {
 	// Whether or not to test for a yellow condition.
 	// If this property is not set, do not calculate yellow status.
 	Yellow string
+}
+
+//
+// The operation on the target state.
+//
+//
+type StateAlarmOperator struct {
 }
 
 //
@@ -50595,6 +52019,13 @@ type StorageDrsPodConfigInfo struct {
 
 	// The configuration settings for load balancing storage space.
 	SpaceLoadBalanceConfig *StorageDrsSpaceLoadBalanceConfig
+}
+
+//
+// Storage DRS behavior.
+//
+//
+type StorageDrsPodConfigInfoBehavior struct {
 }
 
 //
@@ -50935,6 +52366,17 @@ type StorageIORMInfo struct {
 }
 
 //
+// User specification of congestion threshold mode on a given datastore
+//
+// For more information, see
+// congestionThreshold
+//
+//
+//
+type StorageIORMThresholdMode struct {
+}
+
+//
 // Describes a single storage migration action. The storage migration
 // action applies either to a virtual machine or a set of virtual disks.
 //
@@ -51172,6 +52614,15 @@ type StoragePlacementSpec struct {
 }
 
 //
+// Defines the storage placement operation type.
+//
+//
+//
+//
+type StoragePlacementSpecPlacementType struct {
+}
+
+//
 // The StoragePod data object aggregates the storage
 // resources of associated Datastore objects into a single
 // storage resource for use by virtual machines. The storage services
@@ -51186,6 +52637,8 @@ type StoragePlacementSpec struct {
 //
 //
 type StoragePod struct {
+	*ManagedObject
+
 	*Folder
 
 	// Storage DRS related attributes of the Storage Pod.
@@ -51256,6 +52709,7 @@ type StorageRequirement struct {
 // storage resources.
 //
 type StorageResourceManager struct {
+	*ManagedObject
 }
 
 //
@@ -51287,7 +52741,7 @@ type StorageResourceManager struct {
 // Since
 // vSphere API 5.0
 //
-func (api *StorageResourceManager) ApplyStorageDrsRecommendation_Task(
+func (mo *StorageResourceManager) ApplyStorageDrsRecommendation_Task(
 	_this *ManagedObjectReference, key []string,
 ) (*Task, error) {
 
@@ -51313,7 +52767,7 @@ func (api *StorageResourceManager) ApplyStorageDrsRecommendation_Task(
 // Since
 // vSphere API 5.0
 //
-func (api *StorageResourceManager) ApplyStorageDrsRecommendationToPod_Task(
+func (mo *StorageResourceManager) ApplyStorageDrsRecommendationToPod_Task(
 	_this *ManagedObjectReference, pod *StoragePod, key string,
 ) (*Task, error) {
 
@@ -51332,7 +52786,7 @@ func (api *StorageResourceManager) ApplyStorageDrsRecommendationToPod_Task(
 // Since
 // vSphere API 5.0
 //
-func (api *StorageResourceManager) CancelStorageDrsRecommendation(
+func (mo *StorageResourceManager) CancelStorageDrsRecommendation(
 	_this *ManagedObjectReference, key []string,
 ) error {
 
@@ -51355,7 +52809,7 @@ func (api *StorageResourceManager) CancelStorageDrsRecommendation(
 // Required Privileges
 // None
 //
-func (api *StorageResourceManager) ConfigureDatastoreIORM_Task(
+func (mo *StorageResourceManager) ConfigureDatastoreIORM_Task(
 	_this *ManagedObjectReference, datastore *Datastore, spec *StorageIORMConfigSpec,
 ) (*Task, error) {
 
@@ -51373,7 +52827,7 @@ func (api *StorageResourceManager) ConfigureDatastoreIORM_Task(
 // Since
 // vSphere API 5.0
 //
-func (api *StorageResourceManager) ConfigureStorageDrsForPod_Task(
+func (mo *StorageResourceManager) ConfigureStorageDrsForPod_Task(
 	_this *ManagedObjectReference, pod *StoragePod, spec *StorageDrsConfigSpec, modify bool,
 ) (*Task, error) {
 
@@ -51396,7 +52850,7 @@ func (api *StorageResourceManager) ConfigureStorageDrsForPod_Task(
 // Since
 // vSphere API 5.1
 //
-func (api *StorageResourceManager) QueryDatastorePerformanceSummary(
+func (mo *StorageResourceManager) QueryDatastorePerformanceSummary(
 	_this *ManagedObjectReference, datastore *Datastore,
 ) ([]*StoragePerformanceSummary, error) {
 
@@ -51412,7 +52866,7 @@ func (api *StorageResourceManager) QueryDatastorePerformanceSummary(
 // Required Privileges
 // Datastore.Config
 //
-func (api *StorageResourceManager) QueryIORMConfigOption(
+func (mo *StorageResourceManager) QueryIORMConfigOption(
 	_this *ManagedObjectReference, host *HostSystem,
 ) (*StorageIORMConfigOption, error) {
 
@@ -51508,7 +52962,7 @@ func (api *StorageResourceManager) QueryIORMConfigOption(
 // Since
 // vSphere API 5.0
 //
-func (api *StorageResourceManager) RecommendDatastores(
+func (mo *StorageResourceManager) RecommendDatastores(
 	_this *ManagedObjectReference, storageSpec *StoragePlacementSpec,
 ) (*StoragePlacementResult, error) {
 
@@ -51528,7 +52982,7 @@ func (api *StorageResourceManager) RecommendDatastores(
 // Since
 // vSphere API 5.0
 //
-func (api *StorageResourceManager) RefreshStorageDrsRecommendation(
+func (mo *StorageResourceManager) RefreshStorageDrsRecommendation(
 	_this *ManagedObjectReference, pod *StoragePod,
 ) error {
 
@@ -51716,7 +53170,7 @@ type Task struct {
 // Required Privileges
 // Global.CancelTask
 //
-func (api *Task) CancelTask(
+func (mo *Task) CancelTask(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -51734,7 +53188,7 @@ func (api *Task) CancelTask(
 // Since
 // vSphere API 4.0
 //
-func (api *Task) SetTaskDescription(
+func (mo *Task) SetTaskDescription(
 	_this *ManagedObjectReference, description *LocalizableMessage,
 ) error {
 
@@ -51753,7 +53207,7 @@ func (api *Task) SetTaskDescription(
 // Since
 // VI API 2.5
 //
-func (api *Task) SetTaskState(
+func (mo *Task) SetTaskState(
 	_this *ManagedObjectReference, state *enum.TaskInfoState, result interface{}, fault *MethodFault,
 ) error {
 
@@ -51774,7 +53228,7 @@ func (api *Task) SetTaskState(
 // Since
 // VI API 2.5
 //
-func (api *Task) UpdateProgress(
+func (mo *Task) UpdateProgress(
 	_this *ManagedObjectReference, percentDone int32,
 ) error {
 
@@ -51948,11 +53402,29 @@ type TaskFilterSpecByUsername struct {
 }
 
 //
+// This option specifies how to select tasks based on child relationships
+// in the inventory hierarchy. If a managed entity has children, their tasks
+// can be retrieved with this filter option.
+//
+//
+type TaskFilterSpecRecursionOption struct {
+}
+
+//
+// This option specifies a time stamp governing the selection of tasks.
+//
+//
+type TaskFilterSpecTimeOption struct {
+}
+
+//
 // TaskHistoryCollector provides a mechanism for
 // retrieving historical data and updates when the server appends new
 // tasks.
 //
 type TaskHistoryCollector struct {
+	*ManagedObject
+
 	*HistoryCollector
 
 	// The items in the 'viewable latest page'. As new tasks that match the
@@ -51976,7 +53448,7 @@ type TaskHistoryCollector struct {
 // Required Privileges
 // None
 //
-func (api *TaskHistoryCollector) ReadNextTasks(
+func (mo *TaskHistoryCollector) ReadNextTasks(
 	_this *ManagedObjectReference, maxCount int32,
 ) ([]*TaskInfo, error) {
 
@@ -51994,7 +53466,7 @@ func (api *TaskHistoryCollector) ReadNextTasks(
 // Required Privileges
 // None
 //
-func (api *TaskHistoryCollector) ReadPreviousTasks(
+func (mo *TaskHistoryCollector) ReadPreviousTasks(
 	_this *ManagedObjectReference, maxCount int32,
 ) ([]*TaskInfo, error) {
 
@@ -52115,6 +53587,13 @@ type TaskInfo struct {
 }
 
 //
+// List of possible states of a task.
+//
+//
+type TaskInfoState struct {
+}
+
+//
 // The TaskManager managed object provides an interface for creating and managing
 // Task managed objects. Many operations are non-blocking,
 // returning a Task managed object that can be monitored by a
@@ -52122,6 +53601,7 @@ type TaskInfo struct {
 // accessed through the TaskManager.
 //
 type TaskManager struct {
+	*ManagedObject
 
 	// Locale-specific, static strings that describe Task
 	// information to users.
@@ -52174,7 +53654,7 @@ type TaskManager struct {
 // Required Privileges
 // System.View
 //
-func (api *TaskManager) CreateCollectorForTasks(
+func (mo *TaskManager) CreateCollectorForTasks(
 	_this *ManagedObjectReference, filter *TaskFilterSpec,
 ) (*TaskHistoryCollector, error) {
 
@@ -52195,7 +53675,7 @@ func (api *TaskManager) CreateCollectorForTasks(
 // Since
 // VI API 2.5
 //
-func (api *TaskManager) CreateTask(
+func (mo *TaskManager) CreateTask(
 	_this *ManagedObjectReference, obj *ManagedObjectReference, taskTypeId string, initiatedBy string, cancelable bool, parentTaskKey string,
 ) (*TaskInfo, error) {
 
@@ -52418,6 +53898,9 @@ type ThirdPartyLicenseAssignmentFailed struct {
 
 	// The reason why the assignment failed, if known.
 	Reason string
+}
+
+type ThirdPartyLicenseAssignmentFailedReason struct {
 }
 
 //
@@ -53366,6 +54849,14 @@ type UpgradeEvent struct {
 }
 
 //
+// The policy setting used to determine when tools are auto-upgraded for
+// a virtual machine
+//
+//
+type UpgradePolicy struct {
+}
+
+//
 // Mtu health check status of an uplink port is changed, and in the latest mtu health check,
 // not all the vlans' MTU setting on physical switch allows vSphere Distributed Switch
 // max MTU size packets passing.
@@ -53446,6 +54937,7 @@ type UserAssignedToGroup struct {
 //
 //
 type UserDirectory struct {
+	*ManagedObject
 
 	// List of Windows domains available for user searches, if the underlying
 	// system supports windows domain membership.
@@ -53492,7 +54984,7 @@ type UserDirectory struct {
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *UserDirectory) RetrieveUserGroups(
+func (mo *UserDirectory) RetrieveUserGroups(
 	_this *ManagedObjectReference, domain string, searchStr string, belongsToGroup string, belongsToUser string, exactMatch bool, findUsers bool, findGroups bool,
 ) ([]*UserSearchResult, error) {
 
@@ -53723,6 +55215,9 @@ type UserUpgradeEvent struct {
 	*UpgradeEvent
 }
 
+type VAppAutoStartAction struct {
+}
+
 //
 // Specification for a vApp cloning operation.
 //
@@ -53786,6 +55281,15 @@ type VAppCloneSpecNetworkMappingPair struct {
 
 	// The source network
 	Source *Network
+}
+
+//
+// The cloned VMs can either be provisioned the same way as the VMs
+// they are a clone of, thin provisioned or thick provisioned, or
+// linked clones (i.e., using delta disks).
+//
+//
+type VAppCloneSpecProvisioningType struct {
 }
 
 //
@@ -54088,6 +55592,27 @@ type VAppIPAssignmentInfo struct {
 	//
 	// Reconfigure privilege: VApp.ApplicationConfig
 	SupportedIpProtocol []string
+}
+
+//
+// IP allocation schemes supported by the guest.
+//
+//
+type VAppIPAssignmentInfoAllocationSchemes struct {
+}
+
+//
+// IP allocation policy for a deployment.
+//
+//
+type VAppIPAssignmentInfoIpAllocationPolicy struct {
+}
+
+//
+// IP protocols supported by the guest.
+//
+//
+type VAppIPAssignmentInfoProtocols struct {
 }
 
 //
@@ -54477,6 +56002,9 @@ type VFlashModuleNotSupported struct {
 	VmName string
 }
 
+type VFlashModuleNotSupportedReason struct {
+}
+
 //
 // The vFlash module version of the vFlash cache asscociated with the
 // virtual disk of a VM is not compatible with the supported versions of
@@ -54568,6 +56096,17 @@ type VMOnVirtualIntranet struct {
 //
 type VMotionAcrossNetworkNotSupported struct {
 	*MigrationFeatureNotSupported
+}
+
+//
+// Types of a host's compatibility with a designated virtual machine
+// that is a candidate for VMotion. Used with queryVMotionCompatibility
+// both as inputs (to designate which compatibility types to test for)
+// and as outputs (to specify which compatibility types apply for
+// each host).
+//
+//
+type VMotionCompatibilityType struct {
 }
 
 //
@@ -55016,6 +56555,13 @@ type VMwareDVSTeamingHealthCheckResult struct {
 }
 
 //
+// The teaming health check match status.
+//
+//
+type VMwareDVSTeamingMatchStatus struct {
+}
+
+//
 // This class defines Vlan health check result of an uplink port
 // in the VMware vSphered Distributed Switch.
 //
@@ -55087,6 +56633,20 @@ type VMwareDVSVspanConfigSpec struct {
 
 	// The Distributed Port Mirroring session to be reconfigured.
 	VspanSession *VMwareVspanSession
+}
+
+//
+// Distributed Port Mirroring session types.
+//
+//
+type VMwareDVSVspanSessionType struct {
+}
+
+//
+// Link Aggregation Control Protocol API versions.
+//
+//
+type VMwareDvsLacpApiVersion struct {
 }
 
 //
@@ -55167,6 +56727,13 @@ type VMwareDvsLacpGroupSpec struct {
 }
 
 //
+// Load balance algorithm in a Link Aggregation Control Protocol group.
+//
+//
+type VMwareDvsLacpLoadBalanceAlgorithm struct {
+}
+
+//
 // This class defines the ipfix configuration of the Link Aggregation
 // Control Protocol group.
 //
@@ -55241,6 +56808,13 @@ type VMwareIpfixConfig struct {
 	// analyzed. Set to 0 to disable sampling. Legal value range is 0-1000.
 	// Default 0.
 	SamplingRate int32
+}
+
+//
+// Link Aggregation Control Protocol policy modes.
+//
+//
+type VMwareUplinkLacpMode struct {
 }
 
 // Deprecated.
@@ -55456,6 +57030,16 @@ type VMwareVspanSession struct {
 	StripOriginalVlan bool
 }
 
+// Deprecated.
+// As of vSphere API 4.0, use CheckTestType instead.
+//
+//
+// Types of tests available for validateMigration.
+//
+//
+type ValidateMigrationTestType struct {
+}
+
 //
 // This event records when the VirtualCenter agent on a host failed to uninstall.
 //
@@ -55530,6 +57114,7 @@ type VcAgentUpgradedEvent struct {
 //
 //
 type View struct {
+	*ManagedObject
 }
 
 //
@@ -55538,7 +57123,7 @@ type View struct {
 // Required Privileges
 // System.View
 //
-func (api *View) DestroyView(
+func (mo *View) DestroyView(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -55616,6 +57201,7 @@ func (api *View) DestroyView(
 //
 //
 type ViewManager struct {
+	*ManagedObject
 
 	// An array of view references. Each array entry is a managed object reference
 	// to a view created by this ViewManager.
@@ -55635,7 +57221,7 @@ type ViewManager struct {
 // Required Privileges
 // System.View
 //
-func (api *ViewManager) CreateContainerView(
+func (mo *ViewManager) CreateContainerView(
 	_this *ManagedObjectReference, container *ManagedEntity, type_ []string, recursive bool,
 ) (*ContainerView, error) {
 
@@ -55649,7 +57235,7 @@ func (api *ViewManager) CreateContainerView(
 // Required Privileges
 // System.View
 //
-func (api *ViewManager) CreateInventoryView(
+func (mo *ViewManager) CreateInventoryView(
 	_this *ManagedObjectReference,
 ) (*InventoryView, error) {
 
@@ -55666,7 +57252,7 @@ func (api *ViewManager) CreateInventoryView(
 // Required Privileges
 // System.View
 //
-func (api *ViewManager) CreateListView(
+func (mo *ViewManager) CreateListView(
 	_this *ManagedObjectReference, obj []*ManagedObjectReference,
 ) (*ListView, error) {
 
@@ -55681,7 +57267,7 @@ func (api *ViewManager) CreateListView(
 // Required Privileges
 // System.View
 //
-func (api *ViewManager) CreateListViewFromView(
+func (mo *ViewManager) CreateListViewFromView(
 	_this *ManagedObjectReference, view *View,
 ) (*ListView, error) {
 
@@ -55766,6 +57352,8 @@ type VirtualAHCIControllerOption struct {
 //
 //
 type VirtualApp struct {
+	*ManagedObject
+
 	*ResourcePool
 
 	// Deprecated.
@@ -55830,7 +57418,7 @@ type VirtualApp struct {
 // Required Privileges
 // VApp.Clone
 //
-func (api *VirtualApp) CloneVApp_Task(
+func (mo *VirtualApp) CloneVApp_Task(
 	_this *ManagedObjectReference, name string, target *ResourcePool, spec *VAppCloneSpec,
 ) (*Task, error) {
 
@@ -55849,7 +57437,7 @@ func (api *VirtualApp) CloneVApp_Task(
 // Required Privileges
 // VApp.Export
 //
-func (api *VirtualApp) ExportVApp(
+func (mo *VirtualApp) ExportVApp(
 	_this *ManagedObjectReference,
 ) (*HttpNfcLease, error) {
 
@@ -55873,7 +57461,7 @@ func (api *VirtualApp) ExportVApp(
 // Required Privileges
 // VApp.PowerOff
 //
-func (api *VirtualApp) PowerOffVApp_Task(
+func (mo *VirtualApp) PowerOffVApp_Task(
 	_this *ManagedObjectReference, force bool,
 ) (*Task, error) {
 
@@ -55905,7 +57493,7 @@ func (api *VirtualApp) PowerOffVApp_Task(
 // Required Privileges
 // VApp.PowerOn
 //
-func (api *VirtualApp) PowerOnVApp_Task(
+func (mo *VirtualApp) PowerOnVApp_Task(
 	_this *ManagedObjectReference,
 ) (*Task, error) {
 
@@ -55930,7 +57518,7 @@ func (api *VirtualApp) PowerOnVApp_Task(
 // Since
 // vSphere API 4.1
 //
-func (api *VirtualApp) SuspendVApp_Task(
+func (mo *VirtualApp) SuspendVApp_Task(
 	_this *ManagedObjectReference,
 ) (*Task, error) {
 
@@ -55950,7 +57538,7 @@ func (api *VirtualApp) SuspendVApp_Task(
 // Required Privileges
 // VApp.Unregister
 //
-func (api *VirtualApp) UnregisterVApp_Task(
+func (mo *VirtualApp) UnregisterVApp_Task(
 	_this *ManagedObjectReference,
 ) (*Task, error) {
 
@@ -56011,7 +57599,7 @@ func (api *VirtualApp) UnregisterVApp_Task(
 // Since
 // vSphere API 4.1
 //
-func (api *VirtualApp) UpdateLinkedChildren(
+func (mo *VirtualApp) UpdateLinkedChildren(
 	_this *ManagedObjectReference, addChangeSet []*VirtualAppLinkInfo, removeSet []*ManagedEntity,
 ) error {
 
@@ -56029,7 +57617,7 @@ func (api *VirtualApp) UpdateLinkedChildren(
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *VirtualApp) UpdateVAppConfig(
+func (mo *VirtualApp) UpdateVAppConfig(
 	_this *ManagedObjectReference, spec *VAppConfigSpec,
 ) error {
 
@@ -56130,6 +57718,16 @@ type VirtualAppSummary struct {
 
 	// Whether the vApp is running
 	VAppState *enum.VirtualAppVAppState
+}
+
+//
+// The VAppState type defines the set of states a vApp can be
+// in. The transitory states between started and stopped is modeled explicitly,
+// since the starting or stopping of a vApp is typically a time-consuming
+// process that might take minutes to complete.
+//
+//
+type VirtualAppVAppState struct {
 }
 
 //
@@ -56479,6 +58077,22 @@ type VirtualDeviceConfigSpec struct {
 }
 
 //
+// The type of operation being performed on the backing of a virtual device.
+// Valid values are:
+//
+//
+type VirtualDeviceConfigSpecFileOperation struct {
+}
+
+//
+// The type of operation being performed on the specified virtual device.
+// Valid values are:
+//
+//
+type VirtualDeviceConfigSpecOperation struct {
+}
+
+//
 // The VirtualDeviceConnectInfo data object type
 // contains information about connectable virtual devices.
 //
@@ -56504,6 +58118,13 @@ type VirtualDeviceConnectInfo struct {
 	//
 	// Since vSphere API 4.0
 	Status string
+}
+
+//
+// Specifies the connectable virtual device status.
+//
+//
+type VirtualDeviceConnectInfoStatus struct {
 }
 
 //
@@ -56591,6 +58212,13 @@ type VirtualDeviceFileBackingOption struct {
 	// Valid filename extension for the filename.
 	// If no extensions are present, any file extension is acceptable.
 	FileNameExtensions *ChoiceOption
+}
+
+//
+// All known file extensions. Valid ones are:
+//
+//
+type VirtualDeviceFileExtension struct {
 }
 
 //
@@ -56799,6 +58427,14 @@ type VirtualDeviceURIBackingOption struct {
 }
 
 //
+// The VirtualDeviceURIBackingOptionDirection enum type
+// provides values for the direction of a network connection.
+//
+//
+type VirtualDeviceURIBackingOptionDirection struct {
+}
+
+//
 // This data object type contains information about a disk in a virtual machine.
 //
 // The virtual disk backing object types describe the different virtual disk backings
@@ -56881,6 +58517,13 @@ type VirtualDisk struct {
 }
 
 //
+// The types of virtual disk adapters used by virtual disks
+//
+//
+type VirtualDiskAdapterType struct {
+}
+
+//
 // Pod-wide anit-affinity rule for virtual disks. The set of virtual disks should
 // be placed on different datastores.
 //
@@ -56911,6 +58554,22 @@ type VirtualDiskBlocksNotFullyProvisioned struct {
 }
 
 //
+// All known compatibility modes for raw disk mappings. Valid compatibility
+// modes are:
+//
+//
+// • virtualMode
+//
+// • physicalMode
+//
+//
+//
+//
+//
+type VirtualDiskCompatibilityMode struct {
+}
+
+//
 // The VirtualDiskSpec data object type encapsulates change
 // specifications for an individual virtual disk device. The virtual
 // disk being added or modified must be fully specified.
@@ -56933,6 +58592,13 @@ type VirtualDiskConfigSpec struct {
 	// Default is unset.
 	// See HostVFlashManagerVFlashCacheConfigInfoVFlashModuleConfigOption
 	MigrateCache bool
+}
+
+//
+// The delta disk format constants
+//
+//
+type VirtualDiskDeltaDiskFormat struct {
 }
 
 //
@@ -57377,6 +59043,7 @@ type VirtualDiskId struct {
 // a datastore can be obtained from the datastore browser.See HostDatastoreBrowser
 //
 type VirtualDiskManager struct {
+	*ManagedObject
 }
 
 //
@@ -57399,7 +59066,7 @@ type VirtualDiskManager struct {
 // Required Privileges
 // System.View
 //
-func (api *VirtualDiskManager) CopyVirtualDisk_Task(
+func (mo *VirtualDiskManager) CopyVirtualDisk_Task(
 	_this *ManagedObjectReference, sourceName string, sourceDatacenter *Datacenter, destName string, destDatacenter *Datacenter, destSpec *VirtualDiskSpec, force bool,
 ) (*Task, error) {
 
@@ -57422,7 +59089,7 @@ func (api *VirtualDiskManager) CopyVirtualDisk_Task(
 // Required Privileges
 // System.View
 //
-func (api *VirtualDiskManager) CreateVirtualDisk_Task(
+func (mo *VirtualDiskManager) CreateVirtualDisk_Task(
 	_this *ManagedObjectReference, name string, datacenter *Datacenter, spec *VirtualDiskSpec,
 ) (*Task, error) {
 
@@ -57448,7 +59115,7 @@ func (api *VirtualDiskManager) CreateVirtualDisk_Task(
 // Required Privileges
 // System.View
 //
-func (api *VirtualDiskManager) DefragmentVirtualDisk_Task(
+func (mo *VirtualDiskManager) DefragmentVirtualDisk_Task(
 	_this *ManagedObjectReference, name string, datacenter *Datacenter,
 ) (*Task, error) {
 
@@ -57472,7 +59139,7 @@ func (api *VirtualDiskManager) DefragmentVirtualDisk_Task(
 // Required Privileges
 // System.View
 //
-func (api *VirtualDiskManager) DeleteVirtualDisk_Task(
+func (mo *VirtualDiskManager) DeleteVirtualDisk_Task(
 	_this *ManagedObjectReference, name string, datacenter *Datacenter,
 ) (*Task, error) {
 
@@ -57500,7 +59167,7 @@ func (api *VirtualDiskManager) DeleteVirtualDisk_Task(
 // Since
 // vSphere API 4.0
 //
-func (api *VirtualDiskManager) EagerZeroVirtualDisk_Task(
+func (mo *VirtualDiskManager) EagerZeroVirtualDisk_Task(
 	_this *ManagedObjectReference, name string, datacenter *Datacenter,
 ) (*Task, error) {
 
@@ -57536,7 +59203,7 @@ func (api *VirtualDiskManager) EagerZeroVirtualDisk_Task(
 // Required Privileges
 // System.View
 //
-func (api *VirtualDiskManager) ExtendVirtualDisk_Task(
+func (mo *VirtualDiskManager) ExtendVirtualDisk_Task(
 	_this *ManagedObjectReference, name string, datacenter *Datacenter, newCapacityKb int64, eagerZero bool,
 ) (*Task, error) {
 
@@ -57561,7 +59228,7 @@ func (api *VirtualDiskManager) ExtendVirtualDisk_Task(
 // Required Privileges
 // System.View
 //
-func (api *VirtualDiskManager) InflateVirtualDisk_Task(
+func (mo *VirtualDiskManager) InflateVirtualDisk_Task(
 	_this *ManagedObjectReference, name string, datacenter *Datacenter,
 ) (*Task, error) {
 
@@ -57591,7 +59258,7 @@ func (api *VirtualDiskManager) InflateVirtualDisk_Task(
 // Required Privileges
 // System.View
 //
-func (api *VirtualDiskManager) MoveVirtualDisk_Task(
+func (mo *VirtualDiskManager) MoveVirtualDisk_Task(
 	_this *ManagedObjectReference, sourceName string, sourceDatacenter *Datacenter, destName string, destDatacenter *Datacenter, force bool, profile []*VirtualMachineProfileSpec,
 ) (*Task, error) {
 
@@ -57617,7 +59284,7 @@ func (api *VirtualDiskManager) MoveVirtualDisk_Task(
 // Required Privileges
 // System.View
 //
-func (api *VirtualDiskManager) QueryVirtualDiskFragmentation(
+func (mo *VirtualDiskManager) QueryVirtualDiskFragmentation(
 	_this *ManagedObjectReference, name string, datacenter *Datacenter,
 ) (int32, error) {
 
@@ -57640,7 +59307,7 @@ func (api *VirtualDiskManager) QueryVirtualDiskFragmentation(
 // Required Privileges
 // System.View
 //
-func (api *VirtualDiskManager) QueryVirtualDiskGeometry(
+func (mo *VirtualDiskManager) QueryVirtualDiskGeometry(
 	_this *ManagedObjectReference, name string, datacenter *Datacenter,
 ) (*HostDiskDimensionsChs, error) {
 
@@ -57663,7 +59330,7 @@ func (api *VirtualDiskManager) QueryVirtualDiskGeometry(
 // Required Privileges
 // System.View
 //
-func (api *VirtualDiskManager) QueryVirtualDiskUuid(
+func (mo *VirtualDiskManager) QueryVirtualDiskUuid(
 	_this *ManagedObjectReference, name string, datacenter *Datacenter,
 ) (string, error) {
 
@@ -57686,7 +59353,7 @@ func (api *VirtualDiskManager) QueryVirtualDiskUuid(
 // Required Privileges
 // System.View
 //
-func (api *VirtualDiskManager) SetVirtualDiskUuid(
+func (mo *VirtualDiskManager) SetVirtualDiskUuid(
 	_this *ManagedObjectReference, name string, datacenter *Datacenter, uuid string,
 ) error {
 
@@ -57717,7 +59384,7 @@ func (api *VirtualDiskManager) SetVirtualDiskUuid(
 // Required Privileges
 // System.View
 //
-func (api *VirtualDiskManager) ShrinkVirtualDisk_Task(
+func (mo *VirtualDiskManager) ShrinkVirtualDisk_Task(
 	_this *ManagedObjectReference, name string, datacenter *Datacenter, copy bool,
 ) (*Task, error) {
 
@@ -57741,12 +59408,23 @@ func (api *VirtualDiskManager) ShrinkVirtualDisk_Task(
 // Required Privileges
 // System.View
 //
-func (api *VirtualDiskManager) ZeroFillVirtualDisk_Task(
+func (mo *VirtualDiskManager) ZeroFillVirtualDisk_Task(
 	_this *ManagedObjectReference, name string, datacenter *Datacenter,
 ) (*Task, error) {
 
 	return nil, nil
 
+}
+
+//
+// The list of known disk modes.
+//
+// The list of supported disk modes varies by the backing type. The "persistent"
+// mode is supported by every backing type.
+//
+//
+//
+type VirtualDiskMode struct {
 }
 
 //
@@ -58466,6 +60144,13 @@ type VirtualDiskSpec struct {
 }
 
 //
+// The types of virtual disks that can be created or cloned.
+//
+//
+type VirtualDiskType struct {
+}
+
+//
 // Data object describes the vFlash cache configuration on this virtual disk.
 //
 //
@@ -58497,6 +60182,20 @@ type VirtualDiskVFlashCacheConfigInfo struct {
 	// defaultVFlashModule
 	// will be used.
 	VFlashModule string
+}
+
+//
+// Pre-defined constants for cache consistency types
+//
+//
+type VirtualDiskVFlashCacheConfigInfoCacheConsistencyType struct {
+}
+
+//
+// Pre-defined constants for cache modes.
+//
+//
+type VirtualDiskVFlashCacheConfigInfoCacheMode struct {
 }
 
 //
@@ -58624,6 +60323,27 @@ type VirtualEthernetCardLegacyNetworkBackingInfo struct {
 //
 type VirtualEthernetCardLegacyNetworkBackingOption struct {
 	*VirtualDeviceDeviceBackingOption
+}
+
+//
+// Possible device names for legacy network backing option are listed below.
+// Note: This is not an exhaustive list. It is possible to specify
+// a specific device as well.
+// For example, on ESX hosts, the device name could be specified as "vmnic[0-9]"
+// or vmnet_[0-9].
+// For VMware Server Windows hosts, the device name could be specified as "vmnet[0-9]"
+// and for VMware Server Linux hosts, the device name could be specified as "/dev/vmnet[0-9]"
+// depending on what devices are available on that particular host.
+//
+//
+type VirtualEthernetCardLegacyNetworkDeviceName struct {
+}
+
+//
+// The enumeration of all known valid MAC address types.
+//
+//
+type VirtualEthernetCardMacType struct {
 }
 
 //
@@ -59240,7 +60960,7 @@ type VirtualMachine struct {
 // Required Privileges
 // VirtualMachine.Interact.ConsoleInteract
 //
-func (api *VirtualMachine) AcquireMksTicket(
+func (mo *VirtualMachine) AcquireMksTicket(
 	_this *ManagedObjectReference,
 ) (*VirtualMachineMksTicket, error) {
 
@@ -59282,7 +61002,7 @@ func (api *VirtualMachine) AcquireMksTicket(
 // Since
 // vSphere API 4.1
 //
-func (api *VirtualMachine) AcquireTicket(
+func (mo *VirtualMachine) AcquireTicket(
 	_this *ManagedObjectReference, ticketType string,
 ) (*VirtualMachineTicket, error) {
 
@@ -59296,7 +61016,7 @@ func (api *VirtualMachine) AcquireTicket(
 // Required Privileges
 // VirtualMachine.Interact.AnswerQuestion
 //
-func (api *VirtualMachine) AnswerVM(
+func (mo *VirtualMachine) AnswerVM(
 	_this *ManagedObjectReference, questionId string, answerChoice string,
 ) error {
 
@@ -59314,7 +61034,7 @@ func (api *VirtualMachine) AnswerVM(
 // Required Privileges
 // VirtualMachine.Provisioning.Customize
 //
-func (api *VirtualMachine) CheckCustomizationSpec(
+func (mo *VirtualMachine) CheckCustomizationSpec(
 	_this *ManagedObjectReference, spec *CustomizationSpec,
 ) error {
 
@@ -59364,7 +61084,7 @@ func (api *VirtualMachine) CheckCustomizationSpec(
 // Required Privileges
 // None
 //
-func (api *VirtualMachine) CloneVM_Task(
+func (mo *VirtualMachine) CloneVM_Task(
 	_this *ManagedObjectReference, folder *Folder, name string, spec *VirtualMachineCloneSpec,
 ) (*Task, error) {
 
@@ -59390,7 +61110,7 @@ func (api *VirtualMachine) CloneVM_Task(
 // Since
 // vSphere API 5.0
 //
-func (api *VirtualMachine) ConsolidateVMDisks_Task(
+func (mo *VirtualMachine) ConsolidateVMDisks_Task(
 	_this *ManagedObjectReference,
 ) (*Task, error) {
 
@@ -59406,7 +61126,7 @@ func (api *VirtualMachine) ConsolidateVMDisks_Task(
 // Since
 // vSphere API 4.0
 //
-func (api *VirtualMachine) CreateScreenshot_Task(
+func (mo *VirtualMachine) CreateScreenshot_Task(
 	_this *ManagedObjectReference,
 ) (*Task, error) {
 
@@ -59441,7 +61161,7 @@ func (api *VirtualMachine) CreateScreenshot_Task(
 // Since
 // vSphere API 4.0
 //
-func (api *VirtualMachine) CreateSecondaryVM_Task(
+func (mo *VirtualMachine) CreateSecondaryVM_Task(
 	_this *ManagedObjectReference, host *HostSystem,
 ) (*Task, error) {
 
@@ -59467,7 +61187,7 @@ func (api *VirtualMachine) CreateSecondaryVM_Task(
 // Required Privileges
 // VirtualMachine.State.CreateSnapshot
 //
-func (api *VirtualMachine) CreateSnapshot_Task(
+func (mo *VirtualMachine) CreateSnapshot_Task(
 	_this *ManagedObjectReference, name string, description string, memory bool, quiesce bool,
 ) (*Task, error) {
 
@@ -59481,7 +61201,7 @@ func (api *VirtualMachine) CreateSnapshot_Task(
 // Required Privileges
 // VirtualMachine.Provisioning.Customize
 //
-func (api *VirtualMachine) CustomizeVM_Task(
+func (mo *VirtualMachine) CustomizeVM_Task(
 	_this *ManagedObjectReference, spec *CustomizationSpec,
 ) (*Task, error) {
 
@@ -59497,7 +61217,7 @@ func (api *VirtualMachine) CustomizeVM_Task(
 // Since
 // VI API 2.5
 //
-func (api *VirtualMachine) DefragmentAllDisks(
+func (mo *VirtualMachine) DefragmentAllDisks(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -59518,7 +61238,7 @@ func (api *VirtualMachine) DefragmentAllDisks(
 // Since
 // vSphere API 4.0
 //
-func (api *VirtualMachine) DisableSecondaryVM_Task(
+func (mo *VirtualMachine) DisableSecondaryVM_Task(
 	_this *ManagedObjectReference, vm *VirtualMachine,
 ) (*Task, error) {
 
@@ -59551,7 +61271,7 @@ func (api *VirtualMachine) DisableSecondaryVM_Task(
 // Since
 // vSphere API 4.0
 //
-func (api *VirtualMachine) EnableSecondaryVM_Task(
+func (mo *VirtualMachine) EnableSecondaryVM_Task(
 	_this *ManagedObjectReference, vm *VirtualMachine, host *HostSystem,
 ) (*Task, error) {
 
@@ -59576,7 +61296,7 @@ func (api *VirtualMachine) EnableSecondaryVM_Task(
 // Since
 // vSphere API 5.0
 //
-func (api *VirtualMachine) EstimateStorageForConsolidateSnapshots_Task(
+func (mo *VirtualMachine) EstimateStorageForConsolidateSnapshots_Task(
 	_this *ManagedObjectReference,
 ) (*Task, error) {
 
@@ -59597,7 +61317,7 @@ func (api *VirtualMachine) EstimateStorageForConsolidateSnapshots_Task(
 // Since
 // vSphere API 4.0
 //
-func (api *VirtualMachine) ExportVm(
+func (mo *VirtualMachine) ExportVm(
 	_this *ManagedObjectReference,
 ) (*HttpNfcLease, error) {
 
@@ -59616,7 +61336,7 @@ func (api *VirtualMachine) ExportVm(
 // Since
 // vSphere API 4.0
 //
-func (api *VirtualMachine) ExtractOvfEnvironment(
+func (mo *VirtualMachine) ExtractOvfEnvironment(
 	_this *ManagedObjectReference,
 ) (string, error) {
 
@@ -59633,7 +61353,7 @@ func (api *VirtualMachine) ExtractOvfEnvironment(
 // Since
 // vSphere API 4.0
 //
-func (api *VirtualMachine) MakePrimaryVM_Task(
+func (mo *VirtualMachine) MakePrimaryVM_Task(
 	_this *ManagedObjectReference, vm *VirtualMachine,
 ) (*Task, error) {
 
@@ -59648,7 +61368,7 @@ func (api *VirtualMachine) MakePrimaryVM_Task(
 // Required Privileges
 // VirtualMachine.Provisioning.MarkAsTemplate
 //
-func (api *VirtualMachine) MarkAsTemplate(
+func (mo *VirtualMachine) MarkAsTemplate(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -59663,7 +61383,7 @@ func (api *VirtualMachine) MarkAsTemplate(
 // Required Privileges
 // VirtualMachine.Provisioning.MarkAsVM
 //
-func (api *VirtualMachine) MarkAsVirtualMachine(
+func (mo *VirtualMachine) MarkAsVirtualMachine(
 	_this *ManagedObjectReference, pool *ResourcePool, host *HostSystem,
 ) error {
 
@@ -59682,7 +61402,7 @@ func (api *VirtualMachine) MarkAsVirtualMachine(
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *VirtualMachine) MigrateVM_Task(
+func (mo *VirtualMachine) MigrateVM_Task(
 	_this *ManagedObjectReference, pool *ResourcePool, host *HostSystem, priority *enum.VirtualMachineMovePriority, state *enum.VirtualMachinePowerState,
 ) (*Task, error) {
 
@@ -59699,7 +61419,7 @@ func (api *VirtualMachine) MigrateVM_Task(
 // Required Privileges
 // VirtualMachine.Interact.ToolsInstall
 //
-func (api *VirtualMachine) MountToolsInstaller(
+func (mo *VirtualMachine) MountToolsInstaller(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -59717,7 +61437,7 @@ func (api *VirtualMachine) MountToolsInstaller(
 // Required Privileges
 // VirtualMachine.Interact.PowerOff
 //
-func (api *VirtualMachine) PowerOffVM_Task(
+func (mo *VirtualMachine) PowerOffVM_Task(
 	_this *ManagedObjectReference,
 ) (*Task, error) {
 
@@ -59751,7 +61471,7 @@ func (api *VirtualMachine) PowerOffVM_Task(
 // Required Privileges
 // VirtualMachine.Interact.PowerOn
 //
-func (api *VirtualMachine) PowerOnVM_Task(
+func (mo *VirtualMachine) PowerOnVM_Task(
 	_this *ManagedObjectReference, host *HostSystem,
 ) (*Task, error) {
 
@@ -59805,7 +61525,7 @@ func (api *VirtualMachine) PowerOnVM_Task(
 // Since
 // vSphere API 4.0
 //
-func (api *VirtualMachine) PromoteDisks_Task(
+func (mo *VirtualMachine) PromoteDisks_Task(
 	_this *ManagedObjectReference, unlink bool, disks []*VirtualDisk,
 ) (*Task, error) {
 
@@ -59829,7 +61549,7 @@ func (api *VirtualMachine) PromoteDisks_Task(
 // Since
 // vSphere API 4.0
 //
-func (api *VirtualMachine) QueryChangedDiskAreas(
+func (mo *VirtualMachine) QueryChangedDiskAreas(
 	_this *ManagedObjectReference, snapshot *VirtualMachineSnapshot, deviceKey int32, startOffset int64, changeId string,
 ) (*DiskChangeInfo, error) {
 
@@ -59854,7 +61574,7 @@ func (api *VirtualMachine) QueryChangedDiskAreas(
 // Since
 // vSphere API 4.1
 //
-func (api *VirtualMachine) QueryFaultToleranceCompatibility(
+func (mo *VirtualMachine) QueryFaultToleranceCompatibility(
 	_this *ManagedObjectReference,
 ) ([]*MethodFault, error) {
 
@@ -59872,7 +61592,7 @@ func (api *VirtualMachine) QueryFaultToleranceCompatibility(
 // Since
 // vSphere API 4.0
 //
-func (api *VirtualMachine) QueryUnownedFiles(
+func (mo *VirtualMachine) QueryUnownedFiles(
 	_this *ManagedObjectReference,
 ) ([]string, error) {
 
@@ -59889,7 +61609,7 @@ func (api *VirtualMachine) QueryUnownedFiles(
 // Required Privileges
 // VirtualMachine.Interact.Reset
 //
-func (api *VirtualMachine) RebootGuest(
+func (mo *VirtualMachine) RebootGuest(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -60003,7 +61723,7 @@ func (api *VirtualMachine) RebootGuest(
 // Required Privileges
 // Dynamic - See discussion above
 //
-func (api *VirtualMachine) ReconfigVM_Task(
+func (mo *VirtualMachine) ReconfigVM_Task(
 	_this *ManagedObjectReference, spec *VirtualMachineConfigSpec,
 ) (*Task, error) {
 
@@ -60021,7 +61741,7 @@ func (api *VirtualMachine) ReconfigVM_Task(
 // Since
 // vSphere API 4.0
 //
-func (api *VirtualMachine) RefreshStorageInfo(
+func (mo *VirtualMachine) RefreshStorageInfo(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -60062,7 +61782,7 @@ func (api *VirtualMachine) RefreshStorageInfo(
 // Since
 // vSphere API 4.1
 //
-func (api *VirtualMachine) ReloadVirtualMachineFromPath_Task(
+func (mo *VirtualMachine) ReloadVirtualMachineFromPath_Task(
 	_this *ManagedObjectReference, configurationPath string,
 ) (*Task, error) {
 
@@ -60090,7 +61810,7 @@ func (api *VirtualMachine) ReloadVirtualMachineFromPath_Task(
 // Required Privileges
 // Resource.ColdMigrate
 //
-func (api *VirtualMachine) RelocateVM_Task(
+func (mo *VirtualMachine) RelocateVM_Task(
 	_this *ManagedObjectReference, spec *VirtualMachineRelocateSpec, priority *enum.VirtualMachineMovePriority,
 ) (*Task, error) {
 
@@ -60106,7 +61826,7 @@ func (api *VirtualMachine) RelocateVM_Task(
 // Required Privileges
 // VirtualMachine.State.RemoveSnapshot
 //
-func (api *VirtualMachine) RemoveAllSnapshots_Task(
+func (mo *VirtualMachine) RemoveAllSnapshots_Task(
 	_this *ManagedObjectReference, consolidate bool,
 ) (*Task, error) {
 
@@ -60125,7 +61845,7 @@ func (api *VirtualMachine) RemoveAllSnapshots_Task(
 // Required Privileges
 // VirtualMachine.Config.ResetGuestInfo
 //
-func (api *VirtualMachine) ResetGuestInformation(
+func (mo *VirtualMachine) ResetGuestInformation(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -60146,7 +61866,7 @@ func (api *VirtualMachine) ResetGuestInformation(
 // Required Privileges
 // VirtualMachine.Interact.Reset
 //
-func (api *VirtualMachine) ResetVM_Task(
+func (mo *VirtualMachine) ResetVM_Task(
 	_this *ManagedObjectReference,
 ) (*Task, error) {
 
@@ -60165,7 +61885,7 @@ func (api *VirtualMachine) ResetVM_Task(
 // Required Privileges
 // VirtualMachine.State.RevertToSnapshot
 //
-func (api *VirtualMachine) RevertToCurrentSnapshot_Task(
+func (mo *VirtualMachine) RevertToCurrentSnapshot_Task(
 	_this *ManagedObjectReference, host *HostSystem, suppressPowerOn bool,
 ) (*Task, error) {
 
@@ -60181,7 +61901,7 @@ func (api *VirtualMachine) RevertToCurrentSnapshot_Task(
 // Since
 // vSphere API 4.0
 //
-func (api *VirtualMachine) SetDisplayTopology(
+func (mo *VirtualMachine) SetDisplayTopology(
 	_this *ManagedObjectReference, displays []*VirtualMachineDisplayTopology,
 ) error {
 
@@ -60195,7 +61915,7 @@ func (api *VirtualMachine) SetDisplayTopology(
 // Required Privileges
 // VirtualMachine.Interact.ConsoleInteract
 //
-func (api *VirtualMachine) SetScreenResolution(
+func (mo *VirtualMachine) SetScreenResolution(
 	_this *ManagedObjectReference, width int32, height int32,
 ) error {
 
@@ -60212,7 +61932,7 @@ func (api *VirtualMachine) SetScreenResolution(
 // Required Privileges
 // VirtualMachine.Interact.PowerOff
 //
-func (api *VirtualMachine) ShutdownGuest(
+func (mo *VirtualMachine) ShutdownGuest(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -60229,7 +61949,7 @@ func (api *VirtualMachine) ShutdownGuest(
 // Required Privileges
 // VirtualMachine.Interact.Suspend
 //
-func (api *VirtualMachine) StandbyGuest(
+func (mo *VirtualMachine) StandbyGuest(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -60255,7 +61975,7 @@ func (api *VirtualMachine) StandbyGuest(
 // Since
 // vSphere API 4.0
 //
-func (api *VirtualMachine) StartRecording_Task(
+func (mo *VirtualMachine) StartRecording_Task(
 	_this *ManagedObjectReference, name string, description string,
 ) (*Task, error) {
 
@@ -60280,7 +62000,7 @@ func (api *VirtualMachine) StartRecording_Task(
 // Since
 // vSphere API 4.0
 //
-func (api *VirtualMachine) StartReplaying_Task(
+func (mo *VirtualMachine) StartReplaying_Task(
 	_this *ManagedObjectReference, replaySnapshot *VirtualMachineSnapshot,
 ) (*Task, error) {
 
@@ -60304,7 +62024,7 @@ func (api *VirtualMachine) StartReplaying_Task(
 // Since
 // vSphere API 4.0
 //
-func (api *VirtualMachine) StopRecording_Task(
+func (mo *VirtualMachine) StopRecording_Task(
 	_this *ManagedObjectReference,
 ) (*Task, error) {
 
@@ -60328,7 +62048,7 @@ func (api *VirtualMachine) StopRecording_Task(
 // Since
 // vSphere API 4.0
 //
-func (api *VirtualMachine) StopReplaying_Task(
+func (mo *VirtualMachine) StopReplaying_Task(
 	_this *ManagedObjectReference,
 ) (*Task, error) {
 
@@ -60342,7 +62062,7 @@ func (api *VirtualMachine) StopReplaying_Task(
 // Required Privileges
 // VirtualMachine.Interact.Suspend
 //
-func (api *VirtualMachine) SuspendVM_Task(
+func (mo *VirtualMachine) SuspendVM_Task(
 	_this *ManagedObjectReference,
 ) (*Task, error) {
 
@@ -60360,7 +62080,7 @@ func (api *VirtualMachine) SuspendVM_Task(
 // Since
 // vSphere API 4.0
 //
-func (api *VirtualMachine) TerminateFaultTolerantVM_Task(
+func (mo *VirtualMachine) TerminateFaultTolerantVM_Task(
 	_this *ManagedObjectReference, vm *VirtualMachine,
 ) (*Task, error) {
 
@@ -60383,7 +62103,7 @@ func (api *VirtualMachine) TerminateFaultTolerantVM_Task(
 // Since
 // vSphere API 5.1
 //
-func (api *VirtualMachine) TerminateVM(
+func (mo *VirtualMachine) TerminateVM(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -60403,7 +62123,7 @@ func (api *VirtualMachine) TerminateVM(
 // Since
 // vSphere API 4.0
 //
-func (api *VirtualMachine) TurnOffFaultToleranceForVM_Task(
+func (mo *VirtualMachine) TurnOffFaultToleranceForVM_Task(
 	_this *ManagedObjectReference,
 ) (*Task, error) {
 
@@ -60417,7 +62137,7 @@ func (api *VirtualMachine) TurnOffFaultToleranceForVM_Task(
 // Required Privileges
 // VirtualMachine.Interact.ToolsInstall
 //
-func (api *VirtualMachine) UnmountToolsInstaller(
+func (mo *VirtualMachine) UnmountToolsInstaller(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -60442,7 +62162,7 @@ func (api *VirtualMachine) UnmountToolsInstaller(
 // Required Privileges
 // VirtualMachine.Inventory.Unregister
 //
-func (api *VirtualMachine) UnregisterVM(
+func (mo *VirtualMachine) UnregisterVM(
 	_this *ManagedObjectReference,
 ) error {
 
@@ -60459,7 +62179,7 @@ func (api *VirtualMachine) UnregisterVM(
 // Required Privileges
 // VirtualMachine.Interact.ToolsInstall
 //
-func (api *VirtualMachine) UpgradeTools_Task(
+func (mo *VirtualMachine) UpgradeTools_Task(
 	_this *ManagedObjectReference, installerOptions string,
 ) (*Task, error) {
 
@@ -60474,7 +62194,7 @@ func (api *VirtualMachine) UpgradeTools_Task(
 // Required Privileges
 // VirtualMachine.Config.UpgradeVirtualHardware
 //
-func (api *VirtualMachine) UpgradeVM_Task(
+func (mo *VirtualMachine) UpgradeVM_Task(
 	_this *ManagedObjectReference, version string,
 ) (*Task, error) {
 
@@ -60497,6 +62217,13 @@ type VirtualMachineAffinityInfo struct {
 	// may be used by the virtual machine.  If the array is empty when
 	// modifying the affinity setting, then any existing affinity is removed.
 	AffinitySet []int32
+}
+
+//
+// Application heartbeat status type.
+//
+//
+type VirtualMachineAppHeartbeatStatusType struct {
 }
 
 //
@@ -60904,6 +62631,7 @@ type VirtualMachineCloneSpec struct {
 // of a virtual machine with a host.
 //
 type VirtualMachineCompatibilityChecker struct {
+	*ManagedObject
 }
 
 //
@@ -60913,7 +62641,7 @@ type VirtualMachineCompatibilityChecker struct {
 // Required Privileges
 // System.View
 //
-func (api *VirtualMachineCompatibilityChecker) CheckCompatibility_Task(
+func (mo *VirtualMachineCompatibilityChecker) CheckCompatibility_Task(
 	_this *ManagedObjectReference, vm *VirtualMachine, host *HostSystem, pool *ResourcePool, testType []string,
 ) (*Task, error) {
 
@@ -61269,6 +62997,13 @@ type VirtualMachineConfigInfoDatastoreUrlPair struct {
 }
 
 //
+// The NPIV WWN source type.
+//
+//
+type VirtualMachineConfigInfoNpivWwnType struct {
+}
+
+//
 // Information about virtualization overhead required to power on the
 // virtual machine on the registered host.
 //
@@ -61286,6 +63021,19 @@ type VirtualMachineConfigInfoOverheadInfo struct {
 	// in case it is not specified - current virtual machine home directory
 	// is being used.
 	InitialSwapReservation int64
+}
+
+//
+// Available choices for virtual machine swapfile placement policy. This is
+// the set of legal values for the virtual machine configuration's
+// swapPlacement property. All
+// values except for "inherit" and "vmConfigured" are also valid values for
+// a compute resource configuration's
+// vmSwapPlacement
+// property.
+//
+//
+type VirtualMachineConfigInfoSwapPlacementType struct {
 }
 
 //
@@ -61921,6 +63669,13 @@ type VirtualMachineConfigSpec struct {
 }
 
 //
+// The root WWN operation mode.
+//
+//
+type VirtualMachineConfigSpecNpivWwnOp struct {
+}
+
+//
 // A subset of virtual machine configuration.
 //
 //
@@ -61996,6 +63751,17 @@ type VirtualMachineConfigSummary struct {
 
 	// Path name to the configuration file for the virtual machine
 	VmPathName string
+}
+
+//
+// The connectivity state of a virtual machine. When the API is provided directly by
+// a server product, such as ESX Server, then the disconnected state is not
+// possible. However, when accessed through VirtualCenter, the state of a virtual
+// machine is set to disconnected if the hosts that manage the virtual
+// machine becomes unavailable.
+//
+//
+type VirtualMachineConnectionState struct {
 }
 
 //
@@ -62250,6 +64016,12 @@ type VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeState struct {
 	VmDirectPathGen2InactiveReasonVm []string
 }
 
+type VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonOther struct {
+}
+
+type VirtualMachineDeviceRuntimeInfoVirtualEthernetCardRuntimeStateVmDirectPathGen2InactiveReasonVm struct {
+}
+
 //
 // The DiskDeviceInfo class contains basic information about a specific disk hardware
 // device.
@@ -62298,6 +64070,17 @@ type VirtualMachineDisplayTopology struct {
 //
 type VirtualMachineEmptyProfileSpec struct {
 	*VirtualMachineProfileSpec
+}
+
+//
+// The FaultToleranceState type defines a simple set of states for a
+// fault tolerant virtual machine:
+// disabled, starting, and enabled.
+//
+//
+//
+//
+type VirtualMachineFaultToleranceState struct {
 }
 
 //
@@ -62555,6 +64338,13 @@ type VirtualMachineFileLayoutExFileInfo struct {
 }
 
 //
+// File-type constants.
+//
+//
+type VirtualMachineFileLayoutExFileType struct {
+}
+
+//
 // Layout of a snapshot.
 //
 //
@@ -62733,12 +64523,55 @@ type VirtualMachineFlagInfo struct {
 }
 
 //
+// Set of possible values for monitorType.
+//
+//
+type VirtualMachineFlagInfoMonitorType struct {
+}
+
+//
+// Set of possible values for virtualExecUsage.
+//
+//
+type VirtualMachineFlagInfoVirtualExecUsage struct {
+}
+
+//
+// Set of possible values for virtualMmuUsage.
+//
+//
+type VirtualMachineFlagInfoVirtualMmuUsage struct {
+}
+
+//
 // FloppyInfo class contains information about a physical floppy
 // drive on the host.
 //
 //
 type VirtualMachineFloppyInfo struct {
 	*VirtualMachineTargetInfo
+}
+
+//
+// Guest operating system family constants.
+//
+//
+type VirtualMachineGuestOsFamily struct {
+}
+
+//
+// Guest operating system identifier.
+//
+//
+type VirtualMachineGuestOsIdentifier struct {
+}
+
+//
+// The possible hints that the guest could display about current tasks
+// inside the guest.
+//
+//
+type VirtualMachineGuestState struct {
 }
 
 //
@@ -62789,6 +64622,13 @@ type VirtualMachineGuestSummary struct {
 	//
 	// Since vSphere API 5.0
 	ToolsVersionStatus2 string
+}
+
+//
+// Set of possible values for htSharing.
+//
+//
+type VirtualMachineHtSharing struct {
 }
 
 //
@@ -62869,6 +64709,13 @@ type VirtualMachineLegacyNetworkSwitchInfo struct {
 
 	// The name of the network switch.
 	Name string
+}
+
+//
+// Means for allocating additional memory for virtual machines.
+//
+//
+type VirtualMachineMemoryAllocationPolicy struct {
 }
 
 //
@@ -63024,6 +64871,13 @@ type VirtualMachineMetadataManagerVmMetadataInput struct {
 }
 
 //
+// This enum represents the set of legal operations
+//
+//
+type VirtualMachineMetadataManagerVmMetadataOp struct {
+}
+
+//
 // VmMetadataOwner defines the namespace for an owner
 //
 //
@@ -63035,6 +64889,14 @@ type VirtualMachineMetadataManagerVmMetadataOwner struct {
 	// owner field is interpreted by the implementation based on
 	// the datastore type.
 	Name string
+}
+
+//
+// This enum contains a list of valid owner values for
+// the name field
+//
+//
+type VirtualMachineMetadataManagerVmMetadataOwnerOwner struct {
 }
 
 //
@@ -63087,6 +64949,23 @@ type VirtualMachineMksTicket struct {
 	// The ticket name. This is used as the username and password for the MKS
 	// connection.
 	Ticket string
+}
+
+//
+// MovePriority is an enumeration of values that indicate the priority of the task
+// that moves a virtual machine from one host to another or one storage location
+// to another. Note this priority can affect both the source and target hosts.
+//
+//
+type VirtualMachineMovePriority struct {
+}
+
+//
+// The NeedSecondaryReason type defines all reasons a virtual machine is
+// in the needSecondary Fault Tolerance state following a failure.
+//
+//
+type VirtualMachineNeedSecondaryReason struct {
 }
 
 //
@@ -63150,6 +65029,39 @@ type VirtualMachinePciPassthroughInfo struct {
 }
 
 //
+// Set of possible values for snapshotPowerOffBehavior.
+//
+//
+type VirtualMachinePowerOffBehavior struct {
+}
+
+//
+// The list of possible default power operations available for the virtual machine
+//
+//
+type VirtualMachinePowerOpType struct {
+}
+
+//
+// The PowerState type defines a simple set of states for a virtual machine:
+// poweredOn, poweredOff, and suspended. This type does not model substates,
+// such as when a task is running to change the virtual machine state.
+// If the virtual machine is in a state with a task in progress, it
+// transitions to a new state when the task completes. For example, a virtual
+// machine continues to be in the poweredOn state while a suspend task
+// is running, and changes to the suspended state once the task finishes.
+//
+// As a consequence of this approach, clients interested in monitoring
+// the status of a virtual machine should typically track the
+// activeTask data object in addition to the
+// powerState object.
+//
+//
+//
+type VirtualMachinePowerState struct {
+}
+
+//
 // The extensible data object type encapsulates additional data specific
 // to Virtual Machine and its devices.
 //
@@ -63194,6 +65106,7 @@ type VirtualMachineProfileSpec struct {
 // the feasibility of certain provisioning operations.
 //
 type VirtualMachineProvisioningChecker struct {
+	*ManagedObject
 }
 
 //
@@ -63203,7 +65116,7 @@ type VirtualMachineProvisioningChecker struct {
 // Required Privileges
 // System.View
 //
-func (api *VirtualMachineProvisioningChecker) CheckMigrate_Task(
+func (mo *VirtualMachineProvisioningChecker) CheckMigrate_Task(
 	_this *ManagedObjectReference, vm *VirtualMachine, host *HostSystem, pool *ResourcePool, state *enum.VirtualMachinePowerState, testType []string,
 ) (*Task, error) {
 
@@ -63218,7 +65131,7 @@ func (api *VirtualMachineProvisioningChecker) CheckMigrate_Task(
 // Required Privileges
 // System.View
 //
-func (api *VirtualMachineProvisioningChecker) CheckRelocate_Task(
+func (mo *VirtualMachineProvisioningChecker) CheckRelocate_Task(
 	_this *ManagedObjectReference, vm *VirtualMachine, spec *VirtualMachineRelocateSpec, testType []string,
 ) (*Task, error) {
 
@@ -63234,7 +65147,7 @@ func (api *VirtualMachineProvisioningChecker) CheckRelocate_Task(
 // Required Privileges
 // System.View
 //
-func (api *VirtualMachineProvisioningChecker) QueryVMotionCompatibilityEx_Task(
+func (mo *VirtualMachineProvisioningChecker) QueryVMotionCompatibilityEx_Task(
 	_this *ManagedObjectReference, vm []*VirtualMachine, host []*HostSystem,
 ) (*Task, error) {
 
@@ -63405,6 +65318,43 @@ type VirtualMachineQuickStats struct {
 }
 
 //
+// The RecordReplayState type defines a simple set of record and replay
+// states for a virtual machine.
+//
+//
+type VirtualMachineRecordReplayState struct {
+}
+
+//
+// Specifies how a virtual disk is moved or copied to a
+// datastore.
+//
+// In all cases after the move or copy the virtual machine's current running point
+// will be placed on the target datastore.  The current running point is defined
+// as the disk backing which the virtual machine is currently
+// writing to.  This end state can be achieved in multiple
+// ways, and the supported options are described in this
+// enumeration.
+//
+//
+// These options are only relevant when the backing of the
+// specified disk is a file backing.
+//
+//
+// Since disk backings may become shared as the result of
+// either a clone operation or
+// a relocate operation,
+// PromoteDisks_Task has been provided as
+// a way to unshare such disk backings.
+//
+// See parentSee parentSee parentSee parentSee parentSee diskMoveTypeSee diskMoveType
+//
+//
+//
+type VirtualMachineRelocateDiskMoveOptions struct {
+}
+
+//
 // Specification for moving or copying a virtual machine to a different datastore
 // or host.
 //
@@ -63554,6 +65504,17 @@ type VirtualMachineRelocateSpecDiskLocator struct {
 	//
 	// Since vSphere API 5.5
 	Profile []*VirtualMachineProfileSpec
+}
+
+// Deprecated.
+// as of vSphere API 5.0.
+//
+//
+// The set of tranformations that can be performed on the virtual disks
+// as part of the copy.
+//
+//
+type VirtualMachineRelocateTransformation struct {
 }
 
 //
@@ -63838,6 +65799,13 @@ type VirtualMachineScsiPassthroughInfo struct {
 }
 
 //
+// Possible SCSI classes.
+//
+//
+type VirtualMachineScsiPassthroughType struct {
+}
+
+//
 // SerialInfo class contains information about a physical serial
 // drive on the host.
 //
@@ -63881,7 +65849,7 @@ type VirtualMachineSnapshot struct {
 // Since
 // vSphere API 5.5
 //
-func (api *VirtualMachineSnapshot) ExportSnapshot(
+func (mo *VirtualMachineSnapshot) ExportSnapshot(
 	_this *ManagedObjectReference,
 ) (*HttpNfcLease, error) {
 
@@ -63895,7 +65863,7 @@ func (api *VirtualMachineSnapshot) ExportSnapshot(
 // Required Privileges
 // VirtualMachine.State.RemoveSnapshot
 //
-func (api *VirtualMachineSnapshot) RemoveSnapshot_Task(
+func (mo *VirtualMachineSnapshot) RemoveSnapshot_Task(
 	_this *ManagedObjectReference, removeChildren bool, consolidate bool,
 ) (*Task, error) {
 
@@ -63912,7 +65880,7 @@ func (api *VirtualMachineSnapshot) RemoveSnapshot_Task(
 // Required Privileges
 // VirtualMachine.State.RenameSnapshot
 //
-func (api *VirtualMachineSnapshot) RenameSnapshot(
+func (mo *VirtualMachineSnapshot) RenameSnapshot(
 	_this *ManagedObjectReference, name string, description string,
 ) error {
 
@@ -63926,7 +65894,7 @@ func (api *VirtualMachineSnapshot) RenameSnapshot(
 // Required Privileges
 // VirtualMachine.State.RevertToSnapshot
 //
-func (api *VirtualMachineSnapshot) RevertToSnapshot_Task(
+func (mo *VirtualMachineSnapshot) RevertToSnapshot_Task(
 	_this *ManagedObjectReference, host *HostSystem, suppressPowerOn bool,
 ) (*Task, error) {
 
@@ -64029,6 +65997,14 @@ type VirtualMachineSriovInfo struct {
 	// Indicates whether corresponding PCI device is a virtual function
 	// instantiated by a SR-IOV capable device.
 	VirtualFunction bool
+}
+
+//
+// The list of possible standby actions that the virtual machine can take
+// for S1 ACPI.
+//
+//
+type VirtualMachineStandbyActionType struct {
 }
 
 //
@@ -64176,6 +66152,14 @@ type VirtualMachineTargetInfo struct {
 }
 
 //
+// Describes how widely the endpoint is availabe in a cluster. Note that these
+// fields are not neccessarily mutual-exclusive.
+//
+//
+type VirtualMachineTargetInfoConfigurationTag struct {
+}
+
+//
 // This data object contains the information needed to establish a
 // connection to a running virtual machine.
 //
@@ -64203,6 +66187,40 @@ type VirtualMachineTicket struct {
 	// The ticket name. This is used as the username and password for the MKS
 	// connection.
 	Ticket string
+}
+
+//
+// The virtual machine ticket type.
+//
+//
+type VirtualMachineTicketType struct {
+}
+
+//
+// Current running status of VMware Tools running in the guest
+// operating system.
+//
+//
+type VirtualMachineToolsRunningStatus struct {
+}
+
+// Deprecated.
+// As of vSphere API 4.0 use VirtualMachineToolsVersionStatus
+// and VirtualMachineToolsRunningStatus.
+//
+//
+// Current status of VMware Tools running in the guest operating system.
+//
+//
+type VirtualMachineToolsStatus struct {
+}
+
+//
+// Current version status of VMware Tools installed in the guest operating
+// system.
+//
+//
+type VirtualMachineToolsVersionStatus struct {
 }
 
 //
@@ -64276,6 +66294,20 @@ type VirtualMachineUsbInfo struct {
 
 	// The vendor ID of the USB device.
 	Vendor int32
+}
+
+//
+// Device class family.
+//
+//
+type VirtualMachineUsbInfoFamily struct {
+}
+
+//
+// Device speed.
+//
+//
+type VirtualMachineUsbInfoSpeed struct {
 }
 
 //
@@ -64433,6 +66465,13 @@ type VirtualMachineVideoCard struct {
 
 	// The size of the framebuffer for a virtual machine.
 	VideoRamSizeInKB int64
+}
+
+//
+// Set of possible values for use3dRenderer.
+//
+//
+type VirtualMachineVideoCardUse3dRenderer struct {
 }
 
 //
@@ -64814,6 +66853,16 @@ type VirtualPointingDeviceDeviceBackingInfo struct {
 }
 
 //
+// The valid choices for host pointing devices are:
+//
+//
+//
+//
+//
+type VirtualPointingDeviceHostChoice struct {
+}
+
+//
 // The VirtualPointingDeviceOption data object type contains the options
 // for the host mouse type defined in the
 // VirtualPointingDevice data object type.
@@ -64972,6 +67021,16 @@ type VirtualSCSIPassthroughDeviceBackingOption struct {
 //
 type VirtualSCSIPassthroughOption struct {
 	*VirtualDeviceOption
+}
+
+//
+// Sharing describes three possible ways of sharing the SCSI bus:
+//
+// One of these values is assigned to the sharedBus object to determine
+// if or how the SCSI bus is shared.
+//
+//
+type VirtualSCSISharing struct {
 }
 
 //
@@ -65137,6 +67196,34 @@ type VirtualSerialPortDeviceBackingInfo struct {
 //
 type VirtualSerialPortDeviceBackingOption struct {
 	*VirtualDeviceDeviceBackingOption
+}
+
+//
+// The VirtualSerialPortEndPoint enum defines
+// endpoint values for virtual serial port pipe backing.
+// When you use serial port pipe backing to connect a virtual machine
+// to another process, you must define the endpoints.
+// See the endpoint
+// property for the virtual serial port pipe backing information data object.
+//
+// The possible endpoint values are:
+//
+//
+//
+// • client
+//
+// • server
+//
+//
+//
+//
+// For the supported choices, see the
+// endpoint
+// property for the virtual serial port pipe backing option data object.
+//
+//
+//
+type VirtualSerialPortEndPoint struct {
 }
 
 //
@@ -66114,6 +68201,7 @@ type VirtualVmxnetOption struct {
 // host and services from physical environment to virtualization environment.
 //
 type VirtualizationManager struct {
+	*ManagedObject
 }
 
 //
@@ -66562,6 +68650,9 @@ type VmDasBeingResetEvent struct {
 	Reason string
 }
 
+type VmDasBeingResetEventReasonCode struct {
+}
+
 //
 // This event records when a virtual machine is reset by
 // HA VM Health Monitoring on hosts that support the create screenshot api
@@ -66924,6 +69015,13 @@ type VmFailedStartingSecondaryEvent struct {
 }
 
 //
+// The reason for the failure.
+//
+//
+type VmFailedStartingSecondaryEventFailureReason struct {
+}
+
+//
 // This event records a failure to power off a virtual machine.
 //
 //
@@ -67042,6 +69140,9 @@ type VmFaultToleranceConfigIssue struct {
 	Reason string
 }
 
+type VmFaultToleranceConfigIssueReasonForIssue struct {
+}
+
 //
 // Configuration issues that can occur during operations
 // related to fault tolerance protection for virtual machines.
@@ -67073,6 +69174,9 @@ type VmFaultToleranceInvalidFileBacking struct {
 
 	// The device type of the file backing
 	BackingType string
+}
+
+type VmFaultToleranceInvalidFileBackingDeviceType struct {
 }
 
 //
@@ -67861,6 +69965,9 @@ type VmShutdownOnIsolationEvent struct {
 	ShutdownResult string
 }
 
+type VmShutdownOnIsolationEventOperation struct {
+}
+
 //
 // This data object type describes a file that is a virtual disk snapshot file.
 //
@@ -68387,6 +70494,8 @@ type VmotionInterfaceNotEnabled struct {
 //
 //
 type VmwareDistributedVirtualSwitch struct {
+	*ManagedObject
+
 	*DistributedVirtualSwitch
 }
 
@@ -68402,12 +70511,19 @@ type VmwareDistributedVirtualSwitch struct {
 // Since
 // vSphere API 5.5
 //
-func (api *VmwareDistributedVirtualSwitch) UpdateDVSLacpGroupConfig_Task(
+func (mo *VmwareDistributedVirtualSwitch) UpdateDVSLacpGroupConfig_Task(
 	_this *ManagedObjectReference, lacpGroupSpec []*VMwareDvsLacpGroupSpec,
 ) (*Task, error) {
 
 	return nil, nil
 
+}
+
+//
+// The PVLAN port types.
+//
+//
+type VmwareDistributedVirtualSwitchPvlanPortType struct {
 }
 
 //
@@ -68613,6 +70729,13 @@ type VsanDiskFault struct {
 }
 
 //
+// The list of disk issues.
+//
+//
+type VsanDiskIssueType struct {
+}
+
+//
 // Base exception class for VSAN-specific faults raised for host
 // or cluster operations.See HostVsanSystemSee ReconfigureComputeResource_Task
 //
@@ -68815,6 +70938,14 @@ type VsanHostDecommissionMode struct {
 }
 
 //
+// The action to take with regard to storage objects upon decommissioning
+// a host from use with the VSAN service.
+//
+//
+type VsanHostDecommissionModeObjectAction struct {
+}
+
+//
 // A DiskMapResult represents the result of an operation performed
 // on the set of disks in a VsanHostDiskMapping.See InitializeDisks_TaskSee UpdateVsan_Task
 //
@@ -68874,6 +71005,21 @@ type VsanHostDiskResult struct {
 }
 
 //
+// Values used for indicating a disk's status for use by the VSAN service.See state
+//
+//
+type VsanHostDiskResultState struct {
+}
+
+//
+// A VsanHostHealthState represents the state of a participating
+// host in the VSAN service.See VsanHostClusterStatus
+//
+//
+type VsanHostHealthState struct {
+}
+
+//
 // An VsanHostIpConfig is a pair of multicast IP addresses for use by the VSAN
 // service.  For VSAN there is one such IpConfig pair per "virtual network" as
 // represented by VsanHostConfigInfoNetworkInfoPortConfig.See VsanHostConfigInfoNetworkInfoSee portSee VsanHostConfigInfoNetworkInfoPortConfigSee UpdateVsan_Task
@@ -68906,6 +71052,14 @@ type VsanHostMembershipInfo struct {
 
 	// VSAN node UUID for the host of this MembershipInfo.See nodeUuid
 	NodeUuid string
+}
+
+//
+// A VsanHostNodeState represents the state of participation of a host
+// in the VSAN service.See VsanHostClusterStatusSee VsanHostClusterStatusState
+//
+//
+type VsanHostNodeState struct {
 }
 
 //
@@ -69143,6 +71297,9 @@ type WarningUpgradeEvent struct {
 	*UpgradeEvent
 }
 
+type WeekOfMonth struct {
+}
+
 //
 // The WeeklyTaskScheduler data object sets the time for weekly
 // task execution. You can set the schedule for task execution
@@ -69195,6 +71352,9 @@ type WillLoseHAProtection struct {
 	// the operation is performed. Values come from
 	// Resolution.
 	Resolution string
+}
+
+type WillLoseHAProtectionResolution struct {
 }
 
 //
