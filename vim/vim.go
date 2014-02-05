@@ -283,7 +283,7 @@ type Alarm struct {
 
 	// Information about this alarm.
 	// Required Privilege: System.View
-	Info *AlarmInfo
+	info *AlarmInfo
 }
 
 //
@@ -530,11 +530,11 @@ type AlarmManager struct {
 	// The default setting for each alarm expression, used to populate the
 	// initial client wizard screen.
 	// Required Privilege: System.View
-	DefaultExpression []*AlarmExpression
+	defaultExpression []*AlarmExpression
 
 	// The static descriptive strings used in alarms.
 	// Required Privilege: System.View
-	Description *AlarmDescription
+	description *AlarmDescription
 }
 
 //
@@ -1436,16 +1436,16 @@ type AuthorizationManager struct {
 
 	// Static, descriptive strings for system roles and privileges.
 	// Required Privilege: System.View
-	Description *AuthorizationDescription
+	description *AuthorizationDescription
 
 	// The list of system-defined privileges.
 	// Required Privilege: System.View
-	PrivilegeList []*AuthorizationPrivilege
+	privilegeList []*AuthorizationPrivilege
 
 	// The currently defined roles in the system, including
 	// static system-defined roles.
 	// Required Privilege: System.View
-	RoleList []*AuthorizationRole
+	roleList []*AuthorizationRole
 }
 
 //
@@ -2653,7 +2653,7 @@ type ClusterComputeResource struct {
 	// The set of actions that have been performed recently.
 	//
 	// Since VI API 2.5
-	ActionHistory []*ClusterActionHistory
+	actionHistory []*ClusterActionHistory
 
 	// Deprecated.
 	// As of VI API 2.5, use configurationEx,
@@ -2661,7 +2661,7 @@ type ClusterComputeResource struct {
 	//
 	//
 	// Configuration of the cluster.
-	Configuration *ClusterConfigInfo
+	configuration *ClusterConfigInfo
 
 	// A collection of the DRS faults generated in the last DRS invocation.
 	// Each element of the collection is the set of faults generated in one
@@ -2682,7 +2682,7 @@ type ClusterComputeResource struct {
 	//
 	// Since vSphere API 4.0
 	// Required Privilege: System.Read
-	DrsFault []*ClusterDrsFaults
+	drsFault []*ClusterDrsFaults
 
 	// Deprecated.
 	// As of VI API 2.5, use
@@ -2702,12 +2702,12 @@ type ClusterComputeResource struct {
 	// recommendations may be empty, since there may be no recommended
 	// migrations at this time, or it is possible that DRS is not
 	// enabled.
-	DrsRecommendation []*ClusterDrsRecommendation
+	drsRecommendation []*ClusterDrsRecommendation
 
 	// The set of migration decisions that have recently been performed.
 	//
 	// This list is populated only when DRS is in automatic mode.
-	MigrationHistory []*ClusterDrsMigration
+	migrationHistory []*ClusterDrsMigration
 
 	// List of recommended actions for the cluster. It is
 	// possible that the current set of recommendations may be empty,
@@ -2717,7 +2717,7 @@ type ClusterComputeResource struct {
 	//
 	// Since VI API 2.5
 	// Required Privilege: System.Read
-	Recommendation []*ClusterRecommendation
+	recommendation []*ClusterRecommendation
 }
 
 //
@@ -5687,7 +5687,7 @@ type ComputeResource struct {
 	// ClusterConfigInfoEx object.
 	//
 	// Since VI API 2.5
-	ConfigurationEx *ComputeResourceConfigInfo
+	configurationEx *ComputeResourceConfigInfo
 
 	// The datastore property is the subset of datastore objects in the datacenter
 	// available in this ComputeResource.
@@ -5695,17 +5695,17 @@ type ComputeResource struct {
 	// This property is computed as the aggregate set of datastores available from all
 	// the hosts that are part of this compute resource.
 	// Required Privilege: System.View
-	Datastore []*Datastore
+	datastore []*Datastore
 
 	// The environment browser object that identifies the environments that are supported
 	// on this compute resource.
 	// Required Privilege: System.View
-	EnvironmentBrowser *EnvironmentBrowser
+	environmentBrowser *EnvironmentBrowser
 
 	// List of hosts that are part of this compute resource. If the compute resource is a
 	// standalone type, then this list contains just one element.
 	// Required Privilege: System.View
-	Host []*HostSystem
+	host []*HostSystem
 
 	// The subset of network objects available in the datacenter that is available in
 	// this ComputeResource.
@@ -5713,15 +5713,15 @@ type ComputeResource struct {
 	// This property is computed as the aggregate set of networks available from all the
 	// hosts that are part of this compute resource.
 	// Required Privilege: System.View
-	Network []*Network
+	network []*Network
 
 	// Reference to root resource pool.
 	// Required Privilege: System.View
-	ResourcePool *ResourcePool
+	resourcePool *ResourcePool
 
 	// Basic runtime information about a compute resource. This information is used on
 	// summary screens and in list views.
-	Summary *ComputeResourceSummary
+	summary *ComputeResourceSummary
 }
 
 //
@@ -6140,7 +6140,7 @@ type ContainerView struct {
 
 	// The Folder, Datacenter, ComputeResource, ResourcePool, or HostSystem instance
 	// that provides the objects that the view presents.
-	Container *ManagedEntity
+	container *ManagedEntity
 
 	// Whether to include only the immediate children of the container instance,
 	// or to include additional objects by following the paths beyond the
@@ -6148,12 +6148,12 @@ type ContainerView struct {
 	//
 	// For information about recursive behavior, see the description of
 	// CreateContainerView.
-	Recursive bool
+	recursive bool
 
 	// An optional list of types to be applied to the set of objects in the view.
 	// The list of types indicates objects that are included in the view.
 	// If empty, all types are included.
-	Type []string
+	type_ []string
 }
 
 // Deprecated.
@@ -6448,7 +6448,7 @@ type CustomFieldsManager struct {
 	// List of custom fields defined on this server. The fields are
 	// sorted by name.
 	// Required Privilege: System.View
-	Field []*CustomFieldDef
+	field []*CustomFieldDef
 }
 
 //
@@ -7098,11 +7098,11 @@ type CustomizationSpecManager struct {
 	// Gets a binary public encryption key that can be used to encrypt
 	// passwords in stored specifications.
 	// Required Privilege: System.View
-	EncryptionKey []int8
+	encryptionKey []int8
 
 	// Gets a list of information on available specifications.
 	// Required Privilege: VirtualMachine.Provisioning.ReadCustSpecs
-	Info []*CustomizationSpecInfo
+	info []*CustomizationSpecInfo
 }
 
 //
@@ -9094,11 +9094,11 @@ type Datacenter struct {
 	//
 	// Since vSphere API 5.1
 	// Required Privilege: System.View
-	Configuration *DatacenterConfigInfo
+	configuration *DatacenterConfigInfo
 
 	// A collection of references to the datastore objects
 	// available in this datacenter.
-	Datastore []*Datastore
+	datastore []*Datastore
 
 	// A reference to the folder hierarchy that contains
 	// the datastores for this datacenter.
@@ -9107,18 +9107,18 @@ type Datacenter struct {
 	//
 	// Since vSphere API 4.0
 	// Required Privilege: System.View
-	DatastoreFolder *Folder
+	datastoreFolder *Folder
 
 	// A reference to the folder hierarchy that contains
 	// the compute resources, including hosts and clusters, for this datacenter.
 	//
 	// This folder is guaranteed to exist.
 	// Required Privilege: System.View
-	HostFolder *Folder
+	hostFolder *Folder
 
 	// A collection of references to the network objects
 	// available in this datacenter.
-	Network []*Network
+	network []*Network
 
 	// A reference to the folder hierarchy that contains the network entities
 	// for this datacenter. The folder can include Network,
@@ -9129,7 +9129,7 @@ type Datacenter struct {
 	//
 	// Since vSphere API 4.0
 	// Required Privilege: System.View
-	NetworkFolder *Folder
+	networkFolder *Folder
 
 	// A reference to the folder hierarchy that contains VirtualMachine
 	// virtual machine templates (identified by the template
@@ -9141,7 +9141,7 @@ type Datacenter struct {
 	//
 	// This folder is guaranteed to exist.
 	// Required Privilege: System.View
-	VmFolder *Folder
+	vmFolder *Folder
 }
 
 //
@@ -9387,16 +9387,16 @@ type Datastore struct {
 	*ManagedEntity
 
 	// DatastoreBrowser used to browse this datastore.
-	Browser *HostDatastoreBrowser
+	browser *HostDatastoreBrowser
 
 	// Capabilities of this datastore.
-	Capability *DatastoreCapability
+	capability *DatastoreCapability
 
 	// Hosts attached to this datastore.
-	Host []*DatastoreHostMount
+	host []*DatastoreHostMount
 
 	// Specific information about the datastore.
-	Info *DatastoreInfo
+	info *DatastoreInfo
 
 	// Configuration of storage I/O resource management for the datastore.
 	// Currently we only support storage I/O resource management on VMFS volumes
@@ -9408,13 +9408,13 @@ type Datastore struct {
 	// ConfigureDatastoreIORM_Task
 	//
 	// Since vSphere API 4.1
-	IormConfiguration *StorageIORMInfo
+	iormConfiguration *StorageIORMInfo
 
 	// Global properties of the datastore.
-	Summary *DatastoreSummary
+	summary *DatastoreSummary
 
 	// Virtual machines stored on this datastore.
-	Vm []*VirtualMachine
+	vm []*VirtualMachine
 }
 
 //
@@ -10728,13 +10728,13 @@ type DistributedVirtualPortgroup struct {
 	*Network
 
 	// Configuration of the portgroup.
-	Config *DVPortgroupConfigInfo
+	config *DVPortgroupConfigInfo
 
 	// Generated UUID of the portgroup.
-	Key string
+	key string
 
 	// Port keys for the set of ports in the portgroup.
-	PortKeys []string
+	portKeys []string
 }
 
 //
@@ -11147,30 +11147,30 @@ type DistributedVirtualSwitch struct {
 	// When you retrieve this property from an ESXi host,
 	// capability.dvsOperationSupported
 	// should always be set to false.
-	Capability *DVSCapability
+	capability *DVSCapability
 
 	// Switch configuration data.
-	Config *DVSConfigInfo
+	config *DVSConfigInfo
 
 	// Network resource pool information for the switch.
 	//
 	// Since vSphere API 4.1
-	NetworkResourcePool []*DVSNetworkResourcePool
+	networkResourcePool []*DVSNetworkResourcePool
 
 	// Portgroups that are defined on the switch.
-	Portgroup []*DistributedVirtualPortgroup
+	portgroup []*DistributedVirtualPortgroup
 
 	// Runtime information of the distributed virtual switch.
 	//
 	// Since vSphere API 5.1
-	Runtime *DVSRuntimeInfo
+	runtime *DVSRuntimeInfo
 
 	// Summary of the switch.
-	Summary *DVSSummary
+	summary *DVSSummary
 
 	// Generated UUID of the switch. Unique across vCenter Server
 	// inventory and instances.
-	Uuid string
+	uuid string
 }
 
 //
@@ -14411,7 +14411,7 @@ type EnvironmentBrowser struct {
 
 	// DatastoreBrowser to browse datastores that are available on this entity.
 	// Required Privilege: System.View
-	DatastoreBrowser *HostDatastoreBrowser
+	datastoreBrowser *HostDatastoreBrowser
 }
 
 //
@@ -15086,7 +15086,7 @@ type EventHistoryCollector struct {
 	//
 	// The "oldest event" is the one with the smallest key (event ID). The
 	// events in the returned page are unordered.
-	LatestPage []*Event
+	latestPage []*Event
 }
 
 //
@@ -15136,16 +15136,16 @@ type EventManager struct {
 
 	// Static descriptive strings used in events.
 	// Required Privilege: System.View
-	Description *EventDescription
+	description *EventDescription
 
 	// The latest event that happened on the VirtualCenter server.
 	// Required Privilege: System.View
-	LatestEvent *Event
+	latestEvent *Event
 
 	// For each client, the maximum number of event collectors that can exist
 	// simultaneously.
 	// Required Privilege: System.View
-	MaxCollector int32
+	maxCollector int32
 }
 
 //
@@ -15531,7 +15531,7 @@ type ExtensibleManagedObject struct {
 	//
 	// Since VI API 2.5
 	// Required Privilege: System.View
-	AvailableField []*CustomFieldDef
+	availableField []*CustomFieldDef
 
 	// List of custom field values. Each value uses a key to associate
 	// an instance of a CustomFieldStringValue with
@@ -15539,7 +15539,7 @@ type ExtensibleManagedObject struct {
 	//
 	// Since VI API 2.5
 	// Required Privilege: System.View
-	Value []*CustomFieldValue
+	value []*CustomFieldValue
 }
 
 //
@@ -15776,7 +15776,7 @@ type ExtensionManager struct {
 
 	// The list of currently registered extensions.
 	// Required Privilege: System.View
-	ExtensionList []*Extension
+	extensionList []*Extension
 }
 
 //
@@ -17064,7 +17064,7 @@ type Folder struct {
 
 	// An array of managed object references. Each entry is a reference to a child entity.
 	// Required Privilege: System.View
-	ChildEntity []*ManagedEntity
+	childEntity []*ManagedEntity
 
 	// Specifies the object types a folder may contain.
 	// When you create a folder, it inherits its childType from the parent folder
@@ -17093,7 +17093,7 @@ type Folder struct {
 	// Datastore folders can contain child datastore folders and Datastore
 	// managed objects.
 	// Required Privilege: System.View
-	ChildType []string
+	childType []string
 }
 
 //
@@ -18340,17 +18340,17 @@ type GuestOperationsManager struct {
 	// A singleton managed object that provides methods for guest authentication
 	// operations.
 	// Required Privilege: System.Anonymous
-	AuthManager *GuestAuthManager
+	authManager *GuestAuthManager
 
 	// A singleton managed object that provides methods for guest file
 	// operations.
 	// Required Privilege: System.Anonymous
-	FileManager *GuestFileManager
+	fileManager *GuestFileManager
 
 	// A singleton managed object that provides methods for guest process
 	// operations.
 	// Required Privilege: System.Anonymous
-	ProcessManager *GuestProcessManager
+	processManager *GuestProcessManager
 }
 
 //
@@ -19005,7 +19005,7 @@ type HistoryCollector struct {
 	//
 	// The type of the returned filter is determined by the managed object
 	// for which the collector is created.
-	Filter interface{}
+	filter interface{}
 }
 
 //
@@ -19497,7 +19497,7 @@ type HostAuthenticationManager struct {
 	*ManagedObject
 
 	// Information about Active Directory membership.
-	Info *HostAuthenticationManagerInfo
+	info *HostAuthenticationManagerInfo
 
 	// An array that can contain managed object references to local and
 	// Active Directory authentication managed objects.
@@ -19522,7 +19522,7 @@ type HostAuthenticationManager struct {
 	// HostAuthenticationStoreInfo.enabled
 	// property is True (accessed through the info
 	// property), the join method will throw a fault.
-	SupportedStore []*HostAuthenticationStore
+	supportedStore []*HostAuthenticationStore
 }
 
 //
@@ -19562,7 +19562,7 @@ type HostAuthenticationStore struct {
 	*ManagedObject
 
 	// Information about the authentication store.
-	Info *HostAuthenticationStoreInfo
+	info *HostAuthenticationStoreInfo
 }
 
 //
@@ -19592,7 +19592,7 @@ type HostAuthenticationStoreInfo struct {
 type HostAutoStartManager struct {
 	*ManagedObject
 
-	Config *HostAutoStartManagerConfig
+	config *HostAutoStartManagerConfig
 }
 
 //
@@ -19803,7 +19803,7 @@ type HostCacheConfigurationManager struct {
 	// The swap performance configuration for the ESX host.  This includes
 	// configuration information for each datastore enabled for this purpose.
 	// Required Privilege: Host.Config.AdvancedConfig
-	CacheConfigurationInfo []*HostCacheConfigurationInfo
+	cacheConfigurationInfo []*HostCacheConfigurationInfo
 }
 
 //
@@ -21442,7 +21442,7 @@ type HostCpuSchedulerSystem struct {
 	// The hyperthread configuration for the CpuSchedulerSystem.  The
 	// existence of this data object type indicates if the CPU scheduler
 	// is capable of scheduling hyperthreads as resources.
-	HyperthreadInfo *HostHyperThreadScheduleInfo
+	hyperthreadInfo *HostHyperThreadScheduleInfo
 }
 
 //
@@ -21634,7 +21634,7 @@ type HostDatastoreBrowser struct {
 	// browsed, the host's datastores are used. If the Datacenter is being browsed, the
 	// Datacenter's list of datastores is used.
 	// Required Privilege: System.View
-	Datastore []*Datastore
+	datastore []*Datastore
 
 	// The list of supported file types. The supported file types are represented as
 	// items in this list. For each supported file type, there is an object in the list
@@ -21648,7 +21648,7 @@ type HostDatastoreBrowser struct {
 	// This property is used by clients to determine what kinds of file types are
 	// supported. Clients should consult this list to avoid querying for types of virtual
 	// machine components that are not supported.
-	SupportedType []*FileQuery
+	supportedType []*FileQuery
 }
 
 // Deprecated.
@@ -21865,11 +21865,11 @@ type HostDatastoreSystem struct {
 	// Capability vector indicating the available product features.
 	//
 	// Since VI API 2.5
-	Capabilities *HostDatastoreSystemCapabilities
+	capabilities *HostDatastoreSystemCapabilities
 
 	// List of datastores on this host.
 	// Required Privilege: System.View
-	Datastore []*Datastore
+	datastore []*Datastore
 }
 
 //
@@ -22214,7 +22214,7 @@ type HostDateTimeSystem struct {
 
 	// The DateTime configuration of the host.
 	// Required Privilege: System.Read
-	DateTimeInfo *HostDateTimeInfo
+	dateTimeInfo *HostDateTimeInfo
 }
 
 //
@@ -22510,7 +22510,7 @@ type HostDiagnosticSystem struct {
 	*ManagedObject
 
 	// The currently active diagnostic partition.
-	ActivePartition *HostDiagnosticPartition
+	activePartition *HostDiagnosticPartition
 }
 
 //
@@ -23053,7 +23053,7 @@ type HostEsxAgentHostManager struct {
 
 	// Configuration of agent virtual machine resources
 	// Required Privilege: Host.Config.Settings
-	ConfigInfo *HostEsxAgentHostManagerConfigInfo
+	configInfo *HostEsxAgentHostManagerConfigInfo
 }
 
 //
@@ -23652,7 +23652,7 @@ type HostFirewallSystem struct {
 	*ExtensibleManagedObject
 
 	// Firewall configuration.
-	FirewallInfo *HostFirewallInfo
+	firewallInfo *HostFirewallInfo
 }
 
 //
@@ -23907,7 +23907,7 @@ type HostGraphicsManager struct {
 
 	// Array of graphics information
 	// Required Privilege: System.Read
-	GraphicsInfo []*HostGraphicsInfo
+	graphicsInfo []*HostGraphicsInfo
 }
 
 //
@@ -24093,7 +24093,7 @@ type HostHardwareSummary struct {
 type HostHealthStatusSystem struct {
 	*ManagedObject
 
-	Runtime *HealthSystemRuntime
+	runtime *HealthSystemRuntime
 }
 
 //
@@ -25948,14 +25948,14 @@ type HostMemorySystem struct {
 	// Service console reservation information for the memory manager.  The
 	// existence of this data object indicates if the service console memory
 	// reservation must be configured for this host.
-	ConsoleReservationInfo *ServiceConsoleReservationInfo
+	consoleReservationInfo *ServiceConsoleReservationInfo
 
 	// Virtual machine reservation information for the memory manager.  The
 	// existence of this data object indicates if the virtual machine memory
 	// reservation must be configured for this host.
 	//
 	// Since VI API 2.5
-	VirtualMachineReservationInfo *VirtualMachineMemoryReservationInfo
+	virtualMachineReservationInfo *VirtualMachineMemoryReservationInfo
 }
 
 //
@@ -27087,13 +27087,13 @@ type HostNetworkSystem struct {
 	*ExtensibleManagedObject
 
 	// Capability vector indicating the available product features.
-	Capabilities *HostNetCapabilities
+	capabilities *HostNetCapabilities
 
 	// IP route configuration for the service console.  The IP route
 	// configuration is global to the entire host.  This property is
 	// set only if
 	// IP routing can be configured for the service console.
-	ConsoleIpRouteConfig *HostIpRouteConfig
+	consoleIpRouteConfig *HostIpRouteConfig
 
 	// Deprecated.
 	// As of vSphere API 5.5, which is moved to
@@ -27101,7 +27101,7 @@ type HostNetworkSystem struct {
 	//
 	//
 	// Client-side DNS configuration.
-	DnsConfig *HostDnsConfig
+	dnsConfig *HostDnsConfig
 
 	// Deprecated.
 	// As of vSphere API 5.5, which is moved to
@@ -27109,22 +27109,22 @@ type HostNetworkSystem struct {
 	//
 	//
 	// The IP route configuration.
-	IpRouteConfig *HostIpRouteConfig
+	ipRouteConfig *HostIpRouteConfig
 
 	// Network configuration information.  This information can be applied
 	// using the updateNetworkConfig() method.  The
 	// information is a strict subset of the information available in NetworkInfo.See HostNetworkInfo
-	NetworkConfig *HostNetworkConfig
+	networkConfig *HostNetworkConfig
 
 	// The network configuration and runtime information.
-	NetworkInfo *HostNetworkInfo
+	networkInfo *HostNetworkInfo
 
 	// Deprecated.
 	// As of VI API 4.0, the system defaults will be used.
 	//
 	//
 	// The offload capabilities available on this server.
-	OffloadCapabilities *HostNetOffloadCapabilities
+	offloadCapabilities *HostNetOffloadCapabilities
 }
 
 //
@@ -28451,7 +28451,7 @@ type HostPciPassthruSystem struct {
 
 	// Array of PciPassthru information
 	// Required Privilege: System.Read
-	PciPassthruInfo []*HostPciPassthruInfo
+	pciPassthruInfo []*HostPciPassthruInfo
 }
 
 //
@@ -28910,11 +28910,11 @@ type HostPowerSystem struct {
 
 	// Power system capabilities object.
 	// Required Privilege: Host.Config.Power
-	Capability *PowerSystemCapability
+	capability *PowerSystemCapability
 
 	// Power system state info object.
 	// Required Privilege: Host.Config.Power
-	Info *PowerSystemInfo
+	info *PowerSystemInfo
 }
 
 //
@@ -29108,7 +29108,7 @@ type HostProfile struct {
 	// method. If you do not specify a host for validation
 	// (HostProfileCompleteConfigSpec.validatorHost),
 	// the Profile Engine uses the reference host to validate the profile.
-	ReferenceHost *HostSystem
+	referenceHost *HostSystem
 }
 
 //
@@ -30123,7 +30123,7 @@ type HostServiceSystem struct {
 	*ExtensibleManagedObject
 
 	// Service configuration.
-	ServiceInfo *HostServiceInfo
+	serviceInfo *HostServiceInfo
 }
 
 //
@@ -30360,11 +30360,11 @@ type HostSnmpSystem struct {
 
 	// Since VI API 2.5
 	// Required Privilege: Global.Settings
-	Configuration *HostSnmpConfigSpec
+	configuration *HostSnmpConfigSpec
 
 	// Since VI API 2.5
 	// Required Privilege: Global.Settings
-	Limits *HostSnmpSystemAgentLimits
+	limits *HostSnmpSystemAgentLimits
 }
 
 //
@@ -30587,7 +30587,7 @@ type HostStorageSystem struct {
 	// File system volume information for the host.  See the
 	// FileSystemVolumeInfo data
 	// object type for more information.
-	FileSystemVolumeInfo *HostFileSystemVolumeInfo
+	fileSystemVolumeInfo *HostFileSystemVolumeInfo
 
 	// Runtime information about the state of a multipath path.
 	// A null value will be returned if path state information is not available
@@ -30598,17 +30598,17 @@ type HostStorageSystem struct {
 	// of the storageDeviceInfo property.
 	//
 	// Since vSphere API 4.0
-	MultipathStateInfo *HostMultipathStateInfo
+	multipathStateInfo *HostMultipathStateInfo
 
 	// Host storage information up to the device level.
-	StorageDeviceInfo *HostStorageDeviceInfo
+	storageDeviceInfo *HostStorageDeviceInfo
 
 	// Datastore paths of files used by the host system on
 	// mounted volumes, for instance, the COS vmdk file of the
 	// host. For information on datastore paths, see Datastore.
 	//
 	// Since vSphere API 4.1
-	SystemFile []string
+	systemFile []string
 }
 
 //
@@ -31741,11 +31741,11 @@ type HostSystem struct {
 
 	// Host capabilities. This might not be available for a
 	// disconnected host.
-	Capability *HostCapability
+	capability *HostCapability
 
 	// Host configuration information.  This might not be available for a disconnected
 	// host.
-	Config *HostConfigInfo
+	config *HostConfigInfo
 
 	// Host configuration systems.
 	//
@@ -31756,20 +31756,20 @@ type HostSystem struct {
 	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
 	// an empty string for the version parameter. Any other version value will not
 	// produce any property values as no updates are generated.
-	ConfigManager *HostConfigManager
+	configManager *HostConfigManager
 
 	// A collection of references to the subset of datastore objects in the datacenter
 	// that are available in this HostSystem.
 	// Required Privilege: System.View
-	Datastore []*Datastore
+	datastore []*Datastore
 
 	// DatastoreBrowser to browse datastores for this host.
 	// Required Privilege: System.View
-	DatastoreBrowser *HostDatastoreBrowser
+	datastoreBrowser *HostDatastoreBrowser
 
 	// Hardware configuration of the host. This might not be available for a
 	// disconnected host.
-	Hardware *HostHardwareInfo
+	hardware *HostHardwareInfo
 
 	// Information about all licensable resources, currently present on this host.
 	// This information is used mostly by the modules, manipulating information
@@ -31779,25 +31779,25 @@ type HostSystem struct {
 	// The values in this property may not be accurate for pre-5.0 hosts when returned by vCenter 5.0
 	//
 	// Since vSphere API 5.0
-	LicensableResource *HostLicensableResourceInfo
+	licensableResource *HostLicensableResourceInfo
 
 	// A collection of references to the subset of network objects in the datacenter that
 	// are available in this HostSystem.
 	// Required Privilege: System.View
-	Network []*Network
+	network []*Network
 
 	// Runtime state information about the host such as connection state.
-	Runtime *HostRuntimeInfo
+	runtime *HostRuntimeInfo
 
 	// Basic information about the host, including connection state.
-	Summary *HostListSummary
+	summary *HostListSummary
 
 	// Reference for the system resource hierarchy, used for configuring the set of
 	// resources reserved to the system and unavailable to virtual machines.
-	SystemResources *HostSystemResourceInfo
+	systemResources *HostSystemResourceInfo
 
 	// List of virtual machines associated with this host.
-	Vm []*VirtualMachine
+	vm []*VirtualMachine
 }
 
 //
@@ -32893,7 +32893,7 @@ type HostVFlashManager struct {
 	*ManagedObject
 
 	// Host vFlash configuration information.
-	VFlashConfigInfo *HostVFlashManagerVFlashConfigInfo
+	vFlashConfigInfo *HostVFlashManagerVFlashConfigInfo
 }
 
 //
@@ -33229,10 +33229,10 @@ type HostVMotionSystem struct {
 	*ExtensibleManagedObject
 
 	// IP configuration of the VMotion VirtualNic.
-	IpConfig *HostIpConfig
+	ipConfig *HostIpConfig
 
 	// VMotion network configuration.
-	NetConfig *HostVMotionNetConfig
+	netConfig *HostVMotionNetConfig
 }
 
 //
@@ -33431,7 +33431,7 @@ type HostVirtualNicManager struct {
 	*ExtensibleManagedObject
 
 	// Network configuration.
-	Info *HostVirtualNicManagerInfo
+	info *HostVirtualNicManagerInfo
 }
 
 //
@@ -34020,7 +34020,7 @@ type HostVsanSystem struct {
 
 	// The current VSAN service configuration information for this host.
 	// Required Privilege: System.Read
-	Config *VsanHostConfigInfo
+	config *VsanHostConfigInfo
 }
 
 //
@@ -34311,18 +34311,18 @@ type HttpNfcLease struct {
 
 	// If the lease is in the error state, this property contains the
 	// error that caused the lease to be aborted.
-	Error *LocalizedMethodFault
+	error *LocalizedMethodFault
 
 	// Provides information on the objects contained in this lease. The
 	// info property is only valid when the lease is in the ready state.
-	Info *HttpNfcLeaseInfo
+	info *HttpNfcLeaseInfo
 
 	// Provides progress information (0-100 percent) for the initializing state
 	// of the lease. Clients can use this to track overall progress.
-	InitializeProgress int32
+	initializeProgress int32
 
 	// The current state of the lease.
-	State *enum.HttpNfcLeaseState
+	state *enum.HttpNfcLeaseState
 }
 
 //
@@ -37226,11 +37226,11 @@ type LicenseManager struct {
 	// Return current diagnostic information.
 	//
 	// Since VI API 2.5
-	Diagnostics *LicenseDiagnostics
+	diagnostics *LicenseDiagnostics
 
 	// Since vSphere API 4.0
 	// Required Privilege: System.Read
-	Evaluation *LicenseManagerEvaluationInfo
+	evaluation *LicenseManagerEvaluationInfo
 
 	// Deprecated.
 	// As of VI API 2.5, use QuerySupportedFeatures
@@ -37238,13 +37238,13 @@ type LicenseManager struct {
 	//
 	//
 	// The list of features that can be licensed.
-	FeatureInfo []*LicenseFeatureInfo
+	featureInfo []*LicenseFeatureInfo
 
 	// License Assignment Manager
 	//
 	// Since vSphere API 4.0
 	// Required Privilege: System.View
-	LicenseAssignmentManager *LicenseAssignmentManager
+	licenseAssignmentManager *LicenseAssignmentManager
 
 	// Deprecated.
 	// As of vSphere API 4.0, use
@@ -37259,13 +37259,13 @@ type LicenseManager struct {
 	// To set the edition use SetLicenseEdition.
 	//
 	// Since VI API 2.5
-	LicensedEdition string
+	licensedEdition string
 
 	// Get information about all the licenses avaiable.
 	//
 	// Since vSphere API 4.0
 	// Required Privilege: dynamic
-	Licenses []*LicenseManagerLicenseInfo
+	licenses []*LicenseManagerLicenseInfo
 
 	// Deprecated.
 	// As of vSphere API 4.0, use
@@ -37273,7 +37273,7 @@ type LicenseManager struct {
 	//
 	//
 	// Set or return a data object type of LocalLicense or LicenseServer.
-	Source *LicenseSource
+	source *LicenseSource
 
 	// Deprecated.
 	// As of vSphere API 4.0, this property is not used.
@@ -37281,7 +37281,7 @@ type LicenseManager struct {
 	//
 	// Current state of the license source. License sources that are LocalSource
 	// are always available.
-	SourceAvailable bool
+	sourceAvailable bool
 }
 
 //
@@ -38138,7 +38138,7 @@ type LocalizationManager struct {
 	// Fetches the descriptions of all the client-side localization message
 	// catalogs available for the current session locale.
 	// Required Privilege: System.View
-	Catalog []*LocalizationManagerMessageCatalog
+	catalog []*LocalizationManagerMessageCatalog
 }
 
 //
@@ -38339,14 +38339,14 @@ type ManagedEntity struct {
 	//
 	// Since vSphere API 4.0
 	// Required Privilege: System.Read
-	AlarmActionsEnabled bool
+	alarmActionsEnabled bool
 
 	// Current configuration issues that have been detected for this entity. Typically,
 	// these issues have already been logged as events. The entity stores these
 	// events as long as they are still current. The
 	// configStatus property provides an overall status
 	// based on these events.
-	ConfigIssue []*Event
+	configIssue []*Event
 
 	// The configStatus indicates whether or not the system has detected a configuration
 	// issue involving this entity. For example, it might have detected a
@@ -38372,11 +38372,11 @@ type ManagedEntity struct {
 	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
 	// an empty string for the version parameter. Any other version value will not
 	// produce any property values as no updates are generated.
-	ConfigStatus *enum.ManagedEntityStatus
+	configStatus *enum.ManagedEntityStatus
 
 	// Custom field values.
 	// Required Privilege: System.View
-	CustomValue []*CustomFieldValue
+	customValue []*CustomFieldValue
 
 	// A set of alarm states for alarms that apply to this managed entity.
 	// The set includes alarms defined on this entity
@@ -38386,7 +38386,7 @@ type ManagedEntity struct {
 	// Alarms are inherited if they can be triggered by this entity or its descendants.
 	// This set does not include alarms that are defined on descendants of this entity.
 	// Required Privilege: System.View
-	DeclaredAlarmState []*AlarmState
+	declaredAlarmState []*AlarmState
 
 	// List of operations that are disabled, given the current runtime
 	// state of the entity. For example, a power-on operation always fails if a
@@ -38463,11 +38463,11 @@ type ManagedEntity struct {
 	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
 	// an empty string for the version parameter. Any other version value will not
 	// produce any property values as no updates are generated.
-	DisabledMethod []string
+	disabledMethod []string
 
 	// Access rights the current session has to this entity.
 	// Required Privilege: System.View
-	EffectiveRole []int32
+	effectiveRole []int32
 
 	// Name of this entity, unique relative to its parent.
 	//
@@ -38477,7 +38477,7 @@ type ManagedEntity struct {
 	// sequence. A slash is escaped as %2F or %2f. A backslash is escaped as %5C or
 	// %5c, and a percent is escaped as %25.
 	// Required Privilege: System.View
-	Name string
+	name string
 
 	// General health of this managed entity.
 	// The overall status of the managed entity is computed as the worst status
@@ -38500,7 +38500,7 @@ type ManagedEntity struct {
 	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
 	// an empty string for the version parameter. Any other version value will not
 	// produce any property values as no updates are generated.
-	OverallStatus *enum.ManagedEntityStatus
+	overallStatus *enum.ManagedEntityStatus
 
 	// Parent of this entity.
 	//
@@ -38508,10 +38508,10 @@ type ManagedEntity struct {
 	// VirtualMachine objects that are part of
 	// a VirtualApp.
 	// Required Privilege: System.View
-	Parent *ManagedEntity
+	parent *ManagedEntity
 
 	// List of permissions defined for this entity.
-	Permission []*Permission
+	permission []*Permission
 
 	// The set of recent tasks operating on this managed entity. This is a subset
 	// of recentTask belong to this entity. A task in this
@@ -38533,14 +38533,14 @@ type ManagedEntity struct {
 	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
 	// an empty string for the version parameter. Any other version value will not
 	// produce any property values as no updates are generated.
-	RecentTask []*Task
+	recentTask []*Task
 
 	// The set of tags associated with this managed entity.
 	// Experimental. Subject to change.
 	//
 	// Since vSphere API 4.0
 	// Required Privilege: System.View
-	Tag []*Tag
+	tag []*Tag
 
 	// A set of alarm states for alarms triggered by this entity
 	// or by its descendants.
@@ -38556,7 +38556,7 @@ type ManagedEntity struct {
 	// an empty string for the version parameter. Any other version value will not
 	// produce any property values as no updates are generated.
 	// Required Privilege: System.View
-	TriggeredAlarmState []*AlarmState
+	triggeredAlarmState []*AlarmState
 }
 
 //
@@ -39018,7 +39018,7 @@ type ManagedObjectView struct {
 	*View
 
 	// The list of references to objects mapped by this view.
-	View []*ManagedObjectReference
+	view []*ManagedObjectReference
 }
 
 //
@@ -40518,16 +40518,16 @@ type Network struct {
 	*ManagedEntity
 
 	// Hosts attached to this network.
-	Host []*HostSystem
+	host []*HostSystem
 
 	// Name of this network.
-	Name string
+	name string
 
 	// Properties of a network.
-	Summary *NetworkSummary
+	summary *NetworkSummary
 
 	// Virtual machines using this network.
-	Vm []*VirtualMachine
+	vm []*VirtualMachine
 }
 
 // Deprecated.
@@ -41694,11 +41694,11 @@ type OptionManager struct {
 	*ManagedObject
 
 	// A list of the current settings for the key/value pair options.
-	Setting []*OptionValue
+	setting []*OptionValue
 
 	// A list of supported key/value pair options including their
 	// type information.
-	SupportedOption []*OptionDef
+	supportedOption []*OptionDef
 }
 
 //
@@ -43010,7 +43010,7 @@ type OvfManager struct {
 	//
 	// Since vSphere API 5.1
 	// Required Privilege: System.View
-	OvfExportOption []*OvfOptionInfo
+	ovfExportOption []*OvfOptionInfo
 
 	// Returns an array of OvfOptionInfo object that specifies what options the server
 	// support for modifing/relaxing the OVF import process.
@@ -43018,7 +43018,7 @@ type OvfManager struct {
 	//
 	// Since vSphere API 5.1
 	// Required Privilege: System.View
-	OvfImportOption []*OvfOptionInfo
+	ovfImportOption []*OvfOptionInfo
 }
 
 //
@@ -44707,16 +44707,16 @@ type PerformanceManager struct {
 
 	// The static description strings.
 	// Required Privilege: System.View
-	Description *PerformanceDescription
+	description *PerformanceDescription
 
 	// A list of intervals configured on the
 	// system.
 	// Required Privilege: System.View
-	HistoricalInterval []*PerfInterval
+	historicalInterval []*PerfInterval
 
 	// A list of all supported performance counters in the system.
 	// Required Privilege: System.View
-	PerfCounter []*PerfCounterInfo
+	perfCounter []*PerfCounterInfo
 }
 
 // Deprecated.
@@ -45944,30 +45944,30 @@ type Profile struct {
 	// If the compliance status of one of the entities is not known, compliance status
 	// of the profile is unknown.
 	// See ComplianceResultStatus.
-	ComplianceStatus string
+	complianceStatus string
 
 	// Configuration data for the profile.
 	// Required Privilege: Profile.Edit
-	Config *ProfileConfigInfo
+	config *ProfileConfigInfo
 
 	// Time at which the profile was created.
-	CreatedTime time.Time
+	createdTime time.Time
 
 	// Deprecated.
 	// As of vSphere API 5.0. use RetrieveDescription instead.
 	//
 	//
 	// Localizable description of the profile
-	Description *ProfileDescription
+	description *ProfileDescription
 
 	// List of managed entities associated with the profile.
-	Entity []*ManagedEntity
+	entity []*ManagedEntity
 
 	// Time at which the profile was last modified.
-	ModifiedTime time.Time
+	modifiedTime time.Time
 
 	// Name of the profile.
-	Name string
+	name string
 }
 
 //
@@ -46484,7 +46484,7 @@ type ProfileManager struct {
 
 	// A list of profiles known to this ProfileManager.
 	// Required Privilege: Profile.View
-	Profile []*Profile
+	profile []*Profile
 }
 
 //
@@ -46872,7 +46872,7 @@ type PropertyCollector struct {
 	// The filters that this PropertyCollector uses to determine the list of
 	// properties for which it detects incremental changes.
 	// Required Privilege: System.View
-	Filter []*PropertyFilter
+	filter []*PropertyFilter
 }
 
 //
@@ -47152,10 +47152,10 @@ type PropertyFilter struct {
 	// nested change or the entire specified property value.  If the value is
 	// true, a change reports only the nested property.  If the value is
 	// false, a change reports the enclosing property named in the filter.
-	PartialUpdates bool
+	partialUpdates bool
 
 	// Specifications for this filter.
-	Spec *PropertyFilterSpec
+	spec *PropertyFilterSpec
 }
 
 //
@@ -48360,19 +48360,19 @@ type ResourcePool struct {
 
 	// The resource configuration of all direct children (VirtualMachine and
 	// ResourcePool) of this resource group.
-	ChildConfiguration []*ResourceConfigSpec
+	childConfiguration []*ResourceConfigSpec
 
 	// Configuration of this resource pool.
-	Config *ResourceConfigSpec
+	config *ResourceConfigSpec
 
 	// The ComputeResource to which this set of one or more nested resource pools
 	// belong.
 	// Required Privilege: System.View
-	Owner *ComputeResource
+	owner *ComputeResource
 
 	// The set of child resource pools.
 	// Required Privilege: System.View
-	ResourcePool []*ResourcePool
+	resourcePool []*ResourcePool
 
 	// Runtime information about a resource pool.
 	// The ResourcePoolResourceUsage information within
@@ -48387,7 +48387,7 @@ type ResourcePool struct {
 	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
 	// an empty string for the version parameter. Any other version value will not
 	// produce any property values as no updates are generated.
-	Runtime *ResourcePoolRuntimeInfo
+	runtime *ResourcePoolRuntimeInfo
 
 	// Basic information about a resource pool.
 	//
@@ -48398,11 +48398,11 @@ type ResourcePool struct {
 	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
 	// an empty string for the version parameter. Any other version value will not
 	// produce any property values as no updates are generated.
-	Summary *ResourcePoolSummary
+	summary *ResourcePoolSummary
 
 	// The set of virtual machines associated with this resource pool.
 	// Required Privilege: System.View
-	Vm []*VirtualMachine
+	vm []*VirtualMachine
 }
 
 //
@@ -49373,7 +49373,7 @@ type ScheduledTask struct {
 	*ExtensibleManagedObject
 
 	// Information about the current scheduled task.
-	Info *ScheduledTaskInfo
+	info *ScheduledTaskInfo
 }
 
 //
@@ -49594,11 +49594,11 @@ type ScheduledTaskManager struct {
 
 	// Static descriptive strings used in scheduled tasks.
 	// Required Privilege: System.View
-	Description *ScheduledTaskDescription
+	description *ScheduledTaskDescription
 
 	// All available scheduled tasks.
 	// Required Privilege: System.View
-	ScheduledTask []*ScheduledTask
+	scheduledTask []*ScheduledTask
 }
 
 //
@@ -50646,7 +50646,7 @@ type ServiceInstance struct {
 
 	// API-wide capabilities.
 	// Required Privilege: System.View
-	Capability *Capability
+	capability *Capability
 
 	// The properties of the ServiceInstance managed object. The content property
 	// is identical to the return value from the
@@ -50659,7 +50659,7 @@ type ServiceInstance struct {
 	// the RetrieveServiceContent method,
 	// and then invoking a second traversal to continue.)
 	// Required Privilege: System.Anonymous
-	Content *ServiceContent
+	content *ServiceContent
 
 	// Contains the time most recently obtained from the server.
 	// The time is not necessarily current. This property is intended for use
@@ -50670,7 +50670,7 @@ type ServiceInstance struct {
 	// You should not rely on the serverClock property to get the current time
 	// on the server; instead, use the CurrentTime method.
 	// Required Privilege: System.View
-	ServerClock time.Time
+	serverClock time.Time
 }
 
 //
@@ -50775,7 +50775,7 @@ type ServiceManager struct {
 
 	// The full list of services available in this directory.
 	// Required Privilege: Global.ServiceManagers
-	Service []*ServiceManagerServiceInfo
+	service []*ServiceManagerServiceInfo
 }
 
 //
@@ -50862,23 +50862,23 @@ type SessionManager struct {
 	// This property contains information about the client's current session.
 	// If the client is not logged on, the value is null.
 	// Required Privilege: System.Anonymous
-	CurrentSession *UserSession
+	currentSession *UserSession
 
 	// This is the default server locale.
 	// Required Privilege: System.Anonymous
-	DefaultLocale string
+	defaultLocale string
 
 	// The system global message from the server.
 	// Required Privilege: System.View
-	Message string
+	message string
 
 	// Provides the list of locales for which the server has localized messages.
 	// Required Privilege: System.Anonymous
-	MessageLocaleList []string
+	messageLocaleList []string
 
 	// The list of currently active sessions.
 	// Required Privilege: Sessions.TerminateSession
-	SessionList []*UserSession
+	sessionList []*UserSession
 
 	// Provides the list of locales that the server supports.
 	// Listing a locale ensures that some standardized information such as dates appear
@@ -50886,7 +50886,7 @@ type SessionManager struct {
 	// are displayed, if available. If localized information is not available, the
 	// message is returned using the system locale.
 	// Required Privilege: System.Anonymous
-	SupportedLocaleList []string
+	supportedLocaleList []string
 }
 
 //
@@ -51455,10 +51455,10 @@ type SimpleCommand struct {
 	*ManagedObject
 
 	// The encoding type used in the result.
-	EncodingType *enum.SimpleCommandEncoding
+	encodingType *enum.SimpleCommandEncoding
 
 	// A description of the service.
-	Entity *ServiceManagerServiceInfo
+	entity *ServiceManagerServiceInfo
 }
 
 //
@@ -52643,11 +52643,11 @@ type StoragePod struct {
 
 	// Storage DRS related attributes of the Storage Pod.
 	// Required Privilege: System.Read
-	PodStorageDrsEntry *PodStorageDrsEntry
+	podStorageDrsEntry *PodStorageDrsEntry
 
 	// Storage pod summary.
 	// Required Privilege: System.View
-	Summary *StoragePodSummary
+	summary *StoragePodSummary
 }
 
 //
@@ -53150,7 +53150,7 @@ type Task struct {
 	*ExtensibleManagedObject
 
 	// Detailed information about this task.
-	Info *TaskInfo
+	info *TaskInfo
 }
 
 //
@@ -53435,7 +53435,7 @@ type TaskHistoryCollector struct {
 	//
 	// The "oldest task" is the one with the oldest creation time. The
 	// tasks in the returned page are unordered.
-	LatestPage []*TaskInfo
+	latestPage []*TaskInfo
 }
 
 //
@@ -53606,12 +53606,12 @@ type TaskManager struct {
 	// Locale-specific, static strings that describe Task
 	// information to users.
 	// Required Privilege: System.View
-	Description *TaskDescription
+	description *TaskDescription
 
 	// Maximum number of TaskHistoryCollector
 	// data objects that can exist concurrently, per client.
 	// Required Privilege: System.View
-	MaxCollector int32
+	maxCollector int32
 
 	// A list of Task managed objects that completed recently,
 	// that are currently running, or that are queued to run.
@@ -53639,7 +53639,7 @@ type TaskManager struct {
 	// an empty string for the version parameter. Any other version value will not
 	// produce any property values as no updates are generated.
 	// Required Privilege: System.View
-	RecentTask []*Task
+	recentTask []*Task
 }
 
 //
@@ -54942,7 +54942,7 @@ type UserDirectory struct {
 	// List of Windows domains available for user searches, if the underlying
 	// system supports windows domain membership.
 	// Required Privilege: System.View
-	DomainList []string
+	domainList []string
 }
 
 //
@@ -57206,7 +57206,7 @@ type ViewManager struct {
 	// An array of view references. Each array entry is a managed object reference
 	// to a view created by this ViewManager.
 	// Required Privilege: System.View
-	ViewList []*View
+	viewList []*View
 }
 
 //
@@ -57363,32 +57363,32 @@ type VirtualApp struct {
 	// List of linked children.
 	//
 	// Since vSphere API 4.1
-	ChildLink []*VirtualAppLinkInfo
+	childLink []*VirtualAppLinkInfo
 
 	// A collection of references to the subset of datastore objects used by this
 	// vApp.
 	// Required Privilege: System.View
-	Datastore []*Datastore
+	datastore []*Datastore
 
 	// A collection of references to the subset of network objects that
 	// is used by this virtual machine.
 	// Required Privilege: System.View
-	Network []*Network
+	network []*Network
 
 	// A reference to the parent folder in the VM and Template folder hierarchy. This
 	// is only set for a root vApp. A root vApp is a vApp that is not a child of
 	// another vApp.
 	// Required Privilege: System.View
-	ParentFolder *Folder
+	parentFolder *Folder
 
 	// Reference to the parent vApp.
 	//
 	// Since vSphere API 4.1
-	ParentVApp *ManagedEntity
+	parentVApp *ManagedEntity
 
 	// Configuration of this package.
 	// Required Privilege: System.Read
-	VAppConfig *VAppConfigInfo
+	vAppConfig *VAppConfigInfo
 }
 
 //
@@ -60783,7 +60783,7 @@ type VirtualMachine struct {
 	*ManagedEntity
 
 	// Information about the runtime capabilities of this virtual machine.
-	Capability *VirtualMachineCapability
+	capability *VirtualMachineCapability
 
 	// Configuration of this virtual machine, including the name and UUID.
 	//
@@ -60795,18 +60795,18 @@ type VirtualMachine struct {
 	// if the server is unable to access the virtual machine files on disk,
 	// and is often also unavailable during the initial phases of
 	// virtual machine creation.
-	Config *VirtualMachineConfigInfo
+	config *VirtualMachineConfigInfo
 
 	// A collection of references to the subset of datastore objects in the datacenter
 	// that is used by this virtual machine.
 	// Required Privilege: System.View
-	Datastore []*Datastore
+	datastore []*Datastore
 
 	// The current virtual machine's environment browser object. This contains
 	// information on all the configurations that can be used on the
 	// virtual machine. This is identical to the environment browser on
 	// the ComputeResource to which this virtual machine belongs.
-	EnvironmentBrowser *EnvironmentBrowser
+	environmentBrowser *EnvironmentBrowser
 
 	// Information about VMware Tools and about the virtual machine
 	// from the perspective of VMware Tools.
@@ -60814,7 +60814,7 @@ type VirtualMachine struct {
 	// operating system information reflects the last known state of the virtual machine.
 	// For powered on machines, this is current information. For powered off machines,
 	// this is the last recorded state before the virtual machine was powered off.
-	Guest *GuestInfo
+	guest *GuestInfo
 
 	// The guest heartbeat.
 	// The heartbeat status is classified as:
@@ -60826,7 +60826,7 @@ type VirtualMachine struct {
 	//
 	// The guest heartbeat is a statistics metric. Alarms can be configured on
 	// this metric to trigger emails or other actions.
-	GuestHeartbeatStatus *enum.ManagedEntityStatus
+	guestHeartbeatStatus *enum.ManagedEntityStatus
 
 	// Deprecated.
 	// As of vSphere API 4.0, use layoutEx instead.
@@ -60841,7 +60841,7 @@ type VirtualMachine struct {
 	//
 	//
 	// Detailed information about the files that comprise this virtual machine.
-	Layout *VirtualMachineFileLayout
+	layout *VirtualMachineFileLayout
 
 	// Detailed information about the files that comprise this virtual machine.
 	//
@@ -60856,17 +60856,17 @@ type VirtualMachine struct {
 	// produce any property values as no updates are generated.
 	//
 	// Since vSphere API 4.0
-	LayoutEx *VirtualMachineFileLayoutEx
+	layoutEx *VirtualMachineFileLayoutEx
 
 	// A collection of references to the subset of network objects in the datacenter that
 	// is used by this virtual machine.
 	// Required Privilege: System.View
-	Network []*Network
+	network []*Network
 
 	// Reference to the parent vApp.
 	//
 	// Since vSphere API 4.1
-	ParentVApp *ManagedEntity
+	parentVApp *ManagedEntity
 
 	// The resource configuration for a virtual machine. The shares
 	// in this specification are evaluated relative to the resource pool
@@ -60879,7 +60879,7 @@ type VirtualMachine struct {
 	//
 	// To change the configuration, use
 	// UpdateChildResourceConfiguration.
-	ResourceConfig *ResourceConfigSpec
+	resourceConfig *ResourceConfigSpec
 
 	// The current resource pool that specifies resource allocation
 	// for this virtual machine.
@@ -60889,12 +60889,12 @@ type VirtualMachine struct {
 	//
 	// Returns null if the virtual machine is a template or the session has no access
 	// to the resource pool.
-	ResourcePool *ResourcePool
+	resourcePool *ResourcePool
 
 	// The roots of all snapshot trees for the virtual machine.
 	//
 	// Since vSphere API 4.1
-	RootSnapshot []*VirtualMachineSnapshot
+	rootSnapshot []*VirtualMachineSnapshot
 
 	// Execution state and history for this virtual machine.
 	//
@@ -60903,7 +60903,7 @@ type VirtualMachine struct {
 	// the virtual machine's power state changes.
 	// an execution message is pending.
 	// an event occurs.
-	Runtime *VirtualMachineRuntimeInfo
+	runtime *VirtualMachineRuntimeInfo
 
 	// Current snapshot and tree.
 	// The property is valid if snapshots have been created
@@ -60916,7 +60916,7 @@ type VirtualMachine struct {
 	// RemoveSnapshot_Task
 	// RevertToSnapshot_Task
 	// RemoveAllSnapshots_Task
-	Snapshot *VirtualMachineSnapshotInfo
+	snapshot *VirtualMachineSnapshotInfo
 
 	// Storage space used by the virtual machine, split by datastore.
 	// Can be explicitly refreshed by the RefreshStorageInfo operation.
@@ -60930,7 +60930,7 @@ type VirtualMachine struct {
 	// produce any property values as no updates are generated.
 	//
 	// Since vSphere API 4.0
-	Storage *VirtualMachineStorageInfo
+	storage *VirtualMachineStorageInfo
 
 	// Basic information about this virtual machine. This includes:
 	//
@@ -60939,7 +60939,7 @@ type VirtualMachine struct {
 	// basic configuration
 	// alarms
 	// performance information
-	Summary *VirtualMachineSummary
+	summary *VirtualMachineSummary
 }
 
 // Deprecated.
@@ -65825,7 +65825,7 @@ type VirtualMachineSnapshot struct {
 	// All snapshots for which this snapshot is the parent.
 	//
 	// Since vSphere API 4.1
-	ChildSnapshot []*VirtualMachineSnapshot
+	childSnapshot []*VirtualMachineSnapshot
 
 	// Information about the configuration of this virtual machine when this snapshot was
 	// taken.
@@ -65833,7 +65833,7 @@ type VirtualMachineSnapshot struct {
 	// The datastore paths for the virtual machine disks point to the head of the disk
 	// chain that represents the disk at this given snapshot. The fileInfo.fileLayout
 	// field is not set.
-	Config *VirtualMachineConfigInfo
+	config *VirtualMachineConfigInfo
 }
 
 //
