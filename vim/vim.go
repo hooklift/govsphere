@@ -281,9 +281,13 @@ type AgentInstallFailedReason struct {
 type Alarm struct {
 	*ExtensibleManagedObject
 
-	// Information about this alarm.
-	// Required Privilege: System.View
 	info *AlarmInfo
+}
+
+// Information about this alarm.
+// Required Privilege: System.View
+func (mo *Alarm) Info() (*AlarmInfo, error) {
+	return nil, nil
 }
 
 //
@@ -527,14 +531,22 @@ type AlarmInfo struct {
 type AlarmManager struct {
 	*ManagedObject
 
-	// The default setting for each alarm expression, used to populate the
-	// initial client wizard screen.
-	// Required Privilege: System.View
 	defaultExpression []*AlarmExpression
 
-	// The static descriptive strings used in alarms.
-	// Required Privilege: System.View
 	description *AlarmDescription
+}
+
+// The default setting for each alarm expression, used to populate the
+// initial client wizard screen.
+// Required Privilege: System.View
+func (mo *AlarmManager) DefaultExpression() ([]*AlarmExpression, error) {
+	return nil, nil
+}
+
+// The static descriptive strings used in alarms.
+// Required Privilege: System.View
+func (mo *AlarmManager) Description() (*AlarmDescription, error) {
+	return nil, nil
 }
 
 //
@@ -1434,18 +1446,30 @@ type AuthorizationEvent struct {
 type AuthorizationManager struct {
 	*ManagedObject
 
-	// Static, descriptive strings for system roles and privileges.
-	// Required Privilege: System.View
 	description *AuthorizationDescription
 
-	// The list of system-defined privileges.
-	// Required Privilege: System.View
 	privilegeList []*AuthorizationPrivilege
 
-	// The currently defined roles in the system, including
-	// static system-defined roles.
-	// Required Privilege: System.View
 	roleList []*AuthorizationRole
+}
+
+// Static, descriptive strings for system roles and privileges.
+// Required Privilege: System.View
+func (mo *AuthorizationManager) Description() (*AuthorizationDescription, error) {
+	return nil, nil
+}
+
+// The list of system-defined privileges.
+// Required Privilege: System.View
+func (mo *AuthorizationManager) PrivilegeList() ([]*AuthorizationPrivilege, error) {
+	return nil, nil
+}
+
+// The currently defined roles in the system, including
+// static system-defined roles.
+// Required Privilege: System.View
+func (mo *AuthorizationManager) RoleList() ([]*AuthorizationRole, error) {
+	return nil, nil
 }
 
 //
@@ -2650,74 +2674,98 @@ type ClusterComputeResource struct {
 
 	*ComputeResource
 
-	// The set of actions that have been performed recently.
-	//
-	// Since VI API 2.5
 	actionHistory []*ClusterActionHistory
 
-	// Deprecated.
-	// As of VI API 2.5, use configurationEx,
-	// which is a ClusterConfigInfoEx data object..
-	//
-	//
-	// Configuration of the cluster.
 	configuration *ClusterConfigInfo
 
-	// A collection of the DRS faults generated in the last DRS invocation.
-	// Each element of the collection is the set of faults generated in one
-	// recommendation.
-	//
-	// DRS faults are generated when DRS tries to make recommendations
-	// for rule enforcement, power management, etc., and indexed in a tree
-	// structure with reason for recommendations and VM to migrate (optional)
-	// as the index keys.
-	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
-	//
-	// Since vSphere API 4.0
-	// Required Privilege: System.Read
 	drsFault []*ClusterDrsFaults
 
-	// Deprecated.
-	// As of VI API 2.5, use
-	// recommendation.
-	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
-	//
-	//
-	// If DRS is enabled, this returns the set of recommended
-	// migrations from the DRS module. The current set of
-	// recommendations may be empty, since there may be no recommended
-	// migrations at this time, or it is possible that DRS is not
-	// enabled.
 	drsRecommendation []*ClusterDrsRecommendation
 
-	// The set of migration decisions that have recently been performed.
-	//
-	// This list is populated only when DRS is in automatic mode.
 	migrationHistory []*ClusterDrsMigration
 
-	// List of recommended actions for the cluster. It is
-	// possible that the current set of recommendations may be empty,
-	// either due to not having any running dynamic recommendation
-	// generation module, or since there may be no recommended actions
-	// at this time.
-	//
-	// Since VI API 2.5
-	// Required Privilege: System.Read
 	recommendation []*ClusterRecommendation
+}
+
+// The set of actions that have been performed recently.
+//
+// Since VI API 2.5
+func (mo *ClusterComputeResource) ActionHistory() ([]*ClusterActionHistory, error) {
+	return nil, nil
+}
+
+// Deprecated.
+// As of VI API 2.5, use configurationEx,
+// which is a ClusterConfigInfoEx data object..
+//
+//
+// Configuration of the cluster.
+func (mo *ClusterComputeResource) Configuration() (*ClusterConfigInfo, error) {
+	return nil, nil
+}
+
+// A collection of the DRS faults generated in the last DRS invocation.
+// Each element of the collection is the set of faults generated in one
+// recommendation.
+//
+// DRS faults are generated when DRS tries to make recommendations
+// for rule enforcement, power management, etc., and indexed in a tree
+// structure with reason for recommendations and VM to migrate (optional)
+// as the index keys.
+//
+// In releases after vSphere API 5.0, vSphere Servers might not
+// generate property collector update notifications for this property.
+// To obtain the latest value of the property, you can use
+// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+// an empty string for the version parameter. Any other version value will not
+// produce any property values as no updates are generated.
+//
+// Since vSphere API 4.0
+// Required Privilege: System.Read
+func (mo *ClusterComputeResource) DrsFault() ([]*ClusterDrsFaults, error) {
+	return nil, nil
+}
+
+// Deprecated.
+// As of VI API 2.5, use
+// recommendation.
+//
+// In releases after vSphere API 5.0, vSphere Servers might not
+// generate property collector update notifications for this property.
+// To obtain the latest value of the property, you can use
+// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+// an empty string for the version parameter. Any other version value will not
+// produce any property values as no updates are generated.
+//
+//
+// If DRS is enabled, this returns the set of recommended
+// migrations from the DRS module. The current set of
+// recommendations may be empty, since there may be no recommended
+// migrations at this time, or it is possible that DRS is not
+// enabled.
+func (mo *ClusterComputeResource) DrsRecommendation() ([]*ClusterDrsRecommendation, error) {
+	return nil, nil
+}
+
+// The set of migration decisions that have recently been performed.
+//
+// This list is populated only when DRS is in automatic mode.
+func (mo *ClusterComputeResource) MigrationHistory() ([]*ClusterDrsMigration, error) {
+	return nil, nil
+}
+
+// List of recommended actions for the cluster. It is
+// possible that the current set of recommendations may be empty,
+// either due to not having any running dynamic recommendation
+// generation module, or since there may be no recommended actions
+// at this time.
+//
+// Since VI API 2.5
+// Required Privilege: System.Read
+func (mo *ClusterComputeResource) Recommendation() ([]*ClusterRecommendation, error) {
+	return nil, nil
 }
 
 //
@@ -5682,46 +5730,74 @@ type CompositePolicyOption struct {
 type ComputeResource struct {
 	*ManagedEntity
 
-	// Configuration of the compute resource; applies to both standalone hosts
-	// and clusters. For a cluster this property will return a
-	// ClusterConfigInfoEx object.
-	//
-	// Since VI API 2.5
 	configurationEx *ComputeResourceConfigInfo
 
-	// The datastore property is the subset of datastore objects in the datacenter
-	// available in this ComputeResource.
-	//
-	// This property is computed as the aggregate set of datastores available from all
-	// the hosts that are part of this compute resource.
-	// Required Privilege: System.View
 	datastore []*Datastore
 
-	// The environment browser object that identifies the environments that are supported
-	// on this compute resource.
-	// Required Privilege: System.View
 	environmentBrowser *EnvironmentBrowser
 
-	// List of hosts that are part of this compute resource. If the compute resource is a
-	// standalone type, then this list contains just one element.
-	// Required Privilege: System.View
 	host []*HostSystem
 
-	// The subset of network objects available in the datacenter that is available in
-	// this ComputeResource.
-	//
-	// This property is computed as the aggregate set of networks available from all the
-	// hosts that are part of this compute resource.
-	// Required Privilege: System.View
 	network []*Network
 
-	// Reference to root resource pool.
-	// Required Privilege: System.View
 	resourcePool *ResourcePool
 
-	// Basic runtime information about a compute resource. This information is used on
-	// summary screens and in list views.
 	summary *ComputeResourceSummary
+}
+
+// Configuration of the compute resource; applies to both standalone hosts
+// and clusters. For a cluster this property will return a
+// ClusterConfigInfoEx object.
+//
+// Since VI API 2.5
+func (mo *ComputeResource) ConfigurationEx() (*ComputeResourceConfigInfo, error) {
+	return nil, nil
+}
+
+// The datastore property is the subset of datastore objects in the datacenter
+// available in this ComputeResource.
+//
+// This property is computed as the aggregate set of datastores available from all
+// the hosts that are part of this compute resource.
+// Required Privilege: System.View
+func (mo *ComputeResource) Datastore() ([]*Datastore, error) {
+	return nil, nil
+}
+
+// The environment browser object that identifies the environments that are supported
+// on this compute resource.
+// Required Privilege: System.View
+func (mo *ComputeResource) EnvironmentBrowser() (*EnvironmentBrowser, error) {
+	return nil, nil
+}
+
+// List of hosts that are part of this compute resource. If the compute resource is a
+// standalone type, then this list contains just one element.
+// Required Privilege: System.View
+func (mo *ComputeResource) Host() ([]*HostSystem, error) {
+	return nil, nil
+}
+
+// The subset of network objects available in the datacenter that is available in
+// this ComputeResource.
+//
+// This property is computed as the aggregate set of networks available from all the
+// hosts that are part of this compute resource.
+// Required Privilege: System.View
+func (mo *ComputeResource) Network() ([]*Network, error) {
+	return nil, nil
+}
+
+// Reference to root resource pool.
+// Required Privilege: System.View
+func (mo *ComputeResource) ResourcePool() (*ResourcePool, error) {
+	return nil, nil
+}
+
+// Basic runtime information about a compute resource. This information is used on
+// summary screens and in list views.
+func (mo *ComputeResource) Summary() (*ComputeResourceSummary, error) {
+	return nil, nil
 }
 
 //
@@ -6138,22 +6214,34 @@ type ContainerView struct {
 
 	*ManagedObjectView
 
-	// The Folder, Datacenter, ComputeResource, ResourcePool, or HostSystem instance
-	// that provides the objects that the view presents.
 	container *ManagedEntity
 
-	// Whether to include only the immediate children of the container instance,
-	// or to include additional objects by following the paths beyond the
-	// immediate children.
-	//
-	// For information about recursive behavior, see the description of
-	// CreateContainerView.
 	recursive bool
 
-	// An optional list of types to be applied to the set of objects in the view.
-	// The list of types indicates objects that are included in the view.
-	// If empty, all types are included.
 	type_ []string
+}
+
+// The Folder, Datacenter, ComputeResource, ResourcePool, or HostSystem instance
+// that provides the objects that the view presents.
+func (mo *ContainerView) Container() (*ManagedEntity, error) {
+	return nil, nil
+}
+
+// Whether to include only the immediate children of the container instance,
+// or to include additional objects by following the paths beyond the
+// immediate children.
+//
+// For information about recursive behavior, see the description of
+// CreateContainerView.
+func (mo *ContainerView) Recursive() (bool, error) {
+	return nil, nil
+}
+
+// An optional list of types to be applied to the set of objects in the view.
+// The list of types indicates objects that are included in the view.
+// If empty, all types are included.
+func (mo *ContainerView) Type() ([]string, error) {
+	return nil, nil
 }
 
 // Deprecated.
@@ -6445,10 +6533,14 @@ type CustomFieldValueChangedEvent struct {
 type CustomFieldsManager struct {
 	*ManagedObject
 
-	// List of custom fields defined on this server. The fields are
-	// sorted by name.
-	// Required Privilege: System.View
 	field []*CustomFieldDef
+}
+
+// List of custom fields defined on this server. The fields are
+// sorted by name.
+// Required Privilege: System.View
+func (mo *CustomFieldsManager) Field() ([]*CustomFieldDef, error) {
+	return nil, nil
 }
 
 //
@@ -7095,14 +7187,22 @@ type CustomizationSpecItem struct {
 type CustomizationSpecManager struct {
 	*ManagedObject
 
-	// Gets a binary public encryption key that can be used to encrypt
-	// passwords in stored specifications.
-	// Required Privilege: System.View
 	encryptionKey []int8
 
-	// Gets a list of information on available specifications.
-	// Required Privilege: VirtualMachine.Provisioning.ReadCustSpecs
 	info []*CustomizationSpecInfo
+}
+
+// Gets a binary public encryption key that can be used to encrypt
+// passwords in stored specifications.
+// Required Privilege: System.View
+func (mo *CustomizationSpecManager) EncryptionKey() ([]int8, error) {
+	return nil, nil
+}
+
+// Gets a list of information on available specifications.
+// Required Privilege: VirtualMachine.Provisioning.ReadCustSpecs
+func (mo *CustomizationSpecManager) Info() ([]*CustomizationSpecInfo, error) {
+	return nil, nil
 }
 
 //
@@ -9090,58 +9190,86 @@ type DatabaseSizeParam struct {
 type Datacenter struct {
 	*ManagedEntity
 
-	// Configuration of the datacenter.
-	//
-	// Since vSphere API 5.1
-	// Required Privilege: System.View
 	configuration *DatacenterConfigInfo
 
-	// A collection of references to the datastore objects
-	// available in this datacenter.
 	datastore []*Datastore
 
-	// A reference to the folder hierarchy that contains
-	// the datastores for this datacenter.
-	//
-	// This folder is guaranteed to exist.
-	//
-	// Since vSphere API 4.0
-	// Required Privilege: System.View
 	datastoreFolder *Folder
 
-	// A reference to the folder hierarchy that contains
-	// the compute resources, including hosts and clusters, for this datacenter.
-	//
-	// This folder is guaranteed to exist.
-	// Required Privilege: System.View
 	hostFolder *Folder
 
-	// A collection of references to the network objects
-	// available in this datacenter.
 	network []*Network
 
-	// A reference to the folder hierarchy that contains the network entities
-	// for this datacenter. The folder can include Network,
-	// DistributedVirtualSwitch, and
-	// DistributedVirtualPortgroup objects.
-	//
-	// This folder is guaranteed to exist.
-	//
-	// Since vSphere API 4.0
-	// Required Privilege: System.View
 	networkFolder *Folder
 
-	// A reference to the folder hierarchy that contains VirtualMachine
-	// virtual machine templates (identified by the template
-	// property, and VirtualApp objects for this datacenter.
-	//
-	// Note that a VirtualApp that is a child of a ResourcePool
-	// may also be visible in this folder. VirtualApp objects can be nested,
-	// but only the parent VirtualApp can be visible in the folder.
-	//
-	// This folder is guaranteed to exist.
-	// Required Privilege: System.View
 	vmFolder *Folder
+}
+
+// Configuration of the datacenter.
+//
+// Since vSphere API 5.1
+// Required Privilege: System.View
+func (mo *Datacenter) Configuration() (*DatacenterConfigInfo, error) {
+	return nil, nil
+}
+
+// A collection of references to the datastore objects
+// available in this datacenter.
+func (mo *Datacenter) Datastore() ([]*Datastore, error) {
+	return nil, nil
+}
+
+// A reference to the folder hierarchy that contains
+// the datastores for this datacenter.
+//
+// This folder is guaranteed to exist.
+//
+// Since vSphere API 4.0
+// Required Privilege: System.View
+func (mo *Datacenter) DatastoreFolder() (*Folder, error) {
+	return nil, nil
+}
+
+// A reference to the folder hierarchy that contains
+// the compute resources, including hosts and clusters, for this datacenter.
+//
+// This folder is guaranteed to exist.
+// Required Privilege: System.View
+func (mo *Datacenter) HostFolder() (*Folder, error) {
+	return nil, nil
+}
+
+// A collection of references to the network objects
+// available in this datacenter.
+func (mo *Datacenter) Network() ([]*Network, error) {
+	return nil, nil
+}
+
+// A reference to the folder hierarchy that contains the network entities
+// for this datacenter. The folder can include Network,
+// DistributedVirtualSwitch, and
+// DistributedVirtualPortgroup objects.
+//
+// This folder is guaranteed to exist.
+//
+// Since vSphere API 4.0
+// Required Privilege: System.View
+func (mo *Datacenter) NetworkFolder() (*Folder, error) {
+	return nil, nil
+}
+
+// A reference to the folder hierarchy that contains VirtualMachine
+// virtual machine templates (identified by the template
+// property, and VirtualApp objects for this datacenter.
+//
+// Note that a VirtualApp that is a child of a ResourcePool
+// may also be visible in this folder. VirtualApp objects can be nested,
+// but only the parent VirtualApp can be visible in the folder.
+//
+// This folder is guaranteed to exist.
+// Required Privilege: System.View
+func (mo *Datacenter) VmFolder() (*Folder, error) {
+	return nil, nil
 }
 
 //
@@ -9386,35 +9514,63 @@ type DatacenterRenamedEvent struct {
 type Datastore struct {
 	*ManagedEntity
 
-	// DatastoreBrowser used to browse this datastore.
 	browser *HostDatastoreBrowser
 
-	// Capabilities of this datastore.
 	capability *DatastoreCapability
 
-	// Hosts attached to this datastore.
 	host []*DatastoreHostMount
 
-	// Specific information about the datastore.
 	info *DatastoreInfo
 
-	// Configuration of storage I/O resource management for the datastore.
-	// Currently we only support storage I/O resource management on VMFS volumes
-	// of a datastore.
-	//
-	// This configuration may not be available if the datastore is not accessible
-	// from any host, or if the datastore does not have VMFS volume.
-	// The configuration can be modified using the method
-	// ConfigureDatastoreIORM_Task
-	//
-	// Since vSphere API 4.1
 	iormConfiguration *StorageIORMInfo
 
-	// Global properties of the datastore.
 	summary *DatastoreSummary
 
-	// Virtual machines stored on this datastore.
 	vm []*VirtualMachine
+}
+
+// DatastoreBrowser used to browse this datastore.
+func (mo *Datastore) Browser() (*HostDatastoreBrowser, error) {
+	return nil, nil
+}
+
+// Capabilities of this datastore.
+func (mo *Datastore) Capability() (*DatastoreCapability, error) {
+	return nil, nil
+}
+
+// Hosts attached to this datastore.
+func (mo *Datastore) Host() ([]*DatastoreHostMount, error) {
+	return nil, nil
+}
+
+// Specific information about the datastore.
+func (mo *Datastore) Info() (*DatastoreInfo, error) {
+	return nil, nil
+}
+
+// Configuration of storage I/O resource management for the datastore.
+// Currently we only support storage I/O resource management on VMFS volumes
+// of a datastore.
+//
+// This configuration may not be available if the datastore is not accessible
+// from any host, or if the datastore does not have VMFS volume.
+// The configuration can be modified using the method
+// ConfigureDatastoreIORM_Task
+//
+// Since vSphere API 4.1
+func (mo *Datastore) IormConfiguration() (*StorageIORMInfo, error) {
+	return nil, nil
+}
+
+// Global properties of the datastore.
+func (mo *Datastore) Summary() (*DatastoreSummary, error) {
+	return nil, nil
+}
+
+// Virtual machines stored on this datastore.
+func (mo *Datastore) Vm() ([]*VirtualMachine, error) {
+	return nil, nil
 }
 
 //
@@ -10727,14 +10883,26 @@ type DistributedVirtualPortgroup struct {
 
 	*Network
 
-	// Configuration of the portgroup.
 	config *DVPortgroupConfigInfo
 
-	// Generated UUID of the portgroup.
 	key string
 
-	// Port keys for the set of ports in the portgroup.
 	portKeys []string
+}
+
+// Configuration of the portgroup.
+func (mo *DistributedVirtualPortgroup) Config() (*DVPortgroupConfigInfo, error) {
+	return nil, nil
+}
+
+// Generated UUID of the portgroup.
+func (mo *DistributedVirtualPortgroup) Key() (string, error) {
+	return nil, nil
+}
+
+// Port keys for the set of ports in the portgroup.
+func (mo *DistributedVirtualPortgroup) PortKeys() ([]string, error) {
+	return nil, nil
 }
 
 //
@@ -11142,35 +11310,63 @@ type DistributedVirtualPortgroupPortgroupType struct {
 type DistributedVirtualSwitch struct {
 	*ManagedEntity
 
-	// Capability of the switch. Capabilities are indicated at the port,
-	// portgroup and switch levels, and for version-specific features.
-	// When you retrieve this property from an ESXi host,
-	// capability.dvsOperationSupported
-	// should always be set to false.
 	capability *DVSCapability
 
-	// Switch configuration data.
 	config *DVSConfigInfo
 
-	// Network resource pool information for the switch.
-	//
-	// Since vSphere API 4.1
 	networkResourcePool []*DVSNetworkResourcePool
 
-	// Portgroups that are defined on the switch.
 	portgroup []*DistributedVirtualPortgroup
 
-	// Runtime information of the distributed virtual switch.
-	//
-	// Since vSphere API 5.1
 	runtime *DVSRuntimeInfo
 
-	// Summary of the switch.
 	summary *DVSSummary
 
-	// Generated UUID of the switch. Unique across vCenter Server
-	// inventory and instances.
 	uuid string
+}
+
+// Capability of the switch. Capabilities are indicated at the port,
+// portgroup and switch levels, and for version-specific features.
+// When you retrieve this property from an ESXi host,
+// capability.dvsOperationSupported
+// should always be set to false.
+func (mo *DistributedVirtualSwitch) Capability() (*DVSCapability, error) {
+	return nil, nil
+}
+
+// Switch configuration data.
+func (mo *DistributedVirtualSwitch) Config() (*DVSConfigInfo, error) {
+	return nil, nil
+}
+
+// Network resource pool information for the switch.
+//
+// Since vSphere API 4.1
+func (mo *DistributedVirtualSwitch) NetworkResourcePool() ([]*DVSNetworkResourcePool, error) {
+	return nil, nil
+}
+
+// Portgroups that are defined on the switch.
+func (mo *DistributedVirtualSwitch) Portgroup() ([]*DistributedVirtualPortgroup, error) {
+	return nil, nil
+}
+
+// Runtime information of the distributed virtual switch.
+//
+// Since vSphere API 5.1
+func (mo *DistributedVirtualSwitch) Runtime() (*DVSRuntimeInfo, error) {
+	return nil, nil
+}
+
+// Summary of the switch.
+func (mo *DistributedVirtualSwitch) Summary() (*DVSSummary, error) {
+	return nil, nil
+}
+
+// Generated UUID of the switch. Unique across vCenter Server
+// inventory and instances.
+func (mo *DistributedVirtualSwitch) Uuid() (string, error) {
+	return nil, nil
 }
 
 //
@@ -14409,9 +14605,13 @@ type EnumDescription struct {
 type EnvironmentBrowser struct {
 	*ManagedObject
 
-	// DatastoreBrowser to browse datastores that are available on this entity.
-	// Required Privilege: System.View
 	datastoreBrowser *HostDatastoreBrowser
+}
+
+// DatastoreBrowser to browse datastores that are available on this entity.
+// Required Privilege: System.View
+func (mo *EnvironmentBrowser) DatastoreBrowser() (*HostDatastoreBrowser, error) {
+	return nil, nil
 }
 
 //
@@ -15078,15 +15278,19 @@ type EventHistoryCollector struct {
 
 	*HistoryCollector
 
-	// The items in the 'viewable latest page'. As new events that match the
-	// collector's EventFilterSpec are created, they are added to this
-	// page, and the oldest events are removed from the collector to keep the
-	// size of the page to that allowed by
-	// HistoryCollector#setLatestPageSize.
-	//
-	// The "oldest event" is the one with the smallest key (event ID). The
-	// events in the returned page are unordered.
 	latestPage []*Event
+}
+
+// The items in the 'viewable latest page'. As new events that match the
+// collector's EventFilterSpec are created, they are added to this
+// page, and the oldest events are removed from the collector to keep the
+// size of the page to that allowed by
+// HistoryCollector#setLatestPageSize.
+//
+// The "oldest event" is the one with the smallest key (event ID). The
+// events in the returned page are unordered.
+func (mo *EventHistoryCollector) LatestPage() ([]*Event, error) {
+	return nil, nil
 }
 
 //
@@ -15134,18 +15338,30 @@ func (mo *EventHistoryCollector) ReadPreviousEvents(
 type EventManager struct {
 	*ManagedObject
 
-	// Static descriptive strings used in events.
-	// Required Privilege: System.View
 	description *EventDescription
 
-	// The latest event that happened on the VirtualCenter server.
-	// Required Privilege: System.View
 	latestEvent *Event
 
-	// For each client, the maximum number of event collectors that can exist
-	// simultaneously.
-	// Required Privilege: System.View
 	maxCollector int32
+}
+
+// Static descriptive strings used in events.
+// Required Privilege: System.View
+func (mo *EventManager) Description() (*EventDescription, error) {
+	return nil, nil
+}
+
+// The latest event that happened on the VirtualCenter server.
+// Required Privilege: System.View
+func (mo *EventManager) LatestEvent() (*Event, error) {
+	return nil, nil
+}
+
+// For each client, the maximum number of event collectors that can exist
+// simultaneously.
+// Required Privilege: System.View
+func (mo *EventManager) MaxCollector() (int32, error) {
+	return nil, nil
 }
 
 //
@@ -15526,20 +15742,28 @@ type ExtendedFault struct {
 type ExtensibleManagedObject struct {
 	*ManagedObject
 
-	// List of custom field definitions that are valid for the object's type.
-	// The fields are sorted by name.
-	//
-	// Since VI API 2.5
-	// Required Privilege: System.View
 	availableField []*CustomFieldDef
 
-	// List of custom field values. Each value uses a key to associate
-	// an instance of a CustomFieldStringValue with
-	// a custom field definition.
-	//
-	// Since VI API 2.5
-	// Required Privilege: System.View
 	value []*CustomFieldValue
+}
+
+// List of custom field definitions that are valid for the object's type.
+// The fields are sorted by name.
+//
+// Since VI API 2.5
+// Required Privilege: System.View
+func (mo *ExtensibleManagedObject) AvailableField() ([]*CustomFieldDef, error) {
+	return nil, nil
+}
+
+// List of custom field values. Each value uses a key to associate
+// an instance of a CustomFieldStringValue with
+// a custom field definition.
+//
+// Since VI API 2.5
+// Required Privilege: System.View
+func (mo *ExtensibleManagedObject) Value() ([]*CustomFieldValue, error) {
+	return nil, nil
 }
 
 //
@@ -15774,9 +15998,13 @@ type ExtensionHealthInfo struct {
 type ExtensionManager struct {
 	*ManagedObject
 
-	// The list of currently registered extensions.
-	// Required Privilege: System.View
 	extensionList []*Extension
+}
+
+// The list of currently registered extensions.
+// Required Privilege: System.View
+func (mo *ExtensionManager) ExtensionList() ([]*Extension, error) {
+	return nil, nil
 }
 
 //
@@ -17062,38 +17290,46 @@ type FloppyImageFileQuery struct {
 type Folder struct {
 	*ManagedEntity
 
-	// An array of managed object references. Each entry is a reference to a child entity.
-	// Required Privilege: System.View
 	childEntity []*ManagedEntity
 
-	// Specifies the object types a folder may contain.
-	// When you create a folder, it inherits its childType from the parent folder
-	// in which it is created. childType is an array of strings. Each array entry
-	// identifies a set of object types - Folder and one or more managed object
-	// types. The following list shows childType values for the different folders:
-	//
-	// { "vim.Folder", "vim.Datacenter" } - Identifies the root folder
-	// and its descendant folders. Data center folders can contain
-	// child data center folders and Datacenter managed objects.
-	// Datacenter objects contain virtual machine, compute resource,
-	// network entity, and datastore folders.
-	// { "vim.Folder", "vim.Virtualmachine", "vim.VirtualApp" } - Identifies
-	// a virtual machine folder. A virtual machine folder may contain child
-	// virtual machine folders. It also can contain VirtualMachine managed objects,
-	// templates, and VirtualApp managed objects.
-	// { "vim.Folder", "vim.ComputeResource" } - Identifies a
-	// compute resource folder, which contains child compute resource folders
-	// and ComputeResource hierarchies.
-	// { "vim.Folder", "vim.Network" } - Identifies a network entity folder.
-	// Network entity folders on a vCenter Server can contain Network,
-	// DistributedVirtualSwitch, and DistributedVirtualPortgroup managed
-	// objects. Network entity folders on an ESXi host can contain only
-	// Network objects.
-	// { "vim.Folder", "vim.Datastore" } - Identifies a datastore folder.
-	// Datastore folders can contain child datastore folders and Datastore
-	// managed objects.
-	// Required Privilege: System.View
 	childType []string
+}
+
+// An array of managed object references. Each entry is a reference to a child entity.
+// Required Privilege: System.View
+func (mo *Folder) ChildEntity() ([]*ManagedEntity, error) {
+	return nil, nil
+}
+
+// Specifies the object types a folder may contain.
+// When you create a folder, it inherits its childType from the parent folder
+// in which it is created. childType is an array of strings. Each array entry
+// identifies a set of object types - Folder and one or more managed object
+// types. The following list shows childType values for the different folders:
+//
+// { "vim.Folder", "vim.Datacenter" } - Identifies the root folder
+// and its descendant folders. Data center folders can contain
+// child data center folders and Datacenter managed objects.
+// Datacenter objects contain virtual machine, compute resource,
+// network entity, and datastore folders.
+// { "vim.Folder", "vim.Virtualmachine", "vim.VirtualApp" } - Identifies
+// a virtual machine folder. A virtual machine folder may contain child
+// virtual machine folders. It also can contain VirtualMachine managed objects,
+// templates, and VirtualApp managed objects.
+// { "vim.Folder", "vim.ComputeResource" } - Identifies a
+// compute resource folder, which contains child compute resource folders
+// and ComputeResource hierarchies.
+// { "vim.Folder", "vim.Network" } - Identifies a network entity folder.
+// Network entity folders on a vCenter Server can contain Network,
+// DistributedVirtualSwitch, and DistributedVirtualPortgroup managed
+// objects. Network entity folders on an ESXi host can contain only
+// Network objects.
+// { "vim.Folder", "vim.Datastore" } - Identifies a datastore folder.
+// Datastore folders can contain child datastore folders and Datastore
+// managed objects.
+// Required Privilege: System.View
+func (mo *Folder) ChildType() ([]string, error) {
+	return nil, nil
 }
 
 //
@@ -18337,20 +18573,32 @@ type GuestOperationsFault struct {
 type GuestOperationsManager struct {
 	*ManagedObject
 
-	// A singleton managed object that provides methods for guest authentication
-	// operations.
-	// Required Privilege: System.Anonymous
 	authManager *GuestAuthManager
 
-	// A singleton managed object that provides methods for guest file
-	// operations.
-	// Required Privilege: System.Anonymous
 	fileManager *GuestFileManager
 
-	// A singleton managed object that provides methods for guest process
-	// operations.
-	// Required Privilege: System.Anonymous
 	processManager *GuestProcessManager
+}
+
+// A singleton managed object that provides methods for guest authentication
+// operations.
+// Required Privilege: System.Anonymous
+func (mo *GuestOperationsManager) AuthManager() (*GuestAuthManager, error) {
+	return nil, nil
+}
+
+// A singleton managed object that provides methods for guest file
+// operations.
+// Required Privilege: System.Anonymous
+func (mo *GuestOperationsManager) FileManager() (*GuestFileManager, error) {
+	return nil, nil
+}
+
+// A singleton managed object that provides methods for guest process
+// operations.
+// Required Privilege: System.Anonymous
+func (mo *GuestOperationsManager) ProcessManager() (*GuestProcessManager, error) {
+	return nil, nil
 }
 
 //
@@ -19001,11 +19249,15 @@ type HealthSystemRuntime struct {
 type HistoryCollector struct {
 	*ManagedObject
 
-	// The filter used to create this collector.
-	//
-	// The type of the returned filter is determined by the managed object
-	// for which the collector is created.
 	filter interface{}
+}
+
+// The filter used to create this collector.
+//
+// The type of the returned filter is determined by the managed object
+// for which the collector is created.
+func (mo *HistoryCollector) Filter() (interface{}, error) {
+	return nil, nil
 }
 
 //
@@ -19496,33 +19748,41 @@ type HostApplyProfile struct {
 type HostAuthenticationManager struct {
 	*ManagedObject
 
-	// Information about Active Directory membership.
 	info *HostAuthenticationManagerInfo
 
-	// An array that can contain managed object references to local and
-	// Active Directory authentication managed objects.
-	//
-	// supportedStore data implies a connection to a system
-	// that stores information about accounts.
-	// The supportedStore array can include the following objects:
-	//
-	// HostLocalAuthentication - Local authentication refers
-	// to user accounts on the ESX host. Local authentication is always enabled.
-	//
-	// HostActiveDirectoryAuthentication - Active Directory authentication
-	// refers to computer accounts and user accounts on the domain controller.
-	// This object indicates the domain membership status for the host
-	// and defines the join and leave methods for Active Directory
-	// membership.
-	//
-	// If supportedStore references
-	// a HostActiveDirectoryAuthentication object, the host
-	// is capable of joining a domain.
-	// However, if you try to add a host to a domain when the
-	// HostAuthenticationStoreInfo.enabled
-	// property is True (accessed through the info
-	// property), the join method will throw a fault.
 	supportedStore []*HostAuthenticationStore
+}
+
+// Information about Active Directory membership.
+func (mo *HostAuthenticationManager) Info() (*HostAuthenticationManagerInfo, error) {
+	return nil, nil
+}
+
+// An array that can contain managed object references to local and
+// Active Directory authentication managed objects.
+//
+// supportedStore data implies a connection to a system
+// that stores information about accounts.
+// The supportedStore array can include the following objects:
+//
+// HostLocalAuthentication - Local authentication refers
+// to user accounts on the ESX host. Local authentication is always enabled.
+//
+// HostActiveDirectoryAuthentication - Active Directory authentication
+// refers to computer accounts and user accounts on the domain controller.
+// This object indicates the domain membership status for the host
+// and defines the join and leave methods for Active Directory
+// membership.
+//
+// If supportedStore references
+// a HostActiveDirectoryAuthentication object, the host
+// is capable of joining a domain.
+// However, if you try to add a host to a domain when the
+// HostAuthenticationStoreInfo.enabled
+// property is True (accessed through the info
+// property), the join method will throw a fault.
+func (mo *HostAuthenticationManager) SupportedStore() ([]*HostAuthenticationStore, error) {
+	return nil, nil
 }
 
 //
@@ -19561,8 +19821,12 @@ type HostAuthenticationManagerInfo struct {
 type HostAuthenticationStore struct {
 	*ManagedObject
 
-	// Information about the authentication store.
 	info *HostAuthenticationStoreInfo
+}
+
+// Information about the authentication store.
+func (mo *HostAuthenticationStore) Info() (*HostAuthenticationStoreInfo, error) {
+	return nil, nil
 }
 
 //
@@ -19593,6 +19857,10 @@ type HostAutoStartManager struct {
 	*ManagedObject
 
 	config *HostAutoStartManagerConfig
+}
+
+func (mo *HostAutoStartManager) Config() (*HostAutoStartManagerConfig, error) {
+	return nil, nil
 }
 
 //
@@ -19800,10 +20068,14 @@ type HostCacheConfigurationInfo struct {
 type HostCacheConfigurationManager struct {
 	*ManagedObject
 
-	// The swap performance configuration for the ESX host.  This includes
-	// configuration information for each datastore enabled for this purpose.
-	// Required Privilege: Host.Config.AdvancedConfig
 	cacheConfigurationInfo []*HostCacheConfigurationInfo
+}
+
+// The swap performance configuration for the ESX host.  This includes
+// configuration information for each datastore enabled for this purpose.
+// Required Privilege: Host.Config.AdvancedConfig
+func (mo *HostCacheConfigurationManager) CacheConfigurationInfo() ([]*HostCacheConfigurationInfo, error) {
+	return nil, nil
 }
 
 //
@@ -21439,10 +21711,14 @@ type HostCpuPowerManagementInfoPolicyType struct {
 type HostCpuSchedulerSystem struct {
 	*ExtensibleManagedObject
 
-	// The hyperthread configuration for the CpuSchedulerSystem.  The
-	// existence of this data object type indicates if the CPU scheduler
-	// is capable of scheduling hyperthreads as resources.
 	hyperthreadInfo *HostHyperThreadScheduleInfo
+}
+
+// The hyperthread configuration for the CpuSchedulerSystem.  The
+// existence of this data object type indicates if the CPU scheduler
+// is capable of scheduling hyperthreads as resources.
+func (mo *HostCpuSchedulerSystem) HyperthreadInfo() (*HostHyperThreadScheduleInfo, error) {
+	return nil, nil
 }
 
 //
@@ -21627,28 +21903,36 @@ type HostDasOkEvent struct {
 type HostDatastoreBrowser struct {
 	*ManagedObject
 
-	// Set of datastores that can be searched on this DatastoreBrowser.
-	//
-	// The list of datastores available to browse on this DatastoreBrowser is contextual
-	// information that depends on the object being browsed. If the host is being
-	// browsed, the host's datastores are used. If the Datacenter is being browsed, the
-	// Datacenter's list of datastores is used.
-	// Required Privilege: System.View
 	datastore []*Datastore
 
-	// The list of supported file types. The supported file types are represented as
-	// items in this list. For each supported file type, there is an object in the list
-	// whose dynamic type is one of the types derived from the
-	// FileQuery data object
-	// type. In general, the properties in this query type are not set.
-	//
-	// Use the Query of the desired file type in the SearchSpec.query to indicate the
-	// desired file types.
-	//
-	// This property is used by clients to determine what kinds of file types are
-	// supported. Clients should consult this list to avoid querying for types of virtual
-	// machine components that are not supported.
 	supportedType []*FileQuery
+}
+
+// Set of datastores that can be searched on this DatastoreBrowser.
+//
+// The list of datastores available to browse on this DatastoreBrowser is contextual
+// information that depends on the object being browsed. If the host is being
+// browsed, the host's datastores are used. If the Datacenter is being browsed, the
+// Datacenter's list of datastores is used.
+// Required Privilege: System.View
+func (mo *HostDatastoreBrowser) Datastore() ([]*Datastore, error) {
+	return nil, nil
+}
+
+// The list of supported file types. The supported file types are represented as
+// items in this list. For each supported file type, there is an object in the list
+// whose dynamic type is one of the types derived from the
+// FileQuery data object
+// type. In general, the properties in this query type are not set.
+//
+// Use the Query of the desired file type in the SearchSpec.query to indicate the
+// desired file types.
+//
+// This property is used by clients to determine what kinds of file types are
+// supported. Clients should consult this list to avoid querying for types of virtual
+// machine components that are not supported.
+func (mo *HostDatastoreBrowser) SupportedType() ([]*FileQuery, error) {
+	return nil, nil
 }
 
 // Deprecated.
@@ -21862,14 +22146,22 @@ type HostDatastoreNameConflictConnectInfo struct {
 type HostDatastoreSystem struct {
 	*ManagedObject
 
-	// Capability vector indicating the available product features.
-	//
-	// Since VI API 2.5
 	capabilities *HostDatastoreSystemCapabilities
 
-	// List of datastores on this host.
-	// Required Privilege: System.View
 	datastore []*Datastore
+}
+
+// Capability vector indicating the available product features.
+//
+// Since VI API 2.5
+func (mo *HostDatastoreSystem) Capabilities() (*HostDatastoreSystemCapabilities, error) {
+	return nil, nil
+}
+
+// List of datastores on this host.
+// Required Privilege: System.View
+func (mo *HostDatastoreSystem) Datastore() ([]*Datastore, error) {
+	return nil, nil
 }
 
 //
@@ -22212,9 +22504,13 @@ type HostDateTimeInfo struct {
 type HostDateTimeSystem struct {
 	*ManagedObject
 
-	// The DateTime configuration of the host.
-	// Required Privilege: System.Read
 	dateTimeInfo *HostDateTimeInfo
+}
+
+// The DateTime configuration of the host.
+// Required Privilege: System.Read
+func (mo *HostDateTimeSystem) DateTimeInfo() (*HostDateTimeInfo, error) {
+	return nil, nil
 }
 
 //
@@ -22509,8 +22805,12 @@ type HostDiagnosticPartitionCreateSpec struct {
 type HostDiagnosticSystem struct {
 	*ManagedObject
 
-	// The currently active diagnostic partition.
 	activePartition *HostDiagnosticPartition
+}
+
+// The currently active diagnostic partition.
+func (mo *HostDiagnosticSystem) ActivePartition() (*HostDiagnosticPartition, error) {
+	return nil, nil
 }
 
 //
@@ -23051,9 +23351,13 @@ type HostEnableAdminFailedEvent struct {
 type HostEsxAgentHostManager struct {
 	*ManagedObject
 
-	// Configuration of agent virtual machine resources
-	// Required Privilege: Host.Config.Settings
 	configInfo *HostEsxAgentHostManagerConfigInfo
+}
+
+// Configuration of agent virtual machine resources
+// Required Privilege: Host.Config.Settings
+func (mo *HostEsxAgentHostManager) ConfigInfo() (*HostEsxAgentHostManagerConfigInfo, error) {
+	return nil, nil
 }
 
 //
@@ -23651,8 +23955,12 @@ type HostFirewallRulesetRulesetSpec struct {
 type HostFirewallSystem struct {
 	*ExtensibleManagedObject
 
-	// Firewall configuration.
 	firewallInfo *HostFirewallInfo
+}
+
+// Firewall configuration.
+func (mo *HostFirewallSystem) FirewallInfo() (*HostFirewallInfo, error) {
+	return nil, nil
 }
 
 //
@@ -23905,9 +24213,13 @@ type HostGraphicsInfoGraphicsType struct {
 type HostGraphicsManager struct {
 	*ExtensibleManagedObject
 
-	// Array of graphics information
-	// Required Privilege: System.Read
 	graphicsInfo []*HostGraphicsInfo
+}
+
+// Array of graphics information
+// Required Privilege: System.Read
+func (mo *HostGraphicsManager) GraphicsInfo() ([]*HostGraphicsInfo, error) {
+	return nil, nil
 }
 
 //
@@ -24094,6 +24406,10 @@ type HostHealthStatusSystem struct {
 	*ManagedObject
 
 	runtime *HealthSystemRuntime
+}
+
+func (mo *HostHealthStatusSystem) Runtime() (*HealthSystemRuntime, error) {
+	return nil, nil
 }
 
 //
@@ -25945,17 +26261,25 @@ type HostMemorySpec struct {
 type HostMemorySystem struct {
 	*ExtensibleManagedObject
 
-	// Service console reservation information for the memory manager.  The
-	// existence of this data object indicates if the service console memory
-	// reservation must be configured for this host.
 	consoleReservationInfo *ServiceConsoleReservationInfo
 
-	// Virtual machine reservation information for the memory manager.  The
-	// existence of this data object indicates if the virtual machine memory
-	// reservation must be configured for this host.
-	//
-	// Since VI API 2.5
 	virtualMachineReservationInfo *VirtualMachineMemoryReservationInfo
+}
+
+// Service console reservation information for the memory manager.  The
+// existence of this data object indicates if the service console memory
+// reservation must be configured for this host.
+func (mo *HostMemorySystem) ConsoleReservationInfo() (*ServiceConsoleReservationInfo, error) {
+	return nil, nil
+}
+
+// Virtual machine reservation information for the memory manager.  The
+// existence of this data object indicates if the virtual machine memory
+// reservation must be configured for this host.
+//
+// Since VI API 2.5
+func (mo *HostMemorySystem) VirtualMachineReservationInfo() (*VirtualMachineMemoryReservationInfo, error) {
+	return nil, nil
 }
 
 //
@@ -27086,45 +27410,73 @@ type HostNetworkSecurityPolicy struct {
 type HostNetworkSystem struct {
 	*ExtensibleManagedObject
 
-	// Capability vector indicating the available product features.
 	capabilities *HostNetCapabilities
 
-	// IP route configuration for the service console.  The IP route
-	// configuration is global to the entire host.  This property is
-	// set only if
-	// IP routing can be configured for the service console.
 	consoleIpRouteConfig *HostIpRouteConfig
 
-	// Deprecated.
-	// As of vSphere API 5.5, which is moved to
-	// each NetStackInstance. This only works on the default NetStackInstance.
-	//
-	//
-	// Client-side DNS configuration.
 	dnsConfig *HostDnsConfig
 
-	// Deprecated.
-	// As of vSphere API 5.5, which is moved to
-	// each NetStackInstance. This only works on the default NetStackInstance.
-	//
-	//
-	// The IP route configuration.
 	ipRouteConfig *HostIpRouteConfig
 
-	// Network configuration information.  This information can be applied
-	// using the updateNetworkConfig() method.  The
-	// information is a strict subset of the information available in NetworkInfo.See HostNetworkInfo
 	networkConfig *HostNetworkConfig
 
-	// The network configuration and runtime information.
 	networkInfo *HostNetworkInfo
 
-	// Deprecated.
-	// As of VI API 4.0, the system defaults will be used.
-	//
-	//
-	// The offload capabilities available on this server.
 	offloadCapabilities *HostNetOffloadCapabilities
+}
+
+// Capability vector indicating the available product features.
+func (mo *HostNetworkSystem) Capabilities() (*HostNetCapabilities, error) {
+	return nil, nil
+}
+
+// IP route configuration for the service console.  The IP route
+// configuration is global to the entire host.  This property is
+// set only if
+// IP routing can be configured for the service console.
+func (mo *HostNetworkSystem) ConsoleIpRouteConfig() (*HostIpRouteConfig, error) {
+	return nil, nil
+}
+
+// Deprecated.
+// As of vSphere API 5.5, which is moved to
+// each NetStackInstance. This only works on the default NetStackInstance.
+//
+//
+// Client-side DNS configuration.
+func (mo *HostNetworkSystem) DnsConfig() (*HostDnsConfig, error) {
+	return nil, nil
+}
+
+// Deprecated.
+// As of vSphere API 5.5, which is moved to
+// each NetStackInstance. This only works on the default NetStackInstance.
+//
+//
+// The IP route configuration.
+func (mo *HostNetworkSystem) IpRouteConfig() (*HostIpRouteConfig, error) {
+	return nil, nil
+}
+
+// Network configuration information.  This information can be applied
+// using the updateNetworkConfig() method.  The
+// information is a strict subset of the information available in NetworkInfo.See HostNetworkInfo
+func (mo *HostNetworkSystem) NetworkConfig() (*HostNetworkConfig, error) {
+	return nil, nil
+}
+
+// The network configuration and runtime information.
+func (mo *HostNetworkSystem) NetworkInfo() (*HostNetworkInfo, error) {
+	return nil, nil
+}
+
+// Deprecated.
+// As of VI API 4.0, the system defaults will be used.
+//
+//
+// The offload capabilities available on this server.
+func (mo *HostNetworkSystem) OffloadCapabilities() (*HostNetOffloadCapabilities, error) {
+	return nil, nil
 }
 
 //
@@ -28449,9 +28801,13 @@ type HostPciPassthruInfo struct {
 type HostPciPassthruSystem struct {
 	*ExtensibleManagedObject
 
-	// Array of PciPassthru information
-	// Required Privilege: System.Read
 	pciPassthruInfo []*HostPciPassthruInfo
+}
+
+// Array of PciPassthru information
+// Required Privilege: System.Read
+func (mo *HostPciPassthruSystem) PciPassthruInfo() ([]*HostPciPassthruInfo, error) {
+	return nil, nil
 }
 
 //
@@ -28908,13 +29264,21 @@ type HostPowerPolicy struct {
 type HostPowerSystem struct {
 	*ManagedObject
 
-	// Power system capabilities object.
-	// Required Privilege: Host.Config.Power
 	capability *PowerSystemCapability
 
-	// Power system state info object.
-	// Required Privilege: Host.Config.Power
 	info *PowerSystemInfo
+}
+
+// Power system capabilities object.
+// Required Privilege: Host.Config.Power
+func (mo *HostPowerSystem) Capability() (*PowerSystemCapability, error) {
+	return nil, nil
+}
+
+// Power system state info object.
+// Required Privilege: Host.Config.Power
+func (mo *HostPowerSystem) Info() (*PowerSystemInfo, error) {
+	return nil, nil
 }
 
 //
@@ -29103,12 +29467,16 @@ type HostProfile struct {
 
 	*Profile
 
-	// Reference host in use for this host profile. To set this property,
-	// use the UpdateReferenceHost
-	// method. If you do not specify a host for validation
-	// (HostProfileCompleteConfigSpec.validatorHost),
-	// the Profile Engine uses the reference host to validate the profile.
 	referenceHost *HostSystem
+}
+
+// Reference host in use for this host profile. To set this property,
+// use the UpdateReferenceHost
+// method. If you do not specify a host for validation
+// (HostProfileCompleteConfigSpec.validatorHost),
+// the Profile Engine uses the reference host to validate the profile.
+func (mo *HostProfile) ReferenceHost() (*HostSystem, error) {
+	return nil, nil
 }
 
 //
@@ -30122,8 +30490,12 @@ type HostServiceSourcePackage struct {
 type HostServiceSystem struct {
 	*ExtensibleManagedObject
 
-	// Service configuration.
 	serviceInfo *HostServiceInfo
+}
+
+// Service configuration.
+func (mo *HostServiceSystem) ServiceInfo() (*HostServiceInfo, error) {
+	return nil, nil
 }
 
 //
@@ -30358,13 +30730,21 @@ type HostSnmpDestination struct {
 type HostSnmpSystem struct {
 	*ManagedObject
 
-	// Since VI API 2.5
-	// Required Privilege: Global.Settings
 	configuration *HostSnmpConfigSpec
 
-	// Since VI API 2.5
-	// Required Privilege: Global.Settings
 	limits *HostSnmpSystemAgentLimits
+}
+
+// Since VI API 2.5
+// Required Privilege: Global.Settings
+func (mo *HostSnmpSystem) Configuration() (*HostSnmpConfigSpec, error) {
+	return nil, nil
+}
+
+// Since VI API 2.5
+// Required Privilege: Global.Settings
+func (mo *HostSnmpSystem) Limits() (*HostSnmpSystemAgentLimits, error) {
+	return nil, nil
 }
 
 //
@@ -30584,31 +30964,47 @@ type HostStorageOperationalInfo struct {
 type HostStorageSystem struct {
 	*ExtensibleManagedObject
 
-	// File system volume information for the host.  See the
-	// FileSystemVolumeInfo data
-	// object type for more information.
 	fileSystemVolumeInfo *HostFileSystemVolumeInfo
 
-	// Runtime information about the state of a multipath path.
-	// A null value will be returned if path state information is not available
-	// for this system.
-	//
-	// In systems prior to the plug-store architecture, the state of a path
-	// may be accessible on the HostMultipathInfo data object
-	// of the storageDeviceInfo property.
-	//
-	// Since vSphere API 4.0
 	multipathStateInfo *HostMultipathStateInfo
 
-	// Host storage information up to the device level.
 	storageDeviceInfo *HostStorageDeviceInfo
 
-	// Datastore paths of files used by the host system on
-	// mounted volumes, for instance, the COS vmdk file of the
-	// host. For information on datastore paths, see Datastore.
-	//
-	// Since vSphere API 4.1
 	systemFile []string
+}
+
+// File system volume information for the host.  See the
+// FileSystemVolumeInfo data
+// object type for more information.
+func (mo *HostStorageSystem) FileSystemVolumeInfo() (*HostFileSystemVolumeInfo, error) {
+	return nil, nil
+}
+
+// Runtime information about the state of a multipath path.
+// A null value will be returned if path state information is not available
+// for this system.
+//
+// In systems prior to the plug-store architecture, the state of a path
+// may be accessible on the HostMultipathInfo data object
+// of the storageDeviceInfo property.
+//
+// Since vSphere API 4.0
+func (mo *HostStorageSystem) MultipathStateInfo() (*HostMultipathStateInfo, error) {
+	return nil, nil
+}
+
+// Host storage information up to the device level.
+func (mo *HostStorageSystem) StorageDeviceInfo() (*HostStorageDeviceInfo, error) {
+	return nil, nil
+}
+
+// Datastore paths of files used by the host system on
+// mounted volumes, for instance, the COS vmdk file of the
+// host. For information on datastore paths, see Datastore.
+//
+// Since vSphere API 4.1
+func (mo *HostStorageSystem) SystemFile() ([]string, error) {
+	return nil, nil
 }
 
 //
@@ -31739,65 +32135,113 @@ type HostSyncFailedEvent struct {
 type HostSystem struct {
 	*ManagedEntity
 
-	// Host capabilities. This might not be available for a
-	// disconnected host.
 	capability *HostCapability
 
-	// Host configuration information.  This might not be available for a disconnected
-	// host.
 	config *HostConfigInfo
 
-	// Host configuration systems.
-	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
 	configManager *HostConfigManager
 
-	// A collection of references to the subset of datastore objects in the datacenter
-	// that are available in this HostSystem.
-	// Required Privilege: System.View
 	datastore []*Datastore
 
-	// DatastoreBrowser to browse datastores for this host.
-	// Required Privilege: System.View
 	datastoreBrowser *HostDatastoreBrowser
 
-	// Hardware configuration of the host. This might not be available for a
-	// disconnected host.
 	hardware *HostHardwareInfo
 
-	// Information about all licensable resources, currently present on this host.
-	// This information is used mostly by the modules, manipulating information
-	// in the LicenseManager. Developers of such modules
-	// should use this property instead of hardware.
-	// NOTE:
-	// The values in this property may not be accurate for pre-5.0 hosts when returned by vCenter 5.0
-	//
-	// Since vSphere API 5.0
 	licensableResource *HostLicensableResourceInfo
 
-	// A collection of references to the subset of network objects in the datacenter that
-	// are available in this HostSystem.
-	// Required Privilege: System.View
 	network []*Network
 
-	// Runtime state information about the host such as connection state.
 	runtime *HostRuntimeInfo
 
-	// Basic information about the host, including connection state.
 	summary *HostListSummary
 
-	// Reference for the system resource hierarchy, used for configuring the set of
-	// resources reserved to the system and unavailable to virtual machines.
 	systemResources *HostSystemResourceInfo
 
-	// List of virtual machines associated with this host.
 	vm []*VirtualMachine
+}
+
+// Host capabilities. This might not be available for a
+// disconnected host.
+func (mo *HostSystem) Capability() (*HostCapability, error) {
+	return nil, nil
+}
+
+// Host configuration information.  This might not be available for a disconnected
+// host.
+func (mo *HostSystem) Config() (*HostConfigInfo, error) {
+	return nil, nil
+}
+
+// Host configuration systems.
+//
+// In releases after vSphere API 5.0, vSphere Servers might not
+// generate property collector update notifications for this property.
+// To obtain the latest value of the property, you can use
+// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+// an empty string for the version parameter. Any other version value will not
+// produce any property values as no updates are generated.
+func (mo *HostSystem) ConfigManager() (*HostConfigManager, error) {
+	return nil, nil
+}
+
+// A collection of references to the subset of datastore objects in the datacenter
+// that are available in this HostSystem.
+// Required Privilege: System.View
+func (mo *HostSystem) Datastore() ([]*Datastore, error) {
+	return nil, nil
+}
+
+// DatastoreBrowser to browse datastores for this host.
+// Required Privilege: System.View
+func (mo *HostSystem) DatastoreBrowser() (*HostDatastoreBrowser, error) {
+	return nil, nil
+}
+
+// Hardware configuration of the host. This might not be available for a
+// disconnected host.
+func (mo *HostSystem) Hardware() (*HostHardwareInfo, error) {
+	return nil, nil
+}
+
+// Information about all licensable resources, currently present on this host.
+// This information is used mostly by the modules, manipulating information
+// in the LicenseManager. Developers of such modules
+// should use this property instead of hardware.
+// NOTE:
+// The values in this property may not be accurate for pre-5.0 hosts when returned by vCenter 5.0
+//
+// Since vSphere API 5.0
+func (mo *HostSystem) LicensableResource() (*HostLicensableResourceInfo, error) {
+	return nil, nil
+}
+
+// A collection of references to the subset of network objects in the datacenter that
+// are available in this HostSystem.
+// Required Privilege: System.View
+func (mo *HostSystem) Network() ([]*Network, error) {
+	return nil, nil
+}
+
+// Runtime state information about the host such as connection state.
+func (mo *HostSystem) Runtime() (*HostRuntimeInfo, error) {
+	return nil, nil
+}
+
+// Basic information about the host, including connection state.
+func (mo *HostSystem) Summary() (*HostListSummary, error) {
+	return nil, nil
+}
+
+// Reference for the system resource hierarchy, used for configuring the set of
+// resources reserved to the system and unavailable to virtual machines.
+func (mo *HostSystem) SystemResources() (*HostSystemResourceInfo, error) {
+	return nil, nil
+}
+
+// List of virtual machines associated with this host.
+func (mo *HostSystem) Vm() ([]*VirtualMachine, error) {
+	return nil, nil
 }
 
 //
@@ -32892,8 +33336,12 @@ type HostUserWorldSwapNotEnabledEvent struct {
 type HostVFlashManager struct {
 	*ManagedObject
 
-	// Host vFlash configuration information.
 	vFlashConfigInfo *HostVFlashManagerVFlashConfigInfo
+}
+
+// Host vFlash configuration information.
+func (mo *HostVFlashManager) VFlashConfigInfo() (*HostVFlashManagerVFlashConfigInfo, error) {
+	return nil, nil
 }
 
 //
@@ -33228,11 +33676,19 @@ type HostVMotionNetConfig struct {
 type HostVMotionSystem struct {
 	*ExtensibleManagedObject
 
-	// IP configuration of the VMotion VirtualNic.
 	ipConfig *HostIpConfig
 
-	// VMotion network configuration.
 	netConfig *HostVMotionNetConfig
+}
+
+// IP configuration of the VMotion VirtualNic.
+func (mo *HostVMotionSystem) IpConfig() (*HostIpConfig, error) {
+	return nil, nil
+}
+
+// VMotion network configuration.
+func (mo *HostVMotionSystem) NetConfig() (*HostVMotionNetConfig, error) {
+	return nil, nil
 }
 
 //
@@ -33430,8 +33886,12 @@ type HostVirtualNicConnection struct {
 type HostVirtualNicManager struct {
 	*ExtensibleManagedObject
 
-	// Network configuration.
 	info *HostVirtualNicManagerInfo
+}
+
+// Network configuration.
+func (mo *HostVirtualNicManager) Info() (*HostVirtualNicManagerInfo, error) {
+	return nil, nil
 }
 
 //
@@ -34018,9 +34478,13 @@ type HostVsanInternalSystemCmmdsQuery struct {
 type HostVsanSystem struct {
 	*ManagedObject
 
-	// The current VSAN service configuration information for this host.
-	// Required Privilege: System.Read
 	config *VsanHostConfigInfo
+}
+
+// The current VSAN service configuration information for this host.
+// Required Privilege: System.Read
+func (mo *HostVsanSystem) Config() (*VsanHostConfigInfo, error) {
+	return nil, nil
 }
 
 //
@@ -34309,20 +34773,36 @@ type HourlyTaskScheduler struct {
 type HttpNfcLease struct {
 	*ManagedObject
 
-	// If the lease is in the error state, this property contains the
-	// error that caused the lease to be aborted.
 	error *LocalizedMethodFault
 
-	// Provides information on the objects contained in this lease. The
-	// info property is only valid when the lease is in the ready state.
 	info *HttpNfcLeaseInfo
 
-	// Provides progress information (0-100 percent) for the initializing state
-	// of the lease. Clients can use this to track overall progress.
 	initializeProgress int32
 
-	// The current state of the lease.
 	state *enum.HttpNfcLeaseState
+}
+
+// If the lease is in the error state, this property contains the
+// error that caused the lease to be aborted.
+func (mo *HttpNfcLease) Error() (*LocalizedMethodFault, error) {
+	return nil, nil
+}
+
+// Provides information on the objects contained in this lease. The
+// info property is only valid when the lease is in the ready state.
+func (mo *HttpNfcLease) Info() (*HttpNfcLeaseInfo, error) {
+	return nil, nil
+}
+
+// Provides progress information (0-100 percent) for the initializing state
+// of the lease. Clients can use this to track overall progress.
+func (mo *HttpNfcLease) InitializeProgress() (int32, error) {
+	return nil, nil
+}
+
+// The current state of the lease.
+func (mo *HttpNfcLease) State() (*HttpNfcLeaseState, error) {
+	return nil, nil
 }
 
 //
@@ -37219,69 +37699,101 @@ type LicenseKeyEntityMismatch struct {
 type LicenseManager struct {
 	*ManagedObject
 
-	// Deprecated.
-	// As of vSphere API 4.0, this property is not used by the system.
-	//
-	//
-	// Return current diagnostic information.
-	//
-	// Since VI API 2.5
 	diagnostics *LicenseDiagnostics
 
-	// Since vSphere API 4.0
-	// Required Privilege: System.Read
 	evaluation *LicenseManagerEvaluationInfo
 
-	// Deprecated.
-	// As of VI API 2.5, use QuerySupportedFeatures
-	// instead.
-	//
-	//
-	// The list of features that can be licensed.
 	featureInfo []*LicenseFeatureInfo
 
-	// License Assignment Manager
-	//
-	// Since vSphere API 4.0
-	// Required Privilege: System.View
 	licenseAssignmentManager *LicenseAssignmentManager
 
-	// Deprecated.
-	// As of vSphere API 4.0, use
-	// QueryAssignedLicenses instead.
-	//
-	//
-	// The product's license edition. The edition defines which product license
-	// the server requires. This, in turn, determines the core set of functionalities
-	// provided by the product and the additional features that can be licensed. If
-	// no edition is set the property is set to the empty string ("").
-	//
-	// To set the edition use SetLicenseEdition.
-	//
-	// Since VI API 2.5
 	licensedEdition string
 
-	// Get information about all the licenses avaiable.
-	//
-	// Since vSphere API 4.0
-	// Required Privilege: dynamic
 	licenses []*LicenseManagerLicenseInfo
 
-	// Deprecated.
-	// As of vSphere API 4.0, use
-	// QueryAssignedLicenses to get evaluation information.
-	//
-	//
-	// Set or return a data object type of LocalLicense or LicenseServer.
 	source *LicenseSource
 
-	// Deprecated.
-	// As of vSphere API 4.0, this property is not used.
-	//
-	//
-	// Current state of the license source. License sources that are LocalSource
-	// are always available.
 	sourceAvailable bool
+}
+
+// Deprecated.
+// As of vSphere API 4.0, this property is not used by the system.
+//
+//
+// Return current diagnostic information.
+//
+// Since VI API 2.5
+func (mo *LicenseManager) Diagnostics() (*LicenseDiagnostics, error) {
+	return nil, nil
+}
+
+// Since vSphere API 4.0
+// Required Privilege: System.Read
+func (mo *LicenseManager) Evaluation() (*LicenseManagerEvaluationInfo, error) {
+	return nil, nil
+}
+
+// Deprecated.
+// As of VI API 2.5, use QuerySupportedFeatures
+// instead.
+//
+//
+// The list of features that can be licensed.
+func (mo *LicenseManager) FeatureInfo() ([]*LicenseFeatureInfo, error) {
+	return nil, nil
+}
+
+// License Assignment Manager
+//
+// Since vSphere API 4.0
+// Required Privilege: System.View
+func (mo *LicenseManager) LicenseAssignmentManager() (*LicenseAssignmentManager, error) {
+	return nil, nil
+}
+
+// Deprecated.
+// As of vSphere API 4.0, use
+// QueryAssignedLicenses instead.
+//
+//
+// The product's license edition. The edition defines which product license
+// the server requires. This, in turn, determines the core set of functionalities
+// provided by the product and the additional features that can be licensed. If
+// no edition is set the property is set to the empty string ("").
+//
+// To set the edition use SetLicenseEdition.
+//
+// Since VI API 2.5
+func (mo *LicenseManager) LicensedEdition() (string, error) {
+	return nil, nil
+}
+
+// Get information about all the licenses avaiable.
+//
+// Since vSphere API 4.0
+// Required Privilege: dynamic
+func (mo *LicenseManager) Licenses() ([]*LicenseManagerLicenseInfo, error) {
+	return nil, nil
+}
+
+// Deprecated.
+// As of vSphere API 4.0, use
+// QueryAssignedLicenses to get evaluation information.
+//
+//
+// Set or return a data object type of LocalLicense or LicenseServer.
+func (mo *LicenseManager) Source() (*LicenseSource, error) {
+	return nil, nil
+}
+
+// Deprecated.
+// As of vSphere API 4.0, this property is not used.
+//
+//
+// Current state of the license source. License sources that are LocalSource
+// are always available.
+func (mo *LicenseManager) SourceAvailable() (bool, error) {
+	return nil, nil
 }
 
 //
@@ -38135,10 +38647,14 @@ type LocalizableMessage struct {
 type LocalizationManager struct {
 	*ManagedObject
 
-	// Fetches the descriptions of all the client-side localization message
-	// catalogs available for the current session locale.
-	// Required Privilege: System.View
 	catalog []*LocalizationManagerMessageCatalog
+}
+
+// Fetches the descriptions of all the client-side localization message
+// catalogs available for the current session locale.
+// Required Privilege: System.View
+func (mo *LocalizationManager) Catalog() ([]*LocalizationManagerMessageCatalog, error) {
+	return nil, nil
 }
 
 //
@@ -38334,229 +38850,285 @@ type ManagedByInfo struct {
 type ManagedEntity struct {
 	*ExtensibleManagedObject
 
-	// Whether alarm actions are enabled for this entity.
-	// True if enabled; false otherwise.
-	//
-	// Since vSphere API 4.0
-	// Required Privilege: System.Read
 	alarmActionsEnabled bool
 
-	// Current configuration issues that have been detected for this entity. Typically,
-	// these issues have already been logged as events. The entity stores these
-	// events as long as they are still current. The
-	// configStatus property provides an overall status
-	// based on these events.
 	configIssue []*Event
 
-	// The configStatus indicates whether or not the system has detected a configuration
-	// issue involving this entity. For example, it might have detected a
-	// duplicate IP address or MAC address, or a host in a cluster
-	// might be out of compliance. The meanings of the configStatus values are:
-	//
-	// red:    A problem has been detected involving the entity.
-	// yellow: A problem is about to occur or a transient condition
-	// has occurred (For example, reconfigure fail-over policy).
-	// green:  No configuration issues have been detected.
-	// gray:   The configuration status of the entity is not being monitored.
-	//
-	// A green status indicates only that a problem has not been detected;
-	// it is not a guarantee that the entity is problem-free.
-	//
-	// The configIssue property contains a list of the
-	// problems that have been detected.
-	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
 	configStatus *enum.ManagedEntityStatus
 
-	// Custom field values.
-	// Required Privilege: System.View
 	customValue []*CustomFieldValue
 
-	// A set of alarm states for alarms that apply to this managed entity.
-	// The set includes alarms defined on this entity
-	// and alarms inherited from the parent entity,
-	// or from any ancestors in the inventory hierarchy.
-	//
-	// Alarms are inherited if they can be triggered by this entity or its descendants.
-	// This set does not include alarms that are defined on descendants of this entity.
-	// Required Privilege: System.View
 	declaredAlarmState []*AlarmState
 
-	// List of operations that are disabled, given the current runtime
-	// state of the entity. For example, a power-on operation always fails if a
-	// virtual machine is already powered on. This list can be used by clients to
-	// enable or disable operations in a graphical user interface.
-	//
-	// Note: This list is determined by the current runtime state of an entity,
-	// not by its permissions.
-	//
-	// This list may include the following operations for a HostSystem:
-	//
-	// EnterMaintenanceMode_Task
-	// ExitMaintenanceMode_Task
-	// RebootHost_Task
-	// ShutdownHost_Task
-	// ReconnectHost_Task
-	// DisconnectHost_Task
-	//
-	//
-	// This list may include the following operations for a VirtualMachine:
-	//
-	// AnswerVM
-	// Rename_Task
-	// CloneVM_Task
-	// PowerOffVM_Task
-	// PowerOnVM_Task
-	// SuspendVM_Task
-	// ResetVM_Task
-	// ReconfigVM_Task
-	// RelocateVM_Task
-	// MigrateVM_Task
-	// CustomizeVM_Task
-	// ShutdownGuest
-	// StandbyGuest
-	// RebootGuest
-	// CreateSnapshot_Task
-	// RemoveAllSnapshots_Task
-	// RevertToCurrentSnapshot_Task
-	// MarkAsTemplate
-	// MarkAsVirtualMachine
-	// ResetGuestInformation
-	// MountToolsInstaller
-	// UnmountToolsInstaller
-	// Destroy_Task
-	// UpgradeVM_Task
-	// ExportVm
-	//
-	//
-	// This list may include the following operations for a ResourcePool:
-	//
-	// ImportVApp
-	// CreateChildVM_Task
-	// UpdateConfig
-	// CreateVM_Task
-	// Destroy_Task
-	// Rename_Task
-	//
-	// This list may include the following operations for a VirtualApp:
-	//
-	// Destroy_Task
-	// CloneVApp_Task
-	// unregisterVApp_Task
-	// ExportVApp
-	// PowerOnVApp_Task
-	// PowerOffVApp_Task
-	// UpdateVAppConfig
-	//
-	//
-	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
 	disabledMethod []string
 
-	// Access rights the current session has to this entity.
-	// Required Privilege: System.View
 	effectiveRole []int32
 
-	// Name of this entity, unique relative to its parent.
-	//
-	// Any / (slash), \ (backslash), character used in this
-	// name element will be escaped. Similarly, any % (percent) character used in
-	// this name element will be escaped, unless it is used to start an escape
-	// sequence. A slash is escaped as %2F or %2f. A backslash is escaped as %5C or
-	// %5c, and a percent is escaped as %25.
-	// Required Privilege: System.View
 	name string
 
-	// General health of this managed entity.
-	// The overall status of the managed entity is computed as the worst status
-	// among its alarms and the configuration issues detected on the entity.
-	// The status is reported as one of the following values:
-	//
-	// red:    The entity has alarms or configuration issues with a red status.
-	// yellow: The entity does not have alarms or configuration issues with a
-	// red status, and has at least one with a yellow status.
-	// green:  The entity does not have alarms or configuration issues with a
-	// red or yellow status, and has at least one with a green status.
-	// gray:   All of the entity's alarms have a gray status and the
-	// configuration status of the entity is not being monitored.
-	//
-	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
 	overallStatus *enum.ManagedEntityStatus
 
-	// Parent of this entity.
-	//
-	// This value is null for the root object and for
-	// VirtualMachine objects that are part of
-	// a VirtualApp.
-	// Required Privilege: System.View
 	parent *ManagedEntity
 
-	// List of permissions defined for this entity.
 	permission []*Permission
 
-	// The set of recent tasks operating on this managed entity. This is a subset
-	// of recentTask belong to this entity. A task in this
-	// list could be in one of the four states: pending, running, success or error.
-	//
-	// This property can be used to deduce intermediate power states for
-	// a virtual machine entity. For example, if the current powerState is "poweredOn"
-	// and there is a running task performing the "suspend" operation, then the virtual
-	// machine's intermediate state might be described as "suspending."
-	//
-	// Most tasks (such as power operations) obtain exclusive access to the virtual
-	// machine, so it is unusual for this list to contain more than one running task.
-	// One exception, however, is the task of cloning a virtual machine.
-	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
 	recentTask []*Task
 
-	// The set of tags associated with this managed entity.
-	// Experimental. Subject to change.
-	//
-	// Since vSphere API 4.0
-	// Required Privilege: System.View
 	tag []*Tag
 
-	// A set of alarm states for alarms triggered by this entity
-	// or by its descendants.
-	//
-	// Triggered alarms are propagated up the inventory hierarchy
-	// so that a user can readily tell when a descendant has triggered an alarm.
-	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
-	// Required Privilege: System.View
 	triggeredAlarmState []*AlarmState
+}
+
+// Whether alarm actions are enabled for this entity.
+// True if enabled; false otherwise.
+//
+// Since vSphere API 4.0
+// Required Privilege: System.Read
+func (mo *ManagedEntity) AlarmActionsEnabled() (bool, error) {
+	return nil, nil
+}
+
+// Current configuration issues that have been detected for this entity. Typically,
+// these issues have already been logged as events. The entity stores these
+// events as long as they are still current. The
+// configStatus property provides an overall status
+// based on these events.
+func (mo *ManagedEntity) ConfigIssue() ([]*Event, error) {
+	return nil, nil
+}
+
+// The configStatus indicates whether or not the system has detected a configuration
+// issue involving this entity. For example, it might have detected a
+// duplicate IP address or MAC address, or a host in a cluster
+// might be out of compliance. The meanings of the configStatus values are:
+//
+// red:    A problem has been detected involving the entity.
+// yellow: A problem is about to occur or a transient condition
+// has occurred (For example, reconfigure fail-over policy).
+// green:  No configuration issues have been detected.
+// gray:   The configuration status of the entity is not being monitored.
+//
+// A green status indicates only that a problem has not been detected;
+// it is not a guarantee that the entity is problem-free.
+//
+// The configIssue property contains a list of the
+// problems that have been detected.
+//
+// In releases after vSphere API 5.0, vSphere Servers might not
+// generate property collector update notifications for this property.
+// To obtain the latest value of the property, you can use
+// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+// an empty string for the version parameter. Any other version value will not
+// produce any property values as no updates are generated.
+func (mo *ManagedEntity) ConfigStatus() (*ManagedEntityStatus, error) {
+	return nil, nil
+}
+
+// Custom field values.
+// Required Privilege: System.View
+func (mo *ManagedEntity) CustomValue() ([]*CustomFieldValue, error) {
+	return nil, nil
+}
+
+// A set of alarm states for alarms that apply to this managed entity.
+// The set includes alarms defined on this entity
+// and alarms inherited from the parent entity,
+// or from any ancestors in the inventory hierarchy.
+//
+// Alarms are inherited if they can be triggered by this entity or its descendants.
+// This set does not include alarms that are defined on descendants of this entity.
+// Required Privilege: System.View
+func (mo *ManagedEntity) DeclaredAlarmState() ([]*AlarmState, error) {
+	return nil, nil
+}
+
+// List of operations that are disabled, given the current runtime
+// state of the entity. For example, a power-on operation always fails if a
+// virtual machine is already powered on. This list can be used by clients to
+// enable or disable operations in a graphical user interface.
+//
+// Note: This list is determined by the current runtime state of an entity,
+// not by its permissions.
+//
+// This list may include the following operations for a HostSystem:
+//
+// EnterMaintenanceMode_Task
+// ExitMaintenanceMode_Task
+// RebootHost_Task
+// ShutdownHost_Task
+// ReconnectHost_Task
+// DisconnectHost_Task
+//
+//
+// This list may include the following operations for a VirtualMachine:
+//
+// AnswerVM
+// Rename_Task
+// CloneVM_Task
+// PowerOffVM_Task
+// PowerOnVM_Task
+// SuspendVM_Task
+// ResetVM_Task
+// ReconfigVM_Task
+// RelocateVM_Task
+// MigrateVM_Task
+// CustomizeVM_Task
+// ShutdownGuest
+// StandbyGuest
+// RebootGuest
+// CreateSnapshot_Task
+// RemoveAllSnapshots_Task
+// RevertToCurrentSnapshot_Task
+// MarkAsTemplate
+// MarkAsVirtualMachine
+// ResetGuestInformation
+// MountToolsInstaller
+// UnmountToolsInstaller
+// Destroy_Task
+// UpgradeVM_Task
+// ExportVm
+//
+//
+// This list may include the following operations for a ResourcePool:
+//
+// ImportVApp
+// CreateChildVM_Task
+// UpdateConfig
+// CreateVM_Task
+// Destroy_Task
+// Rename_Task
+//
+// This list may include the following operations for a VirtualApp:
+//
+// Destroy_Task
+// CloneVApp_Task
+// unregisterVApp_Task
+// ExportVApp
+// PowerOnVApp_Task
+// PowerOffVApp_Task
+// UpdateVAppConfig
+//
+//
+//
+// In releases after vSphere API 5.0, vSphere Servers might not
+// generate property collector update notifications for this property.
+// To obtain the latest value of the property, you can use
+// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+// an empty string for the version parameter. Any other version value will not
+// produce any property values as no updates are generated.
+func (mo *ManagedEntity) DisabledMethod() ([]string, error) {
+	return nil, nil
+}
+
+// Access rights the current session has to this entity.
+// Required Privilege: System.View
+func (mo *ManagedEntity) EffectiveRole() ([]int32, error) {
+	return nil, nil
+}
+
+// Name of this entity, unique relative to its parent.
+//
+// Any / (slash), \ (backslash), character used in this
+// name element will be escaped. Similarly, any % (percent) character used in
+// this name element will be escaped, unless it is used to start an escape
+// sequence. A slash is escaped as %2F or %2f. A backslash is escaped as %5C or
+// %5c, and a percent is escaped as %25.
+// Required Privilege: System.View
+func (mo *ManagedEntity) Name() (string, error) {
+	return nil, nil
+}
+
+// General health of this managed entity.
+// The overall status of the managed entity is computed as the worst status
+// among its alarms and the configuration issues detected on the entity.
+// The status is reported as one of the following values:
+//
+// red:    The entity has alarms or configuration issues with a red status.
+// yellow: The entity does not have alarms or configuration issues with a
+// red status, and has at least one with a yellow status.
+// green:  The entity does not have alarms or configuration issues with a
+// red or yellow status, and has at least one with a green status.
+// gray:   All of the entity's alarms have a gray status and the
+// configuration status of the entity is not being monitored.
+//
+//
+// In releases after vSphere API 5.0, vSphere Servers might not
+// generate property collector update notifications for this property.
+// To obtain the latest value of the property, you can use
+// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+// an empty string for the version parameter. Any other version value will not
+// produce any property values as no updates are generated.
+func (mo *ManagedEntity) OverallStatus() (*ManagedEntityStatus, error) {
+	return nil, nil
+}
+
+// Parent of this entity.
+//
+// This value is null for the root object and for
+// VirtualMachine objects that are part of
+// a VirtualApp.
+// Required Privilege: System.View
+func (mo *ManagedEntity) Parent() (*ManagedEntity, error) {
+	return nil, nil
+}
+
+// List of permissions defined for this entity.
+func (mo *ManagedEntity) Permission() ([]*Permission, error) {
+	return nil, nil
+}
+
+// The set of recent tasks operating on this managed entity. This is a subset
+// of recentTask belong to this entity. A task in this
+// list could be in one of the four states: pending, running, success or error.
+//
+// This property can be used to deduce intermediate power states for
+// a virtual machine entity. For example, if the current powerState is "poweredOn"
+// and there is a running task performing the "suspend" operation, then the virtual
+// machine's intermediate state might be described as "suspending."
+//
+// Most tasks (such as power operations) obtain exclusive access to the virtual
+// machine, so it is unusual for this list to contain more than one running task.
+// One exception, however, is the task of cloning a virtual machine.
+//
+// In releases after vSphere API 5.0, vSphere Servers might not
+// generate property collector update notifications for this property.
+// To obtain the latest value of the property, you can use
+// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+// an empty string for the version parameter. Any other version value will not
+// produce any property values as no updates are generated.
+func (mo *ManagedEntity) RecentTask() ([]*Task, error) {
+	return nil, nil
+}
+
+// The set of tags associated with this managed entity.
+// Experimental. Subject to change.
+//
+// Since vSphere API 4.0
+// Required Privilege: System.View
+func (mo *ManagedEntity) Tag() ([]*Tag, error) {
+	return nil, nil
+}
+
+// A set of alarm states for alarms triggered by this entity
+// or by its descendants.
+//
+// Triggered alarms are propagated up the inventory hierarchy
+// so that a user can readily tell when a descendant has triggered an alarm.
+//
+// In releases after vSphere API 5.0, vSphere Servers might not
+// generate property collector update notifications for this property.
+// To obtain the latest value of the property, you can use
+// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+// an empty string for the version parameter. Any other version value will not
+// produce any property values as no updates are generated.
+// Required Privilege: System.View
+func (mo *ManagedEntity) TriggeredAlarmState() ([]*AlarmState, error) {
+	return nil, nil
 }
 
 //
@@ -39017,8 +39589,12 @@ type ManagedObjectView struct {
 
 	*View
 
-	// The list of references to objects mapped by this view.
 	view []*ManagedObjectReference
+}
+
+// The list of references to objects mapped by this view.
+func (mo *ManagedObjectView) View() ([]*ManagedObjectReference, error) {
+	return nil, nil
 }
 
 //
@@ -40517,17 +41093,33 @@ type NetStackInstanceProfile struct {
 type Network struct {
 	*ManagedEntity
 
-	// Hosts attached to this network.
 	host []*HostSystem
 
-	// Name of this network.
 	name string
 
-	// Properties of a network.
 	summary *NetworkSummary
 
-	// Virtual machines using this network.
 	vm []*VirtualMachine
+}
+
+// Hosts attached to this network.
+func (mo *Network) Host() ([]*HostSystem, error) {
+	return nil, nil
+}
+
+// Name of this network.
+func (mo *Network) Name() (string, error) {
+	return nil, nil
+}
+
+// Properties of a network.
+func (mo *Network) Summary() (*NetworkSummary, error) {
+	return nil, nil
+}
+
+// Virtual machines using this network.
+func (mo *Network) Vm() ([]*VirtualMachine, error) {
+	return nil, nil
 }
 
 // Deprecated.
@@ -41693,12 +42285,20 @@ type OptionDef struct {
 type OptionManager struct {
 	*ManagedObject
 
-	// A list of the current settings for the key/value pair options.
 	setting []*OptionValue
 
-	// A list of supported key/value pair options including their
-	// type information.
 	supportedOption []*OptionDef
+}
+
+// A list of the current settings for the key/value pair options.
+func (mo *OptionManager) Setting() ([]*OptionValue, error) {
+	return nil, nil
+}
+
+// A list of supported key/value pair options including their
+// type information.
+func (mo *OptionManager) SupportedOption() ([]*OptionDef, error) {
+	return nil, nil
 }
 
 //
@@ -43004,21 +43604,29 @@ type OvfInvalidVmName struct {
 type OvfManager struct {
 	*ManagedObject
 
-	// Returns an array of OvfOptionInfo object that specifies what options the server
-	// support for exporting an OVF descriptor.
-	//
-	//
-	// Since vSphere API 5.1
-	// Required Privilege: System.View
 	ovfExportOption []*OvfOptionInfo
 
-	// Returns an array of OvfOptionInfo object that specifies what options the server
-	// support for modifing/relaxing the OVF import process.
-	//
-	//
-	// Since vSphere API 5.1
-	// Required Privilege: System.View
 	ovfImportOption []*OvfOptionInfo
+}
+
+// Returns an array of OvfOptionInfo object that specifies what options the server
+// support for exporting an OVF descriptor.
+//
+//
+// Since vSphere API 5.1
+// Required Privilege: System.View
+func (mo *OvfManager) OvfExportOption() ([]*OvfOptionInfo, error) {
+	return nil, nil
+}
+
+// Returns an array of OvfOptionInfo object that specifies what options the server
+// support for modifing/relaxing the OVF import process.
+//
+//
+// Since vSphere API 5.1
+// Required Privilege: System.View
+func (mo *OvfManager) OvfImportOption() ([]*OvfOptionInfo, error) {
+	return nil, nil
 }
 
 //
@@ -44705,18 +45313,30 @@ type PerformanceDescription struct {
 type PerformanceManager struct {
 	*ManagedObject
 
-	// The static description strings.
-	// Required Privilege: System.View
 	description *PerformanceDescription
 
-	// A list of intervals configured on the
-	// system.
-	// Required Privilege: System.View
 	historicalInterval []*PerfInterval
 
-	// A list of all supported performance counters in the system.
-	// Required Privilege: System.View
 	perfCounter []*PerfCounterInfo
+}
+
+// The static description strings.
+// Required Privilege: System.View
+func (mo *PerformanceManager) Description() (*PerformanceDescription, error) {
+	return nil, nil
+}
+
+// A list of intervals configured on the
+// system.
+// Required Privilege: System.View
+func (mo *PerformanceManager) HistoricalInterval() ([]*PerfInterval, error) {
+	return nil, nil
+}
+
+// A list of all supported performance counters in the system.
+// Required Privilege: System.View
+func (mo *PerformanceManager) PerfCounter() ([]*PerfCounterInfo, error) {
+	return nil, nil
 }
 
 // Deprecated.
@@ -45938,36 +46558,64 @@ type ProductComponentInfo struct {
 type Profile struct {
 	*ManagedObject
 
-	// Overall compliance of entities associated with this profile.
-	// If one of the entities is out of compliance, the profile is nonCompliant.
-	// If all entities are in compliance, the profile is compliant.
-	// If the compliance status of one of the entities is not known, compliance status
-	// of the profile is unknown.
-	// See ComplianceResultStatus.
 	complianceStatus string
 
-	// Configuration data for the profile.
-	// Required Privilege: Profile.Edit
 	config *ProfileConfigInfo
 
-	// Time at which the profile was created.
 	createdTime time.Time
 
-	// Deprecated.
-	// As of vSphere API 5.0. use RetrieveDescription instead.
-	//
-	//
-	// Localizable description of the profile
 	description *ProfileDescription
 
-	// List of managed entities associated with the profile.
 	entity []*ManagedEntity
 
-	// Time at which the profile was last modified.
 	modifiedTime time.Time
 
-	// Name of the profile.
 	name string
+}
+
+// Overall compliance of entities associated with this profile.
+// If one of the entities is out of compliance, the profile is nonCompliant.
+// If all entities are in compliance, the profile is compliant.
+// If the compliance status of one of the entities is not known, compliance status
+// of the profile is unknown.
+// See ComplianceResultStatus.
+func (mo *Profile) ComplianceStatus() (string, error) {
+	return nil, nil
+}
+
+// Configuration data for the profile.
+// Required Privilege: Profile.Edit
+func (mo *Profile) Config() (*ProfileConfigInfo, error) {
+	return nil, nil
+}
+
+// Time at which the profile was created.
+func (mo *Profile) CreatedTime() (time.Time, error) {
+	return nil, nil
+}
+
+// Deprecated.
+// As of vSphere API 5.0. use RetrieveDescription instead.
+//
+//
+// Localizable description of the profile
+func (mo *Profile) Description() (*ProfileDescription, error) {
+	return nil, nil
+}
+
+// List of managed entities associated with the profile.
+func (mo *Profile) Entity() ([]*ManagedEntity, error) {
+	return nil, nil
+}
+
+// Time at which the profile was last modified.
+func (mo *Profile) ModifiedTime() (time.Time, error) {
+	return nil, nil
+}
+
+// Name of the profile.
+func (mo *Profile) Name() (string, error) {
+	return nil, nil
 }
 
 //
@@ -46482,9 +47130,13 @@ type ProfileExpressionMetadata struct {
 type ProfileManager struct {
 	*ManagedObject
 
-	// A list of profiles known to this ProfileManager.
-	// Required Privilege: Profile.View
 	profile []*Profile
+}
+
+// A list of profiles known to this ProfileManager.
+// Required Privilege: Profile.View
+func (mo *ProfileManager) Profile() ([]*Profile, error) {
+	return nil, nil
 }
 
 //
@@ -46869,10 +47521,14 @@ type PropertyChangeOp struct {
 type PropertyCollector struct {
 	*ManagedObject
 
-	// The filters that this PropertyCollector uses to determine the list of
-	// properties for which it detects incremental changes.
-	// Required Privilege: System.View
 	filter []*PropertyFilter
+}
+
+// The filters that this PropertyCollector uses to determine the list of
+// properties for which it detects incremental changes.
+// Required Privilege: System.View
+func (mo *PropertyCollector) Filter() ([]*PropertyFilter, error) {
+	return nil, nil
 }
 
 //
@@ -47148,14 +47804,22 @@ func (mo *PropertyCollector) WaitForUpdatesEx(
 type PropertyFilter struct {
 	*ManagedObject
 
-	// Flag to indicate if a change to a nested property reports only the
-	// nested change or the entire specified property value.  If the value is
-	// true, a change reports only the nested property.  If the value is
-	// false, a change reports the enclosing property named in the filter.
 	partialUpdates bool
 
-	// Specifications for this filter.
 	spec *PropertyFilterSpec
+}
+
+// Flag to indicate if a change to a nested property reports only the
+// nested change or the entire specified property value.  If the value is
+// true, a change reports only the nested property.  If the value is
+// false, a change reports the enclosing property named in the filter.
+func (mo *PropertyFilter) PartialUpdates() (bool, error) {
+	return nil, nil
+}
+
+// Specifications for this filter.
+func (mo *PropertyFilter) Spec() (*PropertyFilterSpec, error) {
+	return nil, nil
 }
 
 //
@@ -48358,51 +49022,79 @@ func (mo *ResourcePlanningManager) EstimateDatabaseSize(
 type ResourcePool struct {
 	*ManagedEntity
 
-	// The resource configuration of all direct children (VirtualMachine and
-	// ResourcePool) of this resource group.
 	childConfiguration []*ResourceConfigSpec
 
-	// Configuration of this resource pool.
 	config *ResourceConfigSpec
 
-	// The ComputeResource to which this set of one or more nested resource pools
-	// belong.
-	// Required Privilege: System.View
 	owner *ComputeResource
 
-	// The set of child resource pools.
-	// Required Privilege: System.View
 	resourcePool []*ResourcePool
 
-	// Runtime information about a resource pool.
-	// The ResourcePoolResourceUsage information within
-	// ResourcePoolRuntimeInfo can be transiently stale.
-	// Use RefreshRuntime method to
-	// update the information.
-	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
 	runtime *ResourcePoolRuntimeInfo
 
-	// Basic information about a resource pool.
-	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
 	summary *ResourcePoolSummary
 
-	// The set of virtual machines associated with this resource pool.
-	// Required Privilege: System.View
 	vm []*VirtualMachine
+}
+
+// The resource configuration of all direct children (VirtualMachine and
+// ResourcePool) of this resource group.
+func (mo *ResourcePool) ChildConfiguration() ([]*ResourceConfigSpec, error) {
+	return nil, nil
+}
+
+// Configuration of this resource pool.
+func (mo *ResourcePool) Config() (*ResourceConfigSpec, error) {
+	return nil, nil
+}
+
+// The ComputeResource to which this set of one or more nested resource pools
+// belong.
+// Required Privilege: System.View
+func (mo *ResourcePool) Owner() (*ComputeResource, error) {
+	return nil, nil
+}
+
+// The set of child resource pools.
+// Required Privilege: System.View
+func (mo *ResourcePool) ResourcePool() ([]*ResourcePool, error) {
+	return nil, nil
+}
+
+// Runtime information about a resource pool.
+// The ResourcePoolResourceUsage information within
+// ResourcePoolRuntimeInfo can be transiently stale.
+// Use RefreshRuntime method to
+// update the information.
+//
+// In releases after vSphere API 5.0, vSphere Servers might not
+// generate property collector update notifications for this property.
+// To obtain the latest value of the property, you can use
+// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+// an empty string for the version parameter. Any other version value will not
+// produce any property values as no updates are generated.
+func (mo *ResourcePool) Runtime() (*ResourcePoolRuntimeInfo, error) {
+	return nil, nil
+}
+
+// Basic information about a resource pool.
+//
+// In releases after vSphere API 5.0, vSphere Servers might not
+// generate property collector update notifications for this property.
+// To obtain the latest value of the property, you can use
+// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+// an empty string for the version parameter. Any other version value will not
+// produce any property values as no updates are generated.
+func (mo *ResourcePool) Summary() (*ResourcePoolSummary, error) {
+	return nil, nil
+}
+
+// The set of virtual machines associated with this resource pool.
+// Required Privilege: System.View
+func (mo *ResourcePool) Vm() ([]*VirtualMachine, error) {
+	return nil, nil
 }
 
 //
@@ -49372,8 +50064,12 @@ type ScheduledHardwareUpgradeInfoHardwareUpgradeStatus struct {
 type ScheduledTask struct {
 	*ExtensibleManagedObject
 
-	// Information about the current scheduled task.
 	info *ScheduledTaskInfo
+}
+
+// Information about the current scheduled task.
+func (mo *ScheduledTask) Info() (*ScheduledTaskInfo, error) {
+	return nil, nil
 }
 
 //
@@ -49592,13 +50288,21 @@ type ScheduledTaskInfo struct {
 type ScheduledTaskManager struct {
 	*ManagedObject
 
-	// Static descriptive strings used in scheduled tasks.
-	// Required Privilege: System.View
 	description *ScheduledTaskDescription
 
-	// All available scheduled tasks.
-	// Required Privilege: System.View
 	scheduledTask []*ScheduledTask
+}
+
+// Static descriptive strings used in scheduled tasks.
+// Required Privilege: System.View
+func (mo *ScheduledTaskManager) Description() (*ScheduledTaskDescription, error) {
+	return nil, nil
+}
+
+// All available scheduled tasks.
+// Required Privilege: System.View
+func (mo *ScheduledTaskManager) ScheduledTask() ([]*ScheduledTask, error) {
+	return nil, nil
 }
 
 //
@@ -50644,33 +51348,45 @@ type ServiceContent struct {
 type ServiceInstance struct {
 	*ManagedObject
 
-	// API-wide capabilities.
-	// Required Privilege: System.View
 	capability *Capability
 
-	// The properties of the ServiceInstance managed object. The content property
-	// is identical to the return value from the
-	// RetrieveServiceContent method.
-	//
-	// Use the content property with the PropertyCollector
-	// to perform inventory traversal that includes the ServiceInstance.
-	// (In the absence of a content property, a traversal that encounters
-	// the ServiceInstance would require calling
-	// the RetrieveServiceContent method,
-	// and then invoking a second traversal to continue.)
-	// Required Privilege: System.Anonymous
 	content *ServiceContent
 
-	// Contains the time most recently obtained from the server.
-	// The time is not necessarily current. This property is intended for use
-	// with the PropertyCollector WaitForUpdates
-	// method. The PropertyCollector will provide notification if some event occurs
-	// that changes the server clock time in a non-linear fashion.
-	//
-	// You should not rely on the serverClock property to get the current time
-	// on the server; instead, use the CurrentTime method.
-	// Required Privilege: System.View
 	serverClock time.Time
+}
+
+// API-wide capabilities.
+// Required Privilege: System.View
+func (mo *ServiceInstance) Capability() (*Capability, error) {
+	return nil, nil
+}
+
+// The properties of the ServiceInstance managed object. The content property
+// is identical to the return value from the
+// RetrieveServiceContent method.
+//
+// Use the content property with the PropertyCollector
+// to perform inventory traversal that includes the ServiceInstance.
+// (In the absence of a content property, a traversal that encounters
+// the ServiceInstance would require calling
+// the RetrieveServiceContent method,
+// and then invoking a second traversal to continue.)
+// Required Privilege: System.Anonymous
+func (mo *ServiceInstance) Content() (*ServiceContent, error) {
+	return nil, nil
+}
+
+// Contains the time most recently obtained from the server.
+// The time is not necessarily current. This property is intended for use
+// with the PropertyCollector WaitForUpdates
+// method. The PropertyCollector will provide notification if some event occurs
+// that changes the server clock time in a non-linear fashion.
+//
+// You should not rely on the serverClock property to get the current time
+// on the server; instead, use the CurrentTime method.
+// Required Privilege: System.View
+func (mo *ServiceInstance) ServerClock() (time.Time, error) {
+	return nil, nil
 }
 
 //
@@ -50773,9 +51489,13 @@ func (mo *ServiceInstance) ValidateMigration(
 type ServiceManager struct {
 	*ManagedObject
 
-	// The full list of services available in this directory.
-	// Required Privilege: Global.ServiceManagers
 	service []*ServiceManagerServiceInfo
+}
+
+// The full list of services available in this directory.
+// Required Privilege: Global.ServiceManagers
+func (mo *ServiceManager) Service() ([]*ServiceManagerServiceInfo, error) {
+	return nil, nil
 }
 
 //
@@ -50859,34 +51579,58 @@ type SessionEvent struct {
 type SessionManager struct {
 	*ManagedObject
 
-	// This property contains information about the client's current session.
-	// If the client is not logged on, the value is null.
-	// Required Privilege: System.Anonymous
 	currentSession *UserSession
 
-	// This is the default server locale.
-	// Required Privilege: System.Anonymous
 	defaultLocale string
 
-	// The system global message from the server.
-	// Required Privilege: System.View
 	message string
 
-	// Provides the list of locales for which the server has localized messages.
-	// Required Privilege: System.Anonymous
 	messageLocaleList []string
 
-	// The list of currently active sessions.
-	// Required Privilege: Sessions.TerminateSession
 	sessionList []*UserSession
 
-	// Provides the list of locales that the server supports.
-	// Listing a locale ensures that some standardized information such as dates appear
-	// in the appropriate format. Other localized information, such as error messages,
-	// are displayed, if available. If localized information is not available, the
-	// message is returned using the system locale.
-	// Required Privilege: System.Anonymous
 	supportedLocaleList []string
+}
+
+// This property contains information about the client's current session.
+// If the client is not logged on, the value is null.
+// Required Privilege: System.Anonymous
+func (mo *SessionManager) CurrentSession() (*UserSession, error) {
+	return nil, nil
+}
+
+// This is the default server locale.
+// Required Privilege: System.Anonymous
+func (mo *SessionManager) DefaultLocale() (string, error) {
+	return nil, nil
+}
+
+// The system global message from the server.
+// Required Privilege: System.View
+func (mo *SessionManager) Message() (string, error) {
+	return nil, nil
+}
+
+// Provides the list of locales for which the server has localized messages.
+// Required Privilege: System.Anonymous
+func (mo *SessionManager) MessageLocaleList() ([]string, error) {
+	return nil, nil
+}
+
+// The list of currently active sessions.
+// Required Privilege: Sessions.TerminateSession
+func (mo *SessionManager) SessionList() ([]*UserSession, error) {
+	return nil, nil
+}
+
+// Provides the list of locales that the server supports.
+// Listing a locale ensures that some standardized information such as dates appear
+// in the appropriate format. Other localized information, such as error messages,
+// are displayed, if available. If localized information is not available, the
+// message is returned using the system locale.
+// Required Privilege: System.Anonymous
+func (mo *SessionManager) SupportedLocaleList() ([]string, error) {
+	return nil, nil
 }
 
 //
@@ -51454,11 +52198,19 @@ type ShrinkDiskFault struct {
 type SimpleCommand struct {
 	*ManagedObject
 
-	// The encoding type used in the result.
 	encodingType *enum.SimpleCommandEncoding
 
-	// A description of the service.
 	entity *ServiceManagerServiceInfo
+}
+
+// The encoding type used in the result.
+func (mo *SimpleCommand) EncodingType() (*SimpleCommandEncoding, error) {
+	return nil, nil
+}
+
+// A description of the service.
+func (mo *SimpleCommand) Entity() (*ServiceManagerServiceInfo, error) {
+	return nil, nil
 }
 
 //
@@ -52641,13 +53393,21 @@ type StoragePod struct {
 
 	*Folder
 
-	// Storage DRS related attributes of the Storage Pod.
-	// Required Privilege: System.Read
 	podStorageDrsEntry *PodStorageDrsEntry
 
-	// Storage pod summary.
-	// Required Privilege: System.View
 	summary *StoragePodSummary
+}
+
+// Storage DRS related attributes of the Storage Pod.
+// Required Privilege: System.Read
+func (mo *StoragePod) PodStorageDrsEntry() (*PodStorageDrsEntry, error) {
+	return nil, nil
+}
+
+// Storage pod summary.
+// Required Privilege: System.View
+func (mo *StoragePod) Summary() (*StoragePodSummary, error) {
+	return nil, nil
 }
 
 //
@@ -53149,8 +53909,12 @@ type Tag struct {
 type Task struct {
 	*ExtensibleManagedObject
 
-	// Detailed information about this task.
 	info *TaskInfo
+}
+
+// Detailed information about this task.
+func (mo *Task) Info() (*TaskInfo, error) {
+	return nil, nil
 }
 
 //
@@ -53427,15 +54191,19 @@ type TaskHistoryCollector struct {
 
 	*HistoryCollector
 
-	// The items in the 'viewable latest page'. As new tasks that match the
-	// collector's TaskFilterSpec are created, they are added to this
-	// page, and the oldest tasks are removed from the collector to keep the
-	// size of the page to that allowed by
-	// SetCollectorPageSize.
-	//
-	// The "oldest task" is the one with the oldest creation time. The
-	// tasks in the returned page are unordered.
 	latestPage []*TaskInfo
+}
+
+// The items in the 'viewable latest page'. As new tasks that match the
+// collector's TaskFilterSpec are created, they are added to this
+// page, and the oldest tasks are removed from the collector to keep the
+// size of the page to that allowed by
+// SetCollectorPageSize.
+//
+// The "oldest task" is the one with the oldest creation time. The
+// tasks in the returned page are unordered.
+func (mo *TaskHistoryCollector) LatestPage() ([]*TaskInfo, error) {
+	return nil, nil
 }
 
 //
@@ -53603,43 +54371,55 @@ type TaskInfoState struct {
 type TaskManager struct {
 	*ManagedObject
 
-	// Locale-specific, static strings that describe Task
-	// information to users.
-	// Required Privilege: System.View
 	description *TaskDescription
 
-	// Maximum number of TaskHistoryCollector
-	// data objects that can exist concurrently, per client.
-	// Required Privilege: System.View
 	maxCollector int32
 
-	// A list of Task managed objects that completed recently,
-	// that are currently running, or that are queued to run.
-	//
-	//
-	// The list contains only Task objects that the client
-	// has permission to access, which is determined by having permission to
-	// access the Task object's managed entity.
-	//
-	// The completed Task objects by default include only
-	// Task objects that completed within the past 10 minutes.
-	// When connected to vCenter Server, there is an additional default limitation
-	// that each of the completed Task objects in this list is one
-	// of the last 200 completed Task objects.
-	//
-	// This property should not be used for tracking Task
-	// completion. Generally, a ListView is a better way to
-	// monitor a specific set of Task objects.
-	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
-	// Required Privilege: System.View
 	recentTask []*Task
+}
+
+// Locale-specific, static strings that describe Task
+// information to users.
+// Required Privilege: System.View
+func (mo *TaskManager) Description() (*TaskDescription, error) {
+	return nil, nil
+}
+
+// Maximum number of TaskHistoryCollector
+// data objects that can exist concurrently, per client.
+// Required Privilege: System.View
+func (mo *TaskManager) MaxCollector() (int32, error) {
+	return nil, nil
+}
+
+// A list of Task managed objects that completed recently,
+// that are currently running, or that are queued to run.
+//
+//
+// The list contains only Task objects that the client
+// has permission to access, which is determined by having permission to
+// access the Task object's managed entity.
+//
+// The completed Task objects by default include only
+// Task objects that completed within the past 10 minutes.
+// When connected to vCenter Server, there is an additional default limitation
+// that each of the completed Task objects in this list is one
+// of the last 200 completed Task objects.
+//
+// This property should not be used for tracking Task
+// completion. Generally, a ListView is a better way to
+// monitor a specific set of Task objects.
+//
+// In releases after vSphere API 5.0, vSphere Servers might not
+// generate property collector update notifications for this property.
+// To obtain the latest value of the property, you can use
+// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+// an empty string for the version parameter. Any other version value will not
+// produce any property values as no updates are generated.
+// Required Privilege: System.View
+func (mo *TaskManager) RecentTask() ([]*Task, error) {
+	return nil, nil
 }
 
 //
@@ -54939,10 +55719,14 @@ type UserAssignedToGroup struct {
 type UserDirectory struct {
 	*ManagedObject
 
-	// List of Windows domains available for user searches, if the underlying
-	// system supports windows domain membership.
-	// Required Privilege: System.View
 	domainList []string
+}
+
+// List of Windows domains available for user searches, if the underlying
+// system supports windows domain membership.
+// Required Privilege: System.View
+func (mo *UserDirectory) DomainList() ([]string, error) {
+	return nil, nil
 }
 
 //
@@ -57203,10 +57987,14 @@ func (mo *View) DestroyView(
 type ViewManager struct {
 	*ManagedObject
 
-	// An array of view references. Each array entry is a managed object reference
-	// to a view created by this ViewManager.
-	// Required Privilege: System.View
 	viewList []*View
+}
+
+// An array of view references. Each array entry is a managed object reference
+// to a view created by this ViewManager.
+// Required Privilege: System.View
+func (mo *ViewManager) ViewList() ([]*View, error) {
+	return nil, nil
 }
 
 //
@@ -57356,39 +58144,63 @@ type VirtualApp struct {
 
 	*ResourcePool
 
-	// Deprecated.
-	// As of vSphere API 5.1.
-	//
-	//
-	// List of linked children.
-	//
-	// Since vSphere API 4.1
 	childLink []*VirtualAppLinkInfo
 
-	// A collection of references to the subset of datastore objects used by this
-	// vApp.
-	// Required Privilege: System.View
 	datastore []*Datastore
 
-	// A collection of references to the subset of network objects that
-	// is used by this virtual machine.
-	// Required Privilege: System.View
 	network []*Network
 
-	// A reference to the parent folder in the VM and Template folder hierarchy. This
-	// is only set for a root vApp. A root vApp is a vApp that is not a child of
-	// another vApp.
-	// Required Privilege: System.View
 	parentFolder *Folder
 
-	// Reference to the parent vApp.
-	//
-	// Since vSphere API 4.1
 	parentVApp *ManagedEntity
 
-	// Configuration of this package.
-	// Required Privilege: System.Read
 	vAppConfig *VAppConfigInfo
+}
+
+// Deprecated.
+// As of vSphere API 5.1.
+//
+//
+// List of linked children.
+//
+// Since vSphere API 4.1
+func (mo *VirtualApp) ChildLink() ([]*VirtualAppLinkInfo, error) {
+	return nil, nil
+}
+
+// A collection of references to the subset of datastore objects used by this
+// vApp.
+// Required Privilege: System.View
+func (mo *VirtualApp) Datastore() ([]*Datastore, error) {
+	return nil, nil
+}
+
+// A collection of references to the subset of network objects that
+// is used by this virtual machine.
+// Required Privilege: System.View
+func (mo *VirtualApp) Network() ([]*Network, error) {
+	return nil, nil
+}
+
+// A reference to the parent folder in the VM and Template folder hierarchy. This
+// is only set for a root vApp. A root vApp is a vApp that is not a child of
+// another vApp.
+// Required Privilege: System.View
+func (mo *VirtualApp) ParentFolder() (*Folder, error) {
+	return nil, nil
+}
+
+// Reference to the parent vApp.
+//
+// Since vSphere API 4.1
+func (mo *VirtualApp) ParentVApp() (*ManagedEntity, error) {
+	return nil, nil
+}
+
+// Configuration of this package.
+// Required Privilege: System.Read
+func (mo *VirtualApp) VAppConfig() (*VAppConfigInfo, error) {
+	return nil, nil
 }
 
 //
@@ -60782,164 +61594,232 @@ type VirtualLsiLogicSASControllerOption struct {
 type VirtualMachine struct {
 	*ManagedEntity
 
-	// Information about the runtime capabilities of this virtual machine.
 	capability *VirtualMachineCapability
 
-	// Configuration of this virtual machine, including the name and UUID.
-	//
-	// This property is set when a virtual machine is created or when
-	// the reconfigVM method is called.
-	//
-	// The virtual machine configuration is not guaranteed to be available.
-	// For example, the configuration information would be unavailable
-	// if the server is unable to access the virtual machine files on disk,
-	// and is often also unavailable during the initial phases of
-	// virtual machine creation.
 	config *VirtualMachineConfigInfo
 
-	// A collection of references to the subset of datastore objects in the datacenter
-	// that is used by this virtual machine.
-	// Required Privilege: System.View
 	datastore []*Datastore
 
-	// The current virtual machine's environment browser object. This contains
-	// information on all the configurations that can be used on the
-	// virtual machine. This is identical to the environment browser on
-	// the ComputeResource to which this virtual machine belongs.
 	environmentBrowser *EnvironmentBrowser
 
-	// Information about VMware Tools and about the virtual machine
-	// from the perspective of VMware Tools.
-	// Information about the guest operating system is available in VirtualCenter. Guest
-	// operating system information reflects the last known state of the virtual machine.
-	// For powered on machines, this is current information. For powered off machines,
-	// this is the last recorded state before the virtual machine was powered off.
 	guest *GuestInfo
 
-	// The guest heartbeat.
-	// The heartbeat status is classified as:
-	//
-	// gray - VMware Tools are not installed or not running.
-	// red - No heartbeat. Guest operating system may have stopped responding.
-	// yellow - Intermittent heartbeat. May be due to guest load.
-	// green - Guest operating system is responding normally.
-	//
-	// The guest heartbeat is a statistics metric. Alarms can be configured on
-	// this metric to trigger emails or other actions.
 	guestHeartbeatStatus *enum.ManagedEntityStatus
 
-	// Deprecated.
-	// As of vSphere API 4.0, use layoutEx instead.
-	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
-	//
-	//
-	// Detailed information about the files that comprise this virtual machine.
 	layout *VirtualMachineFileLayout
 
-	// Detailed information about the files that comprise this virtual machine.
-	//
-	// Can be explicitly refreshed by the RefreshStorageInfo operation.
-	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
-	//
-	// Since vSphere API 4.0
 	layoutEx *VirtualMachineFileLayoutEx
 
-	// A collection of references to the subset of network objects in the datacenter that
-	// is used by this virtual machine.
-	// Required Privilege: System.View
 	network []*Network
 
-	// Reference to the parent vApp.
-	//
-	// Since vSphere API 4.1
 	parentVApp *ManagedEntity
 
-	// The resource configuration for a virtual machine. The shares
-	// in this specification are evaluated relative to the resource pool
-	// to which it is assigned. This will return null if the product
-	// the virtual machine is registered on does not support resource
-	// configuration.
-	//
-	// To retrieve the configuration, you typically use
-	// childConfiguration.
-	//
-	// To change the configuration, use
-	// UpdateChildResourceConfiguration.
 	resourceConfig *ResourceConfigSpec
 
-	// The current resource pool that specifies resource allocation
-	// for this virtual machine.
-	//
-	// This property is set when a virtual machine is created or associated with
-	// a different resource pool.
-	//
-	// Returns null if the virtual machine is a template or the session has no access
-	// to the resource pool.
 	resourcePool *ResourcePool
 
-	// The roots of all snapshot trees for the virtual machine.
-	//
-	// Since vSphere API 4.1
 	rootSnapshot []*VirtualMachineSnapshot
 
-	// Execution state and history for this virtual machine.
-	//
-	// The contents of this property change when:
-	//
-	// the virtual machine's power state changes.
-	// an execution message is pending.
-	// an event occurs.
 	runtime *VirtualMachineRuntimeInfo
 
-	// Current snapshot and tree.
-	// The property is valid if snapshots have been created
-	// for this virtual machine.
-	//
-	// The contents of this property change in response to the methods:
-	//
-	// CreateSnapshot_Task
-	// RevertToCurrentSnapshot_Task
-	// RemoveSnapshot_Task
-	// RevertToSnapshot_Task
-	// RemoveAllSnapshots_Task
 	snapshot *VirtualMachineSnapshotInfo
 
-	// Storage space used by the virtual machine, split by datastore.
-	// Can be explicitly refreshed by the RefreshStorageInfo operation.
-	//
-	// In releases after vSphere API 5.0, vSphere Servers might not
-	// generate property collector update notifications for this property.
-	// To obtain the latest value of the property, you can use
-	// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
-	// If you use the PropertyCollector.WaitForUpdatesEx method, specify
-	// an empty string for the version parameter. Any other version value will not
-	// produce any property values as no updates are generated.
-	//
-	// Since vSphere API 4.0
 	storage *VirtualMachineStorageInfo
 
-	// Basic information about this virtual machine. This includes:
-	//
-	// runtimeInfo
-	// guest
-	// basic configuration
-	// alarms
-	// performance information
 	summary *VirtualMachineSummary
+}
+
+// Information about the runtime capabilities of this virtual machine.
+func (mo *VirtualMachine) Capability() (*VirtualMachineCapability, error) {
+	return nil, nil
+}
+
+// Configuration of this virtual machine, including the name and UUID.
+//
+// This property is set when a virtual machine is created or when
+// the reconfigVM method is called.
+//
+// The virtual machine configuration is not guaranteed to be available.
+// For example, the configuration information would be unavailable
+// if the server is unable to access the virtual machine files on disk,
+// and is often also unavailable during the initial phases of
+// virtual machine creation.
+func (mo *VirtualMachine) Config() (*VirtualMachineConfigInfo, error) {
+	return nil, nil
+}
+
+// A collection of references to the subset of datastore objects in the datacenter
+// that is used by this virtual machine.
+// Required Privilege: System.View
+func (mo *VirtualMachine) Datastore() ([]*Datastore, error) {
+	return nil, nil
+}
+
+// The current virtual machine's environment browser object. This contains
+// information on all the configurations that can be used on the
+// virtual machine. This is identical to the environment browser on
+// the ComputeResource to which this virtual machine belongs.
+func (mo *VirtualMachine) EnvironmentBrowser() (*EnvironmentBrowser, error) {
+	return nil, nil
+}
+
+// Information about VMware Tools and about the virtual machine
+// from the perspective of VMware Tools.
+// Information about the guest operating system is available in VirtualCenter. Guest
+// operating system information reflects the last known state of the virtual machine.
+// For powered on machines, this is current information. For powered off machines,
+// this is the last recorded state before the virtual machine was powered off.
+func (mo *VirtualMachine) Guest() (*GuestInfo, error) {
+	return nil, nil
+}
+
+// The guest heartbeat.
+// The heartbeat status is classified as:
+//
+// gray - VMware Tools are not installed or not running.
+// red - No heartbeat. Guest operating system may have stopped responding.
+// yellow - Intermittent heartbeat. May be due to guest load.
+// green - Guest operating system is responding normally.
+//
+// The guest heartbeat is a statistics metric. Alarms can be configured on
+// this metric to trigger emails or other actions.
+func (mo *VirtualMachine) GuestHeartbeatStatus() (*ManagedEntityStatus, error) {
+	return nil, nil
+}
+
+// Deprecated.
+// As of vSphere API 4.0, use layoutEx instead.
+//
+// In releases after vSphere API 5.0, vSphere Servers might not
+// generate property collector update notifications for this property.
+// To obtain the latest value of the property, you can use
+// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+// an empty string for the version parameter. Any other version value will not
+// produce any property values as no updates are generated.
+//
+//
+// Detailed information about the files that comprise this virtual machine.
+func (mo *VirtualMachine) Layout() (*VirtualMachineFileLayout, error) {
+	return nil, nil
+}
+
+// Detailed information about the files that comprise this virtual machine.
+//
+// Can be explicitly refreshed by the RefreshStorageInfo operation.
+//
+// In releases after vSphere API 5.0, vSphere Servers might not
+// generate property collector update notifications for this property.
+// To obtain the latest value of the property, you can use
+// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+// an empty string for the version parameter. Any other version value will not
+// produce any property values as no updates are generated.
+//
+// Since vSphere API 4.0
+func (mo *VirtualMachine) LayoutEx() (*VirtualMachineFileLayoutEx, error) {
+	return nil, nil
+}
+
+// A collection of references to the subset of network objects in the datacenter that
+// is used by this virtual machine.
+// Required Privilege: System.View
+func (mo *VirtualMachine) Network() ([]*Network, error) {
+	return nil, nil
+}
+
+// Reference to the parent vApp.
+//
+// Since vSphere API 4.1
+func (mo *VirtualMachine) ParentVApp() (*ManagedEntity, error) {
+	return nil, nil
+}
+
+// The resource configuration for a virtual machine. The shares
+// in this specification are evaluated relative to the resource pool
+// to which it is assigned. This will return null if the product
+// the virtual machine is registered on does not support resource
+// configuration.
+//
+// To retrieve the configuration, you typically use
+// childConfiguration.
+//
+// To change the configuration, use
+// UpdateChildResourceConfiguration.
+func (mo *VirtualMachine) ResourceConfig() (*ResourceConfigSpec, error) {
+	return nil, nil
+}
+
+// The current resource pool that specifies resource allocation
+// for this virtual machine.
+//
+// This property is set when a virtual machine is created or associated with
+// a different resource pool.
+//
+// Returns null if the virtual machine is a template or the session has no access
+// to the resource pool.
+func (mo *VirtualMachine) ResourcePool() (*ResourcePool, error) {
+	return nil, nil
+}
+
+// The roots of all snapshot trees for the virtual machine.
+//
+// Since vSphere API 4.1
+func (mo *VirtualMachine) RootSnapshot() ([]*VirtualMachineSnapshot, error) {
+	return nil, nil
+}
+
+// Execution state and history for this virtual machine.
+//
+// The contents of this property change when:
+//
+// the virtual machine's power state changes.
+// an execution message is pending.
+// an event occurs.
+func (mo *VirtualMachine) Runtime() (*VirtualMachineRuntimeInfo, error) {
+	return nil, nil
+}
+
+// Current snapshot and tree.
+// The property is valid if snapshots have been created
+// for this virtual machine.
+//
+// The contents of this property change in response to the methods:
+//
+// CreateSnapshot_Task
+// RevertToCurrentSnapshot_Task
+// RemoveSnapshot_Task
+// RevertToSnapshot_Task
+// RemoveAllSnapshots_Task
+func (mo *VirtualMachine) Snapshot() (*VirtualMachineSnapshotInfo, error) {
+	return nil, nil
+}
+
+// Storage space used by the virtual machine, split by datastore.
+// Can be explicitly refreshed by the RefreshStorageInfo operation.
+//
+// In releases after vSphere API 5.0, vSphere Servers might not
+// generate property collector update notifications for this property.
+// To obtain the latest value of the property, you can use
+// PropertyCollector methods RetrievePropertiesEx or WaitForUpdatesEx.
+// If you use the PropertyCollector.WaitForUpdatesEx method, specify
+// an empty string for the version parameter. Any other version value will not
+// produce any property values as no updates are generated.
+//
+// Since vSphere API 4.0
+func (mo *VirtualMachine) Storage() (*VirtualMachineStorageInfo, error) {
+	return nil, nil
+}
+
+// Basic information about this virtual machine. This includes:
+//
+// runtimeInfo
+// guest
+// basic configuration
+// alarms
+// performance information
+func (mo *VirtualMachine) Summary() (*VirtualMachineSummary, error) {
+	return nil, nil
 }
 
 // Deprecated.
@@ -65822,18 +66702,26 @@ type VirtualMachineSerialInfo struct {
 type VirtualMachineSnapshot struct {
 	*ExtensibleManagedObject
 
-	// All snapshots for which this snapshot is the parent.
-	//
-	// Since vSphere API 4.1
 	childSnapshot []*VirtualMachineSnapshot
 
-	// Information about the configuration of this virtual machine when this snapshot was
-	// taken.
-	//
-	// The datastore paths for the virtual machine disks point to the head of the disk
-	// chain that represents the disk at this given snapshot. The fileInfo.fileLayout
-	// field is not set.
 	config *VirtualMachineConfigInfo
+}
+
+// All snapshots for which this snapshot is the parent.
+//
+// Since vSphere API 4.1
+func (mo *VirtualMachineSnapshot) ChildSnapshot() ([]*VirtualMachineSnapshot, error) {
+	return nil, nil
+}
+
+// Information about the configuration of this virtual machine when this snapshot was
+// taken.
+//
+// The datastore paths for the virtual machine disks point to the head of the disk
+// chain that represents the disk at this given snapshot. The fileInfo.fileLayout
+// field is not set.
+func (mo *VirtualMachineSnapshot) Config() (*VirtualMachineConfigInfo, error) {
+	return nil, nil
 }
 
 //

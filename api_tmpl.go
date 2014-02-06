@@ -32,10 +32,23 @@ type {{$type}} struct {
 		{{$fieldComment := comment .Description}}
 		{{$privileges := comment .RequiredPrivileges}}
 		{{$fieldType := toGoType .Type}}
-		{{if $fieldComment}} {{$fieldComment}} {{end}}{{if $privileges}} {{$privileges}} {{end}}
+		{{if ne $namespace "mo"}}{{if $fieldComment}} {{$fieldComment}} {{end}}{{if $privileges}} {{$privileges}} {{end}}{{end}}
 		{{if ne $namespace "mo"}}{{makePublic .Name true}}{{else}}{{replaceReservedWords .Name}}{{end}} {{lookUpNamespace $fieldType $namespace}}
 	{{end}}
 }
+
+{{if eq $namespace "mo"}}
+	{{range .Properties}}
+		{{$fieldComment := comment .Description}}
+		{{$privileges := comment .RequiredPrivileges}}
+		{{$fieldType := toGoType .Type}}
+		{{if $fieldComment}} {{$fieldComment}} {{end}}{{if $privileges}} {{$privileges}} {{end}}
+		func (mo *{{$type}}) {{makePublic .Name true}}() ({{$fieldType}}, error) {
+			return nil, nil
+		}
+	{{end}}
+{{end}}
+
 
 {{range .Methods}}
 {{$mcomment := comment .Description}}
