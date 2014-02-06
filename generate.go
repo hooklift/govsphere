@@ -49,6 +49,24 @@ func replaceReservedWords(identifier string) string {
 	return identifier
 }
 
+var nullTypes = map[string]string{
+	"string":    "\"\"",
+	"bool":      "false",
+	"int32":     "int32(0)",
+	"int64":     "int64(0)",
+	"int8":      "int8(0)",
+	"time.Time": "time.Now()",
+}
+
+func toNullType(dataType string) string {
+	value := nullTypes[dataType]
+	if value == "" {
+		return "nil"
+	}
+
+	return value
+}
+
 var xsd2GoTypes = map[string]string{
 	"string":        "string",
 	"token":         "string",
@@ -132,6 +150,20 @@ func makePublic(field_ string, public bool) string {
 	return string(field)
 }
 
+func genGetterName(name, extends string) string {
+	if len(extends) > 0 {
+		extends = extends[1:]
+	}
+
+	name = makePublic(name, true)
+
+	if strings.EqualFold(name, extends) {
+		return "Get" + name
+	}
+
+	return name
+}
+
 func comment(text string) string {
 	lines := strings.Split(text, "\n")
 
@@ -209,6 +241,8 @@ var funcMap = template.FuncMap{
 	"makePublic":           makePublic,
 	"comment":              comment,
 	"lookUpNamespace":      lookUpNamespace,
+	"toNullType":           toNullType,
+	"genGetterName":        genGetterName,
 }
 
 func generate(apiDefFile string) {
@@ -295,6 +329,7 @@ func genCode(objects []Object, mainPkg, tmpl, namespace string) {
 			import (
 				"time"
 				"github.com/c4milo/govsphere/vim/enum"
+				"errors"
 			)
 		`)
 	} else {

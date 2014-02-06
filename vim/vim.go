@@ -5,6 +5,7 @@
 package vim
 
 import (
+	"errors"
 	"github.com/c4milo/govsphere/vim/enum"
 	"time"
 )
@@ -287,7 +288,16 @@ type Alarm struct {
 // Information about this alarm.
 // Required Privilege: System.View
 func (mo *Alarm) Info() (*AlarmInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("info")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*AlarmInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *AlarmInfo")
+	}
+	return v, nil
 }
 
 //
@@ -540,13 +550,31 @@ type AlarmManager struct {
 // initial client wizard screen.
 // Required Privilege: System.View
 func (mo *AlarmManager) DefaultExpression() ([]*AlarmExpression, error) {
-	return nil, nil
+	t, err := mo.currentProperty("defaultExpression")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*AlarmExpression)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*AlarmExpression")
+	}
+	return v, nil
 }
 
 // The static descriptive strings used in alarms.
 // Required Privilege: System.View
 func (mo *AlarmManager) Description() (*AlarmDescription, error) {
-	return nil, nil
+	t, err := mo.currentProperty("description")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*AlarmDescription)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *AlarmDescription")
+	}
+	return v, nil
 }
 
 //
@@ -581,7 +609,7 @@ func (mo *AlarmManager) AreAlarmActionsEnabled(
 	_this *ManagedObjectReference, entity *ManagedEntity,
 ) (bool, error) {
 
-	return nil, nil
+	return false, nil
 
 }
 
@@ -1456,20 +1484,47 @@ type AuthorizationManager struct {
 // Static, descriptive strings for system roles and privileges.
 // Required Privilege: System.View
 func (mo *AuthorizationManager) Description() (*AuthorizationDescription, error) {
-	return nil, nil
+	t, err := mo.currentProperty("description")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*AuthorizationDescription)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *AuthorizationDescription")
+	}
+	return v, nil
 }
 
 // The list of system-defined privileges.
 // Required Privilege: System.View
 func (mo *AuthorizationManager) PrivilegeList() ([]*AuthorizationPrivilege, error) {
-	return nil, nil
+	t, err := mo.currentProperty("privilegeList")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*AuthorizationPrivilege)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*AuthorizationPrivilege")
+	}
+	return v, nil
 }
 
 // The currently defined roles in the system, including
 // static system-defined roles.
 // Required Privilege: System.View
 func (mo *AuthorizationManager) RoleList() ([]*AuthorizationRole, error) {
-	return nil, nil
+	t, err := mo.currentProperty("roleList")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*AuthorizationRole)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*AuthorizationRole")
+	}
+	return v, nil
 }
 
 //
@@ -1485,7 +1540,7 @@ func (mo *AuthorizationManager) AddAuthorizationRole(
 	_this *ManagedObjectReference, name string, privIds []string,
 ) (int32, error) {
 
-	return nil, nil
+	return int32(0), nil
 
 }
 
@@ -2690,7 +2745,16 @@ type ClusterComputeResource struct {
 //
 // Since VI API 2.5
 func (mo *ClusterComputeResource) ActionHistory() ([]*ClusterActionHistory, error) {
-	return nil, nil
+	t, err := mo.currentProperty("actionHistory")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*ClusterActionHistory)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*ClusterActionHistory")
+	}
+	return v, nil
 }
 
 // Deprecated.
@@ -2700,7 +2764,16 @@ func (mo *ClusterComputeResource) ActionHistory() ([]*ClusterActionHistory, erro
 //
 // Configuration of the cluster.
 func (mo *ClusterComputeResource) Configuration() (*ClusterConfigInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("configuration")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ClusterConfigInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ClusterConfigInfo")
+	}
+	return v, nil
 }
 
 // A collection of the DRS faults generated in the last DRS invocation.
@@ -2723,7 +2796,16 @@ func (mo *ClusterComputeResource) Configuration() (*ClusterConfigInfo, error) {
 // Since vSphere API 4.0
 // Required Privilege: System.Read
 func (mo *ClusterComputeResource) DrsFault() ([]*ClusterDrsFaults, error) {
-	return nil, nil
+	t, err := mo.currentProperty("drsFault")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*ClusterDrsFaults)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*ClusterDrsFaults")
+	}
+	return v, nil
 }
 
 // Deprecated.
@@ -2745,14 +2827,32 @@ func (mo *ClusterComputeResource) DrsFault() ([]*ClusterDrsFaults, error) {
 // migrations at this time, or it is possible that DRS is not
 // enabled.
 func (mo *ClusterComputeResource) DrsRecommendation() ([]*ClusterDrsRecommendation, error) {
-	return nil, nil
+	t, err := mo.currentProperty("drsRecommendation")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*ClusterDrsRecommendation)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*ClusterDrsRecommendation")
+	}
+	return v, nil
 }
 
 // The set of migration decisions that have recently been performed.
 //
 // This list is populated only when DRS is in automatic mode.
 func (mo *ClusterComputeResource) MigrationHistory() ([]*ClusterDrsMigration, error) {
-	return nil, nil
+	t, err := mo.currentProperty("migrationHistory")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*ClusterDrsMigration)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*ClusterDrsMigration")
+	}
+	return v, nil
 }
 
 // List of recommended actions for the cluster. It is
@@ -2764,7 +2864,16 @@ func (mo *ClusterComputeResource) MigrationHistory() ([]*ClusterDrsMigration, er
 // Since VI API 2.5
 // Required Privilege: System.Read
 func (mo *ClusterComputeResource) Recommendation() ([]*ClusterRecommendation, error) {
-	return nil, nil
+	t, err := mo.currentProperty("recommendation")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*ClusterRecommendation)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*ClusterRecommendation")
+	}
+	return v, nil
 }
 
 //
@@ -5748,7 +5857,16 @@ type ComputeResource struct {
 //
 // Since VI API 2.5
 func (mo *ComputeResource) ConfigurationEx() (*ComputeResourceConfigInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("configurationEx")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ComputeResourceConfigInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ComputeResourceConfigInfo")
+	}
+	return v, nil
 }
 
 // The datastore property is the subset of datastore objects in the datacenter
@@ -5758,21 +5876,48 @@ func (mo *ComputeResource) ConfigurationEx() (*ComputeResourceConfigInfo, error)
 // the hosts that are part of this compute resource.
 // Required Privilege: System.View
 func (mo *ComputeResource) Datastore() ([]*Datastore, error) {
-	return nil, nil
+	t, err := mo.currentProperty("datastore")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*Datastore)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*Datastore")
+	}
+	return v, nil
 }
 
 // The environment browser object that identifies the environments that are supported
 // on this compute resource.
 // Required Privilege: System.View
 func (mo *ComputeResource) EnvironmentBrowser() (*EnvironmentBrowser, error) {
-	return nil, nil
+	t, err := mo.currentProperty("environmentBrowser")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*EnvironmentBrowser)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *EnvironmentBrowser")
+	}
+	return v, nil
 }
 
 // List of hosts that are part of this compute resource. If the compute resource is a
 // standalone type, then this list contains just one element.
 // Required Privilege: System.View
 func (mo *ComputeResource) Host() ([]*HostSystem, error) {
-	return nil, nil
+	t, err := mo.currentProperty("host")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*HostSystem)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*HostSystem")
+	}
+	return v, nil
 }
 
 // The subset of network objects available in the datacenter that is available in
@@ -5782,19 +5927,46 @@ func (mo *ComputeResource) Host() ([]*HostSystem, error) {
 // hosts that are part of this compute resource.
 // Required Privilege: System.View
 func (mo *ComputeResource) Network() ([]*Network, error) {
-	return nil, nil
+	t, err := mo.currentProperty("network")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*Network)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*Network")
+	}
+	return v, nil
 }
 
 // Reference to root resource pool.
 // Required Privilege: System.View
 func (mo *ComputeResource) ResourcePool() (*ResourcePool, error) {
-	return nil, nil
+	t, err := mo.currentProperty("resourcePool")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ResourcePool)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ResourcePool")
+	}
+	return v, nil
 }
 
 // Basic runtime information about a compute resource. This information is used on
 // summary screens and in list views.
 func (mo *ComputeResource) Summary() (*ComputeResourceSummary, error) {
-	return nil, nil
+	t, err := mo.currentProperty("summary")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ComputeResourceSummary)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ComputeResourceSummary")
+	}
+	return v, nil
 }
 
 //
@@ -6220,7 +6392,16 @@ type ContainerView struct {
 // The Folder, Datacenter, ComputeResource, ResourcePool, or HostSystem instance
 // that provides the objects that the view presents.
 func (mo *ContainerView) Container() (*ManagedEntity, error) {
-	return nil, nil
+	t, err := mo.currentProperty("container")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ManagedEntity)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ManagedEntity")
+	}
+	return v, nil
 }
 
 // Whether to include only the immediate children of the container instance,
@@ -6230,14 +6411,32 @@ func (mo *ContainerView) Container() (*ManagedEntity, error) {
 // For information about recursive behavior, see the description of
 // CreateContainerView.
 func (mo *ContainerView) Recursive() (bool, error) {
-	return nil, nil
+	t, err := mo.currentProperty("recursive")
+	if err != nil {
+		return false, err
+	}
+
+	v, ok := t.(bool)
+	if !ok {
+		return false, errors.New("Unable to make type assertion to: bool")
+	}
+	return v, nil
 }
 
 // An optional list of types to be applied to the set of objects in the view.
 // The list of types indicates objects that are included in the view.
 // If empty, all types are included.
 func (mo *ContainerView) Type() ([]string, error) {
-	return nil, nil
+	t, err := mo.currentProperty("type")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]string)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []string")
+	}
+	return v, nil
 }
 
 // Deprecated.
@@ -6536,7 +6735,16 @@ type CustomFieldsManager struct {
 // sorted by name.
 // Required Privilege: System.View
 func (mo *CustomFieldsManager) Field() ([]*CustomFieldDef, error) {
-	return nil, nil
+	t, err := mo.currentProperty("field")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*CustomFieldDef)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*CustomFieldDef")
+	}
+	return v, nil
 }
 
 //
@@ -7192,13 +7400,31 @@ type CustomizationSpecManager struct {
 // passwords in stored specifications.
 // Required Privilege: System.View
 func (mo *CustomizationSpecManager) EncryptionKey() ([]int8, error) {
-	return nil, nil
+	t, err := mo.currentProperty("encryptionKey")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]int8)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []int8")
+	}
+	return v, nil
 }
 
 // Gets a list of information on available specifications.
 // Required Privilege: VirtualMachine.Provisioning.ReadCustSpecs
 func (mo *CustomizationSpecManager) Info() ([]*CustomizationSpecInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("info")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*CustomizationSpecInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*CustomizationSpecInfo")
+	}
+	return v, nil
 }
 
 //
@@ -7241,7 +7467,7 @@ func (mo *CustomizationSpecManager) CustomizationSpecItemToXml(
 	_this *ManagedObjectReference, item *CustomizationSpecItem,
 ) (string, error) {
 
-	return nil, nil
+	return "", nil
 
 }
 
@@ -7269,7 +7495,7 @@ func (mo *CustomizationSpecManager) DoesCustomizationSpecExist(
 	_this *ManagedObjectReference, name string,
 ) (bool, error) {
 
-	return nil, nil
+	return false, nil
 
 }
 
@@ -9206,13 +9432,31 @@ type Datacenter struct {
 // Since vSphere API 5.1
 // Required Privilege: System.View
 func (mo *Datacenter) Configuration() (*DatacenterConfigInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("configuration")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*DatacenterConfigInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *DatacenterConfigInfo")
+	}
+	return v, nil
 }
 
 // A collection of references to the datastore objects
 // available in this datacenter.
 func (mo *Datacenter) Datastore() ([]*Datastore, error) {
-	return nil, nil
+	t, err := mo.currentProperty("datastore")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*Datastore)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*Datastore")
+	}
+	return v, nil
 }
 
 // A reference to the folder hierarchy that contains
@@ -9223,7 +9467,16 @@ func (mo *Datacenter) Datastore() ([]*Datastore, error) {
 // Since vSphere API 4.0
 // Required Privilege: System.View
 func (mo *Datacenter) DatastoreFolder() (*Folder, error) {
-	return nil, nil
+	t, err := mo.currentProperty("datastoreFolder")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*Folder)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *Folder")
+	}
+	return v, nil
 }
 
 // A reference to the folder hierarchy that contains
@@ -9232,13 +9485,31 @@ func (mo *Datacenter) DatastoreFolder() (*Folder, error) {
 // This folder is guaranteed to exist.
 // Required Privilege: System.View
 func (mo *Datacenter) HostFolder() (*Folder, error) {
-	return nil, nil
+	t, err := mo.currentProperty("hostFolder")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*Folder)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *Folder")
+	}
+	return v, nil
 }
 
 // A collection of references to the network objects
 // available in this datacenter.
 func (mo *Datacenter) Network() ([]*Network, error) {
-	return nil, nil
+	t, err := mo.currentProperty("network")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*Network)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*Network")
+	}
+	return v, nil
 }
 
 // A reference to the folder hierarchy that contains the network entities
@@ -9251,7 +9522,16 @@ func (mo *Datacenter) Network() ([]*Network, error) {
 // Since vSphere API 4.0
 // Required Privilege: System.View
 func (mo *Datacenter) NetworkFolder() (*Folder, error) {
-	return nil, nil
+	t, err := mo.currentProperty("networkFolder")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*Folder)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *Folder")
+	}
+	return v, nil
 }
 
 // A reference to the folder hierarchy that contains VirtualMachine
@@ -9265,7 +9545,16 @@ func (mo *Datacenter) NetworkFolder() (*Folder, error) {
 // This folder is guaranteed to exist.
 // Required Privilege: System.View
 func (mo *Datacenter) VmFolder() (*Folder, error) {
-	return nil, nil
+	t, err := mo.currentProperty("vmFolder")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*Folder)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *Folder")
+	}
+	return v, nil
 }
 
 //
@@ -9527,22 +9816,58 @@ type Datastore struct {
 
 // DatastoreBrowser used to browse this datastore.
 func (mo *Datastore) Browser() (*HostDatastoreBrowser, error) {
-	return nil, nil
+	t, err := mo.currentProperty("browser")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostDatastoreBrowser)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostDatastoreBrowser")
+	}
+	return v, nil
 }
 
 // Capabilities of this datastore.
 func (mo *Datastore) Capability() (*DatastoreCapability, error) {
-	return nil, nil
+	t, err := mo.currentProperty("capability")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*DatastoreCapability)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *DatastoreCapability")
+	}
+	return v, nil
 }
 
 // Hosts attached to this datastore.
 func (mo *Datastore) Host() ([]*DatastoreHostMount, error) {
-	return nil, nil
+	t, err := mo.currentProperty("host")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*DatastoreHostMount)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*DatastoreHostMount")
+	}
+	return v, nil
 }
 
 // Specific information about the datastore.
 func (mo *Datastore) Info() (*DatastoreInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("info")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*DatastoreInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *DatastoreInfo")
+	}
+	return v, nil
 }
 
 // Configuration of storage I/O resource management for the datastore.
@@ -9556,17 +9881,44 @@ func (mo *Datastore) Info() (*DatastoreInfo, error) {
 //
 // Since vSphere API 4.1
 func (mo *Datastore) IormConfiguration() (*StorageIORMInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("iormConfiguration")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*StorageIORMInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *StorageIORMInfo")
+	}
+	return v, nil
 }
 
 // Global properties of the datastore.
 func (mo *Datastore) Summary() (*DatastoreSummary, error) {
-	return nil, nil
+	t, err := mo.currentProperty("summary")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*DatastoreSummary)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *DatastoreSummary")
+	}
+	return v, nil
 }
 
 // Virtual machines stored on this datastore.
 func (mo *Datastore) Vm() ([]*VirtualMachine, error) {
-	return nil, nil
+	t, err := mo.currentProperty("vm")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*VirtualMachine)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*VirtualMachine")
+	}
+	return v, nil
 }
 
 //
@@ -10013,7 +10365,7 @@ func (mo *DatastoreNamespaceManager) CreateDirectory(
 	_this *ManagedObjectReference, datastore *Datastore, displayName string, policy string,
 ) (string, error) {
 
-	return nil, nil
+	return "", nil
 
 }
 
@@ -10887,17 +11239,44 @@ type DistributedVirtualPortgroup struct {
 
 // Configuration of the portgroup.
 func (mo *DistributedVirtualPortgroup) Config() (*DVPortgroupConfigInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("config")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*DVPortgroupConfigInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *DVPortgroupConfigInfo")
+	}
+	return v, nil
 }
 
 // Generated UUID of the portgroup.
 func (mo *DistributedVirtualPortgroup) Key() (string, error) {
-	return nil, nil
+	t, err := mo.currentProperty("key")
+	if err != nil {
+		return "", err
+	}
+
+	v, ok := t.(string)
+	if !ok {
+		return "", errors.New("Unable to make type assertion to: string")
+	}
+	return v, nil
 }
 
 // Port keys for the set of ports in the portgroup.
 func (mo *DistributedVirtualPortgroup) PortKeys() ([]string, error) {
-	return nil, nil
+	t, err := mo.currentProperty("portKeys")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]string)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []string")
+	}
+	return v, nil
 }
 
 //
@@ -11326,42 +11705,105 @@ type DistributedVirtualSwitch struct {
 // capability.dvsOperationSupported
 // should always be set to false.
 func (mo *DistributedVirtualSwitch) Capability() (*DVSCapability, error) {
-	return nil, nil
+	t, err := mo.currentProperty("capability")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*DVSCapability)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *DVSCapability")
+	}
+	return v, nil
 }
 
 // Switch configuration data.
 func (mo *DistributedVirtualSwitch) Config() (*DVSConfigInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("config")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*DVSConfigInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *DVSConfigInfo")
+	}
+	return v, nil
 }
 
 // Network resource pool information for the switch.
 //
 // Since vSphere API 4.1
 func (mo *DistributedVirtualSwitch) NetworkResourcePool() ([]*DVSNetworkResourcePool, error) {
-	return nil, nil
+	t, err := mo.currentProperty("networkResourcePool")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*DVSNetworkResourcePool)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*DVSNetworkResourcePool")
+	}
+	return v, nil
 }
 
 // Portgroups that are defined on the switch.
 func (mo *DistributedVirtualSwitch) Portgroup() ([]*DistributedVirtualPortgroup, error) {
-	return nil, nil
+	t, err := mo.currentProperty("portgroup")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*DistributedVirtualPortgroup)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*DistributedVirtualPortgroup")
+	}
+	return v, nil
 }
 
 // Runtime information of the distributed virtual switch.
 //
 // Since vSphere API 5.1
 func (mo *DistributedVirtualSwitch) Runtime() (*DVSRuntimeInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("runtime")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*DVSRuntimeInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *DVSRuntimeInfo")
+	}
+	return v, nil
 }
 
 // Summary of the switch.
 func (mo *DistributedVirtualSwitch) Summary() (*DVSSummary, error) {
-	return nil, nil
+	t, err := mo.currentProperty("summary")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*DVSSummary)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *DVSSummary")
+	}
+	return v, nil
 }
 
 // Generated UUID of the switch. Unique across vCenter Server
 // inventory and instances.
 func (mo *DistributedVirtualSwitch) Uuid() (string, error) {
-	return nil, nil
+	t, err := mo.currentProperty("uuid")
+	if err != nil {
+		return "", err
+	}
+
+	v, ok := t.(string)
+	if !ok {
+		return "", errors.New("Unable to make type assertion to: string")
+	}
+	return v, nil
 }
 
 //
@@ -14606,7 +15048,16 @@ type EnvironmentBrowser struct {
 // DatastoreBrowser to browse datastores that are available on this entity.
 // Required Privilege: System.View
 func (mo *EnvironmentBrowser) DatastoreBrowser() (*HostDatastoreBrowser, error) {
-	return nil, nil
+	t, err := mo.currentProperty("datastoreBrowser")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostDatastoreBrowser)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostDatastoreBrowser")
+	}
+	return v, nil
 }
 
 //
@@ -15284,7 +15735,16 @@ type EventHistoryCollector struct {
 // The "oldest event" is the one with the smallest key (event ID). The
 // events in the returned page are unordered.
 func (mo *EventHistoryCollector) LatestPage() ([]*Event, error) {
-	return nil, nil
+	t, err := mo.currentProperty("latestPage")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*Event)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*Event")
+	}
+	return v, nil
 }
 
 //
@@ -15342,20 +15802,47 @@ type EventManager struct {
 // Static descriptive strings used in events.
 // Required Privilege: System.View
 func (mo *EventManager) Description() (*EventDescription, error) {
-	return nil, nil
+	t, err := mo.currentProperty("description")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*EventDescription)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *EventDescription")
+	}
+	return v, nil
 }
 
 // The latest event that happened on the VirtualCenter server.
 // Required Privilege: System.View
 func (mo *EventManager) LatestEvent() (*Event, error) {
-	return nil, nil
+	t, err := mo.currentProperty("latestEvent")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*Event)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *Event")
+	}
+	return v, nil
 }
 
 // For each client, the maximum number of event collectors that can exist
 // simultaneously.
 // Required Privilege: System.View
 func (mo *EventManager) MaxCollector() (int32, error) {
-	return nil, nil
+	t, err := mo.currentProperty("maxCollector")
+	if err != nil {
+		return int32(0), err
+	}
+
+	v, ok := t.(int32)
+	if !ok {
+		return int32(0), errors.New("Unable to make type assertion to: int32")
+	}
+	return v, nil
 }
 
 //
@@ -15747,7 +16234,16 @@ type ExtensibleManagedObject struct {
 // Since VI API 2.5
 // Required Privilege: System.View
 func (mo *ExtensibleManagedObject) AvailableField() ([]*CustomFieldDef, error) {
-	return nil, nil
+	t, err := mo.currentProperty("availableField")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*CustomFieldDef)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*CustomFieldDef")
+	}
+	return v, nil
 }
 
 // List of custom field values. Each value uses a key to associate
@@ -15757,7 +16253,16 @@ func (mo *ExtensibleManagedObject) AvailableField() ([]*CustomFieldDef, error) {
 // Since VI API 2.5
 // Required Privilege: System.View
 func (mo *ExtensibleManagedObject) Value() ([]*CustomFieldValue, error) {
-	return nil, nil
+	t, err := mo.currentProperty("value")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*CustomFieldValue)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*CustomFieldValue")
+	}
+	return v, nil
 }
 
 //
@@ -15998,7 +16503,16 @@ type ExtensionManager struct {
 // The list of currently registered extensions.
 // Required Privilege: System.View
 func (mo *ExtensionManager) ExtensionList() ([]*Extension, error) {
-	return nil, nil
+	t, err := mo.currentProperty("extensionList")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*Extension)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*Extension")
+	}
+	return v, nil
 }
 
 //
@@ -16031,7 +16545,7 @@ func (mo *ExtensionManager) GetPublicKey(
 	_this *ManagedObjectReference,
 ) (string, error) {
 
-	return nil, nil
+	return "", nil
 
 }
 
@@ -17292,7 +17806,16 @@ type Folder struct {
 // An array of managed object references. Each entry is a reference to a child entity.
 // Required Privilege: System.View
 func (mo *Folder) ChildEntity() ([]*ManagedEntity, error) {
-	return nil, nil
+	t, err := mo.currentProperty("childEntity")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*ManagedEntity)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*ManagedEntity")
+	}
+	return v, nil
 }
 
 // Specifies the object types a folder may contain.
@@ -17323,7 +17846,16 @@ func (mo *Folder) ChildEntity() ([]*ManagedEntity, error) {
 // managed objects.
 // Required Privilege: System.View
 func (mo *Folder) ChildType() ([]string, error) {
-	return nil, nil
+	t, err := mo.currentProperty("childType")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]string)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []string")
+	}
+	return v, nil
 }
 
 //
@@ -18136,7 +18668,7 @@ func (mo *GuestFileManager) CreateTemporaryDirectoryInGuest(
 	_this *ManagedObjectReference, vm *VirtualMachine, auth *GuestAuthentication, prefix string, suffix string, directoryPath string,
 ) (string, error) {
 
-	return nil, nil
+	return "", nil
 
 }
 
@@ -18156,7 +18688,7 @@ func (mo *GuestFileManager) CreateTemporaryFileInGuest(
 	_this *ManagedObjectReference, vm *VirtualMachine, auth *GuestAuthentication, prefix string, suffix string, directoryPath string,
 ) (string, error) {
 
-	return nil, nil
+	return "", nil
 
 }
 
@@ -18264,7 +18796,7 @@ func (mo *GuestFileManager) InitiateFileTransferToGuest(
 	_this *ManagedObjectReference, vm *VirtualMachine, auth *GuestAuthentication, guestFilePath string, fileAttributes *GuestFileAttributes, fileSize int64, overwrite bool,
 ) (string, error) {
 
-	return nil, nil
+	return "", nil
 
 }
 
@@ -18578,21 +19110,48 @@ type GuestOperationsManager struct {
 // operations.
 // Required Privilege: System.Anonymous
 func (mo *GuestOperationsManager) AuthManager() (*GuestAuthManager, error) {
-	return nil, nil
+	t, err := mo.currentProperty("authManager")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*GuestAuthManager)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *GuestAuthManager")
+	}
+	return v, nil
 }
 
 // A singleton managed object that provides methods for guest file
 // operations.
 // Required Privilege: System.Anonymous
 func (mo *GuestOperationsManager) FileManager() (*GuestFileManager, error) {
-	return nil, nil
+	t, err := mo.currentProperty("fileManager")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*GuestFileManager)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *GuestFileManager")
+	}
+	return v, nil
 }
 
 // A singleton managed object that provides methods for guest process
 // operations.
 // Required Privilege: System.Anonymous
 func (mo *GuestOperationsManager) ProcessManager() (*GuestProcessManager, error) {
-	return nil, nil
+	t, err := mo.currentProperty("processManager")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*GuestProcessManager)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *GuestProcessManager")
+	}
+	return v, nil
 }
 
 //
@@ -18937,7 +19496,7 @@ func (mo *GuestProcessManager) StartProgramInGuest(
 	_this *ManagedObjectReference, vm *VirtualMachine, auth *GuestAuthentication, spec *GuestProgramSpec,
 ) (int64, error) {
 
-	return nil, nil
+	return int64(0), nil
 
 }
 
@@ -19251,7 +19810,16 @@ type HistoryCollector struct {
 // The type of the returned filter is determined by the managed object
 // for which the collector is created.
 func (mo *HistoryCollector) Filter() (interface{}, error) {
-	return nil, nil
+	t, err := mo.currentProperty("filter")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(interface{})
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: interface{}")
+	}
+	return v, nil
 }
 
 //
@@ -19748,7 +20316,16 @@ type HostAuthenticationManager struct {
 
 // Information about Active Directory membership.
 func (mo *HostAuthenticationManager) Info() (*HostAuthenticationManagerInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("info")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostAuthenticationManagerInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostAuthenticationManagerInfo")
+	}
+	return v, nil
 }
 
 // An array that can contain managed object references to local and
@@ -19775,7 +20352,16 @@ func (mo *HostAuthenticationManager) Info() (*HostAuthenticationManagerInfo, err
 // property is True (accessed through the info
 // property), the join method will throw a fault.
 func (mo *HostAuthenticationManager) SupportedStore() ([]*HostAuthenticationStore, error) {
-	return nil, nil
+	t, err := mo.currentProperty("supportedStore")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*HostAuthenticationStore)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*HostAuthenticationStore")
+	}
+	return v, nil
 }
 
 //
@@ -19819,7 +20405,16 @@ type HostAuthenticationStore struct {
 
 // Information about the authentication store.
 func (mo *HostAuthenticationStore) Info() (*HostAuthenticationStoreInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("info")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostAuthenticationStoreInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostAuthenticationStoreInfo")
+	}
+	return v, nil
 }
 
 //
@@ -19853,7 +20448,16 @@ type HostAutoStartManager struct {
 }
 
 func (mo *HostAutoStartManager) Config() (*HostAutoStartManagerConfig, error) {
-	return nil, nil
+	t, err := mo.currentProperty("config")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostAutoStartManagerConfig)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostAutoStartManagerConfig")
+	}
+	return v, nil
 }
 
 //
@@ -20068,7 +20672,16 @@ type HostCacheConfigurationManager struct {
 // configuration information for each datastore enabled for this purpose.
 // Required Privilege: Host.Config.AdvancedConfig
 func (mo *HostCacheConfigurationManager) CacheConfigurationInfo() ([]*HostCacheConfigurationInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("cacheConfigurationInfo")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*HostCacheConfigurationInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*HostCacheConfigurationInfo")
+	}
+	return v, nil
 }
 
 //
@@ -21711,7 +22324,16 @@ type HostCpuSchedulerSystem struct {
 // existence of this data object type indicates if the CPU scheduler
 // is capable of scheduling hyperthreads as resources.
 func (mo *HostCpuSchedulerSystem) HyperthreadInfo() (*HostHyperThreadScheduleInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("hyperthreadInfo")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostHyperThreadScheduleInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostHyperThreadScheduleInfo")
+	}
+	return v, nil
 }
 
 //
@@ -21909,7 +22531,16 @@ type HostDatastoreBrowser struct {
 // Datacenter's list of datastores is used.
 // Required Privilege: System.View
 func (mo *HostDatastoreBrowser) Datastore() ([]*Datastore, error) {
-	return nil, nil
+	t, err := mo.currentProperty("datastore")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*Datastore)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*Datastore")
+	}
+	return v, nil
 }
 
 // The list of supported file types. The supported file types are represented as
@@ -21925,7 +22556,16 @@ func (mo *HostDatastoreBrowser) Datastore() ([]*Datastore, error) {
 // supported. Clients should consult this list to avoid querying for types of virtual
 // machine components that are not supported.
 func (mo *HostDatastoreBrowser) SupportedType() ([]*FileQuery, error) {
-	return nil, nil
+	t, err := mo.currentProperty("supportedType")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*FileQuery)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*FileQuery")
+	}
+	return v, nil
 }
 
 // Deprecated.
@@ -22148,13 +22788,31 @@ type HostDatastoreSystem struct {
 //
 // Since VI API 2.5
 func (mo *HostDatastoreSystem) Capabilities() (*HostDatastoreSystemCapabilities, error) {
-	return nil, nil
+	t, err := mo.currentProperty("capabilities")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostDatastoreSystemCapabilities)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostDatastoreSystemCapabilities")
+	}
+	return v, nil
 }
 
 // List of datastores on this host.
 // Required Privilege: System.View
 func (mo *HostDatastoreSystem) Datastore() ([]*Datastore, error) {
-	return nil, nil
+	t, err := mo.currentProperty("datastore")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*Datastore)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*Datastore")
+	}
+	return v, nil
 }
 
 //
@@ -22503,7 +23161,16 @@ type HostDateTimeSystem struct {
 // The DateTime configuration of the host.
 // Required Privilege: System.Read
 func (mo *HostDateTimeSystem) DateTimeInfo() (*HostDateTimeInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("dateTimeInfo")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostDateTimeInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostDateTimeInfo")
+	}
+	return v, nil
 }
 
 //
@@ -22531,7 +23198,7 @@ func (mo *HostDateTimeSystem) QueryDateTime(
 	_this *ManagedObjectReference,
 ) (time.Time, error) {
 
-	return nil, nil
+	return time.Now(), nil
 
 }
 
@@ -22803,7 +23470,16 @@ type HostDiagnosticSystem struct {
 
 // The currently active diagnostic partition.
 func (mo *HostDiagnosticSystem) ActivePartition() (*HostDiagnosticPartition, error) {
-	return nil, nil
+	t, err := mo.currentProperty("activePartition")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostDiagnosticPartition)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostDiagnosticPartition")
+	}
+	return v, nil
 }
 
 //
@@ -23349,7 +24025,16 @@ type HostEsxAgentHostManager struct {
 // Configuration of agent virtual machine resources
 // Required Privilege: Host.Config.Settings
 func (mo *HostEsxAgentHostManager) ConfigInfo() (*HostEsxAgentHostManagerConfigInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("configInfo")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostEsxAgentHostManagerConfigInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostEsxAgentHostManagerConfigInfo")
+	}
+	return v, nil
 }
 
 //
@@ -23952,7 +24637,16 @@ type HostFirewallSystem struct {
 
 // Firewall configuration.
 func (mo *HostFirewallSystem) FirewallInfo() (*HostFirewallInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("firewallInfo")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostFirewallInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostFirewallInfo")
+	}
+	return v, nil
 }
 
 //
@@ -24056,7 +24750,7 @@ func (mo *HostFirmwareSystem) BackupFirmwareConfiguration(
 	_this *ManagedObjectReference,
 ) (string, error) {
 
-	return nil, nil
+	return "", nil
 
 }
 
@@ -24072,7 +24766,7 @@ func (mo *HostFirmwareSystem) QueryFirmwareConfigUploadURL(
 	_this *ManagedObjectReference,
 ) (string, error) {
 
-	return nil, nil
+	return "", nil
 
 }
 
@@ -24211,7 +24905,16 @@ type HostGraphicsManager struct {
 // Array of graphics information
 // Required Privilege: System.Read
 func (mo *HostGraphicsManager) GraphicsInfo() ([]*HostGraphicsInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("graphicsInfo")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*HostGraphicsInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*HostGraphicsInfo")
+	}
+	return v, nil
 }
 
 //
@@ -24224,7 +24927,7 @@ func (mo *HostGraphicsManager) IsSharedGraphicsActive(
 	_this *ManagedObjectReference,
 ) (bool, error) {
 
-	return nil, nil
+	return false, nil
 
 }
 
@@ -24401,7 +25104,16 @@ type HostHealthStatusSystem struct {
 }
 
 func (mo *HostHealthStatusSystem) Runtime() (*HealthSystemRuntime, error) {
-	return nil, nil
+	t, err := mo.currentProperty("runtime")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HealthSystemRuntime)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HealthSystemRuntime")
+	}
+	return v, nil
 }
 
 //
@@ -24545,7 +25257,7 @@ func (mo *HostImageConfigManager) HostImageConfigGetAcceptance(
 	_this *ManagedObjectReference,
 ) (string, error) {
 
-	return nil, nil
+	return "", nil
 
 }
 
@@ -25605,7 +26317,7 @@ func (mo *HostKernelModuleSystem) QueryConfiguredModuleOptionString(
 	_this *ManagedObjectReference, name string,
 ) (string, error) {
 
-	return nil, nil
+	return "", nil
 
 }
 
@@ -26261,7 +26973,16 @@ type HostMemorySystem struct {
 // existence of this data object indicates if the service console memory
 // reservation must be configured for this host.
 func (mo *HostMemorySystem) ConsoleReservationInfo() (*ServiceConsoleReservationInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("consoleReservationInfo")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ServiceConsoleReservationInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ServiceConsoleReservationInfo")
+	}
+	return v, nil
 }
 
 // Virtual machine reservation information for the memory manager.  The
@@ -26270,7 +26991,16 @@ func (mo *HostMemorySystem) ConsoleReservationInfo() (*ServiceConsoleReservation
 //
 // Since VI API 2.5
 func (mo *HostMemorySystem) VirtualMachineReservationInfo() (*VirtualMachineMemoryReservationInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("virtualMachineReservationInfo")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*VirtualMachineMemoryReservationInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *VirtualMachineMemoryReservationInfo")
+	}
+	return v, nil
 }
 
 //
@@ -27418,7 +28148,16 @@ type HostNetworkSystem struct {
 
 // Capability vector indicating the available product features.
 func (mo *HostNetworkSystem) Capabilities() (*HostNetCapabilities, error) {
-	return nil, nil
+	t, err := mo.currentProperty("capabilities")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostNetCapabilities)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostNetCapabilities")
+	}
+	return v, nil
 }
 
 // IP route configuration for the service console.  The IP route
@@ -27426,7 +28165,16 @@ func (mo *HostNetworkSystem) Capabilities() (*HostNetCapabilities, error) {
 // set only if
 // IP routing can be configured for the service console.
 func (mo *HostNetworkSystem) ConsoleIpRouteConfig() (*HostIpRouteConfig, error) {
-	return nil, nil
+	t, err := mo.currentProperty("consoleIpRouteConfig")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostIpRouteConfig)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostIpRouteConfig")
+	}
+	return v, nil
 }
 
 // Deprecated.
@@ -27436,7 +28184,16 @@ func (mo *HostNetworkSystem) ConsoleIpRouteConfig() (*HostIpRouteConfig, error) 
 //
 // Client-side DNS configuration.
 func (mo *HostNetworkSystem) DnsConfig() (*HostDnsConfig, error) {
-	return nil, nil
+	t, err := mo.currentProperty("dnsConfig")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostDnsConfig)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostDnsConfig")
+	}
+	return v, nil
 }
 
 // Deprecated.
@@ -27446,19 +28203,46 @@ func (mo *HostNetworkSystem) DnsConfig() (*HostDnsConfig, error) {
 //
 // The IP route configuration.
 func (mo *HostNetworkSystem) IpRouteConfig() (*HostIpRouteConfig, error) {
-	return nil, nil
+	t, err := mo.currentProperty("ipRouteConfig")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostIpRouteConfig)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostIpRouteConfig")
+	}
+	return v, nil
 }
 
 // Network configuration information.  This information can be applied
 // using the updateNetworkConfig() method.  The
 // information is a strict subset of the information available in NetworkInfo.See HostNetworkInfo
 func (mo *HostNetworkSystem) NetworkConfig() (*HostNetworkConfig, error) {
-	return nil, nil
+	t, err := mo.currentProperty("networkConfig")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostNetworkConfig)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostNetworkConfig")
+	}
+	return v, nil
 }
 
 // The network configuration and runtime information.
 func (mo *HostNetworkSystem) NetworkInfo() (*HostNetworkInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("networkInfo")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostNetworkInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostNetworkInfo")
+	}
+	return v, nil
 }
 
 // Deprecated.
@@ -27467,7 +28251,16 @@ func (mo *HostNetworkSystem) NetworkInfo() (*HostNetworkInfo, error) {
 //
 // The offload capabilities available on this server.
 func (mo *HostNetworkSystem) OffloadCapabilities() (*HostNetOffloadCapabilities, error) {
-	return nil, nil
+	t, err := mo.currentProperty("offloadCapabilities")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostNetOffloadCapabilities)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostNetOffloadCapabilities")
+	}
+	return v, nil
 }
 
 //
@@ -27505,7 +28298,7 @@ func (mo *HostNetworkSystem) AddServiceConsoleVirtualNic(
 	_this *ManagedObjectReference, portgroup string, nic *HostVirtualNicSpec,
 ) (string, error) {
 
-	return nil, nil
+	return "", nil
 
 }
 
@@ -27530,7 +28323,7 @@ func (mo *HostNetworkSystem) AddVirtualNic(
 	_this *ManagedObjectReference, portgroup string, nic *HostVirtualNicSpec,
 ) (string, error) {
 
-	return nil, nil
+	return "", nil
 
 }
 
@@ -28798,7 +29591,16 @@ type HostPciPassthruSystem struct {
 // Array of PciPassthru information
 // Required Privilege: System.Read
 func (mo *HostPciPassthruSystem) PciPassthruInfo() ([]*HostPciPassthruInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("pciPassthruInfo")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*HostPciPassthruInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*HostPciPassthruInfo")
+	}
+	return v, nil
 }
 
 //
@@ -29263,13 +30065,31 @@ type HostPowerSystem struct {
 // Power system capabilities object.
 // Required Privilege: Host.Config.Power
 func (mo *HostPowerSystem) Capability() (*PowerSystemCapability, error) {
-	return nil, nil
+	t, err := mo.currentProperty("capability")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*PowerSystemCapability)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *PowerSystemCapability")
+	}
+	return v, nil
 }
 
 // Power system state info object.
 // Required Privilege: Host.Config.Power
 func (mo *HostPowerSystem) Info() (*PowerSystemInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("info")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*PowerSystemInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *PowerSystemInfo")
+	}
+	return v, nil
 }
 
 //
@@ -29466,7 +30286,16 @@ type HostProfile struct {
 // (HostProfileCompleteConfigSpec.validatorHost),
 // the Profile Engine uses the reference host to validate the profile.
 func (mo *HostProfile) ReferenceHost() (*HostSystem, error) {
-	return nil, nil
+	t, err := mo.currentProperty("referenceHost")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostSystem)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostSystem")
+	}
+	return v, nil
 }
 
 //
@@ -30484,7 +31313,16 @@ type HostServiceSystem struct {
 
 // Service configuration.
 func (mo *HostServiceSystem) ServiceInfo() (*HostServiceInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("serviceInfo")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostServiceInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostServiceInfo")
+	}
+	return v, nil
 }
 
 //
@@ -30727,13 +31565,31 @@ type HostSnmpSystem struct {
 // Since VI API 2.5
 // Required Privilege: Global.Settings
 func (mo *HostSnmpSystem) Configuration() (*HostSnmpConfigSpec, error) {
-	return nil, nil
+	t, err := mo.currentProperty("configuration")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostSnmpConfigSpec)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostSnmpConfigSpec")
+	}
+	return v, nil
 }
 
 // Since VI API 2.5
 // Required Privilege: Global.Settings
 func (mo *HostSnmpSystem) Limits() (*HostSnmpSystemAgentLimits, error) {
-	return nil, nil
+	t, err := mo.currentProperty("limits")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostSnmpSystemAgentLimits)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostSnmpSystemAgentLimits")
+	}
+	return v, nil
 }
 
 //
@@ -30966,7 +31822,16 @@ type HostStorageSystem struct {
 // FileSystemVolumeInfo data
 // object type for more information.
 func (mo *HostStorageSystem) FileSystemVolumeInfo() (*HostFileSystemVolumeInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("fileSystemVolumeInfo")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostFileSystemVolumeInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostFileSystemVolumeInfo")
+	}
+	return v, nil
 }
 
 // Runtime information about the state of a multipath path.
@@ -30979,12 +31844,30 @@ func (mo *HostStorageSystem) FileSystemVolumeInfo() (*HostFileSystemVolumeInfo, 
 //
 // Since vSphere API 4.0
 func (mo *HostStorageSystem) MultipathStateInfo() (*HostMultipathStateInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("multipathStateInfo")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostMultipathStateInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostMultipathStateInfo")
+	}
+	return v, nil
 }
 
 // Host storage information up to the device level.
 func (mo *HostStorageSystem) StorageDeviceInfo() (*HostStorageDeviceInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("storageDeviceInfo")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostStorageDeviceInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostStorageDeviceInfo")
+	}
+	return v, nil
 }
 
 // Datastore paths of files used by the host system on
@@ -30993,7 +31876,16 @@ func (mo *HostStorageSystem) StorageDeviceInfo() (*HostStorageDeviceInfo, error)
 //
 // Since vSphere API 4.1
 func (mo *HostStorageSystem) SystemFile() ([]string, error) {
-	return nil, nil
+	t, err := mo.currentProperty("systemFile")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]string)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []string")
+	}
+	return v, nil
 }
 
 //
@@ -32152,13 +33044,31 @@ type HostSystem struct {
 // Host capabilities. This might not be available for a
 // disconnected host.
 func (mo *HostSystem) Capability() (*HostCapability, error) {
-	return nil, nil
+	t, err := mo.currentProperty("capability")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostCapability)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostCapability")
+	}
+	return v, nil
 }
 
 // Host configuration information.  This might not be available for a disconnected
 // host.
 func (mo *HostSystem) Config() (*HostConfigInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("config")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostConfigInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostConfigInfo")
+	}
+	return v, nil
 }
 
 // Host configuration systems.
@@ -32171,26 +33081,62 @@ func (mo *HostSystem) Config() (*HostConfigInfo, error) {
 // an empty string for the version parameter. Any other version value will not
 // produce any property values as no updates are generated.
 func (mo *HostSystem) ConfigManager() (*HostConfigManager, error) {
-	return nil, nil
+	t, err := mo.currentProperty("configManager")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostConfigManager)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostConfigManager")
+	}
+	return v, nil
 }
 
 // A collection of references to the subset of datastore objects in the datacenter
 // that are available in this HostSystem.
 // Required Privilege: System.View
 func (mo *HostSystem) Datastore() ([]*Datastore, error) {
-	return nil, nil
+	t, err := mo.currentProperty("datastore")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*Datastore)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*Datastore")
+	}
+	return v, nil
 }
 
 // DatastoreBrowser to browse datastores for this host.
 // Required Privilege: System.View
 func (mo *HostSystem) DatastoreBrowser() (*HostDatastoreBrowser, error) {
-	return nil, nil
+	t, err := mo.currentProperty("datastoreBrowser")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostDatastoreBrowser)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostDatastoreBrowser")
+	}
+	return v, nil
 }
 
 // Hardware configuration of the host. This might not be available for a
 // disconnected host.
 func (mo *HostSystem) Hardware() (*HostHardwareInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("hardware")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostHardwareInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostHardwareInfo")
+	}
+	return v, nil
 }
 
 // Information about all licensable resources, currently present on this host.
@@ -32202,35 +33148,89 @@ func (mo *HostSystem) Hardware() (*HostHardwareInfo, error) {
 //
 // Since vSphere API 5.0
 func (mo *HostSystem) LicensableResource() (*HostLicensableResourceInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("licensableResource")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostLicensableResourceInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostLicensableResourceInfo")
+	}
+	return v, nil
 }
 
 // A collection of references to the subset of network objects in the datacenter that
 // are available in this HostSystem.
 // Required Privilege: System.View
 func (mo *HostSystem) Network() ([]*Network, error) {
-	return nil, nil
+	t, err := mo.currentProperty("network")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*Network)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*Network")
+	}
+	return v, nil
 }
 
 // Runtime state information about the host such as connection state.
 func (mo *HostSystem) Runtime() (*HostRuntimeInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("runtime")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostRuntimeInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostRuntimeInfo")
+	}
+	return v, nil
 }
 
 // Basic information about the host, including connection state.
 func (mo *HostSystem) Summary() (*HostListSummary, error) {
-	return nil, nil
+	t, err := mo.currentProperty("summary")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostListSummary)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostListSummary")
+	}
+	return v, nil
 }
 
 // Reference for the system resource hierarchy, used for configuring the set of
 // resources reserved to the system and unavailable to virtual machines.
 func (mo *HostSystem) SystemResources() (*HostSystemResourceInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("systemResources")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostSystemResourceInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostSystemResourceInfo")
+	}
+	return v, nil
 }
 
 // List of virtual machines associated with this host.
 func (mo *HostSystem) Vm() ([]*VirtualMachine, error) {
-	return nil, nil
+	t, err := mo.currentProperty("vm")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*VirtualMachine)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*VirtualMachine")
+	}
+	return v, nil
 }
 
 //
@@ -32467,7 +33467,7 @@ func (mo *HostSystem) QueryMemoryOverhead(
 	_this *ManagedObjectReference, memorySize int64, videoRamSize int32, numVcpus int32,
 ) (int64, error) {
 
-	return nil, nil
+	return int64(0), nil
 
 }
 
@@ -32488,7 +33488,7 @@ func (mo *HostSystem) QueryMemoryOverheadEx(
 	_this *ManagedObjectReference, vmConfigInfo *VirtualMachineConfigInfo,
 ) (int64, error) {
 
-	return nil, nil
+	return int64(0), nil
 
 }
 
@@ -32601,7 +33601,7 @@ func (mo *HostSystem) RetrieveHardwareUptime(
 	_this *ManagedObjectReference,
 ) (int64, error) {
 
-	return nil, nil
+	return int64(0), nil
 
 }
 
@@ -33330,7 +34330,16 @@ type HostVFlashManager struct {
 
 // Host vFlash configuration information.
 func (mo *HostVFlashManager) VFlashConfigInfo() (*HostVFlashManagerVFlashConfigInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("vFlashConfigInfo")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostVFlashManagerVFlashConfigInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostVFlashManagerVFlashConfigInfo")
+	}
+	return v, nil
 }
 
 //
@@ -33672,12 +34681,30 @@ type HostVMotionSystem struct {
 
 // IP configuration of the VMotion VirtualNic.
 func (mo *HostVMotionSystem) IpConfig() (*HostIpConfig, error) {
-	return nil, nil
+	t, err := mo.currentProperty("ipConfig")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostIpConfig)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostIpConfig")
+	}
+	return v, nil
 }
 
 // VMotion network configuration.
 func (mo *HostVMotionSystem) NetConfig() (*HostVMotionNetConfig, error) {
-	return nil, nil
+	t, err := mo.currentProperty("netConfig")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostVMotionNetConfig)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostVMotionNetConfig")
+	}
+	return v, nil
 }
 
 //
@@ -33880,7 +34907,16 @@ type HostVirtualNicManager struct {
 
 // Network configuration.
 func (mo *HostVirtualNicManager) Info() (*HostVirtualNicManagerInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("info")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HostVirtualNicManagerInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HostVirtualNicManagerInfo")
+	}
+	return v, nil
 }
 
 //
@@ -34386,7 +35422,7 @@ func (mo *HostVsanInternalSystem) QueryCmmds(
 	_this *ManagedObjectReference, queries []*HostVsanInternalSystemCmmdsQuery,
 ) (string, error) {
 
-	return nil, nil
+	return "", nil
 
 }
 
@@ -34403,7 +35439,7 @@ func (mo *HostVsanInternalSystem) QueryObjectsOnPhysicalVsanDisk(
 	_this *ManagedObjectReference, disks []string,
 ) (string, error) {
 
-	return nil, nil
+	return "", nil
 
 }
 
@@ -34420,7 +35456,7 @@ func (mo *HostVsanInternalSystem) QueryPhysicalVsanDisks(
 	_this *ManagedObjectReference, props []string,
 ) (string, error) {
 
-	return nil, nil
+	return "", nil
 
 }
 
@@ -34437,7 +35473,7 @@ func (mo *HostVsanInternalSystem) QueryVsanObjects(
 	_this *ManagedObjectReference, uuids []string,
 ) (string, error) {
 
-	return nil, nil
+	return "", nil
 
 }
 
@@ -34473,7 +35509,16 @@ type HostVsanSystem struct {
 // The current VSAN service configuration information for this host.
 // Required Privilege: System.Read
 func (mo *HostVsanSystem) Config() (*VsanHostConfigInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("config")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*VsanHostConfigInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *VsanHostConfigInfo")
+	}
+	return v, nil
 }
 
 //
@@ -34774,24 +35819,60 @@ type HttpNfcLease struct {
 // If the lease is in the error state, this property contains the
 // error that caused the lease to be aborted.
 func (mo *HttpNfcLease) Error() (*LocalizedMethodFault, error) {
-	return nil, nil
+	t, err := mo.currentProperty("error")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*LocalizedMethodFault)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *LocalizedMethodFault")
+	}
+	return v, nil
 }
 
 // Provides information on the objects contained in this lease. The
 // info property is only valid when the lease is in the ready state.
 func (mo *HttpNfcLease) Info() (*HttpNfcLeaseInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("info")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HttpNfcLeaseInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HttpNfcLeaseInfo")
+	}
+	return v, nil
 }
 
 // Provides progress information (0-100 percent) for the initializing state
 // of the lease. Clients can use this to track overall progress.
 func (mo *HttpNfcLease) InitializeProgress() (int32, error) {
-	return nil, nil
+	t, err := mo.currentProperty("initializeProgress")
+	if err != nil {
+		return int32(0), err
+	}
+
+	v, ok := t.(int32)
+	if !ok {
+		return int32(0), errors.New("Unable to make type assertion to: int32")
+	}
+	return v, nil
 }
 
 // The current state of the lease.
 func (mo *HttpNfcLease) State() (*HttpNfcLeaseState, error) {
-	return nil, nil
+	t, err := mo.currentProperty("state")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*HttpNfcLeaseState)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *HttpNfcLeaseState")
+	}
+	return v, nil
 }
 
 //
@@ -36564,7 +37645,7 @@ func (mo *IpPoolManager) AllocateIpv4Address(
 	_this *ManagedObjectReference, dc *Datacenter, poolId int32, allocationId string,
 ) (string, error) {
 
-	return nil, nil
+	return "", nil
 
 }
 
@@ -36595,7 +37676,7 @@ func (mo *IpPoolManager) AllocateIpv6Address(
 	_this *ManagedObjectReference, dc *Datacenter, poolId int32, allocationId string,
 ) (string, error) {
 
-	return nil, nil
+	return "", nil
 
 }
 
@@ -36617,7 +37698,7 @@ func (mo *IpPoolManager) CreateIpPool(
 	_this *ManagedObjectReference, dc *Datacenter, pool *IpPool,
 ) (int32, error) {
 
-	return nil, nil
+	return int32(0), nil
 
 }
 
@@ -37712,13 +38793,31 @@ type LicenseManager struct {
 //
 // Since VI API 2.5
 func (mo *LicenseManager) Diagnostics() (*LicenseDiagnostics, error) {
-	return nil, nil
+	t, err := mo.currentProperty("diagnostics")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*LicenseDiagnostics)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *LicenseDiagnostics")
+	}
+	return v, nil
 }
 
 // Since vSphere API 4.0
 // Required Privilege: System.Read
 func (mo *LicenseManager) Evaluation() (*LicenseManagerEvaluationInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("evaluation")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*LicenseManagerEvaluationInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *LicenseManagerEvaluationInfo")
+	}
+	return v, nil
 }
 
 // Deprecated.
@@ -37728,7 +38827,16 @@ func (mo *LicenseManager) Evaluation() (*LicenseManagerEvaluationInfo, error) {
 //
 // The list of features that can be licensed.
 func (mo *LicenseManager) FeatureInfo() ([]*LicenseFeatureInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("featureInfo")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*LicenseFeatureInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*LicenseFeatureInfo")
+	}
+	return v, nil
 }
 
 // License Assignment Manager
@@ -37736,7 +38844,16 @@ func (mo *LicenseManager) FeatureInfo() ([]*LicenseFeatureInfo, error) {
 // Since vSphere API 4.0
 // Required Privilege: System.View
 func (mo *LicenseManager) LicenseAssignmentManager() (*LicenseAssignmentManager, error) {
-	return nil, nil
+	t, err := mo.currentProperty("licenseAssignmentManager")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*LicenseAssignmentManager)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *LicenseAssignmentManager")
+	}
+	return v, nil
 }
 
 // Deprecated.
@@ -37753,7 +38870,16 @@ func (mo *LicenseManager) LicenseAssignmentManager() (*LicenseAssignmentManager,
 //
 // Since VI API 2.5
 func (mo *LicenseManager) LicensedEdition() (string, error) {
-	return nil, nil
+	t, err := mo.currentProperty("licensedEdition")
+	if err != nil {
+		return "", err
+	}
+
+	v, ok := t.(string)
+	if !ok {
+		return "", errors.New("Unable to make type assertion to: string")
+	}
+	return v, nil
 }
 
 // Get information about all the licenses avaiable.
@@ -37761,7 +38887,16 @@ func (mo *LicenseManager) LicensedEdition() (string, error) {
 // Since vSphere API 4.0
 // Required Privilege: dynamic
 func (mo *LicenseManager) Licenses() ([]*LicenseManagerLicenseInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("licenses")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*LicenseManagerLicenseInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*LicenseManagerLicenseInfo")
+	}
+	return v, nil
 }
 
 // Deprecated.
@@ -37771,7 +38906,16 @@ func (mo *LicenseManager) Licenses() ([]*LicenseManagerLicenseInfo, error) {
 //
 // Set or return a data object type of LocalLicense or LicenseServer.
 func (mo *LicenseManager) Source() (*LicenseSource, error) {
-	return nil, nil
+	t, err := mo.currentProperty("source")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*LicenseSource)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *LicenseSource")
+	}
+	return v, nil
 }
 
 // Deprecated.
@@ -37781,7 +38925,16 @@ func (mo *LicenseManager) Source() (*LicenseSource, error) {
 // Current state of the license source. License sources that are LocalSource
 // are always available.
 func (mo *LicenseManager) SourceAvailable() (bool, error) {
-	return nil, nil
+	t, err := mo.currentProperty("sourceAvailable")
+	if err != nil {
+		return false, err
+	}
+
+	v, ok := t.(bool)
+	if !ok {
+		return false, errors.New("Unable to make type assertion to: bool")
+	}
+	return v, nil
 }
 
 //
@@ -37816,7 +38969,7 @@ func (mo *LicenseManager) CheckLicenseFeature(
 	_this *ManagedObjectReference, host *HostSystem, featureKey string,
 ) (bool, error) {
 
-	return nil, nil
+	return false, nil
 
 }
 
@@ -37890,7 +39043,7 @@ func (mo *LicenseManager) DisableFeature(
 	_this *ManagedObjectReference, host *HostSystem, featureKey string,
 ) (bool, error) {
 
-	return nil, nil
+	return false, nil
 
 }
 
@@ -37910,7 +39063,7 @@ func (mo *LicenseManager) EnableFeature(
 	_this *ManagedObjectReference, host *HostSystem, featureKey string,
 ) (bool, error) {
 
-	return nil, nil
+	return false, nil
 
 }
 
@@ -38641,7 +39794,16 @@ type LocalizationManager struct {
 // catalogs available for the current session locale.
 // Required Privilege: System.View
 func (mo *LocalizationManager) Catalog() ([]*LocalizationManagerMessageCatalog, error) {
-	return nil, nil
+	t, err := mo.currentProperty("catalog")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*LocalizationManagerMessageCatalog)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*LocalizationManagerMessageCatalog")
+	}
+	return v, nil
 }
 
 //
@@ -38872,7 +40034,16 @@ type ManagedEntity struct {
 // Since vSphere API 4.0
 // Required Privilege: System.Read
 func (mo *ManagedEntity) AlarmActionsEnabled() (bool, error) {
-	return nil, nil
+	t, err := mo.currentProperty("alarmActionsEnabled")
+	if err != nil {
+		return false, err
+	}
+
+	v, ok := t.(bool)
+	if !ok {
+		return false, errors.New("Unable to make type assertion to: bool")
+	}
+	return v, nil
 }
 
 // Current configuration issues that have been detected for this entity. Typically,
@@ -38881,7 +40052,16 @@ func (mo *ManagedEntity) AlarmActionsEnabled() (bool, error) {
 // configStatus property provides an overall status
 // based on these events.
 func (mo *ManagedEntity) ConfigIssue() ([]*Event, error) {
-	return nil, nil
+	t, err := mo.currentProperty("configIssue")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*Event)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*Event")
+	}
+	return v, nil
 }
 
 // The configStatus indicates whether or not the system has detected a configuration
@@ -38909,13 +40089,31 @@ func (mo *ManagedEntity) ConfigIssue() ([]*Event, error) {
 // an empty string for the version parameter. Any other version value will not
 // produce any property values as no updates are generated.
 func (mo *ManagedEntity) ConfigStatus() (*ManagedEntityStatus, error) {
-	return nil, nil
+	t, err := mo.currentProperty("configStatus")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ManagedEntityStatus)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ManagedEntityStatus")
+	}
+	return v, nil
 }
 
 // Custom field values.
 // Required Privilege: System.View
 func (mo *ManagedEntity) CustomValue() ([]*CustomFieldValue, error) {
-	return nil, nil
+	t, err := mo.currentProperty("customValue")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*CustomFieldValue)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*CustomFieldValue")
+	}
+	return v, nil
 }
 
 // A set of alarm states for alarms that apply to this managed entity.
@@ -38927,7 +40125,16 @@ func (mo *ManagedEntity) CustomValue() ([]*CustomFieldValue, error) {
 // This set does not include alarms that are defined on descendants of this entity.
 // Required Privilege: System.View
 func (mo *ManagedEntity) DeclaredAlarmState() ([]*AlarmState, error) {
-	return nil, nil
+	t, err := mo.currentProperty("declaredAlarmState")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*AlarmState)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*AlarmState")
+	}
+	return v, nil
 }
 
 // List of operations that are disabled, given the current runtime
@@ -39006,13 +40213,31 @@ func (mo *ManagedEntity) DeclaredAlarmState() ([]*AlarmState, error) {
 // an empty string for the version parameter. Any other version value will not
 // produce any property values as no updates are generated.
 func (mo *ManagedEntity) DisabledMethod() ([]string, error) {
-	return nil, nil
+	t, err := mo.currentProperty("disabledMethod")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]string)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []string")
+	}
+	return v, nil
 }
 
 // Access rights the current session has to this entity.
 // Required Privilege: System.View
 func (mo *ManagedEntity) EffectiveRole() ([]int32, error) {
-	return nil, nil
+	t, err := mo.currentProperty("effectiveRole")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]int32)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []int32")
+	}
+	return v, nil
 }
 
 // Name of this entity, unique relative to its parent.
@@ -39024,7 +40249,16 @@ func (mo *ManagedEntity) EffectiveRole() ([]int32, error) {
 // %5c, and a percent is escaped as %25.
 // Required Privilege: System.View
 func (mo *ManagedEntity) Name() (string, error) {
-	return nil, nil
+	t, err := mo.currentProperty("name")
+	if err != nil {
+		return "", err
+	}
+
+	v, ok := t.(string)
+	if !ok {
+		return "", errors.New("Unable to make type assertion to: string")
+	}
+	return v, nil
 }
 
 // General health of this managed entity.
@@ -39049,7 +40283,16 @@ func (mo *ManagedEntity) Name() (string, error) {
 // an empty string for the version parameter. Any other version value will not
 // produce any property values as no updates are generated.
 func (mo *ManagedEntity) OverallStatus() (*ManagedEntityStatus, error) {
-	return nil, nil
+	t, err := mo.currentProperty("overallStatus")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ManagedEntityStatus)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ManagedEntityStatus")
+	}
+	return v, nil
 }
 
 // Parent of this entity.
@@ -39059,12 +40302,30 @@ func (mo *ManagedEntity) OverallStatus() (*ManagedEntityStatus, error) {
 // a VirtualApp.
 // Required Privilege: System.View
 func (mo *ManagedEntity) Parent() (*ManagedEntity, error) {
-	return nil, nil
+	t, err := mo.currentProperty("parent")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ManagedEntity)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ManagedEntity")
+	}
+	return v, nil
 }
 
 // List of permissions defined for this entity.
 func (mo *ManagedEntity) Permission() ([]*Permission, error) {
-	return nil, nil
+	t, err := mo.currentProperty("permission")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*Permission)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*Permission")
+	}
+	return v, nil
 }
 
 // The set of recent tasks operating on this managed entity. This is a subset
@@ -39088,7 +40349,16 @@ func (mo *ManagedEntity) Permission() ([]*Permission, error) {
 // an empty string for the version parameter. Any other version value will not
 // produce any property values as no updates are generated.
 func (mo *ManagedEntity) RecentTask() ([]*Task, error) {
-	return nil, nil
+	t, err := mo.currentProperty("recentTask")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*Task)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*Task")
+	}
+	return v, nil
 }
 
 // The set of tags associated with this managed entity.
@@ -39097,7 +40367,16 @@ func (mo *ManagedEntity) RecentTask() ([]*Task, error) {
 // Since vSphere API 4.0
 // Required Privilege: System.View
 func (mo *ManagedEntity) Tag() ([]*Tag, error) {
-	return nil, nil
+	t, err := mo.currentProperty("tag")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*Tag)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*Tag")
+	}
+	return v, nil
 }
 
 // A set of alarm states for alarms triggered by this entity
@@ -39115,7 +40394,16 @@ func (mo *ManagedEntity) Tag() ([]*Tag, error) {
 // produce any property values as no updates are generated.
 // Required Privilege: System.View
 func (mo *ManagedEntity) TriggeredAlarmState() ([]*AlarmState, error) {
-	return nil, nil
+	t, err := mo.currentProperty("triggeredAlarmState")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*AlarmState)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*AlarmState")
+	}
+	return v, nil
 }
 
 //
@@ -39579,8 +40867,17 @@ type ManagedObjectView struct {
 }
 
 // The list of references to objects mapped by this view.
-func (mo *ManagedObjectView) View() ([]*ManagedObjectReference, error) {
-	return nil, nil
+func (mo *ManagedObjectView) GetView() ([]*ManagedObjectReference, error) {
+	t, err := mo.currentProperty("view")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*ManagedObjectReference)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*ManagedObjectReference")
+	}
+	return v, nil
 }
 
 //
@@ -41090,22 +42387,58 @@ type Network struct {
 
 // Hosts attached to this network.
 func (mo *Network) Host() ([]*HostSystem, error) {
-	return nil, nil
+	t, err := mo.currentProperty("host")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*HostSystem)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*HostSystem")
+	}
+	return v, nil
 }
 
 // Name of this network.
 func (mo *Network) Name() (string, error) {
-	return nil, nil
+	t, err := mo.currentProperty("name")
+	if err != nil {
+		return "", err
+	}
+
+	v, ok := t.(string)
+	if !ok {
+		return "", errors.New("Unable to make type assertion to: string")
+	}
+	return v, nil
 }
 
 // Properties of a network.
 func (mo *Network) Summary() (*NetworkSummary, error) {
-	return nil, nil
+	t, err := mo.currentProperty("summary")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*NetworkSummary)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *NetworkSummary")
+	}
+	return v, nil
 }
 
 // Virtual machines using this network.
 func (mo *Network) Vm() ([]*VirtualMachine, error) {
-	return nil, nil
+	t, err := mo.currentProperty("vm")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*VirtualMachine)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*VirtualMachine")
+	}
+	return v, nil
 }
 
 // Deprecated.
@@ -42277,13 +43610,31 @@ type OptionManager struct {
 
 // A list of the current settings for the key/value pair options.
 func (mo *OptionManager) Setting() ([]*OptionValue, error) {
-	return nil, nil
+	t, err := mo.currentProperty("setting")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*OptionValue)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*OptionValue")
+	}
+	return v, nil
 }
 
 // A list of supported key/value pair options including their
 // type information.
 func (mo *OptionManager) SupportedOption() ([]*OptionDef, error) {
-	return nil, nil
+	t, err := mo.currentProperty("supportedOption")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*OptionDef)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*OptionDef")
+	}
+	return v, nil
 }
 
 //
@@ -43601,7 +44952,16 @@ type OvfManager struct {
 // Since vSphere API 5.1
 // Required Privilege: System.View
 func (mo *OvfManager) OvfExportOption() ([]*OvfOptionInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("ovfExportOption")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*OvfOptionInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*OvfOptionInfo")
+	}
+	return v, nil
 }
 
 // Returns an array of OvfOptionInfo object that specifies what options the server
@@ -43611,7 +44971,16 @@ func (mo *OvfManager) OvfExportOption() ([]*OvfOptionInfo, error) {
 // Since vSphere API 5.1
 // Required Privilege: System.View
 func (mo *OvfManager) OvfImportOption() ([]*OvfOptionInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("ovfImportOption")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*OvfOptionInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*OvfOptionInfo")
+	}
+	return v, nil
 }
 
 //
@@ -45308,20 +46677,47 @@ type PerformanceManager struct {
 // The static description strings.
 // Required Privilege: System.View
 func (mo *PerformanceManager) Description() (*PerformanceDescription, error) {
-	return nil, nil
+	t, err := mo.currentProperty("description")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*PerformanceDescription)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *PerformanceDescription")
+	}
+	return v, nil
 }
 
 // A list of intervals configured on the
 // system.
 // Required Privilege: System.View
 func (mo *PerformanceManager) HistoricalInterval() ([]*PerfInterval, error) {
-	return nil, nil
+	t, err := mo.currentProperty("historicalInterval")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*PerfInterval)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*PerfInterval")
+	}
+	return v, nil
 }
 
 // A list of all supported performance counters in the system.
 // Required Privilege: System.View
 func (mo *PerformanceManager) PerfCounter() ([]*PerfCounterInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("perfCounter")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*PerfCounterInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*PerfCounterInfo")
+	}
+	return v, nil
 }
 
 // Deprecated.
@@ -46565,18 +47961,45 @@ type Profile struct {
 // of the profile is unknown.
 // See ComplianceResultStatus.
 func (mo *Profile) ComplianceStatus() (string, error) {
-	return nil, nil
+	t, err := mo.currentProperty("complianceStatus")
+	if err != nil {
+		return "", err
+	}
+
+	v, ok := t.(string)
+	if !ok {
+		return "", errors.New("Unable to make type assertion to: string")
+	}
+	return v, nil
 }
 
 // Configuration data for the profile.
 // Required Privilege: Profile.Edit
 func (mo *Profile) Config() (*ProfileConfigInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("config")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ProfileConfigInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ProfileConfigInfo")
+	}
+	return v, nil
 }
 
 // Time at which the profile was created.
 func (mo *Profile) CreatedTime() (time.Time, error) {
-	return nil, nil
+	t, err := mo.currentProperty("createdTime")
+	if err != nil {
+		return time.Now(), err
+	}
+
+	v, ok := t.(time.Time)
+	if !ok {
+		return time.Now(), errors.New("Unable to make type assertion to: time.Time")
+	}
+	return v, nil
 }
 
 // Deprecated.
@@ -46585,22 +48008,58 @@ func (mo *Profile) CreatedTime() (time.Time, error) {
 //
 // Localizable description of the profile
 func (mo *Profile) Description() (*ProfileDescription, error) {
-	return nil, nil
+	t, err := mo.currentProperty("description")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ProfileDescription)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ProfileDescription")
+	}
+	return v, nil
 }
 
 // List of managed entities associated with the profile.
 func (mo *Profile) Entity() ([]*ManagedEntity, error) {
-	return nil, nil
+	t, err := mo.currentProperty("entity")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*ManagedEntity)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*ManagedEntity")
+	}
+	return v, nil
 }
 
 // Time at which the profile was last modified.
 func (mo *Profile) ModifiedTime() (time.Time, error) {
-	return nil, nil
+	t, err := mo.currentProperty("modifiedTime")
+	if err != nil {
+		return time.Now(), err
+	}
+
+	v, ok := t.(time.Time)
+	if !ok {
+		return time.Now(), errors.New("Unable to make type assertion to: time.Time")
+	}
+	return v, nil
 }
 
 // Name of the profile.
 func (mo *Profile) Name() (string, error) {
-	return nil, nil
+	t, err := mo.currentProperty("name")
+	if err != nil {
+		return "", err
+	}
+
+	v, ok := t.(string)
+	if !ok {
+		return "", errors.New("Unable to make type assertion to: string")
+	}
+	return v, nil
 }
 
 //
@@ -46674,7 +48133,7 @@ func (mo *Profile) ExportProfile(
 	_this *ManagedObjectReference,
 ) (string, error) {
 
-	return nil, nil
+	return "", nil
 
 }
 
@@ -47121,7 +48580,16 @@ type ProfileManager struct {
 // A list of profiles known to this ProfileManager.
 // Required Privilege: Profile.View
 func (mo *ProfileManager) Profile() ([]*Profile, error) {
-	return nil, nil
+	t, err := mo.currentProperty("profile")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*Profile)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*Profile")
+	}
+	return v, nil
 }
 
 //
@@ -47513,7 +48981,16 @@ type PropertyCollector struct {
 // properties for which it detects incremental changes.
 // Required Privilege: System.View
 func (mo *PropertyCollector) Filter() ([]*PropertyFilter, error) {
-	return nil, nil
+	t, err := mo.currentProperty("filter")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*PropertyFilter)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*PropertyFilter")
+	}
+	return v, nil
 }
 
 //
@@ -47799,12 +49276,30 @@ type PropertyFilter struct {
 // true, a change reports only the nested property.  If the value is
 // false, a change reports the enclosing property named in the filter.
 func (mo *PropertyFilter) PartialUpdates() (bool, error) {
-	return nil, nil
+	t, err := mo.currentProperty("partialUpdates")
+	if err != nil {
+		return false, err
+	}
+
+	v, ok := t.(bool)
+	if !ok {
+		return false, errors.New("Unable to make type assertion to: bool")
+	}
+	return v, nil
 }
 
 // Specifications for this filter.
 func (mo *PropertyFilter) Spec() (*PropertyFilterSpec, error) {
-	return nil, nil
+	t, err := mo.currentProperty("spec")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*PropertyFilterSpec)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *PropertyFilterSpec")
+	}
+	return v, nil
 }
 
 //
@@ -49025,25 +50520,61 @@ type ResourcePool struct {
 // The resource configuration of all direct children (VirtualMachine and
 // ResourcePool) of this resource group.
 func (mo *ResourcePool) ChildConfiguration() ([]*ResourceConfigSpec, error) {
-	return nil, nil
+	t, err := mo.currentProperty("childConfiguration")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*ResourceConfigSpec)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*ResourceConfigSpec")
+	}
+	return v, nil
 }
 
 // Configuration of this resource pool.
 func (mo *ResourcePool) Config() (*ResourceConfigSpec, error) {
-	return nil, nil
+	t, err := mo.currentProperty("config")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ResourceConfigSpec)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ResourceConfigSpec")
+	}
+	return v, nil
 }
 
 // The ComputeResource to which this set of one or more nested resource pools
 // belong.
 // Required Privilege: System.View
 func (mo *ResourcePool) Owner() (*ComputeResource, error) {
-	return nil, nil
+	t, err := mo.currentProperty("owner")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ComputeResource)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ComputeResource")
+	}
+	return v, nil
 }
 
 // The set of child resource pools.
 // Required Privilege: System.View
 func (mo *ResourcePool) ResourcePool() ([]*ResourcePool, error) {
-	return nil, nil
+	t, err := mo.currentProperty("resourcePool")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*ResourcePool)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*ResourcePool")
+	}
+	return v, nil
 }
 
 // Runtime information about a resource pool.
@@ -49060,7 +50591,16 @@ func (mo *ResourcePool) ResourcePool() ([]*ResourcePool, error) {
 // an empty string for the version parameter. Any other version value will not
 // produce any property values as no updates are generated.
 func (mo *ResourcePool) Runtime() (*ResourcePoolRuntimeInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("runtime")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ResourcePoolRuntimeInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ResourcePoolRuntimeInfo")
+	}
+	return v, nil
 }
 
 // Basic information about a resource pool.
@@ -49073,13 +50613,31 @@ func (mo *ResourcePool) Runtime() (*ResourcePoolRuntimeInfo, error) {
 // an empty string for the version parameter. Any other version value will not
 // produce any property values as no updates are generated.
 func (mo *ResourcePool) Summary() (*ResourcePoolSummary, error) {
-	return nil, nil
+	t, err := mo.currentProperty("summary")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ResourcePoolSummary)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ResourcePoolSummary")
+	}
+	return v, nil
 }
 
 // The set of virtual machines associated with this resource pool.
 // Required Privilege: System.View
 func (mo *ResourcePool) Vm() ([]*VirtualMachine, error) {
-	return nil, nil
+	t, err := mo.currentProperty("vm")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*VirtualMachine)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*VirtualMachine")
+	}
+	return v, nil
 }
 
 //
@@ -50054,7 +51612,16 @@ type ScheduledTask struct {
 
 // Information about the current scheduled task.
 func (mo *ScheduledTask) Info() (*ScheduledTaskInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("info")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ScheduledTaskInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ScheduledTaskInfo")
+	}
+	return v, nil
 }
 
 //
@@ -50281,13 +51848,31 @@ type ScheduledTaskManager struct {
 // Static descriptive strings used in scheduled tasks.
 // Required Privilege: System.View
 func (mo *ScheduledTaskManager) Description() (*ScheduledTaskDescription, error) {
-	return nil, nil
+	t, err := mo.currentProperty("description")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ScheduledTaskDescription)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ScheduledTaskDescription")
+	}
+	return v, nil
 }
 
 // All available scheduled tasks.
 // Required Privilege: System.View
 func (mo *ScheduledTaskManager) ScheduledTask() ([]*ScheduledTask, error) {
-	return nil, nil
+	t, err := mo.currentProperty("scheduledTask")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*ScheduledTask)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*ScheduledTask")
+	}
+	return v, nil
 }
 
 //
@@ -51343,7 +52928,16 @@ type ServiceInstance struct {
 // API-wide capabilities.
 // Required Privilege: System.View
 func (mo *ServiceInstance) Capability() (*Capability, error) {
-	return nil, nil
+	t, err := mo.currentProperty("capability")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*Capability)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *Capability")
+	}
+	return v, nil
 }
 
 // The properties of the ServiceInstance managed object. The content property
@@ -51358,7 +52952,16 @@ func (mo *ServiceInstance) Capability() (*Capability, error) {
 // and then invoking a second traversal to continue.)
 // Required Privilege: System.Anonymous
 func (mo *ServiceInstance) Content() (*ServiceContent, error) {
-	return nil, nil
+	t, err := mo.currentProperty("content")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ServiceContent)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ServiceContent")
+	}
+	return v, nil
 }
 
 // Contains the time most recently obtained from the server.
@@ -51371,7 +52974,16 @@ func (mo *ServiceInstance) Content() (*ServiceContent, error) {
 // on the server; instead, use the CurrentTime method.
 // Required Privilege: System.View
 func (mo *ServiceInstance) ServerClock() (time.Time, error) {
-	return nil, nil
+	t, err := mo.currentProperty("serverClock")
+	if err != nil {
+		return time.Now(), err
+	}
+
+	v, ok := t.(time.Time)
+	if !ok {
+		return time.Now(), errors.New("Unable to make type assertion to: time.Time")
+	}
+	return v, nil
 }
 
 //
@@ -51385,7 +52997,7 @@ func (mo *ServiceInstance) CurrentTime(
 	_this *ManagedObjectReference,
 ) (time.Time, error) {
 
-	return nil, nil
+	return time.Now(), nil
 
 }
 
@@ -51480,7 +53092,16 @@ type ServiceManager struct {
 // The full list of services available in this directory.
 // Required Privilege: Global.ServiceManagers
 func (mo *ServiceManager) Service() ([]*ServiceManagerServiceInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("service")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*ServiceManagerServiceInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*ServiceManagerServiceInfo")
+	}
+	return v, nil
 }
 
 //
@@ -51581,31 +53202,76 @@ type SessionManager struct {
 // If the client is not logged on, the value is null.
 // Required Privilege: System.Anonymous
 func (mo *SessionManager) CurrentSession() (*UserSession, error) {
-	return nil, nil
+	t, err := mo.currentProperty("currentSession")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*UserSession)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *UserSession")
+	}
+	return v, nil
 }
 
 // This is the default server locale.
 // Required Privilege: System.Anonymous
 func (mo *SessionManager) DefaultLocale() (string, error) {
-	return nil, nil
+	t, err := mo.currentProperty("defaultLocale")
+	if err != nil {
+		return "", err
+	}
+
+	v, ok := t.(string)
+	if !ok {
+		return "", errors.New("Unable to make type assertion to: string")
+	}
+	return v, nil
 }
 
 // The system global message from the server.
 // Required Privilege: System.View
 func (mo *SessionManager) Message() (string, error) {
-	return nil, nil
+	t, err := mo.currentProperty("message")
+	if err != nil {
+		return "", err
+	}
+
+	v, ok := t.(string)
+	if !ok {
+		return "", errors.New("Unable to make type assertion to: string")
+	}
+	return v, nil
 }
 
 // Provides the list of locales for which the server has localized messages.
 // Required Privilege: System.Anonymous
 func (mo *SessionManager) MessageLocaleList() ([]string, error) {
-	return nil, nil
+	t, err := mo.currentProperty("messageLocaleList")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]string)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []string")
+	}
+	return v, nil
 }
 
 // The list of currently active sessions.
 // Required Privilege: Sessions.TerminateSession
 func (mo *SessionManager) SessionList() ([]*UserSession, error) {
-	return nil, nil
+	t, err := mo.currentProperty("sessionList")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*UserSession)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*UserSession")
+	}
+	return v, nil
 }
 
 // Provides the list of locales that the server supports.
@@ -51615,7 +53281,16 @@ func (mo *SessionManager) SessionList() ([]*UserSession, error) {
 // message is returned using the system locale.
 // Required Privilege: System.Anonymous
 func (mo *SessionManager) SupportedLocaleList() ([]string, error) {
-	return nil, nil
+	t, err := mo.currentProperty("supportedLocaleList")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]string)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []string")
+	}
+	return v, nil
 }
 
 //
@@ -51645,7 +53320,7 @@ func (mo *SessionManager) AcquireCloneTicket(
 	_this *ManagedObjectReference,
 ) (string, error) {
 
-	return nil, nil
+	return "", nil
 
 }
 
@@ -51920,7 +53595,7 @@ func (mo *SessionManager) SessionIsActive(
 	_this *ManagedObjectReference, sessionID string, userName string,
 ) (bool, error) {
 
-	return nil, nil
+	return false, nil
 
 }
 
@@ -52190,12 +53865,30 @@ type SimpleCommand struct {
 
 // The encoding type used in the result.
 func (mo *SimpleCommand) EncodingType() (*SimpleCommandEncoding, error) {
-	return nil, nil
+	t, err := mo.currentProperty("encodingType")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*SimpleCommandEncoding)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *SimpleCommandEncoding")
+	}
+	return v, nil
 }
 
 // A description of the service.
 func (mo *SimpleCommand) Entity() (*ServiceManagerServiceInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("entity")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ServiceManagerServiceInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ServiceManagerServiceInfo")
+	}
+	return v, nil
 }
 
 //
@@ -52209,7 +53902,7 @@ func (mo *SimpleCommand) ExecuteSimpleCommand(
 	_this *ManagedObjectReference, arguments []string,
 ) (string, error) {
 
-	return nil, nil
+	return "", nil
 
 }
 
@@ -53385,13 +55078,31 @@ type StoragePod struct {
 // Storage DRS related attributes of the Storage Pod.
 // Required Privilege: System.Read
 func (mo *StoragePod) PodStorageDrsEntry() (*PodStorageDrsEntry, error) {
-	return nil, nil
+	t, err := mo.currentProperty("podStorageDrsEntry")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*PodStorageDrsEntry)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *PodStorageDrsEntry")
+	}
+	return v, nil
 }
 
 // Storage pod summary.
 // Required Privilege: System.View
 func (mo *StoragePod) Summary() (*StoragePodSummary, error) {
-	return nil, nil
+	t, err := mo.currentProperty("summary")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*StoragePodSummary)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *StoragePodSummary")
+	}
+	return v, nil
 }
 
 //
@@ -53898,7 +55609,16 @@ type Task struct {
 
 // Detailed information about this task.
 func (mo *Task) Info() (*TaskInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("info")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*TaskInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *TaskInfo")
+	}
+	return v, nil
 }
 
 //
@@ -54186,7 +55906,16 @@ type TaskHistoryCollector struct {
 // The "oldest task" is the one with the oldest creation time. The
 // tasks in the returned page are unordered.
 func (mo *TaskHistoryCollector) LatestPage() ([]*TaskInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("latestPage")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*TaskInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*TaskInfo")
+	}
+	return v, nil
 }
 
 //
@@ -54365,14 +56094,32 @@ type TaskManager struct {
 // information to users.
 // Required Privilege: System.View
 func (mo *TaskManager) Description() (*TaskDescription, error) {
-	return nil, nil
+	t, err := mo.currentProperty("description")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*TaskDescription)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *TaskDescription")
+	}
+	return v, nil
 }
 
 // Maximum number of TaskHistoryCollector
 // data objects that can exist concurrently, per client.
 // Required Privilege: System.View
 func (mo *TaskManager) MaxCollector() (int32, error) {
-	return nil, nil
+	t, err := mo.currentProperty("maxCollector")
+	if err != nil {
+		return int32(0), err
+	}
+
+	v, ok := t.(int32)
+	if !ok {
+		return int32(0), errors.New("Unable to make type assertion to: int32")
+	}
+	return v, nil
 }
 
 // A list of Task managed objects that completed recently,
@@ -54402,7 +56149,16 @@ func (mo *TaskManager) MaxCollector() (int32, error) {
 // produce any property values as no updates are generated.
 // Required Privilege: System.View
 func (mo *TaskManager) RecentTask() ([]*Task, error) {
-	return nil, nil
+	t, err := mo.currentProperty("recentTask")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*Task)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*Task")
+	}
+	return v, nil
 }
 
 //
@@ -55709,7 +57465,16 @@ type UserDirectory struct {
 // system supports windows domain membership.
 // Required Privilege: System.View
 func (mo *UserDirectory) DomainList() ([]string, error) {
-	return nil, nil
+	t, err := mo.currentProperty("domainList")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]string)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []string")
+	}
+	return v, nil
 }
 
 //
@@ -57977,7 +59742,16 @@ type ViewManager struct {
 // to a view created by this ViewManager.
 // Required Privilege: System.View
 func (mo *ViewManager) ViewList() ([]*View, error) {
-	return nil, nil
+	t, err := mo.currentProperty("viewList")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*View)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*View")
+	}
+	return v, nil
 }
 
 //
@@ -58147,21 +59921,48 @@ type VirtualApp struct {
 //
 // Since vSphere API 4.1
 func (mo *VirtualApp) ChildLink() ([]*VirtualAppLinkInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("childLink")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*VirtualAppLinkInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*VirtualAppLinkInfo")
+	}
+	return v, nil
 }
 
 // A collection of references to the subset of datastore objects used by this
 // vApp.
 // Required Privilege: System.View
 func (mo *VirtualApp) Datastore() ([]*Datastore, error) {
-	return nil, nil
+	t, err := mo.currentProperty("datastore")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*Datastore)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*Datastore")
+	}
+	return v, nil
 }
 
 // A collection of references to the subset of network objects that
 // is used by this virtual machine.
 // Required Privilege: System.View
 func (mo *VirtualApp) Network() ([]*Network, error) {
-	return nil, nil
+	t, err := mo.currentProperty("network")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*Network)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*Network")
+	}
+	return v, nil
 }
 
 // A reference to the parent folder in the VM and Template folder hierarchy. This
@@ -58169,20 +59970,47 @@ func (mo *VirtualApp) Network() ([]*Network, error) {
 // another vApp.
 // Required Privilege: System.View
 func (mo *VirtualApp) ParentFolder() (*Folder, error) {
-	return nil, nil
+	t, err := mo.currentProperty("parentFolder")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*Folder)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *Folder")
+	}
+	return v, nil
 }
 
 // Reference to the parent vApp.
 //
 // Since vSphere API 4.1
 func (mo *VirtualApp) ParentVApp() (*ManagedEntity, error) {
-	return nil, nil
+	t, err := mo.currentProperty("parentVApp")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ManagedEntity)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ManagedEntity")
+	}
+	return v, nil
 }
 
 // Configuration of this package.
 // Required Privilege: System.Read
 func (mo *VirtualApp) VAppConfig() (*VAppConfigInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("vAppConfig")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*VAppConfigInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *VAppConfigInfo")
+	}
+	return v, nil
 }
 
 //
@@ -60082,7 +61910,7 @@ func (mo *VirtualDiskManager) QueryVirtualDiskFragmentation(
 	_this *ManagedObjectReference, name string, datacenter *Datacenter,
 ) (int32, error) {
 
-	return nil, nil
+	return int32(0), nil
 
 }
 
@@ -60128,7 +61956,7 @@ func (mo *VirtualDiskManager) QueryVirtualDiskUuid(
 	_this *ManagedObjectReference, name string, datacenter *Datacenter,
 ) (string, error) {
 
-	return nil, nil
+	return "", nil
 
 }
 
@@ -61613,7 +63441,16 @@ type VirtualMachine struct {
 
 // Information about the runtime capabilities of this virtual machine.
 func (mo *VirtualMachine) Capability() (*VirtualMachineCapability, error) {
-	return nil, nil
+	t, err := mo.currentProperty("capability")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*VirtualMachineCapability)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *VirtualMachineCapability")
+	}
+	return v, nil
 }
 
 // Configuration of this virtual machine, including the name and UUID.
@@ -61627,14 +63464,32 @@ func (mo *VirtualMachine) Capability() (*VirtualMachineCapability, error) {
 // and is often also unavailable during the initial phases of
 // virtual machine creation.
 func (mo *VirtualMachine) Config() (*VirtualMachineConfigInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("config")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*VirtualMachineConfigInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *VirtualMachineConfigInfo")
+	}
+	return v, nil
 }
 
 // A collection of references to the subset of datastore objects in the datacenter
 // that is used by this virtual machine.
 // Required Privilege: System.View
 func (mo *VirtualMachine) Datastore() ([]*Datastore, error) {
-	return nil, nil
+	t, err := mo.currentProperty("datastore")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*Datastore)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*Datastore")
+	}
+	return v, nil
 }
 
 // The current virtual machine's environment browser object. This contains
@@ -61642,7 +63497,16 @@ func (mo *VirtualMachine) Datastore() ([]*Datastore, error) {
 // virtual machine. This is identical to the environment browser on
 // the ComputeResource to which this virtual machine belongs.
 func (mo *VirtualMachine) EnvironmentBrowser() (*EnvironmentBrowser, error) {
-	return nil, nil
+	t, err := mo.currentProperty("environmentBrowser")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*EnvironmentBrowser)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *EnvironmentBrowser")
+	}
+	return v, nil
 }
 
 // Information about VMware Tools and about the virtual machine
@@ -61652,7 +63516,16 @@ func (mo *VirtualMachine) EnvironmentBrowser() (*EnvironmentBrowser, error) {
 // For powered on machines, this is current information. For powered off machines,
 // this is the last recorded state before the virtual machine was powered off.
 func (mo *VirtualMachine) Guest() (*GuestInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("guest")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*GuestInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *GuestInfo")
+	}
+	return v, nil
 }
 
 // The guest heartbeat.
@@ -61666,7 +63539,16 @@ func (mo *VirtualMachine) Guest() (*GuestInfo, error) {
 // The guest heartbeat is a statistics metric. Alarms can be configured on
 // this metric to trigger emails or other actions.
 func (mo *VirtualMachine) GuestHeartbeatStatus() (*ManagedEntityStatus, error) {
-	return nil, nil
+	t, err := mo.currentProperty("guestHeartbeatStatus")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ManagedEntityStatus)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ManagedEntityStatus")
+	}
+	return v, nil
 }
 
 // Deprecated.
@@ -61683,7 +63565,16 @@ func (mo *VirtualMachine) GuestHeartbeatStatus() (*ManagedEntityStatus, error) {
 //
 // Detailed information about the files that comprise this virtual machine.
 func (mo *VirtualMachine) Layout() (*VirtualMachineFileLayout, error) {
-	return nil, nil
+	t, err := mo.currentProperty("layout")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*VirtualMachineFileLayout)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *VirtualMachineFileLayout")
+	}
+	return v, nil
 }
 
 // Detailed information about the files that comprise this virtual machine.
@@ -61700,21 +63591,48 @@ func (mo *VirtualMachine) Layout() (*VirtualMachineFileLayout, error) {
 //
 // Since vSphere API 4.0
 func (mo *VirtualMachine) LayoutEx() (*VirtualMachineFileLayoutEx, error) {
-	return nil, nil
+	t, err := mo.currentProperty("layoutEx")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*VirtualMachineFileLayoutEx)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *VirtualMachineFileLayoutEx")
+	}
+	return v, nil
 }
 
 // A collection of references to the subset of network objects in the datacenter that
 // is used by this virtual machine.
 // Required Privilege: System.View
 func (mo *VirtualMachine) Network() ([]*Network, error) {
-	return nil, nil
+	t, err := mo.currentProperty("network")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*Network)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*Network")
+	}
+	return v, nil
 }
 
 // Reference to the parent vApp.
 //
 // Since vSphere API 4.1
 func (mo *VirtualMachine) ParentVApp() (*ManagedEntity, error) {
-	return nil, nil
+	t, err := mo.currentProperty("parentVApp")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ManagedEntity)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ManagedEntity")
+	}
+	return v, nil
 }
 
 // The resource configuration for a virtual machine. The shares
@@ -61729,7 +63647,16 @@ func (mo *VirtualMachine) ParentVApp() (*ManagedEntity, error) {
 // To change the configuration, use
 // UpdateChildResourceConfiguration.
 func (mo *VirtualMachine) ResourceConfig() (*ResourceConfigSpec, error) {
-	return nil, nil
+	t, err := mo.currentProperty("resourceConfig")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ResourceConfigSpec)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ResourceConfigSpec")
+	}
+	return v, nil
 }
 
 // The current resource pool that specifies resource allocation
@@ -61741,14 +63668,32 @@ func (mo *VirtualMachine) ResourceConfig() (*ResourceConfigSpec, error) {
 // Returns null if the virtual machine is a template or the session has no access
 // to the resource pool.
 func (mo *VirtualMachine) ResourcePool() (*ResourcePool, error) {
-	return nil, nil
+	t, err := mo.currentProperty("resourcePool")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*ResourcePool)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *ResourcePool")
+	}
+	return v, nil
 }
 
 // The roots of all snapshot trees for the virtual machine.
 //
 // Since vSphere API 4.1
 func (mo *VirtualMachine) RootSnapshot() ([]*VirtualMachineSnapshot, error) {
-	return nil, nil
+	t, err := mo.currentProperty("rootSnapshot")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*VirtualMachineSnapshot)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*VirtualMachineSnapshot")
+	}
+	return v, nil
 }
 
 // Execution state and history for this virtual machine.
@@ -61759,7 +63704,16 @@ func (mo *VirtualMachine) RootSnapshot() ([]*VirtualMachineSnapshot, error) {
 // an execution message is pending.
 // an event occurs.
 func (mo *VirtualMachine) Runtime() (*VirtualMachineRuntimeInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("runtime")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*VirtualMachineRuntimeInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *VirtualMachineRuntimeInfo")
+	}
+	return v, nil
 }
 
 // Current snapshot and tree.
@@ -61774,7 +63728,16 @@ func (mo *VirtualMachine) Runtime() (*VirtualMachineRuntimeInfo, error) {
 // RevertToSnapshot_Task
 // RemoveAllSnapshots_Task
 func (mo *VirtualMachine) Snapshot() (*VirtualMachineSnapshotInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("snapshot")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*VirtualMachineSnapshotInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *VirtualMachineSnapshotInfo")
+	}
+	return v, nil
 }
 
 // Storage space used by the virtual machine, split by datastore.
@@ -61790,7 +63753,16 @@ func (mo *VirtualMachine) Snapshot() (*VirtualMachineSnapshotInfo, error) {
 //
 // Since vSphere API 4.0
 func (mo *VirtualMachine) Storage() (*VirtualMachineStorageInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("storage")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*VirtualMachineStorageInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *VirtualMachineStorageInfo")
+	}
+	return v, nil
 }
 
 // Basic information about this virtual machine. This includes:
@@ -61801,7 +63773,16 @@ func (mo *VirtualMachine) Storage() (*VirtualMachineStorageInfo, error) {
 // alarms
 // performance information
 func (mo *VirtualMachine) Summary() (*VirtualMachineSummary, error) {
-	return nil, nil
+	t, err := mo.currentProperty("summary")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*VirtualMachineSummary)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *VirtualMachineSummary")
+	}
+	return v, nil
 }
 
 // Deprecated.
@@ -62202,7 +64183,7 @@ func (mo *VirtualMachine) ExtractOvfEnvironment(
 	_this *ManagedObjectReference,
 ) (string, error) {
 
-	return nil, nil
+	return "", nil
 
 }
 
@@ -66693,7 +68674,16 @@ type VirtualMachineSnapshot struct {
 //
 // Since vSphere API 4.1
 func (mo *VirtualMachineSnapshot) ChildSnapshot() ([]*VirtualMachineSnapshot, error) {
-	return nil, nil
+	t, err := mo.currentProperty("childSnapshot")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.([]*VirtualMachineSnapshot)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: []*VirtualMachineSnapshot")
+	}
+	return v, nil
 }
 
 // Information about the configuration of this virtual machine when this snapshot was
@@ -66703,7 +68693,16 @@ func (mo *VirtualMachineSnapshot) ChildSnapshot() ([]*VirtualMachineSnapshot, er
 // chain that represents the disk at this given snapshot. The fileInfo.fileLayout
 // field is not set.
 func (mo *VirtualMachineSnapshot) Config() (*VirtualMachineConfigInfo, error) {
-	return nil, nil
+	t, err := mo.currentProperty("config")
+	if err != nil {
+		return nil, err
+	}
+
+	v, ok := t.(*VirtualMachineConfigInfo)
+	if !ok {
+		return nil, errors.New("Unable to make type assertion to: *VirtualMachineConfigInfo")
+	}
+	return v, nil
 }
 
 //

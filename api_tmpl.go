@@ -40,9 +40,20 @@ type {{$type}} struct {
 		{{$fieldComment := comment .Description}}
 		{{$privileges := comment .RequiredPrivileges}}
 		{{$fieldType := toGoType .Type}}
+		{{$nullValue := toNullType $fieldType}}
+		{{$getterName := genGetterName .Name $extends}}
 		{{if $fieldComment}} {{$fieldComment}} {{end}}{{if $privileges}} {{$privileges}} {{end}}
-		func (mo *{{$type}}) {{makePublic .Name true}}() ({{$fieldType}}, error) {
-			return nil, nil
+		func (mo *{{$type}}) {{$getterName}}() ({{$fieldType}}, error) {
+			t, err := mo.currentProperty("{{.Name}}")
+			if err != nil {
+				return {{$nullValue}}, err
+			}
+
+			v, ok := t.({{$fieldType}})
+			if !ok {
+				return {{$nullValue}}, errors.New("Unable to make type assertion to: {{$fieldType}}")
+			}
+			return v, nil
 		}
 	{{end}}
 {{end}}
@@ -56,7 +67,7 @@ func ({{$namespace}} *{{$type}}) {{makePublic .Name true}}(
 {{range .Parameters}} {{$ptype := toGoType .Type}} {{replaceReservedWords .Name}} {{lookUpNamespace $ptype $namespace}}, {{end}}
 ) ({{if $returnType}}{{lookUpNamespace $returnType $namespace}},{{end}} error) {
 	{{if $returnType}}
-		return nil, nil
+		return {{toNullType $returnType}}, nil
 	{{else}}
 		return nil
 	{{end}}
