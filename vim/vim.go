@@ -2671,7 +2671,6 @@ type ClusterComplianceCheckedEvent struct {
 //
 type ClusterComputeResource struct {
 	*ManagedObject
-
 	*ComputeResource
 
 	actionHistory []*ClusterActionHistory
@@ -5107,7 +5106,6 @@ type ClusterPowerOnVmResult struct {
 
 type ClusterProfile struct {
 	*ManagedObject
-
 	*Profile
 }
 
@@ -5181,7 +5179,6 @@ type ClusterProfileCreateSpec struct {
 
 type ClusterProfileManager struct {
 	*ManagedObject
-
 	*ProfileManager
 }
 
@@ -6211,7 +6208,6 @@ type ConnectedIso struct {
 //
 type ContainerView struct {
 	*ManagedObject
-
 	*ManagedObjectView
 
 	container *ManagedEntity
@@ -10880,7 +10876,6 @@ type DistributedVirtualPort struct {
 //
 type DistributedVirtualPortgroup struct {
 	*ManagedObject
-
 	*Network
 
 	config *DVPortgroupConfigInfo
@@ -15275,7 +15270,6 @@ type EventFilterSpecRecursionOption struct {
 //
 type EventHistoryCollector struct {
 	*ManagedObject
-
 	*HistoryCollector
 
 	latestPage []*Event
@@ -19454,7 +19448,6 @@ type HostActiveDirectory struct {
 //
 type HostActiveDirectoryAuthentication struct {
 	*ManagedObject
-
 	*HostDirectoryStore
 }
 
@@ -22935,7 +22928,6 @@ type HostDigestInfoDigestMethodType struct {
 //
 type HostDirectoryStore struct {
 	*ManagedObject
-
 	*HostAuthenticationStore
 }
 
@@ -25985,7 +25977,6 @@ func (mo *HostLocalAccountManager) UpdateUser(
 //
 type HostLocalAuthentication struct {
 	*ManagedObject
-
 	*HostAuthenticationStore
 }
 
@@ -29464,7 +29455,6 @@ type HostPrimaryAgentNotShortNameEvent struct {
 //
 type HostProfile struct {
 	*ManagedObject
-
 	*Profile
 
 	referenceHost *HostSystem
@@ -29664,7 +29654,6 @@ type HostProfileHostBasedConfigSpec struct {
 //
 type HostProfileManager struct {
 	*ManagedObject
-
 	*ProfileManager
 }
 
@@ -36302,7 +36291,6 @@ type InventoryHasStandardAloneHosts struct {
 //
 type InventoryView struct {
 	*ManagedObject
-
 	*ManagedObjectView
 }
 
@@ -38411,7 +38399,6 @@ type LinuxVolumeNotClean struct {
 //
 type ListView struct {
 	*ManagedObject
-
 	*ManagedObjectView
 }
 
@@ -39586,7 +39573,6 @@ type ManagedObjectReference struct {
 //
 type ManagedObjectView struct {
 	*ManagedObject
-
 	*View
 
 	view []*ManagedObjectReference
@@ -42181,7 +42167,6 @@ type OnceTaskScheduler struct {
 //
 type OpaqueNetwork struct {
 	*ManagedObject
-
 	*Network
 }
 
@@ -53390,7 +53375,6 @@ type StoragePlacementSpecPlacementType struct {
 //
 type StoragePod struct {
 	*ManagedObject
-
 	*Folder
 
 	podStorageDrsEntry *PodStorageDrsEntry
@@ -54188,7 +54172,6 @@ type TaskFilterSpecTimeOption struct {
 //
 type TaskHistoryCollector struct {
 	*ManagedObject
-
 	*HistoryCollector
 
 	latestPage []*TaskInfo
@@ -58141,7 +58124,6 @@ type VirtualAHCIControllerOption struct {
 //
 type VirtualApp struct {
 	*ManagedObject
-
 	*ResourcePool
 
 	childLink []*VirtualAppLinkInfo
@@ -71383,7 +71365,6 @@ type VmotionInterfaceNotEnabled struct {
 //
 type VmwareDistributedVirtualSwitch struct {
 	*ManagedObject
-
 	*DistributedVirtualSwitch
 }
 

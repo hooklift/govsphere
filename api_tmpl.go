@@ -25,16 +25,13 @@ type {{$type}} struct {
 	{{if ne $extends "*ManagedEntity"}}
 		{{if ne $extends "*ExtensibleManagedObject"}}
 			{{if eq $namespace "mo"}}*ManagedObject{{end}}
-		{{end}}
-	{{end}}
-	{{lookUpNamespace $extends $namespace}}
+		{{end}}{{end}}{{lookUpNamespace $extends $namespace}}
 	{{range .Properties}}
 		{{$fieldComment := comment .Description}}
 		{{$privileges := comment .RequiredPrivileges}}
 		{{$fieldType := toGoType .Type}}
 		{{if ne $namespace "mo"}}{{if $fieldComment}} {{$fieldComment}} {{end}}{{if $privileges}} {{$privileges}} {{end}}{{end}}
-		{{if ne $namespace "mo"}}{{makePublic .Name true}}{{else}}{{replaceReservedWords .Name}}{{end}} {{lookUpNamespace $fieldType $namespace}}
-	{{end}}
+		{{if ne $namespace "mo"}}{{makePublic .Name true}}{{else}}{{replaceReservedWords .Name}}{{end}} {{lookUpNamespace $fieldType $namespace}}{{end}}
 }
 
 {{if eq $namespace "mo"}}
