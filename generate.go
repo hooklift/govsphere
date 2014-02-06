@@ -308,6 +308,7 @@ func genCode(objects []Object, mainPkg, tmpl, namespace string) {
 			}
 		}
 
+		log.Println("type: " + obj.Name)
 		tmpl := template.Must(template.New(obj.Namespace).Funcs(funcMap).Parse(tmpl))
 		err = tmpl.Execute(data, obj)
 		if err != nil {
@@ -322,4 +323,6 @@ func genCode(objects []Object, mainPkg, tmpl, namespace string) {
 		log.Fatalf("There are errors in the generated source for %s: %s\n", file, err.Error())
 	}
 	fd.Write(fsource)
+
+	log.Println("Done 💩")
 }

@@ -30,10 +30,9 @@ Example output:
 Start the godoc server and open up your browser: `godoc -http=:6060`
 
 ## TODO
-1. Generate getters for MOs which will invoke PropertyCollector in order to get the current object's property value.
-2. Create ServiceInstance class
+1. Create ServiceInstance class
 	* Use best API version supported by the server
-3. Add support for JSON Schema in api.json generation
+2. Add support for JSON Schema in api.json generation
 
 ## License
 Copyright 2014 Cloudescape. All rights reserved.
