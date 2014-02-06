@@ -31,7 +31,8 @@ type {{$type}} struct {
 		{{$privileges := comment .RequiredPrivileges}}
 		{{$fieldType := toGoType .Type}}
 		{{if ne $namespace "mo"}}{{if $fieldComment}} {{$fieldComment}} {{end}}{{if $privileges}} {{$privileges}} {{end}}{{end}}
-		{{if ne $namespace "mo"}}{{makePublic .Name true}}{{else}}{{replaceReservedWords .Name}}{{end}} {{lookUpNamespace $fieldType $namespace}}{{end}}
+		{{if ne $namespace "mo"}}{{makePublic .Name true}}{{else}}{{replaceReservedWords .Name}}{{end}} {{lookUpNamespace $fieldType $namespace}}
+	{{end}}
 }
 
 {{if eq $namespace "mo"}}
