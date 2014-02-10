@@ -42,8 +42,8 @@ type Client struct {
 func NewClient(url, soapAction string, tls bool) *Client {
 	return &Client{
 		url:        url,
-		tls:        tls,
 		soapAction: soapAction,
+		tls:        tls,
 	}
 }
 

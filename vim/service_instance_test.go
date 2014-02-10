@@ -5,7 +5,7 @@ import (
 )
 
 func TestNewServiceInstance(t *testing.T) {
-	service := NewServiceInstance("https://172.16.103.128", "root", "shadow04101", "5.5", false)
+	service := NewServiceInstance("https://172.16.103.128", "root", "shadow04101", APIv5_5, false)
 	content, err := service.Content()
 	if err != nil {
 		t.Errorf("incorrect result\ngot:  %#v\nwant: %#v", err, nil)
