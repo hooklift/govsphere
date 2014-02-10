@@ -6,47 +6,56 @@ import (
 	"encoding/xml"
 	"io/ioutil"
 	"log"
+	"net"
 	"net/http"
+	"time"
 )
 
-type SoapEnvelope struct {
-	XMLName       xml.Name   `xml:"http://schemas.xmlsoap.org/soap/envelope/ Envelope"`
-	EncodingStyle string     `xml:"http://schemas.xmlsoap.org/soap/encoding/ encodingStyle,attr"`
-	Header        SoapHeader `xml:"http://schemas.xmlsoap.org/soap/envelope/ Header"`
-	Body          SoapBody   `xml:"http://schemas.xmlsoap.org/soap/envelope/ Body"`
+type Envelope struct {
+	XMLName       xml.Name `xml:"http://schemas.xmlsoap.org/soap/envelope/ Envelope"`
+	EncodingStyle string   `xml:"http://schemas.xmlsoap.org/soap/encoding/ encodingStyle,attr"`
+	Header        Header   `xml:"http://schemas.xmlsoap.org/soap/envelope/ Header"`
+	Body          Body     `xml:"http://schemas.xmlsoap.org/soap/envelope/ Body"`
 }
 
-type SoapHeader struct {
+type Header struct {
 	Header interface{}
 }
 
-type SoapBody struct {
+type Body struct {
 	Body  string
-	Fault SoapFault
+	Fault Fault
 }
 
-type SoapFault struct {
+type Fault struct {
 	faultcode   string `xml:"http://schemas.xmlsoap.org/soap/envelope/ faultcode"`
 	faultstring string `xml:"faultstring"`
 	faultactora string `xml:"faultactor"`
 	detail      string `xml:"detail"`
 }
 
-type SoapClient struct {
-	url string
-	tls bool
+type Client struct {
+	url, soapAction string
+	tls             bool
 }
 
-func NewSoapClient(url string, tls bool) *SoapClient {
-	return &SoapClient{
-		url: url,
-		tls: tls,
+func NewClient(url, soapAction string, tls bool) *Client {
+	return &Client{
+		url:        url,
+		tls:        tls,
+		soapAction: soapAction,
 	}
 }
 
-func (s *SoapClient) Call(soapAction string, request, response interface{}) error {
-	envelope := SoapEnvelope{
-		Header:        SoapHeader{},
+var timeout = time.Duration(30 * time.Second)
+
+func dialTimeout(network, addr string) (net.Conn, error) {
+	return net.DialTimeout(network, addr, timeout)
+}
+
+func (s *Client) Call(request interface{}, response interface{}) error {
+	envelope := Envelope{
+		Header:        Header{},
 		EncodingStyle: "http://schemas.xmlsoap.org/soap/encoding/",
 	}
 
@@ -55,7 +64,7 @@ func (s *SoapClient) Call(soapAction string, request, response interface{}) erro
 		return err
 	}
 
-	envelope.Body = SoapBody{
+	envelope.Body = Body{
 		Body: string(reqXml),
 	}
 
@@ -71,7 +80,7 @@ func (s *SoapClient) Call(soapAction string, request, response interface{}) erro
 
 	req, err := http.NewRequest("POST", s.url, buffer)
 	req.Header.Add("Content-Type", "text/xml; charset=\"utf-8\"")
-	req.Header.Add("SOAPAction", soapAction)
+	req.Header.Add("SOAPAction", s.soapAction)
 	req.Header.Set("User-Agent", "govsphere/1.0")
 
 	tr := &http.Transport{
@@ -90,7 +99,7 @@ func (s *SoapClient) Call(soapAction string, request, response interface{}) erro
 
 	body, err := ioutil.ReadAll(res.Body)
 
-	respEnvelope := &SoapEnvelope{}
+	respEnvelope := &Envelope{}
 
 	err = xml.Unmarshal(body, respEnvelope)
 	if err != nil {

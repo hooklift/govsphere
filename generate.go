@@ -329,7 +329,7 @@ func genCode(objects []Object, mainPkg, tmpl, namespace string) {
 			import (
 				"time"
 				"github.com/c4milo/govsphere/vim/enum"
-				"errors"
+				"encoding/xml"
 			)
 		`)
 	} else {

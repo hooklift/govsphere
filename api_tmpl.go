@@ -31,7 +31,7 @@ type {{$type}} struct {
 		{{$privileges := comment .RequiredPrivileges}}
 		{{$fieldType := toGoType .Type}}
 		{{if ne $namespace "mo"}}{{if $fieldComment}} {{$fieldComment}} {{end}}{{if $privileges}} {{$privileges}} {{end}}{{end}}
-		{{if ne $namespace "mo"}}{{makePublic .Name true}}{{else}}{{replaceReservedWords .Name}}{{end}} {{lookUpNamespace $fieldType $namespace}}
+		{{if ne $namespace "mo"}}{{makePublic .Name true}}{{else}}{{replaceReservedWords .Name}}{{end}} {{lookUpNamespace $fieldType $namespace}} ` + "`" + `xml:"{{.Name}},omitempty"` + "`" + `
 	{{end}}
 }
 
@@ -44,16 +44,22 @@ type {{$type}} struct {
 		{{$getterName := genGetterName .Name $extends}}
 		{{if $fieldComment}} {{$fieldComment}} {{end}}{{if $privileges}} {{$privileges}} {{end}}
 		func (mo *{{$type}}) {{$getterName}}() ({{$fieldType}}, error) {
-			t, err := mo.currentProperty("{{.Name}}")
+
+			{{if $fieldType}}
+				response := struct {
+					Returnval {{$fieldType}} ` + "`" + `xml:"returnval"` + "`" + `
+				}{}
+			{{end}}
+
+			err := mo.currentProperty("{{.Name}}", {{if $fieldType}}&response{{else}}nil{{end}})
 			if err != nil {
 				return {{$nullValue}}, err
 			}
-
-			v, ok := t.({{$fieldType}})
-			if !ok {
-				return {{$nullValue}}, errors.New("Unable to make type assertion to: {{$fieldType}}")
-			}
-			return v, nil
+			{{if $fieldType}}
+				return response.Returnval, nil
+			{{else}}
+				return nil
+			{{end}}
 		}
 	{{end}}
 {{end}}
@@ -64,10 +70,33 @@ type {{$type}} struct {
 {{$returnType := toGoType .ReturnValue.Type}}
 {{if $mcomment}} {{$mcomment}} {{end}}
 func ({{$namespace}} *{{$type}}) {{makePublic .Name true}}(
-{{range .Parameters}} {{$ptype := toGoType .Type}} {{replaceReservedWords .Name}} {{lookUpNamespace $ptype $namespace}}, {{end}}
+{{range .Parameters}} {{if ne .Name "_this"}}{{$ptype := toGoType .Type}} {{replaceReservedWords .Name}} {{lookUpNamespace $ptype $namespace}}, {{end}}{{end}}
 ) ({{if $returnType}}{{lookUpNamespace $returnType $namespace}},{{end}} error) {
+
+	{{$requestType := makePublic .Name true}}
+
+	request := struct {
+		XMLName	xml.Name ` + "`" + `xml:"{{$requestType}}"` + "`" + `
+		{{range .Parameters}}{{$ptype := toGoType .Type}}{{makePublic .Name true}} {{lookUpNamespace $ptype $namespace}} ` + "`" + `xml:"{{.Name}},omitempty"` + "`" + `
+		{{end}}
+	}{
+		{{range .Parameters}}{{makePublic .Name true}}:{{if eq .Name "_this"}}{{$namespace}}.this,{{else}}{{replaceReservedWords .Name}},{{end}}
+		{{end}}
+	}
+
 	{{if $returnType}}
-		return {{toNullType $returnType}}, nil
+	response := struct {
+		Returnval {{lookUpNamespace $returnType $namespace}} ` + "`" + `xml:"returnval"` + "`" + `
+	}{}
+	{{end}}
+
+	err := {{$namespace}}.soapClient.Call(request, {{if $returnType}}&response{{else}}nil{{end}})
+	if err != nil {
+		{{if $returnType}}return {{toNullType $returnType}}, err{{else}}return err{{end}}
+	}
+
+	{{if $returnType}}
+		return response.Returnval, nil
 	{{else}}
 		return nil
 	{{end}}
