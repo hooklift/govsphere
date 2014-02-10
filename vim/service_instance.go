@@ -2,6 +2,7 @@ package vim
 
 import (
 	"github.com/c4milo/govsphere/vim/soap"
+	"log"
 )
 
 const (
@@ -19,7 +20,7 @@ func NewServiceInstance(url, user, pass string, ignoreCert bool) *ServiceInstanc
 
 	service := &ServiceInstance{
 		ManagedObject: &ManagedObject{
-			this: &ManagedObjectReference{
+			This: &ManagedObjectReference{
 				Type:  "ServiceInstance",
 				Value: "ServiceInstance",
 			},
@@ -51,6 +52,20 @@ func NewServiceInstance(url, user, pass string, ignoreCert bool) *ServiceInstanc
 	}
 
 	service.ManagedObject.soapClient = soap.NewClient(url, apiVersion, ignoreCert)
+
+	//Using new API Version
+	sc, err = service.RetrieveServiceContent()
+	if err != nil {
+		panic(err)
+	}
+
+	session, err := sc.SessionManager.Login(user, pass, "")
+	if err != nil {
+		panic(err)
+	}
+
+	log.Printf("%v\n", session)
+	//TODO What do I do with session? where do I store it?
 
 	return service
 }

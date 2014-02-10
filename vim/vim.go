@@ -320,11 +320,11 @@ func (mo *Alarm) ReconfigureAlarm(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ReconfigureAlarm"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *AlarmSpec              `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Spec:  spec,
+		This: mo.This,
+		Spec: spec,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -346,9 +346,9 @@ func (mo *Alarm) RemoveAlarm() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"RemoveAlarm"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -625,11 +625,11 @@ func (mo *AlarmManager) AcknowledgeAlarm(
 
 	request := struct {
 		XMLName xml.Name                `xml:"AcknowledgeAlarm"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Alarm   *Alarm                  `xml:"alarm,omitempty"`
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Alarm:  alarm,
 		Entity: entity,
 	}
@@ -657,10 +657,10 @@ func (mo *AlarmManager) AreAlarmActionsEnabled(
 
 	request := struct {
 		XMLName xml.Name                `xml:"AreAlarmActionsEnabled"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Entity: entity,
 	}
 
@@ -694,11 +694,11 @@ func (mo *AlarmManager) CreateAlarm(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreateAlarm"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 		Spec    *AlarmSpec              `xml:"spec,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Entity: entity,
 		Spec:   spec,
 	}
@@ -730,11 +730,11 @@ func (mo *AlarmManager) EnableAlarmActions(
 
 	request := struct {
 		XMLName xml.Name                `xml:"EnableAlarmActions"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 		Enabled bool                    `xml:"enabled,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		Entity:  entity,
 		Enabled: enabled,
 	}
@@ -764,10 +764,10 @@ func (mo *AlarmManager) GetAlarm(
 
 	request := struct {
 		XMLName xml.Name                `xml:"GetAlarm"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Entity: entity,
 	}
 
@@ -798,10 +798,10 @@ func (mo *AlarmManager) GetAlarmState(
 
 	request := struct {
 		XMLName xml.Name                `xml:"GetAlarmState"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Entity: entity,
 	}
 
@@ -1684,11 +1684,11 @@ func (mo *AuthorizationManager) AddAuthorizationRole(
 
 	request := struct {
 		XMLName xml.Name                `xml:"AddAuthorizationRole"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 		PrivIds []string                `xml:"privIds,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		Name:    name,
 		PrivIds: privIds,
 	}
@@ -1726,12 +1726,12 @@ func (mo *AuthorizationManager) HasPrivilegeOnEntities(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"HasPrivilegeOnEntities"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity    []*ManagedEntity        `xml:"entity,omitempty"`
 		SessionId string                  `xml:"sessionId,omitempty"`
 		PrivId    []string                `xml:"privId,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		Entity:    entity,
 		SessionId: sessionId,
 		PrivId:    privId,
@@ -1769,12 +1769,12 @@ func (mo *AuthorizationManager) HasPrivilegeOnEntity(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"HasPrivilegeOnEntity"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity    *ManagedEntity          `xml:"entity,omitempty"`
 		SessionId string                  `xml:"sessionId,omitempty"`
 		PrivId    []string                `xml:"privId,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		Entity:    entity,
 		SessionId: sessionId,
 		PrivId:    privId,
@@ -1805,11 +1805,11 @@ func (mo *AuthorizationManager) MergePermissions(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"MergePermissions"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		SrcRoleId int32                   `xml:"srcRoleId,omitempty"`
 		DstRoleId int32                   `xml:"dstRoleId,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		SrcRoleId: srcRoleId,
 		DstRoleId: dstRoleId,
 	}
@@ -1835,11 +1835,11 @@ func (mo *AuthorizationManager) RemoveAuthorizationRole(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"RemoveAuthorizationRole"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		RoleId     int32                   `xml:"roleId,omitempty"`
 		FailIfUsed bool                    `xml:"failIfUsed,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		RoleId:     roleId,
 		FailIfUsed: failIfUsed,
 	}
@@ -1877,12 +1877,12 @@ func (mo *AuthorizationManager) RemoveEntityPermission(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RemoveEntityPermission"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 		User    string                  `xml:"user,omitempty"`
 		IsGroup bool                    `xml:"isGroup,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		Entity:  entity,
 		User:    user,
 		IsGroup: isGroup,
@@ -1940,11 +1940,11 @@ func (mo *AuthorizationManager) ResetEntityPermissions(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"ResetEntityPermissions"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity     *ManagedEntity          `xml:"entity,omitempty"`
 		Permission []*Permission           `xml:"permission,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Entity:     entity,
 		Permission: permission,
 	}
@@ -1970,9 +1970,9 @@ func (mo *AuthorizationManager) RetrieveAllPermissions() ([]*Permission, error) 
 
 	request := struct {
 		XMLName xml.Name                `xml:"RetrieveAllPermissions"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -2013,11 +2013,11 @@ func (mo *AuthorizationManager) RetrieveEntityPermissions(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"RetrieveEntityPermissions"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity    *ManagedEntity          `xml:"entity,omitempty"`
 		Inherited bool                    `xml:"inherited,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		Entity:    entity,
 		Inherited: inherited,
 	}
@@ -2049,10 +2049,10 @@ func (mo *AuthorizationManager) RetrieveRolePermissions(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RetrieveRolePermissions"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		RoleId  int32                   `xml:"roleId,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		RoleId: roleId,
 	}
 
@@ -2105,11 +2105,11 @@ func (mo *AuthorizationManager) SetEntityPermissions(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"SetEntityPermissions"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity     *ManagedEntity          `xml:"entity,omitempty"`
 		Permission []*Permission           `xml:"permission,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Entity:     entity,
 		Permission: permission,
 	}
@@ -2138,12 +2138,12 @@ func (mo *AuthorizationManager) UpdateAuthorizationRole(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpdateAuthorizationRole"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		RoleId  int32                   `xml:"roleId,omitempty"`
 		NewName string                  `xml:"newName,omitempty"`
 		PrivIds []string                `xml:"privIds,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		RoleId:  roleId,
 		NewName: newName,
 		PrivIds: privIds,
@@ -3276,13 +3276,13 @@ func (mo *ClusterComputeResource) AddHost_Task(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"AddHost_Task"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec         *HostConnectSpec        `xml:"spec,omitempty"`
 		AsConnected  bool                    `xml:"asConnected,omitempty"`
 		ResourcePool *ResourcePool           `xml:"resourcePool,omitempty"`
 		License      string                  `xml:"license,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		Spec:         spec,
 		AsConnected:  asConnected,
 		ResourcePool: resourcePool,
@@ -3322,11 +3322,11 @@ func (mo *ClusterComputeResource) ApplyRecommendation(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ApplyRecommendation"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Key     string                  `xml:"key,omitempty"`
 	}{
-		_this: mo.this,
-		Key:   key,
+		This: mo.This,
+		Key:  key,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -3356,11 +3356,11 @@ func (mo *ClusterComputeResource) CancelRecommendation(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CancelRecommendation"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Key     string                  `xml:"key,omitempty"`
 	}{
-		_this: mo.this,
-		Key:   key,
+		This: mo.This,
+		Key:  key,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -3418,11 +3418,11 @@ func (mo *ClusterComputeResource) ClusterEnterMaintenanceMode(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ClusterEnterMaintenanceMode"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    []*HostSystem           `xml:"host,omitempty"`
 		Option  []*OptionValue          `xml:"option,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Host:   host,
 		Option: option,
 	}
@@ -3474,11 +3474,11 @@ func (mo *ClusterComputeResource) MoveHostInto_Task(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"MoveHostInto_Task"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		Host         *HostSystem             `xml:"host,omitempty"`
 		ResourcePool *ResourcePool           `xml:"resourcePool,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		Host:         host,
 		ResourcePool: resourcePool,
 	}
@@ -3533,11 +3533,11 @@ func (mo *ClusterComputeResource) MoveInto_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"MoveInto_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    []*HostSystem           `xml:"host,omitempty"`
 	}{
-		_this: mo.this,
-		Host:  host,
+		This: mo.This,
+		Host: host,
 	}
 
 	response := struct {
@@ -3587,13 +3587,13 @@ func (mo *ClusterComputeResource) RecommendHostsForVm(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RecommendHostsForVm"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm      *VirtualMachine         `xml:"vm,omitempty"`
 		Pool    *ResourcePool           `xml:"pool,omitempty"`
 	}{
-		_this: mo.this,
-		Vm:    vm,
-		Pool:  pool,
+		This: mo.This,
+		Vm:   vm,
+		Pool: pool,
 	}
 
 	response := struct {
@@ -3624,11 +3624,11 @@ func (mo *ClusterComputeResource) ReconfigureCluster_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ReconfigureCluster_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *ClusterConfigSpec      `xml:"spec,omitempty"`
 		Modify  bool                    `xml:"modify,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Spec:   spec,
 		Modify: modify,
 	}
@@ -3664,9 +3664,9 @@ func (mo *ClusterComputeResource) RefreshRecommendation() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"RefreshRecommendation"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -3690,9 +3690,9 @@ func (mo *ClusterComputeResource) RetrieveDasAdvancedRuntimeInfo() (*ClusterDasA
 
 	request := struct {
 		XMLName xml.Name                `xml:"RetrieveDasAdvancedRuntimeInfo"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -5774,10 +5774,10 @@ func (mo *ClusterProfile) UpdateClusterProfile(
 
 	request := struct {
 		XMLName xml.Name                  `xml:"UpdateClusterProfile"`
-		_this   *ManagedObjectReference   `xml:"_this,omitempty"`
+		This    *ManagedObjectReference   `xml:"_this,omitempty"`
 		Config  *ClusterProfileConfigSpec `xml:"config,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Config: config,
 	}
 
@@ -6555,11 +6555,11 @@ func (mo *ComputeResource) ReconfigureComputeResource_Task(
 
 	request := struct {
 		XMLName xml.Name                   `xml:"ReconfigureComputeResource_Task"`
-		_this   *ManagedObjectReference    `xml:"_this,omitempty"`
+		This    *ManagedObjectReference    `xml:"_this,omitempty"`
 		Spec    *ComputeResourceConfigSpec `xml:"spec,omitempty"`
 		Modify  bool                       `xml:"modify,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Spec:   spec,
 		Modify: modify,
 	}
@@ -7360,13 +7360,13 @@ func (mo *CustomFieldsManager) AddCustomFieldDef(
 
 	request := struct {
 		XMLName        xml.Name                `xml:"AddCustomFieldDef"`
-		_this          *ManagedObjectReference `xml:"_this,omitempty"`
+		This           *ManagedObjectReference `xml:"_this,omitempty"`
 		Name           string                  `xml:"name,omitempty"`
 		MoType         string                  `xml:"moType,omitempty"`
 		FieldDefPolicy *PrivilegePolicyDef     `xml:"fieldDefPolicy,omitempty"`
 		FieldPolicy    *PrivilegePolicyDef     `xml:"fieldPolicy,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		Name:           name,
 		MoType:         moType,
 		FieldDefPolicy: fieldDefPolicy,
@@ -7399,11 +7399,11 @@ func (mo *CustomFieldsManager) RemoveCustomFieldDef(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RemoveCustomFieldDef"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Key     int32                   `xml:"key,omitempty"`
 	}{
-		_this: mo.this,
-		Key:   key,
+		This: mo.This,
+		Key:  key,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -7427,13 +7427,13 @@ func (mo *CustomFieldsManager) RenameCustomFieldDef(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RenameCustomFieldDef"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Key     int32                   `xml:"key,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 	}{
-		_this: mo.this,
-		Key:   key,
-		Name:  name,
+		This: mo.This,
+		Key:  key,
+		Name: name,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -7457,12 +7457,12 @@ func (mo *CustomFieldsManager) SetField(
 
 	request := struct {
 		XMLName xml.Name                `xml:"SetField"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 		Key     int32                   `xml:"key,omitempty"`
 		Value   string                  `xml:"value,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Entity: entity,
 		Key:    key,
 		Value:  value,
@@ -8117,10 +8117,10 @@ func (mo *CustomizationSpecManager) CheckCustomizationResources(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CheckCustomizationResources"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		GuestOs string                  `xml:"guestOs,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		GuestOs: guestOs,
 	}
 
@@ -8145,11 +8145,11 @@ func (mo *CustomizationSpecManager) CreateCustomizationSpec(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreateCustomizationSpec"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Item    *CustomizationSpecItem  `xml:"item,omitempty"`
 	}{
-		_this: mo.this,
-		Item:  item,
+		This: mo.This,
+		Item: item,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -8173,11 +8173,11 @@ func (mo *CustomizationSpecManager) CustomizationSpecItemToXml(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CustomizationSpecItemToXml"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Item    *CustomizationSpecItem  `xml:"item,omitempty"`
 	}{
-		_this: mo.this,
-		Item:  item,
+		This: mo.This,
+		Item: item,
 	}
 
 	response := struct {
@@ -8205,11 +8205,11 @@ func (mo *CustomizationSpecManager) DeleteCustomizationSpec(
 
 	request := struct {
 		XMLName xml.Name                `xml:"DeleteCustomizationSpec"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 	}{
-		_this: mo.this,
-		Name:  name,
+		This: mo.This,
+		Name: name,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -8233,11 +8233,11 @@ func (mo *CustomizationSpecManager) DoesCustomizationSpecExist(
 
 	request := struct {
 		XMLName xml.Name                `xml:"DoesCustomizationSpecExist"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 	}{
-		_this: mo.this,
-		Name:  name,
+		This: mo.This,
+		Name: name,
 	}
 
 	response := struct {
@@ -8265,11 +8265,11 @@ func (mo *CustomizationSpecManager) DuplicateCustomizationSpec(
 
 	request := struct {
 		XMLName xml.Name                `xml:"DuplicateCustomizationSpec"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 		NewName string                  `xml:"newName,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		Name:    name,
 		NewName: newName,
 	}
@@ -8295,11 +8295,11 @@ func (mo *CustomizationSpecManager) GetCustomizationSpec(
 
 	request := struct {
 		XMLName xml.Name                `xml:"GetCustomizationSpec"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 	}{
-		_this: mo.this,
-		Name:  name,
+		This: mo.This,
+		Name: name,
 	}
 
 	response := struct {
@@ -8331,11 +8331,11 @@ func (mo *CustomizationSpecManager) OverwriteCustomizationSpec(
 
 	request := struct {
 		XMLName xml.Name                `xml:"OverwriteCustomizationSpec"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Item    *CustomizationSpecItem  `xml:"item,omitempty"`
 	}{
-		_this: mo.this,
-		Item:  item,
+		This: mo.This,
+		Item: item,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -8359,11 +8359,11 @@ func (mo *CustomizationSpecManager) RenameCustomizationSpec(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RenameCustomizationSpec"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 		NewName string                  `xml:"newName,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		Name:    name,
 		NewName: newName,
 	}
@@ -8389,10 +8389,10 @@ func (mo *CustomizationSpecManager) XmlToCustomizationSpecItem(
 
 	request := struct {
 		XMLName     xml.Name                `xml:"XmlToCustomizationSpecItem"`
-		_this       *ManagedObjectReference `xml:"_this,omitempty"`
+		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		SpecItemXml string                  `xml:"specItemXml,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		SpecItemXml: specItemXml,
 	}
 
@@ -10447,11 +10447,11 @@ func (mo *Datacenter) PowerOnMultiVM_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"PowerOnMultiVM_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm      []*VirtualMachine       `xml:"vm,omitempty"`
 		Option  []*OptionValue          `xml:"option,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Vm:     vm,
 		Option: option,
 	}
@@ -10484,14 +10484,14 @@ func (mo *Datacenter) QueryConnectionInfo(
 
 	request := struct {
 		XMLName       xml.Name                `xml:"QueryConnectionInfo"`
-		_this         *ManagedObjectReference `xml:"_this,omitempty"`
+		This          *ManagedObjectReference `xml:"_this,omitempty"`
 		Hostname      string                  `xml:"hostname,omitempty"`
 		Port          int32                   `xml:"port,omitempty"`
 		Username      string                  `xml:"username,omitempty"`
 		Password      string                  `xml:"password,omitempty"`
 		SslThumbprint string                  `xml:"sslThumbprint,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		Hostname:      hostname,
 		Port:          port,
 		Username:      username,
@@ -10527,9 +10527,9 @@ func (mo *Datacenter) QueryDatacenterConfigOptionDescriptor() ([]*VirtualMachine
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryDatacenterConfigOptionDescriptor"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -10559,11 +10559,11 @@ func (mo *Datacenter) ReconfigureDatacenter_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ReconfigureDatacenter_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *DatacenterConfigSpec   `xml:"spec,omitempty"`
 		Modify  bool                    `xml:"modify,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Spec:   spec,
 		Modify: modify,
 	}
@@ -10896,9 +10896,9 @@ func (mo *Datastore) DatastoreEnterMaintenanceMode() (*StoragePlacementResult, e
 
 	request := struct {
 		XMLName xml.Name                `xml:"DatastoreEnterMaintenanceMode"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -10931,9 +10931,9 @@ func (mo *Datastore) DatastoreExitMaintenanceMode_Task() (*Task, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"DatastoreExitMaintenanceMode_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -10965,9 +10965,9 @@ func (mo *Datastore) DestroyDatastore() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"DestroyDatastore"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -10990,9 +10990,9 @@ func (mo *Datastore) RefreshDatastore() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"RefreshDatastore"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -11018,9 +11018,9 @@ func (mo *Datastore) RefreshDatastoreStorageInfo() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"RefreshDatastoreStorageInfo"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -11047,10 +11047,10 @@ func (mo *Datastore) RenameDatastore(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RenameDatastore"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		NewName string                  `xml:"newName,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		NewName: newName,
 	}
 
@@ -11103,10 +11103,10 @@ func (mo *Datastore) UpdateVirtualMachineFiles_Task(
 
 	request := struct {
 		XMLName                   xml.Name                           `xml:"UpdateVirtualMachineFiles_Task"`
-		_this                     *ManagedObjectReference            `xml:"_this,omitempty"`
+		This                      *ManagedObjectReference            `xml:"_this,omitempty"`
 		MountPathDatastoreMapping []*DatastoreMountPathDatastorePair `xml:"mountPathDatastoreMapping,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 		MountPathDatastoreMapping: mountPathDatastoreMapping,
 	}
 
@@ -11401,12 +11401,12 @@ func (mo *DatastoreNamespaceManager) CreateDirectory(
 
 	request := struct {
 		XMLName     xml.Name                `xml:"CreateDirectory"`
-		_this       *ManagedObjectReference `xml:"_this,omitempty"`
+		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		Datastore   *Datastore              `xml:"datastore,omitempty"`
 		DisplayName string                  `xml:"displayName,omitempty"`
 		Policy      string                  `xml:"policy,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		Datastore:   datastore,
 		DisplayName: displayName,
 		Policy:      policy,
@@ -11444,11 +11444,11 @@ func (mo *DatastoreNamespaceManager) DeleteDirectory(
 
 	request := struct {
 		XMLName       xml.Name                `xml:"DeleteDirectory"`
-		_this         *ManagedObjectReference `xml:"_this,omitempty"`
+		This          *ManagedObjectReference `xml:"_this,omitempty"`
 		Datacenter    *Datacenter             `xml:"datacenter,omitempty"`
 		DatastorePath string                  `xml:"datastorePath,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		Datacenter:    datacenter,
 		DatastorePath: datastorePath,
 	}
@@ -11852,13 +11852,13 @@ func (mo *DiagnosticManager) BrowseDiagnosticLog(
 
 	request := struct {
 		XMLName xml.Name                `xml:"BrowseDiagnosticLog"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 		Key     string                  `xml:"key,omitempty"`
 		Start   int32                   `xml:"start,omitempty"`
 		Lines   int32                   `xml:"lines,omitempty"`
 	}{
-		_this: mo.this,
+		This:  mo.This,
 		Host:  host,
 		Key:   key,
 		Start: start,
@@ -11895,11 +11895,11 @@ func (mo *DiagnosticManager) GenerateLogBundles_Task(
 
 	request := struct {
 		XMLName        xml.Name                `xml:"GenerateLogBundles_Task"`
-		_this          *ManagedObjectReference `xml:"_this,omitempty"`
+		This           *ManagedObjectReference `xml:"_this,omitempty"`
 		IncludeDefault bool                    `xml:"includeDefault,omitempty"`
 		Host           []*HostSystem           `xml:"host,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		IncludeDefault: includeDefault,
 		Host:           host,
 	}
@@ -11929,11 +11929,11 @@ func (mo *DiagnosticManager) QueryDescriptions(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryDescriptions"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		_this: mo.this,
-		Host:  host,
+		This: mo.This,
+		Host: host,
 	}
 
 	response := struct {
@@ -12463,10 +12463,10 @@ func (mo *DistributedVirtualPortgroup) DVPortgroupRollback_Task(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"DVPortgroupRollback_Task"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		EntityBackup *EntityBackupConfig     `xml:"entityBackup,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		EntityBackup: entityBackup,
 	}
 
@@ -12533,11 +12533,11 @@ func (mo *DistributedVirtualPortgroup) ReconfigureDVPortgroup_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ReconfigureDVPortgroup_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *DVPortgroupConfigSpec  `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Spec:  spec,
+		This: mo.This,
+		Spec: spec,
 	}
 
 	response := struct {
@@ -13009,11 +13009,11 @@ func (mo *DistributedVirtualSwitch) AddDVPortgroup_Task(
 
 	request := struct {
 		XMLName xml.Name                 `xml:"AddDVPortgroup_Task"`
-		_this   *ManagedObjectReference  `xml:"_this,omitempty"`
+		This    *ManagedObjectReference  `xml:"_this,omitempty"`
 		Spec    []*DVPortgroupConfigSpec `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Spec:  spec,
+		This: mo.This,
+		Spec: spec,
 	}
 
 	response := struct {
@@ -13043,10 +13043,10 @@ func (mo *DistributedVirtualSwitch) AddNetworkResourcePool(
 
 	request := struct {
 		XMLName    xml.Name                            `xml:"AddNetworkResourcePool"`
-		_this      *ManagedObjectReference             `xml:"_this,omitempty"`
+		This       *ManagedObjectReference             `xml:"_this,omitempty"`
 		ConfigSpec []*DVSNetworkResourcePoolConfigSpec `xml:"configSpec,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		ConfigSpec: configSpec,
 	}
 
@@ -13074,11 +13074,11 @@ func (mo *DistributedVirtualSwitch) CreateDVPortgroup_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreateDVPortgroup_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *DVPortgroupConfigSpec  `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Spec:  spec,
+		This: mo.This,
+		Spec: spec,
 	}
 
 	response := struct {
@@ -13137,10 +13137,10 @@ func (mo *DistributedVirtualSwitch) DVSRollback_Task(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"DVSRollback_Task"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		EntityBackup *EntityBackupConfig     `xml:"entityBackup,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		EntityBackup: entityBackup,
 	}
 
@@ -13171,10 +13171,10 @@ func (mo *DistributedVirtualSwitch) EnableNetworkResourceManagement(
 
 	request := struct {
 		XMLName xml.Name                `xml:"EnableNetworkResourceManagement"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Enable  bool                    `xml:"enable,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Enable: enable,
 	}
 
@@ -13200,10 +13200,10 @@ func (mo *DistributedVirtualSwitch) FetchDVPortKeys(
 
 	request := struct {
 		XMLName  xml.Name                              `xml:"FetchDVPortKeys"`
-		_this    *ManagedObjectReference               `xml:"_this,omitempty"`
+		This     *ManagedObjectReference               `xml:"_this,omitempty"`
 		Criteria *DistributedVirtualSwitchPortCriteria `xml:"criteria,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		Criteria: criteria,
 	}
 
@@ -13232,10 +13232,10 @@ func (mo *DistributedVirtualSwitch) FetchDVPorts(
 
 	request := struct {
 		XMLName  xml.Name                              `xml:"FetchDVPorts"`
-		_this    *ManagedObjectReference               `xml:"_this,omitempty"`
+		This     *ManagedObjectReference               `xml:"_this,omitempty"`
 		Criteria *DistributedVirtualSwitchPortCriteria `xml:"criteria,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		Criteria: criteria,
 	}
 
@@ -13266,10 +13266,10 @@ func (mo *DistributedVirtualSwitch) LookupDvPortGroup(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"LookupDvPortGroup"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		PortgroupKey string                  `xml:"portgroupKey,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		PortgroupKey: portgroupKey,
 	}
 
@@ -13352,11 +13352,11 @@ func (mo *DistributedVirtualSwitch) MergeDvs_Task(
 
 	request := struct {
 		XMLName xml.Name                  `xml:"MergeDvs_Task"`
-		_this   *ManagedObjectReference   `xml:"_this,omitempty"`
+		This    *ManagedObjectReference   `xml:"_this,omitempty"`
 		Dvs     *DistributedVirtualSwitch `xml:"dvs,omitempty"`
 	}{
-		_this: mo.this,
-		Dvs:   dvs,
+		This: mo.This,
+		Dvs:  dvs,
 	}
 
 	response := struct {
@@ -13387,11 +13387,11 @@ func (mo *DistributedVirtualSwitch) MoveDVPort_Task(
 
 	request := struct {
 		XMLName                 xml.Name                `xml:"MoveDVPort_Task"`
-		_this                   *ManagedObjectReference `xml:"_this,omitempty"`
+		This                    *ManagedObjectReference `xml:"_this,omitempty"`
 		PortKey                 []string                `xml:"portKey,omitempty"`
 		DestinationPortgroupKey string                  `xml:"destinationPortgroupKey,omitempty"`
 	}{
-		_this:                   mo.this,
+		This:                    mo.This,
 		PortKey:                 portKey,
 		DestinationPortgroupKey: destinationPortgroupKey,
 	}
@@ -13421,11 +13421,11 @@ func (mo *DistributedVirtualSwitch) PerformDvsProductSpecOperation_Task(
 
 	request := struct {
 		XMLName     xml.Name                             `xml:"PerformDvsProductSpecOperation_Task"`
-		_this       *ManagedObjectReference              `xml:"_this,omitempty"`
+		This        *ManagedObjectReference              `xml:"_this,omitempty"`
 		Operation   string                               `xml:"operation,omitempty"`
 		ProductSpec *DistributedVirtualSwitchProductSpec `xml:"productSpec,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		Operation:   operation,
 		ProductSpec: productSpec,
 	}
@@ -13453,9 +13453,9 @@ func (mo *DistributedVirtualSwitch) QueryUsedVlanIdInDvs() ([]int32, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryUsedVlanIdInDvs"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -13483,11 +13483,11 @@ func (mo *DistributedVirtualSwitch) ReconfigureDVPort_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ReconfigureDVPort_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Port    []*DVPortConfigSpec     `xml:"port,omitempty"`
 	}{
-		_this: mo.this,
-		Port:  port,
+		This: mo.This,
+		Port: port,
 	}
 
 	response := struct {
@@ -13566,11 +13566,11 @@ func (mo *DistributedVirtualSwitch) ReconfigureDvs_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ReconfigureDvs_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *DVSConfigSpec          `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Spec:  spec,
+		This: mo.This,
+		Spec: spec,
 	}
 
 	response := struct {
@@ -13604,10 +13604,10 @@ func (mo *DistributedVirtualSwitch) RectifyDvsHost_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RectifyDvsHost_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Hosts   []*HostSystem           `xml:"hosts,omitempty"`
 	}{
-		_this: mo.this,
+		This:  mo.This,
 		Hosts: hosts,
 	}
 
@@ -13636,10 +13636,10 @@ func (mo *DistributedVirtualSwitch) RefreshDVPortState(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"RefreshDVPortState"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		PortKeys []string                `xml:"portKeys,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		PortKeys: portKeys,
 	}
 
@@ -13666,11 +13666,11 @@ func (mo *DistributedVirtualSwitch) RemoveNetworkResourcePool(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RemoveNetworkResourcePool"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Key     []string                `xml:"key,omitempty"`
 	}{
-		_this: mo.this,
-		Key:   key,
+		This: mo.This,
+		Key:  key,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -13694,10 +13694,10 @@ func (mo *DistributedVirtualSwitch) UpdateDvsCapability(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"UpdateDvsCapability"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Capability *DVSCapability          `xml:"capability,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Capability: capability,
 	}
 
@@ -13724,10 +13724,10 @@ func (mo *DistributedVirtualSwitch) UpdateDVSHealthCheckConfig_Task(
 
 	request := struct {
 		XMLName           xml.Name                `xml:"UpdateDVSHealthCheckConfig_Task"`
-		_this             *ManagedObjectReference `xml:"_this,omitempty"`
+		This              *ManagedObjectReference `xml:"_this,omitempty"`
 		HealthCheckConfig []*DVSHealthCheckConfig `xml:"healthCheckConfig,omitempty"`
 	}{
-		_this:             mo.this,
+		This:              mo.This,
 		HealthCheckConfig: healthCheckConfig,
 	}
 
@@ -13758,10 +13758,10 @@ func (mo *DistributedVirtualSwitch) UpdateNetworkResourcePool(
 
 	request := struct {
 		XMLName    xml.Name                            `xml:"UpdateNetworkResourcePool"`
-		_this      *ManagedObjectReference             `xml:"_this,omitempty"`
+		This       *ManagedObjectReference             `xml:"_this,omitempty"`
 		ConfigSpec []*DVSNetworkResourcePoolConfigSpec `xml:"configSpec,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		ConfigSpec: configSpec,
 	}
 
@@ -14054,10 +14054,10 @@ func (mo *DistributedVirtualSwitchManager) DVSManagerExportEntity_Task(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"DVSManagerExportEntity_Task"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		SelectionSet []*SelectionSet         `xml:"selectionSet,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		SelectionSet: selectionSet,
 	}
 
@@ -14093,11 +14093,11 @@ func (mo *DistributedVirtualSwitchManager) DVSManagerImportEntity_Task(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"DVSManagerImportEntity_Task"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		EntityBackup []*EntityBackupConfig   `xml:"entityBackup,omitempty"`
 		ImportType   string                  `xml:"importType,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		EntityBackup: entityBackup,
 		ImportType:   importType,
 	}
@@ -14130,11 +14130,11 @@ func (mo *DistributedVirtualSwitchManager) DVSManagerLookupDvPortGroup(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"DVSManagerLookupDvPortGroup"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		SwitchUuid   string                  `xml:"switchUuid,omitempty"`
 		PortgroupKey string                  `xml:"portgroupKey,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		SwitchUuid:   switchUuid,
 		PortgroupKey: portgroupKey,
 	}
@@ -14163,9 +14163,9 @@ func (mo *DistributedVirtualSwitchManager) QueryAvailableDvsSpec() ([]*Distribut
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryAvailableDvsSpec"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -14194,12 +14194,12 @@ func (mo *DistributedVirtualSwitchManager) QueryCompatibleHostForExistingDvs(
 
 	request := struct {
 		XMLName   xml.Name                  `xml:"QueryCompatibleHostForExistingDvs"`
-		_this     *ManagedObjectReference   `xml:"_this,omitempty"`
+		This      *ManagedObjectReference   `xml:"_this,omitempty"`
 		Container *ManagedEntity            `xml:"container,omitempty"`
 		Recursive bool                      `xml:"recursive,omitempty"`
 		Dvs       *DistributedVirtualSwitch `xml:"dvs,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		Container: container,
 		Recursive: recursive,
 		Dvs:       dvs,
@@ -14231,12 +14231,12 @@ func (mo *DistributedVirtualSwitchManager) QueryCompatibleHostForNewDvs(
 
 	request := struct {
 		XMLName           xml.Name                             `xml:"QueryCompatibleHostForNewDvs"`
-		_this             *ManagedObjectReference              `xml:"_this,omitempty"`
+		This              *ManagedObjectReference              `xml:"_this,omitempty"`
 		Container         *ManagedEntity                       `xml:"container,omitempty"`
 		Recursive         bool                                 `xml:"recursive,omitempty"`
 		SwitchProductSpec *DistributedVirtualSwitchProductSpec `xml:"switchProductSpec,omitempty"`
 	}{
-		_this:             mo.this,
+		This:              mo.This,
 		Container:         container,
 		Recursive:         recursive,
 		SwitchProductSpec: switchProductSpec,
@@ -14267,11 +14267,11 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsByUuid(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryDvsByUuid"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Uuid    string                  `xml:"uuid,omitempty"`
 	}{
-		_this: mo.this,
-		Uuid:  uuid,
+		This: mo.This,
+		Uuid: uuid,
 	}
 
 	response := struct {
@@ -14325,12 +14325,12 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsCheckCompatibility(
 
 	request := struct {
 		XMLName        xml.Name                                            `xml:"QueryDvsCheckCompatibility"`
-		_this          *ManagedObjectReference                             `xml:"_this,omitempty"`
+		This           *ManagedObjectReference                             `xml:"_this,omitempty"`
 		HostContainer  *DistributedVirtualSwitchManagerHostContainer       `xml:"hostContainer,omitempty"`
 		DvsProductSpec *DistributedVirtualSwitchManagerDvsProductSpec      `xml:"dvsProductSpec,omitempty"`
 		HostFilterSpec []*DistributedVirtualSwitchManagerHostDvsFilterSpec `xml:"hostFilterSpec,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		HostContainer:  hostContainer,
 		DvsProductSpec: dvsProductSpec,
 		HostFilterSpec: hostFilterSpec,
@@ -14363,10 +14363,10 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsCompatibleHostSpec(
 
 	request := struct {
 		XMLName           xml.Name                             `xml:"QueryDvsCompatibleHostSpec"`
-		_this             *ManagedObjectReference              `xml:"_this,omitempty"`
+		This              *ManagedObjectReference              `xml:"_this,omitempty"`
 		SwitchProductSpec *DistributedVirtualSwitchProductSpec `xml:"switchProductSpec,omitempty"`
 	}{
-		_this:             mo.this,
+		This:              mo.This,
 		SwitchProductSpec: switchProductSpec,
 	}
 
@@ -14396,13 +14396,13 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsConfigTarget(
 
 	request := struct {
 		XMLName xml.Name                  `xml:"QueryDvsConfigTarget"`
-		_this   *ManagedObjectReference   `xml:"_this,omitempty"`
+		This    *ManagedObjectReference   `xml:"_this,omitempty"`
 		Host    *HostSystem               `xml:"host,omitempty"`
 		Dvs     *DistributedVirtualSwitch `xml:"dvs,omitempty"`
 	}{
-		_this: mo.this,
-		Host:  host,
-		Dvs:   dvs,
+		This: mo.This,
+		Host: host,
+		Dvs:  dvs,
 	}
 
 	response := struct {
@@ -14433,10 +14433,10 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsFeatureCapability(
 
 	request := struct {
 		XMLName           xml.Name                             `xml:"QueryDvsFeatureCapability"`
-		_this             *ManagedObjectReference              `xml:"_this,omitempty"`
+		This              *ManagedObjectReference              `xml:"_this,omitempty"`
 		SwitchProductSpec *DistributedVirtualSwitchProductSpec `xml:"switchProductSpec,omitempty"`
 	}{
-		_this:             mo.this,
+		This:              mo.This,
 		SwitchProductSpec: switchProductSpec,
 	}
 
@@ -14468,10 +14468,10 @@ func (mo *DistributedVirtualSwitchManager) RectifyDvsOnHost_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RectifyDvsOnHost_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Hosts   []*HostSystem           `xml:"hosts,omitempty"`
 	}{
-		_this: mo.this,
+		This:  mo.This,
 		Hosts: hosts,
 	}
 
@@ -16845,13 +16845,13 @@ func (mo *EnvironmentBrowser) QueryConfigOption(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryConfigOption"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Key     string                  `xml:"key,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		_this: mo.this,
-		Key:   key,
-		Host:  host,
+		This: mo.This,
+		Key:  key,
+		Host: host,
 	}
 
 	response := struct {
@@ -16877,9 +16877,9 @@ func (mo *EnvironmentBrowser) QueryConfigOptionDescriptor() ([]*VirtualMachineCo
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryConfigOptionDescriptor"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -16922,11 +16922,11 @@ func (mo *EnvironmentBrowser) QueryConfigTarget(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryConfigTarget"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		_this: mo.this,
-		Host:  host,
+		This: mo.This,
+		Host: host,
 	}
 
 	response := struct {
@@ -16970,11 +16970,11 @@ func (mo *EnvironmentBrowser) QueryTargetCapabilities(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryTargetCapabilities"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		_this: mo.this,
-		Host:  host,
+		This: mo.This,
+		Host: host,
 	}
 
 	response := struct {
@@ -17593,10 +17593,10 @@ func (mo *EventHistoryCollector) ReadNextEvents(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"ReadNextEvents"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		MaxCount int32                   `xml:"maxCount,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		MaxCount: maxCount,
 	}
 
@@ -17629,10 +17629,10 @@ func (mo *EventHistoryCollector) ReadPreviousEvents(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"ReadPreviousEvents"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		MaxCount int32                   `xml:"maxCount,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		MaxCount: maxCount,
 	}
 
@@ -17733,10 +17733,10 @@ func (mo *EventManager) CreateCollectorForEvents(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreateCollectorForEvents"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Filter  *EventFilterSpec        `xml:"filter,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Filter: filter,
 	}
 
@@ -17765,11 +17765,11 @@ func (mo *EventManager) LogUserEvent(
 
 	request := struct {
 		XMLName xml.Name                `xml:"LogUserEvent"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 		Msg     string                  `xml:"msg,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Entity: entity,
 		Msg:    msg,
 	}
@@ -17821,11 +17821,11 @@ func (mo *EventManager) PostEvent(
 
 	request := struct {
 		XMLName     xml.Name                `xml:"PostEvent"`
-		_this       *ManagedObjectReference `xml:"_this,omitempty"`
+		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		EventToPost *Event                  `xml:"eventToPost,omitempty"`
 		TaskInfo    *TaskInfo               `xml:"taskInfo,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		EventToPost: eventToPost,
 		TaskInfo:    taskInfo,
 	}
@@ -17852,10 +17852,10 @@ func (mo *EventManager) QueryEvents(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryEvents"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Filter  *EventFilterSpec        `xml:"filter,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Filter: filter,
 	}
 
@@ -17886,10 +17886,10 @@ func (mo *EventManager) RetrieveArgumentDescription(
 
 	request := struct {
 		XMLName     xml.Name                `xml:"RetrieveArgumentDescription"`
-		_this       *ManagedObjectReference `xml:"_this,omitempty"`
+		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		EventTypeId string                  `xml:"eventTypeId,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		EventTypeId: eventTypeId,
 	}
 
@@ -18244,11 +18244,11 @@ func (mo *ExtensibleManagedObject) SetCustomValue(
 
 	request := struct {
 		XMLName xml.Name                `xml:"SetCustomValue"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Key     string                  `xml:"key,omitempty"`
 		Value   string                  `xml:"value,omitempty"`
 	}{
-		_this: mo.this,
+		This:  mo.This,
 		Key:   key,
 		Value: value,
 	}
@@ -18507,10 +18507,10 @@ func (mo *ExtensionManager) FindExtension(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"FindExtension"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		ExtensionKey string                  `xml:"extensionKey,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		ExtensionKey: extensionKey,
 	}
 
@@ -18543,9 +18543,9 @@ func (mo *ExtensionManager) GetPublicKey() (string, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"GetPublicKey"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -18579,10 +18579,10 @@ func (mo *ExtensionManager) QueryExtensionIpAllocationUsage(
 
 	request := struct {
 		XMLName       xml.Name                `xml:"QueryExtensionIpAllocationUsage"`
-		_this         *ManagedObjectReference `xml:"_this,omitempty"`
+		This          *ManagedObjectReference `xml:"_this,omitempty"`
 		ExtensionKeys []string                `xml:"extensionKeys,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		ExtensionKeys: extensionKeys,
 	}
 
@@ -18614,10 +18614,10 @@ func (mo *ExtensionManager) QueryManagedBy(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"QueryManagedBy"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		ExtensionKey string                  `xml:"extensionKey,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		ExtensionKey: extensionKey,
 	}
 
@@ -18646,10 +18646,10 @@ func (mo *ExtensionManager) RegisterExtension(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"RegisterExtension"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Extension *Extension              `xml:"extension,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		Extension: extension,
 	}
 
@@ -18690,11 +18690,11 @@ func (mo *ExtensionManager) SetExtensionCertificate(
 
 	request := struct {
 		XMLName        xml.Name                `xml:"SetExtensionCertificate"`
-		_this          *ManagedObjectReference `xml:"_this,omitempty"`
+		This           *ManagedObjectReference `xml:"_this,omitempty"`
 		ExtensionKey   string                  `xml:"extensionKey,omitempty"`
 		CertificatePem string                  `xml:"certificatePem,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		ExtensionKey:   extensionKey,
 		CertificatePem: certificatePem,
 	}
@@ -18730,11 +18730,11 @@ func (mo *ExtensionManager) SetPublicKey(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"SetPublicKey"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		ExtensionKey string                  `xml:"extensionKey,omitempty"`
 		PublicKey    string                  `xml:"publicKey,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		ExtensionKey: extensionKey,
 		PublicKey:    publicKey,
 	}
@@ -18760,10 +18760,10 @@ func (mo *ExtensionManager) UnregisterExtension(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"UnregisterExtension"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		ExtensionKey string                  `xml:"extensionKey,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		ExtensionKey: extensionKey,
 	}
 
@@ -18795,10 +18795,10 @@ func (mo *ExtensionManager) UpdateExtension(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"UpdateExtension"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Extension *Extension              `xml:"extension,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		Extension: extension,
 	}
 
@@ -19459,12 +19459,12 @@ func (mo *FileManager) ChangeOwner(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"ChangeOwner"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Name       string                  `xml:"name,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 		Owner      string                  `xml:"owner,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Name:       name,
 		Datacenter: datacenter,
 		Owner:      owner,
@@ -19533,14 +19533,14 @@ func (mo *FileManager) CopyDatastoreFile_Task(
 
 	request := struct {
 		XMLName               xml.Name                `xml:"CopyDatastoreFile_Task"`
-		_this                 *ManagedObjectReference `xml:"_this,omitempty"`
+		This                  *ManagedObjectReference `xml:"_this,omitempty"`
 		SourceName            string                  `xml:"sourceName,omitempty"`
 		SourceDatacenter      *Datacenter             `xml:"sourceDatacenter,omitempty"`
 		DestinationName       string                  `xml:"destinationName,omitempty"`
 		DestinationDatacenter *Datacenter             `xml:"destinationDatacenter,omitempty"`
 		Force                 bool                    `xml:"force,omitempty"`
 	}{
-		_this:                 mo.this,
+		This:                  mo.This,
 		SourceName:            sourceName,
 		SourceDatacenter:      sourceDatacenter,
 		DestinationName:       destinationName,
@@ -19593,11 +19593,11 @@ func (mo *FileManager) DeleteDatastoreFile_Task(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"DeleteDatastoreFile_Task"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Name       string                  `xml:"name,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Name:       name,
 		Datacenter: datacenter,
 	}
@@ -19639,12 +19639,12 @@ func (mo *FileManager) MakeDirectory(
 
 	request := struct {
 		XMLName                 xml.Name                `xml:"MakeDirectory"`
-		_this                   *ManagedObjectReference `xml:"_this,omitempty"`
+		This                    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name                    string                  `xml:"name,omitempty"`
 		Datacenter              *Datacenter             `xml:"datacenter,omitempty"`
 		CreateParentDirectories bool                    `xml:"createParentDirectories,omitempty"`
 	}{
-		_this:                   mo.this,
+		This:                    mo.This,
 		Name:                    name,
 		Datacenter:              datacenter,
 		CreateParentDirectories: createParentDirectories,
@@ -19714,14 +19714,14 @@ func (mo *FileManager) MoveDatastoreFile_Task(
 
 	request := struct {
 		XMLName               xml.Name                `xml:"MoveDatastoreFile_Task"`
-		_this                 *ManagedObjectReference `xml:"_this,omitempty"`
+		This                  *ManagedObjectReference `xml:"_this,omitempty"`
 		SourceName            string                  `xml:"sourceName,omitempty"`
 		SourceDatacenter      *Datacenter             `xml:"sourceDatacenter,omitempty"`
 		DestinationName       string                  `xml:"destinationName,omitempty"`
 		DestinationDatacenter *Datacenter             `xml:"destinationDatacenter,omitempty"`
 		Force                 bool                    `xml:"force,omitempty"`
 	}{
-		_this:                 mo.this,
+		This:                  mo.This,
 		SourceName:            sourceName,
 		SourceDatacenter:      sourceDatacenter,
 		DestinationName:       destinationName,
@@ -20119,13 +20119,13 @@ func (mo *Folder) AddStandaloneHost_Task(
 
 	request := struct {
 		XMLName      xml.Name                   `xml:"AddStandaloneHost_Task"`
-		_this        *ManagedObjectReference    `xml:"_this,omitempty"`
+		This         *ManagedObjectReference    `xml:"_this,omitempty"`
 		Spec         *HostConnectSpec           `xml:"spec,omitempty"`
 		CompResSpec  *ComputeResourceConfigSpec `xml:"compResSpec,omitempty"`
 		AddConnected bool                       `xml:"addConnected,omitempty"`
 		License      string                     `xml:"license,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		Spec:         spec,
 		CompResSpec:  compResSpec,
 		AddConnected: addConnected,
@@ -20165,13 +20165,13 @@ func (mo *Folder) CreateCluster(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreateCluster"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 		Spec    *ClusterConfigSpec      `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Name:  name,
-		Spec:  spec,
+		This: mo.This,
+		Name: name,
+		Spec: spec,
 	}
 
 	response := struct {
@@ -20206,13 +20206,13 @@ func (mo *Folder) CreateClusterEx(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreateClusterEx"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 		Spec    *ClusterConfigSpecEx    `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Name:  name,
-		Spec:  spec,
+		This: mo.This,
+		Name: name,
+		Spec: spec,
 	}
 
 	response := struct {
@@ -20245,11 +20245,11 @@ func (mo *Folder) CreateDatacenter(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreateDatacenter"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 	}{
-		_this: mo.this,
-		Name:  name,
+		This: mo.This,
+		Name: name,
 	}
 
 	response := struct {
@@ -20281,11 +20281,11 @@ func (mo *Folder) CreateDVS_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreateDVS_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *DVSCreateSpec          `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Spec:  spec,
+		This: mo.This,
+		Spec: spec,
 	}
 
 	response := struct {
@@ -20319,11 +20319,11 @@ func (mo *Folder) CreateFolder(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreateFolder"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 	}{
-		_this: mo.this,
-		Name:  name,
+		This: mo.This,
+		Name: name,
 	}
 
 	response := struct {
@@ -20358,11 +20358,11 @@ func (mo *Folder) CreateStoragePod(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreateStoragePod"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 	}{
-		_this: mo.this,
-		Name:  name,
+		This: mo.This,
+		Name: name,
 	}
 
 	response := struct {
@@ -20437,12 +20437,12 @@ func (mo *Folder) CreateVM_Task(
 
 	request := struct {
 		XMLName xml.Name                  `xml:"CreateVM_Task"`
-		_this   *ManagedObjectReference   `xml:"_this,omitempty"`
+		This    *ManagedObjectReference   `xml:"_this,omitempty"`
 		Config  *VirtualMachineConfigSpec `xml:"config,omitempty"`
 		Pool    *ResourcePool             `xml:"pool,omitempty"`
 		Host    *HostSystem               `xml:"host,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Config: config,
 		Pool:   pool,
 		Host:   host,
@@ -20544,11 +20544,11 @@ func (mo *Folder) MoveIntoFolder_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"MoveIntoFolder_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		List    []*ManagedEntity        `xml:"list,omitempty"`
 	}{
-		_this: mo.this,
-		List:  list,
+		This: mo.This,
+		List: list,
 	}
 
 	response := struct {
@@ -20588,14 +20588,14 @@ func (mo *Folder) RegisterVM_Task(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"RegisterVM_Task"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Path       string                  `xml:"path,omitempty"`
 		Name       string                  `xml:"name,omitempty"`
 		AsTemplate bool                    `xml:"asTemplate,omitempty"`
 		Pool       *ResourcePool           `xml:"pool,omitempty"`
 		Host       *HostSystem             `xml:"host,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Path:       path,
 		Name:       name,
 		AsTemplate: asTemplate,
@@ -20649,9 +20649,9 @@ func (mo *Folder) UnregisterAndDestroy_Task() (*Task, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"UnregisterAndDestroy_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -20906,12 +20906,12 @@ func (mo *GuestAuthManager) AcquireCredentialsInGuest(
 
 	request := struct {
 		XMLName       xml.Name                `xml:"AcquireCredentialsInGuest"`
-		_this         *ManagedObjectReference `xml:"_this,omitempty"`
+		This          *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm            *VirtualMachine         `xml:"vm,omitempty"`
 		RequestedAuth *GuestAuthentication    `xml:"requestedAuth,omitempty"`
 		SessionID     int64                   `xml:"sessionID,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		Vm:            vm,
 		RequestedAuth: requestedAuth,
 		SessionID:     sessionID,
@@ -20952,13 +20952,13 @@ func (mo *GuestAuthManager) ReleaseCredentialsInGuest(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ReleaseCredentialsInGuest"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm      *VirtualMachine         `xml:"vm,omitempty"`
 		Auth    *GuestAuthentication    `xml:"auth,omitempty"`
 	}{
-		_this: mo.this,
-		Vm:    vm,
-		Auth:  auth,
+		This: mo.This,
+		Vm:   vm,
+		Auth: auth,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -20990,13 +20990,13 @@ func (mo *GuestAuthManager) ValidateCredentialsInGuest(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ValidateCredentialsInGuest"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm      *VirtualMachine         `xml:"vm,omitempty"`
 		Auth    *GuestAuthentication    `xml:"auth,omitempty"`
 	}{
-		_this: mo.this,
-		Vm:    vm,
-		Auth:  auth,
+		This: mo.This,
+		Vm:   vm,
+		Auth: auth,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -21154,13 +21154,13 @@ func (mo *GuestFileManager) ChangeFileAttributesInGuest(
 
 	request := struct {
 		XMLName        xml.Name                `xml:"ChangeFileAttributesInGuest"`
-		_this          *ManagedObjectReference `xml:"_this,omitempty"`
+		This           *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm             *VirtualMachine         `xml:"vm,omitempty"`
 		Auth           *GuestAuthentication    `xml:"auth,omitempty"`
 		GuestFilePath  string                  `xml:"guestFilePath,omitempty"`
 		FileAttributes *GuestFileAttributes    `xml:"fileAttributes,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		Vm:             vm,
 		Auth:           auth,
 		GuestFilePath:  guestFilePath,
@@ -21194,14 +21194,14 @@ func (mo *GuestFileManager) CreateTemporaryDirectoryInGuest(
 
 	request := struct {
 		XMLName       xml.Name                `xml:"CreateTemporaryDirectoryInGuest"`
-		_this         *ManagedObjectReference `xml:"_this,omitempty"`
+		This          *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm            *VirtualMachine         `xml:"vm,omitempty"`
 		Auth          *GuestAuthentication    `xml:"auth,omitempty"`
 		Prefix        string                  `xml:"prefix,omitempty"`
 		Suffix        string                  `xml:"suffix,omitempty"`
 		DirectoryPath string                  `xml:"directoryPath,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		Vm:            vm,
 		Auth:          auth,
 		Prefix:        prefix,
@@ -21240,14 +21240,14 @@ func (mo *GuestFileManager) CreateTemporaryFileInGuest(
 
 	request := struct {
 		XMLName       xml.Name                `xml:"CreateTemporaryFileInGuest"`
-		_this         *ManagedObjectReference `xml:"_this,omitempty"`
+		This          *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm            *VirtualMachine         `xml:"vm,omitempty"`
 		Auth          *GuestAuthentication    `xml:"auth,omitempty"`
 		Prefix        string                  `xml:"prefix,omitempty"`
 		Suffix        string                  `xml:"suffix,omitempty"`
 		DirectoryPath string                  `xml:"directoryPath,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		Vm:            vm,
 		Auth:          auth,
 		Prefix:        prefix,
@@ -21282,13 +21282,13 @@ func (mo *GuestFileManager) DeleteDirectoryInGuest(
 
 	request := struct {
 		XMLName       xml.Name                `xml:"DeleteDirectoryInGuest"`
-		_this         *ManagedObjectReference `xml:"_this,omitempty"`
+		This          *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm            *VirtualMachine         `xml:"vm,omitempty"`
 		Auth          *GuestAuthentication    `xml:"auth,omitempty"`
 		DirectoryPath string                  `xml:"directoryPath,omitempty"`
 		Recursive     bool                    `xml:"recursive,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		Vm:            vm,
 		Auth:          auth,
 		DirectoryPath: directoryPath,
@@ -21318,12 +21318,12 @@ func (mo *GuestFileManager) DeleteFileInGuest(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"DeleteFileInGuest"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm       *VirtualMachine         `xml:"vm,omitempty"`
 		Auth     *GuestAuthentication    `xml:"auth,omitempty"`
 		FilePath string                  `xml:"filePath,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		Vm:       vm,
 		Auth:     auth,
 		FilePath: filePath,
@@ -21375,12 +21375,12 @@ func (mo *GuestFileManager) InitiateFileTransferFromGuest(
 
 	request := struct {
 		XMLName       xml.Name                `xml:"InitiateFileTransferFromGuest"`
-		_this         *ManagedObjectReference `xml:"_this,omitempty"`
+		This          *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm            *VirtualMachine         `xml:"vm,omitempty"`
 		Auth          *GuestAuthentication    `xml:"auth,omitempty"`
 		GuestFilePath string                  `xml:"guestFilePath,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		Vm:            vm,
 		Auth:          auth,
 		GuestFilePath: guestFilePath,
@@ -21434,7 +21434,7 @@ func (mo *GuestFileManager) InitiateFileTransferToGuest(
 
 	request := struct {
 		XMLName        xml.Name                `xml:"InitiateFileTransferToGuest"`
-		_this          *ManagedObjectReference `xml:"_this,omitempty"`
+		This           *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm             *VirtualMachine         `xml:"vm,omitempty"`
 		Auth           *GuestAuthentication    `xml:"auth,omitempty"`
 		GuestFilePath  string                  `xml:"guestFilePath,omitempty"`
@@ -21442,7 +21442,7 @@ func (mo *GuestFileManager) InitiateFileTransferToGuest(
 		FileSize       int64                   `xml:"fileSize,omitempty"`
 		Overwrite      bool                    `xml:"overwrite,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		Vm:             vm,
 		Auth:           auth,
 		GuestFilePath:  guestFilePath,
@@ -21485,7 +21485,7 @@ func (mo *GuestFileManager) ListFilesInGuest(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"ListFilesInGuest"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm           *VirtualMachine         `xml:"vm,omitempty"`
 		Auth         *GuestAuthentication    `xml:"auth,omitempty"`
 		FilePath     string                  `xml:"filePath,omitempty"`
@@ -21493,7 +21493,7 @@ func (mo *GuestFileManager) ListFilesInGuest(
 		MaxResults   int32                   `xml:"maxResults,omitempty"`
 		MatchPattern string                  `xml:"matchPattern,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		Vm:           vm,
 		Auth:         auth,
 		FilePath:     filePath,
@@ -21529,13 +21529,13 @@ func (mo *GuestFileManager) MakeDirectoryInGuest(
 
 	request := struct {
 		XMLName                 xml.Name                `xml:"MakeDirectoryInGuest"`
-		_this                   *ManagedObjectReference `xml:"_this,omitempty"`
+		This                    *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm                      *VirtualMachine         `xml:"vm,omitempty"`
 		Auth                    *GuestAuthentication    `xml:"auth,omitempty"`
 		DirectoryPath           string                  `xml:"directoryPath,omitempty"`
 		CreateParentDirectories bool                    `xml:"createParentDirectories,omitempty"`
 	}{
-		_this:                   mo.this,
+		This:                    mo.This,
 		Vm:                      vm,
 		Auth:                    auth,
 		DirectoryPath:           directoryPath,
@@ -21565,13 +21565,13 @@ func (mo *GuestFileManager) MoveDirectoryInGuest(
 
 	request := struct {
 		XMLName          xml.Name                `xml:"MoveDirectoryInGuest"`
-		_this            *ManagedObjectReference `xml:"_this,omitempty"`
+		This             *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm               *VirtualMachine         `xml:"vm,omitempty"`
 		Auth             *GuestAuthentication    `xml:"auth,omitempty"`
 		SrcDirectoryPath string                  `xml:"srcDirectoryPath,omitempty"`
 		DstDirectoryPath string                  `xml:"dstDirectoryPath,omitempty"`
 	}{
-		_this:            mo.this,
+		This:             mo.This,
 		Vm:               vm,
 		Auth:             auth,
 		SrcDirectoryPath: srcDirectoryPath,
@@ -21601,14 +21601,14 @@ func (mo *GuestFileManager) MoveFileInGuest(
 
 	request := struct {
 		XMLName     xml.Name                `xml:"MoveFileInGuest"`
-		_this       *ManagedObjectReference `xml:"_this,omitempty"`
+		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm          *VirtualMachine         `xml:"vm,omitempty"`
 		Auth        *GuestAuthentication    `xml:"auth,omitempty"`
 		SrcFilePath string                  `xml:"srcFilePath,omitempty"`
 		DstFilePath string                  `xml:"dstFilePath,omitempty"`
 		Overwrite   bool                    `xml:"overwrite,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		Vm:          vm,
 		Auth:        auth,
 		SrcFilePath: srcFilePath,
@@ -22215,15 +22215,15 @@ func (mo *GuestProcessManager) ListProcessesInGuest(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ListProcessesInGuest"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm      *VirtualMachine         `xml:"vm,omitempty"`
 		Auth    *GuestAuthentication    `xml:"auth,omitempty"`
 		Pids    []int64                 `xml:"pids,omitempty"`
 	}{
-		_this: mo.this,
-		Vm:    vm,
-		Auth:  auth,
-		Pids:  pids,
+		This: mo.This,
+		Vm:   vm,
+		Auth: auth,
+		Pids: pids,
 	}
 
 	response := struct {
@@ -22258,12 +22258,12 @@ func (mo *GuestProcessManager) ReadEnvironmentVariableInGuest(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ReadEnvironmentVariableInGuest"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm      *VirtualMachine         `xml:"vm,omitempty"`
 		Auth    *GuestAuthentication    `xml:"auth,omitempty"`
 		Names   []string                `xml:"names,omitempty"`
 	}{
-		_this: mo.this,
+		This:  mo.This,
 		Vm:    vm,
 		Auth:  auth,
 		Names: names,
@@ -22302,15 +22302,15 @@ func (mo *GuestProcessManager) StartProgramInGuest(
 
 	request := struct {
 		XMLName xml.Name                `xml:"StartProgramInGuest"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm      *VirtualMachine         `xml:"vm,omitempty"`
 		Auth    *GuestAuthentication    `xml:"auth,omitempty"`
 		Spec    *GuestProgramSpec       `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Vm:    vm,
-		Auth:  auth,
-		Spec:  spec,
+		This: mo.This,
+		Vm:   vm,
+		Auth: auth,
+		Spec: spec,
 	}
 
 	response := struct {
@@ -22340,15 +22340,15 @@ func (mo *GuestProcessManager) TerminateProcessInGuest(
 
 	request := struct {
 		XMLName xml.Name                `xml:"TerminateProcessInGuest"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm      *VirtualMachine         `xml:"vm,omitempty"`
 		Auth    *GuestAuthentication    `xml:"auth,omitempty"`
 		Pid     int64                   `xml:"pid,omitempty"`
 	}{
-		_this: mo.this,
-		Vm:    vm,
-		Auth:  auth,
-		Pid:   pid,
+		This: mo.This,
+		Vm:   vm,
+		Auth: auth,
+		Pid:  pid,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -22678,9 +22678,9 @@ func (mo *HistoryCollector) DestroyCollector() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"DestroyCollector"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -22707,9 +22707,9 @@ func (mo *HistoryCollector) ResetCollector() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"ResetCollector"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -22735,9 +22735,9 @@ func (mo *HistoryCollector) RewindCollector() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"RewindCollector"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -22764,10 +22764,10 @@ func (mo *HistoryCollector) SetCollectorPageSize(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"SetCollectorPageSize"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		MaxCount int32                   `xml:"maxCount,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		MaxCount: maxCount,
 	}
 
@@ -22926,11 +22926,11 @@ func (mo *HostActiveDirectoryAuthentication) ImportCertificateForCAM_Task(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"ImportCertificateForCAM_Task"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		CertPath  string                  `xml:"certPath,omitempty"`
 		CamServer string                  `xml:"camServer,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		CertPath:  certPath,
 		CamServer: camServer,
 	}
@@ -22967,12 +22967,12 @@ func (mo *HostActiveDirectoryAuthentication) JoinDomain_Task(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"JoinDomain_Task"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		DomainName string                  `xml:"domainName,omitempty"`
 		UserName   string                  `xml:"userName,omitempty"`
 		Password   string                  `xml:"password,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		DomainName: domainName,
 		UserName:   userName,
 		Password:   password,
@@ -23012,11 +23012,11 @@ func (mo *HostActiveDirectoryAuthentication) JoinDomainWithCAM_Task(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"JoinDomainWithCAM_Task"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		DomainName string                  `xml:"domainName,omitempty"`
 		CamServer  string                  `xml:"camServer,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		DomainName: domainName,
 		CamServer:  camServer,
 	}
@@ -23046,10 +23046,10 @@ func (mo *HostActiveDirectoryAuthentication) LeaveCurrentDomain_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"LeaveCurrentDomain_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Force   bool                    `xml:"force,omitempty"`
 	}{
-		_this: mo.this,
+		This:  mo.This,
 		Force: force,
 	}
 
@@ -23452,9 +23452,9 @@ func (mo *HostAutoStartManager) AutoStartPowerOff() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"AutoStartPowerOff"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -23480,9 +23480,9 @@ func (mo *HostAutoStartManager) AutoStartPowerOn() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"AutoStartPowerOn"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -23525,11 +23525,11 @@ func (mo *HostAutoStartManager) ReconfigureAutostart(
 
 	request := struct {
 		XMLName xml.Name                    `xml:"ReconfigureAutostart"`
-		_this   *ManagedObjectReference     `xml:"_this,omitempty"`
+		This    *ManagedObjectReference     `xml:"_this,omitempty"`
 		Spec    *HostAutoStartManagerConfig `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Spec:  spec,
+		This: mo.This,
+		Spec: spec,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -23631,9 +23631,9 @@ func (mo *HostBootDeviceSystem) QueryBootDevices() (*HostBootDeviceInfo, error) 
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryBootDevices"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -23661,11 +23661,11 @@ func (mo *HostBootDeviceSystem) UpdateBootDevice(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpdateBootDevice"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Key     string                  `xml:"key,omitempty"`
 	}{
-		_this: mo.this,
-		Key:   key,
+		This: mo.This,
+		Key:  key,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -23738,11 +23738,11 @@ func (mo *HostCacheConfigurationManager) ConfigureHostCache_Task(
 
 	request := struct {
 		XMLName xml.Name                    `xml:"ConfigureHostCache_Task"`
-		_this   *ManagedObjectReference     `xml:"_this,omitempty"`
+		This    *ManagedObjectReference     `xml:"_this,omitempty"`
 		Spec    *HostCacheConfigurationSpec `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Spec:  spec,
+		This: mo.This,
+		Spec: spec,
 	}
 
 	response := struct {
@@ -25410,9 +25410,9 @@ func (mo *HostCpuSchedulerSystem) DisableHyperThreading() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"DisableHyperThreading"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -25437,9 +25437,9 @@ func (mo *HostCpuSchedulerSystem) EnableHyperThreading() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"EnableHyperThreading"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -25670,10 +25670,10 @@ func (mo *HostDatastoreBrowser) DeleteFile(
 
 	request := struct {
 		XMLName       xml.Name                `xml:"DeleteFile"`
-		_this         *ManagedObjectReference `xml:"_this,omitempty"`
+		This          *ManagedObjectReference `xml:"_this,omitempty"`
 		DatastorePath string                  `xml:"datastorePath,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		DatastorePath: datastorePath,
 	}
 
@@ -25701,11 +25701,11 @@ func (mo *HostDatastoreBrowser) SearchDatastore_Task(
 
 	request := struct {
 		XMLName       xml.Name                        `xml:"SearchDatastore_Task"`
-		_this         *ManagedObjectReference         `xml:"_this,omitempty"`
+		This          *ManagedObjectReference         `xml:"_this,omitempty"`
 		DatastorePath string                          `xml:"datastorePath,omitempty"`
 		SearchSpec    *HostDatastoreBrowserSearchSpec `xml:"searchSpec,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		DatastorePath: datastorePath,
 		SearchSpec:    searchSpec,
 	}
@@ -25738,11 +25738,11 @@ func (mo *HostDatastoreBrowser) SearchDatastoreSubFolders_Task(
 
 	request := struct {
 		XMLName       xml.Name                        `xml:"SearchDatastoreSubFolders_Task"`
-		_this         *ManagedObjectReference         `xml:"_this,omitempty"`
+		This          *ManagedObjectReference         `xml:"_this,omitempty"`
 		DatastorePath string                          `xml:"datastorePath,omitempty"`
 		SearchSpec    *HostDatastoreBrowserSearchSpec `xml:"searchSpec,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		DatastorePath: datastorePath,
 		SearchSpec:    searchSpec,
 	}
@@ -25990,11 +25990,11 @@ func (mo *HostDatastoreSystem) ConfigureDatastorePrincipal(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"ConfigureDatastorePrincipal"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		UserName string                  `xml:"userName,omitempty"`
 		Password string                  `xml:"password,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		UserName: userName,
 		Password: password,
 	}
@@ -26020,13 +26020,13 @@ func (mo *HostDatastoreSystem) CreateLocalDatastore(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreateLocalDatastore"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 		Path    string                  `xml:"path,omitempty"`
 	}{
-		_this: mo.this,
-		Name:  name,
-		Path:  path,
+		This: mo.This,
+		Name: name,
+		Path: path,
 	}
 
 	response := struct {
@@ -26054,11 +26054,11 @@ func (mo *HostDatastoreSystem) CreateNasDatastore(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreateNasDatastore"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *HostNasVolumeSpec      `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Spec:  spec,
+		This: mo.This,
+		Spec: spec,
 	}
 
 	response := struct {
@@ -26086,11 +26086,11 @@ func (mo *HostDatastoreSystem) CreateVmfsDatastore(
 
 	request := struct {
 		XMLName xml.Name                 `xml:"CreateVmfsDatastore"`
-		_this   *ManagedObjectReference  `xml:"_this,omitempty"`
+		This    *ManagedObjectReference  `xml:"_this,omitempty"`
 		Spec    *VmfsDatastoreCreateSpec `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Spec:  spec,
+		This: mo.This,
+		Spec: spec,
 	}
 
 	response := struct {
@@ -26121,11 +26121,11 @@ func (mo *HostDatastoreSystem) ExpandVmfsDatastore(
 
 	request := struct {
 		XMLName   xml.Name                 `xml:"ExpandVmfsDatastore"`
-		_this     *ManagedObjectReference  `xml:"_this,omitempty"`
+		This      *ManagedObjectReference  `xml:"_this,omitempty"`
 		Datastore *Datastore               `xml:"datastore,omitempty"`
 		Spec      *VmfsDatastoreExpandSpec `xml:"spec,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		Datastore: datastore,
 		Spec:      spec,
 	}
@@ -26156,11 +26156,11 @@ func (mo *HostDatastoreSystem) ExtendVmfsDatastore(
 
 	request := struct {
 		XMLName   xml.Name                 `xml:"ExtendVmfsDatastore"`
-		_this     *ManagedObjectReference  `xml:"_this,omitempty"`
+		This      *ManagedObjectReference  `xml:"_this,omitempty"`
 		Datastore *Datastore               `xml:"datastore,omitempty"`
 		Spec      *VmfsDatastoreExtendSpec `xml:"spec,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		Datastore: datastore,
 		Spec:      spec,
 	}
@@ -26206,10 +26206,10 @@ func (mo *HostDatastoreSystem) QueryAvailableDisksForVmfs(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"QueryAvailableDisksForVmfs"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Datastore *Datastore              `xml:"datastore,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		Datastore: datastore,
 	}
 
@@ -26242,9 +26242,9 @@ func (mo *HostDatastoreSystem) QueryUnresolvedVmfsVolumes() ([]*HostUnresolvedVm
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryUnresolvedVmfsVolumes"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -26272,11 +26272,11 @@ func (mo *HostDatastoreSystem) QueryVmfsDatastoreCreateOptions(
 
 	request := struct {
 		XMLName          xml.Name                `xml:"QueryVmfsDatastoreCreateOptions"`
-		_this            *ManagedObjectReference `xml:"_this,omitempty"`
+		This             *ManagedObjectReference `xml:"_this,omitempty"`
 		DevicePath       string                  `xml:"devicePath,omitempty"`
 		VmfsMajorVersion int32                   `xml:"vmfsMajorVersion,omitempty"`
 	}{
-		_this:            mo.this,
+		This:             mo.This,
 		DevicePath:       devicePath,
 		VmfsMajorVersion: vmfsMajorVersion,
 	}
@@ -26310,10 +26310,10 @@ func (mo *HostDatastoreSystem) QueryVmfsDatastoreExpandOptions(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"QueryVmfsDatastoreExpandOptions"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Datastore *Datastore              `xml:"datastore,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		Datastore: datastore,
 	}
 
@@ -26343,12 +26343,12 @@ func (mo *HostDatastoreSystem) QueryVmfsDatastoreExtendOptions(
 
 	request := struct {
 		XMLName                  xml.Name                `xml:"QueryVmfsDatastoreExtendOptions"`
-		_this                    *ManagedObjectReference `xml:"_this,omitempty"`
+		This                     *ManagedObjectReference `xml:"_this,omitempty"`
 		Datastore                *Datastore              `xml:"datastore,omitempty"`
 		DevicePath               string                  `xml:"devicePath,omitempty"`
 		SuppressExpandCandidates bool                    `xml:"suppressExpandCandidates,omitempty"`
 	}{
-		_this:                    mo.this,
+		This:                     mo.This,
 		Datastore:                datastore,
 		DevicePath:               devicePath,
 		SuppressExpandCandidates: suppressExpandCandidates,
@@ -26379,10 +26379,10 @@ func (mo *HostDatastoreSystem) RemoveDatastore(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"RemoveDatastore"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Datastore *Datastore              `xml:"datastore,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		Datastore: datastore,
 	}
 
@@ -26426,10 +26426,10 @@ func (mo *HostDatastoreSystem) ResignatureUnresolvedVmfsVolume_Task(
 
 	request := struct {
 		XMLName        xml.Name                           `xml:"ResignatureUnresolvedVmfsVolume_Task"`
-		_this          *ManagedObjectReference            `xml:"_this,omitempty"`
+		This           *ManagedObjectReference            `xml:"_this,omitempty"`
 		ResolutionSpec *HostUnresolvedVmfsResignatureSpec `xml:"resolutionSpec,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		ResolutionSpec: resolutionSpec,
 	}
 
@@ -26465,10 +26465,10 @@ func (mo *HostDatastoreSystem) UpdateLocalSwapDatastore(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"UpdateLocalSwapDatastore"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Datastore *Datastore              `xml:"datastore,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		Datastore: datastore,
 	}
 
@@ -26580,9 +26580,9 @@ func (mo *HostDateTimeSystem) QueryAvailableTimeZones() ([]*HostDateTimeSystemTi
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryAvailableTimeZones"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -26608,9 +26608,9 @@ func (mo *HostDateTimeSystem) QueryDateTime() (time.Time, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryDateTime"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -26637,9 +26637,9 @@ func (mo *HostDateTimeSystem) RefreshDateTimeSystem() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"RefreshDateTimeSystem"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -26665,10 +26665,10 @@ func (mo *HostDateTimeSystem) UpdateDateTime(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"UpdateDateTime"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		DateTime time.Time               `xml:"dateTime,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		DateTime: dateTime,
 	}
 
@@ -26693,10 +26693,10 @@ func (mo *HostDateTimeSystem) UpdateDateTimeConfig(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpdateDateTimeConfig"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Config  *HostDateTimeConfig     `xml:"config,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Config: config,
 	}
 
@@ -26962,11 +26962,11 @@ func (mo *HostDiagnosticSystem) CreateDiagnosticPartition(
 
 	request := struct {
 		XMLName xml.Name                           `xml:"CreateDiagnosticPartition"`
-		_this   *ManagedObjectReference            `xml:"_this,omitempty"`
+		This    *ManagedObjectReference            `xml:"_this,omitempty"`
 		Spec    *HostDiagnosticPartitionCreateSpec `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Spec:  spec,
+		This: mo.This,
+		Spec: spec,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -26992,9 +26992,9 @@ func (mo *HostDiagnosticSystem) QueryAvailablePartition() ([]*HostDiagnosticPart
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryAvailablePartition"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -27025,11 +27025,11 @@ func (mo *HostDiagnosticSystem) QueryPartitionCreateDesc(
 
 	request := struct {
 		XMLName        xml.Name                `xml:"QueryPartitionCreateDesc"`
-		_this          *ManagedObjectReference `xml:"_this,omitempty"`
+		This           *ManagedObjectReference `xml:"_this,omitempty"`
 		DiskUuid       string                  `xml:"diskUuid,omitempty"`
 		DiagnosticType string                  `xml:"diagnosticType,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		DiskUuid:       diskUuid,
 		DiagnosticType: diagnosticType,
 	}
@@ -27065,11 +27065,11 @@ func (mo *HostDiagnosticSystem) QueryPartitionCreateOptions(
 
 	request := struct {
 		XMLName        xml.Name                `xml:"QueryPartitionCreateOptions"`
-		_this          *ManagedObjectReference `xml:"_this,omitempty"`
+		This           *ManagedObjectReference `xml:"_this,omitempty"`
 		StorageType    string                  `xml:"storageType,omitempty"`
 		DiagnosticType string                  `xml:"diagnosticType,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		StorageType:    storageType,
 		DiagnosticType: diagnosticType,
 	}
@@ -27101,10 +27101,10 @@ func (mo *HostDiagnosticSystem) SelectActivePartition(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"SelectActivePartition"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Partition *HostScsiDiskPartition  `xml:"partition,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		Partition: partition,
 	}
 
@@ -27600,10 +27600,10 @@ func (mo *HostEsxAgentHostManager) EsxAgentHostManagerUpdateConfig(
 
 	request := struct {
 		XMLName    xml.Name                           `xml:"EsxAgentHostManagerUpdateConfig"`
-		_this      *ManagedObjectReference            `xml:"_this,omitempty"`
+		This       *ManagedObjectReference            `xml:"_this,omitempty"`
 		ConfigInfo *HostEsxAgentHostManagerConfigInfo `xml:"configInfo,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		ConfigInfo: configInfo,
 	}
 
@@ -28228,11 +28228,11 @@ func (mo *HostFirewallSystem) DisableRuleset(
 
 	request := struct {
 		XMLName xml.Name                `xml:"DisableRuleset"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Id      string                  `xml:"id,omitempty"`
 	}{
-		_this: mo.this,
-		Id:    id,
+		This: mo.This,
+		Id:   id,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -28258,11 +28258,11 @@ func (mo *HostFirewallSystem) EnableRuleset(
 
 	request := struct {
 		XMLName xml.Name                `xml:"EnableRuleset"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Id      string                  `xml:"id,omitempty"`
 	}{
-		_this: mo.this,
-		Id:    id,
+		This: mo.This,
+		Id:   id,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -28285,9 +28285,9 @@ func (mo *HostFirewallSystem) RefreshFirewall() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"RefreshFirewall"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -28311,10 +28311,10 @@ func (mo *HostFirewallSystem) UpdateDefaultPolicy(
 
 	request := struct {
 		XMLName       xml.Name                   `xml:"UpdateDefaultPolicy"`
-		_this         *ManagedObjectReference    `xml:"_this,omitempty"`
+		This          *ManagedObjectReference    `xml:"_this,omitempty"`
 		DefaultPolicy *HostFirewallDefaultPolicy `xml:"defaultPolicy,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		DefaultPolicy: defaultPolicy,
 	}
 
@@ -28341,13 +28341,13 @@ func (mo *HostFirewallSystem) UpdateRuleset(
 
 	request := struct {
 		XMLName xml.Name                        `xml:"UpdateRuleset"`
-		_this   *ManagedObjectReference         `xml:"_this,omitempty"`
+		This    *ManagedObjectReference         `xml:"_this,omitempty"`
 		Id      string                          `xml:"id,omitempty"`
 		Spec    *HostFirewallRulesetRulesetSpec `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Id:    id,
-		Spec:  spec,
+		This: mo.This,
+		Id:   id,
+		Spec: spec,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -28382,9 +28382,9 @@ func (mo *HostFirmwareSystem) BackupFirmwareConfiguration() (string, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"BackupFirmwareConfiguration"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -28412,9 +28412,9 @@ func (mo *HostFirmwareSystem) QueryFirmwareConfigUploadURL() (string, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryFirmwareConfigUploadURL"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -28446,9 +28446,9 @@ func (mo *HostFirmwareSystem) ResetFirmwareToFactoryDefaults() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"ResetFirmwareToFactoryDefaults"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -28482,10 +28482,10 @@ func (mo *HostFirmwareSystem) RestoreFirmwareConfiguration(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RestoreFirmwareConfiguration"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Force   bool                    `xml:"force,omitempty"`
 	}{
-		_this: mo.this,
+		This:  mo.This,
 		Force: force,
 	}
 
@@ -28613,9 +28613,9 @@ func (mo *HostGraphicsManager) IsSharedGraphicsActive() (bool, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"IsSharedGraphicsActive"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -28641,9 +28641,9 @@ func (mo *HostGraphicsManager) RefreshGraphicsManager() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"RefreshGraphicsManager"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -28838,9 +28838,9 @@ func (mo *HostHealthStatusSystem) RefreshHealthStatusSystem() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"RefreshHealthStatusSystem"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -28865,9 +28865,9 @@ func (mo *HostHealthStatusSystem) ResetSystemHealthInfo() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"ResetSystemHealthInfo"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -28989,9 +28989,9 @@ func (mo *HostImageConfigManager) HostImageConfigGetAcceptance() (string, error)
 
 	request := struct {
 		XMLName xml.Name                `xml:"HostImageConfigGetAcceptance"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -29017,9 +29017,9 @@ func (mo *HostImageConfigManager) HostImageConfigGetProfile() (*HostImageProfile
 
 	request := struct {
 		XMLName xml.Name                `xml:"HostImageConfigGetProfile"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -29047,10 +29047,10 @@ func (mo *HostImageConfigManager) UpdateHostImageAcceptanceLevel(
 
 	request := struct {
 		XMLName            xml.Name                `xml:"UpdateHostImageAcceptanceLevel"`
-		_this              *ManagedObjectReference `xml:"_this,omitempty"`
+		This               *ManagedObjectReference `xml:"_this,omitempty"`
 		NewAcceptanceLevel string                  `xml:"newAcceptanceLevel,omitempty"`
 	}{
-		_this:              mo.this,
+		This:               mo.This,
 		NewAcceptanceLevel: newAcceptanceLevel,
 	}
 
@@ -30093,11 +30093,11 @@ func (mo *HostKernelModuleSystem) QueryConfiguredModuleOptionString(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryConfiguredModuleOptionString"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 	}{
-		_this: mo.this,
-		Name:  name,
+		This: mo.This,
+		Name: name,
 	}
 
 	response := struct {
@@ -30125,9 +30125,9 @@ func (mo *HostKernelModuleSystem) QueryModules() ([]*KernelModuleInfo, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryModules"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -30155,11 +30155,11 @@ func (mo *HostKernelModuleSystem) UpdateModuleOptionString(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpdateModuleOptionString"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 		Options string                  `xml:"options,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		Name:    name,
 		Options: options,
 	}
@@ -30383,11 +30383,11 @@ func (mo *HostLocalAccountManager) AssignUserToGroup(
 
 	request := struct {
 		XMLName xml.Name                `xml:"AssignUserToGroup"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		User    string                  `xml:"user,omitempty"`
 		Group   string                  `xml:"group,omitempty"`
 	}{
-		_this: mo.this,
+		This:  mo.This,
 		User:  user,
 		Group: group,
 	}
@@ -30424,10 +30424,10 @@ func (mo *HostLocalAccountManager) CreateGroup(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreateGroup"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Group   *HostAccountSpec        `xml:"group,omitempty"`
 	}{
-		_this: mo.this,
+		This:  mo.This,
 		Group: group,
 	}
 
@@ -30457,11 +30457,11 @@ func (mo *HostLocalAccountManager) CreateUser(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreateUser"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		User    *HostAccountSpec        `xml:"user,omitempty"`
 	}{
-		_this: mo.this,
-		User:  user,
+		This: mo.This,
+		User: user,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -30491,10 +30491,10 @@ func (mo *HostLocalAccountManager) RemoveGroup(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"RemoveGroup"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		GroupName string                  `xml:"groupName,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		GroupName: groupName,
 	}
 
@@ -30525,10 +30525,10 @@ func (mo *HostLocalAccountManager) RemoveUser(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"RemoveUser"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		UserName string                  `xml:"userName,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		UserName: userName,
 	}
 
@@ -30559,11 +30559,11 @@ func (mo *HostLocalAccountManager) UnassignUserFromGroup(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UnassignUserFromGroup"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		User    string                  `xml:"user,omitempty"`
 		Group   string                  `xml:"group,omitempty"`
 	}{
-		_this: mo.this,
+		This:  mo.This,
 		User:  user,
 		Group: group,
 	}
@@ -30591,11 +30591,11 @@ func (mo *HostLocalAccountManager) UpdateUser(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpdateUser"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		User    *HostAccountSpec        `xml:"user,omitempty"`
 	}{
-		_this: mo.this,
-		User:  user,
+		This: mo.This,
+		User: user,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -30946,10 +30946,10 @@ func (mo *HostMemorySystem) ReconfigureServiceConsoleReservation(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"ReconfigureServiceConsoleReservation"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		CfgBytes int64                   `xml:"cfgBytes,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		CfgBytes: cfgBytes,
 	}
 
@@ -30976,11 +30976,11 @@ func (mo *HostMemorySystem) ReconfigureVirtualMachineReservation(
 
 	request := struct {
 		XMLName xml.Name                             `xml:"ReconfigureVirtualMachineReservation"`
-		_this   *ManagedObjectReference              `xml:"_this,omitempty"`
+		This    *ManagedObjectReference              `xml:"_this,omitempty"`
 		Spec    *VirtualMachineMemoryReservationSpec `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Spec:  spec,
+		This: mo.This,
+		Spec: spec,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -32245,10 +32245,10 @@ func (mo *HostNetworkSystem) AddPortGroup(
 
 	request := struct {
 		XMLName xml.Name                `xml:"AddPortGroup"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Portgrp *HostPortGroupSpec      `xml:"portgrp,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		Portgrp: portgrp,
 	}
 
@@ -32284,11 +32284,11 @@ func (mo *HostNetworkSystem) AddServiceConsoleVirtualNic(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"AddServiceConsoleVirtualNic"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Portgroup string                  `xml:"portgroup,omitempty"`
 		Nic       *HostVirtualNicSpec     `xml:"nic,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		Portgroup: portgroup,
 		Nic:       nic,
 	}
@@ -32329,11 +32329,11 @@ func (mo *HostNetworkSystem) AddVirtualNic(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"AddVirtualNic"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Portgroup string                  `xml:"portgroup,omitempty"`
 		Nic       *HostVirtualNicSpec     `xml:"nic,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		Portgroup: portgroup,
 		Nic:       nic,
 	}
@@ -32365,11 +32365,11 @@ func (mo *HostNetworkSystem) AddVirtualSwitch(
 
 	request := struct {
 		XMLName     xml.Name                `xml:"AddVirtualSwitch"`
-		_this       *ManagedObjectReference `xml:"_this,omitempty"`
+		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		VswitchName string                  `xml:"vswitchName,omitempty"`
 		Spec        *HostVirtualSwitchSpec  `xml:"spec,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		VswitchName: vswitchName,
 		Spec:        spec,
 	}
@@ -32402,10 +32402,10 @@ func (mo *HostNetworkSystem) QueryNetworkHint(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryNetworkHint"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Device  []string                `xml:"device,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Device: device,
 	}
 
@@ -32433,9 +32433,9 @@ func (mo *HostNetworkSystem) RefreshNetworkSystem() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"RefreshNetworkSystem"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -32459,10 +32459,10 @@ func (mo *HostNetworkSystem) RemovePortGroup(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RemovePortGroup"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		PgName  string                  `xml:"pgName,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		PgName: pgName,
 	}
 
@@ -32487,10 +32487,10 @@ func (mo *HostNetworkSystem) RemoveServiceConsoleVirtualNic(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RemoveServiceConsoleVirtualNic"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Device  string                  `xml:"device,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Device: device,
 	}
 
@@ -32515,10 +32515,10 @@ func (mo *HostNetworkSystem) RemoveVirtualNic(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RemoveVirtualNic"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Device  string                  `xml:"device,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Device: device,
 	}
 
@@ -32543,10 +32543,10 @@ func (mo *HostNetworkSystem) RemoveVirtualSwitch(
 
 	request := struct {
 		XMLName     xml.Name                `xml:"RemoveVirtualSwitch"`
-		_this       *ManagedObjectReference `xml:"_this,omitempty"`
+		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		VswitchName string                  `xml:"vswitchName,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		VswitchName: vswitchName,
 	}
 
@@ -32575,10 +32575,10 @@ func (mo *HostNetworkSystem) RestartServiceConsoleVirtualNic(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RestartServiceConsoleVirtualNic"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Device  string                  `xml:"device,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Device: device,
 	}
 
@@ -32603,10 +32603,10 @@ func (mo *HostNetworkSystem) UpdateConsoleIpRouteConfig(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpdateConsoleIpRouteConfig"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Config  *HostIpRouteConfig      `xml:"config,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Config: config,
 	}
 
@@ -32635,10 +32635,10 @@ func (mo *HostNetworkSystem) UpdateDnsConfig(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpdateDnsConfig"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Config  *HostDnsConfig          `xml:"config,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Config: config,
 	}
 
@@ -32667,10 +32667,10 @@ func (mo *HostNetworkSystem) UpdateIpRouteConfig(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpdateIpRouteConfig"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Config  *HostIpRouteConfig      `xml:"config,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Config: config,
 	}
 
@@ -32701,10 +32701,10 @@ func (mo *HostNetworkSystem) UpdateIpRouteTableConfig(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpdateIpRouteTableConfig"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Config  *HostIpRouteTableConfig `xml:"config,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Config: config,
 	}
 
@@ -32782,11 +32782,11 @@ func (mo *HostNetworkSystem) UpdateNetworkConfig(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"UpdateNetworkConfig"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Config     *HostNetworkConfig      `xml:"config,omitempty"`
 		ChangeMode string                  `xml:"changeMode,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Config:     config,
 		ChangeMode: changeMode,
 	}
@@ -32817,11 +32817,11 @@ func (mo *HostNetworkSystem) UpdatePhysicalNicLinkSpeed(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"UpdatePhysicalNicLinkSpeed"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Device    string                  `xml:"device,omitempty"`
 		LinkSpeed *PhysicalNicLinkInfo    `xml:"linkSpeed,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		Device:    device,
 		LinkSpeed: linkSpeed,
 	}
@@ -32847,11 +32847,11 @@ func (mo *HostNetworkSystem) UpdatePortGroup(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpdatePortGroup"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		PgName  string                  `xml:"pgName,omitempty"`
 		Portgrp *HostPortGroupSpec      `xml:"portgrp,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		PgName:  pgName,
 		Portgrp: portgrp,
 	}
@@ -32886,11 +32886,11 @@ func (mo *HostNetworkSystem) UpdateServiceConsoleVirtualNic(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpdateServiceConsoleVirtualNic"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Device  string                  `xml:"device,omitempty"`
 		Nic     *HostVirtualNicSpec     `xml:"nic,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Device: device,
 		Nic:    nic,
 	}
@@ -32926,11 +32926,11 @@ func (mo *HostNetworkSystem) UpdateVirtualNic(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpdateVirtualNic"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Device  string                  `xml:"device,omitempty"`
 		Nic     *HostVirtualNicSpec     `xml:"nic,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Device: device,
 		Nic:    nic,
 	}
@@ -32972,11 +32972,11 @@ func (mo *HostNetworkSystem) UpdateVirtualSwitch(
 
 	request := struct {
 		XMLName     xml.Name                `xml:"UpdateVirtualSwitch"`
-		_this       *ManagedObjectReference `xml:"_this,omitempty"`
+		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		VswitchName string                  `xml:"vswitchName,omitempty"`
 		Spec        *HostVirtualSwitchSpec  `xml:"spec,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		VswitchName: vswitchName,
 		Spec:        spec,
 	}
@@ -33466,12 +33466,12 @@ func (mo *HostPatchManager) CheckHostPatch_Task(
 
 	request := struct {
 		XMLName    xml.Name                                   `xml:"CheckHostPatch_Task"`
-		_this      *ManagedObjectReference                    `xml:"_this,omitempty"`
+		This       *ManagedObjectReference                    `xml:"_this,omitempty"`
 		MetaUrls   []string                                   `xml:"metaUrls,omitempty"`
 		BundleUrls []string                                   `xml:"bundleUrls,omitempty"`
 		Spec       *HostPatchManagerPatchManagerOperationSpec `xml:"spec,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		MetaUrls:   metaUrls,
 		BundleUrls: bundleUrls,
 		Spec:       spec,
@@ -33508,12 +33508,12 @@ func (mo *HostPatchManager) InstallHostPatch_Task(
 
 	request := struct {
 		XMLName    xml.Name                 `xml:"InstallHostPatch_Task"`
-		_this      *ManagedObjectReference  `xml:"_this,omitempty"`
+		This       *ManagedObjectReference  `xml:"_this,omitempty"`
 		Repository *HostPatchManagerLocator `xml:"repository,omitempty"`
 		UpdateID   string                   `xml:"updateID,omitempty"`
 		Force      bool                     `xml:"force,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Repository: repository,
 		UpdateID:   updateID,
 		Force:      force,
@@ -33549,13 +33549,13 @@ func (mo *HostPatchManager) InstallHostPatchV2_Task(
 
 	request := struct {
 		XMLName    xml.Name                                   `xml:"InstallHostPatchV2_Task"`
-		_this      *ManagedObjectReference                    `xml:"_this,omitempty"`
+		This       *ManagedObjectReference                    `xml:"_this,omitempty"`
 		MetaUrls   []string                                   `xml:"metaUrls,omitempty"`
 		BundleUrls []string                                   `xml:"bundleUrls,omitempty"`
 		VibUrls    []string                                   `xml:"vibUrls,omitempty"`
 		Spec       *HostPatchManagerPatchManagerOperationSpec `xml:"spec,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		MetaUrls:   metaUrls,
 		BundleUrls: bundleUrls,
 		VibUrls:    vibUrls,
@@ -33589,11 +33589,11 @@ func (mo *HostPatchManager) QueryHostPatch_Task(
 
 	request := struct {
 		XMLName xml.Name                                   `xml:"QueryHostPatch_Task"`
-		_this   *ManagedObjectReference                    `xml:"_this,omitempty"`
+		This    *ManagedObjectReference                    `xml:"_this,omitempty"`
 		Spec    *HostPatchManagerPatchManagerOperationSpec `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Spec:  spec,
+		This: mo.This,
+		Spec: spec,
 	}
 
 	response := struct {
@@ -33626,11 +33626,11 @@ func (mo *HostPatchManager) ScanHostPatch_Task(
 
 	request := struct {
 		XMLName    xml.Name                 `xml:"ScanHostPatch_Task"`
-		_this      *ManagedObjectReference  `xml:"_this,omitempty"`
+		This       *ManagedObjectReference  `xml:"_this,omitempty"`
 		Repository *HostPatchManagerLocator `xml:"repository,omitempty"`
 		UpdateID   []string                 `xml:"updateID,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Repository: repository,
 		UpdateID:   updateID,
 	}
@@ -33664,12 +33664,12 @@ func (mo *HostPatchManager) ScanHostPatchV2_Task(
 
 	request := struct {
 		XMLName    xml.Name                                   `xml:"ScanHostPatchV2_Task"`
-		_this      *ManagedObjectReference                    `xml:"_this,omitempty"`
+		This       *ManagedObjectReference                    `xml:"_this,omitempty"`
 		MetaUrls   []string                                   `xml:"metaUrls,omitempty"`
 		BundleUrls []string                                   `xml:"bundleUrls,omitempty"`
 		Spec       *HostPatchManagerPatchManagerOperationSpec `xml:"spec,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		MetaUrls:   metaUrls,
 		BundleUrls: bundleUrls,
 		Spec:       spec,
@@ -33702,13 +33702,13 @@ func (mo *HostPatchManager) StageHostPatch_Task(
 
 	request := struct {
 		XMLName    xml.Name                                   `xml:"StageHostPatch_Task"`
-		_this      *ManagedObjectReference                    `xml:"_this,omitempty"`
+		This       *ManagedObjectReference                    `xml:"_this,omitempty"`
 		MetaUrls   []string                                   `xml:"metaUrls,omitempty"`
 		BundleUrls []string                                   `xml:"bundleUrls,omitempty"`
 		VibUrls    []string                                   `xml:"vibUrls,omitempty"`
 		Spec       *HostPatchManagerPatchManagerOperationSpec `xml:"spec,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		MetaUrls:   metaUrls,
 		BundleUrls: bundleUrls,
 		VibUrls:    vibUrls,
@@ -33742,11 +33742,11 @@ func (mo *HostPatchManager) UninstallHostPatch_Task(
 
 	request := struct {
 		XMLName     xml.Name                                   `xml:"UninstallHostPatch_Task"`
-		_this       *ManagedObjectReference                    `xml:"_this,omitempty"`
+		This        *ManagedObjectReference                    `xml:"_this,omitempty"`
 		BulletinIds []string                                   `xml:"bulletinIds,omitempty"`
 		Spec        *HostPatchManagerPatchManagerOperationSpec `xml:"spec,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		BulletinIds: bulletinIds,
 		Spec:        spec,
 	}
@@ -34081,9 +34081,9 @@ func (mo *HostPciPassthruSystem) Refresh() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"Refresh"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -34109,10 +34109,10 @@ func (mo *HostPciPassthruSystem) UpdatePassthruConfig(
 
 	request := struct {
 		XMLName xml.Name                 `xml:"UpdatePassthruConfig"`
-		_this   *ManagedObjectReference  `xml:"_this,omitempty"`
+		This    *ManagedObjectReference  `xml:"_this,omitempty"`
 		Config  []*HostPciPassthruConfig `xml:"config,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Config: config,
 	}
 
@@ -34600,11 +34600,11 @@ func (mo *HostPowerSystem) ConfigurePowerPolicy(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ConfigurePowerPolicy"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Key     int32                   `xml:"key,omitempty"`
 	}{
-		_this: mo.this,
-		Key:   key,
+		This: mo.This,
+		Key:  key,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -34835,11 +34835,11 @@ func (mo *HostProfile) ExecuteHostProfile(
 
 	request := struct {
 		XMLName       xml.Name                                `xml:"ExecuteHostProfile"`
-		_this         *ManagedObjectReference                 `xml:"_this,omitempty"`
+		This          *ManagedObjectReference                 `xml:"_this,omitempty"`
 		Host          *HostSystem                             `xml:"host,omitempty"`
 		DeferredParam []*ProfileDeferredPolicyOptionParameter `xml:"deferredParam,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		Host:          host,
 		DeferredParam: deferredParam,
 	}
@@ -34869,10 +34869,10 @@ func (mo *HostProfile) UpdateHostProfile(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpdateHostProfile"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Config  *HostProfileConfigSpec  `xml:"config,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Config: config,
 	}
 
@@ -34897,11 +34897,11 @@ func (mo *HostProfile) UpdateReferenceHost(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpdateReferenceHost"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		_this: mo.this,
-		Host:  host,
+		This: mo.This,
+		Host: host,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -35061,12 +35061,12 @@ func (mo *HostProfileManager) ApplyHostConfig_Task(
 
 	request := struct {
 		XMLName    xml.Name                                `xml:"ApplyHostConfig_Task"`
-		_this      *ManagedObjectReference                 `xml:"_this,omitempty"`
+		This       *ManagedObjectReference                 `xml:"_this,omitempty"`
 		Host       *HostSystem                             `xml:"host,omitempty"`
 		ConfigSpec *HostConfigSpec                         `xml:"configSpec,omitempty"`
 		UserInput  []*ProfileDeferredPolicyOptionParameter `xml:"userInput,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Host:       host,
 		ConfigSpec: configSpec,
 		UserInput:  userInput,
@@ -35101,11 +35101,11 @@ func (mo *HostProfileManager) CheckAnswerFileStatus_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CheckAnswerFileStatus_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    []*HostSystem           `xml:"host,omitempty"`
 	}{
-		_this: mo.this,
-		Host:  host,
+		This: mo.This,
+		Host: host,
 	}
 
 	response := struct {
@@ -35156,12 +35156,12 @@ func (mo *HostProfileManager) CreateDefaultProfile(
 
 	request := struct {
 		XMLName         xml.Name                `xml:"CreateDefaultProfile"`
-		_this           *ManagedObjectReference `xml:"_this,omitempty"`
+		This            *ManagedObjectReference `xml:"_this,omitempty"`
 		ProfileType     string                  `xml:"profileType,omitempty"`
 		ProfileTypeName string                  `xml:"profileTypeName,omitempty"`
 		Profile         *Profile                `xml:"profile,omitempty"`
 	}{
-		_this:           mo.this,
+		This:            mo.This,
 		ProfileType:     profileType,
 		ProfileTypeName: profileTypeName,
 		Profile:         profile,
@@ -35196,11 +35196,11 @@ func (mo *HostProfileManager) ExportAnswerFile_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ExportAnswerFile_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		_this: mo.this,
-		Host:  host,
+		This: mo.This,
+		Host: host,
 	}
 
 	response := struct {
@@ -35233,11 +35233,11 @@ func (mo *HostProfileManager) GenerateConfigTaskList(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"GenerateConfigTaskList"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		ConfigSpec *HostConfigSpec         `xml:"configSpec,omitempty"`
 		Host       *HostSystem             `xml:"host,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		ConfigSpec: configSpec,
 		Host:       host,
 	}
@@ -35272,11 +35272,11 @@ func (mo *HostProfileManager) GenerateHostProfileTaskList_Task(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"GenerateHostProfileTaskList_Task"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		ConfigSpec *HostConfigSpec         `xml:"configSpec,omitempty"`
 		Host       *HostSystem             `xml:"host,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		ConfigSpec: configSpec,
 		Host:       host,
 	}
@@ -35311,11 +35311,11 @@ func (mo *HostProfileManager) QueryAnswerFileStatus(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryAnswerFileStatus"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    []*HostSystem           `xml:"host,omitempty"`
 	}{
-		_this: mo.this,
-		Host:  host,
+		This: mo.This,
+		Host: host,
 	}
 
 	response := struct {
@@ -35343,11 +35343,11 @@ func (mo *HostProfileManager) QueryHostProfileMetadata(
 
 	request := struct {
 		XMLName     xml.Name                `xml:"QueryHostProfileMetadata"`
-		_this       *ManagedObjectReference `xml:"_this,omitempty"`
+		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		ProfileName []string                `xml:"profileName,omitempty"`
 		Profile     *Profile                `xml:"profile,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		ProfileName: profileName,
 		Profile:     profile,
 	}
@@ -35379,10 +35379,10 @@ func (mo *HostProfileManager) QueryProfileStructure(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryProfileStructure"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Profile *Profile                `xml:"profile,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		Profile: profile,
 	}
 
@@ -35413,11 +35413,11 @@ func (mo *HostProfileManager) RetrieveAnswerFile(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RetrieveAnswerFile"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		_this: mo.this,
-		Host:  host,
+		This: mo.This,
+		Host: host,
 	}
 
 	response := struct {
@@ -35449,11 +35449,11 @@ func (mo *HostProfileManager) RetrieveAnswerFileForProfile(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"RetrieveAnswerFileForProfile"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		Host         *HostSystem             `xml:"host,omitempty"`
 		ApplyProfile *HostApplyProfile       `xml:"applyProfile,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		Host:         host,
 		ApplyProfile: applyProfile,
 	}
@@ -35487,11 +35487,11 @@ func (mo *HostProfileManager) UpdateAnswerFile_Task(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"UpdateAnswerFile_Task"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Host       *HostSystem             `xml:"host,omitempty"`
 		ConfigSpec *AnswerFileCreateSpec   `xml:"configSpec,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Host:       host,
 		ConfigSpec: configSpec,
 	}
@@ -36132,9 +36132,9 @@ func (mo *HostServiceSystem) RefreshServices() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"RefreshServices"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -36158,11 +36158,11 @@ func (mo *HostServiceSystem) RestartService(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RestartService"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Id      string                  `xml:"id,omitempty"`
 	}{
-		_this: mo.this,
-		Id:    id,
+		This: mo.This,
+		Id:   id,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -36186,11 +36186,11 @@ func (mo *HostServiceSystem) StartService(
 
 	request := struct {
 		XMLName xml.Name                `xml:"StartService"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Id      string                  `xml:"id,omitempty"`
 	}{
-		_this: mo.this,
-		Id:    id,
+		This: mo.This,
+		Id:   id,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -36214,11 +36214,11 @@ func (mo *HostServiceSystem) StopService(
 
 	request := struct {
 		XMLName xml.Name                `xml:"StopService"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Id      string                  `xml:"id,omitempty"`
 	}{
-		_this: mo.this,
-		Id:    id,
+		This: mo.This,
+		Id:   id,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -36243,11 +36243,11 @@ func (mo *HostServiceSystem) UninstallService(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UninstallService"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Id      string                  `xml:"id,omitempty"`
 	}{
-		_this: mo.this,
-		Id:    id,
+		This: mo.This,
+		Id:   id,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -36271,11 +36271,11 @@ func (mo *HostServiceSystem) UpdateServicePolicy(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpdateServicePolicy"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Id      string                  `xml:"id,omitempty"`
 		Policy  string                  `xml:"policy,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Id:     id,
 		Policy: policy,
 	}
@@ -36487,11 +36487,11 @@ func (mo *HostSnmpSystem) ReconfigureSnmpAgent(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ReconfigureSnmpAgent"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *HostSnmpConfigSpec     `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Spec:  spec,
+		This: mo.This,
+		Spec: spec,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -36514,9 +36514,9 @@ func (mo *HostSnmpSystem) SendTestNotification() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"SendTestNotification"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -36816,11 +36816,11 @@ func (mo *HostStorageSystem) AddInternetScsiSendTargets(
 
 	request := struct {
 		XMLName        xml.Name                         `xml:"AddInternetScsiSendTargets"`
-		_this          *ManagedObjectReference          `xml:"_this,omitempty"`
+		This           *ManagedObjectReference          `xml:"_this,omitempty"`
 		IScsiHbaDevice string                           `xml:"iScsiHbaDevice,omitempty"`
 		Targets        []*HostInternetScsiHbaSendTarget `xml:"targets,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		IScsiHbaDevice: iScsiHbaDevice,
 		Targets:        targets,
 	}
@@ -36847,11 +36847,11 @@ func (mo *HostStorageSystem) AddInternetScsiStaticTargets(
 
 	request := struct {
 		XMLName        xml.Name                           `xml:"AddInternetScsiStaticTargets"`
-		_this          *ManagedObjectReference            `xml:"_this,omitempty"`
+		This           *ManagedObjectReference            `xml:"_this,omitempty"`
 		IScsiHbaDevice string                             `xml:"iScsiHbaDevice,omitempty"`
 		Targets        []*HostInternetScsiHbaStaticTarget `xml:"targets,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		IScsiHbaDevice: iScsiHbaDevice,
 		Targets:        targets,
 	}
@@ -36886,10 +36886,10 @@ func (mo *HostStorageSystem) AttachScsiLun(
 
 	request := struct {
 		XMLName xml.Name                `xml:"AttachScsiLun"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		LunUuid string                  `xml:"lunUuid,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		LunUuid: lunUuid,
 	}
 
@@ -36914,11 +36914,11 @@ func (mo *HostStorageSystem) AttachVmfsExtent(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"AttachVmfsExtent"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		VmfsPath string                  `xml:"vmfsPath,omitempty"`
 		Extent   *HostScsiDiskPartition  `xml:"extent,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		VmfsPath: vmfsPath,
 		Extent:   extent,
 	}
@@ -36946,12 +36946,12 @@ func (mo *HostStorageSystem) ComputeDiskPartitionInfo(
 
 	request := struct {
 		XMLName         xml.Name                 `xml:"ComputeDiskPartitionInfo"`
-		_this           *ManagedObjectReference  `xml:"_this,omitempty"`
+		This            *ManagedObjectReference  `xml:"_this,omitempty"`
 		DevicePath      string                   `xml:"devicePath,omitempty"`
 		Layout          *HostDiskPartitionLayout `xml:"layout,omitempty"`
 		PartitionFormat string                   `xml:"partitionFormat,omitempty"`
 	}{
-		_this:           mo.this,
+		This:            mo.This,
 		DevicePath:      devicePath,
 		Layout:          layout,
 		PartitionFormat: partitionFormat,
@@ -36985,12 +36985,12 @@ func (mo *HostStorageSystem) ComputeDiskPartitionInfoForResize(
 
 	request := struct {
 		XMLName         xml.Name                     `xml:"ComputeDiskPartitionInfoForResize"`
-		_this           *ManagedObjectReference      `xml:"_this,omitempty"`
+		This            *ManagedObjectReference      `xml:"_this,omitempty"`
 		Partition       *HostScsiDiskPartition       `xml:"partition,omitempty"`
 		BlockRange      *HostDiskPartitionBlockRange `xml:"blockRange,omitempty"`
 		PartitionFormat string                       `xml:"partitionFormat,omitempty"`
 	}{
-		_this:           mo.this,
+		This:            mo.This,
 		Partition:       partition,
 		BlockRange:      blockRange,
 		PartitionFormat: partitionFormat,
@@ -37033,10 +37033,10 @@ func (mo *HostStorageSystem) DeleteScsiLunState(
 
 	request := struct {
 		XMLName          xml.Name                `xml:"DeleteScsiLunState"`
-		_this            *ManagedObjectReference `xml:"_this,omitempty"`
+		This             *ManagedObjectReference `xml:"_this,omitempty"`
 		LunCanonicalName string                  `xml:"lunCanonicalName,omitempty"`
 	}{
-		_this:            mo.this,
+		This:             mo.This,
 		LunCanonicalName: lunCanonicalName,
 	}
 
@@ -37078,10 +37078,10 @@ func (mo *HostStorageSystem) DeleteVffsVolumeState(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"DeleteVffsVolumeState"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		VffsUuid string                  `xml:"vffsUuid,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		VffsUuid: vffsUuid,
 	}
 
@@ -37124,10 +37124,10 @@ func (mo *HostStorageSystem) DeleteVmfsVolumeState(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"DeleteVmfsVolumeState"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		VmfsUuid string                  `xml:"vmfsUuid,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		VmfsUuid: vmfsUuid,
 	}
 
@@ -37154,10 +37154,10 @@ func (mo *HostStorageSystem) DestroyVffs(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"DestroyVffs"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		VffsPath string                  `xml:"vffsPath,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		VffsPath: vffsPath,
 	}
 
@@ -37192,10 +37192,10 @@ func (mo *HostStorageSystem) DetachScsiLun(
 
 	request := struct {
 		XMLName xml.Name                `xml:"DetachScsiLun"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		LunUuid string                  `xml:"lunUuid,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		LunUuid: lunUuid,
 	}
 
@@ -37222,10 +37222,10 @@ func (mo *HostStorageSystem) DisableMultipathPath(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"DisableMultipathPath"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		PathName string                  `xml:"pathName,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		PathName: pathName,
 	}
 
@@ -37255,10 +37255,10 @@ func (mo *HostStorageSystem) DiscoverFcoeHbas(
 
 	request := struct {
 		XMLName  xml.Name                     `xml:"DiscoverFcoeHbas"`
-		_this    *ManagedObjectReference      `xml:"_this,omitempty"`
+		This     *ManagedObjectReference      `xml:"_this,omitempty"`
 		FcoeSpec *FcoeConfigFcoeSpecification `xml:"fcoeSpec,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		FcoeSpec: fcoeSpec,
 	}
 
@@ -37285,10 +37285,10 @@ func (mo *HostStorageSystem) EnableMultipathPath(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"EnableMultipathPath"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		PathName string                  `xml:"pathName,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		PathName: pathName,
 	}
 
@@ -37315,11 +37315,11 @@ func (mo *HostStorageSystem) ExpandVmfsExtent(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"ExpandVmfsExtent"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		VmfsPath string                  `xml:"vmfsPath,omitempty"`
 		Extent   *HostScsiDiskPartition  `xml:"extent,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		VmfsPath: vmfsPath,
 		Extent:   extent,
 	}
@@ -37347,12 +37347,12 @@ func (mo *HostStorageSystem) ExtendVffs(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"ExtendVffs"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		VffsPath   string                  `xml:"vffsPath,omitempty"`
 		DevicePath string                  `xml:"devicePath,omitempty"`
 		Spec       *HostDiskPartitionSpec  `xml:"spec,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		VffsPath:   vffsPath,
 		DevicePath: devicePath,
 		Spec:       spec,
@@ -37381,10 +37381,10 @@ func (mo *HostStorageSystem) FormatVffs(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"FormatVffs"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		CreateSpec *HostVffsSpec           `xml:"createSpec,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		CreateSpec: createSpec,
 	}
 
@@ -37413,10 +37413,10 @@ func (mo *HostStorageSystem) FormatVmfs(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"FormatVmfs"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		CreateSpec *HostVmfsSpec           `xml:"createSpec,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		CreateSpec: createSpec,
 	}
 
@@ -37451,11 +37451,11 @@ func (mo *HostStorageSystem) MarkForRemoval(
 
 	request := struct {
 		XMLName xml.Name                `xml:"MarkForRemoval"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		HbaName string                  `xml:"hbaName,omitempty"`
 		Remove  bool                    `xml:"remove,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		HbaName: hbaName,
 		Remove:  remove,
 	}
@@ -37488,10 +37488,10 @@ func (mo *HostStorageSystem) MountVffsVolume(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"MountVffsVolume"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		VffsUuid string                  `xml:"vffsUuid,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		VffsUuid: vffsUuid,
 	}
 
@@ -37525,10 +37525,10 @@ func (mo *HostStorageSystem) MountVmfsVolume(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"MountVmfsVolume"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		VmfsUuid string                  `xml:"vmfsUuid,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		VmfsUuid: vmfsUuid,
 	}
 
@@ -37561,10 +37561,10 @@ func (mo *HostStorageSystem) QueryAvailableSsds(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"QueryAvailableSsds"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		VffsPath string                  `xml:"vffsPath,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		VffsPath: vffsPath,
 	}
 
@@ -37601,9 +37601,9 @@ func (mo *HostStorageSystem) QueryPathSelectionPolicyOptions() ([]*HostPathSelec
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryPathSelectionPolicyOptions"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -37639,9 +37639,9 @@ func (mo *HostStorageSystem) QueryStorageArrayTypePolicyOptions() ([]*HostStorag
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryStorageArrayTypePolicyOptions"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -37673,9 +37673,9 @@ func (mo *HostStorageSystem) QueryUnresolvedVmfsVolume() ([]*HostUnresolvedVmfsV
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryUnresolvedVmfsVolume"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -37724,9 +37724,9 @@ func (mo *HostStorageSystem) RefreshStorageSystem() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"RefreshStorageSystem"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -37754,11 +37754,11 @@ func (mo *HostStorageSystem) RemoveInternetScsiSendTargets(
 
 	request := struct {
 		XMLName        xml.Name                         `xml:"RemoveInternetScsiSendTargets"`
-		_this          *ManagedObjectReference          `xml:"_this,omitempty"`
+		This           *ManagedObjectReference          `xml:"_this,omitempty"`
 		IScsiHbaDevice string                           `xml:"iScsiHbaDevice,omitempty"`
 		Targets        []*HostInternetScsiHbaSendTarget `xml:"targets,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		IScsiHbaDevice: iScsiHbaDevice,
 		Targets:        targets,
 	}
@@ -37788,11 +37788,11 @@ func (mo *HostStorageSystem) RemoveInternetScsiStaticTargets(
 
 	request := struct {
 		XMLName        xml.Name                           `xml:"RemoveInternetScsiStaticTargets"`
-		_this          *ManagedObjectReference            `xml:"_this,omitempty"`
+		This           *ManagedObjectReference            `xml:"_this,omitempty"`
 		IScsiHbaDevice string                             `xml:"iScsiHbaDevice,omitempty"`
 		Targets        []*HostInternetScsiHbaStaticTarget `xml:"targets,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		IScsiHbaDevice: iScsiHbaDevice,
 		Targets:        targets,
 	}
@@ -37837,9 +37837,9 @@ func (mo *HostStorageSystem) RescanAllHba() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"RescanAllHba"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -37864,10 +37864,10 @@ func (mo *HostStorageSystem) RescanHba(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"RescanHba"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		HbaDevice string                  `xml:"hbaDevice,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		HbaDevice: hbaDevice,
 	}
 
@@ -37900,9 +37900,9 @@ func (mo *HostStorageSystem) RescanVffs() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"RescanVffs"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -37932,9 +37932,9 @@ func (mo *HostStorageSystem) RescanVmfs() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"RescanVmfs"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -37986,10 +37986,10 @@ func (mo *HostStorageSystem) ResolveMultipleUnresolvedVmfsVolumes(
 
 	request := struct {
 		XMLName        xml.Name                            `xml:"ResolveMultipleUnresolvedVmfsVolumes"`
-		_this          *ManagedObjectReference             `xml:"_this,omitempty"`
+		This           *ManagedObjectReference             `xml:"_this,omitempty"`
 		ResolutionSpec []*HostUnresolvedVmfsResolutionSpec `xml:"resolutionSpec,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		ResolutionSpec: resolutionSpec,
 	}
 
@@ -38056,10 +38056,10 @@ func (mo *HostStorageSystem) ResolveMultipleUnresolvedVmfsVolumesEx_Task(
 
 	request := struct {
 		XMLName        xml.Name                            `xml:"ResolveMultipleUnresolvedVmfsVolumesEx_Task"`
-		_this          *ManagedObjectReference             `xml:"_this,omitempty"`
+		This           *ManagedObjectReference             `xml:"_this,omitempty"`
 		ResolutionSpec []*HostUnresolvedVmfsResolutionSpec `xml:"resolutionSpec,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		ResolutionSpec: resolutionSpec,
 	}
 
@@ -38088,10 +38088,10 @@ func (mo *HostStorageSystem) RetrieveDiskPartitionInfo(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"RetrieveDiskPartitionInfo"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		DevicePath []string                `xml:"devicePath,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		DevicePath: devicePath,
 	}
 
@@ -38121,11 +38121,11 @@ func (mo *HostStorageSystem) SetMultipathLunPolicy(
 
 	request := struct {
 		XMLName xml.Name                            `xml:"SetMultipathLunPolicy"`
-		_this   *ManagedObjectReference             `xml:"_this,omitempty"`
+		This    *ManagedObjectReference             `xml:"_this,omitempty"`
 		LunId   string                              `xml:"lunId,omitempty"`
 		Policy  *HostMultipathInfoLogicalUnitPolicy `xml:"policy,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		LunId:  lunId,
 		Policy: policy,
 	}
@@ -38162,10 +38162,10 @@ func (mo *HostStorageSystem) UnmountForceMountedVmfsVolume(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"UnmountForceMountedVmfsVolume"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		VmfsUuid string                  `xml:"vmfsUuid,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		VmfsUuid: vmfsUuid,
 	}
 
@@ -38201,10 +38201,10 @@ func (mo *HostStorageSystem) UnmountVffsVolume(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"UnmountVffsVolume"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		VffsUuid string                  `xml:"vffsUuid,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		VffsUuid: vffsUuid,
 	}
 
@@ -38286,10 +38286,10 @@ func (mo *HostStorageSystem) UnmountVmfsVolume(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"UnmountVmfsVolume"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		VmfsUuid string                  `xml:"vmfsUuid,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		VmfsUuid: vmfsUuid,
 	}
 
@@ -38315,11 +38315,11 @@ func (mo *HostStorageSystem) UpdateDiskPartitions(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"UpdateDiskPartitions"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		DevicePath string                  `xml:"devicePath,omitempty"`
 		Spec       *HostDiskPartitionSpec  `xml:"spec,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		DevicePath: devicePath,
 		Spec:       spec,
 	}
@@ -38348,12 +38348,12 @@ func (mo *HostStorageSystem) UpdateInternetScsiAdvancedOptions(
 
 	request := struct {
 		XMLName        xml.Name                         `xml:"UpdateInternetScsiAdvancedOptions"`
-		_this          *ManagedObjectReference          `xml:"_this,omitempty"`
+		This           *ManagedObjectReference          `xml:"_this,omitempty"`
 		IScsiHbaDevice string                           `xml:"iScsiHbaDevice,omitempty"`
 		TargetSet      *HostInternetScsiHbaTargetSet    `xml:"targetSet,omitempty"`
 		Options        []*HostInternetScsiHbaParamValue `xml:"options,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		IScsiHbaDevice: iScsiHbaDevice,
 		TargetSet:      targetSet,
 		Options:        options,
@@ -38380,11 +38380,11 @@ func (mo *HostStorageSystem) UpdateInternetScsiAlias(
 
 	request := struct {
 		XMLName        xml.Name                `xml:"UpdateInternetScsiAlias"`
-		_this          *ManagedObjectReference `xml:"_this,omitempty"`
+		This           *ManagedObjectReference `xml:"_this,omitempty"`
 		IScsiHbaDevice string                  `xml:"iScsiHbaDevice,omitempty"`
 		IScsiAlias     string                  `xml:"iScsiAlias,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		IScsiHbaDevice: iScsiHbaDevice,
 		IScsiAlias:     iScsiAlias,
 	}
@@ -38411,12 +38411,12 @@ func (mo *HostStorageSystem) UpdateInternetScsiAuthenticationProperties(
 
 	request := struct {
 		XMLName                  xml.Name                                     `xml:"UpdateInternetScsiAuthenticationProperties"`
-		_this                    *ManagedObjectReference                      `xml:"_this,omitempty"`
+		This                     *ManagedObjectReference                      `xml:"_this,omitempty"`
 		IScsiHbaDevice           string                                       `xml:"iScsiHbaDevice,omitempty"`
 		AuthenticationProperties *HostInternetScsiHbaAuthenticationProperties `xml:"authenticationProperties,omitempty"`
 		TargetSet                *HostInternetScsiHbaTargetSet                `xml:"targetSet,omitempty"`
 	}{
-		_this:                    mo.this,
+		This:                     mo.This,
 		IScsiHbaDevice:           iScsiHbaDevice,
 		AuthenticationProperties: authenticationProperties,
 		TargetSet:                targetSet,
@@ -38446,12 +38446,12 @@ func (mo *HostStorageSystem) UpdateInternetScsiDigestProperties(
 
 	request := struct {
 		XMLName          xml.Name                             `xml:"UpdateInternetScsiDigestProperties"`
-		_this            *ManagedObjectReference              `xml:"_this,omitempty"`
+		This             *ManagedObjectReference              `xml:"_this,omitempty"`
 		IScsiHbaDevice   string                               `xml:"iScsiHbaDevice,omitempty"`
 		TargetSet        *HostInternetScsiHbaTargetSet        `xml:"targetSet,omitempty"`
 		DigestProperties *HostInternetScsiHbaDigestProperties `xml:"digestProperties,omitempty"`
 	}{
-		_this:            mo.this,
+		This:             mo.This,
 		IScsiHbaDevice:   iScsiHbaDevice,
 		TargetSet:        targetSet,
 		DigestProperties: digestProperties,
@@ -38478,11 +38478,11 @@ func (mo *HostStorageSystem) UpdateInternetScsiDiscoveryProperties(
 
 	request := struct {
 		XMLName             xml.Name                                `xml:"UpdateInternetScsiDiscoveryProperties"`
-		_this               *ManagedObjectReference                 `xml:"_this,omitempty"`
+		This                *ManagedObjectReference                 `xml:"_this,omitempty"`
 		IScsiHbaDevice      string                                  `xml:"iScsiHbaDevice,omitempty"`
 		DiscoveryProperties *HostInternetScsiHbaDiscoveryProperties `xml:"discoveryProperties,omitempty"`
 	}{
-		_this:               mo.this,
+		This:                mo.This,
 		IScsiHbaDevice:      iScsiHbaDevice,
 		DiscoveryProperties: discoveryProperties,
 	}
@@ -38508,11 +38508,11 @@ func (mo *HostStorageSystem) UpdateInternetScsiIPProperties(
 
 	request := struct {
 		XMLName        xml.Name                         `xml:"UpdateInternetScsiIPProperties"`
-		_this          *ManagedObjectReference          `xml:"_this,omitempty"`
+		This           *ManagedObjectReference          `xml:"_this,omitempty"`
 		IScsiHbaDevice string                           `xml:"iScsiHbaDevice,omitempty"`
 		IpProperties   *HostInternetScsiHbaIPProperties `xml:"ipProperties,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		IScsiHbaDevice: iScsiHbaDevice,
 		IpProperties:   ipProperties,
 	}
@@ -38538,11 +38538,11 @@ func (mo *HostStorageSystem) UpdateInternetScsiName(
 
 	request := struct {
 		XMLName        xml.Name                `xml:"UpdateInternetScsiName"`
-		_this          *ManagedObjectReference `xml:"_this,omitempty"`
+		This           *ManagedObjectReference `xml:"_this,omitempty"`
 		IScsiHbaDevice string                  `xml:"iScsiHbaDevice,omitempty"`
 		IScsiName      string                  `xml:"iScsiName,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		IScsiHbaDevice: iScsiHbaDevice,
 		IScsiName:      iScsiName,
 	}
@@ -38571,11 +38571,11 @@ func (mo *HostStorageSystem) UpdateScsiLunDisplayName(
 
 	request := struct {
 		XMLName     xml.Name                `xml:"UpdateScsiLunDisplayName"`
-		_this       *ManagedObjectReference `xml:"_this,omitempty"`
+		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		LunUuid     string                  `xml:"lunUuid,omitempty"`
 		DisplayName string                  `xml:"displayName,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		LunUuid:     lunUuid,
 		DisplayName: displayName,
 	}
@@ -38601,10 +38601,10 @@ func (mo *HostStorageSystem) UpdateSoftwareInternetScsiEnabled(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpdateSoftwareInternetScsiEnabled"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Enabled bool                    `xml:"enabled,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		Enabled: enabled,
 	}
 
@@ -38634,10 +38634,10 @@ func (mo *HostStorageSystem) UpgradeVmfs(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"UpgradeVmfs"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		VmfsPath string                  `xml:"vmfsPath,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		VmfsPath: vmfsPath,
 	}
 
@@ -38667,9 +38667,9 @@ func (mo *HostStorageSystem) UpgradeVmLayout() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpgradeVmLayout"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -38963,9 +38963,9 @@ func (mo *HostSystem) AcquireCimServicesTicket() (*HostServiceTicket, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"AcquireCimServicesTicket"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -38991,9 +38991,9 @@ func (mo *HostSystem) DisconnectHost_Task() (*Task, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"DisconnectHost_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -39032,9 +39032,9 @@ func (mo *HostSystem) EnterLockdownMode() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"EnterLockdownMode"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -39077,12 +39077,12 @@ func (mo *HostSystem) EnterMaintenanceMode_Task(
 
 	request := struct {
 		XMLName               xml.Name                `xml:"EnterMaintenanceMode_Task"`
-		_this                 *ManagedObjectReference `xml:"_this,omitempty"`
+		This                  *ManagedObjectReference `xml:"_this,omitempty"`
 		Timeout               int32                   `xml:"timeout,omitempty"`
 		EvacuatePoweredOffVms bool                    `xml:"evacuatePoweredOffVms,omitempty"`
 		MaintenanceSpec       *HostMaintenanceSpec    `xml:"maintenanceSpec,omitempty"`
 	}{
-		_this:                 mo.this,
+		This:                  mo.This,
 		Timeout:               timeout,
 		EvacuatePoweredOffVms: evacuatePoweredOffVms,
 		MaintenanceSpec:       maintenanceSpec,
@@ -39118,9 +39118,9 @@ func (mo *HostSystem) ExitLockdownMode() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"ExitLockdownMode"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -39149,10 +39149,10 @@ func (mo *HostSystem) ExitMaintenanceMode_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ExitMaintenanceMode_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Timeout int32                   `xml:"timeout,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		Timeout: timeout,
 	}
 
@@ -39210,11 +39210,11 @@ func (mo *HostSystem) PowerDownHostToStandBy_Task(
 
 	request := struct {
 		XMLName               xml.Name                `xml:"PowerDownHostToStandBy_Task"`
-		_this                 *ManagedObjectReference `xml:"_this,omitempty"`
+		This                  *ManagedObjectReference `xml:"_this,omitempty"`
 		TimeoutSec            int32                   `xml:"timeoutSec,omitempty"`
 		EvacuatePoweredOffVms bool                    `xml:"evacuatePoweredOffVms,omitempty"`
 	}{
-		_this:                 mo.this,
+		This:                  mo.This,
 		TimeoutSec:            timeoutSec,
 		EvacuatePoweredOffVms: evacuatePoweredOffVms,
 	}
@@ -39261,10 +39261,10 @@ func (mo *HostSystem) PowerUpHostFromStandBy_Task(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"PowerUpHostFromStandBy_Task"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		TimeoutSec int32                   `xml:"timeoutSec,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		TimeoutSec: timeoutSec,
 	}
 
@@ -39291,9 +39291,9 @@ func (mo *HostSystem) QueryHostConnectionInfo() (*HostConnectInfo, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryHostConnectionInfo"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -39325,12 +39325,12 @@ func (mo *HostSystem) QueryMemoryOverhead(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"QueryMemoryOverhead"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		MemorySize   int64                   `xml:"memorySize,omitempty"`
 		VideoRamSize int32                   `xml:"videoRamSize,omitempty"`
 		NumVcpus     int32                   `xml:"numVcpus,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		MemorySize:   memorySize,
 		VideoRamSize: videoRamSize,
 		NumVcpus:     numVcpus,
@@ -39368,10 +39368,10 @@ func (mo *HostSystem) QueryMemoryOverheadEx(
 
 	request := struct {
 		XMLName      xml.Name                  `xml:"QueryMemoryOverheadEx"`
-		_this        *ManagedObjectReference   `xml:"_this,omitempty"`
+		This         *ManagedObjectReference   `xml:"_this,omitempty"`
 		VmConfigInfo *VirtualMachineConfigInfo `xml:"vmConfigInfo,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		VmConfigInfo: vmConfigInfo,
 	}
 
@@ -39400,9 +39400,9 @@ func (mo *HostSystem) QueryTpmAttestationReport() (*HostTpmAttestationReport, er
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryTpmAttestationReport"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -39436,10 +39436,10 @@ func (mo *HostSystem) RebootHost_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RebootHost_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Force   bool                    `xml:"force,omitempty"`
 	}{
-		_this: mo.this,
+		This:  mo.This,
 		Force: force,
 	}
 
@@ -39473,9 +39473,9 @@ func (mo *HostSystem) ReconfigureHostForDAS_Task() (*Task, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"ReconfigureHostForDAS_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -39526,11 +39526,11 @@ func (mo *HostSystem) ReconnectHost_Task(
 
 	request := struct {
 		XMLName       xml.Name                 `xml:"ReconnectHost_Task"`
-		_this         *ManagedObjectReference  `xml:"_this,omitempty"`
+		This          *ManagedObjectReference  `xml:"_this,omitempty"`
 		CnxSpec       *HostConnectSpec         `xml:"cnxSpec,omitempty"`
 		ReconnectSpec *HostSystemReconnectSpec `xml:"reconnectSpec,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		CnxSpec:       cnxSpec,
 		ReconnectSpec: reconnectSpec,
 	}
@@ -39563,9 +39563,9 @@ func (mo *HostSystem) RetrieveHardwareUptime() (int64, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"RetrieveHardwareUptime"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -39599,10 +39599,10 @@ func (mo *HostSystem) ShutdownHost_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ShutdownHost_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Force   bool                    `xml:"force,omitempty"`
 	}{
-		_this: mo.this,
+		This:  mo.This,
 		Force: force,
 	}
 
@@ -39633,10 +39633,10 @@ func (mo *HostSystem) UpdateFlags(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"UpdateFlags"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		FlagInfo *HostFlagInfo           `xml:"flagInfo,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		FlagInfo: flagInfo,
 	}
 
@@ -39663,10 +39663,10 @@ func (mo *HostSystem) UpdateIpmi(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"UpdateIpmi"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		IpmiInfo *HostIpmiInfo           `xml:"ipmiInfo,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		IpmiInfo: ipmiInfo,
 	}
 
@@ -39691,10 +39691,10 @@ func (mo *HostSystem) UpdateSystemResources(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"UpdateSystemResources"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		ResourceInfo *HostSystemResourceInfo `xml:"resourceInfo,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		ResourceInfo: resourceInfo,
 	}
 
@@ -39721,10 +39721,10 @@ func (mo *HostSystem) UpdateSystemSwapConfiguration(
 
 	request := struct {
 		XMLName       xml.Name                     `xml:"UpdateSystemSwapConfiguration"`
-		_this         *ManagedObjectReference      `xml:"_this,omitempty"`
+		This          *ManagedObjectReference      `xml:"_this,omitempty"`
 		SysSwapConfig *HostSystemSwapConfiguration `xml:"sysSwapConfig,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		SysSwapConfig: sysSwapConfig,
 	}
 
@@ -40419,10 +40419,10 @@ func (mo *HostVFlashManager) ConfigureVFlashResourceEx_Task(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"ConfigureVFlashResourceEx_Task"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		DevicePath []string                `xml:"devicePath,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		DevicePath: devicePath,
 	}
 
@@ -40451,11 +40451,11 @@ func (mo *HostVFlashManager) HostConfigureVFlashResource(
 
 	request := struct {
 		XMLName xml.Name                                   `xml:"HostConfigureVFlashResource"`
-		_this   *ManagedObjectReference                    `xml:"_this,omitempty"`
+		This    *ManagedObjectReference                    `xml:"_this,omitempty"`
 		Spec    *HostVFlashManagerVFlashResourceConfigSpec `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Spec:  spec,
+		This: mo.This,
+		Spec: spec,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -40479,11 +40479,11 @@ func (mo *HostVFlashManager) HostConfigVFlashCache(
 
 	request := struct {
 		XMLName xml.Name                                `xml:"HostConfigVFlashCache"`
-		_this   *ManagedObjectReference                 `xml:"_this,omitempty"`
+		This    *ManagedObjectReference                 `xml:"_this,omitempty"`
 		Spec    *HostVFlashManagerVFlashCacheConfigSpec `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Spec:  spec,
+		This: mo.This,
+		Spec: spec,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -40509,10 +40509,10 @@ func (mo *HostVFlashManager) HostGetVFlashModuleDefaultConfig(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"HostGetVFlashModuleDefaultConfig"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		VFlashModule string                  `xml:"vFlashModule,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		VFlashModule: vFlashModule,
 	}
 
@@ -40539,9 +40539,9 @@ func (mo *HostVFlashManager) HostRemoveVFlashResource() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"HostRemoveVFlashResource"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -40847,9 +40847,9 @@ func (mo *HostVMotionSystem) DeselectVnic() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"DeselectVnic"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -40873,10 +40873,10 @@ func (mo *HostVMotionSystem) SelectVnic(
 
 	request := struct {
 		XMLName xml.Name                `xml:"SelectVnic"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Device  string                  `xml:"device,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Device: device,
 	}
 
@@ -40901,10 +40901,10 @@ func (mo *HostVMotionSystem) UpdateIpConfig(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"UpdateIpConfig"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		IpConfig *HostIpConfig           `xml:"ipConfig,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		IpConfig: ipConfig,
 	}
 
@@ -41101,11 +41101,11 @@ func (mo *HostVirtualNicManager) DeselectVnicForNicType(
 
 	request := struct {
 		XMLName xml.Name                `xml:"DeselectVnicForNicType"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		NicType string                  `xml:"nicType,omitempty"`
 		Device  string                  `xml:"device,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		NicType: nicType,
 		Device:  device,
 	}
@@ -41131,10 +41131,10 @@ func (mo *HostVirtualNicManager) QueryNetConfig(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryNetConfig"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		NicType string                  `xml:"nicType,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		NicType: nicType,
 	}
 
@@ -41166,11 +41166,11 @@ func (mo *HostVirtualNicManager) SelectVnicForNicType(
 
 	request := struct {
 		XMLName xml.Name                `xml:"SelectVnicForNicType"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		NicType string                  `xml:"nicType,omitempty"`
 		Device  string                  `xml:"device,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		NicType: nicType,
 		Device:  device,
 	}
@@ -41644,10 +41644,10 @@ func (mo *HostVsanInternalSystem) QueryCmmds(
 
 	request := struct {
 		XMLName xml.Name                            `xml:"QueryCmmds"`
-		_this   *ManagedObjectReference             `xml:"_this,omitempty"`
+		This    *ManagedObjectReference             `xml:"_this,omitempty"`
 		Queries []*HostVsanInternalSystemCmmdsQuery `xml:"queries,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		Queries: queries,
 	}
 
@@ -41679,10 +41679,10 @@ func (mo *HostVsanInternalSystem) QueryObjectsOnPhysicalVsanDisk(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryObjectsOnPhysicalVsanDisk"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Disks   []string                `xml:"disks,omitempty"`
 	}{
-		_this: mo.this,
+		This:  mo.This,
 		Disks: disks,
 	}
 
@@ -41714,10 +41714,10 @@ func (mo *HostVsanInternalSystem) QueryPhysicalVsanDisks(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryPhysicalVsanDisks"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Props   []string                `xml:"props,omitempty"`
 	}{
-		_this: mo.this,
+		This:  mo.This,
 		Props: props,
 	}
 
@@ -41749,10 +41749,10 @@ func (mo *HostVsanInternalSystem) QueryVsanObjects(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryVsanObjects"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Uuids   []string                `xml:"uuids,omitempty"`
 	}{
-		_this: mo.this,
+		This:  mo.This,
 		Uuids: uuids,
 	}
 
@@ -41840,11 +41840,11 @@ func (mo *HostVsanSystem) AddDisks_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"AddDisks_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Disk    []*HostScsiDisk         `xml:"disk,omitempty"`
 	}{
-		_this: mo.this,
-		Disk:  disk,
+		This: mo.This,
+		Disk: disk,
 	}
 
 	response := struct {
@@ -41884,10 +41884,10 @@ func (mo *HostVsanSystem) InitializeDisks_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"InitializeDisks_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Mapping []*VsanHostDiskMapping  `xml:"mapping,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		Mapping: mapping,
 	}
 
@@ -41917,10 +41917,10 @@ func (mo *HostVsanSystem) QueryDisksForVsan(
 
 	request := struct {
 		XMLName       xml.Name                `xml:"QueryDisksForVsan"`
-		_this         *ManagedObjectReference `xml:"_this,omitempty"`
+		This          *ManagedObjectReference `xml:"_this,omitempty"`
 		CanonicalName []string                `xml:"canonicalName,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		CanonicalName: canonicalName,
 	}
 
@@ -41947,9 +41947,9 @@ func (mo *HostVsanSystem) QueryHostStatus() (*VsanHostClusterStatus, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryHostStatus"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -41993,11 +41993,11 @@ func (mo *HostVsanSystem) RemoveDisk_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RemoveDisk_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Disk    []*HostScsiDisk         `xml:"disk,omitempty"`
 	}{
-		_this: mo.this,
-		Disk:  disk,
+		This: mo.This,
+		Disk: disk,
 	}
 
 	response := struct {
@@ -42035,10 +42035,10 @@ func (mo *HostVsanSystem) RemoveDiskMapping_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RemoveDiskMapping_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Mapping []*VsanHostDiskMapping  `xml:"mapping,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		Mapping: mapping,
 	}
 
@@ -42084,10 +42084,10 @@ func (mo *HostVsanSystem) UpdateVsan_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpdateVsan_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Config  *VsanHostConfigInfo     `xml:"config,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Config: config,
 	}
 
@@ -42319,10 +42319,10 @@ func (mo *HttpNfcLease) HttpNfcLeaseAbort(
 
 	request := struct {
 		XMLName xml.Name                `xml:"HttpNfcLeaseAbort"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Fault   *MethodFault            `xml:"fault,omitempty"`
 	}{
-		_this: mo.this,
+		This:  mo.This,
 		Fault: fault,
 	}
 
@@ -42352,9 +42352,9 @@ func (mo *HttpNfcLease) HttpNfcLeaseComplete() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"HttpNfcLeaseComplete"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -42378,9 +42378,9 @@ func (mo *HttpNfcLease) HttpNfcLeaseGetManifest() ([]*HttpNfcLeaseManifestEntry,
 
 	request := struct {
 		XMLName xml.Name                `xml:"HttpNfcLeaseGetManifest"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -42411,10 +42411,10 @@ func (mo *HttpNfcLease) HttpNfcLeaseProgress(
 
 	request := struct {
 		XMLName xml.Name                `xml:"HttpNfcLeaseProgress"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Percent int32                   `xml:"percent,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		Percent: percent,
 	}
 
@@ -43871,10 +43871,10 @@ func (mo *InventoryView) CloseInventoryViewFolder(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CloseInventoryViewFolder"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  []*ManagedEntity        `xml:"entity,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Entity: entity,
 	}
 
@@ -43913,10 +43913,10 @@ func (mo *InventoryView) OpenInventoryViewFolder(
 
 	request := struct {
 		XMLName xml.Name                `xml:"OpenInventoryViewFolder"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  []*ManagedEntity        `xml:"entity,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Entity: entity,
 	}
 
@@ -44159,12 +44159,12 @@ func (mo *IpPoolManager) AllocateIpv4Address(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"AllocateIpv4Address"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		Dc           *Datacenter             `xml:"dc,omitempty"`
 		PoolId       int32                   `xml:"poolId,omitempty"`
 		AllocationId string                  `xml:"allocationId,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		Dc:           dc,
 		PoolId:       poolId,
 		AllocationId: allocationId,
@@ -44212,12 +44212,12 @@ func (mo *IpPoolManager) AllocateIpv6Address(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"AllocateIpv6Address"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		Dc           *Datacenter             `xml:"dc,omitempty"`
 		PoolId       int32                   `xml:"poolId,omitempty"`
 		AllocationId string                  `xml:"allocationId,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		Dc:           dc,
 		PoolId:       poolId,
 		AllocationId: allocationId,
@@ -44256,13 +44256,13 @@ func (mo *IpPoolManager) CreateIpPool(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreateIpPool"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Dc      *Datacenter             `xml:"dc,omitempty"`
 		Pool    *IpPool                 `xml:"pool,omitempty"`
 	}{
-		_this: mo.this,
-		Dc:    dc,
-		Pool:  pool,
+		This: mo.This,
+		Dc:   dc,
+		Pool: pool,
 	}
 
 	response := struct {
@@ -44294,12 +44294,12 @@ func (mo *IpPoolManager) DestroyIpPool(
 
 	request := struct {
 		XMLName xml.Name                `xml:"DestroyIpPool"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Dc      *Datacenter             `xml:"dc,omitempty"`
 		Id      int32                   `xml:"id,omitempty"`
 		Force   bool                    `xml:"force,omitempty"`
 	}{
-		_this: mo.this,
+		This:  mo.This,
 		Dc:    dc,
 		Id:    id,
 		Force: force,
@@ -44328,12 +44328,12 @@ func (mo *IpPoolManager) QueryIPAllocations(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"QueryIPAllocations"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		Dc           *Datacenter             `xml:"dc,omitempty"`
 		PoolId       int32                   `xml:"poolId,omitempty"`
 		ExtensionKey string                  `xml:"extensionKey,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		Dc:           dc,
 		PoolId:       poolId,
 		ExtensionKey: extensionKey,
@@ -44364,11 +44364,11 @@ func (mo *IpPoolManager) QueryIpPools(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryIpPools"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Dc      *Datacenter             `xml:"dc,omitempty"`
 	}{
-		_this: mo.this,
-		Dc:    dc,
+		This: mo.This,
+		Dc:   dc,
 	}
 
 	response := struct {
@@ -44407,12 +44407,12 @@ func (mo *IpPoolManager) ReleaseIpAllocation(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"ReleaseIpAllocation"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		Dc           *Datacenter             `xml:"dc,omitempty"`
 		PoolId       int32                   `xml:"poolId,omitempty"`
 		AllocationId string                  `xml:"allocationId,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		Dc:           dc,
 		PoolId:       poolId,
 		AllocationId: allocationId,
@@ -44446,13 +44446,13 @@ func (mo *IpPoolManager) UpdateIpPool(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpdateIpPool"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Dc      *Datacenter             `xml:"dc,omitempty"`
 		Pool    *IpPool                 `xml:"pool,omitempty"`
 	}{
-		_this: mo.this,
-		Dc:    dc,
-		Pool:  pool,
+		This: mo.This,
+		Dc:   dc,
+		Pool: pool,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -44677,11 +44677,11 @@ func (mo *IscsiManager) BindVnic(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"BindVnic"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		IScsiHbaName string                  `xml:"iScsiHbaName,omitempty"`
 		VnicDevice   string                  `xml:"vnicDevice,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		IScsiHbaName: iScsiHbaName,
 		VnicDevice:   vnicDevice,
 	}
@@ -44707,10 +44707,10 @@ func (mo *IscsiManager) QueryBoundVnics(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"QueryBoundVnics"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		IScsiHbaName string                  `xml:"iScsiHbaName,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		IScsiHbaName: iScsiHbaName,
 	}
 
@@ -44743,10 +44743,10 @@ func (mo *IscsiManager) QueryCandidateNics(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"QueryCandidateNics"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		IScsiHbaName string                  `xml:"iScsiHbaName,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		IScsiHbaName: iScsiHbaName,
 	}
 
@@ -44776,10 +44776,10 @@ func (mo *IscsiManager) QueryMigrationDependencies(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"QueryMigrationDependencies"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		PnicDevice []string                `xml:"pnicDevice,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		PnicDevice: pnicDevice,
 	}
 
@@ -44808,10 +44808,10 @@ func (mo *IscsiManager) QueryPnicStatus(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"QueryPnicStatus"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		PnicDevice string                  `xml:"pnicDevice,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		PnicDevice: pnicDevice,
 	}
 
@@ -44840,10 +44840,10 @@ func (mo *IscsiManager) QueryVnicStatus(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"QueryVnicStatus"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		VnicDevice string                  `xml:"vnicDevice,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		VnicDevice: vnicDevice,
 	}
 
@@ -44872,12 +44872,12 @@ func (mo *IscsiManager) UnbindVnic(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"UnbindVnic"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		IScsiHbaName string                  `xml:"iScsiHbaName,omitempty"`
 		VnicDevice   string                  `xml:"vnicDevice,omitempty"`
 		Force        bool                    `xml:"force,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		IScsiHbaName: iScsiHbaName,
 		VnicDevice:   vnicDevice,
 		Force:        force,
@@ -45248,10 +45248,10 @@ func (mo *LicenseAssignmentManager) QueryAssignedLicenses(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"QueryAssignedLicenses"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		EntityId string                  `xml:"entityId,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		EntityId: entityId,
 	}
 
@@ -45280,10 +45280,10 @@ func (mo *LicenseAssignmentManager) RemoveAssignedLicense(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"RemoveAssignedLicense"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		EntityId string                  `xml:"entityId,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		EntityId: entityId,
 	}
 
@@ -45308,12 +45308,12 @@ func (mo *LicenseAssignmentManager) UpdateAssignedLicense(
 
 	request := struct {
 		XMLName           xml.Name                `xml:"UpdateAssignedLicense"`
-		_this             *ManagedObjectReference `xml:"_this,omitempty"`
+		This              *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity            string                  `xml:"entity,omitempty"`
 		LicenseKey        string                  `xml:"licenseKey,omitempty"`
 		EntityDisplayName string                  `xml:"entityDisplayName,omitempty"`
 	}{
-		_this:             mo.this,
+		This:              mo.This,
 		Entity:            entity,
 		LicenseKey:        licenseKey,
 		EntityDisplayName: entityDisplayName,
@@ -45813,11 +45813,11 @@ func (mo *LicenseManager) AddLicense(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"AddLicense"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		LicenseKey string                  `xml:"licenseKey,omitempty"`
 		Labels     []*KeyValue             `xml:"labels,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		LicenseKey: licenseKey,
 		Labels:     labels,
 	}
@@ -45853,11 +45853,11 @@ func (mo *LicenseManager) CheckLicenseFeature(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"CheckLicenseFeature"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Host       *HostSystem             `xml:"host,omitempty"`
 		FeatureKey string                  `xml:"featureKey,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Host:       host,
 		FeatureKey: featureKey,
 	}
@@ -45911,11 +45911,11 @@ func (mo *LicenseManager) ConfigureLicenseSource(
 
 	request := struct {
 		XMLName       xml.Name                `xml:"ConfigureLicenseSource"`
-		_this         *ManagedObjectReference `xml:"_this,omitempty"`
+		This          *ManagedObjectReference `xml:"_this,omitempty"`
 		Host          *HostSystem             `xml:"host,omitempty"`
 		LicenseSource *LicenseSource          `xml:"licenseSource,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		Host:          host,
 		LicenseSource: licenseSource,
 	}
@@ -45943,10 +45943,10 @@ func (mo *LicenseManager) DecodeLicense(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"DecodeLicense"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		LicenseKey string                  `xml:"licenseKey,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		LicenseKey: licenseKey,
 	}
 
@@ -45981,11 +45981,11 @@ func (mo *LicenseManager) DisableFeature(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"DisableFeature"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Host       *HostSystem             `xml:"host,omitempty"`
 		FeatureKey string                  `xml:"featureKey,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Host:       host,
 		FeatureKey: featureKey,
 	}
@@ -46021,11 +46021,11 @@ func (mo *LicenseManager) EnableFeature(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"EnableFeature"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Host       *HostSystem             `xml:"host,omitempty"`
 		FeatureKey string                  `xml:"featureKey,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Host:       host,
 		FeatureKey: featureKey,
 	}
@@ -46060,11 +46060,11 @@ func (mo *LicenseManager) QueryLicenseSourceAvailability(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryLicenseSourceAvailability"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		_this: mo.this,
-		Host:  host,
+		This: mo.This,
+		Host: host,
 	}
 
 	response := struct {
@@ -46103,11 +46103,11 @@ func (mo *LicenseManager) QueryLicenseUsage(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryLicenseUsage"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		_this: mo.this,
-		Host:  host,
+		This: mo.This,
+		Host: host,
 	}
 
 	response := struct {
@@ -46142,11 +46142,11 @@ func (mo *LicenseManager) QuerySupportedFeatures(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QuerySupportedFeatures"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		_this: mo.this,
-		Host:  host,
+		This: mo.This,
+		Host: host,
 	}
 
 	response := struct {
@@ -46176,10 +46176,10 @@ func (mo *LicenseManager) RemoveLicense(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"RemoveLicense"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		LicenseKey string                  `xml:"licenseKey,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		LicenseKey: licenseKey,
 	}
 
@@ -46206,11 +46206,11 @@ func (mo *LicenseManager) RemoveLicenseLabel(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"RemoveLicenseLabel"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		LicenseKey string                  `xml:"licenseKey,omitempty"`
 		LabelKey   string                  `xml:"labelKey,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		LicenseKey: licenseKey,
 		LabelKey:   labelKey,
 	}
@@ -46249,11 +46249,11 @@ func (mo *LicenseManager) SetLicenseEdition(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"SetLicenseEdition"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Host       *HostSystem             `xml:"host,omitempty"`
 		FeatureKey string                  `xml:"featureKey,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Host:       host,
 		FeatureKey: featureKey,
 	}
@@ -46289,11 +46289,11 @@ func (mo *LicenseManager) UpdateLicense(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"UpdateLicense"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		LicenseKey string                  `xml:"licenseKey,omitempty"`
 		Labels     []*KeyValue             `xml:"labels,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		LicenseKey: licenseKey,
 		Labels:     labels,
 	}
@@ -46326,12 +46326,12 @@ func (mo *LicenseManager) UpdateLicenseLabel(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"UpdateLicenseLabel"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		LicenseKey string                  `xml:"licenseKey,omitempty"`
 		LabelKey   string                  `xml:"labelKey,omitempty"`
 		LabelValue string                  `xml:"labelValue,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		LicenseKey: licenseKey,
 		LabelKey:   labelKey,
 		LabelValue: labelValue,
@@ -46687,11 +46687,11 @@ func (mo *ListView) ModifyListView(
 
 	request := struct {
 		XMLName xml.Name                  `xml:"ModifyListView"`
-		_this   *ManagedObjectReference   `xml:"_this,omitempty"`
+		This    *ManagedObjectReference   `xml:"_this,omitempty"`
 		Add     []*ManagedObjectReference `xml:"add,omitempty"`
 		Remove  []*ManagedObjectReference `xml:"remove,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Add:    add,
 		Remove: remove,
 	}
@@ -46727,11 +46727,11 @@ func (mo *ListView) ResetListView(
 
 	request := struct {
 		XMLName xml.Name                  `xml:"ResetListView"`
-		_this   *ManagedObjectReference   `xml:"_this,omitempty"`
+		This    *ManagedObjectReference   `xml:"_this,omitempty"`
 		Obj     []*ManagedObjectReference `xml:"obj,omitempty"`
 	}{
-		_this: mo.this,
-		Obj:   obj,
+		This: mo.This,
+		Obj:  obj,
 	}
 
 	response := struct {
@@ -46759,11 +46759,11 @@ func (mo *ListView) ResetListViewFromView(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ResetListViewFromView"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		View    *View                   `xml:"view,omitempty"`
 	}{
-		_this: mo.this,
-		View:  view,
+		This: mo.This,
+		View: view,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -47622,9 +47622,9 @@ func (mo *ManagedEntity) Destroy_Task() (*Task, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"Destroy_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -47659,9 +47659,9 @@ func (mo *ManagedEntity) Reload() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"Reload"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -47694,10 +47694,10 @@ func (mo *ManagedEntity) Rename_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"Rename_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		NewName string                  `xml:"newName,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		NewName: newName,
 	}
 
@@ -48085,10 +48085,10 @@ type ManagedObjectReference struct {
 	//
 	//
 	// "VmwareDistributedVirtualSwitch" - VmwareDistributedVirtualSwitch Managed Object.
-	Type string `xml:"type,omitempty"`
+	Type string `xml:"type,attr"`
 
 	// The specific instance of Managed Object this ManagedObjectReference refers to.
-	Value string `xml:"value,omitempty"`
+	Value string `xml:",innerxml"`
 }
 
 //
@@ -49705,9 +49705,9 @@ func (mo *Network) DestroyNetwork() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"DestroyNetwork"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -50929,11 +50929,11 @@ func (mo *OptionManager) QueryOptions(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryOptions"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 	}{
-		_this: mo.this,
-		Name:  name,
+		This: mo.This,
+		Name: name,
 	}
 
 	response := struct {
@@ -50981,10 +50981,10 @@ func (mo *OptionManager) UpdateOptions(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"UpdateOptions"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		ChangedValue []*OptionValue          `xml:"changedValue,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		ChangedValue: changedValue,
 	}
 
@@ -52313,13 +52313,13 @@ func (mo *OvfManager) CreateDescriptor(
 
 	request := struct {
 		XMLName xml.Name                   `xml:"CreateDescriptor"`
-		_this   *ManagedObjectReference    `xml:"_this,omitempty"`
+		This    *ManagedObjectReference    `xml:"_this,omitempty"`
 		Obj     *ManagedEntity             `xml:"obj,omitempty"`
 		Cdp     *OvfCreateDescriptorParams `xml:"cdp,omitempty"`
 	}{
-		_this: mo.this,
-		Obj:   obj,
-		Cdp:   cdp,
+		This: mo.This,
+		Obj:  obj,
+		Cdp:  cdp,
 	}
 
 	response := struct {
@@ -52356,13 +52356,13 @@ func (mo *OvfManager) CreateImportSpec(
 
 	request := struct {
 		XMLName       xml.Name                   `xml:"CreateImportSpec"`
-		_this         *ManagedObjectReference    `xml:"_this,omitempty"`
+		This          *ManagedObjectReference    `xml:"_this,omitempty"`
 		OvfDescriptor string                     `xml:"ovfDescriptor,omitempty"`
 		ResourcePool  *ResourcePool              `xml:"resourcePool,omitempty"`
 		Datastore     *Datastore                 `xml:"datastore,omitempty"`
 		Cisp          *OvfCreateImportSpecParams `xml:"cisp,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		OvfDescriptor: ovfDescriptor,
 		ResourcePool:  resourcePool,
 		Datastore:     datastore,
@@ -52401,11 +52401,11 @@ func (mo *OvfManager) ParseDescriptor(
 
 	request := struct {
 		XMLName       xml.Name                  `xml:"ParseDescriptor"`
-		_this         *ManagedObjectReference   `xml:"_this,omitempty"`
+		This          *ManagedObjectReference   `xml:"_this,omitempty"`
 		OvfDescriptor string                    `xml:"ovfDescriptor,omitempty"`
 		Pdp           *OvfParseDescriptorParams `xml:"pdp,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		OvfDescriptor: ovfDescriptor,
 		Pdp:           pdp,
 	}
@@ -52439,12 +52439,12 @@ func (mo *OvfManager) ValidateHost(
 
 	request := struct {
 		XMLName       xml.Name                `xml:"ValidateHost"`
-		_this         *ManagedObjectReference `xml:"_this,omitempty"`
+		This          *ManagedObjectReference `xml:"_this,omitempty"`
 		OvfDescriptor string                  `xml:"ovfDescriptor,omitempty"`
 		Host          *HostSystem             `xml:"host,omitempty"`
 		Vhp           *OvfValidateHostParams  `xml:"vhp,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		OvfDescriptor: ovfDescriptor,
 		Host:          host,
 		Vhp:           vhp,
@@ -54128,10 +54128,10 @@ func (mo *PerformanceManager) CreatePerfInterval(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"CreatePerfInterval"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		IntervalId *PerfInterval           `xml:"intervalId,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		IntervalId: intervalId,
 	}
 
@@ -54158,13 +54158,13 @@ func (mo *PerformanceManager) QueryAvailablePerfMetric(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"QueryAvailablePerfMetric"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity     *ManagedObjectReference `xml:"entity,omitempty"`
 		BeginTime  time.Time               `xml:"beginTime,omitempty"`
 		EndTime    time.Time               `xml:"endTime,omitempty"`
 		IntervalId int32                   `xml:"intervalId,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Entity:     entity,
 		BeginTime:  beginTime,
 		EndTime:    endTime,
@@ -54200,10 +54200,10 @@ func (mo *PerformanceManager) QueryPerf(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"QueryPerf"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		QuerySpec []*PerfQuerySpec        `xml:"querySpec,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		QuerySpec: querySpec,
 	}
 
@@ -54244,10 +54244,10 @@ func (mo *PerformanceManager) QueryPerfComposite(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"QueryPerfComposite"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		QuerySpec *PerfQuerySpec          `xml:"querySpec,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		QuerySpec: querySpec,
 	}
 
@@ -54276,10 +54276,10 @@ func (mo *PerformanceManager) QueryPerfCounter(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"QueryPerfCounter"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		CounterId []int32                 `xml:"counterId,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		CounterId: counterId,
 	}
 
@@ -54313,10 +54313,10 @@ func (mo *PerformanceManager) QueryPerfCounterByLevel(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryPerfCounterByLevel"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Level   int32                   `xml:"level,omitempty"`
 	}{
-		_this: mo.this,
+		This:  mo.This,
 		Level: level,
 	}
 
@@ -54348,10 +54348,10 @@ func (mo *PerformanceManager) QueryPerfProviderSummary(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryPerfProviderSummary"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  *ManagedObjectReference `xml:"entity,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Entity: entity,
 	}
 
@@ -54384,10 +54384,10 @@ func (mo *PerformanceManager) RemovePerfInterval(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"RemovePerfInterval"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		SamplePeriod int32                   `xml:"samplePeriod,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		SamplePeriod: samplePeriod,
 	}
 
@@ -54416,10 +54416,10 @@ func (mo *PerformanceManager) ResetCounterLevelMapping(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"ResetCounterLevelMapping"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		Counters []int32                 `xml:"counters,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		Counters: counters,
 	}
 
@@ -54536,10 +54536,10 @@ func (mo *PerformanceManager) UpdateCounterLevelMapping(
 
 	request := struct {
 		XMLName         xml.Name                                 `xml:"UpdateCounterLevelMapping"`
-		_this           *ManagedObjectReference                  `xml:"_this,omitempty"`
+		This            *ManagedObjectReference                  `xml:"_this,omitempty"`
 		CounterLevelMap []*PerformanceManagerCounterLevelMapping `xml:"counterLevelMap,omitempty"`
 	}{
-		_this:           mo.this,
+		This:            mo.This,
 		CounterLevelMap: counterLevelMap,
 	}
 
@@ -54639,10 +54639,10 @@ func (mo *PerformanceManager) UpdatePerfInterval(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"UpdatePerfInterval"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		Interval *PerfInterval           `xml:"interval,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		Interval: interval,
 	}
 
@@ -55664,10 +55664,10 @@ func (mo *Profile) AssociateProfile(
 
 	request := struct {
 		XMLName xml.Name                `xml:"AssociateProfile"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  []*ManagedEntity        `xml:"entity,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Entity: entity,
 	}
 
@@ -55692,10 +55692,10 @@ func (mo *Profile) CheckProfileCompliance_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CheckProfileCompliance_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  []*ManagedEntity        `xml:"entity,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Entity: entity,
 	}
 
@@ -55722,9 +55722,9 @@ func (mo *Profile) DestroyProfile() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"DestroyProfile"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -55748,10 +55748,10 @@ func (mo *Profile) DissociateProfile(
 
 	request := struct {
 		XMLName xml.Name                `xml:"DissociateProfile"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  []*ManagedEntity        `xml:"entity,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Entity: entity,
 	}
 
@@ -55777,9 +55777,9 @@ func (mo *Profile) ExportProfile() (string, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"ExportProfile"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -55807,9 +55807,9 @@ func (mo *Profile) RetrieveDescription() (*ProfileDescription, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"RetrieveDescription"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -55892,11 +55892,11 @@ func (mo *ProfileComplianceManager) CheckCompliance_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CheckCompliance_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Profile []*Profile              `xml:"profile,omitempty"`
 		Entity  []*ManagedEntity        `xml:"entity,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		Profile: profile,
 		Entity:  entity,
 	}
@@ -55926,11 +55926,11 @@ func (mo *ProfileComplianceManager) ClearComplianceStatus(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ClearComplianceStatus"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Profile []*Profile              `xml:"profile,omitempty"`
 		Entity  []*ManagedEntity        `xml:"entity,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		Profile: profile,
 		Entity:  entity,
 	}
@@ -55956,11 +55956,11 @@ func (mo *ProfileComplianceManager) QueryComplianceStatus(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryComplianceStatus"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Profile []*Profile              `xml:"profile,omitempty"`
 		Entity  []*ManagedEntity        `xml:"entity,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		Profile: profile,
 		Entity:  entity,
 	}
@@ -55990,11 +55990,11 @@ func (mo *ProfileComplianceManager) QueryExpressionMetadata(
 
 	request := struct {
 		XMLName        xml.Name                `xml:"QueryExpressionMetadata"`
-		_this          *ManagedObjectReference `xml:"_this,omitempty"`
+		This           *ManagedObjectReference `xml:"_this,omitempty"`
 		ExpressionName []string                `xml:"expressionName,omitempty"`
 		Profile        *Profile                `xml:"profile,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		ExpressionName: expressionName,
 		Profile:        profile,
 	}
@@ -56354,10 +56354,10 @@ func (mo *ProfileManager) CreateProfile(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"CreateProfile"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		CreateSpec *ProfileCreateSpec      `xml:"createSpec,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		CreateSpec: createSpec,
 	}
 
@@ -56388,10 +56388,10 @@ func (mo *ProfileManager) FindAssociatedProfile(
 
 	request := struct {
 		XMLName xml.Name                `xml:"FindAssociatedProfile"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Entity: entity,
 	}
 
@@ -56422,11 +56422,11 @@ func (mo *ProfileManager) QueryPolicyMetadata(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"QueryPolicyMetadata"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		PolicyName []string                `xml:"policyName,omitempty"`
 		Profile    *Profile                `xml:"profile,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		PolicyName: policyName,
 		Profile:    profile,
 	}
@@ -56815,10 +56815,10 @@ func (mo *PropertyCollector) CancelRetrievePropertiesEx(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CancelRetrievePropertiesEx"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Token   string                  `xml:"token,omitempty"`
 	}{
-		_this: mo.this,
+		This:  mo.This,
 		Token: token,
 	}
 
@@ -56843,9 +56843,9 @@ func (mo *PropertyCollector) CancelWaitForUpdates() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"CancelWaitForUpdates"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -56875,10 +56875,10 @@ func (mo *PropertyCollector) CheckForUpdates(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CheckForUpdates"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Version string                  `xml:"version,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		Version: version,
 	}
 
@@ -56909,10 +56909,10 @@ func (mo *PropertyCollector) ContinueRetrievePropertiesEx(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ContinueRetrievePropertiesEx"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Token   string                  `xml:"token,omitempty"`
 	}{
-		_this: mo.this,
+		This:  mo.This,
 		Token: token,
 	}
 
@@ -56941,11 +56941,11 @@ func (mo *PropertyCollector) CreateFilter(
 
 	request := struct {
 		XMLName        xml.Name                `xml:"CreateFilter"`
-		_this          *ManagedObjectReference `xml:"_this,omitempty"`
+		This           *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec           *PropertyFilterSpec     `xml:"spec,omitempty"`
 		PartialUpdates bool                    `xml:"partialUpdates,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		Spec:           spec,
 		PartialUpdates: partialUpdates,
 	}
@@ -57015,9 +57015,9 @@ func (mo *PropertyCollector) CreatePropertyCollector() (*PropertyCollector, erro
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreatePropertyCollector"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -57055,9 +57055,9 @@ func (mo *PropertyCollector) DestroyPropertyCollector() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"DestroyPropertyCollector"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -57093,10 +57093,10 @@ func (mo *PropertyCollector) RetrieveProperties(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RetrieveProperties"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		SpecSet []*PropertyFilterSpec   `xml:"specSet,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		SpecSet: specSet,
 	}
 
@@ -57136,11 +57136,11 @@ func (mo *PropertyCollector) RetrievePropertiesEx(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RetrievePropertiesEx"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		SpecSet []*PropertyFilterSpec   `xml:"specSet,omitempty"`
 		Options *RetrieveOptions        `xml:"options,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		SpecSet: specSet,
 		Options: options,
 	}
@@ -57174,10 +57174,10 @@ func (mo *PropertyCollector) WaitForUpdates(
 
 	request := struct {
 		XMLName xml.Name                `xml:"WaitForUpdates"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Version string                  `xml:"version,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		Version: version,
 	}
 
@@ -57221,11 +57221,11 @@ func (mo *PropertyCollector) WaitForUpdatesEx(
 
 	request := struct {
 		XMLName xml.Name                `xml:"WaitForUpdatesEx"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Version string                  `xml:"version,omitempty"`
 		Options *WaitOptions            `xml:"options,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		Version: version,
 		Options: options,
 	}
@@ -57308,9 +57308,9 @@ func (mo *PropertyFilter) DestroyPropertyFilter() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"DestroyPropertyFilter"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -58365,10 +58365,10 @@ func (mo *ResourcePlanningManager) EstimateDatabaseSize(
 
 	request := struct {
 		XMLName     xml.Name                `xml:"EstimateDatabaseSize"`
-		_this       *ManagedObjectReference `xml:"_this,omitempty"`
+		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		DbSizeParam *DatabaseSizeParam      `xml:"dbSizeParam,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		DbSizeParam: dbSizeParam,
 	}
 
@@ -58707,11 +58707,11 @@ func (mo *ResourcePool) CreateChildVM_Task(
 
 	request := struct {
 		XMLName xml.Name                  `xml:"CreateChildVM_Task"`
-		_this   *ManagedObjectReference   `xml:"_this,omitempty"`
+		This    *ManagedObjectReference   `xml:"_this,omitempty"`
 		Config  *VirtualMachineConfigSpec `xml:"config,omitempty"`
 		Host    *HostSystem               `xml:"host,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Config: config,
 		Host:   host,
 	}
@@ -58750,13 +58750,13 @@ func (mo *ResourcePool) CreateResourcePool(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreateResourcePool"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 		Spec    *ResourceConfigSpec     `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Name:  name,
-		Spec:  spec,
+		This: mo.This,
+		Name: name,
+		Spec: spec,
 	}
 
 	response := struct {
@@ -58791,13 +58791,13 @@ func (mo *ResourcePool) CreateVApp(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"CreateVApp"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Name       string                  `xml:"name,omitempty"`
 		ResSpec    *ResourceConfigSpec     `xml:"resSpec,omitempty"`
 		ConfigSpec *VAppConfigSpec         `xml:"configSpec,omitempty"`
 		VmFolder   *Folder                 `xml:"vmFolder,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Name:       name,
 		ResSpec:    resSpec,
 		ConfigSpec: configSpec,
@@ -58851,9 +58851,9 @@ func (mo *ResourcePool) DestroyChildren() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"DestroyChildren"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -58922,12 +58922,12 @@ func (mo *ResourcePool) ImportVApp(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ImportVApp"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *ImportSpec             `xml:"spec,omitempty"`
 		Folder  *Folder                 `xml:"folder,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Spec:   spec,
 		Folder: folder,
 		Host:   host,
@@ -59000,11 +59000,11 @@ func (mo *ResourcePool) MoveIntoResourcePool(
 
 	request := struct {
 		XMLName xml.Name                `xml:"MoveIntoResourcePool"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		List    []*ManagedEntity        `xml:"list,omitempty"`
 	}{
-		_this: mo.this,
-		List:  list,
+		This: mo.This,
+		List: list,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -59028,9 +59028,9 @@ func (mo *ResourcePool) QueryResourceConfigOption() (*ResourceConfigOption, erro
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryResourceConfigOption"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -59064,9 +59064,9 @@ func (mo *ResourcePool) RefreshRuntime() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"RefreshRuntime"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -59105,15 +59105,15 @@ func (mo *ResourcePool) RegisterChildVM_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RegisterChildVM_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Path    string                  `xml:"path,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		_this: mo.this,
-		Path:  path,
-		Name:  name,
-		Host:  host,
+		This: mo.This,
+		Path: path,
+		Name: name,
+		Host: host,
 	}
 
 	response := struct {
@@ -59166,11 +59166,11 @@ func (mo *ResourcePool) UpdateChildResourceConfiguration(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpdateChildResourceConfiguration"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    []*ResourceConfigSpec   `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Spec:  spec,
+		This: mo.This,
+		Spec: spec,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -59212,11 +59212,11 @@ func (mo *ResourcePool) UpdateConfig(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpdateConfig"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 		Config  *ResourceConfigSpec     `xml:"config,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Name:   name,
 		Config: config,
 	}
@@ -59858,11 +59858,11 @@ func (mo *ScheduledTask) ReconfigureScheduledTask(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ReconfigureScheduledTask"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *ScheduledTaskSpec      `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Spec:  spec,
+		This: mo.This,
+		Spec: spec,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -59884,9 +59884,9 @@ func (mo *ScheduledTask) RemoveScheduledTask() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"RemoveScheduledTask"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -59909,9 +59909,9 @@ func (mo *ScheduledTask) RunScheduledTask() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"RunScheduledTask"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -60149,13 +60149,13 @@ func (mo *ScheduledTaskManager) CreateObjectScheduledTask(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreateObjectScheduledTask"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Obj     *ManagedObjectReference `xml:"obj,omitempty"`
 		Spec    *ScheduledTaskSpec      `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Obj:   obj,
-		Spec:  spec,
+		This: mo.This,
+		Obj:  obj,
+		Spec: spec,
 	}
 
 	response := struct {
@@ -60183,11 +60183,11 @@ func (mo *ScheduledTaskManager) CreateScheduledTask(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreateScheduledTask"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 		Spec    *ScheduledTaskSpec      `xml:"spec,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Entity: entity,
 		Spec:   spec,
 	}
@@ -60219,10 +60219,10 @@ func (mo *ScheduledTaskManager) RetrieveEntityScheduledTask(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RetrieveEntityScheduledTask"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Entity: entity,
 	}
 
@@ -60255,11 +60255,11 @@ func (mo *ScheduledTaskManager) RetrieveObjectScheduledTask(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RetrieveObjectScheduledTask"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Obj     *ManagedObjectReference `xml:"obj,omitempty"`
 	}{
-		_this: mo.this,
-		Obj:   obj,
+		This: mo.This,
+		Obj:  obj,
 	}
 
 	response := struct {
@@ -60634,12 +60634,12 @@ func (mo *SearchIndex) FindAllByDnsName(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"FindAllByDnsName"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 		DnsName    string                  `xml:"dnsName,omitempty"`
 		VmSearch   bool                    `xml:"vmSearch,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Datacenter: datacenter,
 		DnsName:    dnsName,
 		VmSearch:   vmSearch,
@@ -60674,12 +60674,12 @@ func (mo *SearchIndex) FindAllByIp(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"FindAllByIp"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 		Ip         string                  `xml:"ip,omitempty"`
 		VmSearch   bool                    `xml:"vmSearch,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Datacenter: datacenter,
 		Ip:         ip,
 		VmSearch:   vmSearch,
@@ -60712,13 +60712,13 @@ func (mo *SearchIndex) FindAllByUuid(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"FindAllByUuid"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		Datacenter   *Datacenter             `xml:"datacenter,omitempty"`
 		Uuid         string                  `xml:"uuid,omitempty"`
 		VmSearch     bool                    `xml:"vmSearch,omitempty"`
 		InstanceUuid bool                    `xml:"instanceUuid,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		Datacenter:   datacenter,
 		Uuid:         uuid,
 		VmSearch:     vmSearch,
@@ -60750,11 +60750,11 @@ func (mo *SearchIndex) FindByDatastorePath(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"FindByDatastorePath"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 		Path       string                  `xml:"path,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Datacenter: datacenter,
 		Path:       path,
 	}
@@ -60785,12 +60785,12 @@ func (mo *SearchIndex) FindByDnsName(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"FindByDnsName"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 		DnsName    string                  `xml:"dnsName,omitempty"`
 		VmSearch   bool                    `xml:"vmSearch,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Datacenter: datacenter,
 		DnsName:    dnsName,
 		VmSearch:   vmSearch,
@@ -60827,10 +60827,10 @@ func (mo *SearchIndex) FindByInventoryPath(
 
 	request := struct {
 		XMLName       xml.Name                `xml:"FindByInventoryPath"`
-		_this         *ManagedObjectReference `xml:"_this,omitempty"`
+		This          *ManagedObjectReference `xml:"_this,omitempty"`
 		InventoryPath string                  `xml:"inventoryPath,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		InventoryPath: inventoryPath,
 	}
 
@@ -60861,12 +60861,12 @@ func (mo *SearchIndex) FindByIp(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"FindByIp"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 		Ip         string                  `xml:"ip,omitempty"`
 		VmSearch   bool                    `xml:"vmSearch,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Datacenter: datacenter,
 		Ip:         ip,
 		VmSearch:   vmSearch,
@@ -60897,13 +60897,13 @@ func (mo *SearchIndex) FindByUuid(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"FindByUuid"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		Datacenter   *Datacenter             `xml:"datacenter,omitempty"`
 		Uuid         string                  `xml:"uuid,omitempty"`
 		VmSearch     bool                    `xml:"vmSearch,omitempty"`
 		InstanceUuid bool                    `xml:"instanceUuid,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		Datacenter:   datacenter,
 		Uuid:         uuid,
 		VmSearch:     vmSearch,
@@ -60940,11 +60940,11 @@ func (mo *SearchIndex) FindChild(
 
 	request := struct {
 		XMLName xml.Name                `xml:"FindChild"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Entity: entity,
 		Name:   name,
 	}
@@ -61533,9 +61533,9 @@ func (mo *ServiceInstance) CurrentTime() (time.Time, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"CurrentTime"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -61569,12 +61569,12 @@ func (mo *ServiceInstance) QueryVMotionCompatibility(
 
 	request := struct {
 		XMLName       xml.Name                `xml:"QueryVMotionCompatibility"`
-		_this         *ManagedObjectReference `xml:"_this,omitempty"`
+		This          *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm            *VirtualMachine         `xml:"vm,omitempty"`
 		Host          []*HostSystem           `xml:"host,omitempty"`
 		Compatibility []string                `xml:"compatibility,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		Vm:            vm,
 		Host:          host,
 		Compatibility: compatibility,
@@ -61605,9 +61605,9 @@ func (mo *ServiceInstance) RetrieveProductComponents() ([]*ProductComponentInfo,
 
 	request := struct {
 		XMLName xml.Name                `xml:"RetrieveProductComponents"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -61633,9 +61633,9 @@ func (mo *ServiceInstance) RetrieveServiceContent() (*ServiceContent, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"RetrieveServiceContent"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -61646,7 +61646,6 @@ func (mo *ServiceInstance) RetrieveServiceContent() (*ServiceContent, error) {
 	if err != nil {
 		return nil, err
 	}
-
 
 	return response.Returnval, nil
 
@@ -61672,14 +61671,14 @@ func (mo *ServiceInstance) ValidateMigration(
 
 	request := struct {
 		XMLName  xml.Name                       `xml:"ValidateMigration"`
-		_this    *ManagedObjectReference        `xml:"_this,omitempty"`
+		This     *ManagedObjectReference        `xml:"_this,omitempty"`
 		Vm       []*VirtualMachine              `xml:"vm,omitempty"`
 		State    *enum.VirtualMachinePowerState `xml:"state,omitempty"`
 		TestType []string                       `xml:"testType,omitempty"`
 		Pool     *ResourcePool                  `xml:"pool,omitempty"`
 		Host     *HostSystem                    `xml:"host,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		Vm:       vm,
 		State:    state,
 		TestType: testType,
@@ -61750,11 +61749,11 @@ func (mo *ServiceManager) QueryServiceList(
 
 	request := struct {
 		XMLName     xml.Name                `xml:"QueryServiceList"`
-		_this       *ManagedObjectReference `xml:"_this,omitempty"`
+		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		ServiceName string                  `xml:"serviceName,omitempty"`
 		Location    []string                `xml:"location,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		ServiceName: serviceName,
 		Location:    location,
 	}
@@ -61981,9 +61980,9 @@ func (mo *SessionManager) AcquireCloneTicket() (string, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"AcquireCloneTicket"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -62014,11 +62013,11 @@ func (mo *SessionManager) AcquireGenericServiceTicket(
 
 	request := struct {
 		XMLName xml.Name                          `xml:"AcquireGenericServiceTicket"`
-		_this   *ManagedObjectReference           `xml:"_this,omitempty"`
+		This    *ManagedObjectReference           `xml:"_this,omitempty"`
 		Spec    *SessionManagerServiceRequestSpec `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Spec:  spec,
+		This: mo.This,
+		Spec: spec,
 	}
 
 	response := struct {
@@ -62066,10 +62065,10 @@ func (mo *SessionManager) AcquireLocalTicket(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"AcquireLocalTicket"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		UserName string                  `xml:"userName,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		UserName: userName,
 	}
 
@@ -62103,10 +62102,10 @@ func (mo *SessionManager) CloneSession(
 
 	request := struct {
 		XMLName     xml.Name                `xml:"CloneSession"`
-		_this       *ManagedObjectReference `xml:"_this,omitempty"`
+		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		CloneTicket string                  `xml:"cloneTicket,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		CloneTicket: cloneTicket,
 	}
 
@@ -62143,11 +62142,11 @@ func (mo *SessionManager) ImpersonateUser(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"ImpersonateUser"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		UserName string                  `xml:"userName,omitempty"`
 		Locale   string                  `xml:"locale,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		UserName: userName,
 		Locale:   locale,
 	}
@@ -62178,12 +62177,12 @@ func (mo *SessionManager) Login(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"Login"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		UserName string                  `xml:"userName,omitempty"`
 		Password string                  `xml:"password,omitempty"`
 		Locale   string                  `xml:"locale,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		UserName: userName,
 		Password: password,
 		Locale:   locale,
@@ -62240,11 +62239,11 @@ func (mo *SessionManager) LoginBySSPI(
 
 	request := struct {
 		XMLName     xml.Name                `xml:"LoginBySSPI"`
-		_this       *ManagedObjectReference `xml:"_this,omitempty"`
+		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		Base64Token string                  `xml:"base64Token,omitempty"`
 		Locale      string                  `xml:"locale,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		Base64Token: base64Token,
 		Locale:      locale,
 	}
@@ -62307,10 +62306,10 @@ func (mo *SessionManager) LoginByToken(
 
 	request := struct {
 		XMLName xml.Name                `xml:"LoginByToken"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Locale  string                  `xml:"locale,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Locale: locale,
 	}
 
@@ -62351,11 +62350,11 @@ func (mo *SessionManager) LoginExtensionByCertificate(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"LoginExtensionByCertificate"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		ExtensionKey string                  `xml:"extensionKey,omitempty"`
 		Locale       string                  `xml:"locale,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		ExtensionKey: extensionKey,
 		Locale:       locale,
 	}
@@ -62394,11 +62393,11 @@ func (mo *SessionManager) LoginExtensionBySubjectName(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"LoginExtensionBySubjectName"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		ExtensionKey string                  `xml:"extensionKey,omitempty"`
 		Locale       string                  `xml:"locale,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		ExtensionKey: extensionKey,
 		Locale:       locale,
 	}
@@ -62426,9 +62425,9 @@ func (mo *SessionManager) Logout() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"Logout"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -62456,11 +62455,11 @@ func (mo *SessionManager) SessionIsActive(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"SessionIsActive"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		SessionID string                  `xml:"sessionID,omitempty"`
 		UserName  string                  `xml:"userName,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		SessionID: sessionID,
 		UserName:  userName,
 	}
@@ -62490,10 +62489,10 @@ func (mo *SessionManager) SetLocale(
 
 	request := struct {
 		XMLName xml.Name                `xml:"SetLocale"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Locale  string                  `xml:"locale,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Locale: locale,
 	}
 
@@ -62525,10 +62524,10 @@ func (mo *SessionManager) TerminateSession(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"TerminateSession"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		SessionId []string                `xml:"sessionId,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		SessionId: sessionId,
 	}
 
@@ -62555,10 +62554,10 @@ func (mo *SessionManager) UpdateServiceMessage(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpdateServiceMessage"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Message string                  `xml:"message,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		Message: message,
 	}
 
@@ -62829,10 +62828,10 @@ func (mo *SimpleCommand) ExecuteSimpleCommand(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"ExecuteSimpleCommand"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Arguments []string                `xml:"arguments,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		Arguments: arguments,
 	}
 
@@ -64149,11 +64148,11 @@ func (mo *StorageResourceManager) ApplyStorageDrsRecommendation_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ApplyStorageDrsRecommendation_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Key     []string                `xml:"key,omitempty"`
 	}{
-		_this: mo.this,
-		Key:   key,
+		This: mo.This,
+		Key:  key,
 	}
 
 	response := struct {
@@ -64193,13 +64192,13 @@ func (mo *StorageResourceManager) ApplyStorageDrsRecommendationToPod_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ApplyStorageDrsRecommendationToPod_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Pod     *StoragePod             `xml:"pod,omitempty"`
 		Key     string                  `xml:"key,omitempty"`
 	}{
-		_this: mo.this,
-		Pod:   pod,
-		Key:   key,
+		This: mo.This,
+		Pod:  pod,
+		Key:  key,
 	}
 
 	response := struct {
@@ -64232,11 +64231,11 @@ func (mo *StorageResourceManager) CancelStorageDrsRecommendation(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CancelStorageDrsRecommendation"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Key     []string                `xml:"key,omitempty"`
 	}{
-		_this: mo.this,
-		Key:   key,
+		This: mo.This,
+		Key:  key,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -64269,11 +64268,11 @@ func (mo *StorageResourceManager) ConfigureDatastoreIORM_Task(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"ConfigureDatastoreIORM_Task"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Datastore *Datastore              `xml:"datastore,omitempty"`
 		Spec      *StorageIORMConfigSpec  `xml:"spec,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		Datastore: datastore,
 		Spec:      spec,
 	}
@@ -64307,12 +64306,12 @@ func (mo *StorageResourceManager) ConfigureStorageDrsForPod_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"ConfigureStorageDrsForPod_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Pod     *StoragePod             `xml:"pod,omitempty"`
 		Spec    *StorageDrsConfigSpec   `xml:"spec,omitempty"`
 		Modify  bool                    `xml:"modify,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Pod:    pod,
 		Spec:   spec,
 		Modify: modify,
@@ -64352,10 +64351,10 @@ func (mo *StorageResourceManager) QueryDatastorePerformanceSummary(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"QueryDatastorePerformanceSummary"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Datastore *Datastore              `xml:"datastore,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		Datastore: datastore,
 	}
 
@@ -64386,11 +64385,11 @@ func (mo *StorageResourceManager) QueryIORMConfigOption(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryIORMConfigOption"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		_this: mo.this,
-		Host:  host,
+		This: mo.This,
+		Host: host,
 	}
 
 	response := struct {
@@ -64500,10 +64499,10 @@ func (mo *StorageResourceManager) RecommendDatastores(
 
 	request := struct {
 		XMLName     xml.Name                `xml:"RecommendDatastores"`
-		_this       *ManagedObjectReference `xml:"_this,omitempty"`
+		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		StorageSpec *StoragePlacementSpec   `xml:"storageSpec,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		StorageSpec: storageSpec,
 	}
 
@@ -64538,11 +64537,11 @@ func (mo *StorageResourceManager) RefreshStorageDrsRecommendation(
 
 	request := struct {
 		XMLName xml.Name                `xml:"RefreshStorageDrsRecommendation"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Pod     *StoragePod             `xml:"pod,omitempty"`
 	}{
-		_this: mo.this,
-		Pod:   pod,
+		This: mo.This,
+		Pod:  pod,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -64753,9 +64752,9 @@ func (mo *Task) CancelTask() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"CancelTask"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -64783,10 +64782,10 @@ func (mo *Task) SetTaskDescription(
 
 	request := struct {
 		XMLName     xml.Name                `xml:"SetTaskDescription"`
-		_this       *ManagedObjectReference `xml:"_this,omitempty"`
+		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		Description *LocalizableMessage     `xml:"description,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		Description: description,
 	}
 
@@ -64816,12 +64815,12 @@ func (mo *Task) SetTaskState(
 
 	request := struct {
 		XMLName xml.Name                `xml:"SetTaskState"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		State   *enum.TaskInfoState     `xml:"state,omitempty"`
 		Result  interface{}             `xml:"result,omitempty"`
 		Fault   *MethodFault            `xml:"fault,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		State:  state,
 		Result: result,
 		Fault:  fault,
@@ -64855,10 +64854,10 @@ func (mo *Task) UpdateProgress(
 
 	request := struct {
 		XMLName     xml.Name                `xml:"UpdateProgress"`
-		_this       *ManagedObjectReference `xml:"_this,omitempty"`
+		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		PercentDone int32                   `xml:"percentDone,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		PercentDone: percentDone,
 	}
 
@@ -65103,10 +65102,10 @@ func (mo *TaskHistoryCollector) ReadNextTasks(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"ReadNextTasks"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		MaxCount int32                   `xml:"maxCount,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		MaxCount: maxCount,
 	}
 
@@ -65139,10 +65138,10 @@ func (mo *TaskHistoryCollector) ReadPreviousTasks(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"ReadPreviousTasks"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		MaxCount int32                   `xml:"maxCount,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		MaxCount: maxCount,
 	}
 
@@ -65390,10 +65389,10 @@ func (mo *TaskManager) CreateCollectorForTasks(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreateCollectorForTasks"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Filter  *TaskFilterSpec         `xml:"filter,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Filter: filter,
 	}
 
@@ -65429,14 +65428,14 @@ func (mo *TaskManager) CreateTask(
 
 	request := struct {
 		XMLName       xml.Name                `xml:"CreateTask"`
-		_this         *ManagedObjectReference `xml:"_this,omitempty"`
+		This          *ManagedObjectReference `xml:"_this,omitempty"`
 		Obj           *ManagedObjectReference `xml:"obj,omitempty"`
 		TaskTypeId    string                  `xml:"taskTypeId,omitempty"`
 		InitiatedBy   string                  `xml:"initiatedBy,omitempty"`
 		Cancelable    bool                    `xml:"cancelable,omitempty"`
 		ParentTaskKey string                  `xml:"parentTaskKey,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		Obj:           obj,
 		TaskTypeId:    taskTypeId,
 		InitiatedBy:   initiatedBy,
@@ -66779,7 +66778,7 @@ func (mo *UserDirectory) RetrieveUserGroups(
 
 	request := struct {
 		XMLName        xml.Name                `xml:"RetrieveUserGroups"`
-		_this          *ManagedObjectReference `xml:"_this,omitempty"`
+		This           *ManagedObjectReference `xml:"_this,omitempty"`
 		Domain         string                  `xml:"domain,omitempty"`
 		SearchStr      string                  `xml:"searchStr,omitempty"`
 		BelongsToGroup string                  `xml:"belongsToGroup,omitempty"`
@@ -66788,7 +66787,7 @@ func (mo *UserDirectory) RetrieveUserGroups(
 		FindUsers      bool                    `xml:"findUsers,omitempty"`
 		FindGroups     bool                    `xml:"findGroups,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		Domain:         domain,
 		SearchStr:      searchStr,
 		BelongsToGroup: belongsToGroup,
@@ -68946,9 +68945,9 @@ func (mo *View) DestroyView() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"DestroyView"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -69071,12 +69070,12 @@ func (mo *ViewManager) CreateContainerView(
 
 	request := struct {
 		XMLName   xml.Name                `xml:"CreateContainerView"`
-		_this     *ManagedObjectReference `xml:"_this,omitempty"`
+		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Container *ManagedEntity          `xml:"container,omitempty"`
 		Type      []string                `xml:"type,omitempty"`
 		Recursive bool                    `xml:"recursive,omitempty"`
 	}{
-		_this:     mo.this,
+		This:      mo.This,
 		Container: container,
 		Type:      type_,
 		Recursive: recursive,
@@ -69105,9 +69104,9 @@ func (mo *ViewManager) CreateInventoryView() (*InventoryView, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreateInventoryView"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -69138,11 +69137,11 @@ func (mo *ViewManager) CreateListView(
 
 	request := struct {
 		XMLName xml.Name                  `xml:"CreateListView"`
-		_this   *ManagedObjectReference   `xml:"_this,omitempty"`
+		This    *ManagedObjectReference   `xml:"_this,omitempty"`
 		Obj     []*ManagedObjectReference `xml:"obj,omitempty"`
 	}{
-		_this: mo.this,
-		Obj:   obj,
+		This: mo.This,
+		Obj:  obj,
 	}
 
 	response := struct {
@@ -69171,11 +69170,11 @@ func (mo *ViewManager) CreateListViewFromView(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreateListViewFromView"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		View    *View                   `xml:"view,omitempty"`
 	}{
-		_this: mo.this,
-		View:  view,
+		This: mo.This,
+		View: view,
 	}
 
 	response := struct {
@@ -69429,12 +69428,12 @@ func (mo *VirtualApp) CloneVApp_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CloneVApp_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 		Target  *ResourcePool           `xml:"target,omitempty"`
 		Spec    *VAppCloneSpec          `xml:"spec,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Name:   name,
 		Target: target,
 		Spec:   spec,
@@ -69468,9 +69467,9 @@ func (mo *VirtualApp) ExportVApp() (*HttpNfcLease, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"ExportVApp"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -69508,10 +69507,10 @@ func (mo *VirtualApp) PowerOffVApp_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"PowerOffVApp_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Force   bool                    `xml:"force,omitempty"`
 	}{
-		_this: mo.this,
+		This:  mo.This,
 		Force: force,
 	}
 
@@ -69556,9 +69555,9 @@ func (mo *VirtualApp) PowerOnVApp_Task() (*Task, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"PowerOnVApp_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -69595,9 +69594,9 @@ func (mo *VirtualApp) SuspendVApp_Task() (*Task, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"SuspendVApp_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -69629,9 +69628,9 @@ func (mo *VirtualApp) UnregisterVApp_Task() (*Task, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"UnregisterVApp_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -69706,11 +69705,11 @@ func (mo *VirtualApp) UpdateLinkedChildren(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"UpdateLinkedChildren"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		AddChangeSet []*VirtualAppLinkInfo   `xml:"addChangeSet,omitempty"`
 		RemoveSet    []*ManagedEntity        `xml:"removeSet,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		AddChangeSet: addChangeSet,
 		RemoveSet:    removeSet,
 	}
@@ -69740,11 +69739,11 @@ func (mo *VirtualApp) UpdateVAppConfig(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpdateVAppConfig"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *VAppConfigSpec         `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Spec:  spec,
+		This: mo.This,
+		Spec: spec,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -71203,7 +71202,7 @@ func (mo *VirtualDiskManager) CopyVirtualDisk_Task(
 
 	request := struct {
 		XMLName          xml.Name                `xml:"CopyVirtualDisk_Task"`
-		_this            *ManagedObjectReference `xml:"_this,omitempty"`
+		This             *ManagedObjectReference `xml:"_this,omitempty"`
 		SourceName       string                  `xml:"sourceName,omitempty"`
 		SourceDatacenter *Datacenter             `xml:"sourceDatacenter,omitempty"`
 		DestName         string                  `xml:"destName,omitempty"`
@@ -71211,7 +71210,7 @@ func (mo *VirtualDiskManager) CopyVirtualDisk_Task(
 		DestSpec         *VirtualDiskSpec        `xml:"destSpec,omitempty"`
 		Force            bool                    `xml:"force,omitempty"`
 	}{
-		_this:            mo.this,
+		This:             mo.This,
 		SourceName:       sourceName,
 		SourceDatacenter: sourceDatacenter,
 		DestName:         destName,
@@ -71254,12 +71253,12 @@ func (mo *VirtualDiskManager) CreateVirtualDisk_Task(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"CreateVirtualDisk_Task"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Name       string                  `xml:"name,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 		Spec       *VirtualDiskSpec        `xml:"spec,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Name:       name,
 		Datacenter: datacenter,
 		Spec:       spec,
@@ -71302,11 +71301,11 @@ func (mo *VirtualDiskManager) DefragmentVirtualDisk_Task(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"DefragmentVirtualDisk_Task"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Name       string                  `xml:"name,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Name:       name,
 		Datacenter: datacenter,
 	}
@@ -71346,11 +71345,11 @@ func (mo *VirtualDiskManager) DeleteVirtualDisk_Task(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"DeleteVirtualDisk_Task"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Name       string                  `xml:"name,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Name:       name,
 		Datacenter: datacenter,
 	}
@@ -71394,11 +71393,11 @@ func (mo *VirtualDiskManager) EagerZeroVirtualDisk_Task(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"EagerZeroVirtualDisk_Task"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Name       string                  `xml:"name,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Name:       name,
 		Datacenter: datacenter,
 	}
@@ -71450,13 +71449,13 @@ func (mo *VirtualDiskManager) ExtendVirtualDisk_Task(
 
 	request := struct {
 		XMLName       xml.Name                `xml:"ExtendVirtualDisk_Task"`
-		_this         *ManagedObjectReference `xml:"_this,omitempty"`
+		This          *ManagedObjectReference `xml:"_this,omitempty"`
 		Name          string                  `xml:"name,omitempty"`
 		Datacenter    *Datacenter             `xml:"datacenter,omitempty"`
 		NewCapacityKb int64                   `xml:"newCapacityKb,omitempty"`
 		EagerZero     bool                    `xml:"eagerZero,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		Name:          name,
 		Datacenter:    datacenter,
 		NewCapacityKb: newCapacityKb,
@@ -71499,11 +71498,11 @@ func (mo *VirtualDiskManager) InflateVirtualDisk_Task(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"InflateVirtualDisk_Task"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Name       string                  `xml:"name,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Name:       name,
 		Datacenter: datacenter,
 	}
@@ -71549,7 +71548,7 @@ func (mo *VirtualDiskManager) MoveVirtualDisk_Task(
 
 	request := struct {
 		XMLName          xml.Name                     `xml:"MoveVirtualDisk_Task"`
-		_this            *ManagedObjectReference      `xml:"_this,omitempty"`
+		This             *ManagedObjectReference      `xml:"_this,omitempty"`
 		SourceName       string                       `xml:"sourceName,omitempty"`
 		SourceDatacenter *Datacenter                  `xml:"sourceDatacenter,omitempty"`
 		DestName         string                       `xml:"destName,omitempty"`
@@ -71557,7 +71556,7 @@ func (mo *VirtualDiskManager) MoveVirtualDisk_Task(
 		Force            bool                         `xml:"force,omitempty"`
 		Profile          []*VirtualMachineProfileSpec `xml:"profile,omitempty"`
 	}{
-		_this:            mo.this,
+		This:             mo.This,
 		SourceName:       sourceName,
 		SourceDatacenter: sourceDatacenter,
 		DestName:         destName,
@@ -71603,11 +71602,11 @@ func (mo *VirtualDiskManager) QueryVirtualDiskFragmentation(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"QueryVirtualDiskFragmentation"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Name       string                  `xml:"name,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Name:       name,
 		Datacenter: datacenter,
 	}
@@ -71646,11 +71645,11 @@ func (mo *VirtualDiskManager) QueryVirtualDiskGeometry(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"QueryVirtualDiskGeometry"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Name       string                  `xml:"name,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Name:       name,
 		Datacenter: datacenter,
 	}
@@ -71689,11 +71688,11 @@ func (mo *VirtualDiskManager) QueryVirtualDiskUuid(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"QueryVirtualDiskUuid"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Name       string                  `xml:"name,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Name:       name,
 		Datacenter: datacenter,
 	}
@@ -71732,12 +71731,12 @@ func (mo *VirtualDiskManager) SetVirtualDiskUuid(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"SetVirtualDiskUuid"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Name       string                  `xml:"name,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 		Uuid       string                  `xml:"uuid,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Name:       name,
 		Datacenter: datacenter,
 		Uuid:       uuid,
@@ -71781,12 +71780,12 @@ func (mo *VirtualDiskManager) ShrinkVirtualDisk_Task(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"ShrinkVirtualDisk_Task"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Name       string                  `xml:"name,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 		Copy       bool                    `xml:"copy,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Name:       name,
 		Datacenter: datacenter,
 		Copy:       copy,
@@ -71827,11 +71826,11 @@ func (mo *VirtualDiskManager) ZeroFillVirtualDisk_Task(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"ZeroFillVirtualDisk_Task"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Name       string                  `xml:"name,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		Name:       name,
 		Datacenter: datacenter,
 	}
@@ -73652,9 +73651,9 @@ func (mo *VirtualMachine) AcquireMksTicket() (*VirtualMachineMksTicket, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"AcquireMksTicket"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -73710,10 +73709,10 @@ func (mo *VirtualMachine) AcquireTicket(
 
 	request := struct {
 		XMLName    xml.Name                `xml:"AcquireTicket"`
-		_this      *ManagedObjectReference `xml:"_this,omitempty"`
+		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		TicketType string                  `xml:"ticketType,omitempty"`
 	}{
-		_this:      mo.this,
+		This:       mo.This,
 		TicketType: ticketType,
 	}
 
@@ -73742,11 +73741,11 @@ func (mo *VirtualMachine) AnswerVM(
 
 	request := struct {
 		XMLName      xml.Name                `xml:"AnswerVM"`
-		_this        *ManagedObjectReference `xml:"_this,omitempty"`
+		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		QuestionId   string                  `xml:"questionId,omitempty"`
 		AnswerChoice string                  `xml:"answerChoice,omitempty"`
 	}{
-		_this:        mo.this,
+		This:         mo.This,
 		QuestionId:   questionId,
 		AnswerChoice: answerChoice,
 	}
@@ -73776,11 +73775,11 @@ func (mo *VirtualMachine) CheckCustomizationSpec(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CheckCustomizationSpec"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *CustomizationSpec      `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Spec:  spec,
+		This: mo.This,
+		Spec: spec,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -73840,12 +73839,12 @@ func (mo *VirtualMachine) CloneVM_Task(
 
 	request := struct {
 		XMLName xml.Name                 `xml:"CloneVM_Task"`
-		_this   *ManagedObjectReference  `xml:"_this,omitempty"`
+		This    *ManagedObjectReference  `xml:"_this,omitempty"`
 		Folder  *Folder                  `xml:"folder,omitempty"`
 		Name    string                   `xml:"name,omitempty"`
 		Spec    *VirtualMachineCloneSpec `xml:"spec,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Folder: folder,
 		Name:   name,
 		Spec:   spec,
@@ -73886,9 +73885,9 @@ func (mo *VirtualMachine) ConsolidateVMDisks_Task() (*Task, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"ConsolidateVMDisks_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -73916,9 +73915,9 @@ func (mo *VirtualMachine) CreateScreenshot_Task() (*Task, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreateScreenshot_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -73967,11 +73966,11 @@ func (mo *VirtualMachine) CreateSecondaryVM_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CreateSecondaryVM_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		_this: mo.this,
-		Host:  host,
+		This: mo.This,
+		Host: host,
 	}
 
 	response := struct {
@@ -74011,13 +74010,13 @@ func (mo *VirtualMachine) CreateSnapshot_Task(
 
 	request := struct {
 		XMLName     xml.Name                `xml:"CreateSnapshot_Task"`
-		_this       *ManagedObjectReference `xml:"_this,omitempty"`
+		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		Name        string                  `xml:"name,omitempty"`
 		Description string                  `xml:"description,omitempty"`
 		Memory      bool                    `xml:"memory,omitempty"`
 		Quiesce     bool                    `xml:"quiesce,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		Name:        name,
 		Description: description,
 		Memory:      memory,
@@ -74049,11 +74048,11 @@ func (mo *VirtualMachine) CustomizeVM_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"CustomizeVM_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *CustomizationSpec      `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Spec:  spec,
+		This: mo.This,
+		Spec: spec,
 	}
 
 	response := struct {
@@ -74081,9 +74080,9 @@ func (mo *VirtualMachine) DefragmentAllDisks() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"DefragmentAllDisks"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -74114,11 +74113,11 @@ func (mo *VirtualMachine) DisableSecondaryVM_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"DisableSecondaryVM_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm      *VirtualMachine         `xml:"vm,omitempty"`
 	}{
-		_this: mo.this,
-		Vm:    vm,
+		This: mo.This,
+		Vm:   vm,
 	}
 
 	response := struct {
@@ -74165,13 +74164,13 @@ func (mo *VirtualMachine) EnableSecondaryVM_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"EnableSecondaryVM_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm      *VirtualMachine         `xml:"vm,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		_this: mo.this,
-		Vm:    vm,
-		Host:  host,
+		This: mo.This,
+		Vm:   vm,
+		Host: host,
 	}
 
 	response := struct {
@@ -74208,9 +74207,9 @@ func (mo *VirtualMachine) EstimateStorageForConsolidateSnapshots_Task() (*Task, 
 
 	request := struct {
 		XMLName xml.Name                `xml:"EstimateStorageForConsolidateSnapshots_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -74243,9 +74242,9 @@ func (mo *VirtualMachine) ExportVm() (*HttpNfcLease, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"ExportVm"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -74276,9 +74275,9 @@ func (mo *VirtualMachine) ExtractOvfEnvironment() (string, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"ExtractOvfEnvironment"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -74309,11 +74308,11 @@ func (mo *VirtualMachine) MakePrimaryVM_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"MakePrimaryVM_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm      *VirtualMachine         `xml:"vm,omitempty"`
 	}{
-		_this: mo.this,
-		Vm:    vm,
+		This: mo.This,
+		Vm:   vm,
 	}
 
 	response := struct {
@@ -74340,9 +74339,9 @@ func (mo *VirtualMachine) MarkAsTemplate() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"MarkAsTemplate"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -74367,13 +74366,13 @@ func (mo *VirtualMachine) MarkAsVirtualMachine(
 
 	request := struct {
 		XMLName xml.Name                `xml:"MarkAsVirtualMachine"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Pool    *ResourcePool           `xml:"pool,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		_this: mo.this,
-		Pool:  pool,
-		Host:  host,
+		This: mo.This,
+		Pool: pool,
+		Host: host,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -74402,13 +74401,13 @@ func (mo *VirtualMachine) MigrateVM_Task(
 
 	request := struct {
 		XMLName  xml.Name                         `xml:"MigrateVM_Task"`
-		_this    *ManagedObjectReference          `xml:"_this,omitempty"`
+		This     *ManagedObjectReference          `xml:"_this,omitempty"`
 		Pool     *ResourcePool                    `xml:"pool,omitempty"`
 		Host     *HostSystem                      `xml:"host,omitempty"`
 		Priority *enum.VirtualMachineMovePriority `xml:"priority,omitempty"`
 		State    *enum.VirtualMachinePowerState   `xml:"state,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		Pool:     pool,
 		Host:     host,
 		Priority: priority,
@@ -74441,9 +74440,9 @@ func (mo *VirtualMachine) MountToolsInstaller() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"MountToolsInstaller"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -74469,9 +74468,9 @@ func (mo *VirtualMachine) PowerOffVM_Task() (*Task, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"PowerOffVM_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -74519,11 +74518,11 @@ func (mo *VirtualMachine) PowerOnVM_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"PowerOnVM_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		_this: mo.this,
-		Host:  host,
+		This: mo.This,
+		Host: host,
 	}
 
 	response := struct {
@@ -74591,11 +74590,11 @@ func (mo *VirtualMachine) PromoteDisks_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"PromoteDisks_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Unlink  bool                    `xml:"unlink,omitempty"`
 		Disks   []*VirtualDisk          `xml:"disks,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Unlink: unlink,
 		Disks:  disks,
 	}
@@ -74635,13 +74634,13 @@ func (mo *VirtualMachine) QueryChangedDiskAreas(
 
 	request := struct {
 		XMLName     xml.Name                `xml:"QueryChangedDiskAreas"`
-		_this       *ManagedObjectReference `xml:"_this,omitempty"`
+		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		Snapshot    *VirtualMachineSnapshot `xml:"snapshot,omitempty"`
 		DeviceKey   int32                   `xml:"deviceKey,omitempty"`
 		StartOffset int64                   `xml:"startOffset,omitempty"`
 		ChangeId    string                  `xml:"changeId,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		Snapshot:    snapshot,
 		DeviceKey:   deviceKey,
 		StartOffset: startOffset,
@@ -74682,9 +74681,9 @@ func (mo *VirtualMachine) QueryFaultToleranceCompatibility() ([]*MethodFault, er
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryFaultToleranceCompatibility"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -74714,9 +74713,9 @@ func (mo *VirtualMachine) QueryUnownedFiles() ([]string, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryUnownedFiles"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -74745,9 +74744,9 @@ func (mo *VirtualMachine) RebootGuest() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"RebootGuest"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -74871,11 +74870,11 @@ func (mo *VirtualMachine) ReconfigVM_Task(
 
 	request := struct {
 		XMLName xml.Name                  `xml:"ReconfigVM_Task"`
-		_this   *ManagedObjectReference   `xml:"_this,omitempty"`
+		This    *ManagedObjectReference   `xml:"_this,omitempty"`
 		Spec    *VirtualMachineConfigSpec `xml:"spec,omitempty"`
 	}{
-		_this: mo.this,
-		Spec:  spec,
+		This: mo.This,
+		Spec: spec,
 	}
 
 	response := struct {
@@ -74905,9 +74904,9 @@ func (mo *VirtualMachine) RefreshStorageInfo() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"RefreshStorageInfo"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -74958,10 +74957,10 @@ func (mo *VirtualMachine) ReloadVirtualMachineFromPath_Task(
 
 	request := struct {
 		XMLName           xml.Name                `xml:"ReloadVirtualMachineFromPath_Task"`
-		_this             *ManagedObjectReference `xml:"_this,omitempty"`
+		This              *ManagedObjectReference `xml:"_this,omitempty"`
 		ConfigurationPath string                  `xml:"configurationPath,omitempty"`
 	}{
-		_this:             mo.this,
+		This:              mo.This,
 		ConfigurationPath: configurationPath,
 	}
 
@@ -75004,11 +75003,11 @@ func (mo *VirtualMachine) RelocateVM_Task(
 
 	request := struct {
 		XMLName  xml.Name                         `xml:"RelocateVM_Task"`
-		_this    *ManagedObjectReference          `xml:"_this,omitempty"`
+		This     *ManagedObjectReference          `xml:"_this,omitempty"`
 		Spec     *VirtualMachineRelocateSpec      `xml:"spec,omitempty"`
 		Priority *enum.VirtualMachineMovePriority `xml:"priority,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		Spec:     spec,
 		Priority: priority,
 	}
@@ -75040,10 +75039,10 @@ func (mo *VirtualMachine) RemoveAllSnapshots_Task(
 
 	request := struct {
 		XMLName     xml.Name                `xml:"RemoveAllSnapshots_Task"`
-		_this       *ManagedObjectReference `xml:"_this,omitempty"`
+		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		Consolidate bool                    `xml:"consolidate,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		Consolidate: consolidate,
 	}
 
@@ -75075,9 +75074,9 @@ func (mo *VirtualMachine) ResetGuestInformation() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"ResetGuestInformation"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -75106,9 +75105,9 @@ func (mo *VirtualMachine) ResetVM_Task() (*Task, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"ResetVM_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -75141,11 +75140,11 @@ func (mo *VirtualMachine) RevertToCurrentSnapshot_Task(
 
 	request := struct {
 		XMLName         xml.Name                `xml:"RevertToCurrentSnapshot_Task"`
-		_this           *ManagedObjectReference `xml:"_this,omitempty"`
+		This            *ManagedObjectReference `xml:"_this,omitempty"`
 		Host            *HostSystem             `xml:"host,omitempty"`
 		SuppressPowerOn bool                    `xml:"suppressPowerOn,omitempty"`
 	}{
-		_this:           mo.this,
+		This:            mo.This,
 		Host:            host,
 		SuppressPowerOn: suppressPowerOn,
 	}
@@ -75177,10 +75176,10 @@ func (mo *VirtualMachine) SetDisplayTopology(
 
 	request := struct {
 		XMLName  xml.Name                         `xml:"SetDisplayTopology"`
-		_this    *ManagedObjectReference          `xml:"_this,omitempty"`
+		This     *ManagedObjectReference          `xml:"_this,omitempty"`
 		Displays []*VirtualMachineDisplayTopology `xml:"displays,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		Displays: displays,
 	}
 
@@ -75205,11 +75204,11 @@ func (mo *VirtualMachine) SetScreenResolution(
 
 	request := struct {
 		XMLName xml.Name                `xml:"SetScreenResolution"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Width   int32                   `xml:"width,omitempty"`
 		Height  int32                   `xml:"height,omitempty"`
 	}{
-		_this:  mo.this,
+		This:   mo.This,
 		Width:  width,
 		Height: height,
 	}
@@ -75236,9 +75235,9 @@ func (mo *VirtualMachine) ShutdownGuest() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"ShutdownGuest"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -75263,9 +75262,9 @@ func (mo *VirtualMachine) StandbyGuest() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"StandbyGuest"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -75301,11 +75300,11 @@ func (mo *VirtualMachine) StartRecording_Task(
 
 	request := struct {
 		XMLName     xml.Name                `xml:"StartRecording_Task"`
-		_this       *ManagedObjectReference `xml:"_this,omitempty"`
+		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		Name        string                  `xml:"name,omitempty"`
 		Description string                  `xml:"description,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		Name:        name,
 		Description: description,
 	}
@@ -75346,10 +75345,10 @@ func (mo *VirtualMachine) StartReplaying_Task(
 
 	request := struct {
 		XMLName        xml.Name                `xml:"StartReplaying_Task"`
-		_this          *ManagedObjectReference `xml:"_this,omitempty"`
+		This           *ManagedObjectReference `xml:"_this,omitempty"`
 		ReplaySnapshot *VirtualMachineSnapshot `xml:"replaySnapshot,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		ReplaySnapshot: replaySnapshot,
 	}
 
@@ -75386,9 +75385,9 @@ func (mo *VirtualMachine) StopRecording_Task() (*Task, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"StopRecording_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -75424,9 +75423,9 @@ func (mo *VirtualMachine) StopReplaying_Task() (*Task, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"StopReplaying_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -75452,9 +75451,9 @@ func (mo *VirtualMachine) SuspendVM_Task() (*Task, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"SuspendVM_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -75486,11 +75485,11 @@ func (mo *VirtualMachine) TerminateFaultTolerantVM_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"TerminateFaultTolerantVM_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm      *VirtualMachine         `xml:"vm,omitempty"`
 	}{
-		_this: mo.this,
-		Vm:    vm,
+		This: mo.This,
+		Vm:   vm,
 	}
 
 	response := struct {
@@ -75525,9 +75524,9 @@ func (mo *VirtualMachine) TerminateVM() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"TerminateVM"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -75555,9 +75554,9 @@ func (mo *VirtualMachine) TurnOffFaultToleranceForVM_Task() (*Task, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"TurnOffFaultToleranceForVM_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -75583,9 +75582,9 @@ func (mo *VirtualMachine) UnmountToolsInstaller() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"UnmountToolsInstaller"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -75618,9 +75617,9 @@ func (mo *VirtualMachine) UnregisterVM() error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"UnregisterVM"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	err := mo.soapClient.Call(request, nil)
@@ -75647,10 +75646,10 @@ func (mo *VirtualMachine) UpgradeTools_Task(
 
 	request := struct {
 		XMLName          xml.Name                `xml:"UpgradeTools_Task"`
-		_this            *ManagedObjectReference `xml:"_this,omitempty"`
+		This             *ManagedObjectReference `xml:"_this,omitempty"`
 		InstallerOptions string                  `xml:"installerOptions,omitempty"`
 	}{
-		_this:            mo.this,
+		This:             mo.This,
 		InstallerOptions: installerOptions,
 	}
 
@@ -75680,10 +75679,10 @@ func (mo *VirtualMachine) UpgradeVM_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"UpgradeVM_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Version string                  `xml:"version,omitempty"`
 	}{
-		_this:   mo.this,
+		This:    mo.This,
 		Version: version,
 	}
 
@@ -76145,13 +76144,13 @@ func (mo *VirtualMachineCompatibilityChecker) CheckCompatibility_Task(
 
 	request := struct {
 		XMLName  xml.Name                `xml:"CheckCompatibility_Task"`
-		_this    *ManagedObjectReference `xml:"_this,omitempty"`
+		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm       *VirtualMachine         `xml:"vm,omitempty"`
 		Host     *HostSystem             `xml:"host,omitempty"`
 		Pool     *ResourcePool           `xml:"pool,omitempty"`
 		TestType []string                `xml:"testType,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		Vm:       vm,
 		Host:     host,
 		Pool:     pool,
@@ -78644,14 +78643,14 @@ func (mo *VirtualMachineProvisioningChecker) CheckMigrate_Task(
 
 	request := struct {
 		XMLName  xml.Name                       `xml:"CheckMigrate_Task"`
-		_this    *ManagedObjectReference        `xml:"_this,omitempty"`
+		This     *ManagedObjectReference        `xml:"_this,omitempty"`
 		Vm       *VirtualMachine                `xml:"vm,omitempty"`
 		Host     *HostSystem                    `xml:"host,omitempty"`
 		Pool     *ResourcePool                  `xml:"pool,omitempty"`
 		State    *enum.VirtualMachinePowerState `xml:"state,omitempty"`
 		TestType []string                       `xml:"testType,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		Vm:       vm,
 		Host:     host,
 		Pool:     pool,
@@ -78685,12 +78684,12 @@ func (mo *VirtualMachineProvisioningChecker) CheckRelocate_Task(
 
 	request := struct {
 		XMLName  xml.Name                    `xml:"CheckRelocate_Task"`
-		_this    *ManagedObjectReference     `xml:"_this,omitempty"`
+		This     *ManagedObjectReference     `xml:"_this,omitempty"`
 		Vm       *VirtualMachine             `xml:"vm,omitempty"`
 		Spec     *VirtualMachineRelocateSpec `xml:"spec,omitempty"`
 		TestType []string                    `xml:"testType,omitempty"`
 	}{
-		_this:    mo.this,
+		This:     mo.This,
 		Vm:       vm,
 		Spec:     spec,
 		TestType: testType,
@@ -78723,13 +78722,13 @@ func (mo *VirtualMachineProvisioningChecker) QueryVMotionCompatibilityEx_Task(
 
 	request := struct {
 		XMLName xml.Name                `xml:"QueryVMotionCompatibilityEx_Task"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm      []*VirtualMachine       `xml:"vm,omitempty"`
 		Host    []*HostSystem           `xml:"host,omitempty"`
 	}{
-		_this: mo.this,
-		Vm:    vm,
-		Host:  host,
+		This: mo.This,
+		Vm:   vm,
+		Host: host,
 	}
 
 	response := struct {
@@ -79473,9 +79472,9 @@ func (mo *VirtualMachineSnapshot) ExportSnapshot() (*HttpNfcLease, error) {
 
 	request := struct {
 		XMLName xml.Name                `xml:"ExportSnapshot"`
-		_this   *ManagedObjectReference `xml:"_this,omitempty"`
+		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		_this: mo.this,
+		This: mo.This,
 	}
 
 	response := struct {
@@ -79503,11 +79502,11 @@ func (mo *VirtualMachineSnapshot) RemoveSnapshot_Task(
 
 	request := struct {
 		XMLName        xml.Name                `xml:"RemoveSnapshot_Task"`
-		_this          *ManagedObjectReference `xml:"_this,omitempty"`
+		This           *ManagedObjectReference `xml:"_this,omitempty"`
 		RemoveChildren bool                    `xml:"removeChildren,omitempty"`
 		Consolidate    bool                    `xml:"consolidate,omitempty"`
 	}{
-		_this:          mo.this,
+		This:           mo.This,
 		RemoveChildren: removeChildren,
 		Consolidate:    consolidate,
 	}
@@ -79540,11 +79539,11 @@ func (mo *VirtualMachineSnapshot) RenameSnapshot(
 
 	request := struct {
 		XMLName     xml.Name                `xml:"RenameSnapshot"`
-		_this       *ManagedObjectReference `xml:"_this,omitempty"`
+		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		Name        string                  `xml:"name,omitempty"`
 		Description string                  `xml:"description,omitempty"`
 	}{
-		_this:       mo.this,
+		This:        mo.This,
 		Name:        name,
 		Description: description,
 	}
@@ -79570,11 +79569,11 @@ func (mo *VirtualMachineSnapshot) RevertToSnapshot_Task(
 
 	request := struct {
 		XMLName         xml.Name                `xml:"RevertToSnapshot_Task"`
-		_this           *ManagedObjectReference `xml:"_this,omitempty"`
+		This            *ManagedObjectReference `xml:"_this,omitempty"`
 		Host            *HostSystem             `xml:"host,omitempty"`
 		SuppressPowerOn bool                    `xml:"suppressPowerOn,omitempty"`
 	}{
-		_this:           mo.this,
+		This:            mo.This,
 		Host:            host,
 		SuppressPowerOn: suppressPowerOn,
 	}
@@ -84206,10 +84205,10 @@ func (mo *VmwareDistributedVirtualSwitch) UpdateDVSLacpGroupConfig_Task(
 
 	request := struct {
 		XMLName       xml.Name                  `xml:"UpdateDVSLacpGroupConfig_Task"`
-		_this         *ManagedObjectReference   `xml:"_this,omitempty"`
+		This          *ManagedObjectReference   `xml:"_this,omitempty"`
 		LacpGroupSpec []*VMwareDvsLacpGroupSpec `xml:"lacpGroupSpec,omitempty"`
 	}{
-		_this:         mo.this,
+		This:          mo.This,
 		LacpGroupSpec: lacpGroupSpec,
 	}
 

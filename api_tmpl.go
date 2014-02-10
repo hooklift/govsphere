@@ -31,7 +31,7 @@ type {{$type}} struct {
 		{{$privileges := comment .RequiredPrivileges}}
 		{{$fieldType := toGoType .Type}}
 		{{if ne $namespace "mo"}}{{if $fieldComment}} {{$fieldComment}} {{end}}{{if $privileges}} {{$privileges}} {{end}}{{end}}
-		{{if ne $namespace "mo"}}{{makePublic .Name true}}{{else}}{{replaceReservedWords .Name}}{{end}} {{lookUpNamespace $fieldType $namespace}} ` + "`" + `xml:"{{.Name}},omitempty"` + "`" + `
+		{{if ne $namespace "mo"}}{{makePublic .Name true}}{{else}}{{replaceReservedWords .Name}}{{end}} {{lookUpNamespace $fieldType $namespace}}{{if eq $type "ManagedObjectReference"}}{{if eq .Name "type"}}` + "`" + `xml:"{{.Name}},attr"` + "`" + `{{else if eq .Name "value"}}` + "`" + `xml:",innerxml"` + "`" + `{{end}}{{else}}` + "`" + `xml:"{{.Name}},omitempty"` + "`" + `{{end}}
 	{{end}}
 }
 
@@ -77,10 +77,10 @@ func ({{$namespace}} *{{$type}}) {{makePublic .Name true}}(
 
 	request := struct {
 		XMLName	xml.Name ` + "`" + `xml:"{{$requestType}}"` + "`" + `
-		{{range .Parameters}}{{$ptype := toGoType .Type}}{{makePublic .Name true}} {{lookUpNamespace $ptype $namespace}} ` + "`" + `xml:"{{.Name}},omitempty"` + "`" + `
+		{{range .Parameters}}{{$ptype := toGoType .Type}}{{if eq .Name "_this"}}This{{else}}{{makePublic .Name true}}{{end}} {{lookUpNamespace $ptype $namespace}} ` + "`" + `xml:"{{.Name}},omitempty"` + "`" + `
 		{{end}}
 	}{
-		{{range .Parameters}}{{makePublic .Name true}}:{{if eq .Name "_this"}}{{$namespace}}.this,{{else}}{{replaceReservedWords .Name}},{{end}}
+		{{range .Parameters}}{{if eq .Name "_this"}}This{{else}}{{makePublic .Name true}}{{end}}:{{if eq .Name "_this"}}{{$namespace}}.This,{{else}}{{replaceReservedWords .Name}},{{end}}
 		{{end}}
 	}
 

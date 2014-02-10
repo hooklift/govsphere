@@ -8,6 +8,7 @@ import (
 	"log"
 	"net"
 	"net/http"
+	"net/http/httputil"
 	"time"
 )
 
@@ -23,8 +24,7 @@ type Header struct {
 }
 
 type Body struct {
-	Body  string
-	Fault Fault
+	Body string `xml:",innerxml"`
 }
 
 type Fault struct {
@@ -71,7 +71,7 @@ func (s *Client) Call(request interface{}, response interface{}) error {
 	buffer := &bytes.Buffer{}
 
 	encoder := xml.NewEncoder(buffer)
-	//encoder.Indent("  ", "    ")
+	encoder.Indent("  ", "    ")
 
 	err = encoder.Encode(envelope)
 	if err != nil {
@@ -91,11 +91,20 @@ func (s *Client) Call(request interface{}, response interface{}) error {
 	}
 
 	client := &http.Client{Transport: tr}
+
+	rawReq, _ := httputil.DumpRequestOut(req, true)
+	log.Println("===========REQUEST===========")
+	log.Println(string(rawReq))
+
 	res, err := client.Do(req)
 	if err != nil {
 		return err
 	}
 	defer res.Body.Close()
+
+	rawRes, _ := httputil.DumpResponse(res, true)
+	log.Println("===========RESPONSE===========")
+	log.Println(string(rawRes))
 
 	body, err := ioutil.ReadAll(res.Body)
 

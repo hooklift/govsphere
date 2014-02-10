@@ -5,7 +5,7 @@ import (
 )
 
 type ManagedObject struct {
-	this       *ManagedObjectReference `xml:"_this"`
+	This       *ManagedObjectReference
 	soapClient *soap.Client
 }
 
