@@ -27,20 +27,30 @@ func NewServiceInstance(url, user, pass string, ignoreCert bool) *ServiceInstanc
 		},
 	}
 
-	sc := service.RetrieveServiceContent()
+	sc, err := service.RetrieveServiceContent()
+	if err != nil {
+		panic(err)
+	}
+
 	version := sc.About.ApiVersion
 
 	var apiVersion string
 	switch version {
-		default: apiVersion = APIv5_5
-		case 4.0: apiVersion = APIv4_0
-		case 4.1: apiVersion = APIv4_1
-		case 5.0: apiVersion = APIv5_0
-		case 5.1: apiVersion = APIv5_1
-		case 5.5: apiVersion = APIv5_5
+	default:
+		apiVersion = APIv5_5
+	case "4.0":
+		apiVersion = APIv4_0
+	case "4.1":
+		apiVersion = APIv4_1
+	case "5.0":
+		apiVersion = APIv5_0
+	case "5.1":
+		apiVersion = APIv5_1
+	case "5.5":
+		apiVersion = APIv5_5
 	}
 
-	service.ManagedObject.soapClient = soap.NewClient(url, apiVersion, ignoreCert),
+	service.ManagedObject.soapClient = soap.NewClient(url, apiVersion, ignoreCert)
 
 	return service
 }

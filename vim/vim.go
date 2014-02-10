@@ -61647,6 +61647,7 @@ func (mo *ServiceInstance) RetrieveServiceContent() (*ServiceContent, error) {
 		return nil, err
 	}
 
+
 	return response.Returnval, nil
 
 }
