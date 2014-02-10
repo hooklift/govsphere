@@ -31,7 +31,6 @@ Start the godoc server and open up your browser: `godoc -http=:6060`
 
 ## TODO
 3. Create ServiceInstance class
-	* Use best API version supported by the server
 	* Finish SoapClient
 4. Implement ManagedObject.currentProperty()
 5. Add support for JSON Schema in api.json generation
