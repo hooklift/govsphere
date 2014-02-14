@@ -31,7 +31,7 @@ type {{$type}} struct {
 		{{$privileges := comment .RequiredPrivileges}}
 		{{$fieldType := toGoType .Type}}
 		{{if ne $namespace "mo"}}{{if $fieldComment}} {{$fieldComment}} {{end}}{{if $privileges}} {{$privileges}} {{end}}{{end}}
-		{{if ne $namespace "mo"}}{{makePublic .Name true}}{{else}}{{replaceReservedWords .Name}}{{end}} {{lookUpNamespace $fieldType $namespace}}{{if eq $type "ManagedObjectReference"}}{{if eq .Name "type"}}` + "`" + `xml:"{{.Name}},attr"` + "`" + `{{else if eq .Name "value"}}` + "`" + `xml:",innerxml"` + "`" + `{{end}}{{else}}` + "`" + `xml:"{{.Name}},omitempty"` + "`" + `{{end}}
+		{{makePublic .Name true}} {{lookUpNamespace $fieldType $namespace}}{{if eq $type "ManagedObjectReference"}}{{if eq .Name "type"}}` + "`" + `xml:"{{.Name}},attr"` + "`" + `{{else if eq .Name "value"}}` + "`" + `xml:",innerxml"` + "`" + `{{end}}{{else}}` + "`" + `xml:"{{.Name}},omitempty"` + "`" + `{{end}}
 	{{end}}
 }
 

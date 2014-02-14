@@ -282,7 +282,7 @@ type AgentInstallFailedReason struct {
 type Alarm struct {
 	*ExtensibleManagedObject
 
-	info *AlarmInfo `xml:"info,omitempty"`
+	Info *AlarmInfo `xml:"info,omitempty"`
 }
 
 // Information about this alarm.
@@ -567,9 +567,9 @@ type AlarmInfo struct {
 type AlarmManager struct {
 	*ManagedObject
 
-	defaultExpression []*AlarmExpression `xml:"defaultExpression,omitempty"`
+	DefaultExpression []*AlarmExpression `xml:"defaultExpression,omitempty"`
 
-	description *AlarmDescription `xml:"description,omitempty"`
+	Description *AlarmDescription `xml:"description,omitempty"`
 }
 
 // The default setting for each alarm expression, used to populate the
@@ -1610,11 +1610,11 @@ type AuthorizationEvent struct {
 type AuthorizationManager struct {
 	*ManagedObject
 
-	description *AuthorizationDescription `xml:"description,omitempty"`
+	Description *AuthorizationDescription `xml:"description,omitempty"`
 
-	privilegeList []*AuthorizationPrivilege `xml:"privilegeList,omitempty"`
+	PrivilegeList []*AuthorizationPrivilege `xml:"privilegeList,omitempty"`
 
-	roleList []*AuthorizationRole `xml:"roleList,omitempty"`
+	RoleList []*AuthorizationRole `xml:"roleList,omitempty"`
 }
 
 // Static, descriptive strings for system roles and privileges.
@@ -3086,17 +3086,17 @@ type ClusterComputeResource struct {
 	*ManagedObject
 	*ComputeResource
 
-	actionHistory []*ClusterActionHistory `xml:"actionHistory,omitempty"`
+	ActionHistory []*ClusterActionHistory `xml:"actionHistory,omitempty"`
 
-	configuration *ClusterConfigInfo `xml:"configuration,omitempty"`
+	Configuration *ClusterConfigInfo `xml:"configuration,omitempty"`
 
-	drsFault []*ClusterDrsFaults `xml:"drsFault,omitempty"`
+	DrsFault []*ClusterDrsFaults `xml:"drsFault,omitempty"`
 
-	drsRecommendation []*ClusterDrsRecommendation `xml:"drsRecommendation,omitempty"`
+	DrsRecommendation []*ClusterDrsRecommendation `xml:"drsRecommendation,omitempty"`
 
-	migrationHistory []*ClusterDrsMigration `xml:"migrationHistory,omitempty"`
+	MigrationHistory []*ClusterDrsMigration `xml:"migrationHistory,omitempty"`
 
-	recommendation []*ClusterRecommendation `xml:"recommendation,omitempty"`
+	Recommendation []*ClusterRecommendation `xml:"recommendation,omitempty"`
 }
 
 // The set of actions that have been performed recently.
@@ -6394,19 +6394,19 @@ type CompositePolicyOption struct {
 type ComputeResource struct {
 	*ManagedEntity
 
-	configurationEx *ComputeResourceConfigInfo `xml:"configurationEx,omitempty"`
+	ConfigurationEx *ComputeResourceConfigInfo `xml:"configurationEx,omitempty"`
 
-	datastore []*Datastore `xml:"datastore,omitempty"`
+	Datastore []*Datastore `xml:"datastore,omitempty"`
 
-	environmentBrowser *EnvironmentBrowser `xml:"environmentBrowser,omitempty"`
+	EnvironmentBrowser *EnvironmentBrowser `xml:"environmentBrowser,omitempty"`
 
-	host []*HostSystem `xml:"host,omitempty"`
+	Host []*HostSystem `xml:"host,omitempty"`
 
-	network []*Network `xml:"network,omitempty"`
+	Network []*Network `xml:"network,omitempty"`
 
-	resourcePool *ResourcePool `xml:"resourcePool,omitempty"`
+	ResourcePool *ResourcePool `xml:"resourcePool,omitempty"`
 
-	summary *ComputeResourceSummary `xml:"summary,omitempty"`
+	Summary *ComputeResourceSummary `xml:"summary,omitempty"`
 }
 
 // Configuration of the compute resource; applies to both standalone hosts
@@ -6974,11 +6974,11 @@ type ContainerView struct {
 	*ManagedObject
 	*ManagedObjectView
 
-	container *ManagedEntity `xml:"container,omitempty"`
+	Container *ManagedEntity `xml:"container,omitempty"`
 
-	recursive bool `xml:"recursive,omitempty"`
+	Recursive bool `xml:"recursive,omitempty"`
 
-	type_ []string `xml:"type,omitempty"`
+	Type []string `xml:"type,omitempty"`
 }
 
 // The Folder, Datacenter, ComputeResource, ResourcePool, or HostSystem instance
@@ -7326,7 +7326,7 @@ type CustomFieldValueChangedEvent struct {
 type CustomFieldsManager struct {
 	*ManagedObject
 
-	field []*CustomFieldDef `xml:"field,omitempty"`
+	Field []*CustomFieldDef `xml:"field,omitempty"`
 }
 
 // List of custom fields defined on this server. The fields are
@@ -8063,9 +8063,9 @@ type CustomizationSpecItem struct {
 type CustomizationSpecManager struct {
 	*ManagedObject
 
-	encryptionKey []int8 `xml:"encryptionKey,omitempty"`
+	EncryptionKey []int8 `xml:"encryptionKey,omitempty"`
 
-	info []*CustomizationSpecInfo `xml:"info,omitempty"`
+	Info []*CustomizationSpecInfo `xml:"info,omitempty"`
 }
 
 // Gets a binary public encryption key that can be used to encrypt
@@ -10248,19 +10248,19 @@ type DatabaseSizeParam struct {
 type Datacenter struct {
 	*ManagedEntity
 
-	configuration *DatacenterConfigInfo `xml:"configuration,omitempty"`
+	Configuration *DatacenterConfigInfo `xml:"configuration,omitempty"`
 
-	datastore []*Datastore `xml:"datastore,omitempty"`
+	Datastore []*Datastore `xml:"datastore,omitempty"`
 
-	datastoreFolder *Folder `xml:"datastoreFolder,omitempty"`
+	DatastoreFolder *Folder `xml:"datastoreFolder,omitempty"`
 
-	hostFolder *Folder `xml:"hostFolder,omitempty"`
+	HostFolder *Folder `xml:"hostFolder,omitempty"`
 
-	network []*Network `xml:"network,omitempty"`
+	Network []*Network `xml:"network,omitempty"`
 
-	networkFolder *Folder `xml:"networkFolder,omitempty"`
+	NetworkFolder *Folder `xml:"networkFolder,omitempty"`
 
-	vmFolder *Folder `xml:"vmFolder,omitempty"`
+	VmFolder *Folder `xml:"vmFolder,omitempty"`
 }
 
 // Configuration of the datacenter.
@@ -10729,19 +10729,19 @@ type DatacenterRenamedEvent struct {
 type Datastore struct {
 	*ManagedEntity
 
-	browser *HostDatastoreBrowser `xml:"browser,omitempty"`
+	Browser *HostDatastoreBrowser `xml:"browser,omitempty"`
 
-	capability *DatastoreCapability `xml:"capability,omitempty"`
+	Capability *DatastoreCapability `xml:"capability,omitempty"`
 
-	host []*DatastoreHostMount `xml:"host,omitempty"`
+	Host []*DatastoreHostMount `xml:"host,omitempty"`
 
-	info *DatastoreInfo `xml:"info,omitempty"`
+	Info *DatastoreInfo `xml:"info,omitempty"`
 
-	iormConfiguration *StorageIORMInfo `xml:"iormConfiguration,omitempty"`
+	IormConfiguration *StorageIORMInfo `xml:"iormConfiguration,omitempty"`
 
-	summary *DatastoreSummary `xml:"summary,omitempty"`
+	Summary *DatastoreSummary `xml:"summary,omitempty"`
 
-	vm []*VirtualMachine `xml:"vm,omitempty"`
+	Vm []*VirtualMachine `xml:"vm,omitempty"`
 }
 
 // DatastoreBrowser used to browse this datastore.
@@ -12364,11 +12364,11 @@ type DistributedVirtualPortgroup struct {
 	*ManagedObject
 	*Network
 
-	config *DVPortgroupConfigInfo `xml:"config,omitempty"`
+	Config *DVPortgroupConfigInfo `xml:"config,omitempty"`
 
-	key string `xml:"key,omitempty"`
+	Key string `xml:"key,omitempty"`
 
-	portKeys []string `xml:"portKeys,omitempty"`
+	PortKeys []string `xml:"portKeys,omitempty"`
 }
 
 // Configuration of the portgroup.
@@ -12860,19 +12860,19 @@ type DistributedVirtualPortgroupPortgroupType struct {
 type DistributedVirtualSwitch struct {
 	*ManagedEntity
 
-	capability *DVSCapability `xml:"capability,omitempty"`
+	Capability *DVSCapability `xml:"capability,omitempty"`
 
-	config *DVSConfigInfo `xml:"config,omitempty"`
+	Config *DVSConfigInfo `xml:"config,omitempty"`
 
-	networkResourcePool []*DVSNetworkResourcePool `xml:"networkResourcePool,omitempty"`
+	NetworkResourcePool []*DVSNetworkResourcePool `xml:"networkResourcePool,omitempty"`
 
-	portgroup []*DistributedVirtualPortgroup `xml:"portgroup,omitempty"`
+	Portgroup []*DistributedVirtualPortgroup `xml:"portgroup,omitempty"`
 
-	runtime *DVSRuntimeInfo `xml:"runtime,omitempty"`
+	Runtime *DVSRuntimeInfo `xml:"runtime,omitempty"`
 
-	summary *DVSSummary `xml:"summary,omitempty"`
+	Summary *DVSSummary `xml:"summary,omitempty"`
 
-	uuid string `xml:"uuid,omitempty"`
+	Uuid string `xml:"uuid,omitempty"`
 }
 
 // Capability of the switch. Capabilities are indicated at the port,
@@ -16798,7 +16798,7 @@ type EnumDescription struct {
 type EnvironmentBrowser struct {
 	*ManagedObject
 
-	datastoreBrowser *HostDatastoreBrowser `xml:"datastoreBrowser,omitempty"`
+	DatastoreBrowser *HostDatastoreBrowser `xml:"datastoreBrowser,omitempty"`
 }
 
 // DatastoreBrowser to browse datastores that are available on this entity.
@@ -17551,7 +17551,7 @@ type EventHistoryCollector struct {
 	*ManagedObject
 	*HistoryCollector
 
-	latestPage []*Event `xml:"latestPage,omitempty"`
+	LatestPage []*Event `xml:"latestPage,omitempty"`
 }
 
 // The items in the 'viewable latest page'. As new events that match the
@@ -17658,11 +17658,11 @@ func (mo *EventHistoryCollector) ReadPreviousEvents(
 type EventManager struct {
 	*ManagedObject
 
-	description *EventDescription `xml:"description,omitempty"`
+	Description *EventDescription `xml:"description,omitempty"`
 
-	latestEvent *Event `xml:"latestEvent,omitempty"`
+	LatestEvent *Event `xml:"latestEvent,omitempty"`
 
-	maxCollector int32 `xml:"maxCollector,omitempty"`
+	MaxCollector int32 `xml:"maxCollector,omitempty"`
 }
 
 // Static descriptive strings used in events.
@@ -18181,9 +18181,9 @@ type ExtendedFault struct {
 type ExtensibleManagedObject struct {
 	*ManagedObject
 
-	availableField []*CustomFieldDef `xml:"availableField,omitempty"`
+	AvailableField []*CustomFieldDef `xml:"availableField,omitempty"`
 
-	value []*CustomFieldValue `xml:"value,omitempty"`
+	Value []*CustomFieldValue `xml:"value,omitempty"`
 }
 
 // List of custom field definitions that are valid for the object's type.
@@ -18475,7 +18475,7 @@ type ExtensionHealthInfo struct {
 type ExtensionManager struct {
 	*ManagedObject
 
-	extensionList []*Extension `xml:"extensionList,omitempty"`
+	ExtensionList []*Extension `xml:"extensionList,omitempty"`
 }
 
 // The list of currently registered extensions.
@@ -20028,9 +20028,9 @@ type FloppyImageFileQuery struct {
 type Folder struct {
 	*ManagedEntity
 
-	childEntity []*ManagedEntity `xml:"childEntity,omitempty"`
+	ChildEntity []*ManagedEntity `xml:"childEntity,omitempty"`
 
-	childType []string `xml:"childType,omitempty"`
+	ChildType []string `xml:"childType,omitempty"`
 }
 
 // An array of managed object references. Each entry is a reference to a child entity.
@@ -21853,11 +21853,11 @@ type GuestOperationsFault struct {
 type GuestOperationsManager struct {
 	*ManagedObject
 
-	authManager *GuestAuthManager `xml:"authManager,omitempty"`
+	AuthManager *GuestAuthManager `xml:"authManager,omitempty"`
 
-	fileManager *GuestFileManager `xml:"fileManager,omitempty"`
+	FileManager *GuestFileManager `xml:"fileManager,omitempty"`
 
-	processManager *GuestProcessManager `xml:"processManager,omitempty"`
+	ProcessManager *GuestProcessManager `xml:"processManager,omitempty"`
 }
 
 // A singleton managed object that provides methods for guest authentication
@@ -22646,7 +22646,7 @@ type HealthSystemRuntime struct {
 type HistoryCollector struct {
 	*ManagedObject
 
-	filter interface{} `xml:"filter,omitempty"`
+	Filter interface{} `xml:"filter,omitempty"`
 }
 
 // The filter used to create this collector.
@@ -23279,9 +23279,9 @@ type HostApplyProfile struct {
 type HostAuthenticationManager struct {
 	*ManagedObject
 
-	info *HostAuthenticationManagerInfo `xml:"info,omitempty"`
+	Info *HostAuthenticationManagerInfo `xml:"info,omitempty"`
 
-	supportedStore []*HostAuthenticationStore `xml:"supportedStore,omitempty"`
+	SupportedStore []*HostAuthenticationStore `xml:"supportedStore,omitempty"`
 }
 
 // Information about Active Directory membership.
@@ -23374,7 +23374,7 @@ type HostAuthenticationManagerInfo struct {
 type HostAuthenticationStore struct {
 	*ManagedObject
 
-	info *HostAuthenticationStoreInfo `xml:"info,omitempty"`
+	Info *HostAuthenticationStoreInfo `xml:"info,omitempty"`
 }
 
 // Information about the authentication store.
@@ -23420,7 +23420,7 @@ type HostAuthenticationStoreInfo struct {
 type HostAutoStartManager struct {
 	*ManagedObject
 
-	config *HostAutoStartManagerConfig `xml:"config,omitempty"`
+	Config *HostAutoStartManagerConfig `xml:"config,omitempty"`
 }
 
 func (mo *HostAutoStartManager) Config() (*HostAutoStartManagerConfig, error) {
@@ -23705,7 +23705,7 @@ type HostCacheConfigurationInfo struct {
 type HostCacheConfigurationManager struct {
 	*ManagedObject
 
-	cacheConfigurationInfo []*HostCacheConfigurationInfo `xml:"cacheConfigurationInfo,omitempty"`
+	CacheConfigurationInfo []*HostCacheConfigurationInfo `xml:"cacheConfigurationInfo,omitempty"`
 }
 
 // The swap performance configuration for the ESX host.  This includes
@@ -25377,7 +25377,7 @@ type HostCpuPowerManagementInfoPolicyType struct {
 type HostCpuSchedulerSystem struct {
 	*ExtensibleManagedObject
 
-	hyperthreadInfo *HostHyperThreadScheduleInfo `xml:"hyperthreadInfo,omitempty"`
+	HyperthreadInfo *HostHyperThreadScheduleInfo `xml:"hyperthreadInfo,omitempty"`
 }
 
 // The hyperthread configuration for the CpuSchedulerSystem.  The
@@ -25600,9 +25600,9 @@ type HostDasOkEvent struct {
 type HostDatastoreBrowser struct {
 	*ManagedObject
 
-	datastore []*Datastore `xml:"datastore,omitempty"`
+	Datastore []*Datastore `xml:"datastore,omitempty"`
 
-	supportedType []*FileQuery `xml:"supportedType,omitempty"`
+	SupportedType []*FileQuery `xml:"supportedType,omitempty"`
 }
 
 // Set of datastores that can be searched on this DatastoreBrowser.
@@ -25919,9 +25919,9 @@ type HostDatastoreNameConflictConnectInfo struct {
 type HostDatastoreSystem struct {
 	*ManagedObject
 
-	capabilities *HostDatastoreSystemCapabilities `xml:"capabilities,omitempty"`
+	Capabilities *HostDatastoreSystemCapabilities `xml:"capabilities,omitempty"`
 
-	datastore []*Datastore `xml:"datastore,omitempty"`
+	Datastore []*Datastore `xml:"datastore,omitempty"`
 }
 
 // Capability vector indicating the available product features.
@@ -26549,7 +26549,7 @@ type HostDateTimeInfo struct {
 type HostDateTimeSystem struct {
 	*ManagedObject
 
-	dateTimeInfo *HostDateTimeInfo `xml:"dateTimeInfo,omitempty"`
+	DateTimeInfo *HostDateTimeInfo `xml:"dateTimeInfo,omitempty"`
 }
 
 // The DateTime configuration of the host.
@@ -26927,7 +26927,7 @@ type HostDiagnosticPartitionCreateSpec struct {
 type HostDiagnosticSystem struct {
 	*ManagedObject
 
-	activePartition *HostDiagnosticPartition `xml:"activePartition,omitempty"`
+	ActivePartition *HostDiagnosticPartition `xml:"activePartition,omitempty"`
 }
 
 // The currently active diagnostic partition.
@@ -27565,7 +27565,7 @@ type HostEnableAdminFailedEvent struct {
 type HostEsxAgentHostManager struct {
 	*ManagedObject
 
-	configInfo *HostEsxAgentHostManagerConfigInfo `xml:"configInfo,omitempty"`
+	ConfigInfo *HostEsxAgentHostManagerConfigInfo `xml:"configInfo,omitempty"`
 }
 
 // Configuration of agent virtual machine resources
@@ -28194,7 +28194,7 @@ type HostFirewallRulesetRulesetSpec struct {
 type HostFirewallSystem struct {
 	*ExtensibleManagedObject
 
-	firewallInfo *HostFirewallInfo `xml:"firewallInfo,omitempty"`
+	FirewallInfo *HostFirewallInfo `xml:"firewallInfo,omitempty"`
 }
 
 // Firewall configuration.
@@ -28583,7 +28583,7 @@ type HostGraphicsInfoGraphicsType struct {
 type HostGraphicsManager struct {
 	*ExtensibleManagedObject
 
-	graphicsInfo []*HostGraphicsInfo `xml:"graphicsInfo,omitempty"`
+	GraphicsInfo []*HostGraphicsInfo `xml:"graphicsInfo,omitempty"`
 }
 
 // Array of graphics information
@@ -28810,7 +28810,7 @@ type HostHardwareSummary struct {
 type HostHealthStatusSystem struct {
 	*ManagedObject
 
-	runtime *HealthSystemRuntime `xml:"runtime,omitempty"`
+	Runtime *HealthSystemRuntime `xml:"runtime,omitempty"`
 }
 
 func (mo *HostHealthStatusSystem) Runtime() (*HealthSystemRuntime, error) {
@@ -30888,9 +30888,9 @@ type HostMemorySpec struct {
 type HostMemorySystem struct {
 	*ExtensibleManagedObject
 
-	consoleReservationInfo *ServiceConsoleReservationInfo `xml:"consoleReservationInfo,omitempty"`
+	ConsoleReservationInfo *ServiceConsoleReservationInfo `xml:"consoleReservationInfo,omitempty"`
 
-	virtualMachineReservationInfo *VirtualMachineMemoryReservationInfo `xml:"virtualMachineReservationInfo,omitempty"`
+	VirtualMachineReservationInfo *VirtualMachineMemoryReservationInfo `xml:"virtualMachineReservationInfo,omitempty"`
 }
 
 // Service console reservation information for the memory manager.  The
@@ -32087,19 +32087,19 @@ type HostNetworkSecurityPolicy struct {
 type HostNetworkSystem struct {
 	*ExtensibleManagedObject
 
-	capabilities *HostNetCapabilities `xml:"capabilities,omitempty"`
+	Capabilities *HostNetCapabilities `xml:"capabilities,omitempty"`
 
-	consoleIpRouteConfig *HostIpRouteConfig `xml:"consoleIpRouteConfig,omitempty"`
+	ConsoleIpRouteConfig *HostIpRouteConfig `xml:"consoleIpRouteConfig,omitempty"`
 
-	dnsConfig *HostDnsConfig `xml:"dnsConfig,omitempty"`
+	DnsConfig *HostDnsConfig `xml:"dnsConfig,omitempty"`
 
-	ipRouteConfig *HostIpRouteConfig `xml:"ipRouteConfig,omitempty"`
+	IpRouteConfig *HostIpRouteConfig `xml:"ipRouteConfig,omitempty"`
 
-	networkConfig *HostNetworkConfig `xml:"networkConfig,omitempty"`
+	NetworkConfig *HostNetworkConfig `xml:"networkConfig,omitempty"`
 
-	networkInfo *HostNetworkInfo `xml:"networkInfo,omitempty"`
+	NetworkInfo *HostNetworkInfo `xml:"networkInfo,omitempty"`
 
-	offloadCapabilities *HostNetOffloadCapabilities `xml:"offloadCapabilities,omitempty"`
+	OffloadCapabilities *HostNetOffloadCapabilities `xml:"offloadCapabilities,omitempty"`
 }
 
 // Capability vector indicating the available product features.
@@ -34051,7 +34051,7 @@ type HostPciPassthruInfo struct {
 type HostPciPassthruSystem struct {
 	*ExtensibleManagedObject
 
-	pciPassthruInfo []*HostPciPassthruInfo `xml:"pciPassthruInfo,omitempty"`
+	PciPassthruInfo []*HostPciPassthruInfo `xml:"pciPassthruInfo,omitempty"`
 }
 
 // Array of PciPassthru information
@@ -34549,9 +34549,9 @@ type HostPowerPolicy struct {
 type HostPowerSystem struct {
 	*ManagedObject
 
-	capability *PowerSystemCapability `xml:"capability,omitempty"`
+	Capability *PowerSystemCapability `xml:"capability,omitempty"`
 
-	info *PowerSystemInfo `xml:"info,omitempty"`
+	Info *PowerSystemInfo `xml:"info,omitempty"`
 }
 
 // Power system capabilities object.
@@ -34787,7 +34787,7 @@ type HostProfile struct {
 	*ManagedObject
 	*Profile
 
-	referenceHost *HostSystem `xml:"referenceHost,omitempty"`
+	ReferenceHost *HostSystem `xml:"referenceHost,omitempty"`
 }
 
 // Reference host in use for this host profile. To set this property,
@@ -36102,7 +36102,7 @@ type HostServiceSourcePackage struct {
 type HostServiceSystem struct {
 	*ExtensibleManagedObject
 
-	serviceInfo *HostServiceInfo `xml:"serviceInfo,omitempty"`
+	ServiceInfo *HostServiceInfo `xml:"serviceInfo,omitempty"`
 }
 
 // Service configuration.
@@ -36435,9 +36435,9 @@ type HostSnmpDestination struct {
 type HostSnmpSystem struct {
 	*ManagedObject
 
-	configuration *HostSnmpConfigSpec `xml:"configuration,omitempty"`
+	Configuration *HostSnmpConfigSpec `xml:"configuration,omitempty"`
 
-	limits *HostSnmpSystemAgentLimits `xml:"limits,omitempty"`
+	Limits *HostSnmpSystemAgentLimits `xml:"limits,omitempty"`
 }
 
 // Since VI API 2.5
@@ -36715,13 +36715,13 @@ type HostStorageOperationalInfo struct {
 type HostStorageSystem struct {
 	*ExtensibleManagedObject
 
-	fileSystemVolumeInfo *HostFileSystemVolumeInfo `xml:"fileSystemVolumeInfo,omitempty"`
+	FileSystemVolumeInfo *HostFileSystemVolumeInfo `xml:"fileSystemVolumeInfo,omitempty"`
 
-	multipathStateInfo *HostMultipathStateInfo `xml:"multipathStateInfo,omitempty"`
+	MultipathStateInfo *HostMultipathStateInfo `xml:"multipathStateInfo,omitempty"`
 
-	storageDeviceInfo *HostStorageDeviceInfo `xml:"storageDeviceInfo,omitempty"`
+	StorageDeviceInfo *HostStorageDeviceInfo `xml:"storageDeviceInfo,omitempty"`
 
-	systemFile []string `xml:"systemFile,omitempty"`
+	SystemFile []string `xml:"systemFile,omitempty"`
 }
 
 // File system volume information for the host.  See the
@@ -38708,29 +38708,29 @@ type HostSyncFailedEvent struct {
 type HostSystem struct {
 	*ManagedEntity
 
-	capability *HostCapability `xml:"capability,omitempty"`
+	Capability *HostCapability `xml:"capability,omitempty"`
 
-	config *HostConfigInfo `xml:"config,omitempty"`
+	Config *HostConfigInfo `xml:"config,omitempty"`
 
-	configManager *HostConfigManager `xml:"configManager,omitempty"`
+	ConfigManager *HostConfigManager `xml:"configManager,omitempty"`
 
-	datastore []*Datastore `xml:"datastore,omitempty"`
+	Datastore []*Datastore `xml:"datastore,omitempty"`
 
-	datastoreBrowser *HostDatastoreBrowser `xml:"datastoreBrowser,omitempty"`
+	DatastoreBrowser *HostDatastoreBrowser `xml:"datastoreBrowser,omitempty"`
 
-	hardware *HostHardwareInfo `xml:"hardware,omitempty"`
+	Hardware *HostHardwareInfo `xml:"hardware,omitempty"`
 
-	licensableResource *HostLicensableResourceInfo `xml:"licensableResource,omitempty"`
+	LicensableResource *HostLicensableResourceInfo `xml:"licensableResource,omitempty"`
 
-	network []*Network `xml:"network,omitempty"`
+	Network []*Network `xml:"network,omitempty"`
 
-	runtime *HostRuntimeInfo `xml:"runtime,omitempty"`
+	Runtime *HostRuntimeInfo `xml:"runtime,omitempty"`
 
-	summary *HostListSummary `xml:"summary,omitempty"`
+	Summary *HostListSummary `xml:"summary,omitempty"`
 
-	systemResources *HostSystemResourceInfo `xml:"systemResources,omitempty"`
+	SystemResources *HostSystemResourceInfo `xml:"systemResources,omitempty"`
 
-	vm []*VirtualMachine `xml:"vm,omitempty"`
+	Vm []*VirtualMachine `xml:"vm,omitempty"`
 }
 
 // Host capabilities. This might not be available for a
@@ -40375,7 +40375,7 @@ type HostUserWorldSwapNotEnabledEvent struct {
 type HostVFlashManager struct {
 	*ManagedObject
 
-	vFlashConfigInfo *HostVFlashManagerVFlashConfigInfo `xml:"vFlashConfigInfo,omitempty"`
+	VFlashConfigInfo *HostVFlashManagerVFlashConfigInfo `xml:"vFlashConfigInfo,omitempty"`
 }
 
 // Host vFlash configuration information.
@@ -40800,9 +40800,9 @@ type HostVMotionNetConfig struct {
 type HostVMotionSystem struct {
 	*ExtensibleManagedObject
 
-	ipConfig *HostIpConfig `xml:"ipConfig,omitempty"`
+	IpConfig *HostIpConfig `xml:"ipConfig,omitempty"`
 
-	netConfig *HostVMotionNetConfig `xml:"netConfig,omitempty"`
+	NetConfig *HostVMotionNetConfig `xml:"netConfig,omitempty"`
 }
 
 // IP configuration of the VMotion VirtualNic.
@@ -41070,7 +41070,7 @@ type HostVirtualNicConnection struct {
 type HostVirtualNicManager struct {
 	*ExtensibleManagedObject
 
-	info *HostVirtualNicManagerInfo `xml:"info,omitempty"`
+	Info *HostVirtualNicManagerInfo `xml:"info,omitempty"`
 }
 
 // Network configuration.
@@ -41795,7 +41795,7 @@ type HostVsanInternalSystemCmmdsQuery struct {
 type HostVsanSystem struct {
 	*ManagedObject
 
-	config *VsanHostConfigInfo `xml:"config,omitempty"`
+	Config *VsanHostConfigInfo `xml:"config,omitempty"`
 }
 
 // The current VSAN service configuration information for this host.
@@ -42223,13 +42223,13 @@ type HourlyTaskScheduler struct {
 type HttpNfcLease struct {
 	*ManagedObject
 
-	error *LocalizedMethodFault `xml:"error,omitempty"`
+	Error *LocalizedMethodFault `xml:"error,omitempty"`
 
-	info *HttpNfcLeaseInfo `xml:"info,omitempty"`
+	Info *HttpNfcLeaseInfo `xml:"info,omitempty"`
 
-	initializeProgress int32 `xml:"initializeProgress,omitempty"`
+	InitializeProgress int32 `xml:"initializeProgress,omitempty"`
 
-	state *enum.HttpNfcLeaseState `xml:"state,omitempty"`
+	State *enum.HttpNfcLeaseState `xml:"state,omitempty"`
 }
 
 // If the lease is in the error state, this property contains the
@@ -45614,21 +45614,21 @@ type LicenseKeyEntityMismatch struct {
 type LicenseManager struct {
 	*ManagedObject
 
-	diagnostics *LicenseDiagnostics `xml:"diagnostics,omitempty"`
+	Diagnostics *LicenseDiagnostics `xml:"diagnostics,omitempty"`
 
-	evaluation *LicenseManagerEvaluationInfo `xml:"evaluation,omitempty"`
+	Evaluation *LicenseManagerEvaluationInfo `xml:"evaluation,omitempty"`
 
-	featureInfo []*LicenseFeatureInfo `xml:"featureInfo,omitempty"`
+	FeatureInfo []*LicenseFeatureInfo `xml:"featureInfo,omitempty"`
 
-	licenseAssignmentManager *LicenseAssignmentManager `xml:"licenseAssignmentManager,omitempty"`
+	LicenseAssignmentManager *LicenseAssignmentManager `xml:"licenseAssignmentManager,omitempty"`
 
-	licensedEdition string `xml:"licensedEdition,omitempty"`
+	LicensedEdition string `xml:"licensedEdition,omitempty"`
 
-	licenses []*LicenseManagerLicenseInfo `xml:"licenses,omitempty"`
+	Licenses []*LicenseManagerLicenseInfo `xml:"licenses,omitempty"`
 
-	source *LicenseSource `xml:"source,omitempty"`
+	Source *LicenseSource `xml:"source,omitempty"`
 
-	sourceAvailable bool `xml:"sourceAvailable,omitempty"`
+	SourceAvailable bool `xml:"sourceAvailable,omitempty"`
 }
 
 // Deprecated.
@@ -46953,7 +46953,7 @@ type LocalizableMessage struct {
 type LocalizationManager struct {
 	*ManagedObject
 
-	catalog []*LocalizationManagerMessageCatalog `xml:"catalog,omitempty"`
+	Catalog []*LocalizationManagerMessageCatalog `xml:"catalog,omitempty"`
 }
 
 // Fetches the descriptions of all the client-side localization message
@@ -47167,33 +47167,33 @@ type ManagedByInfo struct {
 type ManagedEntity struct {
 	*ExtensibleManagedObject
 
-	alarmActionsEnabled bool `xml:"alarmActionsEnabled,omitempty"`
+	AlarmActionsEnabled bool `xml:"alarmActionsEnabled,omitempty"`
 
-	configIssue []*Event `xml:"configIssue,omitempty"`
+	ConfigIssue []*Event `xml:"configIssue,omitempty"`
 
-	configStatus *enum.ManagedEntityStatus `xml:"configStatus,omitempty"`
+	ConfigStatus *enum.ManagedEntityStatus `xml:"configStatus,omitempty"`
 
-	customValue []*CustomFieldValue `xml:"customValue,omitempty"`
+	CustomValue []*CustomFieldValue `xml:"customValue,omitempty"`
 
-	declaredAlarmState []*AlarmState `xml:"declaredAlarmState,omitempty"`
+	DeclaredAlarmState []*AlarmState `xml:"declaredAlarmState,omitempty"`
 
-	disabledMethod []string `xml:"disabledMethod,omitempty"`
+	DisabledMethod []string `xml:"disabledMethod,omitempty"`
 
-	effectiveRole []int32 `xml:"effectiveRole,omitempty"`
+	EffectiveRole []int32 `xml:"effectiveRole,omitempty"`
 
-	name string `xml:"name,omitempty"`
+	Name string `xml:"name,omitempty"`
 
-	overallStatus *enum.ManagedEntityStatus `xml:"overallStatus,omitempty"`
+	OverallStatus *enum.ManagedEntityStatus `xml:"overallStatus,omitempty"`
 
-	parent *ManagedEntity `xml:"parent,omitempty"`
+	Parent *ManagedEntity `xml:"parent,omitempty"`
 
-	permission []*Permission `xml:"permission,omitempty"`
+	Permission []*Permission `xml:"permission,omitempty"`
 
-	recentTask []*Task `xml:"recentTask,omitempty"`
+	RecentTask []*Task `xml:"recentTask,omitempty"`
 
-	tag []*Tag `xml:"tag,omitempty"`
+	Tag []*Tag `xml:"tag,omitempty"`
 
-	triggeredAlarmState []*AlarmState `xml:"triggeredAlarmState,omitempty"`
+	TriggeredAlarmState []*AlarmState `xml:"triggeredAlarmState,omitempty"`
 }
 
 // Whether alarm actions are enabled for this entity.
@@ -48101,7 +48101,7 @@ type ManagedObjectView struct {
 	*ManagedObject
 	*View
 
-	view []*ManagedObjectReference `xml:"view,omitempty"`
+	View []*ManagedObjectReference `xml:"view,omitempty"`
 }
 
 // The list of references to objects mapped by this view.
@@ -49616,13 +49616,13 @@ type NetStackInstanceProfile struct {
 type Network struct {
 	*ManagedEntity
 
-	host []*HostSystem `xml:"host,omitempty"`
+	Host []*HostSystem `xml:"host,omitempty"`
 
-	name string `xml:"name,omitempty"`
+	Name string `xml:"name,omitempty"`
 
-	summary *NetworkSummary `xml:"summary,omitempty"`
+	Summary *NetworkSummary `xml:"summary,omitempty"`
 
-	vm []*VirtualMachine `xml:"vm,omitempty"`
+	Vm []*VirtualMachine `xml:"vm,omitempty"`
 }
 
 // Hosts attached to this network.
@@ -50861,9 +50861,9 @@ type OptionDef struct {
 type OptionManager struct {
 	*ManagedObject
 
-	setting []*OptionValue `xml:"setting,omitempty"`
+	Setting []*OptionValue `xml:"setting,omitempty"`
 
-	supportedOption []*OptionDef `xml:"supportedOption,omitempty"`
+	SupportedOption []*OptionDef `xml:"supportedOption,omitempty"`
 }
 
 // A list of the current settings for the key/value pair options.
@@ -52234,9 +52234,9 @@ type OvfInvalidVmName struct {
 type OvfManager struct {
 	*ManagedObject
 
-	ovfExportOption []*OvfOptionInfo `xml:"ovfExportOption,omitempty"`
+	OvfExportOption []*OvfOptionInfo `xml:"ovfExportOption,omitempty"`
 
-	ovfImportOption []*OvfOptionInfo `xml:"ovfImportOption,omitempty"`
+	OvfImportOption []*OvfOptionInfo `xml:"ovfImportOption,omitempty"`
 }
 
 // Returns an array of OvfOptionInfo object that specifies what options the server
@@ -54051,11 +54051,11 @@ type PerformanceDescription struct {
 type PerformanceManager struct {
 	*ManagedObject
 
-	description *PerformanceDescription `xml:"description,omitempty"`
+	Description *PerformanceDescription `xml:"description,omitempty"`
 
-	historicalInterval []*PerfInterval `xml:"historicalInterval,omitempty"`
+	HistoricalInterval []*PerfInterval `xml:"historicalInterval,omitempty"`
 
-	perfCounter []*PerfCounterInfo `xml:"perfCounter,omitempty"`
+	PerfCounter []*PerfCounterInfo `xml:"perfCounter,omitempty"`
 }
 
 // The static description strings.
@@ -55513,19 +55513,19 @@ type ProductComponentInfo struct {
 type Profile struct {
 	*ManagedObject
 
-	complianceStatus string `xml:"complianceStatus,omitempty"`
+	ComplianceStatus string `xml:"complianceStatus,omitempty"`
 
-	config *ProfileConfigInfo `xml:"config,omitempty"`
+	Config *ProfileConfigInfo `xml:"config,omitempty"`
 
-	createdTime time.Time `xml:"createdTime,omitempty"`
+	CreatedTime time.Time `xml:"createdTime,omitempty"`
 
-	description *ProfileDescription `xml:"description,omitempty"`
+	Description *ProfileDescription `xml:"description,omitempty"`
 
-	entity []*ManagedEntity `xml:"entity,omitempty"`
+	Entity []*ManagedEntity `xml:"entity,omitempty"`
 
-	modifiedTime time.Time `xml:"modifiedTime,omitempty"`
+	ModifiedTime time.Time `xml:"modifiedTime,omitempty"`
 
-	name string `xml:"name,omitempty"`
+	Name string `xml:"name,omitempty"`
 }
 
 // Overall compliance of entities associated with this profile.
@@ -56322,7 +56322,7 @@ type ProfileExpressionMetadata struct {
 type ProfileManager struct {
 	*ManagedObject
 
-	profile []*Profile `xml:"profile,omitempty"`
+	Profile []*Profile `xml:"profile,omitempty"`
 }
 
 // A list of profiles known to this ProfileManager.
@@ -56780,7 +56780,7 @@ type PropertyChangeOp struct {
 type PropertyCollector struct {
 	*ManagedObject
 
-	filter []*PropertyFilter `xml:"filter,omitempty"`
+	Filter []*PropertyFilter `xml:"filter,omitempty"`
 }
 
 // The filters that this PropertyCollector uses to determine the list of
@@ -57254,9 +57254,9 @@ func (mo *PropertyCollector) WaitForUpdatesEx(
 type PropertyFilter struct {
 	*ManagedObject
 
-	partialUpdates bool `xml:"partialUpdates,omitempty"`
+	PartialUpdates bool `xml:"partialUpdates,omitempty"`
 
-	spec *PropertyFilterSpec `xml:"spec,omitempty"`
+	Spec *PropertyFilterSpec `xml:"spec,omitempty"`
 }
 
 // Flag to indicate if a change to a nested property reports only the
@@ -58522,19 +58522,19 @@ func (mo *ResourcePlanningManager) EstimateDatabaseSize(
 type ResourcePool struct {
 	*ManagedEntity
 
-	childConfiguration []*ResourceConfigSpec `xml:"childConfiguration,omitempty"`
+	ChildConfiguration []*ResourceConfigSpec `xml:"childConfiguration,omitempty"`
 
-	config *ResourceConfigSpec `xml:"config,omitempty"`
+	Config *ResourceConfigSpec `xml:"config,omitempty"`
 
-	owner *ComputeResource `xml:"owner,omitempty"`
+	Owner *ComputeResource `xml:"owner,omitempty"`
 
-	resourcePool []*ResourcePool `xml:"resourcePool,omitempty"`
+	ResourcePool []*ResourcePool `xml:"resourcePool,omitempty"`
 
-	runtime *ResourcePoolRuntimeInfo `xml:"runtime,omitempty"`
+	Runtime *ResourcePoolRuntimeInfo `xml:"runtime,omitempty"`
 
-	summary *ResourcePoolSummary `xml:"summary,omitempty"`
+	Summary *ResourcePoolSummary `xml:"summary,omitempty"`
 
-	vm []*VirtualMachine `xml:"vm,omitempty"`
+	Vm []*VirtualMachine `xml:"vm,omitempty"`
 }
 
 // The resource configuration of all direct children (VirtualMachine and
@@ -59827,7 +59827,7 @@ type ScheduledHardwareUpgradeInfoHardwareUpgradeStatus struct {
 type ScheduledTask struct {
 	*ExtensibleManagedObject
 
-	info *ScheduledTaskInfo `xml:"info,omitempty"`
+	Info *ScheduledTaskInfo `xml:"info,omitempty"`
 }
 
 // Information about the current scheduled task.
@@ -60096,9 +60096,9 @@ type ScheduledTaskInfo struct {
 type ScheduledTaskManager struct {
 	*ManagedObject
 
-	description *ScheduledTaskDescription `xml:"description,omitempty"`
+	Description *ScheduledTaskDescription `xml:"description,omitempty"`
 
-	scheduledTask []*ScheduledTask `xml:"scheduledTask,omitempty"`
+	ScheduledTask []*ScheduledTask `xml:"scheduledTask,omitempty"`
 }
 
 // Static descriptive strings used in scheduled tasks.
@@ -61448,11 +61448,11 @@ type ServiceContent struct {
 type ServiceInstance struct {
 	*ManagedObject
 
-	capability *Capability `xml:"capability,omitempty"`
+	Capability *Capability `xml:"capability,omitempty"`
 
-	content *ServiceContent `xml:"content,omitempty"`
+	Content *ServiceContent `xml:"content,omitempty"`
 
-	serverClock time.Time `xml:"serverClock,omitempty"`
+	ServerClock time.Time `xml:"serverClock,omitempty"`
 }
 
 // API-wide capabilities.
@@ -61712,7 +61712,7 @@ func (mo *ServiceInstance) ValidateMigration(
 type ServiceManager struct {
 	*ManagedObject
 
-	service []*ServiceManagerServiceInfo `xml:"service,omitempty"`
+	Service []*ServiceManagerServiceInfo `xml:"service,omitempty"`
 }
 
 // The full list of services available in this directory.
@@ -61833,17 +61833,17 @@ type SessionEvent struct {
 type SessionManager struct {
 	*ManagedObject
 
-	currentSession *UserSession `xml:"currentSession,omitempty"`
+	CurrentSession *UserSession `xml:"currentSession,omitempty"`
 
-	defaultLocale string `xml:"defaultLocale,omitempty"`
+	DefaultLocale string `xml:"defaultLocale,omitempty"`
 
-	message string `xml:"message,omitempty"`
+	Message string `xml:"message,omitempty"`
 
-	messageLocaleList []string `xml:"messageLocaleList,omitempty"`
+	MessageLocaleList []string `xml:"messageLocaleList,omitempty"`
 
-	sessionList []*UserSession `xml:"sessionList,omitempty"`
+	SessionList []*UserSession `xml:"sessionList,omitempty"`
 
-	supportedLocaleList []string `xml:"supportedLocaleList,omitempty"`
+	SupportedLocaleList []string `xml:"supportedLocaleList,omitempty"`
 }
 
 // This property contains information about the client's current session.
@@ -62778,9 +62778,9 @@ type ShrinkDiskFault struct {
 type SimpleCommand struct {
 	*ManagedObject
 
-	encodingType *enum.SimpleCommandEncoding `xml:"encodingType,omitempty"`
+	EncodingType *enum.SimpleCommandEncoding `xml:"encodingType,omitempty"`
 
-	entity *ServiceManagerServiceInfo `xml:"entity,omitempty"`
+	Entity *ServiceManagerServiceInfo `xml:"entity,omitempty"`
 }
 
 // The encoding type used in the result.
@@ -64012,9 +64012,9 @@ type StoragePod struct {
 	*ManagedObject
 	*Folder
 
-	podStorageDrsEntry *PodStorageDrsEntry `xml:"podStorageDrsEntry,omitempty"`
+	PodStorageDrsEntry *PodStorageDrsEntry `xml:"podStorageDrsEntry,omitempty"`
 
-	summary *StoragePodSummary `xml:"summary,omitempty"`
+	Summary *StoragePodSummary `xml:"summary,omitempty"`
 }
 
 // Storage DRS related attributes of the Storage Pod.
@@ -64712,7 +64712,7 @@ type Tag struct {
 type Task struct {
 	*ExtensibleManagedObject
 
-	info *TaskInfo `xml:"info,omitempty"`
+	Info *TaskInfo `xml:"info,omitempty"`
 }
 
 // Detailed information about this task.
@@ -65060,7 +65060,7 @@ type TaskHistoryCollector struct {
 	*ManagedObject
 	*HistoryCollector
 
-	latestPage []*TaskInfo `xml:"latestPage,omitempty"`
+	LatestPage []*TaskInfo `xml:"latestPage,omitempty"`
 }
 
 // The items in the 'viewable latest page'. As new tasks that match the
@@ -65287,11 +65287,11 @@ type TaskInfoState struct {
 type TaskManager struct {
 	*ManagedObject
 
-	description *TaskDescription `xml:"description,omitempty"`
+	Description *TaskDescription `xml:"description,omitempty"`
 
-	maxCollector int32 `xml:"maxCollector,omitempty"`
+	MaxCollector int32 `xml:"maxCollector,omitempty"`
 
-	recentTask []*Task `xml:"recentTask,omitempty"`
+	RecentTask []*Task `xml:"recentTask,omitempty"`
 }
 
 // Locale-specific, static strings that describe Task
@@ -66712,7 +66712,7 @@ type UserAssignedToGroup struct {
 type UserDirectory struct {
 	*ManagedObject
 
-	domainList []string `xml:"domainList,omitempty"`
+	DomainList []string `xml:"domainList,omitempty"`
 }
 
 // List of Windows domains available for user searches, if the underlying
@@ -69031,7 +69031,7 @@ func (mo *View) DestroyView() error {
 type ViewManager struct {
 	*ManagedObject
 
-	viewList []*View `xml:"viewList,omitempty"`
+	ViewList []*View `xml:"viewList,omitempty"`
 }
 
 // An array of view references. Each array entry is a managed object reference
@@ -69270,17 +69270,17 @@ type VirtualApp struct {
 	*ManagedObject
 	*ResourcePool
 
-	childLink []*VirtualAppLinkInfo `xml:"childLink,omitempty"`
+	ChildLink []*VirtualAppLinkInfo `xml:"childLink,omitempty"`
 
-	datastore []*Datastore `xml:"datastore,omitempty"`
+	Datastore []*Datastore `xml:"datastore,omitempty"`
 
-	network []*Network `xml:"network,omitempty"`
+	Network []*Network `xml:"network,omitempty"`
 
-	parentFolder *Folder `xml:"parentFolder,omitempty"`
+	ParentFolder *Folder `xml:"parentFolder,omitempty"`
 
-	parentVApp *ManagedEntity `xml:"parentVApp,omitempty"`
+	ParentVApp *ManagedEntity `xml:"parentVApp,omitempty"`
 
-	vAppConfig *VAppConfigInfo `xml:"vAppConfig,omitempty"`
+	VAppConfig *VAppConfigInfo `xml:"vAppConfig,omitempty"`
 }
 
 // Deprecated.
@@ -73214,39 +73214,39 @@ type VirtualLsiLogicSASControllerOption struct {
 type VirtualMachine struct {
 	*ManagedEntity
 
-	capability *VirtualMachineCapability `xml:"capability,omitempty"`
+	Capability *VirtualMachineCapability `xml:"capability,omitempty"`
 
-	config *VirtualMachineConfigInfo `xml:"config,omitempty"`
+	Config *VirtualMachineConfigInfo `xml:"config,omitempty"`
 
-	datastore []*Datastore `xml:"datastore,omitempty"`
+	Datastore []*Datastore `xml:"datastore,omitempty"`
 
-	environmentBrowser *EnvironmentBrowser `xml:"environmentBrowser,omitempty"`
+	EnvironmentBrowser *EnvironmentBrowser `xml:"environmentBrowser,omitempty"`
 
-	guest *GuestInfo `xml:"guest,omitempty"`
+	Guest *GuestInfo `xml:"guest,omitempty"`
 
-	guestHeartbeatStatus *enum.ManagedEntityStatus `xml:"guestHeartbeatStatus,omitempty"`
+	GuestHeartbeatStatus *enum.ManagedEntityStatus `xml:"guestHeartbeatStatus,omitempty"`
 
-	layout *VirtualMachineFileLayout `xml:"layout,omitempty"`
+	Layout *VirtualMachineFileLayout `xml:"layout,omitempty"`
 
-	layoutEx *VirtualMachineFileLayoutEx `xml:"layoutEx,omitempty"`
+	LayoutEx *VirtualMachineFileLayoutEx `xml:"layoutEx,omitempty"`
 
-	network []*Network `xml:"network,omitempty"`
+	Network []*Network `xml:"network,omitempty"`
 
-	parentVApp *ManagedEntity `xml:"parentVApp,omitempty"`
+	ParentVApp *ManagedEntity `xml:"parentVApp,omitempty"`
 
-	resourceConfig *ResourceConfigSpec `xml:"resourceConfig,omitempty"`
+	ResourceConfig *ResourceConfigSpec `xml:"resourceConfig,omitempty"`
 
-	resourcePool *ResourcePool `xml:"resourcePool,omitempty"`
+	ResourcePool *ResourcePool `xml:"resourcePool,omitempty"`
 
-	rootSnapshot []*VirtualMachineSnapshot `xml:"rootSnapshot,omitempty"`
+	RootSnapshot []*VirtualMachineSnapshot `xml:"rootSnapshot,omitempty"`
 
-	runtime *VirtualMachineRuntimeInfo `xml:"runtime,omitempty"`
+	Runtime *VirtualMachineRuntimeInfo `xml:"runtime,omitempty"`
 
-	snapshot *VirtualMachineSnapshotInfo `xml:"snapshot,omitempty"`
+	Snapshot *VirtualMachineSnapshotInfo `xml:"snapshot,omitempty"`
 
-	storage *VirtualMachineStorageInfo `xml:"storage,omitempty"`
+	Storage *VirtualMachineStorageInfo `xml:"storage,omitempty"`
 
-	summary *VirtualMachineSummary `xml:"summary,omitempty"`
+	Summary *VirtualMachineSummary `xml:"summary,omitempty"`
 }
 
 // Information about the runtime capabilities of this virtual machine.
@@ -79411,9 +79411,9 @@ type VirtualMachineSerialInfo struct {
 type VirtualMachineSnapshot struct {
 	*ExtensibleManagedObject
 
-	childSnapshot []*VirtualMachineSnapshot `xml:"childSnapshot,omitempty"`
+	ChildSnapshot []*VirtualMachineSnapshot `xml:"childSnapshot,omitempty"`
 
-	config *VirtualMachineConfigInfo `xml:"config,omitempty"`
+	Config *VirtualMachineConfigInfo `xml:"config,omitempty"`
 }
 
 // All snapshots for which this snapshot is the parent.
