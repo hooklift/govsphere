@@ -323,11 +323,15 @@ func (mo *Alarm) ReconfigureAlarm(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *AlarmSpec              `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec: spec,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -348,10 +352,14 @@ func (mo *Alarm) RemoveAlarm() error {
 		XMLName xml.Name                `xml:"RemoveAlarm"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -629,12 +637,16 @@ func (mo *AlarmManager) AcknowledgeAlarm(
 		Alarm   *Alarm                  `xml:"alarm,omitempty"`
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Alarm:  alarm,
 		Entity: entity,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -660,7 +672,7 @@ func (mo *AlarmManager) AreAlarmActionsEnabled(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity: entity,
 	}
 
@@ -668,7 +680,11 @@ func (mo *AlarmManager) AreAlarmActionsEnabled(
 		Returnval bool `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return false, err
 	}
@@ -698,7 +714,7 @@ func (mo *AlarmManager) CreateAlarm(
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 		Spec    *AlarmSpec              `xml:"spec,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity: entity,
 		Spec:   spec,
 	}
@@ -707,7 +723,11 @@ func (mo *AlarmManager) CreateAlarm(
 		Returnval *Alarm `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -734,12 +754,16 @@ func (mo *AlarmManager) EnableAlarmActions(
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 		Enabled bool                    `xml:"enabled,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity:  entity,
 		Enabled: enabled,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -767,7 +791,7 @@ func (mo *AlarmManager) GetAlarm(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity: entity,
 	}
 
@@ -775,7 +799,11 @@ func (mo *AlarmManager) GetAlarm(
 		Returnval []*Alarm `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -801,7 +829,7 @@ func (mo *AlarmManager) GetAlarmState(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity: entity,
 	}
 
@@ -809,7 +837,11 @@ func (mo *AlarmManager) GetAlarmState(
 		Returnval []*AlarmState `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -1688,7 +1720,7 @@ func (mo *AuthorizationManager) AddAuthorizationRole(
 		Name    string                  `xml:"name,omitempty"`
 		PrivIds []string                `xml:"privIds,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:    name,
 		PrivIds: privIds,
 	}
@@ -1697,7 +1729,11 @@ func (mo *AuthorizationManager) AddAuthorizationRole(
 		Returnval int32 `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return int32(0), err
 	}
@@ -1731,7 +1767,7 @@ func (mo *AuthorizationManager) HasPrivilegeOnEntities(
 		SessionId string                  `xml:"sessionId,omitempty"`
 		PrivId    []string                `xml:"privId,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity:    entity,
 		SessionId: sessionId,
 		PrivId:    privId,
@@ -1741,7 +1777,11 @@ func (mo *AuthorizationManager) HasPrivilegeOnEntities(
 		Returnval []*EntityPrivilege `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -1774,7 +1814,7 @@ func (mo *AuthorizationManager) HasPrivilegeOnEntity(
 		SessionId string                  `xml:"sessionId,omitempty"`
 		PrivId    []string                `xml:"privId,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity:    entity,
 		SessionId: sessionId,
 		PrivId:    privId,
@@ -1784,7 +1824,11 @@ func (mo *AuthorizationManager) HasPrivilegeOnEntity(
 		Returnval []bool `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -1809,12 +1853,16 @@ func (mo *AuthorizationManager) MergePermissions(
 		SrcRoleId int32                   `xml:"srcRoleId,omitempty"`
 		DstRoleId int32                   `xml:"dstRoleId,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		SrcRoleId: srcRoleId,
 		DstRoleId: dstRoleId,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -1839,12 +1887,16 @@ func (mo *AuthorizationManager) RemoveAuthorizationRole(
 		RoleId     int32                   `xml:"roleId,omitempty"`
 		FailIfUsed bool                    `xml:"failIfUsed,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		RoleId:     roleId,
 		FailIfUsed: failIfUsed,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -1882,13 +1934,17 @@ func (mo *AuthorizationManager) RemoveEntityPermission(
 		User    string                  `xml:"user,omitempty"`
 		IsGroup bool                    `xml:"isGroup,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity:  entity,
 		User:    user,
 		IsGroup: isGroup,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -1944,12 +2000,16 @@ func (mo *AuthorizationManager) ResetEntityPermissions(
 		Entity     *ManagedEntity          `xml:"entity,omitempty"`
 		Permission []*Permission           `xml:"permission,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity:     entity,
 		Permission: permission,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -1972,14 +2032,18 @@ func (mo *AuthorizationManager) RetrieveAllPermissions() ([]*Permission, error) 
 		XMLName xml.Name                `xml:"RetrieveAllPermissions"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval []*Permission `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -2017,7 +2081,7 @@ func (mo *AuthorizationManager) RetrieveEntityPermissions(
 		Entity    *ManagedEntity          `xml:"entity,omitempty"`
 		Inherited bool                    `xml:"inherited,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity:    entity,
 		Inherited: inherited,
 	}
@@ -2026,7 +2090,11 @@ func (mo *AuthorizationManager) RetrieveEntityPermissions(
 		Returnval []*Permission `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -2052,7 +2120,7 @@ func (mo *AuthorizationManager) RetrieveRolePermissions(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		RoleId  int32                   `xml:"roleId,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		RoleId: roleId,
 	}
 
@@ -2060,7 +2128,11 @@ func (mo *AuthorizationManager) RetrieveRolePermissions(
 		Returnval []*Permission `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -2109,12 +2181,16 @@ func (mo *AuthorizationManager) SetEntityPermissions(
 		Entity     *ManagedEntity          `xml:"entity,omitempty"`
 		Permission []*Permission           `xml:"permission,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity:     entity,
 		Permission: permission,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -2143,13 +2219,17 @@ func (mo *AuthorizationManager) UpdateAuthorizationRole(
 		NewName string                  `xml:"newName,omitempty"`
 		PrivIds []string                `xml:"privIds,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		RoleId:  roleId,
 		NewName: newName,
 		PrivIds: privIds,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -3282,7 +3362,7 @@ func (mo *ClusterComputeResource) AddHost_Task(
 		ResourcePool *ResourcePool           `xml:"resourcePool,omitempty"`
 		License      string                  `xml:"license,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec:         spec,
 		AsConnected:  asConnected,
 		ResourcePool: resourcePool,
@@ -3293,7 +3373,11 @@ func (mo *ClusterComputeResource) AddHost_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -3325,11 +3409,15 @@ func (mo *ClusterComputeResource) ApplyRecommendation(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Key     string                  `xml:"key,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Key:  key,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -3359,11 +3447,15 @@ func (mo *ClusterComputeResource) CancelRecommendation(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Key     string                  `xml:"key,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Key:  key,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -3422,7 +3514,7 @@ func (mo *ClusterComputeResource) ClusterEnterMaintenanceMode(
 		Host    []*HostSystem           `xml:"host,omitempty"`
 		Option  []*OptionValue          `xml:"option,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host:   host,
 		Option: option,
 	}
@@ -3431,7 +3523,11 @@ func (mo *ClusterComputeResource) ClusterEnterMaintenanceMode(
 		Returnval *ClusterEnterMaintenanceResult `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -3478,7 +3574,7 @@ func (mo *ClusterComputeResource) MoveHostInto_Task(
 		Host         *HostSystem             `xml:"host,omitempty"`
 		ResourcePool *ResourcePool           `xml:"resourcePool,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host:         host,
 		ResourcePool: resourcePool,
 	}
@@ -3487,7 +3583,11 @@ func (mo *ClusterComputeResource) MoveHostInto_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -3536,7 +3636,7 @@ func (mo *ClusterComputeResource) MoveInto_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    []*HostSystem           `xml:"host,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host: host,
 	}
 
@@ -3544,7 +3644,11 @@ func (mo *ClusterComputeResource) MoveInto_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -3591,7 +3695,7 @@ func (mo *ClusterComputeResource) RecommendHostsForVm(
 		Vm      *VirtualMachine         `xml:"vm,omitempty"`
 		Pool    *ResourcePool           `xml:"pool,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:   vm,
 		Pool: pool,
 	}
@@ -3600,7 +3704,11 @@ func (mo *ClusterComputeResource) RecommendHostsForVm(
 		Returnval []*ClusterHostRecommendation `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -3628,7 +3736,7 @@ func (mo *ClusterComputeResource) ReconfigureCluster_Task(
 		Spec    *ClusterConfigSpec      `xml:"spec,omitempty"`
 		Modify  bool                    `xml:"modify,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec:   spec,
 		Modify: modify,
 	}
@@ -3637,7 +3745,11 @@ func (mo *ClusterComputeResource) ReconfigureCluster_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -3666,10 +3778,14 @@ func (mo *ClusterComputeResource) RefreshRecommendation() error {
 		XMLName xml.Name                `xml:"RefreshRecommendation"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -3692,14 +3808,18 @@ func (mo *ClusterComputeResource) RetrieveDasAdvancedRuntimeInfo() (*ClusterDasA
 		XMLName xml.Name                `xml:"RetrieveDasAdvancedRuntimeInfo"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *ClusterDasAdvancedRuntimeInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -5777,11 +5897,15 @@ func (mo *ClusterProfile) UpdateClusterProfile(
 		This    *ManagedObjectReference   `xml:"_this,omitempty"`
 		Config  *ClusterProfileConfigSpec `xml:"config,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Config: config,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -6559,7 +6683,7 @@ func (mo *ComputeResource) ReconfigureComputeResource_Task(
 		Spec    *ComputeResourceConfigSpec `xml:"spec,omitempty"`
 		Modify  bool                       `xml:"modify,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec:   spec,
 		Modify: modify,
 	}
@@ -6568,7 +6692,11 @@ func (mo *ComputeResource) ReconfigureComputeResource_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -7366,7 +7494,7 @@ func (mo *CustomFieldsManager) AddCustomFieldDef(
 		FieldDefPolicy *PrivilegePolicyDef     `xml:"fieldDefPolicy,omitempty"`
 		FieldPolicy    *PrivilegePolicyDef     `xml:"fieldPolicy,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:           name,
 		MoType:         moType,
 		FieldDefPolicy: fieldDefPolicy,
@@ -7377,7 +7505,11 @@ func (mo *CustomFieldsManager) AddCustomFieldDef(
 		Returnval *CustomFieldDef `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -7402,11 +7534,15 @@ func (mo *CustomFieldsManager) RemoveCustomFieldDef(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Key     int32                   `xml:"key,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Key:  key,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -7431,12 +7567,16 @@ func (mo *CustomFieldsManager) RenameCustomFieldDef(
 		Key     int32                   `xml:"key,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Key:  key,
 		Name: name,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -7462,13 +7602,17 @@ func (mo *CustomFieldsManager) SetField(
 		Key     int32                   `xml:"key,omitempty"`
 		Value   string                  `xml:"value,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity: entity,
 		Key:    key,
 		Value:  value,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -8120,11 +8264,15 @@ func (mo *CustomizationSpecManager) CheckCustomizationResources(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		GuestOs string                  `xml:"guestOs,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		GuestOs: guestOs,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -8148,11 +8296,15 @@ func (mo *CustomizationSpecManager) CreateCustomizationSpec(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Item    *CustomizationSpecItem  `xml:"item,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Item: item,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -8176,7 +8328,7 @@ func (mo *CustomizationSpecManager) CustomizationSpecItemToXml(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Item    *CustomizationSpecItem  `xml:"item,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Item: item,
 	}
 
@@ -8184,7 +8336,11 @@ func (mo *CustomizationSpecManager) CustomizationSpecItemToXml(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -8208,11 +8364,15 @@ func (mo *CustomizationSpecManager) DeleteCustomizationSpec(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name: name,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -8236,7 +8396,7 @@ func (mo *CustomizationSpecManager) DoesCustomizationSpecExist(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name: name,
 	}
 
@@ -8244,7 +8404,11 @@ func (mo *CustomizationSpecManager) DoesCustomizationSpecExist(
 		Returnval bool `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return false, err
 	}
@@ -8269,12 +8433,16 @@ func (mo *CustomizationSpecManager) DuplicateCustomizationSpec(
 		Name    string                  `xml:"name,omitempty"`
 		NewName string                  `xml:"newName,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:    name,
 		NewName: newName,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -8298,7 +8466,7 @@ func (mo *CustomizationSpecManager) GetCustomizationSpec(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name: name,
 	}
 
@@ -8306,7 +8474,11 @@ func (mo *CustomizationSpecManager) GetCustomizationSpec(
 		Returnval *CustomizationSpecItem `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -8334,11 +8506,15 @@ func (mo *CustomizationSpecManager) OverwriteCustomizationSpec(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Item    *CustomizationSpecItem  `xml:"item,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Item: item,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -8363,12 +8539,16 @@ func (mo *CustomizationSpecManager) RenameCustomizationSpec(
 		Name    string                  `xml:"name,omitempty"`
 		NewName string                  `xml:"newName,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:    name,
 		NewName: newName,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -8392,7 +8572,7 @@ func (mo *CustomizationSpecManager) XmlToCustomizationSpecItem(
 		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		SpecItemXml string                  `xml:"specItemXml,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		SpecItemXml: specItemXml,
 	}
 
@@ -8400,7 +8580,11 @@ func (mo *CustomizationSpecManager) XmlToCustomizationSpecItem(
 		Returnval *CustomizationSpecItem `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -10451,7 +10635,7 @@ func (mo *Datacenter) PowerOnMultiVM_Task(
 		Vm      []*VirtualMachine       `xml:"vm,omitempty"`
 		Option  []*OptionValue          `xml:"option,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:     vm,
 		Option: option,
 	}
@@ -10460,7 +10644,11 @@ func (mo *Datacenter) PowerOnMultiVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -10491,7 +10679,7 @@ func (mo *Datacenter) QueryConnectionInfo(
 		Password      string                  `xml:"password,omitempty"`
 		SslThumbprint string                  `xml:"sslThumbprint,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Hostname:      hostname,
 		Port:          port,
 		Username:      username,
@@ -10503,7 +10691,11 @@ func (mo *Datacenter) QueryConnectionInfo(
 		Returnval *HostConnectInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -10529,14 +10721,18 @@ func (mo *Datacenter) QueryDatacenterConfigOptionDescriptor() ([]*VirtualMachine
 		XMLName xml.Name                `xml:"QueryDatacenterConfigOptionDescriptor"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval []*VirtualMachineConfigOptionDescriptor `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -10563,7 +10759,7 @@ func (mo *Datacenter) ReconfigureDatacenter_Task(
 		Spec    *DatacenterConfigSpec   `xml:"spec,omitempty"`
 		Modify  bool                    `xml:"modify,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec:   spec,
 		Modify: modify,
 	}
@@ -10572,7 +10768,11 @@ func (mo *Datacenter) ReconfigureDatacenter_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -10898,14 +11098,18 @@ func (mo *Datastore) DatastoreEnterMaintenanceMode() (*StoragePlacementResult, e
 		XMLName xml.Name                `xml:"DatastoreEnterMaintenanceMode"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *StoragePlacementResult `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -10933,14 +11137,18 @@ func (mo *Datastore) DatastoreExitMaintenanceMode_Task() (*Task, error) {
 		XMLName xml.Name                `xml:"DatastoreExitMaintenanceMode_Task"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -10967,10 +11175,14 @@ func (mo *Datastore) DestroyDatastore() error {
 		XMLName xml.Name                `xml:"DestroyDatastore"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -10992,10 +11204,14 @@ func (mo *Datastore) RefreshDatastore() error {
 		XMLName xml.Name                `xml:"RefreshDatastore"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -11020,10 +11236,14 @@ func (mo *Datastore) RefreshDatastoreStorageInfo() error {
 		XMLName xml.Name                `xml:"RefreshDatastoreStorageInfo"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -11050,11 +11270,15 @@ func (mo *Datastore) RenameDatastore(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		NewName string                  `xml:"newName,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		NewName: newName,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -11106,7 +11330,7 @@ func (mo *Datastore) UpdateVirtualMachineFiles_Task(
 		This                      *ManagedObjectReference            `xml:"_this,omitempty"`
 		MountPathDatastoreMapping []*DatastoreMountPathDatastorePair `xml:"mountPathDatastoreMapping,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		MountPathDatastoreMapping: mountPathDatastoreMapping,
 	}
 
@@ -11114,7 +11338,11 @@ func (mo *Datastore) UpdateVirtualMachineFiles_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -11406,7 +11634,7 @@ func (mo *DatastoreNamespaceManager) CreateDirectory(
 		DisplayName string                  `xml:"displayName,omitempty"`
 		Policy      string                  `xml:"policy,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Datastore:   datastore,
 		DisplayName: displayName,
 		Policy:      policy,
@@ -11416,7 +11644,11 @@ func (mo *DatastoreNamespaceManager) CreateDirectory(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -11448,12 +11680,16 @@ func (mo *DatastoreNamespaceManager) DeleteDirectory(
 		Datacenter    *Datacenter             `xml:"datacenter,omitempty"`
 		DatastorePath string                  `xml:"datastorePath,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Datacenter:    datacenter,
 		DatastorePath: datastorePath,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -11858,7 +12094,7 @@ func (mo *DiagnosticManager) BrowseDiagnosticLog(
 		Start   int32                   `xml:"start,omitempty"`
 		Lines   int32                   `xml:"lines,omitempty"`
 	}{
-		This:  mo.This,
+		This:  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host:  host,
 		Key:   key,
 		Start: start,
@@ -11869,7 +12105,11 @@ func (mo *DiagnosticManager) BrowseDiagnosticLog(
 		Returnval *DiagnosticManagerLogHeader `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -11899,7 +12139,7 @@ func (mo *DiagnosticManager) GenerateLogBundles_Task(
 		IncludeDefault bool                    `xml:"includeDefault,omitempty"`
 		Host           []*HostSystem           `xml:"host,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		IncludeDefault: includeDefault,
 		Host:           host,
 	}
@@ -11908,7 +12148,11 @@ func (mo *DiagnosticManager) GenerateLogBundles_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -11932,7 +12176,7 @@ func (mo *DiagnosticManager) QueryDescriptions(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host: host,
 	}
 
@@ -11940,7 +12184,11 @@ func (mo *DiagnosticManager) QueryDescriptions(
 		Returnval []*DiagnosticManagerLogDescriptor `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -12466,7 +12714,7 @@ func (mo *DistributedVirtualPortgroup) DVPortgroupRollback_Task(
 		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		EntityBackup *EntityBackupConfig     `xml:"entityBackup,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		EntityBackup: entityBackup,
 	}
 
@@ -12474,7 +12722,11 @@ func (mo *DistributedVirtualPortgroup) DVPortgroupRollback_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -12536,7 +12788,7 @@ func (mo *DistributedVirtualPortgroup) ReconfigureDVPortgroup_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *DVPortgroupConfigSpec  `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec: spec,
 	}
 
@@ -12544,7 +12796,11 @@ func (mo *DistributedVirtualPortgroup) ReconfigureDVPortgroup_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13012,7 +13268,7 @@ func (mo *DistributedVirtualSwitch) AddDVPortgroup_Task(
 		This    *ManagedObjectReference  `xml:"_this,omitempty"`
 		Spec    []*DVPortgroupConfigSpec `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec: spec,
 	}
 
@@ -13020,7 +13276,11 @@ func (mo *DistributedVirtualSwitch) AddDVPortgroup_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13046,11 +13306,15 @@ func (mo *DistributedVirtualSwitch) AddNetworkResourcePool(
 		This       *ManagedObjectReference             `xml:"_this,omitempty"`
 		ConfigSpec []*DVSNetworkResourcePoolConfigSpec `xml:"configSpec,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ConfigSpec: configSpec,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -13077,7 +13341,7 @@ func (mo *DistributedVirtualSwitch) CreateDVPortgroup_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *DVPortgroupConfigSpec  `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec: spec,
 	}
 
@@ -13085,7 +13349,11 @@ func (mo *DistributedVirtualSwitch) CreateDVPortgroup_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13140,7 +13408,7 @@ func (mo *DistributedVirtualSwitch) DVSRollback_Task(
 		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		EntityBackup *EntityBackupConfig     `xml:"entityBackup,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		EntityBackup: entityBackup,
 	}
 
@@ -13148,7 +13416,11 @@ func (mo *DistributedVirtualSwitch) DVSRollback_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13174,11 +13446,15 @@ func (mo *DistributedVirtualSwitch) EnableNetworkResourceManagement(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Enable  bool                    `xml:"enable,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Enable: enable,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -13203,7 +13479,7 @@ func (mo *DistributedVirtualSwitch) FetchDVPortKeys(
 		This     *ManagedObjectReference               `xml:"_this,omitempty"`
 		Criteria *DistributedVirtualSwitchPortCriteria `xml:"criteria,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Criteria: criteria,
 	}
 
@@ -13211,7 +13487,11 @@ func (mo *DistributedVirtualSwitch) FetchDVPortKeys(
 		Returnval []string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13235,7 +13515,7 @@ func (mo *DistributedVirtualSwitch) FetchDVPorts(
 		This     *ManagedObjectReference               `xml:"_this,omitempty"`
 		Criteria *DistributedVirtualSwitchPortCriteria `xml:"criteria,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Criteria: criteria,
 	}
 
@@ -13243,7 +13523,11 @@ func (mo *DistributedVirtualSwitch) FetchDVPorts(
 		Returnval []*DistributedVirtualPort `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13269,7 +13553,7 @@ func (mo *DistributedVirtualSwitch) LookupDvPortGroup(
 		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		PortgroupKey string                  `xml:"portgroupKey,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		PortgroupKey: portgroupKey,
 	}
 
@@ -13277,7 +13561,11 @@ func (mo *DistributedVirtualSwitch) LookupDvPortGroup(
 		Returnval *DistributedVirtualPortgroup `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13355,7 +13643,7 @@ func (mo *DistributedVirtualSwitch) MergeDvs_Task(
 		This    *ManagedObjectReference   `xml:"_this,omitempty"`
 		Dvs     *DistributedVirtualSwitch `xml:"dvs,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Dvs:  dvs,
 	}
 
@@ -13363,7 +13651,11 @@ func (mo *DistributedVirtualSwitch) MergeDvs_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13391,7 +13683,7 @@ func (mo *DistributedVirtualSwitch) MoveDVPort_Task(
 		PortKey                 []string                `xml:"portKey,omitempty"`
 		DestinationPortgroupKey string                  `xml:"destinationPortgroupKey,omitempty"`
 	}{
-		This:                    mo.This,
+		This:                    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		PortKey:                 portKey,
 		DestinationPortgroupKey: destinationPortgroupKey,
 	}
@@ -13400,7 +13692,11 @@ func (mo *DistributedVirtualSwitch) MoveDVPort_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13425,7 +13721,7 @@ func (mo *DistributedVirtualSwitch) PerformDvsProductSpecOperation_Task(
 		Operation   string                               `xml:"operation,omitempty"`
 		ProductSpec *DistributedVirtualSwitchProductSpec `xml:"productSpec,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Operation:   operation,
 		ProductSpec: productSpec,
 	}
@@ -13434,7 +13730,11 @@ func (mo *DistributedVirtualSwitch) PerformDvsProductSpecOperation_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13455,14 +13755,18 @@ func (mo *DistributedVirtualSwitch) QueryUsedVlanIdInDvs() ([]int32, error) {
 		XMLName xml.Name                `xml:"QueryUsedVlanIdInDvs"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval []int32 `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13486,7 +13790,7 @@ func (mo *DistributedVirtualSwitch) ReconfigureDVPort_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Port    []*DVPortConfigSpec     `xml:"port,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Port: port,
 	}
 
@@ -13494,7 +13798,11 @@ func (mo *DistributedVirtualSwitch) ReconfigureDVPort_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13569,7 +13877,7 @@ func (mo *DistributedVirtualSwitch) ReconfigureDvs_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *DVSConfigSpec          `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec: spec,
 	}
 
@@ -13577,7 +13885,11 @@ func (mo *DistributedVirtualSwitch) ReconfigureDvs_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13607,7 +13919,7 @@ func (mo *DistributedVirtualSwitch) RectifyDvsHost_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Hosts   []*HostSystem           `xml:"hosts,omitempty"`
 	}{
-		This:  mo.This,
+		This:  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Hosts: hosts,
 	}
 
@@ -13615,7 +13927,11 @@ func (mo *DistributedVirtualSwitch) RectifyDvsHost_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13639,11 +13955,15 @@ func (mo *DistributedVirtualSwitch) RefreshDVPortState(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		PortKeys []string                `xml:"portKeys,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		PortKeys: portKeys,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -13669,11 +13989,15 @@ func (mo *DistributedVirtualSwitch) RemoveNetworkResourcePool(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Key     []string                `xml:"key,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Key:  key,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -13697,11 +14021,15 @@ func (mo *DistributedVirtualSwitch) UpdateDvsCapability(
 		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		Capability *DVSCapability          `xml:"capability,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Capability: capability,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -13727,7 +14055,7 @@ func (mo *DistributedVirtualSwitch) UpdateDVSHealthCheckConfig_Task(
 		This              *ManagedObjectReference `xml:"_this,omitempty"`
 		HealthCheckConfig []*DVSHealthCheckConfig `xml:"healthCheckConfig,omitempty"`
 	}{
-		This:              mo.This,
+		This:              &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		HealthCheckConfig: healthCheckConfig,
 	}
 
@@ -13735,7 +14063,11 @@ func (mo *DistributedVirtualSwitch) UpdateDVSHealthCheckConfig_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13761,11 +14093,15 @@ func (mo *DistributedVirtualSwitch) UpdateNetworkResourcePool(
 		This       *ManagedObjectReference             `xml:"_this,omitempty"`
 		ConfigSpec []*DVSNetworkResourcePoolConfigSpec `xml:"configSpec,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ConfigSpec: configSpec,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -14057,7 +14393,7 @@ func (mo *DistributedVirtualSwitchManager) DVSManagerExportEntity_Task(
 		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		SelectionSet []*SelectionSet         `xml:"selectionSet,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		SelectionSet: selectionSet,
 	}
 
@@ -14065,7 +14401,11 @@ func (mo *DistributedVirtualSwitchManager) DVSManagerExportEntity_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -14097,7 +14437,7 @@ func (mo *DistributedVirtualSwitchManager) DVSManagerImportEntity_Task(
 		EntityBackup []*EntityBackupConfig   `xml:"entityBackup,omitempty"`
 		ImportType   string                  `xml:"importType,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		EntityBackup: entityBackup,
 		ImportType:   importType,
 	}
@@ -14106,7 +14446,11 @@ func (mo *DistributedVirtualSwitchManager) DVSManagerImportEntity_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -14134,7 +14478,7 @@ func (mo *DistributedVirtualSwitchManager) DVSManagerLookupDvPortGroup(
 		SwitchUuid   string                  `xml:"switchUuid,omitempty"`
 		PortgroupKey string                  `xml:"portgroupKey,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		SwitchUuid:   switchUuid,
 		PortgroupKey: portgroupKey,
 	}
@@ -14143,7 +14487,11 @@ func (mo *DistributedVirtualSwitchManager) DVSManagerLookupDvPortGroup(
 		Returnval *DistributedVirtualPortgroup `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -14165,14 +14513,18 @@ func (mo *DistributedVirtualSwitchManager) QueryAvailableDvsSpec() ([]*Distribut
 		XMLName xml.Name                `xml:"QueryAvailableDvsSpec"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval []*DistributedVirtualSwitchProductSpec `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -14199,7 +14551,7 @@ func (mo *DistributedVirtualSwitchManager) QueryCompatibleHostForExistingDvs(
 		Recursive bool                      `xml:"recursive,omitempty"`
 		Dvs       *DistributedVirtualSwitch `xml:"dvs,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Container: container,
 		Recursive: recursive,
 		Dvs:       dvs,
@@ -14209,7 +14561,11 @@ func (mo *DistributedVirtualSwitchManager) QueryCompatibleHostForExistingDvs(
 		Returnval []*HostSystem `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -14236,7 +14592,7 @@ func (mo *DistributedVirtualSwitchManager) QueryCompatibleHostForNewDvs(
 		Recursive         bool                                 `xml:"recursive,omitempty"`
 		SwitchProductSpec *DistributedVirtualSwitchProductSpec `xml:"switchProductSpec,omitempty"`
 	}{
-		This:              mo.This,
+		This:              &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Container:         container,
 		Recursive:         recursive,
 		SwitchProductSpec: switchProductSpec,
@@ -14246,7 +14602,11 @@ func (mo *DistributedVirtualSwitchManager) QueryCompatibleHostForNewDvs(
 		Returnval []*HostSystem `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -14270,7 +14630,7 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsByUuid(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Uuid    string                  `xml:"uuid,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Uuid: uuid,
 	}
 
@@ -14278,7 +14638,11 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsByUuid(
 		Returnval *DistributedVirtualSwitch `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -14330,7 +14694,7 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsCheckCompatibility(
 		DvsProductSpec *DistributedVirtualSwitchManagerDvsProductSpec      `xml:"dvsProductSpec,omitempty"`
 		HostFilterSpec []*DistributedVirtualSwitchManagerHostDvsFilterSpec `xml:"hostFilterSpec,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		HostContainer:  hostContainer,
 		DvsProductSpec: dvsProductSpec,
 		HostFilterSpec: hostFilterSpec,
@@ -14340,7 +14704,11 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsCheckCompatibility(
 		Returnval []*DistributedVirtualSwitchManagerCompatibilityResult `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -14366,7 +14734,7 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsCompatibleHostSpec(
 		This              *ManagedObjectReference              `xml:"_this,omitempty"`
 		SwitchProductSpec *DistributedVirtualSwitchProductSpec `xml:"switchProductSpec,omitempty"`
 	}{
-		This:              mo.This,
+		This:              &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		SwitchProductSpec: switchProductSpec,
 	}
 
@@ -14374,7 +14742,11 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsCompatibleHostSpec(
 		Returnval []*DistributedVirtualSwitchHostProductSpec `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -14400,7 +14772,7 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsConfigTarget(
 		Host    *HostSystem               `xml:"host,omitempty"`
 		Dvs     *DistributedVirtualSwitch `xml:"dvs,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host: host,
 		Dvs:  dvs,
 	}
@@ -14409,7 +14781,11 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsConfigTarget(
 		Returnval *DVSManagerDvsConfigTarget `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -14436,7 +14812,7 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsFeatureCapability(
 		This              *ManagedObjectReference              `xml:"_this,omitempty"`
 		SwitchProductSpec *DistributedVirtualSwitchProductSpec `xml:"switchProductSpec,omitempty"`
 	}{
-		This:              mo.This,
+		This:              &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		SwitchProductSpec: switchProductSpec,
 	}
 
@@ -14444,7 +14820,11 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsFeatureCapability(
 		Returnval *DVSFeatureCapability `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -14471,7 +14851,7 @@ func (mo *DistributedVirtualSwitchManager) RectifyDvsOnHost_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Hosts   []*HostSystem           `xml:"hosts,omitempty"`
 	}{
-		This:  mo.This,
+		This:  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Hosts: hosts,
 	}
 
@@ -14479,7 +14859,11 @@ func (mo *DistributedVirtualSwitchManager) RectifyDvsOnHost_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -16849,7 +17233,7 @@ func (mo *EnvironmentBrowser) QueryConfigOption(
 		Key     string                  `xml:"key,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Key:  key,
 		Host: host,
 	}
@@ -16858,7 +17242,11 @@ func (mo *EnvironmentBrowser) QueryConfigOption(
 		Returnval *VirtualMachineConfigOption `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -16879,14 +17267,18 @@ func (mo *EnvironmentBrowser) QueryConfigOptionDescriptor() ([]*VirtualMachineCo
 		XMLName xml.Name                `xml:"QueryConfigOptionDescriptor"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval []*VirtualMachineConfigOptionDescriptor `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -16925,7 +17317,7 @@ func (mo *EnvironmentBrowser) QueryConfigTarget(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host: host,
 	}
 
@@ -16933,7 +17325,11 @@ func (mo *EnvironmentBrowser) QueryConfigTarget(
 		Returnval *ConfigTarget `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -16973,7 +17369,7 @@ func (mo *EnvironmentBrowser) QueryTargetCapabilities(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host: host,
 	}
 
@@ -16981,7 +17377,11 @@ func (mo *EnvironmentBrowser) QueryTargetCapabilities(
 		Returnval *HostCapability `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -17596,7 +17996,7 @@ func (mo *EventHistoryCollector) ReadNextEvents(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		MaxCount int32                   `xml:"maxCount,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		MaxCount: maxCount,
 	}
 
@@ -17604,7 +18004,11 @@ func (mo *EventHistoryCollector) ReadNextEvents(
 		Returnval []*Event `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -17632,7 +18036,7 @@ func (mo *EventHistoryCollector) ReadPreviousEvents(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		MaxCount int32                   `xml:"maxCount,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		MaxCount: maxCount,
 	}
 
@@ -17640,7 +18044,11 @@ func (mo *EventHistoryCollector) ReadPreviousEvents(
 		Returnval []*Event `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -17736,7 +18144,7 @@ func (mo *EventManager) CreateCollectorForEvents(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Filter  *EventFilterSpec        `xml:"filter,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Filter: filter,
 	}
 
@@ -17744,7 +18152,11 @@ func (mo *EventManager) CreateCollectorForEvents(
 		Returnval *EventHistoryCollector `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -17769,12 +18181,16 @@ func (mo *EventManager) LogUserEvent(
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 		Msg     string                  `xml:"msg,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity: entity,
 		Msg:    msg,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -17825,12 +18241,16 @@ func (mo *EventManager) PostEvent(
 		EventToPost *Event                  `xml:"eventToPost,omitempty"`
 		TaskInfo    *TaskInfo               `xml:"taskInfo,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		EventToPost: eventToPost,
 		TaskInfo:    taskInfo,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -17855,7 +18275,7 @@ func (mo *EventManager) QueryEvents(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Filter  *EventFilterSpec        `xml:"filter,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Filter: filter,
 	}
 
@@ -17863,7 +18283,11 @@ func (mo *EventManager) QueryEvents(
 		Returnval []*Event `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -17889,7 +18313,7 @@ func (mo *EventManager) RetrieveArgumentDescription(
 		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		EventTypeId string                  `xml:"eventTypeId,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		EventTypeId: eventTypeId,
 	}
 
@@ -17897,7 +18321,11 @@ func (mo *EventManager) RetrieveArgumentDescription(
 		Returnval []*EventArgDesc `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -18248,12 +18676,16 @@ func (mo *ExtensibleManagedObject) SetCustomValue(
 		Key     string                  `xml:"key,omitempty"`
 		Value   string                  `xml:"value,omitempty"`
 	}{
-		This:  mo.This,
+		This:  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Key:   key,
 		Value: value,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -18510,7 +18942,7 @@ func (mo *ExtensionManager) FindExtension(
 		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		ExtensionKey string                  `xml:"extensionKey,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ExtensionKey: extensionKey,
 	}
 
@@ -18518,7 +18950,11 @@ func (mo *ExtensionManager) FindExtension(
 		Returnval *Extension `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -18545,14 +18981,18 @@ func (mo *ExtensionManager) GetPublicKey() (string, error) {
 		XMLName xml.Name                `xml:"GetPublicKey"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -18582,7 +19022,7 @@ func (mo *ExtensionManager) QueryExtensionIpAllocationUsage(
 		This          *ManagedObjectReference `xml:"_this,omitempty"`
 		ExtensionKeys []string                `xml:"extensionKeys,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ExtensionKeys: extensionKeys,
 	}
 
@@ -18590,7 +19030,11 @@ func (mo *ExtensionManager) QueryExtensionIpAllocationUsage(
 		Returnval []*ExtensionManagerIpAllocationUsage `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -18617,7 +19061,7 @@ func (mo *ExtensionManager) QueryManagedBy(
 		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		ExtensionKey string                  `xml:"extensionKey,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ExtensionKey: extensionKey,
 	}
 
@@ -18625,7 +19069,11 @@ func (mo *ExtensionManager) QueryManagedBy(
 		Returnval []*ManagedEntity `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -18649,11 +19097,15 @@ func (mo *ExtensionManager) RegisterExtension(
 		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Extension *Extension              `xml:"extension,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Extension: extension,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -18694,12 +19146,16 @@ func (mo *ExtensionManager) SetExtensionCertificate(
 		ExtensionKey   string                  `xml:"extensionKey,omitempty"`
 		CertificatePem string                  `xml:"certificatePem,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ExtensionKey:   extensionKey,
 		CertificatePem: certificatePem,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -18734,12 +19190,16 @@ func (mo *ExtensionManager) SetPublicKey(
 		ExtensionKey string                  `xml:"extensionKey,omitempty"`
 		PublicKey    string                  `xml:"publicKey,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ExtensionKey: extensionKey,
 		PublicKey:    publicKey,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -18763,11 +19223,15 @@ func (mo *ExtensionManager) UnregisterExtension(
 		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		ExtensionKey string                  `xml:"extensionKey,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ExtensionKey: extensionKey,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -18798,11 +19262,15 @@ func (mo *ExtensionManager) UpdateExtension(
 		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Extension *Extension              `xml:"extension,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Extension: extension,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -19464,13 +19932,17 @@ func (mo *FileManager) ChangeOwner(
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 		Owner      string                  `xml:"owner,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:       name,
 		Datacenter: datacenter,
 		Owner:      owner,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -19540,7 +20012,7 @@ func (mo *FileManager) CopyDatastoreFile_Task(
 		DestinationDatacenter *Datacenter             `xml:"destinationDatacenter,omitempty"`
 		Force                 bool                    `xml:"force,omitempty"`
 	}{
-		This:                  mo.This,
+		This:                  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		SourceName:            sourceName,
 		SourceDatacenter:      sourceDatacenter,
 		DestinationName:       destinationName,
@@ -19552,7 +20024,11 @@ func (mo *FileManager) CopyDatastoreFile_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -19597,7 +20073,7 @@ func (mo *FileManager) DeleteDatastoreFile_Task(
 		Name       string                  `xml:"name,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:       name,
 		Datacenter: datacenter,
 	}
@@ -19606,7 +20082,11 @@ func (mo *FileManager) DeleteDatastoreFile_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -19644,13 +20124,17 @@ func (mo *FileManager) MakeDirectory(
 		Datacenter              *Datacenter             `xml:"datacenter,omitempty"`
 		CreateParentDirectories bool                    `xml:"createParentDirectories,omitempty"`
 	}{
-		This:                    mo.This,
+		This:                    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:                    name,
 		Datacenter:              datacenter,
 		CreateParentDirectories: createParentDirectories,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -19721,7 +20205,7 @@ func (mo *FileManager) MoveDatastoreFile_Task(
 		DestinationDatacenter *Datacenter             `xml:"destinationDatacenter,omitempty"`
 		Force                 bool                    `xml:"force,omitempty"`
 	}{
-		This:                  mo.This,
+		This:                  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		SourceName:            sourceName,
 		SourceDatacenter:      sourceDatacenter,
 		DestinationName:       destinationName,
@@ -19733,7 +20217,11 @@ func (mo *FileManager) MoveDatastoreFile_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -20125,7 +20613,7 @@ func (mo *Folder) AddStandaloneHost_Task(
 		AddConnected bool                       `xml:"addConnected,omitempty"`
 		License      string                     `xml:"license,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec:         spec,
 		CompResSpec:  compResSpec,
 		AddConnected: addConnected,
@@ -20136,7 +20624,11 @@ func (mo *Folder) AddStandaloneHost_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -20169,7 +20661,7 @@ func (mo *Folder) CreateCluster(
 		Name    string                  `xml:"name,omitempty"`
 		Spec    *ClusterConfigSpec      `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name: name,
 		Spec: spec,
 	}
@@ -20178,7 +20670,11 @@ func (mo *Folder) CreateCluster(
 		Returnval *ClusterComputeResource `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -20210,7 +20706,7 @@ func (mo *Folder) CreateClusterEx(
 		Name    string                  `xml:"name,omitempty"`
 		Spec    *ClusterConfigSpecEx    `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name: name,
 		Spec: spec,
 	}
@@ -20219,7 +20715,11 @@ func (mo *Folder) CreateClusterEx(
 		Returnval *ClusterComputeResource `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -20248,7 +20748,7 @@ func (mo *Folder) CreateDatacenter(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name: name,
 	}
 
@@ -20256,7 +20756,11 @@ func (mo *Folder) CreateDatacenter(
 		Returnval *Datacenter `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -20284,7 +20788,7 @@ func (mo *Folder) CreateDVS_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *DVSCreateSpec          `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec: spec,
 	}
 
@@ -20292,7 +20796,11 @@ func (mo *Folder) CreateDVS_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -20322,7 +20830,7 @@ func (mo *Folder) CreateFolder(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name: name,
 	}
 
@@ -20330,7 +20838,11 @@ func (mo *Folder) CreateFolder(
 		Returnval *Folder `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -20361,7 +20873,7 @@ func (mo *Folder) CreateStoragePod(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name: name,
 	}
 
@@ -20369,7 +20881,11 @@ func (mo *Folder) CreateStoragePod(
 		Returnval *StoragePod `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -20442,7 +20958,7 @@ func (mo *Folder) CreateVM_Task(
 		Pool    *ResourcePool             `xml:"pool,omitempty"`
 		Host    *HostSystem               `xml:"host,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Config: config,
 		Pool:   pool,
 		Host:   host,
@@ -20452,7 +20968,11 @@ func (mo *Folder) CreateVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -20547,7 +21067,7 @@ func (mo *Folder) MoveIntoFolder_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		List    []*ManagedEntity        `xml:"list,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		List: list,
 	}
 
@@ -20555,7 +21075,11 @@ func (mo *Folder) MoveIntoFolder_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -20595,7 +21119,7 @@ func (mo *Folder) RegisterVM_Task(
 		Pool       *ResourcePool           `xml:"pool,omitempty"`
 		Host       *HostSystem             `xml:"host,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Path:       path,
 		Name:       name,
 		AsTemplate: asTemplate,
@@ -20607,7 +21131,11 @@ func (mo *Folder) RegisterVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -20651,14 +21179,18 @@ func (mo *Folder) UnregisterAndDestroy_Task() (*Task, error) {
 		XMLName xml.Name                `xml:"UnregisterAndDestroy_Task"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -20911,7 +21443,7 @@ func (mo *GuestAuthManager) AcquireCredentialsInGuest(
 		RequestedAuth *GuestAuthentication    `xml:"requestedAuth,omitempty"`
 		SessionID     int64                   `xml:"sessionID,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:            vm,
 		RequestedAuth: requestedAuth,
 		SessionID:     sessionID,
@@ -20921,7 +21453,11 @@ func (mo *GuestAuthManager) AcquireCredentialsInGuest(
 		Returnval *GuestAuthentication `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -20956,12 +21492,16 @@ func (mo *GuestAuthManager) ReleaseCredentialsInGuest(
 		Vm      *VirtualMachine         `xml:"vm,omitempty"`
 		Auth    *GuestAuthentication    `xml:"auth,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:   vm,
 		Auth: auth,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -20994,12 +21534,16 @@ func (mo *GuestAuthManager) ValidateCredentialsInGuest(
 		Vm      *VirtualMachine         `xml:"vm,omitempty"`
 		Auth    *GuestAuthentication    `xml:"auth,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:   vm,
 		Auth: auth,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -21160,14 +21704,18 @@ func (mo *GuestFileManager) ChangeFileAttributesInGuest(
 		GuestFilePath  string                  `xml:"guestFilePath,omitempty"`
 		FileAttributes *GuestFileAttributes    `xml:"fileAttributes,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:             vm,
 		Auth:           auth,
 		GuestFilePath:  guestFilePath,
 		FileAttributes: fileAttributes,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -21201,7 +21749,7 @@ func (mo *GuestFileManager) CreateTemporaryDirectoryInGuest(
 		Suffix        string                  `xml:"suffix,omitempty"`
 		DirectoryPath string                  `xml:"directoryPath,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:            vm,
 		Auth:          auth,
 		Prefix:        prefix,
@@ -21213,7 +21761,11 @@ func (mo *GuestFileManager) CreateTemporaryDirectoryInGuest(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -21247,7 +21799,7 @@ func (mo *GuestFileManager) CreateTemporaryFileInGuest(
 		Suffix        string                  `xml:"suffix,omitempty"`
 		DirectoryPath string                  `xml:"directoryPath,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:            vm,
 		Auth:          auth,
 		Prefix:        prefix,
@@ -21259,7 +21811,11 @@ func (mo *GuestFileManager) CreateTemporaryFileInGuest(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -21288,14 +21844,18 @@ func (mo *GuestFileManager) DeleteDirectoryInGuest(
 		DirectoryPath string                  `xml:"directoryPath,omitempty"`
 		Recursive     bool                    `xml:"recursive,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:            vm,
 		Auth:          auth,
 		DirectoryPath: directoryPath,
 		Recursive:     recursive,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -21323,13 +21883,17 @@ func (mo *GuestFileManager) DeleteFileInGuest(
 		Auth     *GuestAuthentication    `xml:"auth,omitempty"`
 		FilePath string                  `xml:"filePath,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:       vm,
 		Auth:     auth,
 		FilePath: filePath,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -21380,7 +21944,7 @@ func (mo *GuestFileManager) InitiateFileTransferFromGuest(
 		Auth          *GuestAuthentication    `xml:"auth,omitempty"`
 		GuestFilePath string                  `xml:"guestFilePath,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:            vm,
 		Auth:          auth,
 		GuestFilePath: guestFilePath,
@@ -21390,7 +21954,11 @@ func (mo *GuestFileManager) InitiateFileTransferFromGuest(
 		Returnval *FileTransferInformation `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -21442,7 +22010,7 @@ func (mo *GuestFileManager) InitiateFileTransferToGuest(
 		FileSize       int64                   `xml:"fileSize,omitempty"`
 		Overwrite      bool                    `xml:"overwrite,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:             vm,
 		Auth:           auth,
 		GuestFilePath:  guestFilePath,
@@ -21455,7 +22023,11 @@ func (mo *GuestFileManager) InitiateFileTransferToGuest(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -21493,7 +22065,7 @@ func (mo *GuestFileManager) ListFilesInGuest(
 		MaxResults   int32                   `xml:"maxResults,omitempty"`
 		MatchPattern string                  `xml:"matchPattern,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:           vm,
 		Auth:         auth,
 		FilePath:     filePath,
@@ -21506,7 +22078,11 @@ func (mo *GuestFileManager) ListFilesInGuest(
 		Returnval *GuestListFileInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -21535,14 +22111,18 @@ func (mo *GuestFileManager) MakeDirectoryInGuest(
 		DirectoryPath           string                  `xml:"directoryPath,omitempty"`
 		CreateParentDirectories bool                    `xml:"createParentDirectories,omitempty"`
 	}{
-		This:                    mo.This,
+		This:                    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:                      vm,
 		Auth:                    auth,
 		DirectoryPath:           directoryPath,
 		CreateParentDirectories: createParentDirectories,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -21571,14 +22151,18 @@ func (mo *GuestFileManager) MoveDirectoryInGuest(
 		SrcDirectoryPath string                  `xml:"srcDirectoryPath,omitempty"`
 		DstDirectoryPath string                  `xml:"dstDirectoryPath,omitempty"`
 	}{
-		This:             mo.This,
+		This:             &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:               vm,
 		Auth:             auth,
 		SrcDirectoryPath: srcDirectoryPath,
 		DstDirectoryPath: dstDirectoryPath,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -21608,7 +22192,7 @@ func (mo *GuestFileManager) MoveFileInGuest(
 		DstFilePath string                  `xml:"dstFilePath,omitempty"`
 		Overwrite   bool                    `xml:"overwrite,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:          vm,
 		Auth:        auth,
 		SrcFilePath: srcFilePath,
@@ -21616,7 +22200,11 @@ func (mo *GuestFileManager) MoveFileInGuest(
 		Overwrite:   overwrite,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -22220,7 +22808,7 @@ func (mo *GuestProcessManager) ListProcessesInGuest(
 		Auth    *GuestAuthentication    `xml:"auth,omitempty"`
 		Pids    []int64                 `xml:"pids,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:   vm,
 		Auth: auth,
 		Pids: pids,
@@ -22230,7 +22818,11 @@ func (mo *GuestProcessManager) ListProcessesInGuest(
 		Returnval []*GuestProcessInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -22263,7 +22855,7 @@ func (mo *GuestProcessManager) ReadEnvironmentVariableInGuest(
 		Auth    *GuestAuthentication    `xml:"auth,omitempty"`
 		Names   []string                `xml:"names,omitempty"`
 	}{
-		This:  mo.This,
+		This:  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:    vm,
 		Auth:  auth,
 		Names: names,
@@ -22273,7 +22865,11 @@ func (mo *GuestProcessManager) ReadEnvironmentVariableInGuest(
 		Returnval []string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -22307,7 +22903,7 @@ func (mo *GuestProcessManager) StartProgramInGuest(
 		Auth    *GuestAuthentication    `xml:"auth,omitempty"`
 		Spec    *GuestProgramSpec       `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:   vm,
 		Auth: auth,
 		Spec: spec,
@@ -22317,7 +22913,11 @@ func (mo *GuestProcessManager) StartProgramInGuest(
 		Returnval int64 `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return int64(0), err
 	}
@@ -22345,13 +22945,17 @@ func (mo *GuestProcessManager) TerminateProcessInGuest(
 		Auth    *GuestAuthentication    `xml:"auth,omitempty"`
 		Pid     int64                   `xml:"pid,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:   vm,
 		Auth: auth,
 		Pid:  pid,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -22680,10 +23284,14 @@ func (mo *HistoryCollector) DestroyCollector() error {
 		XMLName xml.Name                `xml:"DestroyCollector"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -22709,10 +23317,14 @@ func (mo *HistoryCollector) ResetCollector() error {
 		XMLName xml.Name                `xml:"ResetCollector"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -22737,10 +23349,14 @@ func (mo *HistoryCollector) RewindCollector() error {
 		XMLName xml.Name                `xml:"RewindCollector"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -22767,11 +23383,15 @@ func (mo *HistoryCollector) SetCollectorPageSize(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		MaxCount int32                   `xml:"maxCount,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		MaxCount: maxCount,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -22930,7 +23550,7 @@ func (mo *HostActiveDirectoryAuthentication) ImportCertificateForCAM_Task(
 		CertPath  string                  `xml:"certPath,omitempty"`
 		CamServer string                  `xml:"camServer,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		CertPath:  certPath,
 		CamServer: camServer,
 	}
@@ -22939,7 +23559,11 @@ func (mo *HostActiveDirectoryAuthentication) ImportCertificateForCAM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -22972,7 +23596,7 @@ func (mo *HostActiveDirectoryAuthentication) JoinDomain_Task(
 		UserName   string                  `xml:"userName,omitempty"`
 		Password   string                  `xml:"password,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		DomainName: domainName,
 		UserName:   userName,
 		Password:   password,
@@ -22982,7 +23606,11 @@ func (mo *HostActiveDirectoryAuthentication) JoinDomain_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -23016,7 +23644,7 @@ func (mo *HostActiveDirectoryAuthentication) JoinDomainWithCAM_Task(
 		DomainName string                  `xml:"domainName,omitempty"`
 		CamServer  string                  `xml:"camServer,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		DomainName: domainName,
 		CamServer:  camServer,
 	}
@@ -23025,7 +23653,11 @@ func (mo *HostActiveDirectoryAuthentication) JoinDomainWithCAM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -23049,7 +23681,7 @@ func (mo *HostActiveDirectoryAuthentication) LeaveCurrentDomain_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Force   bool                    `xml:"force,omitempty"`
 	}{
-		This:  mo.This,
+		This:  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Force: force,
 	}
 
@@ -23057,7 +23689,11 @@ func (mo *HostActiveDirectoryAuthentication) LeaveCurrentDomain_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -23454,10 +24090,14 @@ func (mo *HostAutoStartManager) AutoStartPowerOff() error {
 		XMLName xml.Name                `xml:"AutoStartPowerOff"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -23482,10 +24122,14 @@ func (mo *HostAutoStartManager) AutoStartPowerOn() error {
 		XMLName xml.Name                `xml:"AutoStartPowerOn"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -23528,11 +24172,15 @@ func (mo *HostAutoStartManager) ReconfigureAutostart(
 		This    *ManagedObjectReference     `xml:"_this,omitempty"`
 		Spec    *HostAutoStartManagerConfig `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec: spec,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -23633,14 +24281,18 @@ func (mo *HostBootDeviceSystem) QueryBootDevices() (*HostBootDeviceInfo, error) 
 		XMLName xml.Name                `xml:"QueryBootDevices"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *HostBootDeviceInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -23664,11 +24316,15 @@ func (mo *HostBootDeviceSystem) UpdateBootDevice(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Key     string                  `xml:"key,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Key:  key,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -23741,7 +24397,7 @@ func (mo *HostCacheConfigurationManager) ConfigureHostCache_Task(
 		This    *ManagedObjectReference     `xml:"_this,omitempty"`
 		Spec    *HostCacheConfigurationSpec `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec: spec,
 	}
 
@@ -23749,7 +24405,11 @@ func (mo *HostCacheConfigurationManager) ConfigureHostCache_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -25412,10 +26072,14 @@ func (mo *HostCpuSchedulerSystem) DisableHyperThreading() error {
 		XMLName xml.Name                `xml:"DisableHyperThreading"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -25439,10 +26103,14 @@ func (mo *HostCpuSchedulerSystem) EnableHyperThreading() error {
 		XMLName xml.Name                `xml:"EnableHyperThreading"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -25673,11 +26341,15 @@ func (mo *HostDatastoreBrowser) DeleteFile(
 		This          *ManagedObjectReference `xml:"_this,omitempty"`
 		DatastorePath string                  `xml:"datastorePath,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		DatastorePath: datastorePath,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -25705,7 +26377,7 @@ func (mo *HostDatastoreBrowser) SearchDatastore_Task(
 		DatastorePath string                          `xml:"datastorePath,omitempty"`
 		SearchSpec    *HostDatastoreBrowserSearchSpec `xml:"searchSpec,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		DatastorePath: datastorePath,
 		SearchSpec:    searchSpec,
 	}
@@ -25714,7 +26386,11 @@ func (mo *HostDatastoreBrowser) SearchDatastore_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -25742,7 +26418,7 @@ func (mo *HostDatastoreBrowser) SearchDatastoreSubFolders_Task(
 		DatastorePath string                          `xml:"datastorePath,omitempty"`
 		SearchSpec    *HostDatastoreBrowserSearchSpec `xml:"searchSpec,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		DatastorePath: datastorePath,
 		SearchSpec:    searchSpec,
 	}
@@ -25751,7 +26427,11 @@ func (mo *HostDatastoreBrowser) SearchDatastoreSubFolders_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -25994,12 +26674,16 @@ func (mo *HostDatastoreSystem) ConfigureDatastorePrincipal(
 		UserName string                  `xml:"userName,omitempty"`
 		Password string                  `xml:"password,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		UserName: userName,
 		Password: password,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -26024,7 +26708,7 @@ func (mo *HostDatastoreSystem) CreateLocalDatastore(
 		Name    string                  `xml:"name,omitempty"`
 		Path    string                  `xml:"path,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name: name,
 		Path: path,
 	}
@@ -26033,7 +26717,11 @@ func (mo *HostDatastoreSystem) CreateLocalDatastore(
 		Returnval *Datastore `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26057,7 +26745,7 @@ func (mo *HostDatastoreSystem) CreateNasDatastore(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *HostNasVolumeSpec      `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec: spec,
 	}
 
@@ -26065,7 +26753,11 @@ func (mo *HostDatastoreSystem) CreateNasDatastore(
 		Returnval *Datastore `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26089,7 +26781,7 @@ func (mo *HostDatastoreSystem) CreateVmfsDatastore(
 		This    *ManagedObjectReference  `xml:"_this,omitempty"`
 		Spec    *VmfsDatastoreCreateSpec `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec: spec,
 	}
 
@@ -26097,7 +26789,11 @@ func (mo *HostDatastoreSystem) CreateVmfsDatastore(
 		Returnval *Datastore `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26125,7 +26821,7 @@ func (mo *HostDatastoreSystem) ExpandVmfsDatastore(
 		Datastore *Datastore               `xml:"datastore,omitempty"`
 		Spec      *VmfsDatastoreExpandSpec `xml:"spec,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Datastore: datastore,
 		Spec:      spec,
 	}
@@ -26134,7 +26830,11 @@ func (mo *HostDatastoreSystem) ExpandVmfsDatastore(
 		Returnval *Datastore `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26160,7 +26860,7 @@ func (mo *HostDatastoreSystem) ExtendVmfsDatastore(
 		Datastore *Datastore               `xml:"datastore,omitempty"`
 		Spec      *VmfsDatastoreExtendSpec `xml:"spec,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Datastore: datastore,
 		Spec:      spec,
 	}
@@ -26169,7 +26869,11 @@ func (mo *HostDatastoreSystem) ExtendVmfsDatastore(
 		Returnval *Datastore `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26209,7 +26913,7 @@ func (mo *HostDatastoreSystem) QueryAvailableDisksForVmfs(
 		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Datastore *Datastore              `xml:"datastore,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Datastore: datastore,
 	}
 
@@ -26217,7 +26921,11 @@ func (mo *HostDatastoreSystem) QueryAvailableDisksForVmfs(
 		Returnval []*HostScsiDisk `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26244,14 +26952,18 @@ func (mo *HostDatastoreSystem) QueryUnresolvedVmfsVolumes() ([]*HostUnresolvedVm
 		XMLName xml.Name                `xml:"QueryUnresolvedVmfsVolumes"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval []*HostUnresolvedVmfsVolume `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26276,7 +26988,7 @@ func (mo *HostDatastoreSystem) QueryVmfsDatastoreCreateOptions(
 		DevicePath       string                  `xml:"devicePath,omitempty"`
 		VmfsMajorVersion int32                   `xml:"vmfsMajorVersion,omitempty"`
 	}{
-		This:             mo.This,
+		This:             &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		DevicePath:       devicePath,
 		VmfsMajorVersion: vmfsMajorVersion,
 	}
@@ -26285,7 +26997,11 @@ func (mo *HostDatastoreSystem) QueryVmfsDatastoreCreateOptions(
 		Returnval []*VmfsDatastoreOption `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26313,7 +27029,7 @@ func (mo *HostDatastoreSystem) QueryVmfsDatastoreExpandOptions(
 		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Datastore *Datastore              `xml:"datastore,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Datastore: datastore,
 	}
 
@@ -26321,7 +27037,11 @@ func (mo *HostDatastoreSystem) QueryVmfsDatastoreExpandOptions(
 		Returnval []*VmfsDatastoreOption `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26348,7 +27068,7 @@ func (mo *HostDatastoreSystem) QueryVmfsDatastoreExtendOptions(
 		DevicePath               string                  `xml:"devicePath,omitempty"`
 		SuppressExpandCandidates bool                    `xml:"suppressExpandCandidates,omitempty"`
 	}{
-		This:                     mo.This,
+		This:                     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Datastore:                datastore,
 		DevicePath:               devicePath,
 		SuppressExpandCandidates: suppressExpandCandidates,
@@ -26358,7 +27078,11 @@ func (mo *HostDatastoreSystem) QueryVmfsDatastoreExtendOptions(
 		Returnval []*VmfsDatastoreOption `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26382,11 +27106,15 @@ func (mo *HostDatastoreSystem) RemoveDatastore(
 		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Datastore *Datastore              `xml:"datastore,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Datastore: datastore,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -26429,7 +27157,7 @@ func (mo *HostDatastoreSystem) ResignatureUnresolvedVmfsVolume_Task(
 		This           *ManagedObjectReference            `xml:"_this,omitempty"`
 		ResolutionSpec *HostUnresolvedVmfsResignatureSpec `xml:"resolutionSpec,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ResolutionSpec: resolutionSpec,
 	}
 
@@ -26437,7 +27165,11 @@ func (mo *HostDatastoreSystem) ResignatureUnresolvedVmfsVolume_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26468,11 +27200,15 @@ func (mo *HostDatastoreSystem) UpdateLocalSwapDatastore(
 		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Datastore *Datastore              `xml:"datastore,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Datastore: datastore,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -26582,14 +27318,18 @@ func (mo *HostDateTimeSystem) QueryAvailableTimeZones() ([]*HostDateTimeSystemTi
 		XMLName xml.Name                `xml:"QueryAvailableTimeZones"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval []*HostDateTimeSystemTimeZone `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26610,14 +27350,18 @@ func (mo *HostDateTimeSystem) QueryDateTime() (time.Time, error) {
 		XMLName xml.Name                `xml:"QueryDateTime"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval time.Time `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return time.Now(), err
 	}
@@ -26639,10 +27383,14 @@ func (mo *HostDateTimeSystem) RefreshDateTimeSystem() error {
 		XMLName xml.Name                `xml:"RefreshDateTimeSystem"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -26668,11 +27416,15 @@ func (mo *HostDateTimeSystem) UpdateDateTime(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		DateTime time.Time               `xml:"dateTime,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		DateTime: dateTime,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -26696,11 +27448,15 @@ func (mo *HostDateTimeSystem) UpdateDateTimeConfig(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Config  *HostDateTimeConfig     `xml:"config,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Config: config,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -26965,11 +27721,15 @@ func (mo *HostDiagnosticSystem) CreateDiagnosticPartition(
 		This    *ManagedObjectReference            `xml:"_this,omitempty"`
 		Spec    *HostDiagnosticPartitionCreateSpec `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec: spec,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -26994,14 +27754,18 @@ func (mo *HostDiagnosticSystem) QueryAvailablePartition() ([]*HostDiagnosticPart
 		XMLName xml.Name                `xml:"QueryAvailablePartition"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval []*HostDiagnosticPartition `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -27029,7 +27793,7 @@ func (mo *HostDiagnosticSystem) QueryPartitionCreateDesc(
 		DiskUuid       string                  `xml:"diskUuid,omitempty"`
 		DiagnosticType string                  `xml:"diagnosticType,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		DiskUuid:       diskUuid,
 		DiagnosticType: diagnosticType,
 	}
@@ -27038,7 +27802,11 @@ func (mo *HostDiagnosticSystem) QueryPartitionCreateDesc(
 		Returnval *HostDiagnosticPartitionCreateDescription `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -27069,7 +27837,7 @@ func (mo *HostDiagnosticSystem) QueryPartitionCreateOptions(
 		StorageType    string                  `xml:"storageType,omitempty"`
 		DiagnosticType string                  `xml:"diagnosticType,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		StorageType:    storageType,
 		DiagnosticType: diagnosticType,
 	}
@@ -27078,7 +27846,11 @@ func (mo *HostDiagnosticSystem) QueryPartitionCreateOptions(
 		Returnval []*HostDiagnosticPartitionCreateOption `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -27104,11 +27876,15 @@ func (mo *HostDiagnosticSystem) SelectActivePartition(
 		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Partition *HostScsiDiskPartition  `xml:"partition,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Partition: partition,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -27603,11 +28379,15 @@ func (mo *HostEsxAgentHostManager) EsxAgentHostManagerUpdateConfig(
 		This       *ManagedObjectReference            `xml:"_this,omitempty"`
 		ConfigInfo *HostEsxAgentHostManagerConfigInfo `xml:"configInfo,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ConfigInfo: configInfo,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -28231,11 +29011,15 @@ func (mo *HostFirewallSystem) DisableRuleset(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Id      string                  `xml:"id,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Id:   id,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -28261,11 +29045,15 @@ func (mo *HostFirewallSystem) EnableRuleset(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Id      string                  `xml:"id,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Id:   id,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -28287,10 +29075,14 @@ func (mo *HostFirewallSystem) RefreshFirewall() error {
 		XMLName xml.Name                `xml:"RefreshFirewall"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -28314,11 +29106,15 @@ func (mo *HostFirewallSystem) UpdateDefaultPolicy(
 		This          *ManagedObjectReference    `xml:"_this,omitempty"`
 		DefaultPolicy *HostFirewallDefaultPolicy `xml:"defaultPolicy,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		DefaultPolicy: defaultPolicy,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -28345,12 +29141,16 @@ func (mo *HostFirewallSystem) UpdateRuleset(
 		Id      string                          `xml:"id,omitempty"`
 		Spec    *HostFirewallRulesetRulesetSpec `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Id:   id,
 		Spec: spec,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -28384,14 +29184,18 @@ func (mo *HostFirmwareSystem) BackupFirmwareConfiguration() (string, error) {
 		XMLName xml.Name                `xml:"BackupFirmwareConfiguration"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -28414,14 +29218,18 @@ func (mo *HostFirmwareSystem) QueryFirmwareConfigUploadURL() (string, error) {
 		XMLName xml.Name                `xml:"QueryFirmwareConfigUploadURL"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -28448,10 +29256,14 @@ func (mo *HostFirmwareSystem) ResetFirmwareToFactoryDefaults() error {
 		XMLName xml.Name                `xml:"ResetFirmwareToFactoryDefaults"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -28485,11 +29297,15 @@ func (mo *HostFirmwareSystem) RestoreFirmwareConfiguration(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Force   bool                    `xml:"force,omitempty"`
 	}{
-		This:  mo.This,
+		This:  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Force: force,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -28615,14 +29431,18 @@ func (mo *HostGraphicsManager) IsSharedGraphicsActive() (bool, error) {
 		XMLName xml.Name                `xml:"IsSharedGraphicsActive"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval bool `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return false, err
 	}
@@ -28643,10 +29463,14 @@ func (mo *HostGraphicsManager) RefreshGraphicsManager() error {
 		XMLName xml.Name                `xml:"RefreshGraphicsManager"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -28840,10 +29664,14 @@ func (mo *HostHealthStatusSystem) RefreshHealthStatusSystem() error {
 		XMLName xml.Name                `xml:"RefreshHealthStatusSystem"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -28867,10 +29695,14 @@ func (mo *HostHealthStatusSystem) ResetSystemHealthInfo() error {
 		XMLName xml.Name                `xml:"ResetSystemHealthInfo"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -28991,14 +29823,18 @@ func (mo *HostImageConfigManager) HostImageConfigGetAcceptance() (string, error)
 		XMLName xml.Name                `xml:"HostImageConfigGetAcceptance"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -29019,14 +29855,18 @@ func (mo *HostImageConfigManager) HostImageConfigGetProfile() (*HostImageProfile
 		XMLName xml.Name                `xml:"HostImageConfigGetProfile"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *HostImageProfileSummary `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -29050,11 +29890,15 @@ func (mo *HostImageConfigManager) UpdateHostImageAcceptanceLevel(
 		This               *ManagedObjectReference `xml:"_this,omitempty"`
 		NewAcceptanceLevel string                  `xml:"newAcceptanceLevel,omitempty"`
 	}{
-		This:               mo.This,
+		This:               &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		NewAcceptanceLevel: newAcceptanceLevel,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -30096,7 +30940,7 @@ func (mo *HostKernelModuleSystem) QueryConfiguredModuleOptionString(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name: name,
 	}
 
@@ -30104,7 +30948,11 @@ func (mo *HostKernelModuleSystem) QueryConfiguredModuleOptionString(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -30127,14 +30975,18 @@ func (mo *HostKernelModuleSystem) QueryModules() ([]*KernelModuleInfo, error) {
 		XMLName xml.Name                `xml:"QueryModules"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval []*KernelModuleInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -30159,12 +31011,16 @@ func (mo *HostKernelModuleSystem) UpdateModuleOptionString(
 		Name    string                  `xml:"name,omitempty"`
 		Options string                  `xml:"options,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:    name,
 		Options: options,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -30387,12 +31243,16 @@ func (mo *HostLocalAccountManager) AssignUserToGroup(
 		User    string                  `xml:"user,omitempty"`
 		Group   string                  `xml:"group,omitempty"`
 	}{
-		This:  mo.This,
+		This:  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		User:  user,
 		Group: group,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -30427,11 +31287,15 @@ func (mo *HostLocalAccountManager) CreateGroup(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Group   *HostAccountSpec        `xml:"group,omitempty"`
 	}{
-		This:  mo.This,
+		This:  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Group: group,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -30460,11 +31324,15 @@ func (mo *HostLocalAccountManager) CreateUser(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		User    *HostAccountSpec        `xml:"user,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		User: user,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -30494,11 +31362,15 @@ func (mo *HostLocalAccountManager) RemoveGroup(
 		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		GroupName string                  `xml:"groupName,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		GroupName: groupName,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -30528,11 +31400,15 @@ func (mo *HostLocalAccountManager) RemoveUser(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		UserName string                  `xml:"userName,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		UserName: userName,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -30563,12 +31439,16 @@ func (mo *HostLocalAccountManager) UnassignUserFromGroup(
 		User    string                  `xml:"user,omitempty"`
 		Group   string                  `xml:"group,omitempty"`
 	}{
-		This:  mo.This,
+		This:  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		User:  user,
 		Group: group,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -30594,11 +31474,15 @@ func (mo *HostLocalAccountManager) UpdateUser(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		User    *HostAccountSpec        `xml:"user,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		User: user,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -30949,11 +31833,15 @@ func (mo *HostMemorySystem) ReconfigureServiceConsoleReservation(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		CfgBytes int64                   `xml:"cfgBytes,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		CfgBytes: cfgBytes,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -30979,11 +31867,15 @@ func (mo *HostMemorySystem) ReconfigureVirtualMachineReservation(
 		This    *ManagedObjectReference              `xml:"_this,omitempty"`
 		Spec    *VirtualMachineMemoryReservationSpec `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec: spec,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -32248,11 +33140,15 @@ func (mo *HostNetworkSystem) AddPortGroup(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Portgrp *HostPortGroupSpec      `xml:"portgrp,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Portgrp: portgrp,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -32288,7 +33184,7 @@ func (mo *HostNetworkSystem) AddServiceConsoleVirtualNic(
 		Portgroup string                  `xml:"portgroup,omitempty"`
 		Nic       *HostVirtualNicSpec     `xml:"nic,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Portgroup: portgroup,
 		Nic:       nic,
 	}
@@ -32297,7 +33193,11 @@ func (mo *HostNetworkSystem) AddServiceConsoleVirtualNic(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -32333,7 +33233,7 @@ func (mo *HostNetworkSystem) AddVirtualNic(
 		Portgroup string                  `xml:"portgroup,omitempty"`
 		Nic       *HostVirtualNicSpec     `xml:"nic,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Portgroup: portgroup,
 		Nic:       nic,
 	}
@@ -32342,7 +33242,11 @@ func (mo *HostNetworkSystem) AddVirtualNic(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -32369,12 +33273,16 @@ func (mo *HostNetworkSystem) AddVirtualSwitch(
 		VswitchName string                  `xml:"vswitchName,omitempty"`
 		Spec        *HostVirtualSwitchSpec  `xml:"spec,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		VswitchName: vswitchName,
 		Spec:        spec,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -32405,7 +33313,7 @@ func (mo *HostNetworkSystem) QueryNetworkHint(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Device  []string                `xml:"device,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Device: device,
 	}
 
@@ -32413,7 +33321,11 @@ func (mo *HostNetworkSystem) QueryNetworkHint(
 		Returnval []*PhysicalNicHintInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -32435,10 +33347,14 @@ func (mo *HostNetworkSystem) RefreshNetworkSystem() error {
 		XMLName xml.Name                `xml:"RefreshNetworkSystem"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -32462,11 +33378,15 @@ func (mo *HostNetworkSystem) RemovePortGroup(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		PgName  string                  `xml:"pgName,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		PgName: pgName,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -32490,11 +33410,15 @@ func (mo *HostNetworkSystem) RemoveServiceConsoleVirtualNic(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Device  string                  `xml:"device,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Device: device,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -32518,11 +33442,15 @@ func (mo *HostNetworkSystem) RemoveVirtualNic(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Device  string                  `xml:"device,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Device: device,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -32546,11 +33474,15 @@ func (mo *HostNetworkSystem) RemoveVirtualSwitch(
 		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		VswitchName string                  `xml:"vswitchName,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		VswitchName: vswitchName,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -32578,11 +33510,15 @@ func (mo *HostNetworkSystem) RestartServiceConsoleVirtualNic(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Device  string                  `xml:"device,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Device: device,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -32606,11 +33542,15 @@ func (mo *HostNetworkSystem) UpdateConsoleIpRouteConfig(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Config  *HostIpRouteConfig      `xml:"config,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Config: config,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -32638,11 +33578,15 @@ func (mo *HostNetworkSystem) UpdateDnsConfig(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Config  *HostDnsConfig          `xml:"config,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Config: config,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -32670,11 +33614,15 @@ func (mo *HostNetworkSystem) UpdateIpRouteConfig(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Config  *HostIpRouteConfig      `xml:"config,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Config: config,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -32704,11 +33652,15 @@ func (mo *HostNetworkSystem) UpdateIpRouteTableConfig(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Config  *HostIpRouteTableConfig `xml:"config,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Config: config,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -32786,7 +33738,7 @@ func (mo *HostNetworkSystem) UpdateNetworkConfig(
 		Config     *HostNetworkConfig      `xml:"config,omitempty"`
 		ChangeMode string                  `xml:"changeMode,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Config:     config,
 		ChangeMode: changeMode,
 	}
@@ -32795,7 +33747,11 @@ func (mo *HostNetworkSystem) UpdateNetworkConfig(
 		Returnval *HostNetworkConfigResult `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -32821,12 +33777,16 @@ func (mo *HostNetworkSystem) UpdatePhysicalNicLinkSpeed(
 		Device    string                  `xml:"device,omitempty"`
 		LinkSpeed *PhysicalNicLinkInfo    `xml:"linkSpeed,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Device:    device,
 		LinkSpeed: linkSpeed,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -32851,12 +33811,16 @@ func (mo *HostNetworkSystem) UpdatePortGroup(
 		PgName  string                  `xml:"pgName,omitempty"`
 		Portgrp *HostPortGroupSpec      `xml:"portgrp,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		PgName:  pgName,
 		Portgrp: portgrp,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -32890,12 +33854,16 @@ func (mo *HostNetworkSystem) UpdateServiceConsoleVirtualNic(
 		Device  string                  `xml:"device,omitempty"`
 		Nic     *HostVirtualNicSpec     `xml:"nic,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Device: device,
 		Nic:    nic,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -32930,12 +33898,16 @@ func (mo *HostNetworkSystem) UpdateVirtualNic(
 		Device  string                  `xml:"device,omitempty"`
 		Nic     *HostVirtualNicSpec     `xml:"nic,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Device: device,
 		Nic:    nic,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -32976,12 +33948,16 @@ func (mo *HostNetworkSystem) UpdateVirtualSwitch(
 		VswitchName string                  `xml:"vswitchName,omitempty"`
 		Spec        *HostVirtualSwitchSpec  `xml:"spec,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		VswitchName: vswitchName,
 		Spec:        spec,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -33471,7 +34447,7 @@ func (mo *HostPatchManager) CheckHostPatch_Task(
 		BundleUrls []string                                   `xml:"bundleUrls,omitempty"`
 		Spec       *HostPatchManagerPatchManagerOperationSpec `xml:"spec,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		MetaUrls:   metaUrls,
 		BundleUrls: bundleUrls,
 		Spec:       spec,
@@ -33481,7 +34457,11 @@ func (mo *HostPatchManager) CheckHostPatch_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -33513,7 +34493,7 @@ func (mo *HostPatchManager) InstallHostPatch_Task(
 		UpdateID   string                   `xml:"updateID,omitempty"`
 		Force      bool                     `xml:"force,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Repository: repository,
 		UpdateID:   updateID,
 		Force:      force,
@@ -33523,7 +34503,11 @@ func (mo *HostPatchManager) InstallHostPatch_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -33555,7 +34539,7 @@ func (mo *HostPatchManager) InstallHostPatchV2_Task(
 		VibUrls    []string                                   `xml:"vibUrls,omitempty"`
 		Spec       *HostPatchManagerPatchManagerOperationSpec `xml:"spec,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		MetaUrls:   metaUrls,
 		BundleUrls: bundleUrls,
 		VibUrls:    vibUrls,
@@ -33566,7 +34550,11 @@ func (mo *HostPatchManager) InstallHostPatchV2_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -33592,7 +34580,7 @@ func (mo *HostPatchManager) QueryHostPatch_Task(
 		This    *ManagedObjectReference                    `xml:"_this,omitempty"`
 		Spec    *HostPatchManagerPatchManagerOperationSpec `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec: spec,
 	}
 
@@ -33600,7 +34588,11 @@ func (mo *HostPatchManager) QueryHostPatch_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -33630,7 +34622,7 @@ func (mo *HostPatchManager) ScanHostPatch_Task(
 		Repository *HostPatchManagerLocator `xml:"repository,omitempty"`
 		UpdateID   []string                 `xml:"updateID,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Repository: repository,
 		UpdateID:   updateID,
 	}
@@ -33639,7 +34631,11 @@ func (mo *HostPatchManager) ScanHostPatch_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -33669,7 +34665,7 @@ func (mo *HostPatchManager) ScanHostPatchV2_Task(
 		BundleUrls []string                                   `xml:"bundleUrls,omitempty"`
 		Spec       *HostPatchManagerPatchManagerOperationSpec `xml:"spec,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		MetaUrls:   metaUrls,
 		BundleUrls: bundleUrls,
 		Spec:       spec,
@@ -33679,7 +34675,11 @@ func (mo *HostPatchManager) ScanHostPatchV2_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -33708,7 +34708,7 @@ func (mo *HostPatchManager) StageHostPatch_Task(
 		VibUrls    []string                                   `xml:"vibUrls,omitempty"`
 		Spec       *HostPatchManagerPatchManagerOperationSpec `xml:"spec,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		MetaUrls:   metaUrls,
 		BundleUrls: bundleUrls,
 		VibUrls:    vibUrls,
@@ -33719,7 +34719,11 @@ func (mo *HostPatchManager) StageHostPatch_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -33746,7 +34750,7 @@ func (mo *HostPatchManager) UninstallHostPatch_Task(
 		BulletinIds []string                                   `xml:"bulletinIds,omitempty"`
 		Spec        *HostPatchManagerPatchManagerOperationSpec `xml:"spec,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		BulletinIds: bulletinIds,
 		Spec:        spec,
 	}
@@ -33755,7 +34759,11 @@ func (mo *HostPatchManager) UninstallHostPatch_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -34083,10 +35091,14 @@ func (mo *HostPciPassthruSystem) Refresh() error {
 		XMLName xml.Name                `xml:"Refresh"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -34112,11 +35124,15 @@ func (mo *HostPciPassthruSystem) UpdatePassthruConfig(
 		This    *ManagedObjectReference  `xml:"_this,omitempty"`
 		Config  []*HostPciPassthruConfig `xml:"config,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Config: config,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -34603,11 +35619,15 @@ func (mo *HostPowerSystem) ConfigurePowerPolicy(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Key     int32                   `xml:"key,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Key:  key,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -34839,7 +35859,7 @@ func (mo *HostProfile) ExecuteHostProfile(
 		Host          *HostSystem                             `xml:"host,omitempty"`
 		DeferredParam []*ProfileDeferredPolicyOptionParameter `xml:"deferredParam,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host:          host,
 		DeferredParam: deferredParam,
 	}
@@ -34848,7 +35868,11 @@ func (mo *HostProfile) ExecuteHostProfile(
 		Returnval *ProfileExecuteResult `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -34872,11 +35896,15 @@ func (mo *HostProfile) UpdateHostProfile(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Config  *HostProfileConfigSpec  `xml:"config,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Config: config,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -34900,11 +35928,15 @@ func (mo *HostProfile) UpdateReferenceHost(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host: host,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -35066,7 +36098,7 @@ func (mo *HostProfileManager) ApplyHostConfig_Task(
 		ConfigSpec *HostConfigSpec                         `xml:"configSpec,omitempty"`
 		UserInput  []*ProfileDeferredPolicyOptionParameter `xml:"userInput,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host:       host,
 		ConfigSpec: configSpec,
 		UserInput:  userInput,
@@ -35076,7 +36108,11 @@ func (mo *HostProfileManager) ApplyHostConfig_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -35104,7 +36140,7 @@ func (mo *HostProfileManager) CheckAnswerFileStatus_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    []*HostSystem           `xml:"host,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host: host,
 	}
 
@@ -35112,7 +36148,11 @@ func (mo *HostProfileManager) CheckAnswerFileStatus_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -35161,7 +36201,7 @@ func (mo *HostProfileManager) CreateDefaultProfile(
 		ProfileTypeName string                  `xml:"profileTypeName,omitempty"`
 		Profile         *Profile                `xml:"profile,omitempty"`
 	}{
-		This:            mo.This,
+		This:            &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ProfileType:     profileType,
 		ProfileTypeName: profileTypeName,
 		Profile:         profile,
@@ -35171,7 +36211,11 @@ func (mo *HostProfileManager) CreateDefaultProfile(
 		Returnval *ApplyProfile `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -35199,7 +36243,7 @@ func (mo *HostProfileManager) ExportAnswerFile_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host: host,
 	}
 
@@ -35207,7 +36251,11 @@ func (mo *HostProfileManager) ExportAnswerFile_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -35237,7 +36285,7 @@ func (mo *HostProfileManager) GenerateConfigTaskList(
 		ConfigSpec *HostConfigSpec         `xml:"configSpec,omitempty"`
 		Host       *HostSystem             `xml:"host,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ConfigSpec: configSpec,
 		Host:       host,
 	}
@@ -35246,7 +36294,11 @@ func (mo *HostProfileManager) GenerateConfigTaskList(
 		Returnval *HostProfileManagerConfigTaskList `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -35276,7 +36328,7 @@ func (mo *HostProfileManager) GenerateHostProfileTaskList_Task(
 		ConfigSpec *HostConfigSpec         `xml:"configSpec,omitempty"`
 		Host       *HostSystem             `xml:"host,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ConfigSpec: configSpec,
 		Host:       host,
 	}
@@ -35285,7 +36337,11 @@ func (mo *HostProfileManager) GenerateHostProfileTaskList_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -35314,7 +36370,7 @@ func (mo *HostProfileManager) QueryAnswerFileStatus(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    []*HostSystem           `xml:"host,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host: host,
 	}
 
@@ -35322,7 +36378,11 @@ func (mo *HostProfileManager) QueryAnswerFileStatus(
 		Returnval []*AnswerFileStatusResult `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -35347,7 +36407,7 @@ func (mo *HostProfileManager) QueryHostProfileMetadata(
 		ProfileName []string                `xml:"profileName,omitempty"`
 		Profile     *Profile                `xml:"profile,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ProfileName: profileName,
 		Profile:     profile,
 	}
@@ -35356,7 +36416,11 @@ func (mo *HostProfileManager) QueryHostProfileMetadata(
 		Returnval []*ProfileMetadata `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -35382,7 +36446,7 @@ func (mo *HostProfileManager) QueryProfileStructure(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Profile *Profile                `xml:"profile,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Profile: profile,
 	}
 
@@ -35390,7 +36454,11 @@ func (mo *HostProfileManager) QueryProfileStructure(
 		Returnval *ProfileProfileStructure `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -35416,7 +36484,7 @@ func (mo *HostProfileManager) RetrieveAnswerFile(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host: host,
 	}
 
@@ -35424,7 +36492,11 @@ func (mo *HostProfileManager) RetrieveAnswerFile(
 		Returnval *AnswerFile `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -35453,7 +36525,7 @@ func (mo *HostProfileManager) RetrieveAnswerFileForProfile(
 		Host         *HostSystem             `xml:"host,omitempty"`
 		ApplyProfile *HostApplyProfile       `xml:"applyProfile,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host:         host,
 		ApplyProfile: applyProfile,
 	}
@@ -35462,7 +36534,11 @@ func (mo *HostProfileManager) RetrieveAnswerFileForProfile(
 		Returnval *AnswerFile `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -35491,7 +36567,7 @@ func (mo *HostProfileManager) UpdateAnswerFile_Task(
 		Host       *HostSystem             `xml:"host,omitempty"`
 		ConfigSpec *AnswerFileCreateSpec   `xml:"configSpec,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host:       host,
 		ConfigSpec: configSpec,
 	}
@@ -35500,7 +36576,11 @@ func (mo *HostProfileManager) UpdateAnswerFile_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -36134,10 +37214,14 @@ func (mo *HostServiceSystem) RefreshServices() error {
 		XMLName xml.Name                `xml:"RefreshServices"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -36161,11 +37245,15 @@ func (mo *HostServiceSystem) RestartService(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Id      string                  `xml:"id,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Id:   id,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -36189,11 +37277,15 @@ func (mo *HostServiceSystem) StartService(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Id      string                  `xml:"id,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Id:   id,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -36217,11 +37309,15 @@ func (mo *HostServiceSystem) StopService(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Id      string                  `xml:"id,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Id:   id,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -36246,11 +37342,15 @@ func (mo *HostServiceSystem) UninstallService(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Id      string                  `xml:"id,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Id:   id,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -36275,12 +37375,16 @@ func (mo *HostServiceSystem) UpdateServicePolicy(
 		Id      string                  `xml:"id,omitempty"`
 		Policy  string                  `xml:"policy,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Id:     id,
 		Policy: policy,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -36490,11 +37594,15 @@ func (mo *HostSnmpSystem) ReconfigureSnmpAgent(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *HostSnmpConfigSpec     `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec: spec,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -36516,10 +37624,14 @@ func (mo *HostSnmpSystem) SendTestNotification() error {
 		XMLName xml.Name                `xml:"SendTestNotification"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -36820,12 +37932,16 @@ func (mo *HostStorageSystem) AddInternetScsiSendTargets(
 		IScsiHbaDevice string                           `xml:"iScsiHbaDevice,omitempty"`
 		Targets        []*HostInternetScsiHbaSendTarget `xml:"targets,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		IScsiHbaDevice: iScsiHbaDevice,
 		Targets:        targets,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -36851,12 +37967,16 @@ func (mo *HostStorageSystem) AddInternetScsiStaticTargets(
 		IScsiHbaDevice string                             `xml:"iScsiHbaDevice,omitempty"`
 		Targets        []*HostInternetScsiHbaStaticTarget `xml:"targets,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		IScsiHbaDevice: iScsiHbaDevice,
 		Targets:        targets,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -36889,11 +38009,15 @@ func (mo *HostStorageSystem) AttachScsiLun(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		LunUuid string                  `xml:"lunUuid,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		LunUuid: lunUuid,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -36918,12 +38042,16 @@ func (mo *HostStorageSystem) AttachVmfsExtent(
 		VmfsPath string                  `xml:"vmfsPath,omitempty"`
 		Extent   *HostScsiDiskPartition  `xml:"extent,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		VmfsPath: vmfsPath,
 		Extent:   extent,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -36951,7 +38079,7 @@ func (mo *HostStorageSystem) ComputeDiskPartitionInfo(
 		Layout          *HostDiskPartitionLayout `xml:"layout,omitempty"`
 		PartitionFormat string                   `xml:"partitionFormat,omitempty"`
 	}{
-		This:            mo.This,
+		This:            &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		DevicePath:      devicePath,
 		Layout:          layout,
 		PartitionFormat: partitionFormat,
@@ -36961,7 +38089,11 @@ func (mo *HostStorageSystem) ComputeDiskPartitionInfo(
 		Returnval *HostDiskPartitionInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -36990,7 +38122,7 @@ func (mo *HostStorageSystem) ComputeDiskPartitionInfoForResize(
 		BlockRange      *HostDiskPartitionBlockRange `xml:"blockRange,omitempty"`
 		PartitionFormat string                       `xml:"partitionFormat,omitempty"`
 	}{
-		This:            mo.This,
+		This:            &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Partition:       partition,
 		BlockRange:      blockRange,
 		PartitionFormat: partitionFormat,
@@ -37000,7 +38132,11 @@ func (mo *HostStorageSystem) ComputeDiskPartitionInfoForResize(
 		Returnval *HostDiskPartitionInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -37036,11 +38172,15 @@ func (mo *HostStorageSystem) DeleteScsiLunState(
 		This             *ManagedObjectReference `xml:"_this,omitempty"`
 		LunCanonicalName string                  `xml:"lunCanonicalName,omitempty"`
 	}{
-		This:             mo.This,
+		This:             &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		LunCanonicalName: lunCanonicalName,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37081,11 +38221,15 @@ func (mo *HostStorageSystem) DeleteVffsVolumeState(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		VffsUuid string                  `xml:"vffsUuid,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		VffsUuid: vffsUuid,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37127,11 +38271,15 @@ func (mo *HostStorageSystem) DeleteVmfsVolumeState(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		VmfsUuid string                  `xml:"vmfsUuid,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		VmfsUuid: vmfsUuid,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37157,11 +38305,15 @@ func (mo *HostStorageSystem) DestroyVffs(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		VffsPath string                  `xml:"vffsPath,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		VffsPath: vffsPath,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37195,11 +38347,15 @@ func (mo *HostStorageSystem) DetachScsiLun(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		LunUuid string                  `xml:"lunUuid,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		LunUuid: lunUuid,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37225,11 +38381,15 @@ func (mo *HostStorageSystem) DisableMultipathPath(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		PathName string                  `xml:"pathName,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		PathName: pathName,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37258,11 +38418,15 @@ func (mo *HostStorageSystem) DiscoverFcoeHbas(
 		This     *ManagedObjectReference      `xml:"_this,omitempty"`
 		FcoeSpec *FcoeConfigFcoeSpecification `xml:"fcoeSpec,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		FcoeSpec: fcoeSpec,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37288,11 +38452,15 @@ func (mo *HostStorageSystem) EnableMultipathPath(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		PathName string                  `xml:"pathName,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		PathName: pathName,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37319,12 +38487,16 @@ func (mo *HostStorageSystem) ExpandVmfsExtent(
 		VmfsPath string                  `xml:"vmfsPath,omitempty"`
 		Extent   *HostScsiDiskPartition  `xml:"extent,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		VmfsPath: vmfsPath,
 		Extent:   extent,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37352,13 +38524,17 @@ func (mo *HostStorageSystem) ExtendVffs(
 		DevicePath string                  `xml:"devicePath,omitempty"`
 		Spec       *HostDiskPartitionSpec  `xml:"spec,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		VffsPath:   vffsPath,
 		DevicePath: devicePath,
 		Spec:       spec,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37384,7 +38560,7 @@ func (mo *HostStorageSystem) FormatVffs(
 		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		CreateSpec *HostVffsSpec           `xml:"createSpec,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		CreateSpec: createSpec,
 	}
 
@@ -37392,7 +38568,11 @@ func (mo *HostStorageSystem) FormatVffs(
 		Returnval *HostVffsVolume `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -37416,7 +38596,7 @@ func (mo *HostStorageSystem) FormatVmfs(
 		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		CreateSpec *HostVmfsSpec           `xml:"createSpec,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		CreateSpec: createSpec,
 	}
 
@@ -37424,7 +38604,11 @@ func (mo *HostStorageSystem) FormatVmfs(
 		Returnval *HostVmfsVolume `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -37455,12 +38639,16 @@ func (mo *HostStorageSystem) MarkForRemoval(
 		HbaName string                  `xml:"hbaName,omitempty"`
 		Remove  bool                    `xml:"remove,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		HbaName: hbaName,
 		Remove:  remove,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37491,11 +38679,15 @@ func (mo *HostStorageSystem) MountVffsVolume(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		VffsUuid string                  `xml:"vffsUuid,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		VffsUuid: vffsUuid,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37528,11 +38720,15 @@ func (mo *HostStorageSystem) MountVmfsVolume(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		VmfsUuid string                  `xml:"vmfsUuid,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		VmfsUuid: vmfsUuid,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37564,7 +38760,7 @@ func (mo *HostStorageSystem) QueryAvailableSsds(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		VffsPath string                  `xml:"vffsPath,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		VffsPath: vffsPath,
 	}
 
@@ -37572,7 +38768,11 @@ func (mo *HostStorageSystem) QueryAvailableSsds(
 		Returnval []*HostScsiDisk `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -37603,14 +38803,18 @@ func (mo *HostStorageSystem) QueryPathSelectionPolicyOptions() ([]*HostPathSelec
 		XMLName xml.Name                `xml:"QueryPathSelectionPolicyOptions"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval []*HostPathSelectionPolicyOption `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -37641,14 +38845,18 @@ func (mo *HostStorageSystem) QueryStorageArrayTypePolicyOptions() ([]*HostStorag
 		XMLName xml.Name                `xml:"QueryStorageArrayTypePolicyOptions"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval []*HostStorageArrayTypePolicyOption `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -37675,14 +38883,18 @@ func (mo *HostStorageSystem) QueryUnresolvedVmfsVolume() ([]*HostUnresolvedVmfsV
 		XMLName xml.Name                `xml:"QueryUnresolvedVmfsVolume"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval []*HostUnresolvedVmfsVolume `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -37726,10 +38938,14 @@ func (mo *HostStorageSystem) RefreshStorageSystem() error {
 		XMLName xml.Name                `xml:"RefreshStorageSystem"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37758,12 +38974,16 @@ func (mo *HostStorageSystem) RemoveInternetScsiSendTargets(
 		IScsiHbaDevice string                           `xml:"iScsiHbaDevice,omitempty"`
 		Targets        []*HostInternetScsiHbaSendTarget `xml:"targets,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		IScsiHbaDevice: iScsiHbaDevice,
 		Targets:        targets,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37792,12 +39012,16 @@ func (mo *HostStorageSystem) RemoveInternetScsiStaticTargets(
 		IScsiHbaDevice string                             `xml:"iScsiHbaDevice,omitempty"`
 		Targets        []*HostInternetScsiHbaStaticTarget `xml:"targets,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		IScsiHbaDevice: iScsiHbaDevice,
 		Targets:        targets,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37839,10 +39063,14 @@ func (mo *HostStorageSystem) RescanAllHba() error {
 		XMLName xml.Name                `xml:"RescanAllHba"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37867,11 +39095,15 @@ func (mo *HostStorageSystem) RescanHba(
 		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		HbaDevice string                  `xml:"hbaDevice,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		HbaDevice: hbaDevice,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37902,10 +39134,14 @@ func (mo *HostStorageSystem) RescanVffs() error {
 		XMLName xml.Name                `xml:"RescanVffs"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37934,10 +39170,14 @@ func (mo *HostStorageSystem) RescanVmfs() error {
 		XMLName xml.Name                `xml:"RescanVmfs"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37989,7 +39229,7 @@ func (mo *HostStorageSystem) ResolveMultipleUnresolvedVmfsVolumes(
 		This           *ManagedObjectReference             `xml:"_this,omitempty"`
 		ResolutionSpec []*HostUnresolvedVmfsResolutionSpec `xml:"resolutionSpec,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ResolutionSpec: resolutionSpec,
 	}
 
@@ -37997,7 +39237,11 @@ func (mo *HostStorageSystem) ResolveMultipleUnresolvedVmfsVolumes(
 		Returnval []*HostUnresolvedVmfsResolutionResult `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -38059,7 +39303,7 @@ func (mo *HostStorageSystem) ResolveMultipleUnresolvedVmfsVolumesEx_Task(
 		This           *ManagedObjectReference             `xml:"_this,omitempty"`
 		ResolutionSpec []*HostUnresolvedVmfsResolutionSpec `xml:"resolutionSpec,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ResolutionSpec: resolutionSpec,
 	}
 
@@ -38067,7 +39311,11 @@ func (mo *HostStorageSystem) ResolveMultipleUnresolvedVmfsVolumesEx_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -38091,7 +39339,7 @@ func (mo *HostStorageSystem) RetrieveDiskPartitionInfo(
 		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		DevicePath []string                `xml:"devicePath,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		DevicePath: devicePath,
 	}
 
@@ -38099,7 +39347,11 @@ func (mo *HostStorageSystem) RetrieveDiskPartitionInfo(
 		Returnval []*HostDiskPartitionInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -38125,12 +39377,16 @@ func (mo *HostStorageSystem) SetMultipathLunPolicy(
 		LunId   string                              `xml:"lunId,omitempty"`
 		Policy  *HostMultipathInfoLogicalUnitPolicy `xml:"policy,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		LunId:  lunId,
 		Policy: policy,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38165,11 +39421,15 @@ func (mo *HostStorageSystem) UnmountForceMountedVmfsVolume(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		VmfsUuid string                  `xml:"vmfsUuid,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		VmfsUuid: vmfsUuid,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38204,11 +39464,15 @@ func (mo *HostStorageSystem) UnmountVffsVolume(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		VffsUuid string                  `xml:"vffsUuid,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		VffsUuid: vffsUuid,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38289,11 +39553,15 @@ func (mo *HostStorageSystem) UnmountVmfsVolume(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		VmfsUuid string                  `xml:"vmfsUuid,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		VmfsUuid: vmfsUuid,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38319,12 +39587,16 @@ func (mo *HostStorageSystem) UpdateDiskPartitions(
 		DevicePath string                  `xml:"devicePath,omitempty"`
 		Spec       *HostDiskPartitionSpec  `xml:"spec,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		DevicePath: devicePath,
 		Spec:       spec,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38353,13 +39625,17 @@ func (mo *HostStorageSystem) UpdateInternetScsiAdvancedOptions(
 		TargetSet      *HostInternetScsiHbaTargetSet    `xml:"targetSet,omitempty"`
 		Options        []*HostInternetScsiHbaParamValue `xml:"options,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		IScsiHbaDevice: iScsiHbaDevice,
 		TargetSet:      targetSet,
 		Options:        options,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38384,12 +39660,16 @@ func (mo *HostStorageSystem) UpdateInternetScsiAlias(
 		IScsiHbaDevice string                  `xml:"iScsiHbaDevice,omitempty"`
 		IScsiAlias     string                  `xml:"iScsiAlias,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		IScsiHbaDevice: iScsiHbaDevice,
 		IScsiAlias:     iScsiAlias,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38416,13 +39696,17 @@ func (mo *HostStorageSystem) UpdateInternetScsiAuthenticationProperties(
 		AuthenticationProperties *HostInternetScsiHbaAuthenticationProperties `xml:"authenticationProperties,omitempty"`
 		TargetSet                *HostInternetScsiHbaTargetSet                `xml:"targetSet,omitempty"`
 	}{
-		This:                     mo.This,
+		This:                     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		IScsiHbaDevice:           iScsiHbaDevice,
 		AuthenticationProperties: authenticationProperties,
 		TargetSet:                targetSet,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38451,13 +39735,17 @@ func (mo *HostStorageSystem) UpdateInternetScsiDigestProperties(
 		TargetSet        *HostInternetScsiHbaTargetSet        `xml:"targetSet,omitempty"`
 		DigestProperties *HostInternetScsiHbaDigestProperties `xml:"digestProperties,omitempty"`
 	}{
-		This:             mo.This,
+		This:             &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		IScsiHbaDevice:   iScsiHbaDevice,
 		TargetSet:        targetSet,
 		DigestProperties: digestProperties,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38482,12 +39770,16 @@ func (mo *HostStorageSystem) UpdateInternetScsiDiscoveryProperties(
 		IScsiHbaDevice      string                                  `xml:"iScsiHbaDevice,omitempty"`
 		DiscoveryProperties *HostInternetScsiHbaDiscoveryProperties `xml:"discoveryProperties,omitempty"`
 	}{
-		This:                mo.This,
+		This:                &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		IScsiHbaDevice:      iScsiHbaDevice,
 		DiscoveryProperties: discoveryProperties,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38512,12 +39804,16 @@ func (mo *HostStorageSystem) UpdateInternetScsiIPProperties(
 		IScsiHbaDevice string                           `xml:"iScsiHbaDevice,omitempty"`
 		IpProperties   *HostInternetScsiHbaIPProperties `xml:"ipProperties,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		IScsiHbaDevice: iScsiHbaDevice,
 		IpProperties:   ipProperties,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38542,12 +39838,16 @@ func (mo *HostStorageSystem) UpdateInternetScsiName(
 		IScsiHbaDevice string                  `xml:"iScsiHbaDevice,omitempty"`
 		IScsiName      string                  `xml:"iScsiName,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		IScsiHbaDevice: iScsiHbaDevice,
 		IScsiName:      iScsiName,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38575,12 +39875,16 @@ func (mo *HostStorageSystem) UpdateScsiLunDisplayName(
 		LunUuid     string                  `xml:"lunUuid,omitempty"`
 		DisplayName string                  `xml:"displayName,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		LunUuid:     lunUuid,
 		DisplayName: displayName,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38604,11 +39908,15 @@ func (mo *HostStorageSystem) UpdateSoftwareInternetScsiEnabled(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Enabled bool                    `xml:"enabled,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Enabled: enabled,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38637,11 +39945,15 @@ func (mo *HostStorageSystem) UpgradeVmfs(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		VmfsPath string                  `xml:"vmfsPath,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		VmfsPath: vmfsPath,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38669,10 +39981,14 @@ func (mo *HostStorageSystem) UpgradeVmLayout() error {
 		XMLName xml.Name                `xml:"UpgradeVmLayout"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38965,14 +40281,18 @@ func (mo *HostSystem) AcquireCimServicesTicket() (*HostServiceTicket, error) {
 		XMLName xml.Name                `xml:"AcquireCimServicesTicket"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *HostServiceTicket `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -38993,14 +40313,18 @@ func (mo *HostSystem) DisconnectHost_Task() (*Task, error) {
 		XMLName xml.Name                `xml:"DisconnectHost_Task"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -39034,10 +40358,14 @@ func (mo *HostSystem) EnterLockdownMode() error {
 		XMLName xml.Name                `xml:"EnterLockdownMode"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -39082,7 +40410,7 @@ func (mo *HostSystem) EnterMaintenanceMode_Task(
 		EvacuatePoweredOffVms bool                    `xml:"evacuatePoweredOffVms,omitempty"`
 		MaintenanceSpec       *HostMaintenanceSpec    `xml:"maintenanceSpec,omitempty"`
 	}{
-		This:                  mo.This,
+		This:                  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Timeout:               timeout,
 		EvacuatePoweredOffVms: evacuatePoweredOffVms,
 		MaintenanceSpec:       maintenanceSpec,
@@ -39092,7 +40420,11 @@ func (mo *HostSystem) EnterMaintenanceMode_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -39120,10 +40452,14 @@ func (mo *HostSystem) ExitLockdownMode() error {
 		XMLName xml.Name                `xml:"ExitLockdownMode"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -39152,7 +40488,7 @@ func (mo *HostSystem) ExitMaintenanceMode_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Timeout int32                   `xml:"timeout,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Timeout: timeout,
 	}
 
@@ -39160,7 +40496,11 @@ func (mo *HostSystem) ExitMaintenanceMode_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -39214,7 +40554,7 @@ func (mo *HostSystem) PowerDownHostToStandBy_Task(
 		TimeoutSec            int32                   `xml:"timeoutSec,omitempty"`
 		EvacuatePoweredOffVms bool                    `xml:"evacuatePoweredOffVms,omitempty"`
 	}{
-		This:                  mo.This,
+		This:                  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		TimeoutSec:            timeoutSec,
 		EvacuatePoweredOffVms: evacuatePoweredOffVms,
 	}
@@ -39223,7 +40563,11 @@ func (mo *HostSystem) PowerDownHostToStandBy_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -39264,7 +40608,7 @@ func (mo *HostSystem) PowerUpHostFromStandBy_Task(
 		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		TimeoutSec int32                   `xml:"timeoutSec,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		TimeoutSec: timeoutSec,
 	}
 
@@ -39272,7 +40616,11 @@ func (mo *HostSystem) PowerUpHostFromStandBy_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -39293,14 +40641,18 @@ func (mo *HostSystem) QueryHostConnectionInfo() (*HostConnectInfo, error) {
 		XMLName xml.Name                `xml:"QueryHostConnectionInfo"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *HostConnectInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -39330,7 +40682,7 @@ func (mo *HostSystem) QueryMemoryOverhead(
 		VideoRamSize int32                   `xml:"videoRamSize,omitempty"`
 		NumVcpus     int32                   `xml:"numVcpus,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		MemorySize:   memorySize,
 		VideoRamSize: videoRamSize,
 		NumVcpus:     numVcpus,
@@ -39340,7 +40692,11 @@ func (mo *HostSystem) QueryMemoryOverhead(
 		Returnval int64 `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return int64(0), err
 	}
@@ -39371,7 +40727,7 @@ func (mo *HostSystem) QueryMemoryOverheadEx(
 		This         *ManagedObjectReference   `xml:"_this,omitempty"`
 		VmConfigInfo *VirtualMachineConfigInfo `xml:"vmConfigInfo,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		VmConfigInfo: vmConfigInfo,
 	}
 
@@ -39379,7 +40735,11 @@ func (mo *HostSystem) QueryMemoryOverheadEx(
 		Returnval int64 `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return int64(0), err
 	}
@@ -39402,14 +40762,18 @@ func (mo *HostSystem) QueryTpmAttestationReport() (*HostTpmAttestationReport, er
 		XMLName xml.Name                `xml:"QueryTpmAttestationReport"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *HostTpmAttestationReport `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -39439,7 +40803,7 @@ func (mo *HostSystem) RebootHost_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Force   bool                    `xml:"force,omitempty"`
 	}{
-		This:  mo.This,
+		This:  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Force: force,
 	}
 
@@ -39447,7 +40811,11 @@ func (mo *HostSystem) RebootHost_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -39475,14 +40843,18 @@ func (mo *HostSystem) ReconfigureHostForDAS_Task() (*Task, error) {
 		XMLName xml.Name                `xml:"ReconfigureHostForDAS_Task"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -39530,7 +40902,7 @@ func (mo *HostSystem) ReconnectHost_Task(
 		CnxSpec       *HostConnectSpec         `xml:"cnxSpec,omitempty"`
 		ReconnectSpec *HostSystemReconnectSpec `xml:"reconnectSpec,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		CnxSpec:       cnxSpec,
 		ReconnectSpec: reconnectSpec,
 	}
@@ -39539,7 +40911,11 @@ func (mo *HostSystem) ReconnectHost_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -39565,14 +40941,18 @@ func (mo *HostSystem) RetrieveHardwareUptime() (int64, error) {
 		XMLName xml.Name                `xml:"RetrieveHardwareUptime"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval int64 `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return int64(0), err
 	}
@@ -39602,7 +40982,7 @@ func (mo *HostSystem) ShutdownHost_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Force   bool                    `xml:"force,omitempty"`
 	}{
-		This:  mo.This,
+		This:  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Force: force,
 	}
 
@@ -39610,7 +40990,11 @@ func (mo *HostSystem) ShutdownHost_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -39636,11 +41020,15 @@ func (mo *HostSystem) UpdateFlags(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		FlagInfo *HostFlagInfo           `xml:"flagInfo,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		FlagInfo: flagInfo,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -39666,11 +41054,15 @@ func (mo *HostSystem) UpdateIpmi(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		IpmiInfo *HostIpmiInfo           `xml:"ipmiInfo,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		IpmiInfo: ipmiInfo,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -39694,11 +41086,15 @@ func (mo *HostSystem) UpdateSystemResources(
 		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		ResourceInfo *HostSystemResourceInfo `xml:"resourceInfo,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ResourceInfo: resourceInfo,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -39724,11 +41120,15 @@ func (mo *HostSystem) UpdateSystemSwapConfiguration(
 		This          *ManagedObjectReference      `xml:"_this,omitempty"`
 		SysSwapConfig *HostSystemSwapConfiguration `xml:"sysSwapConfig,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		SysSwapConfig: sysSwapConfig,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -40422,7 +41822,7 @@ func (mo *HostVFlashManager) ConfigureVFlashResourceEx_Task(
 		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		DevicePath []string                `xml:"devicePath,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		DevicePath: devicePath,
 	}
 
@@ -40430,7 +41830,11 @@ func (mo *HostVFlashManager) ConfigureVFlashResourceEx_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -40454,11 +41858,15 @@ func (mo *HostVFlashManager) HostConfigureVFlashResource(
 		This    *ManagedObjectReference                    `xml:"_this,omitempty"`
 		Spec    *HostVFlashManagerVFlashResourceConfigSpec `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec: spec,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -40482,11 +41890,15 @@ func (mo *HostVFlashManager) HostConfigVFlashCache(
 		This    *ManagedObjectReference                 `xml:"_this,omitempty"`
 		Spec    *HostVFlashManagerVFlashCacheConfigSpec `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec: spec,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -40512,7 +41924,7 @@ func (mo *HostVFlashManager) HostGetVFlashModuleDefaultConfig(
 		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		VFlashModule string                  `xml:"vFlashModule,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		VFlashModule: vFlashModule,
 	}
 
@@ -40520,7 +41932,11 @@ func (mo *HostVFlashManager) HostGetVFlashModuleDefaultConfig(
 		Returnval *VirtualDiskVFlashCacheConfigInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -40541,10 +41957,14 @@ func (mo *HostVFlashManager) HostRemoveVFlashResource() error {
 		XMLName xml.Name                `xml:"HostRemoveVFlashResource"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -40849,10 +42269,14 @@ func (mo *HostVMotionSystem) DeselectVnic() error {
 		XMLName xml.Name                `xml:"DeselectVnic"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -40876,11 +42300,15 @@ func (mo *HostVMotionSystem) SelectVnic(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Device  string                  `xml:"device,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Device: device,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -40904,11 +42332,15 @@ func (mo *HostVMotionSystem) UpdateIpConfig(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		IpConfig *HostIpConfig           `xml:"ipConfig,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		IpConfig: ipConfig,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -41105,12 +42537,16 @@ func (mo *HostVirtualNicManager) DeselectVnicForNicType(
 		NicType string                  `xml:"nicType,omitempty"`
 		Device  string                  `xml:"device,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		NicType: nicType,
 		Device:  device,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -41134,7 +42570,7 @@ func (mo *HostVirtualNicManager) QueryNetConfig(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		NicType string                  `xml:"nicType,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		NicType: nicType,
 	}
 
@@ -41142,7 +42578,11 @@ func (mo *HostVirtualNicManager) QueryNetConfig(
 		Returnval *VirtualNicManagerNetConfig `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -41170,12 +42610,16 @@ func (mo *HostVirtualNicManager) SelectVnicForNicType(
 		NicType string                  `xml:"nicType,omitempty"`
 		Device  string                  `xml:"device,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		NicType: nicType,
 		Device:  device,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -41647,7 +43091,7 @@ func (mo *HostVsanInternalSystem) QueryCmmds(
 		This    *ManagedObjectReference             `xml:"_this,omitempty"`
 		Queries []*HostVsanInternalSystemCmmdsQuery `xml:"queries,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Queries: queries,
 	}
 
@@ -41655,7 +43099,11 @@ func (mo *HostVsanInternalSystem) QueryCmmds(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -41682,7 +43130,7 @@ func (mo *HostVsanInternalSystem) QueryObjectsOnPhysicalVsanDisk(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Disks   []string                `xml:"disks,omitempty"`
 	}{
-		This:  mo.This,
+		This:  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Disks: disks,
 	}
 
@@ -41690,7 +43138,11 @@ func (mo *HostVsanInternalSystem) QueryObjectsOnPhysicalVsanDisk(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -41717,7 +43169,7 @@ func (mo *HostVsanInternalSystem) QueryPhysicalVsanDisks(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Props   []string                `xml:"props,omitempty"`
 	}{
-		This:  mo.This,
+		This:  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Props: props,
 	}
 
@@ -41725,7 +43177,11 @@ func (mo *HostVsanInternalSystem) QueryPhysicalVsanDisks(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -41752,7 +43208,7 @@ func (mo *HostVsanInternalSystem) QueryVsanObjects(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Uuids   []string                `xml:"uuids,omitempty"`
 	}{
-		This:  mo.This,
+		This:  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Uuids: uuids,
 	}
 
@@ -41760,7 +43216,11 @@ func (mo *HostVsanInternalSystem) QueryVsanObjects(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -41843,7 +43303,7 @@ func (mo *HostVsanSystem) AddDisks_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Disk    []*HostScsiDisk         `xml:"disk,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Disk: disk,
 	}
 
@@ -41851,7 +43311,11 @@ func (mo *HostVsanSystem) AddDisks_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -41887,7 +43351,7 @@ func (mo *HostVsanSystem) InitializeDisks_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Mapping []*VsanHostDiskMapping  `xml:"mapping,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Mapping: mapping,
 	}
 
@@ -41895,7 +43359,11 @@ func (mo *HostVsanSystem) InitializeDisks_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -41920,7 +43388,7 @@ func (mo *HostVsanSystem) QueryDisksForVsan(
 		This          *ManagedObjectReference `xml:"_this,omitempty"`
 		CanonicalName []string                `xml:"canonicalName,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		CanonicalName: canonicalName,
 	}
 
@@ -41928,7 +43396,11 @@ func (mo *HostVsanSystem) QueryDisksForVsan(
 		Returnval []*VsanHostDiskResult `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -41949,14 +43421,18 @@ func (mo *HostVsanSystem) QueryHostStatus() (*VsanHostClusterStatus, error) {
 		XMLName xml.Name                `xml:"QueryHostStatus"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *VsanHostClusterStatus `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -41996,7 +43472,7 @@ func (mo *HostVsanSystem) RemoveDisk_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Disk    []*HostScsiDisk         `xml:"disk,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Disk: disk,
 	}
 
@@ -42004,7 +43480,11 @@ func (mo *HostVsanSystem) RemoveDisk_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -42038,7 +43518,7 @@ func (mo *HostVsanSystem) RemoveDiskMapping_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Mapping []*VsanHostDiskMapping  `xml:"mapping,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Mapping: mapping,
 	}
 
@@ -42046,7 +43526,11 @@ func (mo *HostVsanSystem) RemoveDiskMapping_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -42087,7 +43571,7 @@ func (mo *HostVsanSystem) UpdateVsan_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Config  *VsanHostConfigInfo     `xml:"config,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Config: config,
 	}
 
@@ -42095,7 +43579,11 @@ func (mo *HostVsanSystem) UpdateVsan_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -42322,11 +43810,15 @@ func (mo *HttpNfcLease) HttpNfcLeaseAbort(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Fault   *MethodFault            `xml:"fault,omitempty"`
 	}{
-		This:  mo.This,
+		This:  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Fault: fault,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -42354,10 +43846,14 @@ func (mo *HttpNfcLease) HttpNfcLeaseComplete() error {
 		XMLName xml.Name                `xml:"HttpNfcLeaseComplete"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -42380,14 +43876,18 @@ func (mo *HttpNfcLease) HttpNfcLeaseGetManifest() ([]*HttpNfcLeaseManifestEntry,
 		XMLName xml.Name                `xml:"HttpNfcLeaseGetManifest"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval []*HttpNfcLeaseManifestEntry `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -42414,11 +43914,15 @@ func (mo *HttpNfcLease) HttpNfcLeaseProgress(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Percent int32                   `xml:"percent,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Percent: percent,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -43874,7 +45378,7 @@ func (mo *InventoryView) CloseInventoryViewFolder(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  []*ManagedEntity        `xml:"entity,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity: entity,
 	}
 
@@ -43882,7 +45386,11 @@ func (mo *InventoryView) CloseInventoryViewFolder(
 		Returnval []*ManagedEntity `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -43916,7 +45424,7 @@ func (mo *InventoryView) OpenInventoryViewFolder(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  []*ManagedEntity        `xml:"entity,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity: entity,
 	}
 
@@ -43924,7 +45432,11 @@ func (mo *InventoryView) OpenInventoryViewFolder(
 		Returnval []*ManagedEntity `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -44164,7 +45676,7 @@ func (mo *IpPoolManager) AllocateIpv4Address(
 		PoolId       int32                   `xml:"poolId,omitempty"`
 		AllocationId string                  `xml:"allocationId,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Dc:           dc,
 		PoolId:       poolId,
 		AllocationId: allocationId,
@@ -44174,7 +45686,11 @@ func (mo *IpPoolManager) AllocateIpv4Address(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -44217,7 +45733,7 @@ func (mo *IpPoolManager) AllocateIpv6Address(
 		PoolId       int32                   `xml:"poolId,omitempty"`
 		AllocationId string                  `xml:"allocationId,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Dc:           dc,
 		PoolId:       poolId,
 		AllocationId: allocationId,
@@ -44227,7 +45743,11 @@ func (mo *IpPoolManager) AllocateIpv6Address(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -44260,7 +45780,7 @@ func (mo *IpPoolManager) CreateIpPool(
 		Dc      *Datacenter             `xml:"dc,omitempty"`
 		Pool    *IpPool                 `xml:"pool,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Dc:   dc,
 		Pool: pool,
 	}
@@ -44269,7 +45789,11 @@ func (mo *IpPoolManager) CreateIpPool(
 		Returnval int32 `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return int32(0), err
 	}
@@ -44299,13 +45823,17 @@ func (mo *IpPoolManager) DestroyIpPool(
 		Id      int32                   `xml:"id,omitempty"`
 		Force   bool                    `xml:"force,omitempty"`
 	}{
-		This:  mo.This,
+		This:  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Dc:    dc,
 		Id:    id,
 		Force: force,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -44333,7 +45861,7 @@ func (mo *IpPoolManager) QueryIPAllocations(
 		PoolId       int32                   `xml:"poolId,omitempty"`
 		ExtensionKey string                  `xml:"extensionKey,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Dc:           dc,
 		PoolId:       poolId,
 		ExtensionKey: extensionKey,
@@ -44343,7 +45871,11 @@ func (mo *IpPoolManager) QueryIPAllocations(
 		Returnval []*IpPoolManagerIpAllocation `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -44367,7 +45899,7 @@ func (mo *IpPoolManager) QueryIpPools(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Dc      *Datacenter             `xml:"dc,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Dc:   dc,
 	}
 
@@ -44375,7 +45907,11 @@ func (mo *IpPoolManager) QueryIpPools(
 		Returnval []*IpPool `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -44412,13 +45948,17 @@ func (mo *IpPoolManager) ReleaseIpAllocation(
 		PoolId       int32                   `xml:"poolId,omitempty"`
 		AllocationId string                  `xml:"allocationId,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Dc:           dc,
 		PoolId:       poolId,
 		AllocationId: allocationId,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -44450,12 +45990,16 @@ func (mo *IpPoolManager) UpdateIpPool(
 		Dc      *Datacenter             `xml:"dc,omitempty"`
 		Pool    *IpPool                 `xml:"pool,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Dc:   dc,
 		Pool: pool,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -44681,12 +46225,16 @@ func (mo *IscsiManager) BindVnic(
 		IScsiHbaName string                  `xml:"iScsiHbaName,omitempty"`
 		VnicDevice   string                  `xml:"vnicDevice,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		IScsiHbaName: iScsiHbaName,
 		VnicDevice:   vnicDevice,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -44710,7 +46258,7 @@ func (mo *IscsiManager) QueryBoundVnics(
 		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		IScsiHbaName string                  `xml:"iScsiHbaName,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		IScsiHbaName: iScsiHbaName,
 	}
 
@@ -44718,7 +46266,11 @@ func (mo *IscsiManager) QueryBoundVnics(
 		Returnval []*IscsiPortInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -44746,7 +46298,7 @@ func (mo *IscsiManager) QueryCandidateNics(
 		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		IScsiHbaName string                  `xml:"iScsiHbaName,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		IScsiHbaName: iScsiHbaName,
 	}
 
@@ -44754,7 +46306,11 @@ func (mo *IscsiManager) QueryCandidateNics(
 		Returnval []*IscsiPortInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -44779,7 +46335,7 @@ func (mo *IscsiManager) QueryMigrationDependencies(
 		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		PnicDevice []string                `xml:"pnicDevice,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		PnicDevice: pnicDevice,
 	}
 
@@ -44787,7 +46343,11 @@ func (mo *IscsiManager) QueryMigrationDependencies(
 		Returnval *IscsiMigrationDependency `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -44811,7 +46371,7 @@ func (mo *IscsiManager) QueryPnicStatus(
 		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		PnicDevice string                  `xml:"pnicDevice,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		PnicDevice: pnicDevice,
 	}
 
@@ -44819,7 +46379,11 @@ func (mo *IscsiManager) QueryPnicStatus(
 		Returnval *IscsiStatus `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -44843,7 +46407,7 @@ func (mo *IscsiManager) QueryVnicStatus(
 		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		VnicDevice string                  `xml:"vnicDevice,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		VnicDevice: vnicDevice,
 	}
 
@@ -44851,7 +46415,11 @@ func (mo *IscsiManager) QueryVnicStatus(
 		Returnval *IscsiStatus `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -44877,13 +46445,17 @@ func (mo *IscsiManager) UnbindVnic(
 		VnicDevice   string                  `xml:"vnicDevice,omitempty"`
 		Force        bool                    `xml:"force,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		IScsiHbaName: iScsiHbaName,
 		VnicDevice:   vnicDevice,
 		Force:        force,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -45251,7 +46823,7 @@ func (mo *LicenseAssignmentManager) QueryAssignedLicenses(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		EntityId string                  `xml:"entityId,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		EntityId: entityId,
 	}
 
@@ -45259,7 +46831,11 @@ func (mo *LicenseAssignmentManager) QueryAssignedLicenses(
 		Returnval []*LicenseAssignmentManagerLicenseAssignment `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -45283,11 +46859,15 @@ func (mo *LicenseAssignmentManager) RemoveAssignedLicense(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		EntityId string                  `xml:"entityId,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		EntityId: entityId,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -45313,7 +46893,7 @@ func (mo *LicenseAssignmentManager) UpdateAssignedLicense(
 		LicenseKey        string                  `xml:"licenseKey,omitempty"`
 		EntityDisplayName string                  `xml:"entityDisplayName,omitempty"`
 	}{
-		This:              mo.This,
+		This:              &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity:            entity,
 		LicenseKey:        licenseKey,
 		EntityDisplayName: entityDisplayName,
@@ -45323,7 +46903,11 @@ func (mo *LicenseAssignmentManager) UpdateAssignedLicense(
 		Returnval *LicenseManagerLicenseInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -45817,7 +47401,7 @@ func (mo *LicenseManager) AddLicense(
 		LicenseKey string                  `xml:"licenseKey,omitempty"`
 		Labels     []*KeyValue             `xml:"labels,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		LicenseKey: licenseKey,
 		Labels:     labels,
 	}
@@ -45826,7 +47410,11 @@ func (mo *LicenseManager) AddLicense(
 		Returnval *LicenseManagerLicenseInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -45857,7 +47445,7 @@ func (mo *LicenseManager) CheckLicenseFeature(
 		Host       *HostSystem             `xml:"host,omitempty"`
 		FeatureKey string                  `xml:"featureKey,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host:       host,
 		FeatureKey: featureKey,
 	}
@@ -45866,7 +47454,11 @@ func (mo *LicenseManager) CheckLicenseFeature(
 		Returnval bool `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return false, err
 	}
@@ -45915,12 +47507,16 @@ func (mo *LicenseManager) ConfigureLicenseSource(
 		Host          *HostSystem             `xml:"host,omitempty"`
 		LicenseSource *LicenseSource          `xml:"licenseSource,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host:          host,
 		LicenseSource: licenseSource,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -45946,7 +47542,7 @@ func (mo *LicenseManager) DecodeLicense(
 		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		LicenseKey string                  `xml:"licenseKey,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		LicenseKey: licenseKey,
 	}
 
@@ -45954,7 +47550,11 @@ func (mo *LicenseManager) DecodeLicense(
 		Returnval *LicenseManagerLicenseInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -45985,7 +47585,7 @@ func (mo *LicenseManager) DisableFeature(
 		Host       *HostSystem             `xml:"host,omitempty"`
 		FeatureKey string                  `xml:"featureKey,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host:       host,
 		FeatureKey: featureKey,
 	}
@@ -45994,7 +47594,11 @@ func (mo *LicenseManager) DisableFeature(
 		Returnval bool `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return false, err
 	}
@@ -46025,7 +47629,7 @@ func (mo *LicenseManager) EnableFeature(
 		Host       *HostSystem             `xml:"host,omitempty"`
 		FeatureKey string                  `xml:"featureKey,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host:       host,
 		FeatureKey: featureKey,
 	}
@@ -46034,7 +47638,11 @@ func (mo *LicenseManager) EnableFeature(
 		Returnval bool `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return false, err
 	}
@@ -46063,7 +47671,7 @@ func (mo *LicenseManager) QueryLicenseSourceAvailability(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host: host,
 	}
 
@@ -46071,7 +47679,11 @@ func (mo *LicenseManager) QueryLicenseSourceAvailability(
 		Returnval []*LicenseAvailabilityInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -46106,7 +47718,7 @@ func (mo *LicenseManager) QueryLicenseUsage(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host: host,
 	}
 
@@ -46114,7 +47726,11 @@ func (mo *LicenseManager) QueryLicenseUsage(
 		Returnval *LicenseUsageInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -46145,7 +47761,7 @@ func (mo *LicenseManager) QuerySupportedFeatures(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host: host,
 	}
 
@@ -46153,7 +47769,11 @@ func (mo *LicenseManager) QuerySupportedFeatures(
 		Returnval []*LicenseFeatureInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -46179,11 +47799,15 @@ func (mo *LicenseManager) RemoveLicense(
 		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		LicenseKey string                  `xml:"licenseKey,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		LicenseKey: licenseKey,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -46210,12 +47834,16 @@ func (mo *LicenseManager) RemoveLicenseLabel(
 		LicenseKey string                  `xml:"licenseKey,omitempty"`
 		LabelKey   string                  `xml:"labelKey,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		LicenseKey: licenseKey,
 		LabelKey:   labelKey,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -46253,12 +47881,16 @@ func (mo *LicenseManager) SetLicenseEdition(
 		Host       *HostSystem             `xml:"host,omitempty"`
 		FeatureKey string                  `xml:"featureKey,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host:       host,
 		FeatureKey: featureKey,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -46293,7 +47925,7 @@ func (mo *LicenseManager) UpdateLicense(
 		LicenseKey string                  `xml:"licenseKey,omitempty"`
 		Labels     []*KeyValue             `xml:"labels,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		LicenseKey: licenseKey,
 		Labels:     labels,
 	}
@@ -46302,7 +47934,11 @@ func (mo *LicenseManager) UpdateLicense(
 		Returnval *LicenseManagerLicenseInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -46331,13 +47967,17 @@ func (mo *LicenseManager) UpdateLicenseLabel(
 		LabelKey   string                  `xml:"labelKey,omitempty"`
 		LabelValue string                  `xml:"labelValue,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		LicenseKey: licenseKey,
 		LabelKey:   labelKey,
 		LabelValue: labelValue,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -46691,7 +48331,7 @@ func (mo *ListView) ModifyListView(
 		Add     []*ManagedObjectReference `xml:"add,omitempty"`
 		Remove  []*ManagedObjectReference `xml:"remove,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Add:    add,
 		Remove: remove,
 	}
@@ -46700,7 +48340,11 @@ func (mo *ListView) ModifyListView(
 		Returnval []*ManagedObjectReference `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -46730,7 +48374,7 @@ func (mo *ListView) ResetListView(
 		This    *ManagedObjectReference   `xml:"_this,omitempty"`
 		Obj     []*ManagedObjectReference `xml:"obj,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Obj:  obj,
 	}
 
@@ -46738,7 +48382,11 @@ func (mo *ListView) ResetListView(
 		Returnval []*ManagedObjectReference `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -46762,11 +48410,15 @@ func (mo *ListView) ResetListViewFromView(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		View    *View                   `xml:"view,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		View: view,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -47624,14 +49276,18 @@ func (mo *ManagedEntity) Destroy_Task() (*Task, error) {
 		XMLName xml.Name                `xml:"Destroy_Task"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -47661,10 +49317,14 @@ func (mo *ManagedEntity) Reload() error {
 		XMLName xml.Name                `xml:"Reload"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -47697,7 +49357,7 @@ func (mo *ManagedEntity) Rename_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		NewName string                  `xml:"newName,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		NewName: newName,
 	}
 
@@ -47705,7 +49365,11 @@ func (mo *ManagedEntity) Rename_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -49707,10 +51371,14 @@ func (mo *Network) DestroyNetwork() error {
 		XMLName xml.Name                `xml:"DestroyNetwork"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -50932,7 +52600,7 @@ func (mo *OptionManager) QueryOptions(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name: name,
 	}
 
@@ -50940,7 +52608,11 @@ func (mo *OptionManager) QueryOptions(
 		Returnval []*OptionValue `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -50984,11 +52656,15 @@ func (mo *OptionManager) UpdateOptions(
 		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		ChangedValue []*OptionValue          `xml:"changedValue,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ChangedValue: changedValue,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -52317,7 +53993,7 @@ func (mo *OvfManager) CreateDescriptor(
 		Obj     *ManagedEntity             `xml:"obj,omitempty"`
 		Cdp     *OvfCreateDescriptorParams `xml:"cdp,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Obj:  obj,
 		Cdp:  cdp,
 	}
@@ -52326,7 +54002,11 @@ func (mo *OvfManager) CreateDescriptor(
 		Returnval *OvfCreateDescriptorResult `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -52362,7 +54042,7 @@ func (mo *OvfManager) CreateImportSpec(
 		Datastore     *Datastore                 `xml:"datastore,omitempty"`
 		Cisp          *OvfCreateImportSpecParams `xml:"cisp,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		OvfDescriptor: ovfDescriptor,
 		ResourcePool:  resourcePool,
 		Datastore:     datastore,
@@ -52373,7 +54053,11 @@ func (mo *OvfManager) CreateImportSpec(
 		Returnval *OvfCreateImportSpecResult `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -52405,7 +54089,7 @@ func (mo *OvfManager) ParseDescriptor(
 		OvfDescriptor string                    `xml:"ovfDescriptor,omitempty"`
 		Pdp           *OvfParseDescriptorParams `xml:"pdp,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		OvfDescriptor: ovfDescriptor,
 		Pdp:           pdp,
 	}
@@ -52414,7 +54098,11 @@ func (mo *OvfManager) ParseDescriptor(
 		Returnval *OvfParseDescriptorResult `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -52444,7 +54132,7 @@ func (mo *OvfManager) ValidateHost(
 		Host          *HostSystem             `xml:"host,omitempty"`
 		Vhp           *OvfValidateHostParams  `xml:"vhp,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		OvfDescriptor: ovfDescriptor,
 		Host:          host,
 		Vhp:           vhp,
@@ -52454,7 +54142,11 @@ func (mo *OvfManager) ValidateHost(
 		Returnval *OvfValidateHostResult `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -54131,11 +55823,15 @@ func (mo *PerformanceManager) CreatePerfInterval(
 		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		IntervalId *PerfInterval           `xml:"intervalId,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		IntervalId: intervalId,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -54164,7 +55860,7 @@ func (mo *PerformanceManager) QueryAvailablePerfMetric(
 		EndTime    time.Time               `xml:"endTime,omitempty"`
 		IntervalId int32                   `xml:"intervalId,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity:     entity,
 		BeginTime:  beginTime,
 		EndTime:    endTime,
@@ -54175,7 +55871,11 @@ func (mo *PerformanceManager) QueryAvailablePerfMetric(
 		Returnval []*PerfMetricId `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -54203,7 +55903,7 @@ func (mo *PerformanceManager) QueryPerf(
 		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		QuerySpec []*PerfQuerySpec        `xml:"querySpec,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		QuerySpec: querySpec,
 	}
 
@@ -54211,7 +55911,11 @@ func (mo *PerformanceManager) QueryPerf(
 		Returnval []*PerfEntityMetricBase `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -54247,7 +55951,7 @@ func (mo *PerformanceManager) QueryPerfComposite(
 		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		QuerySpec *PerfQuerySpec          `xml:"querySpec,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		QuerySpec: querySpec,
 	}
 
@@ -54255,7 +55959,11 @@ func (mo *PerformanceManager) QueryPerfComposite(
 		Returnval *PerfCompositeMetric `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -54279,7 +55987,7 @@ func (mo *PerformanceManager) QueryPerfCounter(
 		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		CounterId []int32                 `xml:"counterId,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		CounterId: counterId,
 	}
 
@@ -54287,7 +55995,11 @@ func (mo *PerformanceManager) QueryPerfCounter(
 		Returnval []*PerfCounterInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -54316,7 +56028,7 @@ func (mo *PerformanceManager) QueryPerfCounterByLevel(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Level   int32                   `xml:"level,omitempty"`
 	}{
-		This:  mo.This,
+		This:  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Level: level,
 	}
 
@@ -54324,7 +56036,11 @@ func (mo *PerformanceManager) QueryPerfCounterByLevel(
 		Returnval []*PerfCounterInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -54351,7 +56067,7 @@ func (mo *PerformanceManager) QueryPerfProviderSummary(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  *ManagedObjectReference `xml:"entity,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity: entity,
 	}
 
@@ -54359,7 +56075,11 @@ func (mo *PerformanceManager) QueryPerfProviderSummary(
 		Returnval *PerfProviderSummary `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -54387,11 +56107,15 @@ func (mo *PerformanceManager) RemovePerfInterval(
 		This         *ManagedObjectReference `xml:"_this,omitempty"`
 		SamplePeriod int32                   `xml:"samplePeriod,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		SamplePeriod: samplePeriod,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -54419,11 +56143,15 @@ func (mo *PerformanceManager) ResetCounterLevelMapping(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		Counters []int32                 `xml:"counters,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Counters: counters,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -54539,11 +56267,15 @@ func (mo *PerformanceManager) UpdateCounterLevelMapping(
 		This            *ManagedObjectReference                  `xml:"_this,omitempty"`
 		CounterLevelMap []*PerformanceManagerCounterLevelMapping `xml:"counterLevelMap,omitempty"`
 	}{
-		This:            mo.This,
+		This:            &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		CounterLevelMap: counterLevelMap,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -54642,11 +56374,15 @@ func (mo *PerformanceManager) UpdatePerfInterval(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		Interval *PerfInterval           `xml:"interval,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Interval: interval,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -55667,11 +57403,15 @@ func (mo *Profile) AssociateProfile(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  []*ManagedEntity        `xml:"entity,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity: entity,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -55695,7 +57435,7 @@ func (mo *Profile) CheckProfileCompliance_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  []*ManagedEntity        `xml:"entity,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity: entity,
 	}
 
@@ -55703,7 +57443,11 @@ func (mo *Profile) CheckProfileCompliance_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -55724,10 +57468,14 @@ func (mo *Profile) DestroyProfile() error {
 		XMLName xml.Name                `xml:"DestroyProfile"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -55751,11 +57499,15 @@ func (mo *Profile) DissociateProfile(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  []*ManagedEntity        `xml:"entity,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity: entity,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -55779,14 +57531,18 @@ func (mo *Profile) ExportProfile() (string, error) {
 		XMLName xml.Name                `xml:"ExportProfile"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -55809,14 +57565,18 @@ func (mo *Profile) RetrieveDescription() (*ProfileDescription, error) {
 		XMLName xml.Name                `xml:"RetrieveDescription"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *ProfileDescription `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -55896,7 +57656,7 @@ func (mo *ProfileComplianceManager) CheckCompliance_Task(
 		Profile []*Profile              `xml:"profile,omitempty"`
 		Entity  []*ManagedEntity        `xml:"entity,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Profile: profile,
 		Entity:  entity,
 	}
@@ -55905,7 +57665,11 @@ func (mo *ProfileComplianceManager) CheckCompliance_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -55930,12 +57694,16 @@ func (mo *ProfileComplianceManager) ClearComplianceStatus(
 		Profile []*Profile              `xml:"profile,omitempty"`
 		Entity  []*ManagedEntity        `xml:"entity,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Profile: profile,
 		Entity:  entity,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -55960,7 +57728,7 @@ func (mo *ProfileComplianceManager) QueryComplianceStatus(
 		Profile []*Profile              `xml:"profile,omitempty"`
 		Entity  []*ManagedEntity        `xml:"entity,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Profile: profile,
 		Entity:  entity,
 	}
@@ -55969,7 +57737,11 @@ func (mo *ProfileComplianceManager) QueryComplianceStatus(
 		Returnval []*ComplianceResult `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -55994,7 +57766,7 @@ func (mo *ProfileComplianceManager) QueryExpressionMetadata(
 		ExpressionName []string                `xml:"expressionName,omitempty"`
 		Profile        *Profile                `xml:"profile,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ExpressionName: expressionName,
 		Profile:        profile,
 	}
@@ -56003,7 +57775,11 @@ func (mo *ProfileComplianceManager) QueryExpressionMetadata(
 		Returnval []*ProfileExpressionMetadata `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -56357,7 +58133,7 @@ func (mo *ProfileManager) CreateProfile(
 		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		CreateSpec *ProfileCreateSpec      `xml:"createSpec,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		CreateSpec: createSpec,
 	}
 
@@ -56365,7 +58141,11 @@ func (mo *ProfileManager) CreateProfile(
 		Returnval *Profile `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -56391,7 +58171,7 @@ func (mo *ProfileManager) FindAssociatedProfile(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity: entity,
 	}
 
@@ -56399,7 +58179,11 @@ func (mo *ProfileManager) FindAssociatedProfile(
 		Returnval []*Profile `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -56426,7 +58210,7 @@ func (mo *ProfileManager) QueryPolicyMetadata(
 		PolicyName []string                `xml:"policyName,omitempty"`
 		Profile    *Profile                `xml:"profile,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		PolicyName: policyName,
 		Profile:    profile,
 	}
@@ -56435,7 +58219,11 @@ func (mo *ProfileManager) QueryPolicyMetadata(
 		Returnval []*ProfilePolicyMetadata `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -56818,11 +58606,15 @@ func (mo *PropertyCollector) CancelRetrievePropertiesEx(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Token   string                  `xml:"token,omitempty"`
 	}{
-		This:  mo.This,
+		This:  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Token: token,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -56845,10 +58637,14 @@ func (mo *PropertyCollector) CancelWaitForUpdates() error {
 		XMLName xml.Name                `xml:"CancelWaitForUpdates"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -56878,7 +58674,7 @@ func (mo *PropertyCollector) CheckForUpdates(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Version string                  `xml:"version,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Version: version,
 	}
 
@@ -56886,7 +58682,11 @@ func (mo *PropertyCollector) CheckForUpdates(
 		Returnval *UpdateSet `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -56912,7 +58712,7 @@ func (mo *PropertyCollector) ContinueRetrievePropertiesEx(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Token   string                  `xml:"token,omitempty"`
 	}{
-		This:  mo.This,
+		This:  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Token: token,
 	}
 
@@ -56920,7 +58720,11 @@ func (mo *PropertyCollector) ContinueRetrievePropertiesEx(
 		Returnval *RetrieveResult `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -56945,7 +58749,7 @@ func (mo *PropertyCollector) CreateFilter(
 		Spec           *PropertyFilterSpec     `xml:"spec,omitempty"`
 		PartialUpdates bool                    `xml:"partialUpdates,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec:           spec,
 		PartialUpdates: partialUpdates,
 	}
@@ -56954,7 +58758,11 @@ func (mo *PropertyCollector) CreateFilter(
 		Returnval *PropertyFilter `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -57017,14 +58825,18 @@ func (mo *PropertyCollector) CreatePropertyCollector() (*PropertyCollector, erro
 		XMLName xml.Name                `xml:"CreatePropertyCollector"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *PropertyCollector `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -57057,10 +58869,14 @@ func (mo *PropertyCollector) DestroyPropertyCollector() error {
 		XMLName xml.Name                `xml:"DestroyPropertyCollector"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -57096,7 +58912,7 @@ func (mo *PropertyCollector) RetrieveProperties(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		SpecSet []*PropertyFilterSpec   `xml:"specSet,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		SpecSet: specSet,
 	}
 
@@ -57104,7 +58920,11 @@ func (mo *PropertyCollector) RetrieveProperties(
 		Returnval []*ObjectContent `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -57140,7 +58960,7 @@ func (mo *PropertyCollector) RetrievePropertiesEx(
 		SpecSet []*PropertyFilterSpec   `xml:"specSet,omitempty"`
 		Options *RetrieveOptions        `xml:"options,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		SpecSet: specSet,
 		Options: options,
 	}
@@ -57149,7 +58969,11 @@ func (mo *PropertyCollector) RetrievePropertiesEx(
 		Returnval *RetrieveResult `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -57177,7 +59001,7 @@ func (mo *PropertyCollector) WaitForUpdates(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Version string                  `xml:"version,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Version: version,
 	}
 
@@ -57185,7 +59009,11 @@ func (mo *PropertyCollector) WaitForUpdates(
 		Returnval *UpdateSet `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -57225,7 +59053,7 @@ func (mo *PropertyCollector) WaitForUpdatesEx(
 		Version string                  `xml:"version,omitempty"`
 		Options *WaitOptions            `xml:"options,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Version: version,
 		Options: options,
 	}
@@ -57234,7 +59062,11 @@ func (mo *PropertyCollector) WaitForUpdatesEx(
 		Returnval *UpdateSet `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -57310,10 +59142,14 @@ func (mo *PropertyFilter) DestroyPropertyFilter() error {
 		XMLName xml.Name                `xml:"DestroyPropertyFilter"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -58368,7 +60204,7 @@ func (mo *ResourcePlanningManager) EstimateDatabaseSize(
 		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		DbSizeParam *DatabaseSizeParam      `xml:"dbSizeParam,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		DbSizeParam: dbSizeParam,
 	}
 
@@ -58376,7 +60212,11 @@ func (mo *ResourcePlanningManager) EstimateDatabaseSize(
 		Returnval *DatabaseSizeEstimate `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -58711,7 +60551,7 @@ func (mo *ResourcePool) CreateChildVM_Task(
 		Config  *VirtualMachineConfigSpec `xml:"config,omitempty"`
 		Host    *HostSystem               `xml:"host,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Config: config,
 		Host:   host,
 	}
@@ -58720,7 +60560,11 @@ func (mo *ResourcePool) CreateChildVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -58754,7 +60598,7 @@ func (mo *ResourcePool) CreateResourcePool(
 		Name    string                  `xml:"name,omitempty"`
 		Spec    *ResourceConfigSpec     `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name: name,
 		Spec: spec,
 	}
@@ -58763,7 +60607,11 @@ func (mo *ResourcePool) CreateResourcePool(
 		Returnval *ResourcePool `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -58797,7 +60645,7 @@ func (mo *ResourcePool) CreateVApp(
 		ConfigSpec *VAppConfigSpec         `xml:"configSpec,omitempty"`
 		VmFolder   *Folder                 `xml:"vmFolder,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:       name,
 		ResSpec:    resSpec,
 		ConfigSpec: configSpec,
@@ -58808,7 +60656,11 @@ func (mo *ResourcePool) CreateVApp(
 		Returnval *VirtualApp `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -58853,10 +60705,14 @@ func (mo *ResourcePool) DestroyChildren() error {
 		XMLName xml.Name                `xml:"DestroyChildren"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -58927,7 +60783,7 @@ func (mo *ResourcePool) ImportVApp(
 		Folder  *Folder                 `xml:"folder,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec:   spec,
 		Folder: folder,
 		Host:   host,
@@ -58937,7 +60793,11 @@ func (mo *ResourcePool) ImportVApp(
 		Returnval *HttpNfcLease `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -59003,11 +60863,15 @@ func (mo *ResourcePool) MoveIntoResourcePool(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		List    []*ManagedEntity        `xml:"list,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		List: list,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -59030,14 +60894,18 @@ func (mo *ResourcePool) QueryResourceConfigOption() (*ResourceConfigOption, erro
 		XMLName xml.Name                `xml:"QueryResourceConfigOption"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *ResourceConfigOption `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -59066,10 +60934,14 @@ func (mo *ResourcePool) RefreshRuntime() error {
 		XMLName xml.Name                `xml:"RefreshRuntime"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -59110,7 +60982,7 @@ func (mo *ResourcePool) RegisterChildVM_Task(
 		Name    string                  `xml:"name,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Path: path,
 		Name: name,
 		Host: host,
@@ -59120,7 +60992,11 @@ func (mo *ResourcePool) RegisterChildVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -59169,11 +61045,15 @@ func (mo *ResourcePool) UpdateChildResourceConfiguration(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    []*ResourceConfigSpec   `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec: spec,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -59216,12 +61096,16 @@ func (mo *ResourcePool) UpdateConfig(
 		Name    string                  `xml:"name,omitempty"`
 		Config  *ResourceConfigSpec     `xml:"config,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:   name,
 		Config: config,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -59861,11 +61745,15 @@ func (mo *ScheduledTask) ReconfigureScheduledTask(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *ScheduledTaskSpec      `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec: spec,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -59886,10 +61774,14 @@ func (mo *ScheduledTask) RemoveScheduledTask() error {
 		XMLName xml.Name                `xml:"RemoveScheduledTask"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -59911,10 +61803,14 @@ func (mo *ScheduledTask) RunScheduledTask() error {
 		XMLName xml.Name                `xml:"RunScheduledTask"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -60153,7 +62049,7 @@ func (mo *ScheduledTaskManager) CreateObjectScheduledTask(
 		Obj     *ManagedObjectReference `xml:"obj,omitempty"`
 		Spec    *ScheduledTaskSpec      `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Obj:  obj,
 		Spec: spec,
 	}
@@ -60162,7 +62058,11 @@ func (mo *ScheduledTaskManager) CreateObjectScheduledTask(
 		Returnval *ScheduledTask `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -60187,7 +62087,7 @@ func (mo *ScheduledTaskManager) CreateScheduledTask(
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 		Spec    *ScheduledTaskSpec      `xml:"spec,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity: entity,
 		Spec:   spec,
 	}
@@ -60196,7 +62096,11 @@ func (mo *ScheduledTaskManager) CreateScheduledTask(
 		Returnval *ScheduledTask `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -60222,7 +62126,7 @@ func (mo *ScheduledTaskManager) RetrieveEntityScheduledTask(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity: entity,
 	}
 
@@ -60230,7 +62134,11 @@ func (mo *ScheduledTaskManager) RetrieveEntityScheduledTask(
 		Returnval []*ScheduledTask `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -60258,7 +62166,7 @@ func (mo *ScheduledTaskManager) RetrieveObjectScheduledTask(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Obj     *ManagedObjectReference `xml:"obj,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Obj:  obj,
 	}
 
@@ -60266,7 +62174,11 @@ func (mo *ScheduledTaskManager) RetrieveObjectScheduledTask(
 		Returnval []*ScheduledTask `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -60639,7 +62551,7 @@ func (mo *SearchIndex) FindAllByDnsName(
 		DnsName    string                  `xml:"dnsName,omitempty"`
 		VmSearch   bool                    `xml:"vmSearch,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Datacenter: datacenter,
 		DnsName:    dnsName,
 		VmSearch:   vmSearch,
@@ -60649,7 +62561,11 @@ func (mo *SearchIndex) FindAllByDnsName(
 		Returnval []*ManagedEntity `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -60679,7 +62595,7 @@ func (mo *SearchIndex) FindAllByIp(
 		Ip         string                  `xml:"ip,omitempty"`
 		VmSearch   bool                    `xml:"vmSearch,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Datacenter: datacenter,
 		Ip:         ip,
 		VmSearch:   vmSearch,
@@ -60689,7 +62605,11 @@ func (mo *SearchIndex) FindAllByIp(
 		Returnval []*ManagedEntity `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -60718,7 +62638,7 @@ func (mo *SearchIndex) FindAllByUuid(
 		VmSearch     bool                    `xml:"vmSearch,omitempty"`
 		InstanceUuid bool                    `xml:"instanceUuid,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Datacenter:   datacenter,
 		Uuid:         uuid,
 		VmSearch:     vmSearch,
@@ -60729,7 +62649,11 @@ func (mo *SearchIndex) FindAllByUuid(
 		Returnval []*ManagedEntity `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -60754,7 +62678,7 @@ func (mo *SearchIndex) FindByDatastorePath(
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 		Path       string                  `xml:"path,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Datacenter: datacenter,
 		Path:       path,
 	}
@@ -60763,7 +62687,11 @@ func (mo *SearchIndex) FindByDatastorePath(
 		Returnval *VirtualMachine `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -60790,7 +62718,7 @@ func (mo *SearchIndex) FindByDnsName(
 		DnsName    string                  `xml:"dnsName,omitempty"`
 		VmSearch   bool                    `xml:"vmSearch,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Datacenter: datacenter,
 		DnsName:    dnsName,
 		VmSearch:   vmSearch,
@@ -60800,7 +62728,11 @@ func (mo *SearchIndex) FindByDnsName(
 		Returnval *ManagedEntity `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -60830,7 +62762,7 @@ func (mo *SearchIndex) FindByInventoryPath(
 		This          *ManagedObjectReference `xml:"_this,omitempty"`
 		InventoryPath string                  `xml:"inventoryPath,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		InventoryPath: inventoryPath,
 	}
 
@@ -60838,7 +62770,11 @@ func (mo *SearchIndex) FindByInventoryPath(
 		Returnval *ManagedEntity `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -60866,7 +62802,7 @@ func (mo *SearchIndex) FindByIp(
 		Ip         string                  `xml:"ip,omitempty"`
 		VmSearch   bool                    `xml:"vmSearch,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Datacenter: datacenter,
 		Ip:         ip,
 		VmSearch:   vmSearch,
@@ -60876,7 +62812,11 @@ func (mo *SearchIndex) FindByIp(
 		Returnval *ManagedEntity `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -60903,7 +62843,7 @@ func (mo *SearchIndex) FindByUuid(
 		VmSearch     bool                    `xml:"vmSearch,omitempty"`
 		InstanceUuid bool                    `xml:"instanceUuid,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Datacenter:   datacenter,
 		Uuid:         uuid,
 		VmSearch:     vmSearch,
@@ -60914,7 +62854,11 @@ func (mo *SearchIndex) FindByUuid(
 		Returnval *ManagedEntity `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -60944,7 +62888,7 @@ func (mo *SearchIndex) FindChild(
 		Entity  *ManagedEntity          `xml:"entity,omitempty"`
 		Name    string                  `xml:"name,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Entity: entity,
 		Name:   name,
 	}
@@ -60953,7 +62897,11 @@ func (mo *SearchIndex) FindChild(
 		Returnval *ManagedEntity `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -61535,14 +63483,18 @@ func (mo *ServiceInstance) CurrentTime() (time.Time, error) {
 		XMLName xml.Name                `xml:"CurrentTime"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval time.Time `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return time.Now(), err
 	}
@@ -61574,7 +63526,7 @@ func (mo *ServiceInstance) QueryVMotionCompatibility(
 		Host          []*HostSystem           `xml:"host,omitempty"`
 		Compatibility []string                `xml:"compatibility,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:            vm,
 		Host:          host,
 		Compatibility: compatibility,
@@ -61584,7 +63536,11 @@ func (mo *ServiceInstance) QueryVMotionCompatibility(
 		Returnval []*HostVMotionCompatibility `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -61607,14 +63563,18 @@ func (mo *ServiceInstance) RetrieveProductComponents() ([]*ProductComponentInfo,
 		XMLName xml.Name                `xml:"RetrieveProductComponents"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval []*ProductComponentInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -61635,14 +63595,18 @@ func (mo *ServiceInstance) RetrieveServiceContent() (*ServiceContent, error) {
 		XMLName xml.Name                `xml:"RetrieveServiceContent"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *ServiceContent `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -61678,7 +63642,7 @@ func (mo *ServiceInstance) ValidateMigration(
 		Pool     *ResourcePool                  `xml:"pool,omitempty"`
 		Host     *HostSystem                    `xml:"host,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:       vm,
 		State:    state,
 		TestType: testType,
@@ -61690,7 +63654,11 @@ func (mo *ServiceInstance) ValidateMigration(
 		Returnval []*Event `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -61753,7 +63721,7 @@ func (mo *ServiceManager) QueryServiceList(
 		ServiceName string                  `xml:"serviceName,omitempty"`
 		Location    []string                `xml:"location,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ServiceName: serviceName,
 		Location:    location,
 	}
@@ -61762,7 +63730,11 @@ func (mo *ServiceManager) QueryServiceList(
 		Returnval []*ServiceManagerServiceInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -61982,14 +63954,18 @@ func (mo *SessionManager) AcquireCloneTicket() (string, error) {
 		XMLName xml.Name                `xml:"AcquireCloneTicket"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -62016,7 +63992,7 @@ func (mo *SessionManager) AcquireGenericServiceTicket(
 		This    *ManagedObjectReference           `xml:"_this,omitempty"`
 		Spec    *SessionManagerServiceRequestSpec `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec: spec,
 	}
 
@@ -62024,7 +64000,11 @@ func (mo *SessionManager) AcquireGenericServiceTicket(
 		Returnval *SessionManagerGenericServiceTicket `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -62068,7 +64048,7 @@ func (mo *SessionManager) AcquireLocalTicket(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		UserName string                  `xml:"userName,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		UserName: userName,
 	}
 
@@ -62076,7 +64056,11 @@ func (mo *SessionManager) AcquireLocalTicket(
 		Returnval *SessionManagerLocalTicket `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -62105,7 +64089,7 @@ func (mo *SessionManager) CloneSession(
 		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		CloneTicket string                  `xml:"cloneTicket,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		CloneTicket: cloneTicket,
 	}
 
@@ -62113,7 +64097,11 @@ func (mo *SessionManager) CloneSession(
 		Returnval *UserSession `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -62146,7 +64134,7 @@ func (mo *SessionManager) ImpersonateUser(
 		UserName string                  `xml:"userName,omitempty"`
 		Locale   string                  `xml:"locale,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		UserName: userName,
 		Locale:   locale,
 	}
@@ -62155,7 +64143,11 @@ func (mo *SessionManager) ImpersonateUser(
 		Returnval *UserSession `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -62182,7 +64174,7 @@ func (mo *SessionManager) Login(
 		Password string                  `xml:"password,omitempty"`
 		Locale   string                  `xml:"locale,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		UserName: userName,
 		Password: password,
 		Locale:   locale,
@@ -62192,7 +64184,11 @@ func (mo *SessionManager) Login(
 		Returnval *UserSession `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -62243,7 +64239,7 @@ func (mo *SessionManager) LoginBySSPI(
 		Base64Token string                  `xml:"base64Token,omitempty"`
 		Locale      string                  `xml:"locale,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Base64Token: base64Token,
 		Locale:      locale,
 	}
@@ -62252,7 +64248,11 @@ func (mo *SessionManager) LoginBySSPI(
 		Returnval *UserSession `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -62309,7 +64309,7 @@ func (mo *SessionManager) LoginByToken(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Locale  string                  `xml:"locale,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Locale: locale,
 	}
 
@@ -62317,7 +64317,11 @@ func (mo *SessionManager) LoginByToken(
 		Returnval *UserSession `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -62354,7 +64358,7 @@ func (mo *SessionManager) LoginExtensionByCertificate(
 		ExtensionKey string                  `xml:"extensionKey,omitempty"`
 		Locale       string                  `xml:"locale,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ExtensionKey: extensionKey,
 		Locale:       locale,
 	}
@@ -62363,7 +64367,11 @@ func (mo *SessionManager) LoginExtensionByCertificate(
 		Returnval *UserSession `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -62397,7 +64405,7 @@ func (mo *SessionManager) LoginExtensionBySubjectName(
 		ExtensionKey string                  `xml:"extensionKey,omitempty"`
 		Locale       string                  `xml:"locale,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ExtensionKey: extensionKey,
 		Locale:       locale,
 	}
@@ -62406,7 +64414,11 @@ func (mo *SessionManager) LoginExtensionBySubjectName(
 		Returnval *UserSession `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -62427,10 +64439,14 @@ func (mo *SessionManager) Logout() error {
 		XMLName xml.Name                `xml:"Logout"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -62459,7 +64475,7 @@ func (mo *SessionManager) SessionIsActive(
 		SessionID string                  `xml:"sessionID,omitempty"`
 		UserName  string                  `xml:"userName,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		SessionID: sessionID,
 		UserName:  userName,
 	}
@@ -62468,7 +64484,11 @@ func (mo *SessionManager) SessionIsActive(
 		Returnval bool `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return false, err
 	}
@@ -62492,11 +64512,15 @@ func (mo *SessionManager) SetLocale(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Locale  string                  `xml:"locale,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Locale: locale,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -62527,11 +64551,15 @@ func (mo *SessionManager) TerminateSession(
 		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		SessionId []string                `xml:"sessionId,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		SessionId: sessionId,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -62557,11 +64585,15 @@ func (mo *SessionManager) UpdateServiceMessage(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Message string                  `xml:"message,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Message: message,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -62831,7 +64863,7 @@ func (mo *SimpleCommand) ExecuteSimpleCommand(
 		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Arguments []string                `xml:"arguments,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Arguments: arguments,
 	}
 
@@ -62839,7 +64871,11 @@ func (mo *SimpleCommand) ExecuteSimpleCommand(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -64151,7 +66187,7 @@ func (mo *StorageResourceManager) ApplyStorageDrsRecommendation_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Key     []string                `xml:"key,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Key:  key,
 	}
 
@@ -64159,7 +66195,11 @@ func (mo *StorageResourceManager) ApplyStorageDrsRecommendation_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -64196,7 +66236,7 @@ func (mo *StorageResourceManager) ApplyStorageDrsRecommendationToPod_Task(
 		Pod     *StoragePod             `xml:"pod,omitempty"`
 		Key     string                  `xml:"key,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Pod:  pod,
 		Key:  key,
 	}
@@ -64205,7 +66245,11 @@ func (mo *StorageResourceManager) ApplyStorageDrsRecommendationToPod_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -64234,11 +66278,15 @@ func (mo *StorageResourceManager) CancelStorageDrsRecommendation(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Key     []string                `xml:"key,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Key:  key,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -64272,7 +66320,7 @@ func (mo *StorageResourceManager) ConfigureDatastoreIORM_Task(
 		Datastore *Datastore              `xml:"datastore,omitempty"`
 		Spec      *StorageIORMConfigSpec  `xml:"spec,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Datastore: datastore,
 		Spec:      spec,
 	}
@@ -64281,7 +66329,11 @@ func (mo *StorageResourceManager) ConfigureDatastoreIORM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -64311,7 +66363,7 @@ func (mo *StorageResourceManager) ConfigureStorageDrsForPod_Task(
 		Spec    *StorageDrsConfigSpec   `xml:"spec,omitempty"`
 		Modify  bool                    `xml:"modify,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Pod:    pod,
 		Spec:   spec,
 		Modify: modify,
@@ -64321,7 +66373,11 @@ func (mo *StorageResourceManager) ConfigureStorageDrsForPod_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -64354,7 +66410,7 @@ func (mo *StorageResourceManager) QueryDatastorePerformanceSummary(
 		This      *ManagedObjectReference `xml:"_this,omitempty"`
 		Datastore *Datastore              `xml:"datastore,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Datastore: datastore,
 	}
 
@@ -64362,7 +66418,11 @@ func (mo *StorageResourceManager) QueryDatastorePerformanceSummary(
 		Returnval []*StoragePerformanceSummary `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -64388,7 +66448,7 @@ func (mo *StorageResourceManager) QueryIORMConfigOption(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host: host,
 	}
 
@@ -64396,7 +66456,11 @@ func (mo *StorageResourceManager) QueryIORMConfigOption(
 		Returnval *StorageIORMConfigOption `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -64502,7 +66566,7 @@ func (mo *StorageResourceManager) RecommendDatastores(
 		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		StorageSpec *StoragePlacementSpec   `xml:"storageSpec,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		StorageSpec: storageSpec,
 	}
 
@@ -64510,7 +66574,11 @@ func (mo *StorageResourceManager) RecommendDatastores(
 		Returnval *StoragePlacementResult `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -64540,11 +66608,15 @@ func (mo *StorageResourceManager) RefreshStorageDrsRecommendation(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Pod     *StoragePod             `xml:"pod,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Pod:  pod,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -64754,10 +66826,14 @@ func (mo *Task) CancelTask() error {
 		XMLName xml.Name                `xml:"CancelTask"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -64785,11 +66861,15 @@ func (mo *Task) SetTaskDescription(
 		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		Description *LocalizableMessage     `xml:"description,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Description: description,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -64820,13 +66900,17 @@ func (mo *Task) SetTaskState(
 		Result  interface{}             `xml:"result,omitempty"`
 		Fault   *MethodFault            `xml:"fault,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		State:  state,
 		Result: result,
 		Fault:  fault,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -64857,11 +66941,15 @@ func (mo *Task) UpdateProgress(
 		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		PercentDone int32                   `xml:"percentDone,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		PercentDone: percentDone,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -65105,7 +67193,7 @@ func (mo *TaskHistoryCollector) ReadNextTasks(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		MaxCount int32                   `xml:"maxCount,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		MaxCount: maxCount,
 	}
 
@@ -65113,7 +67201,11 @@ func (mo *TaskHistoryCollector) ReadNextTasks(
 		Returnval []*TaskInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -65141,7 +67233,7 @@ func (mo *TaskHistoryCollector) ReadPreviousTasks(
 		This     *ManagedObjectReference `xml:"_this,omitempty"`
 		MaxCount int32                   `xml:"maxCount,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		MaxCount: maxCount,
 	}
 
@@ -65149,7 +67241,11 @@ func (mo *TaskHistoryCollector) ReadPreviousTasks(
 		Returnval []*TaskInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -65392,7 +67488,7 @@ func (mo *TaskManager) CreateCollectorForTasks(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Filter  *TaskFilterSpec         `xml:"filter,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Filter: filter,
 	}
 
@@ -65400,7 +67496,11 @@ func (mo *TaskManager) CreateCollectorForTasks(
 		Returnval *TaskHistoryCollector `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -65435,7 +67535,7 @@ func (mo *TaskManager) CreateTask(
 		Cancelable    bool                    `xml:"cancelable,omitempty"`
 		ParentTaskKey string                  `xml:"parentTaskKey,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Obj:           obj,
 		TaskTypeId:    taskTypeId,
 		InitiatedBy:   initiatedBy,
@@ -65447,7 +67547,11 @@ func (mo *TaskManager) CreateTask(
 		Returnval *TaskInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -66787,7 +68891,7 @@ func (mo *UserDirectory) RetrieveUserGroups(
 		FindUsers      bool                    `xml:"findUsers,omitempty"`
 		FindGroups     bool                    `xml:"findGroups,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Domain:         domain,
 		SearchStr:      searchStr,
 		BelongsToGroup: belongsToGroup,
@@ -66801,7 +68905,11 @@ func (mo *UserDirectory) RetrieveUserGroups(
 		Returnval []*UserSearchResult `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -68947,10 +71055,14 @@ func (mo *View) DestroyView() error {
 		XMLName xml.Name                `xml:"DestroyView"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -69075,7 +71187,7 @@ func (mo *ViewManager) CreateContainerView(
 		Type      []string                `xml:"type,omitempty"`
 		Recursive bool                    `xml:"recursive,omitempty"`
 	}{
-		This:      mo.This,
+		This:      &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Container: container,
 		Type:      type_,
 		Recursive: recursive,
@@ -69085,7 +71197,11 @@ func (mo *ViewManager) CreateContainerView(
 		Returnval *ContainerView `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -69106,14 +71222,18 @@ func (mo *ViewManager) CreateInventoryView() (*InventoryView, error) {
 		XMLName xml.Name                `xml:"CreateInventoryView"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *InventoryView `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -69140,7 +71260,7 @@ func (mo *ViewManager) CreateListView(
 		This    *ManagedObjectReference   `xml:"_this,omitempty"`
 		Obj     []*ManagedObjectReference `xml:"obj,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Obj:  obj,
 	}
 
@@ -69148,7 +71268,11 @@ func (mo *ViewManager) CreateListView(
 		Returnval *ListView `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -69173,7 +71297,7 @@ func (mo *ViewManager) CreateListViewFromView(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		View    *View                   `xml:"view,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		View: view,
 	}
 
@@ -69181,7 +71305,11 @@ func (mo *ViewManager) CreateListViewFromView(
 		Returnval *ListView `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -69433,7 +71561,7 @@ func (mo *VirtualApp) CloneVApp_Task(
 		Target  *ResourcePool           `xml:"target,omitempty"`
 		Spec    *VAppCloneSpec          `xml:"spec,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:   name,
 		Target: target,
 		Spec:   spec,
@@ -69443,7 +71571,11 @@ func (mo *VirtualApp) CloneVApp_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -69469,14 +71601,18 @@ func (mo *VirtualApp) ExportVApp() (*HttpNfcLease, error) {
 		XMLName xml.Name                `xml:"ExportVApp"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *HttpNfcLease `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -69510,7 +71646,7 @@ func (mo *VirtualApp) PowerOffVApp_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Force   bool                    `xml:"force,omitempty"`
 	}{
-		This:  mo.This,
+		This:  &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Force: force,
 	}
 
@@ -69518,7 +71654,11 @@ func (mo *VirtualApp) PowerOffVApp_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -69557,14 +71697,18 @@ func (mo *VirtualApp) PowerOnVApp_Task() (*Task, error) {
 		XMLName xml.Name                `xml:"PowerOnVApp_Task"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -69596,14 +71740,18 @@ func (mo *VirtualApp) SuspendVApp_Task() (*Task, error) {
 		XMLName xml.Name                `xml:"SuspendVApp_Task"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -69630,14 +71778,18 @@ func (mo *VirtualApp) UnregisterVApp_Task() (*Task, error) {
 		XMLName xml.Name                `xml:"UnregisterVApp_Task"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -69709,12 +71861,16 @@ func (mo *VirtualApp) UpdateLinkedChildren(
 		AddChangeSet []*VirtualAppLinkInfo   `xml:"addChangeSet,omitempty"`
 		RemoveSet    []*ManagedEntity        `xml:"removeSet,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		AddChangeSet: addChangeSet,
 		RemoveSet:    removeSet,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -69742,11 +71898,15 @@ func (mo *VirtualApp) UpdateVAppConfig(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *VAppConfigSpec         `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec: spec,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -71210,7 +73370,7 @@ func (mo *VirtualDiskManager) CopyVirtualDisk_Task(
 		DestSpec         *VirtualDiskSpec        `xml:"destSpec,omitempty"`
 		Force            bool                    `xml:"force,omitempty"`
 	}{
-		This:             mo.This,
+		This:             &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		SourceName:       sourceName,
 		SourceDatacenter: sourceDatacenter,
 		DestName:         destName,
@@ -71223,7 +73383,11 @@ func (mo *VirtualDiskManager) CopyVirtualDisk_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -71258,7 +73422,7 @@ func (mo *VirtualDiskManager) CreateVirtualDisk_Task(
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 		Spec       *VirtualDiskSpec        `xml:"spec,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:       name,
 		Datacenter: datacenter,
 		Spec:       spec,
@@ -71268,7 +73432,11 @@ func (mo *VirtualDiskManager) CreateVirtualDisk_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -71305,7 +73473,7 @@ func (mo *VirtualDiskManager) DefragmentVirtualDisk_Task(
 		Name       string                  `xml:"name,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:       name,
 		Datacenter: datacenter,
 	}
@@ -71314,7 +73482,11 @@ func (mo *VirtualDiskManager) DefragmentVirtualDisk_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -71349,7 +73521,7 @@ func (mo *VirtualDiskManager) DeleteVirtualDisk_Task(
 		Name       string                  `xml:"name,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:       name,
 		Datacenter: datacenter,
 	}
@@ -71358,7 +73530,11 @@ func (mo *VirtualDiskManager) DeleteVirtualDisk_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -71397,7 +73573,7 @@ func (mo *VirtualDiskManager) EagerZeroVirtualDisk_Task(
 		Name       string                  `xml:"name,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:       name,
 		Datacenter: datacenter,
 	}
@@ -71406,7 +73582,11 @@ func (mo *VirtualDiskManager) EagerZeroVirtualDisk_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -71455,7 +73635,7 @@ func (mo *VirtualDiskManager) ExtendVirtualDisk_Task(
 		NewCapacityKb int64                   `xml:"newCapacityKb,omitempty"`
 		EagerZero     bool                    `xml:"eagerZero,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:          name,
 		Datacenter:    datacenter,
 		NewCapacityKb: newCapacityKb,
@@ -71466,7 +73646,11 @@ func (mo *VirtualDiskManager) ExtendVirtualDisk_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -71502,7 +73686,7 @@ func (mo *VirtualDiskManager) InflateVirtualDisk_Task(
 		Name       string                  `xml:"name,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:       name,
 		Datacenter: datacenter,
 	}
@@ -71511,7 +73695,11 @@ func (mo *VirtualDiskManager) InflateVirtualDisk_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -71556,7 +73744,7 @@ func (mo *VirtualDiskManager) MoveVirtualDisk_Task(
 		Force            bool                         `xml:"force,omitempty"`
 		Profile          []*VirtualMachineProfileSpec `xml:"profile,omitempty"`
 	}{
-		This:             mo.This,
+		This:             &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		SourceName:       sourceName,
 		SourceDatacenter: sourceDatacenter,
 		DestName:         destName,
@@ -71569,7 +73757,11 @@ func (mo *VirtualDiskManager) MoveVirtualDisk_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -71606,7 +73798,7 @@ func (mo *VirtualDiskManager) QueryVirtualDiskFragmentation(
 		Name       string                  `xml:"name,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:       name,
 		Datacenter: datacenter,
 	}
@@ -71615,7 +73807,11 @@ func (mo *VirtualDiskManager) QueryVirtualDiskFragmentation(
 		Returnval int32 `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return int32(0), err
 	}
@@ -71649,7 +73845,7 @@ func (mo *VirtualDiskManager) QueryVirtualDiskGeometry(
 		Name       string                  `xml:"name,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:       name,
 		Datacenter: datacenter,
 	}
@@ -71658,7 +73854,11 @@ func (mo *VirtualDiskManager) QueryVirtualDiskGeometry(
 		Returnval *HostDiskDimensionsChs `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -71692,7 +73892,7 @@ func (mo *VirtualDiskManager) QueryVirtualDiskUuid(
 		Name       string                  `xml:"name,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:       name,
 		Datacenter: datacenter,
 	}
@@ -71701,7 +73901,11 @@ func (mo *VirtualDiskManager) QueryVirtualDiskUuid(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -71736,13 +73940,17 @@ func (mo *VirtualDiskManager) SetVirtualDiskUuid(
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 		Uuid       string                  `xml:"uuid,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:       name,
 		Datacenter: datacenter,
 		Uuid:       uuid,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -71785,7 +73993,7 @@ func (mo *VirtualDiskManager) ShrinkVirtualDisk_Task(
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 		Copy       bool                    `xml:"copy,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:       name,
 		Datacenter: datacenter,
 		Copy:       copy,
@@ -71795,7 +74003,11 @@ func (mo *VirtualDiskManager) ShrinkVirtualDisk_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -71830,7 +74042,7 @@ func (mo *VirtualDiskManager) ZeroFillVirtualDisk_Task(
 		Name       string                  `xml:"name,omitempty"`
 		Datacenter *Datacenter             `xml:"datacenter,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:       name,
 		Datacenter: datacenter,
 	}
@@ -71839,7 +74051,11 @@ func (mo *VirtualDiskManager) ZeroFillVirtualDisk_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -73653,14 +75869,18 @@ func (mo *VirtualMachine) AcquireMksTicket() (*VirtualMachineMksTicket, error) {
 		XMLName xml.Name                `xml:"AcquireMksTicket"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *VirtualMachineMksTicket `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -73712,7 +75932,7 @@ func (mo *VirtualMachine) AcquireTicket(
 		This       *ManagedObjectReference `xml:"_this,omitempty"`
 		TicketType string                  `xml:"ticketType,omitempty"`
 	}{
-		This:       mo.This,
+		This:       &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		TicketType: ticketType,
 	}
 
@@ -73720,7 +75940,11 @@ func (mo *VirtualMachine) AcquireTicket(
 		Returnval *VirtualMachineTicket `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -73745,12 +75969,16 @@ func (mo *VirtualMachine) AnswerVM(
 		QuestionId   string                  `xml:"questionId,omitempty"`
 		AnswerChoice string                  `xml:"answerChoice,omitempty"`
 	}{
-		This:         mo.This,
+		This:         &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		QuestionId:   questionId,
 		AnswerChoice: answerChoice,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -73778,11 +76006,15 @@ func (mo *VirtualMachine) CheckCustomizationSpec(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *CustomizationSpec      `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec: spec,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -73844,7 +76076,7 @@ func (mo *VirtualMachine) CloneVM_Task(
 		Name    string                   `xml:"name,omitempty"`
 		Spec    *VirtualMachineCloneSpec `xml:"spec,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Folder: folder,
 		Name:   name,
 		Spec:   spec,
@@ -73854,7 +76086,11 @@ func (mo *VirtualMachine) CloneVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -73887,14 +76123,18 @@ func (mo *VirtualMachine) ConsolidateVMDisks_Task() (*Task, error) {
 		XMLName xml.Name                `xml:"ConsolidateVMDisks_Task"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -73917,14 +76157,18 @@ func (mo *VirtualMachine) CreateScreenshot_Task() (*Task, error) {
 		XMLName xml.Name                `xml:"CreateScreenshot_Task"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -73969,7 +76213,7 @@ func (mo *VirtualMachine) CreateSecondaryVM_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host: host,
 	}
 
@@ -73977,7 +76221,11 @@ func (mo *VirtualMachine) CreateSecondaryVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -74016,7 +76264,7 @@ func (mo *VirtualMachine) CreateSnapshot_Task(
 		Memory      bool                    `xml:"memory,omitempty"`
 		Quiesce     bool                    `xml:"quiesce,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:        name,
 		Description: description,
 		Memory:      memory,
@@ -74027,7 +76275,11 @@ func (mo *VirtualMachine) CreateSnapshot_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -74051,7 +76303,7 @@ func (mo *VirtualMachine) CustomizeVM_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Spec    *CustomizationSpec      `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec: spec,
 	}
 
@@ -74059,7 +76311,11 @@ func (mo *VirtualMachine) CustomizeVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -74082,10 +76338,14 @@ func (mo *VirtualMachine) DefragmentAllDisks() error {
 		XMLName xml.Name                `xml:"DefragmentAllDisks"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -74116,7 +76376,7 @@ func (mo *VirtualMachine) DisableSecondaryVM_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm      *VirtualMachine         `xml:"vm,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:   vm,
 	}
 
@@ -74124,7 +76384,11 @@ func (mo *VirtualMachine) DisableSecondaryVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -74168,7 +76432,7 @@ func (mo *VirtualMachine) EnableSecondaryVM_Task(
 		Vm      *VirtualMachine         `xml:"vm,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:   vm,
 		Host: host,
 	}
@@ -74177,7 +76441,11 @@ func (mo *VirtualMachine) EnableSecondaryVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -74209,14 +76477,18 @@ func (mo *VirtualMachine) EstimateStorageForConsolidateSnapshots_Task() (*Task, 
 		XMLName xml.Name                `xml:"EstimateStorageForConsolidateSnapshots_Task"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -74244,14 +76516,18 @@ func (mo *VirtualMachine) ExportVm() (*HttpNfcLease, error) {
 		XMLName xml.Name                `xml:"ExportVm"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *HttpNfcLease `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -74277,14 +76553,18 @@ func (mo *VirtualMachine) ExtractOvfEnvironment() (string, error) {
 		XMLName xml.Name                `xml:"ExtractOvfEnvironment"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -74311,7 +76591,7 @@ func (mo *VirtualMachine) MakePrimaryVM_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm      *VirtualMachine         `xml:"vm,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:   vm,
 	}
 
@@ -74319,7 +76599,11 @@ func (mo *VirtualMachine) MakePrimaryVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -74341,10 +76625,14 @@ func (mo *VirtualMachine) MarkAsTemplate() error {
 		XMLName xml.Name                `xml:"MarkAsTemplate"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -74370,12 +76658,16 @@ func (mo *VirtualMachine) MarkAsVirtualMachine(
 		Pool    *ResourcePool           `xml:"pool,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Pool: pool,
 		Host: host,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -74407,7 +76699,7 @@ func (mo *VirtualMachine) MigrateVM_Task(
 		Priority *enum.VirtualMachineMovePriority `xml:"priority,omitempty"`
 		State    *enum.VirtualMachinePowerState   `xml:"state,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Pool:     pool,
 		Host:     host,
 		Priority: priority,
@@ -74418,7 +76710,11 @@ func (mo *VirtualMachine) MigrateVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -74442,10 +76738,14 @@ func (mo *VirtualMachine) MountToolsInstaller() error {
 		XMLName xml.Name                `xml:"MountToolsInstaller"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -74470,14 +76770,18 @@ func (mo *VirtualMachine) PowerOffVM_Task() (*Task, error) {
 		XMLName xml.Name                `xml:"PowerOffVM_Task"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -74521,7 +76825,7 @@ func (mo *VirtualMachine) PowerOnVM_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Host    *HostSystem             `xml:"host,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host: host,
 	}
 
@@ -74529,7 +76833,11 @@ func (mo *VirtualMachine) PowerOnVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -74594,7 +76902,7 @@ func (mo *VirtualMachine) PromoteDisks_Task(
 		Unlink  bool                    `xml:"unlink,omitempty"`
 		Disks   []*VirtualDisk          `xml:"disks,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Unlink: unlink,
 		Disks:  disks,
 	}
@@ -74603,7 +76911,11 @@ func (mo *VirtualMachine) PromoteDisks_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -74640,7 +76952,7 @@ func (mo *VirtualMachine) QueryChangedDiskAreas(
 		StartOffset int64                   `xml:"startOffset,omitempty"`
 		ChangeId    string                  `xml:"changeId,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Snapshot:    snapshot,
 		DeviceKey:   deviceKey,
 		StartOffset: startOffset,
@@ -74651,7 +76963,11 @@ func (mo *VirtualMachine) QueryChangedDiskAreas(
 		Returnval *DiskChangeInfo `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -74683,14 +76999,18 @@ func (mo *VirtualMachine) QueryFaultToleranceCompatibility() ([]*MethodFault, er
 		XMLName xml.Name                `xml:"QueryFaultToleranceCompatibility"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval []*MethodFault `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -74715,14 +77035,18 @@ func (mo *VirtualMachine) QueryUnownedFiles() ([]string, error) {
 		XMLName xml.Name                `xml:"QueryUnownedFiles"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval []string `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -74746,10 +77070,14 @@ func (mo *VirtualMachine) RebootGuest() error {
 		XMLName xml.Name                `xml:"RebootGuest"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -74873,7 +77201,7 @@ func (mo *VirtualMachine) ReconfigVM_Task(
 		This    *ManagedObjectReference   `xml:"_this,omitempty"`
 		Spec    *VirtualMachineConfigSpec `xml:"spec,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec: spec,
 	}
 
@@ -74881,7 +77209,11 @@ func (mo *VirtualMachine) ReconfigVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -74906,10 +77238,14 @@ func (mo *VirtualMachine) RefreshStorageInfo() error {
 		XMLName xml.Name                `xml:"RefreshStorageInfo"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -74960,7 +77296,7 @@ func (mo *VirtualMachine) ReloadVirtualMachineFromPath_Task(
 		This              *ManagedObjectReference `xml:"_this,omitempty"`
 		ConfigurationPath string                  `xml:"configurationPath,omitempty"`
 	}{
-		This:              mo.This,
+		This:              &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ConfigurationPath: configurationPath,
 	}
 
@@ -74968,7 +77304,11 @@ func (mo *VirtualMachine) ReloadVirtualMachineFromPath_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -75007,7 +77347,7 @@ func (mo *VirtualMachine) RelocateVM_Task(
 		Spec     *VirtualMachineRelocateSpec      `xml:"spec,omitempty"`
 		Priority *enum.VirtualMachineMovePriority `xml:"priority,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Spec:     spec,
 		Priority: priority,
 	}
@@ -75016,7 +77356,11 @@ func (mo *VirtualMachine) RelocateVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -75042,7 +77386,7 @@ func (mo *VirtualMachine) RemoveAllSnapshots_Task(
 		This        *ManagedObjectReference `xml:"_this,omitempty"`
 		Consolidate bool                    `xml:"consolidate,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Consolidate: consolidate,
 	}
 
@@ -75050,7 +77394,11 @@ func (mo *VirtualMachine) RemoveAllSnapshots_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -75076,10 +77424,14 @@ func (mo *VirtualMachine) ResetGuestInformation() error {
 		XMLName xml.Name                `xml:"ResetGuestInformation"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -75107,14 +77459,18 @@ func (mo *VirtualMachine) ResetVM_Task() (*Task, error) {
 		XMLName xml.Name                `xml:"ResetVM_Task"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -75144,7 +77500,7 @@ func (mo *VirtualMachine) RevertToCurrentSnapshot_Task(
 		Host            *HostSystem             `xml:"host,omitempty"`
 		SuppressPowerOn bool                    `xml:"suppressPowerOn,omitempty"`
 	}{
-		This:            mo.This,
+		This:            &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host:            host,
 		SuppressPowerOn: suppressPowerOn,
 	}
@@ -75153,7 +77509,11 @@ func (mo *VirtualMachine) RevertToCurrentSnapshot_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -75179,11 +77539,15 @@ func (mo *VirtualMachine) SetDisplayTopology(
 		This     *ManagedObjectReference          `xml:"_this,omitempty"`
 		Displays []*VirtualMachineDisplayTopology `xml:"displays,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Displays: displays,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -75208,12 +77572,16 @@ func (mo *VirtualMachine) SetScreenResolution(
 		Width   int32                   `xml:"width,omitempty"`
 		Height  int32                   `xml:"height,omitempty"`
 	}{
-		This:   mo.This,
+		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Width:  width,
 		Height: height,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -75237,10 +77605,14 @@ func (mo *VirtualMachine) ShutdownGuest() error {
 		XMLName xml.Name                `xml:"ShutdownGuest"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -75264,10 +77636,14 @@ func (mo *VirtualMachine) StandbyGuest() error {
 		XMLName xml.Name                `xml:"StandbyGuest"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -75304,7 +77680,7 @@ func (mo *VirtualMachine) StartRecording_Task(
 		Name        string                  `xml:"name,omitempty"`
 		Description string                  `xml:"description,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:        name,
 		Description: description,
 	}
@@ -75313,7 +77689,11 @@ func (mo *VirtualMachine) StartRecording_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -75348,7 +77728,7 @@ func (mo *VirtualMachine) StartReplaying_Task(
 		This           *ManagedObjectReference `xml:"_this,omitempty"`
 		ReplaySnapshot *VirtualMachineSnapshot `xml:"replaySnapshot,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		ReplaySnapshot: replaySnapshot,
 	}
 
@@ -75356,7 +77736,11 @@ func (mo *VirtualMachine) StartReplaying_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -75387,14 +77771,18 @@ func (mo *VirtualMachine) StopRecording_Task() (*Task, error) {
 		XMLName xml.Name                `xml:"StopRecording_Task"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -75425,14 +77813,18 @@ func (mo *VirtualMachine) StopReplaying_Task() (*Task, error) {
 		XMLName xml.Name                `xml:"StopReplaying_Task"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -75453,14 +77845,18 @@ func (mo *VirtualMachine) SuspendVM_Task() (*Task, error) {
 		XMLName xml.Name                `xml:"SuspendVM_Task"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -75488,7 +77884,7 @@ func (mo *VirtualMachine) TerminateFaultTolerantVM_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Vm      *VirtualMachine         `xml:"vm,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:   vm,
 	}
 
@@ -75496,7 +77892,11 @@ func (mo *VirtualMachine) TerminateFaultTolerantVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -75526,10 +77926,14 @@ func (mo *VirtualMachine) TerminateVM() error {
 		XMLName xml.Name                `xml:"TerminateVM"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -75556,14 +77960,18 @@ func (mo *VirtualMachine) TurnOffFaultToleranceForVM_Task() (*Task, error) {
 		XMLName xml.Name                `xml:"TurnOffFaultToleranceForVM_Task"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -75584,10 +77992,14 @@ func (mo *VirtualMachine) UnmountToolsInstaller() error {
 		XMLName xml.Name                `xml:"UnmountToolsInstaller"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -75619,10 +78031,14 @@ func (mo *VirtualMachine) UnregisterVM() error {
 		XMLName xml.Name                `xml:"UnregisterVM"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -75649,7 +78065,7 @@ func (mo *VirtualMachine) UpgradeTools_Task(
 		This             *ManagedObjectReference `xml:"_this,omitempty"`
 		InstallerOptions string                  `xml:"installerOptions,omitempty"`
 	}{
-		This:             mo.This,
+		This:             &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		InstallerOptions: installerOptions,
 	}
 
@@ -75657,7 +78073,11 @@ func (mo *VirtualMachine) UpgradeTools_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -75682,7 +78102,7 @@ func (mo *VirtualMachine) UpgradeVM_Task(
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		Version string                  `xml:"version,omitempty"`
 	}{
-		This:    mo.This,
+		This:    &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Version: version,
 	}
 
@@ -75690,7 +78110,11 @@ func (mo *VirtualMachine) UpgradeVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -76150,7 +78574,7 @@ func (mo *VirtualMachineCompatibilityChecker) CheckCompatibility_Task(
 		Pool     *ResourcePool           `xml:"pool,omitempty"`
 		TestType []string                `xml:"testType,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:       vm,
 		Host:     host,
 		Pool:     pool,
@@ -76161,7 +78585,11 @@ func (mo *VirtualMachineCompatibilityChecker) CheckCompatibility_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -78650,7 +81078,7 @@ func (mo *VirtualMachineProvisioningChecker) CheckMigrate_Task(
 		State    *enum.VirtualMachinePowerState `xml:"state,omitempty"`
 		TestType []string                       `xml:"testType,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:       vm,
 		Host:     host,
 		Pool:     pool,
@@ -78662,7 +81090,11 @@ func (mo *VirtualMachineProvisioningChecker) CheckMigrate_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -78689,7 +81121,7 @@ func (mo *VirtualMachineProvisioningChecker) CheckRelocate_Task(
 		Spec     *VirtualMachineRelocateSpec `xml:"spec,omitempty"`
 		TestType []string                    `xml:"testType,omitempty"`
 	}{
-		This:     mo.This,
+		This:     &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:       vm,
 		Spec:     spec,
 		TestType: testType,
@@ -78699,7 +81131,11 @@ func (mo *VirtualMachineProvisioningChecker) CheckRelocate_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -78726,7 +81162,7 @@ func (mo *VirtualMachineProvisioningChecker) QueryVMotionCompatibilityEx_Task(
 		Vm      []*VirtualMachine       `xml:"vm,omitempty"`
 		Host    []*HostSystem           `xml:"host,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Vm:   vm,
 		Host: host,
 	}
@@ -78735,7 +81171,11 @@ func (mo *VirtualMachineProvisioningChecker) QueryVMotionCompatibilityEx_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -79474,14 +81914,18 @@ func (mo *VirtualMachineSnapshot) ExportSnapshot() (*HttpNfcLease, error) {
 		XMLName xml.Name                `xml:"ExportSnapshot"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 	}{
-		This: mo.This,
+		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
 	response := struct {
 		Returnval *HttpNfcLease `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -79506,7 +81950,7 @@ func (mo *VirtualMachineSnapshot) RemoveSnapshot_Task(
 		RemoveChildren bool                    `xml:"removeChildren,omitempty"`
 		Consolidate    bool                    `xml:"consolidate,omitempty"`
 	}{
-		This:           mo.This,
+		This:           &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		RemoveChildren: removeChildren,
 		Consolidate:    consolidate,
 	}
@@ -79515,7 +81959,11 @@ func (mo *VirtualMachineSnapshot) RemoveSnapshot_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -79543,12 +81991,16 @@ func (mo *VirtualMachineSnapshot) RenameSnapshot(
 		Name        string                  `xml:"name,omitempty"`
 		Description string                  `xml:"description,omitempty"`
 	}{
-		This:        mo.This,
+		This:        &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Name:        name,
 		Description: description,
 	}
 
-	err := mo.soapClient.Call(request, nil)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, nil)
 	if err != nil {
 		return err
 	}
@@ -79573,7 +82025,7 @@ func (mo *VirtualMachineSnapshot) RevertToSnapshot_Task(
 		Host            *HostSystem             `xml:"host,omitempty"`
 		SuppressPowerOn bool                    `xml:"suppressPowerOn,omitempty"`
 	}{
-		This:            mo.This,
+		This:            &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		Host:            host,
 		SuppressPowerOn: suppressPowerOn,
 	}
@@ -79582,7 +82034,11 @@ func (mo *VirtualMachineSnapshot) RevertToSnapshot_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -84208,7 +86664,7 @@ func (mo *VmwareDistributedVirtualSwitch) UpdateDVSLacpGroupConfig_Task(
 		This          *ManagedObjectReference   `xml:"_this,omitempty"`
 		LacpGroupSpec []*VMwareDvsLacpGroupSpec `xml:"lacpGroupSpec,omitempty"`
 	}{
-		This:          mo.This,
+		This:          &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 		LacpGroupSpec: lacpGroupSpec,
 	}
 
@@ -84216,7 +86672,11 @@ func (mo *VmwareDistributedVirtualSwitch) UpdateDVSLacpGroupConfig_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	err := mo.soapClient.Call(request, &response)
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, &response)
 	if err != nil {
 		return nil, err
 	}

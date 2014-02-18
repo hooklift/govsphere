@@ -2,8 +2,10 @@ package vim
 
 import (
 	"github.com/c4milo/govsphere/vim/soap"
-	"log"
 )
+
+var soapClient *soap.Client
+var serviceInstance *ServiceInstance
 
 const (
 	APIv4_0 string = "urn:vim25/4.0"
@@ -14,19 +16,24 @@ const (
 )
 
 func NewServiceInstance(url, user, pass string, ignoreCert bool) *ServiceInstance {
-	if url == "" || user == "" {
-		panic("A URL and username is required")
+	if serviceInstance != nil {
+		return serviceInstance
+	}
+
+	if url == "" {
+		panic("Server URL is required")
 	}
 
 	service := &ServiceInstance{
 		ManagedObject: &ManagedObject{
-			This: &ManagedObjectReference{
-				Type:  "ServiceInstance",
-				Value: "ServiceInstance",
-			},
-			soapClient: soap.NewClient(url, APIv4_0, ignoreCert),
+			Type:  "ServiceInstance",
+			Value: "ServiceInstance",
 		},
 	}
+
+	//Since we do not know the latest version supported by
+	//the vSphere server yet, we use the oldest possible first.
+	soapClient = soap.NewClient(url, APIv4_0, ignoreCert)
 
 	sc, err := service.RetrieveServiceContent()
 	if err != nil {
@@ -51,20 +58,23 @@ func NewServiceInstance(url, user, pass string, ignoreCert bool) *ServiceInstanc
 		apiVersion = APIv5_5
 	}
 
-	service.ManagedObject.soapClient = soap.NewClient(url, apiVersion, ignoreCert)
+	//Now that we know the latest supported API version,
+	//we can re-create soapClient using such version.
+	soapClient = soap.NewClient(url, apiVersion, ignoreCert)
 
-	//Using new API Version
+	serviceInstance = service
+
 	sc, err = service.RetrieveServiceContent()
 	if err != nil {
 		panic(err)
 	}
 
-	session, err := sc.SessionManager.Login(user, pass, "")
-	if err != nil {
-		panic(err)
-	}
+	// session, err := sc.SessionManager.Login(user, pass, "")
+	// if err != nil {
+	// 	panic(err)
+	// }
 
-	log.Printf("%v\n", session)
+	// log.Printf("%v\n", session)
 	//TODO What do I do with session? where do I store it?
 
 	return service

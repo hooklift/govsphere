@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"crypto/tls"
 	"encoding/xml"
+	//"errors"
 	"io/ioutil"
 	"log"
 	"net"
@@ -24,13 +25,14 @@ type Header struct {
 }
 
 type Body struct {
-	Body string `xml:",innerxml"`
+	Fault *Fault `xml:"fault,omitempty"` //It has to be a pointer or omitempty doesn't work
+	Body  string `xml:",innerxml"`
 }
 
 type Fault struct {
 	faultcode   string `xml:"http://schemas.xmlsoap.org/soap/envelope/ faultcode"`
 	faultstring string `xml:"faultstring"`
-	faultactora string `xml:"faultactor"`
+	faultactor  string `xml:"faultactor"`
 	detail      string `xml:"detail"`
 }
 
@@ -59,7 +61,7 @@ func (s *Client) Call(request interface{}, response interface{}) error {
 		EncodingStyle: "http://schemas.xmlsoap.org/soap/encoding/",
 	}
 
-	reqXml, err := xml.Marshal(request)
+	reqXml, err := xml.MarshalIndent(request, "  ", "    ")
 	if err != nil {
 		return err
 	}
@@ -115,10 +117,14 @@ func (s *Client) Call(request interface{}, response interface{}) error {
 		return err
 	}
 
-	if respEnvelope.Body.Body == "" {
+	if res.StatusCode == 500 {
 		log.Printf("%#v\n", respEnvelope.Body)
-		return nil
 	}
+
+	// if respEnvelope.Body.Body == "" {
+	// 	log.Printf("%#v\n", respEnvelope.Body)
+	// 	return nil
+	// }
 
 	err = xml.Unmarshal([]byte(respEnvelope.Body.Body), response)
 	if err != nil {

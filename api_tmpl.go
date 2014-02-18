@@ -80,7 +80,7 @@ func ({{$namespace}} *{{$type}}) {{makePublic .Name true}}(
 		{{range .Parameters}}{{$ptype := toGoType .Type}}{{if eq .Name "_this"}}This{{else}}{{makePublic .Name true}}{{end}} {{lookUpNamespace $ptype $namespace}} ` + "`" + `xml:"{{.Name}},omitempty"` + "`" + `
 		{{end}}
 	}{
-		{{range .Parameters}}{{if eq .Name "_this"}}This{{else}}{{makePublic .Name true}}{{end}}:{{if eq .Name "_this"}}{{$namespace}}.This,{{else}}{{replaceReservedWords .Name}},{{end}}
+		{{range .Parameters}}{{if eq .Name "_this"}}This{{else}}{{makePublic .Name true}}{{end}}:{{if eq .Name "_this"}}&ManagedObjectReference{Type: mo.ManagedObject.Type, Value:mo.ManagedObject.Value},{{else}}{{replaceReservedWords .Name}},{{end}}
 		{{end}}
 	}
 
@@ -90,7 +90,11 @@ func ({{$namespace}} *{{$type}}) {{makePublic .Name true}}(
 	}{}
 	{{end}}
 
-	err := {{$namespace}}.soapClient.Call(request, {{if $returnType}}&response{{else}}nil{{end}})
+	if soapClient == nil {
+		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	}
+
+	err := soapClient.Call(request, {{if $returnType}}&response{{else}}nil{{end}})
 	if err != nil {
 		{{if $returnType}}return {{toNullType $returnType}}, err{{else}}return err{{end}}
 	}

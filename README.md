@@ -30,10 +30,9 @@ Example output:
 Start the godoc server and open up your browser: `godoc -http=:6060`
 
 ## TODO
-3. Create ServiceInstance class
-	* Finish SoapClient
-4. Implement ManagedObject.currentProperty()
-5. Add support for JSON Schema in api.json generation
+1. Generate an Error() function for all vSphere faults to implement golang error interface
+2. Implement ManagedObject.currentProperty()
+3. Add support for JSON Schema in api.json generation
 
 ## License
 Copyright 2014 Cloudescape. All rights reserved.
