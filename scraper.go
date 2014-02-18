@@ -308,7 +308,10 @@ func scrapeObject(refFile, name, namespace string, channel chan *Object) {
 					}
 				}
 			}
-			obj.Properties = props
+
+			if len(props) > 0 {
+				obj.Properties = props
+			}
 		} else if prev == "Methods" {
 			methods := sel.Find("tbody > tr:nth-child(2) > td > a")
 			//obj.Methods = make([]*Method, methods.Length())
