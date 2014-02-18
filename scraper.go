@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"encoding/xml"
 	"github.com/PuerkitoBio/goquery"
 	"io/ioutil"
 	"log"
@@ -288,6 +289,26 @@ func scrapeObject(refFile, name, namespace string, channel chan *Object) {
 				obj.Properties = append(obj.Properties, p)
 
 			})
+
+			//In order to respect WSDL sequences, we have to
+			//read the WSDL type definition for every data type,
+			//and make sure the order of the properties is the same
+			//in the resulting api.json definition.
+			wsdlDef := d.Find("#wsdl-div > textarea").Text()
+
+			wsdl := &XsdComplexType{}
+			xml.Unmarshal([]byte(wsdlDef), wsdl)
+
+			props := make([]*Property, 0)
+			for _, el := range wsdl.ComplexContent.Extension.Sequence.Elements {
+				for _, prop := range obj.Properties {
+					if prop.Name == el.Name {
+						props = append(props, prop)
+						break
+					}
+				}
+			}
+			obj.Properties = props
 		} else if prev == "Methods" {
 			methods := sel.Find("tbody > tr:nth-child(2) > td > a")
 			//obj.Methods = make([]*Method, methods.Length())
