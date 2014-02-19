@@ -96,7 +96,7 @@ func (s *Client) Call(request interface{}, response interface{}) error {
 
 	rawReq, _ := httputil.DumpRequestOut(req, true)
 	log.Println("===========REQUEST===========")
-	log.Println(string(rawReq))
+	log.Println(string(rawReq) + "\n")
 
 	res, err := client.Do(req)
 	if err != nil {
@@ -106,7 +106,7 @@ func (s *Client) Call(request interface{}, response interface{}) error {
 
 	rawRes, _ := httputil.DumpResponse(res, true)
 	log.Println("===========RESPONSE===========")
-	log.Println(string(rawRes))
+	log.Println(string(rawRes) + "\n")
 
 	body, err := ioutil.ReadAll(res.Body)
 
@@ -120,11 +120,6 @@ func (s *Client) Call(request interface{}, response interface{}) error {
 	if res.StatusCode == 500 {
 		log.Printf("%#v\n", respEnvelope.Body)
 	}
-
-	// if respEnvelope.Body.Body == "" {
-	// 	log.Printf("%#v\n", respEnvelope.Body)
-	// 	return nil
-	// }
 
 	err = xml.Unmarshal([]byte(respEnvelope.Body.Body), response)
 	if err != nil {

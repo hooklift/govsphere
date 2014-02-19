@@ -18,5 +18,4 @@ func TestNewServiceInstance(t *testing.T) {
 
 	t.Logf("=>%#v<=\n", cap)
 	t.Logf("=>%#v<=\n", content)
-	t.Log("Puta!")
 }

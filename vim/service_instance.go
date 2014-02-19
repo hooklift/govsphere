@@ -74,8 +74,7 @@ func NewServiceInstance(url, user, pass string, ignoreCert bool) *ServiceInstanc
 	// 	panic(err)
 	// }
 
-	// log.Printf("%v\n", session)
-	//TODO What do I do with session? where do I store it?
+	//log.Printf("%v\n", session)
 
 	return service
 }
