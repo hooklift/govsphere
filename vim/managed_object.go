@@ -2,7 +2,6 @@ package vim
 
 import (
 	"errors"
-	"log"
 )
 
 type ManagedObject struct {
@@ -11,9 +10,9 @@ type ManagedObject struct {
 	serviceIntance *ServiceInstance
 }
 
-func (mo *ManagedObject) currentProperty(property string, response interface{}) error {
+func (mo *ManagedObject) currentProperty(property string) (interface{}, error) {
 	if serviceInstance == nil {
-		return errors.New("A ServiceInstance must be created first")
+		return nil, errors.New("A ServiceInstance must be created first")
 	}
 
 	this := &ManagedObjectReference{
@@ -52,24 +51,23 @@ func (mo *ManagedObject) currentProperty(property string, response interface{}) 
 	//to avoid a stack overflow
 	serviceContent, err := serviceInstance.RetrieveServiceContent()
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	pc := serviceContent.PropertyCollector
-	log.Println("================================================")
-	log.Printf("%#v\n", pc)
-	log.Println("================================================")
 
-	//It does not use RetrievePropertiesEx because we want
-	//to support older versions of vSphere too, when getting
-	//MO properties
+	//It does not use pc.RetrievePropertiesEx because we want
+	//to support older versions of vSphere too
 	objs, err := pc.RetrieveProperties([]*PropertyFilterSpec{filterSpec})
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	log.Printf("%#v\n", objs)
+	if len(objs) == 0 ||
+		len(objs[0].MissingSet) > 0 ||
+		len(objs[0].PropSet) == 0 {
+		return nil, nil
+	}
 
-	//Get property set from returned ObjectContent
-	return nil
+	return objs[0].PropSet[0].Val, nil
 }
