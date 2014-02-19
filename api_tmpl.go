@@ -44,19 +44,15 @@ type {{$type}} struct {
 		{{$getterName := genGetterName .Name $extends}}
 		{{if $fieldComment}} {{$fieldComment}} {{end}}{{if $privileges}} {{$privileges}} {{end}}
 		func (mo *{{$type}}) {{$getterName}}() ({{$fieldType}}, error) {
-
-			{{if $fieldType}}
-				response := struct {
-					Returnval {{$fieldType}} ` + "`" + `xml:"returnval"` + "`" + `
-				}{}
-			{{end}}
-
-			err := mo.currentProperty("{{.Name}}", {{if $fieldType}}&response{{else}}nil{{end}})
+			p, err := mo.currentProperty("{{.Name}}")
 			if err != nil {
 				return {{$nullValue}}, err
 			}
 			{{if $fieldType}}
-				return response.Returnval, nil
+				if p != nil {
+					return p.({{$fieldType}}), nil
+				}
+				return {{$nullValue}}, nil
 			{{else}}
 				return nil
 			{{end}}

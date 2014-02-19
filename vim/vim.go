@@ -288,17 +288,15 @@ type Alarm struct {
 // Information about this alarm.
 // Required Privilege: System.View
 func (mo *Alarm) Info() (*AlarmInfo, error) {
-
-	response := struct {
-		Returnval *AlarmInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("info", &response)
+	p, err := mo.currentProperty("info")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*AlarmInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -584,34 +582,30 @@ type AlarmManager struct {
 // initial client wizard screen.
 // Required Privilege: System.View
 func (mo *AlarmManager) DefaultExpression() ([]*AlarmExpression, error) {
-
-	response := struct {
-		Returnval []*AlarmExpression `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("defaultExpression", &response)
+	p, err := mo.currentProperty("defaultExpression")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*AlarmExpression), nil
+	}
+	return nil, nil
 
 }
 
 // The static descriptive strings used in alarms.
 // Required Privilege: System.View
 func (mo *AlarmManager) Description() (*AlarmDescription, error) {
-
-	response := struct {
-		Returnval *AlarmDescription `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("description", &response)
+	p, err := mo.currentProperty("description")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*AlarmDescription), nil
+	}
+	return nil, nil
 
 }
 
@@ -1652,34 +1646,30 @@ type AuthorizationManager struct {
 // Static, descriptive strings for system roles and privileges.
 // Required Privilege: System.View
 func (mo *AuthorizationManager) Description() (*AuthorizationDescription, error) {
-
-	response := struct {
-		Returnval *AuthorizationDescription `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("description", &response)
+	p, err := mo.currentProperty("description")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*AuthorizationDescription), nil
+	}
+	return nil, nil
 
 }
 
 // The list of system-defined privileges.
 // Required Privilege: System.View
 func (mo *AuthorizationManager) PrivilegeList() ([]*AuthorizationPrivilege, error) {
-
-	response := struct {
-		Returnval []*AuthorizationPrivilege `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("privilegeList", &response)
+	p, err := mo.currentProperty("privilegeList")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*AuthorizationPrivilege), nil
+	}
+	return nil, nil
 
 }
 
@@ -1687,17 +1677,15 @@ func (mo *AuthorizationManager) PrivilegeList() ([]*AuthorizationPrivilege, erro
 // static system-defined roles.
 // Required Privilege: System.View
 func (mo *AuthorizationManager) RoleList() ([]*AuthorizationRole, error) {
-
-	response := struct {
-		Returnval []*AuthorizationRole `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("roleList", &response)
+	p, err := mo.currentProperty("roleList")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*AuthorizationRole), nil
+	}
+	return nil, nil
 
 }
 
@@ -3183,17 +3171,15 @@ type ClusterComputeResource struct {
 //
 // Since VI API 2.5
 func (mo *ClusterComputeResource) ActionHistory() ([]*ClusterActionHistory, error) {
-
-	response := struct {
-		Returnval []*ClusterActionHistory `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("actionHistory", &response)
+	p, err := mo.currentProperty("actionHistory")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*ClusterActionHistory), nil
+	}
+	return nil, nil
 
 }
 
@@ -3204,17 +3190,15 @@ func (mo *ClusterComputeResource) ActionHistory() ([]*ClusterActionHistory, erro
 //
 // Configuration of the cluster.
 func (mo *ClusterComputeResource) Configuration() (*ClusterConfigInfo, error) {
-
-	response := struct {
-		Returnval *ClusterConfigInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("configuration", &response)
+	p, err := mo.currentProperty("configuration")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ClusterConfigInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -3238,17 +3222,15 @@ func (mo *ClusterComputeResource) Configuration() (*ClusterConfigInfo, error) {
 // Since vSphere API 4.0
 // Required Privilege: System.Read
 func (mo *ClusterComputeResource) DrsFault() ([]*ClusterDrsFaults, error) {
-
-	response := struct {
-		Returnval []*ClusterDrsFaults `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("drsFault", &response)
+	p, err := mo.currentProperty("drsFault")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*ClusterDrsFaults), nil
+	}
+	return nil, nil
 
 }
 
@@ -3271,17 +3253,15 @@ func (mo *ClusterComputeResource) DrsFault() ([]*ClusterDrsFaults, error) {
 // migrations at this time, or it is possible that DRS is not
 // enabled.
 func (mo *ClusterComputeResource) DrsRecommendation() ([]*ClusterDrsRecommendation, error) {
-
-	response := struct {
-		Returnval []*ClusterDrsRecommendation `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("drsRecommendation", &response)
+	p, err := mo.currentProperty("drsRecommendation")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*ClusterDrsRecommendation), nil
+	}
+	return nil, nil
 
 }
 
@@ -3289,17 +3269,15 @@ func (mo *ClusterComputeResource) DrsRecommendation() ([]*ClusterDrsRecommendati
 //
 // This list is populated only when DRS is in automatic mode.
 func (mo *ClusterComputeResource) MigrationHistory() ([]*ClusterDrsMigration, error) {
-
-	response := struct {
-		Returnval []*ClusterDrsMigration `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("migrationHistory", &response)
+	p, err := mo.currentProperty("migrationHistory")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*ClusterDrsMigration), nil
+	}
+	return nil, nil
 
 }
 
@@ -3312,17 +3290,15 @@ func (mo *ClusterComputeResource) MigrationHistory() ([]*ClusterDrsMigration, er
 // Since VI API 2.5
 // Required Privilege: System.Read
 func (mo *ClusterComputeResource) Recommendation() ([]*ClusterRecommendation, error) {
-
-	response := struct {
-		Returnval []*ClusterRecommendation `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("recommendation", &response)
+	p, err := mo.currentProperty("recommendation")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*ClusterRecommendation), nil
+	}
+	return nil, nil
 
 }
 
@@ -6539,17 +6515,15 @@ type ComputeResource struct {
 //
 // Since VI API 2.5
 func (mo *ComputeResource) ConfigurationEx() (*ComputeResourceConfigInfo, error) {
-
-	response := struct {
-		Returnval *ComputeResourceConfigInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("configurationEx", &response)
+	p, err := mo.currentProperty("configurationEx")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ComputeResourceConfigInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -6560,17 +6534,15 @@ func (mo *ComputeResource) ConfigurationEx() (*ComputeResourceConfigInfo, error)
 // the hosts that are part of this compute resource.
 // Required Privilege: System.View
 func (mo *ComputeResource) Datastore() ([]*Datastore, error) {
-
-	response := struct {
-		Returnval []*Datastore `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("datastore", &response)
+	p, err := mo.currentProperty("datastore")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*Datastore), nil
+	}
+	return nil, nil
 
 }
 
@@ -6578,17 +6550,15 @@ func (mo *ComputeResource) Datastore() ([]*Datastore, error) {
 // on this compute resource.
 // Required Privilege: System.View
 func (mo *ComputeResource) EnvironmentBrowser() (*EnvironmentBrowser, error) {
-
-	response := struct {
-		Returnval *EnvironmentBrowser `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("environmentBrowser", &response)
+	p, err := mo.currentProperty("environmentBrowser")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*EnvironmentBrowser), nil
+	}
+	return nil, nil
 
 }
 
@@ -6596,17 +6566,15 @@ func (mo *ComputeResource) EnvironmentBrowser() (*EnvironmentBrowser, error) {
 // standalone type, then this list contains just one element.
 // Required Privilege: System.View
 func (mo *ComputeResource) Host() ([]*HostSystem, error) {
-
-	response := struct {
-		Returnval []*HostSystem `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("host", &response)
+	p, err := mo.currentProperty("host")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*HostSystem), nil
+	}
+	return nil, nil
 
 }
 
@@ -6617,51 +6585,45 @@ func (mo *ComputeResource) Host() ([]*HostSystem, error) {
 // hosts that are part of this compute resource.
 // Required Privilege: System.View
 func (mo *ComputeResource) Network() ([]*Network, error) {
-
-	response := struct {
-		Returnval []*Network `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("network", &response)
+	p, err := mo.currentProperty("network")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*Network), nil
+	}
+	return nil, nil
 
 }
 
 // Reference to root resource pool.
 // Required Privilege: System.View
 func (mo *ComputeResource) ResourcePool() (*ResourcePool, error) {
-
-	response := struct {
-		Returnval *ResourcePool `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("resourcePool", &response)
+	p, err := mo.currentProperty("resourcePool")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ResourcePool), nil
+	}
+	return nil, nil
 
 }
 
 // Basic runtime information about a compute resource. This information is used on
 // summary screens and in list views.
 func (mo *ComputeResource) Summary() (*ComputeResourceSummary, error) {
-
-	response := struct {
-		Returnval *ComputeResourceSummary `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("summary", &response)
+	p, err := mo.currentProperty("summary")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ComputeResourceSummary), nil
+	}
+	return nil, nil
 
 }
 
@@ -7112,17 +7074,15 @@ type ContainerView struct {
 // The Folder, Datacenter, ComputeResource, ResourcePool, or HostSystem instance
 // that provides the objects that the view presents.
 func (mo *ContainerView) Container() (*ManagedEntity, error) {
-
-	response := struct {
-		Returnval *ManagedEntity `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("container", &response)
+	p, err := mo.currentProperty("container")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ManagedEntity), nil
+	}
+	return nil, nil
 
 }
 
@@ -7133,17 +7093,15 @@ func (mo *ContainerView) Container() (*ManagedEntity, error) {
 // For information about recursive behavior, see the description of
 // CreateContainerView.
 func (mo *ContainerView) Recursive() (bool, error) {
-
-	response := struct {
-		Returnval bool `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("recursive", &response)
+	p, err := mo.currentProperty("recursive")
 	if err != nil {
 		return false, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(bool), nil
+	}
+	return false, nil
 
 }
 
@@ -7151,17 +7109,15 @@ func (mo *ContainerView) Recursive() (bool, error) {
 // The list of types indicates objects that are included in the view.
 // If empty, all types are included.
 func (mo *ContainerView) Type() ([]string, error) {
-
-	response := struct {
-		Returnval []string `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("type", &response)
+	p, err := mo.currentProperty("type")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]string), nil
+	}
+	return nil, nil
 
 }
 
@@ -7461,17 +7417,15 @@ type CustomFieldsManager struct {
 // sorted by name.
 // Required Privilege: System.View
 func (mo *CustomFieldsManager) Field() ([]*CustomFieldDef, error) {
-
-	response := struct {
-		Returnval []*CustomFieldDef `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("field", &response)
+	p, err := mo.currentProperty("field")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*CustomFieldDef), nil
+	}
+	return nil, nil
 
 }
 
@@ -8216,34 +8170,30 @@ type CustomizationSpecManager struct {
 // passwords in stored specifications.
 // Required Privilege: System.View
 func (mo *CustomizationSpecManager) EncryptionKey() ([]int8, error) {
-
-	response := struct {
-		Returnval []int8 `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("encryptionKey", &response)
+	p, err := mo.currentProperty("encryptionKey")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]int8), nil
+	}
+	return nil, nil
 
 }
 
 // Gets a list of information on available specifications.
 // Required Privilege: VirtualMachine.Provisioning.ReadCustSpecs
 func (mo *CustomizationSpecManager) Info() ([]*CustomizationSpecInfo, error) {
-
-	response := struct {
-		Returnval []*CustomizationSpecInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("info", &response)
+	p, err := mo.currentProperty("info")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*CustomizationSpecInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -10452,34 +10402,30 @@ type Datacenter struct {
 // Since vSphere API 5.1
 // Required Privilege: System.View
 func (mo *Datacenter) Configuration() (*DatacenterConfigInfo, error) {
-
-	response := struct {
-		Returnval *DatacenterConfigInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("configuration", &response)
+	p, err := mo.currentProperty("configuration")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*DatacenterConfigInfo), nil
+	}
+	return nil, nil
 
 }
 
 // A collection of references to the datastore objects
 // available in this datacenter.
 func (mo *Datacenter) Datastore() ([]*Datastore, error) {
-
-	response := struct {
-		Returnval []*Datastore `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("datastore", &response)
+	p, err := mo.currentProperty("datastore")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*Datastore), nil
+	}
+	return nil, nil
 
 }
 
@@ -10491,17 +10437,15 @@ func (mo *Datacenter) Datastore() ([]*Datastore, error) {
 // Since vSphere API 4.0
 // Required Privilege: System.View
 func (mo *Datacenter) DatastoreFolder() (*Folder, error) {
-
-	response := struct {
-		Returnval *Folder `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("datastoreFolder", &response)
+	p, err := mo.currentProperty("datastoreFolder")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*Folder), nil
+	}
+	return nil, nil
 
 }
 
@@ -10511,34 +10455,30 @@ func (mo *Datacenter) DatastoreFolder() (*Folder, error) {
 // This folder is guaranteed to exist.
 // Required Privilege: System.View
 func (mo *Datacenter) HostFolder() (*Folder, error) {
-
-	response := struct {
-		Returnval *Folder `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("hostFolder", &response)
+	p, err := mo.currentProperty("hostFolder")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*Folder), nil
+	}
+	return nil, nil
 
 }
 
 // A collection of references to the network objects
 // available in this datacenter.
 func (mo *Datacenter) Network() ([]*Network, error) {
-
-	response := struct {
-		Returnval []*Network `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("network", &response)
+	p, err := mo.currentProperty("network")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*Network), nil
+	}
+	return nil, nil
 
 }
 
@@ -10552,17 +10492,15 @@ func (mo *Datacenter) Network() ([]*Network, error) {
 // Since vSphere API 4.0
 // Required Privilege: System.View
 func (mo *Datacenter) NetworkFolder() (*Folder, error) {
-
-	response := struct {
-		Returnval *Folder `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("networkFolder", &response)
+	p, err := mo.currentProperty("networkFolder")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*Folder), nil
+	}
+	return nil, nil
 
 }
 
@@ -10577,17 +10515,15 @@ func (mo *Datacenter) NetworkFolder() (*Folder, error) {
 // This folder is guaranteed to exist.
 // Required Privilege: System.View
 func (mo *Datacenter) VmFolder() (*Folder, error) {
-
-	response := struct {
-		Returnval *Folder `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("vmFolder", &response)
+	p, err := mo.currentProperty("vmFolder")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*Folder), nil
+	}
+	return nil, nil
 
 }
 
@@ -10946,65 +10882,57 @@ type Datastore struct {
 
 // DatastoreBrowser used to browse this datastore.
 func (mo *Datastore) Browser() (*HostDatastoreBrowser, error) {
-
-	response := struct {
-		Returnval *HostDatastoreBrowser `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("browser", &response)
+	p, err := mo.currentProperty("browser")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostDatastoreBrowser), nil
+	}
+	return nil, nil
 
 }
 
 // Capabilities of this datastore.
 func (mo *Datastore) Capability() (*DatastoreCapability, error) {
-
-	response := struct {
-		Returnval *DatastoreCapability `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("capability", &response)
+	p, err := mo.currentProperty("capability")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*DatastoreCapability), nil
+	}
+	return nil, nil
 
 }
 
 // Hosts attached to this datastore.
 func (mo *Datastore) Host() ([]*DatastoreHostMount, error) {
-
-	response := struct {
-		Returnval []*DatastoreHostMount `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("host", &response)
+	p, err := mo.currentProperty("host")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*DatastoreHostMount), nil
+	}
+	return nil, nil
 
 }
 
 // Specific information about the datastore.
 func (mo *Datastore) Info() (*DatastoreInfo, error) {
-
-	response := struct {
-		Returnval *DatastoreInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("info", &response)
+	p, err := mo.currentProperty("info")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*DatastoreInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -11019,49 +10947,43 @@ func (mo *Datastore) Info() (*DatastoreInfo, error) {
 //
 // Since vSphere API 4.1
 func (mo *Datastore) IormConfiguration() (*StorageIORMInfo, error) {
-
-	response := struct {
-		Returnval *StorageIORMInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("iormConfiguration", &response)
+	p, err := mo.currentProperty("iormConfiguration")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*StorageIORMInfo), nil
+	}
+	return nil, nil
 
 }
 
 // Global properties of the datastore.
 func (mo *Datastore) Summary() (*DatastoreSummary, error) {
-
-	response := struct {
-		Returnval *DatastoreSummary `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("summary", &response)
+	p, err := mo.currentProperty("summary")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*DatastoreSummary), nil
+	}
+	return nil, nil
 
 }
 
 // Virtual machines stored on this datastore.
 func (mo *Datastore) Vm() ([]*VirtualMachine, error) {
-
-	response := struct {
-		Returnval []*VirtualMachine `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("vm", &response)
+	p, err := mo.currentProperty("vm")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*VirtualMachine), nil
+	}
+	return nil, nil
 
 }
 
@@ -12621,49 +12543,43 @@ type DistributedVirtualPortgroup struct {
 
 // Configuration of the portgroup.
 func (mo *DistributedVirtualPortgroup) Config() (*DVPortgroupConfigInfo, error) {
-
-	response := struct {
-		Returnval *DVPortgroupConfigInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("config", &response)
+	p, err := mo.currentProperty("config")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*DVPortgroupConfigInfo), nil
+	}
+	return nil, nil
 
 }
 
 // Generated UUID of the portgroup.
 func (mo *DistributedVirtualPortgroup) Key() (string, error) {
-
-	response := struct {
-		Returnval string `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("key", &response)
+	p, err := mo.currentProperty("key")
 	if err != nil {
 		return "", err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(string), nil
+	}
+	return "", nil
 
 }
 
 // Port keys for the set of ports in the portgroup.
 func (mo *DistributedVirtualPortgroup) PortKeys() ([]string, error) {
-
-	response := struct {
-		Returnval []string `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("portKeys", &response)
+	p, err := mo.currentProperty("portKeys")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]string), nil
+	}
+	return nil, nil
 
 }
 
@@ -13137,33 +13053,29 @@ type DistributedVirtualSwitch struct {
 // capability.dvsOperationSupported
 // should always be set to false.
 func (mo *DistributedVirtualSwitch) Capability() (*DVSCapability, error) {
-
-	response := struct {
-		Returnval *DVSCapability `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("capability", &response)
+	p, err := mo.currentProperty("capability")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*DVSCapability), nil
+	}
+	return nil, nil
 
 }
 
 // Switch configuration data.
 func (mo *DistributedVirtualSwitch) Config() (*DVSConfigInfo, error) {
-
-	response := struct {
-		Returnval *DVSConfigInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("config", &response)
+	p, err := mo.currentProperty("config")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*DVSConfigInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -13171,33 +13083,29 @@ func (mo *DistributedVirtualSwitch) Config() (*DVSConfigInfo, error) {
 //
 // Since vSphere API 4.1
 func (mo *DistributedVirtualSwitch) NetworkResourcePool() ([]*DVSNetworkResourcePool, error) {
-
-	response := struct {
-		Returnval []*DVSNetworkResourcePool `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("networkResourcePool", &response)
+	p, err := mo.currentProperty("networkResourcePool")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*DVSNetworkResourcePool), nil
+	}
+	return nil, nil
 
 }
 
 // Portgroups that are defined on the switch.
 func (mo *DistributedVirtualSwitch) Portgroup() ([]*DistributedVirtualPortgroup, error) {
-
-	response := struct {
-		Returnval []*DistributedVirtualPortgroup `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("portgroup", &response)
+	p, err := mo.currentProperty("portgroup")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*DistributedVirtualPortgroup), nil
+	}
+	return nil, nil
 
 }
 
@@ -13205,50 +13113,44 @@ func (mo *DistributedVirtualSwitch) Portgroup() ([]*DistributedVirtualPortgroup,
 //
 // Since vSphere API 5.1
 func (mo *DistributedVirtualSwitch) Runtime() (*DVSRuntimeInfo, error) {
-
-	response := struct {
-		Returnval *DVSRuntimeInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("runtime", &response)
+	p, err := mo.currentProperty("runtime")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*DVSRuntimeInfo), nil
+	}
+	return nil, nil
 
 }
 
 // Summary of the switch.
 func (mo *DistributedVirtualSwitch) Summary() (*DVSSummary, error) {
-
-	response := struct {
-		Returnval *DVSSummary `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("summary", &response)
+	p, err := mo.currentProperty("summary")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*DVSSummary), nil
+	}
+	return nil, nil
 
 }
 
 // Generated UUID of the switch. Unique across vCenter Server
 // inventory and instances.
 func (mo *DistributedVirtualSwitch) Uuid() (string, error) {
-
-	response := struct {
-		Returnval string `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("uuid", &response)
+	p, err := mo.currentProperty("uuid")
 	if err != nil {
 		return "", err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(string), nil
+	}
+	return "", nil
 
 }
 
@@ -17188,17 +17090,15 @@ type EnvironmentBrowser struct {
 // DatastoreBrowser to browse datastores that are available on this entity.
 // Required Privilege: System.View
 func (mo *EnvironmentBrowser) DatastoreBrowser() (*HostDatastoreBrowser, error) {
-
-	response := struct {
-		Returnval *HostDatastoreBrowser `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("datastoreBrowser", &response)
+	p, err := mo.currentProperty("datastoreBrowser")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostDatastoreBrowser), nil
+	}
+	return nil, nil
 
 }
 
@@ -17963,17 +17863,15 @@ type EventHistoryCollector struct {
 // The "oldest event" is the one with the smallest key (event ID). The
 // events in the returned page are unordered.
 func (mo *EventHistoryCollector) LatestPage() ([]*Event, error) {
-
-	response := struct {
-		Returnval []*Event `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("latestPage", &response)
+	p, err := mo.currentProperty("latestPage")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*Event), nil
+	}
+	return nil, nil
 
 }
 
@@ -18076,34 +17974,30 @@ type EventManager struct {
 // Static descriptive strings used in events.
 // Required Privilege: System.View
 func (mo *EventManager) Description() (*EventDescription, error) {
-
-	response := struct {
-		Returnval *EventDescription `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("description", &response)
+	p, err := mo.currentProperty("description")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*EventDescription), nil
+	}
+	return nil, nil
 
 }
 
 // The latest event that happened on the VirtualCenter server.
 // Required Privilege: System.View
 func (mo *EventManager) LatestEvent() (*Event, error) {
-
-	response := struct {
-		Returnval *Event `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("latestEvent", &response)
+	p, err := mo.currentProperty("latestEvent")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*Event), nil
+	}
+	return nil, nil
 
 }
 
@@ -18111,17 +18005,15 @@ func (mo *EventManager) LatestEvent() (*Event, error) {
 // simultaneously.
 // Required Privilege: System.View
 func (mo *EventManager) MaxCollector() (int32, error) {
-
-	response := struct {
-		Returnval int32 `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("maxCollector", &response)
+	p, err := mo.currentProperty("maxCollector")
 	if err != nil {
 		return int32(0), err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(int32), nil
+	}
+	return int32(0), nil
 
 }
 
@@ -18620,17 +18512,15 @@ type ExtensibleManagedObject struct {
 // Since VI API 2.5
 // Required Privilege: System.View
 func (mo *ExtensibleManagedObject) AvailableField() ([]*CustomFieldDef, error) {
-
-	response := struct {
-		Returnval []*CustomFieldDef `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("availableField", &response)
+	p, err := mo.currentProperty("availableField")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*CustomFieldDef), nil
+	}
+	return nil, nil
 
 }
 
@@ -18641,17 +18531,15 @@ func (mo *ExtensibleManagedObject) AvailableField() ([]*CustomFieldDef, error) {
 // Since VI API 2.5
 // Required Privilege: System.View
 func (mo *ExtensibleManagedObject) Value() ([]*CustomFieldValue, error) {
-
-	response := struct {
-		Returnval []*CustomFieldValue `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("value", &response)
+	p, err := mo.currentProperty("value")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*CustomFieldValue), nil
+	}
+	return nil, nil
 
 }
 
@@ -18913,17 +18801,15 @@ type ExtensionManager struct {
 // The list of currently registered extensions.
 // Required Privilege: System.View
 func (mo *ExtensionManager) ExtensionList() ([]*Extension, error) {
-
-	response := struct {
-		Returnval []*Extension `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("extensionList", &response)
+	p, err := mo.currentProperty("extensionList")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*Extension), nil
+	}
+	return nil, nil
 
 }
 
@@ -20524,17 +20410,15 @@ type Folder struct {
 // An array of managed object references. Each entry is a reference to a child entity.
 // Required Privilege: System.View
 func (mo *Folder) ChildEntity() ([]*ManagedEntity, error) {
-
-	response := struct {
-		Returnval []*ManagedEntity `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("childEntity", &response)
+	p, err := mo.currentProperty("childEntity")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*ManagedEntity), nil
+	}
+	return nil, nil
 
 }
 
@@ -20566,17 +20450,15 @@ func (mo *Folder) ChildEntity() ([]*ManagedEntity, error) {
 // managed objects.
 // Required Privilege: System.View
 func (mo *Folder) ChildType() ([]string, error) {
-
-	response := struct {
-		Returnval []string `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("childType", &response)
+	p, err := mo.currentProperty("childType")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]string), nil
+	}
+	return nil, nil
 
 }
 
@@ -22452,17 +22334,15 @@ type GuestOperationsManager struct {
 // operations.
 // Required Privilege: System.Anonymous
 func (mo *GuestOperationsManager) AuthManager() (*GuestAuthManager, error) {
-
-	response := struct {
-		Returnval *GuestAuthManager `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("authManager", &response)
+	p, err := mo.currentProperty("authManager")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*GuestAuthManager), nil
+	}
+	return nil, nil
 
 }
 
@@ -22470,17 +22350,15 @@ func (mo *GuestOperationsManager) AuthManager() (*GuestAuthManager, error) {
 // operations.
 // Required Privilege: System.Anonymous
 func (mo *GuestOperationsManager) FileManager() (*GuestFileManager, error) {
-
-	response := struct {
-		Returnval *GuestFileManager `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("fileManager", &response)
+	p, err := mo.currentProperty("fileManager")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*GuestFileManager), nil
+	}
+	return nil, nil
 
 }
 
@@ -22488,17 +22366,15 @@ func (mo *GuestOperationsManager) FileManager() (*GuestFileManager, error) {
 // operations.
 // Required Privilege: System.Anonymous
 func (mo *GuestOperationsManager) ProcessManager() (*GuestProcessManager, error) {
-
-	response := struct {
-		Returnval *GuestProcessManager `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("processManager", &response)
+	p, err := mo.currentProperty("processManager")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*GuestProcessManager), nil
+	}
+	return nil, nil
 
 }
 
@@ -23258,17 +23134,15 @@ type HistoryCollector struct {
 // The type of the returned filter is determined by the managed object
 // for which the collector is created.
 func (mo *HistoryCollector) Filter() (interface{}, error) {
-
-	response := struct {
-		Returnval interface{} `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("filter", &response)
+	p, err := mo.currentProperty("filter")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(interface{}), nil
+	}
+	return nil, nil
 
 }
 
@@ -23922,17 +23796,15 @@ type HostAuthenticationManager struct {
 
 // Information about Active Directory membership.
 func (mo *HostAuthenticationManager) Info() (*HostAuthenticationManagerInfo, error) {
-
-	response := struct {
-		Returnval *HostAuthenticationManagerInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("info", &response)
+	p, err := mo.currentProperty("info")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostAuthenticationManagerInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -23960,17 +23832,15 @@ func (mo *HostAuthenticationManager) Info() (*HostAuthenticationManagerInfo, err
 // property is True (accessed through the info
 // property), the join method will throw a fault.
 func (mo *HostAuthenticationManager) SupportedStore() ([]*HostAuthenticationStore, error) {
-
-	response := struct {
-		Returnval []*HostAuthenticationStore `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("supportedStore", &response)
+	p, err := mo.currentProperty("supportedStore")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*HostAuthenticationStore), nil
+	}
+	return nil, nil
 
 }
 
@@ -24015,17 +23885,15 @@ type HostAuthenticationStore struct {
 
 // Information about the authentication store.
 func (mo *HostAuthenticationStore) Info() (*HostAuthenticationStoreInfo, error) {
-
-	response := struct {
-		Returnval *HostAuthenticationStoreInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("info", &response)
+	p, err := mo.currentProperty("info")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostAuthenticationStoreInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -24060,17 +23928,15 @@ type HostAutoStartManager struct {
 }
 
 func (mo *HostAutoStartManager) Config() (*HostAutoStartManagerConfig, error) {
-
-	response := struct {
-		Returnval *HostAutoStartManagerConfig `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("config", &response)
+	p, err := mo.currentProperty("config")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostAutoStartManagerConfig), nil
+	}
+	return nil, nil
 
 }
 
@@ -24368,17 +24234,15 @@ type HostCacheConfigurationManager struct {
 // configuration information for each datastore enabled for this purpose.
 // Required Privilege: Host.Config.AdvancedConfig
 func (mo *HostCacheConfigurationManager) CacheConfigurationInfo() ([]*HostCacheConfigurationInfo, error) {
-
-	response := struct {
-		Returnval []*HostCacheConfigurationInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("cacheConfigurationInfo", &response)
+	p, err := mo.currentProperty("cacheConfigurationInfo")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*HostCacheConfigurationInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -26044,17 +25908,15 @@ type HostCpuSchedulerSystem struct {
 // existence of this data object type indicates if the CPU scheduler
 // is capable of scheduling hyperthreads as resources.
 func (mo *HostCpuSchedulerSystem) HyperthreadInfo() (*HostHyperThreadScheduleInfo, error) {
-
-	response := struct {
-		Returnval *HostHyperThreadScheduleInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("hyperthreadInfo", &response)
+	p, err := mo.currentProperty("hyperthreadInfo")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostHyperThreadScheduleInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -26281,17 +26143,15 @@ type HostDatastoreBrowser struct {
 // Datacenter's list of datastores is used.
 // Required Privilege: System.View
 func (mo *HostDatastoreBrowser) Datastore() ([]*Datastore, error) {
-
-	response := struct {
-		Returnval []*Datastore `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("datastore", &response)
+	p, err := mo.currentProperty("datastore")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*Datastore), nil
+	}
+	return nil, nil
 
 }
 
@@ -26308,17 +26168,15 @@ func (mo *HostDatastoreBrowser) Datastore() ([]*Datastore, error) {
 // supported. Clients should consult this list to avoid querying for types of virtual
 // machine components that are not supported.
 func (mo *HostDatastoreBrowser) SupportedType() ([]*FileQuery, error) {
-
-	response := struct {
-		Returnval []*FileQuery `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("supportedType", &response)
+	p, err := mo.currentProperty("supportedType")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*FileQuery), nil
+	}
+	return nil, nil
 
 }
 
@@ -26608,34 +26466,30 @@ type HostDatastoreSystem struct {
 //
 // Since VI API 2.5
 func (mo *HostDatastoreSystem) Capabilities() (*HostDatastoreSystemCapabilities, error) {
-
-	response := struct {
-		Returnval *HostDatastoreSystemCapabilities `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("capabilities", &response)
+	p, err := mo.currentProperty("capabilities")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostDatastoreSystemCapabilities), nil
+	}
+	return nil, nil
 
 }
 
 // List of datastores on this host.
 // Required Privilege: System.View
 func (mo *HostDatastoreSystem) Datastore() ([]*Datastore, error) {
-
-	response := struct {
-		Returnval []*Datastore `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("datastore", &response)
+	p, err := mo.currentProperty("datastore")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*Datastore), nil
+	}
+	return nil, nil
 
 }
 
@@ -27291,17 +27145,15 @@ type HostDateTimeSystem struct {
 // The DateTime configuration of the host.
 // Required Privilege: System.Read
 func (mo *HostDateTimeSystem) DateTimeInfo() (*HostDateTimeInfo, error) {
-
-	response := struct {
-		Returnval *HostDateTimeInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("dateTimeInfo", &response)
+	p, err := mo.currentProperty("dateTimeInfo")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostDateTimeInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -27688,17 +27540,15 @@ type HostDiagnosticSystem struct {
 
 // The currently active diagnostic partition.
 func (mo *HostDiagnosticSystem) ActivePartition() (*HostDiagnosticPartition, error) {
-
-	response := struct {
-		Returnval *HostDiagnosticPartition `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("activePartition", &response)
+	p, err := mo.currentProperty("activePartition")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostDiagnosticPartition), nil
+	}
+	return nil, nil
 
 }
 
@@ -28347,17 +28197,15 @@ type HostEsxAgentHostManager struct {
 // Configuration of agent virtual machine resources
 // Required Privilege: Host.Config.Settings
 func (mo *HostEsxAgentHostManager) ConfigInfo() (*HostEsxAgentHostManagerConfigInfo, error) {
-
-	response := struct {
-		Returnval *HostEsxAgentHostManagerConfigInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("configInfo", &response)
+	p, err := mo.currentProperty("configInfo")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostEsxAgentHostManagerConfigInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -28979,17 +28827,15 @@ type HostFirewallSystem struct {
 
 // Firewall configuration.
 func (mo *HostFirewallSystem) FirewallInfo() (*HostFirewallInfo, error) {
-
-	response := struct {
-		Returnval *HostFirewallInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("firewallInfo", &response)
+	p, err := mo.currentProperty("firewallInfo")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostFirewallInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -29405,17 +29251,15 @@ type HostGraphicsManager struct {
 // Array of graphics information
 // Required Privilege: System.Read
 func (mo *HostGraphicsManager) GraphicsInfo() ([]*HostGraphicsInfo, error) {
-
-	response := struct {
-		Returnval []*HostGraphicsInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("graphicsInfo", &response)
+	p, err := mo.currentProperty("graphicsInfo")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*HostGraphicsInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -29638,17 +29482,15 @@ type HostHealthStatusSystem struct {
 }
 
 func (mo *HostHealthStatusSystem) Runtime() (*HealthSystemRuntime, error) {
-
-	response := struct {
-		Returnval *HealthSystemRuntime `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("runtime", &response)
+	p, err := mo.currentProperty("runtime")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HealthSystemRuntime), nil
+	}
+	return nil, nil
 
 }
 
@@ -31781,17 +31623,15 @@ type HostMemorySystem struct {
 // existence of this data object indicates if the service console memory
 // reservation must be configured for this host.
 func (mo *HostMemorySystem) ConsoleReservationInfo() (*ServiceConsoleReservationInfo, error) {
-
-	response := struct {
-		Returnval *ServiceConsoleReservationInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("consoleReservationInfo", &response)
+	p, err := mo.currentProperty("consoleReservationInfo")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ServiceConsoleReservationInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -31801,17 +31641,15 @@ func (mo *HostMemorySystem) ConsoleReservationInfo() (*ServiceConsoleReservation
 //
 // Since VI API 2.5
 func (mo *HostMemorySystem) VirtualMachineReservationInfo() (*VirtualMachineMemoryReservationInfo, error) {
-
-	response := struct {
-		Returnval *VirtualMachineMemoryReservationInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("virtualMachineReservationInfo", &response)
+	p, err := mo.currentProperty("virtualMachineReservationInfo")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*VirtualMachineMemoryReservationInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -32996,17 +32834,15 @@ type HostNetworkSystem struct {
 
 // Capability vector indicating the available product features.
 func (mo *HostNetworkSystem) Capabilities() (*HostNetCapabilities, error) {
-
-	response := struct {
-		Returnval *HostNetCapabilities `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("capabilities", &response)
+	p, err := mo.currentProperty("capabilities")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostNetCapabilities), nil
+	}
+	return nil, nil
 
 }
 
@@ -33015,17 +32851,15 @@ func (mo *HostNetworkSystem) Capabilities() (*HostNetCapabilities, error) {
 // set only if
 // IP routing can be configured for the service console.
 func (mo *HostNetworkSystem) ConsoleIpRouteConfig() (*HostIpRouteConfig, error) {
-
-	response := struct {
-		Returnval *HostIpRouteConfig `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("consoleIpRouteConfig", &response)
+	p, err := mo.currentProperty("consoleIpRouteConfig")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostIpRouteConfig), nil
+	}
+	return nil, nil
 
 }
 
@@ -33036,17 +32870,15 @@ func (mo *HostNetworkSystem) ConsoleIpRouteConfig() (*HostIpRouteConfig, error) 
 //
 // Client-side DNS configuration.
 func (mo *HostNetworkSystem) DnsConfig() (*HostDnsConfig, error) {
-
-	response := struct {
-		Returnval *HostDnsConfig `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("dnsConfig", &response)
+	p, err := mo.currentProperty("dnsConfig")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostDnsConfig), nil
+	}
+	return nil, nil
 
 }
 
@@ -33057,17 +32889,15 @@ func (mo *HostNetworkSystem) DnsConfig() (*HostDnsConfig, error) {
 //
 // The IP route configuration.
 func (mo *HostNetworkSystem) IpRouteConfig() (*HostIpRouteConfig, error) {
-
-	response := struct {
-		Returnval *HostIpRouteConfig `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("ipRouteConfig", &response)
+	p, err := mo.currentProperty("ipRouteConfig")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostIpRouteConfig), nil
+	}
+	return nil, nil
 
 }
 
@@ -33075,33 +32905,29 @@ func (mo *HostNetworkSystem) IpRouteConfig() (*HostIpRouteConfig, error) {
 // using the updateNetworkConfig() method.  The
 // information is a strict subset of the information available in NetworkInfo.See HostNetworkInfo
 func (mo *HostNetworkSystem) NetworkConfig() (*HostNetworkConfig, error) {
-
-	response := struct {
-		Returnval *HostNetworkConfig `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("networkConfig", &response)
+	p, err := mo.currentProperty("networkConfig")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostNetworkConfig), nil
+	}
+	return nil, nil
 
 }
 
 // The network configuration and runtime information.
 func (mo *HostNetworkSystem) NetworkInfo() (*HostNetworkInfo, error) {
-
-	response := struct {
-		Returnval *HostNetworkInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("networkInfo", &response)
+	p, err := mo.currentProperty("networkInfo")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostNetworkInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -33111,17 +32937,15 @@ func (mo *HostNetworkSystem) NetworkInfo() (*HostNetworkInfo, error) {
 //
 // The offload capabilities available on this server.
 func (mo *HostNetworkSystem) OffloadCapabilities() (*HostNetOffloadCapabilities, error) {
-
-	response := struct {
-		Returnval *HostNetOffloadCapabilities `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("offloadCapabilities", &response)
+	p, err := mo.currentProperty("offloadCapabilities")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostNetOffloadCapabilities), nil
+	}
+	return nil, nil
 
 }
 
@@ -35065,17 +34889,15 @@ type HostPciPassthruSystem struct {
 // Array of PciPassthru information
 // Required Privilege: System.Read
 func (mo *HostPciPassthruSystem) PciPassthruInfo() ([]*HostPciPassthruInfo, error) {
-
-	response := struct {
-		Returnval []*HostPciPassthruInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("pciPassthruInfo", &response)
+	p, err := mo.currentProperty("pciPassthruInfo")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*HostPciPassthruInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -35573,34 +35395,30 @@ type HostPowerSystem struct {
 // Power system capabilities object.
 // Required Privilege: Host.Config.Power
 func (mo *HostPowerSystem) Capability() (*PowerSystemCapability, error) {
-
-	response := struct {
-		Returnval *PowerSystemCapability `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("capability", &response)
+	p, err := mo.currentProperty("capability")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*PowerSystemCapability), nil
+	}
+	return nil, nil
 
 }
 
 // Power system state info object.
 // Required Privilege: Host.Config.Power
 func (mo *HostPowerSystem) Info() (*PowerSystemInfo, error) {
-
-	response := struct {
-		Returnval *PowerSystemInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("info", &response)
+	p, err := mo.currentProperty("info")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*PowerSystemInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -35816,17 +35634,15 @@ type HostProfile struct {
 // (HostProfileCompleteConfigSpec.validatorHost),
 // the Profile Engine uses the reference host to validate the profile.
 func (mo *HostProfile) ReferenceHost() (*HostSystem, error) {
-
-	response := struct {
-		Returnval *HostSystem `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("referenceHost", &response)
+	p, err := mo.currentProperty("referenceHost")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostSystem), nil
+	}
+	return nil, nil
 
 }
 
@@ -37187,17 +37003,15 @@ type HostServiceSystem struct {
 
 // Service configuration.
 func (mo *HostServiceSystem) ServiceInfo() (*HostServiceInfo, error) {
-
-	response := struct {
-		Returnval *HostServiceInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("serviceInfo", &response)
+	p, err := mo.currentProperty("serviceInfo")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostServiceInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -37547,34 +37361,30 @@ type HostSnmpSystem struct {
 // Since VI API 2.5
 // Required Privilege: Global.Settings
 func (mo *HostSnmpSystem) Configuration() (*HostSnmpConfigSpec, error) {
-
-	response := struct {
-		Returnval *HostSnmpConfigSpec `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("configuration", &response)
+	p, err := mo.currentProperty("configuration")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostSnmpConfigSpec), nil
+	}
+	return nil, nil
 
 }
 
 // Since VI API 2.5
 // Required Privilege: Global.Settings
 func (mo *HostSnmpSystem) Limits() (*HostSnmpSystemAgentLimits, error) {
-
-	response := struct {
-		Returnval *HostSnmpSystemAgentLimits `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("limits", &response)
+	p, err := mo.currentProperty("limits")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostSnmpSystemAgentLimits), nil
+	}
+	return nil, nil
 
 }
 
@@ -37840,17 +37650,15 @@ type HostStorageSystem struct {
 // FileSystemVolumeInfo data
 // object type for more information.
 func (mo *HostStorageSystem) FileSystemVolumeInfo() (*HostFileSystemVolumeInfo, error) {
-
-	response := struct {
-		Returnval *HostFileSystemVolumeInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("fileSystemVolumeInfo", &response)
+	p, err := mo.currentProperty("fileSystemVolumeInfo")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostFileSystemVolumeInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -37864,33 +37672,29 @@ func (mo *HostStorageSystem) FileSystemVolumeInfo() (*HostFileSystemVolumeInfo, 
 //
 // Since vSphere API 4.0
 func (mo *HostStorageSystem) MultipathStateInfo() (*HostMultipathStateInfo, error) {
-
-	response := struct {
-		Returnval *HostMultipathStateInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("multipathStateInfo", &response)
+	p, err := mo.currentProperty("multipathStateInfo")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostMultipathStateInfo), nil
+	}
+	return nil, nil
 
 }
 
 // Host storage information up to the device level.
 func (mo *HostStorageSystem) StorageDeviceInfo() (*HostStorageDeviceInfo, error) {
-
-	response := struct {
-		Returnval *HostStorageDeviceInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("storageDeviceInfo", &response)
+	p, err := mo.currentProperty("storageDeviceInfo")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostStorageDeviceInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -37900,17 +37704,15 @@ func (mo *HostStorageSystem) StorageDeviceInfo() (*HostStorageDeviceInfo, error)
 //
 // Since vSphere API 4.1
 func (mo *HostStorageSystem) SystemFile() ([]string, error) {
-
-	response := struct {
-		Returnval []string `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("systemFile", &response)
+	p, err := mo.currentProperty("systemFile")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]string), nil
+	}
+	return nil, nil
 
 }
 
@@ -40052,34 +39854,30 @@ type HostSystem struct {
 // Host capabilities. This might not be available for a
 // disconnected host.
 func (mo *HostSystem) Capability() (*HostCapability, error) {
-
-	response := struct {
-		Returnval *HostCapability `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("capability", &response)
+	p, err := mo.currentProperty("capability")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostCapability), nil
+	}
+	return nil, nil
 
 }
 
 // Host configuration information.  This might not be available for a disconnected
 // host.
 func (mo *HostSystem) Config() (*HostConfigInfo, error) {
-
-	response := struct {
-		Returnval *HostConfigInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("config", &response)
+	p, err := mo.currentProperty("config")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostConfigInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -40093,17 +39891,15 @@ func (mo *HostSystem) Config() (*HostConfigInfo, error) {
 // an empty string for the version parameter. Any other version value will not
 // produce any property values as no updates are generated.
 func (mo *HostSystem) ConfigManager() (*HostConfigManager, error) {
-
-	response := struct {
-		Returnval *HostConfigManager `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("configManager", &response)
+	p, err := mo.currentProperty("configManager")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostConfigManager), nil
+	}
+	return nil, nil
 
 }
 
@@ -40111,51 +39907,45 @@ func (mo *HostSystem) ConfigManager() (*HostConfigManager, error) {
 // that are available in this HostSystem.
 // Required Privilege: System.View
 func (mo *HostSystem) Datastore() ([]*Datastore, error) {
-
-	response := struct {
-		Returnval []*Datastore `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("datastore", &response)
+	p, err := mo.currentProperty("datastore")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*Datastore), nil
+	}
+	return nil, nil
 
 }
 
 // DatastoreBrowser to browse datastores for this host.
 // Required Privilege: System.View
 func (mo *HostSystem) DatastoreBrowser() (*HostDatastoreBrowser, error) {
-
-	response := struct {
-		Returnval *HostDatastoreBrowser `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("datastoreBrowser", &response)
+	p, err := mo.currentProperty("datastoreBrowser")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostDatastoreBrowser), nil
+	}
+	return nil, nil
 
 }
 
 // Hardware configuration of the host. This might not be available for a
 // disconnected host.
 func (mo *HostSystem) Hardware() (*HostHardwareInfo, error) {
-
-	response := struct {
-		Returnval *HostHardwareInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("hardware", &response)
+	p, err := mo.currentProperty("hardware")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostHardwareInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -40168,17 +39958,15 @@ func (mo *HostSystem) Hardware() (*HostHardwareInfo, error) {
 //
 // Since vSphere API 5.0
 func (mo *HostSystem) LicensableResource() (*HostLicensableResourceInfo, error) {
-
-	response := struct {
-		Returnval *HostLicensableResourceInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("licensableResource", &response)
+	p, err := mo.currentProperty("licensableResource")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostLicensableResourceInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -40186,82 +39974,72 @@ func (mo *HostSystem) LicensableResource() (*HostLicensableResourceInfo, error) 
 // are available in this HostSystem.
 // Required Privilege: System.View
 func (mo *HostSystem) Network() ([]*Network, error) {
-
-	response := struct {
-		Returnval []*Network `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("network", &response)
+	p, err := mo.currentProperty("network")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*Network), nil
+	}
+	return nil, nil
 
 }
 
 // Runtime state information about the host such as connection state.
 func (mo *HostSystem) Runtime() (*HostRuntimeInfo, error) {
-
-	response := struct {
-		Returnval *HostRuntimeInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("runtime", &response)
+	p, err := mo.currentProperty("runtime")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostRuntimeInfo), nil
+	}
+	return nil, nil
 
 }
 
 // Basic information about the host, including connection state.
 func (mo *HostSystem) Summary() (*HostListSummary, error) {
-
-	response := struct {
-		Returnval *HostListSummary `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("summary", &response)
+	p, err := mo.currentProperty("summary")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostListSummary), nil
+	}
+	return nil, nil
 
 }
 
 // Reference for the system resource hierarchy, used for configuring the set of
 // resources reserved to the system and unavailable to virtual machines.
 func (mo *HostSystem) SystemResources() (*HostSystemResourceInfo, error) {
-
-	response := struct {
-		Returnval *HostSystemResourceInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("systemResources", &response)
+	p, err := mo.currentProperty("systemResources")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostSystemResourceInfo), nil
+	}
+	return nil, nil
 
 }
 
 // List of virtual machines associated with this host.
 func (mo *HostSystem) Vm() ([]*VirtualMachine, error) {
-
-	response := struct {
-		Returnval []*VirtualMachine `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("vm", &response)
+	p, err := mo.currentProperty("vm")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*VirtualMachine), nil
+	}
+	return nil, nil
 
 }
 
@@ -41780,17 +41558,15 @@ type HostVFlashManager struct {
 
 // Host vFlash configuration information.
 func (mo *HostVFlashManager) VFlashConfigInfo() (*HostVFlashManagerVFlashConfigInfo, error) {
-
-	response := struct {
-		Returnval *HostVFlashManagerVFlashConfigInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("vFlashConfigInfo", &response)
+	p, err := mo.currentProperty("vFlashConfigInfo")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostVFlashManagerVFlashConfigInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -42227,33 +42003,29 @@ type HostVMotionSystem struct {
 
 // IP configuration of the VMotion VirtualNic.
 func (mo *HostVMotionSystem) IpConfig() (*HostIpConfig, error) {
-
-	response := struct {
-		Returnval *HostIpConfig `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("ipConfig", &response)
+	p, err := mo.currentProperty("ipConfig")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostIpConfig), nil
+	}
+	return nil, nil
 
 }
 
 // VMotion network configuration.
 func (mo *HostVMotionSystem) NetConfig() (*HostVMotionNetConfig, error) {
-
-	response := struct {
-		Returnval *HostVMotionNetConfig `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("netConfig", &response)
+	p, err := mo.currentProperty("netConfig")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostVMotionNetConfig), nil
+	}
+	return nil, nil
 
 }
 
@@ -42507,17 +42279,15 @@ type HostVirtualNicManager struct {
 
 // Network configuration.
 func (mo *HostVirtualNicManager) Info() (*HostVirtualNicManagerInfo, error) {
-
-	response := struct {
-		Returnval *HostVirtualNicManagerInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("info", &response)
+	p, err := mo.currentProperty("info")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HostVirtualNicManagerInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -43261,17 +43031,15 @@ type HostVsanSystem struct {
 // The current VSAN service configuration information for this host.
 // Required Privilege: System.Read
 func (mo *HostVsanSystem) Config() (*VsanHostConfigInfo, error) {
-
-	response := struct {
-		Returnval *VsanHostConfigInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("config", &response)
+	p, err := mo.currentProperty("config")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*VsanHostConfigInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -43723,67 +43491,59 @@ type HttpNfcLease struct {
 // If the lease is in the error state, this property contains the
 // error that caused the lease to be aborted.
 func (mo *HttpNfcLease) Error() (*LocalizedMethodFault, error) {
-
-	response := struct {
-		Returnval *LocalizedMethodFault `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("error", &response)
+	p, err := mo.currentProperty("error")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*LocalizedMethodFault), nil
+	}
+	return nil, nil
 
 }
 
 // Provides information on the objects contained in this lease. The
 // info property is only valid when the lease is in the ready state.
 func (mo *HttpNfcLease) Info() (*HttpNfcLeaseInfo, error) {
-
-	response := struct {
-		Returnval *HttpNfcLeaseInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("info", &response)
+	p, err := mo.currentProperty("info")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HttpNfcLeaseInfo), nil
+	}
+	return nil, nil
 
 }
 
 // Provides progress information (0-100 percent) for the initializing state
 // of the lease. Clients can use this to track overall progress.
 func (mo *HttpNfcLease) InitializeProgress() (int32, error) {
-
-	response := struct {
-		Returnval int32 `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("initializeProgress", &response)
+	p, err := mo.currentProperty("initializeProgress")
 	if err != nil {
 		return int32(0), err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(int32), nil
+	}
+	return int32(0), nil
 
 }
 
 // The current state of the lease.
 func (mo *HttpNfcLease) State() (*HttpNfcLeaseState, error) {
-
-	response := struct {
-		Returnval *HttpNfcLeaseState `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("state", &response)
+	p, err := mo.currentProperty("state")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*HttpNfcLeaseState), nil
+	}
+	return nil, nil
 
 }
 
@@ -47223,34 +46983,30 @@ type LicenseManager struct {
 //
 // Since VI API 2.5
 func (mo *LicenseManager) Diagnostics() (*LicenseDiagnostics, error) {
-
-	response := struct {
-		Returnval *LicenseDiagnostics `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("diagnostics", &response)
+	p, err := mo.currentProperty("diagnostics")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*LicenseDiagnostics), nil
+	}
+	return nil, nil
 
 }
 
 // Since vSphere API 4.0
 // Required Privilege: System.Read
 func (mo *LicenseManager) Evaluation() (*LicenseManagerEvaluationInfo, error) {
-
-	response := struct {
-		Returnval *LicenseManagerEvaluationInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("evaluation", &response)
+	p, err := mo.currentProperty("evaluation")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*LicenseManagerEvaluationInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -47261,17 +47017,15 @@ func (mo *LicenseManager) Evaluation() (*LicenseManagerEvaluationInfo, error) {
 //
 // The list of features that can be licensed.
 func (mo *LicenseManager) FeatureInfo() ([]*LicenseFeatureInfo, error) {
-
-	response := struct {
-		Returnval []*LicenseFeatureInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("featureInfo", &response)
+	p, err := mo.currentProperty("featureInfo")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*LicenseFeatureInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -47280,17 +47034,15 @@ func (mo *LicenseManager) FeatureInfo() ([]*LicenseFeatureInfo, error) {
 // Since vSphere API 4.0
 // Required Privilege: System.View
 func (mo *LicenseManager) LicenseAssignmentManager() (*LicenseAssignmentManager, error) {
-
-	response := struct {
-		Returnval *LicenseAssignmentManager `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("licenseAssignmentManager", &response)
+	p, err := mo.currentProperty("licenseAssignmentManager")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*LicenseAssignmentManager), nil
+	}
+	return nil, nil
 
 }
 
@@ -47308,17 +47060,15 @@ func (mo *LicenseManager) LicenseAssignmentManager() (*LicenseAssignmentManager,
 //
 // Since VI API 2.5
 func (mo *LicenseManager) LicensedEdition() (string, error) {
-
-	response := struct {
-		Returnval string `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("licensedEdition", &response)
+	p, err := mo.currentProperty("licensedEdition")
 	if err != nil {
 		return "", err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(string), nil
+	}
+	return "", nil
 
 }
 
@@ -47327,17 +47077,15 @@ func (mo *LicenseManager) LicensedEdition() (string, error) {
 // Since vSphere API 4.0
 // Required Privilege: dynamic
 func (mo *LicenseManager) Licenses() ([]*LicenseManagerLicenseInfo, error) {
-
-	response := struct {
-		Returnval []*LicenseManagerLicenseInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("licenses", &response)
+	p, err := mo.currentProperty("licenses")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*LicenseManagerLicenseInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -47348,17 +47096,15 @@ func (mo *LicenseManager) Licenses() ([]*LicenseManagerLicenseInfo, error) {
 //
 // Set or return a data object type of LocalLicense or LicenseServer.
 func (mo *LicenseManager) Source() (*LicenseSource, error) {
-
-	response := struct {
-		Returnval *LicenseSource `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("source", &response)
+	p, err := mo.currentProperty("source")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*LicenseSource), nil
+	}
+	return nil, nil
 
 }
 
@@ -47369,17 +47115,15 @@ func (mo *LicenseManager) Source() (*LicenseSource, error) {
 // Current state of the license source. License sources that are LocalSource
 // are always available.
 func (mo *LicenseManager) SourceAvailable() (bool, error) {
-
-	response := struct {
-		Returnval bool `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("sourceAvailable", &response)
+	p, err := mo.currentProperty("sourceAvailable")
 	if err != nil {
 		return false, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(bool), nil
+	}
+	return false, nil
 
 }
 
@@ -48612,17 +48356,15 @@ type LocalizationManager struct {
 // catalogs available for the current session locale.
 // Required Privilege: System.View
 func (mo *LocalizationManager) Catalog() ([]*LocalizationManagerMessageCatalog, error) {
-
-	response := struct {
-		Returnval []*LocalizationManagerMessageCatalog `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("catalog", &response)
+	p, err := mo.currentProperty("catalog")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*LocalizationManagerMessageCatalog), nil
+	}
+	return nil, nil
 
 }
 
@@ -48854,17 +48596,15 @@ type ManagedEntity struct {
 // Since vSphere API 4.0
 // Required Privilege: System.Read
 func (mo *ManagedEntity) AlarmActionsEnabled() (bool, error) {
-
-	response := struct {
-		Returnval bool `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("alarmActionsEnabled", &response)
+	p, err := mo.currentProperty("alarmActionsEnabled")
 	if err != nil {
 		return false, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(bool), nil
+	}
+	return false, nil
 
 }
 
@@ -48874,17 +48614,15 @@ func (mo *ManagedEntity) AlarmActionsEnabled() (bool, error) {
 // configStatus property provides an overall status
 // based on these events.
 func (mo *ManagedEntity) ConfigIssue() ([]*Event, error) {
-
-	response := struct {
-		Returnval []*Event `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("configIssue", &response)
+	p, err := mo.currentProperty("configIssue")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*Event), nil
+	}
+	return nil, nil
 
 }
 
@@ -48913,34 +48651,30 @@ func (mo *ManagedEntity) ConfigIssue() ([]*Event, error) {
 // an empty string for the version parameter. Any other version value will not
 // produce any property values as no updates are generated.
 func (mo *ManagedEntity) ConfigStatus() (*ManagedEntityStatus, error) {
-
-	response := struct {
-		Returnval *ManagedEntityStatus `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("configStatus", &response)
+	p, err := mo.currentProperty("configStatus")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ManagedEntityStatus), nil
+	}
+	return nil, nil
 
 }
 
 // Custom field values.
 // Required Privilege: System.View
 func (mo *ManagedEntity) CustomValue() ([]*CustomFieldValue, error) {
-
-	response := struct {
-		Returnval []*CustomFieldValue `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("customValue", &response)
+	p, err := mo.currentProperty("customValue")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*CustomFieldValue), nil
+	}
+	return nil, nil
 
 }
 
@@ -48953,17 +48687,15 @@ func (mo *ManagedEntity) CustomValue() ([]*CustomFieldValue, error) {
 // This set does not include alarms that are defined on descendants of this entity.
 // Required Privilege: System.View
 func (mo *ManagedEntity) DeclaredAlarmState() ([]*AlarmState, error) {
-
-	response := struct {
-		Returnval []*AlarmState `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("declaredAlarmState", &response)
+	p, err := mo.currentProperty("declaredAlarmState")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*AlarmState), nil
+	}
+	return nil, nil
 
 }
 
@@ -49043,34 +48775,30 @@ func (mo *ManagedEntity) DeclaredAlarmState() ([]*AlarmState, error) {
 // an empty string for the version parameter. Any other version value will not
 // produce any property values as no updates are generated.
 func (mo *ManagedEntity) DisabledMethod() ([]string, error) {
-
-	response := struct {
-		Returnval []string `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("disabledMethod", &response)
+	p, err := mo.currentProperty("disabledMethod")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]string), nil
+	}
+	return nil, nil
 
 }
 
 // Access rights the current session has to this entity.
 // Required Privilege: System.View
 func (mo *ManagedEntity) EffectiveRole() ([]int32, error) {
-
-	response := struct {
-		Returnval []int32 `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("effectiveRole", &response)
+	p, err := mo.currentProperty("effectiveRole")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]int32), nil
+	}
+	return nil, nil
 
 }
 
@@ -49083,17 +48811,15 @@ func (mo *ManagedEntity) EffectiveRole() ([]int32, error) {
 // %5c, and a percent is escaped as %25.
 // Required Privilege: System.View
 func (mo *ManagedEntity) Name() (string, error) {
-
-	response := struct {
-		Returnval string `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("name", &response)
+	p, err := mo.currentProperty("name")
 	if err != nil {
 		return "", err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(string), nil
+	}
+	return "", nil
 
 }
 
@@ -49119,17 +48845,15 @@ func (mo *ManagedEntity) Name() (string, error) {
 // an empty string for the version parameter. Any other version value will not
 // produce any property values as no updates are generated.
 func (mo *ManagedEntity) OverallStatus() (*ManagedEntityStatus, error) {
-
-	response := struct {
-		Returnval *ManagedEntityStatus `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("overallStatus", &response)
+	p, err := mo.currentProperty("overallStatus")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ManagedEntityStatus), nil
+	}
+	return nil, nil
 
 }
 
@@ -49140,33 +48864,29 @@ func (mo *ManagedEntity) OverallStatus() (*ManagedEntityStatus, error) {
 // a VirtualApp.
 // Required Privilege: System.View
 func (mo *ManagedEntity) Parent() (*ManagedEntity, error) {
-
-	response := struct {
-		Returnval *ManagedEntity `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("parent", &response)
+	p, err := mo.currentProperty("parent")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ManagedEntity), nil
+	}
+	return nil, nil
 
 }
 
 // List of permissions defined for this entity.
 func (mo *ManagedEntity) Permission() ([]*Permission, error) {
-
-	response := struct {
-		Returnval []*Permission `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("permission", &response)
+	p, err := mo.currentProperty("permission")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*Permission), nil
+	}
+	return nil, nil
 
 }
 
@@ -49191,17 +48911,15 @@ func (mo *ManagedEntity) Permission() ([]*Permission, error) {
 // an empty string for the version parameter. Any other version value will not
 // produce any property values as no updates are generated.
 func (mo *ManagedEntity) RecentTask() ([]*Task, error) {
-
-	response := struct {
-		Returnval []*Task `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("recentTask", &response)
+	p, err := mo.currentProperty("recentTask")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*Task), nil
+	}
+	return nil, nil
 
 }
 
@@ -49211,17 +48929,15 @@ func (mo *ManagedEntity) RecentTask() ([]*Task, error) {
 // Since vSphere API 4.0
 // Required Privilege: System.View
 func (mo *ManagedEntity) Tag() ([]*Tag, error) {
-
-	response := struct {
-		Returnval []*Tag `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("tag", &response)
+	p, err := mo.currentProperty("tag")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*Tag), nil
+	}
+	return nil, nil
 
 }
 
@@ -49240,17 +48956,15 @@ func (mo *ManagedEntity) Tag() ([]*Tag, error) {
 // produce any property values as no updates are generated.
 // Required Privilege: System.View
 func (mo *ManagedEntity) TriggeredAlarmState() ([]*AlarmState, error) {
-
-	response := struct {
-		Returnval []*AlarmState `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("triggeredAlarmState", &response)
+	p, err := mo.currentProperty("triggeredAlarmState")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*AlarmState), nil
+	}
+	return nil, nil
 
 }
 
@@ -49770,17 +49484,15 @@ type ManagedObjectView struct {
 
 // The list of references to objects mapped by this view.
 func (mo *ManagedObjectView) GetView() ([]*ManagedObjectReference, error) {
-
-	response := struct {
-		Returnval []*ManagedObjectReference `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("view", &response)
+	p, err := mo.currentProperty("view")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*ManagedObjectReference), nil
+	}
+	return nil, nil
 
 }
 
@@ -51291,65 +51003,57 @@ type Network struct {
 
 // Hosts attached to this network.
 func (mo *Network) Host() ([]*HostSystem, error) {
-
-	response := struct {
-		Returnval []*HostSystem `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("host", &response)
+	p, err := mo.currentProperty("host")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*HostSystem), nil
+	}
+	return nil, nil
 
 }
 
 // Name of this network.
 func (mo *Network) Name() (string, error) {
-
-	response := struct {
-		Returnval string `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("name", &response)
+	p, err := mo.currentProperty("name")
 	if err != nil {
 		return "", err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(string), nil
+	}
+	return "", nil
 
 }
 
 // Properties of a network.
 func (mo *Network) Summary() (*NetworkSummary, error) {
-
-	response := struct {
-		Returnval *NetworkSummary `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("summary", &response)
+	p, err := mo.currentProperty("summary")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*NetworkSummary), nil
+	}
+	return nil, nil
 
 }
 
 // Virtual machines using this network.
 func (mo *Network) Vm() ([]*VirtualMachine, error) {
-
-	response := struct {
-		Returnval []*VirtualMachine `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("vm", &response)
+	p, err := mo.currentProperty("vm")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*VirtualMachine), nil
+	}
+	return nil, nil
 
 }
 
@@ -52536,34 +52240,30 @@ type OptionManager struct {
 
 // A list of the current settings for the key/value pair options.
 func (mo *OptionManager) Setting() ([]*OptionValue, error) {
-
-	response := struct {
-		Returnval []*OptionValue `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("setting", &response)
+	p, err := mo.currentProperty("setting")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*OptionValue), nil
+	}
+	return nil, nil
 
 }
 
 // A list of supported key/value pair options including their
 // type information.
 func (mo *OptionManager) SupportedOption() ([]*OptionDef, error) {
-
-	response := struct {
-		Returnval []*OptionDef `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("supportedOption", &response)
+	p, err := mo.currentProperty("supportedOption")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*OptionDef), nil
+	}
+	return nil, nil
 
 }
 
@@ -53922,17 +53622,15 @@ type OvfManager struct {
 // Since vSphere API 5.1
 // Required Privilege: System.View
 func (mo *OvfManager) OvfExportOption() ([]*OvfOptionInfo, error) {
-
-	response := struct {
-		Returnval []*OvfOptionInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("ovfExportOption", &response)
+	p, err := mo.currentProperty("ovfExportOption")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*OvfOptionInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -53943,17 +53641,15 @@ func (mo *OvfManager) OvfExportOption() ([]*OvfOptionInfo, error) {
 // Since vSphere API 5.1
 // Required Privilege: System.View
 func (mo *OvfManager) OvfImportOption() ([]*OvfOptionInfo, error) {
-
-	response := struct {
-		Returnval []*OvfOptionInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("ovfImportOption", &response)
+	p, err := mo.currentProperty("ovfImportOption")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*OvfOptionInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -55753,17 +55449,15 @@ type PerformanceManager struct {
 // The static description strings.
 // Required Privilege: System.View
 func (mo *PerformanceManager) Description() (*PerformanceDescription, error) {
-
-	response := struct {
-		Returnval *PerformanceDescription `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("description", &response)
+	p, err := mo.currentProperty("description")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*PerformanceDescription), nil
+	}
+	return nil, nil
 
 }
 
@@ -55771,34 +55465,30 @@ func (mo *PerformanceManager) Description() (*PerformanceDescription, error) {
 // system.
 // Required Privilege: System.View
 func (mo *PerformanceManager) HistoricalInterval() ([]*PerfInterval, error) {
-
-	response := struct {
-		Returnval []*PerfInterval `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("historicalInterval", &response)
+	p, err := mo.currentProperty("historicalInterval")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*PerfInterval), nil
+	}
+	return nil, nil
 
 }
 
 // A list of all supported performance counters in the system.
 // Required Privilege: System.View
 func (mo *PerformanceManager) PerfCounter() ([]*PerfCounterInfo, error) {
-
-	response := struct {
-		Returnval []*PerfCounterInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("perfCounter", &response)
+	p, err := mo.currentProperty("perfCounter")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*PerfCounterInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -57271,50 +56961,44 @@ type Profile struct {
 // of the profile is unknown.
 // See ComplianceResultStatus.
 func (mo *Profile) ComplianceStatus() (string, error) {
-
-	response := struct {
-		Returnval string `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("complianceStatus", &response)
+	p, err := mo.currentProperty("complianceStatus")
 	if err != nil {
 		return "", err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(string), nil
+	}
+	return "", nil
 
 }
 
 // Configuration data for the profile.
 // Required Privilege: Profile.Edit
 func (mo *Profile) Config() (*ProfileConfigInfo, error) {
-
-	response := struct {
-		Returnval *ProfileConfigInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("config", &response)
+	p, err := mo.currentProperty("config")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ProfileConfigInfo), nil
+	}
+	return nil, nil
 
 }
 
 // Time at which the profile was created.
 func (mo *Profile) CreatedTime() (time.Time, error) {
-
-	response := struct {
-		Returnval time.Time `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("createdTime", &response)
+	p, err := mo.currentProperty("createdTime")
 	if err != nil {
 		return time.Now(), err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(time.Time), nil
+	}
+	return time.Now(), nil
 
 }
 
@@ -57324,65 +57008,57 @@ func (mo *Profile) CreatedTime() (time.Time, error) {
 //
 // Localizable description of the profile
 func (mo *Profile) Description() (*ProfileDescription, error) {
-
-	response := struct {
-		Returnval *ProfileDescription `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("description", &response)
+	p, err := mo.currentProperty("description")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ProfileDescription), nil
+	}
+	return nil, nil
 
 }
 
 // List of managed entities associated with the profile.
 func (mo *Profile) Entity() ([]*ManagedEntity, error) {
-
-	response := struct {
-		Returnval []*ManagedEntity `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("entity", &response)
+	p, err := mo.currentProperty("entity")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*ManagedEntity), nil
+	}
+	return nil, nil
 
 }
 
 // Time at which the profile was last modified.
 func (mo *Profile) ModifiedTime() (time.Time, error) {
-
-	response := struct {
-		Returnval time.Time `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("modifiedTime", &response)
+	p, err := mo.currentProperty("modifiedTime")
 	if err != nil {
 		return time.Now(), err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(time.Time), nil
+	}
+	return time.Now(), nil
 
 }
 
 // Name of the profile.
 func (mo *Profile) Name() (string, error) {
-
-	response := struct {
-		Returnval string `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("name", &response)
+	p, err := mo.currentProperty("name")
 	if err != nil {
 		return "", err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(string), nil
+	}
+	return "", nil
 
 }
 
@@ -58104,17 +57780,15 @@ type ProfileManager struct {
 // A list of profiles known to this ProfileManager.
 // Required Privilege: Profile.View
 func (mo *ProfileManager) Profile() ([]*Profile, error) {
-
-	response := struct {
-		Returnval []*Profile `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("profile", &response)
+	p, err := mo.currentProperty("profile")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*Profile), nil
+	}
+	return nil, nil
 
 }
 
@@ -58575,17 +58249,15 @@ type PropertyCollector struct {
 // properties for which it detects incremental changes.
 // Required Privilege: System.View
 func (mo *PropertyCollector) Filter() ([]*PropertyFilter, error) {
-
-	response := struct {
-		Returnval []*PropertyFilter `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("filter", &response)
+	p, err := mo.currentProperty("filter")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*PropertyFilter), nil
+	}
+	return nil, nil
 
 }
 
@@ -59096,33 +58768,29 @@ type PropertyFilter struct {
 // true, a change reports only the nested property.  If the value is
 // false, a change reports the enclosing property named in the filter.
 func (mo *PropertyFilter) PartialUpdates() (bool, error) {
-
-	response := struct {
-		Returnval bool `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("partialUpdates", &response)
+	p, err := mo.currentProperty("partialUpdates")
 	if err != nil {
 		return false, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(bool), nil
+	}
+	return false, nil
 
 }
 
 // Specifications for this filter.
 func (mo *PropertyFilter) Spec() (*PropertyFilterSpec, error) {
-
-	response := struct {
-		Returnval *PropertyFilterSpec `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("spec", &response)
+	p, err := mo.currentProperty("spec")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*PropertyFilterSpec), nil
+	}
+	return nil, nil
 
 }
 
@@ -60380,33 +60048,29 @@ type ResourcePool struct {
 // The resource configuration of all direct children (VirtualMachine and
 // ResourcePool) of this resource group.
 func (mo *ResourcePool) ChildConfiguration() ([]*ResourceConfigSpec, error) {
-
-	response := struct {
-		Returnval []*ResourceConfigSpec `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("childConfiguration", &response)
+	p, err := mo.currentProperty("childConfiguration")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*ResourceConfigSpec), nil
+	}
+	return nil, nil
 
 }
 
 // Configuration of this resource pool.
 func (mo *ResourcePool) Config() (*ResourceConfigSpec, error) {
-
-	response := struct {
-		Returnval *ResourceConfigSpec `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("config", &response)
+	p, err := mo.currentProperty("config")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ResourceConfigSpec), nil
+	}
+	return nil, nil
 
 }
 
@@ -60414,34 +60078,30 @@ func (mo *ResourcePool) Config() (*ResourceConfigSpec, error) {
 // belong.
 // Required Privilege: System.View
 func (mo *ResourcePool) Owner() (*ComputeResource, error) {
-
-	response := struct {
-		Returnval *ComputeResource `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("owner", &response)
+	p, err := mo.currentProperty("owner")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ComputeResource), nil
+	}
+	return nil, nil
 
 }
 
 // The set of child resource pools.
 // Required Privilege: System.View
 func (mo *ResourcePool) ResourcePool() ([]*ResourcePool, error) {
-
-	response := struct {
-		Returnval []*ResourcePool `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("resourcePool", &response)
+	p, err := mo.currentProperty("resourcePool")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*ResourcePool), nil
+	}
+	return nil, nil
 
 }
 
@@ -60459,17 +60119,15 @@ func (mo *ResourcePool) ResourcePool() ([]*ResourcePool, error) {
 // an empty string for the version parameter. Any other version value will not
 // produce any property values as no updates are generated.
 func (mo *ResourcePool) Runtime() (*ResourcePoolRuntimeInfo, error) {
-
-	response := struct {
-		Returnval *ResourcePoolRuntimeInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("runtime", &response)
+	p, err := mo.currentProperty("runtime")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ResourcePoolRuntimeInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -60483,34 +60141,30 @@ func (mo *ResourcePool) Runtime() (*ResourcePoolRuntimeInfo, error) {
 // an empty string for the version parameter. Any other version value will not
 // produce any property values as no updates are generated.
 func (mo *ResourcePool) Summary() (*ResourcePoolSummary, error) {
-
-	response := struct {
-		Returnval *ResourcePoolSummary `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("summary", &response)
+	p, err := mo.currentProperty("summary")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ResourcePoolSummary), nil
+	}
+	return nil, nil
 
 }
 
 // The set of virtual machines associated with this resource pool.
 // Required Privilege: System.View
 func (mo *ResourcePool) Vm() ([]*VirtualMachine, error) {
-
-	response := struct {
-		Returnval []*VirtualMachine `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("vm", &response)
+	p, err := mo.currentProperty("vm")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*VirtualMachine), nil
+	}
+	return nil, nil
 
 }
 
@@ -61716,17 +61370,15 @@ type ScheduledTask struct {
 
 // Information about the current scheduled task.
 func (mo *ScheduledTask) Info() (*ScheduledTaskInfo, error) {
-
-	response := struct {
-		Returnval *ScheduledTaskInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("info", &response)
+	p, err := mo.currentProperty("info")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ScheduledTaskInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -62000,34 +61652,30 @@ type ScheduledTaskManager struct {
 // Static descriptive strings used in scheduled tasks.
 // Required Privilege: System.View
 func (mo *ScheduledTaskManager) Description() (*ScheduledTaskDescription, error) {
-
-	response := struct {
-		Returnval *ScheduledTaskDescription `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("description", &response)
+	p, err := mo.currentProperty("description")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ScheduledTaskDescription), nil
+	}
+	return nil, nil
 
 }
 
 // All available scheduled tasks.
 // Required Privilege: System.View
 func (mo *ScheduledTaskManager) ScheduledTask() ([]*ScheduledTask, error) {
-
-	response := struct {
-		Returnval []*ScheduledTask `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("scheduledTask", &response)
+	p, err := mo.currentProperty("scheduledTask")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*ScheduledTask), nil
+	}
+	return nil, nil
 
 }
 
@@ -63406,17 +63054,15 @@ type ServiceInstance struct {
 // API-wide capabilities.
 // Required Privilege: System.View
 func (mo *ServiceInstance) Capability() (*Capability, error) {
-
-	response := struct {
-		Returnval *Capability `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("capability", &response)
+	p, err := mo.currentProperty("capability")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*Capability), nil
+	}
+	return nil, nil
 
 }
 
@@ -63432,17 +63078,15 @@ func (mo *ServiceInstance) Capability() (*Capability, error) {
 // and then invoking a second traversal to continue.)
 // Required Privilege: System.Anonymous
 func (mo *ServiceInstance) Content() (*ServiceContent, error) {
-
-	response := struct {
-		Returnval *ServiceContent `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("content", &response)
+	p, err := mo.currentProperty("content")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ServiceContent), nil
+	}
+	return nil, nil
 
 }
 
@@ -63456,17 +63100,15 @@ func (mo *ServiceInstance) Content() (*ServiceContent, error) {
 // on the server; instead, use the CurrentTime method.
 // Required Privilege: System.View
 func (mo *ServiceInstance) ServerClock() (time.Time, error) {
-
-	response := struct {
-		Returnval time.Time `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("serverClock", &response)
+	p, err := mo.currentProperty("serverClock")
 	if err != nil {
 		return time.Now(), err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(time.Time), nil
+	}
+	return time.Now(), nil
 
 }
 
@@ -63686,17 +63328,15 @@ type ServiceManager struct {
 // The full list of services available in this directory.
 // Required Privilege: Global.ServiceManagers
 func (mo *ServiceManager) Service() ([]*ServiceManagerServiceInfo, error) {
-
-	response := struct {
-		Returnval []*ServiceManagerServiceInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("service", &response)
+	p, err := mo.currentProperty("service")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*ServiceManagerServiceInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -63822,85 +63462,75 @@ type SessionManager struct {
 // If the client is not logged on, the value is null.
 // Required Privilege: System.Anonymous
 func (mo *SessionManager) CurrentSession() (*UserSession, error) {
-
-	response := struct {
-		Returnval *UserSession `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("currentSession", &response)
+	p, err := mo.currentProperty("currentSession")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*UserSession), nil
+	}
+	return nil, nil
 
 }
 
 // This is the default server locale.
 // Required Privilege: System.Anonymous
 func (mo *SessionManager) DefaultLocale() (string, error) {
-
-	response := struct {
-		Returnval string `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("defaultLocale", &response)
+	p, err := mo.currentProperty("defaultLocale")
 	if err != nil {
 		return "", err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(string), nil
+	}
+	return "", nil
 
 }
 
 // The system global message from the server.
 // Required Privilege: System.View
 func (mo *SessionManager) Message() (string, error) {
-
-	response := struct {
-		Returnval string `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("message", &response)
+	p, err := mo.currentProperty("message")
 	if err != nil {
 		return "", err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(string), nil
+	}
+	return "", nil
 
 }
 
 // Provides the list of locales for which the server has localized messages.
 // Required Privilege: System.Anonymous
 func (mo *SessionManager) MessageLocaleList() ([]string, error) {
-
-	response := struct {
-		Returnval []string `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("messageLocaleList", &response)
+	p, err := mo.currentProperty("messageLocaleList")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]string), nil
+	}
+	return nil, nil
 
 }
 
 // The list of currently active sessions.
 // Required Privilege: Sessions.TerminateSession
 func (mo *SessionManager) SessionList() ([]*UserSession, error) {
-
-	response := struct {
-		Returnval []*UserSession `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("sessionList", &response)
+	p, err := mo.currentProperty("sessionList")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*UserSession), nil
+	}
+	return nil, nil
 
 }
 
@@ -63911,17 +63541,15 @@ func (mo *SessionManager) SessionList() ([]*UserSession, error) {
 // message is returned using the system locale.
 // Required Privilege: System.Anonymous
 func (mo *SessionManager) SupportedLocaleList() ([]string, error) {
-
-	response := struct {
-		Returnval []string `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("supportedLocaleList", &response)
+	p, err := mo.currentProperty("supportedLocaleList")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]string), nil
+	}
+	return nil, nil
 
 }
 
@@ -64817,33 +64445,29 @@ type SimpleCommand struct {
 
 // The encoding type used in the result.
 func (mo *SimpleCommand) EncodingType() (*SimpleCommandEncoding, error) {
-
-	response := struct {
-		Returnval *SimpleCommandEncoding `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("encodingType", &response)
+	p, err := mo.currentProperty("encodingType")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*SimpleCommandEncoding), nil
+	}
+	return nil, nil
 
 }
 
 // A description of the service.
 func (mo *SimpleCommand) Entity() (*ServiceManagerServiceInfo, error) {
-
-	response := struct {
-		Returnval *ServiceManagerServiceInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("entity", &response)
+	p, err := mo.currentProperty("entity")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ServiceManagerServiceInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -66056,34 +65680,30 @@ type StoragePod struct {
 // Storage DRS related attributes of the Storage Pod.
 // Required Privilege: System.Read
 func (mo *StoragePod) PodStorageDrsEntry() (*PodStorageDrsEntry, error) {
-
-	response := struct {
-		Returnval *PodStorageDrsEntry `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("podStorageDrsEntry", &response)
+	p, err := mo.currentProperty("podStorageDrsEntry")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*PodStorageDrsEntry), nil
+	}
+	return nil, nil
 
 }
 
 // Storage pod summary.
 // Required Privilege: System.View
 func (mo *StoragePod) Summary() (*StoragePodSummary, error) {
-
-	response := struct {
-		Returnval *StoragePodSummary `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("summary", &response)
+	p, err := mo.currentProperty("summary")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*StoragePodSummary), nil
+	}
+	return nil, nil
 
 }
 
@@ -66789,17 +66409,15 @@ type Task struct {
 
 // Detailed information about this task.
 func (mo *Task) Info() (*TaskInfo, error) {
-
-	response := struct {
-		Returnval *TaskInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("info", &response)
+	p, err := mo.currentProperty("info")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*TaskInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -67160,17 +66778,15 @@ type TaskHistoryCollector struct {
 // The "oldest task" is the one with the oldest creation time. The
 // tasks in the returned page are unordered.
 func (mo *TaskHistoryCollector) LatestPage() ([]*TaskInfo, error) {
-
-	response := struct {
-		Returnval []*TaskInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("latestPage", &response)
+	p, err := mo.currentProperty("latestPage")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*TaskInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -67394,17 +67010,15 @@ type TaskManager struct {
 // information to users.
 // Required Privilege: System.View
 func (mo *TaskManager) Description() (*TaskDescription, error) {
-
-	response := struct {
-		Returnval *TaskDescription `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("description", &response)
+	p, err := mo.currentProperty("description")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*TaskDescription), nil
+	}
+	return nil, nil
 
 }
 
@@ -67412,17 +67026,15 @@ func (mo *TaskManager) Description() (*TaskDescription, error) {
 // data objects that can exist concurrently, per client.
 // Required Privilege: System.View
 func (mo *TaskManager) MaxCollector() (int32, error) {
-
-	response := struct {
-		Returnval int32 `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("maxCollector", &response)
+	p, err := mo.currentProperty("maxCollector")
 	if err != nil {
 		return int32(0), err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(int32), nil
+	}
+	return int32(0), nil
 
 }
 
@@ -67453,17 +67065,15 @@ func (mo *TaskManager) MaxCollector() (int32, error) {
 // produce any property values as no updates are generated.
 // Required Privilege: System.View
 func (mo *TaskManager) RecentTask() ([]*Task, error) {
-
-	response := struct {
-		Returnval []*Task `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("recentTask", &response)
+	p, err := mo.currentProperty("recentTask")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*Task), nil
+	}
+	return nil, nil
 
 }
 
@@ -68823,17 +68433,15 @@ type UserDirectory struct {
 // system supports windows domain membership.
 // Required Privilege: System.View
 func (mo *UserDirectory) DomainList() ([]string, error) {
-
-	response := struct {
-		Returnval []string `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("domainList", &response)
+	p, err := mo.currentProperty("domainList")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]string), nil
+	}
+	return nil, nil
 
 }
 
@@ -71150,17 +70758,15 @@ type ViewManager struct {
 // to a view created by this ViewManager.
 // Required Privilege: System.View
 func (mo *ViewManager) ViewList() ([]*View, error) {
-
-	response := struct {
-		Returnval []*View `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("viewList", &response)
+	p, err := mo.currentProperty("viewList")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*View), nil
+	}
+	return nil, nil
 
 }
 
@@ -71419,17 +71025,15 @@ type VirtualApp struct {
 //
 // Since vSphere API 4.1
 func (mo *VirtualApp) ChildLink() ([]*VirtualAppLinkInfo, error) {
-
-	response := struct {
-		Returnval []*VirtualAppLinkInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("childLink", &response)
+	p, err := mo.currentProperty("childLink")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*VirtualAppLinkInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -71437,17 +71041,15 @@ func (mo *VirtualApp) ChildLink() ([]*VirtualAppLinkInfo, error) {
 // vApp.
 // Required Privilege: System.View
 func (mo *VirtualApp) Datastore() ([]*Datastore, error) {
-
-	response := struct {
-		Returnval []*Datastore `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("datastore", &response)
+	p, err := mo.currentProperty("datastore")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*Datastore), nil
+	}
+	return nil, nil
 
 }
 
@@ -71455,17 +71057,15 @@ func (mo *VirtualApp) Datastore() ([]*Datastore, error) {
 // is used by this virtual machine.
 // Required Privilege: System.View
 func (mo *VirtualApp) Network() ([]*Network, error) {
-
-	response := struct {
-		Returnval []*Network `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("network", &response)
+	p, err := mo.currentProperty("network")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*Network), nil
+	}
+	return nil, nil
 
 }
 
@@ -71474,17 +71074,15 @@ func (mo *VirtualApp) Network() ([]*Network, error) {
 // another vApp.
 // Required Privilege: System.View
 func (mo *VirtualApp) ParentFolder() (*Folder, error) {
-
-	response := struct {
-		Returnval *Folder `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("parentFolder", &response)
+	p, err := mo.currentProperty("parentFolder")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*Folder), nil
+	}
+	return nil, nil
 
 }
 
@@ -71492,34 +71090,30 @@ func (mo *VirtualApp) ParentFolder() (*Folder, error) {
 //
 // Since vSphere API 4.1
 func (mo *VirtualApp) ParentVApp() (*ManagedEntity, error) {
-
-	response := struct {
-		Returnval *ManagedEntity `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("parentVApp", &response)
+	p, err := mo.currentProperty("parentVApp")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ManagedEntity), nil
+	}
+	return nil, nil
 
 }
 
 // Configuration of this package.
 // Required Privilege: System.Read
 func (mo *VirtualApp) VAppConfig() (*VAppConfigInfo, error) {
-
-	response := struct {
-		Returnval *VAppConfigInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("vAppConfig", &response)
+	p, err := mo.currentProperty("vAppConfig")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*VAppConfigInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -75467,17 +75061,15 @@ type VirtualMachine struct {
 
 // Information about the runtime capabilities of this virtual machine.
 func (mo *VirtualMachine) Capability() (*VirtualMachineCapability, error) {
-
-	response := struct {
-		Returnval *VirtualMachineCapability `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("capability", &response)
+	p, err := mo.currentProperty("capability")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*VirtualMachineCapability), nil
+	}
+	return nil, nil
 
 }
 
@@ -75492,17 +75084,15 @@ func (mo *VirtualMachine) Capability() (*VirtualMachineCapability, error) {
 // and is often also unavailable during the initial phases of
 // virtual machine creation.
 func (mo *VirtualMachine) Config() (*VirtualMachineConfigInfo, error) {
-
-	response := struct {
-		Returnval *VirtualMachineConfigInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("config", &response)
+	p, err := mo.currentProperty("config")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*VirtualMachineConfigInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -75510,17 +75100,15 @@ func (mo *VirtualMachine) Config() (*VirtualMachineConfigInfo, error) {
 // that is used by this virtual machine.
 // Required Privilege: System.View
 func (mo *VirtualMachine) Datastore() ([]*Datastore, error) {
-
-	response := struct {
-		Returnval []*Datastore `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("datastore", &response)
+	p, err := mo.currentProperty("datastore")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*Datastore), nil
+	}
+	return nil, nil
 
 }
 
@@ -75529,17 +75117,15 @@ func (mo *VirtualMachine) Datastore() ([]*Datastore, error) {
 // virtual machine. This is identical to the environment browser on
 // the ComputeResource to which this virtual machine belongs.
 func (mo *VirtualMachine) EnvironmentBrowser() (*EnvironmentBrowser, error) {
-
-	response := struct {
-		Returnval *EnvironmentBrowser `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("environmentBrowser", &response)
+	p, err := mo.currentProperty("environmentBrowser")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*EnvironmentBrowser), nil
+	}
+	return nil, nil
 
 }
 
@@ -75550,17 +75136,15 @@ func (mo *VirtualMachine) EnvironmentBrowser() (*EnvironmentBrowser, error) {
 // For powered on machines, this is current information. For powered off machines,
 // this is the last recorded state before the virtual machine was powered off.
 func (mo *VirtualMachine) Guest() (*GuestInfo, error) {
-
-	response := struct {
-		Returnval *GuestInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("guest", &response)
+	p, err := mo.currentProperty("guest")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*GuestInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -75575,17 +75159,15 @@ func (mo *VirtualMachine) Guest() (*GuestInfo, error) {
 // The guest heartbeat is a statistics metric. Alarms can be configured on
 // this metric to trigger emails or other actions.
 func (mo *VirtualMachine) GuestHeartbeatStatus() (*ManagedEntityStatus, error) {
-
-	response := struct {
-		Returnval *ManagedEntityStatus `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("guestHeartbeatStatus", &response)
+	p, err := mo.currentProperty("guestHeartbeatStatus")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ManagedEntityStatus), nil
+	}
+	return nil, nil
 
 }
 
@@ -75603,17 +75185,15 @@ func (mo *VirtualMachine) GuestHeartbeatStatus() (*ManagedEntityStatus, error) {
 //
 // Detailed information about the files that comprise this virtual machine.
 func (mo *VirtualMachine) Layout() (*VirtualMachineFileLayout, error) {
-
-	response := struct {
-		Returnval *VirtualMachineFileLayout `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("layout", &response)
+	p, err := mo.currentProperty("layout")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*VirtualMachineFileLayout), nil
+	}
+	return nil, nil
 
 }
 
@@ -75631,17 +75211,15 @@ func (mo *VirtualMachine) Layout() (*VirtualMachineFileLayout, error) {
 //
 // Since vSphere API 4.0
 func (mo *VirtualMachine) LayoutEx() (*VirtualMachineFileLayoutEx, error) {
-
-	response := struct {
-		Returnval *VirtualMachineFileLayoutEx `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("layoutEx", &response)
+	p, err := mo.currentProperty("layoutEx")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*VirtualMachineFileLayoutEx), nil
+	}
+	return nil, nil
 
 }
 
@@ -75649,17 +75227,15 @@ func (mo *VirtualMachine) LayoutEx() (*VirtualMachineFileLayoutEx, error) {
 // is used by this virtual machine.
 // Required Privilege: System.View
 func (mo *VirtualMachine) Network() ([]*Network, error) {
-
-	response := struct {
-		Returnval []*Network `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("network", &response)
+	p, err := mo.currentProperty("network")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*Network), nil
+	}
+	return nil, nil
 
 }
 
@@ -75667,17 +75243,15 @@ func (mo *VirtualMachine) Network() ([]*Network, error) {
 //
 // Since vSphere API 4.1
 func (mo *VirtualMachine) ParentVApp() (*ManagedEntity, error) {
-
-	response := struct {
-		Returnval *ManagedEntity `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("parentVApp", &response)
+	p, err := mo.currentProperty("parentVApp")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ManagedEntity), nil
+	}
+	return nil, nil
 
 }
 
@@ -75693,17 +75267,15 @@ func (mo *VirtualMachine) ParentVApp() (*ManagedEntity, error) {
 // To change the configuration, use
 // UpdateChildResourceConfiguration.
 func (mo *VirtualMachine) ResourceConfig() (*ResourceConfigSpec, error) {
-
-	response := struct {
-		Returnval *ResourceConfigSpec `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("resourceConfig", &response)
+	p, err := mo.currentProperty("resourceConfig")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ResourceConfigSpec), nil
+	}
+	return nil, nil
 
 }
 
@@ -75716,17 +75288,15 @@ func (mo *VirtualMachine) ResourceConfig() (*ResourceConfigSpec, error) {
 // Returns null if the virtual machine is a template or the session has no access
 // to the resource pool.
 func (mo *VirtualMachine) ResourcePool() (*ResourcePool, error) {
-
-	response := struct {
-		Returnval *ResourcePool `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("resourcePool", &response)
+	p, err := mo.currentProperty("resourcePool")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*ResourcePool), nil
+	}
+	return nil, nil
 
 }
 
@@ -75734,17 +75304,15 @@ func (mo *VirtualMachine) ResourcePool() (*ResourcePool, error) {
 //
 // Since vSphere API 4.1
 func (mo *VirtualMachine) RootSnapshot() ([]*VirtualMachineSnapshot, error) {
-
-	response := struct {
-		Returnval []*VirtualMachineSnapshot `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("rootSnapshot", &response)
+	p, err := mo.currentProperty("rootSnapshot")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*VirtualMachineSnapshot), nil
+	}
+	return nil, nil
 
 }
 
@@ -75756,17 +75324,15 @@ func (mo *VirtualMachine) RootSnapshot() ([]*VirtualMachineSnapshot, error) {
 // an execution message is pending.
 // an event occurs.
 func (mo *VirtualMachine) Runtime() (*VirtualMachineRuntimeInfo, error) {
-
-	response := struct {
-		Returnval *VirtualMachineRuntimeInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("runtime", &response)
+	p, err := mo.currentProperty("runtime")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*VirtualMachineRuntimeInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -75782,17 +75348,15 @@ func (mo *VirtualMachine) Runtime() (*VirtualMachineRuntimeInfo, error) {
 // RevertToSnapshot_Task
 // RemoveAllSnapshots_Task
 func (mo *VirtualMachine) Snapshot() (*VirtualMachineSnapshotInfo, error) {
-
-	response := struct {
-		Returnval *VirtualMachineSnapshotInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("snapshot", &response)
+	p, err := mo.currentProperty("snapshot")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*VirtualMachineSnapshotInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -75809,17 +75373,15 @@ func (mo *VirtualMachine) Snapshot() (*VirtualMachineSnapshotInfo, error) {
 //
 // Since vSphere API 4.0
 func (mo *VirtualMachine) Storage() (*VirtualMachineStorageInfo, error) {
-
-	response := struct {
-		Returnval *VirtualMachineStorageInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("storage", &response)
+	p, err := mo.currentProperty("storage")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*VirtualMachineStorageInfo), nil
+	}
+	return nil, nil
 
 }
 
@@ -75831,17 +75393,15 @@ func (mo *VirtualMachine) Storage() (*VirtualMachineStorageInfo, error) {
 // alarms
 // performance information
 func (mo *VirtualMachine) Summary() (*VirtualMachineSummary, error) {
-
-	response := struct {
-		Returnval *VirtualMachineSummary `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("summary", &response)
+	p, err := mo.currentProperty("summary")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*VirtualMachineSummary), nil
+	}
+	return nil, nil
 
 }
 
@@ -81860,17 +81420,15 @@ type VirtualMachineSnapshot struct {
 //
 // Since vSphere API 4.1
 func (mo *VirtualMachineSnapshot) ChildSnapshot() ([]*VirtualMachineSnapshot, error) {
-
-	response := struct {
-		Returnval []*VirtualMachineSnapshot `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("childSnapshot", &response)
+	p, err := mo.currentProperty("childSnapshot")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.([]*VirtualMachineSnapshot), nil
+	}
+	return nil, nil
 
 }
 
@@ -81881,17 +81439,15 @@ func (mo *VirtualMachineSnapshot) ChildSnapshot() ([]*VirtualMachineSnapshot, er
 // chain that represents the disk at this given snapshot. The fileInfo.fileLayout
 // field is not set.
 func (mo *VirtualMachineSnapshot) Config() (*VirtualMachineConfigInfo, error) {
-
-	response := struct {
-		Returnval *VirtualMachineConfigInfo `xml:"returnval"`
-	}{}
-
-	err := mo.currentProperty("config", &response)
+	p, err := mo.currentProperty("config")
 	if err != nil {
 		return nil, err
 	}
 
-	return response.Returnval, nil
+	if p != nil {
+		return p.(*VirtualMachineConfigInfo), nil
+	}
+	return nil, nil
 
 }
 
