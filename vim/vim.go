@@ -325,11 +325,11 @@ func (mo *Alarm) ReconfigureAlarm(
 		Spec: spec,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -353,11 +353,11 @@ func (mo *Alarm) RemoveAlarm() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -636,11 +636,11 @@ func (mo *AlarmManager) AcknowledgeAlarm(
 		Entity: entity,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -674,11 +674,11 @@ func (mo *AlarmManager) AreAlarmActionsEnabled(
 		Returnval bool `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return false, err
 	}
@@ -717,11 +717,11 @@ func (mo *AlarmManager) CreateAlarm(
 		Returnval *Alarm `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -753,11 +753,11 @@ func (mo *AlarmManager) EnableAlarmActions(
 		Enabled: enabled,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -793,11 +793,11 @@ func (mo *AlarmManager) GetAlarm(
 		Returnval []*Alarm `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -831,11 +831,11 @@ func (mo *AlarmManager) GetAlarmState(
 		Returnval []*AlarmState `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -1512,7 +1512,7 @@ type ArrayUpdateSpec struct {
 
 	// Key for the element to be removed. Only used if the operation
 	// is "remove".
-	RemoveKey interface{} `xml:"removeKey,omitempty"`
+	RemoveKey *PropertyValue `xml:"removeKey,omitempty"`
 }
 
 //
@@ -1717,11 +1717,11 @@ func (mo *AuthorizationManager) AddAuthorizationRole(
 		Returnval int32 `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return int32(0), err
 	}
@@ -1765,11 +1765,11 @@ func (mo *AuthorizationManager) HasPrivilegeOnEntities(
 		Returnval []*EntityPrivilege `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -1812,11 +1812,11 @@ func (mo *AuthorizationManager) HasPrivilegeOnEntity(
 		Returnval []bool `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -1846,11 +1846,11 @@ func (mo *AuthorizationManager) MergePermissions(
 		DstRoleId: dstRoleId,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -1880,11 +1880,11 @@ func (mo *AuthorizationManager) RemoveAuthorizationRole(
 		FailIfUsed: failIfUsed,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -1928,11 +1928,11 @@ func (mo *AuthorizationManager) RemoveEntityPermission(
 		IsGroup: isGroup,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -1993,11 +1993,11 @@ func (mo *AuthorizationManager) ResetEntityPermissions(
 		Permission: permission,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -2027,11 +2027,11 @@ func (mo *AuthorizationManager) RetrieveAllPermissions() ([]*Permission, error) 
 		Returnval []*Permission `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -2078,11 +2078,11 @@ func (mo *AuthorizationManager) RetrieveEntityPermissions(
 		Returnval []*Permission `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -2116,11 +2116,11 @@ func (mo *AuthorizationManager) RetrieveRolePermissions(
 		Returnval []*Permission `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -2174,11 +2174,11 @@ func (mo *AuthorizationManager) SetEntityPermissions(
 		Permission: permission,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -2213,11 +2213,11 @@ func (mo *AuthorizationManager) UpdateAuthorizationRole(
 		PrivIds: privIds,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -3349,11 +3349,11 @@ func (mo *ClusterComputeResource) AddHost_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -3389,11 +3389,11 @@ func (mo *ClusterComputeResource) ApplyRecommendation(
 		Key:  key,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -3427,11 +3427,11 @@ func (mo *ClusterComputeResource) CancelRecommendation(
 		Key:  key,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -3499,11 +3499,11 @@ func (mo *ClusterComputeResource) ClusterEnterMaintenanceMode(
 		Returnval *ClusterEnterMaintenanceResult `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -3559,11 +3559,11 @@ func (mo *ClusterComputeResource) MoveHostInto_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -3620,11 +3620,11 @@ func (mo *ClusterComputeResource) MoveInto_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -3680,11 +3680,11 @@ func (mo *ClusterComputeResource) RecommendHostsForVm(
 		Returnval []*ClusterHostRecommendation `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -3721,11 +3721,11 @@ func (mo *ClusterComputeResource) ReconfigureCluster_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -3757,11 +3757,11 @@ func (mo *ClusterComputeResource) RefreshRecommendation() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -3791,11 +3791,11 @@ func (mo *ClusterComputeResource) RetrieveDasAdvancedRuntimeInfo() (*ClusterDasA
 		Returnval *ClusterDasAdvancedRuntimeInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -5877,11 +5877,11 @@ func (mo *ClusterProfile) UpdateClusterProfile(
 		Config: config,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -6654,11 +6654,11 @@ func (mo *ComputeResource) ReconfigureComputeResource_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -7459,11 +7459,11 @@ func (mo *CustomFieldsManager) AddCustomFieldDef(
 		Returnval *CustomFieldDef `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -7492,11 +7492,11 @@ func (mo *CustomFieldsManager) RemoveCustomFieldDef(
 		Key:  key,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -7526,11 +7526,11 @@ func (mo *CustomFieldsManager) RenameCustomFieldDef(
 		Name: name,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -7562,11 +7562,11 @@ func (mo *CustomFieldsManager) SetField(
 		Value:  value,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -8218,11 +8218,11 @@ func (mo *CustomizationSpecManager) CheckCustomizationResources(
 		GuestOs: guestOs,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -8250,11 +8250,11 @@ func (mo *CustomizationSpecManager) CreateCustomizationSpec(
 		Item: item,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -8286,11 +8286,11 @@ func (mo *CustomizationSpecManager) CustomizationSpecItemToXml(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -8318,11 +8318,11 @@ func (mo *CustomizationSpecManager) DeleteCustomizationSpec(
 		Name: name,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -8354,11 +8354,11 @@ func (mo *CustomizationSpecManager) DoesCustomizationSpecExist(
 		Returnval bool `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return false, err
 	}
@@ -8388,11 +8388,11 @@ func (mo *CustomizationSpecManager) DuplicateCustomizationSpec(
 		NewName: newName,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -8424,11 +8424,11 @@ func (mo *CustomizationSpecManager) GetCustomizationSpec(
 		Returnval *CustomizationSpecItem `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -8460,11 +8460,11 @@ func (mo *CustomizationSpecManager) OverwriteCustomizationSpec(
 		Item: item,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -8494,11 +8494,11 @@ func (mo *CustomizationSpecManager) RenameCustomizationSpec(
 		NewName: newName,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -8530,11 +8530,11 @@ func (mo *CustomizationSpecManager) XmlToCustomizationSpecItem(
 		Returnval *CustomizationSpecItem `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -10580,11 +10580,11 @@ func (mo *Datacenter) PowerOnMultiVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -10627,11 +10627,11 @@ func (mo *Datacenter) QueryConnectionInfo(
 		Returnval *HostConnectInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -10664,11 +10664,11 @@ func (mo *Datacenter) QueryDatacenterConfigOptionDescriptor() ([]*VirtualMachine
 		Returnval []*VirtualMachineConfigOptionDescriptor `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -10704,11 +10704,11 @@ func (mo *Datacenter) ReconfigureDatacenter_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -11027,11 +11027,11 @@ func (mo *Datastore) DatastoreEnterMaintenanceMode() (*StoragePlacementResult, e
 		Returnval *StoragePlacementResult `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -11066,11 +11066,11 @@ func (mo *Datastore) DatastoreExitMaintenanceMode_Task() (*Task, error) {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -11100,11 +11100,11 @@ func (mo *Datastore) DestroyDatastore() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -11129,11 +11129,11 @@ func (mo *Datastore) RefreshDatastore() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -11161,11 +11161,11 @@ func (mo *Datastore) RefreshDatastoreStorageInfo() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -11196,11 +11196,11 @@ func (mo *Datastore) RenameDatastore(
 		NewName: newName,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -11260,11 +11260,11 @@ func (mo *Datastore) UpdateVirtualMachineFiles_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -11566,11 +11566,11 @@ func (mo *DatastoreNamespaceManager) CreateDirectory(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -11607,11 +11607,11 @@ func (mo *DatastoreNamespaceManager) DeleteDirectory(
 		DatastorePath: datastorePath,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -12027,11 +12027,11 @@ func (mo *DiagnosticManager) BrowseDiagnosticLog(
 		Returnval *DiagnosticManagerLogHeader `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -12070,11 +12070,11 @@ func (mo *DiagnosticManager) GenerateLogBundles_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -12106,11 +12106,11 @@ func (mo *DiagnosticManager) QueryDescriptions(
 		Returnval []*DiagnosticManagerLogDescriptor `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -12638,11 +12638,11 @@ func (mo *DistributedVirtualPortgroup) DVPortgroupRollback_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -12712,11 +12712,11 @@ func (mo *DistributedVirtualPortgroup) ReconfigureDVPortgroup_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13178,11 +13178,11 @@ func (mo *DistributedVirtualSwitch) AddDVPortgroup_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13212,11 +13212,11 @@ func (mo *DistributedVirtualSwitch) AddNetworkResourcePool(
 		ConfigSpec: configSpec,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -13251,11 +13251,11 @@ func (mo *DistributedVirtualSwitch) CreateDVPortgroup_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13318,11 +13318,11 @@ func (mo *DistributedVirtualSwitch) DVSRollback_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13352,11 +13352,11 @@ func (mo *DistributedVirtualSwitch) EnableNetworkResourceManagement(
 		Enable: enable,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -13389,11 +13389,11 @@ func (mo *DistributedVirtualSwitch) FetchDVPortKeys(
 		Returnval []string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13425,11 +13425,11 @@ func (mo *DistributedVirtualSwitch) FetchDVPorts(
 		Returnval []*DistributedVirtualPort `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13463,11 +13463,11 @@ func (mo *DistributedVirtualSwitch) LookupDvPortGroup(
 		Returnval *DistributedVirtualPortgroup `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13553,11 +13553,11 @@ func (mo *DistributedVirtualSwitch) MergeDvs_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13594,11 +13594,11 @@ func (mo *DistributedVirtualSwitch) MoveDVPort_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13632,11 +13632,11 @@ func (mo *DistributedVirtualSwitch) PerformDvsProductSpecOperation_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13664,11 +13664,11 @@ func (mo *DistributedVirtualSwitch) QueryUsedVlanIdInDvs() ([]int32, error) {
 		Returnval []int32 `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13700,11 +13700,11 @@ func (mo *DistributedVirtualSwitch) ReconfigureDVPort_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13787,11 +13787,11 @@ func (mo *DistributedVirtualSwitch) ReconfigureDvs_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13829,11 +13829,11 @@ func (mo *DistributedVirtualSwitch) RectifyDvsHost_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13861,11 +13861,11 @@ func (mo *DistributedVirtualSwitch) RefreshDVPortState(
 		PortKeys: portKeys,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -13895,11 +13895,11 @@ func (mo *DistributedVirtualSwitch) RemoveNetworkResourcePool(
 		Key:  key,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -13927,11 +13927,11 @@ func (mo *DistributedVirtualSwitch) UpdateDvsCapability(
 		Capability: capability,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -13965,11 +13965,11 @@ func (mo *DistributedVirtualSwitch) UpdateDVSHealthCheckConfig_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -13999,11 +13999,11 @@ func (mo *DistributedVirtualSwitch) UpdateNetworkResourcePool(
 		ConfigSpec: configSpec,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -14303,11 +14303,11 @@ func (mo *DistributedVirtualSwitchManager) DVSManagerExportEntity_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -14348,11 +14348,11 @@ func (mo *DistributedVirtualSwitchManager) DVSManagerImportEntity_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -14389,11 +14389,11 @@ func (mo *DistributedVirtualSwitchManager) DVSManagerLookupDvPortGroup(
 		Returnval *DistributedVirtualPortgroup `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -14422,11 +14422,11 @@ func (mo *DistributedVirtualSwitchManager) QueryAvailableDvsSpec() ([]*Distribut
 		Returnval []*DistributedVirtualSwitchProductSpec `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -14463,11 +14463,11 @@ func (mo *DistributedVirtualSwitchManager) QueryCompatibleHostForExistingDvs(
 		Returnval []*HostSystem `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -14504,11 +14504,11 @@ func (mo *DistributedVirtualSwitchManager) QueryCompatibleHostForNewDvs(
 		Returnval []*HostSystem `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -14540,11 +14540,11 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsByUuid(
 		Returnval *DistributedVirtualSwitch `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -14606,11 +14606,11 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsCheckCompatibility(
 		Returnval []*DistributedVirtualSwitchManagerCompatibilityResult `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -14644,11 +14644,11 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsCompatibleHostSpec(
 		Returnval []*DistributedVirtualSwitchHostProductSpec `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -14683,11 +14683,11 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsConfigTarget(
 		Returnval *DVSManagerDvsConfigTarget `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -14722,11 +14722,11 @@ func (mo *DistributedVirtualSwitchManager) QueryDvsFeatureCapability(
 		Returnval *DVSFeatureCapability `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -14761,11 +14761,11 @@ func (mo *DistributedVirtualSwitchManager) RectifyDvsOnHost_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -16502,7 +16502,7 @@ type DynamicArray struct {
 	DynamicType string `xml:"dynamicType,omitempty"`
 
 	// Array of dynamic values.
-	Val []interface{} `xml:"val,omitempty"`
+	Val []*PropertyValue `xml:"val,omitempty"`
 }
 
 //
@@ -16552,7 +16552,7 @@ type DynamicProperty struct {
 	Name string `xml:"name,omitempty"`
 
 	// Value of the property.
-	Val interface{} `xml:"val,omitempty"`
+	Val *PropertyValue `xml:"val,omitempty"`
 }
 
 //
@@ -17142,11 +17142,11 @@ func (mo *EnvironmentBrowser) QueryConfigOption(
 		Returnval *VirtualMachineConfigOption `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -17174,11 +17174,11 @@ func (mo *EnvironmentBrowser) QueryConfigOptionDescriptor() ([]*VirtualMachineCo
 		Returnval []*VirtualMachineConfigOptionDescriptor `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -17225,11 +17225,11 @@ func (mo *EnvironmentBrowser) QueryConfigTarget(
 		Returnval *ConfigTarget `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -17277,11 +17277,11 @@ func (mo *EnvironmentBrowser) QueryTargetCapabilities(
 		Returnval *HostCapability `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -17902,11 +17902,11 @@ func (mo *EventHistoryCollector) ReadNextEvents(
 		Returnval []*Event `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -17942,11 +17942,11 @@ func (mo *EventHistoryCollector) ReadPreviousEvents(
 		Returnval []*Event `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -18044,11 +18044,11 @@ func (mo *EventManager) CreateCollectorForEvents(
 		Returnval *EventHistoryCollector `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -18078,11 +18078,11 @@ func (mo *EventManager) LogUserEvent(
 		Msg:    msg,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -18138,11 +18138,11 @@ func (mo *EventManager) PostEvent(
 		TaskInfo:    taskInfo,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -18175,11 +18175,11 @@ func (mo *EventManager) QueryEvents(
 		Returnval []*Event `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -18213,11 +18213,11 @@ func (mo *EventManager) RetrieveArgumentDescription(
 		Returnval []*EventArgDesc `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -18569,11 +18569,11 @@ func (mo *ExtensibleManagedObject) SetCustomValue(
 		Value: value,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -18836,11 +18836,11 @@ func (mo *ExtensionManager) FindExtension(
 		Returnval *Extension `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -18874,11 +18874,11 @@ func (mo *ExtensionManager) GetPublicKey() (string, error) {
 		Returnval string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -18916,11 +18916,11 @@ func (mo *ExtensionManager) QueryExtensionIpAllocationUsage(
 		Returnval []*ExtensionManagerIpAllocationUsage `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -18955,11 +18955,11 @@ func (mo *ExtensionManager) QueryManagedBy(
 		Returnval []*ManagedEntity `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -18987,11 +18987,11 @@ func (mo *ExtensionManager) RegisterExtension(
 		Extension: extension,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -19037,11 +19037,11 @@ func (mo *ExtensionManager) SetExtensionCertificate(
 		CertificatePem: certificatePem,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -19081,11 +19081,11 @@ func (mo *ExtensionManager) SetPublicKey(
 		PublicKey:    publicKey,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -19113,11 +19113,11 @@ func (mo *ExtensionManager) UnregisterExtension(
 		ExtensionKey: extensionKey,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -19152,11 +19152,11 @@ func (mo *ExtensionManager) UpdateExtension(
 		Extension: extension,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -19824,11 +19824,11 @@ func (mo *FileManager) ChangeOwner(
 		Owner:      owner,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -19910,11 +19910,11 @@ func (mo *FileManager) CopyDatastoreFile_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -19968,11 +19968,11 @@ func (mo *FileManager) DeleteDatastoreFile_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -20016,11 +20016,11 @@ func (mo *FileManager) MakeDirectory(
 		CreateParentDirectories: createParentDirectories,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -20103,11 +20103,11 @@ func (mo *FileManager) MoveDatastoreFile_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -20506,11 +20506,11 @@ func (mo *Folder) AddStandaloneHost_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -20552,11 +20552,11 @@ func (mo *Folder) CreateCluster(
 		Returnval *ClusterComputeResource `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -20597,11 +20597,11 @@ func (mo *Folder) CreateClusterEx(
 		Returnval *ClusterComputeResource `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -20638,11 +20638,11 @@ func (mo *Folder) CreateDatacenter(
 		Returnval *Datacenter `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -20678,11 +20678,11 @@ func (mo *Folder) CreateDVS_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -20720,11 +20720,11 @@ func (mo *Folder) CreateFolder(
 		Returnval *Folder `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -20763,11 +20763,11 @@ func (mo *Folder) CreateStoragePod(
 		Returnval *StoragePod `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -20850,11 +20850,11 @@ func (mo *Folder) CreateVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -20957,11 +20957,11 @@ func (mo *Folder) MoveIntoFolder_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -21013,11 +21013,11 @@ func (mo *Folder) RegisterVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -21068,11 +21068,11 @@ func (mo *Folder) UnregisterAndDestroy_Task() (*Task, error) {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -21335,11 +21335,11 @@ func (mo *GuestAuthManager) AcquireCredentialsInGuest(
 		Returnval *GuestAuthentication `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -21379,11 +21379,11 @@ func (mo *GuestAuthManager) ReleaseCredentialsInGuest(
 		Auth: auth,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -21421,11 +21421,11 @@ func (mo *GuestAuthManager) ValidateCredentialsInGuest(
 		Auth: auth,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -21593,11 +21593,11 @@ func (mo *GuestFileManager) ChangeFileAttributesInGuest(
 		FileAttributes: fileAttributes,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -21643,11 +21643,11 @@ func (mo *GuestFileManager) CreateTemporaryDirectoryInGuest(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -21693,11 +21693,11 @@ func (mo *GuestFileManager) CreateTemporaryFileInGuest(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -21733,11 +21733,11 @@ func (mo *GuestFileManager) DeleteDirectoryInGuest(
 		Recursive:     recursive,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -21771,11 +21771,11 @@ func (mo *GuestFileManager) DeleteFileInGuest(
 		FilePath: filePath,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -21836,11 +21836,11 @@ func (mo *GuestFileManager) InitiateFileTransferFromGuest(
 		Returnval *FileTransferInformation `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -21905,11 +21905,11 @@ func (mo *GuestFileManager) InitiateFileTransferToGuest(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -21960,11 +21960,11 @@ func (mo *GuestFileManager) ListFilesInGuest(
 		Returnval *GuestListFileInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -22000,11 +22000,11 @@ func (mo *GuestFileManager) MakeDirectoryInGuest(
 		CreateParentDirectories: createParentDirectories,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -22040,11 +22040,11 @@ func (mo *GuestFileManager) MoveDirectoryInGuest(
 		DstDirectoryPath: dstDirectoryPath,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -22082,11 +22082,11 @@ func (mo *GuestFileManager) MoveFileInGuest(
 		Overwrite:   overwrite,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -22694,11 +22694,11 @@ func (mo *GuestProcessManager) ListProcessesInGuest(
 		Returnval []*GuestProcessInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -22741,11 +22741,11 @@ func (mo *GuestProcessManager) ReadEnvironmentVariableInGuest(
 		Returnval []string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -22789,11 +22789,11 @@ func (mo *GuestProcessManager) StartProgramInGuest(
 		Returnval int64 `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return int64(0), err
 	}
@@ -22827,11 +22827,11 @@ func (mo *GuestProcessManager) TerminateProcessInGuest(
 		Pid:  pid,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -23126,21 +23126,21 @@ type HealthSystemRuntime struct {
 type HistoryCollector struct {
 	*ManagedObject
 
-	filter interface{} `xml:"filter,omitempty"`
+	filter *PropertyValue `xml:"filter,omitempty"`
 }
 
 // The filter used to create this collector.
 //
 // The type of the returned filter is determined by the managed object
 // for which the collector is created.
-func (mo *HistoryCollector) Filter() (interface{}, error) {
+func (mo *HistoryCollector) Filter() (*PropertyValue, error) {
 	p, err := mo.currentProperty("filter")
 	if err != nil {
 		return nil, err
 	}
 
 	if p != nil {
-		return p.(interface{}), nil
+		return p.(*PropertyValue), nil
 	}
 	return nil, nil
 
@@ -23161,11 +23161,11 @@ func (mo *HistoryCollector) DestroyCollector() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -23194,11 +23194,11 @@ func (mo *HistoryCollector) ResetCollector() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -23226,11 +23226,11 @@ func (mo *HistoryCollector) RewindCollector() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -23261,11 +23261,11 @@ func (mo *HistoryCollector) SetCollectorPageSize(
 		MaxCount: maxCount,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -23433,11 +23433,11 @@ func (mo *HostActiveDirectoryAuthentication) ImportCertificateForCAM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -23480,11 +23480,11 @@ func (mo *HostActiveDirectoryAuthentication) JoinDomain_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -23527,11 +23527,11 @@ func (mo *HostActiveDirectoryAuthentication) JoinDomainWithCAM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -23563,11 +23563,11 @@ func (mo *HostActiveDirectoryAuthentication) LeaveCurrentDomain_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -23959,11 +23959,11 @@ func (mo *HostAutoStartManager) AutoStartPowerOff() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -23991,11 +23991,11 @@ func (mo *HostAutoStartManager) AutoStartPowerOn() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -24042,11 +24042,11 @@ func (mo *HostAutoStartManager) ReconfigureAutostart(
 		Spec: spec,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -24154,11 +24154,11 @@ func (mo *HostBootDeviceSystem) QueryBootDevices() (*HostBootDeviceInfo, error) 
 		Returnval *HostBootDeviceInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -24186,11 +24186,11 @@ func (mo *HostBootDeviceSystem) UpdateBootDevice(
 		Key:  key,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -24269,11 +24269,11 @@ func (mo *HostCacheConfigurationManager) ConfigureHostCache_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -25937,11 +25937,11 @@ func (mo *HostCpuSchedulerSystem) DisableHyperThreading() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -25968,11 +25968,11 @@ func (mo *HostCpuSchedulerSystem) EnableHyperThreading() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -26203,11 +26203,11 @@ func (mo *HostDatastoreBrowser) DeleteFile(
 		DatastorePath: datastorePath,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -26244,11 +26244,11 @@ func (mo *HostDatastoreBrowser) SearchDatastore_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26285,11 +26285,11 @@ func (mo *HostDatastoreBrowser) SearchDatastoreSubFolders_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26533,11 +26533,11 @@ func (mo *HostDatastoreSystem) ConfigureDatastorePrincipal(
 		Password: password,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -26571,11 +26571,11 @@ func (mo *HostDatastoreSystem) CreateLocalDatastore(
 		Returnval *Datastore `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26607,11 +26607,11 @@ func (mo *HostDatastoreSystem) CreateNasDatastore(
 		Returnval *Datastore `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26643,11 +26643,11 @@ func (mo *HostDatastoreSystem) CreateVmfsDatastore(
 		Returnval *Datastore `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26684,11 +26684,11 @@ func (mo *HostDatastoreSystem) ExpandVmfsDatastore(
 		Returnval *Datastore `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26723,11 +26723,11 @@ func (mo *HostDatastoreSystem) ExtendVmfsDatastore(
 		Returnval *Datastore `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26775,11 +26775,11 @@ func (mo *HostDatastoreSystem) QueryAvailableDisksForVmfs(
 		Returnval []*HostScsiDisk `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26813,11 +26813,11 @@ func (mo *HostDatastoreSystem) QueryUnresolvedVmfsVolumes() ([]*HostUnresolvedVm
 		Returnval []*HostUnresolvedVmfsVolume `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26851,11 +26851,11 @@ func (mo *HostDatastoreSystem) QueryVmfsDatastoreCreateOptions(
 		Returnval []*VmfsDatastoreOption `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26891,11 +26891,11 @@ func (mo *HostDatastoreSystem) QueryVmfsDatastoreExpandOptions(
 		Returnval []*VmfsDatastoreOption `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26932,11 +26932,11 @@ func (mo *HostDatastoreSystem) QueryVmfsDatastoreExtendOptions(
 		Returnval []*VmfsDatastoreOption `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -26964,11 +26964,11 @@ func (mo *HostDatastoreSystem) RemoveDatastore(
 		Datastore: datastore,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -27019,11 +27019,11 @@ func (mo *HostDatastoreSystem) ResignatureUnresolvedVmfsVolume_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -27058,11 +27058,11 @@ func (mo *HostDatastoreSystem) UpdateLocalSwapDatastore(
 		Datastore: datastore,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -27177,11 +27177,11 @@ func (mo *HostDateTimeSystem) QueryAvailableTimeZones() ([]*HostDateTimeSystemTi
 		Returnval []*HostDateTimeSystemTimeZone `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -27209,11 +27209,11 @@ func (mo *HostDateTimeSystem) QueryDateTime() (time.Time, error) {
 		Returnval time.Time `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return time.Now(), err
 	}
@@ -27238,11 +27238,11 @@ func (mo *HostDateTimeSystem) RefreshDateTimeSystem() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -27272,11 +27272,11 @@ func (mo *HostDateTimeSystem) UpdateDateTime(
 		DateTime: dateTime,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -27304,11 +27304,11 @@ func (mo *HostDateTimeSystem) UpdateDateTimeConfig(
 		Config: config,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -27575,11 +27575,11 @@ func (mo *HostDiagnosticSystem) CreateDiagnosticPartition(
 		Spec: spec,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -27611,11 +27611,11 @@ func (mo *HostDiagnosticSystem) QueryAvailablePartition() ([]*HostDiagnosticPart
 		Returnval []*HostDiagnosticPartition `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -27652,11 +27652,11 @@ func (mo *HostDiagnosticSystem) QueryPartitionCreateDesc(
 		Returnval *HostDiagnosticPartitionCreateDescription `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -27696,11 +27696,11 @@ func (mo *HostDiagnosticSystem) QueryPartitionCreateOptions(
 		Returnval []*HostDiagnosticPartitionCreateOption `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -27730,11 +27730,11 @@ func (mo *HostDiagnosticSystem) SelectActivePartition(
 		Partition: partition,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -28231,11 +28231,11 @@ func (mo *HostEsxAgentHostManager) EsxAgentHostManagerUpdateConfig(
 		ConfigInfo: configInfo,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -28861,11 +28861,11 @@ func (mo *HostFirewallSystem) DisableRuleset(
 		Id:   id,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -28895,11 +28895,11 @@ func (mo *HostFirewallSystem) EnableRuleset(
 		Id:   id,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -28924,11 +28924,11 @@ func (mo *HostFirewallSystem) RefreshFirewall() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -28956,11 +28956,11 @@ func (mo *HostFirewallSystem) UpdateDefaultPolicy(
 		DefaultPolicy: defaultPolicy,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -28992,11 +28992,11 @@ func (mo *HostFirewallSystem) UpdateRuleset(
 		Spec: spec,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -29037,11 +29037,11 @@ func (mo *HostFirmwareSystem) BackupFirmwareConfiguration() (string, error) {
 		Returnval string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -29071,11 +29071,11 @@ func (mo *HostFirmwareSystem) QueryFirmwareConfigUploadURL() (string, error) {
 		Returnval string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -29105,11 +29105,11 @@ func (mo *HostFirmwareSystem) ResetFirmwareToFactoryDefaults() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -29147,11 +29147,11 @@ func (mo *HostFirmwareSystem) RestoreFirmwareConfiguration(
 		Force: force,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -29282,11 +29282,11 @@ func (mo *HostGraphicsManager) IsSharedGraphicsActive() (bool, error) {
 		Returnval bool `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return false, err
 	}
@@ -29310,11 +29310,11 @@ func (mo *HostGraphicsManager) RefreshGraphicsManager() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -29509,11 +29509,11 @@ func (mo *HostHealthStatusSystem) RefreshHealthStatusSystem() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -29540,11 +29540,11 @@ func (mo *HostHealthStatusSystem) ResetSystemHealthInfo() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -29672,11 +29672,11 @@ func (mo *HostImageConfigManager) HostImageConfigGetAcceptance() (string, error)
 		Returnval string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -29704,11 +29704,11 @@ func (mo *HostImageConfigManager) HostImageConfigGetProfile() (*HostImageProfile
 		Returnval *HostImageProfileSummary `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -29736,11 +29736,11 @@ func (mo *HostImageConfigManager) UpdateHostImageAcceptanceLevel(
 		NewAcceptanceLevel: newAcceptanceLevel,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -30790,11 +30790,11 @@ func (mo *HostKernelModuleSystem) QueryConfiguredModuleOptionString(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -30824,11 +30824,11 @@ func (mo *HostKernelModuleSystem) QueryModules() ([]*KernelModuleInfo, error) {
 		Returnval []*KernelModuleInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -30858,11 +30858,11 @@ func (mo *HostKernelModuleSystem) UpdateModuleOptionString(
 		Options: options,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -31090,11 +31090,11 @@ func (mo *HostLocalAccountManager) AssignUserToGroup(
 		Group: group,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -31133,11 +31133,11 @@ func (mo *HostLocalAccountManager) CreateGroup(
 		Group: group,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -31170,11 +31170,11 @@ func (mo *HostLocalAccountManager) CreateUser(
 		User: user,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -31208,11 +31208,11 @@ func (mo *HostLocalAccountManager) RemoveGroup(
 		GroupName: groupName,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -31246,11 +31246,11 @@ func (mo *HostLocalAccountManager) RemoveUser(
 		UserName: userName,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -31286,11 +31286,11 @@ func (mo *HostLocalAccountManager) UnassignUserFromGroup(
 		Group: group,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -31320,11 +31320,11 @@ func (mo *HostLocalAccountManager) UpdateUser(
 		User: user,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -31675,11 +31675,11 @@ func (mo *HostMemorySystem) ReconfigureServiceConsoleReservation(
 		CfgBytes: cfgBytes,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -31709,11 +31709,11 @@ func (mo *HostMemorySystem) ReconfigureVirtualMachineReservation(
 		Spec: spec,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -32968,11 +32968,11 @@ func (mo *HostNetworkSystem) AddPortGroup(
 		Portgrp: portgrp,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -33017,11 +33017,11 @@ func (mo *HostNetworkSystem) AddServiceConsoleVirtualNic(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -33066,11 +33066,11 @@ func (mo *HostNetworkSystem) AddVirtualNic(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -33102,11 +33102,11 @@ func (mo *HostNetworkSystem) AddVirtualSwitch(
 		Spec:        spec,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -33145,11 +33145,11 @@ func (mo *HostNetworkSystem) QueryNetworkHint(
 		Returnval []*PhysicalNicHintInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -33174,11 +33174,11 @@ func (mo *HostNetworkSystem) RefreshNetworkSystem() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -33206,11 +33206,11 @@ func (mo *HostNetworkSystem) RemovePortGroup(
 		PgName: pgName,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -33238,11 +33238,11 @@ func (mo *HostNetworkSystem) RemoveServiceConsoleVirtualNic(
 		Device: device,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -33270,11 +33270,11 @@ func (mo *HostNetworkSystem) RemoveVirtualNic(
 		Device: device,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -33302,11 +33302,11 @@ func (mo *HostNetworkSystem) RemoveVirtualSwitch(
 		VswitchName: vswitchName,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -33338,11 +33338,11 @@ func (mo *HostNetworkSystem) RestartServiceConsoleVirtualNic(
 		Device: device,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -33370,11 +33370,11 @@ func (mo *HostNetworkSystem) UpdateConsoleIpRouteConfig(
 		Config: config,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -33406,11 +33406,11 @@ func (mo *HostNetworkSystem) UpdateDnsConfig(
 		Config: config,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -33442,11 +33442,11 @@ func (mo *HostNetworkSystem) UpdateIpRouteConfig(
 		Config: config,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -33480,11 +33480,11 @@ func (mo *HostNetworkSystem) UpdateIpRouteTableConfig(
 		Config: config,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -33571,11 +33571,11 @@ func (mo *HostNetworkSystem) UpdateNetworkConfig(
 		Returnval *HostNetworkConfigResult `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -33606,11 +33606,11 @@ func (mo *HostNetworkSystem) UpdatePhysicalNicLinkSpeed(
 		LinkSpeed: linkSpeed,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -33640,11 +33640,11 @@ func (mo *HostNetworkSystem) UpdatePortGroup(
 		Portgrp: portgrp,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -33683,11 +33683,11 @@ func (mo *HostNetworkSystem) UpdateServiceConsoleVirtualNic(
 		Nic:    nic,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -33727,11 +33727,11 @@ func (mo *HostNetworkSystem) UpdateVirtualNic(
 		Nic:    nic,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -33777,11 +33777,11 @@ func (mo *HostNetworkSystem) UpdateVirtualSwitch(
 		Spec:        spec,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -34281,11 +34281,11 @@ func (mo *HostPatchManager) CheckHostPatch_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -34327,11 +34327,11 @@ func (mo *HostPatchManager) InstallHostPatch_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -34374,11 +34374,11 @@ func (mo *HostPatchManager) InstallHostPatchV2_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -34412,11 +34412,11 @@ func (mo *HostPatchManager) QueryHostPatch_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -34455,11 +34455,11 @@ func (mo *HostPatchManager) ScanHostPatch_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -34499,11 +34499,11 @@ func (mo *HostPatchManager) ScanHostPatchV2_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -34543,11 +34543,11 @@ func (mo *HostPatchManager) StageHostPatch_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -34583,11 +34583,11 @@ func (mo *HostPatchManager) UninstallHostPatch_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -34916,11 +34916,11 @@ func (mo *HostPciPassthruSystem) Refresh() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -34950,11 +34950,11 @@ func (mo *HostPciPassthruSystem) UpdatePassthruConfig(
 		Config: config,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -35441,11 +35441,11 @@ func (mo *HostPowerSystem) ConfigurePowerPolicy(
 		Key:  key,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -35684,11 +35684,11 @@ func (mo *HostProfile) ExecuteHostProfile(
 		Returnval *ProfileExecuteResult `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -35716,11 +35716,11 @@ func (mo *HostProfile) UpdateHostProfile(
 		Config: config,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -35748,11 +35748,11 @@ func (mo *HostProfile) UpdateReferenceHost(
 		Host: host,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -35924,11 +35924,11 @@ func (mo *HostProfileManager) ApplyHostConfig_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -35964,11 +35964,11 @@ func (mo *HostProfileManager) CheckAnswerFileStatus_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -36027,11 +36027,11 @@ func (mo *HostProfileManager) CreateDefaultProfile(
 		Returnval *ApplyProfile `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -36067,11 +36067,11 @@ func (mo *HostProfileManager) ExportAnswerFile_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -36110,11 +36110,11 @@ func (mo *HostProfileManager) GenerateConfigTaskList(
 		Returnval *HostProfileManagerConfigTaskList `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -36153,11 +36153,11 @@ func (mo *HostProfileManager) GenerateHostProfileTaskList_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -36194,11 +36194,11 @@ func (mo *HostProfileManager) QueryAnswerFileStatus(
 		Returnval []*AnswerFileStatusResult `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -36232,11 +36232,11 @@ func (mo *HostProfileManager) QueryHostProfileMetadata(
 		Returnval []*ProfileMetadata `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -36270,11 +36270,11 @@ func (mo *HostProfileManager) QueryProfileStructure(
 		Returnval *ProfileProfileStructure `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -36308,11 +36308,11 @@ func (mo *HostProfileManager) RetrieveAnswerFile(
 		Returnval *AnswerFile `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -36350,11 +36350,11 @@ func (mo *HostProfileManager) RetrieveAnswerFileForProfile(
 		Returnval *AnswerFile `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -36392,11 +36392,11 @@ func (mo *HostProfileManager) UpdateAnswerFile_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -37031,11 +37031,11 @@ func (mo *HostServiceSystem) RefreshServices() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37063,11 +37063,11 @@ func (mo *HostServiceSystem) RestartService(
 		Id:   id,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37095,11 +37095,11 @@ func (mo *HostServiceSystem) StartService(
 		Id:   id,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37127,11 +37127,11 @@ func (mo *HostServiceSystem) StopService(
 		Id:   id,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37160,11 +37160,11 @@ func (mo *HostServiceSystem) UninstallService(
 		Id:   id,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37194,11 +37194,11 @@ func (mo *HostServiceSystem) UpdateServicePolicy(
 		Policy: policy,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37408,11 +37408,11 @@ func (mo *HostSnmpSystem) ReconfigureSnmpAgent(
 		Spec: spec,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37437,11 +37437,11 @@ func (mo *HostSnmpSystem) SendTestNotification() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37739,11 +37739,11 @@ func (mo *HostStorageSystem) AddInternetScsiSendTargets(
 		Targets:        targets,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37774,11 +37774,11 @@ func (mo *HostStorageSystem) AddInternetScsiStaticTargets(
 		Targets:        targets,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37815,11 +37815,11 @@ func (mo *HostStorageSystem) AttachScsiLun(
 		LunUuid: lunUuid,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37849,11 +37849,11 @@ func (mo *HostStorageSystem) AttachVmfsExtent(
 		Extent:   extent,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -37891,11 +37891,11 @@ func (mo *HostStorageSystem) ComputeDiskPartitionInfo(
 		Returnval *HostDiskPartitionInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -37934,11 +37934,11 @@ func (mo *HostStorageSystem) ComputeDiskPartitionInfoForResize(
 		Returnval *HostDiskPartitionInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -37978,11 +37978,11 @@ func (mo *HostStorageSystem) DeleteScsiLunState(
 		LunCanonicalName: lunCanonicalName,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38027,11 +38027,11 @@ func (mo *HostStorageSystem) DeleteVffsVolumeState(
 		VffsUuid: vffsUuid,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38077,11 +38077,11 @@ func (mo *HostStorageSystem) DeleteVmfsVolumeState(
 		VmfsUuid: vmfsUuid,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38111,11 +38111,11 @@ func (mo *HostStorageSystem) DestroyVffs(
 		VffsPath: vffsPath,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38153,11 +38153,11 @@ func (mo *HostStorageSystem) DetachScsiLun(
 		LunUuid: lunUuid,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38187,11 +38187,11 @@ func (mo *HostStorageSystem) DisableMultipathPath(
 		PathName: pathName,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38224,11 +38224,11 @@ func (mo *HostStorageSystem) DiscoverFcoeHbas(
 		FcoeSpec: fcoeSpec,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38258,11 +38258,11 @@ func (mo *HostStorageSystem) EnableMultipathPath(
 		PathName: pathName,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38294,11 +38294,11 @@ func (mo *HostStorageSystem) ExpandVmfsExtent(
 		Extent:   extent,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38332,11 +38332,11 @@ func (mo *HostStorageSystem) ExtendVffs(
 		Spec:       spec,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38370,11 +38370,11 @@ func (mo *HostStorageSystem) FormatVffs(
 		Returnval *HostVffsVolume `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -38406,11 +38406,11 @@ func (mo *HostStorageSystem) FormatVmfs(
 		Returnval *HostVmfsVolume `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -38446,11 +38446,11 @@ func (mo *HostStorageSystem) MarkForRemoval(
 		Remove:  remove,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38485,11 +38485,11 @@ func (mo *HostStorageSystem) MountVffsVolume(
 		VffsUuid: vffsUuid,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38526,11 +38526,11 @@ func (mo *HostStorageSystem) MountVmfsVolume(
 		VmfsUuid: vmfsUuid,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38570,11 +38570,11 @@ func (mo *HostStorageSystem) QueryAvailableSsds(
 		Returnval []*HostScsiDisk `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -38612,11 +38612,11 @@ func (mo *HostStorageSystem) QueryPathSelectionPolicyOptions() ([]*HostPathSelec
 		Returnval []*HostPathSelectionPolicyOption `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -38654,11 +38654,11 @@ func (mo *HostStorageSystem) QueryStorageArrayTypePolicyOptions() ([]*HostStorag
 		Returnval []*HostStorageArrayTypePolicyOption `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -38692,11 +38692,11 @@ func (mo *HostStorageSystem) QueryUnresolvedVmfsVolume() ([]*HostUnresolvedVmfsV
 		Returnval []*HostUnresolvedVmfsVolume `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -38743,11 +38743,11 @@ func (mo *HostStorageSystem) RefreshStorageSystem() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38781,11 +38781,11 @@ func (mo *HostStorageSystem) RemoveInternetScsiSendTargets(
 		Targets:        targets,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38819,11 +38819,11 @@ func (mo *HostStorageSystem) RemoveInternetScsiStaticTargets(
 		Targets:        targets,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38868,11 +38868,11 @@ func (mo *HostStorageSystem) RescanAllHba() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38901,11 +38901,11 @@ func (mo *HostStorageSystem) RescanHba(
 		HbaDevice: hbaDevice,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38939,11 +38939,11 @@ func (mo *HostStorageSystem) RescanVffs() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -38975,11 +38975,11 @@ func (mo *HostStorageSystem) RescanVmfs() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -39039,11 +39039,11 @@ func (mo *HostStorageSystem) ResolveMultipleUnresolvedVmfsVolumes(
 		Returnval []*HostUnresolvedVmfsResolutionResult `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -39113,11 +39113,11 @@ func (mo *HostStorageSystem) ResolveMultipleUnresolvedVmfsVolumesEx_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -39149,11 +39149,11 @@ func (mo *HostStorageSystem) RetrieveDiskPartitionInfo(
 		Returnval []*HostDiskPartitionInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -39184,11 +39184,11 @@ func (mo *HostStorageSystem) SetMultipathLunPolicy(
 		Policy: policy,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -39227,11 +39227,11 @@ func (mo *HostStorageSystem) UnmountForceMountedVmfsVolume(
 		VmfsUuid: vmfsUuid,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -39270,11 +39270,11 @@ func (mo *HostStorageSystem) UnmountVffsVolume(
 		VffsUuid: vffsUuid,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -39359,11 +39359,11 @@ func (mo *HostStorageSystem) UnmountVmfsVolume(
 		VmfsUuid: vmfsUuid,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -39394,11 +39394,11 @@ func (mo *HostStorageSystem) UpdateDiskPartitions(
 		Spec:       spec,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -39433,11 +39433,11 @@ func (mo *HostStorageSystem) UpdateInternetScsiAdvancedOptions(
 		Options:        options,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -39467,11 +39467,11 @@ func (mo *HostStorageSystem) UpdateInternetScsiAlias(
 		IScsiAlias:     iScsiAlias,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -39504,11 +39504,11 @@ func (mo *HostStorageSystem) UpdateInternetScsiAuthenticationProperties(
 		TargetSet:                targetSet,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -39543,11 +39543,11 @@ func (mo *HostStorageSystem) UpdateInternetScsiDigestProperties(
 		DigestProperties: digestProperties,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -39577,11 +39577,11 @@ func (mo *HostStorageSystem) UpdateInternetScsiDiscoveryProperties(
 		DiscoveryProperties: discoveryProperties,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -39611,11 +39611,11 @@ func (mo *HostStorageSystem) UpdateInternetScsiIPProperties(
 		IpProperties:   ipProperties,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -39645,11 +39645,11 @@ func (mo *HostStorageSystem) UpdateInternetScsiName(
 		IScsiName:      iScsiName,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -39682,11 +39682,11 @@ func (mo *HostStorageSystem) UpdateScsiLunDisplayName(
 		DisplayName: displayName,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -39714,11 +39714,11 @@ func (mo *HostStorageSystem) UpdateSoftwareInternetScsiEnabled(
 		Enabled: enabled,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -39751,11 +39751,11 @@ func (mo *HostStorageSystem) UpgradeVmfs(
 		VmfsPath: vmfsPath,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -39786,11 +39786,11 @@ func (mo *HostStorageSystem) UpgradeVmLayout() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -40066,11 +40066,11 @@ func (mo *HostSystem) AcquireCimServicesTicket() (*HostServiceTicket, error) {
 		Returnval *HostServiceTicket `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -40098,11 +40098,11 @@ func (mo *HostSystem) DisconnectHost_Task() (*Task, error) {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -40139,11 +40139,11 @@ func (mo *HostSystem) EnterLockdownMode() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -40198,11 +40198,11 @@ func (mo *HostSystem) EnterMaintenanceMode_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -40233,11 +40233,11 @@ func (mo *HostSystem) ExitLockdownMode() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -40274,11 +40274,11 @@ func (mo *HostSystem) ExitMaintenanceMode_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -40341,11 +40341,11 @@ func (mo *HostSystem) PowerDownHostToStandBy_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -40394,11 +40394,11 @@ func (mo *HostSystem) PowerUpHostFromStandBy_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -40426,11 +40426,11 @@ func (mo *HostSystem) QueryHostConnectionInfo() (*HostConnectInfo, error) {
 		Returnval *HostConnectInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -40470,11 +40470,11 @@ func (mo *HostSystem) QueryMemoryOverhead(
 		Returnval int64 `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return int64(0), err
 	}
@@ -40513,11 +40513,11 @@ func (mo *HostSystem) QueryMemoryOverheadEx(
 		Returnval int64 `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return int64(0), err
 	}
@@ -40547,11 +40547,11 @@ func (mo *HostSystem) QueryTpmAttestationReport() (*HostTpmAttestationReport, er
 		Returnval *HostTpmAttestationReport `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -40589,11 +40589,11 @@ func (mo *HostSystem) RebootHost_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -40628,11 +40628,11 @@ func (mo *HostSystem) ReconfigureHostForDAS_Task() (*Task, error) {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -40689,11 +40689,11 @@ func (mo *HostSystem) ReconnectHost_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -40726,11 +40726,11 @@ func (mo *HostSystem) RetrieveHardwareUptime() (int64, error) {
 		Returnval int64 `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return int64(0), err
 	}
@@ -40768,11 +40768,11 @@ func (mo *HostSystem) ShutdownHost_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -40802,11 +40802,11 @@ func (mo *HostSystem) UpdateFlags(
 		FlagInfo: flagInfo,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -40836,11 +40836,11 @@ func (mo *HostSystem) UpdateIpmi(
 		IpmiInfo: ipmiInfo,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -40868,11 +40868,11 @@ func (mo *HostSystem) UpdateSystemResources(
 		ResourceInfo: resourceInfo,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -40902,11 +40902,11 @@ func (mo *HostSystem) UpdateSystemSwapConfiguration(
 		SysSwapConfig: sysSwapConfig,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -41606,11 +41606,11 @@ func (mo *HostVFlashManager) ConfigureVFlashResourceEx_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -41638,11 +41638,11 @@ func (mo *HostVFlashManager) HostConfigureVFlashResource(
 		Spec: spec,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -41670,11 +41670,11 @@ func (mo *HostVFlashManager) HostConfigVFlashCache(
 		Spec: spec,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -41708,11 +41708,11 @@ func (mo *HostVFlashManager) HostGetVFlashModuleDefaultConfig(
 		Returnval *VirtualDiskVFlashCacheConfigInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -41736,11 +41736,11 @@ func (mo *HostVFlashManager) HostRemoveVFlashResource() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -42044,11 +42044,11 @@ func (mo *HostVMotionSystem) DeselectVnic() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -42076,11 +42076,11 @@ func (mo *HostVMotionSystem) SelectVnic(
 		Device: device,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -42108,11 +42108,11 @@ func (mo *HostVMotionSystem) UpdateIpConfig(
 		IpConfig: ipConfig,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -42312,11 +42312,11 @@ func (mo *HostVirtualNicManager) DeselectVnicForNicType(
 		Device:  device,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -42348,11 +42348,11 @@ func (mo *HostVirtualNicManager) QueryNetConfig(
 		Returnval *VirtualNicManagerNetConfig `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -42385,11 +42385,11 @@ func (mo *HostVirtualNicManager) SelectVnicForNicType(
 		Device:  device,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -42869,11 +42869,11 @@ func (mo *HostVsanInternalSystem) QueryCmmds(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -42908,11 +42908,11 @@ func (mo *HostVsanInternalSystem) QueryObjectsOnPhysicalVsanDisk(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -42947,11 +42947,11 @@ func (mo *HostVsanInternalSystem) QueryPhysicalVsanDisks(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -42986,11 +42986,11 @@ func (mo *HostVsanInternalSystem) QueryVsanObjects(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -43079,11 +43079,11 @@ func (mo *HostVsanSystem) AddDisks_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -43127,11 +43127,11 @@ func (mo *HostVsanSystem) InitializeDisks_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -43164,11 +43164,11 @@ func (mo *HostVsanSystem) QueryDisksForVsan(
 		Returnval []*VsanHostDiskResult `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -43196,11 +43196,11 @@ func (mo *HostVsanSystem) QueryHostStatus() (*VsanHostClusterStatus, error) {
 		Returnval *VsanHostClusterStatus `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -43248,11 +43248,11 @@ func (mo *HostVsanSystem) RemoveDisk_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -43294,11 +43294,11 @@ func (mo *HostVsanSystem) RemoveDiskMapping_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -43347,11 +43347,11 @@ func (mo *HostVsanSystem) UpdateVsan_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -43574,11 +43574,11 @@ func (mo *HttpNfcLease) HttpNfcLeaseAbort(
 		Fault: fault,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -43609,11 +43609,11 @@ func (mo *HttpNfcLease) HttpNfcLeaseComplete() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -43643,11 +43643,11 @@ func (mo *HttpNfcLease) HttpNfcLeaseGetManifest() ([]*HttpNfcLeaseManifestEntry,
 		Returnval []*HttpNfcLeaseManifestEntry `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -43678,11 +43678,11 @@ func (mo *HttpNfcLease) HttpNfcLeaseProgress(
 		Percent: percent,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -45146,11 +45146,11 @@ func (mo *InventoryView) CloseInventoryViewFolder(
 		Returnval []*ManagedEntity `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -45192,11 +45192,11 @@ func (mo *InventoryView) OpenInventoryViewFolder(
 		Returnval []*ManagedEntity `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -45446,11 +45446,11 @@ func (mo *IpPoolManager) AllocateIpv4Address(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -45503,11 +45503,11 @@ func (mo *IpPoolManager) AllocateIpv6Address(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -45549,11 +45549,11 @@ func (mo *IpPoolManager) CreateIpPool(
 		Returnval int32 `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return int32(0), err
 	}
@@ -45589,11 +45589,11 @@ func (mo *IpPoolManager) DestroyIpPool(
 		Force: force,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -45631,11 +45631,11 @@ func (mo *IpPoolManager) QueryIPAllocations(
 		Returnval []*IpPoolManagerIpAllocation `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -45667,11 +45667,11 @@ func (mo *IpPoolManager) QueryIpPools(
 		Returnval []*IpPool `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -45714,11 +45714,11 @@ func (mo *IpPoolManager) ReleaseIpAllocation(
 		AllocationId: allocationId,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -45755,11 +45755,11 @@ func (mo *IpPoolManager) UpdateIpPool(
 		Pool: pool,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -45990,11 +45990,11 @@ func (mo *IscsiManager) BindVnic(
 		VnicDevice:   vnicDevice,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -46026,11 +46026,11 @@ func (mo *IscsiManager) QueryBoundVnics(
 		Returnval []*IscsiPortInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -46066,11 +46066,11 @@ func (mo *IscsiManager) QueryCandidateNics(
 		Returnval []*IscsiPortInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -46103,11 +46103,11 @@ func (mo *IscsiManager) QueryMigrationDependencies(
 		Returnval *IscsiMigrationDependency `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -46139,11 +46139,11 @@ func (mo *IscsiManager) QueryPnicStatus(
 		Returnval *IscsiStatus `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -46175,11 +46175,11 @@ func (mo *IscsiManager) QueryVnicStatus(
 		Returnval *IscsiStatus `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -46211,11 +46211,11 @@ func (mo *IscsiManager) UnbindVnic(
 		Force:        force,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -46438,7 +46438,7 @@ type KeyAnyValue struct {
 	Key string `xml:"key,omitempty"`
 
 	// the value
-	Value interface{} `xml:"value,omitempty"`
+	Value *PropertyValue `xml:"value,omitempty"`
 }
 
 //
@@ -46591,11 +46591,11 @@ func (mo *LicenseAssignmentManager) QueryAssignedLicenses(
 		Returnval []*LicenseAssignmentManagerLicenseAssignment `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -46623,11 +46623,11 @@ func (mo *LicenseAssignmentManager) RemoveAssignedLicense(
 		EntityId: entityId,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -46663,11 +46663,11 @@ func (mo *LicenseAssignmentManager) UpdateAssignedLicense(
 		Returnval *LicenseManagerLicenseInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -47154,11 +47154,11 @@ func (mo *LicenseManager) AddLicense(
 		Returnval *LicenseManagerLicenseInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -47198,11 +47198,11 @@ func (mo *LicenseManager) CheckLicenseFeature(
 		Returnval bool `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return false, err
 	}
@@ -47256,11 +47256,11 @@ func (mo *LicenseManager) ConfigureLicenseSource(
 		LicenseSource: licenseSource,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -47294,11 +47294,11 @@ func (mo *LicenseManager) DecodeLicense(
 		Returnval *LicenseManagerLicenseInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -47338,11 +47338,11 @@ func (mo *LicenseManager) DisableFeature(
 		Returnval bool `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return false, err
 	}
@@ -47382,11 +47382,11 @@ func (mo *LicenseManager) EnableFeature(
 		Returnval bool `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return false, err
 	}
@@ -47423,11 +47423,11 @@ func (mo *LicenseManager) QueryLicenseSourceAvailability(
 		Returnval []*LicenseAvailabilityInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -47470,11 +47470,11 @@ func (mo *LicenseManager) QueryLicenseUsage(
 		Returnval *LicenseUsageInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -47513,11 +47513,11 @@ func (mo *LicenseManager) QuerySupportedFeatures(
 		Returnval []*LicenseFeatureInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -47547,11 +47547,11 @@ func (mo *LicenseManager) RemoveLicense(
 		LicenseKey: licenseKey,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -47583,11 +47583,11 @@ func (mo *LicenseManager) RemoveLicenseLabel(
 		LabelKey:   labelKey,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -47630,11 +47630,11 @@ func (mo *LicenseManager) SetLicenseEdition(
 		FeatureKey: featureKey,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -47678,11 +47678,11 @@ func (mo *LicenseManager) UpdateLicense(
 		Returnval *LicenseManagerLicenseInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -47717,11 +47717,11 @@ func (mo *LicenseManager) UpdateLicenseLabel(
 		LabelValue: labelValue,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -48084,11 +48084,11 @@ func (mo *ListView) ModifyListView(
 		Returnval []*ManagedObjectReference `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -48126,11 +48126,11 @@ func (mo *ListView) ResetListView(
 		Returnval []*ManagedObjectReference `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -48158,11 +48158,11 @@ func (mo *ListView) ResetListViewFromView(
 		View: view,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -48997,11 +48997,11 @@ func (mo *ManagedEntity) Destroy_Task() (*Task, error) {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -49034,11 +49034,11 @@ func (mo *ManagedEntity) Reload() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -49079,11 +49079,11 @@ func (mo *ManagedEntity) Rename_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -49590,7 +49590,7 @@ type MethodActionArgument struct {
 	*DynamicData
 
 	// The value of the argument.
-	Value interface{} `xml:"value,omitempty"`
+	Value *PropertyValue `xml:"value,omitempty"`
 }
 
 //
@@ -51078,11 +51078,11 @@ func (mo *Network) DestroyNetwork() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -52308,11 +52308,11 @@ func (mo *OptionManager) QueryOptions(
 		Returnval []*OptionValue `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -52360,11 +52360,11 @@ func (mo *OptionManager) UpdateOptions(
 		ChangedValue: changedValue,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -52417,7 +52417,7 @@ type OptionValue struct {
 	// The value of the option. The Any data object type enables you to
 	// define any value for the option. Typically, however, the value
 	// of an option is of type String or Integer.
-	Value interface{} `xml:"value,omitempty"`
+	Value *PropertyValue `xml:"value,omitempty"`
 }
 
 //
@@ -53698,11 +53698,11 @@ func (mo *OvfManager) CreateDescriptor(
 		Returnval *OvfCreateDescriptorResult `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -53749,11 +53749,11 @@ func (mo *OvfManager) CreateImportSpec(
 		Returnval *OvfCreateImportSpecResult `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -53794,11 +53794,11 @@ func (mo *OvfManager) ParseDescriptor(
 		Returnval *OvfParseDescriptorResult `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -53838,11 +53838,11 @@ func (mo *OvfManager) ValidateHost(
 		Returnval *OvfValidateHostResult `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -55517,11 +55517,11 @@ func (mo *PerformanceManager) CreatePerfInterval(
 		IntervalId: intervalId,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -55561,11 +55561,11 @@ func (mo *PerformanceManager) QueryAvailablePerfMetric(
 		Returnval []*PerfMetricId `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -55601,11 +55601,11 @@ func (mo *PerformanceManager) QueryPerf(
 		Returnval []*PerfEntityMetricBase `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -55649,11 +55649,11 @@ func (mo *PerformanceManager) QueryPerfComposite(
 		Returnval *PerfCompositeMetric `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -55685,11 +55685,11 @@ func (mo *PerformanceManager) QueryPerfCounter(
 		Returnval []*PerfCounterInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -55726,11 +55726,11 @@ func (mo *PerformanceManager) QueryPerfCounterByLevel(
 		Returnval []*PerfCounterInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -55765,11 +55765,11 @@ func (mo *PerformanceManager) QueryPerfProviderSummary(
 		Returnval *PerfProviderSummary `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -55801,11 +55801,11 @@ func (mo *PerformanceManager) RemovePerfInterval(
 		SamplePeriod: samplePeriod,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -55837,11 +55837,11 @@ func (mo *PerformanceManager) ResetCounterLevelMapping(
 		Counters: counters,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -55961,11 +55961,11 @@ func (mo *PerformanceManager) UpdateCounterLevelMapping(
 		CounterLevelMap: counterLevelMap,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -56068,11 +56068,11 @@ func (mo *PerformanceManager) UpdatePerfInterval(
 		Interval: interval,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -57083,11 +57083,11 @@ func (mo *Profile) AssociateProfile(
 		Entity: entity,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -57119,11 +57119,11 @@ func (mo *Profile) CheckProfileCompliance_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -57147,11 +57147,11 @@ func (mo *Profile) DestroyProfile() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -57179,11 +57179,11 @@ func (mo *Profile) DissociateProfile(
 		Entity: entity,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -57214,11 +57214,11 @@ func (mo *Profile) ExportProfile() (string, error) {
 		Returnval string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -57248,11 +57248,11 @@ func (mo *Profile) RetrieveDescription() (*ProfileDescription, error) {
 		Returnval *ProfileDescription `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -57341,11 +57341,11 @@ func (mo *ProfileComplianceManager) CheckCompliance_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -57375,11 +57375,11 @@ func (mo *ProfileComplianceManager) ClearComplianceStatus(
 		Entity:  entity,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -57413,11 +57413,11 @@ func (mo *ProfileComplianceManager) QueryComplianceStatus(
 		Returnval []*ComplianceResult `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -57451,11 +57451,11 @@ func (mo *ProfileComplianceManager) QueryExpressionMetadata(
 		Returnval []*ProfileExpressionMetadata `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -57815,11 +57815,11 @@ func (mo *ProfileManager) CreateProfile(
 		Returnval *Profile `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -57853,11 +57853,11 @@ func (mo *ProfileManager) FindAssociatedProfile(
 		Returnval []*Profile `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -57893,11 +57893,11 @@ func (mo *ProfileManager) QueryPolicyMetadata(
 		Returnval []*ProfilePolicyMetadata `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -57994,7 +57994,7 @@ type ProfileParameterMetadata struct {
 	Optional bool `xml:"optional,omitempty"`
 
 	// Default value that can be used for the parameter.
-	DefaultValue interface{} `xml:"defaultValue,omitempty"`
+	DefaultValue *PropertyValue `xml:"defaultValue,omitempty"`
 }
 
 //
@@ -58201,7 +58201,7 @@ type PropertyChange struct {
 	Op *enum.PropertyChangeOp `xml:"op,omitempty"`
 
 	// New value for the property when "op" is either "add" or "assign".
-	Val interface{} `xml:"val,omitempty"`
+	Val *PropertyValue `xml:"val,omitempty"`
 }
 
 //
@@ -58282,11 +58282,11 @@ func (mo *PropertyCollector) CancelRetrievePropertiesEx(
 		Token: token,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -58312,11 +58312,11 @@ func (mo *PropertyCollector) CancelWaitForUpdates() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -58354,11 +58354,11 @@ func (mo *PropertyCollector) CheckForUpdates(
 		Returnval *UpdateSet `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -58392,11 +58392,11 @@ func (mo *PropertyCollector) ContinueRetrievePropertiesEx(
 		Returnval *RetrieveResult `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -58430,11 +58430,11 @@ func (mo *PropertyCollector) CreateFilter(
 		Returnval *PropertyFilter `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -58504,11 +58504,11 @@ func (mo *PropertyCollector) CreatePropertyCollector() (*PropertyCollector, erro
 		Returnval *PropertyCollector `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -58544,11 +58544,11 @@ func (mo *PropertyCollector) DestroyPropertyCollector() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -58592,11 +58592,11 @@ func (mo *PropertyCollector) RetrieveProperties(
 		Returnval []*ObjectContent `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -58641,11 +58641,11 @@ func (mo *PropertyCollector) RetrievePropertiesEx(
 		Returnval *RetrieveResult `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -58681,11 +58681,11 @@ func (mo *PropertyCollector) WaitForUpdates(
 		Returnval *UpdateSet `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -58734,11 +58734,11 @@ func (mo *PropertyCollector) WaitForUpdatesEx(
 		Returnval *UpdateSet `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -58813,11 +58813,11 @@ func (mo *PropertyFilter) DestroyPropertyFilter() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -59880,11 +59880,11 @@ func (mo *ResourcePlanningManager) EstimateDatabaseSize(
 		Returnval *DatabaseSizeEstimate `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -60214,11 +60214,11 @@ func (mo *ResourcePool) CreateChildVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -60261,11 +60261,11 @@ func (mo *ResourcePool) CreateResourcePool(
 		Returnval *ResourcePool `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -60310,11 +60310,11 @@ func (mo *ResourcePool) CreateVApp(
 		Returnval *VirtualApp `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -60362,11 +60362,11 @@ func (mo *ResourcePool) DestroyChildren() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -60447,11 +60447,11 @@ func (mo *ResourcePool) ImportVApp(
 		Returnval *HttpNfcLease `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -60521,11 +60521,11 @@ func (mo *ResourcePool) MoveIntoResourcePool(
 		List: list,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -60555,11 +60555,11 @@ func (mo *ResourcePool) QueryResourceConfigOption() (*ResourceConfigOption, erro
 		Returnval *ResourceConfigOption `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -60591,11 +60591,11 @@ func (mo *ResourcePool) RefreshRuntime() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -60646,11 +60646,11 @@ func (mo *ResourcePool) RegisterChildVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -60703,11 +60703,11 @@ func (mo *ResourcePool) UpdateChildResourceConfiguration(
 		Spec: spec,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -60755,11 +60755,11 @@ func (mo *ResourcePool) UpdateConfig(
 		Config: config,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -61401,11 +61401,11 @@ func (mo *ScheduledTask) ReconfigureScheduledTask(
 		Spec: spec,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -61429,11 +61429,11 @@ func (mo *ScheduledTask) RemoveScheduledTask() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -61458,11 +61458,11 @@ func (mo *ScheduledTask) RunScheduledTask() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -61621,7 +61621,7 @@ type ScheduledTaskInfo struct {
 	Error *LocalizedMethodFault `xml:"error,omitempty"`
 
 	// The operation result when the scheduled task state is "success".
-	Result interface{} `xml:"result,omitempty"`
+	Result *PropertyValue `xml:"result,omitempty"`
 
 	// The task progress when the scheduled task state is "running".
 	Progress int32 `xml:"progress,omitempty"`
@@ -61706,11 +61706,11 @@ func (mo *ScheduledTaskManager) CreateObjectScheduledTask(
 		Returnval *ScheduledTask `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -61744,11 +61744,11 @@ func (mo *ScheduledTaskManager) CreateScheduledTask(
 		Returnval *ScheduledTask `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -61782,11 +61782,11 @@ func (mo *ScheduledTaskManager) RetrieveEntityScheduledTask(
 		Returnval []*ScheduledTask `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -61822,11 +61822,11 @@ func (mo *ScheduledTaskManager) RetrieveObjectScheduledTask(
 		Returnval []*ScheduledTask `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -62209,11 +62209,11 @@ func (mo *SearchIndex) FindAllByDnsName(
 		Returnval []*ManagedEntity `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -62253,11 +62253,11 @@ func (mo *SearchIndex) FindAllByIp(
 		Returnval []*ManagedEntity `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -62297,11 +62297,11 @@ func (mo *SearchIndex) FindAllByUuid(
 		Returnval []*ManagedEntity `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -62335,11 +62335,11 @@ func (mo *SearchIndex) FindByDatastorePath(
 		Returnval *VirtualMachine `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -62376,11 +62376,11 @@ func (mo *SearchIndex) FindByDnsName(
 		Returnval *ManagedEntity `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -62418,11 +62418,11 @@ func (mo *SearchIndex) FindByInventoryPath(
 		Returnval *ManagedEntity `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -62460,11 +62460,11 @@ func (mo *SearchIndex) FindByIp(
 		Returnval *ManagedEntity `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -62502,11 +62502,11 @@ func (mo *SearchIndex) FindByUuid(
 		Returnval *ManagedEntity `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -62545,11 +62545,11 @@ func (mo *SearchIndex) FindChild(
 		Returnval *ManagedEntity `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -63132,11 +63132,11 @@ func (mo *ServiceInstance) CurrentTime() (time.Time, error) {
 		Returnval time.Time `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return time.Now(), err
 	}
@@ -63178,11 +63178,11 @@ func (mo *ServiceInstance) QueryVMotionCompatibility(
 		Returnval []*HostVMotionCompatibility `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -63212,11 +63212,11 @@ func (mo *ServiceInstance) RetrieveProductComponents() ([]*ProductComponentInfo,
 		Returnval []*ProductComponentInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -63244,11 +63244,11 @@ func (mo *ServiceInstance) RetrieveServiceContent() (*ServiceContent, error) {
 		Returnval *ServiceContent `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -63296,11 +63296,11 @@ func (mo *ServiceInstance) ValidateMigration(
 		Returnval []*Event `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -63370,11 +63370,11 @@ func (mo *ServiceManager) QueryServiceList(
 		Returnval []*ServiceManagerServiceInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -63589,11 +63589,11 @@ func (mo *SessionManager) AcquireCloneTicket() (string, error) {
 		Returnval string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -63628,11 +63628,11 @@ func (mo *SessionManager) AcquireGenericServiceTicket(
 		Returnval *SessionManagerGenericServiceTicket `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -63684,11 +63684,11 @@ func (mo *SessionManager) AcquireLocalTicket(
 		Returnval *SessionManagerLocalTicket `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -63725,11 +63725,11 @@ func (mo *SessionManager) CloneSession(
 		Returnval *UserSession `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -63771,11 +63771,11 @@ func (mo *SessionManager) ImpersonateUser(
 		Returnval *UserSession `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -63812,11 +63812,11 @@ func (mo *SessionManager) Login(
 		Returnval *UserSession `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -63876,11 +63876,11 @@ func (mo *SessionManager) LoginBySSPI(
 		Returnval *UserSession `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -63945,11 +63945,11 @@ func (mo *SessionManager) LoginByToken(
 		Returnval *UserSession `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -63995,11 +63995,11 @@ func (mo *SessionManager) LoginExtensionByCertificate(
 		Returnval *UserSession `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -64042,11 +64042,11 @@ func (mo *SessionManager) LoginExtensionBySubjectName(
 		Returnval *UserSession `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -64070,11 +64070,11 @@ func (mo *SessionManager) Logout() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -64112,11 +64112,11 @@ func (mo *SessionManager) SessionIsActive(
 		Returnval bool `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return false, err
 	}
@@ -64144,11 +64144,11 @@ func (mo *SessionManager) SetLocale(
 		Locale: locale,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -64183,11 +64183,11 @@ func (mo *SessionManager) TerminateSession(
 		SessionId: sessionId,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -64217,11 +64217,11 @@ func (mo *SessionManager) UpdateServiceMessage(
 		Message: message,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -64495,11 +64495,11 @@ func (mo *SimpleCommand) ExecuteSimpleCommand(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -65815,11 +65815,11 @@ func (mo *StorageResourceManager) ApplyStorageDrsRecommendation_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -65865,11 +65865,11 @@ func (mo *StorageResourceManager) ApplyStorageDrsRecommendationToPod_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -65902,11 +65902,11 @@ func (mo *StorageResourceManager) CancelStorageDrsRecommendation(
 		Key:  key,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -65949,11 +65949,11 @@ func (mo *StorageResourceManager) ConfigureDatastoreIORM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -65993,11 +65993,11 @@ func (mo *StorageResourceManager) ConfigureStorageDrsForPod_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -66038,11 +66038,11 @@ func (mo *StorageResourceManager) QueryDatastorePerformanceSummary(
 		Returnval []*StoragePerformanceSummary `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -66076,11 +66076,11 @@ func (mo *StorageResourceManager) QueryIORMConfigOption(
 		Returnval *StorageIORMConfigOption `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -66194,11 +66194,11 @@ func (mo *StorageResourceManager) RecommendDatastores(
 		Returnval *StoragePlacementResult `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -66232,11 +66232,11 @@ func (mo *StorageResourceManager) RefreshStorageDrsRecommendation(
 		Pod:  pod,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -66447,11 +66447,11 @@ func (mo *Task) CancelTask() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -66483,11 +66483,11 @@ func (mo *Task) SetTaskDescription(
 		Description: description,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -66508,14 +66508,14 @@ func (mo *Task) SetTaskDescription(
 // VI API 2.5
 //
 func (mo *Task) SetTaskState(
-	state *enum.TaskInfoState, result interface{}, fault *MethodFault,
+	state *enum.TaskInfoState, result *PropertyValue, fault *MethodFault,
 ) error {
 
 	request := struct {
 		XMLName xml.Name                `xml:"SetTaskState"`
 		This    *ManagedObjectReference `xml:"_this,omitempty"`
 		State   *enum.TaskInfoState     `xml:"state,omitempty"`
-		Result  interface{}             `xml:"result,omitempty"`
+		Result  *PropertyValue          `xml:"result,omitempty"`
 		Fault   *MethodFault            `xml:"fault,omitempty"`
 	}{
 		This:   &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
@@ -66524,11 +66524,11 @@ func (mo *Task) SetTaskState(
 		Fault:  fault,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -66563,11 +66563,11 @@ func (mo *Task) UpdateProgress(
 		PercentDone: percentDone,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -66817,11 +66817,11 @@ func (mo *TaskHistoryCollector) ReadNextTasks(
 		Returnval []*TaskInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -66857,11 +66857,11 @@ func (mo *TaskHistoryCollector) ReadPreviousTasks(
 		Returnval []*TaskInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -66940,7 +66940,7 @@ type TaskInfo struct {
 
 	// If the task state is "success", then this property may be used
 	// to hold a return value.
-	Result interface{} `xml:"result,omitempty"`
+	Result *PropertyValue `xml:"result,omitempty"`
 
 	// If the task state is "running", then this property contains a
 	// progress measurement, expressed as percentage completed, from 0 to 100.
@@ -67106,11 +67106,11 @@ func (mo *TaskManager) CreateCollectorForTasks(
 		Returnval *TaskHistoryCollector `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -67157,11 +67157,11 @@ func (mo *TaskManager) CreateTask(
 		Returnval *TaskInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -68513,11 +68513,11 @@ func (mo *UserDirectory) RetrieveUserGroups(
 		Returnval []*UserSearchResult `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -70666,11 +70666,11 @@ func (mo *View) DestroyView() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -70803,11 +70803,11 @@ func (mo *ViewManager) CreateContainerView(
 		Returnval *ContainerView `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -70835,11 +70835,11 @@ func (mo *ViewManager) CreateInventoryView() (*InventoryView, error) {
 		Returnval *InventoryView `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -70874,11 +70874,11 @@ func (mo *ViewManager) CreateListView(
 		Returnval *ListView `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -70911,11 +70911,11 @@ func (mo *ViewManager) CreateListViewFromView(
 		Returnval *ListView `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -71165,11 +71165,11 @@ func (mo *VirtualApp) CloneVApp_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -71202,11 +71202,11 @@ func (mo *VirtualApp) ExportVApp() (*HttpNfcLease, error) {
 		Returnval *HttpNfcLease `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -71248,11 +71248,11 @@ func (mo *VirtualApp) PowerOffVApp_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -71298,11 +71298,11 @@ func (mo *VirtualApp) PowerOnVApp_Task() (*Task, error) {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -71341,11 +71341,11 @@ func (mo *VirtualApp) SuspendVApp_Task() (*Task, error) {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -71379,11 +71379,11 @@ func (mo *VirtualApp) UnregisterVApp_Task() (*Task, error) {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -71460,11 +71460,11 @@ func (mo *VirtualApp) UpdateLinkedChildren(
 		RemoveSet:    removeSet,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -71496,11 +71496,11 @@ func (mo *VirtualApp) UpdateVAppConfig(
 		Spec: spec,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -72977,11 +72977,11 @@ func (mo *VirtualDiskManager) CopyVirtualDisk_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -73026,11 +73026,11 @@ func (mo *VirtualDiskManager) CreateVirtualDisk_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -73076,11 +73076,11 @@ func (mo *VirtualDiskManager) DefragmentVirtualDisk_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -73124,11 +73124,11 @@ func (mo *VirtualDiskManager) DeleteVirtualDisk_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -73176,11 +73176,11 @@ func (mo *VirtualDiskManager) EagerZeroVirtualDisk_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -73240,11 +73240,11 @@ func (mo *VirtualDiskManager) ExtendVirtualDisk_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -73289,11 +73289,11 @@ func (mo *VirtualDiskManager) InflateVirtualDisk_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -73351,11 +73351,11 @@ func (mo *VirtualDiskManager) MoveVirtualDisk_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -73401,11 +73401,11 @@ func (mo *VirtualDiskManager) QueryVirtualDiskFragmentation(
 		Returnval int32 `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return int32(0), err
 	}
@@ -73448,11 +73448,11 @@ func (mo *VirtualDiskManager) QueryVirtualDiskGeometry(
 		Returnval *HostDiskDimensionsChs `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -73495,11 +73495,11 @@ func (mo *VirtualDiskManager) QueryVirtualDiskUuid(
 		Returnval string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -73540,11 +73540,11 @@ func (mo *VirtualDiskManager) SetVirtualDiskUuid(
 		Uuid:       uuid,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -73597,11 +73597,11 @@ func (mo *VirtualDiskManager) ShrinkVirtualDisk_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -73645,11 +73645,11 @@ func (mo *VirtualDiskManager) ZeroFillVirtualDisk_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -75436,11 +75436,11 @@ func (mo *VirtualMachine) AcquireMksTicket() (*VirtualMachineMksTicket, error) {
 		Returnval *VirtualMachineMksTicket `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -75500,11 +75500,11 @@ func (mo *VirtualMachine) AcquireTicket(
 		Returnval *VirtualMachineTicket `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -75534,11 +75534,11 @@ func (mo *VirtualMachine) AnswerVM(
 		AnswerChoice: answerChoice,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -75570,11 +75570,11 @@ func (mo *VirtualMachine) CheckCustomizationSpec(
 		Spec: spec,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -75646,11 +75646,11 @@ func (mo *VirtualMachine) CloneVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -75690,11 +75690,11 @@ func (mo *VirtualMachine) ConsolidateVMDisks_Task() (*Task, error) {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -75724,11 +75724,11 @@ func (mo *VirtualMachine) CreateScreenshot_Task() (*Task, error) {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -75781,11 +75781,11 @@ func (mo *VirtualMachine) CreateSecondaryVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -75835,11 +75835,11 @@ func (mo *VirtualMachine) CreateSnapshot_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -75871,11 +75871,11 @@ func (mo *VirtualMachine) CustomizeVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -75901,11 +75901,11 @@ func (mo *VirtualMachine) DefragmentAllDisks() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -75944,11 +75944,11 @@ func (mo *VirtualMachine) DisableSecondaryVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -76001,11 +76001,11 @@ func (mo *VirtualMachine) EnableSecondaryVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -76044,11 +76044,11 @@ func (mo *VirtualMachine) EstimateStorageForConsolidateSnapshots_Task() (*Task, 
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -76083,11 +76083,11 @@ func (mo *VirtualMachine) ExportVm() (*HttpNfcLease, error) {
 		Returnval *HttpNfcLease `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -76120,11 +76120,11 @@ func (mo *VirtualMachine) ExtractOvfEnvironment() (string, error) {
 		Returnval string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return "", err
 	}
@@ -76159,11 +76159,11 @@ func (mo *VirtualMachine) MakePrimaryVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -76188,11 +76188,11 @@ func (mo *VirtualMachine) MarkAsTemplate() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -76223,11 +76223,11 @@ func (mo *VirtualMachine) MarkAsVirtualMachine(
 		Host: host,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -76270,11 +76270,11 @@ func (mo *VirtualMachine) MigrateVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -76301,11 +76301,11 @@ func (mo *VirtualMachine) MountToolsInstaller() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -76337,11 +76337,11 @@ func (mo *VirtualMachine) PowerOffVM_Task() (*Task, error) {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -76393,11 +76393,11 @@ func (mo *VirtualMachine) PowerOnVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -76471,11 +76471,11 @@ func (mo *VirtualMachine) PromoteDisks_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -76523,11 +76523,11 @@ func (mo *VirtualMachine) QueryChangedDiskAreas(
 		Returnval *DiskChangeInfo `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -76566,11 +76566,11 @@ func (mo *VirtualMachine) QueryFaultToleranceCompatibility() ([]*MethodFault, er
 		Returnval []*MethodFault `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -76602,11 +76602,11 @@ func (mo *VirtualMachine) QueryUnownedFiles() ([]string, error) {
 		Returnval []string `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -76633,11 +76633,11 @@ func (mo *VirtualMachine) RebootGuest() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -76769,11 +76769,11 @@ func (mo *VirtualMachine) ReconfigVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -76801,11 +76801,11 @@ func (mo *VirtualMachine) RefreshStorageInfo() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -76864,11 +76864,11 @@ func (mo *VirtualMachine) ReloadVirtualMachineFromPath_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -76916,11 +76916,11 @@ func (mo *VirtualMachine) RelocateVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -76954,11 +76954,11 @@ func (mo *VirtualMachine) RemoveAllSnapshots_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -76987,11 +76987,11 @@ func (mo *VirtualMachine) ResetGuestInformation() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -77026,11 +77026,11 @@ func (mo *VirtualMachine) ResetVM_Task() (*Task, error) {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -77069,11 +77069,11 @@ func (mo *VirtualMachine) RevertToCurrentSnapshot_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -77103,11 +77103,11 @@ func (mo *VirtualMachine) SetDisplayTopology(
 		Displays: displays,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -77137,11 +77137,11 @@ func (mo *VirtualMachine) SetScreenResolution(
 		Height: height,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -77168,11 +77168,11 @@ func (mo *VirtualMachine) ShutdownGuest() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -77199,11 +77199,11 @@ func (mo *VirtualMachine) StandbyGuest() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -77249,11 +77249,11 @@ func (mo *VirtualMachine) StartRecording_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -77296,11 +77296,11 @@ func (mo *VirtualMachine) StartReplaying_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -77338,11 +77338,11 @@ func (mo *VirtualMachine) StopRecording_Task() (*Task, error) {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -77380,11 +77380,11 @@ func (mo *VirtualMachine) StopReplaying_Task() (*Task, error) {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -77412,11 +77412,11 @@ func (mo *VirtualMachine) SuspendVM_Task() (*Task, error) {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -77452,11 +77452,11 @@ func (mo *VirtualMachine) TerminateFaultTolerantVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -77489,11 +77489,11 @@ func (mo *VirtualMachine) TerminateVM() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -77527,11 +77527,11 @@ func (mo *VirtualMachine) TurnOffFaultToleranceForVM_Task() (*Task, error) {
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -77555,11 +77555,11 @@ func (mo *VirtualMachine) UnmountToolsInstaller() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -77594,11 +77594,11 @@ func (mo *VirtualMachine) UnregisterVM() error {
 		This: &ManagedObjectReference{Type: mo.ManagedObject.Type, Value: mo.ManagedObject.Value},
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -77633,11 +77633,11 @@ func (mo *VirtualMachine) UpgradeTools_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -77670,11 +77670,11 @@ func (mo *VirtualMachine) UpgradeVM_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -78145,11 +78145,11 @@ func (mo *VirtualMachineCompatibilityChecker) CheckCompatibility_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -80338,7 +80338,7 @@ type VirtualMachineMessage struct {
 	// Substitution variables in the format string identified by id
 	// are 1-based indexes into this array. Substitution variable {1}
 	// corresponds to argument[0], etc.
-	Argument []interface{} `xml:"argument,omitempty"`
+	Argument []*PropertyValue `xml:"argument,omitempty"`
 
 	// Text in session locale.
 	// Use SessionManager.SetLocale to
@@ -80650,11 +80650,11 @@ func (mo *VirtualMachineProvisioningChecker) CheckMigrate_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -80691,11 +80691,11 @@ func (mo *VirtualMachineProvisioningChecker) CheckRelocate_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -80731,11 +80731,11 @@ func (mo *VirtualMachineProvisioningChecker) QueryVMotionCompatibilityEx_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -81477,11 +81477,11 @@ func (mo *VirtualMachineSnapshot) ExportSnapshot() (*HttpNfcLease, error) {
 		Returnval *HttpNfcLease `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -81515,11 +81515,11 @@ func (mo *VirtualMachineSnapshot) RemoveSnapshot_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -81552,11 +81552,11 @@ func (mo *VirtualMachineSnapshot) RenameSnapshot(
 		Description: description,
 	}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, nil)
+	err := session.invoke(request, nil)
 	if err != nil {
 		return err
 	}
@@ -81590,11 +81590,11 @@ func (mo *VirtualMachineSnapshot) RevertToSnapshot_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}
@@ -86228,11 +86228,11 @@ func (mo *VmwareDistributedVirtualSwitch) UpdateDVSLacpGroupConfig_Task(
 		Returnval *Task `xml:"returnval"`
 	}{}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, &response)
+	err := session.invoke(request, &response)
 	if err != nil {
 		return nil, err
 	}

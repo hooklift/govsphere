@@ -86,11 +86,11 @@ func ({{$namespace}} *{{$type}}) {{makePublic .Name true}}(
 	}{}
 	{{end}}
 
-	if soapClient == nil {
-		panic("SoapClient is nil, you need to create a ServiceInstance first")
+	if session == nil {
+		panic("You need to create a vSphereSession first")
 	}
 
-	err := soapClient.Call(request, {{if $returnType}}&response{{else}}nil{{end}})
+	err := session.invoke(request, {{if $returnType}}&response{{else}}nil{{end}})
 	if err != nil {
 		{{if $returnType}}return {{toNullType $returnType}}, err{{else}}return err{{end}}
 	}
@@ -119,3 +119,14 @@ const (
 `
 
 var faultTmpl = doTmpl
+
+var registryTmpl = `
+var registry map[string]func() interface{}
+func init() {
+	registry = map[string]func() interface{}{
+		{{range .}}
+			"{{.Name}}": func() interface{} { return &{{.Name}}{} },
+		{{end}}
+	}
+}
+`

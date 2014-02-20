@@ -88,7 +88,7 @@ var xsd2GoTypes = map[string]string{
 	"unsignedShort": "uint16",
 	"unsignedByte":  "byte",
 	"unsignedLong":  "uint64",
-	"anyType":       "interface{}",
+	"anyType":       "*PropertyValue",
 }
 
 func toGoType(xsdType string) string {
@@ -288,6 +288,11 @@ func generate(apiDefFile string) {
 		genCode(objects, mainPkg, enumTmpl, "enum")
 	}()
 
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		genTypeRegistry(objects, mainPkg)
+	}()
 	// wg.Add(1)
 	// go func() {
 	// 	defer wg.Done()
@@ -295,6 +300,33 @@ func generate(apiDefFile string) {
 	// }()
 
 	wg.Wait()
+}
+
+func genTypeRegistry(objects []Object, pkg string) {
+	file := pkg + "/registry.go"
+
+	fd, err := os.Create(file)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	defer fd.Close()
+
+	data := new(bytes.Buffer)
+	data.WriteString("package " + pkg + "\n")
+
+	tmpl := template.Must(template.New("registry").Parse(registryTmpl))
+	err = tmpl.Execute(data, objects)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	source := data.Bytes()
+	fsource, err := format.Source(source)
+	if err != nil {
+		fd.Write(source)
+		log.Fatalf("There are errors in the generated source for %s: %s\n", file, err.Error())
+	}
+	fd.Write(fsource)
 }
 
 func genCode(objects []Object, mainPkg, tmpl, namespace string) {
