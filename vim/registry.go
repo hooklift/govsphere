@@ -1,5 +1,9 @@
 package vim
 
+//This is a type registry map needed
+//in order to convert anyType SOAP types to
+//Go types in runtime.
+
 var registry map[string]func() interface{}
 
 func init() {

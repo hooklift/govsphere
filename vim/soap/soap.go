@@ -126,6 +126,10 @@ func (s *Client) Call(request interface{}, response interface{}, cookies []*http
 		log.Printf("%#v\n", respEnvelope.Body)
 	}
 
+	if response == nil {
+		return res.Cookies(), nil
+	}
+
 	err = xml.Unmarshal([]byte(respEnvelope.Body.Body), response)
 	if err != nil {
 		return nil, err
