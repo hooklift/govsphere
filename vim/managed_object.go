@@ -2,17 +2,17 @@ package vim
 
 import (
 	"errors"
+	"log"
 )
 
 type ManagedObject struct {
-	Type           string `xml:"type,attr"`
-	Value          string `xml:",innerxml"`
-	serviceIntance *ServiceInstance
+	Type  string `xml:"type,attr"`
+	Value string `xml:",innerxml"`
 }
 
 func (mo *ManagedObject) currentProperty(property string) (interface{}, error) {
-	if serviceInstance == nil {
-		return nil, errors.New("A ServiceInstance must be created first")
+	if session == nil {
+		return nil, errors.New("A vSphere session must be created first")
 	}
 
 	this := &ManagedObjectReference{
@@ -49,12 +49,7 @@ func (mo *ManagedObject) currentProperty(property string) (interface{}, error) {
 
 	//Retrieves ServiceContent using method instead of Content() accessor
 	//to avoid a stack overflow
-	serviceContent, err := serviceInstance.RetrieveServiceContent()
-	if err != nil {
-		return nil, err
-	}
-
-	pc := serviceContent.PropertyCollector
+	pc := session.ServiceContent.PropertyCollector
 
 	//It does not use pc.RetrievePropertiesEx because we want
 	//to support older versions of vSphere too
@@ -69,5 +64,6 @@ func (mo *ManagedObject) currentProperty(property string) (interface{}, error) {
 		return nil, nil
 	}
 
-	return objs[0].PropSet[0].Val, nil
+	log.Printf("Returned val: %#v\n", objs[0].PropSet[0].Val)
+	return objs[0].PropSet[0].Val.Value()
 }

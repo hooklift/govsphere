@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"crypto/tls"
 	"encoding/xml"
-	//"errors"
 	"io/ioutil"
 	"log"
 	"net"
@@ -55,7 +54,7 @@ func dialTimeout(network, addr string) (net.Conn, error) {
 	return net.DialTimeout(network, addr, timeout)
 }
 
-func (s *Client) Call(request interface{}, response interface{}) error {
+func (s *Client) Call(request interface{}, response interface{}, cookies []*http.Cookie) ([]*http.Cookie, error) {
 	envelope := Envelope{
 		Header:        Header{},
 		EncodingStyle: "http://schemas.xmlsoap.org/soap/encoding/",
@@ -63,7 +62,7 @@ func (s *Client) Call(request interface{}, response interface{}) error {
 
 	reqXml, err := xml.MarshalIndent(request, "  ", "    ")
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	envelope.Body = Body{
@@ -77,13 +76,19 @@ func (s *Client) Call(request interface{}, response interface{}) error {
 
 	err = encoder.Encode(envelope)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	req, err := http.NewRequest("POST", s.url, buffer)
 	req.Header.Add("Content-Type", "text/xml; charset=\"utf-8\"")
 	req.Header.Add("SOAPAction", s.soapAction)
 	req.Header.Set("User-Agent", "govsphere/1.0")
+
+	for _, cookie := range cookies {
+		if cookie != nil {
+			req.AddCookie(cookie)
+		}
+	}
 
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{
@@ -100,7 +105,7 @@ func (s *Client) Call(request interface{}, response interface{}) error {
 
 	res, err := client.Do(req)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	defer res.Body.Close()
 
@@ -114,7 +119,7 @@ func (s *Client) Call(request interface{}, response interface{}) error {
 
 	err = xml.Unmarshal(body, respEnvelope)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	if res.StatusCode == 500 {
@@ -123,8 +128,8 @@ func (s *Client) Call(request interface{}, response interface{}) error {
 
 	err = xml.Unmarshal([]byte(respEnvelope.Body.Body), response)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	return nil
+	return res.Cookies(), nil
 }
