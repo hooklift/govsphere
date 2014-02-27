@@ -313,6 +313,11 @@ func genTypeRegistry(objects []Object, pkg string) {
 
 	data := new(bytes.Buffer)
 	data.WriteString("package " + pkg + "\n")
+	data.WriteString(`
+		//This is a type registry map needed
+		//in order to convert anyType SOAP types to
+		//Go types in runtime.
+	`)
 
 	tmpl := template.Must(template.New("registry").Parse(registryTmpl))
 	err = tmpl.Execute(data, objects)
