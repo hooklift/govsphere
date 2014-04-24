@@ -6,7 +6,7 @@ import (
 
 type XsdSchema struct {
 	XMLName            xml.Name          `xml:"http://www.w3.org/2001/XMLSchema schema"`
-	Tns                string            `xml:"xmlns tns",attr`
+	Tns                string            `xml:"xmlns tns,attr"`
 	Xs                 string            `xml:"xmlns xs,attr"`
 	Version            string            `xml:"version,attr"`
 	TargetNamespace    string            `xml:"targetNamespace,attr"`

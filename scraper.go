@@ -153,8 +153,7 @@ func scrape() {
 		log.Fatalln(err)
 	}
 
-	log.Println("\n")
-	log.Printf("Total objects to extract: %d\n", counter.x)
+	log.Printf("\nTotal objects to extract: %d\n", counter.x)
 	log.Printf("Total objects extracted: %d\n", totalObjects)
 	log.Println("vSphere API definition was generated in ./api.json")
 	log.Println("Done 💩")
