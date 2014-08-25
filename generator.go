@@ -192,14 +192,14 @@ func comment(text string) string {
 	return ""
 }
 
-//This is how we look for the package
-//or namespace associated to one particular
-//type. This is needed because 4 packages
-//are being created such as: mo, enum, do and faults
-//in order to make the API more idiomatic
-//for users to use. Once a type is found
-//this map is going to be used to find its
-//namespace or package.
+// This is how we look for the package
+// or namespace associated to one particular
+// type. This is needed because 4 packages
+// are being created such as: mo, enum, do and faults
+// in order to make the API more idiomatic
+// for users to use. Once a type is found
+// this map is going to be used to find its
+// namespace or package.
 var objnsmap map[string]string
 
 func lookUpNamespace(type_, currentNs string) string {
