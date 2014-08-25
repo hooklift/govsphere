@@ -25,13 +25,13 @@ Example output:
 
 ![](https://i.cloudup.com/sEiUVA9a8L.png)
 
-## Documentation
-Start the godoc server and open up your browser: `godoc -http=:6060`
+## API Documentation
+http://godoc.org/github.com/cloudescape/govsphere
 
 ## TODO
 1. Generate an Error() function for all vSphere faults to implement golang error interface
 2. Implement ManagedObject.currentProperty()
-3. Add support for JSON Schema in api.json generation
+3. Add support for JSON Schema in api.json generation, instead of using our own custom format.
 
 ## License
 Copyright 2014 Cloudescape
