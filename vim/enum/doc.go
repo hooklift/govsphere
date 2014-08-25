@@ -1,4 +1,4 @@
 /*
-VSphere enumearations to typed Go constants
+vSphere enumerations converted to Go constants
 */
 package enum
