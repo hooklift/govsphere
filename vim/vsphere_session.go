@@ -1,8 +1,9 @@
 package vim
 
 import (
-	"github.com/c4milo/govsphere/vim/soap"
 	"net/http"
+
+	"github.com/cloudescape/govsphere/vim/soap"
 )
 
 type VSphereSession struct {

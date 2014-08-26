@@ -365,7 +365,7 @@ func genCode(objects []Object, mainPkg, tmpl, namespace string) {
 		data.WriteString(`
 			import (
 				"time"
-				"github.com/c4milo/govsphere/vim/enum"
+				"github.com/cloudescape/govsphere/vim/enum"
 				"encoding/xml"
 			)
 		`)
