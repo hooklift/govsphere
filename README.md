@@ -1,5 +1,6 @@
 # Go API for VMware vSphere (Alpha)
 [![GoDoc](https://godoc.org/github.com/cloudescape/govsphere?status.svg)](https://godoc.org/github.com/cloudescape/govsphere)
+[![Build Status](https://travis-ci.org/cloudescape/govsphere.svg?branch=master)](https://travis-ci.org/cloudescape/govsphere)
 
 Fully documented and friendly VMWare vSphere API for Go.
 
