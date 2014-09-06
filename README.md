@@ -30,10 +30,6 @@ Example output:
 ## API Documentation
 http://godoc.org/github.com/cloudescape/govsphere
 
-## TODO
-1. Generate an Error() function for all vSphere faults to implement golang error interface
-2. Implement ManagedObject.currentProperty()
-3. Add support for JSON Schema in api.json generation, instead of using our own custom format.
 
 ## License
 Copyright 2014 Cloudescape
