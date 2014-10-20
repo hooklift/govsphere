@@ -3,23 +3,21 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 package vim
 
-import (
-	"strings"
-	"testing"
-)
+import "testing"
 
 func TestNewVSphereSession(t *testing.T) {
-	session := NewVSphereSession("https://172.16.103.128/sdk", "root", "shadow04101", true)
+	session := NewVSphereSession("https://<VCenter or ESXi IP address>/sdk", "user", "password", true)
 
 	_, err := session.ServiceInstance.Capability()
 	if err != nil {
 		t.Errorf("incorrect result\ngot:  %#v\nwant: %#v", err, nil)
 	}
 
-	userAgent := session.UserSession.UserAgent
-	if !strings.Contains(userAgent, "govsphere") {
-		t.Errorf("incorrect result\ngot:  %#v\nwant: %#v", userAgent, "govsphere")
-	}
+	// Supported since vSphere API 5.1 only
+	// userAgent := session.UserSession.UserAgent
+	// if !strings.Contains(userAgent, "govsphere") {
+	// 	t.Errorf("incorrect result\ngot:  %#v\nwant: %#v", userAgent, "govsphere")
+	// }
 
 	err = session.ServiceContent.SessionManager.Logout()
 	if err != nil {
