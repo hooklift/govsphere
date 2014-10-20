@@ -5,6 +5,8 @@ package vim
 
 import (
 	"encoding/xml"
+	"fmt"
+	"strings"
 )
 
 //Use to unmarshal vSphere dynamic types
@@ -14,11 +16,24 @@ type PropertyValue struct {
 }
 
 func (pv *PropertyValue) Value() (interface{}, error) {
-	v := registry[pv.Type]()
-	err := xml.Unmarshal([]byte("<val>"+pv.Xml+"</val>"), v)
-	if err != nil {
-		return nil, err
+	vimType := pv.Type
+
+	if getTypeInstance, ok := registry[vimType]; ok {
+		v := getTypeInstance()
+
+		data := []byte("<val>" + pv.Xml + "</val>")
+
+		if strings.HasPrefix(vimType, "ArrayOf") {
+			data = []byte(pv.Xml)
+		}
+
+		err := xml.Unmarshal(data, &v)
+		if err != nil {
+			return nil, err
+		}
+
+		return v, nil
 	}
 
-	return v, nil
+	return nil, fmt.Errorf("vSphere type not found in registry: %s", vimType)
 }

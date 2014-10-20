@@ -117,7 +117,7 @@ func toGoType(xsdType string) string {
 	if strings.HasSuffix(type_, "[]") {
 		type_ = type_[:len(type_)-2]
 		if value, ok := xsd2GoTypes[type_]; ok {
-			type_ = "[]" + value
+			type_ = "*[]" + value
 		} else {
 			type_ = "[]*" + type_
 		}
@@ -317,9 +317,9 @@ func genTypeRegistry(objects []Object, pkg string) {
 	data := new(bytes.Buffer)
 	data.WriteString("package " + pkg + "\n")
 	data.WriteString(`
-		//This is a type registry map needed
-		//in order to convert anyType SOAP types to
-		//Go types in runtime.
+		// This is an auto-generated type registry map needed
+		// in order to convert anyType SOAP types to
+		// Go types in runtime, without using reflection.
 	`)
 
 	tmpl := template.Must(template.New("registry").Parse(registryTmpl))

@@ -5,17 +5,19 @@ package vim
 
 import (
 	"errors"
-	"log"
 )
 
 type ManagedObject struct {
-	Type  string `xml:"type,attr"`
-	Value string `xml:",innerxml"`
+	*ManagedObjectReference
 }
 
-func (mo *ManagedObject) currentProperty(property string) (interface{}, error) {
+func (mo *ManagedObject) currentProperty(name string) (interface{}, error) {
 	if session == nil {
 		return nil, errors.New("A vSphere session must be created first")
+	}
+
+	if name == "" {
+		return nil, errors.New("A property name is required")
 	}
 
 	this := &ManagedObjectReference{
@@ -23,39 +25,31 @@ func (mo *ManagedObject) currentProperty(property string) (interface{}, error) {
 		Value: mo.Value,
 	}
 
-	//Create object spec
+	// Create object spec
 	objSpec := &ObjectSpec{
 		Obj:  this,
 		Skip: false,
 	}
 
-	//If an empty property is received
-	//it reads all properties from the object
-	//and PathSet is ignored.
-	allProps := false
-	if property == "" {
-		allProps = true
-	}
-
-	//Create property spec
+	// Create property spec
 	propSpec := &PropertySpec{
 		Type:    mo.Type,
-		All:     allProps,
-		PathSet: []string{property},
+		All:     false,
+		PathSet: &[]string{name},
 	}
 
-	//Create property filter spec using object and property specs
+	// Create property filter spec using object and property specs
 	filterSpec := &PropertyFilterSpec{
 		PropSet:   []*PropertySpec{propSpec},
 		ObjectSet: []*ObjectSpec{objSpec},
 	}
 
-	//Retrieves ServiceContent using method instead of Content() accessor
-	//to avoid a stack overflow
+	// Retrieves ServiceContent using method instead of Content() accessor
+	// to avoid a stack overflow
 	pc := session.ServiceContent.PropertyCollector
 
-	//It does not use pc.RetrievePropertiesEx because we want
-	//to support older versions of vSphere too
+	// It does not use pc.RetrievePropertiesEx because we want to support older
+	// versions of vSphere too
 	objs, err := pc.RetrieveProperties([]*PropertyFilterSpec{filterSpec})
 	if err != nil {
 		return nil, err
@@ -67,6 +61,8 @@ func (mo *ManagedObject) currentProperty(property string) (interface{}, error) {
 		return nil, nil
 	}
 
-	log.Printf("Returned val: %#v\n", objs[0].PropSet[0].Val)
-	return objs[0].PropSet[0].Val.Value()
+	val, err := objs[0].PropSet[0].Val.Value()
+	//fmt.Printf("-> Returned val: %#v\n", objs[0].PropSet[0].Val)
+	//fmt.Printf("-> Returned val: %#v\n", val)
+	return val, err
 }

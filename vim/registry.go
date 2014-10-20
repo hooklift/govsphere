@@ -1,16 +1,70 @@
-// This Source Code Form is subject to the terms of the Mozilla Public
-// License, v. 2.0. If a copy of the MPL was not distributed with this
-// file, You can obtain one at http://mozilla.org/MPL/2.0/.
 package vim
 
-//This is a type registry map needed
-//in order to convert anyType SOAP types to
-//Go types in runtime.
+// This is an auto-generated type registry map needed
+// in order to convert anyType SOAP types to
+// Go types in runtime, without using reflection.
 
 var registry map[string]func() interface{}
 
 func init() {
 	registry = map[string]func() interface{}{
+		"ArrayOfManagedObjectReference": func() interface{} {
+			var array []*ManagedObjectReference
+			// Returning a reference to a slice might seem redundant
+			// but the fact is that when we return a value, xml.Unmarshal is
+			// unable to work properly.
+			return &array
+		},
+
+		"ArrayOfString": func() interface{} {
+			var array []string
+			return &array
+		},
+
+		"ArrayOfBoolean": func() interface{} {
+			var array []bool
+			return &array
+		},
+
+		"ArrayOfByte": func() interface{} {
+			var array []byte
+			return &array
+		},
+
+		"ArrayOfDouble": func() interface{} {
+			var array []float64
+			return &array
+		},
+
+		"ArrayOfInt": func() interface{} {
+			var array []int32
+			return &array
+		},
+
+		"ArrayOfLong": func() interface{} {
+			var array []int64
+			return &array
+		},
+
+		"ArrayOfShort": func() interface{} {
+			var array []int16
+			return &array
+		},
+
+		"ArrayOfAnyType": func() interface{} {
+			var array []*PropertyValue
+			return &array
+		},
+
+		"ArrayOfDynamicProperty": func() interface{} {
+			var array []*DynamicProperty
+			return &array
+		},
+
+		"ArrayOfKeyAnyValue": func() interface{} {
+			var array []*KeyAnyValue
+			return &array
+		},
 
 		"AboutInfo": func() interface{} { return &AboutInfo{} },
 

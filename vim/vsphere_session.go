@@ -40,10 +40,14 @@ func NewVSphereSession(url, user, pass string, ignoreCert bool) *VSphereSession 
 		panic("Server URL is required")
 	}
 
+	objref := &ManagedObjectReference{
+		Type:  "ServiceInstance",
+		Value: "ServiceInstance",
+	}
+
 	service := &ServiceInstance{
 		ManagedObject: &ManagedObject{
-			Type:  "ServiceInstance",
-			Value: "ServiceInstance",
+			ManagedObjectReference: objref,
 		},
 	}
 

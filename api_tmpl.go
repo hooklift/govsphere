@@ -51,7 +51,10 @@ type {{$type}} struct {
 			if err != nil {
 				return {{$nullValue}}, err
 			}
-			{{if $fieldType}}
+			{{if eq $fieldType "[]*ManagedEntity"}}
+				refs := p.(*[]*ManagedObjectReference)
+				return ToManagedEntities(*refs), nil
+			{{else if $fieldType}}
 				if p != nil {
 					return p.({{$fieldType}}), nil
 				}
@@ -127,6 +130,64 @@ var registryTmpl = `
 var registry map[string]func() interface{}
 func init() {
 	registry = map[string]func() interface{}{
+		"ArrayOfManagedObjectReference": func() interface{} {
+			var array []*ManagedObjectReference
+			// Returning a reference to a slice might seem redundant
+			// but the fact is that when we return a value, xml.Unmarshal is
+			// unable to work properly.
+			return &array
+		},
+
+		"ArrayOfString": func() interface{} {
+			var array []string
+			return &array
+		},
+
+		"ArrayOfBoolean": func() interface{} {
+			var array []bool
+			return &array
+		},
+
+		"ArrayOfByte": func() interface{} {
+			var array []byte
+			return &array
+		},
+
+		"ArrayOfDouble": func() interface{} {
+			var array []float64
+			return &array
+		},
+
+		"ArrayOfInt": func() interface{} {
+			var array []int32
+			return &array
+		},
+
+		"ArrayOfLong": func() interface{} {
+			var array []int64
+			return &array
+		},
+
+		"ArrayOfShort": func() interface{} {
+			var array []int16
+			return &array
+		},
+
+		"ArrayOfAnyType": func() interface{} {
+			var array []*PropertyValue
+			return &array
+		},
+
+		"ArrayOfDynamicProperty": func() interface{} {
+			var array []*DynamicProperty
+			return &array
+		},
+
+		"ArrayOfKeyAnyValue": func() interface{} {
+			var array []*KeyAnyValue
+			return &array
+		},
+
 		{{range .}}
 			"{{.Name}}": func() interface{} { return &{{.Name}}{} },
 		{{end}}
