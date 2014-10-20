@@ -17,8 +17,8 @@ type VSphereSession struct {
 	UserSession     *UserSession
 }
 
-//For now, let's only support
-//one vSphere session per App
+// For now, let's only support
+// one vSphere session per App
 var session *VSphereSession
 
 const (
@@ -30,8 +30,8 @@ const (
 )
 
 func NewVSphereSession(url, user, pass string, ignoreCert bool) *VSphereSession {
-	//For now, let's only support
-	//one vSphere session per App
+	// For now, let's only support
+	// one vSphere session per App
 	if session != nil {
 		return session
 	}
@@ -51,8 +51,8 @@ func NewVSphereSession(url, user, pass string, ignoreCert bool) *VSphereSession 
 		},
 	}
 
-	//Since we do not know the latest version supported by
-	//the vSphere server yet, we use the oldest possible first.
+	// Since we do not know the latest version supported by
+	// the vSphere server yet, we use the oldest possible first.
 	soapClient := soap.NewClient(url, APIv4_0, ignoreCert)
 
 	session = &VSphereSession{
@@ -82,8 +82,8 @@ func NewVSphereSession(url, user, pass string, ignoreCert bool) *VSphereSession 
 		apiVersion = APIv5_5
 	}
 
-	//Now that we know the latest supported API version,
-	//we can re-create soapClient using such version.
+	// Now that we know the latest supported API version,
+	// we can re-create soapClient using such version.
 	session.soapClient = soap.NewClient(url, apiVersion, ignoreCert)
 
 	sc, err = service.RetrieveServiceContent()
@@ -104,7 +104,7 @@ func NewVSphereSession(url, user, pass string, ignoreCert bool) *VSphereSession 
 }
 
 func (s *VSphereSession) invoke(request interface{}, response interface{}) error {
-	//Sets session cookie
+	// Sets session cookie
 	var cookie *http.Cookie
 	if s.sessionId != "" {
 		cookie = &http.Cookie{
