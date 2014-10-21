@@ -6,7 +6,6 @@ package vim
 import (
 	"encoding/xml"
 	"fmt"
-	"strings"
 )
 
 //Use to unmarshal vSphere dynamic types
@@ -22,12 +21,7 @@ func (pv *PropertyValue) Value() (interface{}, error) {
 		v := getTypeInstance()
 
 		data := []byte("<val>" + pv.Xml + "</val>")
-
-		if strings.HasPrefix(vimType, "ArrayOf") {
-			data = []byte(pv.Xml)
-		}
-
-		err := xml.Unmarshal(data, &v)
+		err := xml.Unmarshal(data, v)
 		if err != nil {
 			return nil, err
 		}

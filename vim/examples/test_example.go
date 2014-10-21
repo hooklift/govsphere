@@ -11,7 +11,7 @@ import (
 
 func main() {
 
-	session := vim.NewVSphereSession("https://172.16.103.128/sdk", "root", "shadow04101", true)
+	session := vim.NewVSphereSession("https://172.16.103.128/sdk", "username", "password", true)
 
 	content, err := session.ServiceInstance.Content()
 
@@ -26,15 +26,12 @@ func main() {
 	}
 
 	fmt.Printf("--> %#v <--\n", children[0].Type)
-	// for child := range children {
-	// 	fmt.Println("====> child: %v", child)
-	// }
 
 	types, err := content.RootFolder.ChildType()
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("--> %#v <--\n", *types)
+	fmt.Printf("--> %#v <--\n", types)
 
 	err = session.ServiceContent.SessionManager.Logout()
 	if err != nil {

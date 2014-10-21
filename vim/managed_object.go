@@ -35,7 +35,7 @@ func (mo *ManagedObject) currentProperty(name string) (interface{}, error) {
 	propSpec := &PropertySpec{
 		Type:    mo.Type,
 		All:     false,
-		PathSet: &[]string{name},
+		PathSet: []string{name},
 	}
 
 	// Create property filter spec using object and property specs
@@ -62,7 +62,5 @@ func (mo *ManagedObject) currentProperty(name string) (interface{}, error) {
 	}
 
 	val, err := objs[0].PropSet[0].Val.Value()
-	//fmt.Printf("-> Returned val: %#v\n", objs[0].PropSet[0].Val)
-	//fmt.Printf("-> Returned val: %#v\n", val)
 	return val, err
 }
