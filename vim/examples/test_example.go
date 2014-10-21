@@ -2,16 +2,20 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// +build ignore
-package main
+package examples
 
 import (
 	"fmt"
+	"testing"
 
 	"github.com/cloudescape/govsphere/vim"
 )
 
-func main() {
+// TODO(c4milo): Remove after Go 1.4.
+// Related to https://codereview.appspot.com/107320046
+func TestA(t *testing.T) {}
+
+func Example_1() {
 
 	session := vim.NewVSphereSession("https://172.16.103.128/sdk", "username", "password", true)
 
