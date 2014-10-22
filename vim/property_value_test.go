@@ -1,6 +1,7 @@
 package vim
 
 import (
+	"encoding/xml"
 	"fmt"
 	"path/filepath"
 	"reflect"
@@ -62,4 +63,61 @@ func TestArrayOfString(t *testing.T) {
 	assert(t, len(objs) == 2, fmt.Sprintf("%d != %d\n", len(objs), 2))
 	assert(t, objs[0] == "Datacenter", fmt.Sprintf("%s != %s\n", objs[0], "Datacenter"))
 	assert(t, objs[1] == "Alarm", fmt.Sprintf("%s != %s\n", objs[1], "Alarm"))
+}
+
+func TestUnmarshalPropertyValue(t *testing.T) {
+	tests := []struct {
+		value    string
+		expType  string
+		expValue string
+	}{
+		{`<returnval>
+			<obj type="Datacenter">ha-datacenter</obj>
+			<propSet>
+				<name>vmFolder</name>
+				<val type="Folder" xsi:type="ManagedObjectReference">ha-folder-vm</val>
+			</propSet>
+			</returnval>`,
+			"Folder",
+			"ha-folder-vm",
+		},
+		{`<returnval>
+			<obj type="Folder">ha-folder-vm</obj>
+			<propSet>
+				<name>childEntity</name>
+				<val xsi:type="ArrayOfManagedObjectReference"><ManagedObjectReference type="VirtualMachine" xsi:type="ManagedObjectReference">1</ManagedObjectReference></val>
+			</propSet>
+			</returnval>`,
+			"ArrayOfManagedObjectReference",
+			`<ManagedObjectReference type="VirtualMachine" xsi:type="ManagedObjectReference">1</ManagedObjectReference>`,
+		},
+	}
+
+	for _, tt := range tests {
+		var obj ObjectContent
+		err := xml.Unmarshal([]byte(tt.value), &obj)
+		ok(t, err)
+
+		motype := obj.PropSet[0].Val.Type
+		movalue := obj.PropSet[0].Val.Xml
+		assert(t, motype == tt.expType, "%s != %s", motype, tt.expType)
+		assert(t, movalue == tt.expValue, "%s != %s", movalue, tt.expValue)
+	}
+}
+
+func TestFixForIssue14(t *testing.T) {
+	data := `<returnval>
+			<obj type="Datacenter">ha-datacenter</obj>
+			<propSet>
+				<name>vmFolder</name>
+				<val type="Folder" xsi:type="ManagedObjectReference">ha-folder-vm</val>
+			</propSet>
+			</returnval>`
+	var obj ObjectContent
+	err := xml.Unmarshal([]byte(data), &obj)
+	ok(t, err)
+	value, err := obj.PropSet[0].Val.Value()
+	ok(t, err)
+	folder := value.(*Folder)
+	assert(t, folder.Type == "Folder", "%s != %s", folder.Type, "Folder")
 }
