@@ -17,11 +17,14 @@ type PropertyValue struct {
 func (pv *PropertyValue) Value() (interface{}, error) {
 	vimType := pv.Type
 
-	if getTypeInstance, ok := registry[vimType]; ok {
-		v := getTypeInstance()
+	if getInstance, ok := registry[vimType]; ok {
+		v := getInstance()
 
-		data := []byte("<val>" + pv.Xml + "</val>")
-		err := xml.Unmarshal(data, v)
+		// We need to make sure the unmarshalled value has its vSphere type
+		// when it is not an actual XML document
+		valueXml := fmt.Sprintf(`<val type="%s">%s</val>`, pv.Type, pv.Xml)
+		valueBytes := []byte(valueXml)
+		err := xml.Unmarshal(valueBytes, v)
 		if err != nil {
 			return nil, err
 		}
