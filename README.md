@@ -1,4 +1,5 @@
 # Go API for VMware vSphere (Alpha)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/cloudescape/govsphere?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![GoDoc](https://godoc.org/github.com/cloudescape/govsphere?status.svg)](https://godoc.org/github.com/cloudescape/govsphere)
 [![Build Status](https://travis-ci.org/cloudescape/govsphere.svg?branch=master)](https://travis-ci.org/cloudescape/govsphere)
 
