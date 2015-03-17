@@ -1,5 +1,5 @@
-# Go API for VMware vSphere (Alpha)
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/hooklift/govsphere?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Go API for VMware vSphere (DEPRECATED)
+# Use official VMWARE library instead https://github.com/vmware/govmomi
 [![GoDoc](https://godoc.org/github.com/hooklift/govsphere?status.svg)](https://godoc.org/github.com/hooklift/govsphere)
 [![Build Status](https://travis-ci.org/hooklift/govsphere.svg?branch=master)](https://travis-ci.org/hooklift/govsphere)
 
